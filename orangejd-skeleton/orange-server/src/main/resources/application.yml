@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  cache:
+    type: redis
+  redis:
+    host: ${orange.redis.host}
+    port: ${orange.redis.port}
+    password: ${orange.redis.password}
+    database: ${orange.redis.database}
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.orangejd: info
+
+orange:
+  jwt:
+    admin-secret-key: change-me-admin
+    admin-ttl: 7200000
+    admin-token-name: Admin-Token
+    app-secret-key: change-me-app
+    app-ttl: 7200000
+    app-token-name: App-Token
+  oss:
+    endpoint: ${orange.oss.endpoint}
+    access-key-id: ${orange.oss.access-key-id}
+    access-key-secret: ${orange.oss.access-key-secret}
+    bucket-name: ${orange.oss.bucket-name}
+
