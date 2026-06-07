@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.UserProfileMapper">
+
+    <resultMap id="userProfileMap" type="com.orangejd.pojo.entity.UserProfile">
+        <id property="id" column="id"/>
+        <result property="accountId" column="account_id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="avatarUrl" column="avatar_url"/>
+        <result property="bio" column="bio"/>
+        <result property="skills" column="skills"/>
+        <result property="contactIntro" column="contact_intro"/>
+        <result property="homepageVisible" column="homepage_visible"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_profile (account_id, nickname, avatar_url, bio, skills, contact_intro, homepage_visible)
+        VALUES (#{accountId}, #{nickname}, #{avatarUrl}, #{bio}, #{skills}, #{contactIntro}, #{homepageVisible})
+    </insert>
+
+    <select id="selectByAccountId" resultMap="userProfileMap">
+        SELECT id, account_id, nickname, avatar_url, bio, skills, contact_intro, homepage_visible, create_time, update_time
+        FROM user_profile
+        WHERE account_id = #{accountId}
+    </select>
+
+    <update id="update">
+        UPDATE user_profile
+        <set>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="avatarUrl != null">avatar_url = #{avatarUrl},</if>
+            <if test="bio != null">bio = #{bio},</if>
+            <if test="skills != null">skills = #{skills},</if>
+            <if test="contactIntro != null">contact_intro = #{contactIntro},</if>
+            <if test="homepageVisible != null">homepage_visible = #{homepageVisible},</if>
+            update_time = NOW()
+        </set>
+        WHERE account_id = #{accountId}
+    </update>
+
+</mapper>

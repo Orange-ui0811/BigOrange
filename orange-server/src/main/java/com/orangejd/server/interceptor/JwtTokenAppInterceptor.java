@@ -24,9 +24,14 @@ public class JwtTokenAppInterceptor implements HandlerInterceptor {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
-        Claims claims = JwtUtil.parseJwt(jwtProperties.getAppSecretKey(), token);
-        BaseContext.setCurrentId(Long.valueOf(claims.get("id").toString()));
-        return true;
+        try {
+            Claims claims = JwtUtil.parseJwt(jwtProperties.getAppSecretKey(), token);
+            BaseContext.setCurrentId(Long.valueOf(claims.get("id").toString()));
+            return true;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return false;
+        }
     }
 
     @Override
