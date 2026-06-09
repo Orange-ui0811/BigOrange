@@ -3,14 +3,14 @@ package com.orangejd.common.result;
 import java.io.Serializable;
 import java.util.List;
 
-public class PageResult implements Serializable {
+public class PageResult<T> implements Serializable {
     private long total;
-    private List<?> records;
+    private List<T> records;
 
     public PageResult() {
     }
 
-    public PageResult(long total, List<?> records) {
+    public PageResult(long total, List<T> records) {
         this.total = total;
         this.records = records;
     }
@@ -23,11 +23,11 @@ public class PageResult implements Serializable {
         this.total = total;
     }
 
-    public List<?> getRecords() {
+    public List<T> getRecords() {
         return records;
     }
 
-    public void setRecords(List<?> records) {
+    public void setRecords(List<T> records) {
         this.records = records;
     }
 }

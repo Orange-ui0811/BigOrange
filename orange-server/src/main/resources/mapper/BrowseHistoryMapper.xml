@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.BrowseHistoryMapper">
+
+    <resultMap id="historyMap" type="com.orangejd.pojo.entity.BrowseHistory">
+        <id property="id" column="id"/>
+        <result property="accountId" column="account_id"/>
+        <result property="targetType" column="target_type"/>
+        <result property="targetId" column="target_id"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO browse_history (account_id, target_type, target_id) VALUES (#{accountId}, #{targetType}, #{targetId})
+    </insert>
+
+    <select id="selectByAccountId" resultMap="historyMap">
+        SELECT * FROM browse_history WHERE account_id = #{accountId}
+        ORDER BY create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <delete id="deleteOldest">
+        DELETE FROM browse_history WHERE account_id = #{accountId} AND id NOT IN (
+            SELECT id FROM (SELECT id FROM browse_history WHERE account_id = #{accountId} ORDER BY create_time DESC LIMIT #{keepCount}) tmp
+        )
+    </delete>
+
+    <select id="selectVOByAccountId" resultType="com.orangejd.pojo.vo.HistoryVO">
+        SELECT h.id, h.target_type AS targetType, h.target_id AS targetId, h.create_time AS createTime,
+               COALESCE(w.title, r.title) AS targetTitle
+        FROM browse_history h
+        LEFT JOIN work w ON h.target_type = 'WORK' AND h.target_id = w.id
+        LEFT JOIN requirement r ON h.target_type = 'REQUIREMENT' AND h.target_id = r.id
+        WHERE h.account_id = #{accountId}
+        ORDER BY h.create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+</mapper>

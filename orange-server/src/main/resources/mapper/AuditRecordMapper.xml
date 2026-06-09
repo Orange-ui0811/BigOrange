@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.AuditRecordMapper">
+
+    <resultMap id="auditMap" type="com.orangejd.pojo.entity.AuditRecord">
+        <id property="id" column="id"/>
+        <result property="targetType" column="target_type"/>
+        <result property="targetId" column="target_id"/>
+        <result property="auditorId" column="auditor_id"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="reason" column="reason"/>
+        <result property="auditTime" column="audit_time"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO audit_record (target_type, target_id, auditor_id, audit_status, reason, audit_time)
+        VALUES (#{targetType}, #{targetId}, #{auditorId}, #{auditStatus}, #{reason}, NOW())
+    </insert>
+
+    <select id="selectByTarget" resultMap="auditMap">
+        SELECT * FROM audit_record WHERE target_type = #{targetType} AND target_id = #{targetId}
+        ORDER BY audit_time DESC
+    </select>
+
+    <select id="selectByAuditor" resultMap="auditMap">
+        SELECT * FROM audit_record WHERE auditor_id = #{auditorId}
+        ORDER BY audit_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+</mapper>

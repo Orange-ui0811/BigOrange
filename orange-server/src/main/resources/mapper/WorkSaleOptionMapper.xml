@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.WorkSaleOptionMapper">
+
+    <resultMap id="optionMap" type="com.orangejd.pojo.entity.WorkSaleOption">
+        <id property="id" column="id"/>
+        <result property="workId" column="work_id"/>
+        <result property="saleType" column="sale_type"/>
+        <result property="price" column="price"/>
+        <result property="description" column="description"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO work_sale_option (work_id, sale_type, price, description)
+        VALUES (#{workId}, #{saleType}, #{price}, #{description})
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO work_sale_option (work_id, sale_type, price, description) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.workId}, #{item.saleType}, #{item.price}, #{item.description})
+        </foreach>
+    </insert>
+
+    <select id="selectByWorkId" resultMap="optionMap">
+        SELECT * FROM work_sale_option WHERE work_id = #{workId}
+    </select>
+
+    <delete id="deleteByWorkId">
+        DELETE FROM work_sale_option WHERE work_id = #{workId}
+    </delete>
+
+</mapper>

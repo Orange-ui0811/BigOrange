@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>OrangeJD API 调试面板</title>
+<style>
+  :root{--bg:#f5f5f5;--card:#fff;--border:#e0e0e0;--accent:#e65100;--ok:#2e7d32;--err:#c62828;--muted:#666}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font:14px/1.6 -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;background:var(--bg);color:#333;padding:16px}
+  h1{font-size:20px;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px}
+  .card h3{font-size:14px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+  .row{display:flex;gap:6px;margin-bottom:6px}
+  input,select,button{font:13px/1.5 inherit;padding:5px 8px;border:1px solid var(--border);border-radius:4px}
+  input:focus,select:focus{outline:none;border-color:var(--accent)}
+  button{cursor:pointer;background:var(--accent);color:#fff;border:none;font-weight:500;white-space:nowrap}
+  button:hover{opacity:0.9}
+  button.danger{background:var(--err)}
+  button.small{font-size:12px;padding:3px 8px}
+  .token{font-size:11px;word-break:break-all;color:var(--muted);margin-top:4px;max-height:40px;overflow:hidden}
+  .result{background:#1e1e1e;color:#d4d4d4;font:12px/1.5 Consolas,monospace;padding:10px;border-radius:6px;min-height:60px;max-height:300px;overflow:auto;white-space:pre-wrap}
+  .result.code1{color:#9ccc65}
+  .result.code0{color:#ef9a9a}
+  .badge{padding:1px 6px;border-radius:3px;font-size:11px;color:#fff}
+  .badge.ok{background:var(--ok)}.badge.err{background:var(--err)}
+  select{background:#fff}
+  .full{grid-column:1/-1}
+</style>
+</head>
+<body>
+
+<h1>OrangeJD API 调试面板</h1>
+<p class="sub">临时前端 — 直接调试后端 API &nbsp;|&nbsp; 后端地址: <input id="baseUrl" value="http://localhost:8080" style="width:160px;font-size:12px"></p>
+
+<div class="grid">
+  <!-- 管理员登录 -->
+  <div class="card">
+    <h3>管理员</h3>
+    <div class="row">
+      <input id="adminUser" value="admin" style="width:80px" placeholder="用户名">
+      <input id="adminPass" value="123456" type="password" style="width:90px" placeholder="密码">
+      <button onclick="adminLogin()">登录</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:8px 0"></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:4px">修改密码</div>
+    <div class="row">
+      <input id="adminOldPwd" type="password" style="width:85px" placeholder="原密码">
+      <input id="adminNewPwd" type="password" style="width:85px" placeholder="新密码">
+      <button onclick="adminChangePwd()" class="danger">确认修改</button>
+    </div>
+    <div class="token" id="adminToken">未登录</div>
+  </div>
+
+  <!-- App 用户登录 + 注册 -->
+  <div class="card">
+    <h3>App 用户</h3>
+    <div class="row">
+      <input id="appUser" value="tester1" style="width:80px" placeholder="用户名">
+      <input id="appPass" value="123456" type="password" style="width:90px" placeholder="密码">
+      <button onclick="appLogin()">登录</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:8px 0"></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:4px">注册新用户</div>
+    <div class="row">
+      <input id="regUser" style="width:80px" placeholder="用户名">
+      <input id="regPass" type="password" style="width:90px" placeholder="密码">
+      <input id="regNick" style="width:70px" placeholder="昵称">
+      <button onclick="appRegister()" style="background:#1565c0">确认注册</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:8px 0"></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:4px">修改密码</div>
+    <div class="row">
+      <input id="appOldPwd" type="password" style="width:85px" placeholder="原密码">
+      <input id="appNewPwd" type="password" style="width:85px" placeholder="新密码">
+      <button onclick="appChangePwd()" class="danger">确认修改</button>
+    </div>
+    <div class="token" id="appToken">未登录</div>
+  </div>
+
+  <!-- Phase 1: 认证 -->
+  <div class="card">
+    <h3>Phase 1·认证</h3>
+    <div class="row">
+      <button onclick="testLogin('admin','123456',true)">管理员登录</button>
+      <button onclick="testLogin('admin','wrong',true)">错误密码 <span class="badge err">应失败</span></button>
+    </div>
+    <div class="row">
+      <button onclick="testLogin('tester1','123456',false)">用户登录</button>
+      <button onclick='api("GET","/app/auth/logout",getAppToken())'>退出登录</button>
+    </div>
+  </div>
+
+  <!-- Phase 2: 分类 -->
+  <div class="card">
+    <h3>Phase 2·分类</h3>
+    <div class="row">
+      <input id="catName" value="测试分类" style="width:90px"><select id="catType"><option>WORK</option><option>REQUIREMENT</option></select>
+      <input id="catSort" value="0" style="width:40px" type="number">
+    </div>
+    <div class="row">
+      <button onclick="catCreate()">新增</button>
+      <button onclick="catListAdmin()">管理端列表</button>
+      <button onclick="catListApp()">用户端列表</button>
+      <button onclick="catDisable()" class="danger">停用ID=1</button>
+    </div>
+    <div class="row"><button onclick="appTokenAccessAdmin()">App Token 访 Admin <span class="badge err">应401</span></button></div>
+  </div>
+
+  <!-- Phase 3: 作品 -->
+  <div class="card">
+    <h3>Phase 3·作品</h3>
+    <div class="row">
+      <input id="workTitle" value="测试作品" style="width:80px" placeholder="标题">
+      <input id="workSummary" value="简介" style="width:70px" placeholder="简介">
+      <select id="workCategory" style="width:90px"><option value="">分类(可选)</option></select>
+    </div>
+    <div class="row">
+      <button onclick="workCreate()">创建</button>
+      <button onclick="workCreateWithPrice()">创建带售价</button>
+      <button onclick="workListMy()">刷新列表</button>
+      <button onclick="workPublic()">公开市场</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:6px 0"></div>
+    <div id="workList" style="max-height:200px;overflow:auto;font-size:12px;color:var(--muted)">点击「刷新列表」查看作品</div>
+  </div>
+
+  <!-- Phase 3: 需求 -->
+  <div class="card">
+    <h3>Phase 3·需求</h3>
+    <div class="row">
+      <input id="reqTitle" value="测试需求" style="width:80px" placeholder="标题">
+      <input id="reqBudgetMin" value="100" style="width:55px" placeholder="min">
+      <input id="reqBudgetMax" value="500" style="width:55px" placeholder="max">
+      <select id="reqCategory" style="width:90px"><option value="">分类(可选)</option></select>
+    </div>
+    <div class="row">
+      <button onclick="reqCreate()">创建</button>
+      <button onclick="reqListMy()">刷新列表</button>
+      <button onclick="reqPublic()">需求广场</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:6px 0"></div>
+    <div id="reqList" style="max-height:200px;overflow:auto;font-size:12px;color:var(--muted)">点击「刷新列表」查看需求</div>
+  </div>
+
+  <!-- Phase 3: 审核 -->
+  <!-- Phase 3: 审核 -->
+  <div class="card">
+    <h3>Phase 3·审核（管理员）</h3>
+    <div class="row">
+      <button onclick="auditListWork()">待审作品</button>
+      <button onclick="auditListReq()">待审需求</button>
+      <button onclick="auditListWork('')">全部作品</button>
+      <button onclick="auditListReq('')">全部需求</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:6px 0"></div>
+    <div id="auditList" style="max-height:200px;overflow:auto;font-size:12px;color:var(--muted)">点击上方按钮加载待审列表</div>
+  </div>
+
+  <!-- Phase 4: 互动 -->
+  <div class="card">
+    <h3>Phase 4·互动</h3>
+    <div class="row">
+      <button onclick="favList()">我的收藏</button>
+      <button onclick="cmtMyList()">我的评论</button>
+      <button onclick="cmtOnMyContent()">给我的评论</button>
+      <button onclick="cmtAll()" style="background:#c62828">全部评论(管理员)</button>
+    </div>
+    <div class="row">
+      <input id="profileId" value="7" style="width:30px" type="number" placeholder="ID">
+      <button onclick="profileView()">作者主页</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:6px 0"></div>
+    <div id="commentArea" style="max-height:200px;overflow:auto;font-size:12px;color:var(--muted)">点列表里的「看评论」在这里展示</div>
+  </div>
+
+  <!-- 结果 -->
+
+  <!-- 结果 -->
+  <div class="card full">
+    <h3>响应 <button onclick="clearResult()" class="small" style="float:right;background:#555">清空</button></h3>
+    <div class="result" id="result">等待请求...</div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const B = () => $('baseUrl').value;
+
+function show(method, url, status, json) {
+  const r = $('result');
+  const cls = json && json.code === 1 ? 'code1' : (json && json.code === 0 ? 'code0' : '');
+  const code = json ? JSON.stringify(json, null, 2) : '无响应';
+  r.className = 'result ' + cls;
+  r.textContent = `[${status}] ${method} ${url}\n${code}`;
+}
+
+async function api(method, path, token, data) {
+  const url = B() + path;
+  const opts = { method, headers: {'Content-Type':'application/json'} };
+  if (token) opts.headers[path.startsWith('/admin') ? 'Admin-Token' : 'App-Token'] = token;
+  if (data) opts.body = JSON.stringify(data);
+  const resp = await fetch(url, opts);
+  let json = null;
+  try { json = await resp.json(); } catch(e) {}
+  show(method, path, resp.status, json);
+  return { status: resp.status, json };
+}
+
+var currentUserId = null; // 当前登录用户 ID
+
+function setToken(id, json) {
+  if (json && json.code === 1) {
+    $(id).innerHTML = '<span class="badge ok">已登录</span> ' + json.data.token;
+    if (json.data.id) currentUserId = json.data.id;
+    return json.data.token;
+  } else {
+    $(id).innerHTML = '<span class="badge err">失败</span> ' + (json ? json.msg : '');
+    return null;
+  }
+}
+
+// --- Phase 1 ---
+async function adminLogin() {
+  const resp = await api('POST','/admin/auth/login',null,{username:$('adminUser').value,password:$('adminPass').value});
+  setToken('adminToken', resp.json);
+}
+async function appLogin() {
+  const resp = await api('POST','/app/auth/login',null,{username:$('appUser').value,password:$('appPass').value});
+  setToken('appToken', resp.json);
+}
+async function appRegister() {
+  const u=$('regUser').value.trim(), p=$('regPass').value, n=$('regNick').value.trim();
+  if(!u||!p) return alert('用户名和密码不能为空');
+  const resp = await api('POST','/app/auth/register',null,{username:u,password:p,nickname:n||u});
+  const t = setToken('appToken', resp.json);
+  if(t) { $('appUser').value=u; $('appPass').value=p; $('regUser').value=''; $('regPass').value=''; $('regNick').value=''; }
+}
+async function testLogin(user,pass,isAdmin) {
+  const path = isAdmin ? '/admin/auth/login' : '/app/auth/login';
+  const resp = await api('POST',path,null,{username:user,password:pass});
+  setToken(isAdmin?'adminToken':'appToken', resp.json);
+}
+async function adminChangePwd() {
+  const t = getToken('adminToken');
+  if(!t) return alert('请先登录管理员');
+  const op=$('adminOldPwd').value, np=$('adminNewPwd').value;
+  if(!op||!np) return alert('原密码和新密码不能为空');
+  await api('PUT','/admin/auth/password',t,{oldPassword:op,newPassword:np});
+  $('adminPass').value=np; $('adminOldPwd').value=''; $('adminNewPwd').value='';
+}
+async function appChangePwd() {
+  const t = getToken('appToken');
+  if(!t) return alert('请先登录 App 用户');
+  const op=$('appOldPwd').value, np=$('appNewPwd').value;
+  if(!op||!np) return alert('原密码和新密码不能为空');
+  await api('PUT','/app/auth/password',t,{oldPassword:op,newPassword:np});
+  $('appPass').value=np; $('appOldPwd').value=''; $('appNewPwd').value='';
+}
+function getToken(id) {
+  const m = $(id).textContent.match(/eyJ[\w.-]+/);
+  return m ? m[0] : null;
+}
+function getAppToken() { return getToken('appToken'); }
+
+// --- Phase 2 ---
+async function catCreate() {
+  await api('POST','/admin/category',getAdminToken(),{name:$('catName').value,type:$('catType').value,sort:parseInt($('catSort').value)||0});
+}
+async function catListAdmin() {
+  await api('GET','/admin/category',getAdminToken());
+}
+async function catListApp() {
+  await api('GET','/app/category',getAppToken());
+}
+async function catDisable() {
+  await api('PUT','/admin/category/1',getAdminToken(),{status:'DISABLED'});
+}
+async function appTokenAccessAdmin() {
+  await api('POST','/admin/category',getAppToken(),{name:'hack',type:'WORK'});
+}
+function getAdminToken() {
+  const el = $('adminToken');
+  const m = el.textContent.match(/eyJ[\w.-]+/);
+  return m ? m[0] : null;
+}
+function clearResult() { $('result').textContent=''; $('result').className='result'; }
+
+// --- Category loader ---
+async function loadCategories() {
+  try {
+    const resp = await fetch(B()+'/app/category?type=WORK');
+    const json = await resp.json();
+    if (json.code === 1 && json.data) {
+      var html = '<option value="">分类(可选)</option>';
+      json.data.forEach(function(c) { html += '<option value="'+c.id+'">'+esc(c.name)+'</option>'; });
+      $('workCategory').innerHTML = html;
+    }
+    const resp2 = await fetch(B()+'/app/category?type=REQUIREMENT');
+    const json2 = await resp2.json();
+    if (json2.code === 1 && json2.data) {
+      var html2 = '<option value="">分类(可选)</option>';
+      json2.data.forEach(function(c) { html2 += '<option value="'+c.id+'">'+esc(c.name)+'</option>'; });
+      $('reqCategory').innerHTML = html2;
+    }
+  } catch(e) {}
+}
+loadCategories(); // 页面加载时自动拉取分类
+
+// --- Phase 3: Work ---
+async function workCreate() {
+  var cid = $('workCategory').value;
+  const r = await api('POST','/app/work',getAppToken(),{title:$('workTitle').value,summary:$('workSummary').value,categoryId:cid?parseInt(cid):null});
+  if (r.json && r.json.code === 1) workListMy();
+}
+async function workCreateWithPrice() {
+  const r = await api('POST','/app/work',getAppToken(),{title:$('workTitle').value,summary:$('workSummary').value,saleOptions:[{saleType:'FIXED_PRICE',price:500,description:'Standard'}]});
+  if (r.json && r.json.code === 1) workListMy();
+}
+async function workListMy() {
+  const t = getAppToken(); if (!t) return alert('请先登录 App 用户');
+  const resp = await fetch(B()+'/app/work/my?page=1&size=20', {headers:{'App-Token':t}});
+  const json = await resp.json();
+  show('GET','/app/work/my',resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('workList').innerHTML = '<span style="color:#999">暂无作品</span>';
+    return;
+  }
+  var h = '';
+  json.data.records.forEach(function(w) {
+    var s = w.auditStatus, c = s==='APPROVED'?'#2e7d32':(s==='PENDING_REVIEW'?'#e65100':(s==='REJECTED'?'#c62828':'#666'));
+    h += '<div style="display:flex;align-items:center;gap:4px;padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="min-width:24px;color:#999">#'+w.id+'</span>'+
+      '<span style="flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(w.title)+'</span>'+
+      '<span style="font-size:10px;color:'+c+'">'+s+'</span>'+
+      '<button onclick="workAct('+w.id+',\'detail\')" class="small" style="background:#555">详情</button>'+
+      '<button onclick="workEdit('+w.id+')" class="small" style="background:#f57c00">编辑</button>'+
+      '<button onclick="workAct('+w.id+',\'submit\')" class="small">提交</button>'+
+      '<button onclick="workAct('+w.id+',\'visibility\')" class="small" style="background:#1565c0">'+w.visibilityStatus+'</button>'+
+      '<button onclick="workAct('+w.id+',\'delete\')" class="small danger">删</button>'+
+      '<button onclick="favQuick(\'WORK\','+w.id+')" style="font-size:10px;padding:2px 5px;background:#c62828">收藏</button>'+
+      '<button onclick="cmtQuick(\'WORK\','+w.id+')" style="font-size:10px;padding:2px 5px;background:#1565c0">评论</button>'+
+      '<button onclick="cmtShow(\'WORK\','+w.id+','+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#00695c">看评论</button>'+
+      '<button onclick="profileViewId('+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#555">作者</button>'+
+      '</div>';
+  });
+  $('workList').innerHTML = h;
+}
+function esc(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+async function workAct(id, action) {
+  if (action === 'delete') {
+    if (!confirm('确认删除作品 #'+id+' ？')) return;
+    await api('DELETE','/app/work/'+id,getAppToken());
+    workListMy();
+  } else if (action === 'submit') {
+    await api('POST','/app/work/'+id+'/submit',getAppToken());
+    setTimeout(workListMy, 500);
+  } else if (action === 'visibility') {
+    await api('PUT','/app/work/'+id+'/visibility',getAppToken());
+    setTimeout(workListMy, 500);
+  } else if (action === 'detail') {
+    await api('GET','/app/work/'+id,getAppToken());
+  }
+}
+async function workEdit(id) {
+  var title = prompt('新标题（留空不修改）：');
+  if (title === null) return;
+  var summary = prompt('新简介（留空不修改）：');
+  if (summary === null) return;
+  var data = {};
+  if (title.trim()) data.title = title.trim();
+  if (summary.trim()) data.summary = summary.trim();
+  await api('PUT','/app/work/'+id,getAppToken(),data);
+  workListMy();
+}
+async function workPublic() {
+  const resp = await fetch(B()+'/app/work/public?page=1&size=20');
+  const json = await resp.json();
+  show('GET','/app/work/public',resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('workList').innerHTML = '<span style="color:#999">暂无公开作品</span>';
+    return;
+  }
+  var h = '<div style="font-weight:600;margin-bottom:4px;color:#2e7d32">公开市场（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(w) {
+    h += '<div style="display:flex;align-items:center;gap:4px;padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="min-width:24px;color:#999">#'+w.id+'</span>'+
+      '<span style="flex:1;font-weight:500">'+esc(w.title)+'</span>'+
+      '<span style="font-size:10px;color:#666">by '+esc(w.ownerName||'#'+w.ownerId)+'</span>'+
+      '<button onclick="favQuick(\'WORK\','+w.id+')" style="font-size:10px;padding:2px 5px;background:#c62828">收藏</button>'+
+      '<button onclick="cmtQuick(\'WORK\','+w.id+')" style="font-size:10px;padding:2px 5px;background:#1565c0">评论</button>'+
+      '<button onclick="cmtShow(\'WORK\','+w.id+','+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#00695c">看评论</button>'+
+      '<button onclick="profileViewId('+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#555">作者</button>'+
+      '</div>';
+  });
+  $('workList').innerHTML = h;
+}
+
+// --- Phase 3: Requirement ---
+async function reqCreate() {
+  var cid = $('reqCategory').value;
+  const r = await api('POST','/app/requirement',getAppToken(),{title:$('reqTitle').value,budgetMin:parseInt($('reqBudgetMin').value)||null,budgetMax:parseInt($('reqBudgetMax').value)||null,categoryId:cid?parseInt(cid):null});
+  if (r.json && r.json.code === 1) reqListMy();
+}
+async function reqListMy() {
+  const t = getAppToken(); if (!t) return alert('请先登录 App 用户');
+  const resp = await fetch(B()+'/app/requirement/my?page=1&size=20', {headers:{'App-Token':t}});
+  const json = await resp.json();
+  show('GET','/app/requirement/my',resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('reqList').innerHTML = '<span style="color:#999">暂无需求</span>';
+    return;
+  }
+  var h = '';
+  json.data.records.forEach(function(r) {
+    var s = r.auditStatus, c = s==='APPROVED'?'#2e7d32':(s==='PENDING_REVIEW'?'#e65100':(s==='REJECTED'?'#c62828':'#666'));
+    h += '<div style="display:flex;align-items:center;gap:4px;padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="min-width:24px;color:#999">#'+r.id+'</span>'+
+      '<span style="flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(r.title)+'</span>'+
+      '<span style="font-size:10px;color:#999">'+r.budgetMin+'~'+r.budgetMax+'</span>'+
+      '<span style="font-size:10px;color:'+c+'">'+s+'</span>'+
+      '<button onclick="reqAct('+r.id+',\'detail\')" class="small" style="background:#555">详情</button>'+
+      '<button onclick="reqEdit('+r.id+')" class="small" style="background:#f57c00">编辑</button>'+
+      '<button onclick="reqAct('+r.id+',\'submit\')" class="small">提交</button>'+
+      '<button onclick="reqAct('+r.id+',\'visibility\')" class="small" style="background:#1565c0">'+r.visibilityStatus+'</button>'+
+      '<button onclick="reqAct('+r.id+',\'delete\')" class="small danger">删</button>'+
+      '<button onclick="cmtShow(\'REQUIREMENT\','+r.id+','+r.publisherId+')" style="font-size:10px;padding:2px 5px;background:#00695c">看评论</button>'+
+      '</div>';
+  });
+  $('reqList').innerHTML = h;
+}
+async function reqAct(id, action) {
+  if (action === 'delete') {
+    if (!confirm('确认删除需求 #'+id+' ？')) return;
+    await api('DELETE','/app/requirement/'+id,getAppToken());
+    reqListMy();
+  } else if (action === 'submit') {
+    await api('POST','/app/requirement/'+id+'/submit',getAppToken());
+    setTimeout(reqListMy, 500);
+  } else if (action === 'visibility') {
+    await api('PUT','/app/requirement/'+id+'/visibility',getAppToken());
+    setTimeout(reqListMy, 500);
+  } else if (action === 'detail') {
+    await api('GET','/app/requirement/'+id,getAppToken());
+  }
+}
+async function reqEdit(id) {
+  var title = prompt('新标题（留空不修改）：');
+  if (title === null) return;
+  var detail = prompt('新详情（留空不修改）：');
+  if (detail === null) return;
+  var data = {};
+  if (title.trim()) data.title = title.trim();
+  if (detail.trim()) data.detail = detail.trim();
+  await api('PUT','/app/requirement/'+id,getAppToken(),data);
+  reqListMy();
+}
+async function reqPublic() { await api('GET','/app/requirement/public?page=1&size=10',null); }
+
+// --- Phase 3: Audit ---
+async function auditListWork(status) {
+  if (status === undefined) status = 'PENDING_REVIEW';
+  const t = getAdminToken(); if (!t) return alert('请先登录管理员');
+  // 待审走 /admin/audit/works，全部走 /admin/work
+  const isPending = (status === 'PENDING_REVIEW');
+  const url = isPending ? '/admin/audit/works?page=1&size=20' : '/admin/work?page=1&size=20'+(status?'&auditStatus='+status:'');
+  const resp = await fetch(B()+url, {headers:{'Admin-Token':t}});
+  const json = await resp.json();
+  show('GET',url,resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('auditList').innerHTML = '<span style="color:#999">暂无'+(isPending?'待审':'')+'作品</span>';
+    return;
+  }
+  var label = isPending ? '待审作品' : '全部作品';
+  var h = '<div style="font-weight:600;margin-bottom:4px">'+label+'（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(w) {
+    h += '<div style="display:flex;align-items:center;gap:4px;padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="min-width:24px;color:#999">#'+w.id+'</span>'+
+      '<span style="flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(w.title)+'</span>'+
+      '<span style="font-size:10px;color:#666">'+w.auditStatus+'</span>'+
+      '<button onclick="auditDetail(\'work\','+w.id+')" class="small" style="background:#555">详情</button>'+
+      (isPending ? '<button onclick="auditAct(\'work\','+w.id+',true)" class="small" style="background:#2e7d32">通过</button><button onclick="auditAct(\'work\','+w.id+',false)" class="small danger">拒绝</button>' : '')+
+      '<button onclick="auditOffline(\'work\','+w.id+')" class="small" style="background:#555">下架</button>'+
+      '</div>';
+  });
+  $('auditList').innerHTML = h;
+}
+async function auditListReq(status) {
+  if (status === undefined) status = 'PENDING_REVIEW';
+  const t = getAdminToken(); if (!t) return alert('请先登录管理员');
+  const isPending = (status === 'PENDING_REVIEW');
+  const url = isPending ? '/admin/audit/requirements?page=1&size=20' : '/admin/requirement?page=1&size=20'+(status?'&auditStatus='+status:'');
+  const resp = await fetch(B()+url, {headers:{'Admin-Token':t}});
+  const json = await resp.json();
+  show('GET',url,resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('auditList').innerHTML = '<span style="color:#999">暂无'+(isPending?'待审':'')+'需求</span>';
+    return;
+  }
+  var label = isPending ? '待审需求' : '全部需求';
+  var h = '<div style="font-weight:600;margin-bottom:4px">'+label+'（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(r) {
+    h += '<div style="display:flex;align-items:center;gap:4px;padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="min-width:24px;color:#999">#'+r.id+'</span>'+
+      '<span style="flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(r.title)+'</span>'+
+      '<span style="font-size:10px;color:#666">'+r.auditStatus+'</span>'+
+      '<button onclick="auditDetail(\'requirement\','+r.id+')" class="small" style="background:#555">详情</button>'+
+      (isPending ? '<button onclick="auditAct(\'requirement\','+r.id+',true)" class="small" style="background:#2e7d32">通过</button><button onclick="auditAct(\'requirement\','+r.id+',false)" class="small danger">拒绝</button>' : '')+
+      '<button onclick="auditOffline(\'requirement\','+r.id+')" class="small" style="background:#555">下架</button>'+
+      '</div>';
+  });
+  $('auditList').innerHTML = h;
+}
+async function auditAct(type, id, approved) {
+  const action = approved ? 'approve' : 'reject';
+  if (!confirm((approved?'通过':'拒绝')+' '+type+' #'+id+' ？')) return;
+  await api('POST','/admin/audit/'+type+'/'+id+'/'+action,getAdminToken(),{reason:approved?'OK':'不合格'});
+  // 刷新列表
+  if (type === 'work') auditListWork(); else auditListReq();
+}
+async function auditDetail(type, id) {
+  await api('GET','/admin/'+type+'/'+id,getAdminToken());
+}
+async function auditOffline(type, id) {
+  if (!confirm('强制下架 '+type+' #'+id+' ？')) return;
+  await api('PUT','/admin/'+type+'/'+id+'/offline',getAdminToken());
+  if (type === 'work') auditListWork(); else auditListReq();
+}
+
+// --- Phase 4: 互动（列表按钮触发）---
+async function favList() {
+  const t = getAppToken(); if (!t) return alert('请先登录');
+  const resp = await fetch(B()+'/app/favorite/list?page=1&size=50', {headers:{'App-Token':t}});
+  const json = await resp.json();
+  show('GET','/app/favorite/list',resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('commentArea').innerHTML = '<span style="color:#999">暂无收藏</span>';
+    return;
+  }
+  var h = '<div style="font-weight:600;margin-bottom:4px">我的收藏（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(f) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="color:#999;font-size:10px">'+f.targetType+'</span>'+
+      '<span style="font-weight:500;margin-left:4px">'+esc(f.targetTitle||'#'+f.targetId)+'</span>'+
+      '<button onclick="favRemove('+f.id+')" style="font-size:10px;padding:1px 4px;background:#c62828;float:right">取消</button>'+
+      '</div>';
+  });
+  $('commentArea').innerHTML = h;
+}
+async function favRemove(favId) {
+  if (!confirm('取消收藏？')) return;
+  await api('DELETE','/app/favorite/'+favId,getAppToken());
+  favList();
+}
+async function profileView() { await api('GET','/app/profile/'+$('profileId').value,getAppToken()); }
+async function favQuick(type, id) { await api('POST','/app/favorite?targetType='+type+'&targetId='+id,getAppToken()); }
+async function cmtQuick(type, id) {
+  var content = prompt('输入评论：'); if (!content) return;
+  await api('POST','/app/comment',getAppToken(),{targetType:type,targetId:id,content:content});
+}
+function isAdminLoggedIn() { return getAdminToken() != null; }
+
+async function cmtShow(type, targetId, ownerId) {
+  var isAdmin = isAdminLoggedIn();
+  var isContentOwner = currentUserId && ownerId && currentUserId === ownerId;
+  var t = isAdmin ? getAdminToken() : getAppToken();
+  if (!t) return alert('请先登录');
+  var basePath = isAdmin ? '/admin/comment/' : '/app/comment/';
+  var headerName = isAdmin ? 'Admin-Token' : 'App-Token';
+  const resp = await fetch(B()+basePath+type+'/'+targetId+'?page=1&size=50', {headers:{[headerName]:t}});
+  const json = await resp.json();
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('commentArea').innerHTML = '<span style="color:#999">暂无评论</span>';
+    return;
+  }
+  var h = '<div style="font-weight:600;margin-bottom:4px">'+type+' #'+targetId+' 的评论（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(c) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="font-weight:500">'+esc(c.accountName||'#'+c.accountId)+'</span>'+
+      '<span style="color:#999;font-size:10px;margin-left:6px">'+c.createTime+'</span>';
+    // 管理员 / 内容主人 / 评论作者本人 可以删除
+    var canDelete = isAdmin || isContentOwner || (currentUserId && c.accountId === currentUserId);
+    if (canDelete) h += '<button onclick="cmtDelete('+c.id+',\''+type+'\','+targetId+')" style="font-size:10px;padding:1px 4px;background:#c62828;float:right">删</button>';
+    h += '<div style="margin-top:2px">'+esc(c.content)+'</div></div>';
+  });
+  $('commentArea').innerHTML = h;
+}
+async function cmtMyList() {
+  const t = getAppToken(); if (!t) return alert('请先登录');
+  const resp = await fetch(B()+'/app/comment/my?page=1&size=50', {headers:{'App-Token':t}});
+  const json = await resp.json();
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('commentArea').innerHTML = '<span style="color:#999">你还没发表过评论</span>';
+    return;
+  }
+  var h = '<div style="font-weight:600;margin-bottom:4px">我发表的评论（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(c) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="color:#999;font-size:10px">'+c.targetType+' #'+c.targetId+'</span>'+
+      '<button onclick="cmtDeleteMy('+c.id+')" style="font-size:10px;padding:1px 4px;background:#c62828;float:right">删</button>'+
+      '<div style="margin-top:2px">'+esc(c.content)+'</div></div>';
+  });
+  $('commentArea').innerHTML = h;
+}
+async function cmtOnMyContent() {
+  const t = getAppToken(); if (!t) return alert('请先登录');
+  const resp = await fetch(B()+'/app/comment/on-my-content?page=1&size=50', {headers:{'App-Token':t}});
+  const json = await resp.json();
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('commentArea').innerHTML = '<span style="color:#999">你的作品/需求还没有收到评论</span>';
+    return;
+  }
+  var h = '<div style="font-weight:600;margin-bottom:4px">给我的评论（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(c) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="font-weight:500">'+esc(c.accountName||'#'+c.accountId)+'</span>'+
+      '<span style="color:#999;font-size:10px"> '+c.targetType+' #'+c.targetId+'</span>'+
+      '<button onclick="cmtDeleteMy('+c.id+')" style="font-size:10px;padding:1px 4px;background:#c62828;float:right">删</button>'+
+      '<div style="margin-top:2px">'+esc(c.content)+'</div></div>';
+  });
+  $('commentArea').innerHTML = h;
+}
+async function cmtDeleteMy(commentId) {
+  if (!confirm('删除这条评论？')) return;
+  await api('DELETE','/app/comment/'+commentId,getAppToken());
+  // 刷新两个列表
+  var currentText = $('commentArea').innerHTML;
+  if (currentText.indexOf('我发表的') >= 0) cmtMyList(); else cmtOnMyContent();
+}
+
+async function cmtAll() {
+  const t = getAdminToken(); if (!t) return alert('请先登录管理员');
+  const resp = await fetch(B()+'/admin/comment/all?page=1&size=50', {headers:{'Admin-Token':t}});
+  const json = await resp.json();
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('commentArea').innerHTML = '<span style="color:#999">暂无评论</span>';
+    return;
+  }
+  var h = '<div style="font-weight:600;margin-bottom:4px">全部评论（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(c) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="font-weight:500">'+esc(c.accountName||'#'+c.accountId)+'</span>'+
+      '<span style="color:#999;font-size:10px"> '+c.targetType+' #'+c.targetId+' '+c.createTime+'</span>'+
+      '<button onclick="cmtAllDelete('+c.id+')" style="font-size:10px;padding:1px 4px;background:#c62828;float:right">删</button>'+
+      '<div style="margin-top:2px">'+esc(c.content)+'</div></div>';
+  });
+  $('commentArea').innerHTML = h;
+}
+async function cmtAllDelete(commentId) {
+  if (!confirm('管理员删除这条评论？')) return;
+  await api('DELETE','/admin/comment/'+commentId,getAdminToken());
+  cmtAll();
+}
+
+async function cmtDelete(commentId, type, targetId) {
+  if (!confirm('删除这条评论？')) return;
+  var isAdmin = isAdminLoggedIn();
+  var path = (isAdmin ? '/admin/comment/' : '/app/comment/') + commentId;
+  var t = isAdmin ? getAdminToken() : getAppToken();
+  await api('DELETE',path,t);
+  cmtShow(type, targetId);
+}
+async function profileViewId(accountId) { await api('GET','/app/profile/'+accountId,getAppToken()); }
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.WorkMapper">
+
+    <resultMap id="workMap" type="com.orangejd.pojo.entity.Work">
+        <id property="id" column="id"/>
+        <result property="ownerId" column="owner_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="detail" column="detail"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="tags" column="tags"/>
+        <result property="coverUrl" column="cover_url"/>
+        <result property="demoUrl" column="demo_url"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="visibilityStatus" column="visibility_status"/>
+        <result property="publishStatus" column="publish_status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="ownerName" column="owner_name"/>
+        <result property="ownerAvatar" column="owner_avatar"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO work (owner_id, title, summary, detail, category_id, tags, cover_url, demo_url, audit_status, visibility_status, publish_status)
+        VALUES (#{ownerId}, #{title}, #{summary}, #{detail}, #{categoryId}, #{tags}, #{coverUrl}, #{demoUrl}, #{auditStatus}, #{visibilityStatus}, #{publishStatus})
+    </insert>
+
+    <update id="update">
+        UPDATE work
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="summary != null">summary = #{summary},</if>
+            <if test="detail != null">detail = #{detail},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="tags != null">tags = #{tags},</if>
+            <if test="coverUrl != null">cover_url = #{coverUrl},</if>
+            <if test="demoUrl != null">demo_url = #{demoUrl},</if>
+            update_time = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" resultMap="workMap">
+        SELECT * FROM work WHERE id = #{id}
+    </select>
+
+    <select id="selectByOwnerId" resultMap="workMap">
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
+        WHERE w.owner_id = #{ownerId}
+        ORDER BY w.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByOwnerId" resultType="int">
+        SELECT COUNT(*) FROM work WHERE owner_id = #{ownerId}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM work WHERE id = #{id}
+    </delete>
+
+    <update id="updateAuditStatus">
+        UPDATE work SET audit_status = #{auditStatus}, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="updateVisibility">
+        UPDATE work SET visibility_status = #{visibilityStatus}, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <select id="selectPublic" resultMap="workMap">
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
+        WHERE w.audit_status = 'APPROVED' AND w.visibility_status = 'PUBLIC'
+        <if test="categoryId != null">AND w.category_id = #{categoryId}</if>
+        <if test="keyword != null and keyword != ''">
+            AND (w.title LIKE CONCAT('%', #{keyword}, '%') OR w.summary LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        ORDER BY
+        <choose>
+            <when test="orderBy == 'favorites'">w.create_time DESC</when>
+            <otherwise>w.create_time DESC</otherwise>
+        </choose>
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countPublic" resultType="int">
+        SELECT COUNT(*) FROM work
+        WHERE audit_status = 'APPROVED' AND visibility_status = 'PUBLIC'
+        <if test="categoryId != null">AND category_id = #{categoryId}</if>
+        <if test="keyword != null and keyword != ''">
+            AND (title LIKE CONCAT('%', #{keyword}, '%') OR summary LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <select id="selectAll" resultMap="workMap">
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
+        <where>
+            <if test="auditStatus != null and auditStatus != ''">w.audit_status = #{auditStatus}</if>
+        </where>
+        ORDER BY w.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM work
+        <where>
+            <if test="auditStatus != null and auditStatus != ''">audit_status = #{auditStatus}</if>
+        </where>
+    </select>
+
+</mapper>

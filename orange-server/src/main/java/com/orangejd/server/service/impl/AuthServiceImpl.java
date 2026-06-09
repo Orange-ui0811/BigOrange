@@ -1,5 +1,6 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.constant.MessageConstant;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.exception.LoginFailedException;
 import com.orangejd.common.properties.JwtProperties;
@@ -75,7 +76,7 @@ public class AuthServiceImpl implements AuthService {
         // 检查用户名重复
         Account existing = accountMapper.selectByUsername(registerDTO.getUsername());
         if (existing != null) {
-            throw new BaseException("用户名已存在");
+            throw new BaseException(MessageConstant.USERNAME_EXISTS);
         }
 
         // 创建账号
@@ -102,17 +103,17 @@ public class AuthServiceImpl implements AuthService {
         // 从 BaseContext 获取当前登录用户 ID（由 JWT 拦截器注入）
         Long currentId = com.orangejd.common.context.BaseContext.getCurrentId();
         if (currentId == null) {
-            throw new BaseException("未登录");
+            throw new BaseException(MessageConstant.NOT_LOGIN);
         }
 
         Account account = accountMapper.selectById(currentId);
         if (account == null) {
-            throw new BaseException("账号不存在");
+            throw new BaseException(MessageConstant.ACCOUNT_NOT_FOUND);
         }
 
         // 校验旧密码
         if (!passwordEncoder.matches(dto.getOldPassword(), account.getPassword())) {
-            throw new BaseException("旧密码错误");
+            throw new BaseException(MessageConstant.OLD_PASSWORD_ERROR);
         }
 
         // 更新为新密码

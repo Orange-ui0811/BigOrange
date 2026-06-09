@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.FavoriteMapper">
+
+    <resultMap id="favoriteMap" type="com.orangejd.pojo.entity.Favorite">
+        <id property="id" column="id"/>
+        <result property="accountId" column="account_id"/>
+        <result property="targetType" column="target_type"/>
+        <result property="targetId" column="target_id"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <resultMap id="favoriteVOMap" type="com.orangejd.pojo.vo.FavoriteVO">
+        <id property="id" column="id"/>
+        <result property="targetType" column="target_type"/>
+        <result property="targetId" column="target_id"/>
+        <result property="targetTitle" column="target_title"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO favorite (account_id, target_type, target_id) VALUES (#{accountId}, #{targetType}, #{targetId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM favorite WHERE account_id = #{accountId} AND target_type = #{targetType} AND target_id = #{targetId}
+    </delete>
+
+    <delete id="deleteById">
+        DELETE FROM favorite WHERE id = #{id}
+    </delete>
+
+    <select id="exists" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM favorite WHERE account_id = #{accountId} AND target_type = #{targetType} AND target_id = #{targetId}
+    </select>
+
+    <select id="selectByAccountId" resultMap="favoriteMap">
+        SELECT * FROM favorite WHERE account_id = #{accountId} ORDER BY create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="selectVOByAccountId" resultMap="favoriteVOMap">
+        SELECT f.id, f.target_type, f.target_id, f.create_time,
+               COALESCE(w.title, r.title) AS target_title
+        FROM favorite f
+        LEFT JOIN work w ON f.target_type = 'WORK' AND f.target_id = w.id
+        LEFT JOIN requirement r ON f.target_type = 'REQUIREMENT' AND f.target_id = r.id
+        WHERE f.account_id = #{accountId}
+        ORDER BY f.create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByAccountId" resultType="int">
+        SELECT COUNT(*) FROM favorite WHERE account_id = #{accountId}
+    </select>
+
+    <select id="countByTarget" resultType="int">
+        SELECT COUNT(*) FROM favorite WHERE target_type = #{targetType} AND target_id = #{targetId}
+    </select>
+</mapper>
