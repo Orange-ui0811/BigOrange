@@ -112,4 +112,10 @@
         </where>
     </select>
 
+    <select id="selectTopByFavorites" resultType="java.util.HashMap">
+        SELECT w.id, w.title, COUNT(f.id) AS favoriteCount
+        FROM work w LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id=w.id
+        WHERE w.audit_status='APPROVED' AND w.visibility_status='PUBLIC'
+        GROUP BY w.id ORDER BY favoriteCount DESC LIMIT #{limit}
+    </select>
 </mapper>

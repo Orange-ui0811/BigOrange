@@ -177,6 +177,49 @@
 
   <!-- 结果 -->
 
+  <!-- Phase 5: 聊天 -->
+  <div class="card">
+    <h3>Phase 5·聊天</h3>
+    <div class="row">
+      <input id="chatWorkId" value="2" style="width:30px" type="number" placeholder="作品ID">
+      <input id="chatReceiverId" value="8" style="width:30px" type="number" placeholder="对方ID">
+      <button onclick="convCreate()">发起会话</button>
+      <button onclick="convList()">会话列表</button>
+      <button onclick="notifyList()" id="notifyBtn">通知</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:6px 0"></div>
+    <div class="row">
+      <input id="chatConvId" value="1" style="width:30px" type="number" placeholder="会话ID">
+      <input id="chatMsg" value="Hi!" style="width:100px" placeholder="消息">
+      <button onclick="msgSend()">发送</button>
+      <button onclick="msgView()">刷新消息</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:6px 0"></div>
+    <div id="chatArea" style="max-height:250px;overflow:auto;font-size:12px;color:var(--muted)">点「会话列表」开始聊天</div>
+  </div>
+
+  <!-- Phase 7: 管理 -->
+  <div class="card">
+    <h3>Phase 7·管理（管理员）</h3>
+    <div class="row">
+      <button onclick="adminUsers()">用户列表</button>
+      <button onclick="adminOrders()">全量订单</button>
+      <button onclick="adminDashboard()">控制台</button>
+      <button onclick="adminAuditHistory()">审核记录</button>
+    </div>
+    <div style="border-top:1px dashed #ddd;margin:6px 0"></div>
+    <div id="adminArea" style="max-height:200px;overflow:auto;font-size:12px;color:var(--muted)">管理员功能（需先登录管理员）</div>
+  </div>
+
+  <!-- Phase 6: 交易 -->
+  <div class="card">
+    <h3>Phase 6·交易</h3>
+    <div class="row">
+      <button onclick="orderBuyList()">买入列表</button>
+      <button onclick="orderSellList()">卖出列表</button>
+    </div>
+  </div>
+
   <!-- 结果 -->
   <div class="card full">
     <h3>响应 <button onclick="clearResult()" class="small" style="float:right;background:#555">清空</button></h3>
@@ -287,6 +330,301 @@ function getAdminToken() {
 }
 function clearResult() { $('result').textContent=''; $('result').className='result'; }
 
+// --- Phase 6: 交易 ---
+async function quoteCreate() {
+  var r = await api('POST','/app/quote',getAppToken(),{conversationId:parseInt($('txConvId').value),price:parseFloat($('txPrice').value)});
+  if (r.json && r.json.code === 1) alert('报价已发送，ID:'+r.json.data.id);
+}
+async function quoteAccept() {
+  var id = prompt('报价单ID:'); if (!id) return;
+  await api('PUT','/app/quote/'+id+'/accept',getAppToken());
+}
+async function quoteReject() {
+  var id = prompt('报价单ID:'); if (!id) return;
+  await api('PUT','/app/quote/'+id+'/reject',getAppToken());
+}
+async function orderDeposit() { await api('PUT','/app/order/'+$('txOrderId').value+'/deposit',getAppToken()); }
+async function orderDeliver() {
+  var content = prompt('交付内容:'); if (!content) return;
+  await api('PUT','/app/order/'+$('txOrderId').value+'/deliver',getAppToken(),{content:content});
+}
+async function orderFinalPay() { await api('PUT','/app/order/'+$('txOrderId').value+'/final-pay',getAppToken()); }
+async function orderCancel() {
+  if (!confirm('取消订单?')) return;
+  await api('PUT','/app/order/'+$('txOrderId').value+'/cancel',getAppToken());
+}
+async function orderDetail() { await api('GET','/app/order/'+$('txOrderId').value,getAppToken()); }
+async function orderBuyList() {
+  var t = getAppToken(); if (!t) return alert('请先登录');
+  var resp = await fetch(B()+'/app/order/buy?page=1&size=30', {headers:{'App-Token':t}});
+  var json = await resp.json(); show('GET','/app/order/buy',resp.status,json);
+  if (json.code!==1||!json.data||!json.data.records.length) { $('chatArea').innerHTML='<span style="color:#999">暂无买入订单</span>'; return; }
+  var h='<div style="font-weight:600;margin-bottom:4px">买入（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(o){ h+=orderRow(o,true); });
+  $('chatArea').innerHTML=h;
+}
+async function orderSellList() {
+  var t = getAppToken(); if (!t) return alert('请先登录');
+  var resp = await fetch(B()+'/app/order/sell?page=1&size=30', {headers:{'App-Token':t}});
+  var json = await resp.json(); show('GET','/app/order/sell',resp.status,json);
+  if (json.code!==1||!json.data||!json.data.records.length) { $('chatArea').innerHTML='<span style="color:#999">暂无卖出订单</span>'; return; }
+  var h='<div style="font-weight:600;margin-bottom:4px">卖出（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(o){ h+=orderRow(o,false); });
+  $('chatArea').innerHTML=h;
+}
+function orderRow(o, isBuy) {
+  var s='<div style="padding:4px 0;border-bottom:1px solid #eee;display:flex;align-items:center;gap:4px">'+
+    '<span style="min-width:20px;color:#999">#'+o.id+'</span>'+
+    '<span style="flex:1;font-weight:500">'+esc(o.workTitle||'订单#'+o.id)+'</span>'+
+    '<span style="font-size:10px;color:#666">'+(isBuy?esc(o.sellerName):esc(o.buyerName))+'</span>'+
+    '<span style="font-size:10px">¥'+o.totalAmount+'</span>'+
+    '<span style="font-size:10px;color:#666">'+o.orderStatus+'</span>'+
+    '<button onclick="orderDetailById('+o.id+')" class="small" style="background:#555">详情</button>';
+  if (isBuy && o.orderStatus==='WAITING_DEPOSIT') s+='<button onclick="orderAct(\'deposit\','+o.id+')" class="small" style="background:#2e7d32">付定金</button>';
+  if (isBuy && o.orderStatus==='WAITING_FINAL_PAYMENT') s+='<button onclick="orderAct(\'final-pay\','+o.id+')" class="small" style="background:#2e7d32">付尾款</button>';
+  if (!isBuy && o.orderStatus==='DEPOSIT_PAID') s+='<button onclick="orderActDeliver('+o.id+')" class="small" style="background:#1565c0">交付</button>';
+  if (o.orderStatus==='COMPLETED'||o.orderStatus==='CANCELLED')
+    s+='<button onclick="orderAct(\'delete\','+o.id+')" class="small" style="background:#666">删除</button>';
+  else
+    s+='<button onclick="orderAct(\'cancel\','+o.id+')" class="small danger">取消</button>';
+  s+='</div>';
+  return s;
+}
+async function orderDetailById(id) { $('txOrderId').value=id; await api('GET','/app/order/'+id,getAppToken()); }
+async function orderAct(action, id) {
+  if ((action==='cancel'||action==='delete') && !confirm((action==='delete'?'删除':'取消')+'订单#'+id+'?')) return;
+  await api(action==='delete'?'DELETE':'PUT','/app/order/'+id+(action==='delete'?'':'/'+action),getAppToken());
+  refreshNotifyBadge();
+  if (action==='deposit'||action==='final-pay'||action==='cancel'||action==='delete') orderBuyList();
+}
+async function orderActDeliver(id) {
+  var content = prompt('交付内容:'); if (!content) return;
+  await api('PUT','/app/order/'+id+'/deliver',getAppToken(),{content:content});
+  refreshNotifyBadge();
+  orderSellList();
+}
+async function refreshNotifyBadge() {
+  try {
+    var token = getAppToken(); if (!token) return;
+    var resp = await fetch(B()+'/app/notification/unread-count', {headers:{'App-Token':token}});
+    var json = await resp.json();
+    var btn = $('notifyBtn');
+    if (json.code===1 && json.data>0) btn.textContent = '通知('+json.data+')';
+    else btn.textContent = '通知';
+  } catch(e) {}
+}
+// --- Phase 7: 管理 ---
+async function adminUsers() {
+  var t = getAdminToken(); if (!t) return alert('请先登录管理员');
+  var resp = await fetch(B()+'/admin/users?page=1&size=50', {headers:{'Admin-Token':t}});
+  var json = await resp.json();
+  if (json.code !== 1 || !json.data || !json.data.records.length) { $('adminArea').innerHTML = '<span style="color:#999">无数据</span>'; return; }
+  var h = '<div style="font-weight:600;margin-bottom:4px">用户列表（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(u) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee;display:flex;align-items:center;gap:4px">'+
+      '<span style="flex:1">'+esc(u.username)+'</span><span style="font-size:10px">'+u.role+'</span>'+
+      '<span style="font-size:10px;color:'+(u.status==='ACTIVE'?'#2e7d32':'#c62828')+'">'+u.status+'</span>'+
+      '<button onclick="adminToggleUser('+u.id+')" class="small" style="background:'+(u.status==='ACTIVE'?'#c62828':'#2e7d32')+'">'+(u.status==='ACTIVE'?'禁用':'启用')+'</button>'+
+      '</div>';
+  });
+  $('adminArea').innerHTML = h;
+}
+async function adminToggleUser(id) {
+  await api('PUT','/admin/users/'+id+'/status',getAdminToken());
+  adminUsers();
+}
+async function adminOrders() {
+  var t = getAdminToken(); if (!t) return alert('请先登录管理员');
+  var resp = await fetch(B()+'/admin/orders?page=1&size=30', {headers:{'Admin-Token':t}});
+  var json = await resp.json();
+  if (json.code !== 1 || !json.data || !json.data.records.length) { $('adminArea').innerHTML = '<span style="color:#999">无订单</span>'; return; }
+  var h = '<div style="font-weight:600;margin-bottom:4px">全量订单（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(o) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee;font-size:11px">'+
+      '#'+o.id+' '+esc(o.buyerName)+'→'+esc(o.sellerName)+' ¥'+o.totalAmount+' '+o.orderStatus+'</div>';
+  });
+  $('adminArea').innerHTML = h;
+}
+async function adminDashboard() {
+  var t = getAdminToken(); if (!t) return alert('请先登录管理员');
+  var resp = await fetch(B()+'/admin/statistics/dashboard', {headers:{'Admin-Token':t}});
+  var json = await resp.json(); show('GET','/admin/statistics/dashboard',resp.status,json);
+  if (json.code !== 1) return;
+  var d = json.data;
+  var h = '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:13px;margin-bottom:8px">'+
+    '<div style="background:#e3f2fd;padding:8px;border-radius:4px"><b>'+d.totalUsers+'</b><br>用户总数</div>'+
+    '<div style="background:#e8f5e9;padding:8px;border-radius:4px"><b>'+d.totalWorks+'</b><br>作品总数</div>'+
+    '<div style="background:#fff3e0;padding:8px;border-radius:4px"><b>'+d.totalRequirements+'</b><br>需求总数</div>'+
+    '<div style="background:#fce4ec;padding:8px;border-radius:4px"><b>'+d.pendingAudits+'</b><br>待审核</div>'+
+    '<div style="background:#f3e5f5;padding:8px;border-radius:4px"><b>'+d.totalOrders+'</b><br>订单总数</div>'+
+    '<div style="background:#e0f2f1;padding:8px;border-radius:4px"><b>¥'+d.todayRevenue+'</b><br>交易额</div>'+
+    '</div>';
+
+  // 热门作品
+  try {
+    var twResp = await fetch(B()+'/admin/statistics/top-works?limit=5', {headers:{'Admin-Token':t}});
+    var tw = await twResp.json();
+    if (tw.code===1 && tw.data && tw.data.length) {
+      h += '<div style="font-weight:600;margin:8px 0 4px">热门作品 Top5</div>';
+      tw.data.forEach(function(w,i) {
+        h += '<div style="display:flex;align-items:center;gap:4px;padding:2px 0;font-size:12px">'+
+          '<span style="color:#e65100;font-weight:600;min-width:20px">#'+(i+1)+'</span>'+
+          '<span style="flex:1">'+esc(w.title||'作品#'+w.id)+'</span>'+
+          '<span style="color:#c62828;font-size:11px">'+w.favoriteCount+' 收藏</span></div>';
+      });
+    }
+  } catch(e) {}
+
+  // 活跃创作者
+  try {
+    var tcResp = await fetch(B()+'/admin/statistics/top-creators?limit=5', {headers:{'Admin-Token':t}});
+    var tc = await tcResp.json();
+    if (tc.code===1 && tc.data && tc.data.length) {
+      h += '<div style="font-weight:600;margin:8px 0 4px">活跃创作者 Top5</div>';
+      tc.data.forEach(function(c,i) {
+        h += '<div style="display:flex;align-items:center;gap:4px;padding:2px 0;font-size:12px">'+
+          '<span style="color:#2e7d32;font-weight:600;min-width:20px">#'+(i+1)+'</span>'+
+          '<span style="flex:1">'+esc(c.username)+'</span>'+
+          '<span style="color:#1565c0;font-size:11px">'+c.workCount+' 作品</span></div>';
+      });
+    }
+  } catch(e) {}
+  $('adminArea').innerHTML = h;
+}
+
+async function adminAuditHistory() {
+  var type = prompt('审核类型 (WORK/REQUIREMENT):','WORK'); if (!type) return;
+  var id = prompt('目标ID:'); if (!id) return;
+  var t = getAdminToken(); if (!t) return alert('请先登录管理员');
+  var resp = await fetch(B()+'/admin/audit/history/'+type+'/'+id, {headers:{'Admin-Token':t}});
+  var json = await resp.json(); show('GET','/admin/audit/history/'+type+'/'+id,resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.length) { $('adminArea').innerHTML = '<span style="color:#999">无审核记录</span>'; return; }
+  var h = '<div style="font-weight:600;margin-bottom:4px">审核记录</div>';
+  json.data.forEach(function(r) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+r.auditStatus+' by #'+r.auditorId+' '+r.auditTime+' - '+esc(r.reason||'')+'</div>';
+  });
+  $('adminArea').innerHTML = h;
+}
+
+async function buyQuick(workId, sellerId) {
+  if (sellerId === currentUserId) { alert('不能购买自己的作品'); return; }
+  var price = prompt('订单金额:'); if (!price) return;
+  await api('POST','/app/order',getAppToken(),{sourceType:'WORK',sourceId:workId,totalAmount:parseFloat(price)});
+}
+
+// --- Phase 5: 聊天 ---
+async function convQuick(workId, reqId, receiverId) {
+  if (receiverId === currentUserId) { alert('不能向自己发起会话'); return; }
+  var data = {receiverId: receiverId};
+  if (workId) data.workId = workId;
+  if (reqId) data.requirementId = reqId;
+  var r = await api('POST','/app/conversation',getAppToken(),data);
+  if (r.json && r.json.code === 1) {
+    $('chatConvId').value = r.json.data.id;
+    msgView();
+    convList();
+  }
+}
+async function convCreate() {
+  var r = await api('POST','/app/conversation',getAppToken(),{workId:parseInt($('chatWorkId').value)||null,receiverId:parseInt($('chatReceiverId').value)});
+  if (r.json && r.json.code === 1) { $('chatConvId').value = r.json.data.id; convList(); }
+}
+async function convList() {
+  var t = getAppToken(); if (!t) return alert('请先登录');
+  var resp = await fetch(B()+'/app/conversation/list?page=1&size=30', {headers:{'App-Token':t}});
+  var json = await resp.json();
+  show('GET','/app/conversation/list',resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) { $('chatArea').innerHTML = '<span style="color:#999">暂无会话</span>'; return; }
+  var h = '<div style="font-weight:600;margin-bottom:4px">我的会话（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(c) {
+    var partner = c.receiverName||'#'+c.receiverId;
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee;cursor:pointer" onclick="$(\'chatConvId\').value='+c.id+';msgView()">'+
+      '<span style="font-weight:500">'+esc(partner)+'</span>'+
+      '<span style="color:#999;font-size:10px;margin-left:6px">'+(c.workTitle||c.requirementTitle||'')+'</span>'+
+      '<span style="color:#999;font-size:10px;float:right">'+(c.unreadCount?'<b style="color:#c62828">'+c.unreadCount+'</b> ':'')+(c.lastMessage||'').substring(0,15)+'</span>'+
+      '<button onclick="event.stopPropagation();convDelete('+c.id+')" style="font-size:9px;padding:1px 3px;background:#c62828;float:right;margin-right:4px">删</button>'+
+      '</div>';
+  });
+  $('chatArea').innerHTML = h;
+}
+async function msgSend() {
+  var convId = parseInt($('chatConvId').value);
+  var r = await api('POST','/app/message',getAppToken(),{conversationId:convId,content:$('chatMsg').value});
+  if (r.json && r.json.code === 1) { $('chatMsg').value = ''; msgView(); }
+}
+async function msgView() {
+  var convId = parseInt($('chatConvId').value);
+  var resp = await fetch(B()+'/app/message/'+convId+'?page=1&size=100', {headers:{'App-Token':getAppToken()}});
+  var json = await resp.json();
+  show('GET','/app/message/'+convId,resp.status,json);
+  if (json.code !== 1) { $('chatArea').innerHTML = '<span style="color:#999">暂无消息</span>'; return; }
+  // 标记已读
+  await fetch(B()+'/app/message/'+convId+'/read', {method:'PUT', headers:{'App-Token':getAppToken()}});
+  // 同时拉报价列表
+  var quoteResp = await fetch(B()+'/app/quote/by-conversation/'+convId, {headers:{'App-Token':getAppToken()}});
+  var quotes = [];
+  try { var qj = await quoteResp.json(); if (qj.code===1) quotes = qj.data; } catch(e) {}
+
+  var h = '<div style="margin-bottom:4px;background:#f5f5f5;padding:6px;border-radius:4px">'+
+    '<b>会话 #'+convId+'</b> | '+
+    '<input id="quotePrice" placeholder="报价金额" style="width:70px;font-size:12px">'+
+    '<button onclick="quoteInConv('+convId+')" style="font-size:11px;padding:2px 6px;background:#e65100;margin-left:4px">发报价</button>'+
+    '</div>';
+  // 显示报价
+  if (quotes.length) { h += '<div style="font-size:11px;margin-bottom:4px">'; quotes.forEach(function(q){ h+= '报价 ¥'+q.price+' ['+q.status+'] '; if(q.status==='PENDING_CONFIRM') h+= '<button onclick="quoteInConvAct(\'accept\','+q.id+','+convId+')" style="font-size:10px;background:#2e7d32;color:#fff">接受</button> <button onclick="quoteInConvAct(\'reject\','+q.id+','+convId+')" style="font-size:10px;background:#c62828;color:#fff">拒绝</button>'; if(q.status==='ACCEPTED') h+= '<button onclick="orderFromQuote('+q.id+','+q.price+','+convId+')" style="font-size:10px;background:#e65100;color:#fff">下单</button>'; }); h += '</div>'; }
+  // 消息列表
+  (json.data||[]).forEach(function(m) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="font-weight:500;color:#1565c0">'+esc(m.senderName||'#'+m.senderId)+'</span>'+
+      '<span style="color:#999;font-size:10px;margin-left:4px">'+m.createTime+'</span>'+
+      '<div style="margin-top:2px">'+esc(m.content)+'</div></div>';
+  });
+  $('chatArea').innerHTML = h;
+}
+async function quoteInConv(convId) {
+  var price = parseFloat($('quotePrice').value); if (!price) return alert('输入金额');
+  await api('POST','/app/quote',getAppToken(),{conversationId:convId,price:price});
+  msgView();
+}
+async function quoteInConvAct(action, quoteId, convId) {
+  await api('PUT','/app/quote/'+quoteId+'/'+action,getAppToken());
+  msgView();
+}
+async function orderFromQuote(quoteId, price, convId) {
+  var deposit = prompt('定金金额 (total:'+price+'):', Math.round(price*0.3));
+  if (!deposit) return;
+  var r = await api('POST','/app/order',getAppToken(),{sourceType:'QUOTE',sourceId:quoteId,deposit:parseFloat(deposit),finalAmount:price-parseFloat(deposit),totalAmount:price});
+  refreshNotifyBadge();
+  msgView();
+  if (r.json && r.json.code === 1) {
+    var oid = r.json.data.id;
+    var h = '<div style="font-weight:600;color:#2e7d32;margin:4px 0">订单 #'+oid+' 已创建 (¥'+price+')</div>'+
+      '<button onclick="orderAct(\'deposit\','+oid+')" style="background:#2e7d32;color:#fff;font-size:12px;padding:4px 12px;margin:4px">付定金 ¥'+deposit+'</button>'+
+      '<button onclick="orderBuyList()" style="background:#555;color:#fff;font-size:12px;padding:4px 12px;margin:4px">买入列表</button>';
+    $('chatArea').innerHTML = h + $('chatArea').innerHTML;
+  }
+}
+async function convDelete(id) {
+  if (!confirm('删除会话 #'+id+' 及全部消息？')) return;
+  await api('DELETE','/app/conversation/'+id,getAppToken());
+  convList();
+}
+async function notifyList() {
+  var resp = await fetch(B()+'/app/notification/list?page=1&size=30', {headers:{'App-Token':getAppToken()}});
+  var json = await resp.json();
+  show('GET','/app/notification/list',resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.length) { $('chatArea').innerHTML = '<span style="color:#999">暂无通知</span>'; return; }
+  var h = '<div style="font-weight:600;margin-bottom:4px">通知（'+json.data.length+'）</div>';
+  json.data.forEach(function(n) {
+    h += '<div style="padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="font-size:10px;color:#999">'+n.type+'</span> '+
+      '<span>'+esc(n.message)+'</span>'+
+      '<span style="color:#999;font-size:10px;float:right">'+(n.isRead?'已读':'未读')+'</span>'+
+      '</div>';
+  });
+  $('chatArea').innerHTML = h;
+}
+
 // --- Category loader ---
 async function loadCategories() {
   try {
@@ -343,6 +681,8 @@ async function workListMy() {
       '<button onclick="cmtQuick(\'WORK\','+w.id+')" style="font-size:10px;padding:2px 5px;background:#1565c0">评论</button>'+
       '<button onclick="cmtShow(\'WORK\','+w.id+','+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#00695c">看评论</button>'+
       '<button onclick="profileViewId('+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#555">作者</button>'+
+      '<button onclick="convQuick('+w.id+',null,'+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#e65100">聊天</button>'+
+      '<button onclick="buyQuick('+w.id+','+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#2e7d32">购买</button>'+
       '</div>';
   });
   $('workList').innerHTML = h;
@@ -392,6 +732,8 @@ async function workPublic() {
       '<button onclick="cmtQuick(\'WORK\','+w.id+')" style="font-size:10px;padding:2px 5px;background:#1565c0">评论</button>'+
       '<button onclick="cmtShow(\'WORK\','+w.id+','+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#00695c">看评论</button>'+
       '<button onclick="profileViewId('+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#555">作者</button>'+
+      '<button onclick="convQuick('+w.id+',null,'+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#e65100">聊天</button>'+
+      '<button onclick="buyQuick('+w.id+','+w.ownerId+')" style="font-size:10px;padding:2px 5px;background:#2e7d32">购买</button>'+
       '</div>';
   });
   $('workList').innerHTML = h;
@@ -425,7 +767,11 @@ async function reqListMy() {
       '<button onclick="reqAct('+r.id+',\'submit\')" class="small">提交</button>'+
       '<button onclick="reqAct('+r.id+',\'visibility\')" class="small" style="background:#1565c0">'+r.visibilityStatus+'</button>'+
       '<button onclick="reqAct('+r.id+',\'delete\')" class="small danger">删</button>'+
+      '<button onclick="favQuick(\'REQUIREMENT\','+r.id+')" style="font-size:10px;padding:2px 5px;background:#c62828">收藏</button>'+
+      '<button onclick="cmtQuickReq('+r.id+')" style="font-size:10px;padding:2px 5px;background:#1565c0">评论</button>'+
       '<button onclick="cmtShow(\'REQUIREMENT\','+r.id+','+r.publisherId+')" style="font-size:10px;padding:2px 5px;background:#00695c">看评论</button>'+
+      '<button onclick="profileViewId('+r.publisherId+')" style="font-size:10px;padding:2px 5px;background:#555">作者</button>'+
+      '<button onclick="convQuick(null,'+r.id+','+r.publisherId+')" style="font-size:10px;padding:2px 5px;background:#e65100">聊天</button>'+
       '</div>';
   });
   $('reqList').innerHTML = h;
@@ -456,7 +802,30 @@ async function reqEdit(id) {
   await api('PUT','/app/requirement/'+id,getAppToken(),data);
   reqListMy();
 }
-async function reqPublic() { await api('GET','/app/requirement/public?page=1&size=10',null); }
+async function reqPublic() {
+  const resp = await fetch(B()+'/app/requirement/public?page=1&size=20');
+  const json = await resp.json();
+  show('GET','/app/requirement/public',resp.status,json);
+  if (json.code !== 1 || !json.data || !json.data.records.length) {
+    $('reqList').innerHTML = '<span style="color:#999">暂无公开需求</span>';
+    return;
+  }
+  var h = '<div style="font-weight:600;margin-bottom:4px;color:#2e7d32">需求广场（'+json.data.total+'）</div>';
+  json.data.records.forEach(function(r) {
+    h += '<div style="display:flex;align-items:center;gap:4px;padding:4px 0;border-bottom:1px solid #eee">'+
+      '<span style="min-width:24px;color:#999">#'+r.id+'</span>'+
+      '<span style="flex:1;font-weight:500">'+esc(r.title)+'</span>'+
+      '<span style="color:#999;font-size:10px">'+r.budgetMin+'~'+r.budgetMax+'</span>'+
+      '<span style="font-size:10px;color:#666">by '+esc(r.publisherName||'#'+r.publisherId)+'</span>'+
+      '<button onclick="favQuick(\'REQUIREMENT\','+r.id+')" style="font-size:10px;padding:2px 5px;background:#c62828">收藏</button>'+
+      '<button onclick="cmtQuickReq('+r.id+')" style="font-size:10px;padding:2px 5px;background:#1565c0">评论</button>'+
+      '<button onclick="cmtShow(\'REQUIREMENT\','+r.id+','+r.publisherId+')" style="font-size:10px;padding:2px 5px;background:#00695c">看评论</button>'+
+      '<button onclick="profileViewId('+r.publisherId+')" style="font-size:10px;padding:2px 5px;background:#555">作者</button>'+
+      '<button onclick="convQuick(null,'+r.id+','+r.publisherId+')" style="font-size:10px;padding:2px 5px;background:#e65100">聊天</button>'+
+      '</div>';
+  });
+  $('reqList').innerHTML = h;
+}
 
 // --- Phase 3: Audit ---
 async function auditListWork(status) {
@@ -558,6 +927,10 @@ async function favQuick(type, id) { await api('POST','/app/favorite?targetType='
 async function cmtQuick(type, id) {
   var content = prompt('输入评论：'); if (!content) return;
   await api('POST','/app/comment',getAppToken(),{targetType:type,targetId:id,content:content});
+}
+async function cmtQuickReq(id) {
+  var content = prompt('输入评论：'); if (!content) return;
+  await api('POST','/app/comment',getAppToken(),{targetType:'REQUIREMENT',targetId:id,content:content});
 }
 function isAdminLoggedIn() { return getAdminToken() != null; }
 

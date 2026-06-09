@@ -10,6 +10,7 @@ import com.orangejd.server.mapper.AuditRecordMapper;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.mapper.RequirementMapper;
 import com.orangejd.server.service.AuditService;
+import com.orangejd.server.service.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ public class AuditServiceImpl implements AuditService {
     @Autowired private WorkMapper workMapper;
     @Autowired private RequirementMapper requirementMapper;
     @Autowired private AuditRecordMapper auditRecordMapper;
+    @Autowired private INotificationService notificationService;
 
     @Override
     @Transactional
@@ -41,7 +43,9 @@ public class AuditServiceImpl implements AuditService {
         record.setAuditStatus(auditStatus);
         record.setReason(reason);
         auditRecordMapper.insert(record);
-        // TODO Phase 5: 通知作品作者审核结果（approved/rejected）
+        notificationService.send(work.getOwnerId(), "AUDIT",
+                approved ? "你的作品《" + work.getTitle() + "》审核通过" : "你的作品《" + work.getTitle() + "》审核未通过",
+                workId);
     }
 
     @Override
@@ -62,6 +66,9 @@ public class AuditServiceImpl implements AuditService {
         record.setAuditStatus(auditStatus);
         record.setReason(reason);
         auditRecordMapper.insert(record);
+        notificationService.send(req.getPublisherId(), "AUDIT",
+                approved ? "你的需求《" + req.getTitle() + "》审核通过" : "你的需求《" + req.getTitle() + "》审核未通过",
+                requirementId);
     }
 
     @Override

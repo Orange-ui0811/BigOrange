@@ -13,6 +13,7 @@ import com.orangejd.pojo.vo.WorkDetailVO;
 import com.orangejd.pojo.vo.WorkVO;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.mapper.WorkSaleOptionMapper;
+import com.orangejd.server.service.INotificationService;
 import com.orangejd.server.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -113,6 +114,7 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Autowired private com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
+    @Autowired private INotificationService notificationService;
 
     @Override
     @Transactional
@@ -129,6 +131,7 @@ public class WorkServiceImpl implements WorkService {
         record.setAuditStatus("REJECTED");
         record.setReason(reason != null ? reason : "管理员下架");
         auditRecordMapper.insert(record);
+        notificationService.send(work.getOwnerId(), "AUDIT", "你的作品《" + work.getTitle() + "》已被管理员下架", id);
     }
 
     @Override

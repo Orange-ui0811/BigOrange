@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.NotificationMapper">
+
+    <resultMap id="notifyMap" type="com.orangejd.pojo.entity.Notification">
+        <id property="id" column="id"/>
+        <result property="accountId" column="account_id"/>
+        <result property="message" column="message"/>
+        <result property="type" column="type"/>
+        <result property="relatedId" column="related_id"/>
+        <result property="isRead" column="is_read"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO notification (account_id, message, type, related_id) VALUES (#{accountId}, #{message}, #{type}, #{relatedId})
+    </insert>
+
+    <update id="markAsRead">
+        UPDATE notification SET is_read = 1 WHERE id = #{id} AND account_id = #{accountId}
+    </update>
+
+    <select id="selectByAccountId" resultMap="notifyMap">
+        SELECT * FROM notification WHERE account_id = #{accountId}
+        ORDER BY create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countUnread" resultType="int">
+        SELECT COUNT(*) FROM notification WHERE account_id = #{accountId} AND is_read = 0
+    </select>
+</mapper>

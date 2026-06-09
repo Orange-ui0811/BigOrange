@@ -1,0 +1,14 @@
+package com.orangejd.server.mapper;
+
+import com.orangejd.pojo.entity.PaymentStage;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+@Mapper
+public interface PaymentStageMapper {
+    int insert(PaymentStage stage);
+    List<PaymentStage> selectByOrderId(@Param("orderId") Long orderId);
+    int updatePayStatus(@Param("id") Long id, @Param("payStatus") String payStatus);
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.DeliveryMapper">
+    <resultMap id="delMap" type="com.orangejd.pojo.entity.Delivery">
+        <id property="id" column="id"/><result property="orderId" column="order_id"/>
+        <result property="delivererId" column="deliverer_id"/><result property="content" column="content"/>
+        <result property="attachmentUrl" column="attachment_url"/><result property="createTime" column="create_time"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO delivery (order_id, deliverer_id, content, attachment_url) VALUES (#{orderId}, #{delivererId}, #{content}, #{attachmentUrl})
+    </insert>
+    <select id="selectByOrderId" resultMap="delMap">SELECT * FROM delivery WHERE order_id = #{orderId} ORDER BY create_time DESC</select>
+</mapper>

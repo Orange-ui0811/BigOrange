@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.QuoteMapper">
+    <resultMap id="quoteMap" type="com.orangejd.pojo.entity.Quote">
+        <id property="id" column="id"/>
+        <result property="conversationId" column="conversation_id"/>
+        <result property="senderId" column="sender_id"/>
+        <result property="receiverId" column="receiver_id"/>
+        <result property="price" column="price"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+        <result property="expireTime" column="expire_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quote (conversation_id, sender_id, receiver_id, price, description, expire_time)
+        VALUES (#{conversationId}, #{senderId}, #{receiverId}, #{price}, #{description}, #{expireTime})
+    </insert>
+    <select id="selectById" resultMap="quoteMap">SELECT * FROM quote WHERE id = #{id}</select>
+    <select id="selectByConversationId" resultMap="quoteMap">
+        SELECT * FROM quote WHERE conversation_id = #{conversationId} ORDER BY create_time DESC
+    </select>
+    <update id="updateStatus">
+        UPDATE quote SET status = #{status}, update_time = NOW() WHERE id = #{id}
+    </update>
+    <select id="selectExpired" resultMap="quoteMap">
+        SELECT * FROM quote WHERE status = #{status} AND expire_time IS NOT NULL AND expire_time &lt; #{now}
+    </select>
+</mapper>

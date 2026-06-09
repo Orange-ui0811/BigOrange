@@ -8,6 +8,8 @@ import com.orangejd.pojo.dto.CommentCreateDTO;
 import com.orangejd.pojo.entity.Comment;
 import com.orangejd.pojo.vo.CommentVO;
 import com.orangejd.server.mapper.CommentMapper;
+import com.orangejd.server.mapper.RequirementMapper;
+import com.orangejd.server.mapper.WorkMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +19,32 @@ import java.util.List;
 public class CommentService implements ICommentService {
 
     @Autowired private CommentMapper commentMapper;
+    @Autowired private WorkMapper workMapper;
+    @Autowired private RequirementMapper requirementMapper;
+    @Autowired private INotificationService notificationService;
 
     public void create(CommentCreateDTO dto) {
         if (dto.getContent() == null || dto.getContent().trim().isEmpty()) throw new BaseException(MessageConstant.COMMENT_EMPTY);
         if (dto.getContent().length() > 1024) throw new BaseException(MessageConstant.COMMENT_TOO_LONG);
+        Long currentId = BaseContext.getCurrentId();
         Comment c = new Comment();
-        c.setAccountId(BaseContext.getCurrentId());
+        c.setAccountId(currentId);
         c.setTargetType(dto.getTargetType());
         c.setTargetId(dto.getTargetId());
         c.setContent(dto.getContent().trim());
         commentMapper.insert(c);
-        // TODO Phase 5: 通知内容作者「xxx 评论了你的作品/需求」
+        // 通知内容作者
+        Long ownerId = null; String title = "";
+        if ("WORK".equals(dto.getTargetType())) {
+            com.orangejd.pojo.entity.Work w = workMapper.selectById(dto.getTargetId());
+            if (w != null && !currentId.equals(w.getOwnerId())) { ownerId = w.getOwnerId(); title = w.getTitle(); }
+        } else if ("REQUIREMENT".equals(dto.getTargetType())) {
+            com.orangejd.pojo.entity.Requirement r = requirementMapper.selectById(dto.getTargetId());
+            if (r != null && !currentId.equals(r.getPublisherId())) { ownerId = r.getPublisherId(); title = r.getTitle(); }
+        }
+        if (ownerId != null) {
+            notificationService.send(ownerId, "COMMENT", "有人评论了你的" + ("WORK".equals(dto.getTargetType()) ? "作品《" : "需求《") + title + "》", dto.getTargetId());
+        }
     }
 
     public void delete(Long id) {

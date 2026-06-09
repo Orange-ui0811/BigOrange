@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.PaymentStageMapper">
+    <resultMap id="psMap" type="com.orangejd.pojo.entity.PaymentStage">
+        <id property="id" column="id"/><result property="orderId" column="order_id"/><result property="stageType" column="stage_type"/>
+        <result property="amount" column="amount"/><result property="payStatus" column="pay_status"/>
+        <result property="payTime" column="pay_time"/><result property="createTime" column="create_time"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO payment_stage (order_id, stage_type, amount) VALUES (#{orderId}, #{stageType}, #{amount})
+    </insert>
+    <select id="selectByOrderId" resultMap="psMap">SELECT * FROM payment_stage WHERE order_id = #{orderId}</select>
+    <update id="updatePayStatus">
+        UPDATE payment_stage SET pay_status = #{payStatus}, pay_time = NOW() WHERE id = #{id}
+    </update>
+</mapper>

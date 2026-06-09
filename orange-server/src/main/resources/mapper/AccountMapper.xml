@@ -36,4 +36,22 @@
         WHERE id = #{id}
     </update>
 
+    <select id="selectAll" resultMap="accountMap">
+        SELECT id, username, password, status, role, create_time, update_time FROM account
+        ORDER BY id ASC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM account
+    </select>
+
+    <update id="updateStatus">
+        UPDATE account SET status = #{status}, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <select id="selectTopCreators" resultType="java.util.HashMap">
+        SELECT a.id, a.username, COUNT(w.id) AS workCount
+        FROM account a LEFT JOIN work w ON a.id = w.owner_id AND w.audit_status='APPROVED'
+        WHERE a.role='USER' GROUP BY a.id ORDER BY workCount DESC LIMIT #{limit}
+    </select>
 </mapper>

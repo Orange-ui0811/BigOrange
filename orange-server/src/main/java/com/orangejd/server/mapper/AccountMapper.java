@@ -14,4 +14,12 @@ public interface AccountMapper {
     int insert(Account account);
 
     int updatePassword(@Param("id") Long id, @Param("password") String password);
+
+    java.util.List<com.orangejd.pojo.entity.Account> selectAll(@Param("offset") int offset, @Param("limit") int limit);
+
+    int countAll();
+
+    int updateStatus(@Param("id") Long id, @Param("status") String status);
+
+    java.util.List<java.util.Map<String, Object>> selectTopCreators(@Param("limit") int limit);
 }

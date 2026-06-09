@@ -35,4 +35,10 @@ public interface WorkMapper {
     List<Work> selectAll(@Param("auditStatus") String auditStatus, @Param("offset") int offset, @Param("limit") int limit);
 
     int countAll(@Param("auditStatus") String auditStatus);
+
+    /** 热门作品按收藏数 */
+    java.util.List<java.util.Map<String, Object>> selectTopByFavorites(@Param("limit") int limit);
+
+    /** 按日期统计新增作品 */
+    int countByCreateDate(@Param("date") String date);
 }

@@ -1,11 +1,13 @@
 package com.orangejd.server.service;
 
-import com.orangejd.common.constant.MessageConstant;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.entity.Favorite;
 import com.orangejd.pojo.vo.FavoriteVO;
 import com.orangejd.server.mapper.FavoriteMapper;
+import com.orangejd.server.mapper.RequirementMapper;
+import com.orangejd.server.mapper.WorkMapper;
+import com.orangejd.server.service.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +17,31 @@ import java.util.List;
 public class FavoriteService implements IFavoriteService {
 
     @Autowired private FavoriteMapper favoriteMapper;
+    @Autowired private WorkMapper workMapper;
+    @Autowired private RequirementMapper requirementMapper;
+    @Autowired private INotificationService notificationService;
 
     public void favorite(String targetType, Long targetId) {
         Long currentId = BaseContext.getCurrentId();
-        if (favoriteMapper.exists(currentId, targetType, targetId)) return; // 已收藏则忽略
+        if (favoriteMapper.exists(currentId, targetType, targetId)) return;
         Favorite f = new Favorite();
         f.setAccountId(currentId);
         f.setTargetType(targetType);
         f.setTargetId(targetId);
         favoriteMapper.insert(f);
-        // TODO Phase 5: 通知内容作者「xxx 收藏了你的作品」
+        // 通知内容作者
+        Long ownerId = null;
+        String title = "";
+        if ("WORK".equals(targetType)) {
+            com.orangejd.pojo.entity.Work w = workMapper.selectById(targetId);
+            if (w != null && !currentId.equals(w.getOwnerId())) { ownerId = w.getOwnerId(); title = w.getTitle(); }
+        } else if ("REQUIREMENT".equals(targetType)) {
+            com.orangejd.pojo.entity.Requirement r = requirementMapper.selectById(targetId);
+            if (r != null && !currentId.equals(r.getPublisherId())) { ownerId = r.getPublisherId(); title = r.getTitle(); }
+        }
+        if (ownerId != null) {
+            notificationService.send(ownerId, "FAVORITE", "有人收藏了你的" + ("WORK".equals(targetType) ? "作品《" : "需求《") + title + "》", targetId);
+        }
     }
 
     public void unfavorite(String targetType, Long targetId) {

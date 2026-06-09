@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.OrderMapper">
+    <resultMap id="orderMap" type="com.orangejd.pojo.entity.Order">
+        <id property="id" column="id"/>
+        <result property="sourceType" column="source_type"/>
+        <result property="sourceId" column="source_id"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="sellerId" column="seller_id"/>
+        <result property="workId" column="work_id"/>
+        <result property="deposit" column="deposit"/>
+        <result property="finalAmount" column="final_amount"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order` (source_type, source_id, buyer_id, seller_id, work_id, deposit, final_amount, total_amount, order_status)
+        VALUES (#{sourceType}, #{sourceId}, #{buyerId}, #{sellerId}, #{workId}, #{deposit}, #{finalAmount}, #{totalAmount}, #{orderStatus})
+    </insert>
+    <select id="selectById" resultMap="orderMap">SELECT * FROM `order` WHERE id = #{id}</select>
+    <select id="selectVOById" resultType="com.orangejd.pojo.vo.OrderVO">
+        SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
+        FROM `order` o
+        LEFT JOIN user_profile b_prof ON o.buyer_id = b_prof.account_id
+        LEFT JOIN user_profile s_prof ON o.seller_id = s_prof.account_id
+        LEFT JOIN work w ON o.work_id = w.id
+        WHERE o.id = #{id}
+    </select>
+    <select id="selectByBuyerId" resultType="com.orangejd.pojo.vo.OrderVO">
+        SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
+        FROM `order` o
+        LEFT JOIN user_profile b_prof ON o.buyer_id = b_prof.account_id
+        LEFT JOIN user_profile s_prof ON o.seller_id = s_prof.account_id
+        LEFT JOIN work w ON o.work_id = w.id
+        WHERE o.buyer_id = #{buyerId}
+        ORDER BY o.create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+    <select id="countByBuyerId" resultType="int">SELECT COUNT(*) FROM `order` WHERE buyer_id = #{buyerId}</select>
+    <select id="selectBySellerId" resultType="com.orangejd.pojo.vo.OrderVO">
+        SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
+        FROM `order` o
+        LEFT JOIN user_profile b_prof ON o.buyer_id = b_prof.account_id
+        LEFT JOIN user_profile s_prof ON o.seller_id = s_prof.account_id
+        LEFT JOIN work w ON o.work_id = w.id
+        WHERE o.seller_id = #{sellerId}
+        ORDER BY o.create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+    <select id="countBySellerId" resultType="int">SELECT COUNT(*) FROM `order` WHERE seller_id = #{sellerId}</select>
+    <update id="updateStatus">
+        UPDATE `order` SET order_status = #{orderStatus}, update_time = NOW() WHERE id = #{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM `order` WHERE id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.orangejd.pojo.vo.OrderVO">
+        SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
+        FROM `order` o
+        LEFT JOIN user_profile b_prof ON o.buyer_id = b_prof.account_id
+        LEFT JOIN user_profile s_prof ON o.seller_id = s_prof.account_id
+        LEFT JOIN work w ON o.work_id = w.id
+        ORDER BY o.create_time DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAllOrders" resultType="int">
+        SELECT COUNT(*) FROM `order`
+    </select>
+</mapper>
