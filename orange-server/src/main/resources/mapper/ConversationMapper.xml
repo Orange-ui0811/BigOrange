@@ -64,4 +64,15 @@
     <delete id="deleteMessagesByConvId">
         DELETE FROM message WHERE conversation_id = #{conversationId}
     </delete>
+
+    <delete id="deleteMessagesByUser">
+        DELETE FROM message WHERE conversation_id = #{conversationId} AND sender_id = #{userId}
+    </delete>
+
+    <update id="hideByUser">
+        UPDATE conversation SET
+        <if test="isInitiator">hidden_by_initiator = 1</if>
+        <if test="!isInitiator">hidden_by_receiver = 1</if>
+        WHERE id = #{id}
+    </update>
 </mapper>

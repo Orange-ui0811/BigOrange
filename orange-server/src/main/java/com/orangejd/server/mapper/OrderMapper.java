@@ -22,4 +22,6 @@ public interface OrderMapper {
     java.util.List<com.orangejd.pojo.vo.OrderVO> selectAll(@Param("offset") int offset, @Param("limit") int limit);
 
     int countAllOrders();
+
+    java.util.List<com.orangejd.pojo.entity.Order> selectTimeoutOrders(@Param("status") String status, @Param("days") int days);
 }

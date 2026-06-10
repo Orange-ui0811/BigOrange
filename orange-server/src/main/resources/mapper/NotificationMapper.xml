@@ -28,4 +28,8 @@
     <select id="countUnread" resultType="int">
         SELECT COUNT(*) FROM notification WHERE account_id = #{accountId} AND is_read = 0
     </select>
+
+    <delete id="deleteOldRead">
+        DELETE FROM notification WHERE is_read = 1 AND create_time &lt; DATE_SUB(NOW(), INTERVAL #{days} DAY)
+    </delete>
 </mapper>

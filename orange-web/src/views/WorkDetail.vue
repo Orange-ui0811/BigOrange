@@ -1,0 +1,53 @@
+<template>
+  <div v-loading="loading">
+    <el-card v-if="work" shadow="never" style="border-radius:12px">
+      <h2 style="margin:0 0 8px">{{work.title}}</h2>
+      <p style="color:#909399;margin:0 0 8px">by {{work.ownerName||'#'+work.ownerId}} · {{work.auditStatus}} · {{work.createTime}}</p>
+      <p style="color:#6b6b6b;line-height:1.8;white-space:pre-wrap">{{work.detail||work.summary||'暂无详情'}}</p>
+      <div v-if="work.saleOptions?.length" style="margin-top:16px;padding-top:16px;border-top:1px solid #f0ece6">
+        <h4>售卖项</h4>
+        <el-tag v-for="(so,i) in work.saleOptions" :key="i" style="margin:4px 8px 4px 0" type="warning">¥{{so.price}} {{so.saleType}}</el-tag>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <el-button type="primary" :loading="contacting" @click="contactAuthor" style="background:#e65100;border-color:#e65100">联系作者</el-button>
+        <el-button @click="fav" :type="favd?'success':''">{{favd?'已收藏':'收藏'}}</el-button>
+      </div>
+    </el-card>
+    <!-- 评论区 -->
+    <el-card shadow="never" style="border-radius:12px;margin-top:16px">
+      <h4 style="margin:0 0 12px">评论 ({{comments.length}})</h4>
+      <div v-for="c in comments" :key="c.id" style="padding:8px 0;border-bottom:1px solid #f5f2ee;font-size:13px">
+        <span style="font-weight:500;color:#2c2c2c">{{c.accountName||'#'+c.accountId}}</span>
+        <span style="color:#909399;font-size:11px;margin-left:8px">{{c.createTime}}</span>
+        <div style="color:#6b6b6b;margin-top:2px">{{c.content}}</div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <el-input v-model="cmtText" placeholder="写评论..." size="small" @keyup.enter="sendCmt"/>
+        <el-button size="small" type="primary" @click="sendCmt">发表</el-button>
+      </div>
+    </el-card>
+  </div>
+</template>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import request from '../api/request'
+const route=useRoute(); const router=useRouter()
+const work=ref(null),loading=ref(false),favd=ref(false),comments=ref([]),cmtText=ref(''),contacting=ref(false)
+const contactAuthor = async () => {
+  if (!work.value) return; contacting.value = true
+  try {
+    const res = await request.post('/app/conversation', { workId: work.value.id, receiverId: work.value.ownerId })
+    if (res.code === 1) router.push('/chat/'+res.data.id)
+  } finally { contacting.value = false }
+}
+onMounted(async()=>{
+  loading.value=true
+  try{const r=await request.get('/app/work/'+route.params.id);if(r.code===1)work.value=r.data}catch{}
+  try{request.post('/app/history?targetType=WORK&targetId='+route.params.id)}catch{}
+  try{const c=await request.get('/app/comment/WORK/'+route.params.id+'?page=1&size=20');if(c.code===1)comments.value=c.data?.records||[]}catch{}
+  loading.value=false
+})
+const fav=async()=>{try{await request.post('/app/favorite?targetType=WORK&targetId='+route.params.id);favd.value=true}catch{}}
+const sendCmt=async()=>{if(!cmtText.value.trim())return;try{await request.post('/app/comment',{targetType:'WORK',targetId:parseInt(route.params.id),content:cmtText.value.trim()});cmtText.value='';const c=await request.get('/app/comment/WORK/'+route.params.id+'?page=1&size=20');if(c.code===1)comments.value=c.data?.records||[]}catch{}}
+</script>

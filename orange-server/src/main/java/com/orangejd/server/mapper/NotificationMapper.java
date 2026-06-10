@@ -16,4 +16,6 @@ public interface NotificationMapper {
     List<Notification> selectByAccountId(@Param("accountId") Long accountId, @Param("offset") int offset, @Param("limit") int limit);
 
     int countUnread(@Param("accountId") Long accountId);
+
+    int deleteOldRead(@Param("days") int days);
 }

@@ -8,5 +8,6 @@ public interface IConversationService {
     ConversationVO create(ConversationCreateDTO dto);
     ConversationVO getDetail(Long id);
     void deleteConversation(Long id);
+    void hideConversation(Long id);
     PageResult<ConversationVO> listMyConversations(int page, int size);
 }

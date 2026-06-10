@@ -2,6 +2,7 @@ package com.orangejd.server.service;
 
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.PageResult;
+import com.orangejd.pojo.entity.UserProfile;
 import com.orangejd.pojo.entity.Work;
 import com.orangejd.pojo.vo.AccountVO;
 import com.orangejd.pojo.vo.UserProfileVO;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +23,17 @@ public class ProfileService implements IProfileService {
     @Autowired private AccountMapper accountMapper;
     @Autowired private UserProfileMapper userProfileMapper;
     @Autowired private WorkMapper workMapper;
+
+    public void updateProfile(Map<String, String> body) {
+        Long id = BaseContext.getCurrentId();
+        UserProfile profile = userProfileMapper.selectByAccountId(id);
+        if (profile == null) { profile = new UserProfile(); profile.setAccountId(id); profile.setHomepageVisible(1); userProfileMapper.insert(profile); profile = userProfileMapper.selectByAccountId(id); }
+        if (body.containsKey("nickname")) profile.setNickname(body.get("nickname"));
+        if (body.containsKey("bio")) profile.setBio(body.get("bio"));
+        if (body.containsKey("skills")) profile.setSkills(body.get("skills"));
+        if (body.containsKey("contactIntro")) profile.setContactIntro(body.get("contactIntro"));
+        userProfileMapper.update(profile);
+    }
 
     public AccountVO getAuthorProfile(Long accountId) {
         com.orangejd.pojo.entity.Account account = accountMapper.selectById(accountId);

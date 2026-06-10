@@ -64,6 +64,11 @@
         ORDER BY o.create_time DESC LIMIT #{offset}, #{limit}
     </select>
 
+    <select id="selectTimeoutOrders" resultMap="orderMap">
+        SELECT * FROM `order` WHERE order_status = #{status}
+        AND create_time &lt; DATE_SUB(NOW(), INTERVAL #{days} DAY)
+    </select>
+
     <select id="countAllOrders" resultType="int">
         SELECT COUNT(*) FROM `order`
     </select>

@@ -30,6 +30,12 @@ public class AppConversationController {
         return Result.success(conversationService.getDetail(id));
     }
 
+    @PutMapping("/{id}/hide")
+    public Result<?> hide(@PathVariable Long id) {
+        conversationService.hideConversation(id);
+        return Result.success();
+    }
+
     @DeleteMapping("/{id}")
     public Result<?> delete(@PathVariable Long id) {
         conversationService.deleteConversation(id);
