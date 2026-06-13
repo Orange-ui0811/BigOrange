@@ -18,4 +18,6 @@ public interface NotificationMapper {
     int countUnread(@Param("accountId") Long accountId);
 
     int deleteOldRead(@Param("days") int days);
+
+    int deleteByIds(@Param("ids") java.util.List<Long> ids, @Param("accountId") Long accountId);
 }

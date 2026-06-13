@@ -4,6 +4,11 @@
       <h2 style="margin:0 0 8px">{{work.title}}</h2>
       <p style="color:#909399;margin:0 0 8px">by {{work.ownerName||'#'+work.ownerId}} · {{work.auditStatus}} · {{work.createTime}}</p>
       <p style="color:#6b6b6b;line-height:1.8;white-space:pre-wrap">{{work.detail||work.summary||'暂无详情'}}</p>
+      <div v-if="work.demoUrl" style="margin-top:12px;padding:12px;background:#f5f9ff;border-radius:8px;border:1px solid #dce8f5">
+        <span style="font-size:13px;color:#1565c0">🔗 在线演示：</span>
+        <a :href="work.demoUrl" target="_blank" style="font-size:13px;color:#e65100;font-weight:600;margin-left:4px">点击体验 →</a>
+        <span style="font-size:11px;color:#909399;margin-left:8px">（源码不可见）</span>
+      </div>
       <div v-if="work.saleOptions?.length" style="margin-top:16px;padding-top:16px;border-top:1px solid #f0ece6">
         <h4>售卖项</h4>
         <el-tag v-for="(so,i) in work.saleOptions" :key="i" style="margin:4px 8px 4px 0" type="warning">¥{{so.price}} {{so.saleType}}</el-tag>

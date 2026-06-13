@@ -10,4 +10,5 @@ public interface INotificationService {
     List<Notification> listMyNotifications(int page, int size);
     void markAsRead(Long id);
     int unreadCount();
+    void batchDelete(java.util.List<Long> ids);
 }

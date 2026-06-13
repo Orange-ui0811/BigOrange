@@ -30,4 +30,10 @@ public class AppNotificationController {
     public Result<Integer> unreadCount() {
         return Result.success(notificationService.unreadCount());
     }
+
+    @DeleteMapping("/batch")
+    public Result<?> batchDelete(@RequestBody java.util.List<Long> ids) {
+        notificationService.batchDelete(ids);
+        return Result.success();
+    }
 }

@@ -30,7 +30,7 @@ const routes = [
 const router = createRouter({ history: createWebHistory(), routes })
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('appToken')
+  const token = sessionStorage.getItem('appToken')
   if (to.path !== '/login' && !token) next('/login')
   else if (to.path === '/login' && token) next('/market')
   else next()

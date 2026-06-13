@@ -1,0 +1,39 @@
+# ============================================================
+# OrangeJD 生产环境配置
+# 启动方式: java -jar orange-server.jar --spring.profiles.active=prod
+# 敏感信息通过环境变量注入，不写在配置文件里
+# ============================================================
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangejd}?useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      username: ${MYSQL_USER:root}
+      password: ${MYSQL_PASSWORD}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD}
+    database: ${REDIS_DB:0}
+
+orange:
+  jwt:
+    admin-secret-key: ${JWT_ADMIN_SECRET}
+    admin-ttl: ${JWT_ADMIN_TTL:7200000}
+    admin-token-name: Admin-Token
+    app-secret-key: ${JWT_APP_SECRET}
+    app-ttl: ${JWT_APP_TTL:7200000}
+    app-token-name: App-Token
+  upload:
+    path: ${UPLOAD_PATH:/data/orangejd/uploads}
+  oss:
+    endpoint: ${OSS_ENDPOINT}
+    access-key-id: ${OSS_ACCESS_KEY}
+    access-key-secret: ${OSS_ACCESS_SECRET}
+    bucket-name: ${OSS_BUCKET}
+
+logging:
+  level:
+    com.orangejd: warn
+    root: error

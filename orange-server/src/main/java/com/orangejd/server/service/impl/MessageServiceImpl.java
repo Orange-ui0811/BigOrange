@@ -47,9 +47,12 @@ public class MessageServiceImpl implements IMessageService {
         // 更新会话时间
         conversationMapper.updateTime(dto.getConversationId());
 
-        // 通知接收方
+        // 不创建通知——聊天未读数单独显示在「聊天」角标
+        // WebSocket 实时推送
         Long receiverId = currentId.equals(conv.getInitiatorId()) ? conv.getReceiverId() : conv.getInitiatorId();
-        notificationService.send(receiverId, "MESSAGE", "你有一条新消息", dto.getConversationId());
+        com.orangejd.server.websocket.WebSocketServer.sendToUser(
+                String.valueOf(receiverId),
+                "{\"type\":\"message\",\"convId\":" + dto.getConversationId() + "}");
 
         return msg;
     }

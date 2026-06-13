@@ -42,7 +42,7 @@ const doLogin = async () => {
   loading.value = true
   try {
     const res = await axios.post('http://127.0.0.1:8080/app/auth/login', loginForm)
-    if (res.data.code === 1) { localStorage.setItem('appToken', res.data.data.token); localStorage.setItem('myId', res.data.data.id); router.push('/market') }
+    if (res.data.code === 1) { sessionStorage.setItem('appToken', res.data.data.token); sessionStorage.setItem('myId', res.data.data.id); router.push('/market') }
     else ElMessage.error(res.data.msg)
   } catch { ElMessage.error('网络连接失败') }
   finally { loading.value = false }
@@ -52,7 +52,7 @@ const doRegister = async () => {
   loading.value = true
   try {
     const res = await axios.post('http://127.0.0.1:8080/app/auth/register', regForm)
-    if (res.data.code === 1) { localStorage.setItem('appToken', res.data.data.token); localStorage.setItem('myId', res.data.data.id); router.push('/market') }
+    if (res.data.code === 1) { sessionStorage.setItem('appToken', res.data.data.token); sessionStorage.setItem('myId', res.data.data.id); router.push('/market') }
     else ElMessage.error(res.data.msg)
   } catch { ElMessage.error('网络连接失败') }
   finally { loading.value = false }

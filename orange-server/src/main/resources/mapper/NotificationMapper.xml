@@ -32,4 +32,12 @@
     <delete id="deleteOldRead">
         DELETE FROM notification WHERE is_read = 1 AND create_time &lt; DATE_SUB(NOW(), INTERVAL #{days} DAY)
     </delete>
+
+    <delete id="deleteByIds">
+        DELETE FROM notification WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND account_id = #{accountId}
+    </delete>
 </mapper>

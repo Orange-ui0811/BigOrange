@@ -6,7 +6,7 @@
       <div v-for="c in convs" :key="c.id" :style="{padding:'14px 16px',borderBottom:'1px solid #f5f2ee',cursor:'pointer',background:activeConv===c.id?'#fff7f0':''}"
         @click="openConv(c)">
         <div style="display:flex;align-items:center;justify-content:space-between">
-          <span style="font-weight:500;font-size:13px">{{ c.receiverName || c.initiatorName || '未知' }}</span>
+          <span style="font-weight:500;font-size:13px">{{ c.initiatorId == myId ? c.receiverName : c.initiatorName }}</span>
           <span style="display:flex;align-items:center;gap:6px">
             <span v-if="c.unreadCount" style="background:#e65100;color:#fff;font-size:10px;padding:1px 6px;border-radius:8px">{{ c.unreadCount }}</span>
             <span @click.stop="deleteConv(c.id)" style="color:#c0c4cc;font-size:16px;line-height:1;cursor:pointer" title="删除会话">&times;</span>
@@ -20,7 +20,7 @@
     <div style="flex:1;display:flex;flex-direction:column">
       <template v-if="activeConv">
         <div style="padding:12px 16px;font-weight:600;font-size:14px;border-bottom:1px solid #f0ece6;background:#faf9f7">
-          {{ activeConv.receiverName || activeConv.initiatorName }}
+          {{ activeConv.initiatorId == myId ? activeConv.receiverName : activeConv.initiatorName }}
           <span style="font-weight:400;font-size:12px;color:#909399;margin-left:8px" v-if="activeConv.workTitle">关联：{{ activeConv.workTitle }}</span>
         </div>
         <!-- 报价卡片置顶 -->
@@ -67,6 +67,7 @@ import { ref, nextTick, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import request from '../api/request'
+import { unreadCount } from '../stores/unread'
 
 const convs = ref([])
 const activeConv = ref(null)
@@ -74,9 +75,26 @@ const messages = ref([])
 const quotes = ref([])
 const msgText = ref('')
 const route = useRoute()
-const myId = ref(localStorage.getItem('myId') || null)
+const myId = ref(sessionStorage.getItem('myId') || null)
+
+let ws = null
+const connectWs = () => {
+  if (ws) try { ws.close() } catch {}
+  const uid = myId.value; if (!uid) return
+  const token = sessionStorage.getItem('appToken')
+  ws = new WebSocket('ws://127.0.0.1:8080/ws/'+uid+'?token='+token)
+  ws.onmessage = (e) => {
+    try {
+      const data = JSON.parse(e.data)
+      if (data.type === 'message' && activeConv.value) openConv(activeConv.value)
+      if (data.type === 'notification') { convList(); unreadCount.value++ }
+    } catch {}
+  }
+  ws.onclose = () => { setTimeout(connectWs, 5000) }
+}
 
 onMounted(async () => {
+  connectWs()
   try { const res = await request.get('/app/conversation/list?page=1&size=30'); if (res.code === 1) convs.value = res.data?.records || [] } catch {}
   // 如果路由带 id，自动打开对应会话
   if (route.params.id) {

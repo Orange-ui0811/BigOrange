@@ -32,6 +32,7 @@ public class ProfileService implements IProfileService {
         if (body.containsKey("bio")) profile.setBio(body.get("bio"));
         if (body.containsKey("skills")) profile.setSkills(body.get("skills"));
         if (body.containsKey("contactIntro")) profile.setContactIntro(body.get("contactIntro"));
+        if (body.containsKey("avatarUrl")) profile.setAvatarUrl(body.get("avatarUrl"));
         userProfileMapper.update(profile);
     }
 

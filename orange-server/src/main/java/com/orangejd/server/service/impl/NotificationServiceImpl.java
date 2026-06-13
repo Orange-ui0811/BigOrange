@@ -25,6 +25,10 @@ public class NotificationServiceImpl implements INotificationService {
         n.setMessage(message);
         n.setRelatedId(relatedId);
         notificationMapper.insert(n);
+        // WebSocket 实时推送通知
+        com.orangejd.server.websocket.WebSocketServer.sendToUser(
+                String.valueOf(accountId),
+                "{\"type\":\"notification\",\"message\":\"" + message + "\"}");
     }
 
     @Override
@@ -45,5 +49,11 @@ public class NotificationServiceImpl implements INotificationService {
     @Override
     public int unreadCount() {
         return notificationMapper.countUnread(BaseContext.getCurrentId());
+    }
+
+    @Override
+    public void batchDelete(java.util.List<Long> ids) {
+        if (ids == null || ids.isEmpty()) return;
+        notificationMapper.deleteByIds(ids, BaseContext.getCurrentId());
     }
 }
