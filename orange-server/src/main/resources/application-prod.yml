@@ -6,11 +6,10 @@
 
 spring:
   datasource:
-    druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangejd}?useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
-      username: ${MYSQL_USER:root}
-      password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangejd}?useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD}
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}

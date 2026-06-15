@@ -34,7 +34,8 @@ const login = async () => {
   if (!valid) return
   loading.value = true
   try {
-    const res = await axios.post('http://127.0.0.1:8080/admin/auth/login', form)
+    const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
+    const res = await axios.post(API + '/admin/auth/login', form)
     if (res.data.code === 1) {
       localStorage.setItem('adminToken', res.data.data.token)
       router.push('/dashboard')
