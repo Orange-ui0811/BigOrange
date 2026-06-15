@@ -53,7 +53,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
         registry.addInterceptor(jwtTokenAppInterceptor)
                 .addPathPatterns("/app/**")
-                .excludePathPatterns("/app/auth/login", "/app/auth/register",
+                .excludePathPatterns("/app/auth/login", "/app/auth/register", "/app/auth/send-code",
                         "/app/category", "/app/work/public", "/app/requirement/public",
                         "/ws/**");
     }

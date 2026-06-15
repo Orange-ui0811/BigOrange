@@ -3,6 +3,7 @@ package com.orangejd.pojo.entity;
 public class Account extends BaseEntity {
     private String username;
     private String password;
+    private String phone;
     private String status;
     private String role;
 
@@ -34,7 +35,7 @@ public class Account extends BaseEntity {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public void setRole(String role) { this.role = role; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 }

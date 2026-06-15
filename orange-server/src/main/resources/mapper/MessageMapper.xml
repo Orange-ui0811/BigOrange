@@ -11,6 +11,7 @@
         <result property="isRead" column="is_read"/>
         <result property="createTime" column="create_time"/>
         <result property="senderName" column="sender_name"/>
+        <result property="senderAvatar" column="sender_avatar"/>
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -18,7 +19,7 @@
     </insert>
 
     <select id="selectByConversationId" resultMap="msgMap">
-        SELECT m.*, up.nickname AS sender_name
+        SELECT m.*, up.nickname AS sender_name, up.avatar_url AS sender_avatar
         FROM message m LEFT JOIN user_profile up ON m.sender_id = up.account_id
         WHERE m.conversation_id = #{conversationId}
         ORDER BY m.create_time ASC

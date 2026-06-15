@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
-const api = axios.create({ baseURL: 'http://127.0.0.1:8080', timeout: 15000 })
+const api = axios.create({ baseURL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080', timeout: 15000 })
 
 api.interceptors.request.use(config => {
   const token = sessionStorage.getItem('appToken')

@@ -7,8 +7,8 @@
       </div>
       <!-- 用户信息 -->
       <div style="padding:16px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)">
-        <el-avatar :size="48" style="background:#e65100;font-size:20px">{{ (me.nickname || me.username || '?')[0] }}</el-avatar>
-        <div style="color:#d0d5dd;font-size:13px;margin-top:6px;font-weight:500">{{ me.nickname || me.username }}</div>
+        <el-avatar :size="48" style="background:#e65100;font-size:20px" :src="avatarUrl ? API+avatarUrl : undefined">{{ nickname ? nickname[0] : (me.nickname || me.username || '?')[0] }}</el-avatar>
+        <div style="color:#d0d5dd;font-size:13px;margin-top:6px;font-weight:500">{{ nickname || me.nickname || me.username }}</div>
       </div>
       <el-menu :default-active="route.path" background-color="#1a1a2e" text-color="#8890a0" active-text-color="#e65100" router style="border-right:none;flex:1">
         <el-menu-item index="/market"><el-icon><Shop /></el-icon> 市场</el-menu-item>
@@ -46,8 +46,9 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import request from '../api/request'
-import { unreadCount } from '../stores/unread'
+import { unreadCount, avatarUrl, nickname } from '../stores/unread'
 
+const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
 const router = useRouter()
 const me = ref({ username: '', nickname: '' })
@@ -56,7 +57,7 @@ const logout = () => { sessionStorage.removeItem('appToken'); router.push('/logi
 
 onMounted(async () => {
   try { const res = await request.get('/app/notification/unread-count'); if (res.code === 1) unreadCount.value = res.data } catch {}
-  try { const res = await request.get('/app/profile/me-info'); if (res.code === 1) me.value = res.data } catch {}
+  try { const res = await request.get('/app/profile/me'); if (res.code === 1) { me.value = res.data; nickname.value = res.data.nickname || ''; avatarUrl.value = res.data.avatarUrl || '' } } catch {}
   try {
     const res = await request.get('/app/conversation/list?page=1&size=50')
     if (res.code === 1 && res.data?.records) chatUnread.value = res.data.records.reduce((s, c) => s + (c.unreadCount || 0), 0)

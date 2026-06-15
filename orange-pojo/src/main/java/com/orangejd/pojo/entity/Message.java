@@ -12,6 +12,7 @@ public class Message {
     private LocalDateTime createTime;
     // 非表字段
     private String senderName;
+    private String senderAvatar;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -29,4 +30,6 @@ public class Message {
     public void setCreateTime(LocalDateTime createTime) { this.createTime = createTime; }
     public String getSenderName() { return senderName; }
     public void setSenderName(String senderName) { this.senderName = senderName; }
+    public String getSenderAvatar() { return senderAvatar; }
+    public void setSenderAvatar(String senderAvatar) { this.senderAvatar = senderAvatar; }
 }

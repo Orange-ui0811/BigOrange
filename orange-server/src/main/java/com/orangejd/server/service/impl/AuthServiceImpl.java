@@ -3,6 +3,7 @@ package com.orangejd.server.service.impl;
 import com.orangejd.common.constant.MessageConstant;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.exception.LoginFailedException;
+import lombok.extern.slf4j.Slf4j;
 import com.orangejd.common.properties.JwtProperties;
 import com.orangejd.common.utils.JwtUtil;
 import com.orangejd.pojo.dto.LoginDTO;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class AuthServiceImpl implements AuthService {
 
@@ -85,6 +87,7 @@ public class AuthServiceImpl implements AuthService {
         account.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         account.setStatus("ACTIVE");
         account.setRole("USER");
+        account.setPhone(registerDTO.getPhone());
         accountMapper.insert(account);
 
         // 创建用户资料
@@ -93,6 +96,7 @@ public class AuthServiceImpl implements AuthService {
         profile.setNickname(registerDTO.getNickname() != null ? registerDTO.getNickname() : registerDTO.getUsername());
         profile.setHomepageVisible(1);
         userProfileMapper.insert(profile);
+        log.info("用户注册 username={} phone={}", registerDTO.getUsername(), registerDTO.getPhone());
 
         // 注册后直接返回登录态
         return buildLoginVO(account, jwtProperties.getAppSecretKey(), jwtProperties.getAppTtl());

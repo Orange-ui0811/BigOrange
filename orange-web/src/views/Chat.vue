@@ -38,10 +38,13 @@
             </span>
           </div>
         </div>
-        <div ref="msgList" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px">
-          <div v-for="m in messages" :key="m.id" :style="{alignSelf:m.senderId===myId?'flex-end':'flex-start',maxWidth:'65%'}">
-            <div v-if="m.senderId!==myId" style="font-size:10px;color:#909399;margin-bottom:2px;padding-left:6px">{{ m.senderName||'用户#'+m.senderId }}</div>
-            <div :style="{background:m.senderId===myId?'#e65100':'#f5f2ee',color:m.senderId===myId?'#fff':'#2c2c2c',padding:'8px 14px',borderRadius:m.senderId===myId?'16px 16px 4px 16px':'16px 16px 16px 4px',fontSize:'13px',lineHeight:'1.5'}">{{ m.content }}</div>
+        <div ref="msgList" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:16px">
+          <div v-for="m in messages" :key="m.id" :style="{display:'flex',alignItems:'flex-end',gap:'8px',flexDirection:m.senderId===myId?'row-reverse':'row',maxWidth:'80%',alignSelf:m.senderId===myId?'flex-end':'flex-start'}">
+            <el-avatar :size="32" style="flex-shrink:0;font-size:12px" :style="{backgroundColor:(m.senderAvatar?undefined:(m.senderId===myId?'#e65100':'#c0c4cc'))}" :src="m.senderAvatar ? API+m.senderAvatar : undefined">{{ (m.senderName||'#')[0] }}</el-avatar>
+            <div style="min-width:0">
+              <div v-if="m.senderId!==myId" style="font-size:10px;color:#909399;margin-bottom:2px">{{ m.senderName||'用户#'+m.senderId }}</div>
+              <div :style="{background:m.senderId===myId?'#e65100':'#f5f2ee',color:m.senderId===myId?'#fff':'#2c2c2c',padding:'8px 14px',borderRadius:m.senderId===myId?'16px 16px 4px 16px':'16px 16px 16px 4px',fontSize:'13px',lineHeight:'1.5'}">{{ m.content }}</div>
+            </div>
           </div>
         </div>
         <span ref="bottomRef"></span>
@@ -74,6 +77,7 @@ const activeConv = ref(null)
 const messages = ref([])
 const quotes = ref([])
 const msgText = ref('')
+const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
 const myId = ref(sessionStorage.getItem('myId') || null)
 
@@ -82,7 +86,8 @@ const connectWs = () => {
   if (ws) try { ws.close() } catch {}
   const uid = myId.value; if (!uid) return
   const token = sessionStorage.getItem('appToken')
-  ws = new WebSocket('ws://127.0.0.1:8080/ws/'+uid+'?token='+token)
+  const wsBase = import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8080'
+  ws = new WebSocket(wsBase + '/ws/'+uid+'?token='+token)
   ws.onmessage = (e) => {
     try {
       const data = JSON.parse(e.data)

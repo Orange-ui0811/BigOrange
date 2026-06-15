@@ -1,6 +1,7 @@
 package com.orangejd.server.service.impl;
 
 import com.orangejd.common.constant.MessageConstant;
+import lombok.extern.slf4j.Slf4j;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.result.PageResult;
@@ -23,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class WorkServiceImpl implements WorkService {
 
@@ -49,6 +51,7 @@ public class WorkServiceImpl implements WorkService {
         work.setVisibilityStatus("PUBLIC");
         work.setPublishStatus("UNPUBLISHED");
         workMapper.insert(work);
+        log.info("作品发布 id={} title={}", work.getId(), work.getTitle());
 
         // 创建售卖项
         if (dto.getSaleOptions() != null && !dto.getSaleOptions().isEmpty()) {

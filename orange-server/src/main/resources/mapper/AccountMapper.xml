@@ -8,6 +8,7 @@
         <result property="username" column="username"/>
         <result property="password" column="password"/>
         <result property="status" column="status"/>
+        <result property="phone" column="phone"/>
         <result property="role" column="role"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
@@ -26,8 +27,8 @@
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO account (username, password, status, role)
-        VALUES (#{username}, #{password}, #{status}, #{role})
+        INSERT INTO account (username, password, phone, status, role)
+        VALUES (#{username}, #{password}, #{phone}, #{status}, #{role})
     </insert>
 
     <update id="updatePassword">
@@ -37,7 +38,7 @@
     </update>
 
     <select id="selectAll" resultMap="accountMap">
-        SELECT id, username, password, status, role, create_time, update_time FROM account
+        SELECT id, username, phone, password, status, role, create_time, update_time FROM account
         ORDER BY id ASC LIMIT #{offset}, #{limit}
     </select>
 

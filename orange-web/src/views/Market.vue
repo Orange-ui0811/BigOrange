@@ -18,7 +18,7 @@
         <el-card shadow="hover" :body-style="{padding:'12px'}" style="border-radius:12px;cursor:pointer;transition:transform .15s;border:1px solid #f0ece6"
           @click="$router.push(tab==='works'?'/work/'+item.id:'/requirement/'+item.id)">
           <div style="display:flex;gap:12px">
-            <img v-if="item.coverUrl" :src="'http://127.0.0.1:8080'+item.coverUrl" style="width:80px;height:60px;border-radius:8px;object-fit:cover;flex-shrink:0" />
+            <img v-if="item.coverUrl" :src="API+item.coverUrl" style="width:80px;height:60px;border-radius:8px;object-fit:cover;flex-shrink:0" />
             <div v-else style="width:80px;height:60px;border-radius:8px;background:#f5f2ee;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#c0c4cc;font-size:20px">📦</div>
             <div style="flex:1;min-width:0">
           <div style="font-weight:600;font-size:15px;color:#2c2c2c;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.title }}</div>
@@ -46,6 +46,7 @@
 import { ref, watch, onMounted } from 'vue'
 import request from '../api/request'
 
+const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const tab = ref('works')
 const list = ref([])
 const categories = ref([])

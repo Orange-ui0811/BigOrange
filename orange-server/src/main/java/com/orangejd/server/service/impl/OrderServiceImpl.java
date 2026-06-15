@@ -1,6 +1,7 @@
 package com.orangejd.server.service.impl;
 
 import com.orangejd.common.constant.MessageConstant;
+import lombok.extern.slf4j.Slf4j;
 import com.orangejd.common.constant.OrderStatus;
 import com.orangejd.common.constant.PayStatus;
 import com.orangejd.common.context.BaseContext;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class OrderServiceImpl implements IOrderService {
 
@@ -115,6 +117,7 @@ public class OrderServiceImpl implements IOrderService {
         if (!OrderStatus.WAITING_DEPOSIT.equals(o.getOrderStatus()))
             throw new BaseException("订单状态不允许支付定金");
         orderMapper.updateStatus(id, OrderStatus.DEPOSIT_PAID);
+        log.info("支付定金 orderId={} buyerId={}", id, o.getBuyerId());
         updatePaymentStage(id, "DEPOSIT");
         notificationService.send(o.getSellerId(), "ORDER", "买家已支付定金", id);
         notificationService.send(o.getBuyerId(), "ORDER", "定金支付成功，等待卖家交付", id);
@@ -151,6 +154,7 @@ public class OrderServiceImpl implements IOrderService {
         orderMapper.updateStatus(id, OrderStatus.FINAL_PAID);
         updatePaymentStage(id, "FINAL");
         orderMapper.updateStatus(id, OrderStatus.COMPLETED);
+        log.info("支付尾款 orderId={} buyerId={}", id, o.getBuyerId());
         notificationService.send(o.getSellerId(), "ORDER", "买家已支付尾款，订单完成", id);
         notificationService.send(o.getBuyerId(), "ORDER", "尾款支付成功，订单已完成", id);
     }

@@ -5,7 +5,7 @@
       <el-tab-pane label="作品" name="work" /><el-tab-pane label="需求" name="requirement" />
     </el-tabs>
     <el-form label-position="top">
-      <el-form-item label="封面图"><el-upload action="http://127.0.0.1:8080/app/common/upload?dir=cover" :headers="uploadHeaders" :on-success="onCoverSuccess" :show-file-list="false" accept="image/*"><el-button size="small">上传封面</el-button></el-upload><el-image v-if="form.coverUrl" :src="'http://127.0.0.1:8080'+form.coverUrl" style="width:120px;height:80px;border-radius:8px;margin-top:8px" fit="cover"/></el-form-item>
+      <el-form-item label="封面图"><el-upload :action="API+'/app/common/upload?dir=cover'" :headers="uploadHeaders" :on-success="onCoverSuccess" :show-file-list="false" accept="image/*"><el-button size="small">上传封面</el-button></el-upload><el-image v-if="form.coverUrl" :src="API+form.coverUrl" style="width:120px;height:80px;border-radius:8px;margin-top:8px" fit="cover"/></el-form-item>
       <el-form-item label="演示链接">
         <template v-if="tab==='work'">
           <el-collapse style="margin-bottom:8px">
@@ -71,6 +71,7 @@ import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
 
+const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
 const isEdit = !!route.params.id
 const tab = ref(isEdit ? (route.params.type === 'work' ? 'work' : 'requirement') : 'work')

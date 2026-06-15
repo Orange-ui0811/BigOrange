@@ -1,6 +1,7 @@
 package com.orangejd.server.service.impl;
 
 import com.orangejd.common.constant.MessageConstant;
+import lombok.extern.slf4j.Slf4j;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.pojo.entity.AuditRecord;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class AuditServiceImpl implements AuditService {
 
@@ -35,6 +37,7 @@ public class AuditServiceImpl implements AuditService {
 
         String auditStatus = approved ? "APPROVED" : "REJECTED";
         workMapper.updateAuditStatus(workId, auditStatus);
+        log.info("审核作品 workId={} result={}", workId, auditStatus);
 
         AuditRecord record = new AuditRecord();
         record.setTargetType("WORK");
