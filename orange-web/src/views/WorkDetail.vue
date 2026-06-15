@@ -1,6 +1,7 @@
 <template>
   <div v-loading="loading">
     <el-card v-if="work" shadow="never" style="border-radius:12px">
+      <img v-if="work.coverUrl" :src="'http://127.0.0.1:8080'+work.coverUrl" style="width:100%;max-height:400px;object-fit:cover;border-radius:12px;margin-bottom:16px" />
       <h2 style="margin:0 0 8px">{{work.title}}</h2>
       <p style="color:#909399;margin:0 0 8px">by {{work.ownerName||'#'+work.ownerId}} · {{work.auditStatus}} · {{work.createTime}}</p>
       <p style="color:#6b6b6b;line-height:1.8;white-space:pre-wrap">{{work.detail||work.summary||'暂无详情'}}</p>

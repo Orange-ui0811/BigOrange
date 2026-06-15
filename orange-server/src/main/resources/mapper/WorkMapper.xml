@@ -20,6 +20,8 @@
         <result property="updateTime" column="update_time"/>
         <result property="ownerName" column="owner_name"/>
         <result property="ownerAvatar" column="owner_avatar"/>
+        <result property="favoriteCount" column="favorite_count"/>
+        <result property="commentCount" column="comment_count"/>
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -43,7 +45,9 @@
     </update>
 
     <select id="selectById" resultMap="workMap">
-        SELECT * FROM work WHERE id = #{id}
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
+        WHERE w.id = #{id}
     </select>
 
     <select id="selectByOwnerId" resultMap="workMap">
@@ -71,7 +75,9 @@
     </update>
 
     <select id="selectPublic" resultMap="workMap">
-        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT COUNT(*) FROM favorite f WHERE f.target_type='WORK' AND f.target_id=w.id) AS favorite_count,
+               (SELECT COUNT(*) FROM comment c WHERE c.target_type='WORK' AND c.target_id=w.id) AS comment_count
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
         WHERE w.audit_status = 'APPROVED' AND w.visibility_status = 'PUBLIC'
         <if test="categoryId != null">AND w.category_id = #{categoryId}</if>

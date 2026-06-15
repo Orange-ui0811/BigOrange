@@ -19,6 +19,8 @@ public class WorkVO {
     private LocalDateTime updateTime;
     private String ownerName;
     private String ownerAvatar;
+    private Integer favoriteCount;
+    private Integer commentCount;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -52,4 +54,8 @@ public class WorkVO {
     public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
     public String getOwnerAvatar() { return ownerAvatar; }
     public void setOwnerAvatar(String ownerAvatar) { this.ownerAvatar = ownerAvatar; }
+    public Integer getFavoriteCount() { return favoriteCount; }
+    public void setFavoriteCount(Integer favoriteCount) { this.favoriteCount = favoriteCount; }
+    public Integer getCommentCount() { return commentCount; }
+    public void setCommentCount(Integer commentCount) { this.commentCount = commentCount; }
 }

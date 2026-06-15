@@ -38,7 +38,9 @@
     </update>
 
     <select id="selectById" resultMap="reqMap">
-        SELECT * FROM requirement WHERE id = #{id}
+        SELECT r.*, up.nickname AS publisher_name
+        FROM requirement r LEFT JOIN user_profile up ON r.publisher_id = up.account_id
+        WHERE r.id = #{id}
     </select>
 
     <select id="selectByPublisherId" resultMap="reqMap">

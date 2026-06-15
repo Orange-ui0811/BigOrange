@@ -192,6 +192,7 @@ public class WorkServiceImpl implements WorkService {
         vo.setPublishStatus(w.getPublishStatus());
         vo.setCreateTime(w.getCreateTime()); vo.setUpdateTime(w.getUpdateTime());
         vo.setOwnerName(w.getOwnerName()); vo.setOwnerAvatar(w.getOwnerAvatar());
+        vo.setFavoriteCount(w.getFavoriteCount()); vo.setCommentCount(w.getCommentCount());
         return vo;
     }
 

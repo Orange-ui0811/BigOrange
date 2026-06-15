@@ -15,14 +15,24 @@
     <!-- 卡片网格 -->
     <el-row :gutter="16" v-loading="loading">
       <el-col :span="8" v-for="item in list" :key="item.id" style="margin-bottom:16px">
-        <el-card shadow="hover" :body-style="{padding:'16px'}" style="border-radius:12px;cursor:pointer;transition:transform .15s;border:1px solid #f0ece6"
+        <el-card shadow="hover" :body-style="{padding:'12px'}" style="border-radius:12px;cursor:pointer;transition:transform .15s;border:1px solid #f0ece6"
           @click="$router.push(tab==='works'?'/work/'+item.id:'/requirement/'+item.id)">
+          <div style="display:flex;gap:12px">
+            <img v-if="item.coverUrl" :src="'http://127.0.0.1:8080'+item.coverUrl" style="width:80px;height:60px;border-radius:8px;object-fit:cover;flex-shrink:0" />
+            <div v-else style="width:80px;height:60px;border-radius:8px;background:#f5f2ee;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#c0c4cc;font-size:20px">📦</div>
+            <div style="flex:1;min-width:0">
           <div style="font-weight:600;font-size:15px;color:#2c2c2c;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.title }}</div>
           <div style="font-size:12px;color:#909399;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.summary || item.detail || '暂无简介' }}</div>
           <div style="display:flex;align-items:center;justify-content:space-between">
             <span style="font-size:12px;color:#6b6b6b">by {{ item.ownerName || item.publisherName || '#'+item.ownerId }}</span>
+            <span v-if="tab==='works'" style="font-size:12px;color:#909399">
+              <span v-if="item.favoriteCount" style="margin-right:8px">⭐{{item.favoriteCount}}</span>
+              <span v-if="item.commentCount">💬{{item.commentCount}}</span>
+            </span>
             <span v-if="tab==='works'" style="font-size:14px;font-weight:700;color:#e65100">¥{{ item.totalAmount || '待定' }}</span>
             <span v-else style="font-size:12px;color:#6b6b6b">¥{{ item.budgetMin }}-{{ item.budgetMax }}</span>
+            </div>
+          </div>
           </div>
         </el-card>
       </el-col>

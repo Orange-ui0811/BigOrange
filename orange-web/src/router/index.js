@@ -13,6 +13,7 @@ const routes = [
       { path: 'chat', name: 'Chat', component: () => import('../views/Chat.vue'), meta: { title: '聊天' } },
       { path: 'chat/:id', name: 'ChatWith', component: () => import('../views/Chat.vue'), meta: { title: '聊天' } },
       { path: 'publish', name: 'Publish', component: () => import('../views/Publish.vue'), meta: { title: '发布' } },
+      { path: 'edit/:type/:id', name: 'Edit', component: () => import('../views/Publish.vue'), meta: { title: '编辑' } },
       { path: 'me/works', name: 'MyWorks', component: () => import('../views/MyWorks.vue'), meta: { title: '我的作品' } },
       { path: 'me/orders', name: 'MyOrders', component: () => import('../views/MyOrders.vue'), meta: { title: '我的订单' } },
       { path: 'me/favorites', name: 'MyFavorites', component: () => import('../views/MyFavorites.vue'), meta: { title: '收藏夹' } },

@@ -4,7 +4,8 @@
       <el-table-column prop="id" label="ID" width="50"/>
       <el-table-column prop="title" label="标题" show-overflow-tooltip/>
       <el-table-column label="状态" width="100"><template #default="{row}"><el-tag :type="st(row.auditStatus)" size="small">{{row.auditStatus}}</el-tag></template></el-table-column>
-      <el-table-column label="操作" width="200"><template #default="{row}">
+      <el-table-column label="操作" width="260"><template #default="{row}">
+        <el-button size="small" @click="$router.push('/edit/'+(tab==='works'?'work':'requirement')+'/'+row.id)">编辑</el-button>
         <el-button size="small" @click="act(row.id,'submit')" v-if="row.auditStatus==='DRAFT'||row.auditStatus==='REJECTED'">提交审核</el-button>
         <el-button size="small" @click="act(row.id,'visibility')">{{row.visibilityStatus}}</el-button>
         <el-button size="small" type="danger" @click="act(row.id,'delete')">删除</el-button>

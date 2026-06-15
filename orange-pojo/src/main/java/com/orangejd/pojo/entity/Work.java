@@ -15,6 +15,8 @@ public class Work extends BaseEntity {
     // JOIN 查询时填充，非表字段
     private String ownerName;
     private String ownerAvatar;
+    private Integer favoriteCount;
+    private Integer commentCount;
 
     public Long getOwnerId() { return ownerId; }
     public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
@@ -42,4 +44,8 @@ public class Work extends BaseEntity {
     public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
     public String getOwnerAvatar() { return ownerAvatar; }
     public void setOwnerAvatar(String ownerAvatar) { this.ownerAvatar = ownerAvatar; }
+    public Integer getFavoriteCount() { return favoriteCount; }
+    public void setFavoriteCount(Integer favoriteCount) { this.favoriteCount = favoriteCount; }
+    public Integer getCommentCount() { return commentCount; }
+    public void setCommentCount(Integer commentCount) { this.commentCount = commentCount; }
 }
