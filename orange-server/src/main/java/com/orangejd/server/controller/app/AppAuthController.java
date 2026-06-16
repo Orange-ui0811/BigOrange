@@ -54,12 +54,6 @@ public class AppAuthController {
 
     @PostMapping("/register")
     public Result<LoginVO> register(@Valid @RequestBody RegisterDTO registerDTO) {
-        if (redisTemplate != null) {
-            String cached = redisTemplate.opsForValue().get("sms:code:" + registerDTO.getPhone());
-            if (cached == null || !cached.equals(registerDTO.getCode()))
-                return Result.error("验证码错误或已过期");
-            redisTemplate.delete("sms:code:" + registerDTO.getPhone());
-        }
         return Result.success(authService.register(registerDTO));
     }
 

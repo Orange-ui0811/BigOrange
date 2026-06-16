@@ -88,6 +88,7 @@ public class AuthServiceImpl implements AuthService {
         account.setStatus("ACTIVE");
         account.setRole("USER");
         account.setPhone(registerDTO.getPhone());
+        account.setIdCard(registerDTO.getIdCard());
         accountMapper.insert(account);
 
         // 创建用户资料

@@ -19,15 +19,24 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog v-model="detailVisible" title="内容详情" width="600px" top="5vh">
-      <div style="max-height:60vh;overflow:auto;line-height:1.8">
-        <p><b>标题：</b>{{ detail.title }}</p>
-        <p><b>发布者：</b>{{ detail.ownerName || detail.publisherName }}</p>
-        <p><b>状态：</b>{{ detail.auditStatus }}</p>
-        <p><b>简介：</b>{{ detail.summary || '无' }}</p>
-        <p><b>详情：</b>{{ detail.detail || '无' }}</p>
-        <p v-if="detail.budgetMin"><b>预算：</b>{{ detail.budgetMin }} - {{ detail.budgetMax }}</p>
-        <p><b>时间：</b>{{ detail.createTime }}</p>
+    <el-dialog v-model="detailVisible" title="内容详情" width="700px" top="3vh">
+      <div style="max-height:65vh;overflow:auto;line-height:1.8">
+        <el-image v-if="detail.coverUrl" :src="'/api'+detail.coverUrl" style="width:100%;max-height:300px;object-fit:cover;border-radius:12px;margin-bottom:12px" fit="cover" />
+        <h3 style="margin:0 0 4px">{{ detail.title }}</h3>
+        <p style="color:#909399;font-size:13px;margin:0 0 8px">by {{ detail.ownerName || detail.publisherName || '#'+(detail.ownerId||detail.publisherId) }} · {{ detail.auditStatus }} · {{ detail.createTime }}</p>
+        <el-alert v-if="detail.demoUrl" title="在线演示" type="info" :closable="false" style="margin-bottom:12px">
+          <a :href="detail.demoUrl" target="_blank" style="color:#e65100;font-weight:600">{{ detail.demoUrl }}</a>
+        </el-alert>
+        <p v-if="detail.summary" style="color:#6b6b6b;white-space:pre-wrap">{{ detail.summary }}</p>
+        <p v-if="detail.detail" style="color:#2c2c2c;white-space:pre-wrap">{{ detail.detail }}</p>
+        <div v-if="detail.saleOptions?.length" style="margin-top:12px;padding-top:12px;border-top:1px solid #eee">
+          <b>售卖项：</b>
+          <el-tag v-for="so in detail.saleOptions" :key="so.id" type="warning" style="margin:4px 8px 4px 0">¥{{ so.price }} {{ so.saleType }}</el-tag>
+        </div>
+        <div v-if="detail.budgetMin" style="margin-top:8px">
+          <el-tag type="warning">预算 ¥{{ detail.budgetMin }} - ¥{{ detail.budgetMax }}</el-tag>
+        </div>
+        <p v-if="detail.tags" style="margin-top:8px"><b>标签：</b>{{ detail.tags }}</p>
       </div>
     </el-dialog>
   </div>

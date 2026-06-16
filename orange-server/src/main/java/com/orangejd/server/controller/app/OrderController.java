@@ -75,4 +75,10 @@ public class OrderController {
         orderService.delete(id);
         return Result.success();
     }
+
+    @DeleteMapping("/batch")
+    public Result<?> batchDelete(@RequestBody java.util.List<Long> ids) {
+        for (Long id : ids) orderService.delete(id);
+        return Result.success();
+    }
 }
