@@ -7,6 +7,7 @@ export PATH=$PATH:/www/server/java/jdk-17.0.8/bin
 export MYSQL_USER=root
 export MYSQL_PASSWORD='Az919800.'
 export MYSQL_DB=orangejd
+export REDIS_PASSWORD='Az919800.'
 export UPLOAD_PATH=/root/uploads
 
 java -jar /root/orange-server-1.0.0-SNAPSHOT.jar --spring.profiles.active=prod
