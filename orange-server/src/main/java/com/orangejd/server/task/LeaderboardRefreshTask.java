@@ -54,21 +54,19 @@ public class LeaderboardRefreshTask {
                 .atStartOfDay().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         for (String topic : TOPICS) {
-            // 全时段
             refreshAndSave(topic, "all", today, null);
-            // 本周
+            sleep(6000);
             String isoDate = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
                     .format(DateTimeFormatter.ISO_LOCAL_DATE);
             refreshAndSave(topic, "week", today, isoDate);
-
-            sleep(6000); // GitHub Search 限流：10次/分钟(无认证) / 30次/分钟(有认证)→ 6秒安全间隔
+            sleep(6000);
         }
 
         // 也刷新全部分类的（topic_name=NULL）
         refreshAndSave(null, "all", today, null);
+        sleep(6000);
         refreshAndSave(null, "week", today, today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
                 .format(DateTimeFormatter.ISO_LOCAL_DATE));
-        sleep(2000);
 
         // 清理 30 天前的旧数据
         String beforeDate = today.minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE);
