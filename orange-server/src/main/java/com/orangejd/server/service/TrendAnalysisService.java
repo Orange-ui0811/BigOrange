@@ -74,7 +74,10 @@ public class TrendAnalysisService {
 
         // 调大模型
         try {
-            String url = apiEndpoint;
+            String url = apiEndpoint.trim();
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "https://" + url;
+            }
             if (!url.endsWith("/chat/completions")) {
                 url = url.replaceAll("/$", "") + "/chat/completions";
             }

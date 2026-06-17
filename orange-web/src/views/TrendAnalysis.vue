@@ -257,7 +257,7 @@ const askAI = async () => {
       model: aiModel.value,
       apiKey: aiKey.value,
       question: aiQuestion.value.trim()
-    })
+    }, { timeout: 35000 })
     if (r.code === 1 && r.data) {
       aiReply.value = r.data.content || ''
       aiReplyHtml.value = marked.parse(aiReply.value)
