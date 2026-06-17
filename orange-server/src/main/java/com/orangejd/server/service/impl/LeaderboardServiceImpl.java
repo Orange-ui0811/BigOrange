@@ -3,7 +3,9 @@ package com.orangejd.server.service.impl;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.server.mapper.AccountMapper;
 import com.orangejd.server.mapper.CategoryMapper;
+import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
 import com.orangejd.server.mapper.WorkMapper;
+import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.service.ILeaderboardService;
 import com.orangejd.pojo.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +30,11 @@ public class LeaderboardServiceImpl implements ILeaderboardService {
     @Autowired private WorkMapper workMapper;
     @Autowired private AccountMapper accountMapper;
     @Autowired private CategoryMapper categoryMapper;
+    @Autowired private LeaderboardSnapshotMapper snapshotMapper;
     @Autowired(required = false) private StringRedisTemplate redisTemplate;
-
-    @Value("${orange.leaderboard.github-token:}")
-    private String githubToken;
-
-    @Value("${orange.leaderboard.github-cache-ttl-minutes:30}")
-    private int githubCacheTtl;
 
     @Value("${orange.leaderboard.local-cache-ttl-minutes:15}")
     private int localCacheTtl;
-
-    @Value("${orange.leaderboard.default-top-n:20}")
-    private int defaultTopN;
-
-    private final RestTemplate restTemplate = new RestTemplate();
 
     private String getWeekStart() {
         LocalDate monday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -110,84 +102,39 @@ public class LeaderboardServiceImpl implements ILeaderboardService {
 
     // ==================== GitHub 仓库榜 ====================
 
+    // ==================== GitHub 仓库榜（从数据库日更快照读取）====================
+
     @Override
     public Map<String, Object> getGithubRepos(String topicName, String period, int page, int size) {
         size = Math.min(size, 50);
+        String today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String yesterday = LocalDate.now().minusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE);
 
-        String cacheKey = "leaderboard:github:" + (topicName == null ? "all" : topicName) + ":" + period + ":p" + page;
+        // 尝试读今天的快照
+        LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", topicName, period, today);
+        String warning = null;
 
-        try {
-            // 构建 GitHub Search API URL
-            StringBuilder q = new StringBuilder();
-            if (topicName != null && !topicName.isEmpty()) {
-                q.append("topic:").append(topicName).append(" ");
+        // 今天没有 → 回退昨天的
+        if (snap == null) {
+            snap = snapshotMapper.selectByKey("github", topicName, period, yesterday);
+            if (snap != null) {
+                warning = "榜单数据更新中，当前展示昨日数据";
             }
-            if ("week".equals(period)) {
-                String isoDate = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-                        .format(DateTimeFormatter.ISO_LOCAL_DATE);
-                q.append("created:>").append(isoDate);
-            } else {
-                q.append("stars:>10");
-            }
+        }
 
-            String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
-                    + "&sort=stars&order=desc&per_page=" + size + "&page=" + page;
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Accept", "application/vnd.github.v3+json");
-            if (githubToken != null && !githubToken.isEmpty()) {
-                headers.set("Authorization", "Bearer " + githubToken);
-            }
-            HttpEntity<String> entity = new HttpEntity<>(headers);
-            ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
-
-            if (response.getBody() != null && response.getBody().containsKey("items")) {
-                @SuppressWarnings("unchecked")
-                List<Map<String, Object>> items = (List<Map<String, Object>>) response.getBody().get("items");
-                int totalCount = (int) response.getBody().getOrDefault("total_count", 0);
-
-                List<Map<String, Object>> records = items.stream().map(item -> {
-                    Map<String, Object> r = new LinkedHashMap<>();
-                    r.put("id", item.get("id"));
-                    r.put("name", item.get("name"));
-                    r.put("fullName", item.get("full_name"));
-                    r.put("description", item.getOrDefault("description", ""));
-                    r.put("htmlUrl", item.get("html_url"));
-                    r.put("language", item.getOrDefault("language", ""));
-                    r.put("stars", item.get("stargazers_count"));
-                    r.put("forks", item.get("forks_count"));
-                    @SuppressWarnings("unchecked")
-                    Map<String, Object> owner = (Map<String, Object>) item.get("owner");
-                    r.put("ownerName", owner != null ? owner.get("login") : "");
-                    r.put("ownerAvatar", owner != null ? owner.get("avatar_url") : "");
-                    return r;
-                }).collect(Collectors.toList());
-
-                String json = toJson(new PageResult<>((long) totalCount, records));
-                setCache(cacheKey, json, githubCacheTtl);
-
-                Map<String, Object> result = new LinkedHashMap<>();
-                result.put("total", totalCount);
-                result.put("records", records);
-                return result;
-            }
-        } catch (Exception e) {
-            // 降级: 尝试返回缓存数据
-            String cached = getCache(cacheKey);
-            if (cached != null) {
-                PageResult<Map<String, Object>> cachedResult = parsePageResult(cached);
-                Map<String, Object> result = new LinkedHashMap<>();
-                result.put("total", cachedResult.getTotal());
-                result.put("records", cachedResult.getRecords());
-                result.put("warning", "GitHub API 暂时不可用，展示缓存数据");
-                return result;
-            }
+        if (snap != null && snap.getDataJson() != null) {
+            PageResult<Map<String, Object>> cached = parsePageResult(snap.getDataJson());
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("total", cached.getTotal());
+            result.put("records", cached.getRecords());
+            if (warning != null) result.put("warning", warning);
+            return result;
         }
 
         Map<String, Object> empty = new LinkedHashMap<>();
         empty.put("total", 0);
         empty.put("records", Collections.emptyList());
-        empty.put("warning", "GitHub API 暂时不可用，请稍后重试");
+        empty.put("warning", "GitHub 榜单数据尚未生成，请稍后重试");
         return empty;
     }
 

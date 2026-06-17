@@ -318,3 +318,20 @@ INSERT INTO category (name, topic_name, type, sort, status) VALUES
 
 -- Step 1.4: 停用旧分类（topic_name 为空的记录）
 UPDATE category SET status = 'INACTIVE' WHERE topic_name IS NULL AND status = 'ACTIVE';
+
+
+-- ============================================================
+-- 榜单快照表（GitHub 数据每日凌晨刷新，保留 7 天）
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS leaderboard_snapshot (
+    id            BIGINT       NOT NULL AUTO_INCREMENT,
+    source        VARCHAR(16)  NOT NULL COMMENT '数据源: github',
+    topic_name    VARCHAR(64)           COMMENT '分类 topic（NULL=全部分类）',
+    period        VARCHAR(16)  NOT NULL DEFAULT 'all' COMMENT '时间窗口: all / week',
+    snapshot_date DATE         NOT NULL COMMENT '快照日期',
+    data_json     MEDIUMTEXT   NOT NULL COMMENT '榜单 JSON',
+    create_time   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_snapshot (source, topic_name, period, snapshot_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='榜单快照表';

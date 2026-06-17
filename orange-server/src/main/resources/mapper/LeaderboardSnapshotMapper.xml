@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.LeaderboardSnapshotMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO leaderboard_snapshot (source, topic_name, period, snapshot_date, data_json)
+        VALUES (#{source}, #{topicName}, #{period}, #{snapshotDate}, #{dataJson})
+    </insert>
+
+    <select id="selectByKey" resultType="com.orangejd.pojo.entity.LeaderboardSnapshot">
+        SELECT id, source, topic_name, period, snapshot_date, data_json, create_time
+        FROM leaderboard_snapshot
+        WHERE source = #{source}
+          AND (topic_name = #{topicName} OR (#{topicName} IS NULL AND topic_name IS NULL))
+          AND period = #{period}
+          AND snapshot_date = #{snapshotDate}
+        LIMIT 1
+    </select>
+
+    <delete id="deleteBefore">
+        DELETE FROM leaderboard_snapshot WHERE snapshot_date &lt; #{beforeDate}
+    </delete>
+</mapper>
