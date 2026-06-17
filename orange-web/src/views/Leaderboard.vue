@@ -15,8 +15,8 @@
       </el-radio-group>
 
       <span style="font-size:13px;color:#909399;font-weight:600;margin-left:8px">分类</span>
-      <el-select v-model="category" placeholder="全部分类" clearable size="default" style="width:160px" @change="load">
-        <el-option label="全部分类" :value="null" />
+      <el-select v-model="category" placeholder="全部" clearable size="default" style="width:160px" @change="load">
+        <el-option label="全部" :value="null" />
         <el-option v-for="c in categories" :key="c.id" :label="c.name" :value="source==='github'?c.topicName:c.id" />
       </el-select>
     </div>

@@ -85,7 +85,7 @@ public class LeaderboardRefreshTask {
             if ("week".equals(period) && isoDate != null) {
                 q.append("created:>").append(isoDate);
             } else {
-                q.append("stars:>10");
+                q.append("stars:>1");
             }
 
             String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
