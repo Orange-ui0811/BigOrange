@@ -45,8 +45,8 @@ public class LeaderboardRefreshTask {
         }).start();
     }
 
-    // 每天凌晨 2:00 执行
-    @Scheduled(cron = "0 0 2 * * ?")
+    // 每周一凌晨 2:00 执行
+    @Scheduled(cron = "0 0 2 * * 1")
     public void refreshAll() {
         log.info("LeaderboardRefreshTask: 开始刷新 GitHub 榜单");
         LocalDate today = LocalDate.now();
@@ -70,13 +70,20 @@ public class LeaderboardRefreshTask {
                 .format(DateTimeFormatter.ISO_LOCAL_DATE));
         sleep(2000);
 
-        // 清理 7 天前的旧数据
-        String beforeDate = today.minusDays(7).format(DateTimeFormatter.ISO_LOCAL_DATE);
+        // 清理 30 天前的旧数据
+        String beforeDate = today.minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE);
         int deleted = snapshotMapper.deleteBefore(beforeDate);
         log.info("LeaderboardRefreshTask: 完成 GitHub 榜单刷新，清理 {} 条旧快照", deleted);
     }
 
     private void refreshAndSave(String topicName, String period, LocalDate today, String isoDate) {
+        // 今天已有快照就跳过
+        String todayStr = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        LeaderboardSnapshot existing = snapshotMapper.selectByKey("github", topicName, period, todayStr);
+        if (existing != null && existing.getDataJson() != null) {
+            log.debug("GitHub 快照已存在，跳过: topic={}, period={}", topicName, period);
+            return;
+        }
         try {
             StringBuilder q = new StringBuilder();
             if (topicName != null && !topicName.isEmpty()) {
