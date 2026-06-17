@@ -16,7 +16,8 @@ const routes = [
       { path: 'audit', name: 'Audit', component: () => import('../views/Audit.vue'), meta: { title: '审核管理' } },
       { path: 'works', name: 'Works', component: () => import('../views/Works.vue'), meta: { title: '内容管理' } },
       { path: 'users', name: 'Users', component: () => import('../views/Users.vue'), meta: { title: '用户管理' } },
-      { path: 'orders', name: 'Orders', component: () => import('../views/Orders.vue'), meta: { title: '订单管理' } }
+      { path: 'orders', name: 'Orders', component: () => import('../views/Orders.vue'), meta: { title: '订单管理' } },
+      { path: 'settings', name: 'Settings', component: () => import('../views/Settings.vue'), meta: { title: '修改密码' } }
     ]
   }
 ]
