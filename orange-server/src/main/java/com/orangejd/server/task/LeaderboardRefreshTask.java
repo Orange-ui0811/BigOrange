@@ -61,7 +61,7 @@ public class LeaderboardRefreshTask {
                     .format(DateTimeFormatter.ISO_LOCAL_DATE);
             refreshAndSave(topic, "week", today, isoDate);
 
-            sleep(2000); // GitHub 限流：搜索 API 30次/分钟 → 每 2 秒一次
+            sleep(6000); // GitHub Search 限流：10次/分钟(无认证) / 30次/分钟(有认证)→ 6秒安全间隔
         }
 
         // 也刷新全部分类的（topic_name=NULL）
