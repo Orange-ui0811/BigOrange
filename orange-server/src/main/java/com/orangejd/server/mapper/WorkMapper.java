@@ -47,4 +47,10 @@ public interface WorkMapper {
 
     /** 榜单: 本周作品收藏排行 */
     java.util.List<java.util.Map<String, Object>> selectLeaderboardWorksWeekly(@Param("categoryId") Long categoryId, @Param("weekStart") String weekStart, @Param("limit") int limit);
+
+    /** 榜单: 作品总数（全时段） */
+    int countLeaderboardWorks(@Param("categoryId") Long categoryId);
+
+    /** 榜单: 作品总数（本周） */
+    int countLeaderboardWorksWeekly(@Param("categoryId") Long categoryId, @Param("weekStart") String weekStart);
 }

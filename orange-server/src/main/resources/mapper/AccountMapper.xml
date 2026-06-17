@@ -85,4 +85,6 @@
         GROUP BY a.id HAVING total_favorites > 0
         ORDER BY total_favorites DESC LIMIT #{limit}
     </select>
+    <select id="countLeaderboardCreators" resultType="int">SELECT COUNT(*) FROM (SELECT a.id FROM account a LEFT JOIN work w ON a.id = w.owner_id AND w.audit_status='APPROVED' LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id = w.id WHERE a.role='USER' GROUP BY a.id HAVING COUNT(f.id) > 0) t</select>
+    <select id="countLeaderboardCreatorsWeekly" resultType="int">SELECT COUNT(*) FROM (SELECT a.id FROM account a LEFT JOIN work w ON a.id = w.owner_id AND w.audit_status='APPROVED' LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id = w.id AND f.create_time >= #{weekStart} WHERE a.role='USER' GROUP BY a.id HAVING COUNT(f.id) > 0) t</select>
 </mapper>

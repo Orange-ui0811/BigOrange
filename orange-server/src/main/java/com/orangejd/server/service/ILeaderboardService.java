@@ -8,5 +8,5 @@ import java.util.Map;
 public interface ILeaderboardService {
     PageResult<Map<String, Object>> getWorks(Long categoryId, String period, int page, int size);
     PageResult<Map<String, Object>> getCreators(String period, int page, int size);
-    PageResult<Map<String, Object>> getGithubRepos(String topicName, String period, int page, int size);
+    Map<String, Object> getGithubRepos(String topicName, String period, int page, int size);
 }

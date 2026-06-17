@@ -28,4 +28,10 @@ public interface AccountMapper {
 
     /** 榜单: 本周创作者收藏排行 */
     java.util.List<java.util.Map<String, Object>> selectLeaderboardCreatorsWeekly(@Param("weekStart") String weekStart, @Param("limit") int limit);
+
+    /** 榜单: 创作者总数 */
+    int countLeaderboardCreators();
+
+    /** 榜单: 创作者总数（本周） */
+    int countLeaderboardCreatorsWeekly(@Param("weekStart") String weekStart);
 }

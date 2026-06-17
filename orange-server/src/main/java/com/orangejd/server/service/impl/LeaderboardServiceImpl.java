@@ -64,15 +64,17 @@ public class LeaderboardServiceImpl implements ILeaderboardService {
         }
 
         List<Map<String, Object>> list;
+        int total;
         boolean isWeek = "week".equals(period);
-        list = isWeek
-                ? workMapper.selectLeaderboardWorksWeekly(categoryId, getWeekStart(), limit)
-                : workMapper.selectLeaderboardWorks(categoryId, limit);
+        if (isWeek) {
+            list = workMapper.selectLeaderboardWorksWeekly(categoryId, getWeekStart(), limit);
+            total = workMapper.countLeaderboardWorksWeekly(categoryId, getWeekStart());
+        } else {
+            list = workMapper.selectLeaderboardWorks(categoryId, limit);
+            total = workMapper.countLeaderboardWorks(categoryId);
+        }
 
-        // 简单分页（榜单数据量小，直接内存截取）
-        if (list.size() > size) list = list.subList(0, size);
-
-        PageResult<Map<String, Object>> result = new PageResult<>((long) list.size(), list);
+        PageResult<Map<String, Object>> result = new PageResult<>((long) total, list);
         setCache(cacheKey, toJson(result), localCacheTtl);
         return result;
     }
@@ -83,7 +85,6 @@ public class LeaderboardServiceImpl implements ILeaderboardService {
     public PageResult<Map<String, Object>> getCreators(String period, int page, int size) {
         size = Math.min(size, 50);
         int limit = size;
-        int offset = (page - 1) * size;
 
         String cacheKey = "leaderboard:local:creators:" + period + ":p" + page;
         String cached = getCache(cacheKey);
@@ -92,14 +93,17 @@ public class LeaderboardServiceImpl implements ILeaderboardService {
         }
 
         List<Map<String, Object>> list;
+        int total;
         boolean isWeek = "week".equals(period);
-        list = isWeek
-                ? accountMapper.selectLeaderboardCreatorsWeekly(getWeekStart(), limit)
-                : accountMapper.selectLeaderboardCreators(limit);
+        if (isWeek) {
+            list = accountMapper.selectLeaderboardCreatorsWeekly(getWeekStart(), limit);
+            total = accountMapper.countLeaderboardCreatorsWeekly(getWeekStart());
+        } else {
+            list = accountMapper.selectLeaderboardCreators(limit);
+            total = accountMapper.countLeaderboardCreators();
+        }
 
-        if (list.size() > size) list = list.subList(0, size);
-
-        PageResult<Map<String, Object>> result = new PageResult<>((long) list.size(), list);
+        PageResult<Map<String, Object>> result = new PageResult<>((long) total, list);
         setCache(cacheKey, toJson(result), localCacheTtl);
         return result;
     }
@@ -107,14 +111,10 @@ public class LeaderboardServiceImpl implements ILeaderboardService {
     // ==================== GitHub 仓库榜 ====================
 
     @Override
-    public PageResult<Map<String, Object>> getGithubRepos(String topicName, String period, int page, int size) {
+    public Map<String, Object> getGithubRepos(String topicName, String period, int page, int size) {
         size = Math.min(size, 50);
 
         String cacheKey = "leaderboard:github:" + (topicName == null ? "all" : topicName) + ":" + period + ":p" + page;
-        String cached = getCache(cacheKey);
-        if (cached != null) {
-            return parsePageResult(cached);
-        }
 
         try {
             // 构建 GitHub Search API URL
@@ -163,16 +163,31 @@ public class LeaderboardServiceImpl implements ILeaderboardService {
                     return r;
                 }).collect(Collectors.toList());
 
-                PageResult<Map<String, Object>> result = new PageResult<>((long) totalCount, records);
-                setCache(cacheKey, toJson(result), githubCacheTtl);
+                String json = toJson(new PageResult<>((long) totalCount, records));
+                setCache(cacheKey, json, githubCacheTtl);
+
+                Map<String, Object> result = new LinkedHashMap<>();
+                result.put("total", totalCount);
+                result.put("records", records);
                 return result;
             }
         } catch (Exception e) {
             // 降级: 尝试返回缓存数据
-            if (cached != null) return parsePageResult(cached);
+            String cached = getCache(cacheKey);
+            if (cached != null) {
+                PageResult<Map<String, Object>> cachedResult = parsePageResult(cached);
+                Map<String, Object> result = new LinkedHashMap<>();
+                result.put("total", cachedResult.getTotal());
+                result.put("records", cachedResult.getRecords());
+                result.put("warning", "GitHub API 暂时不可用，展示缓存数据");
+                return result;
+            }
         }
 
-        PageResult<Map<String, Object>> empty = new PageResult<>(0L, Collections.emptyList());
+        Map<String, Object> empty = new LinkedHashMap<>();
+        empty.put("total", 0);
+        empty.put("records", Collections.emptyList());
+        empty.put("warning", "GitHub API 暂时不可用，请稍后重试");
         return empty;
     }
 

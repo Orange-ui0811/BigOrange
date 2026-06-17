@@ -153,4 +153,6 @@
         <if test="categoryId != null">AND w.category_id = #{categoryId}</if>
         GROUP BY w.id ORDER BY favorite_count DESC LIMIT #{limit}
     </select>
+    <select id="countLeaderboardWorks" resultType="int">SELECT COUNT(DISTINCT w.id) FROM work w LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id=w.id WHERE w.audit_status='APPROVED' AND w.visibility_status='PUBLIC'<if test="categoryId != null"> AND w.category_id = #{categoryId}</if></select>
+    <select id="countLeaderboardWorksWeekly" resultType="int">SELECT COUNT(DISTINCT w.id) FROM work w LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id=w.id AND f.create_time >= #{weekStart} WHERE w.audit_status='APPROVED' AND w.visibility_status='PUBLIC'<if test="categoryId != null"> AND w.category_id = #{categoryId}</if></select>
 </mapper>
