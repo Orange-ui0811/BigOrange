@@ -6,7 +6,9 @@
     </el-tabs>
     <el-table :data="list" size="small" stripe v-loading="loading" empty-text="暂无待审内容">
       <el-table-column prop="id" label="ID" width="60" />
-      <el-table-column prop="title" label="标题" min-width="160" show-overflow-tooltip />
+      <el-table-column label="标题" min-width="160" show-overflow-tooltip>
+        <template #default="{row}"><a href="#" @click.prevent="openWork(row)" style="color:#409EFF;text-decoration:none">{{ row.title }}</a></template>
+      </el-table-column>
       <el-table-column :prop="tab==='works'?'ownerName':'publisherName'" label="发布者" width="120" />
       <el-table-column label="时间" width="160">
         <template #default="{row}">{{ row.createTime }}</template>
@@ -61,6 +63,11 @@ const load = async () => {
     const res = await request.get(api, { params: { page: 1, size: 50 } })
     if (res.code === 1) list.value = res.data?.records || []
   } finally { loading.value = false }
+}
+
+const openWork = (row) => {
+  const path = tab.value === 'works' ? 'work/' + row.id : 'requirement/' + row.id
+  window.open(window.location.origin + '/' + path, '_blank')
 }
 
 const showDetail = async (id) => {
