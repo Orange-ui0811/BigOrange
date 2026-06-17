@@ -11,6 +11,8 @@ public interface CommentMapper {
 
     int insert(com.orangejd.pojo.entity.Comment comment);
 
+    com.orangejd.pojo.entity.Comment selectById(@Param("id") Long id);
+
     int deleteById(@Param("id") Long id);
 
     List<CommentVO> selectByTarget(@Param("targetType") String targetType, @Param("targetId") Long targetId,

@@ -48,7 +48,20 @@ public class CommentService implements ICommentService {
     }
 
     public void delete(Long id) {
-        commentMapper.deleteById(id);
+        Comment comment = commentMapper.selectById(id);
+        if (comment == null) return;
+        Long currentId = BaseContext.getCurrentId();
+        // 评论作者可删
+        if (currentId.equals(comment.getAccountId())) { commentMapper.deleteById(id); return; }
+        // 作品主人可删
+        if ("WORK".equals(comment.getTargetType())) {
+            com.orangejd.pojo.entity.Work w = workMapper.selectById(comment.getTargetId());
+            if (w != null && currentId.equals(w.getOwnerId())) { commentMapper.deleteById(id); return; }
+        } else if ("REQUIREMENT".equals(comment.getTargetType())) {
+            com.orangejd.pojo.entity.Requirement r = requirementMapper.selectById(comment.getTargetId());
+            if (r != null && currentId.equals(r.getPublisherId())) { commentMapper.deleteById(id); return; }
+        }
+        throw new BaseException("无权删除此评论");
     }
 
     public PageResult<CommentVO> listByTarget(String targetType, Long targetId, int page, int size) {

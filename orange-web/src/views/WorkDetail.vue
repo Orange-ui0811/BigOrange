@@ -23,9 +23,14 @@
     <el-card shadow="never" style="border-radius:12px;margin-top:16px">
       <h4 style="margin:0 0 12px">评论 ({{comments.length}})</h4>
       <div v-for="c in comments" :key="c.id" style="padding:8px 0;border-bottom:1px solid #f5f2ee;font-size:13px">
-        <span style="font-weight:500;color:#2c2c2c">{{c.accountName||'#'+c.accountId}}</span>
-        <span style="color:#909399;font-size:11px;margin-left:8px">{{c.createTime}}</span>
-        <div style="color:#6b6b6b;margin-top:2px">{{c.content}}</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div style="flex:1">
+            <span style="font-weight:500;color:#2c2c2c">{{c.accountName||'#'+c.accountId}}</span>
+            <span style="color:#909399;font-size:11px;margin-left:8px">{{c.createTime}}</span>
+            <div style="color:#6b6b6b;margin-top:2px">{{c.content}}</div>
+          </div>
+          <el-button v-if="canDelete(c)" size="small" type="danger" text @click="delCmt(c.id)" style="flex-shrink:0;margin-left:8px">删除</el-button>
+        </div>
       </div>
       <div style="margin-top:12px;display:flex;gap:8px">
         <el-input v-model="cmtText" placeholder="写评论..." size="small" @keyup.enter="sendCmt"/>
@@ -56,6 +61,14 @@ onMounted(async()=>{
   try{const c=await request.get('/app/comment/WORK/'+route.params.id+'?page=1&size=20');if(c.code===1)comments.value=c.data?.records||[]}catch{}
   loading.value=false
 })
+const myId = sessionStorage.getItem('myId')
+const canDelete = (c) => {
+  if (!work.value || !myId) return false
+  return String(c.accountId) === myId || String(work.value.ownerId) === myId
+}
+const delCmt = async (id) => {
+  try { await request.delete('/app/comment/' + id); comments.value = comments.value.filter(c => c.id !== id) } catch {}
+}
 const fav=async()=>{try{await request.post('/app/favorite?targetType=WORK&targetId='+route.params.id);favd.value=true}catch{}}
 const sendCmt=async()=>{if(!cmtText.value.trim())return;try{await request.post('/app/comment',{targetType:'WORK',targetId:parseInt(route.params.id),content:cmtText.value.trim()});cmtText.value='';const c=await request.get('/app/comment/WORK/'+route.params.id+'?page=1&size=20');if(c.code===1)comments.value=c.data?.records||[]}catch{}}
 </script>

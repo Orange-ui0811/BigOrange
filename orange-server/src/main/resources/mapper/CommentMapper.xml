@@ -23,6 +23,11 @@
         <result property="createTime" column="create_time"/>
     </resultMap>
 
+    <select id="selectById" resultMap="commentMap">
+        SELECT id, account_id, target_type, target_id, content, create_time, update_time
+        FROM comment WHERE id = #{id}
+    </select>
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO comment (account_id, target_type, target_id, content) VALUES (#{accountId}, #{targetType}, #{targetId}, #{content})
     </insert>
