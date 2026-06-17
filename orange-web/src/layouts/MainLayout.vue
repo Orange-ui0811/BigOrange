@@ -12,6 +12,7 @@
       </div>
       <el-menu :default-active="route.path" background-color="#1a1a2e" text-color="#8890a0" active-text-color="#e65100" router style="border-right:none;flex:1">
         <el-menu-item index="/market"><el-icon><Shop /></el-icon> 市场</el-menu-item>
+        <el-menu-item index="/leaderboard"><el-icon><DataAnalysis /></el-icon> 榜单</el-menu-item>
         <el-menu-item index="/publish"><el-icon><Edit /></el-icon> 发布</el-menu-item>
         <el-menu-item index="/profile/me"><el-icon><User /></el-icon> 个人主页</el-menu-item>
         <el-menu-item index="/me/works"><el-icon><Folder /></el-icon> 我的作品</el-menu-item>

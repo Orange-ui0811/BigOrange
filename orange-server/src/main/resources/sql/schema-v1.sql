@@ -289,3 +289,31 @@ CREATE TABLE IF NOT EXISTS delivery (
     KEY idx_order_id (order_id),
     CONSTRAINT fk_delivery_order FOREIGN KEY (order_id) REFERENCES `order`(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='交付记录表';
+
+
+-- ============================================================
+-- 榜单功能: 分类迁移（2026-06-17）
+-- ============================================================
+
+-- Step 1.2: 新增 topic_name 字段
+ALTER TABLE category ADD COLUMN IF NOT EXISTS topic_name VARCHAR(64) DEFAULT NULL COMMENT 'GitHub topic名称（英文）' AFTER name;
+
+-- Step 1.3: 插入 14 个新 Topic 分类（四大领域）
+INSERT INTO category (name, topic_name, type, sort, status) VALUES
+('Creative Coding',  'creative-coding',    'WORK', 1, 'ACTIVE'),
+('Game Development', 'game-development',   'WORK', 2, 'ACTIVE'),
+('WebGL',            'WebGL',              'WORK', 3, 'ACTIVE'),
+('Canvas',           'Canvas',             'WORK', 4, 'ACTIVE'),
+('Web Audio',        'Web-Audio',          'WORK', 5, 'ACTIVE'),
+('AI Agents',        'ai-agents',          'WORK', 6, 'ACTIVE'),
+('RAG',              'RAG',                'WORK', 7, 'ACTIVE'),
+('Self-Hosted',      'self-hosted',        'WORK', 8, 'ACTIVE'),
+('Home Assistant',   'home-assistant',     'WORK', 9, 'ACTIVE'),
+('Awesome Self-Host','awesome-self-hosted','WORK',10, 'ACTIVE'),
+('ESP32',            'ESP32',              'WORK',11, 'ACTIVE'),
+('Raspberry Pi',     'raspberry-pi',       'WORK',12, 'ACTIVE'),
+('Home Automation',  'home-automation',    'WORK',13, 'ACTIVE'),
+('3D Printing',      '3d-printing',        'WORK',14, 'ACTIVE');
+
+-- Step 1.4: 停用旧分类（topic_name 为空的记录）
+UPDATE category SET status = 'INACTIVE' WHERE topic_name IS NULL AND status = 'ACTIVE';

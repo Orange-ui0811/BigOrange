@@ -124,4 +124,33 @@
         WHERE w.audit_status='APPROVED' AND w.visibility_status='PUBLIC'
         GROUP BY w.id ORDER BY favoriteCount DESC LIMIT #{limit}
     </select>
+
+    <!-- 榜单: 全时段作品收藏排行 -->
+    <select id="selectLeaderboardWorks" resultType="java.util.HashMap">
+        SELECT w.id, w.title, w.summary, w.cover_url, w.owner_id,
+               a.username AS owner_name, c.name AS category_name,
+               COUNT(f.id) AS favorite_count
+        FROM work w
+        LEFT JOIN account a ON w.owner_id = a.id
+        LEFT JOIN category c ON w.category_id = c.id
+        LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id=w.id
+        WHERE w.audit_status='APPROVED' AND w.visibility_status='PUBLIC'
+        <if test="categoryId != null">AND w.category_id = #{categoryId}</if>
+        GROUP BY w.id ORDER BY favorite_count DESC LIMIT #{limit}
+    </select>
+
+    <!-- 榜单: 本周作品收藏排行 -->
+    <select id="selectLeaderboardWorksWeekly" resultType="java.util.HashMap">
+        SELECT w.id, w.title, w.summary, w.cover_url, w.owner_id,
+               a.username AS owner_name, c.name AS category_name,
+               COUNT(f.id) AS favorite_count
+        FROM work w
+        LEFT JOIN account a ON w.owner_id = a.id
+        LEFT JOIN category c ON w.category_id = c.id
+        LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id=w.id
+            AND f.create_time >= #{weekStart}
+        WHERE w.audit_status='APPROVED' AND w.visibility_status='PUBLIC'
+        <if test="categoryId != null">AND w.category_id = #{categoryId}</if>
+        GROUP BY w.id ORDER BY favorite_count DESC LIMIT #{limit}
+    </select>
 </mapper>

@@ -9,6 +9,7 @@ const routes = [
     redirect: '/market',
     children: [
       { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '市场' } },
+      { path: 'leaderboard', name: 'Leaderboard', component: () => import('../views/Leaderboard.vue'), meta: { title: '榜单' } },
       { path: 'work/:id', name: 'WorkDetail', component: () => import('../views/WorkDetail.vue'), meta: { title: '作品详情' } },
       { path: 'chat', name: 'Chat', component: () => import('../views/Chat.vue'), meta: { title: '聊天' } },
       { path: 'chat/:id', name: 'ChatWith', component: () => import('../views/Chat.vue'), meta: { title: '聊天' } },

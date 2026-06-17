@@ -22,4 +22,10 @@ public interface AccountMapper {
     int updateStatus(@Param("id") Long id, @Param("status") String status);
 
     java.util.List<java.util.Map<String, Object>> selectTopCreators(@Param("limit") int limit);
+
+    /** 榜单: 全时段创作者收藏排行 */
+    java.util.List<java.util.Map<String, Object>> selectLeaderboardCreators(@Param("limit") int limit);
+
+    /** 榜单: 本周创作者收藏排行 */
+    java.util.List<java.util.Map<String, Object>> selectLeaderboardCreatorsWeekly(@Param("weekStart") String weekStart, @Param("limit") int limit);
 }

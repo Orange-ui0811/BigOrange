@@ -56,4 +56,33 @@
         FROM account a LEFT JOIN work w ON a.id = w.owner_id AND w.audit_status='APPROVED'
         WHERE a.role='USER' GROUP BY a.id ORDER BY workCount DESC LIMIT #{limit}
     </select>
+
+    <!-- 榜单: 全时段创作者收藏排行 -->
+    <select id="selectLeaderboardCreators" resultType="java.util.HashMap">
+        SELECT a.id, a.username, up.avatar_url, up.bio,
+               COUNT(f.id) AS total_favorites,
+               COUNT(DISTINCT w.id) AS work_count
+        FROM account a
+        LEFT JOIN user_profile up ON a.id = up.account_id
+        LEFT JOIN work w ON a.id = w.owner_id AND w.audit_status='APPROVED'
+        LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id = w.id
+        WHERE a.role='USER'
+        GROUP BY a.id HAVING total_favorites > 0
+        ORDER BY total_favorites DESC LIMIT #{limit}
+    </select>
+
+    <!-- 榜单: 本周创作者收藏排行 -->
+    <select id="selectLeaderboardCreatorsWeekly" resultType="java.util.HashMap">
+        SELECT a.id, a.username, up.avatar_url, up.bio,
+               COUNT(f.id) AS total_favorites,
+               COUNT(DISTINCT w.id) AS work_count
+        FROM account a
+        LEFT JOIN user_profile up ON a.id = up.account_id
+        LEFT JOIN work w ON a.id = w.owner_id AND w.audit_status='APPROVED'
+        LEFT JOIN favorite f ON f.target_type='WORK' AND f.target_id = w.id
+            AND f.create_time >= #{weekStart}
+        WHERE a.role='USER'
+        GROUP BY a.id HAVING total_favorites > 0
+        ORDER BY total_favorites DESC LIMIT #{limit}
+    </select>
 </mapper>

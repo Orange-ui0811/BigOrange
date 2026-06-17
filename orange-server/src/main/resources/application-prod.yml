@@ -36,3 +36,9 @@ logging:
   level:
     com.orangejd: warn
     root: error
+
+  leaderboard:
+    github-token: ${GITHUB_TOKEN}
+    github-cache-ttl-minutes: ${LEADERBOARD_GITHUB_CACHE_TTL:30}
+    local-cache-ttl-minutes: ${LEADERBOARD_LOCAL_CACHE_TTL:15}
+    default-top-n: ${LEADERBOARD_TOP_N:20}
