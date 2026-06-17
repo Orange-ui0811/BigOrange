@@ -13,7 +13,7 @@ import java.util.*;
 public class TrendAnalysisService {
 
     private static final Logger log = LoggerFactory.getLogger(TrendAnalysisService.class);
-    private static final int TIMEOUT_MS = 30000;
+    private static final int TIMEOUT_MS = 90000;
 
     @Autowired
     private KnowledgeGraphService graphService;
