@@ -4,6 +4,7 @@
       <template #content><span style="font-weight:600">{{ detail.title || '作品详情' }}</span></template>
     </el-page-header>
     <el-card v-if="detail.id" shadow="never" style="border-radius:12px">
+      <img v-if="detail.coverUrl" :src="API + detail.coverUrl" style="width:100%;max-height:360px;object-fit:cover;border-radius:8px;margin-bottom:16px" />
       <el-descriptions :column="2" border size="small">
         <el-descriptions-item label="ID">{{ detail.id }}</el-descriptions-item>
         <el-descriptions-item label="标题">{{ detail.title }}</el-descriptions-item>
@@ -33,6 +34,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import request from '../api/request'
+const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
 const detail = ref({})
 const loading = ref(false)
