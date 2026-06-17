@@ -106,6 +106,7 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryVO vo = new CategoryVO();
         vo.setId(category.getId());
         vo.setName(category.getName());
+        vo.setTopicName(category.getTopicName());
         vo.setType(category.getType());
         vo.setSort(category.getSort());
         vo.setStatus(category.getStatus());

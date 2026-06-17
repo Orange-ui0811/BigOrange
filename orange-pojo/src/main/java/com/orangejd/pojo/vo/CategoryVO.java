@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class CategoryVO {
     private Long id;
     private String name;
+    private String topicName;
     private String type;
     private Integer sort;
     private String status;
@@ -16,6 +17,9 @@ public class CategoryVO {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getTopicName() { return topicName; }
+    public void setTopicName(String topicName) { this.topicName = topicName; }
 
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }

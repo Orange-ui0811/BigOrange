@@ -122,13 +122,15 @@ const categoryGroups = [
   { label: '创意技术', children: [] },
   { label: 'AI 智能', children: [] },
   { label: '自托管', children: [] },
-  { label: '硬件/IoT', children: [] }
+  { label: '硬件/IoT', children: [] },
+  { label: '其他', children: [] }
 ]
 const groupMap = {
   '创意技术': ['creative-coding','game-development','WebGL','Canvas','Web-Audio'],
   'AI 智能': ['ai-agents','RAG'],
   '自托管': ['self-hosted','home-assistant','awesome-self-hosted'],
-  '硬件/IoT': ['ESP32','raspberry-pi','home-automation','3d-printing']
+  '硬件/IoT': ['ESP32','raspberry-pi','home-automation','3d-printing'],
+  '其他': ['other']
 }
 
 const emptyText = computed(() => {
@@ -197,6 +199,7 @@ const load = async () => {
 
 const onFilterChange = () => {
   page.value = 1
+  category.value = null
   if (source.value === 'github') type.value = 'repos'
   else if (type.value === 'repos') type.value = 'works'
   load()

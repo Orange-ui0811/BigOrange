@@ -313,7 +313,8 @@ INSERT INTO category (name, topic_name, type, sort, status) VALUES
 ('ESP32',            'ESP32',              'WORK',11, 'ACTIVE'),
 ('Raspberry Pi',     'raspberry-pi',       'WORK',12, 'ACTIVE'),
 ('Home Automation',  'home-automation',    'WORK',13, 'ACTIVE'),
-('3D Printing',      '3d-printing',        'WORK',14, 'ACTIVE');
+('3D Printing',      '3d-printing',        'WORK',14, 'ACTIVE'),
+('Other',            'other',              'WORK',15, 'ACTIVE');
 
 -- Step 1.4: 停用旧分类（topic_name 为空的记录）
 UPDATE category SET status = 'INACTIVE' WHERE topic_name IS NULL AND status = 'ACTIVE';
