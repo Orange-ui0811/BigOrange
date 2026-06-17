@@ -70,13 +70,14 @@
     <!-- AI 分析面板 -->
     <el-card shadow="never" style="border-radius:12px;margin-top:16px">
       <h4 style="margin:0 0 12px">🤖 AI 趋势分析</h4>
-      <el-row :gutter="12" style="margin-bottom:8px">
-        <el-col :span="6"><el-input v-model="aiEndpoint" placeholder="API Endpoint" size="small" /></el-col>
-        <el-col :span="4"><el-input v-model="aiModel" placeholder="Model" size="small" /></el-col>
-        <el-col :span="5"><el-input v-model="aiKey" placeholder="API Key" type="password" show-password size="small" /></el-col>
-        <el-col :span="9">
-          <el-input v-model="aiQuestion" placeholder="输入分析问题，如：哪些方向是蓝海？" size="small" @keyup.enter="askAI">
-            <template #append><el-button :loading="aiLoading" @click="askAI" size="small">分析</el-button></template>
+      <el-row :gutter="8" style="margin-bottom:8px">
+        <el-col :span="6"><el-input v-model="aiEndpoint" placeholder="https://api.deepseek.com/v1" size="small" /></el-col>
+        <el-col :span="3"><el-input v-model="aiModel" placeholder="deepseek-chat" size="small" /></el-col>
+        <el-col :span="5"><el-input v-model="aiKey" placeholder="sk-xxx" type="password" show-password size="small" /></el-col>
+        <el-col :span="2"><el-button size="small" @click="testConnection" :loading="testLoading">测试</el-button></el-col>
+        <el-col :span="8">
+          <el-input v-model="aiQuestion" placeholder="如：哪些方向是蓝海？" size="small" @keyup.enter="askAI">
+            <template #append><el-button :loading="aiLoading" @click="askAI">分析</el-button></template>
           </el-input>
         </el-col>
       </el-row>
@@ -87,7 +88,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
 import request from '../api/request'
@@ -239,6 +241,32 @@ const renderChart = (mode) => {
 const onViewChange = () => renderChart(viewMode.value)
 
 // AI
+const testLoading = ref(false)
+
+const testConnection = async () => {
+  if (!aiEndpoint.value || !aiKey.value) {
+    aiError.value = '请填写 Endpoint 和 API Key'
+    return
+  }
+  testLoading.value = true; aiError.value = ''
+  try {
+    const r = await request.post('/app/trend/analyze', {
+      endpoint: aiEndpoint.value,
+      model: aiModel.value || 'gpt-4o',
+      apiKey: aiKey.value,
+      question: '回复OK'
+    }, { timeout: 15000 })
+    if (r.code === 1) {
+      aiError.value = ''
+      ElMessage.success('连接成功！模型可用')
+    } else {
+      aiError.value = r.msg || '连接失败'
+    }
+  } catch {
+    aiError.value = '请求超时或网络不通，请检查 Endpoint'
+  } finally { testLoading.value = false }
+}
+
 const compareTopics = (edge) => {
   aiQuestion.value = `请对比分析 ${edge.sourceName} 和 ${edge.targetName} 两个方向的趋势和机会`
   // 滚动到 AI 面板
