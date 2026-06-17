@@ -7,8 +7,13 @@
       <!-- 左：图谱 -->
       <el-col :span="16">
         <el-card shadow="never" style="border-radius:12px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-weight:600">Topic 全景图</span>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <div>
+              <span style="font-weight:600">Topic 全景图</span>
+              <el-tooltip content="节点=技术方向（大小=热度），连线=共享编程语言≥2种（越粗关联越强）" placement="top">
+                <el-icon style="margin-left:6px;color:#909399;cursor:help"><QuestionFilled /></el-icon>
+              </el-tooltip>
+            </div>
             <el-radio-group v-model="viewMode" size="small" @change="onViewChange">
               <el-radio-button value="week">本周</el-radio-button>
               <el-radio-button value="last">上周</el-radio-button>
@@ -21,6 +26,19 @@
       <!-- 右：节点详情 -->
       <el-col :span="8">
         <el-card shadow="never" style="border-radius:12px;height:556px;overflow:auto">
+          <template v-if="selectedEdge">
+            <h4 style="margin:0 0 4px">Topic 关联</h4>
+            <el-tag size="small" type="info" style="margin-right:6px">{{ selectedEdge.sourceName }}</el-tag>
+            <span style="color:#909399">↔</span>
+            <el-tag size="small" type="info" style="margin-left:6px">{{ selectedEdge.targetName }}</el-tag>
+            <el-divider style="margin:12px 0" />
+            <p style="font-size:13px;color:#606266">这两个方向共享 <b>{{ selectedEdge.weight }}</b> 种编程语言，技术栈高度重合，技能可迁移。</p>
+            <div v-if="selectedEdge.sharedLangs?.length" style="margin-top:8px">
+              <div style="font-weight:600;font-size:13px;margin-bottom:4px">共享语言</div>
+              <el-tag v-for="l in selectedEdge.sharedLangs" :key="l" size="small" type="success" style="margin:2px 4px 2px 0">{{ l }}</el-tag>
+            </div>
+            <el-button size="small" type="primary" style="margin-top:12px" @click="compareTopics(selectedEdge)">对比两个方向</el-button>
+          </template>
           <template v-if="selectedNode">
             <h4 style="margin:0 0 4px">{{ selectedNode.name }}</h4>
             <el-tag size="small" type="info">{{ selectedNode.group }}</el-tag>
@@ -80,6 +98,7 @@ const graphLoading = ref(false)
 const viewMode = ref('week')
 const graphData = ref(null)
 const selectedNode = ref(null)
+const selectedEdge = ref(null)
 const selectedDelta = ref(null)
 const lastStars = ref({})
 
@@ -102,11 +121,11 @@ const formatNum = (n) => {
 
 // 四大领域颜色
 const groupColors = {
-  '创意技术': '#e65100',
-  'AI 智能': '#1565c0',
-  '自托管': '#2e7d32',
-  '硬件/IoT': '#6a1b9a',
-  '其他': '#78909c'
+  '创意技术': '#ffcc80',
+  'AI 智能': '#90caf9',
+  '自托管': '#a5d6a7',
+  '硬件/IoT': '#ce93d8',
+  '其他': '#cfd8dc'
 }
 
 const loadGraph = async () => {
@@ -168,7 +187,7 @@ const renderChart = (mode) => {
     series: [{
       type: 'graph',
       layout: 'force',
-      force: { repulsion: 600, edgeLength: [120, 300], gravity: 0.1 },
+      force: { repulsion: 400, edgeLength: [150, 350], gravity: 0.15, friction: 0.3, layoutAnimation: true },
       roam: true,
       draggable: true,
       categories: categories,
@@ -179,19 +198,40 @@ const renderChart = (mode) => {
     }]
   })
 
-  // 点击节点
+  // 点击节点/连线
   chart.off('click')
   chart.on('click', (p) => {
     if (p.dataType === 'node') {
       selectedNode.value = p.data
+      selectedEdge.value = null
       const last = lastStars.value[p.data.id]
       if (last && last > 0) {
         selectedDelta.value = Math.round((p.data.totalStars - last) * 100 / last)
       } else {
         selectedDelta.value = null
       }
+    } else if (p.dataType === 'edge') {
+      selectedEdge.value = p.data
+      selectedNode.value = null
     }
   })
+
+  // 预计算共享语言（从 raw data 中提取）
+  const rawData = mode === 'week' ? graphData.value.thisWeek : graphData.value.lastWeek
+  if (rawData?.edges) {
+    const nodeMap = {}
+    if (rawData.nodes) rawData.nodes.forEach(n => { nodeMap[n.id] = n })
+    rawData.edges.forEach(e => {
+      const sNode = nodeMap[e.source]; const tNode = nodeMap[e.target]
+      e.sourceName = sNode?.name || e.source
+      e.targetName = tNode?.name || e.target
+      // 计算共享语言
+      const sLangs = new Set((sNode?.topLanguages || []).map(l => l.name))
+      const tLangs = new Set((tNode?.topLanguages || []).map(l => l.name))
+      const shared = [...sLangs].filter(l => tLangs.has(l))
+      e.sharedLangs = shared
+    })
+  }
 
   window.addEventListener('resize', () => chart?.resize())
 }
@@ -199,6 +239,12 @@ const renderChart = (mode) => {
 const onViewChange = () => renderChart(viewMode.value)
 
 // AI
+const compareTopics = (edge) => {
+  aiQuestion.value = `请对比分析 ${edge.sourceName} 和 ${edge.targetName} 两个方向的趋势和机会`
+  // 滚动到 AI 面板
+  document.querySelector('.el-card:last-child')?.scrollIntoView({ behavior: 'smooth' })
+}
+
 const askAI = async () => {
   if (!aiKey.value || !aiEndpoint.value || !aiQuestion.value.trim()) {
     aiError.value = '请填写 API Endpoint、API Key 和分析问题'

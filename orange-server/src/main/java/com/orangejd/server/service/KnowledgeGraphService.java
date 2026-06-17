@@ -34,7 +34,6 @@ public class KnowledgeGraphService {
             {"RAG",                "RAG检索增强","AI 智能"},
             {"self-hosted",        "自托管",     "自托管"},
             {"home-assistant",     "家庭助理",   "自托管"},
-            {"awesome-self-hosted","自托管精选", "自托管"},
             {"ESP32",              "ESP32",     "硬件/IoT"},
             {"raspberry-pi",       "树莓派",     "硬件/IoT"},
             {"home-automation",    "家居自动化", "硬件/IoT"},
