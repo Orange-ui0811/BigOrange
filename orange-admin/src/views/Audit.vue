@@ -66,8 +66,9 @@ const load = async () => {
 }
 
 const openWork = (row) => {
-  const path = tab.value === 'works' ? 'work/' + row.id : 'requirement/' + row.id
-  window.open(window.location.origin + '/' + path, '_blank')
+  const path = (tab.value === 'works' ? 'work/' : 'requirement/') + row.id
+  const port = window.location.port === '5174' ? ':5173' : (window.location.port ? ':' + window.location.port : '')
+  window.open(window.location.protocol + '//' + window.location.hostname + port + '/' + path, '_blank')
 }
 
 const showDetail = async (id) => {
