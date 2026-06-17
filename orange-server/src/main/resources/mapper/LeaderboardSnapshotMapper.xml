@@ -6,10 +6,12 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO leaderboard_snapshot (source, topic_name, period, snapshot_date, data_json)
         VALUES (#{source}, #{topicName}, #{period}, #{snapshotDate}, #{dataJson})
+        ON DUPLICATE KEY UPDATE data_json = VALUES(data_json), create_time = NOW()
     </insert>
 
     <select id="selectByKey" resultType="com.orangejd.pojo.entity.LeaderboardSnapshot">
-        SELECT id, source, topic_name, period, snapshot_date, data_json, create_time
+        SELECT id, source, topic_name AS topicName, period,
+               snapshot_date AS snapshotDate, data_json AS dataJson, create_time AS createTime
         FROM leaderboard_snapshot
         WHERE source = #{source}
           AND (topic_name = #{topicName} OR (#{topicName} IS NULL AND topic_name IS NULL))

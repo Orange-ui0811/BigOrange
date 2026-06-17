@@ -31,6 +31,9 @@ orange:
     access-key-id: ${OSS_ACCESS_KEY}
     access-key-secret: ${OSS_ACCESS_SECRET}
     bucket-name: ${OSS_BUCKET}
+  leaderboard:
+    github-token: ${GITHUB_TOKEN}
+    local-cache-ttl-minutes: ${LEADERBOARD_LOCAL_CACHE_TTL:15}
 
 mybatis:
   configuration:
@@ -40,8 +43,3 @@ logging:
   level:
     com.orangejd: warn
     root: error
-
-orange:
-  leaderboard:
-    github-token: ${GITHUB_TOKEN}
-    local-cache-ttl-minutes: ${LEADERBOARD_LOCAL_CACHE_TTL:15}
