@@ -17,7 +17,9 @@ const routes = [
       { path: 'works', name: 'Works', component: () => import('../views/Works.vue'), meta: { title: '内容管理' } },
       { path: 'users', name: 'Users', component: () => import('../views/Users.vue'), meta: { title: '用户管理' } },
       { path: 'orders', name: 'Orders', component: () => import('../views/Orders.vue'), meta: { title: '订单管理' } },
-      { path: 'settings', name: 'Settings', component: () => import('../views/Settings.vue'), meta: { title: '修改密码' } }
+      { path: 'settings', name: 'Settings', component: () => import('../views/Settings.vue'), meta: { title: '修改密码' } },
+      { path: 'work/:id', name: 'WorkDetail', component: () => import('../views/WorkDetail.vue'), meta: { title: '作品详情' } },
+      { path: 'requirement/:id', name: 'ReqDetail', component: () => import('../views/WorkDetail.vue'), meta: { title: '需求详情' } }
     ]
   }
 ]

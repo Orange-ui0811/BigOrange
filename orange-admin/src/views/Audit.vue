@@ -46,10 +46,12 @@
 
 <script setup>
 import { ref, watch, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import request from '../api/request'
 import { tradeEnabled } from '../stores/tradeMode'
 
+const router = useRouter()
 const tab = ref('works')
 const list = ref([])
 const loading = ref(false)
@@ -66,9 +68,8 @@ const load = async () => {
 }
 
 const openWork = (row) => {
-  const path = (tab.value === 'works' ? 'work/' : 'requirement/') + row.id
-  const port = window.location.port === '5174' ? ':5173' : (window.location.port ? ':' + window.location.port : '')
-  window.open(window.location.protocol + '//' + window.location.hostname + port + '/' + path, '_blank')
+  const path = (tab.value === 'works' ? '/work/' : '/requirement/') + row.id
+  router.push(path)
 }
 
 const showDetail = async (id) => {
