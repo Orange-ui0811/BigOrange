@@ -51,7 +51,7 @@
       <el-form-item label="简介"><el-input v-model="form.summary" type="textarea" :rows="2" placeholder="简短介绍" /></el-form-item>
       <el-form-item label="详情"><el-input v-model="form.detail" type="textarea" :rows="4" placeholder="详细描述" /></el-form-item>
       <el-form-item label="分类"><el-select v-model="form.categoryId" placeholder="选择分类" clearable><el-option v-for="c in cats" :key="c.id" :label="c.name" :value="c.id" /></el-select></el-form-item>
-      <template v-if="tab==='work'">
+      <template v-if="tab==='work' && tradeEnabled">
         <el-form-item label="售卖价格"><el-input v-model="form.price" type="number" placeholder="¥ 留空则面议" /></el-form-item>
       </template>
       <template v-else>
@@ -70,6 +70,7 @@ import { ref, reactive, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
+import { tradeEnabled } from '../stores/tradeMode'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()

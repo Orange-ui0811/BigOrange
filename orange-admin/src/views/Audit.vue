@@ -29,7 +29,7 @@
         </el-alert>
         <p v-if="detail.summary" style="color:#6b6b6b;white-space:pre-wrap">{{ detail.summary }}</p>
         <p v-if="detail.detail" style="color:#2c2c2c;white-space:pre-wrap">{{ detail.detail }}</p>
-        <div v-if="detail.saleOptions?.length" style="margin-top:12px;padding-top:12px;border-top:1px solid #eee">
+        <div v-if="tradeEnabled && detail.saleOptions?.length" style="margin-top:12px;padding-top:12px;border-top:1px solid #eee">
           <b>售卖项：</b>
           <el-tag v-for="so in detail.saleOptions" :key="so.id" type="warning" style="margin:4px 8px 4px 0">¥{{ so.price }} {{ so.saleType }}</el-tag>
         </div>
@@ -46,6 +46,7 @@
 import { ref, watch, onMounted } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import request from '../api/request'
+import { tradeEnabled } from '../stores/tradeMode'
 
 const tab = ref('works')
 const list = ref([])

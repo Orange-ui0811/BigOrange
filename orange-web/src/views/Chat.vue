@@ -24,7 +24,7 @@
           <span style="font-weight:400;font-size:12px;color:#909399;margin-left:8px" v-if="activeConv.workTitle">关联：{{ activeConv.workTitle }}</span>
         </div>
         <!-- 报价卡片置顶 -->
-        <div v-if="quotes.length" style="padding:8px 16px;border-bottom:1px solid #f0ece6;background:#fff7f0">
+        <div v-if="tradeEnabled && quotes.length" style="padding:8px 16px;border-bottom:1px solid #f0ece6;background:#fff7f0">
           <div v-for="q in quotes" :key="q.id" style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;font-size:13px">
             <span><b>报价 ¥{{ q.price }}</b> <span style="color:#909399;font-size:11px;margin-left:8px">{{ q.status }}</span></span>
             <span style="display:flex;gap:6px">
@@ -51,14 +51,14 @@
         <div style="padding:12px 16px;border-top:1px solid #f0ece6;display:flex;gap:8px;align-items:center;background:#faf9f7">
           <el-input v-model="msgText" placeholder="输入消息..." size="default" @keyup.enter="sendMsg" />
           <el-button size="default" type="primary" @click="sendMsg" style="background:#e65100;border-color:#e65100">发送</el-button>
-          <el-button size="default" @click="showQuoteDialog=true">发报价</el-button>
+          <el-button v-if="tradeEnabled" size="default" @click="showQuoteDialog=true">发报价</el-button>
           <!-- <el-button size="default" type="danger" plain @click="clearChat">清除聊天</el-button> -->
         </div>
       </template>
       <el-empty v-else description="选择一个会话开始聊天" :image-size="100" style="margin:auto" />
     </div>
     <!-- 发报价弹窗 -->
-    <el-dialog v-model="showQuoteDialog" title="发起报价" width="360px">
+    <el-dialog v-if="tradeEnabled" v-model="showQuoteDialog" title="发起报价" width="360px">
       <el-form label-position="top"><el-form-item label="金额"><el-input v-model="quotePrice" type="number" placeholder="¥" /></el-form-item></el-form>
       <template #footer><el-button @click="showQuoteDialog=false">取消</el-button><el-button type="primary" @click="sendQuote">发送报价</el-button></template>
     </el-dialog>
@@ -71,6 +71,7 @@ import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import request from '../api/request'
 import { unreadCount } from '../stores/unread'
+import { tradeEnabled } from '../stores/tradeMode'
 
 const convs = ref([])
 const activeConv = ref(null)

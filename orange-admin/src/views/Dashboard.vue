@@ -1,7 +1,14 @@
 <template>
   <div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <span style="font-size:13px;color:#909399">快捷设置</span>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span style="font-size:13px;color:#606266">交易模式</span>
+        <el-switch v-model="tradeEnabled" @change="toggleTrade" active-text="开" inactive-text="关" />
+      </div>
+    </div>
     <el-row :gutter="16" style="margin-bottom:16px">
-      <el-col :span="4" v-for="c in cards" :key="c.label">
+      <el-col :span="4" v-for="c in visibleCards" :key="c.label">
         <el-card shadow="never" style="border-radius:10px;text-align:center;padding:8px 0">
           <div style="font-size:28px;font-weight:700;color:#303133">{{ c.value }}</div>
           <div style="font-size:12px;color:#909399;margin-top:4px">{{ c.label }}</div>
@@ -32,16 +39,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import request from '../api/request'
+import { tradeEnabled } from '../stores/tradeMode'
 
 const cards = ref([
-  { label: '用户总数', value: 0 }, { label: '作品总数', value: 0 },
-  { label: '需求总数', value: 0 }, { label: '待审核', value: 0 },
-  { label: '订单总数', value: 0 }, { label: '交易额', value: 0 }
+  { label: '用户总数', value: 0, trade: false }, { label: '作品总数', value: 0, trade: false },
+  { label: '需求总数', value: 0, trade: false }, { label: '待审核', value: 0, trade: false },
+  { label: '订单总数', value: 0, trade: true }, { label: '交易额', value: 0, trade: true }
 ])
+const visibleCards = computed(() => tradeEnabled.value ? cards.value : cards.value.filter(c => !c.trade))
 const topWorks = ref([])
 const topCreators = ref([])
+
+const toggleTrade = async (val) => {
+  try { await request.put('/admin/config/trade-mode', { enabled: val }) } catch { tradeEnabled.value = !val }
+}
 
 onMounted(async () => {
   try {
@@ -58,6 +71,9 @@ onMounted(async () => {
     if (tw.code === 1) topWorks.value = tw.data
     const tc = await request.get('/admin/statistics/top-creators?limit=5')
     if (tc.code === 1) topCreators.value = tc.data
+    // 读取交易模式
+    const tm = await request.get('/admin/config/trade-mode')
+    if (tm.code === 1) tradeEnabled.value = tm.data.enabled
   } catch (e) {}
 })
 </script>

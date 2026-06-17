@@ -10,7 +10,7 @@
         <el-menu-item index="/audit"><el-icon><Checked /></el-icon> 审核管理</el-menu-item>
         <el-menu-item index="/works"><el-icon><Document /></el-icon> 内容管理</el-menu-item>
         <el-menu-item index="/users"><el-icon><User /></el-icon> 用户管理</el-menu-item>
-        <el-menu-item index="/orders"><el-icon><Tickets /></el-icon> 订单管理</el-menu-item>
+        <el-menu-item index="/orders" v-if="tradeEnabled"><el-icon><Tickets /></el-icon> 订单管理</el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>
@@ -26,8 +26,14 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import request from '../api/request'
+import { tradeEnabled } from '../stores/tradeMode'
 const route = useRoute()
 const router = useRouter()
 const logout = () => { localStorage.removeItem('adminToken'); router.push('/login') }
+onMounted(async () => {
+  try { const r = await request.get('/admin/config/trade-mode'); if (r.code === 1) tradeEnabled.value = r.data.enabled } catch {}
+})
 </script>

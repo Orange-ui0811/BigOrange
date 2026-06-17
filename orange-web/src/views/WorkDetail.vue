@@ -10,7 +10,7 @@
         <a :href="work.demoUrl" target="_blank" style="font-size:13px;color:#e65100;font-weight:600;margin-left:4px">点击体验 →</a>
         <span style="font-size:11px;color:#909399;margin-left:8px">（源码不可见）</span>
       </div>
-      <div v-if="work.saleOptions?.length" style="margin-top:16px;padding-top:16px;border-top:1px solid #f0ece6">
+      <div v-if="tradeEnabled && work.saleOptions?.length" style="margin-top:16px;padding-top:16px;border-top:1px solid #f0ece6">
         <h4>售卖项</h4>
         <el-tag v-for="(so,i) in work.saleOptions" :key="i" style="margin:4px 8px 4px 0" type="warning">¥{{so.price}} {{so.saleType}}</el-tag>
       </div>
@@ -38,6 +38,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import request from '../api/request'
+import { tradeEnabled } from '../stores/tradeMode'
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route=useRoute(); const router=useRouter()
 const work=ref(null),loading=ref(false),favd=ref(false),comments=ref([]),cmtText=ref(''),contacting=ref(false)

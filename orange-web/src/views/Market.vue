@@ -29,7 +29,7 @@
               <span v-if="item.favoriteCount" style="margin-right:8px">⭐{{item.favoriteCount}}</span>
               <span v-if="item.commentCount">💬{{item.commentCount}}</span>
             </span>
-            <span v-if="tab==='works'" style="font-size:14px;font-weight:700;color:#e65100">¥{{ item.totalAmount || '待定' }}</span>
+            <span v-if="tab==='works' && tradeEnabled" style="font-size:14px;font-weight:700;color:#e65100">¥{{ item.totalAmount || '待定' }}</span>
             <span v-else style="font-size:12px;color:#6b6b6b">¥{{ item.budgetMin }}-{{ item.budgetMax }}</span>
             </div>
           </div>
@@ -45,6 +45,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import request from '../api/request'
+import { tradeEnabled } from '../stores/tradeMode'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const tab = ref('works')

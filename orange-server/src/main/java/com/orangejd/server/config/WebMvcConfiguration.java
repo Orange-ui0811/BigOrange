@@ -60,6 +60,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .addPathPatterns("/app/**")
                 .excludePathPatterns("/app/auth/login", "/app/auth/register", "/app/auth/send-code",
                         "/app/category", "/app/work/public", "/app/requirement/public",
+                        "/app/config/trade-mode",
                         "/ws/**");
     }
 }

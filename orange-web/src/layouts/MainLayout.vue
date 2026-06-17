@@ -15,7 +15,7 @@
         <el-menu-item index="/publish"><el-icon><Edit /></el-icon> 发布</el-menu-item>
         <el-menu-item index="/profile/me"><el-icon><User /></el-icon> 个人主页</el-menu-item>
         <el-menu-item index="/me/works"><el-icon><Folder /></el-icon> 我的作品</el-menu-item>
-        <el-menu-item index="/me/orders"><el-icon><Tickets /></el-icon> 我的订单</el-menu-item>
+        <el-menu-item index="/me/orders" v-if="tradeEnabled"><el-icon><Tickets /></el-icon> 我的订单</el-menu-item>
         <el-menu-item index="/me/notifications"><el-icon><Bell /></el-icon> 通知<span v-if="unreadCount" style="margin-left:6px;background:#e65100;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px">{{ unreadCount }}</span></el-menu-item>
         <el-menu-item index="/chat"><el-icon><ChatDotRound /></el-icon> 聊天<span v-if="chatUnread" style="margin-left:6px;background:#e65100;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px">{{ chatUnread }}</span></el-menu-item>
         <el-menu-item index="/me/favorites"><el-icon><Star /></el-icon> 收藏夹</el-menu-item>
@@ -47,6 +47,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import request from '../api/request'
 import { unreadCount, avatarUrl, nickname } from '../stores/unread'
+import { tradeEnabled } from '../stores/tradeMode'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
@@ -62,5 +63,6 @@ onMounted(async () => {
     const res = await request.get('/app/conversation/list?page=1&size=50')
     if (res.code === 1 && res.data?.records) chatUnread.value = res.data.records.reduce((s, c) => s + (c.unreadCount || 0), 0)
   } catch {}
+  try { const r = await request.get('/app/config/trade-mode'); if (r.code === 1) tradeEnabled.value = r.data.enabled } catch {}
 })
 </script>
