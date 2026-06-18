@@ -13,7 +13,7 @@
       <el-button size="small" @click="testAiConnect" :loading="aiTesting">测试连接</el-button>
       <el-tag v-if="aiConnected===true" type="success" size="small">已连接</el-tag>
       <el-tag v-else-if="aiConnected===false" type="danger" size="small">未连接</el-tag>
-      <el-button size="small" type="primary" @click="runAiAudit" :loading="aiRunning" style="margin-left:auto">立即审核全部待审</el-button>
+      <el-button v-if="!aiEnabled" size="small" type="primary" @click="runAiAudit" :loading="aiRunning" style="margin-left:auto">手动审核全部待审</el-button>
       <span v-if="aiTriggered > 0" style="font-size:12px;color:#909399">已触发 {{ aiTriggered }} 条</span>
     </div>
     <el-table :data="list" size="small" stripe v-loading="loading" empty-text="暂无待审内容">
@@ -89,7 +89,20 @@ const loadAiStatus = async () => {
   try { const r = await request.get('/admin/audit/ai-auto/status'); if (r.code === 1) aiEnabled.value = r.data.enabled } catch {}
 }
 const toggleAi = async (val) => {
-  try { const r = await request.put('/admin/audit/ai-auto/toggle'); if (r.code === 1) { aiEnabled.value = r.data.enabled; ElMessage.success(r.data.enabled ? 'AI 托管已开启' : 'AI 托管已关闭') } } catch {}
+  try {
+    const r = await request.put('/admin/audit/ai-auto/toggle')
+    if (r.code === 1) {
+      aiEnabled.value = r.data.enabled
+      if (r.data.enabled) {
+        aiTriggered.value = r.data.triggered || 0
+        ElMessage.success('AI 托管已开启' + (aiTriggered.value > 0 ? '，已触发 ' + aiTriggered.value + ' 条审核' : ''))
+        if (aiTriggered.value > 0) setTimeout(() => load(), 5000)
+      } else {
+        aiTriggered.value = 0
+        ElMessage.success('AI 托管已关闭')
+      }
+    }
+  } catch {}
 }
 const runAiAudit = async () => {
   aiRunning.value = true

@@ -42,6 +42,10 @@ public class AdminAuditController {
         aiAuditService.setEnabled(newState);
         Map<String, Object> data = new java.util.LinkedHashMap<>();
         data.put("enabled", newState);
+        if (newState) {
+            int count = aiAuditService.auditAllPending();
+            data.put("triggered", count);
+        }
         return Result.success(data);
     }
 

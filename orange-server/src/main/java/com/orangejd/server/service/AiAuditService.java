@@ -45,6 +45,18 @@ public class AiAuditService {
     @Value("${orange.upload.path:}")
     private String uploadPath;
 
+    @PostConstruct
+    public void init() {
+        // 启动后 10 秒检查：如果开关开着，自动扫描积压
+        new Thread(() -> {
+            try { Thread.sleep(10000); } catch (Exception ignored) {}
+            if (isEnabled()) {
+                log.info("AI托管已开启，启动扫描积压");
+                auditAllPending();
+            }
+        }).start();
+    }
+
     // 最多 2 个并发审核
     private final ExecutorService executor = Executors.newFixedThreadPool(2);
     private final RestTemplate restTemplate = new RestTemplate();
