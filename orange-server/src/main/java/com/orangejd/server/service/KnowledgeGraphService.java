@@ -174,7 +174,8 @@ public class KnowledgeGraphService {
             // 综合洞察
             String beginnerRepo = topRepos.isEmpty() ? "" : (String) topRepos.get(topRepos.size() - 1).get("name");
             String topRepo = topRepos.isEmpty() ? "" : (String) topRepos.get(0).get("name");
-            String insight = generateInsight(TOPIC_NAMES.getOrDefault(topicName, topicName), repoCount, totalStars, starsPerRepo, langDiversity, crowdedness, difficulty, beginnerRepo, topRepo);
+            // 本周数据稍后由 mergeWeeklyData 填充
+            String insight = generateInsight(TOPIC_NAMES.getOrDefault(topicName, topicName), repoCount, totalStars, starsPerRepo, langDiversity, crowdedness, difficulty, beginnerRepo, topRepo, 0, 0);
 
             Map<String, Object> metrics = new LinkedHashMap<>();
             metrics.put("crowdedness", crowdedness);
@@ -217,15 +218,23 @@ public class KnowledgeGraphService {
 
     private String generateInsight(String name, int repoCount, long totalStars, long starsPerRepo,
                                      int langDiversity, String crowdedness, String difficulty,
-                                     String beginnerRepo, String topRepo) {
+                                     String beginnerRepo, String topRepo, int weeklyRepos, long weeklyStars) {
         if (repoCount == 0) return "暂无足够数据进行分析";
         StringBuilder sb = new StringBuilder();
 
+        // 本周热度
+        if (weeklyRepos > 0) {
+            sb.append("【本周动态】本周 ").append(weeklyRepos).append(" 个仓库有新增 stars，周增 ").append(formatK(weeklyStars)).append("⭐。");
+        } else {
+            sb.append("【本周动态】暂无本周热门数据。");
+        }
+        sb.append(" ");
+
         // 拥挤度说明
         sb.append("【拥挤度：").append(crowdedness).append("】");
-        sb.append("该方向共 ").append(repoCount).append(" 个热门仓库，均星 ").append(formatK(starsPerRepo)).append("。");
+        sb.append("该方向共 ").append(repoCount).append(" 个热门仓库（全时段），均星 ").append(formatK(starsPerRepo)).append("。");
         if ("拥挤".equals(crowdedness)) {
-            sb.append("头部项目（如 ").append(topRepo).append("）已达 ").append(formatK(totalStars / repoCount > 0 ? totalStars : 1)).append(" stars，竞争充分，建议从细分场景或垂直领域切入。");
+            sb.append("头部项目（如 ").append(topRepo).append("）已达 ").append(formatK(totalStars)).append(" stars，竞争充分，建议从细分场景或垂直领域切入。");
         } else if ("适中".equals(crowdedness)) {
             sb.append("成熟度适中，头部效应未完全形成，仍有机会做出差异化产品。");
         } else {
@@ -263,16 +272,22 @@ public class KnowledgeGraphService {
     // ---- 本周/上周对比 ----
 
     public Map<String, Object> buildCompareGraph() {
-        // 取最新两个快照日期
         LocalDate today = LocalDate.now();
         String latest = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
         String lastWeek = today.minusWeeks(1).format(DateTimeFormatter.ISO_LOCAL_DATE);
 
-        // 尝试今天 → 昨天 → 上周 → 上上周
+        // 全时段数据
         Map<String, Object> graph1 = buildGraphWithFallback(latest);
         Map<String, Object> graph2 = buildGraphWithFallback(lastWeek);
 
-        // 计算增长率和综合评分
+        // 本周热门数据（week period）
+        Map<String, Object> weeklyGraph = buildWeeklyGraph(latest);
+
+        // 合并本周数据到 thisWeek 的节点中
+        mergeWeeklyData(graph1, weeklyGraph);
+        // 更新洞察文本（加入本周数据）
+        refreshInsights(graph1);
+        // 重新计算增长率（考虑本周活跃度）
         addGrowthAndScores(graph1, graph2);
 
         Map<String, Object> result = new LinkedHashMap<>();
@@ -280,6 +295,81 @@ public class KnowledgeGraphService {
         result.put("lastWeek", graph2);
         result.put("insights", buildInsightsReport(graph1));
         return result;
+    }
+
+    // 构建本周热门仓库图（period=week）
+    public Map<String, Object> buildWeeklyGraph(String snapshotDate) {
+        List<Map<String, Object>> nodes = new ArrayList<>();
+        for (String topicName : TOPIC_NAMES.keySet()) {
+            LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", topicName, "week", snapshotDate);
+            if (snap == null) { // fallback to yesterday
+                LocalDate d = LocalDate.parse(snapshotDate, DateTimeFormatter.ISO_LOCAL_DATE);
+                snap = snapshotMapper.selectByKey("github", topicName, "week", d.minusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE));
+            }
+            List<Map<String, Object>> repos = snap != null ? parseRepos(snap.getDataJson()) : Collections.emptyList();
+            long weeklyStars = 0;
+            for (Map<String, Object> repo : repos) {
+                Object s = repo.get("stars");
+                weeklyStars += s instanceof Number ? ((Number) s).longValue() : 0;
+            }
+            Map<String, Object> node = new LinkedHashMap<>();
+            node.put("id", topicName);
+            node.put("weeklyStars", weeklyStars);
+            node.put("weeklyRepos", repos.size());
+            nodes.add(node);
+        }
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("nodes", nodes);
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void mergeWeeklyData(Map<String, Object> allTimeGraph, Map<String, Object> weeklyGraph) {
+        List<Map<String, Object>> allTimeNodes = (List<Map<String, Object>>) allTimeGraph.get("nodes");
+        List<Map<String, Object>> weeklyNodes = (List<Map<String, Object>>) weeklyGraph.get("nodes");
+        if (allTimeNodes == null || weeklyNodes == null) return;
+
+        Map<String, Map<String, Object>> weeklyMap = new LinkedHashMap<>();
+        for (Map<String, Object> n : weeklyNodes) weeklyMap.put((String) n.get("id"), n);
+
+        for (Map<String, Object> node : allTimeNodes) {
+            Map<String, Object> wn = weeklyMap.get(node.get("id"));
+            Map<String, Object> metrics = (Map<String, Object>) node.get("metrics");
+            if (metrics == null) { metrics = new LinkedHashMap<>(); node.put("metrics", metrics); }
+            if (wn != null) {
+                metrics.put("weeklyStars", ((Number) wn.getOrDefault("weeklyStars", 0L)).longValue());
+                metrics.put("weeklyRepos", ((Number) wn.getOrDefault("weeklyRepos", 0)).intValue());
+            } else {
+                metrics.put("weeklyStars", 0L);
+                metrics.put("weeklyRepos", 0);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void refreshInsights(Map<String, Object> graph) {
+        List<Map<String, Object>> nodes = (List<Map<String, Object>>) graph.get("nodes");
+        if (nodes == null) return;
+        for (Map<String, Object> node : nodes) {
+            String name = (String) node.get("name");
+            int repoCount = ((Number) node.get("repoCount")).intValue();
+            long totalStars = ((Number) node.get("totalStars")).longValue();
+            Map<String, Object> metrics = (Map<String, Object>) node.get("metrics");
+            if (metrics == null) continue;
+            long starsPerRepo = ((Number) metrics.getOrDefault("starsPerRepo", 0L)).longValue();
+            int langDiversity = ((Number) metrics.getOrDefault("langDiversity", 0)).intValue();
+            String crowdedness = (String) metrics.get("crowdedness");
+            String difficulty = (String) metrics.get("difficulty");
+            int weeklyRepos = ((Number) metrics.getOrDefault("weeklyRepos", 0)).intValue();
+            long weeklyStars = ((Number) metrics.getOrDefault("weeklyStars", 0L)).longValue();
+            @SuppressWarnings("rawtypes")
+            List topRepos = (List) node.get("topRepos");
+            String beginnerRepo = (topRepos != null && !topRepos.isEmpty()) ? (String) ((Map) topRepos.get(topRepos.size() - 1)).get("name") : "";
+            String topRepo = (topRepos != null && !topRepos.isEmpty()) ? (String) ((Map) topRepos.get(0)).get("name") : "";
+            String insight = generateInsight(name, repoCount, totalStars, starsPerRepo,
+                    langDiversity, crowdedness, difficulty, beginnerRepo, topRepo, weeklyRepos, weeklyStars);
+            metrics.put("insight", insight);
+        }
     }
 
     @SuppressWarnings("unchecked")

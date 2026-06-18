@@ -56,7 +56,8 @@
             <template v-if="detailTab==='metrics'">
               <el-descriptions :column="1" size="small" border>
                 <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
-                <el-descriptions-item label="仓库数">{{ selectedNode.repoCount }}</el-descriptions-item>
+                <el-descriptions-item label="仓库数(全时段)">{{ selectedNode.repoCount }}</el-descriptions-item>
+                <el-descriptions-item v-if="selectedNode.metrics?.weeklyStars" label="本周新增⭐">{{ formatNum(selectedNode.metrics.weeklyStars) }}</el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
                   <el-tag :type="crowdType(selectedNode.metrics.crowdedness)" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
                 </el-descriptions-item>
