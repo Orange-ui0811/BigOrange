@@ -54,6 +54,9 @@
             <el-divider style="margin:8px 0" />
             <!-- 分析视图 -->
             <template v-if="detailTab==='metrics'">
+              <div v-if="selectedNode.metrics?.summary" style="font-size:12px;color:#606266;line-height:1.6;margin-bottom:12px;padding:8px;background:#faf9f7;border-radius:6px">
+                {{ selectedNode.metrics.summary }}
+              </div>
               <el-descriptions :column="1" size="small" border>
                 <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
                 <el-descriptions-item label="仓库数(全时段)">{{ selectedNode.repoCount }}</el-descriptions-item>
