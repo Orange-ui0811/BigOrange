@@ -230,7 +230,9 @@ const renderChart = (mode) => {
     repoCount: n.repoCount,
     topRepos: n.topRepos,
     topLanguages: n.topLanguages,
-    group: n.group
+    group: n.group,
+    metrics: n.metrics,
+    growthPct: n.growthPct
   }))
 
   const edges = (data.edges || []).map(e => ({
