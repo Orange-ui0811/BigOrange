@@ -172,7 +172,9 @@ public class KnowledgeGraphService {
             // 活跃度（基于最近push，快照中无此数据，用仓库数量代理）
             String activity = repoCount > 20 ? "活跃" : repoCount > 8 ? "一般" : "冷门";
             // 综合洞察
-            String insight = generateInsight(TOPIC_NAMES.getOrDefault(topicName, topicName), repoCount, totalStars, crowdedness, difficulty);
+            String beginnerRepo = topRepos.isEmpty() ? "" : (String) topRepos.get(topRepos.size() - 1).get("name");
+            String topRepo = topRepos.isEmpty() ? "" : (String) topRepos.get(0).get("name");
+            String insight = generateInsight(TOPIC_NAMES.getOrDefault(topicName, topicName), repoCount, totalStars, starsPerRepo, langDiversity, crowdedness, difficulty, beginnerRepo, topRepo);
 
             Map<String, Object> metrics = new LinkedHashMap<>();
             metrics.put("crowdedness", crowdedness);
@@ -213,22 +215,49 @@ public class KnowledgeGraphService {
         return result;
     }
 
-    private String generateInsight(String name, int repoCount, long totalStars, String crowdedness, String difficulty) {
+    private String generateInsight(String name, int repoCount, long totalStars, long starsPerRepo,
+                                     int langDiversity, String crowdedness, String difficulty,
+                                     String beginnerRepo, String topRepo) {
         if (repoCount == 0) return "暂无足够数据进行分析";
         StringBuilder sb = new StringBuilder();
-        if ("蓝海".equals(crowdedness)) {
-            sb.append("新兴方向，竞争较少，早期进入有优势。");
-        } else if ("拥挤".equals(crowdedness)) {
-            sb.append("热度高但竞争激烈，建议寻找细分切入点。");
+
+        // 拥挤度说明
+        sb.append("【拥挤度：").append(crowdedness).append("】");
+        sb.append("该方向共 ").append(repoCount).append(" 个热门仓库，均星 ").append(formatK(starsPerRepo)).append("。");
+        if ("拥挤".equals(crowdedness)) {
+            sb.append("头部项目（如 ").append(topRepo).append("）已达 ").append(formatK(totalStars / repoCount > 0 ? totalStars : 1)).append(" stars，竞争充分，建议从细分场景或垂直领域切入。");
+        } else if ("适中".equals(crowdedness)) {
+            sb.append("成熟度适中，头部效应未完全形成，仍有机会做出差异化产品。");
         } else {
-            sb.append("发展稳定，仍有成长空间。");
+            sb.append("仓库数量少、均星低，属于早期赛道，先行者有先发优势。");
         }
-        if ("入门".equals(difficulty)) {
-            sb.append("技术门槛较低，适合新手尝试。");
-        } else if ("进阶".equals(difficulty)) {
-            sb.append("需要一定技术积累，建议先学习基础项目。");
+        sb.append(" ");
+
+        // 难度说明
+        sb.append("【难度：").append(difficulty).append("】");
+        sb.append("该方向涉及 ").append(langDiversity).append(" 种主要编程语言");
+        if ("进阶".equals(difficulty)) {
+            sb.append("，且高星项目占比大，技术复杂度较高。建议先从 ");
+            if (!beginnerRepo.isEmpty()) sb.append("「").append(beginnerRepo).append("」");
+            else sb.append("低星入门项目");
+            sb.append(" 开始学习。");
+        } else if ("中等".equals(difficulty)) {
+            sb.append("，有一定学习曲线但社区资源丰富。可参考 ");
+            if (!topRepo.isEmpty()) sb.append("「").append(topRepo).append("」");
+            sb.append(" 快速上手。");
+        } else {
+            sb.append("，技术栈相对集中，适合新手入门。推荐直接研究 ");
+            if (!topRepo.isEmpty()) sb.append("「").append(topRepo).append("」");
+            sb.append(" 的源码或文档。");
         }
+
         return sb.toString();
+    }
+
+    private String formatK(long n) {
+        if (n >= 1000000) return String.format("%.1fM", n / 1000000.0);
+        if (n >= 1000) return String.format("%.1fK", n / 1000.0);
+        return String.valueOf(n);
     }
 
     // ---- 本周/上周对比 ----
