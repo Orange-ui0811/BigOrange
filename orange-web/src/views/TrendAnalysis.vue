@@ -91,7 +91,7 @@
               </div>
             </template>
           </template>
-          <template v-if="!selectedNode && !selectedEdge">
+          <template v-if="!selectedNode && !selectedEdge || (selectedNode && detailTab==='insights')">
             <div style="font-weight:600;font-size:13px;margin-bottom:8px">📊 趋势洞察</div>
             <div v-for="card in insightCards" :key="card.title" style="margin-bottom:10px;padding:10px;background:#faf9f7;border-radius:8px">
               <div style="font-size:12px;color:#909399;margin-bottom:6px">{{ card.title }}</div>
@@ -150,9 +150,9 @@ const insightCards = computed(() => {
   if (!insights.value) return []
   const types = [
     { key: 'hotTop3', title: '🔥 热门方向', tagType: 'danger' },
-    { key: 'blueTop3', title: '🌊 蓝海机会', tagType: 'success' },
+    { key: 'blueTop3', title: '🌱 新兴方向', tagType: 'success' },
     { key: 'growTop3', title: '📈 增长最快', tagType: 'warning' },
-    { key: 'oppTop3', title: '⭐ 最佳机会', tagType: '' }
+    { key: 'oppTop3', title: '⭐ 推荐', tagType: '' }
   ]
   return types.map(t => ({ title: t.title, items: insights.value[t.key] || [], tagType: t.tagType }))
 })
