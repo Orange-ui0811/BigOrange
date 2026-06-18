@@ -60,6 +60,9 @@
               <el-descriptions :column="1" size="small" border>
                 <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
                 <el-descriptions-item label="仓库数(全时段)">{{ selectedNode.repoCount }}</el-descriptions-item>
+                <el-descriptions-item v-if="selectedNode.metrics?.vcCount > 0" label="Vibe Coding">
+                  <el-tag type="warning" size="small">{{ selectedNode.metrics.vcCount }} 个项目 · {{ selectedNode.metrics.vcRatio }}%</el-tag>
+                </el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics?.weeklyStars" label="本周新增⭐">{{ formatNum(selectedNode.metrics.weeklyStars) }}</el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
                   <el-tag :type="crowdType(selectedNode.metrics.crowdedness)" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>

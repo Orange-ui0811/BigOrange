@@ -20,6 +20,24 @@ public class KnowledgeGraphService {
     @Autowired
     private LeaderboardSnapshotMapper snapshotMapper;
 
+    // Vibe Coding 关键词（AI 辅助编程相关）
+    private static final String[] VC_KEYWORDS = {
+        "vibe coding", "vibe-coding", "vibecoding",
+        "ai coding", "ai-coding", "ai-coding",
+        "cursor", "claude code", "claude-code",
+        "copilot", "co-pilot",
+        "ai-assisted", "ai assisted", "ai-powered",
+        "llm", "agent", "agents", "ai agent",
+        "code generation", "codegen",
+        "ai ide", "ai editor",
+        "prompt", "prompting",
+        "chatgpt", "openai", "gpt-4", "gpt4",
+        "deepseek", "anthropic",
+        "vscode extension", "ai tool",
+        "autonomous coding", "ai developer",
+        "superpowers", "codex"
+    };
+
     // 15 个 topic 的中文名映射
     private static final Map<String, String> TOPIC_NAMES = new LinkedHashMap<>();
     private static final Map<String, String> TOPIC_GROUPS = new LinkedHashMap<>();
@@ -118,11 +136,23 @@ public class KnowledgeGraphService {
             long totalStars = 0;
             Map<String, Integer> langCount = new LinkedHashMap<>();
             List<Map<String, Object>> topRepos = new ArrayList<>();
+            int vcCount = 0;
+            long vcStars = 0;
 
             for (Map<String, Object> repo : repos) {
                 Object starsObj = repo.get("stars");
                 long stars = starsObj instanceof Number ? ((Number) starsObj).longValue() : 0;
                 totalStars += stars;
+
+                // Vibe Coding 标签
+                String repoName = (String) repo.getOrDefault("name", "");
+                String repoDesc = (String) repo.getOrDefault("description", "");
+                String checkText = (repoName + " " + (repoDesc != null ? repoDesc : "")).toLowerCase();
+                boolean isVC = false;
+                for (String kw : VC_KEYWORDS) {
+                    if (checkText.contains(kw)) { isVC = true; break; }
+                }
+                if (isVC) { vcCount++; vcStars += stars; }
 
                 String lang = (String) repo.getOrDefault("language", "Other");
                 if (lang == null || lang.isEmpty()) lang = "Other";
@@ -177,7 +207,7 @@ public class KnowledgeGraphService {
             // 生成话题简介
             String summary = generateTopicSummary(topicName, repos);
             // 本周数据稍后由 mergeWeeklyData 填充
-            String insight = generateInsight(TOPIC_NAMES.getOrDefault(topicName, topicName), repoCount, totalStars, starsPerRepo, langDiversity, crowdedness, difficulty, beginnerRepo, topRepo, 0, 0);
+            String insight = generateInsight(TOPIC_NAMES.getOrDefault(topicName, topicName), repoCount, totalStars, starsPerRepo, langDiversity, crowdedness, difficulty, beginnerRepo, topRepo, 0, 0, vcCount, repoCount > 0 ? vcCount * 100 / repoCount : 0);
 
             Map<String, Object> metrics = new LinkedHashMap<>();
             metrics.put("crowdedness", crowdedness);
@@ -187,6 +217,9 @@ public class KnowledgeGraphService {
             metrics.put("langDiversity", langDiversity);
             metrics.put("insight", insight);
             metrics.put("summary", summary != null ? summary : "");
+            metrics.put("vcCount", vcCount);
+            metrics.put("vcStars", vcStars);
+            metrics.put("vcRatio", repoCount > 0 ? vcCount * 100 / repoCount : 0);
             node.put("metrics", metrics);
             nodes.add(node);
         }
@@ -221,10 +254,16 @@ public class KnowledgeGraphService {
 
     private String generateInsight(String name, int repoCount, long totalStars, long starsPerRepo,
                                      int langDiversity, String crowdedness, String difficulty,
-                                     String beginnerRepo, String topRepo, int weeklyRepos, long weeklyStars) {
+                                     String beginnerRepo, String topRepo, int weeklyRepos, long weeklyStars,
+                                     int vcCount, int vcRatio) {
         if (repoCount == 0) return "暂无足够数据进行分析";
         StringBuilder sb = new StringBuilder();
 
+        // Vibe Coding 关联
+        if (vcCount > 0) {
+            sb.append("【Vibe Coding】该方向 ").append(repoCount).append(" 个热门项目中，").append(vcCount)
+              .append(" 个（").append(vcRatio).append("%）与 AI 辅助编程直接相关。");
+        }
         // 本周热度
         if (weeklyRepos > 0) {
             sb.append("【本周动态】本周 ").append(weeklyRepos).append(" 个仓库有新增 stars，周增 ").append(formatK(weeklyStars)).append("⭐。");
@@ -391,8 +430,10 @@ public class KnowledgeGraphService {
             List topRepos = (List) node.get("topRepos");
             String beginnerRepo = (topRepos != null && !topRepos.isEmpty()) ? (String) ((Map) topRepos.get(topRepos.size() - 1)).get("name") : "";
             String topRepo = (topRepos != null && !topRepos.isEmpty()) ? (String) ((Map) topRepos.get(0)).get("name") : "";
+            int vcCount2 = ((Number) metrics.getOrDefault("vcCount", 0)).intValue();
+            int vcRatio2 = ((Number) metrics.getOrDefault("vcRatio", 0)).intValue();
             String insight = generateInsight(name, repoCount, totalStars, starsPerRepo,
-                    langDiversity, crowdedness, difficulty, beginnerRepo, topRepo, weeklyRepos, weeklyStars);
+                    langDiversity, crowdedness, difficulty, beginnerRepo, topRepo, weeklyRepos, weeklyStars, vcCount2, vcRatio2);
             metrics.put("insight", insight);
         }
     }
