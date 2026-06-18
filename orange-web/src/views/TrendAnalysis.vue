@@ -3,23 +3,7 @@
     <h3 style="margin:0 0 4px;font-weight:700">趋势分析</h3>
     <p style="color:#909399;font-size:13px;margin:0 0 8px">Vibe Coding 开源项目热度 · 每周更新 · AI 辅助编程趋势洞察</p>
 
-    <!-- 趋势洞察 Tab -->
-    <el-tabs v-model="mainTab" style="margin-bottom:12px">
-      <el-tab-pane label="📊 趋势洞察" name="insights">
-        <el-row :gutter="16" v-if="insights">
-          <el-col :span="6" v-for="card in insightCards" :key="card.title">
-            <el-card shadow="never" style="border-radius:10px;text-align:center">
-              <div style="font-size:13px;color:#909399;margin-bottom:8px">{{ card.title }}</div>
-              <el-tag v-for="n in card.items" :key="n" :type="card.tagType" size="small" style="margin:2px 4px">{{ n }}</el-tag>
-            </el-card>
-          </el-col>
-        </el-row>
-        <el-empty v-else description="数据加载中..." :image-size="60" />
-      </el-tab-pane>
-      <el-tab-pane label="🔗 知识图谱" name="graph" />
-    </el-tabs>
-
-    <el-row :gutter="16" v-if="mainTab==='graph' && graphLoaded">
+    <el-row :gutter="16">
       <!-- 左：图谱 -->
       <el-col :span="18">
         <el-card shadow="never" style="border-radius:12px">
@@ -62,6 +46,7 @@
                 <el-tag size="small" type="info" style="margin-left:6px">{{ selectedNode.group }}</el-tag>
               </div>
               <el-radio-group v-model="detailTab" size="small">
+                <el-radio-button value="insights">洞察</el-radio-button>
                 <el-radio-button value="metrics">分析</el-radio-button>
                 <el-radio-button value="repos">仓库</el-radio-button>
               </el-radio-group>
@@ -106,7 +91,13 @@
               </div>
             </template>
           </template>
-          <el-empty v-else description="点击图谱节点或连线查看详情" :image-size="60" />
+          <template v-if="!selectedNode && !selectedEdge">
+            <div style="font-weight:600;font-size:13px;margin-bottom:8px">📊 趋势洞察</div>
+            <div v-for="card in insightCards" :key="card.title" style="margin-bottom:10px;padding:10px;background:#faf9f7;border-radius:8px">
+              <div style="font-size:12px;color:#909399;margin-bottom:6px">{{ card.title }}</div>
+              <el-tag v-for="n in card.items" :key="n" :type="card.tagType" size="small" style="margin:2px 4px">{{ n }}</el-tag>
+            </div>
+          </template>
         </el-card>
       </el-col>
     </el-row>
@@ -132,7 +123,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
@@ -141,8 +132,6 @@ import request from '../api/request'
 const chartRef = ref(null)
 let chart = null
 const graphLoading = ref(false)
-const graphLoaded = ref(false)
-const mainTab = ref('insights')
 const viewMode = ref('week')
 const graphData = ref(null)
 const insights = ref(null)
@@ -207,7 +196,7 @@ const loadGraph = async () => {
         r.data.lastWeek.nodes.forEach(n => { map[n.id] = (n.totalStars || 0) })
         lastStars.value = map
       }
-      // 初始不渲染，等切换到图谱 Tab
+      renderChart(viewMode.value)
     }
   } catch {} finally { graphLoading.value = false }
 }
@@ -367,17 +356,4 @@ const askAI = async () => {
 
 onMounted(() => loadGraph())
 onUnmounted(() => { chart?.dispose(); chart = null })
-
-watch(mainTab, async (tab) => {
-  if (tab === 'graph') {
-    graphLoaded.value = true
-    await nextTick()
-    setTimeout(() => {
-      if (graphData.value && chartRef.value) {
-        if (chart) chart.dispose(); chart = null
-        renderChart(viewMode.value)
-      }
-    }, 100)
-  }
-})
 </script>
