@@ -1,9 +1,25 @@
 <template>
   <div>
     <h3 style="margin:0 0 4px;font-weight:700">趋势分析</h3>
-    <p style="color:#909399;font-size:13px;margin:0 0 16px">Vibe Coding 开源项目热度 · 15 个技术方向 · 每周更新</p>
+    <p style="color:#909399;font-size:13px;margin:0 0 8px">Vibe Coding 开源项目热度 · 每周更新 · AI 辅助编程趋势洞察</p>
 
-    <el-row :gutter="16">
+    <!-- 趋势洞察 Tab -->
+    <el-tabs v-model="mainTab" style="margin-bottom:12px">
+      <el-tab-pane label="📊 趋势洞察" name="insights">
+        <el-row :gutter="16" v-if="insights">
+          <el-col :span="6" v-for="card in insightCards" :key="card.title">
+            <el-card shadow="never" style="border-radius:10px;text-align:center">
+              <div style="font-size:13px;color:#909399;margin-bottom:8px">{{ card.title }}</div>
+              <el-tag v-for="n in card.items" :key="n" :type="card.tagType" size="small" style="margin:2px 4px">{{ n }}</el-tag>
+            </el-card>
+          </el-col>
+        </el-row>
+        <el-empty v-else description="数据加载中..." :image-size="60" />
+      </el-tab-pane>
+      <el-tab-pane label="🔗 知识图谱" name="graph" />
+    </el-tabs>
+
+    <el-row :gutter="16" v-show="mainTab==='graph'">
       <!-- 左：图谱 -->
       <el-col :span="16">
         <el-card shadow="never" style="border-radius:12px">
@@ -46,9 +62,22 @@
             <el-descriptions :column="1" size="small" border>
               <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
               <el-descriptions-item label="仓库数">{{ selectedNode.repoCount }}</el-descriptions-item>
+              <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
+                <el-tag :type="selectedNode.metrics.crowdedness==='蓝海'?'success':selectedNode.metrics.crowdedness==='适中'?'warning':'danger'" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
+              </el-descriptions-item>
+              <el-descriptions-item v-if="selectedNode.metrics" label="难度">
+                <el-tag :type="selectedNode.metrics.difficulty==='入门'?'success':selectedNode.metrics.difficulty==='中等'?'warning':'danger'" size="small">{{ selectedNode.metrics.difficulty }}</el-tag>
+              </el-descriptions-item>
+              <el-descriptions-item v-if="selectedNode.metrics" label="活跃度">{{ selectedNode.metrics.activity }}</el-descriptions-item>
+              <el-descriptions-item v-if="selectedNode.metrics?.opportunityScore" label="综合评分">
+                <el-progress :percentage="selectedNode.metrics.opportunityScore" :color="scoreColor(selectedNode.metrics.opportunityScore)" :stroke-width="8" />
+              </el-descriptions-item>
             </el-descriptions>
             <div v-if="selectedDelta !== null" style="margin-top:8px;font-size:13px">
               较上周: <span :style="{color:selectedDelta>=0?'#67C23A':'#F56C6C',fontWeight:700}">{{ selectedDelta >= 0 ? '↑' : '↓' }}{{ Math.abs(selectedDelta) }}%</span>
+            </div>
+            <div v-if="selectedNode.metrics?.insight" style="margin-top:8px;padding:8px;background:#f5f9ff;border-radius:6px;font-size:12px;color:#1565c0;line-height:1.6">
+              💡 {{ selectedNode.metrics.insight }}
             </div>
             <div v-if="selectedNode.topRepos?.length" style="margin-top:12px">
               <div style="font-weight:600;font-size:13px;margin-bottom:4px">🏆 Top 5 仓库</div>
@@ -88,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
@@ -97,12 +126,27 @@ import request from '../api/request'
 const chartRef = ref(null)
 let chart = null
 const graphLoading = ref(false)
+const mainTab = ref('insights')
 const viewMode = ref('week')
 const graphData = ref(null)
+const insights = ref(null)
 const selectedNode = ref(null)
 const selectedEdge = ref(null)
 const selectedDelta = ref(null)
 const lastStars = ref({})
+
+const scoreColor = (v) => v >= 70 ? '#67C23A' : v >= 45 ? '#E6A23C' : '#F56C6C'
+
+const insightCards = computed(() => {
+  if (!insights.value) return []
+  const types = [
+    { key: 'hotTop3', title: '🔥 热门方向', tagType: 'danger' },
+    { key: 'blueTop3', title: '🌊 蓝海机会', tagType: 'success' },
+    { key: 'growTop3', title: '📈 增长最快', tagType: 'warning' },
+    { key: 'oppTop3', title: '⭐ 最佳机会', tagType: '' }
+  ]
+  return types.map(t => ({ title: t.title, items: insights.value[t.key] || [], tagType: t.tagType }))
+})
 
 // AI
 const aiEndpoint = ref('https://api.openai.com/v1')
@@ -136,6 +180,7 @@ const loadGraph = async () => {
     const r = await request.get('/app/trend/graph')
     if (r.code === 1) {
       graphData.value = r.data
+      insights.value = r.data.insights || null
       // 提取上周 stars 用于计算变化
       if (r.data.lastWeek?.nodes) {
         const map = {}

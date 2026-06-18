@@ -141,17 +141,22 @@ public class TrendAnalysisService {
                 long stars = ((Number) n.get("totalStars")).longValue();
                 int repos = ((Number) n.get("repoCount")).intValue();
                 String group = (String) n.get("group");
+                Map<String, Object> metrics = (Map<String, Object>) n.get("metrics");
+                String crowdedness = metrics != null ? (String) metrics.getOrDefault("crowdedness", "") : "";
+                String difficulty = metrics != null ? (String) metrics.getOrDefault("difficulty", "") : "";
+                int score = metrics != null ? ((Number) metrics.getOrDefault("opportunityScore", 0)).intValue() : 0;
+                int growth = metrics != null ? ((Number) metrics.getOrDefault("growth", 0)).intValue() : 0;
+                String insight = metrics != null ? (String) metrics.getOrDefault("insight", "") : "";
                 Long last = lastStars.get(n.get("id"));
                 String delta = "";
                 if (last != null && last > 0) {
-                    double pct = (stars - last) * 100.0 / last;
-                    delta = String.format(" (较上周 %+.0f%%)", pct);
+                    delta = String.format(" (较上周 %+d%%)", growth);
                 } else if (last == null) {
                     delta = " (上周无数据)";
                 }
 
-                sb.append(String.format("- **%s** [%s] | ⭐ %,d | 📦 %d repos%s\n",
-                        name, group, stars, repos, delta));
+                sb.append(String.format("- **%s** [%s] | ⭐ %,d | 📦 %d repos%s | 拥挤度: %s | 难度: %s | 综合评分: %d/100\n  洞察: %s\n",
+                        name, group, stars, repos, delta, crowdedness, difficulty, score, insight));
             }
         }
 

@@ -158,6 +158,30 @@ public class KnowledgeGraphService {
             node.put("repoCount", repos.size());
             node.put("topLanguages", topLanguages);
             node.put("topRepos", topRepos);
+
+            // 指标计算
+            int repoCount = repos.size();
+            long starsPerRepo = repoCount > 0 ? totalStars / repoCount : 0;
+            int langDiversity = langCount.size();
+
+            // 拥挤度
+            String crowdedness = starsPerRepo > 10000 ? "拥挤" : starsPerRepo > 3000 ? "适中" : "蓝海";
+            // 难度（基于语言多样性和平均stars）
+            String difficulty = langDiversity > 5 ? "进阶" : langDiversity > 3 ? "中等" : "入门";
+            if (starsPerRepo > 15000) difficulty = "进阶"; // 高星项目通常更复杂
+            // 活跃度（基于最近push，快照中无此数据，用仓库数量代理）
+            String activity = repoCount > 20 ? "活跃" : repoCount > 8 ? "一般" : "冷门";
+            // 综合洞察
+            String insight = generateInsight(TOPIC_NAMES.getOrDefault(topicName, topicName), repoCount, totalStars, crowdedness, difficulty);
+
+            Map<String, Object> metrics = new LinkedHashMap<>();
+            metrics.put("crowdedness", crowdedness);
+            metrics.put("difficulty", difficulty);
+            metrics.put("activity", activity);
+            metrics.put("starsPerRepo", starsPerRepo);
+            metrics.put("langDiversity", langDiversity);
+            metrics.put("insight", insight);
+            node.put("metrics", metrics);
             nodes.add(node);
         }
 
@@ -189,6 +213,24 @@ public class KnowledgeGraphService {
         return result;
     }
 
+    private String generateInsight(String name, int repoCount, long totalStars, String crowdedness, String difficulty) {
+        if (repoCount == 0) return "暂无足够数据进行分析";
+        StringBuilder sb = new StringBuilder();
+        if ("蓝海".equals(crowdedness)) {
+            sb.append("新兴方向，竞争较少，早期进入有优势。");
+        } else if ("拥挤".equals(crowdedness)) {
+            sb.append("热度高但竞争激烈，建议寻找细分切入点。");
+        } else {
+            sb.append("发展稳定，仍有成长空间。");
+        }
+        if ("入门".equals(difficulty)) {
+            sb.append("技术门槛较低，适合新手尝试。");
+        } else if ("进阶".equals(difficulty)) {
+            sb.append("需要一定技术积累，建议先学习基础项目。");
+        }
+        return sb.toString();
+    }
+
     // ---- 本周/上周对比 ----
 
     public Map<String, Object> buildCompareGraph() {
@@ -201,10 +243,123 @@ public class KnowledgeGraphService {
         Map<String, Object> graph1 = buildGraphWithFallback(latest);
         Map<String, Object> graph2 = buildGraphWithFallback(lastWeek);
 
+        // 计算增长率和综合评分
+        addGrowthAndScores(graph1, graph2);
+
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("thisWeek", graph1);
         result.put("lastWeek", graph2);
+        result.put("insights", buildInsightsReport(graph1));
         return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void addGrowthAndScores(Map<String, Object> thisWeek, Map<String, Object> lastWeek) {
+        List<Map<String, Object>> thisNodes = (List<Map<String, Object>>) thisWeek.get("nodes");
+        List<Map<String, Object>> lastNodes = (List<Map<String, Object>>) lastWeek.get("nodes");
+        if (thisNodes == null || lastNodes == null) return;
+
+        Map<String, Long> lastStarMap = new LinkedHashMap<>();
+        for (Map<String, Object> n : lastNodes) {
+            lastStarMap.put((String) n.get("id"), ((Number) n.get("totalStars")).longValue());
+        }
+
+        // 找最大最小值用于标准化
+        long maxStars = 0, maxGrowth = 0;
+        for (Map<String, Object> n : thisNodes) {
+            long stars = ((Number) n.get("totalStars")).longValue();
+            if (stars > maxStars) maxStars = stars;
+            Long last = lastStarMap.get(n.get("id"));
+            if (last != null && last > 0) {
+                long growth = Math.abs(stars - last);
+                if (growth > maxGrowth) maxGrowth = growth;
+            }
+        }
+
+        for (Map<String, Object> n : thisNodes) {
+            long stars = ((Number) n.get("totalStars")).longValue();
+            Map<String, Object> metrics = (Map<String, Object>) n.get("metrics");
+            if (metrics == null) { metrics = new LinkedHashMap<>(); n.put("metrics", metrics); }
+
+            // 增长率
+            Long last = lastStarMap.get(n.get("id"));
+            int growthPct = 0;
+            if (last != null && last > 0) {
+                growthPct = (int) Math.round((stars - last) * 100.0 / last);
+            }
+            metrics.put("growth", growthPct);
+            n.put("growthPct", growthPct);
+
+            // 综合评分 (0-100)
+            double heatScore = maxStars > 0 ? (stars * 30.0 / maxStars) : 0;           // 热度 30%
+            double growthScore = maxGrowth > 0 ? (Math.abs(growthPct) * 25.0 / Math.max(maxGrowth / Math.max(last != null ? last : 1, 1), 1)) : 0;
+            growthScore = Math.min(25, growthPct > 0 ? growthPct * 0.5 : 0);          // 增长 25%
+            long starsPerRepo = ((Number) metrics.getOrDefault("starsPerRepo", 0L)).longValue();
+            double blueScore = starsPerRepo < 3000 ? 25 : starsPerRepo < 10000 ? 15 : 5; // 蓝海 25%
+            int langDiv = ((Number) metrics.getOrDefault("langDiversity", 0)).intValue();
+            double activeScore = langDiv > 5 ? 20 : langDiv > 3 ? 14 : 8;               // 活跃 20%
+
+            int score = (int) Math.round(heatScore + growthScore + blueScore + activeScore);
+            score = Math.min(100, Math.max(0, score));
+            metrics.put("opportunityScore", score);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> buildInsightsReport(Map<String, Object> graph) {
+        List<Map<String, Object>> nodes = (List<Map<String, Object>>) graph.get("nodes");
+        if (nodes == null) return Collections.emptyMap();
+
+        // 热门 Top3
+        List<Map<String, Object>> hot = new ArrayList<>(nodes);
+        hot.sort((a, b) -> Long.compare(
+            ((Number) b.get("totalStars")).longValue(),
+            ((Number) a.get("totalStars")).longValue()));
+        List<String> hotTop3 = hot.subList(0, Math.min(3, hot.size())).stream()
+            .map(n -> (String) n.get("name")).collect(Collectors.toList());
+
+        // 蓝海 Top3（stars/repo 最低）
+        List<Map<String, Object>> blue = new ArrayList<>(nodes);
+        blue.sort((a, b) -> {
+            Map<String, Object> ma = (Map<String, Object>) a.get("metrics");
+            Map<String, Object> mb = (Map<String, Object>) b.get("metrics");
+            long sa = ma != null ? ((Number) ma.getOrDefault("starsPerRepo", Long.MAX_VALUE)).longValue() : Long.MAX_VALUE;
+            long sb = mb != null ? ((Number) mb.getOrDefault("starsPerRepo", Long.MAX_VALUE)).longValue() : Long.MAX_VALUE;
+            return Long.compare(sa, sb);
+        });
+        List<String> blueTop3 = blue.subList(0, Math.min(3, blue.size())).stream()
+            .map(n -> (String) n.get("name")).collect(Collectors.toList());
+
+        // 增长最快 Top3
+        List<Map<String, Object>> growing = new ArrayList<>(nodes);
+        growing.sort((a, b) -> {
+            Map<String, Object> ma = (Map<String, Object>) a.get("metrics");
+            Map<String, Object> mb = (Map<String, Object>) b.get("metrics");
+            int ga = ma != null ? ((Number) ma.getOrDefault("growth", 0)).intValue() : 0;
+            int gb = mb != null ? ((Number) mb.getOrDefault("growth", 0)).intValue() : 0;
+            return Integer.compare(gb, ga);
+        });
+        List<String> growTop3 = growing.subList(0, Math.min(3, growing.size())).stream()
+            .map(n -> (String) n.get("name")).collect(Collectors.toList());
+
+        // 最佳机会 Top3（综合评分最高）
+        List<Map<String, Object>> opp = new ArrayList<>(nodes);
+        opp.sort((a, b) -> {
+            Map<String, Object> ma = (Map<String, Object>) a.get("metrics");
+            Map<String, Object> mb = (Map<String, Object>) b.get("metrics");
+            int oa = ma != null ? ((Number) ma.getOrDefault("opportunityScore", 0)).intValue() : 0;
+            int ob = mb != null ? ((Number) mb.getOrDefault("opportunityScore", 0)).intValue() : 0;
+            return Integer.compare(ob, oa);
+        });
+        List<String> oppTop3 = opp.subList(0, Math.min(3, opp.size())).stream()
+            .map(n -> (String) n.get("name")).collect(Collectors.toList());
+
+        Map<String, Object> report = new LinkedHashMap<>();
+        report.put("hotTop3", hotTop3);
+        report.put("blueTop3", blueTop3);
+        report.put("growTop3", growTop3);
+        report.put("oppTop3", oppTop3);
+        return report;
     }
 
     private Map<String, Object> buildGraphWithFallback(String date) {
