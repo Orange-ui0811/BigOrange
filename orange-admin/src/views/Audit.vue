@@ -4,6 +4,15 @@
       <el-tab-pane label="待审作品" name="works" />
       <el-tab-pane label="待审需求" name="reqs" />
     </el-tabs>
+    <!-- AI 托管控制栏 -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:10px 14px;background:#faf9f7;border-radius:8px">
+      <span style="font-size:13px;font-weight:600">🤖 AI 托管</span>
+      <el-switch v-model="aiEnabled" @change="toggleAi" size="small" />
+      <span v-if="aiEnabled" style="font-size:12px;color:#67C23A">已开启 · 新提交自动审核</span>
+      <span v-else style="font-size:12px;color:#909399">已关闭</span>
+      <el-button size="small" type="primary" @click="runAiAudit" :loading="aiRunning" style="margin-left:auto">立即审核全部待审</el-button>
+      <span v-if="aiTriggered > 0" style="font-size:12px;color:#909399">已触发 {{ aiTriggered }} 条</span>
+    </div>
     <el-table :data="list" size="small" stripe v-loading="loading" empty-text="暂无待审内容">
       <el-table-column prop="id" label="ID" width="60" />
       <el-table-column label="标题" min-width="160" show-overflow-tooltip>
@@ -47,9 +56,26 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import request from '../api/request'
 import { tradeEnabled } from '../stores/tradeMode'
+
+const aiEnabled = ref(false)
+const aiRunning = ref(false)
+const aiTriggered = ref(0)
+
+// 加载 AI 状态
+const loadAiStatus = async () => {
+  try { const r = await request.get('/admin/audit/ai-auto/status'); if (r.code === 1) aiEnabled.value = r.data.enabled } catch {}
+}
+const toggleAi = async (val) => {
+  try { const r = await request.put('/admin/audit/ai-auto/toggle'); if (r.code === 1) { aiEnabled.value = r.data.enabled; ElMessage.success(r.data.enabled ? 'AI 托管已开启' : 'AI 托管已关闭') } } catch {}
+}
+const runAiAudit = async () => {
+  aiRunning.value = true
+  try { const r = await request.post('/admin/audit/ai-auto/run'); if (r.code === 1) { aiTriggered.value = r.data.triggered; ElMessage.success('已触发 ' + r.data.triggered + ' 条AI审核'); setTimeout(() => load(), 5000) } } catch {}
+  finally { aiRunning.value = false }
+}
 
 const router = useRouter()
 const tab = ref('works')
@@ -98,5 +124,5 @@ const reject = (id) => {
 }
 
 watch(tab, load)
-onMounted(load)
+onMounted(() => { load(); loadAiStatus() })
 </script>

@@ -30,6 +30,7 @@ public class WorkServiceImpl implements WorkService {
 
     @Autowired private WorkMapper workMapper;
     @Autowired private WorkSaleOptionMapper optionMapper;
+    @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
 
     @Override
     @Transactional
@@ -103,6 +104,7 @@ public class WorkServiceImpl implements WorkService {
         if (!"DRAFT".equals(work.getAuditStatus()) && !"REJECTED".equals(work.getAuditStatus()))
             throw new BaseException(MessageConstant.WORK_SUBMIT_DENIED);
         workMapper.updateAuditStatus(id, "PENDING_REVIEW");
+        if (aiAuditService != null) aiAuditService.auditWorkAsync(id);
     }
 
     @Override

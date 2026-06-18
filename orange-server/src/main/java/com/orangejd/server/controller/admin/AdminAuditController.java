@@ -23,6 +23,36 @@ public class AdminAuditController {
     @Autowired private AuditService auditService;
     @Autowired private WorkService workService;
     @Autowired private RequirementService requirementService;
+    @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
+
+    // ---- AI 托管 ----
+
+    @GetMapping("/ai-auto/status")
+    public Result<Map<String, Object>> aiStatus() {
+        Map<String, Object> data = new java.util.LinkedHashMap<>();
+        data.put("enabled", aiAuditService != null && aiAuditService.isEnabled());
+        if (aiAuditService != null) data.put("running", aiAuditService.getRunningCount());
+        return Result.success(data);
+    }
+
+    @PutMapping("/ai-auto/toggle")
+    public Result<Map<String, Object>> aiToggle() {
+        if (aiAuditService == null) return Result.error("AI审核服务未配置");
+        boolean newState = !aiAuditService.isEnabled();
+        aiAuditService.setEnabled(newState);
+        Map<String, Object> data = new java.util.LinkedHashMap<>();
+        data.put("enabled", newState);
+        return Result.success(data);
+    }
+
+    @PostMapping("/ai-auto/run")
+    public Result<Map<String, Object>> aiRun() {
+        if (aiAuditService == null) return Result.error("AI审核服务未配置");
+        int count = aiAuditService.auditAllPending();
+        Map<String, Object> data = new java.util.LinkedHashMap<>();
+        data.put("triggered", count);
+        return Result.success(data);
+    }
 
     /** 待审作品列表 */
     @GetMapping("/works")

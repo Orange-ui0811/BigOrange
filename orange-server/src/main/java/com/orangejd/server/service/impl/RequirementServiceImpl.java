@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class RequirementServiceImpl implements RequirementService {
 
     @Autowired private RequirementMapper requirementMapper;
+    @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
 
     @Override
     public RequirementVO create(RequirementCreateDTO dto) {
@@ -74,6 +75,7 @@ public class RequirementServiceImpl implements RequirementService {
         if (!"DRAFT".equals(r.getAuditStatus()) && !"REJECTED".equals(r.getAuditStatus()))
             throw new BaseException(MessageConstant.REQ_SUBMIT_DENIED);
         requirementMapper.updateAuditStatus(id, "PENDING_REVIEW");
+        if (aiAuditService != null) aiAuditService.auditRequirementAsync(id);
     }
 
     @Override
