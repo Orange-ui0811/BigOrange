@@ -19,7 +19,7 @@
       <el-tab-pane label="🔗 知识图谱" name="graph" />
     </el-tabs>
 
-    <el-row :gutter="16" v-show="mainTab==='graph'">
+    <el-row :gutter="16" v-if="mainTab==='graph' && graphLoaded">
       <!-- 左：图谱 -->
       <el-col :span="18">
         <el-card shadow="never" style="border-radius:12px">
@@ -141,6 +141,7 @@ import request from '../api/request'
 const chartRef = ref(null)
 let chart = null
 const graphLoading = ref(false)
+const graphLoaded = ref(false)
 const mainTab = ref('insights')
 const viewMode = ref('week')
 const graphData = ref(null)
@@ -206,7 +207,7 @@ const loadGraph = async () => {
         r.data.lastWeek.nodes.forEach(n => { map[n.id] = (n.totalStars || 0) })
         lastStars.value = map
       }
-      renderChart(viewMode.value)
+      // 初始不渲染，等切换到图谱 Tab
     }
   } catch {} finally { graphLoading.value = false }
 }
@@ -367,8 +368,14 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 
 watch(mainTab, async (tab) => {
   if (tab === 'graph') {
+    graphLoaded.value = true
     await nextTick()
-    if (graphData.value) renderChart(viewMode.value)
+    setTimeout(() => {
+      if (graphData.value && chartRef.value) {
+        if (chart) chart.dispose(); chart = null
+        renderChart(viewMode.value)
+      }
+    }, 100)
   }
 })
 </script>
