@@ -117,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
@@ -344,4 +344,11 @@ const askAI = async () => {
 
 onMounted(() => loadGraph())
 onUnmounted(() => { chart?.dispose(); chart = null })
+
+watch(mainTab, async (tab) => {
+  if (tab === 'graph') {
+    await nextTick()
+    if (graphData.value) renderChart(viewMode.value)
+  }
+})
 </script>
