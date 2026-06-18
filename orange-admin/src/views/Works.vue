@@ -29,7 +29,7 @@
     <el-dialog v-model="detailVisible" title="内容详情" width="600px" top="5vh">
       <div style="max-height:60vh;overflow:auto;line-height:1.8">
         <p><b>标题：</b>{{ detail.title }}</p><p><b>状态：</b>{{ detail.auditStatus }}</p>
-        <p><b>简介：</b>{{ detail.summary || '无' }}</p><p><b>详情：</b>{{ detail.detail || '无' }}</p>
+        <p><b>简介：</b>{{ detail.summary || '无' }}</p><div v-html="'<b>详情：</b>' + (detail.detail || '无')"></div>
         <p><b>时间：</b>{{ detail.createTime }}</p>
       </div>
     </el-dialog>

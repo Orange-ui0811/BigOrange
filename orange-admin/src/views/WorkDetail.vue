@@ -16,7 +16,7 @@
         <el-descriptions-item label="时间">{{ detail.createTime }}</el-descriptions-item>
         <el-descriptions-item label="简介" :span="2">{{ detail.summary || '无' }}</el-descriptions-item>
         <el-descriptions-item label="详情" :span="2">
-          <div style="white-space:pre-wrap;line-height:1.8;max-height:400px;overflow:auto">{{ detail.detail || '无' }}</div>
+          <div style="line-height:1.8;max-height:400px;overflow:auto" v-html="detail.detail || '无'"></div>
         </el-descriptions-item>
         <el-descriptions-item v-if="detail.demoUrl" label="演示链接" :span="2">
           <a :href="detail.demoUrl" target="_blank" style="color:#409EFF">{{ detail.demoUrl }}</a>

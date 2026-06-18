@@ -158,7 +158,8 @@ public class AiAuditService {
             "请审核以下内容：\n\n标题：%s\n简介：%s\n详情：%s\n分类：%s\n演示链接：%s\n提交者：%s",
             title, summary, detail, categoryName, demoUrl, authorName);
 
-        AuditResult result = callAi(userPrompt, coverUrl);
+        List<String> detailImages = extractImageUrls(detail);
+        AuditResult result = callAi(userPrompt, coverUrl, detailImages);
         applyResult("WORK", workId, work.getOwnerId(), title, authorName, result);
     }
 
@@ -182,14 +183,29 @@ public class AiAuditService {
             "请审核以下内容：\n\n标题：%s\n详情：%s\n分类：%s\n提交者：%s",
             title, detail, categoryName, authorName);
 
-        AuditResult result = callAi(userPrompt, null); // 需求没有封面图
+        List<String> detailImages = extractImageUrls(detail);
+        AuditResult result = callAi(userPrompt, null, detailImages);
         applyResult("REQUIREMENT", reqId, req.getPublisherId(), title, authorName, result);
+    }
+
+    /** 从 HTML 详情中提取图片 URL */
+    private List<String> extractImageUrls(String html) {
+        List<String> urls = new ArrayList<>();
+        if (html == null) return urls;
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("<img[^>]+src=[\"']([^\"']+)[\"']", java.util.regex.Pattern.CASE_INSENSITIVE)
+            .matcher(html);
+        while (m.find()) {
+            String url = m.group(1);
+            if (url.startsWith("/")) urls.add(buildPublicUrl(url));
+            else if (url.startsWith("http")) urls.add(url);
+        }
+        return urls;
     }
 
     // ---- AI 调用 ----
 
     @SuppressWarnings("unchecked")
-    private AuditResult callAi(String userPrompt, String imageUrl) {
+    private AuditResult callAi(String userPrompt, String coverUrl, List<String> detailImageUrls) {
         // 组装请求
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("model", model);
@@ -205,19 +221,28 @@ public class AiAuditService {
         Map<String, Object> userMsg = new LinkedHashMap<>();
         userMsg.put("role", "user");
 
-        if (imageUrl != null && !imageUrl.isEmpty()) {
+        // 收集所有图片 URL（封面 + 详情内嵌）
+        List<String> allImages = new ArrayList<>();
+        if (coverUrl != null && !coverUrl.isEmpty()) allImages.add(coverUrl);
+        if (detailImageUrls != null) allImages.addAll(detailImageUrls);
+        // 去重并限制最多 5 张
+        allImages = allImages.stream().distinct().limit(5).collect(java.util.stream.Collectors.toList());
+
+        if (!allImages.isEmpty()) {
             List<Map<String, Object>> content = new ArrayList<>();
             Map<String, Object> textPart = new LinkedHashMap<>();
             textPart.put("type", "text");
             textPart.put("text", userPrompt);
             content.add(textPart);
 
-            Map<String, Object> imgPart = new LinkedHashMap<>();
-            imgPart.put("type", "image_url");
-            Map<String, String> imgUrlMap = new LinkedHashMap<>();
-            imgUrlMap.put("url", imageUrl);
-            imgPart.put("image_url", imgUrlMap);
-            content.add(imgPart);
+            for (String imgUrl : allImages) {
+                Map<String, Object> imgPart = new LinkedHashMap<>();
+                imgPart.put("type", "image_url");
+                Map<String, String> imgUrlMap = new LinkedHashMap<>();
+                imgUrlMap.put("url", imgUrl);
+                imgPart.put("image_url", imgUrlMap);
+                content.add(imgPart);
+            }
 
             userMsg.put("content", content);
         } else {
@@ -238,7 +263,7 @@ public class AiAuditService {
         } catch (Exception e) {
             String errMsg = e.getMessage() != null ? e.getMessage() : "";
             // 图片相关错误 → 降级重试
-            if (imageUrl != null && !imageUrl.isEmpty() &&
+            if (!allImages.isEmpty() &&
                 (errMsg.contains("image") || errMsg.contains("图片") || errMsg.contains("invalid_image"))) {
                 log.warn("AI图片审核失败，降级文本审核: {}", errMsg);
                 try {

@@ -3,7 +3,7 @@
     <el-card v-if="req" shadow="never" style="border-radius:12px">
       <h2 style="margin:0 0 8px">{{req.title}}</h2>
       <p style="color:#909399;margin:0 0 8px">by {{req.publisherName||'#'+req.publisherId}} · {{req.auditStatus}} · {{req.createTime}}</p>
-      <p style="color:#6b6b6b;line-height:1.8;white-space:pre-wrap">{{req.detail||'暂无详情'}}</p>
+      <div style="color:#6b6b6b;line-height:1.8" v-html="req.detail||'暂无详情'"></div>
       <div v-if="req.budgetMin||req.budgetMax" style="margin-top:8px"><el-tag type="warning">预算 ¥{{req.budgetMin}}-{{req.budgetMax}}</el-tag></div>
       <div style="margin-top:16px"><el-button type="primary" :loading="contacting" @click="contactPublisher" style="background:#e65100;border-color:#e65100">联系发布者</el-button></div>
     </el-card>

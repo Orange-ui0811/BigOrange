@@ -42,7 +42,7 @@
           <a :href="detail.demoUrl" target="_blank" style="color:#e65100;font-weight:600">{{ detail.demoUrl }}</a>
         </el-alert>
         <p v-if="detail.summary" style="color:#6b6b6b;white-space:pre-wrap">{{ detail.summary }}</p>
-        <p v-if="detail.detail" style="color:#2c2c2c;white-space:pre-wrap">{{ detail.detail }}</p>
+        <div v-if="detail.detail" style="color:#2c2c2c;max-height:50vh;overflow:auto" v-html="detail.detail"></div>
         <div v-if="tradeEnabled && detail.saleOptions?.length" style="margin-top:12px;padding-top:12px;border-top:1px solid #eee">
           <b>售卖项：</b>
           <el-tag v-for="so in detail.saleOptions" :key="so.id" type="warning" style="margin:4px 8px 4px 0">¥{{ so.price }} {{ so.saleType }}</el-tag>
