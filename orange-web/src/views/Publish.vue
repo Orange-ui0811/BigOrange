@@ -92,7 +92,8 @@ const uploadHeaders = { 'App-Token': sessionStorage.getItem('appToken') || '' }
 const onCoverSuccess = (res) => { if (res.code === 1) form.coverUrl = res.data }
 const onDetailImage = (res) => {
   if (res.code === 1 && res.data) {
-    form.detail = (form.detail || '') + '<img src="' + res.data + '" style="max-width:100%">\n'
+    const url = res.data.startsWith('http') ? res.data : API + res.data
+    form.detail = (form.detail || '') + '<img src="' + url + '" style="max-width:100%">\n'
   }
 }
 
