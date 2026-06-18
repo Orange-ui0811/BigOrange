@@ -108,6 +108,19 @@ public class AiAuditService {
 
     public int getRunningCount() { return runningCount; }
 
+    /** 测试大模型连接 */
+    public String testConnection() {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("model", model);
+        body.put("max_tokens", 10);
+        List<Map<String, String>> messages = new ArrayList<>();
+        Map<String, String> m = new LinkedHashMap<>();
+        m.put("role", "user"); m.put("content", "回复OK");
+        messages.add(m);
+        body.put("messages", messages);
+        return postAi(body);
+    }
+
     // ---- 核心审核逻辑 ----
 
     private void auditWork(Long workId) {

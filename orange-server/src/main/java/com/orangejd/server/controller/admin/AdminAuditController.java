@@ -45,6 +45,24 @@ public class AdminAuditController {
         return Result.success(data);
     }
 
+    @PostMapping("/ai-auto/test")
+    public Result<Map<String, Object>> aiTest() {
+        if (aiAuditService == null) return Result.error("AI审核服务未配置");
+        Map<String, Object> data = new java.util.LinkedHashMap<>();
+        try {
+            long start = System.currentTimeMillis();
+            String result = aiAuditService.testConnection();
+            long elapsed = System.currentTimeMillis() - start;
+            data.put("connected", true);
+            data.put("elapsed", elapsed);
+            data.put("detail", result);
+        } catch (Exception e) {
+            data.put("connected", false);
+            data.put("error", e.getMessage() != null ? e.getMessage().substring(0, Math.min(80, e.getMessage().length())) : "未知错误");
+        }
+        return Result.success(data);
+    }
+
     @PostMapping("/ai-auto/run")
     public Result<Map<String, Object>> aiRun() {
         if (aiAuditService == null) return Result.error("AI审核服务未配置");

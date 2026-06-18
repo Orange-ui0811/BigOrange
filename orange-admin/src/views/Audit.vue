@@ -10,6 +10,9 @@
       <el-switch v-model="aiEnabled" @change="toggleAi" size="small" />
       <span v-if="aiEnabled" style="font-size:12px;color:#67C23A">已开启 · 新提交自动审核</span>
       <span v-else style="font-size:12px;color:#909399">已关闭</span>
+      <el-button size="small" @click="testAiConnect" :loading="aiTesting">测试连接</el-button>
+      <el-tag v-if="aiConnected===true" type="success" size="small">已连接</el-tag>
+      <el-tag v-else-if="aiConnected===false" type="danger" size="small">未连接</el-tag>
       <el-button size="small" type="primary" @click="runAiAudit" :loading="aiRunning" style="margin-left:auto">立即审核全部待审</el-button>
       <span v-if="aiTriggered > 0" style="font-size:12px;color:#909399">已触发 {{ aiTriggered }} 条</span>
     </div>
@@ -63,6 +66,23 @@ import { tradeEnabled } from '../stores/tradeMode'
 const aiEnabled = ref(false)
 const aiRunning = ref(false)
 const aiTriggered = ref(0)
+const aiConnected = ref(null)
+const aiTesting = ref(false)
+
+const testAiConnect = async () => {
+  aiTesting.value = true; aiConnected.value = null
+  try {
+    const r = await request.post('/admin/audit/ai-auto/test')
+    if (r.code === 1 && r.data.connected) {
+      aiConnected.value = true
+      ElMessage.success('连接成功！耗时 ' + r.data.elapsed + 'ms')
+    } else {
+      aiConnected.value = false
+      ElMessage.error(r.data?.error || '连接失败')
+    }
+  } catch { aiConnected.value = false; ElMessage.error('请求失败') }
+  finally { aiTesting.value = false }
+}
 
 // 加载 AI 状态
 const loadAiStatus = async () => {
