@@ -49,7 +49,15 @@
       </el-form-item>
       <el-form-item label="标题" required><el-input v-model="form.title" placeholder="一句话描述你的作品/需求" /></el-form-item>
       <el-form-item label="简介"><el-input v-model="form.summary" type="textarea" :rows="2" placeholder="简短介绍" /></el-form-item>
-      <el-form-item label="详情"><el-input v-model="form.detail" type="textarea" :rows="4" placeholder="详细描述" /></el-form-item>
+      <el-form-item label="详情">
+        <div style="margin-bottom:4px">
+          <el-upload :action="API+'/app/common/upload?dir=detail'" :headers="uploadHeaders" :on-success="onDetailImage" :show-file-list="false" accept="image/*" multiple>
+            <el-button size="small">📷 插入图片</el-button>
+          </el-upload>
+          <span style="font-size:11px;color:#909399;margin-left:6px">支持 HTML：&lt;img src=&quot;...&quot;&gt; 插入图片</span>
+        </div>
+        <el-input v-model="form.detail" type="textarea" :rows="6" placeholder="详细描述（支持HTML富文本）" />
+      </el-form-item>
       <el-form-item label="分类"><el-select v-model="form.categoryId" placeholder="选择分类" clearable><el-option v-for="c in cats" :key="c.id" :label="c.name" :value="c.id" /></el-select></el-form-item>
       <template v-if="tab==='work' && tradeEnabled">
         <el-form-item label="售卖价格"><el-input v-model="form.price" type="number" placeholder="¥ 留空则面议" /></el-form-item>
@@ -82,6 +90,11 @@ const loading = ref(false)
 const form = reactive({ title: '', summary: '', detail: '', categoryId: null, price: '', budgetMin: '', budgetMax: '', coverUrl: '', demoUrl: '' })
 const uploadHeaders = { 'App-Token': sessionStorage.getItem('appToken') || '' }
 const onCoverSuccess = (res) => { if (res.code === 1) form.coverUrl = res.data }
+const onDetailImage = (res) => {
+  if (res.code === 1 && res.data) {
+    form.detail = (form.detail || '') + '<img src="' + res.data + '" style="max-width:100%">\n'
+  }
+}
 
 const loadCats = async () => {
   try { const res = await request.get('/app/category?type=' + (tab.value==='work'?'WORK':'REQUIREMENT')); if (res.code===1) cats.value = res.data } catch {}
