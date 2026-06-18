@@ -21,7 +21,7 @@
 
     <el-row :gutter="16" v-show="mainTab==='graph'">
       <!-- 左：图谱 -->
-      <el-col :span="16">
+      <el-col :span="18">
         <el-card shadow="never" style="border-radius:12px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
             <div>
@@ -40,7 +40,7 @@
       </el-col>
 
       <!-- 右：节点详情 -->
-      <el-col :span="8">
+      <el-col :span="6">
         <el-card shadow="never" style="border-radius:12px;height:556px;overflow:auto">
           <template v-if="selectedEdge">
             <h4 style="margin:0 0 4px">Topic 关联</h4>
@@ -48,50 +48,65 @@
             <span style="color:#909399">↔</span>
             <el-tag size="small" type="info" style="margin-left:6px">{{ selectedEdge.targetName }}</el-tag>
             <el-divider style="margin:12px 0" />
-            <p style="font-size:13px;color:#606266">这两个方向共享 <b>{{ selectedEdge.weight }}</b> 种编程语言，技术栈高度重合，技能可迁移。</p>
+            <p style="font-size:13px;color:#606266">这两个方向共享 <b>{{ selectedEdge.weight }}</b> 种编程语言，技能可迁移。</p>
             <div v-if="selectedEdge.sharedLangs?.length" style="margin-top:8px">
               <div style="font-weight:600;font-size:13px;margin-bottom:4px">共享语言</div>
               <el-tag v-for="l in selectedEdge.sharedLangs" :key="l" size="small" type="success" style="margin:2px 4px 2px 0">{{ l }}</el-tag>
             </div>
-            <el-button size="small" type="primary" style="margin-top:12px" @click="compareTopics(selectedEdge)">对比两个方向</el-button>
+            <el-button size="small" type="primary" style="margin-top:12px" @click="compareTopics(selectedEdge)">AI 对比分析</el-button>
           </template>
           <template v-if="selectedNode">
-            <h4 style="margin:0 0 4px">{{ selectedNode.name }}</h4>
-            <el-tag size="small" type="info">{{ selectedNode.group }}</el-tag>
-            <el-divider style="margin:12px 0" />
-            <el-descriptions :column="1" size="small" border>
-              <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
-              <el-descriptions-item label="仓库数">{{ selectedNode.repoCount }}</el-descriptions-item>
-              <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
-                <el-tag :type="selectedNode.metrics.crowdedness==='蓝海'?'success':selectedNode.metrics.crowdedness==='适中'?'warning':'danger'" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
-              </el-descriptions-item>
-              <el-descriptions-item v-if="selectedNode.metrics" label="难度">
-                <el-tag :type="selectedNode.metrics.difficulty==='入门'?'success':selectedNode.metrics.difficulty==='中等'?'warning':'danger'" size="small">{{ selectedNode.metrics.difficulty }}</el-tag>
-              </el-descriptions-item>
-              <el-descriptions-item v-if="selectedNode.metrics" label="活跃度">{{ selectedNode.metrics.activity }}</el-descriptions-item>
-              <el-descriptions-item v-if="selectedNode.metrics?.opportunityScore" label="综合评分">
-                <el-progress :percentage="selectedNode.metrics.opportunityScore" :color="scoreColor(selectedNode.metrics.opportunityScore)" :stroke-width="8" />
-              </el-descriptions-item>
-            </el-descriptions>
-            <div v-if="selectedDelta !== null" style="margin-top:8px;font-size:13px">
-              较上周: <span :style="{color:selectedDelta>=0?'#67C23A':'#F56C6C',fontWeight:700}">{{ selectedDelta >= 0 ? '↑' : '↓' }}{{ Math.abs(selectedDelta) }}%</span>
-            </div>
-            <div v-if="selectedNode.metrics?.insight" style="margin-top:8px;padding:8px;background:#f5f9ff;border-radius:6px;font-size:12px;color:#1565c0;line-height:1.6">
-              💡 {{ selectedNode.metrics.insight }}
-            </div>
-            <div v-if="selectedNode.topRepos?.length" style="margin-top:12px">
-              <div style="font-weight:600;font-size:13px;margin-bottom:4px">🏆 Top 5 仓库</div>
-              <div v-for="r in selectedNode.topRepos" :key="r.name" style="padding:6px 0;border-bottom:1px solid #f5f2ee;font-size:12px">
-                <a :href="r.htmlUrl" target="_blank" style="color:#409EFF;font-weight:500">{{ r.name }}</a>
-                <span style="color:#e65100;float:right">⭐{{ formatNum(r.stars) }}</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+              <div>
+                <span style="font-weight:600">{{ selectedNode.name }}</span>
+                <el-tag size="small" type="info" style="margin-left:6px">{{ selectedNode.group }}</el-tag>
               </div>
+              <el-radio-group v-model="detailTab" size="small">
+                <el-radio-button value="metrics">分析</el-radio-button>
+                <el-radio-button value="repos">仓库</el-radio-button>
+              </el-radio-group>
             </div>
-            <div v-if="selectedNode.topLanguages?.length" style="margin-top:12px">
-              <div style="font-weight:600;font-size:13px;margin-bottom:4px">主要语言</div>
-              <el-tag v-for="l in selectedNode.topLanguages" :key="l.name" size="small" style="margin:2px 4px 2px 0">{{ l.name }} ({{ l.count }})</el-tag>
-            </div>
+            <el-divider style="margin:8px 0" />
+            <!-- 分析视图 -->
+            <template v-if="detailTab==='metrics'">
+              <el-descriptions :column="1" size="small" border>
+                <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
+                <el-descriptions-item label="仓库数">{{ selectedNode.repoCount }}</el-descriptions-item>
+                <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
+                  <el-tag :type="crowdType(selectedNode.metrics.crowdedness)" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
+                </el-descriptions-item>
+                <el-descriptions-item v-if="selectedNode.metrics" label="难度">
+                  <el-tag :type="diffType(selectedNode.metrics.difficulty)" size="small">{{ selectedNode.metrics.difficulty }}</el-tag>
+                </el-descriptions-item>
+                <el-descriptions-item v-if="selectedNode.metrics" label="活跃度">{{ selectedNode.metrics.activity }}</el-descriptions-item>
+                <el-descriptions-item v-if="selectedNode.metrics?.opportunityScore" label="综合评分">
+                  <el-progress :percentage="selectedNode.metrics.opportunityScore" :color="scoreColor(selectedNode.metrics.opportunityScore)" :stroke-width="6" />
+                </el-descriptions-item>
+              </el-descriptions>
+              <div v-if="selectedDelta !== null" style="margin-top:8px;font-size:13px">
+                较上周: <span :style="{color:selectedDelta>=0?'#67C23A':'#F56C6C',fontWeight:700}">{{ selectedDelta >= 0 ? '↑' : '↓' }}{{ Math.abs(selectedDelta) }}%</span>
+              </div>
+              <div v-if="selectedNode.metrics?.insight" style="margin-top:8px;padding:8px;background:#f5f9ff;border-radius:6px;font-size:12px;color:#1565c0;line-height:1.6">
+                💡 {{ selectedNode.metrics.insight }}
+              </div>
+            </template>
+            <!-- 仓库视图 -->
+            <template v-if="detailTab==='repos'">
+              <div v-if="selectedNode.topRepos?.length">
+                <div style="font-weight:600;font-size:12px;margin-bottom:6px">🏆 Top 5 仓库</div>
+                <div v-for="r in selectedNode.topRepos" :key="r.name" style="padding:6px 0;border-bottom:1px solid #f5f2ee;font-size:12px">
+                  <a :href="r.htmlUrl" target="_blank" style="color:#409EFF;font-weight:500">{{ r.name }}</a>
+                  <span style="color:#e65100;float:right">⭐{{ formatNum(r.stars) }}</span>
+                  <div style="font-size:11px;color:#909399;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.description || '' }}</div>
+                </div>
+              </div>
+              <div v-if="selectedNode.topLanguages?.length" style="margin-top:12px">
+                <div style="font-weight:600;font-size:12px;margin-bottom:4px">主要语言</div>
+                <el-tag v-for="l in selectedNode.topLanguages" :key="l.name" size="small" style="margin:2px 4px 2px 0">{{ l.name }} ({{ l.count }})</el-tag>
+              </div>
+            </template>
           </template>
-          <el-empty v-else description="点击图谱节点查看详情" :image-size="80" />
+          <el-empty v-else description="点击图谱节点或连线查看详情" :image-size="60" />
         </el-card>
       </el-col>
     </el-row>
@@ -133,7 +148,11 @@ const insights = ref(null)
 const selectedNode = ref(null)
 const selectedEdge = ref(null)
 const selectedDelta = ref(null)
+const detailTab = ref('metrics')
 const lastStars = ref({})
+
+const crowdType = (v) => v === '蓝海' ? 'success' : v === '适中' ? 'warning' : 'danger'
+const diffType = (v) => v === '入门' ? 'success' : v === '中等' ? 'warning' : 'danger'
 
 const scoreColor = (v) => v >= 70 ? '#67C23A' : v >= 45 ? '#E6A23C' : '#F56C6C'
 
@@ -251,6 +270,7 @@ const renderChart = (mode) => {
     if (p.dataType === 'node') {
       selectedNode.value = p.data
       selectedEdge.value = null
+      detailTab.value = 'metrics'
       const last = lastStars.value[p.data.id]
       if (last && last > 0) {
         selectedDelta.value = Math.round((p.data.totalStars - last) * 100 / last)
