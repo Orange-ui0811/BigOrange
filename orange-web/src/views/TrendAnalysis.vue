@@ -172,9 +172,15 @@
               <el-tag :type="r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger'" size="small">难度: {{ r.difficulty }}</el-tag>
               <el-progress :percentage="r.score" :color="scoreColor(r.score)" :stroke-width="6" style="margin-top:8px" />
               <div style="font-size:12px;margin-top:8px;line-height:1.6">
+                <p v-if="r.vibeCodingReason"><b>🤖 Vibe Coding：</b>{{ r.vibeCodingReason }}</p>
                 <p><b>推荐理由：</b>{{ r.recommendReason }}</p>
                 <p><b>前置知识：</b>{{ r.prerequisites }}</p>
-                <p v-if="r.references?.length"><b>参考项目：</b>{{ r.references.join('、') }}</p>
+                <p v-if="r.references?.length">
+                  <b>参考项目：</b>
+                  <span v-for="(ref,j) in r.references" :key="j">
+                    <a :href="ref.url" target="_blank" style="color:#409EFF">{{ ref.name }}</a><span v-if="j < r.references.length-1">、</span>
+                  </span>
+                </p>
               </div>
             </el-card>
           </el-col>

@@ -178,7 +178,9 @@ public class TrendAnalysisService {
     // ==================== V2: 四维画像分析 ====================
 
     private static final String SYSTEM_PROMPT_V2 =
-        "你是开源项目推荐专家。基于用户画像和 GitHub 真实数据，给出详细个人化项目推荐。\n\n" +
+        "你是 Vibe Coding（AI 辅助编程）项目推荐专家。Vibe Coding 指利用 AI（如 Claude、Cursor、Copilot、ChatGPT 等）辅助编写代码的新型开发方式。" +
+        "你的任务是推荐适合通过 Vibe Coding 方式参与或学习的开源项目。" +
+        "基于用户画像和 GitHub 真实数据，给出详细个人化 Vibe Coding 项目推荐。\n\n" +
         "输出严格 JSON（不要 markdown 代码块，不要额外文字）：\n" +
         "{\n" +
         "  \"analysis\": {\n" +
@@ -192,9 +194,10 @@ public class TrendAnalysisService {
         "    \"description\": \"详细介绍这个项目是什么、解决什么问题、核心功能（80字以上）\",\n" +
         "    \"difficulty\": \"入门/中等/进阶\",\n" +
         "    \"difficultyReason\": \"为什么是这个难度（结合用户的技术基础分析）\",\n" +
-        "    \"recommendReason\": \"结合用户的方向选择、目的、技术基础、时间投入，详细说明为什么推荐（60字以上）\",\n" +
+        "    \"vibeCodingReason\": \"为什么这个项目适合 Vibe Coding（AI 辅助编程方式参与）\",\n" +
+        "    \"recommendReason\": \"结合用户画像，详细说明推荐原因（60字以上）\",\n" +
         "    \"prerequisites\": \"学习该项目需要的前置知识和技能\",\n" +
-        "    \"references\": [\"参考开源项目名1\", \"参考开源项目名2\"],\n" +
+        "    \"references\": [{\"name\": \"项目名\", \"url\": \"https://github.com/xxx\"}],\n" +
         "    \"score\": 85\n" +
         "  }],\n" +
         "  \"learning\": {\n" +
@@ -330,16 +333,22 @@ public class TrendAnalysisService {
                     rec.put("description", regexExtract(obj, "\"description\"\\s*:\\s*\"([^\"]+)\""));
                     rec.put("difficulty", regexExtract(obj, "\"difficulty\"\\s*:\\s*\"([^\"]+)\""));
                     rec.put("difficultyReason", regexExtract(obj, "\"difficultyReason\"\\s*:\\s*\"([^\"]+)\""));
+                    rec.put("vibeCodingReason", regexExtract(obj, "\"vibeCodingReason\"\\s*:\\s*\"([^\"]+)\""));
                     rec.put("recommendReason", regexExtract(obj, "\"recommendReason\"\\s*:\\s*\"([^\"]+)\""));
                     rec.put("prerequisites", regexExtract(obj, "\"prerequisites\"\\s*:\\s*\"([^\"]+)\""));
                     String scoreStr = regexExtract(obj, "\"score\"\\s*:\\s*(\\d+)");
                     rec.put("score", scoreStr != null ? Integer.parseInt(scoreStr) : 0);
-                    // references 数组
+                    // references 数组（对象格式：{name, url}）
                     String refsStr = regexExtract(obj, "\"references\"\\s*:\\s*\\[(.+?)\\]");
                     if (refsStr != null) {
-                        List<String> refs = new ArrayList<>();
-                        java.util.regex.Matcher rm = java.util.regex.Pattern.compile("\"([^\"]+)\"").matcher(refsStr);
-                        while (rm.find()) refs.add(rm.group(1));
+                        List<Map<String, String>> refs = new ArrayList<>();
+                        java.util.regex.Matcher rm = java.util.regex.Pattern.compile("\\{\"name\"\\s*:\\s*\"([^\"]+)\"\\s*,\\s*\"url\"\\s*:\\s*\"([^\"]+)\"\\}").matcher(refsStr);
+                        while (rm.find()) {
+                            Map<String, String> ref = new LinkedHashMap<>();
+                            ref.put("name", rm.group(1));
+                            ref.put("url", rm.group(2));
+                            refs.add(ref);
+                        }
                         rec.put("references", refs);
                     }
                     if (rec.get("name") != null) recs.add(rec);
