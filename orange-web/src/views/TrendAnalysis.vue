@@ -111,62 +111,83 @@
 
     <!-- 🍊 橙子智能分析面板 -->
     <div style="margin-top:16px">
-      <!-- 表单卡片 -->
-      <div style="background:#fff;border-radius:20px;padding:28px 24px;box-shadow:0 2px 16px rgba(230,81,0,.08);border-left:4px solid #e65100">
-        <div style="display:flex;align-items:center;margin-bottom:20px">
-          <span class="orange-icon" style="font-size:28px;margin-right:10px" />
-          <div>
-            <div style="font-weight:700;font-size:16px;color:#5d4037">桔子 · 智能分析</div>
-            <div style="font-size:12px;color:#bcaaa4">告诉我你的想法，帮你找到最合适的开源项目</div>
+      <!-- 步骤式表单卡片 -->
+      <div class="orange-form-card">
+        <!-- 步骤指示器 -->
+        <div class="steps-bar">
+          <div class="steps-track">
+            <div v-for="(s,i) in formSteps" :key="i" class="step-item" :class="{ active: i === currentStep, done: i < currentStep }" @click="i < currentStep && (currentStep = i)">
+              <div class="step-circle">{{ i < currentStep ? '✓' : s.icon }}</div>
+              <div class="step-label">{{ s.label }}</div>
+            </div>
           </div>
         </div>
 
-        <!-- 四维表单 - 气泡式 -->
-        <el-row :gutter="16">
-          <el-col :span="6">
-            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">🎯 方向</div>
-            <el-select v-model="profile.topics" multiple placeholder="选择方向" size="default" style="width:100%" collapse-tags>
-              <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
-            </el-select>
-            <el-input v-model="profile.customTopics" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
-          </el-col>
-          <el-col :span="5">
-            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">💡 目的</div>
-            <el-select v-model="profile.purpose" placeholder="为什么学" size="default" style="width:100%">
-              <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
-            </el-select>
-            <el-input v-model="profile.customPurpose" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
-          </el-col>
-          <el-col :span="7">
-            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">📚 基础</div>
-            <el-select v-model="profile.experience" placeholder="经验" size="default" style="width:100%">
-              <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
-            </el-select>
-            <el-select v-model="profile.languages" multiple placeholder="语言" size="default" style="width:100%;margin-top:6px" collapse-tags>
-              <el-option v-for="t in langOptions" :key="t" :label="t" :value="t" />
-            </el-select>
-            <el-input v-model="profile.customLang" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
-          </el-col>
-          <el-col :span="6">
-            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">⏰ 时间</div>
-            <el-select v-model="profile.timeCommitment" placeholder="投入时间" size="default" style="width:100%">
-              <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
-            </el-select>
-            <el-input v-model="profile.customTime" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
-            <button class="orange-btn" @click="analyzeV2" :disabled="analyzing" style="width:100%;margin-top:12px">
-              <span v-if="!analyzing">🍊 帮我分析</span>
-              <span v-else class="squeezing">🍊 榨汁中...</span>
-            </button>
-          </el-col>
-        </el-row>
+        <!-- 单张卡片 - 带滚动橙子动画 -->
+        <div class="step-card-wrapper" :key="currentStep">
+          <div class="step-card animate-in">
+            <div class="card-bg-orange" />
+            <!-- 步骤1: 方向 -->
+            <template v-if="currentStep === 0">
+              <div class="step-title">🎯 你对哪个技术方向感兴趣？</div>
+              <el-select v-model="profile.topics" multiple placeholder="选择方向（可多选）" size="large" style="width:100%">
+                <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
+              </el-select>
+              <el-input v-model="profile.customTopics" placeholder="或输入自定义方向..." style="margin-top:12px" maxlength="200" />
+            </template>
+            <!-- 步骤2: 目的 -->
+            <template v-if="currentStep === 1">
+              <div class="step-title">💡 为什么要学 Vibe Coding？</div>
+              <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" style="width:100%">
+                <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
+              </el-select>
+              <el-input v-model="profile.customPurpose" placeholder="或输入自定义目的..." style="margin-top:12px" maxlength="200" />
+            </template>
+            <!-- 步骤3: 基础 -->
+            <template v-if="currentStep === 2">
+              <div class="step-title">📚 你的编程基础怎么样？</div>
+              <el-select v-model="profile.experience" placeholder="编程经验" size="large" style="width:100%">
+                <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
+              </el-select>
+              <el-select v-model="profile.languages" multiple placeholder="掌握的语言（可多选）" size="large" style="width:100%;margin-top:12px">
+                <el-option v-for="t in langOptions" :key="t" :label="t" :value="t" />
+              </el-select>
+              <el-input v-model="profile.customLang" placeholder="或输入自定义..." style="margin-top:12px" maxlength="200" />
+            </template>
+            <!-- 步骤4: 时间 -->
+            <template v-if="currentStep === 3">
+              <div class="step-title">⏰ 你每周能投入多少时间？</div>
+              <el-select v-model="profile.timeCommitment" placeholder="选择时间投入" size="large" style="width:100%">
+                <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
+              </el-select>
+              <el-input v-model="profile.customTime" placeholder="或输入自定义..." style="margin-top:12px" maxlength="200" />
+            </template>
+          </div>
+        </div>
 
+        <!-- 底部按钮 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+          <button v-if="currentStep > 0" class="nav-btn prev" @click="currentStep--">← 上一步</button>
+          <div v-else />
+          <button v-if="currentStep < 3" class="orange-btn" @click="currentStep++">下一步 →</button>
+          <button v-else class="orange-btn squeeze-btn" @click="startJuicing" :disabled="analyzing">
+            <span v-if="!analyzing">🍊 开始榨汁分析</span>
+            <span v-else class="squeezing">🍊🍊🍊🍊 榨汁中...</span>
+          </button>
+        </div>
         <div v-if="v2Error" style="color:#e65100;font-size:13px;margin-top:10px;padding:8px;background:#fff3e0;border-radius:8px">{{ v2Error }}</div>
       </div>
 
-      <!-- 加载中 -->
-      <div v-if="analyzing" style="text-align:center;padding:40px 0">
-        <span class="orange-squeeze" style="font-size:40px;display:block;margin-bottom:8px">🍊</span>
-        <div style="font-size:14px;color:#e65100;font-weight:600">{{ squeezeText }}</div>
+      <!-- 榨汁动画 -->
+      <div v-if="juicing" class="juice-animation">
+        <div class="juice-scene">
+          <span class="j-orange" style="animation-delay:.0s">🍊</span>
+          <span class="j-orange" style="animation-delay:.3s">🍊</span>
+          <span class="j-orange" style="animation-delay:.6s">🍊</span>
+          <span class="j-orange" style="animation-delay:.9s">🍊</span>
+          <span class="j-cup">🥤</span>
+        </div>
+        <div style="margin-top:16px;font-size:14px;color:#e65100;font-weight:600">{{ squeezeText }}</div>
       </div>
 
       <!-- 结果区 -->
@@ -313,11 +334,18 @@ const aiLoading = ref(false)
 const aiError = ref('')
 
 // V2 智能分析
+const currentStep = ref(0)
+const juicing = ref(false)
 const analyzing = ref(false)
 const v2Result = ref(null)
 const v2Error = ref('')
-const squeezeText = ref('🍊 正在榨取分析精华...')
+const squeezeText = ref('🍊 正在收集数据...')
 let squeezeTimer = null
+
+const formSteps = [
+  { icon: '🎯', label: '方向' }, { icon: '💡', label: '目的' },
+  { icon: '📚', label: '基础' }, { icon: '⏰', label: '时间' }
+]
 const profile = reactive({
   topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
   customTopics: '', customPurpose: '', customLang: '', customTime: ''
@@ -330,11 +358,14 @@ const langOptions = ['Python', 'JavaScript', 'TypeScript', 'Go', 'Rust', 'Java',
 const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（每周5-15h）', '🚀 全力投入（每周>15h）']
 const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 找到了！为你生成推荐...']
 
-const analyzeV2 = async () => {
-  if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; return }
-  analyzing.value = true; v2Error.value = ''; v2Result.value = null
-  squeezeText.value = squeezeTexts[0]; let idx = 0
-  squeezeTimer = setInterval(() => { idx = (idx+1) % squeezeTexts.length; squeezeText.value = squeezeTexts[idx] }, 4000)
+const startJuicing = async () => {
+  if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; currentStep.value = 0; return }
+  juicing.value = true; analyzing.value = true; v2Error.value = ''; v2Result.value = null
+  squeezeText.value = '🍊 正在收集数据...'; let idx = 0
+  squeezeTimer = setInterval(() => { idx = (idx+1) % squeezeTexts.length; squeezeText.value = squeezeTexts[idx] }, 3000)
+  // 播放榨汁动画 2.5 秒后开始 API 调用
+  await new Promise(r => setTimeout(r, 2500))
+  juicing.value = false
   try {
     const r = await request.post('/app/trend/analyze-v2', { ...profile }, { timeout: 0 })
     if (r.code === 1 && r.data) {
@@ -343,7 +374,7 @@ const analyzeV2 = async () => {
       v2Error.value = r.msg || '分析失败'
     }
   } catch { v2Error.value = '请求失败，请检查网络连接' }
-  finally { analyzing.value = false; if (squeezeTimer) clearInterval(squeezeTimer) }
+  finally { analyzing.value = false; juicing.value = false; if (squeezeTimer) clearInterval(squeezeTimer) }
 }
 
 const formatNum = (n) => {
@@ -538,30 +569,46 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 </script>
 
 <style scoped>
-/* 🍊 橙子卡通风格 */
-.orange-icon {
-  display: inline-block; width: 36px; height: 36px; background: radial-gradient(circle at 35% 35%, #ffcc80, #e65100 80%);
-  border-radius: 45% 55% 50% 50%; position: relative; box-shadow: 0 2px 8px rgba(230,81,0,.3);
-}
-.orange-icon::after {
-  content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
-  width: 12px; height: 7px; background: #81c784; border-radius: 50% 50% 0 0;
-}
-.orange-btn {
-  background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; border: none;
-  border-radius: 24px; padding: 10px 24px; font-size: 15px; font-weight: 700; cursor: pointer;
-  transition: all .2s; box-shadow: 0 3px 12px rgba(230,81,0,.25);
-}
-.orange-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(230,81,0,.35); }
-.orange-btn:active { transform: scale(.97); }
-.orange-btn:disabled { opacity: .6; cursor: wait; }
+/* 🍊 步骤表单 */
+.orange-form-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 2px 16px rgba(230,81,0,.08); }
+.steps-bar { margin-bottom: 20px; }
+.steps-track { display: flex; justify-content: center; gap: 0; }
+.step-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative; cursor: default; }
+.step-item + .step-item::before { content: ''; position: absolute; top: 16px; left: -50%; width: 100%; height: 2px; background: #ffe0b2; z-index: 0; }
+.step-item.active + .step-item::before, .step-item.done + .step-item::before { background: #e65100; }
+.step-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; background: #fff3e0; color: #e65100; border: 2px solid #ffe0b2; position: relative; z-index: 1; transition: all .3s; }
+.step-item.active .step-circle { background: #e65100; color: #fff; border-color: #e65100; box-shadow: 0 0 8px rgba(230,81,0,.4); }
+.step-item.done .step-circle { background: #e65100; color: #fff; border-color: #e65100; }
+.step-label { font-size: 12px; color: #bcaaa4; transition: color .3s; }
+.step-item.active .step-label, .step-item.done .step-label { color: #5d4037; font-weight: 600; }
 
+.step-card-wrapper { overflow: hidden; }
+.step-card { background: #fffdf5; border-radius: 16px; padding: 28px 24px; min-height: 180px; position: relative; overflow: hidden; border: 1px solid #ffe0b2; }
+.card-bg-orange { position: absolute; right: -30px; bottom: -20px; width: 140px; height: 140px; background: radial-gradient(circle at 35% 35%, #fff3e0, #ffe0b2 70%); border-radius: 45% 55% 50% 50%; opacity: .5; pointer-events: none; }
+.card-bg-orange::after { content: ''; position: absolute; top: -10px; left: 40%; width: 16px; height: 10px; background: #a5d6a7; border-radius: 50% 50% 0 0; }
+.step-title { font-size: 16px; font-weight: 700; color: #5d4037; margin-bottom: 16px; }
+.animate-in { animation: slideIn .35s ease-out; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+/* 按钮 */
+.orange-btn { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; border: none; border-radius: 24px; padding: 10px 28px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; box-shadow: 0 3px 12px rgba(230,81,0,.25); }
+.orange-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(230,81,0,.35); }
+.orange-btn:disabled { opacity: .6; cursor: not-allowed; }
+.squeeze-btn { padding: 14px 36px; font-size: 16px; }
+.nav-btn { background: #fff; color: #e65100; border: 1px solid #ffe0b2; border-radius: 24px; padding: 10px 20px; font-size: 14px; cursor: pointer; transition: all .2s; }
+.nav-btn:hover { background: #fff3e0; }
 .squeezing { animation: squeeze 1s ease-in-out infinite; display: inline-block; }
 @keyframes squeeze { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
-.orange-squeeze { animation: squeezeBig 1.5s ease-in-out infinite; display: inline-block; }
-@keyframes squeezeBig { 0%,100% { transform: scale(1) rotate(0); } 25% { transform: scale(1.2) rotate(-5deg); } 75% { transform: scale(1.2) rotate(5deg); } }
+/* 榨汁动画 */
+.juice-animation { text-align: center; padding: 30px 0 20px; }
+.juice-scene { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.j-orange { font-size: 32px; animation: dropIn .5s ease-out both; }
+.j-cup { font-size: 40px; margin-left: 8px; animation: cupShake 2s ease-in-out infinite; }
+@keyframes dropIn { from { opacity: 0; transform: translateY(-40px) scale(.5); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes cupShake { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
 
+/* 结果卡片 */
 .leaf-card { background: #fffdf7; border-radius: 12px; padding: 14px; border: 1px solid #ffe0b2; height: 100%; }
 .leaf-dot { font-size: 18px; display: block; margin-bottom: 6px; }
 .leaf-label { font-size: 11px; color: #bcaaa4; margin-bottom: 2px; }
