@@ -1,6 +1,7 @@
 package com.orangejd.server.controller.app;
 
 import com.orangejd.common.result.Result;
+import com.orangejd.pojo.dto.TrendProfileDTO;
 import com.orangejd.server.service.KnowledgeGraphService;
 import com.orangejd.server.service.TrendAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,30 @@ public class AppTrendController {
             return Result.error((String) analysis.get("error"));
         }
         return Result.success(analysis);
+    }
+
+    @PostMapping("/analyze-v2")
+    public Result<?> analyzeV2(@RequestBody TrendProfileDTO profile, HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null || ip.isEmpty()) ip = request.getRemoteAddr();
+        String rateKey = "rate:trend:analyze:" + ip;
+        if (redisTemplate != null) {
+            if (redisTemplate.opsForValue().get(rateKey) != null)
+                return Result.error("请求过于频繁，请 10 秒后重试");
+            redisTemplate.opsForValue().set(rateKey, "1", 10, TimeUnit.SECONDS);
+        }
+
+        if (profile.getTopics() == null || profile.getTopics().isEmpty())
+            return Result.error("请至少选择一个技术方向");
+
+        Map<String, Object> result = analysisService.analyzeV2(
+            profile.getTopics(), profile.getPurpose(), profile.getExperience(),
+            profile.getLanguages(), profile.getTimeCommitment(),
+            profile.getCustomTopics(), profile.getCustomPurpose(),
+            profile.getCustomExp(), profile.getCustomLang(), profile.getCustomTime());
+
+        if (result.containsKey("error"))
+            return Result.error((String) result.get("error"));
+        return Result.success(result);
     }
 }

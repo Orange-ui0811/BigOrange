@@ -109,28 +109,113 @@
       </el-col>
     </el-row>
 
-    <!-- AI 分析面板 -->
+    <!-- V2 智能分析面板 -->
     <el-card shadow="never" style="border-radius:12px;margin-top:16px">
-      <h4 style="margin:0 0 12px">🤖 AI 趋势分析</h4>
-      <el-row :gutter="8" style="margin-bottom:8px">
-        <el-col :span="6"><el-input v-model="aiEndpoint" placeholder="https://api.deepseek.com/v1" size="small" /></el-col>
-        <el-col :span="3"><el-input v-model="aiModel" placeholder="deepseek-chat" size="small" /></el-col>
-        <el-col :span="5"><el-input v-model="aiKey" placeholder="sk-xxx" type="password" show-password size="small" /></el-col>
-        <el-col :span="2"><el-button size="small" @click="testConnection" :loading="testLoading">测试</el-button></el-col>
-        <el-col :span="8">
-          <el-input v-model="aiQuestion" placeholder="如：哪些方向是蓝海？" size="small" @keyup.enter="askAI">
-            <template #append><el-button :loading="aiLoading" @click="askAI">分析</el-button></template>
-          </el-input>
+      <h4 style="margin:0 0 12px">🤖 智能分析 · 个人化项目推荐</h4>
+
+      <!-- 四维表单 -->
+      <el-row :gutter="12">
+        <el-col :span="6">
+          <div style="font-weight:600;font-size:13px;margin-bottom:4px">🎯 技术方向</div>
+          <el-select v-model="profile.topics" multiple placeholder="选择方向" size="small" style="width:100%">
+            <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
+          </el-select>
+          <el-input v-model="profile.customTopics" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
+        </el-col>
+        <el-col :span="6">
+          <div style="font-weight:600;font-size:13px;margin-bottom:4px">💡 目的动机</div>
+          <el-select v-model="profile.purpose" placeholder="选择目的" size="small" style="width:100%">
+            <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
+          </el-select>
+          <el-input v-model="profile.customPurpose" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
+        </el-col>
+        <el-col :span="6">
+          <div style="font-weight:600;font-size:13px;margin-bottom:4px">📚 技术基础</div>
+          <el-select v-model="profile.experience" placeholder="编程经验" size="small" style="width:100%">
+            <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
+          </el-select>
+          <el-select v-model="profile.languages" multiple placeholder="掌握语言" size="small" style="width:100%;margin-top:4px">
+            <el-option v-for="t in langOptions" :key="t" :label="t" :value="t" />
+          </el-select>
+          <el-input v-model="profile.customLang" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
+        </el-col>
+        <el-col :span="6">
+          <div style="font-weight:600;font-size:13px;margin-bottom:4px">⏰ 时间投入</div>
+          <el-select v-model="profile.timeCommitment" placeholder="选择时间" size="small" style="width:100%">
+            <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
+          </el-select>
+          <el-input v-model="profile.customTime" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
+          <el-button type="primary" @click="analyzeV2" :loading="analyzing" style="width:100%;margin-top:12px;background:#e65100;border-color:#e65100">开始分析</el-button>
         </el-col>
       </el-row>
-      <div v-if="aiReply" style="background:#faf9f7;border-radius:8px;padding:16px;max-height:400px;overflow:auto;line-height:1.8;font-size:13px" v-html="aiReplyHtml"></div>
-      <div v-if="aiError" style="color:#F56C6C;font-size:13px;margin-top:8px">{{ aiError }}</div>
+
+      <!-- 分析结果 -->
+      <div v-if="v2Result" style="margin-top:16px">
+        <el-divider />
+        <!-- 领域分析 -->
+        <div style="background:#f5f9ff;padding:12px;border-radius:8px;margin-bottom:12px">
+          <div style="font-weight:600;margin-bottom:4px">📊 领域分析</div>
+          <div style="font-size:13px;line-height:1.8;color:#2c2c2c">{{ v2Result.analysis }}</div>
+        </div>
+        <!-- 推荐项目 -->
+        <div style="font-weight:600;margin-bottom:8px">🏆 推荐项目</div>
+        <el-row :gutter="12">
+          <el-col :span="8" v-for="(r, i) in v2Result.recommendations" :key="i">
+            <el-card shadow="never" style="border-radius:8px;margin-bottom:8px;height:100%">
+              <div style="font-weight:600;font-size:14px">{{ r.name }}</div>
+              <p style="font-size:12px;color:#6b6b6b;margin:4px 0">{{ r.description }}</p>
+              <el-tag :type="r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger'" size="small">难度: {{ r.difficulty }}</el-tag>
+              <el-progress :percentage="r.score" :color="scoreColor(r.score)" :stroke-width="6" style="margin-top:8px" />
+              <div style="font-size:12px;margin-top:8px;line-height:1.6">
+                <p><b>推荐理由：</b>{{ r.recommendReason }}</p>
+                <p><b>前置知识：</b>{{ r.prerequisites }}</p>
+                <p v-if="r.references?.length"><b>参考项目：</b>{{ r.references.join('、') }}</p>
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
+        <!-- 柱状图 -->
+        <div v-if="v2Result.chartData?.length" style="margin-top:12px">
+          <div style="font-weight:600;margin-bottom:4px">📈 综合评分对比</div>
+          <div ref="barRef" style="width:100%;height:250px"></div>
+        </div>
+        <!-- 学习建议 -->
+        <div v-if="v2Result.learning" style="margin-top:12px;background:#f0fdf4;padding:12px;border-radius:8px">
+          <div style="font-weight:600;margin-bottom:4px">📖 学习建议</div>
+          <div style="font-size:13px;line-height:1.8;color:#2c2c2c;white-space:pre-wrap">{{ v2Result.learning }}</div>
+        </div>
+      </div>
+
+      <div v-if="analyzing" style="text-align:center;padding:20px;color:#909399">
+        <el-icon class="is-loading"><Loading /></el-icon> AI 正在分析，预计 15-30 秒...
+      </div>
+
+      <div v-if="v2Error" style="color:#F56C6C;font-size:13px;margin-top:8px">{{ v2Error }}</div>
+
+      <!-- 旧面板折叠 -->
+      <el-collapse style="margin-top:12px">
+        <el-collapse-item title="自由提问（旧版）">
+          <el-row :gutter="8">
+            <el-col :span="6"><el-input v-model="aiEndpoint" placeholder="https://api.deepseek.com/v1" size="small" /></el-col>
+            <el-col :span="3"><el-input v-model="aiModel" placeholder="deepseek-chat" size="small" /></el-col>
+            <el-col :span="5"><el-input v-model="aiKey" placeholder="sk-xxx" type="password" show-password size="small" /></el-col>
+            <el-col :span="2"><el-button size="small" @click="testConnection" :loading="testLoading">测试</el-button></el-col>
+            <el-col :span="8">
+              <el-input v-model="aiQuestion" placeholder="自由提问" size="small" @keyup.enter="askAI">
+                <template #append><el-button :loading="aiLoading" @click="askAI">发送</el-button></template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <div v-if="aiReply" style="background:#faf9f7;border-radius:8px;padding:12px;max-height:300px;overflow:auto;line-height:1.8;font-size:13px;margin-top:8px" v-html="aiReplyHtml"></div>
+          <div v-if="aiError" style="color:#F56C6C;font-size:13px;margin-top:4px">{{ aiError }}</div>
+        </el-collapse-item>
+      </el-collapse>
     </el-card>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
@@ -173,6 +258,58 @@ const aiReply = ref('')
 const aiReplyHtml = ref('')
 const aiLoading = ref(false)
 const aiError = ref('')
+
+// V2 智能分析
+const analyzing = ref(false)
+const v2Result = ref(null)
+const v2Error = ref('')
+const barRef = ref(null)
+let barChart = null
+
+const profile = reactive({
+  topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
+  customTopics: '', customPurpose: '', customLang: '', customTime: ''
+})
+
+const topicOptions = ['创意编程','游戏开发','WebGL','Canvas','Web音频','AI智能体','RAG检索增强','自托管','家庭助理','ESP32','树莓派','家居自动化','3D打印','其他']
+const purposeOptions = ['🎓 学习 AI 编程知识', '💼 应对求职面试', '💰 赚钱/接单/创业', '🔬 探索技术兴趣']
+const expOptions = ['新手入门', '1-3年', '3年以上']
+const langOptions = ['Python', 'JavaScript', 'TypeScript', 'Go', 'Rust', 'Java', 'C++', '其他']
+const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（每周5-15h）', '🚀 全力投入（每周>15h）']
+
+const analyzeV2 = async () => {
+  if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; return }
+  analyzing.value = true; v2Error.value = ''; v2Result.value = null
+  if (barChart) { barChart.dispose(); barChart = null }
+  try {
+    const r = await request.post('/app/trend/analyze-v2', { ...profile }, { timeout: 0 })
+    if (r.code === 1 && r.data) {
+      v2Result.value = r.data
+      if (r.data.chartData?.length) {
+        setTimeout(() => renderBar(r.data.chartData), 100)
+      }
+    } else {
+      v2Error.value = r.msg || '分析失败'
+    }
+  } catch { v2Error.value = '请求失败，请检查网络连接' }
+  finally { analyzing.value = false }
+}
+
+const renderBar = (data) => {
+  if (!barRef.value) return
+  if (!barChart) barChart = echarts.init(barRef.value)
+  barChart.setOption({
+    tooltip: { trigger: 'axis' },
+    xAxis: { type: 'category', data: data.map(d => d.label) },
+    yAxis: { type: 'value', max: 100, name: '综合评分' },
+    series: [{
+      type: 'bar', data: data.map(d => d.score),
+      itemStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[
+        {offset:0, color:'#e65100'},{offset:1, color:'#ff9800'}
+      ]) }
+    }]
+  })
+}
 
 const formatNum = (n) => {
   if (!n) return '0'
