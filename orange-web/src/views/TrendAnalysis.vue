@@ -125,7 +125,7 @@
 
         <!-- 单张卡片 - 带滚动橙子动画 -->
         <div class="step-card-wrapper">
-          <Transition :name="animDirection" @after-leave="onAnimEnd">
+          <Transition :name="animDirection">
             <div class="step-card" :key="currentStep">
               <div class="card-bg-orange"></div>
             <!-- 步骤1: 方向 -->
@@ -339,20 +339,11 @@ const aiError = ref('')
 const currentStep = ref(0)
 const animDirection = ref('')
 const juicing = ref(false)
-let pendingStep = null
 
 const goStep = (step) => {
-  if (step === currentStep.value || pendingStep !== null) return
-  pendingStep = step
+  if (step === currentStep.value) return
   animDirection.value = step > currentStep.value ? 'slide-right' : 'slide-left'
-}
-
-const onAnimEnd = () => {
-  if (pendingStep !== null) {
-    currentStep.value = pendingStep
-    pendingStep = null
-    animDirection.value = ''
-  }
+  currentStep.value = step
 }
 const analyzing = ref(false)
 const v2Result = ref(null)
