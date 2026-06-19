@@ -65,10 +65,10 @@
                 </el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics?.weeklyStars" label="本周新增⭐">{{ formatNum(selectedNode.metrics.weeklyStars) }}</el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
-                  <el-tag :type="crowdType(selectedNode.metrics.crowdedness)" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
+                  <el-tag v-if="selectedNode.metrics?.crowdedness" :type="crowdType(selectedNode.metrics.crowdedness)" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
                 </el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics" label="难度">
-                  <el-tag :type="diffType(selectedNode.metrics.difficulty)" size="small">{{ selectedNode.metrics.difficulty }}</el-tag>
+                  <el-tag v-if="selectedNode.metrics?.difficulty" :type="diffType(selectedNode.metrics.difficulty)" size="small">{{ selectedNode.metrics.difficulty }}</el-tag>
                 </el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics" label="活跃度">{{ selectedNode.metrics.activity }}</el-descriptions-item>
                 <el-descriptions-item v-if="selectedNode.metrics?.opportunityScore" label="综合评分">
@@ -320,7 +320,7 @@ const insightCards = computed(() => {
     { key: 'hotTop3', title: '🔥 热门方向', tagType: 'danger' },
     { key: 'blueTop3', title: '🌱 新兴方向', tagType: 'success' },
     { key: 'growTop3', title: '📈 增长最快', tagType: 'warning' },
-    { key: 'oppTop3', title: '⭐ 推荐', tagType: '' }
+    { key: 'oppTop3', title: '⭐ 推荐', tagType: 'info' }
   ]
   return types.map(t => ({ title: t.title, items: insights.value[t.key] || [], tagType: t.tagType }))
 })
