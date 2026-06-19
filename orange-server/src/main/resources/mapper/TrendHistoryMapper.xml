@@ -4,20 +4,20 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO trend_history (account_id, topics, purpose, experience, languages, time_commitment, result_json)
-        VALUES (#{browserId}, #{topics}, #{purpose}, #{experience}, #{languages}, #{timeCommitment}, #{resultJson})
+        VALUES (#{accountId}, #{topics}, #{purpose}, #{experience}, #{languages}, #{timeCommitment}, #{resultJson})
     </insert>
 
     <select id="selectByBrowserId" resultType="com.orangejd.pojo.entity.TrendHistory">
         SELECT id, account_id, topics, purpose, experience, languages, time_commitment, result_json, create_time
-        FROM trend_history WHERE account_id = #{browserId}
+        FROM trend_history WHERE account_id = #{accountId}
         ORDER BY id DESC LIMIT #{limit}
     </select>
 
     <delete id="deleteById">
-        DELETE FROM trend_history WHERE id = #{id} AND account_id = #{browserId}
+        DELETE FROM trend_history WHERE id = #{id} AND account_id = #{accountId}
     </delete>
 
     <delete id="deleteByBrowserId">
-        DELETE FROM trend_history WHERE account_id = #{browserId}
+        DELETE FROM trend_history WHERE account_id = #{accountId}
     </delete>
 </mapper>
