@@ -154,8 +154,13 @@
         <el-divider />
         <!-- 领域分析 -->
         <div style="background:#f5f9ff;padding:12px;border-radius:8px;margin-bottom:12px">
-          <div style="font-weight:600;margin-bottom:4px">📊 领域分析</div>
-          <div style="font-size:13px;line-height:1.8;color:#2c2c2c">{{ v2Result.analysis }}</div>
+          <div style="font-weight:600;margin-bottom:8px">📊 领域分析</div>
+          <el-row :gutter="12">
+            <el-col :span="6"><div style="font-size:12px;color:#909399">发展趋势</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.trend || '-' }}</div></el-col>
+            <el-col :span="6"><div style="font-size:12px;color:#909399">发展前景</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.prospect || '-' }}</div></el-col>
+            <el-col :span="6"><div style="font-size:12px;color:#909399">市场需求</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.demand || '-' }}</div></el-col>
+            <el-col :span="6"><div style="font-size:12px;color:#909399">总结</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.summary || '-' }}</div></el-col>
+          </el-row>
         </div>
         <!-- 推荐项目 -->
         <div style="font-weight:600;margin-bottom:8px">🏆 推荐项目</div>
@@ -174,15 +179,17 @@
             </el-card>
           </el-col>
         </el-row>
-        <!-- 柱状图 -->
-        <div v-if="v2Result.chartData?.length" style="margin-top:12px">
-          <div style="font-weight:600;margin-bottom:4px">📈 综合评分对比</div>
-          <div ref="barRef" style="width:100%;height:250px"></div>
-        </div>
         <!-- 学习建议 -->
         <div v-if="v2Result.learning" style="margin-top:12px;background:#f0fdf4;padding:12px;border-radius:8px">
-          <div style="font-weight:600;margin-bottom:4px">📖 学习建议</div>
-          <div style="font-size:13px;line-height:1.8;color:#2c2c2c;white-space:pre-wrap">{{ v2Result.learning }}</div>
+          <div style="font-weight:600;margin-bottom:8px">📖 学习建议</div>
+          <div v-if="v2Result.learning.steps?.length" style="margin-bottom:8px">
+            <div style="font-size:12px;color:#909399;margin-bottom:4px">学习路径</div>
+            <el-steps :active="v2Result.learning.steps.length" direction="vertical" space="20px" size="small">
+              <el-step v-for="(s,i) in v2Result.learning.steps" :key="i" :title="s" />
+            </el-steps>
+          </div>
+          <div v-if="v2Result.learning.timeline" style="font-size:13px;margin-bottom:4px"><b>预计时间：</b>{{ v2Result.learning.timeline }}</div>
+          <div v-if="v2Result.learning.tips" style="font-size:13px;line-height:1.6;color:#2c2c2c"><b>学习建议：</b>{{ v2Result.learning.tips }}</div>
         </div>
       </div>
 
@@ -263,9 +270,6 @@ const aiError = ref('')
 const analyzing = ref(false)
 const v2Result = ref(null)
 const v2Error = ref('')
-const barRef = ref(null)
-let barChart = null
-
 const profile = reactive({
   topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
   customTopics: '', customPurpose: '', customLang: '', customTime: ''
@@ -280,35 +284,15 @@ const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（�
 const analyzeV2 = async () => {
   if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; return }
   analyzing.value = true; v2Error.value = ''; v2Result.value = null
-  if (barChart) { barChart.dispose(); barChart = null }
   try {
     const r = await request.post('/app/trend/analyze-v2', { ...profile }, { timeout: 0 })
     if (r.code === 1 && r.data) {
       v2Result.value = r.data
-      if (r.data.chartData?.length) {
-        setTimeout(() => renderBar(r.data.chartData), 100)
-      }
     } else {
       v2Error.value = r.msg || '分析失败'
     }
   } catch { v2Error.value = '请求失败，请检查网络连接' }
   finally { analyzing.value = false }
-}
-
-const renderBar = (data) => {
-  if (!barRef.value) return
-  if (!barChart) barChart = echarts.init(barRef.value)
-  barChart.setOption({
-    tooltip: { trigger: 'axis' },
-    xAxis: { type: 'category', data: data.map(d => d.label) },
-    yAxis: { type: 'value', max: 100, name: '综合评分' },
-    series: [{
-      type: 'bar', data: data.map(d => d.score),
-      itemStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[
-        {offset:0, color:'#e65100'},{offset:1, color:'#ff9800'}
-      ]) }
-    }]
-  })
 }
 
 const formatNum = (n) => {

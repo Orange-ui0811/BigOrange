@@ -178,25 +178,33 @@ public class TrendAnalysisService {
     // ==================== V2: 四维画像分析 ====================
 
     private static final String SYSTEM_PROMPT_V2 =
-        "你是开源项目推荐专家。基于用户画像和 GitHub 真实数据，给出个人化项目推荐。\n\n" +
-        "输出严格 JSON（不要 markdown 代码块，不要额外文字，不要省略字段）：\n" +
+        "你是开源项目推荐专家。基于用户画像和 GitHub 真实数据，给出详细个人化项目推荐。\n\n" +
+        "输出严格 JSON（不要 markdown 代码块，不要额外文字）：\n" +
         "{\n" +
-        "  \"analysis\": \"领域当前情况和市场分析（200字以内）\",\n" +
+        "  \"analysis\": {\n" +
+        "    \"trend\": \"当前发展趋势（增长还是稳定还是衰退，增长速度如何）\",\n" +
+        "    \"prospect\": \"发展前景（未来1-2年的机会和方向）\",\n" +
+        "    \"demand\": \"市场需求（企业招聘、商业应用、社区活跃度）\",\n" +
+        "    \"summary\": \"一句话总结（50字）\"\n" +
+        "  },\n" +
         "  \"recommendations\": [{\n" +
         "    \"name\": \"项目名\",\n" +
-        "    \"description\": \"一句话介绍做什么\",\n" +
+        "    \"description\": \"详细介绍这个项目是什么、解决什么问题、核心功能（80字以上）\",\n" +
         "    \"difficulty\": \"入门/中等/进阶\",\n" +
-        "    \"difficultyReason\": \"为什么是这个难度\",\n" +
-        "    \"recommendReason\": \"结合用户画像说明推荐原因\",\n" +
-        "    \"prerequisites\": \"需要学习的前置知识\",\n" +
-        "    \"references\": [\"参考开源项目1\", \"参考开源项目2\"],\n" +
+        "    \"difficultyReason\": \"为什么是这个难度（结合用户的技术基础分析）\",\n" +
+        "    \"recommendReason\": \"结合用户的方向选择、目的、技术基础、时间投入，详细说明为什么推荐（60字以上）\",\n" +
+        "    \"prerequisites\": \"学习该项目需要的前置知识和技能\",\n" +
+        "    \"references\": [\"参考开源项目名1\", \"参考开源项目名2\"],\n" +
         "    \"score\": 85\n" +
         "  }],\n" +
-        "  \"learning\": \"学习路径和预计出成果时间\",\n" +
-        "  \"chartData\": [{\"label\": \"方向名\", \"score\": 85}]\n" +
+        "  \"learning\": {\n" +
+        "    \"steps\": [\"第一步做什么\", \"第二步做什么\", \"第三步做什么\"],\n" +
+        "    \"timeline\": \"预计多长时间能看到成果\",\n" +
+        "    \"tips\": \"学习过程中的建议\"\n" +
+        "  }\n" +
         "}\n\n" +
-        "recommendations 1-3 个，每个必含所有字段。score 0-100。图表 label 用中文方向名。" +
-        "分析越详细越好，不要省略任何字段。";
+        "每个字段都要详细写，不要省略，不要简写。recommendations 1-3 个。analysis 四个子字段必填。" +
+        "description 至少 80 字。recommendReason 至少 60 字。";
 
     @SuppressWarnings("unchecked")
     public Map<String, Object> analyzeV2(
@@ -285,10 +293,27 @@ public class TrendAnalysisService {
 
         // 正则提取主要字段
         try {
-            String analysis = regexExtract(content, "\"analysis\"\\s*:\\s*\"([^\"]+)\"");
-            String learning = regexExtract(content, "\"learning\"\\s*:\\s*\"([^\"]+)\"");
-            result.put("analysis", analysis != null ? analysis : "");
-            result.put("learning", learning != null ? learning : "");
+            // analysis 现在是一个对象
+            Map<String, Object> analysisObj = new LinkedHashMap<>();
+            analysisObj.put("trend", regexExtract(content, "\"trend\"\\s*:\\s*\"([^\"]+)\""));
+            analysisObj.put("prospect", regexExtract(content, "\"prospect\"\\s*:\\s*\"([^\"]+)\""));
+            analysisObj.put("demand", regexExtract(content, "\"demand\"\\s*:\\s*\"([^\"]+)\""));
+            analysisObj.put("summary", regexExtract(content, "\"summary\"\\s*:\\s*\"([^\"]+)\""));
+            result.put("analysis", analysisObj);
+
+            // learning 现在是一个对象
+            Map<String, Object> learningObj = new LinkedHashMap<>();
+            learningObj.put("timeline", regexExtract(content, "\"timeline\"\\s*:\\s*\"([^\"]+)\""));
+            learningObj.put("tips", regexExtract(content, "\"tips\"\\s*:\\s*\"([^\"]+)\""));
+            // steps 数组
+            String stepsStr = regexExtract(content, "\"steps\"\\s*:\\s*\\[(.+?)\\]");
+            if (stepsStr != null) {
+                List<String> steps = new ArrayList<>();
+                java.util.regex.Matcher sm = java.util.regex.Pattern.compile("\"([^\"]+)\"").matcher(stepsStr);
+                while (sm.find()) steps.add(sm.group(1));
+                learningObj.put("steps", steps);
+            }
+            result.put("learning", learningObj);
             result.put("raw", content);
 
             // 提取 recommendations 数组
@@ -322,25 +347,11 @@ public class TrendAnalysisService {
             }
             result.put("recommendations", recs);
 
-            // chartData
-            List<Map<String, Object>> chartData = new ArrayList<>();
-            String chartStr = regexExtract(content, "\"chartData\"\\s*:\\s*\\[(.+?)\\]");
-            if (chartStr != null) {
-                java.util.regex.Matcher cm = java.util.regex.Pattern.compile("\"label\"\\s*:\\s*\"([^\"]+)\"\\s*,\\s*\"score\"\\s*:\\s*(\\d+)").matcher(chartStr);
-                while (cm.find()) {
-                    Map<String, Object> cd = new LinkedHashMap<>();
-                    cd.put("label", cm.group(1));
-                    cd.put("score", Integer.parseInt(cm.group(2)));
-                    chartData.add(cd);
-                }
-            }
-            result.put("chartData", chartData);
             return result;
         } catch (Exception e) {
             result.put("analysis", content.length() > 300 ? content.substring(0, 300) : content);
             result.put("recommendations", Collections.emptyList());
-            result.put("chartData", Collections.emptyList());
-            result.put("learning", "");
+            result.put("learning", new LinkedHashMap<>());
             result.put("raw", content);
             return result;
         }
