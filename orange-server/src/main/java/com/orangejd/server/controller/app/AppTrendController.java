@@ -92,11 +92,13 @@ public class AppTrendController {
         return Result.success(result);
     }
 
-    // ---- 查询历史 ----
+    // ---- 查询历史（需登录）----
 
     @GetMapping("/history")
-    public Result<List<Map<String, Object>>> history(@RequestParam String browserId) {
-        List<com.orangejd.pojo.entity.TrendHistory> list = trendHistoryMapper.selectByBrowserId(browserId, 20);
+    public Result<List<Map<String, Object>>> history() {
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        if (accountId == null || accountId == 0) return Result.error("请先登录");
+        List<com.orangejd.pojo.entity.TrendHistory> list = trendHistoryMapper.selectByBrowserId(accountId, 20);
         List<Map<String, Object>> result = new java.util.ArrayList<>();
         for (com.orangejd.pojo.entity.TrendHistory h : list) {
             Map<String, Object> m = new java.util.LinkedHashMap<>();
@@ -115,8 +117,10 @@ public class AppTrendController {
 
     @PostMapping("/history/save")
     public Result<?> saveHistory(@RequestBody Map<String, Object> body) {
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        if (accountId == null || accountId == 0) return Result.error("请先登录");
         com.orangejd.pojo.entity.TrendHistory h = new com.orangejd.pojo.entity.TrendHistory();
-        h.setBrowserId((String) body.get("browserId"));
+        h.setAccountId(accountId);
         h.setTopics(body.get("topics") != null ? body.get("topics").toString() : "");
         h.setPurpose((String) body.getOrDefault("purpose", ""));
         h.setExperience((String) body.getOrDefault("experience", ""));
@@ -128,14 +132,18 @@ public class AppTrendController {
     }
 
     @DeleteMapping("/history/{id}")
-    public Result<?> deleteHistory(@PathVariable Long id, @RequestParam String browserId) {
-        trendHistoryMapper.deleteById(id, browserId);
+    public Result<?> deleteHistory(@PathVariable Long id) {
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        if (accountId == null || accountId == 0) return Result.error("请先登录");
+        trendHistoryMapper.deleteById(id, accountId);
         return Result.success();
     }
 
     @DeleteMapping("/history/clear")
-    public Result<?> clearHistory(@RequestParam String browserId) {
-        trendHistoryMapper.deleteByBrowserId(browserId);
+    public Result<?> clearHistory() {
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        if (accountId == null || accountId == 0) return Result.error("请先登录");
+        trendHistoryMapper.deleteByBrowserId(accountId);
         return Result.success();
     }
 }

@@ -119,7 +119,7 @@
             <span style="font-weight:700;font-size:16px;color:#5d4037">🍊 智能分析</span>
             <span style="font-size:12px;color:#bcaaa4;margin-left:8px">告诉我你的想法</span>
           </div>
-          <el-popover placement="bottom-end" width="320" trigger="click">
+          <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasAppToken">
             <template #reference>
               <el-button size="small" text>{{ history.length ? '📋 记录 ('+history.length+')' : '📋 记录' }}</el-button>
             </template>
@@ -394,32 +394,28 @@ const expOptions = ['新手入门', '1-3年', '3年以上']
 const langOptions = ['Python', 'JavaScript', 'TypeScript', 'Go', 'Rust', 'Java', 'C++', '其他']
 const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（每周5-15h）', '🚀 全力投入（每周>15h）']
 const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 找到了！为你生成推荐...']
-const browserId = ref(localStorage.getItem('trend_bid') || (() => { const id = 'b_' + Date.now() + '_' + Math.random().toString(36).slice(2,8); localStorage.setItem('trend_bid', id); return id })())
+const hasAppToken = computed(() => !!sessionStorage.getItem('appToken'))
 const history = ref([])
 
 const loadHistoryFromDB = async () => {
-  try { const r = await request.get('/app/trend/history?browserId=' + browserId.value); if (r.code === 1) history.value = r.data.map(h => ({ ...h, time: h.createTime, result: typeof h.result === 'string' ? JSON.parse(h.result) : h.result })) } catch {}
+  if (!hasAppToken.value) return
+  try { const r = await request.get('/app/trend/history'); if (r.code === 1) history.value = r.data.map(h => ({ ...h, time: h.createTime, result: typeof h.result === 'string' ? JSON.parse(h.result) : h.result })) } catch {}
 }
 const saveToHistory = async () => {
-  if (!v2Result.value) return
+  if (!v2Result.value || !hasAppToken.value) return
   try {
     await request.post('/app/trend/history/save', {
-      browserId: browserId.value,
-      topics: profile.topics,
-      purpose: profile.purpose,
-      experience: profile.experience,
-      languages: profile.languages,
-      timeCommitment: profile.timeCommitment,
-      result: JSON.stringify(v2Result.value)
+      topics: profile.topics, purpose: profile.purpose, experience: profile.experience,
+      languages: profile.languages, timeCommitment: profile.timeCommitment, result: JSON.stringify(v2Result.value)
     })
     loadHistoryFromDB()
   } catch {}
 }
 const delHistory = async (i) => {
-  try { await request.delete('/app/trend/history/' + history.value[i].id + '?browserId=' + browserId.value); loadHistoryFromDB() } catch {}
+  try { await request.delete('/app/trend/history/' + history.value[i].id); loadHistoryFromDB() } catch {}
 }
 const clearHistory = async () => {
-  try { await request.delete('/app/trend/history/clear?browserId=' + browserId.value); history.value = [] } catch {}
+  try { await request.delete('/app/trend/history/clear'); history.value = [] } catch {}
 }
 const loadHistory = (h) => {
   v2Result.value = h.result

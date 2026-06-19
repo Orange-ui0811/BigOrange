@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class TrendHistory {
     private Long id;
-    private String browserId;
+    private Long accountId;
     private String topics;
     private String purpose;
     private String experience;
@@ -15,8 +15,8 @@ public class TrendHistory {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public String getBrowserId() { return browserId; }
-    public void setBrowserId(String browserId) { this.browserId = browserId; }
+    public Long getAccountId() { return accountId; }
+    public void setAccountId(Long accountId) { this.accountId = accountId; }
     public String getTopics() { return topics; }
     public void setTopics(String topics) { this.topics = topics; }
     public String getPurpose() { return purpose; }
