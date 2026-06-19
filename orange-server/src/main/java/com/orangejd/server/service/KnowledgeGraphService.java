@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
-public class KnowledgeGraphService {
+public class KnowledgeGraphService implements IKnowledgeGraphService {
 
     @Autowired
     private LeaderboardSnapshotMapper snapshotMapper;

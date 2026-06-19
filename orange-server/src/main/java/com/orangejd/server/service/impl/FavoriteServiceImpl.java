@@ -1,5 +1,6 @@
-package com.orangejd.server.service;
+package com.orangejd.server.service.impl;
 
+import com.orangejd.server.service.IFavoriteService;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.entity.Favorite;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FavoriteService implements IFavoriteService {
+public class FavoriteServiceImpl implements IFavoriteService {
 
     @Autowired private FavoriteMapper favoriteMapper;
     @Autowired private WorkMapper workMapper;

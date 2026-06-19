@@ -1,5 +1,7 @@
-package com.orangejd.server.service;
+package com.orangejd.server.service.impl;
 
+import com.orangejd.server.service.ICommentService;
+import com.orangejd.server.service.INotificationService;
 import com.orangejd.common.constant.MessageConstant;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.exception.BaseException;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CommentService implements ICommentService {
+public class CommentServiceImpl implements ICommentService {
 
     @Autowired private CommentMapper commentMapper;
     @Autowired private WorkMapper workMapper;

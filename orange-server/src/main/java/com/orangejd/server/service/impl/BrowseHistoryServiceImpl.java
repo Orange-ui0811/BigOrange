@@ -1,5 +1,9 @@
-package com.orangejd.server.service;
+package com.orangejd.server.service.impl;
 
+import com.orangejd.server.service.ICommentService;
+import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.IFavoriteService;
+import com.orangejd.server.service.IBrowseHistoryService;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.pojo.entity.BrowseHistory;
 import com.orangejd.server.mapper.BrowseHistoryMapper;
@@ -10,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BrowseHistoryService implements IBrowseHistoryService {
+public class BrowseHistoryServiceImpl implements IBrowseHistoryService {
 
     private static final int MAX_HISTORY_PER_USER = 200;
 
