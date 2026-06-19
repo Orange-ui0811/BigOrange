@@ -5,7 +5,7 @@ import com.orangejd.pojo.entity.Quote;
 
 import java.util.List;
 
-public interface IQuoteService {
+public interface QuoteService {
     Quote create(QuoteCreateDTO dto);
     void accept(Long id);
     void reject(Long id);

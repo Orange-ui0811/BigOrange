@@ -4,7 +4,7 @@ import com.orangejd.common.constant.OrderStatus;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.pojo.entity.Order;
 import com.orangejd.server.mapper.OrderMapper;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderTimeoutTask {
 
     @Autowired private OrderMapper orderMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @Scheduled(cron = "0 0 2 * * ?") // 每天凌晨2点
     public void processTimeoutOrders() {

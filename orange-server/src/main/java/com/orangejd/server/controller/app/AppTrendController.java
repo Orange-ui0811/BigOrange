@@ -2,7 +2,7 @@ package com.orangejd.server.controller.app;
 
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.TrendProfileDTO;
-import com.orangejd.server.service.IKnowledgeGraphService;
+import com.orangejd.server.service.KnowledgeGraphService;
 import com.orangejd.server.service.TrendAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class AppTrendController {
 
     @Autowired
-    private IKnowledgeGraphService graphService;
+    private KnowledgeGraphService graphService;
 
     @Autowired
     private TrendAnalysisService analysisService;

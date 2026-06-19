@@ -16,7 +16,7 @@ public class TrendAnalysisService {
     private static final int TIMEOUT_MS = 90000;
 
     @Autowired
-    private IKnowledgeGraphService graphService;
+    private KnowledgeGraphService graphService;
 
     @org.springframework.beans.factory.annotation.Value("${orange.ai-trend.endpoint:}")
     private String trendEndpoint;

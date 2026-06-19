@@ -9,8 +9,8 @@ import com.orangejd.pojo.entity.Conversation;
 import com.orangejd.pojo.entity.Quote;
 import com.orangejd.server.mapper.ConversationMapper;
 import com.orangejd.server.mapper.QuoteMapper;
-import com.orangejd.server.service.IQuoteService;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.QuoteService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +19,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class QuoteServiceImpl implements IQuoteService {
+public class QuoteServiceImpl implements QuoteService {
 
     @Autowired private QuoteMapper quoteMapper;
     @Autowired private ConversationMapper conversationMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @Override
     public Quote create(QuoteCreateDTO dto) {

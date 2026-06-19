@@ -11,7 +11,7 @@ import com.orangejd.server.mapper.AuditRecordMapper;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.mapper.RequirementMapper;
 import com.orangejd.server.service.AuditService;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +25,7 @@ public class AuditServiceImpl implements AuditService {
     @Autowired private WorkMapper workMapper;
     @Autowired private RequirementMapper requirementMapper;
     @Autowired private AuditRecordMapper auditRecordMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @Override
     @Transactional

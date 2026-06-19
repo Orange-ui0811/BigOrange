@@ -4,7 +4,7 @@ import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.OrderCreateDTO;
 import com.orangejd.pojo.vo.OrderVO;
-import com.orangejd.server.service.IOrderService;
+import com.orangejd.server.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/app/order")
 public class OrderController {
 
-    @Autowired private IOrderService orderService;
+    @Autowired private OrderService orderService;
 
     @PostMapping
     public Result<OrderVO> create(@RequestBody OrderCreateDTO dto) {

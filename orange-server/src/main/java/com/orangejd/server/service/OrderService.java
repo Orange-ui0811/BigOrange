@@ -4,7 +4,7 @@ import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.dto.OrderCreateDTO;
 import com.orangejd.pojo.vo.OrderVO;
 
-public interface IOrderService {
+public interface OrderService {
     OrderVO create(OrderCreateDTO dto);
     OrderVO getDetail(Long id);
     PageResult<OrderVO> listBuy(int page, int size);

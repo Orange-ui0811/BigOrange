@@ -12,8 +12,8 @@ import com.orangejd.pojo.dto.OrderCreateDTO;
 import com.orangejd.pojo.entity.*;
 import com.orangejd.pojo.vo.OrderVO;
 import com.orangejd.server.mapper.*;
-import com.orangejd.server.service.IOrderService;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.OrderService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class OrderServiceImpl implements IOrderService {
+public class OrderServiceImpl implements OrderService {
 
     @Autowired private OrderMapper orderMapper;
     @Autowired private PaymentStageMapper paymentStageMapper;
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired private WorkMapper workMapper;
     @Autowired private QuoteMapper quoteMapper;
     @Autowired private ConversationMapper conversationMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @Override
     @Transactional

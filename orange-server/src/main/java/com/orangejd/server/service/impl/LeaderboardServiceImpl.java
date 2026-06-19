@@ -6,7 +6,7 @@ import com.orangejd.server.mapper.CategoryMapper;
 import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.pojo.entity.LeaderboardSnapshot;
-import com.orangejd.server.service.ILeaderboardService;
+import com.orangejd.server.service.LeaderboardService;
 import com.orangejd.pojo.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
-public class LeaderboardServiceImpl implements ILeaderboardService {
+public class LeaderboardServiceImpl implements LeaderboardService {
 
     @Autowired private WorkMapper workMapper;
     @Autowired private AccountMapper accountMapper;

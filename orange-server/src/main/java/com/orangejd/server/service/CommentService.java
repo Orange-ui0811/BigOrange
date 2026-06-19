@@ -4,7 +4,7 @@ import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.dto.CommentCreateDTO;
 import com.orangejd.pojo.vo.CommentVO;
 
-public interface ICommentService {
+public interface CommentService {
     void create(CommentCreateDTO dto);
     void delete(Long id);
     PageResult<CommentVO> listByTarget(String targetType, Long targetId, int page, int size);

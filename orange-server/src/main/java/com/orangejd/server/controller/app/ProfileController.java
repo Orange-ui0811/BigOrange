@@ -5,8 +5,9 @@ import com.orangejd.common.result.Result;
 import com.orangejd.pojo.vo.AccountVO;
 import com.orangejd.pojo.vo.UserProfileVO;
 import com.orangejd.pojo.vo.WorkVO;
+import com.orangejd.server.service.impl.ProfileServiceImpl;
 import com.orangejd.common.context.BaseContext;
-import com.orangejd.server.service.IProfileService;
+import com.orangejd.server.service.ProfileService;
 import com.orangejd.server.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/app/profile")
 public class ProfileController {
 
-    @Autowired private IProfileService profileService;
+    @Autowired private ProfileService profileService;
 
     @GetMapping("/me-info")
     public Result<Map<String, Object>> meInfo() {
@@ -48,7 +49,7 @@ public class ProfileController {
 
     @PutMapping("/update")
     public Result<?> updateProfile(@RequestBody java.util.Map<String, String> body) {
-        ((ProfileService)profileService).updateProfile(body);
+        ((ProfileServiceImpl)profileService).updateProfile(body);
         return Result.success();
     }
 

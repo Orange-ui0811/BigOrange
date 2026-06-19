@@ -3,7 +3,7 @@ package com.orangejd.server.controller.admin;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.vo.CommentVO;
-import com.orangejd.server.service.ICommentService;
+import com.orangejd.server.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin/comment")
 public class AdminCommentController {
 
-    @Autowired private ICommentService commentService;
+    @Autowired private CommentService commentService;
 
     @GetMapping("/{targetType}/{targetId}")
     public Result<PageResult<CommentVO>> list(@PathVariable String targetType, @PathVariable Long targetId,

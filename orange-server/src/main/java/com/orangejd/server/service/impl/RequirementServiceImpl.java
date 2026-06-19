@@ -10,7 +10,7 @@ import com.orangejd.pojo.dto.RequirementQueryDTO;
 import com.orangejd.pojo.entity.Requirement;
 import com.orangejd.pojo.vo.RequirementVO;
 import com.orangejd.server.mapper.RequirementMapper;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.NotificationService;
 import com.orangejd.server.service.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,7 +88,7 @@ public class RequirementServiceImpl implements RequirementService {
     }
 
     @Autowired private com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @Override
     public void offline(Long id, String reason) {

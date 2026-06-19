@@ -3,7 +3,7 @@ package com.orangejd.server.controller.app;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.MessageSendDTO;
 import com.orangejd.pojo.entity.Message;
-import com.orangejd.server.service.IMessageService;
+import com.orangejd.server.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/app/message")
 public class AppMessageController {
 
-    @Autowired private IMessageService messageService;
+    @Autowired private MessageService messageService;
 
     @PostMapping
     public Result<Message> send(@RequestBody MessageSendDTO dto) {

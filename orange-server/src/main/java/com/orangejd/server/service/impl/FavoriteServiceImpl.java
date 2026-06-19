@@ -1,6 +1,6 @@
 package com.orangejd.server.service.impl;
 
-import com.orangejd.server.service.IFavoriteService;
+import com.orangejd.server.service.FavoriteService;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.entity.Favorite;
@@ -8,19 +8,19 @@ import com.orangejd.pojo.vo.FavoriteVO;
 import com.orangejd.server.mapper.FavoriteMapper;
 import com.orangejd.server.mapper.RequirementMapper;
 import com.orangejd.server.mapper.WorkMapper;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class FavoriteServiceImpl implements IFavoriteService {
+public class FavoriteServiceImpl implements FavoriteService {
 
     @Autowired private FavoriteMapper favoriteMapper;
     @Autowired private WorkMapper workMapper;
     @Autowired private RequirementMapper requirementMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     public void favorite(String targetType, Long targetId) {
         Long currentId = BaseContext.getCurrentId();

@@ -6,14 +6,14 @@ import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.util.PageUtil;
 import com.orangejd.pojo.entity.Notification;
 import com.orangejd.server.mapper.NotificationMapper;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class NotificationServiceImpl implements INotificationService {
+public class NotificationServiceImpl implements NotificationService {
 
     @Autowired private NotificationMapper notificationMapper;
 

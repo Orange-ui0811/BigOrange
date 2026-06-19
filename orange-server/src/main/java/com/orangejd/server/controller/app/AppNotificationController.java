@@ -2,7 +2,7 @@ package com.orangejd.server.controller.app;
 
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.Notification;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/app/notification")
 public class AppNotificationController {
 
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @GetMapping("/list")
     public Result<List<Notification>> list(@RequestParam(defaultValue = "1") int page,

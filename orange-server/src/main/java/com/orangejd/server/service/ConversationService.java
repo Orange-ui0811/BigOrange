@@ -4,7 +4,7 @@ import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.dto.ConversationCreateDTO;
 import com.orangejd.pojo.vo.ConversationVO;
 
-public interface IConversationService {
+public interface ConversationService {
     ConversationVO create(ConversationCreateDTO dto);
     ConversationVO getDetail(Long id);
     void deleteConversation(Long id);

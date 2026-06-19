@@ -4,7 +4,7 @@ import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.ConversationCreateDTO;
 import com.orangejd.pojo.vo.ConversationVO;
-import com.orangejd.server.service.IConversationService;
+import com.orangejd.server.service.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/app/conversation")
 public class AppConversationController {
 
-    @Autowired private IConversationService conversationService;
+    @Autowired private ConversationService conversationService;
 
     @PostMapping
     public Result<ConversationVO> create(@RequestBody ConversationCreateDTO dto) {

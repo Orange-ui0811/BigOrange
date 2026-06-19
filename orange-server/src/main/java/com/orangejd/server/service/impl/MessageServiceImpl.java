@@ -9,8 +9,8 @@ import com.orangejd.pojo.entity.Conversation;
 import com.orangejd.pojo.entity.Message;
 import com.orangejd.server.mapper.ConversationMapper;
 import com.orangejd.server.mapper.MessageMapper;
-import com.orangejd.server.service.IMessageService;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.MessageService;
+import com.orangejd.server.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class MessageServiceImpl implements IMessageService {
+public class MessageServiceImpl implements MessageService {
 
     @Autowired private MessageMapper messageMapper;
     @Autowired private ConversationMapper conversationMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @Override
     @Transactional

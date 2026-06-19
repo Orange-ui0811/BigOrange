@@ -3,7 +3,7 @@ package com.orangejd.server.controller.app;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.vo.FavoriteVO;
-import com.orangejd.server.service.IFavoriteService;
+import com.orangejd.server.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/app/favorite")
 public class FavoriteController {
 
-    @Autowired private IFavoriteService favoriteService;
+    @Autowired private FavoriteService favoriteService;
 
     @PostMapping
     public Result<?> favorite(@RequestParam String targetType, @RequestParam Long targetId) {

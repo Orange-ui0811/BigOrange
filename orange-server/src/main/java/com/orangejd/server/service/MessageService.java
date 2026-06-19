@@ -5,7 +5,7 @@ import com.orangejd.pojo.entity.Message;
 
 import java.util.List;
 
-public interface IMessageService {
+public interface MessageService {
     Message send(MessageSendDTO dto);
     List<Message> getMessages(Long conversationId, int page, int size);
     void markAsRead(Long conversationId);

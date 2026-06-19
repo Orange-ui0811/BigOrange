@@ -9,14 +9,14 @@ import com.orangejd.pojo.dto.ConversationCreateDTO;
 import com.orangejd.pojo.entity.Conversation;
 import com.orangejd.pojo.vo.ConversationVO;
 import com.orangejd.server.mapper.ConversationMapper;
-import com.orangejd.server.service.IConversationService;
+import com.orangejd.server.service.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ConversationServiceImpl implements IConversationService {
+public class ConversationServiceImpl implements ConversationService {
 
     @Autowired private ConversationMapper conversationMapper;
 

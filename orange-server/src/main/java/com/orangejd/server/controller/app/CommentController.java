@@ -4,7 +4,7 @@ import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.CommentCreateDTO;
 import com.orangejd.pojo.vo.CommentVO;
-import com.orangejd.server.service.ICommentService;
+import com.orangejd.server.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/app/comment")
 public class CommentController {
 
-    @Autowired private ICommentService commentService;
+    @Autowired private CommentService commentService;
 
     @PostMapping
     public Result<?> create(@RequestBody CommentCreateDTO dto) {

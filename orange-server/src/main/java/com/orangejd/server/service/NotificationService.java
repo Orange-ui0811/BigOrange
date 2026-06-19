@@ -4,7 +4,7 @@ import com.orangejd.pojo.entity.Notification;
 
 import java.util.List;
 
-public interface INotificationService {
+public interface NotificationService {
     /** 发送通知（供其他 Service 调用） */
     void send(Long accountId, String type, String message, Long relatedId);
     List<Notification> listMyNotifications(int page, int size);

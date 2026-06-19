@@ -3,7 +3,7 @@ package com.orangejd.server.controller.app;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.QuoteCreateDTO;
 import com.orangejd.pojo.entity.Quote;
-import com.orangejd.server.service.IQuoteService;
+import com.orangejd.server.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/app/quote")
 public class QuoteController {
 
-    @Autowired private IQuoteService quoteService;
+    @Autowired private QuoteService quoteService;
 
     @PostMapping
     public Result<Quote> create(@RequestBody QuoteCreateDTO dto) {

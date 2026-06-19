@@ -1,7 +1,7 @@
 package com.orangejd.server.controller.app;
 
 import com.orangejd.common.result.Result;
-import com.orangejd.server.service.ILeaderboardService;
+import com.orangejd.server.service.LeaderboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.Map;
 public class AppLeaderboardController {
 
     @Autowired
-    private ILeaderboardService leaderboardService;
+    private LeaderboardService leaderboardService;
 
     @GetMapping("/works")
     public Result<?> works(@RequestParam(required = false) Long categoryId,

@@ -1,7 +1,7 @@
 package com.orangejd.server.service.impl;
 
-import com.orangejd.server.service.ICommentService;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.CommentService;
+import com.orangejd.server.service.NotificationService;
 import com.orangejd.common.constant.MessageConstant;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.exception.BaseException;
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements ICommentService {
+public class CommentServiceImpl implements CommentService {
 
     @Autowired private CommentMapper commentMapper;
     @Autowired private WorkMapper workMapper;
     @Autowired private RequirementMapper requirementMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     public void create(CommentCreateDTO dto) {
         if (dto.getContent() == null || dto.getContent().trim().isEmpty()) throw new BaseException(MessageConstant.COMMENT_EMPTY);

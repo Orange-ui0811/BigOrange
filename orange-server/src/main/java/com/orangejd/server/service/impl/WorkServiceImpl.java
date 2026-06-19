@@ -14,7 +14,7 @@ import com.orangejd.pojo.vo.WorkDetailVO;
 import com.orangejd.pojo.vo.WorkVO;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.mapper.WorkSaleOptionMapper;
-import com.orangejd.server.service.INotificationService;
+import com.orangejd.server.service.NotificationService;
 import com.orangejd.server.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,7 +119,7 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Autowired private com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
-    @Autowired private INotificationService notificationService;
+    @Autowired private NotificationService notificationService;
 
     @Override
     @Transactional
