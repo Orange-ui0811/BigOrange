@@ -664,24 +664,14 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 .squeezing { animation: squeeze 1s ease-in-out infinite; display: inline-block; }
 @keyframes squeeze { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
-/* 榨汁动画 */
-.juice-animation { text-align: center; padding: 30px 0 20px; }
-.juice-scene { display: flex; align-items: center; justify-content: center; gap: 8px; }
-.j-orange { font-size: 32px; animation: dropIn .5s ease-out both; }
-.j-cup { font-size: 40px; margin-left: 8px; animation: cupShake 2s ease-in-out infinite; }
-@keyframes dropIn { from { opacity: 0; transform: translateY(-40px) scale(.5); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes cupShake { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
-
 /* 结果卡片 */
 .leaf-card { background: #fffdf7; border-radius: 12px; padding: 14px; border: 1px solid #ffe0b2; height: 100%; }
 .leaf-dot { font-size: 18px; display: block; margin-bottom: 6px; }
 .leaf-label { font-size: 11px; color: #bcaaa4; margin-bottom: 2px; }
 .leaf-text { font-size: 13px; color: #5d4037; font-weight: 500; line-height: 1.5; }
 
-..rec-card { background: #fff; border-radius: 20px 20px 28px 28px; padding: 28px 18px 18px; box-shadow: 0 2px 12px rgba(0,0,0,.04); border: 2px solid #ffe0b2; border-top: none; transition: transform .15s; position: relative; overflow: hidden; }
-.rec-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(255,152,0,.06) 0%, rgba(230,81,0,.04) 100%); pointer-events: none; }
-.rec-card::after { content: ''; position: absolute; top: -16px; left: 50%; transform: translateX(-50%); width: 5px; height: 22px; background: linear-gradient(180deg, #ff9800, #e65100); border-radius: 3px; }
-.rec-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(230,81,0,.12); }
+.rec-card { background: #fff; border-radius: 16px; padding: 18px; box-shadow: 0 2px 12px rgba(0,0,0,.04); border-left: 4px solid #e65100; transition: transform .15s; }
+.rec-card:hover { transform: translateY(-2px); }
 .rec-num { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
 
 .juice-glass { position: relative; width: 36px; height: 60px; background: #fff8f0; border: 2px solid #ffe0b2; border-radius: 8px 8px 18px 18px; overflow: hidden; }
