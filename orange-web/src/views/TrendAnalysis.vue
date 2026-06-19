@@ -127,7 +127,7 @@
         <div class="step-card-wrapper">
           <Transition :name="animDirection" @after-leave="onAnimEnd">
             <div class="step-card" :key="currentStep">
-              <div class="card-bg-orange" />
+              <div class="card-bg-orange"></div>
             <!-- 步骤1: 方向 -->
             <template v-if="currentStep === 0">
               <div class="step-title">🎯 你对哪个技术方向感兴趣？</div>
@@ -164,6 +164,7 @@
               <el-input v-model="profile.customTime" placeholder="或输入自定义..." style="margin-top:12px" maxlength="200" />
             </template>
           </div>
+          </Transition>
         </div>
 
         <!-- 底部按钮 -->
