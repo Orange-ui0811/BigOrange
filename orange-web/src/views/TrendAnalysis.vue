@@ -192,6 +192,21 @@
         <div style="margin-top:16px;font-size:14px;color:#e65100;font-weight:600">{{ squeezeText }}</div>
       </div>
 
+      <!-- 查询记录 -->
+      <div v-if="history.length" style="margin-top:16px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-weight:700;font-size:14px;color:#5d4037">📋 查询记录（{{ history.length }}条）</span>
+          <el-button size="small" type="danger" text @click="clearHistory">清空全部</el-button>
+        </div>
+        <div v-for="(h,i) in history" :key="i" style="padding:8px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between;align-items:center" @click="loadHistory(h)">
+          <div style="flex:1;min-width:0">
+            <span style="font-size:13px;color:#5d4037;font-weight:500">{{ h.topics?.join('、') || '全部' }}</span>
+            <span style="font-size:11px;color:#bcaaa4;margin-left:8px">{{ h.time }}</span>
+          </div>
+          <el-button size="small" text type="danger" @click.stop="delHistory(i)">✕</el-button>
+        </div>
+      </div>
+
       <!-- 结果区 -->
       <div v-if="v2Result" style="margin-top:16px">
         <!-- 领域洞察 -->
@@ -369,6 +384,33 @@ const expOptions = ['新手入门', '1-3年', '3年以上']
 const langOptions = ['Python', 'JavaScript', 'TypeScript', 'Go', 'Rust', 'Java', 'C++', '其他']
 const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（每周5-15h）', '🚀 全力投入（每周>15h）']
 const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 找到了！为你生成推荐...']
+const history = ref(JSON.parse(localStorage.getItem('trend_history') || '[]'))
+
+const saveToHistory = () => {
+  if (!v2Result.value) return
+  history.value.unshift({
+    time: new Date().toLocaleString('zh-CN'),
+    topics: [...profile.topics],
+    purpose: profile.purpose,
+    experience: profile.experience,
+    languages: [...profile.languages],
+    timeCommitment: profile.timeCommitment,
+    result: JSON.parse(JSON.stringify(v2Result.value))
+  })
+  if (history.value.length > 20) history.value = history.value.slice(0, 20)
+  localStorage.setItem('trend_history', JSON.stringify(history.value))
+}
+const delHistory = (i) => { history.value.splice(i, 1); localStorage.setItem('trend_history', JSON.stringify(history.value)) }
+const clearHistory = () => { history.value = []; localStorage.removeItem('trend_history') }
+const loadHistory = (h) => {
+  v2Result.value = h.result
+  profile.topics = h.topics || []
+  profile.purpose = h.purpose || ''
+  profile.experience = h.experience || ''
+  profile.languages = h.languages || []
+  profile.timeCommitment = h.timeCommitment || ''
+  currentStep.value = 3
+}
 
 const startJuicing = async () => {
   if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; currentStep.value = 0; return }
@@ -382,6 +424,7 @@ const startJuicing = async () => {
     const r = await request.post('/app/trend/analyze-v2', { ...profile }, { timeout: 0 })
     if (r.code === 1 && r.data) {
       v2Result.value = r.data
+      setTimeout(() => saveToHistory(), 500)
     } else {
       v2Error.value = r.msg || '分析失败'
     }
