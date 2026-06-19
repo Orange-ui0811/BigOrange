@@ -109,109 +109,145 @@
       </el-col>
     </el-row>
 
-    <!-- V2 智能分析面板 -->
-    <el-card shadow="never" style="border-radius:12px;margin-top:16px">
-      <h4 style="margin:0 0 12px">🤖 智能分析 · 个人化项目推荐</h4>
-
-      <!-- 四维表单 -->
-      <el-row :gutter="12">
-        <el-col :span="6">
-          <div style="font-weight:600;font-size:13px;margin-bottom:4px">🎯 技术方向</div>
-          <el-select v-model="profile.topics" multiple placeholder="选择方向" size="small" style="width:100%">
-            <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
-          </el-select>
-          <el-input v-model="profile.customTopics" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
-        </el-col>
-        <el-col :span="6">
-          <div style="font-weight:600;font-size:13px;margin-bottom:4px">💡 目的动机</div>
-          <el-select v-model="profile.purpose" placeholder="选择目的" size="small" style="width:100%">
-            <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
-          </el-select>
-          <el-input v-model="profile.customPurpose" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
-        </el-col>
-        <el-col :span="6">
-          <div style="font-weight:600;font-size:13px;margin-bottom:4px">📚 技术基础</div>
-          <el-select v-model="profile.experience" placeholder="编程经验" size="small" style="width:100%">
-            <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
-          </el-select>
-          <el-select v-model="profile.languages" multiple placeholder="掌握语言" size="small" style="width:100%;margin-top:4px">
-            <el-option v-for="t in langOptions" :key="t" :label="t" :value="t" />
-          </el-select>
-          <el-input v-model="profile.customLang" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
-        </el-col>
-        <el-col :span="6">
-          <div style="font-weight:600;font-size:13px;margin-bottom:4px">⏰ 时间投入</div>
-          <el-select v-model="profile.timeCommitment" placeholder="选择时间" size="small" style="width:100%">
-            <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
-          </el-select>
-          <el-input v-model="profile.customTime" placeholder="自定义补充" size="small" style="margin-top:4px" maxlength="200" />
-          <el-button type="primary" @click="analyzeV2" :loading="analyzing" style="width:100%;margin-top:12px;background:#e65100;border-color:#e65100">开始分析</el-button>
-        </el-col>
-      </el-row>
-
-      <!-- 分析结果 -->
-      <div v-if="v2Result" style="margin-top:16px">
-        <el-divider />
-        <!-- 领域分析 -->
-        <div style="background:#f5f9ff;padding:12px;border-radius:8px;margin-bottom:12px">
-          <div style="font-weight:600;margin-bottom:8px">📊 领域分析</div>
-          <el-row :gutter="12">
-            <el-col :span="6"><div style="font-size:12px;color:#909399">发展趋势</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.trend || '-' }}</div></el-col>
-            <el-col :span="6"><div style="font-size:12px;color:#909399">发展前景</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.prospect || '-' }}</div></el-col>
-            <el-col :span="6"><div style="font-size:12px;color:#909399">市场需求</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.demand || '-' }}</div></el-col>
-            <el-col :span="6"><div style="font-size:12px;color:#909399">总结</div><div style="font-size:13px;font-weight:500">{{ v2Result.analysis?.summary || '-' }}</div></el-col>
-          </el-row>
+    <!-- 🍊 橙子智能分析面板 -->
+    <div style="margin-top:16px">
+      <!-- 表单卡片 -->
+      <div style="background:#fff;border-radius:20px;padding:28px 24px;box-shadow:0 2px 16px rgba(230,81,0,.08);border-left:4px solid #e65100">
+        <div style="display:flex;align-items:center;margin-bottom:20px">
+          <span class="orange-icon" style="font-size:28px;margin-right:10px" />
+          <div>
+            <div style="font-weight:700;font-size:16px;color:#5d4037">桔子 · 智能分析</div>
+            <div style="font-size:12px;color:#bcaaa4">告诉我你的想法，帮你找到最合适的开源项目</div>
+          </div>
         </div>
-        <!-- 推荐项目 -->
-        <div style="font-weight:600;margin-bottom:8px">🏆 推荐项目</div>
-        <el-row :gutter="12">
-          <el-col :span="8" v-for="(r, i) in v2Result.recommendations" :key="i">
-            <el-card shadow="never" style="border-radius:8px;margin-bottom:8px;height:100%">
-              <div style="font-weight:600;font-size:14px">{{ r.name }}</div>
-              <p style="font-size:12px;color:#6b6b6b;margin:4px 0">{{ r.description }}</p>
-              <el-tag :type="r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger'" size="small">难度: {{ r.difficulty }}</el-tag>
-              <el-progress :percentage="r.score" :color="scoreColor(r.score)" :stroke-width="6" style="margin-top:8px" />
-              <div style="font-size:12px;margin-top:8px;line-height:1.6">
-                <p v-if="r.vibeCodingReason"><b>🤖 Vibe Coding：</b>{{ r.vibeCodingReason }}</p>
-                <p><b>推荐理由：</b>{{ r.recommendReason }}</p>
-                <p><b>前置知识：</b>{{ r.prerequisites }}</p>
-                <p v-if="r.references?.length">
-                  <b>参考项目：</b>
-                  <span v-for="(ref,j) in r.references" :key="j">
-                    <template v-if="ref.url">
-                      <a :href="ref.url" target="_blank" style="color:#409EFF">{{ ref.name }}</a>
-                    </template>
-                    <template v-else>{{ ref }}</template>
-                    <span v-if="j < r.references.length-1">、</span>
-                  </span>
-                </p>
-              </div>
-            </el-card>
+
+        <!-- 四维表单 - 气泡式 -->
+        <el-row :gutter="16">
+          <el-col :span="6">
+            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">🎯 方向</div>
+            <el-select v-model="profile.topics" multiple placeholder="选择方向" size="default" style="width:100%" collapse-tags>
+              <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
+            </el-select>
+            <el-input v-model="profile.customTopics" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
+          </el-col>
+          <el-col :span="5">
+            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">💡 目的</div>
+            <el-select v-model="profile.purpose" placeholder="为什么学" size="default" style="width:100%">
+              <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
+            </el-select>
+            <el-input v-model="profile.customPurpose" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
+          </el-col>
+          <el-col :span="7">
+            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">📚 基础</div>
+            <el-select v-model="profile.experience" placeholder="经验" size="default" style="width:100%">
+              <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
+            </el-select>
+            <el-select v-model="profile.languages" multiple placeholder="语言" size="default" style="width:100%;margin-top:6px" collapse-tags>
+              <el-option v-for="t in langOptions" :key="t" :label="t" :value="t" />
+            </el-select>
+            <el-input v-model="profile.customLang" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
+          </el-col>
+          <el-col :span="6">
+            <div style="font-size:13px;font-weight:600;color:#5d4037;margin-bottom:8px">⏰ 时间</div>
+            <el-select v-model="profile.timeCommitment" placeholder="投入时间" size="default" style="width:100%">
+              <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
+            </el-select>
+            <el-input v-model="profile.customTime" placeholder="自定义..." size="small" style="margin-top:6px" maxlength="200" />
+            <button class="orange-btn" @click="analyzeV2" :disabled="analyzing" style="width:100%;margin-top:12px">
+              <span v-if="!analyzing">🍊 帮我分析</span>
+              <span v-else class="squeezing">🍊 榨汁中...</span>
+            </button>
           </el-col>
         </el-row>
-        <!-- 学习建议 -->
-        <div v-if="v2Result.learning" style="margin-top:12px;background:#f0fdf4;padding:12px;border-radius:8px">
-          <div style="font-weight:600;margin-bottom:8px">📖 学习建议</div>
-          <div v-if="v2Result.learning.steps?.length" style="margin-bottom:8px">
-            <div style="font-size:12px;color:#909399;margin-bottom:4px">学习路径</div>
-            <el-steps :active="v2Result.learning.steps.length" direction="vertical" space="20px" size="small">
-              <el-step v-for="(s,i) in v2Result.learning.steps" :key="i" :title="s" />
-            </el-steps>
+
+        <div v-if="v2Error" style="color:#e65100;font-size:13px;margin-top:10px;padding:8px;background:#fff3e0;border-radius:8px">{{ v2Error }}</div>
+      </div>
+
+      <!-- 加载中 -->
+      <div v-if="analyzing" style="text-align:center;padding:40px 0">
+        <span class="orange-squeeze" style="font-size:40px;display:block;margin-bottom:8px">🍊</span>
+        <div style="font-size:14px;color:#e65100;font-weight:600">{{ squeezeText }}</div>
+      </div>
+
+      <!-- 结果区 -->
+      <div v-if="v2Result" style="margin-top:16px">
+        <!-- 领域洞察 -->
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid #ff9800">
+          <div style="font-weight:700;font-size:15px;color:#5d4037;margin-bottom:12px">📊 领域洞察</div>
+          <el-row :gutter="12">
+            <el-col :span="8">
+              <div class="leaf-card">
+                <span class="leaf-dot">🍃</span>
+                <div class="leaf-label">发展趋势</div>
+                <div class="leaf-text">{{ v2Result.analysis?.trend || '-' }}</div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="leaf-card">
+                <span class="leaf-dot">🔮</span>
+                <div class="leaf-label">发展前景</div>
+                <div class="leaf-text">{{ v2Result.analysis?.prospect || '-' }}</div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="leaf-card">
+                <span class="leaf-dot">📈</span>
+                <div class="leaf-label">市场需求</div>
+                <div class="leaf-text">{{ v2Result.analysis?.demand || '-' }}</div>
+              </div>
+            </el-col>
+          </el-row>
+          <div v-if="v2Result.analysis?.summary" style="margin-top:12px;padding-top:12px;border-top:1px solid #ffe0b2;font-size:13px;color:#5d4037;line-height:1.6">
+            💬 {{ v2Result.analysis.summary }}
           </div>
-          <div v-if="v2Result.learning.timeline" style="font-size:13px;margin-bottom:4px"><b>预计时间：</b>{{ v2Result.learning.timeline }}</div>
-          <div v-if="v2Result.learning.tips" style="font-size:13px;line-height:1.6;color:#2c2c2c"><b>学习建议：</b>{{ v2Result.learning.tips }}</div>
+        </div>
+
+        <!-- 推荐项目 -->
+        <div style="font-weight:700;font-size:15px;color:#5d4037;margin:20px 0 12px">🍊 为你推荐</div>
+        <div v-for="(r, i) in v2Result.recommendations" :key="i" class="rec-card" style="margin-bottom:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span class="rec-num">🍊 #{{ i+1 }}</span>
+              <span style="font-weight:700;font-size:15px;color:#5d4037">{{ r.name }}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <el-tag :type="r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger'" size="small" effect="dark">{{ r.difficulty }}</el-tag>
+              <span style="font-size:12px;color:#e65100;font-weight:700">{{ r.score }}分</span>
+            </div>
+          </div>
+          <p style="font-size:13px;color:#6b6b6b;margin:0 0 10px;line-height:1.6">{{ r.description }}</p>
+          <div class="juice-bar"><div class="juice-fill" :style="{width:r.score+'%'}"></div></div>
+          <div style="margin-top:10px;font-size:13px;line-height:1.8">
+            <p v-if="r.vibeCodingReason" style="background:#fff8e1;padding:8px 10px;border-radius:8px;font-size:12px">🤖 <b>Vibe Coding：</b>{{ r.vibeCodingReason }}</p>
+            <p style="margin-top:6px"><span style="color:#e65100">●</span> <b>推荐：</b>{{ r.recommendReason }}</p>
+            <p><span style="color:#ff9800">●</span> <b>前置：</b>{{ r.prerequisites }}</p>
+            <p v-if="r.references?.length">
+              <span style="color:#81c784">●</span> <b>参考：</b>
+              <span v-for="(ref,j) in r.references" :key="j">
+                <template v-if="ref.url"><a :href="ref.url" target="_blank" style="color:#e65100">{{ ref.name }}</a></template>
+                <template v-else>{{ ref }}</template><span v-if="j < r.references.length-1">、</span>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- 学习路径 -->
+        <div v-if="v2Result.learning" style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid #81c784;margin-top:12px">
+          <div style="font-weight:700;font-size:15px;color:#5d4037;margin-bottom:12px">📖 学习路径</div>
+          <div v-if="v2Result.learning.steps?.length" style="display:flex;align-items:center;gap:0;margin-bottom:12px;flex-wrap:wrap">
+            <template v-for="(s,j) in v2Result.learning.steps" :key="j">
+              <div class="step-dot">{{ s }}</div>
+              <span v-if="j < v2Result.learning.steps.length-1" style="color:#e65100;font-size:18px;margin:0 2px">→</span>
+            </template>
+          </div>
+          <div v-if="v2Result.learning.timeline" style="font-size:13px;color:#5d4037;margin-bottom:4px"><b>⏱ 预计：</b>{{ v2Result.learning.timeline }}</div>
+          <div v-if="v2Result.learning.tips" style="font-size:13px;color:#6b6b6b;line-height:1.6">{{ v2Result.learning.tips }}</div>
         </div>
       </div>
 
-      <div v-if="analyzing" style="text-align:center;padding:20px;color:#909399">
-        <el-icon class="is-loading"><Loading /></el-icon> AI 正在分析，预计 15-30 秒...
-      </div>
-
-      <div v-if="v2Error" style="color:#F56C6C;font-size:13px;margin-top:8px">{{ v2Error }}</div>
-
-      <!-- 旧面板折叠 -->
-      <el-collapse style="margin-top:12px">
-        <el-collapse-item title="自由提问（旧版）">
+      <!-- 旧版折叠 -->
+      <el-collapse style="margin-top:16px">
+        <el-collapse-item title="💬 自由提问（旧版）">
           <el-row :gutter="8">
             <el-col :span="6"><el-input v-model="aiEndpoint" placeholder="https://api.deepseek.com/v1" size="small" /></el-col>
             <el-col :span="3"><el-input v-model="aiModel" placeholder="deepseek-chat" size="small" /></el-col>
@@ -227,7 +263,7 @@
           <div v-if="aiError" style="color:#F56C6C;font-size:13px;margin-top:4px">{{ aiError }}</div>
         </el-collapse-item>
       </el-collapse>
-    </el-card>
+    </div>
   </div>
 </template>
 
@@ -280,6 +316,9 @@ const aiError = ref('')
 const analyzing = ref(false)
 const v2Result = ref(null)
 const v2Error = ref('')
+const squeezeText = ref('🍊 正在榨取分析精华...')
+const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 翻阅 ' + (profile.topics[0] || '各类') + ' 项目中...', '🍊 找到了！为你生成推荐...']
+let squeezeTimer = null
 const profile = reactive({
   topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
   customTopics: '', customPurpose: '', customLang: '', customTime: ''
@@ -294,6 +333,8 @@ const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（�
 const analyzeV2 = async () => {
   if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; return }
   analyzing.value = true; v2Error.value = ''; v2Result.value = null
+  squeezeText.value = squeezeTexts[0]; let idx = 0
+  squeezeTimer = setInterval(() => { idx = (idx+1) % squeezeTexts.length; squeezeText.value = squeezeTexts[idx] }, 4000)
   try {
     const r = await request.post('/app/trend/analyze-v2', { ...profile }, { timeout: 0 })
     if (r.code === 1 && r.data) {
@@ -302,7 +343,7 @@ const analyzeV2 = async () => {
       v2Error.value = r.msg || '分析失败'
     }
   } catch { v2Error.value = '请求失败，请检查网络连接' }
-  finally { analyzing.value = false }
+  finally { analyzing.value = false; if (squeezeTimer) clearInterval(squeezeTimer) }
 }
 
 const formatNum = (n) => {
@@ -495,3 +536,43 @@ const askAI = async () => {
 onMounted(() => loadGraph())
 onUnmounted(() => { chart?.dispose(); chart = null })
 </script>
+
+<style scoped>
+/* 🍊 橙子卡通风格 */
+.orange-icon {
+  display: inline-block; width: 36px; height: 36px; background: radial-gradient(circle at 35% 35%, #ffcc80, #e65100 80%);
+  border-radius: 45% 55% 50% 50%; position: relative; box-shadow: 0 2px 8px rgba(230,81,0,.3);
+}
+.orange-icon::after {
+  content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+  width: 12px; height: 7px; background: #81c784; border-radius: 50% 50% 0 0;
+}
+.orange-btn {
+  background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; border: none;
+  border-radius: 24px; padding: 10px 24px; font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: all .2s; box-shadow: 0 3px 12px rgba(230,81,0,.25);
+}
+.orange-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(230,81,0,.35); }
+.orange-btn:active { transform: scale(.97); }
+.orange-btn:disabled { opacity: .6; cursor: wait; }
+
+.squeezing { animation: squeeze 1s ease-in-out infinite; display: inline-block; }
+@keyframes squeeze { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+.orange-squeeze { animation: squeezeBig 1.5s ease-in-out infinite; display: inline-block; }
+@keyframes squeezeBig { 0%,100% { transform: scale(1) rotate(0); } 25% { transform: scale(1.2) rotate(-5deg); } 75% { transform: scale(1.2) rotate(5deg); } }
+
+.leaf-card { background: #fffdf7; border-radius: 12px; padding: 14px; border: 1px solid #ffe0b2; height: 100%; }
+.leaf-dot { font-size: 18px; display: block; margin-bottom: 6px; }
+.leaf-label { font-size: 11px; color: #bcaaa4; margin-bottom: 2px; }
+.leaf-text { font-size: 13px; color: #5d4037; font-weight: 500; line-height: 1.5; }
+
+.rec-card { background: #fff; border-radius: 16px; padding: 18px; box-shadow: 0 2px 12px rgba(0,0,0,.04); border-left: 4px solid #e65100; transition: transform .15s; }
+.rec-card:hover { transform: translateY(-2px); }
+.rec-num { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+
+.juice-bar { height: 6px; background: #ffe0b2; border-radius: 3px; overflow: hidden; }
+.juice-fill { height: 100%; background: linear-gradient(90deg, #ff9800, #e65100); border-radius: 3px; transition: width .8s ease-out; }
+
+.step-dot { background: linear-gradient(135deg, #fff, #fff3e0); border: 1px solid #ffe0b2; border-radius: 20px; padding: 6px 14px; font-size: 12px; color: #5d4037; white-space: nowrap; }
+</style>
