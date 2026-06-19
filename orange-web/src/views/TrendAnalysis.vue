@@ -596,23 +596,42 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 
 .step-card-wrapper { overflow: hidden; }
 .step-card { background: #fffdf5; border-radius: 16px; padding: 28px 24px; min-height: 180px; position: relative; overflow: hidden; border: 1px solid #ffe0b2; }
-.card-bg-orange { position: absolute; right: -30px; bottom: -20px; width: 140px; height: 140px; background: radial-gradient(circle at 35% 35%, #fff3e0, #ffe0b2 70%); border-radius: 45% 55% 50% 50%; opacity: .5; pointer-events: none; }
-.card-bg-orange::after { content: ''; position: absolute; top: -10px; left: 40%; width: 16px; height: 10px; background: #a5d6a7; border-radius: 50% 50% 0 0; }
+.card-bg-orange { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 120px; height: 120px; background: radial-gradient(circle at 35% 35%, #fff3e0, #ffe0b2 70%); border-radius: 45% 55% 50% 50%; opacity: .4; pointer-events: none; }
+.card-bg-orange::after { content: ''; position: absolute; top: -8px; left: 40%; width: 14px; height: 8px; background: #a5d6a7; border-radius: 50% 50% 0 0; }
 .step-title { font-size: 16px; font-weight: 700; color: #5d4037; margin-bottom: 16px; }
 .anim-in { animation: slideIn .35s ease-out; }
 @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
 
 /* 🍊 橙子滚动 */
+.card-bg-orange { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); }
 .orange-roll { transition: none; }
-.roll-next { animation: rollOutLeft .4s ease-in forwards; }
-.roll-prev { animation: rollOutRight .4s ease-in forwards; }
-@keyframes rollOutLeft { from { right: -30px; transform: rotate(0); } to { right: -130px; transform: rotate(-180deg); } }
-@keyframes rollOutRight { from { right: -30px; transform: rotate(0); } to { right: 80px; transform: rotate(180deg); } }
-.anim-in .orange-roll { animation: none !important; right: 100px; animation: rollIn .4s ease-out forwards !important; }
-.anim-in .roll-next { animation-name: rollInRight !important; }
-.anim-in .roll-prev { animation-name: rollInLeft !important; }
-@keyframes rollInRight { from { left: auto; right: -140px; opacity: 0; transform: rotate(-180deg); } to { right: -30px; opacity: 1; transform: rotate(0); } }
-@keyframes rollInLeft { from { left: auto; right: 100px; opacity: 0; transform: rotate(180deg); } to { right: -30px; opacity: 1; transform: rotate(0); } }
+
+/* 下一步: 橙子从中间滚出左边 */
+.roll-next { animation: rollOutLeft .35s ease-in forwards; }
+@keyframes rollOutLeft {
+  from { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+  to { opacity: 0; transform: translate(calc(-50% - 200px),-50%) rotate(-200deg); }
+}
+/* 上一步: 橙子从中间滚出右边 */
+.roll-prev { animation: rollOutRight .35s ease-in forwards; }
+@keyframes rollOutRight {
+  from { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+  to { opacity: 0; transform: translate(calc(-50% + 200px),-50%) rotate(200deg); }
+}
+
+/* 新卡片滑入 + 橙子滚入 */
+.anim-in { animation: cardSlide .35s ease-out; }
+@keyframes cardSlide { from { opacity: 0; } to { opacity: 1; } }
+.anim-in .roll-next { animation-name: rollInFromRight !important; }
+@keyframes rollInFromRight {
+  from { opacity: 0; transform: translate(calc(-50% + 200px),-50%) rotate(200deg); }
+  to { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+}
+.anim-in .roll-prev { animation-name: rollInFromLeft !important; }
+@keyframes rollInFromLeft {
+  from { opacity: 0; transform: translate(calc(-50% - 200px),-50%) rotate(-200deg); }
+  to { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+}
 
 /* 按钮 */
 .orange-btn { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; border: none; border-radius: 24px; padding: 10px 28px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; box-shadow: 0 3px 12px rgba(230,81,0,.25); }
