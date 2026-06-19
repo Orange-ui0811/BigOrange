@@ -335,3 +335,17 @@ CREATE TABLE IF NOT EXISTS leaderboard_snapshot (
     PRIMARY KEY (id),
     UNIQUE KEY uk_snapshot (source, topic_name, period, snapshot_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='榜单快照表';
+
+CREATE TABLE IF NOT EXISTS trend_history (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    browser_id VARCHAR(64) NOT NULL,
+    topics VARCHAR(512),
+    purpose VARCHAR(128),
+    experience VARCHAR(128),
+    languages VARCHAR(512),
+    time_commitment VARCHAR(128),
+    result_json MEDIUMTEXT,
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_browser_id (browser_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

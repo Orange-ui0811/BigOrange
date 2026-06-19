@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.TrendHistoryMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO trend_history (browser_id, topics, purpose, experience, languages, time_commitment, result_json)
+        VALUES (#{browserId}, #{topics}, #{purpose}, #{experience}, #{languages}, #{timeCommitment}, #{resultJson})
+    </insert>
+
+    <select id="selectByBrowserId" resultType="com.orangejd.pojo.entity.TrendHistory">
+        SELECT id, browser_id, topics, purpose, experience, languages, time_commitment, result_json, create_time
+        FROM trend_history WHERE browser_id = #{browserId}
+        ORDER BY id DESC LIMIT #{limit}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM trend_history WHERE id = #{id} AND browser_id = #{browserId}
+    </delete>
+
+    <delete id="deleteByBrowserId">
+        DELETE FROM trend_history WHERE browser_id = #{browserId}
+    </delete>
+</mapper>

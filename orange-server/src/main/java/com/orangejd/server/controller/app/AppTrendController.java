@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -21,6 +21,9 @@ public class AppTrendController {
 
     @Autowired
     private TrendAnalysisService analysisService;
+
+    @Autowired
+    private com.orangejd.server.mapper.TrendHistoryMapper trendHistoryMapper;
 
     @Autowired(required = false)
     private StringRedisTemplate redisTemplate;
@@ -87,5 +90,52 @@ public class AppTrendController {
         if (result.containsKey("error"))
             return Result.error((String) result.get("error"));
         return Result.success(result);
+    }
+
+    // ---- 查询历史 ----
+
+    @GetMapping("/history")
+    public Result<List<Map<String, Object>>> history(@RequestParam String browserId) {
+        List<com.orangejd.pojo.entity.TrendHistory> list = trendHistoryMapper.selectByBrowserId(browserId, 20);
+        List<Map<String, Object>> result = new java.util.ArrayList<>();
+        for (com.orangejd.pojo.entity.TrendHistory h : list) {
+            Map<String, Object> m = new java.util.LinkedHashMap<>();
+            m.put("id", h.getId());
+            m.put("topics", h.getTopics());
+            m.put("purpose", h.getPurpose());
+            m.put("experience", h.getExperience());
+            m.put("languages", h.getLanguages());
+            m.put("timeCommitment", h.getTimeCommitment());
+            m.put("createTime", h.getCreateTime() != null ? h.getCreateTime().toString() : "");
+            m.put("result", h.getResultJson());
+            result.add(m);
+        }
+        return Result.success(result);
+    }
+
+    @PostMapping("/history/save")
+    public Result<?> saveHistory(@RequestBody Map<String, Object> body) {
+        com.orangejd.pojo.entity.TrendHistory h = new com.orangejd.pojo.entity.TrendHistory();
+        h.setBrowserId((String) body.get("browserId"));
+        h.setTopics(body.get("topics") != null ? body.get("topics").toString() : "");
+        h.setPurpose((String) body.getOrDefault("purpose", ""));
+        h.setExperience((String) body.getOrDefault("experience", ""));
+        h.setLanguages(body.get("languages") != null ? body.get("languages").toString() : "");
+        h.setTimeCommitment((String) body.getOrDefault("timeCommitment", ""));
+        h.setResultJson(body.get("result") != null ? body.get("result").toString() : "");
+        trendHistoryMapper.insert(h);
+        return Result.success(Collections.singletonMap("id", h.getId()));
+    }
+
+    @DeleteMapping("/history/{id}")
+    public Result<?> deleteHistory(@PathVariable Long id, @RequestParam String browserId) {
+        trendHistoryMapper.deleteById(id, browserId);
+        return Result.success();
+    }
+
+    @DeleteMapping("/history/clear")
+    public Result<?> clearHistory(@RequestParam String browserId) {
+        trendHistoryMapper.deleteByBrowserId(browserId);
+        return Result.success();
     }
 }

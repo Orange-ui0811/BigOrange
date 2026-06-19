@@ -113,6 +113,31 @@
     <div style="margin-top:16px">
       <!-- 步骤式表单卡片 -->
       <div class="orange-form-card">
+        <!-- 标题栏 + 历史记录 -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div>
+            <span style="font-weight:700;font-size:16px;color:#5d4037">🍊 智能分析</span>
+            <span style="font-size:12px;color:#bcaaa4;margin-left:8px">告诉我你的想法</span>
+          </div>
+          <el-popover placement="bottom-end" width="320" trigger="click">
+            <template #reference>
+              <el-button size="small" text>{{ history.length ? '📋 记录 ('+history.length+')' : '📋 记录' }}</el-button>
+            </template>
+            <div style="max-height:300px;overflow:auto">
+              <div v-if="!history.length" style="text-align:center;color:#bcaaa4;padding:20px">暂无记录</div>
+              <div v-for="(h,i) in history" :key="i" style="padding:6px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between;align-items:center" @click="loadHistory(h)">
+                <div style="flex:1;min-width:0;font-size:12px">
+                  <span style="color:#5d4037;font-weight:500">{{ (Array.isArray(h.topics) ? h.topics.join('、') : String(h.topics||'全部').replace(/[\[\"]/g,'')) }}</span>
+                  <span style="color:#bcaaa4;margin-left:6px;font-size:11px">{{ (h.time||'').substring(0,16) }}</span>
+                </div>
+                <el-button size="small" text type="danger" @click.stop="delHistory(i)">✕</el-button>
+              </div>
+            </div>
+            <div v-if="history.length" style="margin-top:8px;text-align:right">
+              <el-button size="small" type="danger" text @click="clearHistory">清空全部</el-button>
+            </div>
+          </el-popover>
+        </div>
         <!-- 步骤指示器 -->
         <div class="steps-bar">
           <div class="steps-track">
@@ -190,21 +215,6 @@
           <span class="j-cup">🥤</span>
         </div>
         <div style="margin-top:16px;font-size:14px;color:#e65100;font-weight:600">{{ squeezeText }}</div>
-      </div>
-
-      <!-- 查询记录 -->
-      <div v-if="history.length" style="margin-top:16px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <span style="font-weight:700;font-size:14px;color:#5d4037">📋 查询记录（{{ history.length }}条）</span>
-          <el-button size="small" type="danger" text @click="clearHistory">清空全部</el-button>
-        </div>
-        <div v-for="(h,i) in history" :key="i" style="padding:8px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between;align-items:center" @click="loadHistory(h)">
-          <div style="flex:1;min-width:0">
-            <span style="font-size:13px;color:#5d4037;font-weight:500">{{ h.topics?.join('、') || '全部' }}</span>
-            <span style="font-size:11px;color:#bcaaa4;margin-left:8px">{{ h.time }}</span>
-          </div>
-          <el-button size="small" text type="danger" @click.stop="delHistory(i)">✕</el-button>
-        </div>
       </div>
 
       <!-- 结果区 -->
@@ -384,24 +394,33 @@ const expOptions = ['新手入门', '1-3年', '3年以上']
 const langOptions = ['Python', 'JavaScript', 'TypeScript', 'Go', 'Rust', 'Java', 'C++', '其他']
 const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（每周5-15h）', '🚀 全力投入（每周>15h）']
 const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 找到了！为你生成推荐...']
-const history = ref(JSON.parse(localStorage.getItem('trend_history') || '[]'))
+const browserId = ref(localStorage.getItem('trend_bid') || (() => { const id = 'b_' + Date.now() + '_' + Math.random().toString(36).slice(2,8); localStorage.setItem('trend_bid', id); return id })())
+const history = ref([])
 
-const saveToHistory = () => {
-  if (!v2Result.value) return
-  history.value.unshift({
-    time: new Date().toLocaleString('zh-CN'),
-    topics: [...profile.topics],
-    purpose: profile.purpose,
-    experience: profile.experience,
-    languages: [...profile.languages],
-    timeCommitment: profile.timeCommitment,
-    result: JSON.parse(JSON.stringify(v2Result.value))
-  })
-  if (history.value.length > 20) history.value = history.value.slice(0, 20)
-  localStorage.setItem('trend_history', JSON.stringify(history.value))
+const loadHistoryFromDB = async () => {
+  try { const r = await request.get('/app/trend/history?browserId=' + browserId.value); if (r.code === 1) history.value = r.data.map(h => ({ ...h, time: h.createTime, result: typeof h.result === 'string' ? JSON.parse(h.result) : h.result })) } catch {}
 }
-const delHistory = (i) => { history.value.splice(i, 1); localStorage.setItem('trend_history', JSON.stringify(history.value)) }
-const clearHistory = () => { history.value = []; localStorage.removeItem('trend_history') }
+const saveToHistory = async () => {
+  if (!v2Result.value) return
+  try {
+    await request.post('/app/trend/history/save', {
+      browserId: browserId.value,
+      topics: profile.topics,
+      purpose: profile.purpose,
+      experience: profile.experience,
+      languages: profile.languages,
+      timeCommitment: profile.timeCommitment,
+      result: JSON.stringify(v2Result.value)
+    })
+    loadHistoryFromDB()
+  } catch {}
+}
+const delHistory = async (i) => {
+  try { await request.delete('/app/trend/history/' + history.value[i].id + '?browserId=' + browserId.value); loadHistoryFromDB() } catch {}
+}
+const clearHistory = async () => {
+  try { await request.delete('/app/trend/history/clear?browserId=' + browserId.value); history.value = [] } catch {}
+}
 const loadHistory = (h) => {
   v2Result.value = h.result
   profile.topics = h.topics || []
@@ -619,7 +638,7 @@ const askAI = async () => {
   } finally { aiLoading.value = false }
 }
 
-onMounted(() => loadGraph())
+onMounted(() => { loadGraph(); loadHistoryFromDB() })
 onUnmounted(() => { chart?.dispose(); chart = null })
 </script>
 
