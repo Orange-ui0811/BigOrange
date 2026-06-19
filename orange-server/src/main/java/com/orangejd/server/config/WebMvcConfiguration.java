@@ -62,7 +62,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                         "/app/category", "/app/work/public", "/app/requirement/public",
                         "/app/config/trade-mode",
                         "/app/leaderboard/**",
-                        "/app/trend/**",
+                        "/app/trend/graph", "/app/trend/analyze", "/app/trend/analyze-v2",
                         "/ws/**");
     }
 }
