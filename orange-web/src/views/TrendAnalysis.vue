@@ -125,8 +125,9 @@
 
         <!-- 单张卡片 - 带滚动橙子动画 -->
         <div class="step-card-wrapper">
-          <div class="step-card" :class="animClass">
-            <div class="card-bg-orange orange-roll" :class="animDirection" />
+          <Transition :name="animDirection" @after-leave="onAnimEnd">
+            <div class="step-card" :key="currentStep">
+              <div class="card-bg-orange" />
             <!-- 步骤1: 方向 -->
             <template v-if="currentStep === 0">
               <div class="step-title">🎯 你对哪个技术方向感兴趣？</div>
@@ -335,18 +336,22 @@ const aiError = ref('')
 
 // V2 智能分析
 const currentStep = ref(0)
-const lastStep = ref(0)
-const animClass = ref('')
 const animDirection = ref('')
 const juicing = ref(false)
+let pendingStep = null
 
 const goStep = (step) => {
-  if (step === currentStep.value) return
-  animDirection.value = step > currentStep.value ? 'roll-next' : 'roll-prev'
-  animClass.value = 'anim-in'
-  lastStep.value = currentStep.value
-  currentStep.value = step
-  setTimeout(() => { animClass.value = '' }, 400)
+  if (step === currentStep.value || pendingStep !== null) return
+  pendingStep = step
+  animDirection.value = step > currentStep.value ? 'slide-right' : 'slide-left'
+}
+
+const onAnimEnd = () => {
+  if (pendingStep !== null) {
+    currentStep.value = pendingStep
+    pendingStep = null
+    animDirection.value = ''
+  }
 }
 const analyzing = ref(false)
 const v2Result = ref(null)
@@ -602,35 +607,56 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 .anim-in { animation: slideIn .35s ease-out; }
 @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
 
-/* 🍊 橙子滚动 */
-.card-bg-orange { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); }
-.orange-roll { transition: none; }
+/* 🍊 橙子滚动 - Vue Transition */
+.step-card-wrapper { position: relative; }
+.step-card { transition: none; }
 
-/* 下一步: 橙子从中间滚出左边 */
-.roll-next { animation: rollOutLeft .35s ease-in forwards; }
-@keyframes rollOutLeft {
-  from { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+/* 下一步: 旧卡向左滚走 */
+.slide-right-leave-active { animation: slideOutL .35s ease-in forwards; position: absolute; width: 100%; top: 0; left: 0; }
+@keyframes slideOutL {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-80px); }
+}
+.slide-right-leave-active .card-bg-orange { animation: rollOutL .35s ease-in forwards; }
+@keyframes rollOutL {
+  from { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
   to { opacity: 0; transform: translate(calc(-50% - 200px),-50%) rotate(-200deg); }
 }
-/* 上一步: 橙子从中间滚出右边 */
-.roll-prev { animation: rollOutRight .35s ease-in forwards; }
-@keyframes rollOutRight {
-  from { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+
+/* 下一步: 新卡从右边滚入 */
+.slide-right-enter-active { animation: slideInR .35s ease-out forwards; }
+@keyframes slideInR {
+  from { opacity: 0; transform: translateX(80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.slide-right-enter-active .card-bg-orange { animation: rollInR .35s ease-out forwards; }
+@keyframes rollInR {
+  from { opacity: 0; transform: translate(calc(-50% + 200px),-50%) rotate(200deg); }
+  to { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
+}
+
+/* 上一步: 旧卡向右滚走 */
+.slide-left-leave-active { animation: slideOutR .35s ease-in forwards; position: absolute; width: 100%; top: 0; left: 0; }
+@keyframes slideOutR {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(80px); }
+}
+.slide-left-leave-active .card-bg-orange { animation: rollOutR .35s ease-in forwards; }
+@keyframes rollOutR {
+  from { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
   to { opacity: 0; transform: translate(calc(-50% + 200px),-50%) rotate(200deg); }
 }
 
-/* 新卡片滑入 + 橙子滚入 */
-.anim-in { animation: cardSlide .35s ease-out; }
-@keyframes cardSlide { from { opacity: 0; } to { opacity: 1; } }
-.anim-in .roll-next { animation-name: rollInFromRight !important; }
-@keyframes rollInFromRight {
-  from { opacity: 0; transform: translate(calc(-50% + 200px),-50%) rotate(200deg); }
-  to { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+/* 上一步: 新卡从左边滚入 */
+.slide-left-enter-active { animation: slideInL .35s ease-out forwards; }
+@keyframes slideInL {
+  from { opacity: 0; transform: translateX(-80px); }
+  to { opacity: 1; transform: translateX(0); }
 }
-.anim-in .roll-prev { animation-name: rollInFromLeft !important; }
-@keyframes rollInFromLeft {
+.slide-left-enter-active .card-bg-orange { animation: rollInL .35s ease-out forwards; }
+@keyframes rollInL {
   from { opacity: 0; transform: translate(calc(-50% - 200px),-50%) rotate(-200deg); }
-  to { opacity: 1; transform: translate(-50%,-50%) rotate(0); }
+  to { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
 }
 
 /* 按钮 */
