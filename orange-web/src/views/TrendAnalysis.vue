@@ -234,7 +234,7 @@
               <span style="font-weight:700;font-size:15px;color:#5d4037">{{ r.name }}</span>
             </div>
             <div style="display:flex;align-items:center;gap:8px">
-              <el-tag :type="r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger'" size="small" effect="dark">{{ r.difficulty }}</el-tag>
+              <el-tag :type="(r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger')||'info'" size="small" effect="dark">{{ r.difficulty || '未知' }}</el-tag>
               <span style="font-size:12px;color:#e65100;font-weight:700">{{ r.score }}分</span>
             </div>
           </div>
