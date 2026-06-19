@@ -116,7 +116,7 @@
         <!-- 步骤指示器 -->
         <div class="steps-bar">
           <div class="steps-track">
-            <div v-for="(s,i) in formSteps" :key="i" class="step-item" :class="{ active: i === currentStep, done: i < currentStep }" @click="i < currentStep && (currentStep = i)">
+            <div v-for="(s,i) in formSteps" :key="i" class="step-item" :class="{ active: i === currentStep, done: i < currentStep }" @click="i < currentStep && goStep(i)">
               <div class="step-circle">{{ i < currentStep ? '✓' : s.icon }}</div>
               <div class="step-label">{{ s.label }}</div>
             </div>
@@ -124,9 +124,9 @@
         </div>
 
         <!-- 单张卡片 - 带滚动橙子动画 -->
-        <div class="step-card-wrapper" :key="currentStep">
-          <div class="step-card animate-in">
-            <div class="card-bg-orange" />
+        <div class="step-card-wrapper">
+          <div class="step-card" :class="animClass">
+            <div class="card-bg-orange orange-roll" :class="animDirection" />
             <!-- 步骤1: 方向 -->
             <template v-if="currentStep === 0">
               <div class="step-title">🎯 你对哪个技术方向感兴趣？</div>
@@ -167,9 +167,9 @@
 
         <!-- 底部按钮 -->
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
-          <button v-if="currentStep > 0" class="nav-btn prev" @click="currentStep--">← 上一步</button>
+          <button v-if="currentStep > 0" class="nav-btn prev" @click="goStep(currentStep-1)">← 上一步</button>
           <div v-else />
-          <button v-if="currentStep < 3" class="orange-btn" @click="currentStep++">下一步 →</button>
+          <button v-if="currentStep < 3" class="orange-btn" @click="goStep(currentStep+1)">下一步 →</button>
           <button v-else class="orange-btn squeeze-btn" @click="startJuicing" :disabled="analyzing">
             <span v-if="!analyzing">🍊 开始榨汁分析</span>
             <span v-else class="squeezing">🍊🍊🍊🍊 榨汁中...</span>
@@ -335,7 +335,19 @@ const aiError = ref('')
 
 // V2 智能分析
 const currentStep = ref(0)
+const lastStep = ref(0)
+const animClass = ref('')
+const animDirection = ref('')
 const juicing = ref(false)
+
+const goStep = (step) => {
+  if (step === currentStep.value) return
+  animDirection.value = step > currentStep.value ? 'roll-next' : 'roll-prev'
+  animClass.value = 'anim-in'
+  lastStep.value = currentStep.value
+  currentStep.value = step
+  setTimeout(() => { animClass.value = '' }, 400)
+}
 const analyzing = ref(false)
 const v2Result = ref(null)
 const v2Error = ref('')
@@ -587,8 +599,20 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 .card-bg-orange { position: absolute; right: -30px; bottom: -20px; width: 140px; height: 140px; background: radial-gradient(circle at 35% 35%, #fff3e0, #ffe0b2 70%); border-radius: 45% 55% 50% 50%; opacity: .5; pointer-events: none; }
 .card-bg-orange::after { content: ''; position: absolute; top: -10px; left: 40%; width: 16px; height: 10px; background: #a5d6a7; border-radius: 50% 50% 0 0; }
 .step-title { font-size: 16px; font-weight: 700; color: #5d4037; margin-bottom: 16px; }
-.animate-in { animation: slideIn .35s ease-out; }
+.anim-in { animation: slideIn .35s ease-out; }
 @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+/* 🍊 橙子滚动 */
+.orange-roll { transition: none; }
+.roll-next { animation: rollOutLeft .4s ease-in forwards; }
+.roll-prev { animation: rollOutRight .4s ease-in forwards; }
+@keyframes rollOutLeft { from { right: -30px; transform: rotate(0); } to { right: -130px; transform: rotate(-180deg); } }
+@keyframes rollOutRight { from { right: -30px; transform: rotate(0); } to { right: 80px; transform: rotate(180deg); } }
+.anim-in .orange-roll { animation: none !important; right: 100px; animation: rollIn .4s ease-out forwards !important; }
+.anim-in .roll-next { animation-name: rollInRight !important; }
+.anim-in .roll-prev { animation-name: rollInLeft !important; }
+@keyframes rollInRight { from { left: auto; right: -140px; opacity: 0; transform: rotate(-180deg); } to { right: -30px; opacity: 1; transform: rotate(0); } }
+@keyframes rollInLeft { from { left: auto; right: 100px; opacity: 0; transform: rotate(180deg); } to { right: -30px; opacity: 1; transform: rotate(0); } }
 
 /* 按钮 */
 .orange-btn { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; border: none; border-radius: 24px; padding: 10px 28px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; box-shadow: 0 3px 12px rgba(230,81,0,.25); }
