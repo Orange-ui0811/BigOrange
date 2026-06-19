@@ -338,18 +338,26 @@ public class TrendAnalysisService {
                     rec.put("prerequisites", regexExtract(obj, "\"prerequisites\"\\s*:\\s*\"([^\"]+)\""));
                     String scoreStr = regexExtract(obj, "\"score\"\\s*:\\s*(\\d+)");
                     rec.put("score", scoreStr != null ? Integer.parseInt(scoreStr) : 0);
-                    // references 数组（对象格式：{name, url}）
+                    // references 支持新旧两种格式
                     String refsStr = regexExtract(obj, "\"references\"\\s*:\\s*\\[(.+?)\\]");
                     if (refsStr != null) {
-                        List<Map<String, String>> refs = new ArrayList<>();
-                        java.util.regex.Matcher rm = java.util.regex.Pattern.compile("\\{\"name\"\\s*:\\s*\"([^\"]+)\"\\s*,\\s*\"url\"\\s*:\\s*\"([^\"]+)\"\\}").matcher(refsStr);
-                        while (rm.find()) {
-                            Map<String, String> ref = new LinkedHashMap<>();
-                            ref.put("name", rm.group(1));
-                            ref.put("url", rm.group(2));
-                            refs.add(ref);
+                        List<Object> refs = new ArrayList<>();
+                        // 新格式: {name, url}
+                        java.util.regex.Matcher rmObj = java.util.regex.Pattern.compile("\\{\\s*\"name\"\\s*:\\s*\"([^\"]+)\"\\s*,\\s*\"url\"\\s*:\\s*\"([^\"]+)\"\\s*\\}").matcher(refsStr);
+                        if (rmObj.find()) {
+                            rmObj.reset();
+                            while (rmObj.find()) {
+                                Map<String, String> ref = new LinkedHashMap<>();
+                                ref.put("name", rmObj.group(1));
+                                ref.put("url", rmObj.group(2));
+                                refs.add(ref);
+                            }
+                        } else {
+                            // 旧格式: 纯字符串数组
+                            java.util.regex.Matcher rmStr = java.util.regex.Pattern.compile("\"([^\"]+)\"").matcher(refsStr);
+                            while (rmStr.find()) { String s = rmStr.group(1); if (!s.startsWith("http")) refs.add(s); }
                         }
-                        rec.put("references", refs);
+                        if (!refs.isEmpty()) rec.put("references", refs);
                     }
                     if (rec.get("name") != null) recs.add(rec);
                 }

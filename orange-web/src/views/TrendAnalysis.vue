@@ -178,7 +178,11 @@
                 <p v-if="r.references?.length">
                   <b>参考项目：</b>
                   <span v-for="(ref,j) in r.references" :key="j">
-                    <a :href="ref.url" target="_blank" style="color:#409EFF">{{ ref.name }}</a><span v-if="j < r.references.length-1">、</span>
+                    <template v-if="ref.url">
+                      <a :href="ref.url" target="_blank" style="color:#409EFF">{{ ref.name }}</a>
+                    </template>
+                    <template v-else>{{ ref }}</template>
+                    <span v-if="j < r.references.length-1">、</span>
                   </span>
                 </p>
               </div>
