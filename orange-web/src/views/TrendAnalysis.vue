@@ -317,7 +317,6 @@ const analyzing = ref(false)
 const v2Result = ref(null)
 const v2Error = ref('')
 const squeezeText = ref('🍊 正在榨取分析精华...')
-const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 翻阅 ' + (profile.topics[0] || '各类') + ' 项目中...', '🍊 找到了！为你生成推荐...']
 let squeezeTimer = null
 const profile = reactive({
   topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
@@ -329,6 +328,7 @@ const purposeOptions = ['🎓 学习 AI 编程知识', '💼 应对求职面试'
 const expOptions = ['新手入门', '1-3年', '3年以上']
 const langOptions = ['Python', 'JavaScript', 'TypeScript', 'Go', 'Rust', 'Java', 'C++', '其他']
 const timeOptions = ['🕐 碎片时间（每周<5h）', '📅 业余投入（每周5-15h）', '🚀 全力投入（每周>15h）']
+const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 找到了！为你生成推荐...']
 
 const analyzeV2 = async () => {
   if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; return }
