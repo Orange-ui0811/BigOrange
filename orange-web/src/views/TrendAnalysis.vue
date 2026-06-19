@@ -131,7 +131,7 @@
             <!-- 步骤1: 方向 -->
             <template v-if="currentStep === 0">
               <div class="step-title">🎯 你对哪个技术方向感兴趣？</div>
-              <el-select v-model="profile.topics" multiple placeholder="选择方向（可多选）" size="large" style="width:100%">
+              <el-select v-model="profile.topics" multiple placeholder="选择方向（可多选）" size="large" style="width:100%" placement="bottom-start">
                 <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
               </el-select>
               <el-input v-model="profile.customTopics" placeholder="或输入自定义方向..." style="margin-top:12px" maxlength="200" />
@@ -139,7 +139,7 @@
             <!-- 步骤2: 目的 -->
             <template v-if="currentStep === 1">
               <div class="step-title">💡 为什么要学 Vibe Coding？</div>
-              <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" style="width:100%">
+              <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" style="width:100%" placement="bottom-start">
                 <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
               </el-select>
               <el-input v-model="profile.customPurpose" placeholder="或输入自定义目的..." style="margin-top:12px" maxlength="200" />
@@ -147,7 +147,7 @@
             <!-- 步骤3: 基础 -->
             <template v-if="currentStep === 2">
               <div class="step-title">📚 你的编程基础怎么样？</div>
-              <el-select v-model="profile.experience" placeholder="编程经验" size="large" style="width:100%">
+              <el-select v-model="profile.experience" placeholder="编程经验" size="large" style="width:100%" placement="bottom-start">
                 <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
               </el-select>
               <el-select v-model="profile.languages" multiple placeholder="掌握的语言（可多选）" size="large" style="width:100%;margin-top:12px">
@@ -158,7 +158,7 @@
             <!-- 步骤4: 时间 -->
             <template v-if="currentStep === 3">
               <div class="step-title">⏰ 你每周能投入多少时间？</div>
-              <el-select v-model="profile.timeCommitment" placeholder="选择时间投入" size="large" style="width:100%">
+              <el-select v-model="profile.timeCommitment" placeholder="选择时间投入" size="large" style="width:100%" placement="bottom-start">
                 <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
               </el-select>
               <el-input v-model="profile.customTime" placeholder="或输入自定义..." style="margin-top:12px" maxlength="200" />
@@ -227,7 +227,7 @@
 
         <!-- 推荐项目 -->
         <div style="font-weight:700;font-size:15px;color:#5d4037;margin:20px 0 12px">🍊 为你推荐</div>
-        <div v-for="(r, i) in v2Result.recommendations" :key="i" class="rec-card" style="margin-bottom:12px">
+        <div v-for="(r, i) in v2Result.recommendations" :key="i" class="rec-card" style="margin-bottom:14px;max-width:900px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
             <div style="display:flex;align-items:center;gap:8px">
               <span class="rec-num">🍊 #{{ i+1 }}</span>
