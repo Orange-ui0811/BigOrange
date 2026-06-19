@@ -227,7 +227,9 @@
 
         <!-- 推荐项目 -->
         <div style="font-weight:700;font-size:15px;color:#5d4037;margin:20px 0 12px">🍊 为你推荐</div>
-        <div v-for="(r, i) in v2Result.recommendations" :key="i" class="rec-card" style="margin-bottom:14px;max-width:900px">
+        <el-row :gutter="12">
+          <el-col :span="8" v-for="(r, i) in v2Result.recommendations" :key="i">
+            <div class="rec-card" style="margin-bottom:14px;height:100%">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
             <div style="display:flex;align-items:center;gap:8px">
               <span class="rec-num">🍊 #{{ i+1 }}</span>
@@ -253,6 +255,8 @@
             </p>
           </div>
         </div>
+          </el-col>
+        </el-row>
 
         <!-- 学习路径 -->
         <div v-if="v2Result.learning" style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid #81c784;margin-top:12px">
