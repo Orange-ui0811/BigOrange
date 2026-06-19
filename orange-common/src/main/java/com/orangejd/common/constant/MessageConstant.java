@@ -41,4 +41,9 @@ public class MessageConstant {
     public static final String COMMENT_EMPTY = "评论不能为空";
     public static final String COMMENT_TOO_LONG = "评论过长";
 
+    // ---- 通用 ----
+    public static final String ALREADY_EXISTS = "已存在";
+    public static final String UNKNOWN_ERROR = "未知错误";
+    public static final String PARAM_INVALID = "参数不合法";
+
 }

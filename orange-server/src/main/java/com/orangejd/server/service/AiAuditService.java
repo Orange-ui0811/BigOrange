@@ -373,7 +373,6 @@ public class AiAuditService {
             } else {
                 auditService.auditRequirement(targetId, approved, (result.degraded ? "[图片降级] " : "") + result.reason);
             }
-            BaseContext.clear();
 
             // 飞书通知
             if (feishuNotifyService != null) {
@@ -381,8 +380,9 @@ public class AiAuditService {
             }
             log.info("AI审核完成 {}({}): {} reason={}", targetType, targetId, result.action, result.reason);
         } catch (Exception e) {
-            BaseContext.clear();
             log.error("AI审核执行失败 {}({}): {}", targetType, targetId, e.getMessage());
+        } finally {
+            BaseContext.clear();
         }
     }
 

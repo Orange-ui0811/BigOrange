@@ -1,6 +1,8 @@
 package com.orangejd.server.mapper;
 
 import com.orangejd.pojo.entity.Work;
+import com.orangejd.server.annotation.AutoFill;
+import com.orangejd.common.enumeration.OperationType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,8 +11,10 @@ import java.util.List;
 @Mapper
 public interface WorkMapper {
 
+    @AutoFill(OperationType.INSERT)
     int insert(Work work);
 
+    @AutoFill(OperationType.UPDATE)
     int update(Work work);
 
     Work selectById(@Param("id") Long id);
