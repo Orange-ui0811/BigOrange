@@ -190,14 +190,14 @@ public class TrendAnalysisService {
         "    \"summary\": \"一句话总结（50字）\"\n" +
         "  },\n" +
         "  \"recommendations\": [{\n" +
-        "    \"name\": \"中文项目名（不要用GitHub仓库原名，用通俗易懂的中文描述，如'AI智能体开发框架'而非'ECC'）\",\n" +
+        "    \"name\": \"项目名称（用中文描述性名称，绝对不要用GitHub仓库英文原名。如推荐dify要说'开源LLM应用开发平台'而非'dify'，推荐langchain要说'大语言模型应用框架'而非'langchain'）\",\n" +
         "    \"description\": \"详细介绍这个项目是什么、解决什么问题、核心功能（80字以上）\",\n" +
         "    \"difficulty\": \"入门/中等/进阶\",\n" +
         "    \"difficultyReason\": \"为什么是这个难度（结合用户的技术基础分析）\",\n" +
         "    \"vibeCodingReason\": \"为什么这个项目适合 Vibe Coding（AI 辅助编程方式参与）\",\n" +
         "    \"recommendReason\": \"推荐原因（100字以上）。必须结合用户的目的（学习/求职/赚钱/兴趣）详细分析：求职目的→该领域面试官看重什么能力、这个项目能证明什么；学习目的→学习路径和成长价值；赚钱目的→商业价值和变现方式。其中针对目的的专门分析不少于50字\",\n" +
         "    \"prerequisites\": \"学习该项目需要的前置知识和技能\",\n" +
-        "    \"references\": [{\"name\": \"项目名\", \"url\": \"https://github.com/xxx\"}],\n" +
+        "    \"references\": [{\"name\": \"参考项目英文名\", \"url\": \"https://github.com/xxx\"}],\n" +
         "    \"score\": 85\n" +
         "  }],\n" +
         "  \"learning\": {\n" +
