@@ -195,7 +195,7 @@ public class TrendAnalysisService {
         "    \"difficulty\": \"入门/中等/进阶\",\n" +
         "    \"difficultyReason\": \"为什么是这个难度（结合用户的技术基础分析）\",\n" +
         "    \"vibeCodingReason\": \"为什么这个项目适合 Vibe Coding（AI 辅助编程方式参与）\",\n" +
-        "    \"recommendReason\": \"结合用户画像，详细说明推荐原因（60字以上）\",\n" +
+        "    \"recommendReason\": \"推荐原因（100字以上）。必须结合用户的目的（学习/求职/赚钱/兴趣）详细分析：求职目的→该领域面试官看重什么能力、这个项目能证明什么；学习目的→学习路径和成长价值；赚钱目的→商业价值和变现方式。其中针对目的的专门分析不少于50字\",\n" +
         "    \"prerequisites\": \"学习该项目需要的前置知识和技能\",\n" +
         "    \"references\": [{\"name\": \"项目名\", \"url\": \"https://github.com/xxx\"}],\n" +
         "    \"score\": 85\n" +

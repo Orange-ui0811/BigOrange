@@ -163,7 +163,7 @@
             </template>
             <!-- 步骤2: 目的 -->
             <template v-if="currentStep === 1">
-              <div class="step-title">💡 为什么要学 Vibe Coding？</div>
+              <div class="step-title">💡 为什么想做这个方向的项目？</div>
               <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" style="width:100%" placement="bottom-start">
                 <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
               </el-select>
