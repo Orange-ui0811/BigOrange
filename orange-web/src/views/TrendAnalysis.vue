@@ -406,7 +406,7 @@ const saveToHistory = async () => {
   try {
     await request.post('/app/trend/history/save', {
       topics: profile.topics, purpose: profile.purpose, experience: profile.experience,
-      languages: profile.languages, timeCommitment: profile.timeCommitment, result: JSON.stringify(v2Result.value)
+      languages: profile.languages, timeCommitment: profile.timeCommitment, result: v2Result.value
     })
     loadHistoryFromDB()
   } catch {}
