@@ -126,9 +126,7 @@ public class AppTrendController {
         h.setExperience((String) body.getOrDefault("experience", ""));
         h.setLanguages(body.get("languages") != null ? body.get("languages").toString() : "");
         h.setTimeCommitment((String) body.getOrDefault("timeCommitment", ""));
-        try {
-            h.setResultJson(body.get("result") != null ? new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(body.get("result")) : "");
-        } catch (Exception e) { h.setResultJson("{}"); }
+        h.setResultJson(body.getOrDefault("resultString", body.getOrDefault("result", "")).toString());
         trendHistoryMapper.insert(h);
         return Result.success(Collections.singletonMap("id", h.getId()));
     }

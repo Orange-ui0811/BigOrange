@@ -406,10 +406,11 @@ const saveToHistory = async () => {
   try {
     await request.post('/app/trend/history/save', {
       topics: profile.topics, purpose: profile.purpose, experience: profile.experience,
-      languages: profile.languages, timeCommitment: profile.timeCommitment, result: v2Result.value
+      languages: profile.languages, timeCommitment: profile.timeCommitment,
+      resultString: JSON.stringify(v2Result.value)
     })
     loadHistoryFromDB()
-  } catch {}
+  } catch (e) { console.error('保存历史失败:', e) }
 }
 const delHistory = async (i) => {
   try { await request.delete('/app/trend/history/' + history.value[i].id); loadHistoryFromDB() } catch {}
