@@ -190,7 +190,7 @@ public class TrendAnalysisService {
         "    \"summary\": \"一句话总结（50字）\"\n" +
         "  },\n" +
         "  \"recommendations\": [{\n" +
-        "    \"name\": \"项目名\",\n" +
+        "    \"name\": \"中文项目名（不要用GitHub仓库原名，用通俗易懂的中文描述，如'AI智能体开发框架'而非'ECC'）\",\n" +
         "    \"description\": \"详细介绍这个项目是什么、解决什么问题、核心功能（80字以上）\",\n" +
         "    \"difficulty\": \"入门/中等/进阶\",\n" +
         "    \"difficultyReason\": \"为什么是这个难度（结合用户的技术基础分析）\",\n" +
