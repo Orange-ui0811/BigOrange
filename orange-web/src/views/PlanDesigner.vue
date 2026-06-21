@@ -30,6 +30,13 @@
         </div>
         <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." size="large" :autosize="{minRows:4,maxRows:12}" />
         <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." style="margin-top:12px" :autosize="{minRows:2,maxRows:8}" />
+        <div style="margin-top:12px;display:flex;align-items:center;gap:12px">
+          <span style="font-size:13px;color:#5d4037;font-weight:600">生成模式</span>
+          <el-radio-group v-model="planMode" :disabled="started" size="small">
+            <el-radio-button value="full">📋 详细方案（四阶段全流程）</el-radio-button>
+            <el-radio-button value="lite">⚡ 精简方案（快速出计划）</el-radio-button>
+          </el-radio-group>
+        </div>
         <button class="orange-btn start-btn" @click="startPlan" :disabled="!summary.trim()">🍊 开始规划</button>
       </div>
 
@@ -104,6 +111,7 @@ import request from '../api/request'
 const summary = ref('')
 const extra = ref('')
 const started = ref(false)
+const planMode = ref('full')
 const currentPhase = ref(1)
 const phaseError = ref('')
 
@@ -151,6 +159,7 @@ const generatePhase = async (n) => {
   try {
     const r = await request.post('/app/plan/generate', {
       phase: n,
+      mode: planMode.value,
       summary: summary.value,
       extra: extra.value,
       prevContents: getPrevContents(n)
