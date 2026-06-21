@@ -75,7 +75,7 @@
               <template v-if="!editing">
                 <button class="orange-btn" @click="generatePhase(currentPhase)">🔄 重新生成</button>
                 <button class="nav-btn" @click="startEdit">✏️ 编辑</button>
-                <button v-if="currentPhase < 4" class="nav-btn next" @click="switchPhase(currentPhase+1); autoGenerateNext()">下一步 →</button>
+                <button v-if="currentPhase < 4" class="nav-btn next" @click="switchPhase(currentPhase+1)">下一步 →</button>
               </template>
               <template v-else>
                 <button class="orange-btn" @click="saveEdit">💾 保存修改</button>
@@ -128,7 +128,6 @@ const renderedContent = computed(() => {
 const startPlan = () => {
   if (!summary.value.trim()) return
   started.value = true
-  setTimeout(() => generatePhase(1), 200)
 }
 
 const autoGenerateNext = () => {
@@ -159,12 +158,6 @@ const generatePhase = async (n) => {
     if (r.code === 1 && r.data?.content) {
       p.content = r.data.content
       p.done = true
-      // 自动生成下一阶段
-      if (n < 4) {
-        setTimeout(() => {
-          phases[n].done || generatePhase(n + 1)
-        }, 500)
-      }
     } else {
       phaseError.value = r.msg || '生成失败'
     }
