@@ -14,6 +14,7 @@
         <el-menu-item index="/market"><el-icon><Shop /></el-icon> 市场</el-menu-item>
         <el-menu-item index="/leaderboard"><el-icon><DataAnalysis /></el-icon> 榜单</el-menu-item>
         <el-menu-item index="/trend"><el-icon><TrendCharts /></el-icon> 趋势分析</el-menu-item>
+        <el-menu-item index="/plan"><el-icon><EditPen /></el-icon> 方案设计</el-menu-item>
         <el-menu-item index="/publish"><el-icon><Edit /></el-icon> 发布</el-menu-item>
         <el-menu-item index="/profile/me"><el-icon><User /></el-icon> 个人主页</el-menu-item>
         <el-menu-item index="/me/works"><el-icon><Folder /></el-icon> 我的作品</el-menu-item>

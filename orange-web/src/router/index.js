@@ -11,6 +11,7 @@ const routes = [
       { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '市场' } },
       { path: 'leaderboard', name: 'Leaderboard', component: () => import('../views/Leaderboard.vue'), meta: { title: '榜单' } },
       { path: 'trend', name: 'TrendAnalysis', component: () => import('../views/TrendAnalysis.vue'), meta: { title: '趋势分析' } },
+      { path: 'plan', name: 'PlanDesigner', component: () => import('../views/PlanDesigner.vue'), meta: { title: '方案设计' } },
       { path: 'work/:id', name: 'WorkDetail', component: () => import('../views/WorkDetail.vue'), meta: { title: '作品详情' } },
       { path: 'chat', name: 'Chat', component: () => import('../views/Chat.vue'), meta: { title: '聊天' } },
       { path: 'chat/:id', name: 'ChatWith', component: () => import('../views/Chat.vue'), meta: { title: '聊天' } },
