@@ -97,6 +97,7 @@
 
 <script setup>
 import { ref, reactive, computed, nextTick, onMounted } from 'vue'
+import { ElMessage } from 'element-plus'
 import { marked } from 'marked'
 import request from '../api/request'
 
@@ -201,7 +202,8 @@ const savePlan = async () => {
       phase3: phases[2].content, phase4: phases[3].content
     })
     loadPlanHistory()
-  } catch {}
+    ElMessage.success('方案已保存')
+  } catch { ElMessage.error('保存失败') }
 }
 const loadPlan = (h) => {
   summary.value = h.summary || ''
