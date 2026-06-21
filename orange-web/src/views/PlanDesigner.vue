@@ -28,8 +28,8 @@
             </div>
           </el-popover>
         </div>
-        <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." size="large" />
-        <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." style="margin-top:12px" />
+        <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." size="large" :autosize="{minRows:4,maxRows:12}" />
+        <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." style="margin-top:12px" :autosize="{minRows:2,maxRows:8}" />
         <button class="orange-btn start-btn" @click="startPlan" :disabled="!summary.trim()">🍊 开始规划</button>
       </div>
 
@@ -219,7 +219,14 @@ const clearPlanHistory = async () => {
   try { await request.delete('/app/plan/history/clear'); planHistory.value = [] } catch {}
 }
 
-onMounted(loadPlanHistory)
+onMounted(() => {
+  loadPlanHistory()
+  const imported = sessionStorage.getItem('plan_import')
+  if (imported) {
+    summary.value = imported
+    sessionStorage.removeItem('plan_import')
+  }
+})
 
 const switchPhase = (n) => {
   currentPhase.value = n

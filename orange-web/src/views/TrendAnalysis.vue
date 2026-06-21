@@ -278,6 +278,7 @@
               </span>
             </p>
           </div>
+          <button class="import-plan-btn" @click="importToPlan(r)">📋 一键导入方案设计</button>
         </div>
           </el-col>
         </el-row>
@@ -320,6 +321,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
@@ -340,6 +342,7 @@ const lastStars = ref({})
 const crowdType = (v) => v === '蓝海' ? 'success' : v === '适中' ? 'warning' : 'danger'
 const diffType = (v) => v === '入门' ? 'success' : v === '中等' ? 'warning' : 'danger'
 
+const router = useRouter()
 const scoreColor = (v) => v >= 70 ? '#67C23A' : v >= 45 ? '#E6A23C' : '#F56C6C'
 
 const insightCards = computed(() => {
@@ -621,6 +624,12 @@ const compareTopics = (edge) => {
   document.querySelector('.el-card:last-child')?.scrollIntoView({ behavior: 'smooth' })
 }
 
+const importToPlan = (r) => {
+  const text = `项目名称：${r.name}\n项目介绍：${r.description}\n难度：${r.difficulty}\n前置知识：${r.prerequisites}\nVibeCoding适合度：${r.vibeCodingReason || ''}\n推荐理由：${r.recommendReason}`
+  sessionStorage.setItem('plan_import', text)
+  router.push('/plan')
+}
+
 const askAI = async () => {
   if (!aiKey.value || !aiEndpoint.value || !aiQuestion.value.trim()) {
     aiError.value = '请填写 API Endpoint、API Key 和分析问题'
@@ -751,4 +760,6 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 .juice-score-outside { font-size: 12px; color: #e65100; font-weight: 700; }
 
 .step-dot { background: linear-gradient(135deg, #fff, #fff3e0); border: 1px solid #ffe0b2; border-radius: 20px; padding: 6px 14px; font-size: 12px; color: #5d4037; white-space: nowrap; }
+.import-plan-btn { width: 100%; margin-top: 10px; padding: 8px 12px; font-size: 12px; background: linear-gradient(135deg, #fff, #fff3e0); color: #e65100; border: 1px solid #ffe0b2; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all .15s; }
+.import-plan-btn:hover { background: #fff3e0; border-color: #e65100; }
 </style>
