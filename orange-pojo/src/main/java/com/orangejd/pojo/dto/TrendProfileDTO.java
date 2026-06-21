@@ -1,9 +1,7 @@
 package com.orangejd.pojo.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class TrendProfileDTO {
     private List<String> topics;
     private String purpose;

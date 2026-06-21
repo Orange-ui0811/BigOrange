@@ -437,7 +437,17 @@ const startJuicing = async () => {
   await new Promise(r => setTimeout(r, 2500))
   juicing.value = false
   try {
-    const r = await request.post('/app/trend/analyze-v2', { ...profile }, { timeout: 0 })
+    const r = await request.post('/app/trend/analyze-v2', {
+      topics: profile.topics || [],
+      purpose: profile.purpose || '',
+      experience: profile.experience || '',
+      languages: profile.languages || [],
+      timeCommitment: profile.timeCommitment || '',
+      customTopics: profile.customTopics || '',
+      customPurpose: profile.customPurpose || '',
+      customLang: profile.customLang || '',
+      customTime: profile.customTime || ''
+    }, { timeout: 0 })
     if (r.code === 1 && r.data) {
       v2Result.value = r.data
       setTimeout(() => saveToHistory(), 500)
