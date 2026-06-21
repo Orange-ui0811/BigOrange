@@ -5,10 +5,28 @@
       <div v-if="!started" class="plan-intro">
         <div class="intro-header">
           <span class="intro-icon">🍊</span>
-          <div>
+          <div style="flex:1">
             <h3 style="margin:0;color:#5d4037">方案设计</h3>
             <p style="margin:4px 0 0;font-size:13px;color:#bcaaa4">AI 驱动五阶段项目规划，从想法到可执行计划</p>
           </div>
+          <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasToken">
+            <template #reference>
+              <el-button size="small" text>📋 记录 ({{ planHistory.length }})</el-button>
+            </template>
+            <div style="max-height:300px;overflow:auto">
+              <div v-if="!planHistory.length" style="text-align:center;color:#bcaaa4;padding:20px">暂无记录</div>
+              <div v-for="(h,i) in planHistory" :key="i" style="padding:8px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between" @click="loadPlan(h)">
+                <div style="flex:1;min-width:0;font-size:12px">
+                  <span style="color:#5d4037;font-weight:500">{{ (h.summary||'').substring(0,40) }}</span>
+                  <span style="color:#bcaaa4;margin-left:6px;font-size:11px">{{ (h.createTime||'').substring(0,16) }}</span>
+                </div>
+                <el-button size="small" text type="danger" @click.stop="delPlanHistory(i,h.id)">✕</el-button>
+              </div>
+            </div>
+            <div v-if="planHistory.length" style="margin-top:8px;text-align:right">
+              <el-button size="small" type="danger" text @click="clearPlanHistory">清空全部</el-button>
+            </div>
+          </el-popover>
         </div>
         <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." size="large" />
         <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." style="margin-top:12px" />
@@ -17,6 +35,9 @@
 
       <!-- 阶段导航 + 内容 -->
       <template v-else>
+        <div v-if="allDone && hasToken" style="text-align:center;margin-bottom:16px">
+          <button class="orange-btn save-btn" @click="savePlan">💾 保存方案到我的记录</button>
+        </div>
         <div class="phase-nav">
           <div v-for="(p, i) in phases" :key="i"
             class="phase-nav-item" :class="{ active: currentPhase === i+1, done: p.done, generating: p.generating }"
@@ -75,7 +96,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, nextTick } from 'vue'
+import { ref, reactive, computed, nextTick, onMounted } from 'vue'
 import { marked } from 'marked'
 import request from '../api/request'
 
@@ -163,6 +184,42 @@ const saveEdit = () => {
   editing.value = false
 }
 const cancelEdit = () => { editing.value = false }
+
+const hasToken = computed(() => !!sessionStorage.getItem('appToken'))
+const planHistory = ref([])
+const allDone = computed(() => phases.every(p => p.done))
+
+const loadPlanHistory = async () => {
+  if (!hasToken.value) return
+  try { const r = await request.get('/app/plan/history'); if (r.code === 1) planHistory.value = r.data } catch {}
+}
+const savePlan = async () => {
+  if (!hasToken.value || !allDone.value) return
+  try {
+    await request.post('/app/plan/history/save', {
+      summary: summary.value, phase1: phases[0].content, phase2: phases[1].content,
+      phase3: phases[2].content, phase4: phases[3].content
+    })
+    loadPlanHistory()
+  } catch {}
+}
+const loadPlan = (h) => {
+  summary.value = h.summary || ''
+  started.value = true
+  if (h.phase1) { phases[0].content = h.phase1; phases[0].done = true }
+  if (h.phase2) { phases[1].content = h.phase2; phases[1].done = true }
+  if (h.phase3) { phases[2].content = h.phase3; phases[2].done = true }
+  if (h.phase4) { phases[3].content = h.phase4; phases[3].done = true }
+  currentPhase.value = 1
+}
+const delPlanHistory = async (i, id) => {
+  try { await request.delete('/app/plan/history/' + id); loadPlanHistory() } catch {}
+}
+const clearPlanHistory = async () => {
+  try { await request.delete('/app/plan/history/clear'); planHistory.value = [] } catch {}
+}
+
+onMounted(loadPlanHistory)
 
 const switchPhase = (n) => {
   currentPhase.value = n
