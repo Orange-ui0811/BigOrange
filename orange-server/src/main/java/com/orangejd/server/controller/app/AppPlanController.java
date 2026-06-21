@@ -45,8 +45,10 @@ public class AppPlanController {
 
         if (summary.isEmpty()) return Result.error("请输入项目描述");
 
-        String prompt = "lite".equals(mode) ? buildPromptLite(phase, summary, extra, prevContents)
-                                           : buildPrompt(phase, summary, extra, prevContents);
+        // 精简模式：只影响最终计划（阶段4），前三个阶段和详细模式一样
+        boolean lite = "lite".equals(mode) && phase == 4;
+        String prompt = lite ? buildPromptLite(phase, summary, extra, prevContents)
+                             : buildPrompt(phase, summary, extra, prevContents);
         if (prompt == null) return Result.error("无效的阶段编号");
 
         try {
@@ -151,24 +153,13 @@ public class AppPlanController {
     }
 
     private String buildPromptLite(int phase, String summary, String extra, String prevContents) {
-        switch (phase) {
-            case 1:
-                return "请快速分析以下项目，用 3-5 个要点总结：项目目标、核心功能、技术关键点。\n\n" +
-                    "【项目概要】\n" + summary + "\n" + (extra.isEmpty() ? "" : "\n【附加信息】\n" + extra) + "\n\n格式：Markdown 列表。";
-            case 2:
-                return "基于项目概况和前阶段分析，列出 3-5 条关键成功标准。\n\n" +
-                    "【项目概要】\n" + summary + "\n\n【前阶段】\n" + prevContents + "\n\n格式：Markdown 列表。";
-            case 3:
-                return "列出该项目 3-5 个主要风险和对应的规避措施。\n\n" +
-                    "【项目概要】\n" + summary + "\n\n【前阶段】\n" + prevContents + "\n\n格式：Markdown 表格。";
-            case 4:
-                return "请基于以上分析，创建一份精简可执行任务计划：\n\n" +
-                    "【项目概要】\n" + summary + "\n\n" +
-                    "【前三个阶段摘要】\n" + prevContents + "\n\n" +
-                    "输出：1. 当前基线（2-3行）2. 任务拆解为 4-6 步 3. 预计时间 4. 关键风险提示\n格式：Markdown。";
-            default:
-                return null;
-        }
+        // 只有阶段4走精简
+        return "请基于前三个阶段的分析，创建一份精简可执行任务计划。\n\n" +
+            "【项目概要】\n" + summary + "\n\n" +
+            "【前三个阶段分析】\n" + prevContents + "\n\n" +
+            "请用最精炼的语言输出：\n" +
+            "1. 当前基线（2-3行）\n2. 任务拆解（4-6步）\n3. 预计时间和里程碑\n4. 关键风险提示\n" +
+            "格式：Markdown。控制在 500 字以内。";
     }
 
     // ---- 历史记录 ----
