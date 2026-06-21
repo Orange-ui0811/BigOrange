@@ -48,10 +48,18 @@
 
           <!-- 已生成 -->
           <div v-if="phases[currentPhase-1]?.done" class="card result-card">
-            <div v-html="renderedContent" style="line-height:1.8;font-size:14px"></div>
+            <div v-if="!editing" v-html="renderedContent" style="line-height:1.8;font-size:14px" @dblclick="startEdit"></div>
+            <el-input v-else v-model="editContent" type="textarea" :rows="12" style="margin-bottom:12px" />
             <div style="margin-top:16px;display:flex;gap:8px">
-              <button class="orange-btn" @click="generatePhase(currentPhase)">🔄 重新生成</button>
-              <button v-if="currentPhase < 4" class="nav-btn next" @click="switchPhase(currentPhase+1); autoGenerateNext()">下一步 →</button>
+              <template v-if="!editing">
+                <button class="orange-btn" @click="generatePhase(currentPhase)">🔄 重新生成</button>
+                <button class="nav-btn" @click="startEdit">✏️ 编辑</button>
+                <button v-if="currentPhase < 4" class="nav-btn next" @click="switchPhase(currentPhase+1); autoGenerateNext()">下一步 →</button>
+              </template>
+              <template v-else>
+                <button class="orange-btn" @click="saveEdit">💾 保存修改</button>
+                <button class="nav-btn" @click="cancelEdit">取消</button>
+              </template>
             </div>
           </div>
 
@@ -143,9 +151,23 @@ const generatePhase = async (n) => {
   } finally { p.generating = false }
 }
 
+const editing = ref(false)
+const editContent = ref('')
+
+const startEdit = () => {
+  editContent.value = phases[currentPhase.value - 1].content
+  editing.value = true
+}
+const saveEdit = () => {
+  phases[currentPhase.value - 1].content = editContent.value
+  editing.value = false
+}
+const cancelEdit = () => { editing.value = false }
+
 const switchPhase = (n) => {
   currentPhase.value = n
   phaseError.value = ''
+  editing.value = false
 }
 </script>
 
