@@ -1,7 +1,7 @@
 package com.orangejd.pojo.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class RegisterDTO {
     @NotBlank(message = "用户名不能为空")
