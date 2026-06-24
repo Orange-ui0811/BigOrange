@@ -13,10 +13,12 @@ public final class JwtUtil {
     private JwtUtil() {}
 
     private static SecretKey toKey(String secretKey) {
+        // 确保密钥长度 ≥ 256 bit (32 bytes) for HS256
         byte[] keyBytes = secretKey.getBytes();
-        byte[] encoded = Base64.getEncoder().encode(keyBytes);
-        byte[] decoded = Base64.getDecoder().decode(encoded);
-        return new SecretKeySpec(decoded, "HmacSHA256");
+        if (keyBytes.length < 32) {
+            keyBytes = java.util.Arrays.copyOf(keyBytes, 32);
+        }
+        return new SecretKeySpec(keyBytes, "HmacSHA256");
     }
 
     public static String createJwt(String secretKey, long ttlMillis, Map<String, Object> claims) {
