@@ -1,6 +1,14 @@
 <template>
   <div>
     <h3 style="margin:0 0 4px;font-weight:700">趋势分析</h3>
+    
+    <el-tabs v-model="trendTab" style="margin-bottom:12px">
+      <el-tab-pane label="精准推荐" name="v2" />
+      <el-tab-pane label="自由提问" name="v1" />
+      <el-tab-pane label="工作能力参考" name="jobs" />
+    </el-tabs>
+      <div v-if="trendTab==='v2'">
+
     <p style="color:#909399;font-size:13px;margin:0 0 8px">Vibe Coding 开源项目热度 · 每周更新 · AI 辅助编程趋势洞察</p>
 
     <el-row :gutter="16">
@@ -192,6 +200,15 @@
           </Transition>
         </div>
 
+        <!-- RAG 知识库开关 -->
+        <div v-if="currentStep === 3" style="display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:8px">
+          <el-switch v-model="profile.useRag" active-color="#e65100" />
+          <span style="font-size:13px;color:#606266">知识库增强</span>
+          <el-tooltip content="开启后会自动检索你上传的方法论文档和开源项目 README，让推荐结果包含更具体的学习路径、案例参考和面试建议" placement="top">
+            <el-icon style="color:#909399;cursor:help"><QuestionFilled /></el-icon>
+          </el-tooltip>
+        </div>
+
         <!-- 底部按钮 -->
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
           <button v-if="currentStep > 0" class="nav-btn prev" @click="goStep(currentStep-1)">← 上一步</button>
@@ -203,6 +220,28 @@
           </button>
         </div>
         <div v-if="v2Error" style="color:#e65100;font-size:13px;margin-top:10px;padding:8px;background:#fff3e0;border-radius:8px">{{ v2Error }}</div>
+      </div>
+
+      </div>
+
+            </div>
+      </div>
+      <!-- 岗位浏览 -->
+      <div v-if="trendTab==='jobs'" style="min-height:300px">
+        <div style="display:flex;gap:12px;margin-bottom:12px;align-items:center">
+          <span style="font-size:13px;color:#909399;margin-right:4px">筛选：</span>
+          <el-select v-model="jobDirection" placeholder="选择方向" size="small" style="width:200px" @change="loadJobList">
+            <el-option v-for="d in jobDirections" :key="d" :label="d" :value="d" />
+          </el-select>
+          <el-select v-model="jobId" placeholder="选择岗位" size="small" style="width:300px" @change="loadJobDetail">
+            <el-option v-for="j in jobList" :key="j.id" :label="j.position" :value="j.id" />
+          </el-select>
+          <el-button size="small" type="primary" @click="$router.push('/submit-job')" style="margin-left:auto;background:#e65100;border-color:#e65100">📝 投稿岗位</el-button>
+        </div>
+        <div v-if="jobDetail" style="background:#faf9f7;border-radius:8px;padding:16px;line-height:1.8;font-size:14px;max-height:500px;overflow:auto" v-html="jobDetailHtml"></div>
+        <p v-if="jobDetail" style="color:#909399;font-size:11px;margin-top:8px;border-top:1px solid #eee;padding-top:8px">本页面岗位信息由平台注册用户自主上传分享，本平台仅提供信息存储空间服务，不对内容版权、真实性承担责任。如涉及侵权，请联系 1281748852@qq.com，我们将在 3 个工作日内下架对应内容。</p>
+        <el-empty v-if="jobDirection && !jobId && !jobDetail" description="请选择岗位" />
+        <el-empty v-if="!jobDirection" description="请选择方向查看岗位" />
       </div>
 
       <!-- 榨汁动画 -->
@@ -297,35 +336,26 @@
         </div>
       </div>
 
-      <!-- 旧版折叠 -->
-      <el-collapse style="margin-top:16px">
-        <el-collapse-item title="💬 自由提问（旧版）">
-          <el-row :gutter="8">
-            <el-col :span="6"><el-input v-model="aiEndpoint" placeholder="https://api.deepseek.com/v1" size="small" /></el-col>
-            <el-col :span="3"><el-input v-model="aiModel" placeholder="deepseek-chat" size="small" /></el-col>
-            <el-col :span="5"><el-input v-model="aiKey" placeholder="sk-xxx" type="password" show-password size="small" /></el-col>
-            <el-col :span="2"><el-button size="small" @click="testConnection" :loading="testLoading">测试</el-button></el-col>
-            <el-col :span="8">
-              <el-input v-model="aiQuestion" placeholder="自由提问" size="small" @keyup.enter="askAI">
-                <template #append><el-button :loading="aiLoading" @click="askAI">发送</el-button></template>
-              </el-input>
-            </el-col>
-          </el-row>
-          <div v-if="aiReply" style="background:#faf9f7;border-radius:8px;padding:12px;max-height:300px;overflow:auto;line-height:1.8;font-size:13px;margin-top:8px" v-html="aiReplyHtml"></div>
-          <div v-if="aiError" style="color:#F56C6C;font-size:13px;margin-top:4px">{{ aiError }}</div>
-        </el-collapse-item>
-      </el-collapse>
-    </div>
-  </div>
+      <!-- V1 自由提问 -->
+      <div v-if="trendTab==='v1'" style="margin-top:16px">
+        <el-input v-model="aiQuestion" placeholder="自由提问，基于知识库和GitHub数据回答..." size="small" @keyup.enter="askAI">
+          <template #append><el-button :loading="aiLoading" @click="askAI" style="background:#e65100;border-color:#e65100;color:#fff">发送</el-button></template>
+        </el-input>
+        <div v-if="aiReply" style="background:#faf9f7;border-radius:8px;padding:12px;max-height:400px;overflow:auto;line-height:1.8;font-size:13px;margin-top:8px" v-html="aiReplyHtml"></div>
+        <div v-if="aiError" style="color:#F56C6C;font-size:13px;margin-top:4px">{{ aiError }}</div>
+        <p v-if="aiReply" style="color:#909399;font-size:11px;margin-top:8px;border-top:1px solid #eee;padding-top:8px">以上分析由 AI 生成，仅供参考。每次提问消耗 50 segments。</p>
+      </div>
+
 </template>
 
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
 import request from '../api/request'
+import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
 
 const chartRef = ref(null)
 let chart = null
@@ -366,6 +396,14 @@ const aiReplyHtml = ref('')
 const aiLoading = ref(false)
 const aiError = ref('')
 
+const trendTab = ref('v2')
+const jobDirections = ref([])
+const jobDirection = ref('')
+const jobList = ref([])
+const jobId = ref(null)
+const jobDetail = ref('')
+const jobDetailHtml = ref('')
+
 // V2 智能分析
 const currentStep = ref(0)
 const animDirection = ref('')
@@ -388,7 +426,8 @@ const formSteps = [
 ]
 const profile = reactive({
   topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
-  customTopics: '', customPurpose: '', customLang: '', customTime: ''
+  customTopics: '', customPurpose: '', customLang: '', customTime: '',
+  useRag: true
 })
 
 const topicOptions = ['创意编程','游戏开发','WebGL','Canvas','Web音频','AI智能体','RAG检索增强','自托管','家庭助理','ESP32','树莓派','家居自动化','3D打印','其他']
@@ -433,6 +472,10 @@ const loadHistory = (h) => {
 
 const startJuicing = async () => {
   if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; currentStep.value = 0; return }
+  // 消费确认
+  try {
+    await ElMessageBox.confirm('本次分析将消耗 50 segments', '确认分析', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' })
+  } catch { return }
   juicing.value = true; analyzing.value = true; v2Error.value = ''; v2Result.value = null
   squeezeText.value = '🍊 正在收集数据...'; let idx = 0
   squeezeTimer = setInterval(() => { idx = (idx+1) % squeezeTexts.length; squeezeText.value = squeezeTexts[idx] }, 3000)
@@ -441,15 +484,16 @@ const startJuicing = async () => {
   juicing.value = false
   try {
     const r = await request.post('/app/trend/analyze-v2', {
-      topics: profile.topics || [],
+      topics: Array.isArray(profile.topics) ? profile.topics : [],
       purpose: profile.purpose || '',
       experience: profile.experience || '',
-      languages: profile.languages || [],
+      languages: Array.isArray(profile.languages) ? profile.languages : [],
       timeCommitment: profile.timeCommitment || '',
       customTopics: profile.customTopics || '',
       customPurpose: profile.customPurpose || '',
       customLang: profile.customLang || '',
-      customTime: profile.customTime || ''
+      customTime: profile.customTime || '',
+      useRag: profile.useRag
     }, { timeout: 0 })
     if (r.code === 1 && r.data) {
       v2Result.value = r.data
@@ -602,9 +646,6 @@ const testConnection = async () => {
   testLoading.value = true; aiError.value = ''
   try {
     const r = await request.post('/app/trend/analyze', {
-      endpoint: aiEndpoint.value,
-      model: aiModel.value || 'gpt-4o',
-      apiKey: aiKey.value,
       question: '回复OK'
     }, { timeout: 15000 })
     if (r.code === 1) {
@@ -631,16 +672,11 @@ const importToPlan = (r) => {
 }
 
 const askAI = async () => {
-  if (!aiKey.value || !aiEndpoint.value || !aiQuestion.value.trim()) {
-    aiError.value = '请填写 API Endpoint、API Key 和分析问题'
-    return
-  }
+  if (!aiQuestion.value.trim()) { aiError.value = '请输入分析问题'; return }
+  try { await ElMessageBox.confirm('本次提问将消耗 50 segments', '确认发送', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }) } catch { return }
   aiLoading.value = true; aiError.value = ''; aiReply.value = ''; aiReplyHtml.value = ''
   try {
     const r = await request.post('/app/trend/analyze', {
-      endpoint: aiEndpoint.value,
-      model: aiModel.value,
-      apiKey: aiKey.value,
       question: aiQuestion.value.trim()
     }, { timeout: 90000 })
     if (r.code === 1 && r.data) {
@@ -654,7 +690,24 @@ const askAI = async () => {
   } finally { aiLoading.value = false }
 }
 
-onMounted(() => { loadGraph(); loadHistoryFromDB() })
+
+const loadDirections = async () => {
+  try { const r = await getDirections(); jobDirections.value = r.data || [] } catch {}
+}
+const loadJobList = async () => {
+  jobId.value = null; jobDetail.value = ''
+  try { const r = await getJobsByDirection(jobDirection.value); jobList.value = r.data || [] } catch {}
+}
+const loadJobDetail = async () => {
+  if (!jobId.value) return
+  try {
+    const r = await getJobDetail(jobId.value)
+    jobDetail.value = r.data?.displayContent || ''
+    jobDetailHtml.value = marked.parse(jobDetail.value)
+  } catch {}
+}
+
+onMounted(() => { loadGraph(); loadHistoryFromDB(); loadDirections() })
 onUnmounted(() => { chart?.dispose(); chart = null })
 </script>
 

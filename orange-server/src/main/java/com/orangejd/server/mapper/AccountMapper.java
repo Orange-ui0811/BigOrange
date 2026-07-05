@@ -34,4 +34,19 @@ public interface AccountMapper {
 
     /** 榜单: 创作者总数（本周） */
     int countLeaderboardCreatorsWeekly(@Param("weekStart") String weekStart);
+
+    /** 配额: FOR UPDATE 锁行查询 */
+    Account selectByIdForUpdate(@Param("id") Long id);
+
+    /** 配额: 原子扣减（返回受影响行数，0=余额不足） */
+    int decreaseQuota(@Param("id") Long id, @Param("amount") int amount);
+
+    /** 配额: 原子增加 */
+    int increaseQuota(@Param("id") Long id, @Param("amount") int amount);
+
+    /** 配额: 管理端直接设置（审计用） */
+    int setQuota(@Param("id") Long id, @Param("quota") Long quota);
+
+    /** 按邮箱查询 */
+    Account selectByEmail(@Param("email") String email);
 }

@@ -25,6 +25,9 @@ public class AppTrendController {
     @Autowired
     private com.orangejd.server.mapper.TrendHistoryMapper trendHistoryMapper;
 
+    @Autowired
+    private com.orangejd.common.properties.JwtProperties jwtProperties;
+
     @Autowired(required = false)
     private StringRedisTemplate redisTemplate;
 
@@ -48,19 +51,13 @@ public class AppTrendController {
             redisTemplate.opsForValue().set(rateKey, "1", 10, TimeUnit.SECONDS);
         }
 
-        String apiEndpoint = body.getOrDefault("endpoint", "");
-        String apiKey = body.getOrDefault("apiKey", "");
-        String model = body.getOrDefault("model", "gpt-4o");
         String question = body.getOrDefault("question", "");
 
-        if (apiEndpoint.isEmpty() || apiKey.isEmpty()) {
-            return Result.error("请填写 API Endpoint 和 API Key");
-        }
         if (question.isEmpty()) {
             return Result.error("请输入分析问题");
         }
 
-        Map<String, Object> analysis = analysisService.analyze(apiEndpoint, apiKey, model, question);
+        Map<String, Object> analysis = analysisService.analyze(question);
         if (analysis.containsKey("error")) {
             return Result.error((String) analysis.get("error"));
         }
@@ -78,6 +75,9 @@ public class AppTrendController {
             redisTemplate.opsForValue().set(rateKey, "1", 10, TimeUnit.SECONDS);
         }
 
+        // 从请求头提取用户身份（公开端点，JWT 拦截器不生效，手动解析）
+        setCurrentUserFromToken(request);
+
         if (profile.getTopics() == null || profile.getTopics().isEmpty())
             return Result.error("请至少选择一个技术方向");
 
@@ -85,7 +85,8 @@ public class AppTrendController {
             profile.getTopics(), profile.getPurpose(), profile.getExperience(),
             profile.getLanguages(), profile.getTimeCommitment(),
             profile.getCustomTopics(), profile.getCustomPurpose(),
-            profile.getCustomExp(), profile.getCustomLang(), profile.getCustomTime());
+            profile.getCustomExp(), profile.getCustomLang(), profile.getCustomTime(),
+            profile.getUseRag());
 
         if (result.containsKey("error"))
             return Result.error((String) result.get("error"));
@@ -145,5 +146,22 @@ public class AppTrendController {
         if (accountId == null || accountId == 0) return Result.error("请先登录");
         trendHistoryMapper.deleteByBrowserId(accountId);
         return Result.success();
+    }
+
+    /** 从 App-Token 请求头解析用户 ID 并设置到 BaseContext（公开端点专用） */
+    private void setCurrentUserFromToken(HttpServletRequest request) {
+        String token = request.getHeader(jwtProperties.getAppTokenName());
+        if (token != null && !token.isEmpty()) {
+            try {
+                io.jsonwebtoken.Claims claims = com.orangejd.common.utils.JwtUtil
+                    .parseJwt(jwtProperties.getAppSecretKey(), token);
+                Long id = claims.get("id", Long.class);
+                if (id != null) {
+                    com.orangejd.common.context.BaseContext.setCurrentId(id);
+                }
+            } catch (Exception ignored) {
+                // token 无效或过期，不设置用户身份，不扣费
+            }
+        }
     }
 }

@@ -349,3 +349,20 @@ CREATE TABLE IF NOT EXISTS trend_history (
     PRIMARY KEY (id),
     KEY idx_browser_id (browser_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ============================================================
+-- 知识库（RAG 趋势分析增强）
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS knowledge_document (
+    id           BIGINT       NOT NULL AUTO_INCREMENT,
+    title        VARCHAR(256) NOT NULL COMMENT '文档标题（文件名或仓库名）',
+    source       VARCHAR(16)  NOT NULL DEFAULT 'MANUAL' COMMENT '来源: MANUAL / GITHUB',
+    source_ref   VARCHAR(512)          COMMENT '来源引用（GitHub full_name 或文件路径，幂等键）',
+    chunk_count  INT          NOT NULL DEFAULT 0 COMMENT '切片数',
+    file_size    BIGINT                COMMENT '原始文件大小（字节）',
+    create_time  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_source (source),
+    UNIQUE KEY uk_source_ref (source_ref)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='知识库文档表';

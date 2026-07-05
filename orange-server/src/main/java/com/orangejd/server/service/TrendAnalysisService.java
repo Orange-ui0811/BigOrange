@@ -2,9 +2,13 @@ package com.orangejd.server.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
@@ -27,6 +31,15 @@ public class TrendAnalysisService {
     @org.springframework.beans.factory.annotation.Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
     private String trendModel;
 
+    @Autowired(required = false)
+    private VectorStore vectorStore;
+
+    @Autowired
+    private QuotaService quotaService;
+
+    @Autowired(required = false)
+    private StringRedisTemplate redisTemplate;
+
     private final RestTemplate restTemplate;
     private final RestTemplate trendRestTemplate;
 
@@ -41,89 +54,82 @@ public class TrendAnalysisService {
     }
 
     @SuppressWarnings("unchecked")
-    public Map<String, Object> analyze(String apiEndpoint, String apiKey, String model, String question) {
+    public Map<String, Object> analyze(String question) {
         Map<String, Object> result = new LinkedHashMap<>();
+
+        // 配额消费
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        String requestId = null;
+        if (accountId != null && accountId > 0) {
+            requestId = "trend_v1_" + accountId + "_" + System.currentTimeMillis();
+            try { quotaService.consume(accountId, 50, "趋势分析 V1", requestId); }
+            catch (Exception e) { result.put("error", e.getMessage()); return result; }
+        }
 
         // 获取双周图谱数据
         Map<String, Object> compareData;
-        try {
-            compareData = graphService.buildCompareGraph();
-        } catch (Exception e) {
-            result.put("error", "图谱数据获取失败: " + e.getMessage());
-            return result;
-        }
+        try { compareData = graphService.buildCompareGraph(); }
+        catch (Exception e) { result.put("error", "图谱数据获取失败: " + e.getMessage()); return result; }
 
         // 格式化数据摘要
         String dataSummary = formatDataSummary(compareData);
 
-        // 构建 OpenAI 兼容请求
+        // RAG 检索
+        String ragContext = "";
+        if (vectorStore != null) {
+            try {
+                List<org.springframework.ai.document.Document> docs = vectorStore.similaritySearch(
+                    org.springframework.ai.vectorstore.SearchRequest.builder().query(question).topK(2).similarityThreshold(0.5).build());
+                if (!docs.isEmpty()) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < docs.size(); i++) {
+                        sb.append("参考资料").append(i+1).append("：").append(docs.get(i).getText()).append("\n");
+                    }
+                    ragContext = sb.toString();
+                }
+            } catch (Exception ignored) {}
+        }
+
+        String userPrompt = dataSummary + (ragContext.isEmpty() ? "" : "\n\n参考资料：\n" + ragContext) +
+                "\n\n用户问题: " + question;
+
+        // 构建请求（使用服务端配置）
         Map<String, Object> requestBody = new LinkedHashMap<>();
-        requestBody.put("model", model);
-
+        requestBody.put("model", trendModel);
         List<Map<String, String>> messages = new ArrayList<>();
-
-        Map<String, String> systemMsg = new LinkedHashMap<>();
-        systemMsg.put("role", "system");
-        systemMsg.put("content", "你是开源趋势分析师。基于提供的真实 GitHub 数据（15 个技术方向的本周和上周热度数据），" +
-                "分析 Vibe Coding（AI 辅助编程）在不同技术方向的发展趋势。" +
-                "请严格遵守以下规则：\n" +
-                "1. 只基于提供的数据分析，不编造不存在的数据\n" +
-                "2. 如果数据不足以得出结论，明确告知\n" +
-                "3. 用 Markdown 格式回复，包含标题、列表、加粗等\n" +
-                "4. 给出具体的数据支撑（如 \"AI Agents 本周 48,892 stars，增长 12%\"）\n" +
-                "5. 分析维度包括：热度排名、增长趋势、蓝海机会、难度评估、值得投入的方向");
-        messages.add(systemMsg);
-
-        Map<String, String> userMsg = new LinkedHashMap<>();
-        userMsg.put("role", "user");
-        userMsg.put("content", dataSummary + "\n\n用户问题: " + question);
-        messages.add(userMsg);
-
+        Map<String, String> sys = new LinkedHashMap<>();
+        sys.put("role", "system");
+        sys.put("content", "你是开源趋势分析师。基于提供的真实 GitHub 数据和知识库参考资料，分析技术趋势。用 Markdown 格式回复。");
+        messages.add(sys);
+        Map<String, String> usr = new LinkedHashMap<>();
+        usr.put("role", "user"); usr.put("content", userPrompt);
+        messages.add(usr);
         requestBody.put("messages", messages);
         requestBody.put("temperature", 0.7);
         requestBody.put("max_tokens", 2000);
 
         // 调大模型
         try {
-            String url = apiEndpoint.trim();
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "https://" + url;
-            }
-            if (!url.endsWith("/chat/completions")) {
-                url = url.replaceAll("/$", "") + "/chat/completions";
-            }
-
+            String url = trendEndpoint.trim();
+            if (!url.startsWith("http")) url = "https://" + url;
+            if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer " + apiKey);
-            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
-
-            ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-
+            headers.set("Authorization", "Bearer " + trendApiKey);
+            ResponseEntity<Map> response = trendRestTemplate.exchange(url, HttpMethod.POST,
+                    new HttpEntity<>(requestBody, headers), Map.class);
             if (response.getBody() != null) {
                 List<Map<String, Object>> choices = (List<Map<String, Object>>) response.getBody().get("choices");
                 if (choices != null && !choices.isEmpty()) {
                     Map<String, Object> message = (Map<String, Object>) choices.get(0).get("message");
                     result.put("content", message.getOrDefault("content", ""));
-                }
-                Map<String, Object> usage = (Map<String, Object>) response.getBody().get("usage");
-                if (usage != null) {
-                    result.put("usage", usage);
+                    result.put("balance", accountId != null ? quotaService.getBalance(accountId) : 0);
                 }
             }
         } catch (Exception e) {
-            log.warn("AI 分析请求失败: {}", e.getMessage().length() > 100 ? e.getMessage().substring(0, 100) : e.getMessage());
-            String msg = e.getMessage();
-            if (msg != null) {
-                if (msg.contains("401") || msg.contains("403")) result.put("error", "API Key 无效或无权访问，请检查");
-                else if (msg.contains("timeout") || msg.contains("read")) result.put("error", "请求超时（30s），请重试或换用更快的模型");
-                else if (msg.contains("connect") || msg.contains("UnknownHost")) result.put("error", "无法连接到 " + apiEndpoint + "，请检查 Endpoint 地址");
-                else result.put("error", "AI 模型调用失败: " + msg.substring(0, Math.min(100, msg.length())));
-            } else {
-                result.put("error", "AI 模型调用失败，请检查网络和配置");
-            }
+            log.warn("AI趋势分析V1失败: {}", e.getMessage());
+            result.put("error", "AI分析失败: " + e.getMessage());
         }
-
         return result;
     }
 
@@ -212,14 +218,35 @@ public class TrendAnalysisService {
     @SuppressWarnings("unchecked")
     public Map<String, Object> analyzeV2(
             List<String> topics, String purpose, String experience, List<String> languages, String timeCommitment,
-            String customTopics, String customPurpose, String customExp, String customLang, String customTime) {
+            String customTopics, String customPurpose, String customExp, String customLang, String customTime,
+            Boolean useRag) {
 
         Map<String, Object> result = new LinkedHashMap<>();
+
+        // 配额消费
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        String requestId = null;
+        boolean consumed = false;
+        if (accountId != null && accountId > 0) {
+            requestId = "trend_v2_" + accountId + "_" + System.currentTimeMillis();
+            try {
+                int balance = quotaService.consume(accountId, 50, "趋势分析 V2", requestId);
+                consumed = true;
+                result.put("balance", balance);
+                log.info("[QUOTA] 趋势分析预扣: accountId={}, balance={}", accountId, balance);
+            } catch (Exception e) {
+                result.put("error", e.getMessage());
+                return result;
+            }
+        }
 
         // 获取图谱数据
         Map<String, Object> compareData;
         try { compareData = graphService.buildCompareGraph(); }
-        catch (Exception e) { result.put("error", "图谱数据获取失败"); return result; }
+        catch (Exception e) {
+            if (consumed) quotaService.refund(accountId, 50, requestId, "图谱获取失败退款");
+            result.put("error", "图谱数据获取失败"); return result;
+        }
 
         // 构建用户画像
         StringBuilder profile = new StringBuilder();
@@ -245,13 +272,25 @@ public class TrendAnalysisService {
 
         // 数据摘要
         String dataSummary = formatDataSummary(compareData);
+
+        // ---- RAG 检索增强 ----
+        String ragContext = (useRag != null && useRag)
+            ? buildRagContext(topics, purpose, experience, timeCommitment,
+                customTopics, customPurpose, customExp, customTime)
+            : "";
+
         String userPrompt = profile.toString() + "\n\n" + dataSummary +
-            "\n\n请基于用户画像和数据，严格按 JSON 格式输出推荐结果。";
+            (ragContext.isEmpty() ? "" : "\n\n## 知识库参考\n" + ragContext) +
+            "\n\n请基于用户画像、数据和知识库参考，严格按 JSON 格式输出推荐结果。";
 
         // 调 AI
         try {
+            String endpoint = getRedisOrDefault("ai:trend:endpoint", trendEndpoint);
+            String apiKey = getRedisOrDefault("ai:trend:api-key", trendApiKey);
+            String model = getRedisOrDefault("ai:trend:model", trendModel);
+
             Map<String, Object> body = new LinkedHashMap<>();
-            body.put("model", trendModel);
+            body.put("model", model);
 
             List<Map<String, String>> messages = new ArrayList<>();
             Map<String, String> sys = new LinkedHashMap<>();
@@ -263,13 +302,13 @@ public class TrendAnalysisService {
             body.put("messages", messages);
             body.put("temperature", 0.5);
 
-            String url = trendEndpoint.trim();
+            String url = endpoint.trim();
             if (!url.startsWith("http")) url = "https://" + url;
             if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer " + trendApiKey);
+            headers.set("Authorization", "Bearer " + apiKey);
             HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
             ResponseEntity<Map> resp = trendRestTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
@@ -283,6 +322,10 @@ public class TrendAnalysisService {
             }
         } catch (Exception e) {
             log.warn("AI趋势分析V2失败: {}", e.getMessage());
+            if (consumed) {
+                quotaService.refund(accountId, 50, requestId, "AI分析失败退款");
+                log.info("[QUOTA] 退款: accountId={}, amount=50", accountId);
+            }
             result.put("error", "AI分析失败: " + e.getMessage());
         }
         return result;
@@ -380,4 +423,98 @@ public class TrendAnalysisService {
     }
 
     private String nvl(String s) { return s == null || s.isEmpty() ? "未填写" : s; }
+
+    private String getRedisOrDefault(String key, String fallback) {
+        if (redisTemplate == null) return fallback;
+        String v = redisTemplate.opsForValue().get(key);
+        return (v != null && !v.isEmpty()) ? v : fallback;
+    }
+
+    // ==================== RAG 分维检索 ====================
+
+    /**
+     * 分维检索知识库：画像拆成 4 条 query，各自检索 Top 2，合并去重取 Top 3
+     */
+    private String buildRagContext(List<String> topics, String purpose, String experience,
+            String timeCommitment, String customTopics, String customPurpose,
+            String customExp, String customTime) {
+        if (vectorStore == null) return "";
+
+        try {
+            List<String> queries = new ArrayList<>();
+
+            // ① 方向 query
+            StringBuilder dirQuery = new StringBuilder("技术方向：");
+            if (topics != null && !topics.isEmpty())
+                dirQuery.append(String.join(" ", topics)).append(" 开源项目入门实践");
+            if (customTopics != null && !customTopics.isEmpty())
+                dirQuery.append(" ").append(customTopics);
+            queries.add(dirQuery.toString());
+
+            // ② 目的 query
+            StringBuilder purposeQuery = new StringBuilder("技术学习目的：").append(nvl(purpose));
+            if (customPurpose != null && !customPurpose.isEmpty())
+                purposeQuery.append(" ").append(customPurpose);
+            purposeQuery.append(" ").append(purposeToSearchContext(nvl(purpose)));
+            queries.add(purposeQuery.toString());
+
+            // ③ 基础 query
+            StringBuilder expQuery = new StringBuilder("编程经验：").append(nvl(experience));
+            if (customExp != null && !customExp.isEmpty())
+                expQuery.append(" ").append(customExp);
+            expQuery.append(" 学习路径入门");
+            queries.add(expQuery.toString());
+
+            // ④ 时间 query
+            StringBuilder timeQuery = new StringBuilder("时间投入：").append(nvl(timeCommitment));
+            if (customTime != null && !customTime.isEmpty())
+                timeQuery.append(" ").append(customTime);
+            timeQuery.append(" 学习计划 时间管理");
+            queries.add(timeQuery.toString());
+
+            // ② 每条 query 检索 Top 2
+            Map<String, Document> seen = new LinkedHashMap<>(); // textHash → Document
+            for (String q : queries) {
+                try {
+                    List<Document> hits = vectorStore.similaritySearch(
+                        SearchRequest.builder().query(q).topK(2).similarityThreshold(0.6).build()
+                    );
+                    for (Document doc : hits) {
+                        String key = doc.getText().substring(0, Math.min(50, doc.getText().length()));
+                        seen.putIfAbsent(key, doc);
+                    }
+                } catch (Exception e) {
+                    log.debug("[RAG] 单维度检索异常: {}", e.getMessage());
+                }
+            }
+            log.info("[RAG] 分维检索: 4 queries → {} unique fragments", seen.size());
+
+            // ③ 取 Top 3
+            List<Document> selected = new ArrayList<>(seen.values());
+            if (selected.size() > 3) selected = selected.subList(0, 3);
+
+            // ④ 格式化为 prompt 片段
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < selected.size(); i++) {
+                Document doc = selected.get(i);
+                sb.append("【片段").append(i + 1).append("】");
+                Object title = doc.getMetadata().get("docTitle");
+                if (title != null) sb.append(" 来源：").append(title);
+                sb.append("\n").append(doc.getText()).append("\n\n");
+            }
+            log.info("[RAG] prompt 已拼接, 知识库片段数={}", selected.size());
+            return sb.toString();
+        } catch (Exception e) {
+            log.warn("[RAG] 检索失败，跳过增强: {}", e.getMessage());
+            return "";
+        }
+    }
+
+    private String purposeToSearchContext(String purpose) {
+        if (purpose.contains("求职")) return "面试技巧 项目经验 GitHub作品集";
+        if (purpose.contains("学习")) return "学习路径 入门教程 从零开始";
+        if (purpose.contains("赚钱")) return "商业变现 开源项目商业化";
+        if (purpose.contains("探索")) return "技术趋势 新兴方向 兴趣探索";
+        return "";
+    }
 }

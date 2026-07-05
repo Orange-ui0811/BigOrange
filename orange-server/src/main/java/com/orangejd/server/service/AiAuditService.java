@@ -225,8 +225,10 @@ public class AiAuditService {
         List<String> allImages = new ArrayList<>();
         if (coverUrl != null && !coverUrl.isEmpty()) allImages.add(coverUrl);
         if (detailImageUrls != null) allImages.addAll(detailImageUrls);
-        // 去重并限制最多 5 张
-        allImages = allImages.stream().distinct().limit(5).collect(java.util.stream.Collectors.toList());
+        // SSRF 防护 + 去重 + 最多 5 张
+        allImages = allImages.stream()
+                .filter(com.orangejd.common.util.UrlValidator::isSafe)
+                .distinct().limit(5).collect(java.util.stream.Collectors.toList());
 
         if (!allImages.isEmpty()) {
             List<Map<String, Object>> content = new ArrayList<>();

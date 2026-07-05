@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.TopUpMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO top_up (account_id, amount, money, trade_no, payment_method, payment_provider, status)
+        VALUES (#{accountId}, #{amount}, #{money}, #{tradeNo}, #{paymentMethod}, #{paymentProvider}, #{status})
+    </insert>
+
+    <select id="selectByTradeNo" resultType="com.orangejd.pojo.entity.TopUp">
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time, complete_time
+        FROM top_up WHERE trade_no = #{tradeNo}
+    </select>
+
+    <select id="selectByTradeNoForUpdate" resultType="com.orangejd.pojo.entity.TopUp">
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time, complete_time
+        FROM top_up WHERE trade_no = #{tradeNo} FOR UPDATE
+    </select>
+
+    <update id="updateStatus">
+        UPDATE top_up SET status = #{status}, complete_time = NOW() WHERE trade_no = #{tradeNo}
+    </update>
+
+    <select id="selectPending" resultType="com.orangejd.pojo.entity.TopUp">
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time
+        FROM top_up WHERE account_id = #{accountId} AND status = 'pending'
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectAll" resultType="com.orangejd.pojo.entity.TopUp">
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time, complete_time
+        FROM top_up ORDER BY id DESC LIMIT #{offset}, #{limit}
+    </select>
+</mapper>

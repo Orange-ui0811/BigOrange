@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.JobPostingMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO job_posting (company, position, direction, content, display_content, audit_status, submitter_id, submitter_ip, submitter_role)
+        VALUES (#{company}, #{position}, #{direction}, #{content}, #{displayContent}, #{auditStatus}, #{submitterId}, #{submitterIp}, #{submitterRole})
+    </insert>
+
+    <select id="selectById" resultType="com.orangejd.pojo.entity.JobPosting">
+        SELECT id, company, position, direction, content, display_content, audit_status, submitter_id, submitter_ip, submitter_role, reject_reason, create_time
+        FROM job_posting WHERE id = #{id}
+    </select>
+
+    <select id="selectByIdForUpdate" resultType="com.orangejd.pojo.entity.JobPosting">
+        SELECT id, company, position, direction, content, display_content, audit_status, submitter_id, submitter_ip, submitter_role, reject_reason, create_time
+        FROM job_posting WHERE id = #{id} FOR UPDATE
+    </select>
+
+    <select id="selectByCompanyPosition" resultType="com.orangejd.pojo.entity.JobPosting">
+        SELECT id, company, position, direction, audit_status, create_time
+        FROM job_posting WHERE company = #{company} AND position = #{position}
+    </select>
+
+    <select id="countByCompanyPosition" resultType="int">
+        SELECT COUNT(*) FROM job_posting WHERE company = #{company} AND position = #{position}
+    </select>
+
+    <select id="selectAllDirections" resultType="string">
+        SELECT DISTINCT direction FROM job_posting WHERE audit_status = 'APPROVED' AND direction IS NOT NULL ORDER BY direction
+    </select>
+
+    <select id="selectApprovedByDirection" resultType="com.orangejd.pojo.entity.JobPosting">
+        SELECT id, position, direction, display_content AS displayContent, create_time
+        FROM job_posting WHERE audit_status = 'APPROVED' AND direction = #{direction}
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectPending" resultType="com.orangejd.pojo.entity.JobPosting">
+        SELECT id, position, direction, content, display_content, submitter_id, submitter_ip, submitter_role, create_time
+        FROM job_posting WHERE audit_status = 'PENDING'
+        ORDER BY id ASC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="selectAll" resultType="com.orangejd.pojo.entity.JobPosting">
+        SELECT id, company, position, direction, audit_status, submitter_id, reject_reason, create_time
+        FROM job_posting
+        <where>
+            <if test="status != null and status != ''">audit_status = #{status}</if>
+        </where>
+        ORDER BY id DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM job_posting
+        <where>
+            <if test="status != null and status != ''">audit_status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="countPending" resultType="int">
+        SELECT COUNT(*) FROM job_posting WHERE audit_status = 'PENDING'
+    </select>
+
+    <update id="updateAuditStatus">
+        UPDATE job_posting SET audit_status = #{status}, reject_reason = #{reason} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM job_posting WHERE id = #{id}
+    </delete>
+
+    <update id="updateContent">
+        UPDATE job_posting SET position = #{position}, direction = #{direction}, display_content = #{displayContent}
+        WHERE id = #{id}
+    </update>
+</mapper>

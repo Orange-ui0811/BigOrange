@@ -10,6 +10,13 @@ spring:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangejd}?useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD}
+  data:
+    redis:
+      client-type: jedis
+  ai:
+    vectorstore:
+      redis:
+        initialize-schema: true
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
@@ -42,6 +49,10 @@ orange:
     endpoint: ${AI_TREND_ENDPOINT:}
     api-key: ${AI_TREND_KEY:}
     model: ${AI_TREND_MODEL:DeepSeek-V4-Pro}
+  ai-embedding:
+    endpoint: ${AI_EMBEDDING_ENDPOINT:https://ai.gitee.com/v1}
+    api-key: ${AI_EMBEDDING_KEY:}
+    model: ${AI_EMBEDDING_MODEL:bge-small-zh-v1.5}
   feishu:
     webhook-url: ${FEISHU_WEBHOOK_URL:}
 

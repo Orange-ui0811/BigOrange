@@ -14,6 +14,7 @@ public class TrendProfileDTO {
     private String customExp;
     private String customLang;
     private String customTime;
+    private Boolean useRag;
 
     public List<String> getTopics() { return topics; }
     public void setTopics(List<String> topics) { this.topics = topics; }
@@ -35,4 +36,6 @@ public class TrendProfileDTO {
     public void setCustomLang(String customLang) { this.customLang = customLang; }
     public String getCustomTime() { return customTime; }
     public void setCustomTime(String customTime) { this.customTime = customTime; }
+    public Boolean getUseRag() { return useRag; }
+    public void setUseRag(Boolean useRag) { this.useRag = useRag; }
 }

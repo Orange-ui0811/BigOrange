@@ -15,8 +15,13 @@
         </el-tab-pane>
         <el-tab-pane label="注册" name="register">
           <el-form :model="regForm" label-position="top" size="large">
-            <el-form-item label="手机号"><el-input v-model="regForm.phone" placeholder="11位手机号" /></el-form-item>
-            <el-form-item label="身份证号"><el-input v-model="regForm.idCard" placeholder="18位身份证号" /></el-form-item>
+            <el-form-item label="邮箱"><el-input v-model="regForm.email" placeholder="example@qq.com" /></el-form-item>
+            <el-form-item label="验证码">
+              <div style="display:flex;gap:8px">
+                <el-input v-model="regForm.code" placeholder="6位验证码" style="flex:1" />
+                <el-button :disabled="codeCooldown>0" @click="sendCode" style="white-space:nowrap">{{ codeCooldown>0 ? codeCooldown+'s' : '发送验证码' }}</el-button>
+              </div>
+            </el-form-item>
             <el-form-item label="用户名"><el-input v-model="regForm.username" placeholder="用户名" /></el-form-item>
             <el-form-item label="密码"><el-input v-model="regForm.password" type="password" show-password placeholder="至少6位，含字母和数字" /></el-form-item>
             <el-form-item label="昵称"><el-input v-model="regForm.nickname" placeholder="怎么称呼" /></el-form-item>
@@ -38,7 +43,19 @@ const router = useRouter()
 const tab = ref('login')
 const loading = ref(false)
 const loginForm = reactive({ username: 'testphase3', password: '123456' })
-const regForm = reactive({ username: '', password: '', nickname: '', phone: '', idCard: '' })
+const codeCooldown = ref(0)
+const regForm = reactive({ username: '', password: '', nickname: '', email: '', code: '' })
+const sendCode = async () => {
+  if (!regForm.email || !regForm.email.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
+  try {
+    await request.post('/app/auth/send-code', { email: regForm.email })
+    ElMessage.success('验证码已发送')
+    codeCooldown.value = 60
+    const timer = setInterval(() => { codeCooldown.value--; if (codeCooldown.value<=0) clearInterval(timer) }, 1000)
+  } catch (e) {
+    ElMessage.error(e?.response?.data?.msg || '发送失败')
+  }
+}
 const doLogin = async () => {
   loading.value = true
   try {
@@ -51,8 +68,8 @@ const res = await request.post('/app/auth/login', loginForm)
 
 const doRegister = async () => {
   if (regForm.password.length < 6 || !/[a-zA-Z]/.test(regForm.password) || !/\d/.test(regForm.password)) { ElMessage.error('密码至少6位且包含字母和数字'); return }
-  if (!regForm.phone) { ElMessage.error('请输入手机号'); return }
-  if (!regForm.idCard) { ElMessage.error('请输入身份证号'); return }
+  if (!regForm.email || !regForm.email.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
+  if (!regForm.code) { ElMessage.error('请输入验证码'); return }
   loading.value = true
   try {
     const res = await request.post('/app/auth/register', regForm)

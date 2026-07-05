@@ -8,6 +8,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -29,6 +30,12 @@ public class AppPlanController {
     @Autowired
     private com.orangejd.server.mapper.PlanHistoryMapper planHistoryMapper;
 
+    @Autowired
+    private com.orangejd.common.properties.JwtProperties jwtProperties;
+
+    @Autowired
+    private com.orangejd.server.service.QuotaService quotaService;
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     private static final String[] PHASE_TITLES = {
@@ -36,7 +43,10 @@ public class AppPlanController {
     };
 
     @PostMapping("/generate")
-    public Result<?> generate(@RequestBody Map<String, Object> body) {
+    public Result<?> generate(@RequestBody Map<String, Object> body, HttpServletRequest request) {
+        // 手动从 App-Token 提取用户身份
+        setCurrentUserFromToken(request);
+
         int phase = ((Number) body.getOrDefault("phase", 1)).intValue();
         String mode = (String) body.getOrDefault("mode", "full");
         String summary = (String) body.getOrDefault("summary", "");
@@ -44,6 +54,20 @@ public class AppPlanController {
         String prevContents = (String) body.getOrDefault("prevContents", "");
 
         if (summary.isEmpty()) return Result.error("请输入项目描述");
+
+        // 配额消费
+        Long accountId = BaseContext.getCurrentId();
+        String requestId = null;
+        boolean consumed = false;
+        if (accountId != null && accountId > 0) {
+            requestId = "plan_p" + phase + "_" + accountId + "_" + System.currentTimeMillis();
+            try {
+                int balance = quotaService.consume(accountId, 40, "方案设计 Phase " + phase, requestId);
+                consumed = true;
+            } catch (Exception e) {
+                return Result.error(e.getMessage());
+            }
+        }
 
         // 精简模式：只影响最终计划（阶段4），前三个阶段和详细模式一样
         boolean lite = "lite".equals(mode) && phase == 4;
@@ -92,6 +116,7 @@ public class AppPlanController {
             }
             return Result.error("AI 返回为空");
         } catch (Exception e) {
+            if (consumed) quotaService.refund(accountId, 40, requestId, "方案设计失败退款");
             return Result.error("AI 调用失败: " + (e.getMessage() != null ? e.getMessage().substring(0, Math.min(80, e.getMessage().length())) : ""));
         }
     }
@@ -200,5 +225,17 @@ public class AppPlanController {
         if (accountId == null || accountId == 0) return Result.error("请先登录");
         planHistoryMapper.deleteByAccountId(accountId);
         return Result.success();
+    }
+
+    private void setCurrentUserFromToken(HttpServletRequest request) {
+        String token = request.getHeader(jwtProperties.getAppTokenName());
+        if (token != null && !token.isEmpty()) {
+            try {
+                io.jsonwebtoken.Claims claims = com.orangejd.common.utils.JwtUtil
+                    .parseJwt(jwtProperties.getAppSecretKey(), token);
+                Long id = claims.get("id", Long.class);
+                if (id != null) BaseContext.setCurrentId(id);
+            } catch (Exception ignored) {}
+        }
     }
 }

@@ -23,6 +23,7 @@
         <el-menu-item index="/chat"><el-icon><ChatDotRound /></el-icon> 聊天<span v-if="chatUnread" style="margin-left:6px;background:#e65100;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px">{{ chatUnread }}</span></el-menu-item>
         <el-menu-item index="/me/favorites"><el-icon><Star /></el-icon> 收藏夹</el-menu-item>
         <el-menu-item index="/me/history"><el-icon><Clock /></el-icon> 浏览历史</el-menu-item>
+        <el-menu-item index="/me/quota"><el-icon><Wallet /></el-icon> 我的配额</el-menu-item>
         <el-menu-item index="/me/settings"><el-icon><Setting /></el-icon> 设置</el-menu-item>
       </el-menu>
       <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,0.08)">

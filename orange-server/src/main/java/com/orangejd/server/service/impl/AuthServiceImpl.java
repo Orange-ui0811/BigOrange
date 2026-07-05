@@ -15,6 +15,10 @@ import com.orangejd.pojo.vo.LoginVO;
 import com.orangejd.server.mapper.AccountMapper;
 import com.orangejd.server.mapper.UserProfileMapper;
 import com.orangejd.server.service.AuthService;
+import com.orangejd.server.service.QuotaService;
+import com.orangejd.server.service.impl.QuotaServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,6 +42,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private JwtProperties jwtProperties;
+
+    @Autowired(required = false)
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private QuotaService quotaService;
 
     @Override
     public LoginVO adminLogin(LoginDTO loginDTO) {
@@ -81,14 +91,27 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseException(MessageConstant.USERNAME_EXISTS);
         }
 
+        // 校验邮箱验证码
+        String email = registerDTO.getEmail();
+        if (redisTemplate != null) {
+            String cachedCode = redisTemplate.opsForValue().get("mail:code:" + email);
+            if (cachedCode == null) {
+                throw new BaseException("验证码已过期，请重新获取");
+            }
+            if (!cachedCode.equals(registerDTO.getCode())) {
+                throw new BaseException("验证码错误");
+            }
+            redisTemplate.delete("mail:code:" + email);
+            redisTemplate.delete("mail:limit:" + email);
+        }
+
         // 创建账号
         Account account = new Account();
         account.setUsername(registerDTO.getUsername());
         account.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         account.setStatus("ACTIVE");
         account.setRole("USER");
-        account.setPhone(registerDTO.getPhone());
-        account.setIdCard(registerDTO.getIdCard());
+        account.setEmail(email);
         accountMapper.insert(account);
 
         // 创建用户资料
@@ -97,7 +120,10 @@ public class AuthServiceImpl implements AuthService {
         profile.setNickname(registerDTO.getNickname() != null ? registerDTO.getNickname() : registerDTO.getUsername());
         profile.setHomepageVisible(1);
         userProfileMapper.insert(profile);
-        log.info("用户注册 username={} phone={}", registerDTO.getUsername(), registerDTO.getPhone());
+        log.info("用户注册 username={} email={}", registerDTO.getUsername(), registerDTO.getEmail());
+
+        // 新用户赠送试用额度
+        ((QuotaServiceImpl) quotaService).grantNewUserBonus(account.getId());
 
         // 注册后直接返回登录态
         return buildLoginVO(account, jwtProperties.getAppSecretKey(), jwtProperties.getAppTtl());

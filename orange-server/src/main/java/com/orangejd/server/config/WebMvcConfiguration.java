@@ -3,6 +3,7 @@ package com.orangejd.server.config;
 import com.orangejd.common.json.JacksonObjectMapper;
 import com.orangejd.server.interceptor.JwtTokenAdminInterceptor;
 import com.orangejd.server.interceptor.JwtTokenAppInterceptor;
+import com.orangejd.server.interceptor.RequestIdInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -52,6 +53,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new RequestIdInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/auth/login");

@@ -1,9 +1,26 @@
 spring:
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/orangejd?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
     username: root
     password: 123456
+  data:
+    redis:
+      client-type: jedis
+      host: localhost
+      port: 6380
+  ai:
+    vectorstore:
+      redis:
+        initialize-schema: true
 
 mybatis:
   configuration:
@@ -13,7 +30,7 @@ mybatis:
 orange:
   redis:
     host: localhost
-    port: 6379
+    port: 6380
     password:
     database: 0
   oss:
@@ -21,18 +38,27 @@ orange:
     access-key-id: your-access-key-id
     access-key-secret: your-access-key-secret
     bucket-name: your-bucket-name
-
-
   leaderboard:
     github-token: ${GITHUB_TOKEN:}
     local-cache-ttl-minutes: 15
   ai-audit:
-    endpoint: ${AI_AUDIT_ENDPOINT:https://api.deepseek.com/v1}
-    api-key: ${AI_AUDIT_KEY:}
-    model: ${AI_AUDIT_MODEL:deepseek-v4-pro}
+    endpoint: ${AI_AUDIT_ENDPOINT:https://ai.gitee.com/v1}
+    api-key: ${AI_AUDIT_KEY:YMAS0EKKEF1PB6UICEE0LILHHZXKSO4QIO2RTT18}
+    model: ${AI_AUDIT_MODEL:DeepSeek-V4-Pro}
   ai-trend:
     endpoint: ${AI_TREND_ENDPOINT:https://ai.gitee.com/v1}
     api-key: ${AI_TREND_KEY:}
     model: ${AI_TREND_MODEL:DeepSeek-V4-Pro}
+  ai-embedding:
+    endpoint: ${AI_EMBEDDING_ENDPOINT:https://ai.gitee.com/v1}
+    api-key: ${AI_EMBEDDING_KEY:YMAS0EKKEF1PB6UICEE0LILHHZXKSO4QIO2RTT18}
+    model: ${AI_EMBEDDING_MODEL:bge-small-zh-v1.5}
+  epay:
+    pid: ${EPAY_PID:}
+    key: ${EPAY_KEY:}
+    gateway: ${EPAY_GATEWAY:}
+    notify-url: ${EPAY_NOTIFY_URL:}
+    return-url: ${EPAY_RETURN_URL:}
   feishu:
     webhook-url: ${FEISHU_WEBHOOK_URL:}
+    job-webhook-url: ${FEISHU_JOB_WEBHOOK_URL:}

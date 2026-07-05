@@ -11,6 +11,11 @@
         <el-menu-item index="/works"><el-icon><Document /></el-icon> 内容管理</el-menu-item>
         <el-menu-item index="/users"><el-icon><User /></el-icon> 用户管理</el-menu-item>
         <el-menu-item index="/orders" v-if="tradeEnabled"><el-icon><Tickets /></el-icon> 订单管理</el-menu-item>
+        <el-menu-item index="/knowledge"><el-icon><Collection /></el-icon> 知识库</el-menu-item>
+        <el-menu-item index="/redemption"><el-icon><Ticket /></el-icon> 充值码管理</el-menu-item>
+        <el-menu-item index="/ai-config"><el-icon><Setting /></el-icon> AI 调用设置</el-menu-item>
+        <el-menu-item index="/job-audit"><el-icon><Checked /></el-icon> 岗位审核</el-menu-item>
+        <el-menu-item index="/usage"><el-icon><DataAnalysis /></el-icon> 用量统计</el-menu-item>
         <el-menu-item index="/settings"><el-icon><Setting /></el-icon> 修改密码</el-menu-item>
       </el-menu>
     </el-aside>

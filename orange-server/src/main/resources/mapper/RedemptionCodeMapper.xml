@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.RedemptionCodeMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO redemption_code (code, quota, status, created_by)
+        VALUES (#{code}, #{quota}, #{status}, #{createdBy})
+    </insert>
+
+    <select id="selectByCode" resultType="com.orangejd.pojo.entity.RedemptionCode">
+        SELECT id, code, quota, status, created_by, used_by, used_time, create_time
+        FROM redemption_code WHERE code = #{code}
+    </select>
+
+    <select id="selectByCodeForUpdate" resultType="com.orangejd.pojo.entity.RedemptionCode">
+        SELECT id, code, quota, status, created_by, used_by, used_time, create_time
+        FROM redemption_code WHERE code = #{code} FOR UPDATE
+    </select>
+
+    <update id="updateUsed">
+        UPDATE redemption_code SET status = 3, used_by = #{usedBy}, used_time = NOW() WHERE code = #{code}
+    </update>
+
+    <select id="selectAll" resultType="com.orangejd.pojo.entity.RedemptionCode">
+        SELECT id, code, quota, status, created_by, used_by, used_time, create_time
+        FROM redemption_code ORDER BY id DESC LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="long">
+        SELECT COUNT(*) FROM redemption_code
+    </select>
+</mapper>

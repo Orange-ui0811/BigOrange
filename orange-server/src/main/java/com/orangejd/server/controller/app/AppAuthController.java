@@ -8,7 +8,7 @@ import com.orangejd.pojo.dto.PasswordChangeDTO;
 import com.orangejd.pojo.dto.RegisterDTO;
 import com.orangejd.pojo.vo.LoginVO;
 import com.orangejd.server.service.AuthService;
-import com.orangejd.server.service.SmsService;
+import com.orangejd.server.service.MailService;
 import com.orangejd.server.service.TokenBlacklistService;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class AppAuthController {
     @Autowired private AuthService authService;
     @Autowired private JwtProperties jwtProperties;
     @Autowired private TokenBlacklistService blacklistService;
-    @Autowired private SmsService smsService;
+    @Autowired private MailService mailService;
     @Autowired(required = false) private StringRedisTemplate redisTemplate;
 
     @PostMapping("/login")
@@ -38,16 +38,16 @@ public class AppAuthController {
 
     @PostMapping("/send-code")
     public Result<?> sendCode(@RequestBody Map<String, String> body) {
-        String phone = body.get("phone");
-        if (phone == null || phone.length() != 11) return Result.error("手机号格式不正确");
-        // 频率限制：同一手机号 60 秒内只能发一次
-        if (redisTemplate != null && redisTemplate.hasKey("sms:limit:" + phone))
+        String email = body.get("email");
+        if (email == null || !email.contains("@")) return Result.error("邮箱格式不正确");
+        // 频率限制：同一邮箱 60 秒内只能发一次
+        if (redisTemplate != null && redisTemplate.hasKey("mail:limit:" + email))
             return Result.error("验证码已发送，请60秒后再试");
         String code = String.format("%06d", new Random().nextInt(999999));
-        smsService.sendCode(phone, code);
+        mailService.sendCode(email, code);
         if (redisTemplate != null) {
-            redisTemplate.opsForValue().set("sms:code:" + phone, code, 5, TimeUnit.MINUTES);
-            redisTemplate.opsForValue().set("sms:limit:" + phone, "1", 60, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set("mail:code:" + email, code, 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set("mail:limit:" + email, "1", 60, TimeUnit.SECONDS);
         }
         return Result.success();
     }

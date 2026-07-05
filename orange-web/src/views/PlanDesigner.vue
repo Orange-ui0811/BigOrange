@@ -1,69 +1,64 @@
 <template>
   <div class="plan-app">
     <div class="plan-main">
-      <!-- 输入区 -->
-      <div v-if="!started" class="plan-intro">
-        <div class="intro-header">
-          <span class="intro-icon">🍊</span>
-          <div style="flex:1">
-            <h3 style="margin:0;color:#5d4037">方案设计</h3>
-            <p style="margin:4px 0 0;font-size:13px;color:#bcaaa4">AI 驱动五阶段项目规划，从想法到可执行计划</p>
-          </div>
-          <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasToken">
-            <template #reference>
-              <el-button size="small" text>📋 记录 ({{ planHistory.length }})</el-button>
-            </template>
-            <div style="max-height:300px;overflow:auto">
-              <div v-if="!planHistory.length" style="text-align:center;color:#bcaaa4;padding:20px">暂无记录</div>
-              <div v-for="(h,i) in planHistory" :key="i" style="padding:8px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between" @click="loadPlan(h)">
-                <div style="flex:1;min-width:0;font-size:12px">
-                  <span style="color:#5d4037;font-weight:500">{{ (h.summary||'').substring(0,40) }}</span>
-                  <span style="color:#bcaaa4;margin-left:6px;font-size:11px">{{ (h.createTime||'').substring(0,16) }}</span>
-                </div>
-                <el-button size="small" text type="danger" @click.stop="delPlanHistory(i,h.id)">✕</el-button>
+      <div class="intro-header">
+        <span class="intro-icon">🍊</span>
+        <div style="flex:1">
+          <h3 style="margin:0;color:#5d4037">方案设计</h3>
+          <p style="margin:4px 0 0;font-size:13px;color:#bcaaa4">AI 驱动六阶段项目规划，从想法到岗位匹配</p>
+        </div>
+        <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasToken">
+          <template #reference><el-button size="small" text>📋 记录 ({{ planHistory.length }})</el-button></template>
+          <div style="max-height:300px;overflow:auto">
+            <div v-if="!planHistory.length" style="text-align:center;color:#bcaaa4;padding:20px">暂无记录</div>
+            <div v-for="(h,i) in planHistory" :key="i" style="padding:8px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between" @click="loadPlan(h)">
+              <div style="flex:1;min-width:0;font-size:12px">
+                <span style="color:#5d4037;font-weight:500">{{ (h.summary||'').substring(0,40) }}</span>
+                <span style="color:#bcaaa4;margin-left:6px;font-size:11px">{{ (h.createTime||'').substring(0,16) }}</span>
               </div>
+              <el-button size="small" text type="danger" @click.stop="delPlanHistory(i,h.id)">✕</el-button>
             </div>
-            <div v-if="planHistory.length" style="margin-top:8px;text-align:right">
-              <el-button size="small" type="danger" text @click="clearPlanHistory">清空全部</el-button>
-            </div>
-          </el-popover>
-        </div>
-        <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." size="large" :autosize="{minRows:4,maxRows:12}" />
-        <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." style="margin-top:12px" :autosize="{minRows:2,maxRows:8}" />
-        <div style="margin-top:12px;display:flex;align-items:center;gap:12px">
-          <span style="font-size:13px;color:#5d4037;font-weight:600">生成模式</span>
-          <el-radio-group v-model="planMode" :disabled="started" size="small">
-            <el-radio-button value="full">📋 详细方案（四阶段全流程）</el-radio-button>
-            <el-radio-button value="lite">⚡ 精简方案（快速出计划）</el-radio-button>
-          </el-radio-group>
-        </div>
-        <button class="orange-btn start-btn" @click="startPlan" :disabled="!summary.trim()">🍊 开始规划</button>
+          </div>
+        </el-popover>
       </div>
 
-      <!-- 阶段导航 + 内容 -->
-      <template v-else>
-        <div v-if="allDone && hasToken" style="text-align:center;margin-bottom:16px">
-          <button class="orange-btn save-btn" @click="savePlan">💾 保存方案到我的记录</button>
-        </div>
-        <div class="phase-nav">
-          <div v-for="(p, i) in phases" :key="i"
-            class="phase-nav-item" :class="{ active: currentPhase === i+1, done: p.done, generating: p.generating }"
-            @click="switchPhase(i+1)">
-            <div class="phase-dot">{{ p.done ? '✓' : i+1 }}</div>
-            <div>
-              <div class="phase-nav-label">{{ p.title }}</div>
-              <div class="phase-nav-status" v-if="p.generating">生成中...</div>
-              <div class="phase-nav-status" v-else-if="!p.done && currentPhase !== i+1">待生成</div>
-            </div>
+      <!-- 阶段导航始终可见 -->
+      <div class="phase-nav">
+        <div v-for="(p, i) in phases" :key="i"
+          class="phase-nav-item" :class="{ active: currentPhase === i+1, done: p.done, generating: p.generating }"
+          @click="switchPhase(i+1)">
+          <div class="phase-dot">{{ p.done ? '✓' : i+1 }}</div>
+          <div>
+            <div class="phase-nav-label">{{ p.title }}</div>
+            <div class="phase-nav-status" v-if="p.generating">生成中...</div>
+            <div class="phase-nav-status" v-else-if="!p.done && currentPhase !== i+1">待生成</div>
           </div>
         </div>
+      </div>
 
-        <div class="phase-content">
+      <div v-if="allDone && hasToken" style="text-align:center;margin-bottom:8px">
+        <button class="orange-btn save-btn" @click="savePlan">💾 保存方案到我的记录</button>
+      </div>
+
+      <div class="phase-content">
           <div class="phase-title">{{ phases[currentPhase-1]?.title }}</div>
           <div class="phase-subtitle">{{ phaseSubtitles[currentPhase-1] }}</div>
 
+          <!-- Phase 0 输入区 -->
+          <div v-if="currentPhase === 1 && !phases[0].done" class="card">
+            <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." :autosize="{minRows:4,maxRows:12}" />
+            <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." style="margin-top:12px" :autosize="{minRows:2,maxRows:8}" />
+            <div style="margin-top:12px;display:flex;align-items:center;gap:12px">
+              <span style="font-size:13px;color:#5d4037;font-weight:600">生成模式</span>
+              <el-radio-group v-model="planMode" size="small">
+                <el-radio-button value="full">📋 详细方案</el-radio-button>
+                <el-radio-button value="lite">⚡ 精简方案</el-radio-button>
+              </el-radio-group>
+            </div>
+            <button class="orange-btn" @click="generatePhase(1)" :disabled="!summary.trim()" style="margin-top:16px">🍊 确认想法</button>
+          </div>
           <!-- 未生成状态 -->
-          <div v-if="!phases[currentPhase-1]?.done && !phases[currentPhase-1]?.generating" class="card">
+          <div v-else-if="!phases[currentPhase-1]?.done && !phases[currentPhase-1]?.generating" class="card">
             <p style="color:#909399;margin:0">点击下方按钮，AI 将基于项目描述生成此阶段的分析内容。</p>
             <button class="orange-btn" @click="generatePhase(currentPhase)" style="margin-top:16px">🍊 生成本阶段</button>
           </div>
@@ -82,7 +77,7 @@
               <template v-if="!editing">
                 <button class="orange-btn" @click="generatePhase(currentPhase)">🔄 重新生成</button>
                 <button class="nav-btn" @click="startEdit">✏️ 编辑</button>
-                <button v-if="currentPhase < 4" class="nav-btn next" @click="switchPhase(currentPhase+1)">下一步 →</button>
+                <button v-if="currentPhase < 6" class="nav-btn next" @click="switchPhase(currentPhase+1)">下一步 →</button>
               </template>
               <template v-else>
                 <button class="orange-btn" @click="saveEdit">💾 保存修改</button>
@@ -97,14 +92,13 @@
             <button class="orange-btn" @click="generatePhase(currentPhase)" style="margin-top:8px">重试</button>
           </div>
         </div>
-      </template>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed, nextTick, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { marked } from 'marked'
 import request from '../api/request'
 
@@ -114,22 +108,28 @@ const started = ref(false)
 const planMode = ref('full')
 const currentPhase = ref(1)
 const phaseError = ref('')
+const matchLoading = ref(false)
+const matchResult = ref(null)
 
 const phases = reactive([
+  { title: '想法描述', done: false, generating: false, content: '' },
   { title: '需求理解', done: false, generating: false, content: '' },
   { title: '成功标准', done: false, generating: false, content: '' },
   { title: '约束风险', done: false, generating: false, content: '' },
-  { title: '任务计划', done: false, generating: false, content: '' }
+  { title: '任务计划', done: false, generating: false, content: '' },
+  { title: '岗位匹配', done: false, generating: false, content: '' }
 ])
 const phaseSubtitles = [
+  '描述你的项目想法、技术偏好和限制条件',
   '准确复述需求，识别核心模块，划定 MVP 边界',
   '定义可验证的成功标准和完成证据',
   '识别技术约束、业务风险和明确不做的事',
-  '拆解为可落地的步骤，生成执行计划'
+  '拆解为可落地的步骤，生成执行计划',
+  '基于方案匹配最适合的AI实习岗位'
 ]
 
 const renderedContent = computed(() => {
-  const c = phases[currentPhase.value - 1]?.content || ''
+  const c = phases[currentPhase.value-1]?.content || ''
   return marked.parse(c)
 })
 
@@ -139,26 +139,56 @@ const startPlan = () => {
 }
 
 const autoGenerateNext = () => {
-  const p = phases[currentPhase.value - 1]
-  if (p && !p.done) generatePhase(currentPhase.value)
+  const p = phases[currentPhase.value]
+  if (p && !p.done) generatePhase(currentPhase)
 }
 
-const getPrevContents = (phase) => {
+const getPrevContents = (n) => {
   const parts = []
-  for (let i = 0; i < phase - 1; i++) {
+  for (let i = 0; i < n-1; i++) {
     if (phases[i].done) {
-      parts.push(`【阶段${i+1}：${phases[i].title}】\n${phases[i].content}`)
+      parts.push(`【阶段${i}：${phases[i].title}】\n${phases[i].content}`)
     }
   }
   return parts.join('\n\n')
 }
 
+const onPhaseJump = (n) => { phaseError.value = ''; matchResult.value = null }
+
+const doJobMatch = async () => {
+  const planContent = phases[4].content + '\n\n方案概要：' + phases[0].content.substring(0, 200)
+  try { await ElMessageBox.confirm('匹配岗位将消耗 50 segments', '确认', { confirmButtonText:'确认',cancelButtonText:'取消',type:'info' }) } catch { return }
+  const p5 = phases[5]; p5.generating = true
+  try {
+    const r = await request.post('/app/job/match', { planContent: planContent }, { timeout: 120000 })
+    if (r.code === 1 && r.data?.result) {
+      const parsed = JSON.parse(r.data.result.replace(/```json|```/g,'').trim())
+      const matches = parsed.matches || []
+      let content = ''
+      for (const m of matches) {
+        content += `### ${m.position}\n\n📌 **匹配原因**：${m.reason}\n\n📚 **学习重点**：${m.focus}\n\n---\n\n`
+      }
+      p5.content = content; p5.done = true
+    } else { ElMessage.error(r.msg || '匹配失败') }
+  } catch (e) { ElMessage.error('匹配失败') }
+  finally { p5.generating = false }
+}
+
 const generatePhase = async (n) => {
-  const p = phases[n - 1]
+  if (n === undefined || n === null) n = currentPhase.value
+  if (n === 1) {
+    phases[0].content = summary.value + (extra.value ? '\n\n补充：' + extra.value : '')
+    phases[0].done = true
+    return
+  }
+  if (n === 6) { await doJobMatch(); return }
+  try { await ElMessageBox.confirm('本阶段将消耗 40 segments', '确认生成', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }) } catch { return }
+  const p = phases[n-1]
+  if (!p) { phaseError.value = 'Phase ' + n + ' 不存在, phases长度=' + phases.length; return }
   p.generating = true; phaseError.value = ''
   try {
     const r = await request.post('/app/plan/generate', {
-      phase: n,
+      phase: n-1,
       mode: planMode.value,
       summary: summary.value,
       extra: extra.value,
@@ -179,18 +209,18 @@ const editing = ref(false)
 const editContent = ref('')
 
 const startEdit = () => {
-  editContent.value = phases[currentPhase.value - 1].content
+  editContent.value = phases[currentPhase.value].content
   editing.value = true
 }
 const saveEdit = () => {
-  phases[currentPhase.value - 1].content = editContent.value
+  phases[currentPhase.value].content = editContent.value
   editing.value = false
 }
 const cancelEdit = () => { editing.value = false }
 
 const hasToken = computed(() => !!sessionStorage.getItem('appToken'))
 const planHistory = ref([])
-const allDone = computed(() => phases.every(p => p.done))
+const allDone = computed(() => phases.slice(0,5).every(p => p.done))
 
 const loadPlanHistory = async () => {
   if (!hasToken.value) return
@@ -201,7 +231,8 @@ const savePlan = async () => {
   try {
     await request.post('/app/plan/history/save', {
       summary: summary.value, phase1: phases[0].content, phase2: phases[1].content,
-      phase3: phases[2].content, phase4: phases[3].content
+      phase3: phases[2].content, phase4: phases[3].content,
+      phase5: phases[4].content, phase6: phases[5].content
     })
     loadPlanHistory()
     ElMessage.success('方案已保存')
@@ -214,6 +245,8 @@ const loadPlan = (h) => {
   if (h.phase2) { phases[1].content = h.phase2; phases[1].done = true }
   if (h.phase3) { phases[2].content = h.phase3; phases[2].done = true }
   if (h.phase4) { phases[3].content = h.phase4; phases[3].done = true }
+  if (h.phase5) { phases[4].content = h.phase5; phases[4].done = true }
+  if (h.phase6) { phases[5].content = h.phase6; phases[5].done = true }
   currentPhase.value = 1
 }
 const delPlanHistory = async (i, id) => {

@@ -2,6 +2,7 @@ package com.orangejd.server.task;
 
 import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
+import com.orangejd.server.service.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,28 @@ public class LeaderboardRefreshTask {
         "ai-agents","RAG","self-hosted","home-assistant","awesome-self-hosted",
         "ESP32","raspberry-pi","home-automation","3d-printing","other"
     };
+    private static final int README_ALL_TOP_N = 20;   // 全时段 Top 20（永久保留）
+    private static final int README_WEEK_TOP_N = 3;   // 每周 Top 3（30 天过期）
+    private static final int README_TIMEOUT_MS = 10000;
 
     @Autowired private LeaderboardSnapshotMapper snapshotMapper;
+
+    @Autowired(required = false)
+    private DocumentService documentService;
 
     @Value("${orange.leaderboard.github-token:}")
     private String githubToken;
 
     private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate readmeRestTemplate;
+
+    {
+        readmeRestTemplate = new RestTemplate();
+        readmeRestTemplate.setRequestFactory(new org.springframework.http.client.SimpleClientHttpRequestFactory() {{
+            setConnectTimeout(README_TIMEOUT_MS);
+            setReadTimeout(README_TIMEOUT_MS);
+        }});
+    }
 
     // 应用启动后首次预热（异步，不阻塞启动）
     @PostConstruct
@@ -72,6 +88,16 @@ public class LeaderboardRefreshTask {
         String beforeDate = today.minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE);
         int deleted = snapshotMapper.deleteBefore(beforeDate);
         log.info("LeaderboardRefreshTask: 完成 GitHub 榜单刷新，清理 {} 条旧快照", deleted);
+
+        // 清理 30 天前的每周 README
+        if (documentService instanceof com.orangejd.server.service.impl.DocumentServiceImpl impl) {
+            try {
+                int cleaned = impl.cleanExpiredWeekly(beforeDate);
+                if (cleaned > 0) log.info("[RAG] 清理过期 weekly README {} 篇", cleaned);
+            } catch (Exception e) {
+                log.warn("[RAG] weekly 清理异常: {}", e.getMessage());
+            }
+        }
     }
 
     private void refreshAndSave(String topicName, String period, LocalDate today, String isoDate) {
@@ -140,10 +166,69 @@ public class LeaderboardRefreshTask {
                 snapshot.setDataJson(json);
                 snapshotMapper.insert(snapshot);
                 log.info("GitHub 快照已保存: topic={}, period={}", topicName, period);
+
+                // RAG：自动采集 README（all Top 20 / week Top 3）
+                if (topicName != null && documentService != null) {
+                    int topN = "all".equals(period) ? README_ALL_TOP_N : README_WEEK_TOP_N;
+                    try { fetchAndIndexReadme(topicName, period, records, topN); }
+                    catch (Exception e) { log.warn("[RAG] README 采集异常 topic={}: {}", topicName, e.getMessage()); }
+                }
             }
         } catch (Exception e) {
             log.error("GitHub 快照失败 topic={} period={}: {}", topicName, period, e.getMessage());
         }
+    }
+
+    // ==================== RAG README 自动采集 ====================
+
+    private void fetchAndIndexReadme(String topicName, String period,
+                                      List<Map<String, Object>> records, int topN) {
+        int imported = 0;
+        for (int i = 0; i < Math.min(topN, records.size()); i++) {
+            String fullName = (String) records.get(i).get("fullName");
+            if (fullName == null) continue;
+
+            String sourceRef = "week".equals(period) ? fullName + "|week" : fullName;
+            if (documentService.existsBySourceRef(sourceRef)) continue;
+
+            String content = fetchReadme(fullName);
+            if (content == null) continue;
+
+            try {
+                documentService.importFromGithub(fullName, content, period);
+                imported++;
+            } catch (Exception e) {
+                log.warn("[RAG] README 入库失败 {}: {}", fullName, e.getMessage());
+            }
+        }
+        if (imported > 0) {
+            log.info("[RAG] topic={} period={} 自动采集 README {} 篇", topicName, period, imported);
+        }
+    }
+
+    private String fetchReadme(String fullName) {
+        // 先试 master 分支
+        String content = fetchUrl("https://raw.githubusercontent.com/" + fullName + "/master/README.md");
+        if (content != null) return content;
+        // 再试 main 分支
+        return fetchUrl("https://raw.githubusercontent.com/" + fullName + "/main/README.md");
+    }
+
+    private String fetchUrl(String url) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            if (githubToken != null && !githubToken.isEmpty()) {
+                headers.set("Authorization", "Bearer " + githubToken);
+            }
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+            ResponseEntity<String> resp = readmeRestTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            if (resp.getBody() != null && !resp.getBody().isEmpty()) {
+                return resp.getBody();
+            }
+        } catch (Exception ignored) {
+            // README 拉取失败静默跳过
+        }
+        return null;
     }
 
     private void sleep(long ms) {
