@@ -9,6 +9,8 @@ const routes = [
     redirect: '/market',
     children: [
       { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '市场' } },
+      { path: 'ai', name: 'AiHub', component: () => import('../views/AiHub.vue'), meta: { title: 'AI 工具' } },
+      { path: 'me', name: 'MeHub', component: () => import('../views/MeHub.vue'), meta: { title: '我的' } },
       { path: 'leaderboard', name: 'Leaderboard', component: () => import('../views/Leaderboard.vue'), meta: { title: '榜单' } },
       { path: 'trend', name: 'TrendAnalysis', component: () => import('../views/TrendAnalysis.vue'), meta: { title: '趋势分析' } },
       { path: 'plan', name: 'PlanDesigner', component: () => import('../views/PlanDesigner.vue'), meta: { title: '方案设计' } },

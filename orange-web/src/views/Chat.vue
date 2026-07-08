@@ -1,33 +1,37 @@
 <template>
-  <div style="display:flex;height:calc(100vh - 136px);background:#fff;border-radius:12px;overflow:hidden;border:1px solid #f0ece6">
-    <!-- 会话列表 -->
-    <div style="width:280px;border-right:1px solid #f0ece6;overflow-y:auto;flex-shrink:0">
-      <div style="padding:16px;font-weight:600;font-size:14px;border-bottom:1px solid #f0ece6">会话</div>
-      <div v-for="c in convs" :key="c.id" :style="{padding:'14px 16px',borderBottom:'1px solid #f5f2ee',cursor:'pointer',background:activeConv===c.id?'#fff7f0':''}"
-        @click="openConv(c)">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <span style="font-weight:500;font-size:13px">{{ c.initiatorId == myId ? c.receiverName : c.initiatorName }}</span>
-          <span style="display:flex;align-items:center;gap:6px">
-            <span v-if="c.unreadCount" style="background:#e65100;color:#fff;font-size:10px;padding:1px 6px;border-radius:8px">{{ c.unreadCount }}</span>
-            <span @click.stop="deleteConv(c.id)" style="color:#c0c4cc;font-size:16px;line-height:1;cursor:pointer" title="删除会话">&times;</span>
-          </span>
-        </div>
-        <div style="font-size:11px;color:#909399;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ c.lastMessage || c.workTitle || c.requirementTitle || '新会话' }}</div>
+  <div class="message-layout">
+    <!-- ═══ 左：会话列表 ═══ -->
+    <aside class="panel conv-panel">
+      <h3>会话</h3>
+      <div v-for="c in convs" :key="c.id"
+        class="conversation"
+        :class="{ active: activeConv===c.id }"
+        @click="openConv(c)"
+      >
+        <strong>{{ c.initiatorId == myId ? c.receiverName : c.initiatorName }}</strong>
+        <p>{{ c.lastMessage || c.workTitle || c.requirementTitle || '新会话' }}</p>
+        <span v-if="c.unreadCount" class="conv-badge">{{ c.unreadCount }}</span>
+        <span class="conv-del" @click.stop="deleteConv(c.id)" title="删除">×</span>
       </div>
       <el-empty v-if="!convs.length" description="暂无会话" :image-size="60" />
-    </div>
-    <!-- 消息区 -->
-    <div style="flex:1;display:flex;flex-direction:column">
+    </aside>
+
+    <!-- ═══ 中：聊天区 ═══ -->
+    <section class="panel chat-panel">
       <template v-if="activeConv">
-        <div style="padding:12px 16px;font-weight:600;font-size:14px;border-bottom:1px solid #f0ece6;background:#faf9f7">
-          {{ activeConv.initiatorId == myId ? activeConv.receiverName : activeConv.initiatorName }}
-          <span style="font-weight:400;font-size:12px;color:#909399;margin-left:8px" v-if="activeConv.workTitle">关联：{{ activeConv.workTitle }}</span>
+        <div class="chat-topbar">
+          <div class="tag-row">
+            <span class="chat-tag orange" v-if="activeConv.workTitle">关联作品</span>
+            <span class="chat-tag yellow" v-if="activeConv.requirementTitle">需求待确认</span>
+          </div>
+          <strong class="chat-assoc-title">{{ activeConv.workTitle || activeConv.requirementTitle || '聊天' }}</strong>
         </div>
-        <!-- 报价卡片置顶 -->
-        <div v-if="tradeEnabled && quotes.length" style="padding:8px 16px;border-bottom:1px solid #f0ece6;background:#fff7f0">
-          <div v-for="q in quotes" :key="q.id" style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;font-size:13px">
-            <span><b>报价 ¥{{ q.price }}</b> <span style="color:#909399;font-size:11px;margin-left:8px">{{ q.status }}</span></span>
-            <span style="display:flex;gap:6px">
+
+        <!-- 报价卡片 -->
+        <div v-if="tradeEnabled && quotes.length" class="quote-area">
+          <div v-for="q in quotes" :key="q.id" class="quote-item">
+            <span><b>报价 ¥{{ q.price }}</b> <span class="quote-status">{{ q.status }}</span></span>
+            <span class="quote-actions">
               <template v-if="q.status==='PENDING_CONFIRM' && q.receiverId===myId">
                 <el-button size="small" type="success" @click="quoteAct(q.id,'accept')">接受</el-button>
                 <el-button size="small" type="danger" @click="quoteAct(q.id,'reject')">拒绝</el-button>
@@ -38,29 +42,64 @@
             </span>
           </div>
         </div>
-        <div ref="msgList" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:16px">
-          <div v-for="m in messages" :key="m.id" :style="{display:'flex',alignItems:'flex-end',gap:'8px',flexDirection:m.senderId===myId?'row-reverse':'row',maxWidth:'80%',alignSelf:m.senderId===myId?'flex-end':'flex-start'}">
-            <el-avatar :size="32" style="flex-shrink:0;font-size:12px" :style="{backgroundColor:(m.senderAvatar?undefined:(m.senderId===myId?'#e65100':'#c0c4cc'))}" :src="m.senderAvatar ? API+m.senderAvatar : undefined">{{ (m.senderName||'#')[0] }}</el-avatar>
-            <div style="min-width:0">
-              <div v-if="m.senderId!==myId" style="font-size:10px;color:#909399;margin-bottom:2px">{{ m.senderName||'用户#'+m.senderId }}</div>
-              <div :style="{background:m.senderId===myId?'#e65100':'#f5f2ee',color:m.senderId===myId?'#fff':'#2c2c2c',padding:'8px 14px',borderRadius:m.senderId===myId?'16px 16px 4px 16px':'16px 16px 16px 4px',fontSize:'13px',lineHeight:'1.5'}">{{ m.content }}</div>
+
+        <div ref="msgList" class="chat-messages">
+          <div v-for="m in messages" :key="m.id" class="msg-row" :class="{ 'msg-row-mine': m.senderId===myId }">
+            <el-avatar :size="32" class="msg-avatar" :class="{ 'msg-avatar-mine': m.senderId===myId, 'msg-avatar-other': m.senderId!==myId }" :src="m.senderAvatar ? API+m.senderAvatar : undefined">{{ (m.senderName||'#')[0] }}</el-avatar>
+            <div class="msg-content-wrapper">
+              <div v-if="m.senderId!==myId" class="msg-sender-name">{{ m.senderName||'用户#'+m.senderId }}</div>
+              <div class="msg-bubble" :class="{ 'msg-bubble-mine': m.senderId===myId }">{{ m.content }}</div>
             </div>
           </div>
         </div>
         <span ref="bottomRef"></span>
-        <div style="padding:12px 16px;border-top:1px solid #f0ece6;display:flex;gap:8px;align-items:center;background:#faf9f7">
-          <el-input v-model="msgText" placeholder="输入消息..." size="default" @keyup.enter="sendMsg" />
-          <el-button size="default" type="primary" @click="sendMsg" style="background:#e65100;border-color:#e65100">发送</el-button>
-          <el-button v-if="tradeEnabled" size="default" @click="showQuoteDialog=true">发报价</el-button>
-          <!-- <el-button size="default" type="danger" plain @click="clearChat">清除聊天</el-button> -->
+
+        <div class="chat-input-row">
+          <input v-model="msgText" placeholder="输入消息..." @keyup.enter="sendMsg" class="chat-input" />
+          <el-button type="primary" @click="sendMsg">发送</el-button>
+          <el-button v-if="tradeEnabled" @click="showQuoteDialog=true">发报价</el-button>
         </div>
       </template>
-      <el-empty v-else description="选择一个会话开始聊天" :image-size="100" style="margin:auto" />
-    </div>
+      <el-empty v-else description="选择一个会话开始聊天" :image-size="80" class="chat-empty" />
+    </section>
+
+    <!-- ═══ 右：沟通摘要 ═══ -->
+    <aside class="panel summary-panel">
+      <h3>沟通摘要</h3>
+      <div class="mini-list">
+        <div class="mini-list-item">
+          <span>关联内容</span>
+          <strong class="price">{{ activeConv?.workTitle || activeConv?.requirementTitle || '—' }}</strong>
+        </div>
+        <div class="mini-list-item">
+          <span>沟通状态</span>
+          <strong class="price">进行中</strong>
+        </div>
+        <div class="mini-list-item">
+          <span>需求范围</span>
+          <strong class="price">待确认</strong>
+        </div>
+        <div class="mini-list-item">
+          <span>下一步</span>
+          <strong class="price">补充说明</strong>
+        </div>
+      </div>
+      <div class="trust-box">
+        提示：聊天承载作品咨询、需求确认和系统通知。
+      </div>
+    </aside>
+
     <!-- 发报价弹窗 -->
     <el-dialog v-if="tradeEnabled" v-model="showQuoteDialog" title="发起报价" width="360px">
-      <el-form label-position="top"><el-form-item label="金额"><el-input v-model="quotePrice" type="number" placeholder="¥" /></el-form-item></el-form>
-      <template #footer><el-button @click="showQuoteDialog=false">取消</el-button><el-button type="primary" @click="sendQuote">发送报价</el-button></template>
+      <el-form label-position="top">
+        <el-form-item label="金额">
+          <el-input v-model="quotePrice" type="number" placeholder="¥" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="showQuoteDialog=false">取消</el-button>
+        <el-button type="primary" @click="sendQuote">发送报价</el-button>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -99,10 +138,13 @@ const connectWs = () => {
   ws.onclose = () => { setTimeout(connectWs, 5000) }
 }
 
+const convList = async () => {
+  try { const res = await request.get('/app/conversation/list?page=1&size=30'); if (res.code === 1) convs.value = res.data?.records || [] } catch {}
+}
+
 onMounted(async () => {
   connectWs()
-  try { const res = await request.get('/app/conversation/list?page=1&size=30'); if (res.code === 1) convs.value = res.data?.records || [] } catch {}
-  // 如果路由带 id，自动打开对应会话
+  await convList()
   if (route.params.id) {
     const c = convs.value.find(c => String(c.id) === route.params.id)
     if (c) openConv(c)
@@ -148,15 +190,7 @@ const deleteConv = async (id) => {
   try { await ElMessageBox.confirm('确认删除会话及全部消息？', '删除会话', { type: 'warning' }) } catch { return }
   await request.delete(`/app/conversation/${id}`)
   if (activeConv.value?.id === id) { activeConv.value = null; messages.value = [] }
-  try { const res = await request.get('/app/conversation/list?page=1&size=30'); if (res.code === 1) convs.value = res.data?.records || [] } catch {}
-}
-
-const clearChat = async () => {
-  if (!activeConv.value) return
-  try { await ElMessageBox.confirm('确认清除聊天记录？仅清除你自己的记录，对方不受影响', '清除聊天', { type: 'warning' }) } catch { return }
-  await request.put(`/app/conversation/${activeConv.value.id}/hide`)
-  activeConv.value = null; messages.value = []
-  try { const res = await request.get('/app/conversation/list?page=1&size=30'); if (res.code === 1) convs.value = res.data?.records || [] } catch {}
+  await convList()
 }
 
 const orderFromQuote = async (q) => {
@@ -169,3 +203,173 @@ const orderFromQuote = async (q) => {
   } catch {}
 }
 </script>
+
+<style scoped>
+/* ═══ Layout: 3-column ═══ */
+.message-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr) 280px;
+  gap: 16px;
+  min-height: calc(100vh - 156px);
+}
+.panel {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel h3 {
+  margin: 0 0 14px;
+  font-family: var(--font-mono);
+  letter-spacing: -.03em;
+  font-size: 16px;
+}
+
+/* ═══ Left: Conversations ═══ */
+.conv-panel { overflow-y: auto; }
+.conversation {
+  position: relative;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  margin-bottom: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.conversation:hover { border-color: var(--border-orange); background: #fffaf5; }
+.conversation.active {
+  border-color: var(--border-orange);
+  background: var(--cream);
+}
+.conversation strong { display: block; font-size: 13px; }
+.conversation p {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 40px);
+}
+.conv-badge {
+  position: absolute;
+  top: 10px; right: 10px;
+  min-width: 20px; height: 20px;
+  padding: 0 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  color: #fff; background: var(--brand);
+  font-size: 10px; font-family: var(--font-mono); font-weight: 900;
+}
+.conv-del {
+  position: absolute;
+  bottom: 8px; right: 10px;
+  color: var(--text-muted);
+  font-size: 15px; cursor: pointer;
+}
+.conv-del:hover { color: #e53935; }
+
+/* ═══ Center: Chat ═══ */
+.chat-panel { padding: 0; }
+.chat-topbar {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-light);
+}
+.chat-assoc-title {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: -.03em;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.chat-tag {
+  display: inline-flex; align-items: center;
+  min-height: 22px; padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px; font-weight: 800; font-family: var(--font-mono);
+}
+.chat-tag.orange { color: var(--brand-strong); background: var(--brand-soft); border-color: var(--border-orange); }
+.chat-tag.yellow { color: #92400e; background: #fffbeb; border-color: #fde68a; }
+
+.quote-area {
+  padding: 8px 18px;
+  border-bottom: 1px solid var(--border-light);
+  background: #fffbeb;
+}
+.quote-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 0; font-size: 13px; color: var(--text-primary);
+}
+.quote-status { color: var(--text-secondary); font-size: 11px; margin-left: 8px; font-family: var(--font-mono); }
+.quote-actions { display: flex; gap: 4px; }
+
+/* Messages */
+.chat-messages {
+  flex: 1; overflow-y: auto;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 14px;
+  background: #fffaf7;
+}
+.msg-row { display: flex; align-items: flex-end; gap: 8px; max-width: 80%; align-self: flex-start; }
+.msg-row-mine { flex-direction: row-reverse; align-self: flex-end; }
+.msg-avatar { flex-shrink: 0; font-size: 12px; border-radius: 16px; background: #bfb8b0; }
+.msg-avatar-mine { background: var(--brand); }
+.msg-avatar-other { background: var(--text-muted); }
+.msg-content-wrapper { min-width: 0; }
+.msg-sender-name { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; font-family: var(--font-mono); }
+.msg-bubble {
+  padding: 10px 14px; border-radius: 18px;
+  font-size: 13px; line-height: 1.5;
+  background: #f3f4f6; color: var(--text-primary);
+  word-break: break-word;
+}
+.msg-bubble-mine { background: var(--brand); color: #fff; }
+
+/* Chat input */
+.chat-input-row {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex; gap: 8px; align-items: center;
+  background: #fff;
+}
+.chat-input {
+  flex: 1; min-width: 0;
+  height: 38px;
+  border: 1px solid var(--border-orange);
+  border-radius: 999px;
+  padding: 0 16px;
+  outline: 0;
+  font-family: var(--font-body); font-size: 13px;
+}
+.chat-input:focus { border-color: var(--brand); }
+.chat-empty { margin: auto; }
+
+/* ═══ Right: Summary ═══ */
+.summary-panel { overflow-y: auto; }
+.mini-list { display: grid; gap: 10px; }
+.mini-list-item {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; font-size: 12px;
+}
+.mini-list-item span { color: var(--text-secondary); }
+.price { color: var(--brand-strong); font-family: var(--font-mono); font-weight: 900; font-size: 12px; }
+.trust-box {
+  margin-top: 14px; padding: 12px;
+  border-radius: 18px; background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e; font-size: 11px; line-height: 1.6;
+}
+
+@media (max-width: 1120px) { .message-layout { grid-template-columns: 1fr; } .conv-panel, .summary-panel { max-height: 300px; } }
+@media (max-width: 780px) { .message-layout { grid-template-columns: 1fr; } }
+</style>

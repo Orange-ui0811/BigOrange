@@ -1,0 +1,386 @@
+/* ============================================================
+   OrangeVC 像素极简设计系统 v2 — 暖橙渐变 + 像素投影
+   基于 docs/orange-web-prototype/index.html 设计稿
+   ============================================================ */
+
+:root {
+  /* ═══ 品牌色系 ═══ */
+  --brand:           #f37021;
+  --brand-strong:    #ea580c;
+  --brand-deep:      #c55312;
+  --brand-light:     #fff5ec;
+  --brand-bg:        #fff0e0;
+  --brand-soft:      #ffedd5;
+
+  /* ═══ 暖色辅助 ═══ */
+  --cream:           #fff7ed;
+  --cream-2:         #fffaf4;
+  --brown:           #5c260f;
+  --gold:            #f59e0b;
+  --amber:           #fbbf24;
+
+  /* ═══ 背景色系 ═══ */
+  --bg-page:         #fffaf4;
+  --bg-page-alt:     #fff7ed;
+  --bg-sidebar:      rgba(255, 250, 244, 0.92);
+  --bg-card:         #ffffff;
+  --bg-hover:        #fff7ed;
+  --bg-input:        #ffffff;
+  --bg-glass:        rgba(255, 250, 244, 0.84);
+
+  /* ═══ 文字色系 ═══ */
+  --text-primary:    #1f2937;
+  --text-secondary:  #6b7280;
+  --text-muted:      #9ca3af;
+  --text-placeholder:#9ca3af;
+
+  /* ═══ 边框色系 ═══ */
+  --border-orange:   #fed7aa;
+  --border:          #fed7aa;
+  --border-light:    #f0ece6;
+  --border-focus:    #f37021;
+  --line:            #e5e7eb;
+  --line-orange:     #fed7aa;
+
+  /* ═══ 像素投影 ═══ */
+  --shadow-pixel-xs:  2px 2px 0 #ffedd5;
+  --shadow-pixel-sm:  3px 3px 0 #ffedd5;
+  --shadow-pixel:     4px 4px 0 #ffedd5;
+  --shadow-pixel-lg:  6px 6px 0 #ffedd5;
+  --shadow-card:      0 10px 30px rgba(31, 41, 55, 0.06);
+  --shadow-card-lg:   0 18px 50px rgba(121, 62, 20, 0.08);
+  --shadow-lift:      0 18px 40px rgba(154, 83, 28, 0.10);
+  --shadow-glow:      0 0 0 1px rgba(254, 215, 170, 0.85), 0 14px 36px rgba(243, 112, 33, 0.10);
+
+  /* ═══ 间距 (4px base) ═══ */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   12px;
+  --space-lg:   16px;
+  --space-xl:   20px;
+  --space-2xl:  24px;
+  --space-3xl:  32px;
+
+  /* ═══ 字体 ═══ */
+  --font-mono:   "Courier New", "SimHei", monospace;
+  --font-body:   "Microsoft YaHei", "PingFang SC", sans-serif;
+
+  /* ═══ 圆角 — 对齐原型 ═══ */
+  --radius-xl:   28px;
+  --radius-lg:   20px;
+  --radius-md:   14px;
+  --radius-sm:   2px;
+  --radius-pill: 999px;
+}
+
+/* ============================================================
+   全局重置
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(243, 112, 33, 0.12), transparent 28%),
+    radial-gradient(circle at 88% 2%, rgba(245, 158, 11, 0.08), transparent 24%),
+    linear-gradient(135deg, #fffaf4 0%, #fff7ed 46%, #f8fafc 100%);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 像素网格底纹 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.45;
+  background:
+    linear-gradient(rgba(243, 112, 33, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 112, 33, 0.03) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: radial-gradient(circle at 50% 22%, #000 0 42%, transparent 82%);
+}
+
+/* 右下角暖光晕 */
+body::after {
+  content: "";
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  right: -160px;
+  bottom: -170px;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(243, 112, 33, 0.12), transparent 68%);
+  filter: blur(6px);
+}
+
+/* ============================================================
+   Element Plus 全局覆写
+   ============================================================ */
+
+/* --- 按钮 --- */
+.el-button {
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  padding: 8px 18px !important;
+  height: 36px !important;
+  border: 1px solid var(--line) !important;
+  transition: transform 0.15s, box-shadow 0.15s !important;
+}
+.el-button--primary {
+  background: var(--brand) !important;
+  color: #fff !important;
+  border-color: var(--brand) !important;
+  box-shadow: 0 3px 0 rgba(197, 83, 18, 0.20) !important;
+}
+.el-button--primary:hover {
+  background: #ff8a33 !important;
+  box-shadow: 0 4px 0 rgba(197, 83, 18, 0.28) !important;
+  transform: translateY(-1px);
+}
+.el-button--primary:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 1px 0 rgba(197, 83, 18, 0.10) !important;
+}
+.el-button--default {
+  background: #fff !important;
+  border: 1px solid var(--border-light) !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+.el-button--default:hover {
+  border-color: var(--border-orange) !important;
+  color: var(--brand) !important;
+  background: #fffaf5 !important;
+}
+.el-button--small {
+  height: 28px !important;
+  font-size: 11px !important;
+  padding: 4px 12px !important;
+}
+.el-button--large {
+  height: 44px !important;
+  font-size: 14px !important;
+  padding: 10px 24px !important;
+}
+
+/* --- 输入框 --- */
+.el-input__wrapper {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border-orange) !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  font-family: var(--font-body) !important;
+}
+.el-input__wrapper:hover {
+  border-color: var(--brand) !important;
+}
+.el-input.is-focus .el-input__wrapper {
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 2px rgba(243, 112, 33, 0.08) !important;
+}
+.el-input__inner {
+  font-size: 13px !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-body) !important;
+}
+.el-input__inner::placeholder {
+  color: var(--text-placeholder) !important;
+  font-size: 12px !important;
+}
+
+/* --- 卡片 --- */
+.el-card {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border-orange) !important;
+  box-shadow: var(--shadow-card) !important;
+  background: var(--bg-card) !important;
+}
+.el-card__header {
+  border-bottom: 1px solid var(--border-orange) !important;
+  padding: 12px 16px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+}
+.el-card__body {
+  padding: 16px !important;
+}
+
+/* --- 表格 --- */
+.el-table {
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  border: 1px solid var(--border-light) !important;
+}
+.el-table th.el-table__cell {
+  background: var(--bg-page) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--text-secondary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 10px 12px !important;
+}
+.el-table td.el-table__cell {
+  border-bottom: 1px solid var(--border-light) !important;
+  padding: 10px 12px !important;
+  color: var(--text-primary) !important;
+}
+.el-table__body tr:hover > td {
+  background: var(--bg-hover) !important;
+}
+.el-table .el-table__cell {
+  border-right: none !important;
+}
+
+/* --- 标签 --- */
+.el-tag {
+  border-radius: var(--radius-pill) !important;
+  border: 1px solid var(--line) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 2px 6px !important;
+  height: 20px !important;
+  line-height: 16px !important;
+}
+
+/* --- Tab --- */
+.el-tabs__header {
+  margin-bottom: 16px !important;
+}
+.el-tabs__nav-wrap::after {
+  height: 1px !important;
+  background: var(--border) !important;
+}
+.el-tabs__item {
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  height: 36px !important;
+  line-height: 36px !important;
+}
+.el-tabs__item.is-active {
+  color: var(--brand) !important;
+  font-weight: 700 !important;
+}
+.el-tabs__active-bar {
+  background: var(--brand) !important;
+  height: 2px !important;
+}
+
+/* --- 菜单 --- */
+.el-menu {
+  border-right: none !important;
+  background: transparent !important;
+}
+.el-menu-item {
+  font-family: var(--font-mono) !important;
+  font-size: 12px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  color: var(--text-secondary) !important;
+  border-left: 2px solid transparent !important;
+}
+.el-menu-item:hover {
+  background: #fff7ed !important;
+  color: var(--brand) !important;
+}
+.el-menu-item.is-active {
+  color: var(--brand) !important;
+  background: var(--brand-soft) !important;
+  border-left-color: var(--brand) !important;
+  font-weight: 700 !important;
+}
+
+/* --- 分页 --- */
+.el-pagination {
+  font-family: var(--font-mono) !important;
+}
+.el-pager li {
+  border-radius: var(--radius-pill) !important;
+  font-family: var(--font-mono) !important;
+}
+.el-pager li.is-active {
+  background: var(--brand) !important;
+}
+
+/* --- 对话框 --- */
+.el-dialog {
+  border-radius: var(--radius-lg) !important;
+  border: 2px solid var(--brand) !important;
+  box-shadow: var(--shadow-pixel-lg), 8px 8px 0 rgba(0, 0, 0, 0.05) !important;
+}
+.el-dialog__header {
+  font-family: var(--font-mono) !important;
+  font-weight: 700 !important;
+}
+.el-overlay {
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+
+/* --- 下拉框 --- */
+.el-select .el-input__wrapper {
+  border-radius: var(--radius-md) !important;
+}
+
+/* --- 单选框/复选框 --- */
+.el-radio-button__inner {
+  border-radius: var(--radius-md) !important;
+}
+.el-checkbox__inner {
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* --- 上传 --- */
+.el-upload {
+  border-radius: var(--radius-md) !important;
+}
+
+/* --- 数字输入 --- */
+.el-input-number .el-input__wrapper {
+  border-radius: var(--radius-md) !important;
+}
+
+/* ============================================================
+   辅助工具类
+   ============================================================ */
+.oj-card-pixel {
+  border: 1px solid var(--border-orange);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-pixel);
+}
+.oj-card-pixel:hover {
+  box-shadow: var(--shadow-pixel-lg);
+  transform: translate(-2px, -2px);
+}
+.oj-glass {
+  background: var(--bg-glass);
+  border-bottom: 1px solid rgba(254, 215, 170, 0.7);
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,45 +1,122 @@
 <template>
   <el-container style="height:100vh">
-    <!-- 侧边栏 -->
-    <el-aside width="200px" style="background:#1a1a2e;display:flex;flex-direction:column;overflow:hidden">
-      <div style="padding:20px 16px 12px;color:#fff;font-size:18px;font-weight:700;letter-spacing:-0.5px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:4px">
-        OrangeJD
+    <!-- ═══ 侧边栏 ═══ -->
+    <el-aside width="252px" class="app-sidebar">
+
+      <!-- 品牌 + 像素橙子 -->
+      <div class="sidebar-brand">
+        <svg class="sidebar-logo" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="17" y="3" width="5" height="4" fill="#5c260f"/>
+          <rect x="19" y="6" width="3" height="7" fill="#5c260f"/>
+          <rect x="19" y="7" width="2" height="6" fill="#79bd28"/>
+          <rect x="22" y="6" width="10" height="3" fill="#5c260f"/>
+          <rect x="21" y="9" width="12" height="4" fill="#5c260f"/>
+          <rect x="22" y="8" width="9" height="4" fill="#7bd927"/>
+          <rect x="8" y="9" width="21" height="2" fill="#5c260f"/>
+          <rect x="5" y="12" width="29" height="3" fill="#5c260f"/>
+          <rect x="3" y="15" width="33" height="13" fill="#5c260f"/>
+          <rect x="5" y="11" width="27" height="18" fill="#ff9f2e"/>
+          <rect x="7" y="13" width="25" height="17" fill="#ffa934"/>
+          <rect x="32" y="18" width="2" height="8" fill="#ff7c2a"/>
+          <rect x="10" y="15" width="3" height="3" fill="#fff1c8"/>
+          <rect x="8" y="18" width="3" height="5" fill="#fff1c8"/>
+          <rect x="14" y="21" width="2" height="3" fill="#5c260f"/>
+          <rect x="24" y="21" width="2" height="3" fill="#5c260f"/>
+          <rect x="18" y="28" width="1" height="1" fill="#5c260f"/>
+          <rect x="22" y="28" width="1" height="1" fill="#5c260f"/>
+          <rect x="19" y="29" width="1" height="1" fill="#5c260f"/>
+          <rect x="21" y="29" width="1" height="1" fill="#5c260f"/>
+          <rect x="20" y="30" width="1" height="1" fill="#5c260f"/>
+          <rect x="7" y="30" width="27" height="3" fill="#5c260f"/>
+          <rect x="9" y="29" width="23" height="3" fill="#ff8f25"/>
+        </svg>
+        <div class="sidebar-brand-text">
+          <span class="brand-name">OrangeVC</span>
+          <span class="brand-sub">vibe coding market</span>
+        </div>
       </div>
-      <!-- 用户信息 -->
-      <div style="padding:16px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)">
-        <el-avatar :size="48" style="background:#e65100;font-size:20px" :src="avatarUrl ? API+avatarUrl : undefined">{{ nickname ? nickname[0] : (me.nickname || me.username || '?')[0] }}</el-avatar>
-        <div style="color:#d0d5dd;font-size:13px;margin-top:6px;font-weight:500">{{ nickname || me.nickname || me.username }}</div>
+
+      <!-- 用户面板 -->
+      <div class="sidebar-user">
+        <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl ? API+avatarUrl : undefined">
+          {{ (nickname || me.nickname || me.username || '?')[0] }}
+        </el-avatar>
+        <div class="sidebar-user-info">
+          <strong>{{ nickname || me.nickname || me.username }}</strong>
+          <span>创作者</span>
+        </div>
       </div>
-      <el-menu :default-active="route.path" background-color="#1a1a2e" text-color="#8890a0" active-text-color="#e65100" router style="border-right:none;flex:1">
-        <el-menu-item index="/market"><el-icon><Shop /></el-icon> 市场</el-menu-item>
-        <el-menu-item index="/leaderboard"><el-icon><DataAnalysis /></el-icon> 榜单</el-menu-item>
-        <el-menu-item index="/trend"><el-icon><TrendCharts /></el-icon> 趋势分析</el-menu-item>
-        <el-menu-item index="/plan"><el-icon><EditPen /></el-icon> 方案设计</el-menu-item>
-        <el-menu-item index="/publish"><el-icon><Edit /></el-icon> 发布</el-menu-item>
-        <el-menu-item index="/profile/me"><el-icon><User /></el-icon> 个人主页</el-menu-item>
-        <el-menu-item index="/me/works"><el-icon><Folder /></el-icon> 我的作品</el-menu-item>
-        <el-menu-item index="/me/orders" v-if="tradeEnabled"><el-icon><Tickets /></el-icon> 我的订单</el-menu-item>
-        <el-menu-item index="/me/notifications"><el-icon><Bell /></el-icon> 通知<span v-if="unreadCount" style="margin-left:6px;background:#e65100;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px">{{ unreadCount }}</span></el-menu-item>
-        <el-menu-item index="/chat"><el-icon><ChatDotRound /></el-icon> 聊天<span v-if="chatUnread" style="margin-left:6px;background:#e65100;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px">{{ chatUnread }}</span></el-menu-item>
-        <el-menu-item index="/me/favorites"><el-icon><Star /></el-icon> 收藏夹</el-menu-item>
-        <el-menu-item index="/me/history"><el-icon><Clock /></el-icon> 浏览历史</el-menu-item>
-        <el-menu-item index="/me/quota"><el-icon><Wallet /></el-icon> 我的配额</el-menu-item>
-        <el-menu-item index="/me/settings"><el-icon><Setting /></el-icon> 设置</el-menu-item>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- ═══ 5 项主导航 ═══ -->
+      <div class="nav-section-label">主导航</div>
+      <el-menu :default-active="activeMenu" class="sidebar-menu" router>
+        <el-menu-item index="/market">
+          <span class="nav-item-content">
+            <el-icon><Shop /></el-icon>
+            <span>发现</span>
+          </span>
+        </el-menu-item>
+        <el-menu-item index="/ai">
+          <span class="nav-item-content">
+            <el-icon><Cpu /></el-icon>
+            <span>AI 工具</span>
+          </span>
+        </el-menu-item>
+        <el-menu-item index="/publish">
+          <span class="nav-item-content">
+            <el-icon><Edit /></el-icon>
+            <span>发布</span>
+          </span>
+        </el-menu-item>
+        <el-menu-item index="/chat">
+          <span class="nav-item-content">
+            <el-icon><ChatDotRound /></el-icon>
+            <span>消息</span>
+          </span>
+          <span v-if="chatUnread" class="menu-badge">{{ chatUnread }}</span>
+        </el-menu-item>
+        <el-menu-item index="/me">
+          <span class="nav-item-content">
+            <el-icon><User /></el-icon>
+            <span>我的</span>
+          </span>
+        </el-menu-item>
       </el-menu>
-      <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,0.08)">
-        <el-button text style="color:#8890a0;width:100%" @click="logout">退出登录</el-button>
+
+      <!-- 功能归属提示 -->
+      <div class="nav-hint">
+        <strong>功能归属</strong>
+        榜单、趋势分析、方案设计 → AI 工具<br/>
+        通知、收藏、历史、配额、设置 → 我的
+      </div>
+
+      <!-- ═══ 底部工具 ═══ -->
+      <div class="sidebar-tools">
+        <div class="sidebar-divider"></div>
+        <button class="tool-btn" @click="$router.push('/me/notifications')">
+          <span>系统通知</span>
+          <span v-if="unreadCount" class="menu-badge">{{ unreadCount }}</span>
+        </button>
+        <button class="tool-btn" @click="$router.push('/me/settings')">
+          <span>设置</span>
+        </button>
+        <button class="tool-btn logout-btn" @click="logout">
+          <span>退出</span>
+        </button>
       </div>
     </el-aside>
-    <!-- 主区域 -->
+
+    <!-- ═══ 主区域 ═══ -->
     <el-container>
-      <el-header style="background:#fff;border-bottom:1px solid #ebeef5;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px">
-        <span style="font-weight:600;color:#303133;font-size:15px">{{ route.meta.title }}</span>
-        <div style="display:flex;align-items:center;gap:16px">
-          <!-- 搜索栏（市场页显示） -->
-          <el-input v-if="route.name==='Market'" v-model="searchKeyword" placeholder="搜索作品..." size="small" style="width:220px" @keyup.enter="$emit('search',searchKeyword)" clearable />
+      <el-header class="app-header">
+        <div class="topbar-title">
+          <h1>{{ route.meta.title || 'OrangeVC' }}</h1>
         </div>
+        <div class="top-actions"></div>
       </el-header>
-      <el-main style="background:#faf9f7;padding:20px 24px">
+      <el-main class="app-main">
         <router-view />
       </el-main>
     </el-container>
@@ -47,8 +124,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { Shop, Cpu, Edit, ChatDotRound, User } from '@element-plus/icons-vue'
 import request from '../api/request'
 import { unreadCount, avatarUrl, nickname } from '../stores/unread'
 import { tradeEnabled } from '../stores/tradeMode'
@@ -60,6 +138,17 @@ const me = ref({ username: '', nickname: '' })
 const chatUnread = ref(0)
 const logout = () => { sessionStorage.removeItem('appToken'); router.push('/login') }
 
+/* ---- 根据子路由高亮父级菜单 ---- */
+const activeMenu = computed(() => {
+  const p = route.path
+  if (p.startsWith('/market') || p.startsWith('/work/') || p.startsWith('/req/') || p.startsWith('/order/')) return '/market'
+  if (p.startsWith('/ai') || p.startsWith('/leaderboard') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/job')) return '/ai'
+  if (p.startsWith('/publish')) return '/publish'
+  if (p.startsWith('/chat')) return '/chat'
+  if (p.startsWith('/me') || p.startsWith('/profile')) return '/me'
+  return '/market'
+})
+
 onMounted(async () => {
   try { const res = await request.get('/app/notification/unread-count'); if (res.code === 1) unreadCount.value = res.data } catch {}
   try { const res = await request.get('/app/profile/me'); if (res.code === 1) { me.value = res.data; nickname.value = res.data.nickname || ''; avatarUrl.value = res.data.avatarUrl || '' } } catch {}
@@ -70,3 +159,257 @@ onMounted(async () => {
   try { const r = await request.get('/app/config/trade-mode'); if (r.code === 1) tradeEnabled.value = r.data.enabled } catch {}
 })
 </script>
+
+<style scoped>
+/* ===== 侧边栏 ===== */
+.app-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: rgba(255, 255, 255, .86) !important;
+  border-right: 1px solid rgba(254, 215, 170, .85) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* 品牌 */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+}
+
+.sidebar-logo {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 7px 0 rgba(92, 38, 15, .14));
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--brand-strong);
+  letter-spacing: -.045em;
+}
+
+.brand-sub {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+/* 用户面板 */
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  margin: 0;
+  border: 1px solid var(--border-orange);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 237, 213, 0.7), rgba(255, 255, 255, 0.7));
+  box-shadow: var(--shadow-pixel-sm);
+}
+
+.sidebar-avatar {
+  background: linear-gradient(135deg, var(--brand), #fbbf24) !important;
+  border: 2px solid #fff !important;
+  flex-shrink: 0;
+  border-radius: 16px !important;
+}
+
+.sidebar-user-info strong {
+  display: block;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.sidebar-user-info span {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* 分割线 */
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-orange);
+  margin: 8px 14px;
+  opacity: 0.7;
+}
+
+/* 导航标签 */
+.nav-section-label {
+  margin: 6px 14px 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 菜单 */
+.sidebar-menu {
+  flex: 1;
+  overflow-y: auto;
+  border-right: none !important;
+  background: transparent !important;
+  padding: 2px 8px;
+}
+.sidebar-menu .el-menu-item {
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+  min-height: 42px !important;
+  line-height: 42px !important;
+  color: var(--text-secondary) !important;
+  border-radius: 14px !important;
+  padding: 0 12px !important;
+  margin: 2px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border-left: 3px solid transparent !important;
+  transition: background 0.15s, color 0.15s, border-color 0.15s !important;
+}
+.sidebar-menu .el-menu-item:hover {
+  background: #fff7ed !important;
+  color: var(--brand-strong) !important;
+  transform: translateX(2px);
+}
+.sidebar-menu .el-menu-item.is-active {
+  color: var(--brand-strong) !important;
+  background: var(--brand-soft) !important;
+  border-left: 3px solid var(--brand) !important;
+  font-weight: 800 !important;
+}
+.sidebar-menu .el-menu-item .el-icon {
+  font-size: 18px !important;
+  margin-right: 0 !important;
+}
+.nav-item-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 功能归属提示 */
+.nav-hint {
+  margin: 10px 10px 6px;
+  padding: 10px 12px;
+  border: 1px solid rgba(254, 215, 170, 0.7);
+  border-radius: 16px;
+  background: rgba(255, 250, 244, 0.6);
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.nav-hint strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--brown);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: -0.3px;
+}
+
+/* 徽章 */
+.menu-badge {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--brand);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* 底部工具区 */
+.sidebar-tools {
+  padding: 14px 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid rgba(254, 215, 170, .85);
+  margin-top: auto;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 38px;
+  border: none;
+  border-radius: 12px;
+  padding: 0 12px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-align: left;
+}
+.tool-btn:hover {
+  background: #fff7ed;
+  color: var(--brand-strong);
+}
+.logout-btn:hover {
+  color: #e53935;
+  background: #fff5f5;
+}
+
+/* ===== 顶栏 ===== */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: rgba(255, 250, 244, 0.88) !important;
+  border-bottom: 1px solid rgba(254, 215, 170, 0.7) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 28px !important;
+  height: 52px !important;
+}
+
+.topbar-title h1 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ===== 内容区 ===== */
+.app-main {
+  background: transparent !important;
+  padding: 20px 28px 40px !important;
+}
+</style>

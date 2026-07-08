@@ -1,351 +1,356 @@
 <template>
   <div>
-    <h3 style="margin:0 0 4px;font-weight:700">趋势分析</h3>
-    
-    <el-tabs v-model="trendTab" style="margin-bottom:12px">
+    <!-- Compact Head -->
+    <div class="compact-head">
+      <div>
+        <span class="eyebrow">趋势分析</span>
+        <h2>精准推荐、自由提问、工作能力参考。</h2>
+        <p>Vibe Coding 开源项目热度 · 每周更新 · AI 辅助编程趋势洞察</p>
+      </div>
+    </div>
+
+    <el-tabs v-model="trendTab" class="trend-tabs">
       <el-tab-pane label="精准推荐" name="v2" />
       <el-tab-pane label="自由提问" name="v1" />
       <el-tab-pane label="工作能力参考" name="jobs" />
     </el-tabs>
-      <div v-if="trendTab==='v2'">
 
-    <p style="color:#909399;font-size:13px;margin:0 0 8px">Vibe Coding 开源项目热度 · 每周更新 · AI 辅助编程趋势洞察</p>
+    <div v-if="trendTab==='v2'">
+      <p class="section-subtitle">Vibe Coding 开源项目热度 · 每周更新 · AI 辅助编程趋势洞察</p>
 
-    <el-row :gutter="16">
-      <!-- 左：图谱 -->
-      <el-col :span="18">
-        <el-card shadow="never" style="border-radius:12px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-            <div>
-              <span style="font-weight:600">Topic 全景图</span>
-              <el-tooltip content="节点=技术方向（大小=热度），连线=共享编程语言≥2种（越粗关联越强）" placement="top">
-                <el-icon style="margin-left:6px;color:#909399;cursor:help"><QuestionFilled /></el-icon>
-              </el-tooltip>
-            </div>
-            <el-radio-group v-model="viewMode" size="small" @change="onViewChange">
-              <el-radio-button value="week">本周</el-radio-button>
-              <el-radio-button value="last">上周</el-radio-button>
-            </el-radio-group>
-          </div>
-          <div ref="chartRef" style="width:100%;height:500px" v-loading="graphLoading"></div>
-        </el-card>
-      </el-col>
-
-      <!-- 右：节点详情 -->
-      <el-col :span="6">
-        <el-card shadow="never" style="border-radius:12px;height:556px;overflow:auto">
-          <template v-if="selectedEdge">
-            <h4 style="margin:0 0 4px">Topic 关联</h4>
-            <el-tag size="small" type="info" style="margin-right:6px">{{ selectedEdge.sourceName }}</el-tag>
-            <span style="color:#909399">↔</span>
-            <el-tag size="small" type="info" style="margin-left:6px">{{ selectedEdge.targetName }}</el-tag>
-            <el-divider style="margin:12px 0" />
-            <p style="font-size:13px;color:#606266">这两个方向共享 <b>{{ selectedEdge.weight }}</b> 种编程语言，技能可迁移。</p>
-            <div v-if="selectedEdge.sharedLangs?.length" style="margin-top:8px">
-              <div style="font-weight:600;font-size:13px;margin-bottom:4px">共享语言</div>
-              <el-tag v-for="l in selectedEdge.sharedLangs" :key="l" size="small" type="success" style="margin:2px 4px 2px 0">{{ l }}</el-tag>
-            </div>
-            <el-button size="small" type="primary" style="margin-top:12px" @click="compareTopics(selectedEdge)">AI 对比分析</el-button>
-          </template>
-          <template v-if="selectedNode">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <el-row :gutter="16">
+        <!-- 左：图谱 -->
+        <el-col :span="18">
+          <el-card shadow="never" class="graph-card">
+            <div class="card-header-row">
               <div>
-                <span style="font-weight:600">{{ selectedNode.name }}</span>
-                <el-tag size="small" type="info" style="margin-left:6px">{{ selectedNode.group }}</el-tag>
+                <span class="card-title-text">Topic 全景图</span>
+                <el-tooltip content="节点=技术方向（大小=热度），连线=共享编程语言≥2种（越粗关联越强）" placement="top">
+                  <el-icon class="help-icon"><QuestionFilled /></el-icon>
+                </el-tooltip>
               </div>
-              <el-radio-group v-model="detailTab" size="small">
-                <el-radio-button value="insights">洞察</el-radio-button>
-                <el-radio-button value="metrics">分析</el-radio-button>
-                <el-radio-button value="repos">仓库</el-radio-button>
+              <el-radio-group v-model="viewMode" size="small" @change="onViewChange">
+                <el-radio-button value="week">本周</el-radio-button>
+                <el-radio-button value="last">上周</el-radio-button>
               </el-radio-group>
             </div>
-            <el-divider style="margin:8px 0" />
-            <!-- 分析视图 -->
-            <template v-if="detailTab==='metrics'">
-              <div v-if="selectedNode.metrics?.summary" style="font-size:12px;color:#606266;line-height:1.6;margin-bottom:12px;padding:8px;background:#faf9f7;border-radius:6px">
-                {{ selectedNode.metrics.summary }}
+            <div ref="chartRef" class="chart-container" v-loading="graphLoading"></div>
+          </el-card>
+        </el-col>
+
+        <!-- 右：节点详情 -->
+        <el-col :span="6">
+          <el-card shadow="never" class="detail-card">
+            <template v-if="selectedEdge">
+              <h4 class="detail-section-title">Topic 关联</h4>
+              <el-tag size="small" type="info" class="mr-6">{{ selectedEdge.sourceName }}</el-tag>
+              <span class="text-muted">↔</span>
+              <el-tag size="small" type="info" class="ml-6">{{ selectedEdge.targetName }}</el-tag>
+              <el-divider class="compact-divider" />
+              <p class="detail-text">这两个方向共享 <b>{{ selectedEdge.weight }}</b> 种编程语言，技能可迁移。</p>
+              <div v-if="selectedEdge.sharedLangs?.length" class="mt-8">
+                <div class="section-label">共享语言</div>
+                <el-tag v-for="l in selectedEdge.sharedLangs" :key="l" size="small" type="success" class="tag-item">{{ l }}</el-tag>
               </div>
-              <el-descriptions :column="1" size="small" border>
-                <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
-                <el-descriptions-item label="仓库数(全时段)">{{ selectedNode.repoCount }}</el-descriptions-item>
-                <el-descriptions-item v-if="selectedNode.metrics?.vcCount > 0" label="Vibe Coding">
-                  <el-tag type="warning" size="small">{{ selectedNode.metrics.vcCount }} 个项目 · {{ selectedNode.metrics.vcRatio }}%</el-tag>
-                </el-descriptions-item>
-                <el-descriptions-item v-if="selectedNode.metrics?.weeklyStars" label="本周新增⭐">{{ formatNum(selectedNode.metrics.weeklyStars) }}</el-descriptions-item>
-                <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
-                  <el-tag v-if="selectedNode.metrics?.crowdedness" :type="crowdType(selectedNode.metrics.crowdedness)" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
-                </el-descriptions-item>
-                <el-descriptions-item v-if="selectedNode.metrics" label="难度">
-                  <el-tag v-if="selectedNode.metrics?.difficulty" :type="diffType(selectedNode.metrics.difficulty)" size="small">{{ selectedNode.metrics.difficulty }}</el-tag>
-                </el-descriptions-item>
-                <el-descriptions-item v-if="selectedNode.metrics" label="活跃度">{{ selectedNode.metrics.activity }}</el-descriptions-item>
-                <el-descriptions-item v-if="selectedNode.metrics?.opportunityScore" label="综合评分">
-                  <el-progress :percentage="selectedNode.metrics.opportunityScore" :color="scoreColor(selectedNode.metrics.opportunityScore)" :stroke-width="6" />
-                </el-descriptions-item>
-              </el-descriptions>
-              <div v-if="selectedDelta !== null" style="margin-top:8px;font-size:13px">
-                较上周: <span :style="{color:selectedDelta>=0?'#67C23A':'#F56C6C',fontWeight:700}">{{ selectedDelta >= 0 ? '↑' : '↓' }}{{ Math.abs(selectedDelta) }}%</span>
+              <el-button size="small" type="primary" class="mt-12" @click="compareTopics(selectedEdge)">AI 对比分析</el-button>
+            </template>
+            <template v-if="selectedNode">
+              <div class="card-header-row">
+                <div>
+                  <span class="card-title-text">{{ selectedNode.name }}</span>
+                  <el-tag size="small" type="info" class="ml-6">{{ selectedNode.group }}</el-tag>
+                </div>
+                <el-radio-group v-model="detailTab" size="small">
+                  <el-radio-button value="insights">洞察</el-radio-button>
+                  <el-radio-button value="metrics">分析</el-radio-button>
+                  <el-radio-button value="repos">仓库</el-radio-button>
+                </el-radio-group>
               </div>
-              <div v-if="selectedNode.metrics?.insight" style="margin-top:8px;padding:8px;background:#f5f9ff;border-radius:6px;font-size:12px;color:#1565c0;line-height:1.6">
-                💡 {{ selectedNode.metrics.insight }}
+              <el-divider class="compact-divider-sm" />
+              <!-- 分析视图 -->
+              <template v-if="detailTab==='metrics'">
+                <div v-if="selectedNode.metrics?.summary" class="summary-box">
+                  {{ selectedNode.metrics.summary }}
+                </div>
+                <el-descriptions :column="1" size="small" border>
+                  <el-descriptions-item label="总 Stars">{{ formatNum(selectedNode.totalStars) }}</el-descriptions-item>
+                  <el-descriptions-item label="仓库数(全时段)">{{ selectedNode.repoCount }}</el-descriptions-item>
+                  <el-descriptions-item v-if="selectedNode.metrics?.vcCount > 0" label="Vibe Coding">
+                    <el-tag type="warning" size="small">{{ selectedNode.metrics.vcCount }} 个项目 · {{ selectedNode.metrics.vcRatio }}%</el-tag>
+                  </el-descriptions-item>
+                  <el-descriptions-item v-if="selectedNode.metrics?.weeklyStars" label="本周新增⭐">{{ formatNum(selectedNode.metrics.weeklyStars) }}</el-descriptions-item>
+                  <el-descriptions-item v-if="selectedNode.metrics" label="拥挤度">
+                    <el-tag v-if="selectedNode.metrics?.crowdedness" :type="crowdType(selectedNode.metrics.crowdedness)" size="small">{{ selectedNode.metrics.crowdedness }}</el-tag>
+                  </el-descriptions-item>
+                  <el-descriptions-item v-if="selectedNode.metrics" label="难度">
+                    <el-tag v-if="selectedNode.metrics?.difficulty" :type="diffType(selectedNode.metrics.difficulty)" size="small">{{ selectedNode.metrics.difficulty }}</el-tag>
+                  </el-descriptions-item>
+                  <el-descriptions-item v-if="selectedNode.metrics" label="活跃度">{{ selectedNode.metrics.activity }}</el-descriptions-item>
+                  <el-descriptions-item v-if="selectedNode.metrics?.opportunityScore" label="综合评分">
+                    <el-progress :percentage="selectedNode.metrics.opportunityScore" :color="scoreColor(selectedNode.metrics.opportunityScore)" :stroke-width="6" />
+                  </el-descriptions-item>
+                </el-descriptions>
+                <div v-if="selectedDelta !== null" class="delta-row">
+                  较上周: <span :class="selectedDelta>=0 ? 'delta-up' : 'delta-down'">{{ selectedDelta >= 0 ? '↑' : '↓' }}{{ Math.abs(selectedDelta) }}%</span>
+                </div>
+                <div v-if="selectedNode.metrics?.insight" class="insight-box">
+                  {{ selectedNode.metrics.insight }}
+                </div>
+              </template>
+              <!-- 仓库视图 -->
+              <template v-if="detailTab==='repos'">
+                <div v-if="selectedNode.topRepos?.length">
+                  <div class="section-label">Top 5 仓库</div>
+                  <div v-for="r in selectedNode.topRepos" :key="r.name" class="repo-item">
+                    <a :href="r.htmlUrl" target="_blank" class="repo-link">{{ r.name }}</a>
+                    <span class="repo-stars">⭐{{ formatNum(r.stars) }}</span>
+                    <div class="repo-desc">{{ r.description || '' }}</div>
+                  </div>
+                </div>
+                <div v-if="selectedNode.topLanguages?.length" class="mt-12">
+                  <div class="section-label">主要语言</div>
+                  <el-tag v-for="l in selectedNode.topLanguages" :key="l.name" size="small" class="tag-item">{{ l.name }} ({{ l.count }})</el-tag>
+                </div>
+              </template>
+            </template>
+            <template v-if="!selectedNode && !selectedEdge || (selectedNode && detailTab==='insights')">
+              <div class="section-label mb-8">趋势洞察</div>
+              <div v-for="card in insightCards" :key="card.title" class="insight-card">
+                <div class="insight-card-title">{{ card.title }}</div>
+                <el-tag v-for="n in card.items" :key="n" :type="card.tagType" size="small" class="tag-item">{{ n }}</el-tag>
               </div>
             </template>
-            <!-- 仓库视图 -->
-            <template v-if="detailTab==='repos'">
-              <div v-if="selectedNode.topRepos?.length">
-                <div style="font-weight:600;font-size:12px;margin-bottom:6px">🏆 Top 5 仓库</div>
-                <div v-for="r in selectedNode.topRepos" :key="r.name" style="padding:6px 0;border-bottom:1px solid #f5f2ee;font-size:12px">
-                  <a :href="r.htmlUrl" target="_blank" style="color:#409EFF;font-weight:500">{{ r.name }}</a>
-                  <span style="color:#e65100;float:right">⭐{{ formatNum(r.stars) }}</span>
-                  <div style="font-size:11px;color:#909399;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.description || '' }}</div>
+          </el-card>
+        </el-col>
+      </el-row>
+
+      <!-- 智能分析面板 -->
+      <div class="mt-16">
+        <!-- 步骤式表单卡片 -->
+        <div class="orange-form-card">
+          <!-- 标题栏 + 历史记录 -->
+          <div class="form-header-row">
+            <div>
+              <span class="form-title">智能分析</span>
+              <span class="form-title-sub">告诉我你的想法</span>
+            </div>
+            <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasAppToken">
+              <template #reference>
+                <el-button size="small" text>{{ history.length ? '记录 ('+history.length+')' : '记录' }}</el-button>
+              </template>
+              <div class="history-popover">
+                <div v-if="!history.length" class="history-empty">暂无记录</div>
+                <div v-for="(h,i) in history" :key="i" class="history-item" @click="loadHistory(h)">
+                  <div class="history-item-text">
+                    <span class="history-topic">{{ (Array.isArray(h.topics) ? h.topics.join('、') : String(h.topics||'全部').replace(/[\[\"]/g,'')) }}</span>
+                    <span class="history-time">{{ (h.time||'').substring(0,16) }}</span>
+                  </div>
+                  <el-button size="small" text type="danger" @click.stop="delHistory(i)">✕</el-button>
                 </div>
               </div>
-              <div v-if="selectedNode.topLanguages?.length" style="margin-top:12px">
-                <div style="font-weight:600;font-size:12px;margin-bottom:4px">主要语言</div>
-                <el-tag v-for="l in selectedNode.topLanguages" :key="l.name" size="small" style="margin:2px 4px 2px 0">{{ l.name }} ({{ l.count }})</el-tag>
+              <div v-if="history.length" class="history-clear-row">
+                <el-button size="small" type="danger" text @click="clearHistory">清空全部</el-button>
               </div>
-            </template>
-          </template>
-          <template v-if="!selectedNode && !selectedEdge || (selectedNode && detailTab==='insights')">
-            <div style="font-weight:600;font-size:13px;margin-bottom:8px">📊 趋势洞察</div>
-            <div v-for="card in insightCards" :key="card.title" style="margin-bottom:10px;padding:10px;background:#faf9f7;border-radius:8px">
-              <div style="font-size:12px;color:#909399;margin-bottom:6px">{{ card.title }}</div>
-              <el-tag v-for="n in card.items" :key="n" :type="card.tagType" size="small" style="margin:2px 4px">{{ n }}</el-tag>
-            </div>
-          </template>
-        </el-card>
-      </el-col>
-    </el-row>
-
-    <!-- 🍊 橙子智能分析面板 -->
-    <div style="margin-top:16px">
-      <!-- 步骤式表单卡片 -->
-      <div class="orange-form-card">
-        <!-- 标题栏 + 历史记录 -->
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-          <div>
-            <span style="font-weight:700;font-size:16px;color:#5d4037">🍊 智能分析</span>
-            <span style="font-size:12px;color:#bcaaa4;margin-left:8px">告诉我你的想法</span>
+            </el-popover>
           </div>
-          <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasAppToken">
-            <template #reference>
-              <el-button size="small" text>{{ history.length ? '📋 记录 ('+history.length+')' : '📋 记录' }}</el-button>
-            </template>
-            <div style="max-height:300px;overflow:auto">
-              <div v-if="!history.length" style="text-align:center;color:#bcaaa4;padding:20px">暂无记录</div>
-              <div v-for="(h,i) in history" :key="i" style="padding:6px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between;align-items:center" @click="loadHistory(h)">
-                <div style="flex:1;min-width:0;font-size:12px">
-                  <span style="color:#5d4037;font-weight:500">{{ (Array.isArray(h.topics) ? h.topics.join('、') : String(h.topics||'全部').replace(/[\[\"]/g,'')) }}</span>
-                  <span style="color:#bcaaa4;margin-left:6px;font-size:11px">{{ (h.time||'').substring(0,16) }}</span>
-                </div>
-                <el-button size="small" text type="danger" @click.stop="delHistory(i)">✕</el-button>
+          <!-- 步骤指示器 -->
+          <div class="steps-bar">
+            <div class="steps-track">
+              <div v-for="(s,i) in formSteps" :key="i" class="step-item" :class="{ active: i === currentStep, done: i < currentStep }" @click="i < currentStep && goStep(i)">
+                <div class="step-circle">{{ i < currentStep ? '✓' : s.icon }}</div>
+                <div class="step-label">{{ s.label }}</div>
               </div>
-            </div>
-            <div v-if="history.length" style="margin-top:8px;text-align:right">
-              <el-button size="small" type="danger" text @click="clearHistory">清空全部</el-button>
-            </div>
-          </el-popover>
-        </div>
-        <!-- 步骤指示器 -->
-        <div class="steps-bar">
-          <div class="steps-track">
-            <div v-for="(s,i) in formSteps" :key="i" class="step-item" :class="{ active: i === currentStep, done: i < currentStep }" @click="i < currentStep && goStep(i)">
-              <div class="step-circle">{{ i < currentStep ? '✓' : s.icon }}</div>
-              <div class="step-label">{{ s.label }}</div>
             </div>
           </div>
-        </div>
 
-        <!-- 单张卡片 - 带滚动橙子动画 -->
-        <div class="step-card-wrapper">
-          <Transition :name="animDirection">
-            <div class="step-card" :key="currentStep">
-              <div class="card-bg-orange"></div>
-            <!-- 步骤1: 方向 -->
-            <template v-if="currentStep === 0">
-              <div class="step-title">🎯 你对哪个技术方向感兴趣？</div>
-              <el-select v-model="profile.topics" multiple placeholder="选择方向（可多选）" size="large" style="width:100%" placement="bottom-start">
-                <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
-              </el-select>
-              <el-input v-model="profile.customTopics" placeholder="或输入自定义方向..." style="margin-top:12px" maxlength="200" />
-            </template>
-            <!-- 步骤2: 目的 -->
-            <template v-if="currentStep === 1">
-              <div class="step-title">💡 为什么想做这个方向的项目？</div>
-              <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" style="width:100%" placement="bottom-start">
-                <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
-              </el-select>
-              <el-input v-model="profile.customPurpose" placeholder="或输入自定义目的..." style="margin-top:12px" maxlength="200" />
-            </template>
-            <!-- 步骤3: 基础 -->
-            <template v-if="currentStep === 2">
-              <div class="step-title">📚 你的编程基础怎么样？</div>
-              <el-select v-model="profile.experience" placeholder="编程经验" size="large" style="width:100%" placement="bottom-start">
-                <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
-              </el-select>
-              <el-select v-model="profile.languages" multiple placeholder="掌握的语言（可多选）" size="large" style="width:100%;margin-top:12px">
-                <el-option v-for="t in langOptions" :key="t" :label="t" :value="t" />
-              </el-select>
-              <el-input v-model="profile.customLang" placeholder="或输入自定义..." style="margin-top:12px" maxlength="200" />
-            </template>
-            <!-- 步骤4: 时间 -->
-            <template v-if="currentStep === 3">
-              <div class="step-title">⏰ 你每周能投入多少时间？</div>
-              <el-select v-model="profile.timeCommitment" placeholder="选择时间投入" size="large" style="width:100%" placement="bottom-start">
-                <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
-              </el-select>
-              <el-input v-model="profile.customTime" placeholder="或输入自定义..." style="margin-top:12px" maxlength="200" />
-            </template>
+          <!-- 单张卡片 - 带滚动橙子动画 -->
+          <div class="step-card-wrapper">
+            <Transition :name="animDirection">
+              <div class="step-card" :key="currentStep">
+                <div class="card-bg-orange"></div>
+                <!-- 步骤1: 方向 -->
+                <template v-if="currentStep === 0">
+                  <div class="step-title">你对哪个技术方向感兴趣？</div>
+                  <el-select v-model="profile.topics" multiple placeholder="选择方向（可多选）" size="large" class="step-select" placement="bottom-start">
+                    <el-option v-for="t in topicOptions" :key="t" :label="t" :value="t" />
+                  </el-select>
+                  <el-input v-model="profile.customTopics" placeholder="或输入自定义方向..." class="step-input-mt" maxlength="200" />
+                </template>
+                <!-- 步骤2: 目的 -->
+                <template v-if="currentStep === 1">
+                  <div class="step-title">为什么想做这个方向的项目？</div>
+                  <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" class="step-select" placement="bottom-start">
+                    <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
+                  </el-select>
+                  <el-input v-model="profile.customPurpose" placeholder="或输入自定义目的..." class="step-input-mt" maxlength="200" />
+                </template>
+                <!-- 步骤3: 基础 -->
+                <template v-if="currentStep === 2">
+                  <div class="step-title">你的编程基础怎么样？</div>
+                  <el-select v-model="profile.experience" placeholder="编程经验" size="large" class="step-select" placement="bottom-start">
+                    <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
+                  </el-select>
+                  <el-select v-model="profile.languages" multiple placeholder="掌握的语言（可多选）" size="large" class="step-input-mt" placement="bottom-start">
+                    <el-option v-for="t in langOptions" :key="t" :label="t" :value="t" />
+                  </el-select>
+                  <el-input v-model="profile.customLang" placeholder="或输入自定义..." class="step-input-mt" maxlength="200" />
+                </template>
+                <!-- 步骤4: 时间 -->
+                <template v-if="currentStep === 3">
+                  <div class="step-title">你每周能投入多少时间？</div>
+                  <el-select v-model="profile.timeCommitment" placeholder="选择时间投入" size="large" class="step-select" placement="bottom-start">
+                    <el-option v-for="t in timeOptions" :key="t" :label="t" :value="t" />
+                  </el-select>
+                  <el-input v-model="profile.customTime" placeholder="或输入自定义..." class="step-input-mt" maxlength="200" />
+                </template>
+              </div>
+            </Transition>
           </div>
-          </Transition>
-        </div>
 
-        <!-- RAG 知识库开关 -->
-        <div v-if="currentStep === 3" style="display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 16px;background:#fafafa;border-radius:8px">
-          <el-switch v-model="profile.useRag" active-color="#e65100" />
-          <span style="font-size:13px;color:#606266">知识库增强</span>
-          <el-tooltip content="开启后会自动检索你上传的方法论文档和开源项目 README，让推荐结果包含更具体的学习路径、案例参考和面试建议" placement="top">
-            <el-icon style="color:#909399;cursor:help"><QuestionFilled /></el-icon>
-          </el-tooltip>
-        </div>
-
-        <!-- 底部按钮 -->
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
-          <button v-if="currentStep > 0" class="nav-btn prev" @click="goStep(currentStep-1)">← 上一步</button>
-          <div v-else />
-          <button v-if="currentStep < 3" class="orange-btn" @click="goStep(currentStep+1)">下一步 →</button>
-          <button v-else class="orange-btn squeeze-btn" @click="startJuicing" :disabled="analyzing">
-            <span v-if="!analyzing">🍊 开始榨汁分析</span>
-            <span v-else class="squeezing">🍊🍊🍊🍊 榨汁中...</span>
-          </button>
-        </div>
-        <div v-if="v2Error" style="color:#e65100;font-size:13px;margin-top:10px;padding:8px;background:#fff3e0;border-radius:8px">{{ v2Error }}</div>
-      </div>
-
-      </div>
-
-            </div>
-      </div>
-      <!-- 岗位浏览 -->
-      <div v-if="trendTab==='jobs'" style="min-height:300px">
-        <div style="display:flex;gap:12px;margin-bottom:12px;align-items:center">
-          <span style="font-size:13px;color:#909399;margin-right:4px">筛选：</span>
-          <el-select v-model="jobDirection" placeholder="选择方向" size="small" style="width:200px" @change="loadJobList">
-            <el-option v-for="d in jobDirections" :key="d" :label="d" :value="d" />
-          </el-select>
-          <el-select v-model="jobId" placeholder="选择岗位" size="small" style="width:300px" @change="loadJobDetail">
-            <el-option v-for="j in jobList" :key="j.id" :label="j.position" :value="j.id" />
-          </el-select>
-          <el-button size="small" type="primary" @click="$router.push('/submit-job')" style="margin-left:auto;background:#e65100;border-color:#e65100">📝 投稿岗位</el-button>
-        </div>
-        <div v-if="jobDetail" style="background:#faf9f7;border-radius:8px;padding:16px;line-height:1.8;font-size:14px;max-height:500px;overflow:auto" v-html="jobDetailHtml"></div>
-        <p v-if="jobDetail" style="color:#909399;font-size:11px;margin-top:8px;border-top:1px solid #eee;padding-top:8px">本页面岗位信息由平台注册用户自主上传分享，本平台仅提供信息存储空间服务，不对内容版权、真实性承担责任。如涉及侵权，请联系 1281748852@qq.com，我们将在 3 个工作日内下架对应内容。</p>
-        <el-empty v-if="jobDirection && !jobId && !jobDetail" description="请选择岗位" />
-        <el-empty v-if="!jobDirection" description="请选择方向查看岗位" />
-      </div>
-
-      <!-- 榨汁动画 -->
-      <div v-if="juicing" class="juice-animation">
-        <div class="juice-scene">
-          <span class="j-orange" style="animation-delay:.0s">🍊</span>
-          <span class="j-orange" style="animation-delay:.3s">🍊</span>
-          <span class="j-orange" style="animation-delay:.6s">🍊</span>
-          <span class="j-orange" style="animation-delay:.9s">🍊</span>
-          <span class="j-cup">🥤</span>
-        </div>
-        <div style="margin-top:16px;font-size:14px;color:#e65100;font-weight:600">{{ squeezeText }}</div>
-      </div>
-
-      <!-- 结果区 -->
-      <div v-if="v2Result" style="margin-top:16px">
-        <!-- 领域洞察 -->
-        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid #ff9800">
-          <div style="font-weight:700;font-size:15px;color:#5d4037;margin-bottom:12px">📊 领域洞察</div>
-          <el-row :gutter="12">
-            <el-col :span="8">
-              <div class="leaf-card">
-                <span class="leaf-dot">🍃</span>
-                <div class="leaf-label">发展趋势</div>
-                <div class="leaf-text">{{ v2Result.analysis?.trend || '-' }}</div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="leaf-card">
-                <span class="leaf-dot">🔮</span>
-                <div class="leaf-label">发展前景</div>
-                <div class="leaf-text">{{ v2Result.analysis?.prospect || '-' }}</div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="leaf-card">
-                <span class="leaf-dot">📈</span>
-                <div class="leaf-label">市场需求</div>
-                <div class="leaf-text">{{ v2Result.analysis?.demand || '-' }}</div>
-              </div>
-            </el-col>
-          </el-row>
-          <div v-if="v2Result.analysis?.summary" style="margin-top:12px;padding-top:12px;border-top:1px solid #ffe0b2;font-size:13px;color:#5d4037;line-height:1.6">
-            💬 {{ v2Result.analysis.summary }}
+          <!-- RAG 知识库开关 -->
+          <div v-if="currentStep === 3" class="rag-switch-row">
+            <el-switch v-model="profile.useRag" active-color="#c55312" />
+            <span class="rag-label">知识库增强</span>
+            <el-tooltip content="开启后会自动检索你上传的方法论文档和开源项目 README，让推荐结果包含更具体的学习路径、案例参考和面试建议" placement="top">
+              <el-icon class="help-icon"><QuestionFilled /></el-icon>
+            </el-tooltip>
           </div>
-        </div>
 
-        <!-- 推荐项目 -->
-        <div style="font-weight:700;font-size:15px;color:#5d4037;margin:20px 0 12px">🍊 为你推荐</div>
+          <!-- 底部按钮 -->
+          <div class="nav-btn-row">
+            <button v-if="currentStep > 0" class="nav-btn" @click="goStep(currentStep-1)">← 上一步</button>
+            <div v-else />
+            <button v-if="currentStep < 3" class="orange-btn" @click="goStep(currentStep+1)">下一步 →</button>
+            <button v-else class="orange-btn squeeze-btn" @click="startJuicing" :disabled="analyzing">
+              <span v-if="!analyzing">开始榨汁分析</span>
+              <span v-else class="squeezing">榨汁中...</span>
+            </button>
+          </div>
+          <div v-if="v2Error" class="error-box">{{ v2Error }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 岗位浏览 -->
+    <div v-if="trendTab==='jobs'" class="jobs-section">
+      <div class="jobs-filter-row">
+        <span class="filter-label">筛选：</span>
+        <el-select v-model="jobDirection" placeholder="选择方向" size="small" class="job-select-dir" @change="loadJobList">
+          <el-option v-for="d in jobDirections" :key="d" :label="d" :value="d" />
+        </el-select>
+        <el-select v-model="jobId" placeholder="选择岗位" size="small" class="job-select-pos" @change="loadJobDetail">
+          <el-option v-for="j in jobList" :key="j.id" :label="j.position" :value="j.id" />
+        </el-select>
+        <el-button size="small" type="primary" class="jobs-submit-btn" @click="$router.push('/submit-job')">投稿岗位</el-button>
+      </div>
+      <div v-if="jobDetail" class="job-detail-card" v-html="jobDetailHtml"></div>
+      <p v-if="jobDetail" class="job-disclaimer">本页面岗位信息由平台注册用户自主上传分享，本平台仅提供信息存储空间服务，不对内容版权、真实性承担责任。如涉及侵权，请联系 1281748852@qq.com，我们将在 3 个工作日内下架对应内容。</p>
+      <el-empty v-if="jobDirection && !jobId && !jobDetail" description="请选择岗位" />
+      <el-empty v-if="!jobDirection" description="请选择方向查看岗位" />
+    </div>
+
+    <!-- 榨汁动画 -->
+    <div v-if="juicing" class="juice-wrapper">
+      <div class="juice-scene">
+        <span class="j-orange" style="animation-delay:.0s">🍊</span>
+        <span class="j-orange" style="animation-delay:.3s">🍊</span>
+        <span class="j-orange" style="animation-delay:.6s">🍊</span>
+        <span class="j-orange" style="animation-delay:.9s">🍊</span>
+        <span class="j-cup">🥤</span>
+      </div>
+      <div class="juice-text-status">{{ squeezeText }}</div>
+    </div>
+
+    <!-- 结果区 -->
+    <div v-if="v2Result" class="result-section">
+      <!-- 领域洞察 -->
+      <div class="insights-result-card">
+        <div class="insights-result-title">领域洞察</div>
         <el-row :gutter="12">
-          <el-col :span="8" v-for="(r, i) in v2Result.recommendations" :key="i">
-            <div class="rec-card" style="margin-bottom:14px;height:100%">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <span class="rec-num">🍊 #{{ i+1 }}</span>
-              <span style="font-weight:700;font-size:15px;color:#5d4037">{{ r.name }}</span>
+          <el-col :span="8">
+            <div class="leaf-card">
+              <span class="leaf-icon">🍃</span>
+              <div class="leaf-label">发展趋势</div>
+              <div class="leaf-text">{{ v2Result.analysis?.trend || '-' }}</div>
             </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <el-tag :type="(r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger')||'info'" size="small" effect="dark">{{ r.difficulty || '未知' }}</el-tag>
-              <span style="font-size:12px;color:#e65100;font-weight:700">{{ r.score }}分</span>
+          </el-col>
+          <el-col :span="8">
+            <div class="leaf-card">
+              <span class="leaf-icon">🔮</span>
+              <div class="leaf-label">发展前景</div>
+              <div class="leaf-text">{{ v2Result.analysis?.prospect || '-' }}</div>
             </div>
-          </div>
-          <p style="font-size:13px;color:#6b6b6b;margin:0 0 10px;line-height:1.6">{{ r.description }}</p>
-          <div style="margin-top:10px;font-size:13px;line-height:1.8">
-            <p v-if="r.vibeCodingReason" style="background:#fff8e1;padding:8px 10px;border-radius:8px;font-size:12px">🤖 <b>Vibe Coding：</b>{{ r.vibeCodingReason }}</p>
-            <p style="margin-top:6px"><span style="color:#e65100">●</span> <b>推荐：</b>{{ r.recommendReason }}</p>
-            <p><span style="color:#ff9800">●</span> <b>前置：</b>{{ r.prerequisites }}</p>
-            <p v-if="r.references?.length">
-              <span style="color:#81c784">●</span> <b>参考：</b>
-              <span v-for="(ref,j) in r.references" :key="j">
-                <template v-if="ref.url"><a :href="ref.url" target="_blank" style="color:#e65100">{{ ref.name }}</a></template>
-                <template v-else>{{ ref }}</template><span v-if="j < r.references.length-1">、</span>
-              </span>
-            </p>
-          </div>
-          <button class="import-plan-btn" @click="importToPlan(r)">📋 一键导入方案设计</button>
-        </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="leaf-card">
+              <span class="leaf-icon">📈</span>
+              <div class="leaf-label">市场需求</div>
+              <div class="leaf-text">{{ v2Result.analysis?.demand || '-' }}</div>
+            </div>
           </el-col>
         </el-row>
-
-        <!-- 学习路径 -->
-        <div v-if="v2Result.learning" style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid #81c784;margin-top:12px">
-          <div style="font-weight:700;font-size:15px;color:#5d4037;margin-bottom:12px">📖 学习路径</div>
-          <div v-if="v2Result.learning.steps?.length" style="display:flex;align-items:center;gap:0;margin-bottom:12px;flex-wrap:wrap">
-            <template v-for="(s,j) in v2Result.learning.steps" :key="j">
-              <div class="step-dot">{{ s }}</div>
-              <span v-if="j < v2Result.learning.steps.length-1" style="color:#e65100;font-size:18px;margin:0 2px">→</span>
-            </template>
-          </div>
-          <div v-if="v2Result.learning.timeline" style="font-size:13px;color:#5d4037;margin-bottom:4px"><b>⏱ 预计：</b>{{ v2Result.learning.timeline }}</div>
-          <div v-if="v2Result.learning.tips" style="font-size:13px;color:#6b6b6b;line-height:1.6">{{ v2Result.learning.tips }}</div>
+        <div v-if="v2Result.analysis?.summary" class="insights-summary">
+          {{ v2Result.analysis.summary }}
         </div>
       </div>
 
-      <!-- V1 自由提问 -->
-      <div v-if="trendTab==='v1'" style="margin-top:16px">
-        <el-input v-model="aiQuestion" placeholder="自由提问，基于知识库和GitHub数据回答..." size="small" @keyup.enter="askAI">
-          <template #append><el-button :loading="aiLoading" @click="askAI" style="background:#e65100;border-color:#e65100;color:#fff">发送</el-button></template>
-        </el-input>
-        <div v-if="aiReply" style="background:#faf9f7;border-radius:8px;padding:12px;max-height:400px;overflow:auto;line-height:1.8;font-size:13px;margin-top:8px" v-html="aiReplyHtml"></div>
-        <div v-if="aiError" style="color:#F56C6C;font-size:13px;margin-top:4px">{{ aiError }}</div>
-        <p v-if="aiReply" style="color:#909399;font-size:11px;margin-top:8px;border-top:1px solid #eee;padding-top:8px">以上分析由 AI 生成，仅供参考。每次提问消耗 50 segments。</p>
-      </div>
+      <!-- 推荐项目 -->
+      <div class="rec-section-title">为你推荐</div>
+      <el-row :gutter="12">
+        <el-col :span="8" v-for="(r, i) in v2Result.recommendations" :key="i">
+          <div class="rec-card">
+            <div class="rec-header">
+              <div class="rec-name-area">
+                <span class="rec-num">#{{ i+1 }}</span>
+                <span class="rec-name">{{ r.name }}</span>
+              </div>
+              <div class="rec-meta-area">
+                <el-tag :type="(r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger')||'info'" size="small" effect="dark">{{ r.difficulty || '未知' }}</el-tag>
+                <span class="rec-score">{{ r.score }}分</span>
+              </div>
+            </div>
+            <p class="rec-desc">{{ r.description }}</p>
+            <div class="rec-details">
+              <p v-if="r.vibeCodingReason" class="rec-vibe-box"><b>Vibe Coding：</b>{{ r.vibeCodingReason }}</p>
+              <p class="rec-bullet"><span class="bullet-orange">●</span> <b>推荐：</b>{{ r.recommendReason }}</p>
+              <p class="rec-bullet"><span class="bullet-amber">●</span> <b>前置：</b>{{ r.prerequisites }}</p>
+              <p v-if="r.references?.length" class="rec-bullet">
+                <span class="bullet-green">●</span> <b>参考：</b>
+                <span v-for="(ref,j) in r.references" :key="j">
+                  <template v-if="ref.url"><a :href="ref.url" target="_blank" class="ref-link">{{ ref.name }}</a></template>
+                  <template v-else>{{ ref }}</template><span v-if="j < r.references.length-1">、</span>
+                </span>
+              </p>
+            </div>
+            <button class="import-plan-btn" @click="importToPlan(r)">一键导入方案设计</button>
+          </div>
+        </el-col>
+      </el-row>
 
+      <!-- 学习路径 -->
+      <div v-if="v2Result.learning" class="learning-card">
+        <div class="insights-result-title">学习路径</div>
+        <div v-if="v2Result.learning.steps?.length" class="learning-steps">
+          <template v-for="(s,j) in v2Result.learning.steps" :key="j">
+            <div class="step-dot">{{ s }}</div>
+            <span v-if="j < v2Result.learning.steps.length-1" class="step-arrow">→</span>
+          </template>
+        </div>
+        <div v-if="v2Result.learning.timeline" class="learning-timeline"><b>预计：</b>{{ v2Result.learning.timeline }}</div>
+        <div v-if="v2Result.learning.tips" class="learning-tips">{{ v2Result.learning.tips }}</div>
+      </div>
+    </div>
+
+    <!-- V1 自由提问 -->
+    <div v-if="trendTab==='v1'" class="v1-section">
+      <el-input v-model="aiQuestion" placeholder="自由提问，基于知识库和GitHub数据回答..." size="small" @keyup.enter="askAI">
+        <template #append><el-button :loading="aiLoading" @click="askAI" class="send-btn">发送</el-button></template>
+      </el-input>
+      <div v-if="aiReply" class="v1-reply" v-html="aiReplyHtml"></div>
+      <div v-if="aiError" class="v1-error">{{ aiError }}</div>
+      <p v-if="aiReply" class="v1-disclaimer">以上分析由 AI 生成，仅供参考。每次提问消耗 50 segments。</p>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -712,107 +717,929 @@ onUnmounted(() => { chart?.dispose(); chart = null })
 </script>
 
 <style scoped>
-/* 🍊 步骤表单 */
-.orange-form-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 2px 16px rgba(230,81,0,.08); }
-.steps-bar { margin-bottom: 20px; }
-.steps-track { display: flex; justify-content: center; gap: 0; }
-.step-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative; cursor: default; }
-.step-item + .step-item::before { content: ''; position: absolute; top: 16px; left: -50%; width: 100%; height: 2px; background: #ffe0b2; z-index: 0; }
-.step-item.active + .step-item::before, .step-item.done + .step-item::before { background: #e65100; }
-.step-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; background: #fff3e0; color: #e65100; border: 2px solid #ffe0b2; position: relative; z-index: 1; transition: all .3s; }
-.step-item.active .step-circle { background: #e65100; color: #fff; border-color: #e65100; box-shadow: 0 0 8px rgba(230,81,0,.4); }
-.step-item.done .step-circle { background: #e65100; color: #fff; border-color: #e65100; }
-.step-label { font-size: 12px; color: #bcaaa4; transition: color .3s; }
-.step-item.active .step-label, .step-item.done .step-label { color: #5d4037; font-weight: 600; }
+/* ============================================================
+   PIXEL-MINIMALIST DESIGN SYSTEM — TrendAnalysis
+   ============================================================ */
 
-.step-card-wrapper { overflow: hidden; }
-.step-card { background: #fffdf5; border-radius: 16px; padding: 28px 24px; min-height: 180px; position: relative; overflow: hidden; border: 1px solid #ffe0b2; }
-.card-bg-orange { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 120px; height: 120px; background: radial-gradient(circle at 35% 35%, #fff3e0, #ffe0b2 70%); border-radius: 45% 55% 50% 50%; opacity: .4; pointer-events: none; }
-.card-bg-orange::after { content: ''; position: absolute; top: -8px; left: 40%; width: 14px; height: 8px; background: #a5d6a7; border-radius: 50% 50% 0 0; }
-.step-title { font-size: 16px; font-weight: 700; color: #5d4037; margin-bottom: 16px; }
-.anim-in { animation: slideIn .35s ease-out; }
-@keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+/* --- BASE & TYPOGRAPHY --- */
+/* Compact Head */
+.compact-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid rgba(254, 215, 170, .76);
+  border-radius: 28px;
+  background: rgba(255,255,255,.86);
+  box-shadow: var(--shadow-card-lg);
+  flex-wrap: wrap;
+}
+.compact-head h2 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(22px, 3.5vw, 32px);
+  line-height: 1.08;
+  letter-spacing: -.05em;
+}
+.compact-head p {
+  max-width: 680px;
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 13px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--border-orange);
+  border-radius: 999px;
+  color: var(--brand-strong);
+  background: #fffaf5;
+  font-size: 12px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+}
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+.section-label {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #3a302a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-/* 🍊 橙子滚动 - Vue Transition */
-.step-card-wrapper { position: relative; }
-.step-card { transition: none; }
+/* --- SPACING UTILITIES --- */
+.mt-8  { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mr-6  { margin-right: 6px; }
+.ml-6  { margin-left: 6px; }
+.mb-8  { margin-bottom: 8px; }
+
+/* --- TEXT HELPERS --- */
+.text-muted {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #9f9890;
+}
+.card-title-text {
+  font-family: "Courier New", "SimHei", monospace;
+  font-weight: 600;
+  color: #3a302a;
+}
+.help-icon {
+  margin-left: 6px;
+  color: #9f9890;
+  cursor: help;
+}
+
+/* --- TABS --- */
+.trend-tabs {
+  margin-bottom: 12px;
+}
+.trend-tabs :deep(.el-tabs__header) {
+  margin: 0;
+}
+.trend-tabs :deep(.el-tabs__nav-wrap::after) {
+  height: 1px;
+  background-color: var(--border-orange);
+}
+.trend-tabs :deep(.el-tabs__item) {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  height: 36px;
+  line-height: 36px;
+}
+.trend-tabs :deep(.el-tabs__item.is-active) {
+  color: var(--brand-strong);
+}
+.trend-tabs :deep(.el-tabs__active-bar) {
+  height: 2px;
+  background-color: var(--brand);
+}
+
+/* --- CARDS --- */
+.graph-card {
+  border: 1px solid var(--border-orange);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+}
+.detail-card {
+  border: 1px solid var(--border-orange);
+  border-radius: 20px;
+  height: 556px;
+  overflow: auto;
+  box-shadow: var(--shadow-card);
+}
+
+/* --- CARD INTERNALS --- */
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.chart-container {
+  width: 100%;
+  height: 500px;
+}
+.detail-section-title {
+  margin: 0 0 4px;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3a302a;
+}
+.detail-text {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #3a302a;
+}
+.compact-divider {
+  margin: 12px 0;
+}
+.compact-divider-sm {
+  margin: 8px 0;
+}
+.tag-item {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 0;
+  margin: 2px 4px 2px 0;
+}
+.summary-box {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 12px;
+  color: #3a302a;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+}
+.insight-box {
+  margin-top: 8px;
+  padding: 8px;
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 12px;
+  color: #c55312;
+  line-height: 1.6;
+}
+.delta-row {
+  margin-top: 8px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+}
+.delta-up {
+  color: #67C23A;
+  font-weight: 700;
+}
+.delta-down {
+  color: #F56C6C;
+  font-weight: 700;
+}
+
+/* --- REPO ITEMS --- */
+.repo-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #f0ece6;
+  font-size: 12px;
+}
+.repo-link {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #f37021;
+  font-weight: 500;
+  text-decoration: none;
+}
+.repo-link:hover {
+  text-decoration: underline;
+}
+.repo-stars {
+  font-family: "Courier New", "SimHei", monospace;
+  color: #c55312;
+  float: right;
+  font-size: 12px;
+}
+.repo-desc {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 11px;
+  color: #9f9890;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- INSIGHT CARDS --- */
+.insight-card {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+}
+.insight-card-title {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #9f9890;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* --- FORM SECTION --- */
+.orange-form-card {
+  background: #ffffff;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 24px;
+}
+.form-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.form-title {
+  font-family: "Courier New", "SimHei", monospace;
+  font-weight: 700;
+  font-size: 16px;
+  color: #3a302a;
+  letter-spacing: 1px;
+}
+.form-title-sub {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 12px;
+  color: #bfb8b0;
+  margin-left: 8px;
+}
+
+/* --- HISTORY POPOVER --- */
+.history-popover {
+  max-height: 300px;
+  overflow: auto;
+}
+.history-empty {
+  text-align: center;
+  color: #bfb8b0;
+  padding: 20px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+.history-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #f0ece6;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.history-item-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+}
+.history-topic {
+  font-family: "Courier New", "SimHei", monospace;
+  color: #3a302a;
+  font-weight: 500;
+}
+.history-time {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #bfb8b0;
+  margin-left: 6px;
+  font-size: 11px;
+}
+.history-clear-row {
+  margin-top: 8px;
+  text-align: right;
+}
+
+/* --- STEPS --- */
+.steps-bar {
+  margin-bottom: 20px;
+}
+.steps-track {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  position: relative;
+  cursor: default;
+}
+.step-item + .step-item::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: #f0ece6;
+  z-index: 0;
+}
+.step-item.active + .step-item::before,
+.step-item.done + .step-item::before {
+  background: #f37021;
+}
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 14px;
+  background: #faf9f7;
+  color: #f37021;
+  border: 2px solid #e5d9c3;
+  position: relative;
+  z-index: 1;
+  transition: all .3s;
+}
+.step-item.active .step-circle {
+  background: #f37021;
+  color: #fff;
+  border-color: #f37021;
+}
+.step-item.done .step-circle {
+  background: #f37021;
+  color: #fff;
+  border-color: #f37021;
+}
+.step-label {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #bfb8b0;
+  transition: color .3s;
+}
+.step-item.active .step-label,
+.step-item.done .step-label {
+  color: #3a302a;
+  font-weight: 700;
+}
+
+.step-card-wrapper {
+  overflow: hidden;
+}
+.step-card {
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 28px 24px;
+  min-height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+.card-bg-orange {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 35% 35%, #faf9f7, #e5d9c3 70%);
+  border-radius: 45% 55% 50% 50%;
+  opacity: .4;
+  pointer-events: none;
+}
+.card-bg-orange::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 40%;
+  width: 14px;
+  height: 8px;
+  background: #a5d6a7;
+  border-radius: 50% 50% 0 0;
+}
+.step-title {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3a302a;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+.step-select {
+  width: 100%;
+}
+.step-input-mt {
+  margin-top: 12px;
+}
+
+/* --- TRANSITIONS --- */
+.step-card-wrapper {
+  position: relative;
+}
+.step-card {
+  transition: none;
+}
 
 /* 下一步: 旧卡向左滚走 */
-.slide-right-leave-active { animation: slideOutL .35s ease-in forwards; position: absolute; width: 100%; top: 0; left: 0; }
+.slide-right-leave-active {
+  animation: slideOutL .35s ease-in forwards;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
 @keyframes slideOutL {
   from { opacity: 1; transform: translateX(0); }
   to { opacity: 0; transform: translateX(-80px); }
 }
-.slide-right-leave-active .card-bg-orange { animation: rollOutL .35s ease-in forwards; }
+.slide-right-leave-active .card-bg-orange {
+  animation: rollOutL .35s ease-in forwards;
+}
 @keyframes rollOutL {
   from { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
   to { opacity: 0; transform: translate(calc(-50% - 200px),-50%) rotate(-200deg); }
 }
 
 /* 下一步: 新卡从右边滚入 */
-.slide-right-enter-active { animation: slideInR .35s ease-out forwards; }
+.slide-right-enter-active {
+  animation: slideInR .35s ease-out forwards;
+}
 @keyframes slideInR {
   from { opacity: 0; transform: translateX(80px); }
   to { opacity: 1; transform: translateX(0); }
 }
-.slide-right-enter-active .card-bg-orange { animation: rollInR .35s ease-out forwards; }
+.slide-right-enter-active .card-bg-orange {
+  animation: rollInR .35s ease-out forwards;
+}
 @keyframes rollInR {
   from { opacity: 0; transform: translate(calc(-50% + 200px),-50%) rotate(200deg); }
   to { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
 }
 
 /* 上一步: 旧卡向右滚走 */
-.slide-left-leave-active { animation: slideOutR .35s ease-in forwards; position: absolute; width: 100%; top: 0; left: 0; }
+.slide-left-leave-active {
+  animation: slideOutR .35s ease-in forwards;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
 @keyframes slideOutR {
   from { opacity: 1; transform: translateX(0); }
   to { opacity: 0; transform: translateX(80px); }
 }
-.slide-left-leave-active .card-bg-orange { animation: rollOutR .35s ease-in forwards; }
+.slide-left-leave-active .card-bg-orange {
+  animation: rollOutR .35s ease-in forwards;
+}
 @keyframes rollOutR {
   from { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
   to { opacity: 0; transform: translate(calc(-50% + 200px),-50%) rotate(200deg); }
 }
 
 /* 上一步: 新卡从左边滚入 */
-.slide-left-enter-active { animation: slideInL .35s ease-out forwards; }
+.slide-left-enter-active {
+  animation: slideInL .35s ease-out forwards;
+}
 @keyframes slideInL {
   from { opacity: 0; transform: translateX(-80px); }
   to { opacity: 1; transform: translateX(0); }
 }
-.slide-left-enter-active .card-bg-orange { animation: rollInL .35s ease-out forwards; }
+.slide-left-enter-active .card-bg-orange {
+  animation: rollInL .35s ease-out forwards;
+}
 @keyframes rollInL {
   from { opacity: 0; transform: translate(calc(-50% - 200px),-50%) rotate(-200deg); }
   to { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
 }
 
-/* 按钮 */
-.orange-btn { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; border: none; border-radius: 24px; padding: 10px 28px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all .2s; box-shadow: 0 3px 12px rgba(230,81,0,.25); }
-.orange-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(230,81,0,.35); }
-.orange-btn:disabled { opacity: .6; cursor: not-allowed; }
-.squeeze-btn { padding: 14px 36px; font-size: 16px; }
-.nav-btn { background: #fff; color: #e65100; border: 1px solid #ffe0b2; border-radius: 24px; padding: 10px 20px; font-size: 14px; cursor: pointer; transition: all .2s; }
-.nav-btn:hover { background: #fff3e0; }
-.squeezing { animation: squeeze 1s ease-in-out infinite; display: inline-block; }
-@keyframes squeeze { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+/* --- RAG SWITCH --- */
+.rag-switch-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+}
+.rag-label {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #3a302a;
+}
 
-/* 结果卡片 */
-.leaf-card { background: #fffdf7; border-radius: 12px; padding: 14px; border: 1px solid #ffe0b2; height: 100%; }
-.leaf-dot { font-size: 18px; display: block; margin-bottom: 6px; }
-.leaf-label { font-size: 11px; color: #bcaaa4; margin-bottom: 2px; }
-.leaf-text { font-size: 13px; color: #5d4037; font-weight: 500; line-height: 1.5; }
+/* --- BUTTONS --- */
+.nav-btn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+.orange-btn {
+  background: #f37021;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 10px 28px;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  box-shadow: 0 3px 0 rgba(197,83,18,0.15);
+  letter-spacing: 0.5px;
+}
+.orange-btn:hover {
+  background: #c55312;
+}
+.orange-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+.squeeze-btn {
+  padding: 14px 36px;
+  font-size: 16px;
+}
+.nav-btn {
+  background: #ffffff;
+  color: #f37021;
+  border: 2px solid #e5d9c3;
+  border-radius: 0;
+  padding: 10px 20px;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+}
+.nav-btn:hover {
+  background: #faf9f7;
+  border-color: #f37021;
+}
+.squeezing {
+  animation: squeeze 1s ease-in-out infinite;
+  display: inline-block;
+}
+@keyframes squeeze {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
 
-.rec-card { background: #fff; border-radius: 16px; padding: 18px; box-shadow: 0 2px 12px rgba(0,0,0,.04); border-left: 4px solid #e65100; transition: transform .15s; }
-.rec-card:hover { transform: translateY(-2px); }
-.rec-num { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; }
+/* --- ERROR --- */
+.error-box {
+  color: #c55312;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  margin-top: 10px;
+  padding: 8px;
+  background: #faf9f7;
+  border: 2px solid #e5d9c3;
+  border-radius: 2px;
+}
 
-.juice-glass { position: relative; width: 36px; height: 60px; background: #fff8f0; border: 2px solid #ffe0b2; border-radius: 8px 8px 18px 18px; overflow: hidden; }
-.juice-liquid { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(0deg, #e65100, #ff9800 40%, #ffcc80 100%); border-radius: 0 0 16px 16px; transition: height .8s ease-out; display: flex; align-items: center; justify-content: center; min-height: 0; }
-.juice-liquid::after { content: ''; position: absolute; top: 4px; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.25); border-radius: 50%; }
-.juice-straw { position: absolute; top: -18px; left: 50%; transform: translateX(-50%) rotate(-15deg); width: 4px; height: 26px; background: linear-gradient(180deg, #ff9800, #e65100); border-radius: 2px; }
-.juice-score { color: #fff; font-size: 14px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,.4); position: relative; z-index: 1; }
-.juice-score-outside { font-size: 12px; color: #e65100; font-weight: 700; }
+/* --- JOBS SECTION --- */
+.jobs-section {
+  min-height: 300px;
+}
+.jobs-filter-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+.filter-label {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 13px;
+  color: #9f9890;
+  margin-right: 4px;
+}
+.job-select-dir {
+  width: 200px;
+}
+.job-select-pos {
+  width: 300px;
+}
+.jobs-submit-btn {
+  margin-left: auto;
+  background: #f37021;
+  border-color: #f37021;
+  font-family: "Courier New", "SimHei", monospace;
+  border-radius: 0;
+}
+.jobs-submit-btn:hover {
+  background: #c55312;
+  border-color: #c55312;
+}
+.job-detail-card {
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 16px;
+  line-height: 1.8;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 14px;
+  max-height: 500px;
+  overflow: auto;
+}
+.job-disclaimer {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #9f9890;
+  font-size: 11px;
+  margin-top: 8px;
+  border-top: 1px solid #f0ece6;
+  padding-top: 8px;
+}
 
-.step-dot { background: linear-gradient(135deg, #fff, #fff3e0); border: 1px solid #ffe0b2; border-radius: 20px; padding: 6px 14px; font-size: 12px; color: #5d4037; white-space: nowrap; }
-.import-plan-btn { width: 100%; margin-top: 10px; padding: 8px 12px; font-size: 12px; background: linear-gradient(135deg, #fff, #fff3e0); color: #e65100; border: 1px solid #ffe0b2; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all .15s; }
-.import-plan-btn:hover { background: #fff3e0; border-color: #e65100; }
+/* --- JUICE ANIMATION --- */
+.juice-wrapper {
+  text-align: center;
+  padding: 40px;
+}
+.juice-text-status {
+  margin-top: 16px;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 14px;
+  color: #f37021;
+  font-weight: 600;
+}
+
+/* --- RESULTS --- */
+.result-section {
+  margin-top: 16px;
+}
+.insights-result-card {
+  background: #ffffff;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 20px;
+  border-left: 4px solid #f37021;
+}
+.insights-result-title {
+  font-family: "Courier New", "SimHei", monospace;
+  font-weight: 700;
+  font-size: 15px;
+  color: #3a302a;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.insights-summary {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0ece6;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #3a302a;
+  line-height: 1.6;
+}
+.rec-section-title {
+  font-family: "Courier New", "SimHei", monospace;
+  font-weight: 700;
+  font-size: 15px;
+  color: #3a302a;
+  margin: 20px 0 12px;
+  letter-spacing: 1px;
+}
+
+/* --- LEAF CARDS --- */
+.leaf-card {
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 14px;
+  height: 100%;
+}
+.leaf-icon {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 6px;
+}
+.leaf-label {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #bfb8b0;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+.leaf-text {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #3a302a;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* --- RECOMMENDATION CARDS --- */
+.rec-card {
+  background: #ffffff;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 18px;
+  border-left: 4px solid #f37021;
+  margin-bottom: 14px;
+  height: 100%;
+}
+.rec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.rec-name-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rec-num {
+  background: #f37021;
+  color: #fff;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 0;
+}
+.rec-name {
+  font-family: "Courier New", "SimHei", monospace;
+  font-weight: 700;
+  font-size: 15px;
+  color: #3a302a;
+}
+.rec-meta-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rec-score {
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 12px;
+  color: #f37021;
+  font-weight: 700;
+}
+.rec-desc {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #3a302a;
+  margin: 0 0 10px;
+  line-height: 1.6;
+}
+.rec-details {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.rec-vibe-box {
+  background: #faf9f7;
+  padding: 8px 10px;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 12px;
+}
+.rec-bullet {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  margin-top: 6px;
+}
+.bullet-orange {
+  color: #f37021;
+}
+.bullet-amber {
+  color: #f37021;
+}
+.bullet-green {
+  color: #81c784;
+}
+.ref-link {
+  color: #f37021;
+  text-decoration: none;
+}
+.ref-link:hover {
+  text-decoration: underline;
+}
+
+/* --- LEARNING PATH --- */
+.learning-card {
+  background: #ffffff;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 20px;
+  border-left: 4px solid #81c784;
+  margin-top: 12px;
+}
+.learning-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.step-dot {
+  background: #ffffff;
+  border: 2px solid #e5d9c3;
+  border-radius: 0;
+  padding: 6px 14px;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 12px;
+  color: #3a302a;
+  white-space: nowrap;
+}
+.step-arrow {
+  color: #f37021;
+  font-size: 18px;
+  margin: 0 2px;
+}
+.learning-timeline {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #3a302a;
+  margin-bottom: 4px;
+}
+.learning-tips {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #3a302a;
+  line-height: 1.6;
+}
+
+/* --- V1 FREE QUESTION --- */
+.v1-section {
+  margin-top: 16px;
+}
+.send-btn {
+  background: #f37021;
+  border-color: #f37021;
+  color: #fff;
+  font-family: "Courier New", "SimHei", monospace;
+  border-radius: 0;
+}
+.send-btn:hover {
+  background: #c55312;
+  border-color: #c55312;
+}
+.v1-reply {
+  background: #faf9f7;
+  border: 2px solid #f0ece6;
+  border-radius: 2px;
+  padding: 12px;
+  max-height: 400px;
+  overflow: auto;
+  line-height: 1.8;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.v1-error {
+  color: #F56C6C;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  margin-top: 4px;
+}
+.v1-disclaimer {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #9f9890;
+  font-size: 11px;
+  margin-top: 8px;
+  border-top: 1px solid #f0ece6;
+  padding-top: 8px;
+}
+
+.import-plan-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  background: #ffffff;
+  color: #f37021;
+  border: 2px solid #e5d9c3;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all .15s;
+  letter-spacing: 0.5px;
+}
+.import-plan-btn:hover {
+  background: #faf9f7;
+  border-color: #f37021;
+}
 </style>

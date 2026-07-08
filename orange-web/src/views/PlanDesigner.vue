@@ -1,20 +1,21 @@
 <template>
   <div class="plan-app">
     <div class="plan-main">
-      <div class="intro-header">
-        <span class="intro-icon">🍊</span>
-        <div style="flex:1">
-          <h3 style="margin:0;color:#5d4037">方案设计</h3>
-          <p style="margin:4px 0 0;font-size:13px;color:#bcaaa4">AI 驱动六阶段项目规划，从想法到岗位匹配</p>
+      <!-- Compact Head -->
+      <div class="compact-head">
+        <div>
+          <span class="eyebrow">方案设计</span>
+          <h2>从一个想法，生成六阶段项目方案。</h2>
+          <p>AI 驱动项目规划：想法、需求、成功标准、风险、任务、岗位匹配。</p>
         </div>
         <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasToken">
-          <template #reference><el-button size="small" text>📋 记录 ({{ planHistory.length }})</el-button></template>
-          <div style="max-height:300px;overflow:auto">
-            <div v-if="!planHistory.length" style="text-align:center;color:#bcaaa4;padding:20px">暂无记录</div>
-            <div v-for="(h,i) in planHistory" :key="i" style="padding:8px 0;border-bottom:1px solid #f5f2ee;cursor:pointer;display:flex;justify-content:space-between" @click="loadPlan(h)">
-              <div style="flex:1;min-width:0;font-size:12px">
-                <span style="color:#5d4037;font-weight:500">{{ (h.summary||'').substring(0,40) }}</span>
-                <span style="color:#bcaaa4;margin-left:6px;font-size:11px">{{ (h.createTime||'').substring(0,16) }}</span>
+          <template #reference><el-button size="small">记录 ({{ planHistory.length }})</el-button></template>
+          <div class="history-popover">
+            <div v-if="!planHistory.length" class="history-empty">暂无记录</div>
+            <div v-for="(h,i) in planHistory" :key="i" class="history-item" @click="loadPlan(h)">
+              <div class="history-item-text">
+                <span class="history-summary">{{ (h.summary||'').substring(0,40) }}</span>
+                <span class="history-time">{{ (h.createTime||'').substring(0,16) }}</span>
               </div>
               <el-button size="small" text type="danger" @click.stop="delPlanHistory(i,h.id)">✕</el-button>
             </div>
@@ -36,62 +37,63 @@
         </div>
       </div>
 
-      <div v-if="allDone && hasToken" style="text-align:center;margin-bottom:8px">
-        <button class="orange-btn save-btn" @click="savePlan">💾 保存方案到我的记录</button>
+      <div v-if="allDone && hasToken" class="save-row">
+        <button class="orange-btn save-btn" @click="savePlan">保存方案到我的记录</button>
       </div>
 
       <div class="phase-content">
-          <div class="phase-title">{{ phases[currentPhase-1]?.title }}</div>
-          <div class="phase-subtitle">{{ phaseSubtitles[currentPhase-1] }}</div>
+        <div class="phase-title">{{ phases[currentPhase-1]?.title }}</div>
+        <div class="phase-subtitle">{{ phaseSubtitles[currentPhase-1] }}</div>
 
-          <!-- Phase 0 输入区 -->
-          <div v-if="currentPhase === 1 && !phases[0].done" class="card">
-            <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." :autosize="{minRows:4,maxRows:12}" />
-            <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." style="margin-top:12px" :autosize="{minRows:2,maxRows:8}" />
-            <div style="margin-top:12px;display:flex;align-items:center;gap:12px">
-              <span style="font-size:13px;color:#5d4037;font-weight:600">生成模式</span>
-              <el-radio-group v-model="planMode" size="small">
-                <el-radio-button value="full">📋 详细方案</el-radio-button>
-                <el-radio-button value="lite">⚡ 精简方案</el-radio-button>
-              </el-radio-group>
-            </div>
-            <button class="orange-btn" @click="generatePhase(1)" :disabled="!summary.trim()" style="margin-top:16px">🍊 确认想法</button>
+        <!-- Phase 0 输入区 -->
+        <div v-if="currentPhase === 1 && !phases[0].done" class="card">
+          <el-input v-model="summary" type="textarea" :rows="4" placeholder="描述你的项目想法，越详细越好..." :autosize="{minRows:4,maxRows:12}" />
+          <el-input v-model="extra" type="textarea" :rows="2" placeholder="补充信息（可选）：技术偏好、时间限制、特殊需求..." class="mt-12" :autosize="{minRows:2,maxRows:8}" />
+          <div class="mode-select-row">
+            <span class="mode-label">生成模式</span>
+            <el-radio-group v-model="planMode" size="small">
+              <el-radio-button value="full">详细方案</el-radio-button>
+              <el-radio-button value="lite">精简方案</el-radio-button>
+            </el-radio-group>
           </div>
-          <!-- 未生成状态 -->
-          <div v-else-if="!phases[currentPhase-1]?.done && !phases[currentPhase-1]?.generating" class="card">
-            <p style="color:#909399;margin:0">点击下方按钮，AI 将基于项目描述生成此阶段的分析内容。</p>
-            <button class="orange-btn" @click="generatePhase(currentPhase)" style="margin-top:16px">🍊 生成本阶段</button>
-          </div>
+          <button class="orange-btn mt-16" @click="generatePhase(1)" :disabled="!summary.trim()">确认想法</button>
+        </div>
 
-          <!-- 生成中 -->
-          <div v-if="phases[currentPhase-1]?.generating" class="card" style="text-align:center;padding:40px">
-            <span class="generating-spinner">🍊</span>
-            <p style="color:#e65100;margin-top:8px">AI 正在分析和生成...</p>
-          </div>
+        <!-- 未生成状态 -->
+        <div v-else-if="!phases[currentPhase-1]?.done && !phases[currentPhase-1]?.generating" class="card">
+          <p class="card-placeholder">点击下方按钮，AI 将基于项目描述生成此阶段的分析内容。</p>
+          <button class="orange-btn mt-16" @click="generatePhase(currentPhase)">生成本阶段</button>
+        </div>
 
-          <!-- 已生成 -->
-          <div v-if="phases[currentPhase-1]?.done" class="card result-card">
-            <div v-if="!editing" v-html="renderedContent" style="line-height:1.8;font-size:14px" @dblclick="startEdit"></div>
-            <el-input v-else v-model="editContent" type="textarea" :rows="12" style="margin-bottom:12px" />
-            <div style="margin-top:16px;display:flex;gap:8px">
-              <template v-if="!editing">
-                <button class="orange-btn" @click="generatePhase(currentPhase)">🔄 重新生成</button>
-                <button class="nav-btn" @click="startEdit">✏️ 编辑</button>
-                <button v-if="currentPhase < 6" class="nav-btn next" @click="switchPhase(currentPhase+1)">下一步 →</button>
-              </template>
-              <template v-else>
-                <button class="orange-btn" @click="saveEdit">💾 保存修改</button>
-                <button class="nav-btn" @click="cancelEdit">取消</button>
-              </template>
-            </div>
-          </div>
+        <!-- 生成中 -->
+        <div v-if="phases[currentPhase-1]?.generating" class="card generating-card">
+          <span class="generating-spinner">🍊</span>
+          <p class="generating-text">AI 正在分析和生成...</p>
+        </div>
 
-          <!-- 报错 -->
-          <div v-if="phaseError" class="card" style="border-left:4px solid #dc2626">
-            <p style="color:#dc2626">{{ phaseError }}</p>
-            <button class="orange-btn" @click="generatePhase(currentPhase)" style="margin-top:8px">重试</button>
+        <!-- 已生成 -->
+        <div v-if="phases[currentPhase-1]?.done" class="card result-card">
+          <div v-if="!editing" class="result-content" v-html="renderedContent" @dblclick="startEdit"></div>
+          <el-input v-else v-model="editContent" type="textarea" :rows="12" class="mb-12" />
+          <div class="btn-row">
+            <template v-if="!editing">
+              <button class="orange-btn" @click="generatePhase(currentPhase)">重新生成</button>
+              <button class="nav-btn" @click="startEdit">编辑</button>
+              <button v-if="currentPhase < 6" class="nav-btn nav-btn-next" @click="switchPhase(currentPhase+1)">下一步 →</button>
+            </template>
+            <template v-else>
+              <button class="orange-btn" @click="saveEdit">保存修改</button>
+              <button class="nav-btn" @click="cancelEdit">取消</button>
+            </template>
           </div>
         </div>
+
+        <!-- 报错 -->
+        <div v-if="phaseError" class="card error-card">
+          <p class="error-text">{{ phaseError }}</p>
+          <button class="orange-btn mt-8" @click="generatePhase(currentPhase)">重试</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -273,42 +275,321 @@ const switchPhase = (n) => {
 </script>
 
 <style scoped>
-.plan-app { display: flex; min-height: calc(100vh - 136px); background: #fff8f0; border-radius: 16px; overflow: hidden; }
-.plan-main { flex: 1; padding: 24px 32px; max-width: 900px; margin: 0 auto; overflow-y: auto; }
+/* ============================================================
+   PIXEL-MINIMALIST DESIGN SYSTEM — PlanDesigner
+   ============================================================ */
 
-/* Intro */
-.plan-intro { max-width: 640px; margin: 40px auto; }
-.intro-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-.intro-icon { font-size: 32px; }
+/* --- APP SHELL --- */
+.plan-app {
+  display: flex;
+  min-height: calc(100vh - 136px);
+  background: transparent;
+  overflow: hidden;
+}
+.plan-main {
+  flex: 1;
+  padding: 0;
+  max-width: 980px;
+  margin: 0 auto;
+  overflow-y: auto;
+}
 
-/* Phase nav */
-.phase-nav { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid #ffe0b2; padding-bottom: 12px; }
-.phase-nav-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; cursor: pointer; flex: 1; font-size: 13px; transition: all .15s; }
-.phase-nav-item:hover { background: #fff3e0; }
-.phase-nav-item.active { background: #e65100; color: #fff; }
-.phase-nav-item.done { color: #67C23A; }
-.phase-nav-item.generating { color: #e65100; }
-.phase-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; background: #ffe0b2; color: #e65100; }
-.phase-nav-item.active .phase-dot { background: #fff; color: #e65100; }
-.phase-nav-item.done .phase-dot { background: #67C23A; color: #fff; }
-.phase-nav-label { font-weight: 600; }
-.phase-nav-status { font-size: 11px; opacity: .7; }
+/* --- COMPACT HEAD --- */
+.compact-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid rgba(254, 215, 170, .76);
+  border-radius: 28px;
+  background: rgba(255,255,255,.86);
+  box-shadow: var(--shadow-card-lg);
+  flex-wrap: wrap;
+}
+.compact-head h2 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(22px, 3.5vw, 32px);
+  line-height: 1.08;
+  letter-spacing: -.05em;
+}
+.compact-head p {
+  max-width: 680px;
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 13px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--border-orange);
+  border-radius: 999px;
+  color: var(--brand-strong);
+  background: #fffaf5;
+  font-size: 12px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+}
 
-.phase-content { max-width: 780px; }
-.phase-title { font-size: 20px; font-weight: 700; color: #5d4037; }
-.phase-subtitle { font-size: 13px; color: #bcaaa4; margin-bottom: 20px; }
+/* --- HISTORY POPOVER --- */
+.history-popover {
+  max-height: 300px;
+  overflow: auto;
+}
+.history-empty {
+  text-align: center;
+  color: #bfb8b0;
+  padding: 20px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+.history-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0ece6;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+.history-item-text {
+  flex: 1;
+  min-width: 0;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 12px;
+}
+.history-summary {
+  font-family: "Courier New", "SimHei", monospace;
+  color: #3a302a;
+  font-weight: 500;
+}
+.history-time {
+  color: #bfb8b0;
+  margin-left: 6px;
+  font-size: 11px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
 
-.card { background: #fff; border-radius: 12px; padding: 20px 24px; box-shadow: 0 1px 6px rgba(0,0,0,.04); margin-bottom: 16px; border-left: 4px solid #e65100; }
-.result-card { border-left-color: #ff9800; }
+/* --- SAVE ROW --- */
+.save-row {
+  text-align: center;
+  margin-bottom: 8px;
+}
 
-.orange-btn { background: linear-gradient(135deg, #e65100, #ff9800); color: #fff; border: none; border-radius: 24px; padding: 10px 24px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s; box-shadow: 0 2px 8px rgba(230,81,0,.2); }
-.orange-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(230,81,0,.3); }
-.orange-btn:disabled { opacity: .5; cursor: not-allowed; }
-.start-btn { padding: 14px 32px; font-size: 16px; margin-top: 16px; width: 100%; }
+/* --- PHASE NAV --- */
+.phase-nav {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  padding: 4px;
+  border: 1px solid var(--border-orange);
+  border-radius: 14px;
+  background: #fff7ed;
+  flex-wrap: wrap;
+}
+.phase-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  flex: 1;
+  font-size: 12px;
+  transition: all .15s;
+  min-width: 0;
+}
+.phase-nav-item:hover {
+  background: #fff0e0;
+}
+.phase-nav-item.active {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 2px 2px 0 rgba(154,83,28,.12);
+}
+.phase-nav-item.done {
+  color: var(--text-secondary);
+}
+.phase-nav-item.generating {
+  color: var(--brand);
+}
+.phase-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 900;
+  flex-shrink: 0;
+  background: #fff;
+  color: var(--text-secondary);
+}
+.phase-nav-item.active .phase-dot {
+  background: #fff;
+  color: var(--brand);
+}
+.phase-nav-item.done .phase-dot {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+.phase-nav-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.phase-nav-status {
+  font-family: var(--font-body);
+  font-size: 10px;
+  opacity: .7;
+}
 
-.nav-btn { background: #fff; color: #e65100; border: 1px solid #ffe0b2; border-radius: 24px; padding: 10px 20px; cursor: pointer; font-size: 13px; }
-.nav-btn:hover { background: #fff3e0; }
+/* --- PHASE CONTENT --- */
+.phase-content {
+  max-width: 780px;
+}
+.phase-title {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -.03em;
+}
+.phase-subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
 
-.generating-spinner { font-size: 36px; display: inline-block; animation: spin 1.5s ease-in-out infinite; }
-@keyframes spin { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2) rotate(10deg); } }
+/* --- CARDS --- */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--border-orange);
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--brand);
+  box-shadow: var(--shadow-card);
+}
+.result-card {
+  border-left-color: var(--brand);
+}
+.error-card {
+  border-left: 4px solid #dc2626;
+}
+.generating-card {
+  text-align: center;
+  padding: 40px;
+}
+.card-placeholder {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #9f9890;
+  margin: 0;
+}
+
+/* --- MODE SELECT --- */
+.mode-select-row {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mode-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* --- SPACING UTILITIES --- */
+.mt-8  { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mb-12 { margin-bottom: 12px; }
+
+/* --- GENERATING STATE --- */
+.generating-spinner {
+  font-size: 36px;
+  display: inline-block;
+  animation: spin 1.5s ease-in-out infinite;
+}
+@keyframes spin {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2) rotate(10deg); }
+}
+.generating-text {
+  font-family: var(--font-mono);
+  color: var(--brand);
+  margin-top: 8px;
+}
+
+/* --- RESULT CONTENT --- */
+.result-content {
+  line-height: 1.8;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+/* --- BUTTONS --- */
+.btn-row {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+.orange-btn {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  box-shadow: 0 3px 0 rgba(197,83,18,0.20);
+  letter-spacing: 0.5px;
+}
+.orange-btn:hover {
+  background: var(--brand-strong);
+  transform: translateY(-1px);
+}
+.orange-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.save-btn {
+  padding: 10px 24px;
+}
+.nav-btn {
+  background: #ffffff;
+  color: var(--brand-strong);
+  border: 1px solid var(--border-orange);
+  border-radius: 14px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  transition: all .15s;
+}
+.nav-btn:hover {
+  background: #faf9f7;
+  border-color: #f37021;
+}
+.nav-btn-next {
+  /* inherits nav-btn */
+}
+
+/* --- ERROR --- */
+.error-text {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #dc2626;
+  margin: 0;
+}
 </style>

@@ -1,31 +1,40 @@
 <template>
-  <div>
+  <div class="leaderboard-page">
+    <!-- Compact Head -->
+    <div class="compact-head">
+      <div>
+        <span class="eyebrow">榜单中心</span>
+        <h2>本网站作品/创作者榜单，以及 GitHub 仓库榜单。</h2>
+        <p>数据源、时间、分类、榜单类型自由切换。GitHub 数据依赖 API 可用性。</p>
+      </div>
+    </div>
+
     <!-- 筛选栏 -->
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
-      <span style="font-size:13px;color:#909399;font-weight:600">数据源</span>
-      <el-radio-group v-model="source" size="default" @change="onSourceChange">
+    <div class="leaderboard-filters">
+      <span class="filter-label">数据源</span>
+      <el-radio-group v-model="source" size="default" @change="onSourceChange" class="filter-group">
         <el-radio-button value="local">本网站</el-radio-button>
         <el-radio-button value="github">GitHub</el-radio-button>
       </el-radio-group>
 
-      <span style="font-size:13px;color:#909399;font-weight:600;margin-left:8px">时间</span>
-      <el-radio-group v-model="period" size="default" @change="load">
+      <span class="filter-label filter-label-spaced">时间</span>
+      <el-radio-group v-model="period" size="default" @change="load" class="filter-group">
         <el-radio-button value="all">全时段</el-radio-button>
         <el-radio-button value="week">本周</el-radio-button>
       </el-radio-group>
 
-      <span style="font-size:13px;color:#909399;font-weight:600;margin-left:8px">分类</span>
-      <el-select v-model="category" placeholder="全部" clearable size="default" style="width:160px" @change="load">
+      <span class="filter-label filter-label-spaced">分类</span>
+      <el-select v-model="category" placeholder="全部" clearable size="default" class="filter-select" @change="load">
         <el-option label="全部" :value="undefined" />
         <el-option v-for="c in categories" :key="c.id" :label="c.name" :value="source==='github'?(c.topicName||c.id):c.id" />
       </el-select>
     </div>
 
     <!-- GitHub 降级提示 -->
-    <el-alert v-if="warning" :title="warning" type="warning" show-icon closable style="margin-bottom:16px" />
+    <el-alert v-if="warning" :title="warning" type="warning" show-icon closable class="leaderboard-alert" />
 
     <!-- 子 Tab -->
-    <el-tabs v-model="type" style="margin-bottom:16px" @tab-change="load">
+    <el-tabs v-model="type" class="leaderboard-tabs" @tab-change="load">
       <el-tab-pane label="作品" name="works" v-if="source==='local'" />
       <el-tab-pane label="仓库" name="repos" v-if="source==='github'" />
       <el-tab-pane label="创作者" name="creators" v-if="source==='local'" />
@@ -33,57 +42,61 @@
 
     <!-- 加载态 -->
     <el-row :gutter="16" v-if="loading">
-      <el-col :span="6" v-for="i in 8" :key="i" style="margin-bottom:16px">
-        <el-skeleton :loading="true" animated style="padding:16px"><template #template><el-skeleton-item variant="text" style="width:80%" /><el-skeleton-item variant="text" style="width:50%" /><el-skeleton-item variant="text" style="width:30%" /></template></el-skeleton>
+      <el-col :span="6" v-for="i in 8" :key="i" class="skeleton-col">
+        <el-skeleton :loading="true" animated class="skeleton-card">
+          <template #template>
+            <el-skeleton-item variant="text" class="skeleton-line-wide" />
+            <el-skeleton-item variant="text" class="skeleton-line-mid" />
+            <el-skeleton-item variant="text" class="skeleton-line-narrow" />
+          </template>
+        </el-skeleton>
       </el-col>
     </el-row>
 
     <!-- 数据列表 -->
     <el-row :gutter="16" v-else>
-      <el-col :span="6" v-for="(item, idx) in list" :key="item.id||idx" style="margin-bottom:16px">
-        <el-card shadow="hover" :body-style="{padding:'14px'}" style="border-radius:12px;cursor:pointer;transition:transform .15s;border:1px solid #f0ece6;height:100%"
-          @click="onClick(item)">
-
+      <el-col :span="6" v-for="(item, idx) in list" :key="item.id||idx" class="card-col">
+        <el-card shadow="never" class="rank-card" @click="onClick(item)">
           <!-- 排名徽章 -->
-          <div style="position:absolute;top:-6px;left:-6px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e65100,#ff9800);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2">
+          <div class="rank-badge">
             {{ (page-1)*pageSize + idx + 1 }}
           </div>
 
           <!-- 本网站作品 -->
           <template v-if="source==='local' && type==='works'">
-            <div style="font-weight:600;font-size:15px;color:#2c2c2c;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.title || item.name }}</div>
-            <div style="font-size:12px;color:#909399;margin-bottom:8px;display:flex;align-items:center;gap:8px">
-              <span>👤 {{ item.ownerName || item.username }}</span>
-              <span v-if="item.category_name" style="color:#e65100">🏷 {{ item.category_name }}</span>
+            <div class="card-title">{{ item.title || item.name }}</div>
+            <div class="card-meta">
+              <span class="card-owner">{{ item.ownerName || item.username }}</span>
+              <span v-if="item.category_name" class="card-category">{{ item.category_name }}</span>
             </div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span style="font-size:13px;color:#e65100;font-weight:700">⭐ {{ item.favoriteCount || item.favorite_count || 0 }}</span>
+            <div class="card-footer">
+              <span class="card-score">&#9733; {{ item.favoriteCount || item.favorite_count || 0 }}</span>
             </div>
           </template>
 
           <!-- 本网站创作者 -->
           <template v-if="source==='local' && type==='creators'">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-              <el-avatar :size="36" :src="item.avatarUrl||item.avatar_url" style="background:#e65100;font-size:14px">{{ (item.username||'?')[0] }}</el-avatar>
-              <div style="font-weight:600;font-size:15px;color:#2c2c2c">{{ item.username }}</div>
+            <div class="card-creator-row">
+              <el-avatar :size="36" :src="item.avatarUrl||item.avatar_url" class="creator-avatar">{{ (item.username||'?')[0] }}</el-avatar>
+              <div class="card-title">{{ item.username }}</div>
             </div>
-            <div style="font-size:12px;color:#909399;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.bio || '' }}</div>
-            <div style="display:flex;gap:12px;font-size:13px">
-              <span>⭐ {{ item.totalFavorites || item.total_favorites || 0 }}</span>
-              <span>📦 {{ item.workCount || item.work_count || 0 }}作品</span>
+            <div class="card-bio">{{ item.bio || '' }}</div>
+            <div class="card-stats">
+              <span>&#9733; {{ item.totalFavorites || item.total_favorites || 0 }}</span>
+              <span>{{ item.workCount || item.work_count || 0 }}作品</span>
             </div>
           </template>
 
           <!-- GitHub 仓库 -->
           <template v-if="source==='github'">
-            <div style="font-weight:600;font-size:15px;color:#2c2c2c;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.name }}</div>
-            <div style="font-size:11px;color:#6b6b6b;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ item.fullName }}</div>
-            <div style="font-size:12px;color:#909399;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;min-height:34px">
+            <div class="card-title">{{ item.name }}</div>
+            <div class="card-fullname">{{ item.fullName }}</div>
+            <div class="card-description">
               {{ item.description || '暂无描述' }}
             </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px">
-              <span style="font-size:13px;color:#e65100;font-weight:700">⭐ {{ item.stars }}</span>
-              <span v-if="item.language" style="font-size:11px;color:#fff;background:#6b6b6b;padding:2px 8px;border-radius:10px">{{ item.language }}</span>
+            <div class="card-footer">
+              <span class="card-score">&#9733; {{ item.stars }}</span>
+              <span v-if="item.language" class="card-language">{{ item.language }}</span>
             </div>
           </template>
         </el-card>
@@ -94,7 +107,7 @@
     <el-empty v-if="!loading && !list.length" :description="emptyText" />
 
     <!-- 分页 -->
-    <div v-if="total > pageSize" style="display:flex;justify-content:center;margin-top:20px">
+    <div v-if="total > pageSize" class="leaderboard-pagination">
       <el-pagination background layout="total, prev, pager, next" :total="total" :page-size="pageSize" v-model:current-page="page" @current-change="load" />
     </div>
   </div>
@@ -201,3 +214,356 @@ onMounted(async () => {
   load()
 })
 </script>
+
+<style scoped>
+.leaderboard-page {
+  /* outer wrapper — no extra card, compact-head handles the top */
+}
+
+/* Compact Head */
+.compact-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid rgba(254, 215, 170, .76);
+  border-radius: 28px;
+  background: rgba(255,255,255,.86);
+  box-shadow: var(--shadow-card-lg);
+  flex-wrap: wrap;
+}
+.compact-head h2 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(22px, 3.5vw, 32px);
+  line-height: 1.08;
+  letter-spacing: -.05em;
+}
+.compact-head p {
+  max-width: 680px;
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 13px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--border-orange);
+  border-radius: 999px;
+  color: var(--brand-strong);
+  background: #fffaf5;
+  font-size: 12px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+}
+
+/* Filters */
+.leaderboard-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 800;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.filter-label-spaced {
+  margin-left: 8px;
+}
+
+.filter-group :deep(.el-radio-button__inner) {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-orange);
+  background: #ffffff;
+  color: var(--text-secondary);
+  box-shadow: none;
+  padding: 6px 14px;
+}
+
+.filter-group :deep(.el-radio-button__original-radio:checked + .el-radio-button__inner) {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+  box-shadow: 2px 2px 0 rgba(154,83,28,.12);
+}
+
+.filter-select {
+  width: 160px;
+}
+
+.filter-select :deep(.el-input__wrapper) {
+  border-radius: 14px;
+  border: 1px solid var(--border-orange);
+  box-shadow: none;
+  height: 36px;
+}
+
+.filter-select :deep(.el-input__wrapper:focus),
+.filter-select :deep(.el-input__wrapper.is-focus) {
+  border-color: #f37021;
+  box-shadow: none;
+}
+
+/* Alert */
+.leaderboard-alert {
+  margin-bottom: 16px;
+  border-radius: 16px;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+}
+
+.leaderboard-alert :deep(.el-alert__title) {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #c55312;
+}
+
+/* Tabs */
+.leaderboard-tabs {
+  margin-bottom: 16px;
+}
+
+.leaderboard-tabs :deep(.el-tabs__header) {
+  margin-bottom: 0;
+}
+
+.leaderboard-tabs :deep(.el-tabs__nav-wrap::after) {
+  height: 1px;
+  background-color: var(--border-orange);
+}
+
+.leaderboard-tabs :deep(.el-tabs__item) {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0;
+  height: 36px;
+  line-height: 36px;
+}
+
+.leaderboard-tabs :deep(.el-tabs__item.is-active) {
+  color: var(--brand-strong);
+}
+
+.leaderboard-tabs :deep(.el-tabs__active-bar) {
+  background-color: var(--brand);
+  height: 2px;
+}
+
+/* Skeleton */
+.skeleton-col {
+  margin-bottom: 16px;
+}
+
+.skeleton-card {
+  padding: 16px;
+  border: 1px solid var(--border-orange);
+  border-radius: 14px;
+}
+
+.skeleton-line-wide {
+  width: 80%;
+}
+
+.skeleton-line-mid {
+  width: 50%;
+}
+
+.skeleton-line-narrow {
+  width: 30%;
+}
+
+/* Cards */
+.card-col {
+  margin-bottom: 16px;
+}
+
+.rank-card {
+  border: 1px solid var(--border-orange);
+  border-radius: 14px;
+  cursor: pointer;
+  height: 100%;
+  box-shadow: var(--shadow-pixel-sm);
+  position: relative;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+
+.rank-card:hover {
+  border-color: var(--brand-strong);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #ffedd5;
+}
+
+.rank-card :deep(.el-card__body) {
+  padding: 14px;
+}
+
+.rank-badge {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 2px 2px 0 rgba(154,83,28,.12);
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: #3a302a;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+.card-meta {
+  font-size: 12px;
+  color: #9f9890;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+.card-owner {
+  color: #9f9890;
+}
+
+.card-category {
+  color: #f37021;
+  font-family: "Courier New", "SimHei", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-score {
+  font-size: 13px;
+  color: #f37021;
+  font-weight: 700;
+  font-family: "Courier New", "SimHei", monospace;
+}
+
+.card-creator-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.creator-avatar {
+  background: linear-gradient(135deg, var(--brand), #fbbf24);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+
+.card-bio {
+  font-size: 12px;
+  color: #9f9890;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+.card-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: #3a302a;
+  font-family: "Courier New", "SimHei", monospace;
+}
+
+.card-fullname {
+  font-size: 11px;
+  color: #9f9890;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Courier New", "SimHei", monospace;
+}
+
+.card-description {
+  font-size: 12px;
+  color: #9f9890;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  min-height: 34px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+.card-language {
+  font-size: 11px;
+  color: var(--text-primary);
+  background: var(--brand-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* Pagination */
+.leaderboard-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.leaderboard-pagination :deep(.el-pagination.is-background .el-pager li) {
+  border-radius: 2px;
+  font-family: "Courier New", "SimHei", monospace;
+}
+
+.leaderboard-pagination :deep(.el-pagination.is-background .el-pager li.is-active) {
+  background: #f37021;
+}
+
+.leaderboard-pagination :deep(.btn-prev),
+.leaderboard-pagination :deep(.btn-next) {
+  border-radius: 2px;
+}
+</style>
