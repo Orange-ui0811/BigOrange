@@ -13,5 +13,9 @@ public interface AuthService {
     LoginVO register(RegisterDTO registerDTO);
 
     void changePassword(PasswordChangeDTO passwordChangeDTO);
+
+    void sendResetCode(String email);
+
+    void resetPassword(String email, String code, String newPassword);
 }
 

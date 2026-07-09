@@ -10,6 +10,7 @@ import com.orangejd.pojo.vo.LoginVO;
 import com.orangejd.server.service.AuthService;
 import com.orangejd.server.service.MailService;
 import com.orangejd.server.service.TokenBlacklistService;
+import com.orangejd.server.service.TurnstileService;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -30,6 +31,7 @@ public class AppAuthController {
     @Autowired private TokenBlacklistService blacklistService;
     @Autowired private MailService mailService;
     @Autowired(required = false) private StringRedisTemplate redisTemplate;
+    @Autowired private TurnstileService turnstileService;
 
     @PostMapping("/login")
     public Result<LoginVO> login(@RequestBody LoginDTO loginDTO) {
@@ -54,7 +56,28 @@ public class AppAuthController {
 
     @PostMapping("/register")
     public Result<LoginVO> register(@Valid @RequestBody RegisterDTO registerDTO) {
+        if (!turnstileService.verify(registerDTO.getTurnstileToken())) {
+            return Result.error("人机验证失败，请刷新页面重试");
+        }
         return Result.success(authService.register(registerDTO));
+    }
+
+    @PostMapping("/send-reset-code")
+    public Result<?> sendResetCode(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        if (email == null || !email.contains("@")) return Result.error("邮箱格式不正确");
+        authService.sendResetCode(email);
+        return Result.success();
+    }
+
+    @PostMapping("/reset-password")
+    public Result<?> resetPassword(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        String code = body.get("code");
+        String newPassword = body.get("newPassword");
+        if (email == null || code == null || newPassword == null) return Result.error("参数不完整");
+        authService.resetPassword(email, code, newPassword);
+        return Result.success();
     }
 
     @PutMapping("/password")

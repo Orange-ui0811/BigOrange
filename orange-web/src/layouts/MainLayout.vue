@@ -6,29 +6,49 @@
       <!-- 品牌 + 像素橙子 -->
       <div class="sidebar-brand">
         <svg class="sidebar-logo" viewBox="0 0 40 40" aria-hidden="true">
-          <rect x="17" y="3" width="5" height="4" fill="#5c260f"/>
-          <rect x="19" y="6" width="3" height="7" fill="#5c260f"/>
-          <rect x="19" y="7" width="2" height="6" fill="#79bd28"/>
-          <rect x="22" y="6" width="10" height="3" fill="#5c260f"/>
-          <rect x="21" y="9" width="12" height="4" fill="#5c260f"/>
-          <rect x="22" y="8" width="9" height="4" fill="#7bd927"/>
-          <rect x="8" y="9" width="21" height="2" fill="#5c260f"/>
-          <rect x="5" y="12" width="29" height="3" fill="#5c260f"/>
-          <rect x="3" y="15" width="33" height="13" fill="#5c260f"/>
-          <rect x="5" y="11" width="27" height="18" fill="#ff9f2e"/>
-          <rect x="7" y="13" width="25" height="17" fill="#ffa934"/>
-          <rect x="32" y="18" width="2" height="8" fill="#ff7c2a"/>
-          <rect x="10" y="15" width="3" height="3" fill="#fff1c8"/>
-          <rect x="8" y="18" width="3" height="5" fill="#fff1c8"/>
-          <rect x="14" y="21" width="2" height="3" fill="#5c260f"/>
-          <rect x="24" y="21" width="2" height="3" fill="#5c260f"/>
-          <rect x="18" y="28" width="1" height="1" fill="#5c260f"/>
-          <rect x="22" y="28" width="1" height="1" fill="#5c260f"/>
-          <rect x="19" y="29" width="1" height="1" fill="#5c260f"/>
-          <rect x="21" y="29" width="1" height="1" fill="#5c260f"/>
-          <rect x="20" y="30" width="1" height="1" fill="#5c260f"/>
-          <rect x="7" y="30" width="27" height="3" fill="#5c260f"/>
-          <rect x="9" y="29" width="23" height="3" fill="#ff8f25"/>
+          <rect x="14" y="1" width="3" height="8" fill="#4d230d" />
+          <rect x="17" y="2" width="1" height="7" fill="#4d230d" />
+          <rect x="15" y="2" width="2" height="6" fill="#79bd28" />
+          <rect x="19" y="2" width="9" height="2" fill="#4d230d" />
+          <rect x="18" y="4" width="12" height="2" fill="#4d230d" />
+          <rect x="18" y="6" width="11" height="2" fill="#4d230d" />
+          <rect x="20" y="4" width="8" height="2" fill="#8bd33a" />
+          <rect x="19" y="6" width="8" height="2" fill="#78c42f" />
+          <rect x="12" y="6" width="10" height="2" fill="#4d230d" />
+          <rect x="9" y="8" width="4" height="2" fill="#4d230d" />
+          <rect x="7" y="10" width="3" height="2" fill="#4d230d" />
+          <rect x="5" y="12" width="3" height="4" fill="#4d230d" />
+          <rect x="4" y="16" width="2" height="5" fill="#4d230d" />
+          <rect x="3" y="21" width="2" height="7" fill="#4d230d" />
+          <rect x="4" y="28" width="2" height="4" fill="#4d230d" />
+          <rect x="6" y="32" width="3" height="3" fill="#4d230d" />
+          <rect x="9" y="35" width="5" height="2" fill="#4d230d" />
+          <rect x="14" y="37" width="13" height="1" fill="#4d230d" />
+          <rect x="27" y="35" width="5" height="2" fill="#4d230d" />
+          <rect x="32" y="32" width="3" height="3" fill="#4d230d" />
+          <rect x="35" y="27" width="2" height="5" fill="#4d230d" />
+          <rect x="36" y="18" width="1" height="9" fill="#4d230d" />
+          <rect x="35" y="14" width="2" height="4" fill="#4d230d" />
+          <rect x="33" y="11" width="3" height="3" fill="#4d230d" />
+          <rect x="30" y="9" width="3" height="2" fill="#4d230d" />
+          <rect x="27" y="7" width="3" height="2" fill="#4d230d" />
+          <rect x="13" y="8" width="14" height="2" fill="#ffad3f" />
+          <rect x="27" y="9" width="3" height="1" fill="#ffad3f" />
+          <rect x="10" y="10" width="23" height="2" fill="#ffa739" />
+          <rect x="8" y="12" width="27" height="4" fill="#ffa033" />
+          <rect x="6" y="16" width="29" height="5" fill="#ff9a2e" />
+          <rect x="5" y="21" width="31" height="7" fill="#ff9329" />
+          <rect x="6" y="28" width="29" height="4" fill="#ff8823" />
+          <rect x="9" y="32" width="23" height="3" fill="#ff7e1f" />
+          <rect x="14" y="35" width="13" height="2" fill="#ef6f18" />
+          <rect x="33" y="18" width="3" height="8" fill="#ff7623" />
+          <rect x="14" y="21" width="2" height="3" fill="#5c260f" />
+          <rect x="24" y="21" width="2" height="3" fill="#5c260f" />
+          <rect x="18" y="28" width="1" height="1" fill="#5c260f" />
+          <rect x="22" y="28" width="1" height="1" fill="#5c260f" />
+          <rect x="19" y="29" width="1" height="1" fill="#5c260f" />
+          <rect x="21" y="29" width="1" height="1" fill="#5c260f" />
+          <rect x="20" y="30" width="1" height="1" fill="#5c260f" />
         </svg>
         <div class="sidebar-brand-text">
           <span class="brand-name">OrangeVC</span>
@@ -85,6 +105,9 @@
         </el-menu-item>
       </el-menu>
 
+      <!-- 橙子使用指南 -->
+      <GuideBubble />
+
       <!-- 功能归属提示 -->
       <div class="nav-hint">
         <strong>功能归属</strong>
@@ -127,6 +150,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Shop, Cpu, Edit, ChatDotRound, User } from '@element-plus/icons-vue'
+import GuideBubble from '../components/GuideBubble.vue'
 import request from '../api/request'
 import { unreadCount, avatarUrl, nickname } from '../stores/unread'
 import { tradeEnabled } from '../stores/tradeMode'
@@ -262,8 +286,9 @@ onMounted(async () => {
 
 /* 菜单 */
 .sidebar-menu {
-  flex: 1;
-  overflow-y: auto;
+  flex: 0 0 auto;
+  overflow-y: visible;
+  max-height: 320px;
   border-right: none !important;
   background: transparent !important;
   padding: 2px 8px;
@@ -410,6 +435,6 @@ onMounted(async () => {
 /* ===== 内容区 ===== */
 .app-main {
   background: transparent !important;
-  padding: 20px 28px 40px !important;
+  padding: 24px 32px 48px !important;
 }
 </style>

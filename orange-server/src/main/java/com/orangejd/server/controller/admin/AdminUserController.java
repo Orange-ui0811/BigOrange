@@ -26,6 +26,7 @@ public class AdminUserController {
         List<AccountVO> records = accountMapper.selectAll(offset, size).stream().map(a -> {
             AccountVO vo = new AccountVO();
             vo.setId(a.getId()); vo.setUsername(a.getUsername());
+            vo.setEmail(a.getEmail());
             vo.setStatus(a.getStatus()); vo.setRole(a.getRole());
             vo.setCreateTime(a.getCreateTime()); return vo;
         }).collect(Collectors.toList());

@@ -2,8 +2,8 @@ spring:
   mail:
     host: smtp.qq.com
     port: 587
-    username: ${MAIL_USERNAME:}
-    password: ${MAIL_PASSWORD:}
+    username: 1281748852@qq.com
+    password: leywbeyvheyeghcj
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
@@ -28,6 +28,8 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 orange:
+  upload:
+    path: D:/Orangejd/uploads
   redis:
     host: localhost
     port: 6380
@@ -38,6 +40,8 @@ orange:
     access-key-id: your-access-key-id
     access-key-secret: your-access-key-secret
     bucket-name: your-bucket-name
+  turnstile:
+    secret-key: ${TURNSTILE_SECRET_KEY:}
   leaderboard:
     github-token: ${GITHUB_TOKEN:}
     local-cache-ttl-minutes: 15

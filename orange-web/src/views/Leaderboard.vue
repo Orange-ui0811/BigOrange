@@ -20,7 +20,8 @@
       <span class="filter-label filter-label-spaced">时间</span>
       <el-radio-group v-model="period" size="default" @change="load" class="filter-group">
         <el-radio-button value="all">全时段</el-radio-button>
-        <el-radio-button value="week">本周</el-radio-button>
+        <el-radio-button value="week">本周涨星</el-radio-button>
+        <el-radio-button value="new" v-if="source==='github'">本周新增</el-radio-button>
       </el-radio-group>
 
       <span class="filter-label filter-label-spaced">分类</span>
@@ -137,7 +138,8 @@ const emptyText = computed(() => {
   if (warning.value) return warning.value
   if (category.value && period.value === 'week') return '该分类本周暂无内容'
   if (category.value) return '该分类暂无内容'
-  if (period.value === 'week') return '本周暂无内容'
+  if (period.value === 'week') return '本周涨星暂无数据'
+  if (period.value === 'new') return '本周暂无新增项目'
   if (source.value === 'github') return 'GitHub 榜单暂无数据'
   return '暂无内容'
 })
@@ -195,7 +197,10 @@ const onSourceChange = () => {
   category.value = null
   warning.value = ''
   if (source.value === 'github') type.value = 'repos'
-  else if (type.value === 'repos') type.value = 'works'
+  else {
+    if (type.value === 'repos') type.value = 'works'
+    if (period.value === 'new') period.value = 'all' // "本周新增"仅 GitHub 有
+  }
   load()
 }
 
@@ -396,11 +401,12 @@ onMounted(async () => {
 }
 
 .rank-card {
-  border: 1px solid var(--border-orange);
+  border: 1px solid var(--border-weak);
+  border-left: 3px solid var(--brand-soft);
   border-radius: 14px;
   cursor: pointer;
   height: 100%;
-  box-shadow: var(--shadow-pixel-sm);
+  box-shadow: var(--shadow-card);
   position: relative;
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
@@ -408,11 +414,11 @@ onMounted(async () => {
 .rank-card:hover {
   border-color: var(--brand-strong);
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 #ffedd5;
+  box-shadow: var(--shadow-pixel);
 }
 
 .rank-card :deep(.el-card__body) {
-  padding: 14px;
+  padding: 18px;
 }
 
 .rank-badge {

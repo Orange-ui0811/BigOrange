@@ -14,30 +14,48 @@
       </div>
     </div>
 
-    <!-- ═══ 滚动 Ticker ═══ -->
-    <div v-if="tickerItems.length" class="ticker-window" @click="$router.push('/leaderboard')" style="cursor:pointer">
-      <div class="ticker-track">
-        <div v-for="(item, i) in tickerItems" :key="i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
-          <strong>{{ item.fullName || item.name }}</strong>
-          <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+    <!-- ═══ 本周 Ticker ═══ -->
+    <div v-if="tickerItems.length" class="ticker-row" @click="$router.push('/leaderboard')" style="cursor:pointer">
+      <div class="ticker-label">
+        <PixelOrangeLogo bounce style="width:28px;height:28px;flex-shrink:0" />
+        <div>
+          <strong>本周热门</strong>
+          <span>GitHub 涨星项目</span>
         </div>
-        <div v-for="(item, i) in tickerItems" :key="'dup'+i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
-          <strong>{{ item.fullName || item.name }}</strong>
-          <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+      </div>
+      <div class="ticker-window">
+        <div class="ticker-track">
+          <div v-for="(item, i) in tickerItems" :key="i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
+            <strong>{{ item.fullName || item.name }}</strong>
+            <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+          </div>
+          <div v-for="(item, i) in tickerItems" :key="'dup'+i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
+            <strong>{{ item.fullName || item.name }}</strong>
+            <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- ═══ 全时段 Ticker ═══ -->
-    <div v-if="tickerAllItems.length" class="ticker-window" @click="$router.push('/leaderboard')" style="cursor:pointer;margin-top:12px;">
-      <div class="ticker-track" style="animation-duration:35s;">
-        <div v-for="(item, i) in tickerAllItems" :key="'a'+i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
-          <strong>{{ item.fullName || item.name }}</strong>
-          <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+    <div v-if="tickerAllItems.length" class="ticker-row" @click="$router.push('/leaderboard')" style="cursor:pointer;margin-top:12px;">
+      <div class="ticker-label all-time">
+        <PixelOrangeLogo bounce style="width:28px;height:28px;flex-shrink:0" />
+        <div>
+          <strong>全时段热门</strong>
+          <span>GitHub 历史星标</span>
         </div>
-        <div v-for="(item, i) in tickerAllItems" :key="'adup'+i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
-          <strong>{{ item.fullName || item.name }}</strong>
-          <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+      </div>
+      <div class="ticker-window">
+        <div class="ticker-track" style="animation-duration:35s;">
+          <div v-for="(item, i) in tickerAllItems" :key="'a'+i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
+            <strong>{{ item.fullName || item.name }}</strong>
+            <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+          </div>
+          <div v-for="(item, i) in tickerAllItems" :key="'adup'+i" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
+            <strong>{{ item.fullName || item.name }}</strong>
+            <span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -74,6 +92,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import PixelOrangeLogo from '../components/PixelOrangeLogo.vue'
 import request from '../api/request'
 
 const tickerItems = ref([])
@@ -130,7 +149,7 @@ onMounted(async () => {
     linear-gradient(120deg, rgba(255,247,237,.94), rgba(255,255,255,.78)),
     radial-gradient(circle at 92% 10%, rgba(243,112,33,.16), transparent 30%);
   box-shadow: var(--shadow-card-lg);
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   overflow: hidden;
   flex-wrap: wrap;
 }
@@ -190,13 +209,14 @@ onMounted(async () => {
 .hub-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 20px;
+  gap: 20px;
+  margin-top: 28px;
 }
 .hub-card {
   min-height: 190px;
   padding: 20px;
-  border: 1px solid rgba(229, 231, 235, .96);
+  border: 1px solid var(--border-weak);
+  border-left: 3px solid var(--brand);
   border-radius: 24px;
   background: #fff;
   box-shadow: var(--shadow-card);
@@ -210,6 +230,10 @@ onMounted(async () => {
   transform: translateY(-3px);
   border-color: var(--border-orange);
   box-shadow: var(--shadow-lift);
+}
+.hub-card.featured-card {
+  border-left: 4px solid var(--brand);
+  background: var(--card-featured);
 }
 .hub-card h3 {
   margin: 0 0 8px;
@@ -231,18 +255,21 @@ onMounted(async () => {
 /* Card variants — exact prototype backgrounds */
 .tool-trend {
   border-color: #fed7aa;
+  border-left: 4px solid var(--brand);
   background:
     linear-gradient(135deg, rgba(255,237,213,.9), rgba(255,255,255,.96)),
     repeating-linear-gradient(0deg, rgba(243,112,33,.035) 0, rgba(243,112,33,.035) 1px, transparent 1px, transparent 14px);
 }
 .tool-plan {
   border-color: #fde68a;
+  border-left: 3px solid #f59e0b;
   background:
     linear-gradient(135deg, rgba(255,251,235,.94), rgba(255,255,255,.96)),
     repeating-linear-gradient(90deg, rgba(245,158,11,.035) 0, rgba(245,158,11,.035) 1px, transparent 1px, transparent 14px);
 }
 .tool-jobs {
   border-color: #f2c49b;
+  border-left: 3px solid #9a5a24;
   background:
     linear-gradient(135deg, rgba(255,250,244,.96), rgba(255,247,237,.82)),
     radial-gradient(circle at 92% 12%, rgba(154,90,36,.10), transparent 32%);
@@ -266,11 +293,54 @@ onMounted(async () => {
 .hub-tag.green  { color: #9a5a24; background: #fff7ed; border-color: #fed7aa; }
 
 /* ═══ Ticker ═══ */
+.ticker-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.ticker-label {
+  flex-shrink: 0;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-orange);
+  border-right: none;
+  border-radius: 18px 0 0 18px;
+  background:
+    linear-gradient(135deg, rgba(255,237,213,.7), rgba(255,255,255,.88)),
+    repeating-linear-gradient(0deg, rgba(243,112,33,.03) 0, rgba(243,112,33,.03) 1px, transparent 1px, transparent 14px);
+  box-shadow: var(--shadow-card);
+  z-index: 1;
+}
+.ticker-label strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--brand-strong);
+  letter-spacing: -.02em;
+}
+.ticker-label span {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.ticker-label.all-time {
+  background:
+    linear-gradient(135deg, rgba(255,250,244,.8), rgba(255,255,255,.92)),
+    repeating-linear-gradient(90deg, rgba(154,90,36,.03) 0, rgba(154,90,36,.03) 1px, transparent 1px, transparent 14px);
+}
+.ticker-label.all-time strong {
+  color: #9a5a24;
+}
 .ticker-window {
-  margin-bottom: 0;
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid var(--border-orange);
-  border-radius: 18px;
+  border-left: none;
+  border-radius: 0 18px 18px 0;
   background: rgba(255,255,255,.76);
   box-shadow: var(--shadow-card);
   padding: 4px 0;

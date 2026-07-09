@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class AccountVO {
     private Long id;
     private String username;
+    private String email;
     private String status;
     private String role;
     private LocalDateTime createTime;
@@ -24,6 +25,9 @@ public class AccountVO {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     public String getStatus() {
         return status;

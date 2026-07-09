@@ -42,7 +42,10 @@
         <el-button class="mt-auto" size="small">查看历史</el-button>
       </div>
       <div class="hub-card" @click="$router.push('/me/quota')">
-        <h3>配额</h3>
+        <div class="quota-card-title">
+          <PixelOrangeSlice :size="22" />
+          <h3>配额</h3>
+        </div>
         <p>AI 工具消耗、充值码兑换和配额记录。</p>
         <el-button class="mt-auto" size="small">查看配额</el-button>
       </div>
@@ -57,6 +60,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
 
 const me = ref({ username: '', nickname: '' })
@@ -118,12 +122,13 @@ onMounted(async () => {
 .hub-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
 .hub-card {
   min-height: 190px;
   padding: 20px;
-  border: 1px solid rgba(229, 231, 235, .96);
+  border: 1px solid var(--border-weak);
+  border-left: 3px solid var(--brand-soft);
   border-radius: 24px;
   background: #fff;
   box-shadow: var(--shadow-card);
@@ -141,6 +146,7 @@ onMounted(async () => {
 .hub-card.featured {
   grid-column: span 2;
   border-color: var(--border-orange);
+  border-left: 4px solid var(--brand);
   background:
     linear-gradient(135deg, rgba(255,237,213,.88), rgba(255,255,255,.92)),
     repeating-linear-gradient(0deg, rgba(243,112,33,.045) 0, rgba(243,112,33,.045) 1px, transparent 1px, transparent 14px);
@@ -150,6 +156,15 @@ onMounted(async () => {
   font-family: var(--font-mono);
   letter-spacing: -.04em;
   font-size: 20px;
+}
+.quota-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.quota-card-title h3 {
+  margin: 0;
 }
 .hub-card p {
   margin: 0;

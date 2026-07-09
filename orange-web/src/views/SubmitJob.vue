@@ -19,7 +19,7 @@
     <!-- ═══ 浏览模式：岗位浏览 + 能力参考 ═══ -->
     <div v-if="!showForm" class="ai-layout">
       <!-- 左：岗位选择 + 详情 -->
-      <div class="panel panel-left">
+      <div class="panel panel-left card-featured">
         <div class="filter-row">
           <span class="filter-label">方向</span>
           <div class="segmented">
@@ -52,7 +52,7 @@
       </div>
 
       <!-- 右：能力参考 -->
-      <div class="panel panel-right">
+      <div class="panel panel-right card-warm">
         <h3>能力参考</h3>
         <div class="mini-list">
           <div class="mini-list-item">
@@ -230,18 +230,15 @@ onMounted(() => { loadDirections() })
 /* Layout */
 .ai-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
   align-items: start;
 }
 .panel {
   padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  background: #fff;
-  box-shadow: var(--shadow-card);
+  border-radius: 24px;
 }
-.panel-left { border-color: rgba(254, 215, 170, .8); }
+.panel-left { min-height: 300px; }
 
 /* Filter rows */
 .filter-row {

@@ -66,23 +66,28 @@ public class LeaderboardRefreshTask {
     public void refreshAll() {
         log.info("LeaderboardRefreshTask: 开始刷新 GitHub 榜单");
         LocalDate today = LocalDate.now();
-        String weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-                .atStartOfDay().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate monday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        // 周一当天用上周一，避免 GitHb 查询只覆盖一天
+        if (monday.equals(today)) monday = monday.minusWeeks(1);
+        String weekStart = monday.atStartOfDay().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         for (String topic : TOPICS) {
             refreshAndSave(topic, "all", today, null);
             sleep(6000);
-            String isoDate = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+            String isoDate = monday
                     .format(DateTimeFormatter.ISO_LOCAL_DATE);
-            refreshAndSave(topic, "week", today, isoDate);
+            refreshAndSave(topic, "new", today, isoDate);   // 本周新增
+            sleep(6000);
+            refreshWeekStars(topic, today);                  // 本周涨星
             sleep(6000);
         }
 
         // 也刷新全部分类的（topic_name=NULL）
         refreshAndSave(null, "all", today, null);
         sleep(6000);
-        refreshAndSave(null, "week", today, today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-                .format(DateTimeFormatter.ISO_LOCAL_DATE));
+        refreshAndSave(null, "new", today, monday.format(DateTimeFormatter.ISO_LOCAL_DATE));
+        sleep(6000);
+        refreshWeekStars(null, today);
 
         // 清理 30 天前的旧数据
         String beforeDate = today.minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -113,7 +118,7 @@ public class LeaderboardRefreshTask {
             if (topicName != null && !topicName.isEmpty()) {
                 q.append("topic:").append(topicName).append(" ");
             }
-            if ("week".equals(period) && isoDate != null) {
+            if ("new".equals(period) && isoDate != null) {
                 q.append("created:>").append(isoDate);
             } else {
                 q.append("stars:>1");
@@ -179,6 +184,93 @@ public class LeaderboardRefreshTask {
         }
     }
 
+    // ==================== 本周涨星（近期活跃 + 高星 = 趋势上涨） ====================
+
+    /**
+     * 爬取本周涨星最快的项目
+     * 策略：pushed:>上周一 — 近期有代码推送说明仓库活跃，结合高星数近似"正在涨星"
+     * 条件 stars:>10 过滤低质量仓库，sort=stars 按星数降序
+     * 规则：先爬取完成"新增"再爬取"涨星"，避免 GitHub API 限流
+     */
+    private void refreshWeekStars(String topicName, LocalDate today) {
+        String todayStr = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        LeaderboardSnapshot existing = snapshotMapper.selectByKey("github", topicName, "week", todayStr);
+        if (existing != null && existing.getDataJson() != null) {
+            log.debug("GitHub 涨星快照已存在，跳过: topic={}", topicName);
+            return;
+        }
+        try {
+            // 计算上周一日期
+            LocalDate monday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+            if (monday.equals(today)) monday = monday.minusWeeks(1);
+            String pushedAfter = monday.format(DateTimeFormatter.ISO_LOCAL_DATE);
+
+            StringBuilder q = new StringBuilder();
+            if (topicName != null && !topicName.isEmpty()) {
+                q.append("topic:").append(topicName).append(" ");
+            }
+            // pushed: 近期有代码推送 → 活跃仓库 → 更可能在涨星
+            q.append("pushed:>").append(pushedAfter).append(" stars:>10");
+
+            String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
+                    + "&sort=stars&order=desc&per_page=20";
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Accept", "application/vnd.github.v3+json");
+            if (githubToken != null && !githubToken.isEmpty()) {
+                headers.set("Authorization", "Bearer " + githubToken);
+            }
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+            ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
+
+            if (response.getBody() != null && response.getBody().containsKey("items")) {
+                @SuppressWarnings("unchecked")
+                List<Map<String, Object>> items = (List<Map<String, Object>>) response.getBody().get("items");
+                int totalCount = (int) response.getBody().getOrDefault("total_count", 0);
+
+                List<Map<String, Object>> records = new ArrayList<>();
+                for (Map<String, Object> item : items) {
+                    Map<String, Object> r = new LinkedHashMap<>();
+                    r.put("id", item.get("id"));
+                    r.put("name", item.get("name"));
+                    r.put("fullName", item.get("full_name"));
+                    r.put("description", item.getOrDefault("description", ""));
+                    r.put("htmlUrl", item.get("html_url"));
+                    r.put("language", item.getOrDefault("language", ""));
+                    r.put("stars", item.get("stargazers_count"));
+                    r.put("forks", item.get("forks_count"));
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> owner = (Map<String, Object>) item.get("owner");
+                    r.put("ownerName", owner != null ? owner.get("login") : "");
+                    r.put("ownerAvatar", owner != null ? owner.get("avatar_url") : "");
+                    records.add(r);
+                }
+
+                Map<String, Object> data = new LinkedHashMap<>();
+                data.put("total", totalCount);
+                data.put("records", records);
+
+                String json = toJson(data);
+                LeaderboardSnapshot snapshot = new LeaderboardSnapshot();
+                snapshot.setSource("github");
+                snapshot.setTopicName(topicName);
+                snapshot.setPeriod("week");
+                snapshot.setSnapshotDate(today);
+                snapshot.setDataJson(json);
+                snapshotMapper.insert(snapshot);
+                log.info("GitHub 涨星快照已保存: topic={}, period=week, pushed>{}", topicName, pushedAfter);
+
+                // RAG：本周涨星 Top 5 自动采集 README
+                if (topicName != null && documentService != null) {
+                    try { fetchAndIndexReadme(topicName, "week", records, 5); }
+                    catch (Exception e) { log.warn("[RAG] 涨星 README 采集异常 topic={}: {}", topicName, e.getMessage()); }
+                }
+            }
+        } catch (Exception e) {
+            log.error("GitHub 涨星快照失败 topic={}: {}", topicName, e.getMessage());
+        }
+    }
+
     // ==================== RAG README 自动采集 ====================
 
     private void fetchAndIndexReadme(String topicName, String period,
@@ -188,7 +280,8 @@ public class LeaderboardRefreshTask {
             String fullName = (String) records.get(i).get("fullName");
             if (fullName == null) continue;
 
-            String sourceRef = "week".equals(period) ? fullName + "|week" : fullName;
+            String sourceRef = ("new".equals(period) || "week".equals(period))
+                    ? fullName + "|" + period : fullName;
             if (documentService.existsBySourceRef(sourceRef)) continue;
 
             String content = fetchReadme(fullName);

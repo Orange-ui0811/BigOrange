@@ -2,7 +2,8 @@
   <div>
     <el-table :data="list" size="small" stripe v-loading="loading" empty-text="暂无用户">
       <el-table-column prop="id" label="ID" width="60" />
-      <el-table-column prop="username" label="用户名" min-width="120" />
+      <el-table-column prop="username" label="用户名" min-width="100" />
+      <el-table-column prop="email" label="邮箱" min-width="160" />
       <el-table-column prop="role" label="角色" width="80">
         <template #default="{row}">
           <el-tag :type="row.role==='ADMIN'?'danger':''" size="small">{{ row.role }}</el-tag>

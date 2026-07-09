@@ -15,6 +15,7 @@ import com.orangejd.pojo.vo.LoginVO;
 import com.orangejd.server.mapper.AccountMapper;
 import com.orangejd.server.mapper.UserProfileMapper;
 import com.orangejd.server.service.AuthService;
+import com.orangejd.server.service.MailService;
 import com.orangejd.server.service.QuotaService;
 import com.orangejd.server.service.impl.QuotaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -48,6 +51,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private QuotaService quotaService;
+    @Autowired
+    private MailService mailService;
 
     @Override
     public LoginVO adminLogin(LoginDTO loginDTO) {
@@ -89,6 +94,12 @@ public class AuthServiceImpl implements AuthService {
         Account existing = accountMapper.selectByUsername(registerDTO.getUsername());
         if (existing != null) {
             throw new BaseException(MessageConstant.USERNAME_EXISTS);
+        }
+
+        // 检查邮箱已注册（一个邮箱只能注册一个账号，侵权追溯用）
+        Account emailAccount = accountMapper.selectByEmail(registerDTO.getEmail());
+        if (emailAccount != null) {
+            throw new BaseException("该邮箱已注册，请直接登录");
         }
 
         // 校验邮箱验证码
@@ -149,6 +160,49 @@ public class AuthServiceImpl implements AuthService {
 
         // 更新为新密码
         accountMapper.updatePassword(currentId, passwordEncoder.encode(dto.getNewPassword()));
+    }
+
+    @Override
+    public void sendResetCode(String email) {
+        // 检查邮箱是否已注册
+        Account account = accountMapper.selectByEmail(email);
+        if (account == null) {
+            throw new BaseException("该邮箱未注册");
+        }
+        // 频率限制
+        if (redisTemplate != null && redisTemplate.hasKey("mail:reset:limit:" + email)) {
+            throw new BaseException("验证码已发送，请60秒后再试");
+        }
+        String code = String.format("%06d", new Random().nextInt(999999));
+        mailService.sendCode(email, code);
+        if (redisTemplate != null) {
+            redisTemplate.opsForValue().set("mail:reset:code:" + email, code, 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set("mail:reset:limit:" + email, "1", 60, TimeUnit.SECONDS);
+        }
+        log.info("密码重置验证码已发送 email={}", email);
+    }
+
+    @Override
+    public void resetPassword(String email, String code, String newPassword) {
+        // 验证码校验
+        if (redisTemplate != null) {
+            String cachedCode = redisTemplate.opsForValue().get("mail:reset:code:" + email);
+            if (cachedCode == null) {
+                throw new BaseException("验证码已过期，请重新获取");
+            }
+            if (!cachedCode.equals(code)) {
+                throw new BaseException("验证码错误");
+            }
+            redisTemplate.delete("mail:reset:code:" + email);
+            redisTemplate.delete("mail:reset:limit:" + email);
+        }
+        // 密码格式校验
+        if (newPassword == null || !newPassword.matches("^(?=.*[A-Za-z])(?=.*\\d).{6,}$")) {
+            throw new BaseException("密码至少6位且必须包含字母和数字");
+        }
+        Account account = accountMapper.selectByEmail(email);
+        accountMapper.updatePassword(account.getId(), passwordEncoder.encode(newPassword));
+        log.info("密码重置成功 email={}", email);
     }
 
     private LoginVO buildLoginVO(Account account, String secretKey, long ttl) {

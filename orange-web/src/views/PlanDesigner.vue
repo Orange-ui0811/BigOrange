@@ -388,19 +388,20 @@ const switchPhase = (n) => {
   border: 1px solid var(--border-orange);
   border-radius: 14px;
   background: #fff7ed;
-  flex-wrap: wrap;
+  overflow: hidden;
 }
 .phase-nav-item {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 10px;
+  padding: 8px 8px;
   border-radius: 10px;
   cursor: pointer;
   flex: 1;
   font-size: 12px;
   transition: all .15s;
   min-width: 0;
+  overflow: hidden;
 }
 .phase-nav-item:hover {
   background: #fff0e0;
@@ -441,11 +442,15 @@ const switchPhase = (n) => {
 .phase-nav-label {
   font-family: var(--font-mono);
   font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .phase-nav-status {
   font-family: var(--font-body);
   font-size: 10px;
   opacity: .7;
+  white-space: nowrap;
 }
 
 /* --- PHASE CONTENT --- */

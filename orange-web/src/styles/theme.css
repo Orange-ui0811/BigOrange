@@ -37,20 +37,25 @@
   /* ═══ 边框色系 ═══ */
   --border-orange:   #fed7aa;
   --border:          #fed7aa;
+  --border-weak:     rgba(254, 215, 170, 0.50);
   --border-light:    #f0ece6;
   --border-focus:    #f37021;
   --line:            #e5e7eb;
   --line-orange:     #fed7aa;
 
-  /* ═══ 像素投影 ═══ */
+  /* ═══ 表面色系 ═══ */
+  --surface-warm:    #fefaf5;
+  --card-featured:   #fffdf7;
+
+  /* ═══ 投影 ═══ */
   --shadow-pixel-xs:  2px 2px 0 #ffedd5;
   --shadow-pixel-sm:  3px 3px 0 #ffedd5;
   --shadow-pixel:     4px 4px 0 #ffedd5;
   --shadow-pixel-lg:  6px 6px 0 #ffedd5;
-  --shadow-card:      0 10px 30px rgba(31, 41, 55, 0.06);
-  --shadow-card-lg:   0 18px 50px rgba(121, 62, 20, 0.08);
-  --shadow-lift:      0 18px 40px rgba(154, 83, 28, 0.10);
-  --shadow-glow:      0 0 0 1px rgba(254, 215, 170, 0.85), 0 14px 36px rgba(243, 112, 33, 0.10);
+  --shadow-card:      0 8px 24px rgba(31, 41, 55, 0.05);
+  --shadow-card-lg:   0 14px 40px rgba(121, 62, 20, 0.07);
+  --shadow-lift:      0 16px 36px rgba(154, 83, 28, 0.09);
+  --shadow-glow:      0 0 0 1px rgba(254, 215, 170, 0.85), 0 12px 32px rgba(243, 112, 33, 0.08);
 
   /* ═══ 间距 (4px base) ═══ */
   --space-xs:   4px;
@@ -59,7 +64,8 @@
   --space-lg:   16px;
   --space-xl:   20px;
   --space-2xl:  24px;
-  --space-3xl:  32px;
+  --space-3xl:  28px;
+  --space-4xl:  32px;
 
   /* ═══ 字体 ═══ */
   --font-mono:   "Courier New", "SimHei", monospace;
@@ -361,16 +367,60 @@ body::after {
 }
 
 /* ============================================================
-   辅助工具类
+   卡片层次系统 — 三级视觉权重
    ============================================================ */
+
+/* Level 1 — 主卡片：暖色渐变 + 左侧强调线 */
+.card-featured {
+  background:
+    linear-gradient(135deg, rgba(255,237,213,.55), rgba(255,255,255,.96)),
+    repeating-linear-gradient(0deg, rgba(243,112,33,.04) 0, rgba(243,112,33,.04) 1px, transparent 1px, transparent 14px);
+  border: 1px solid var(--border-orange);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.card-featured:hover {
+  border-color: var(--brand-strong);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+/* Level 2 — 暖色卡片：浅暖底 + 弱边框 + 次级强调线 */
+.card-warm {
+  background: var(--surface-warm);
+  border: 1px solid var(--border-weak);
+  border-left: 3px solid var(--brand-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.card-warm:hover {
+  border-color: var(--border-orange);
+  border-left-color: var(--brand);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+/* Level 3 — 默认卡片：白底 + 弱边框 + 微强调线 */
+.card-default {
+  background: #fff;
+  border: 1px solid var(--border-weak);
+  border-left: 3px solid var(--border-weak);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.card-default:hover {
+  border-color: var(--border-orange);
+  border-left-color: var(--brand);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+/* 像素投影卡片（保留旧版兼容） */
 .oj-card-pixel {
   border: 1px solid var(--border-orange);
   background: var(--bg-card);
   box-shadow: var(--shadow-pixel);
-}
-.oj-card-pixel:hover {
-  box-shadow: var(--shadow-pixel-lg);
-  transform: translate(-2px, -2px);
 }
 .oj-glass {
   background: var(--bg-glass);
