@@ -4,6 +4,7 @@
       <button class="detail-back" @click="$router.push('/market')">返回发现</button>
 
       <div class="detail-layout">
+        <PageTour storageKey="reqdetail" :steps="reqdetailTour" />
         <!-- ═══ 主体内容 ═══ -->
         <article class="detail-main">
           <div class="detail-content">
@@ -78,8 +79,15 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
 const route=useRoute(); const router=useRouter()
+
+const reqdetailTour = [
+  { selector: '.info-grid', text: '这里展示需求的预算范围、期望周期和沟通方式，快速判断适不适合你。', expression: 'smile' },
+  { selector: '.deal-panel', text: '右侧可以联系发布者、收藏需求、查看发布者主页。感兴趣就点聊天聊聊吧～', expression: 'wink' },
+]
+
 const req=ref(null),loading=ref(false),contacting=ref(false)
 const contactPublisher = async () => {
   if (!req.value) return; contacting.value = true

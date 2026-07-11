@@ -1,5 +1,6 @@
 <template>
   <div class="publish-page">
+    <PageTour storageKey="publish" :steps="tourSteps" />
     <!-- ═══════ 选择页：发布作品 or 发布需求 ═══════ -->
     <template v-if="!showForm">
       <div class="publish-studio">
@@ -151,6 +152,7 @@
 <script setup>
 import { ref, reactive, watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import PageTour from '../components/PageTour.vue'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
 import { tradeEnabled } from '../stores/tradeMode'
@@ -158,6 +160,12 @@ import { tradeEnabled } from '../stores/tradeMode'
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
 const router = useRouter()
+const tourSteps = [
+  { selector: '.publish-choices', text: '选左边的「发布作品」展示你的 AI 产品，或选右边的「发布需求」找人帮你做。每边都列了要准备什么～', expression: 'wink' },
+  { selector: '.publish-note.strong', text: '发布的流程：填写内容→提交审核→审核通过→公开展示→有人感兴趣→聊天沟通。', expression: 'smile' },
+  { selector: '.publish-note:last-child', text: '当前 MVP 只做作品展示、需求展示、审核、收藏、评论和聊天。后续会逐步完善交易和定制功能～', expression: 'smile' },
+]
+
 const isEdit = !!route.params.id
 const showForm = computed(() => isEdit || !!route.query.type)
 const tab = ref(isEdit ? (route.params.type === 'work' ? 'work' : 'requirement') : (route.query.type || 'work'))

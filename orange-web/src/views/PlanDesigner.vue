@@ -1,5 +1,6 @@
 <template>
   <div class="plan-app">
+    <PageTour storageKey="plan" :steps="tourSteps" />
     <div class="plan-main">
       <!-- Compact Head -->
       <div class="compact-head">
@@ -100,10 +101,18 @@
 
 <script setup>
 import { h, ref, reactive, computed, nextTick, onMounted } from 'vue'
+import PageTour from '../components/PageTour.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { marked } from 'marked'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
+
+const tourSteps = [
+  { selector: '.plan-main textarea, .plan-main .el-textarea__inner', text: '在这里写下你的项目想法！描述清楚想做什么、有什么特殊需求，AI 会帮你规划得更精准～', expression: 'smile' },
+  { selector: '.mode-select-row', text: '选「详细模式」让 AI 深度生成完整的六阶段方案，选「精简模式」快速出框架。', expression: 'wink' },
+  { selector: '.phase-nav', text: '这六个阶段是 AI 帮你一步步规划的：想法→需求→标准→风险→任务→匹配。点任意阶段可以切换查看～', expression: 'sparkle' },
+  { selector: '.btn-row', text: '不满意？点「编辑」自己改内容，点「重新生成」让 AI 再来一次，点「保存方案」存到记录里随时回看。', expression: 'smile' },
+]
 
 const summary = ref('')
 const extra = ref('')

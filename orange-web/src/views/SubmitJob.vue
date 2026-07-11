@@ -1,5 +1,6 @@
 <template>
   <div class="jobs-page">
+    <PageTour storageKey="submitjob" :steps="jobTour" />
     <!-- Back -->
     <button class="detail-back" @click="$router.push('/ai')">返回 AI 工具</button>
 
@@ -117,7 +118,13 @@ import { ref, computed, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { marked } from 'marked'
+import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
+
+const jobTour = [
+  { selector: '.panel-left', text: '先选技术方向（如 AI Agent、RAG），再选具体岗位，就能看到详细的 JD 描述～', expression: 'smile' },
+  { selector: '.panel-right', text: '右边是能力参考面板：展示该岗位需要的技术栈、作品证据和学习重点。', expression: 'wink' },
+]
 import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
 
 const router = useRouter()

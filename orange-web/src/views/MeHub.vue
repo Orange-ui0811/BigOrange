@@ -1,5 +1,6 @@
 <template>
   <div class="me-hub">
+    <PageTour storageKey="mehub" :steps="mehubTour" />
     <!-- 摘要 -->
     <div class="profile-summary">
       <div>
@@ -61,7 +62,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
+import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
+
+const mehubTour = [
+  { selector: '.profile-summary', text: '顶部是你的个人信息和快捷操作：查看公开主页、编辑个人资料。', expression: 'smile' },
+  { selector: '.hub-card.featured', text: '「我的作品」是最常用的入口。在这里管理已发布、草稿、上下架状态。', expression: 'love' },
+  { selector: '.hub-grid', text: '六个大卡片覆盖所有个人管理功能：作品、订单、收藏、历史、配额、设置。点什么进什么～', expression: 'smile' },
+]
 
 const me = ref({ username: '', nickname: '' })
 

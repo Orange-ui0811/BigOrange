@@ -1,5 +1,6 @@
 <template>
   <div>
+    <PageTour storageKey="mequota" :steps="quotaTour" />
     <h3 class="page-title">我的配额</h3>
     <p class="page-subtitle">管理 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" /> 余额，用于 AI 趋势分析和方案设计</p>
 
@@ -89,7 +90,13 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
+import PageTour from '../components/PageTour.vue'
 import { getBalance, redeemCode, getLog, createEpayOrder } from '../api/quota'
+
+const quotaTour = [
+  { selector: '.balance-row', text: '这里是你的 🍊 余额！大卡片显示剩余数量，旁边是对应的人民币价值。', expression: 'love' },
+  { selector: '.action-row', text: '左边输入兑换码兑换，右边选金额在线充值。消费记录在下方表格里随时查看～', expression: 'smile' },
+]
 
 const balance = ref(0)
 const code = ref('')

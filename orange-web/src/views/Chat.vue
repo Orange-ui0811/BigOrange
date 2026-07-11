@@ -1,5 +1,6 @@
 <template>
   <div class="message-layout">
+    <PageTour storageKey="chat" :steps="chatTour" />
     <!-- ═══ 左：会话列表 ═══ -->
     <aside class="panel conv-panel">
       <h3>会话</h3>
@@ -108,7 +109,14 @@
 import { ref, nextTick, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
+
+const chatTour = [
+  { selector: '.conv-panel', text: '左边是会话列表。点击任意会话进入聊天，橙色角标提醒你有新消息。', expression: 'wink' },
+  { selector: '.chat-input-row', text: '在这里输入消息，回车发送。聊得差不多可以点「发报价」创建订单～', expression: 'smile' },
+  { selector: '.summary-panel', text: '右边面板显示当前沟通状态：关联了什么内容、需求范围确认了没、下一步该做什么。', expression: 'smile' },
+]
 import { unreadCount } from '../stores/unread'
 import { tradeEnabled } from '../stores/tradeMode'
 
@@ -168,6 +176,11 @@ const openConv = async (c) => {
     if (msgRes.code === 1) messages.value = [...(msgRes.data || [])].reverse()
     if (quoteRes.code === 1) quotes.value = quoteRes.data || []
     await request.put(`/app/message/${c.id}/read`)
+    // 同步更新侧边栏未读数
+    if (c.unreadCount) {
+      chatUnread.value = Math.max(0, chatUnread.value - c.unreadCount)
+      c.unreadCount = 0
+    }
     scrollBottom()
   } catch {}
 }

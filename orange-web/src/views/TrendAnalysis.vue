@@ -1,5 +1,7 @@
 <template>
   <div>
+    <PageTour storageKey="trend" :steps="tourSteps" />
+
     <!-- Compact Head -->
     <div class="compact-head">
       <div>
@@ -127,7 +129,7 @@
       <!-- 智能分析面板 -->
       <div class="mt-16">
         <!-- 步骤式表单卡片 -->
-        <div class="orange-form-card">
+        <div class="orange-form-card" data-tour="form-panel">
           <!-- 标题栏 + 历史记录 -->
           <div class="form-header-row">
             <div>
@@ -359,6 +361,7 @@
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { h } from 'vue'
 import { useRouter } from 'vue-router'
+import PageTour from '../components/PageTour.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
@@ -404,6 +407,15 @@ const aiReply = ref('')
 const aiReplyHtml = ref('')
 const aiLoading = ref(false)
 const aiError = ref('')
+
+const tourSteps = [
+  { selector: '.graph-card', text: '这是 Topic 全景图！圆圈代表技术方向，越大越热门～ 点击圆圈看详情，连线表示它们共享编程语言。试着拖拽和缩放看看！', expression: 'curious' },
+  { selector: '.card-header-row .el-radio-group', text: '点这里可以切换本周和上周的数据，对比两个时段的热度变化，看哪个方向在上升～', expression: 'wink' },
+  { selector: '.detail-card', text: '点击全景图里的圆圈后，这里会显示那个 Topic 的详细信息：Top 仓库、语言分布、趋势洞察。', expression: 'smile' },
+  { selector: '.insights-result-card', text: 'AI 分析完成后，这里会出现发展趋势、前景预测和热门仓库推荐～ 往下滚动查看完整结果。', expression: 'sparkle' },
+  { selector: '.trend-tabs', text: '三个 Tab 切换模式：精准推荐看图谱+填表单，自由提问直接问 AI，工作能力看岗位要求。', expression: 'smile' },
+  { selector: '[data-tour="form-panel"]', text: '这是智能分析面板！选好方向、目的、编程基础和时间投入，点「开始分析」AI 会给你一份专属的 Vibe Coding 项目推荐～', expression: 'sparkle' },
+]
 
 const trendTab = ref('v2')
 const jobDirections = ref([])

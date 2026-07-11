@@ -5,6 +5,7 @@
       <button class="detail-back" @click="$router.push('/market')">返回发现</button>
 
       <div class="detail-layout">
+        <PageTour storageKey="workdetail" :steps="workdetailTour" />
         <!-- ═══ 主体内容 ═══ -->
         <article class="detail-main">
           <!-- 封面区 -->
@@ -129,8 +130,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
 import { tradeEnabled } from '../stores/tradeMode'
+
+const workdetailTour = [
+  { selector: '.detail-cover', text: '顶部是作品封面和演示。有链接的话直接在线体验这个作品的功能～', expression: 'curious' },
+  { selector: '.deal-panel', text: '右侧操作面板：联系作者、收藏作品、查看作者主页。点「进入聊天咨询」开始沟通。', expression: 'wink' },
+  { selector: '.comment-section', text: '底部评论区：看看别人怎么评价的，也可以留言和作者交流！', expression: 'smile' },
+]
+
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route=useRoute(); const router=useRouter()
 const work=ref(null),loading=ref(false),favd=ref(false),comments=ref([]),cmtText=ref(''),contacting=ref(false)

@@ -1,5 +1,6 @@
 <template>
   <div class="ai-hub">
+    <PageTour storageKey="aihub" :steps="tourSteps" />
     <!-- ═══ Hero ═══ -->
     <div class="hub-hero">
       <div>
@@ -93,7 +94,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import PixelOrangeLogo from '../components/PixelOrangeLogo.vue'
+import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
+
+const tourSteps = [
+  { selector: '.hub-hero, .ticker-row:first-child', text: '这是 AI 工具入口页！上面滚动条展示 GitHub 最火的项目，下面三个卡片是趋势分析、方案设计和工作能力参考。', expression: 'wink' },
+  { selector: '.ticker-row', text: '这两行滚动条分别是本周最火和全时段最火的项目，点一下进入榜单看完整排名。', expression: 'smile' },
+  { selector: '.hub-grid', text: '三个入口：趋势分析看方向热度、方案设计做项目规划、工作能力参考看岗位要求。点进去试试吧！', expression: 'sparkle' },
+]
 
 const tickerItems = ref([])
 const tickerAllItems = ref([])

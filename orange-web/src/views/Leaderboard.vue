@@ -1,5 +1,6 @@
 <template>
   <div class="leaderboard-page">
+    <PageTour storageKey="leaderboard" :steps="tourSteps" />
     <!-- Compact Head -->
     <div class="compact-head">
       <div>
@@ -117,9 +118,17 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
 
 const router = useRouter()
+
+const tourSteps = [
+  { selector: '.leaderboard-filters', text: '切换数据源看本网站排名或 GitHub 热门仓库。选时段看全时段/本周涨星/本周新增。GitHub 专属「本周新增」可以看到刚出炉的项目！', expression: 'wink' },
+  { selector: '.leaderboard-tabs', text: '本网站榜单分作品和创作者两个维度，分别看哪些作品最受欢迎、哪些创作者最高产。', expression: 'smile' },
+  { selector: '.rank-grid, .rank-card', text: '点击任意卡片跳转到作品详情或 GitHub 仓库。排名越靠前越热门，看看有没有你感兴趣的方向～', expression: 'sparkle' },
+]
+
 const source = ref('local')
 const period = ref('all')
 const category = ref(null)
