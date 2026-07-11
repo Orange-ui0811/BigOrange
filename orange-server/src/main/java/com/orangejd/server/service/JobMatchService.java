@@ -22,6 +22,7 @@ public class JobMatchService {
 
     @Autowired(required = false) private VectorStore vectorStore;
     @Autowired private QuotaServiceImpl quotaService;
+    @Autowired private PricingService pricingService;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String endpoint;
@@ -38,7 +39,7 @@ public class JobMatchService {
 
         // 预扣
         if (accountId != null && accountId > 0) {
-            try { quotaService.consume(accountId, 50, "岗位匹配", requestId); }
+            try { int cost = pricingService.getCost("ai:match"); quotaService.consume(accountId, cost, "岗位匹配", requestId); }
             catch (Exception e) { throw new RuntimeException(e.getMessage()); }
         }
 

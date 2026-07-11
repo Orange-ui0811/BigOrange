@@ -36,6 +36,9 @@ public class AppPlanController {
     @Autowired
     private com.orangejd.server.service.QuotaService quotaService;
 
+    @Autowired
+    private com.orangejd.server.service.PricingService pricingService;
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     private static final String[] PHASE_TITLES = {
@@ -62,7 +65,8 @@ public class AppPlanController {
         if (accountId != null && accountId > 0) {
             requestId = "plan_p" + phase + "_" + accountId + "_" + System.currentTimeMillis();
             try {
-                int balance = quotaService.consume(accountId, 40, "方案设计 Phase " + phase, requestId);
+                int cost = pricingService.getCost("ai:plan");
+                int balance = quotaService.consume(accountId, cost, "方案设计 Phase " + phase, requestId);
                 consumed = true;
             } catch (Exception e) {
                 return Result.error(e.getMessage());

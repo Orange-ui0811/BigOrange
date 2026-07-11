@@ -4,7 +4,7 @@
       <template #content><span style="font-weight:600">{{ detail.title || '作品详情' }}</span></template>
     </el-page-header>
     <el-card v-if="detail.id" shadow="never" style="border-radius:12px">
-      <img v-if="detail.coverUrl" :src="API + detail.coverUrl" style="width:100%;max-height:360px;object-fit:cover;border-radius:8px;margin-bottom:16px" />
+      <img v-if="detail.coverUrl" :src="detail.coverUrl" style="width:100%;max-height:360px;object-fit:cover;border-radius:8px;margin-bottom:16px" />
       <el-descriptions :column="2" border size="small">
         <el-descriptions-item label="ID">{{ detail.id }}</el-descriptions-item>
         <el-descriptions-item label="标题">{{ detail.title }}</el-descriptions-item>

@@ -348,17 +348,21 @@
       </el-input>
       <div v-if="aiReply" class="v1-reply" v-html="aiReplyHtml"></div>
       <div v-if="aiError" class="v1-error">{{ aiError }}</div>
-      <p v-if="aiReply" class="v1-disclaimer">以上分析由 AI 生成，仅供参考。每次提问消耗 50 segments。</p>
+      <p v-if="aiReply" class="v1-disclaimer">
+        以上分析由 AI 生成，仅供参考。每次提问消耗 50 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" />
+      </p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { h } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import * as echarts from 'echarts'
 import { marked } from 'marked'
+import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
 import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
 
@@ -479,7 +483,13 @@ const startJuicing = async () => {
   if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; currentStep.value = 0; return }
   // 消费确认
   try {
-    await ElMessageBox.confirm('本次分析将消耗 50 segments', '确认分析', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' })
+    await ElMessageBox.confirm(
+      h('span', { style: 'display:flex;align-items:center;gap:6px' }, [
+        '本次分析将消耗 50 ',
+        h(PixelOrangeSlice, { size: 16 })
+      ]),
+      '确认分析', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
+    )
   } catch { return }
   juicing.value = true; analyzing.value = true; v2Error.value = ''; v2Result.value = null
   squeezeText.value = '🍊 正在收集数据...'; let idx = 0
@@ -678,7 +688,13 @@ const importToPlan = (r) => {
 
 const askAI = async () => {
   if (!aiQuestion.value.trim()) { aiError.value = '请输入分析问题'; return }
-  try { await ElMessageBox.confirm('本次提问将消耗 50 segments', '确认发送', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }) } catch { return }
+  try { await ElMessageBox.confirm(
+    h('span', { style: 'display:flex;align-items:center;gap:6px' }, [
+      '本次提问将消耗 50 ',
+      h(PixelOrangeSlice, { size: 16 })
+    ]),
+    '确认发送', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
+  ) } catch { return }
   aiLoading.value = true; aiError.value = ''; aiReply.value = ''; aiReplyHtml.value = ''
   try {
     const r = await request.post('/app/trend/analyze', {

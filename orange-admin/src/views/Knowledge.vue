@@ -34,7 +34,7 @@
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
               <span style="font-weight:600;font-size:14px;color:#e65100;cursor:pointer" @click="openDetail(doc)">{{ doc.source === 'GITHUB' ? '📦' : '📄' }} {{ doc.title }}</span>
               <el-tag size="small" :type="doc.source==='GITHUB'?'success':doc.source==='JOB_POSTING'?'danger':''">{{ doc.source==='GITHUB'?'GitHub采集':doc.source==='JOB_POSTING'?'岗位招聘':'手动上传' }}</el-tag>
-              <el-tag size="small" :type="doc.period==='week'?'warning':'info'">{{ doc.period==='week'?'30天后清理':'永久' }}</el-tag>
+              <el-tag size="small" :type="doc.period==='week'||doc.period==='new'?'warning':'info'">{{ doc.period==='week'||doc.period==='new'?'30天后清理':'永久' }}</el-tag>
             </div>
             <div style="color:#909399;font-size:12px">{{ doc.chunkCount }} 个切片 <el-divider direction="vertical" /> {{ doc.createTime || '-' }}</div>
           </div>

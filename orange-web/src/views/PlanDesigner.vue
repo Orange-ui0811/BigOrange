@@ -99,9 +99,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, nextTick, onMounted } from 'vue'
+import { h, ref, reactive, computed, nextTick, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { marked } from 'marked'
+import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
 
 const summary = ref('')
@@ -159,7 +160,10 @@ const onPhaseJump = (n) => { phaseError.value = ''; matchResult.value = null }
 
 const doJobMatch = async () => {
   const planContent = phases[4].content + '\n\n方案概要：' + phases[0].content.substring(0, 200)
-  try { await ElMessageBox.confirm('匹配岗位将消耗 50 segments', '确认', { confirmButtonText:'确认',cancelButtonText:'取消',type:'info' }) } catch { return }
+  try { await ElMessageBox.confirm(
+    h('span', { style: 'display:flex;align-items:center;gap:6px' }, ['匹配岗位将消耗 50 ', h(PixelOrangeSlice, { size: 16 })]),
+    '确认', { confirmButtonText:'确认',cancelButtonText:'取消',type:'info' }
+  ) } catch { return }
   const p5 = phases[5]; p5.generating = true
   try {
     const r = await request.post('/app/job/match', { planContent: planContent }, { timeout: 120000 })
@@ -184,7 +188,10 @@ const generatePhase = async (n) => {
     return
   }
   if (n === 6) { await doJobMatch(); return }
-  try { await ElMessageBox.confirm('本阶段将消耗 40 segments', '确认生成', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }) } catch { return }
+  try { await ElMessageBox.confirm(
+    h('span', { style: 'display:flex;align-items:center;gap:6px' }, ['本阶段将消耗 40 ', h(PixelOrangeSlice, { size: 16 })]),
+    '确认生成', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
+  ) } catch { return }
   const p = phases[n-1]
   if (!p) { phaseError.value = 'Phase ' + n + ' 不存在, phases长度=' + phases.length; return }
   p.generating = true; phaseError.value = ''

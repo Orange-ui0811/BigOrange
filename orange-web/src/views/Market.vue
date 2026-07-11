@@ -60,7 +60,7 @@
         >
           <!-- 封面 -->
           <div class="work-cover" :class="coverVariant(item)">
-            <img v-if="item.coverUrl" :src="API+item.coverUrl" class="cover-img" />
+            <img v-if="item.coverUrl" :src="item.coverUrl" class="cover-img" />
             <div v-else class="window">
               <i style="width:62%"></i><i style="width:86%"></i><i style="width:48%"></i><i style="width:74%"></i>
             </div>

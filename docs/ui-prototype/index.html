@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrangeJD UI Prototype</title>
+  <style>
+    :root {
+      --orange: #f37021;
+      --orange-deep: #ea580c;
+      --cream: #fff7ed;
+      --cream-2: #ffedd5;
+      --orange-line: #fed7aa;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --soft: #9ca3af;
+      --line: #e5e7eb;
+      --admin-bg: #f8fafc;
+      --white: #ffffff;
+      --green: #16a34a;
+      --yellow: #f59e0b;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --shadow: 0 18px 50px rgba(154, 83, 28, 0.10);
+      --shadow-soft: 0 10px 30px rgba(31, 41, 55, 0.08);
+      --radius: 18px;
+      --mono: "Fira Code", "JetBrains Mono", Consolas, monospace;
+      --sans: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(243, 112, 33, 0.18), transparent 30%),
+        radial-gradient(circle at 82% 0%, rgba(245, 158, 11, 0.14), transparent 28%),
+        linear-gradient(135deg, #fffaf3 0%, #fff7ed 46%, #f8fafc 100%);
+      min-height: 100vh;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    .prototype-shell {
+      min-height: 100vh;
+      padding: 28px;
+    }
+
+    .prototype-topbar {
+      max-width: 1280px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--orange-deep);
+    }
+
+    .pixel-orange {
+      width: 42px;
+      height: 42px;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 8px 0 rgba(92, 38, 15, 0.14));
+      flex: 0 0 auto;
+    }
+
+    .switcher {
+      display: flex;
+      gap: 8px;
+      padding: 7px;
+      border: 1px solid rgba(254, 215, 170, 0.9);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .switcher button {
+      border: 0;
+      padding: 10px 16px;
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      transition: 180ms ease;
+    }
+
+    .switcher button.active {
+      color: #fff;
+      background: var(--orange);
+      box-shadow: 0 10px 24px rgba(243, 112, 33, 0.28);
+    }
+
+    .page {
+      display: none;
+      max-width: 1280px;
+      margin: 0 auto;
+      animation: rise 260ms ease both;
+    }
+
+    .page.active { display: block; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    .nav-card {
+      border: 1px solid rgba(254, 215, 170, 0.84);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+    }
+
+    .market-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 22px;
+    }
+
+    .market-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .market-links a {
+      padding: 9px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .market-links a.current {
+      color: var(--orange-deep);
+      background: var(--cream-2);
+      font-weight: 700;
+    }
+
+    .btn {
+      border: 0;
+      min-height: 40px;
+      padding: 0 16px;
+      border-radius: 13px;
+      color: var(--text);
+      background: var(--white);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 180ms ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn.primary {
+      color: #fff;
+      border-color: var(--orange);
+      background: var(--orange);
+      box-shadow: 0 12px 24px rgba(243, 112, 33, 0.26);
+    }
+
+    .btn.ghost {
+      color: var(--orange-deep);
+      border-color: var(--orange-line);
+      background: #fffaf5;
+    }
+
+    .hero {
+      padding: 48px 42px 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 34px;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(255, 247, 237, 0.95), rgba(255, 255, 255, 0.72)),
+        repeating-linear-gradient(0deg, rgba(243, 112, 33, 0.04) 0, rgba(243, 112, 33, 0.04) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(90deg, rgba(243, 112, 33, 0.035) 0, rgba(243, 112, 33, 0.035) 1px, transparent 1px, transparent 12px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--orange-line);
+      border-radius: 999px;
+      color: var(--orange-deep);
+      background: #fffaf5;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      margin: 18px 0 14px;
+      font-family: var(--mono);
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.02;
+      letter-spacing: -0.075em;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .search-panel {
+      margin-top: 26px;
+      display: flex;
+      gap: 10px;
+      padding: 9px;
+      border: 1px solid var(--orange-line);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 15px 40px rgba(243, 112, 33, 0.12);
+    }
+
+    .search-panel input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 0 12px;
+      color: var(--text);
+    }
+
+    .hot-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      background: #f9fafb;
+      border: 1px solid var(--line);
+    }
+
+    .tag.orange { color: var(--orange-deep); background: var(--cream-2); border-color: var(--orange-line); }
+    .tag.green { color: var(--green); background: #ecfdf5; border-color: #bbf7d0; }
+    .tag.yellow { color: #92400e; background: #fffbeb; border-color: #fde68a; }
+    .tag.blue { color: var(--blue); background: #eff6ff; border-color: #bfdbfe; }
+    .tag.red { color: var(--red); background: #fef2f2; border-color: #fecaca; }
+
+    .hero-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--orange-line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mini-card strong {
+      display: block;
+      font-family: var(--mono);
+      margin-bottom: 6px;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 24px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(254, 215, 170, 0.7);
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: var(--mono);
+      letter-spacing: -0.055em;
+      font-size: 26px;
+    }
+
+    .section-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .filter-pill {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .filter-pill.active {
+      color: var(--orange-deep);
+      border-color: var(--orange-line);
+      background: var(--cream-2);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .work-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(229, 231, 235, 0.92);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      transition: 180ms ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--orange-line);
+    }
+
+    .cover {
+      height: 164px;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.65), transparent 24%),
+        linear-gradient(135deg, #fed7aa, #f37021);
+    }
+
+    .cover.dark {
+      background:
+        radial-gradient(circle at 26% 22%, rgba(255,255,255,.18), transparent 25%),
+        linear-gradient(135deg, #1f2937, #ea580c);
+    }
+
+    .cover.blue {
+      background:
+        radial-gradient(circle at 24% 20%, rgba(255,255,255,.5), transparent 22%),
+        linear-gradient(135deg, #dbeafe, #2563eb);
+    }
+
+    .code-window {
+      height: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.5);
+      background: rgba(255,255,255,.72);
+      padding: 14px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .code-window i {
+      display: block;
+      height: 9px;
+      border-radius: 99px;
+      background: rgba(31, 41, 55, 0.16);
+    }
+
+    .work-body {
+      padding: 18px;
+    }
+
+    .work-body h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .work-body p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--soft);
+      font-size: 12px;
+    }
+
+    .price {
+      color: var(--orange-deep);
+      font-family: var(--mono);
+      font-weight: 800;
+    }
+
+    .detail-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .detail-hero {
+      min-height: 360px;
+      padding: 24px;
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(255, 237, 213, 0.85), rgba(255,255,255,.72)),
+        repeating-linear-gradient(0deg, rgba(243,112,33,.05) 0, rgba(243,112,33,.05) 1px, transparent 1px, transparent 14px);
+      border: 1px solid var(--orange-line);
+      box-shadow: var(--shadow);
+    }
+
+    .browser-mock {
+      min-height: 300px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid rgba(229, 231, 235, .96);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .browser-top {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 14px;
+      background: #fff7ed;
+      border-bottom: 1px solid var(--orange-line);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); }
+    .dot:nth-child(2) { background: var(--yellow); }
+    .dot:nth-child(3) { background: var(--green); }
+
+    .browser-body {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .mock-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mock-block {
+      min-height: 92px;
+      border-radius: 16px;
+      background: #f9fafb;
+      border: 1px solid var(--line);
+    }
+
+    .copy-card {
+      margin-top: 18px;
+      padding: 24px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid rgba(229, 231, 235, .9);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .copy-card h2,
+    .side-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--mono);
+      letter-spacing: -0.045em;
+    }
+
+    .copy-card p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .side-card {
+      position: sticky;
+      top: 24px;
+      padding: 22px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid var(--orange-line);
+      box-shadow: var(--shadow);
+    }
+
+    .author {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--orange), #fbbf24);
+      border: 3px solid #fff7ed;
+    }
+
+    .author strong { display: block; }
+    .author span { color: var(--muted); font-size: 13px; }
+
+    .sale-option {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .sale-option.active {
+      border-color: var(--orange-line);
+      background: #fff7ed;
+    }
+
+    .admin-page {
+      background: var(--admin-bg);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      min-height: 720px;
+    }
+
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      padding: 22px;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      min-height: 720px;
+    }
+
+    .sidebar .brand { margin-bottom: 28px; }
+
+    .side-nav {
+      display: grid;
+      gap: 8px;
+    }
+
+    .side-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .side-nav a.current {
+      color: var(--orange-deep);
+      background: var(--cream-2);
+    }
+
+    .admin-main {
+      padding: 24px;
+    }
+
+    .admin-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .admin-head h1 {
+      margin: 0;
+      font-family: var(--mono);
+      letter-spacing: -0.05em;
+      font-size: 30px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--mono);
+      font-size: 30px;
+      letter-spacing: -0.05em;
+    }
+
+    .audit-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .table-card, .drawer-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .table-toolbar {
+      padding: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .field {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      background: #f9fafb;
+    }
+
+    .content-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .thumb {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--cream-2), var(--orange));
+    }
+
+    .content-cell strong { display: block; }
+    .content-cell span { color: var(--soft); font-size: 12px; }
+
+    .drawer-card {
+      padding: 18px;
+    }
+
+    .risk-box {
+      padding: 14px;
+      border-radius: 16px;
+      color: #92400e;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      line-height: 1.7;
+      font-size: 13px;
+      margin: 14px 0;
+    }
+
+    .drawer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn.danger {
+      color: var(--red);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    @media (max-width: 980px) {
+      .prototype-shell { padding: 18px; }
+      .prototype-topbar { align-items: stretch; flex-direction: column; }
+      .switcher { overflow-x: auto; justify-content: flex-start; }
+      .hero,
+      .detail-layout,
+      .admin-layout,
+      .audit-shell {
+        grid-template-columns: 1fr;
+      }
+      .work-grid,
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .sidebar { min-height: auto; }
+      .side-card { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .market-nav { flex-direction: column; align-items: flex-start; }
+      .market-links { overflow-x: auto; width: 100%; }
+      .hero { padding: 28px 18px; }
+      .search-panel { flex-direction: column; }
+      .work-grid,
+      .stat-grid,
+      .mock-row {
+        grid-template-columns: 1fr;
+      }
+      .section { padding: 18px; }
+      .table-card { overflow-x: auto; }
+      table { min-width: 760px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="prototype-shell">
+    <header class="prototype-topbar">
+      <div class="brand">
+        <svg class="pixel-orange" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="17" y="3" width="5" height="4" fill="#5c260f"/>
+          <rect x="19" y="6" width="3" height="7" fill="#5c260f"/>
+          <rect x="19" y="7" width="2" height="6" fill="#7bd927"/>
+          <rect x="22" y="6" width="10" height="3" fill="#5c260f"/>
+          <rect x="21" y="9" width="12" height="4" fill="#5c260f"/>
+          <rect x="22" y="8" width="9" height="4" fill="#7bd927"/>
+          <rect x="8" y="9" width="21" height="2" fill="#5c260f"/>
+          <rect x="5" y="12" width="29" height="3" fill="#5c260f"/>
+          <rect x="3" y="15" width="33" height="13" fill="#5c260f"/>
+          <rect x="5" y="11" width="27" height="18" fill="#ff9f2e"/>
+          <rect x="7" y="13" width="25" height="17" fill="#ffa934"/>
+          <rect x="4" y="19" width="2" height="8" fill="#ff9f2e"/>
+          <rect x="32" y="18" width="2" height="8" fill="#ff7c2a"/>
+          <rect x="10" y="15" width="3" height="3" fill="#fff1c8"/>
+          <rect x="8" y="18" width="3" height="5" fill="#fff1c8"/>
+          <rect x="14" y="21" width="2" height="3" fill="#5c260f"/>
+          <rect x="24" y="21" width="2" height="3" fill="#5c260f"/>
+          <rect x="18" y="28" width="1" height="1" fill="#5c260f"/>
+          <rect x="22" y="28" width="1" height="1" fill="#5c260f"/>
+          <rect x="19" y="29" width="1" height="1" fill="#5c260f"/>
+          <rect x="21" y="29" width="1" height="1" fill="#5c260f"/>
+          <rect x="20" y="30" width="1" height="1" fill="#5c260f"/>
+          <rect x="7" y="30" width="27" height="3" fill="#5c260f"/>
+          <rect x="9" y="29" width="23" height="3" fill="#ff8f25"/>
+          <rect x="8" y="36" width="24" height="2" fill="rgba(92,38,15,.45)"/>
+          <rect x="5" y="35" width="7" height="1" fill="rgba(92,38,15,.35)"/>
+          <rect x="28" y="35" width="7" height="1" fill="rgba(92,38,15,.35)"/>
+        </svg>
+        <div>
+          <div>OrangeJD</div>
+          <small style="color: var(--muted); font-family: var(--sans); font-weight: 600;">UI prototype v0.1</small>
+        </div>
+      </div>
+      <nav class="switcher" aria-label="原型页面切换">
+        <button class="active" data-page="home">首页/作品广场</button>
+        <button data-page="detail">作品详情</button>
+        <button data-page="audit">审核后台</button>
+      </nav>
+    </header>
+
+    <section id="home" class="page active">
+      <div class="nav-card">
+        <nav class="market-nav">
+          <div class="brand">
+            <svg class="pixel-orange" viewBox="0 0 40 40" aria-hidden="true">
+              <rect x="8" y="10" width="24" height="23" rx="0" fill="#f37021"/>
+              <rect x="14" y="20" width="3" height="4" fill="#5c260f"/>
+              <rect x="24" y="20" width="3" height="4" fill="#5c260f"/>
+              <rect x="18" y="27" width="5" height="2" fill="#5c260f"/>
+              <rect x="19" y="29" width="3" height="2" fill="#5c260f"/>
+            </svg>
+            OrangeJD
+          </div>
+          <div class="market-links">
+            <a class="current" href="#">作品</a>
+            <a href="#">需求</a>
+            <a href="#">创作者</a>
+            <a href="#">AI 榜单</a>
+            <a href="#">消息</a>
+          </div>
+          <button class="btn primary">发布作品/需求</button>
+        </nav>
+        <div class="hero">
+          <div>
+            <span class="eyebrow">轻像素创作者集市 · 源码/使用权/部署服务</span>
+            <h1>把你的 vibe coding 作品，变成可被发现的项目资产。</h1>
+            <p>OrangeJD 连接 AI 创作者和真实需求方。展示作品、发布需求、聊天协商、定金尾款交易，让灵感从 demo 走向交付。</p>
+            <div class="search-panel">
+              <input aria-label="搜索作品、需求、作者或技术栈" placeholder="搜索作品、需求、作者或技术栈，例如 AI 简历 / 小程序 / RAG" />
+              <button class="btn primary">搜索</button>
+            </div>
+            <div class="hot-tags">
+              <span class="tag orange">AI 工作流</span>
+              <span class="tag">SaaS 模板</span>
+              <span class="tag">部署服务</span>
+              <span class="tag green">已审核作品</span>
+              <span class="tag blue">React / Vue</span>
+            </div>
+          </div>
+          <div class="hero-stack">
+            <div class="mini-card">
+              <strong>本周精选作品</strong>
+              <span>42 个可购买源码，18 个支持部署服务，平均响应 21 分钟。</span>
+            </div>
+            <div class="mini-card">
+              <strong>可信交易提示</strong>
+              <span>源码、使用权、部署服务分开展示；定金与尾款在沟通后确认。</span>
+            </div>
+            <div class="mini-card">
+              <strong>需求大厅</strong>
+              <span>从预算范围开始沟通，适合定制工具、官网、管理后台和 AI 应用。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>作品广场</h2>
+            <p>让封面、价格、作者和交易方式先说话。</p>
+          </div>
+          <button class="btn ghost">查看全部</button>
+        </div>
+        <div class="filter-row">
+          <button class="filter-pill active">全部</button>
+          <button class="filter-pill">源码</button>
+          <button class="filter-pill">使用权</button>
+          <button class="filter-pill">部署服务</button>
+          <button class="filter-pill">收藏最多</button>
+          <button class="filter-pill">价格升序</button>
+        </div>
+        <div class="work-grid">
+          <article class="work-card">
+            <div class="cover"><div class="code-window"><i style="width: 62%"></i><i style="width: 86%"></i><i style="width: 48%"></i><i style="width: 74%"></i></div></div>
+            <div class="work-body">
+              <div class="hot-tags"><span class="tag orange">源码</span><span class="tag green">已审核</span></div>
+              <h3>AI 简历诊断与岗位匹配工具</h3>
+              <p>上传简历后生成岗位匹配建议，适合教育/求职平台二次开发。</p>
+              <div class="meta-row"><span>by PixelCat · 收藏 128</span><strong class="price">¥399 起</strong></div>
+            </div>
+          </article>
+          <article class="work-card">
+            <div class="cover dark"><div class="code-window"><i style="width: 78%"></i><i style="width: 42%"></i><i style="width: 91%"></i><i style="width: 60%"></i></div></div>
+            <div class="work-body">
+              <div class="hot-tags"><span class="tag blue">部署服务</span><span class="tag orange">Vue</span></div>
+              <h3>创作者订单管理后台</h3>
+              <p>包含订单、报价、支付阶段、交付记录，适合外包团队快速上线。</p>
+              <div class="meta-row"><span>by OrangeLab · 收藏 86</span><strong class="price">¥899 起</strong></div>
+            </div>
+          </article>
+          <article class="work-card">
+            <div class="cover blue"><div class="code-window"><i style="width: 55%"></i><i style="width: 88%"></i><i style="width: 70%"></i><i style="width: 38%"></i></div></div>
+            <div class="work-body">
+              <div class="hot-tags"><span class="tag yellow">使用权</span><span class="tag green">可演示</span></div>
+              <h3>RAG 知识库问答 Demo</h3>
+              <p>适合企业内部文档问答，可购买使用权或定制接入现有系统。</p>
+              <div class="meta-row"><span>by NovaAI · 收藏 203</span><strong class="price">¥199 起</strong></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section id="detail" class="page">
+      <div class="detail-layout">
+        <div>
+          <div class="detail-hero">
+            <span class="eyebrow">作品详情 · 已通过审核</span>
+            <h1 style="font-family: var(--mono); letter-spacing: -0.065em; font-size: clamp(30px, 4vw, 48px); margin: 16px 0;">AI 简历诊断与岗位匹配工具</h1>
+            <div class="browser-mock">
+              <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="browser-body">
+                <div class="mock-block" style="min-height: 72px; background: linear-gradient(135deg, #fff7ed, #fed7aa);"></div>
+                <div class="mock-row">
+                  <div class="mock-block"></div>
+                  <div class="mock-block"></div>
+                </div>
+                <div class="mock-block" style="min-height: 88px;"></div>
+              </div>
+            </div>
+          </div>
+          <article class="copy-card">
+            <h2>作品介绍</h2>
+            <p>这是一套面向求职者和教育机构的 AI 简历诊断工具。它支持简历内容解析、岗位 JD 匹配、技能短板总结、学习路线建议，并预留企业私有知识库扩展点。</p>
+            <div class="hot-tags">
+              <span class="tag orange">Vue 3</span>
+              <span class="tag orange">Spring Boot</span>
+              <span class="tag blue">RAG</span>
+              <span class="tag">可二开</span>
+            </div>
+          </article>
+          <article class="copy-card">
+            <h2>评论与问答</h2>
+            <p><strong>CodeFox：</strong>演示效果很完整，是否支持接入企业微信登录？</p>
+            <p><strong>作者回复：</strong>可以作为部署服务的一部分定制，通常 1-2 天完成。</p>
+          </article>
+        </div>
+        <aside class="side-card">
+          <div class="author">
+            <div class="avatar"></div>
+            <div>
+              <strong>PixelCat</strong>
+              <span>AI 应用开发者 · 响应约 18 分钟</span>
+            </div>
+          </div>
+          <h3>购买与服务</h3>
+          <div class="sale-option active">
+            <div><strong>源码</strong><br><span style="color: var(--muted); font-size: 13px;">包含前后端完整代码</span></div>
+            <strong class="price">¥399</strong>
+          </div>
+          <div class="sale-option">
+            <div><strong>使用权</strong><br><span style="color: var(--muted); font-size: 13px;">可直接使用线上版本</span></div>
+            <strong class="price">¥199</strong>
+          </div>
+          <div class="sale-option">
+            <div><strong>部署服务</strong><br><span style="color: var(--muted); font-size: 13px;">协助部署与基础配置</span></div>
+            <strong class="price">¥899</strong>
+          </div>
+          <button class="btn primary" style="width: 100%; margin-top: 8px;">想要，开始聊天</button>
+          <button class="btn ghost" style="width: 100%; margin-top: 10px;">收藏作品</button>
+          <div class="risk-box">交易保障：先沟通范围，再确认定金和尾款。源码、使用权、部署服务需在聊天中明确交付边界。</div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="audit" class="page">
+      <div class="admin-page">
+        <div class="admin-layout">
+          <aside class="sidebar">
+            <div class="brand">
+              <svg class="pixel-orange" viewBox="0 0 40 40" aria-hidden="true">
+                <rect x="8" y="10" width="24" height="23" fill="#f37021"/>
+                <rect x="14" y="20" width="3" height="4" fill="#5c260f"/>
+                <rect x="24" y="20" width="3" height="4" fill="#5c260f"/>
+                <rect x="18" y="27" width="5" height="2" fill="#5c260f"/>
+              </svg>
+              Admin
+            </div>
+            <nav class="side-nav">
+              <a class="current" href="#">审核工作台</a>
+              <a href="#">作品管理</a>
+              <a href="#">需求管理</a>
+              <a href="#">订单管理</a>
+              <a href="#">用户管理</a>
+              <a href="#">数据看板</a>
+            </nav>
+          </aside>
+          <main class="admin-main">
+            <div class="admin-head">
+              <div>
+                <h1>审核工作台</h1>
+                <p style="margin: 6px 0 0; color: var(--muted);">减少跳转，用表格 + 详情抽屉完成审核。</p>
+              </div>
+              <button class="btn primary">批量通过</button>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-card"><span>待审核作品</span><strong>24</strong></div>
+              <div class="stat-card"><span>待审核需求</span><strong>16</strong></div>
+              <div class="stat-card"><span>今日通过</span><strong>38</strong></div>
+              <div class="stat-card"><span>风险提示</span><strong style="color: var(--yellow);">5</strong></div>
+            </div>
+            <div class="audit-shell">
+              <section class="table-card">
+                <div class="table-toolbar">
+                  <input class="field" placeholder="搜索标题/作者" />
+                  <select class="field"><option>全部类型</option><option>作品</option><option>需求</option></select>
+                  <select class="field"><option>待审核</option><option>已通过</option><option>已拒绝</option></select>
+                  <button class="btn ghost">高级筛选</button>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th><input type="checkbox" aria-label="全选" /></th>
+                      <th>内容</th>
+                      <th>作者</th>
+                      <th>类型</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="checkbox" /></td>
+                      <td><div class="content-cell"><span class="thumb"></span><div><strong>AI 简历诊断工具</strong><span>提交于 10:24</span></div></div></td>
+                      <td>PixelCat</td>
+                      <td><span class="tag orange">作品</span></td>
+                      <td><span class="tag yellow">待审核</span></td>
+                      <td><button class="btn ghost">查看</button></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" /></td>
+                      <td><div class="content-cell"><span class="thumb" style="background: linear-gradient(135deg,#dbeafe,#2563eb);"></span><div><strong>定制企业官网 + 部署</strong><span>提交于 09:46</span></div></div></td>
+                      <td>BlueShop</td>
+                      <td><span class="tag blue">需求</span></td>
+                      <td><span class="tag yellow">待审核</span></td>
+                      <td><button class="btn ghost">查看</button></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" /></td>
+                      <td><div class="content-cell"><span class="thumb" style="background: linear-gradient(135deg,#fee2e2,#dc2626);"></span><div><strong>自动采集脚本合集</strong><span>提交于 08:31</span></div></div></td>
+                      <td>ScriptMan</td>
+                      <td><span class="tag orange">作品</span></td>
+                      <td><span class="tag red">高风险</span></td>
+                      <td><button class="btn ghost">查看</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <aside class="drawer-card">
+                <span class="tag yellow">AI 审核建议：需人工确认</span>
+                <h3 style="font-family: var(--mono); letter-spacing: -0.04em;">AI 简历诊断工具</h3>
+                <p style="color: var(--muted); line-height: 1.7;">内容描述清晰，封面与演示链接正常。售卖方式包含源码与部署服务，需要确认是否明确交付范围。</p>
+                <div class="risk-box">建议补充：源码是否包含部署文档、是否包含第三方 API key、部署服务是否包含服务器费用。</div>
+                <label style="font-weight: 700; font-size: 13px;">审核备注</label>
+                <textarea class="field" style="width: 100%; min-height: 92px; padding-top: 10px; margin-top: 8px;" placeholder="填写通过或拒绝理由"></textarea>
+                <div class="drawer-actions">
+                  <button class="btn danger">拒绝</button>
+                  <button class="btn primary">通过</button>
+                </div>
+              </aside>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-page]");
+    const pages = document.querySelectorAll(".page");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.classList.remove("active"));
+        pages.forEach((page) => page.classList.remove("active"));
+        button.classList.add("active");
+        document.getElementById(button.dataset.page).classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+</html>

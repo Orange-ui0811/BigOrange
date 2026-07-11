@@ -11,7 +11,7 @@
           <div class="detail-cover">
             <span class="eyebrow">作品详情 · {{ work.auditStatus || '已审核' }}<template v-if="work.demoUrl"> · 可演示</template></span>
             <div style="height:16px"></div>
-            <img v-if="work.coverUrl" :src="API+work.coverUrl" class="cover-img" />
+            <img v-if="work.coverUrl" :src="work.coverUrl" class="cover-img" />
             <div v-else class="mock-browser">
               <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
               <div class="browser-body">

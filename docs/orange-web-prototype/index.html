@@ -1,0 +1,2736 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrangeJD orange-web Prototype</title>
+  <style>
+    :root {
+      --orange: #f37021;
+      --orange-strong: #ea580c;
+      --orange-soft: #ffedd5;
+      --cream: #fff7ed;
+      --cream-2: #fffaf4;
+      --brown: #5c260f;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --subtle: #9ca3af;
+      --line: #e5e7eb;
+      --line-orange: #fed7aa;
+      --surface: #ffffff;
+      --green: #b7791f;
+      --blue: #9a5a24;
+      --yellow: #f59e0b;
+      --red: #b45309;
+      --shadow: 0 18px 50px rgba(121, 62, 20, 0.11);
+      --shadow-card: 0 10px 30px rgba(31, 41, 55, 0.08);
+      --shadow-lift: 0 24px 70px rgba(154, 83, 28, 0.16);
+      --glow-orange: 0 0 0 1px rgba(254, 215, 170, .85), 0 18px 60px rgba(243, 112, 33, .14);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      --sans: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(243, 112, 33, .18), transparent 28%),
+        radial-gradient(circle at 88% 2%, rgba(245, 158, 11, .12), transparent 24%),
+        linear-gradient(135deg, #fffaf4 0%, #fff7ed 46%, #f8fafc 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .5;
+      background:
+        linear-gradient(rgba(243,112,33,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(243,112,33,.035) 1px, transparent 1px);
+      background-size: 18px 18px;
+      mask-image: radial-gradient(circle at 50% 22%, #000 0 42%, transparent 82%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      right: -160px;
+      bottom: -170px;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle, rgba(243,112,33,.18), transparent 68%);
+      filter: blur(6px);
+    }
+
+    button, input, select { font: inherit; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 252px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 20px 16px;
+      background: rgba(255, 255, 255, .76);
+      border-right: 1px solid rgba(254, 215, 170, .85);
+      backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 18px 0 45px rgba(154, 83, 28, .055);
+    }
+
+    .sidebar-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 10px;
+      font-family: var(--mono);
+      color: var(--orange-strong);
+      font-weight: 900;
+      letter-spacing: -.045em;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 2px;
+      font-family: var(--sans);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .pixel-orange {
+      width: 44px;
+      height: 44px;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 7px 0 rgba(92, 38, 15, .14));
+      flex: 0 0 auto;
+      animation: orange-bob 4.8s ease-in-out infinite;
+    }
+
+    @keyframes orange-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .user-panel {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--line-orange);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,237,213,.86), rgba(255,255,255,.72));
+      box-shadow: var(--shadow-card);
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--orange), #fbbf24);
+      border: 3px solid #fff;
+      box-shadow: inset 0 -8px 0 rgba(92, 38, 15, .08);
+    }
+
+    .user-panel strong { display: block; }
+    .user-panel span { color: var(--muted); font-size: 12px; }
+
+    .nav-section-label {
+      margin: 6px 10px 4px;
+      color: var(--subtle);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav button {
+      width: 100%;
+      min-height: 42px;
+      border: 0;
+      border-radius: 14px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .nav button span:first-child {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+
+    .nav button:hover { background: #fff7ed; color: var(--orange-strong); transform: translateX(2px); }
+    .nav button.active {
+      color: var(--orange-strong);
+      background: var(--orange-soft);
+      box-shadow: inset 3px 0 0 var(--orange);
+    }
+
+    .nav-map {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid rgba(254, 215, 170, .85);
+      border-radius: 16px;
+      background: rgba(255, 250, 244, .74);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .nav-map strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--brown);
+      font-family: var(--mono);
+      letter-spacing: -.04em;
+    }
+
+    .badge {
+      min-width: 22px;
+      height: 22px;
+      padding: 0 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--orange);
+      font-size: 11px;
+      font-family: var(--mono);
+      font-weight: 900;
+    }
+
+    .sidebar-tools {
+      margin-top: auto;
+      display: grid;
+      gap: 6px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(254, 215, 170, .85);
+    }
+
+    .sidebar-tools button {
+      min-height: 38px;
+      border: 0;
+      border-radius: 12px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .sidebar-tools button:hover {
+      color: var(--orange-strong);
+      background: #fff7ed;
+    }
+
+    .main {
+      min-width: 0;
+      padding: 20px 28px 40px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: -20px -28px 24px;
+      padding: 16px 28px;
+      background: rgba(255, 250, 244, .84);
+      border-bottom: 1px solid rgba(254, 215, 170, .7);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-title h1 {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 26px;
+      letter-spacing: -.055em;
+    }
+
+    .topbar-title p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .quick-search {
+      width: 300px;
+      height: 42px;
+      border: 1px solid var(--line-orange);
+      border-radius: 999px;
+      padding: 0 16px;
+      outline: 0;
+      background: #fff;
+      box-shadow: var(--shadow-card);
+    }
+
+    .btn {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text);
+      background: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 180ms ease;
+      white-space: nowrap;
+      font-weight: 800;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(31, 41, 55, .08);
+    }
+    .btn.primary {
+      color: #fff;
+      background: var(--orange);
+      border-color: var(--orange);
+      box-shadow: 0 14px 26px rgba(243, 112, 33, .25);
+    }
+    .btn.primary:hover { box-shadow: 0 18px 34px rgba(243, 112, 33, .28); }
+    .btn.ghost {
+      color: var(--orange-strong);
+      border-color: var(--line-orange);
+      background: #fffaf5;
+    }
+
+    .page { display: none; animation: rise 240ms ease both; }
+    .page.active { display: block; }
+
+    .page.active .section,
+    .page.active .hub-card,
+    .page.active .work-card,
+    .page.active .signal-card,
+    .page.active .panel,
+    .page.active .publish-choice,
+    .page.active .deal-panel,
+    .page.active .detail-main {
+      animation: card-in 360ms ease both;
+    }
+
+    .page.active .work-card:nth-child(2),
+    .page.active .hub-card:nth-child(2),
+    .page.active .signal-card:nth-child(2) { animation-delay: 45ms; }
+
+    .page.active .work-card:nth-child(3),
+    .page.active .hub-card:nth-child(3),
+    .page.active .signal-card:nth-child(3) { animation-delay: 90ms; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(14px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .market-hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+      gap: 18px;
+      padding: 24px;
+      border: 1px solid rgba(254, 215, 170, .88);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(110deg, rgba(255, 247, 237, .96), rgba(255, 255, 255, .74)),
+        repeating-linear-gradient(0deg, rgba(243, 112, 33, .045) 0, rgba(243, 112, 33, .045) 1px, transparent 1px, transparent 14px),
+        repeating-linear-gradient(90deg, rgba(243, 112, 33, .035) 0, rgba(243, 112, 33, .035) 1px, transparent 1px, transparent 14px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line-orange);
+      border-radius: 999px;
+      color: var(--orange-strong);
+      background: #fffaf5;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .market-hero h2 {
+      max-width: 620px;
+      margin: 14px 0 10px;
+      font-family: var(--mono);
+      font-size: clamp(32px, 4.2vw, 48px);
+      line-height: 1.03;
+      letter-spacing: -.075em;
+    }
+
+    .market-hero p {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .hero-search {
+      margin-top: 18px;
+      max-width: 740px;
+      display: flex;
+      gap: 10px;
+      padding: 8px;
+      border: 1px solid var(--line-orange);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 18px 42px rgba(243, 112, 33, .12);
+    }
+
+    .hero-search input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 0 12px;
+    }
+
+    .trust-rail {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .trust-chip {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      border: 1px solid rgba(254, 215, 170, .9);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .72);
+      color: #9a5a24;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(154, 83, 28, .06);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .signal-card {
+      min-height: 112px;
+      padding: 16px;
+      border: 1px solid rgba(254, 215, 170, .92);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: var(--shadow-card);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      cursor: pointer;
+    }
+
+    .signal-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-orange);
+      box-shadow: var(--shadow-lift);
+    }
+
+    .signal-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-family: var(--mono);
+      letter-spacing: -.04em;
+    }
+
+    .signal-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .leaderboard-panel {
+      margin-top: 20px;
+      padding: 22px;
+      border: 1px solid rgba(254, 215, 170, .84);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow);
+    }
+
+    .leaderboard-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 0;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+
+    .segmented {
+      display: inline-flex;
+      padding: 4px;
+      border: 1px solid var(--line-orange);
+      border-radius: 14px;
+      background: #fff7ed;
+      gap: 4px;
+    }
+
+    .segmented span {
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .segmented span.active {
+      color: #fff;
+      background: var(--orange);
+      box-shadow: 2px 2px 0 rgba(154,83,28,.12);
+    }
+
+    .leaderboard-alert {
+      margin: 8px 0 16px;
+      padding: 12px 14px;
+      border: 1px solid #fde68a;
+      border-radius: 16px;
+      color: #92400e;
+      background: #fffbeb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .rank-card {
+      position: relative;
+      min-height: 158px;
+      padding: 16px;
+      border: 2px solid #f2c49b;
+      border-radius: 14px;
+      background: #fffdf9;
+      box-shadow: 4px 4px 0 #ffedd5;
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .rank-card:hover {
+      transform: translate(-2px, -2px);
+      border-color: var(--orange-strong);
+      box-shadow: 6px 6px 0 #ffedd5;
+    }
+
+    .rank-no {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-orange);
+      border-radius: 9px;
+      color: #fff;
+      background: var(--orange);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 2px 2px 0 rgba(154,83,28,.12);
+    }
+
+    .rank-card h4 {
+      margin: 12px 0 8px;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .rank-card p {
+      min-height: 40px;
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .rank-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(254, 215, 170, .9);
+      color: var(--subtle);
+      font-size: 12px;
+    }
+
+    .ticker-window {
+      margin-top: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line-orange);
+      border-radius: 18px;
+      background: rgba(255,255,255,.76);
+      box-shadow: var(--shadow-card);
+    }
+
+    .ticker-track {
+      width: max-content;
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      animation: ticker-scroll 22s linear infinite;
+    }
+
+    .ticker-item {
+      min-width: 260px;
+      padding: 12px;
+      border: 2px solid #f2c49b;
+      border-radius: 14px;
+      background: #fffdf9;
+      box-shadow: 3px 3px 0 #ffedd5;
+    }
+
+    .ticker-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--mono);
+      letter-spacing: -.04em;
+    }
+
+    .ticker-item span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .content-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 22px 0 16px;
+    }
+
+    .pill {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0 14px;
+      color: var(--muted);
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pill.active {
+      color: var(--orange-strong);
+      border-color: var(--line-orange);
+      background: var(--orange-soft);
+    }
+
+    .section {
+      margin-top: 20px;
+      padding: 24px;
+      border: 1px solid rgba(254, 215, 170, .72);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.82);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,.45), transparent 34%);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h3 {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 24px;
+      letter-spacing: -.055em;
+    }
+
+    .section-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .work-card {
+      position: relative;
+      overflow: visible;
+      border: 2px solid #f2c49b;
+      border-radius: 14px;
+      background: #fffdf9;
+      box-shadow:
+        4px 4px 0 #ffedd5,
+        8px 8px 0 rgba(154, 83, 28, .05);
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .work-card::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(254, 215, 170, .92);
+      border-radius: 10px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .work-card:hover {
+      transform: translate(-2px, -2px);
+      border-color: var(--orange-strong);
+      box-shadow:
+        6px 6px 0 #ffedd5,
+        12px 12px 0 rgba(154, 83, 28, .07);
+    }
+
+    .work-card:active {
+      transform: translate(1px, 1px);
+      box-shadow:
+        2px 2px 0 #ffedd5,
+        5px 5px 0 rgba(154, 83, 28, .05);
+    }
+
+    .card-seal {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      padding: 7px 9px;
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      color: #9a5a24;
+      background: rgba(255, 247, 237, .92);
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 2px 2px 0 rgba(243, 112, 33, .18);
+    }
+
+    .work-cover {
+      height: 156px;
+      padding: 14px;
+      border-bottom: 2px solid #f2c49b;
+      border-radius: 12px 12px 0 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.62), transparent 24%),
+        linear-gradient(135deg, #fffaf4, #fdba74);
+      overflow: hidden;
+    }
+
+    .work-cover.dark {
+      background:
+        radial-gradient(circle at 24% 22%, rgba(255,255,255,.42), transparent 26%),
+        linear-gradient(135deg, #fff7ed, #fb923c);
+    }
+
+    .work-cover.blue {
+      background:
+        radial-gradient(circle at 24% 22%, rgba(255,255,255,.46), transparent 26%),
+        linear-gradient(135deg, #fffaf4, #fbbf24);
+    }
+
+    .window {
+      height: 100%;
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 2px solid rgba(180, 83, 9, .36);
+      border-radius: 8px;
+      background:
+        linear-gradient(#fff7ed 0 20px, transparent 20px),
+        rgba(255,255,255,.78);
+      box-shadow: 3px 3px 0 rgba(180, 83, 9, .08);
+    }
+
+    .window i {
+      display: block;
+      height: 9px;
+      border-radius: 2px;
+      background: rgba(180, 83, 9, .12);
+    }
+
+    .work-body {
+      position: relative;
+      z-index: 2;
+      padding: 16px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      min-height: 26px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: #f9fafb;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .tag.orange { color: var(--orange-strong); background: var(--orange-soft); border-color: var(--line-orange); }
+    .tag.green { color: #9a5a24; background: #fff7ed; border-color: #fed7aa; }
+    .tag.blue { color: #9a5a24; background: #fffaf4; border-color: #fcd9bd; }
+    .tag.yellow { color: #92400e; background: #fffbeb; border-color: #fde68a; }
+
+    .work-body h4 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -.02em;
+    }
+
+    .work-body p {
+      min-height: 44px;
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--subtle);
+      font-size: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(254, 215, 170, .9);
+    }
+
+    .price {
+      color: var(--orange-strong);
+      font-family: var(--mono);
+      font-weight: 900;
+    }
+
+    .req-strip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .req-strip:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-orange);
+      box-shadow: var(--shadow);
+    }
+
+    .req-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .req-strip h4 { margin: 0 0 6px; }
+    .req-strip p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 13px; }
+
+    .hub-hero {
+      position: relative;
+      padding: 28px;
+      border: 1px solid rgba(254, 215, 170, .76);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(120deg, rgba(255,247,237,.94), rgba(255,255,255,.78)),
+        radial-gradient(circle at 92% 10%, rgba(243,112,33,.16), transparent 30%);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .hub-hero h2 {
+      margin: 14px 0 10px;
+      max-width: 760px;
+      font-family: var(--mono);
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -.065em;
+    }
+
+    .hub-hero p {
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .hub-card {
+      min-height: 190px;
+      padding: 20px;
+      border: 1px solid rgba(229, 231, 235, .96);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .hub-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-orange);
+      box-shadow: var(--shadow-lift);
+    }
+
+    .hub-card.featured {
+      grid-column: span 2;
+      background:
+        linear-gradient(135deg, rgba(255,237,213,.88), rgba(255,255,255,.92)),
+        repeating-linear-gradient(0deg, rgba(243,112,33,.045) 0, rgba(243,112,33,.045) 1px, transparent 1px, transparent 14px);
+      border-color: var(--line-orange);
+    }
+
+    .hub-card.tool-trend {
+      border-color: #fed7aa;
+      background:
+        linear-gradient(135deg, rgba(255,237,213,.9), rgba(255,255,255,.96)),
+        repeating-linear-gradient(0deg, rgba(243,112,33,.035) 0, rgba(243,112,33,.035) 1px, transparent 1px, transparent 14px);
+    }
+
+    .hub-card.tool-plan {
+      border-color: #fde68a;
+      background:
+        linear-gradient(135deg, rgba(255,251,235,.94), rgba(255,255,255,.96)),
+        repeating-linear-gradient(90deg, rgba(245,158,11,.035) 0, rgba(245,158,11,.035) 1px, transparent 1px, transparent 14px);
+    }
+
+    .hub-card.tool-jobs {
+      border-color: #f2c49b;
+      background:
+        linear-gradient(135deg, rgba(255,250,244,.96), rgba(255,247,237,.82)),
+        radial-gradient(circle at 92% 12%, rgba(154,90,36,.10), transparent 32%);
+    }
+
+    .hub-card h3 {
+      margin: 0 0 8px;
+      font-family: var(--mono);
+      letter-spacing: -.045em;
+      font-size: 22px;
+    }
+
+    .hub-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .hub-card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .compact-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+      padding: 22px;
+      border: 1px solid rgba(254, 215, 170, .76);
+      border-radius: 24px;
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow-card);
+    }
+
+    .compact-head h2 {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -.06em;
+    }
+
+    .compact-head p {
+      max-width: 680px;
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .ai-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .tool-primary {
+      position: relative;
+      padding: 24px;
+      border: 1px solid var(--line-orange);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(255,237,213,.88), rgba(255,255,255,.92)),
+        repeating-linear-gradient(0deg, rgba(243,112,33,.045) 0, rgba(243,112,33,.045) 1px, transparent 1px, transparent 14px);
+      box-shadow: var(--glow-orange);
+      overflow: hidden;
+    }
+
+    .tool-primary h3 {
+      margin: 10px 0;
+      font-family: var(--mono);
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -.07em;
+      line-height: 1.08;
+    }
+
+    .tool-primary p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .trend-workbench {
+      display: grid;
+      gap: 16px;
+    }
+
+    .trend-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .trend-card {
+      position: relative;
+      padding: 20px;
+      border: 1px solid rgba(254, 215, 170, .84);
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,247,237,.86)),
+        repeating-linear-gradient(0deg, rgba(243,112,33,.035) 0, rgba(243,112,33,.035) 1px, transparent 1px, transparent 16px);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .trend-card.soft {
+      background:
+        radial-gradient(circle at 92% 12%, rgba(245,158,11,.12), transparent 30%),
+        linear-gradient(135deg, rgba(255,250,244,.98), rgba(255,255,255,.92));
+    }
+
+    .trend-card h3 {
+      margin: 8px 0 8px;
+      font-family: var(--mono);
+      font-size: 24px;
+      letter-spacing: -.055em;
+    }
+
+    .trend-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .topic-map {
+      position: relative;
+      min-height: 360px;
+      margin-top: 16px;
+      border: 1px solid rgba(254, 215, 170, .82);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 46%, rgba(243,112,33,.14), transparent 24%),
+        radial-gradient(circle at 24% 72%, rgba(245,158,11,.1), transparent 20%),
+        linear-gradient(135deg, rgba(255,237,213,.56), rgba(255,255,255,.82));
+      overflow: hidden;
+    }
+
+    .topic-map::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(243,112,33,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(243,112,33,.045) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: .7;
+    }
+
+    .topic-link {
+      position: absolute;
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(154, 90, 36, .18);
+      transform-origin: left center;
+    }
+
+    .topic-link.l1 { width: 180px; left: 38%; top: 45%; transform: rotate(-28deg); }
+    .topic-link.l2 { width: 168px; left: 41%; top: 50%; transform: rotate(25deg); }
+    .topic-link.l3 { width: 150px; left: 28%; top: 53%; transform: rotate(142deg); }
+    .topic-link.l4 { width: 130px; left: 48%; top: 43%; transform: rotate(86deg); }
+
+    .topic-node {
+      position: absolute;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      min-width: 88px;
+      min-height: 88px;
+      padding: 12px;
+      border: 2px solid rgba(92,38,15,.72);
+      border-radius: 24px;
+      background: #fffaf4;
+      box-shadow: 5px 5px 0 rgba(243,112,33,.16);
+      color: var(--brown);
+      font-family: var(--mono);
+      font-weight: 900;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .topic-node.main {
+      left: 39%;
+      top: 36%;
+      min-width: 112px;
+      min-height: 112px;
+      border-color: var(--orange);
+      background: linear-gradient(135deg, #fff7ed, #ffedd5);
+      color: var(--orange-strong);
+      animation: softPulse 2.8s ease-in-out infinite;
+    }
+
+    .topic-node.n1 { left: 13%; top: 19%; }
+    .topic-node.n2 { right: 12%; top: 18%; }
+    .topic-node.n3 { left: 16%; bottom: 16%; }
+    .topic-node.n4 { right: 18%; bottom: 13%; }
+
+    @keyframes softPulse {
+      0%, 100% { transform: translateY(0); box-shadow: 5px 5px 0 rgba(243,112,33,.16); }
+      50% { transform: translateY(-3px); box-shadow: 7px 7px 0 rgba(243,112,33,.2); }
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .metric-box {
+      padding: 12px;
+      border: 1px solid rgba(229,231,235,.96);
+      border-radius: 16px;
+      background: rgba(255,255,255,.84);
+    }
+
+    .metric-box span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .metric-box strong {
+      color: var(--brown);
+      font-family: var(--mono);
+      font-size: 18px;
+    }
+
+    .progress-line {
+      height: 9px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: #ffedd5;
+      overflow: hidden;
+    }
+
+    .progress-line i {
+      display: block;
+      height: 100%;
+      width: var(--value, 68%);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--orange), var(--yellow));
+    }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .step-chip {
+      padding: 10px;
+      border: 1px solid rgba(254, 215, 170, .86);
+      border-radius: 14px;
+      background: rgba(255,247,237,.74);
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .step-chip.active {
+      background: var(--orange);
+      color: #fff;
+      border-color: var(--orange);
+      box-shadow: 3px 3px 0 rgba(92,38,15,.12);
+    }
+
+    .trend-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .field-card {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field-card label {
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .field-card input,
+    .field-card select,
+    .field-card textarea {
+      width: 100%;
+      border: 1px solid rgba(254, 215, 170, .96);
+      border-radius: 14px;
+      padding: 11px 12px;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.48);
+    }
+
+    .field-card textarea {
+      min-height: 116px;
+      resize: vertical;
+      line-height: 1.65;
+    }
+
+    .field-card.full { grid-column: 1 / -1; }
+
+    .result-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .result-strip div {
+      padding: 13px;
+      border-radius: 16px;
+      border: 1px solid rgba(254, 215, 170, .78);
+      background: rgba(255,255,255,.82);
+    }
+
+    .recommend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .recommend-card {
+      padding: 14px;
+      border: 1px solid rgba(229,231,235,.96);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 4px 4px 0 rgba(243,112,33,.08);
+    }
+
+    .recommend-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+      color: var(--brown);
+      letter-spacing: -.04em;
+    }
+
+    .trend-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .78fr);
+      gap: 16px;
+    }
+
+    .disclaimer {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px dashed rgba(180,83,9,.35);
+      border-radius: 16px;
+      background: rgba(255,247,237,.72);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tool-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .profile-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 22px;
+      border: 1px solid var(--line-orange);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.9);
+      box-shadow: var(--shadow);
+    }
+
+    .publish-studio {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .publish-choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .publish-choice {
+      position: relative;
+      min-height: 420px;
+      padding: 24px;
+      border: 1px solid rgba(229,231,235,.96);
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    }
+
+    .publish-choice:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-orange);
+      box-shadow: var(--shadow-lift);
+    }
+
+    .publish-choice.work {
+      border-color: var(--line-orange);
+      background:
+        linear-gradient(135deg, rgba(255,237,213,.82), rgba(255,255,255,.96)),
+        repeating-linear-gradient(0deg, rgba(243,112,33,.04) 0, rgba(243,112,33,.04) 1px, transparent 1px, transparent 14px);
+    }
+
+    .publish-choice.requirement {
+      background:
+        linear-gradient(135deg, rgba(255,250,244,.94), rgba(255,255,255,.96)),
+        radial-gradient(circle at 90% 10%, rgba(245,158,11,.12), transparent 34%);
+    }
+
+    .publish-choice h3 {
+      margin: 12px 0 10px;
+      font-family: var(--mono);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -.07em;
+    }
+
+    .publish-choice p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .choice-preview {
+      margin: 18px 0 0;
+      padding: 14px;
+      border: 1px solid rgba(254, 215, 170, .76);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5);
+    }
+
+    .choice-preview strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+      letter-spacing: -.04em;
+    }
+
+    .choice-preview span {
+      display: inline-flex;
+      margin: 0 6px 6px 0;
+      padding: 6px 8px;
+      border-radius: 999px;
+      color: var(--muted);
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .prepare-list {
+      margin: 20px 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .prepare-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .check-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--orange);
+      font-size: 12px;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .publish-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .publish-note {
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow-card);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .publish-note:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-orange);
+      box-shadow: var(--shadow);
+    }
+
+    .publish-note.strong {
+      border-color: var(--line-orange);
+      background:
+        linear-gradient(135deg, rgba(255,247,237,.94), rgba(255,255,255,.98)),
+        repeating-linear-gradient(90deg, rgba(243,112,33,.035) 0, rgba(243,112,33,.035) 1px, transparent 1px, transparent 14px);
+    }
+
+    .publish-note h4 {
+      margin: 0 0 8px;
+      font-family: var(--mono);
+      letter-spacing: -.04em;
+    }
+
+    .publish-note p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .publish-flow {
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+    }
+
+    .flow-step {
+      position: relative;
+      padding: 13px 13px 13px 42px;
+      border-radius: 16px;
+      background: #f9fafb;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .flow-step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--orange);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .safe-list {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+
+    .safe-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .message-layout {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr) 300px;
+      gap: 16px;
+      min-height: 560px;
+    }
+
+    .panel {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: var(--shadow-card);
+    }
+
+    .conversation {
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      margin-bottom: 10px;
+      background: #fff;
+    }
+
+    .conversation.active {
+      border-color: var(--line-orange);
+      background: var(--cream);
+    }
+
+    .chat-bubble {
+      max-width: 72%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: #f3f4f6;
+      margin: 10px 0;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .chat-bubble.mine {
+      margin-left: auto;
+      color: #fff;
+      background: var(--orange);
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-list-item {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .detail-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .detail-back {
+      margin-bottom: 14px;
+    }
+
+    .detail-main, .deal-panel {
+      border: 1px solid rgba(254, 215, 170, .74);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow);
+    }
+
+    .detail-main { overflow: hidden; }
+
+    .detail-cover {
+      min-height: 360px;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(255,237,213,.82), rgba(255,255,255,.68)),
+        repeating-linear-gradient(0deg, rgba(243,112,33,.05) 0, rgba(243,112,33,.05) 1px, transparent 1px, transparent 14px);
+    }
+
+    .mock-browser {
+      overflow: hidden;
+      min-height: 300px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: var(--shadow-card);
+    }
+
+    .browser-bar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 14px;
+      background: #fff7ed;
+      border-bottom: 1px solid var(--line-orange);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .dot:nth-child(2) { background: var(--yellow); }
+    .dot:nth-child(3) { background: var(--green); }
+
+    .browser-body {
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .mock-hero {
+      min-height: 86px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff7ed, #fed7aa);
+      border: 1px solid var(--line-orange);
+    }
+
+    .mock-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mock-block {
+      min-height: 96px;
+      border-radius: 18px;
+      background: #f9fafb;
+      border: 1px solid var(--line);
+    }
+
+    .detail-content {
+      padding: 26px;
+    }
+
+    .detail-content h2 {
+      margin: 0 0 10px;
+      font-family: var(--mono);
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -.075em;
+    }
+
+    .detail-content p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .info-box {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #f9fafb;
+    }
+
+    .info-box span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-top: 5px;
+      font-family: var(--mono);
+      color: var(--text);
+    }
+
+    .deal-panel {
+      position: sticky;
+      top: 86px;
+      padding: 22px;
+    }
+
+    .author-card {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+
+    .author-card strong { display: block; }
+    .author-card span { color: var(--muted); font-size: 13px; }
+
+    .sale-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .sale-card.active {
+      background: var(--cream);
+      border-color: var(--line-orange);
+      box-shadow: inset 3px 0 0 var(--orange);
+    }
+
+    .sale-card span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .trust-box {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .comment-card {
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line-orange);
+      }
+      .nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .market-hero, .detail-layout, .message-layout, .ai-layout, .profile-summary, .publish-studio, .trend-grid, .trend-split { grid-template-columns: 1fr; }
+      .deal-panel { position: static; }
+    }
+
+    @media (max-width: 780px) {
+      .main { padding: 16px; }
+      .topbar {
+        position: static;
+        margin: -16px -16px 18px;
+        padding: 16px;
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .top-actions { flex-direction: column; align-items: stretch; }
+      .quick-search { width: 100%; }
+      .nav { grid-template-columns: 1fr 1fr; }
+      .market-hero { padding: 22px; }
+      .hero-search { flex-direction: column; }
+      .market-grid, .info-grid, .mock-grid, .hub-grid, .publish-choices, .rank-grid, .trend-form, .metric-grid, .result-strip, .recommend-grid { grid-template-columns: 1fr; }
+      .step-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .topic-node { transform: scale(.86); }
+      .topic-node.main { left: 34%; }
+      .hub-card.featured { grid-column: auto; }
+      .req-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <svg class="pixel-orange" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="17" y="3" width="5" height="4" fill="#5c260f"/>
+          <rect x="19" y="6" width="3" height="7" fill="#5c260f"/>
+          <rect x="19" y="7" width="2" height="6" fill="#7bd927"/>
+          <rect x="22" y="6" width="10" height="3" fill="#5c260f"/>
+          <rect x="21" y="9" width="12" height="4" fill="#5c260f"/>
+          <rect x="22" y="8" width="9" height="4" fill="#7bd927"/>
+          <rect x="8" y="9" width="21" height="2" fill="#5c260f"/>
+          <rect x="5" y="12" width="29" height="3" fill="#5c260f"/>
+          <rect x="3" y="15" width="33" height="13" fill="#5c260f"/>
+          <rect x="5" y="11" width="27" height="18" fill="#ff9f2e"/>
+          <rect x="7" y="13" width="25" height="17" fill="#ffa934"/>
+          <rect x="32" y="18" width="2" height="8" fill="#ff7c2a"/>
+          <rect x="10" y="15" width="3" height="3" fill="#fff1c8"/>
+          <rect x="8" y="18" width="3" height="5" fill="#fff1c8"/>
+          <rect x="14" y="21" width="2" height="3" fill="#5c260f"/>
+          <rect x="24" y="21" width="2" height="3" fill="#5c260f"/>
+          <rect x="18" y="28" width="1" height="1" fill="#5c260f"/>
+          <rect x="22" y="28" width="1" height="1" fill="#5c260f"/>
+          <rect x="19" y="29" width="1" height="1" fill="#5c260f"/>
+          <rect x="21" y="29" width="1" height="1" fill="#5c260f"/>
+          <rect x="20" y="30" width="1" height="1" fill="#5c260f"/>
+          <rect x="7" y="30" width="27" height="3" fill="#5c260f"/>
+          <rect x="9" y="29" width="23" height="3" fill="#ff8f25"/>
+        </svg>
+        <div>OrangeJD<small>vibe coding market</small></div>
+      </div>
+
+      <div class="user-panel">
+        <div class="avatar"></div>
+        <div>
+          <strong>PixelCat</strong>
+          <span>创作者 / 买家身份可切换</span>
+        </div>
+      </div>
+
+      <div class="sidebar-main">
+      <div>
+        <div class="nav-section-label">Main navigation</div>
+        <nav class="nav">
+          <button class="active" data-page="market"><span>发现</span><span></span></button>
+          <button data-page="ai"><span>AI 工具</span><span></span></button>
+          <button data-page="publish"><span>发布</span><span></span></button>
+          <button data-page="messages"><span>消息</span><span class="badge">3</span></button>
+          <button data-page="me"><span>我的</span><span></span></button>
+        </nav>
+        <div class="nav-map">
+          <strong>功能归属</strong>
+          榜单、趋势分析、方案设计归入 AI 工具；通知、收藏、历史、配额和设置归入我的/底部入口。
+        </div>
+      </div>
+      <div class="sidebar-tools">
+        <button><span>系统通知</span><span class="badge">8</span></button>
+        <button><span>设置</span><span></span></button>
+        <button><span>退出</span><span></span></button>
+      </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-title">
+          <h1 id="pageTitle">发现</h1>
+          <p id="pageSubtitle">搜索、分类、作品/需求切换与榜单入口。</p>
+        </div>
+        <div class="top-actions">
+          <input class="quick-search" placeholder="搜索 AI 简历、RAG、小程序、作品作者..." />
+          <button class="btn ghost" data-page="detail">查看详情样板</button>
+          <button class="btn primary">发布</button>
+        </div>
+      </header>
+
+      <section id="market" class="page active">
+        <div class="market-hero">
+          <div>
+            <span class="eyebrow">发现市场</span>
+            <h2>让你的 vibecoding 作品被看到，被发现，被认可。</h2>
+            <p>首页只做三件事：搜索作品/需求，按分类筛选，快速进入榜单查看热度。</p>
+            <div class="hero-search">
+              <input placeholder="搜索作品、需求、产品类型或作者，例如：AI 客服 / 网站重构 / Vue 后台" />
+              <button class="btn primary">开始搜索</button>
+            </div>
+            <div class="trust-rail" aria-label="平台提示">
+              <span class="trust-chip">作品与需求先审核</span>
+              <span class="trust-chip">演示、截图、说明分开展示</span>
+            </div>
+          </div>
+          <div class="hero-side">
+            <div class="signal-card" data-page="market" data-anchor="works-section"><strong>作品市场</strong><span>封面、简介、作者、热度集中展示，点击进入作品列表。</span></div>
+            <div class="signal-card" data-page="market" data-anchor="requirements-section"><strong>需求大厅</strong><span>预算范围、交付目标和沟通入口优先展示。</span></div>
+            <div class="signal-card" data-page="leaderboard"><strong>榜单入口</strong><span>本网站作品/创作者榜单，以及 GitHub AI 仓库榜单。</span></div>
+          </div>
+        </div>
+
+        <div class="content-tabs">
+          <button class="pill active">全部</button>
+          <button class="pill">作品</button>
+          <button class="pill">需求</button>
+          <button class="pill">AI 工具</button>
+          <button class="pill">网站/后台</button>
+          <button class="pill">收藏最多</button>
+          <button class="pill">最近更新</button>
+        </div>
+
+        <section class="section" id="works-section">
+          <div class="section-head">
+            <div>
+              <h3>作品精选</h3>
+              <p>对齐真实数据：标题、简介、作者、收藏/评论、审核状态和详情入口。</p>
+            </div>
+            <button class="btn ghost">查看全部作品</button>
+          </div>
+          <div class="market-grid">
+            <article class="work-card" data-page="detail">
+              <span class="card-seal">已审核</span>
+              <div class="work-cover"><div class="window"><i style="width:62%"></i><i style="width:86%"></i><i style="width:48%"></i><i style="width:74%"></i></div></div>
+              <div class="work-body">
+                <div class="tag-row"><span class="tag orange">AI 工具</span><span class="tag green">已审核</span><span class="tag blue">Vue</span></div>
+                <h4>AI 简历诊断与岗位匹配工具</h4>
+                <p>上传简历后生成岗位匹配建议，支持教育平台二次开发。</p>
+                <div class="card-foot"><span>PixelCat · 128 收藏 · 24 评论</span><strong class="price">查看详情</strong></div>
+              </div>
+            </article>
+            <article class="work-card" data-page="detail">
+              <span class="card-seal">可演示</span>
+              <div class="work-cover dark"><div class="window"><i style="width:78%"></i><i style="width:42%"></i><i style="width:91%"></i><i style="width:60%"></i></div></div>
+              <div class="work-body">
+                <div class="tag-row"><span class="tag orange">管理后台</span><span class="tag green">可演示</span></div>
+                <h4>创作者作品展示后台</h4>
+                <p>包含作品管理、通知记录和展示配置，适合团队快速整理作品。</p>
+                <div class="card-foot"><span>OrangeLab · 86 收藏</span><strong class="price">查看详情</strong></div>
+              </div>
+            </article>
+            <article class="work-card" data-page="detail">
+              <span class="card-seal">可定制</span>
+              <div class="work-cover blue"><div class="window"><i style="width:55%"></i><i style="width:88%"></i><i style="width:70%"></i><i style="width:38%"></i></div></div>
+              <div class="work-body">
+                <div class="tag-row"><span class="tag yellow">Demo</span><span class="tag blue">RAG</span></div>
+                <h4>私有知识库问答 Demo</h4>
+                <p>面向企业内部资料问答，展示基础问答流程和知识库效果。</p>
+                <div class="card-foot"><span>NovaAI · 203 收藏</span><strong class="price">查看详情</strong></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="requirements-section">
+          <div class="section-head">
+            <div>
+              <h3>需求大厅</h3>
+              <p>需求卡片强调预算范围、交付目标和沟通入口。</p>
+            </div>
+            <button class="btn ghost">查看全部需求</button>
+          </div>
+          <div class="req-list">
+            <article class="req-strip" data-page="requirement-detail">
+              <div>
+                <div class="tag-row"><span class="tag blue">企业官网</span><span class="tag yellow">预算待沟通</span></div>
+                <h4>给线下门店做一个 AI 预约官网</h4>
+                <p>需要展示服务、预约表单、后台查看客户线索，可先做 MVP。</p>
+              </div>
+              <strong class="price">预算 ¥2,000 - ¥5,000</strong>
+            </article>
+            <article class="req-strip" data-page="requirement-detail">
+              <div>
+                <div class="tag-row"><span class="tag orange">小程序</span><span class="tag green">可远程交付</span></div>
+                <h4>做一个课程资料检索小程序</h4>
+                <p>老师上传资料，学生按关键词搜索，最好能加入 AI 摘要。</p>
+              </div>
+              <strong class="price">预算 ¥1,500 - ¥3,000</strong>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section id="ai" class="page">
+        <div class="hub-hero">
+          <div>
+            <span class="eyebrow">AI 工具 · 从榜单看方向</span>
+            <h2>先看热度，再决定下一步做什么。</h2>
+            <p>这里是 AI 工具入口页。Hero 展示滚动榜单预览；下方只保留趋势分析、方案设计和工作能力参考三个工具入口。</p>
+            <div class="leaderboard-alert" style="margin-top:16px;">滚动预览：本周本网站热门项目 · GitHub AI 热门仓库 · 创作者热度变化</div>
+          </div>
+          <div class="hub-card-actions">
+            <button class="btn primary" data-page="leaderboard">查看完整榜单</button>
+            <button class="btn ghost" data-page="trend-page">进入趋势分析</button>
+          </div>
+        </div>
+
+        <div class="ticker-window" data-page="leaderboard">
+          <div class="ticker-track">
+            <div class="ticker-item"><strong>本周本网站 · AI 简历诊断工具</strong><span>作品榜 · ★ 128 · PixelCat</span></div>
+            <div class="ticker-item"><strong>GitHub · awesome-ai-agents</strong><span>仓库榜 · ★ 42k · Python</span></div>
+            <div class="ticker-item"><strong>本网站创作者 · OrangeLab</strong><span>创作者榜 · 12 个作品 · ★ 386</span></div>
+            <div class="ticker-item"><strong>本周本网站 · RAG 知识库 Demo</strong><span>作品榜 · ★ 203 · NovaAI</span></div>
+            <div class="ticker-item"><strong>GitHub · open-webui</strong><span>仓库榜 · ★ 90k · TypeScript</span></div>
+            <div class="ticker-item"><strong>本周本网站 · AI 简历诊断工具</strong><span>作品榜 · ★ 128 · PixelCat</span></div>
+            <div class="ticker-item"><strong>GitHub · awesome-ai-agents</strong><span>仓库榜 · ★ 42k · Python</span></div>
+            <div class="ticker-item"><strong>本网站创作者 · OrangeLab</strong><span>创作者榜 · 12 个作品 · ★ 386</span></div>
+            <div class="ticker-item"><strong>本周本网站 · RAG 知识库 Demo</strong><span>作品榜 · ★ 203 · NovaAI</span></div>
+            <div class="ticker-item"><strong>GitHub · open-webui</strong><span>仓库榜 · ★ 90k · TypeScript</span></div>
+          </div>
+        </div>
+
+        <div class="hub-grid" style="margin-top:20px;">
+          <article class="hub-card tool-trend" data-page="trend-page">
+            <div>
+              <div class="tag-row"><span class="tag blue">趋势分析</span></div>
+              <h3>趋势分析</h3>
+              <p>精准推荐、自由提问、Topic 全景图、智能分析记录。</p>
+            </div>
+            <button class="btn ghost">进入趋势分析</button>
+          </article>
+          <article class="hub-card tool-plan" data-page="plan-page">
+            <div>
+              <div class="tag-row"><span class="tag yellow">方案设计</span></div>
+              <h3>方案设计</h3>
+              <p>六阶段项目规划：想法、需求、成功标准、风险、任务、岗位匹配。</p>
+            </div>
+            <button class="btn ghost">进入方案设计</button>
+          </article>
+          <article class="hub-card tool-jobs" data-page="jobs-page">
+            <div>
+              <div class="tag-row"><span class="tag green">工作能力参考</span></div>
+              <h3>工作能力参考</h3>
+              <p>按方向浏览岗位、查看 JD 详情，并提供岗位投稿入口。</p>
+            </div>
+            <button class="btn ghost">进入工作能力参考</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="leaderboard" class="page">
+        <button class="btn ghost detail-back" data-page="ai">返回 AI 工具</button>
+        <section class="leaderboard-panel">
+          <div class="section-head">
+            <div>
+              <h3>榜单中心</h3>
+              <p>与真实 Leaderboard.vue 对齐：数据源、时间、分类、榜单类型、分页、空状态与 GitHub 降级提示。</p>
+            </div>
+            <button class="btn ghost">刷新榜单</button>
+          </div>
+          <div class="leaderboard-filters">
+            <span class="filter-label">数据源</span>
+            <div class="segmented"><span class="active">本网站</span><span>GitHub</span></div>
+            <span class="filter-label">时间</span>
+            <div class="segmented"><span class="active">全时段</span><span>本周</span></div>
+            <span class="filter-label">分类</span>
+            <div class="segmented"><span class="active">全部</span><span>AI 工具</span><span>网站/后台</span><span>RAG</span></div>
+          </div>
+          <div class="leaderboard-filters">
+            <span class="filter-label">榜单类型</span>
+            <div class="segmented"><span class="active">作品</span><span>创作者</span><span>GitHub 仓库</span></div>
+          </div>
+          <div class="leaderboard-alert">GitHub API 不可用时，真实项目会显示 warning 和空状态，不阻塞本网站榜单。</div>
+          <div class="rank-grid">
+            <article class="rank-card" data-page="detail">
+              <div class="rank-no">01</div>
+              <h4>AI 简历诊断与岗位匹配工具</h4>
+              <p>本网站作品榜。点击进入作品详情。</p>
+              <div class="rank-meta"><span>PixelCat</span><strong class="price">★ 128</strong></div>
+            </article>
+            <article class="rank-card" data-page="me">
+              <div class="rank-no">02</div>
+              <h4>OrangeLab</h4>
+              <p>本网站创作者榜。点击进入作者主页。</p>
+              <div class="rank-meta"><span>12 个作品</span><strong class="price">★ 386</strong></div>
+            </article>
+            <article class="rank-card">
+              <div class="rank-no">03</div>
+              <h4>awesome-ai-agents</h4>
+              <p>GitHub 仓库榜。真实项目点击会打开 GitHub 外链。</p>
+              <div class="rank-meta"><span>Python</span><strong class="price">★ 42k</strong></div>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section id="trend-page" class="page">
+        <button class="btn ghost detail-back" data-page="ai">返回 AI 工具</button>
+        <div class="compact-head">
+          <div>
+            <span class="eyebrow">趋势分析</span>
+            <h2>从开源趋势里，找到适合自己的作品方向。</h2>
+            <p>对齐真实 TrendAnalysis.vue：精准推荐、自由提问、工作能力参考三个 Tab；核心流程包含 Topic 全景图、智能分析表单、历史记录、RAG 增强、推荐项目、导入方案设计和岗位参考。</p>
+          </div>
+          <button class="btn primary" data-page="plan-page">导入方案设计</button>
+        </div>
+        <div class="content-tabs">
+          <button class="pill active">精准推荐</button>
+          <button class="pill">自由提问</button>
+          <button class="pill">工作能力参考</button>
+        </div>
+
+        <div class="trend-workbench">
+          <div class="trend-grid">
+            <article class="trend-card">
+              <div class="tag-row"><span class="tag orange">Topic 全景图</span><span class="tag yellow">本周 / 上周</span><span class="tag">AI 对比分析</span></div>
+              <h3>先看方向之间的关联，再看具体机会。</h3>
+              <p>真实页面会基于 Topic 图谱展示节点、连线、共享语言、Top 仓库和趋势洞察；点击节点后切换“洞察 / 分析 / 仓库”。</p>
+              <div class="topic-map" aria-label="Topic 全景图静态样板">
+                <span class="topic-link l1"></span>
+                <span class="topic-link l2"></span>
+                <span class="topic-link l3"></span>
+                <span class="topic-link l4"></span>
+                <span class="topic-node main">AI Agent<br>主方向</span>
+                <span class="topic-node n1">RAG<br>知识增强</span>
+                <span class="topic-node n2">Workflow<br>自动化</span>
+                <span class="topic-node n3">Vue Tool<br>前端工具</span>
+                <span class="topic-node n4">Data App<br>数据应用</span>
+              </div>
+            </article>
+
+            <aside class="trend-card soft">
+              <div class="tag-row"><span class="tag orange">节点详情</span><span class="tag yellow">洞察</span><span class="tag">仓库</span></div>
+              <h3>AI Agent</h3>
+              <p>选中节点后展示热度、难度、拥挤度、活跃度、机会评分、语言分布和 Top 5 repositories。</p>
+              <div class="metric-grid">
+                <div class="metric-box"><span>总 Stars</span><strong>128k</strong></div>
+                <div class="metric-box"><span>仓库数</span><strong>86</strong></div>
+                <div class="metric-box"><span>Vibe Coding 占比</span><strong>42%</strong></div>
+                <div class="metric-box"><span>本周新增</span><strong>+8.6k</strong></div>
+                <div class="metric-box"><span>拥挤度</span><strong>中等</strong><div class="progress-line" style="--value:58%;"><i></i></div></div>
+                <div class="metric-box"><span>难度</span><strong>偏高</strong><div class="progress-line" style="--value:72%;"><i></i></div></div>
+                <div class="metric-box"><span>活跃度</span><strong>高</strong><div class="progress-line" style="--value:84%;"><i></i></div></div>
+                <div class="metric-box"><span>机会评分</span><strong>81</strong><div class="progress-line" style="--value:81%;"><i></i></div></div>
+              </div>
+              <div class="mini-list" style="margin-top:14px;">
+                <div class="mini-list-item"><span>Top 仓库</span><strong class="price">agent-starter</strong></div>
+                <div class="mini-list-item"><span>主要语言</span><strong class="price">Python / TS</strong></div>
+                <div class="mini-list-item"><span>趋势变化</span><strong class="price">较上周上升</strong></div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="trend-split">
+            <article class="trend-card">
+              <div class="tag-row"><span class="tag orange">智能分析表单</span><span class="tag yellow">4 步推荐</span><span class="tag">历史记录</span></div>
+              <h3>按你的目标，生成项目方向建议。</h3>
+              <p>真实页面按“方向、目的、基础、时间”分步收集信息，可选择 RAG 增强，并把分析结果保存到历史记录。</p>
+              <div class="step-row">
+                <span class="step-chip active">1 方向</span>
+                <span class="step-chip">2 目的</span>
+                <span class="step-chip">3 基础</span>
+                <span class="step-chip">4 时间</span>
+              </div>
+              <div class="trend-form">
+                <div class="field-card">
+                  <label for="trend-topics">选择方向</label>
+                  <select id="trend-topics"><option>AI Agent / RAG / Workflow</option></select>
+                </div>
+                <div class="field-card">
+                  <label for="trend-custom">自定义方向</label>
+                  <input id="trend-custom" value="面向个人效率的 AI 工具" />
+                </div>
+                <div class="field-card">
+                  <label for="trend-purpose">目标用途</label>
+                  <select id="trend-purpose"><option>做一个可展示的作品</option></select>
+                </div>
+                <div class="field-card">
+                  <label for="trend-level">当前基础</label>
+                  <select id="trend-level"><option>会 Vue / Spring Boot，AI 工程经验较少</option></select>
+                </div>
+                <div class="field-card">
+                  <label for="trend-lang">熟悉语言</label>
+                  <input id="trend-lang" value="Java、Vue、Python 基础" />
+                </div>
+                <div class="field-card">
+                  <label for="trend-time">每周投入</label>
+                  <select id="trend-time"><option>每周 8-12 小时</option></select>
+                </div>
+              </div>
+              <div class="hub-card-actions">
+                <button class="btn primary">开始分析</button>
+                <button class="btn ghost">使用 RAG 增强</button>
+                <button class="btn">查看历史</button>
+              </div>
+            </article>
+
+            <aside class="trend-card soft">
+              <div class="tag-row"><span class="tag orange">分析结果</span><span class="tag yellow">可导入方案</span></div>
+              <h3>领域洞察</h3>
+              <div class="result-strip">
+                <div><strong>发展趋势</strong><p>Agent 工具正从 Demo 走向具体工作流。</p></div>
+                <div><strong>发展前景</strong><p>垂直场景更适合个人作品切入。</p></div>
+                <div><strong>市场需求</strong><p>用户更需要可直接试用的轻量工具。</p></div>
+              </div>
+              <div class="recommend-grid" style="grid-template-columns:1fr;">
+                <div class="recommend-card">
+                  <strong>推荐项目：AI 会议纪要行动项助手</strong>
+                  <p>难度中等，适合做成可演示作品；原因、前置知识和参考仓库会在真实结果中展开。</p>
+                  <button class="btn ghost" data-page="plan-page" style="width:100%;margin-top:10px;">导入方案设计</button>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="trend-split">
+            <article class="trend-card">
+              <div class="tag-row"><span class="tag orange">自由提问</span><span class="tag">v1</span></div>
+              <h3>不走表单时，直接问趋势问题。</h3>
+              <p>对齐真实页面的 `/app/trend/ask`：输入问题后返回 AI 回答，适合快速判断方向、技术路线和学习顺序。</p>
+              <div class="trend-form">
+                <div class="field-card full">
+                  <label for="trend-question">你的问题</label>
+                  <textarea id="trend-question">我想做一个适合展示的 AI 工具，应该选 RAG、Agent 还是数据分析类项目？</textarea>
+                </div>
+              </div>
+              <div class="hub-card-actions"><button class="btn primary">发送问题</button><button class="btn ghost">清空</button></div>
+              <div class="comment-card" style="margin-top:14px;">
+                <strong>回答预览</strong>
+                <p>建议优先选择边界清晰、能在线演示、能体现工程完整度的方向；如果时间有限，先做轻量 RAG 或单场景 Agent，再逐步扩展。</p>
+              </div>
+              <div class="disclaimer">AI 回答用于学习和选题参考，真实决策仍需要结合你的时间、基础和实际项目目标。</div>
+            </article>
+
+            <aside class="trend-card soft">
+              <div class="tag-row"><span class="tag orange">工作能力参考</span><span class="tag yellow">jobs Tab</span></div>
+              <h3>用岗位要求反推作品能力。</h3>
+              <p>真实页面通过方向列表、岗位列表和 Markdown 岗位详情展示能力要求，并提供岗位投稿入口。</p>
+              <div class="trend-form">
+                <div class="field-card">
+                  <label for="job-direction">方向</label>
+                  <select id="job-direction"><option>AI 应用开发</option></select>
+                </div>
+                <div class="field-card">
+                  <label for="job-name">岗位</label>
+                  <select id="job-name"><option>AI Agent 实习</option></select>
+                </div>
+              </div>
+              <div class="mini-list" style="margin-top:14px;">
+                <div class="mini-list-item"><span>岗位详情</span><strong class="price">Markdown 渲染</strong></div>
+                <div class="mini-list-item"><span>能力证据</span><strong class="price">Demo / 文档 / 代码结构</strong></div>
+                <div class="mini-list-item"><span>投稿状态</span><strong class="price">提交后审核</strong></div>
+              </div>
+              <div class="hub-card-actions"><button class="btn primary" data-page="jobs-page">查看完整岗位参考</button><button class="btn ghost">投稿岗位</button></div>
+              <div class="disclaimer">岗位内容来自用户投稿或公开信息整理；平台保留审核、下架和侵权处理入口。</div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="plan-page" class="page">
+        <button class="btn ghost detail-back" data-page="ai">返回 AI 工具</button>
+        <div class="compact-head">
+          <div>
+            <span class="eyebrow">方案设计</span>
+            <h2>从一个想法，生成六阶段项目方案。</h2>
+            <p>对齐真实 PlanDesigner.vue：输入项目想法和补充信息，选择详细/精简模式，逐阶段生成、编辑、重新生成、保存历史。</p>
+          </div>
+        </div>
+        <div class="hub-grid">
+          <article class="hub-card featured"><h3>1. 想法描述</h3><p>输入项目想法、技术偏好、时间限制和特殊需求。</p></article>
+          <article class="hub-card"><h3>2. 需求理解</h3><p>复述需求，识别核心模块和 MVP 边界。</p></article>
+          <article class="hub-card"><h3>3. 成功标准</h3><p>定义可验证结果和完成证据。</p></article>
+          <article class="hub-card"><h3>4. 约束风险</h3><p>识别技术约束、业务风险和明确不做事项。</p></article>
+          <article class="hub-card"><h3>5. 任务计划</h3><p>拆解可落地步骤。</p></article>
+          <article class="hub-card"><h3>6. 岗位匹配</h3><p>基于方案内容匹配 AI 实习岗位。</p></article>
+        </div>
+      </section>
+
+      <section id="jobs-page" class="page">
+        <button class="btn ghost detail-back" data-page="ai">返回 AI 工具</button>
+        <div class="compact-head">
+          <div>
+            <span class="eyebrow">工作能力参考</span>
+            <h2>按方向查看岗位，反推作品能力要求。</h2>
+            <p>对齐真实 TrendAnalysis.vue 的 jobs Tab：选择方向、选择岗位、查看 Markdown 岗位详情；岗位投稿进入 SubmitJob.vue 并需审核。</p>
+          </div>
+          <button class="btn primary">投稿岗位</button>
+        </div>
+        <div class="ai-layout">
+          <article class="panel">
+            <div class="leaderboard-filters">
+              <span class="filter-label">方向</span>
+              <div class="segmented"><span class="active">AI Agent</span><span>RAG</span><span>前端工程</span></div>
+            </div>
+            <div class="leaderboard-filters">
+              <span class="filter-label">岗位</span>
+              <div class="segmented"><span class="active">AI Agent 实习</span><span>RAG 应用开发</span></div>
+            </div>
+            <div class="comment-card">
+              <strong>岗位详情</strong>
+              <p>岗位描述、职责、要求以 Markdown 渲染。平台展示用户投稿内容，并保留侵权联系和下架说明。</p>
+            </div>
+          </article>
+          <aside class="panel">
+            <h3 style="margin-top:0;font-family:var(--mono);letter-spacing:-.04em;">能力参考</h3>
+            <div class="mini-list">
+              <div class="mini-list-item"><span>技术栈</span><strong class="price">Python / Vue</strong></div>
+              <div class="mini-list-item"><span>作品证据</span><strong class="price">Demo / 文档</strong></div>
+              <div class="mini-list-item"><span>学习重点</span><strong class="price">工程化</strong></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="publish" class="page">
+        <div class="publish-studio">
+          <div>
+            <div class="compact-head">
+              <div>
+                <span class="eyebrow">发布工作台</span>
+                <h2>先选你要挂出的内容，再进入对应表单。</h2>
+                <p>发布页只做分流和准备提示。真正的字段在下一步表单里根据作品/需求类型动态展示，避免用户一进来就被复杂表单压住。</p>
+              </div>
+            </div>
+            <div class="publish-choices">
+              <article class="publish-choice work">
+                <div>
+                  <div class="tag-row"><span class="tag orange">作品</span><span class="tag green">展示与售卖</span></div>
+                  <h3>发布 AI 产品作品</h3>
+                  <p>适合已经做出 demo、原型或可演示产品的创作者。重点是让别人快速看懂价值、完成度和适用场景。</p>
+                  <div class="choice-preview">
+                    <strong>下一步会填写</strong>
+                    <span>作品封面</span>
+                    <span>演示地址</span>
+                    <span>展示方式</span>
+                    <span>功能亮点</span>
+                  </div>
+                  <ul class="prepare-list">
+                    <li><span class="check-dot">✓</span> 产品标题、简介和封面</li>
+                    <li><span class="check-dot">✓</span> 演示链接或截图</li>
+                    <li><span class="check-dot">✓</span> 功能亮点和适用场景</li>
+                    <li><span class="check-dot">✓</span> 当前完成度和注意事项</li>
+                  </ul>
+                </div>
+                <button class="btn primary" style="width:100%;">开始发布作品</button>
+              </article>
+              <article class="publish-choice requirement">
+                <div>
+                  <div class="tag-row"><span class="tag blue">需求</span><span class="tag yellow">预算与定制</span></div>
+                  <h3>发布定制需求</h3>
+                  <p>适合商家或用户提出目标，先给预算范围，再和创作者通过聊天确认需求范围和实现思路。</p>
+                  <div class="choice-preview">
+                    <strong>下一步会填写</strong>
+                    <span>需求目标</span>
+                    <span>预算范围</span>
+                    <span>参考样例</span>
+                    <span>完成标准</span>
+                  </div>
+                  <ul class="prepare-list">
+                    <li><span class="check-dot" style="background:var(--blue);">✓</span> 想解决的问题</li>
+                    <li><span class="check-dot" style="background:var(--blue);">✓</span> 预算范围和期望周期</li>
+                    <li><span class="check-dot" style="background:var(--blue);">✓</span> 参考产品或截图</li>
+                    <li><span class="check-dot" style="background:var(--blue);">✓</span> 必须包含和暂不需要的内容</li>
+                  </ul>
+                </div>
+                <button class="btn ghost" style="width:100%;">开始发布需求</button>
+              </article>
+            </div>
+          </div>
+          <aside class="publish-side">
+            <div class="publish-note strong">
+              <h4>审核流程</h4>
+              <div class="publish-flow">
+                <div class="flow-step">填写内容并保存草稿</div>
+                <div class="flow-step">提交平台审核</div>
+                <div class="flow-step">审核通过后公开展示</div>
+                <div class="flow-step">被感兴趣后进入聊天沟通</div>
+              </div>
+            </div>
+            <div class="publish-note">
+              <h4>发布前检查</h4>
+              <p>标题是否清楚、演示链接是否可打开、说明范围是否明确、是否包含敏感或侵权内容。</p>
+            </div>
+            <div class="publish-note">
+              <h4>MVP 边界</h4>
+              <p>当前只做作品展示、需求展示、审核、收藏、评论和聊天沟通。</p>
+              <ul class="safe-list">
+                <li>作品先说明功能、演示方式和当前完成度。</li>
+                <li>需求先说明目标、预算范围和完成标准。</li>
+                <li>审核状态、聊天状态和收藏状态先独立流转。</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="messages" class="page">
+        <div class="compact-head">
+          <div>
+            <span class="eyebrow">消息</span>
+            <h2>聊天确认想法，想法沉淀需求。</h2>
+            <p>系统通知已放到左侧底部独立入口；消息页只处理人与人的沟通、需求确认和作品咨询。</p>
+          </div>
+          <button class="btn ghost">查看全部订单</button>
+        </div>
+        <div class="message-layout">
+          <aside class="panel">
+            <h3 style="margin-top:0;font-family:var(--mono);letter-spacing:-.04em;">会话</h3>
+            <div class="conversation active">
+              <strong>PixelCat</strong>
+              <p style="margin:4px 0 0;color:var(--muted);font-size:13px;">AI 简历诊断工具 · 等待回复</p>
+            </div>
+            <div class="conversation">
+              <strong>BlueShop</strong>
+              <p style="margin:4px 0 0;color:var(--muted);font-size:13px;">企业官网需求 · 等待回复</p>
+            </div>
+            <div class="conversation">
+              <strong>NovaAI</strong>
+              <p style="margin:4px 0 0;color:var(--muted);font-size:13px;">RAG Demo 功能咨询</p>
+            </div>
+          </aside>
+          <section class="panel">
+            <div class="tag-row"><span class="tag orange">关联作品</span><span class="tag yellow">需求待确认</span></div>
+            <h3 style="font-family:var(--mono);letter-spacing:-.04em;">AI 简历诊断与岗位匹配工具</h3>
+            <div class="chat-bubble">我想了解这个作品适合哪些使用场景。</div>
+            <div class="chat-bubble mine">可以，我先介绍核心功能、演示方式和当前完成度。</div>
+            <div class="chat-bubble">如果我要做类似功能，可以先聊需求吗？</div>
+            <div class="chat-bubble mine">可以，我们先确认目标、范围和优先级。</div>
+            <div style="display:flex;gap:10px;margin-top:18px;">
+              <input class="quick-search" style="flex:1;width:auto;box-shadow:none;" placeholder="输入消息..." />
+              <button class="btn primary">发送</button>
+            </div>
+          </section>
+          <aside class="panel">
+            <h3 style="margin-top:0;font-family:var(--mono);letter-spacing:-.04em;">沟通摘要</h3>
+            <div class="mini-list">
+              <div class="mini-list-item"><span>关联内容</span><strong class="price">作品</strong></div>
+              <div class="mini-list-item"><span>沟通状态</span><strong class="price">进行中</strong></div>
+              <div class="mini-list-item"><span>需求范围</span><strong class="price">待确认</strong></div>
+              <div class="mini-list-item"><span>下一步</span><strong class="price">补充说明</strong></div>
+            </div>
+            <button class="btn primary" style="width:100%;margin-top:14px;">整理需求</button>
+            <button class="btn ghost" style="width:100%;margin-top:10px;">查看订单</button>
+          </aside>
+        </div>
+      </section>
+
+      <section id="me" class="page">
+        <div class="profile-summary">
+          <div>
+            <span class="eyebrow">我的</span>
+            <div class="author-card" style="border-bottom:0;margin:14px 0 0;padding-bottom:0;">
+              <div class="avatar"></div>
+              <div>
+                <strong>PixelCat</strong>
+                <span>AI 应用开发者 · 12 个公开作品 · 86 次收藏</span>
+              </div>
+            </div>
+          </div>
+          <div class="hub-card-actions" style="justify-content:flex-end;margin-top:0;">
+            <button class="btn primary">查看个人主页</button>
+            <button class="btn ghost">编辑资料</button>
+          </div>
+        </div>
+        <div class="hub-grid">
+          <article class="hub-card featured">
+            <div>
+              <div class="tag-row"><span class="tag orange">内容管理</span></div>
+              <h3>我的作品</h3>
+              <p>管理已发布作品、草稿、审核状态、上下架和公开/私密。</p>
+            </div>
+            <button class="btn primary">进入作品管理</button>
+          </article>
+          <article class="hub-card">
+            <h3>收藏与历史</h3>
+            <p>查看收藏的作品/需求，以及最近浏览记录。</p>
+            <button class="btn ghost">查看</button>
+          </article>
+          <article class="hub-card">
+            <h3>配额</h3>
+            <p>查看 AI 工具消耗、充值码兑换和配额记录。</p>
+            <button class="btn ghost">查看配额</button>
+          </article>
+          <article class="hub-card">
+            <h3>设置</h3>
+            <p>修改密码、账号安全、退出登录。</p>
+            <button class="btn">进入设置</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="detail" class="page">
+        <button class="btn ghost detail-back" data-page="market">返回发现</button>
+        <div class="detail-layout">
+          <article class="detail-main">
+            <div class="detail-cover">
+              <span class="eyebrow">作品详情 · 已通过审核 · 可演示</span>
+              <div style="height: 16px"></div>
+              <div class="mock-browser">
+                <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                <div class="browser-body">
+                  <div class="mock-hero"></div>
+                  <div class="mock-grid"><div class="mock-block"></div><div class="mock-block"></div></div>
+                  <div class="mock-block" style="min-height: 76px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="detail-content">
+              <div class="tag-row"><span class="tag orange">AI 工具</span><span class="tag yellow">可演示</span><span class="tag blue">作品展示</span><span class="tag green">已审核</span></div>
+              <h2>AI 简历诊断与岗位匹配工具</h2>
+              <p>这是一套面向求职者、培训机构和校园就业服务的 AI 工具。它支持简历内容解析、岗位 JD 匹配、技能短板总结、学习路线建议，并预留企业私有知识库扩展点。</p>
+              <div class="info-grid">
+                <div class="info-box"><span>技术栈</span><strong>Vue 3 / Spring Boot</strong></div>
+                <div class="info-box"><span>演示状态</span><strong>可在线体验</strong></div>
+                <div class="info-box"><span>响应速度</span><strong>约 18 分钟</strong></div>
+              </div>
+              <h3>作品亮点</h3>
+              <p>重点展示作品能解决什么问题、适合哪些场景、目前完成到什么程度，以及作者希望收到怎样的反馈或合作咨询。</p>
+              <div class="comment-card">
+                <strong>评论与问答</strong>
+                <p><b>CodeFox：</b>是否可以接入企业微信登录？</p>
+                <p><b>作者回复：</b>可以先在聊天里确认使用场景，我会给出实现建议。</p>
+              </div>
+            </div>
+          </article>
+
+          <aside class="deal-panel">
+            <div class="author-card">
+              <div class="avatar"></div>
+              <div>
+                <strong>PixelCat</strong>
+                <span>AI 应用开发者 · 已发布 12 个作品</span>
+              </div>
+            </div>
+            <div class="sale-card active">
+              <div><strong>查看演示</strong><span>先了解作品功能和完成度</span></div>
+              <strong class="price">Demo</strong>
+            </div>
+            <div class="sale-card">
+              <div><strong>咨询作者</strong><span>询问适用场景、技术栈和后续计划</span></div>
+              <strong class="price">Chat</strong>
+            </div>
+            <div class="sale-card">
+              <div><strong>收藏作品</strong><span>加入收藏夹，后续继续查看</span></div>
+              <strong class="price">Save</strong>
+            </div>
+            <button class="btn primary" style="width:100%; margin-top: 10px;">进入聊天咨询</button>
+            <button class="btn ghost" style="width:100%; margin-top: 10px;">收藏作品</button>
+            <button class="btn" style="width:100%; margin-top: 10px;">查看作者主页</button>
+            <div class="trust-box">提示：当前原型只展示作品信息、作者信息、评论问答和聊天入口。</div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="requirement-detail" class="page">
+        <button class="btn ghost detail-back" data-page="market">返回发现</button>
+        <div class="detail-layout">
+          <article class="detail-main">
+            <div class="detail-content">
+              <div class="tag-row"><span class="tag blue">企业官网</span><span class="tag yellow">预算待沟通</span><span class="tag green">已审核</span></div>
+              <h2>给线下门店做一个 AI 预约官网</h2>
+              <p>需求方希望先做一个可验证的 MVP，用于展示门店服务、收集预约信息，并让客户能够提交基础需求。当前阶段重点是明确页面结构、预约流程和后台查看方式。</p>
+              <div class="info-grid">
+                <div class="info-box"><span>预算范围</span><strong>¥2,000 - ¥5,000</strong></div>
+                <div class="info-box"><span>期望周期</span><strong>2 - 4 周</strong></div>
+                <div class="info-box"><span>沟通方式</span><strong>先聊天确认</strong></div>
+              </div>
+              <h3>需求重点</h3>
+              <p>需要作品/服务展示页、预约表单、客户线索后台，以及后续可扩展的 AI 咨询能力。当前原型只展示需求信息和聊天入口。</p>
+              <div class="comment-card">
+                <strong>补充说明</strong>
+                <p>需求方可继续补充参考网站、品牌资料、页面数量和验收标准。</p>
+              </div>
+            </div>
+          </article>
+
+          <aside class="deal-panel">
+            <div class="author-card">
+              <div class="avatar"></div>
+              <div>
+                <strong>BlueShop</strong>
+                <span>门店经营者 · 发布 3 个需求</span>
+              </div>
+            </div>
+            <div class="sale-card active">
+              <div><strong>查看需求</strong><span>确认目标、范围和预算区间</span></div>
+              <strong class="price">Req</strong>
+            </div>
+            <div class="sale-card">
+              <div><strong>联系需求方</strong><span>通过聊天补充细节</span></div>
+              <strong class="price">Chat</strong>
+            </div>
+            <div class="sale-card">
+              <div><strong>收藏需求</strong><span>后续继续跟进</span></div>
+              <strong class="price">Save</strong>
+            </div>
+            <button class="btn primary" style="width:100%; margin-top: 10px;">进入聊天咨询</button>
+            <button class="btn ghost" style="width:100%; margin-top: 10px;">收藏需求</button>
+            <button class="btn" style="width:100%; margin-top: 10px;">查看发布者主页</button>
+            <div class="trust-box">提示：当前只展示需求信息、发布者信息和聊天入口。</div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-page]");
+    const pages = document.querySelectorAll(".page");
+    const title = document.getElementById("pageTitle");
+    const subtitle = document.getElementById("pageSubtitle");
+    const copy = {
+      market: ["发现", "搜索、分类、作品/需求切换与榜单入口。"],
+      ai: ["AI 工具", "榜单滚动预览，以及趋势分析、方案设计、工作能力参考入口。"],
+      leaderboard: ["榜单中心", "本网站作品/创作者榜单，以及 GitHub 仓库榜单。"],
+      "trend-page": ["趋势分析", "精准推荐、自由提问和工作能力参考。"],
+      "plan-page": ["方案设计", "六阶段项目规划，从想法到岗位匹配。"],
+      "jobs-page": ["工作能力参考", "按方向查看岗位、岗位详情和投稿入口。"],
+      publish: ["发布", "进入发布页后再选择发布作品或发布需求。"],
+      messages: ["消息", "聊天承载作品咨询、需求确认和系统通知。"],
+      me: ["我的", "个人主页、我的作品、收藏、历史、配额和设置聚合在个人中心。"],
+      detail: ["作品详情", "看清演示、作品说明、作者信息和聊天入口。"],
+      "requirement-detail": ["需求详情", "看清需求目标、预算范围、发布者信息和聊天入口。"]
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.page;
+        const anchor = button.dataset.anchor;
+        if (!target) return;
+        pages.forEach((page) => page.classList.remove("active"));
+        document.getElementById(target).classList.add("active");
+        document.querySelectorAll(".nav button").forEach((nav) => nav.classList.remove("active"));
+        const navTarget = document.querySelector(`.nav button[data-page="${target}"]`);
+        if (navTarget) navTarget.classList.add("active");
+        title.textContent = copy[target][0];
+        subtitle.textContent = copy[target][1];
+        if (anchor) {
+          document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

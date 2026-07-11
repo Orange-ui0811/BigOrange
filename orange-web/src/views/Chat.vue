@@ -45,7 +45,7 @@
 
         <div ref="msgList" class="chat-messages">
           <div v-for="m in messages" :key="m.id" class="msg-row" :class="{ 'msg-row-mine': m.senderId===myId }">
-            <el-avatar :size="32" class="msg-avatar" :class="{ 'msg-avatar-mine': m.senderId===myId, 'msg-avatar-other': m.senderId!==myId }" :src="m.senderAvatar ? API+m.senderAvatar : undefined">{{ (m.senderName||'#')[0] }}</el-avatar>
+            <el-avatar :size="32" class="msg-avatar" :class="{ 'msg-avatar-mine': m.senderId===myId, 'msg-avatar-other': m.senderId!==myId }" :src="m.senderAvatar || undefined">{{ (m.senderName||'#')[0] }}</el-avatar>
             <div class="msg-content-wrapper">
               <div v-if="m.senderId!==myId" class="msg-sender-name">{{ m.senderName||'用户#'+m.senderId }}</div>
               <div class="msg-bubble" :class="{ 'msg-bubble-mine': m.senderId===myId }">{{ m.content }}</div>

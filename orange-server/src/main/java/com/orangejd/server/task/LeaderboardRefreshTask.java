@@ -1,12 +1,12 @@
 package com.orangejd.server.task;
 
+import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
 import com.orangejd.server.service.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class LeaderboardRefreshTask {
@@ -40,8 +41,20 @@ public class LeaderboardRefreshTask {
     @Value("${orange.leaderboard.github-token:}")
     private String githubToken;
 
+    @Value("${orange.ai-trend.endpoint:https://ai.gitee.com/v1}")
+    private String aiEndpoint;
+
+    @Value("${orange.ai-trend.api-key:}")
+    private String aiApiKey;
+
+    @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
+    private String aiModel;
+
     private final RestTemplate restTemplate = new RestTemplate();
     private final RestTemplate readmeRestTemplate;
+
+    // 翻译缓存 — 避免同一描述每天重复调用 AI
+    private final Map<String, String> translationCache = new ConcurrentHashMap<>();
 
     {
         readmeRestTemplate = new RestTemplate();
@@ -51,17 +64,7 @@ public class LeaderboardRefreshTask {
         }});
     }
 
-    // 应用启动后首次预热（异步，不阻塞启动）
-    @PostConstruct
-    public void init() {
-        new Thread(() -> {
-            try { Thread.sleep(30000); } catch (Exception ignored) {}
-            log.info("LeaderboardRefreshTask: 启动预热刷新");
-            refreshAll();
-        }).start();
-    }
-
-    // 每周一凌晨 2:00 执行
+    // 每周一凌晨 2:00 执行（爬取 + 翻译全流程）
     @Scheduled(cron = "0 0 2 * * 1")
     public void refreshAll() {
         log.info("LeaderboardRefreshTask: 开始刷新 GitHub 榜单");
@@ -88,6 +91,10 @@ public class LeaderboardRefreshTask {
         refreshAndSave(null, "new", today, monday.format(DateTimeFormatter.ISO_LOCAL_DATE));
         sleep(6000);
         refreshWeekStars(null, today);
+
+        // 所有爬取完成后，统一翻译描述为中文
+        log.info("LeaderboardRefreshTask: 榜单爬取完成，开始翻译描述");
+        translateAllToday(today);
 
         // 清理 30 天前的旧数据
         String beforeDate = today.minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -269,6 +276,152 @@ public class LeaderboardRefreshTask {
         } catch (Exception e) {
             log.error("GitHub 涨星快照失败 topic={}: {}", topicName, e.getMessage());
         }
+    }
+
+    // ==================== 爬取完成后统一翻译 ====================
+
+    /**
+     * 榜单爬取全部完成后，逐条翻译所有缺失 descriptionZh 的描述
+     * 翻译失败则一直重试（每次等待 2s），直到成功
+     */
+    private void translateAllToday(LocalDate today) {
+        if (aiApiKey == null || aiApiKey.isEmpty()) {
+            log.info("AI API Key 未配置，跳过翻译");
+            return;
+        }
+        String todayStr = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        int totalDone = 0;
+        for (String topic : TOPICS) {
+            for (String period : new String[]{"all", "new", "week"}) {
+                LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", topic, period, todayStr);
+                if (snap == null || snap.getDataJson() == null) continue;
+                PageResult<Map<String, Object>> parsed = parsePageResult(snap.getDataJson());
+                if (parsed == null || parsed.getRecords().isEmpty()) continue;
+
+                boolean updated = false;
+                for (Map<String, Object> r : parsed.getRecords()) {
+                    if (r.containsKey("descriptionZh") && r.get("descriptionZh") != null
+                            && !((String) r.get("descriptionZh")).isEmpty()) continue;
+                    String desc = (String) r.getOrDefault("description", "");
+                    if (desc == null || desc.trim().isEmpty()) continue;
+                    desc = desc.trim();
+
+                    // 缓存命中
+                    String cached = translationCache.get(desc);
+                    if (cached != null) {
+                        if (!cached.isEmpty()) r.put("descriptionZh", cached);
+                        updated = true; totalDone++;
+                        continue;
+                    }
+
+                    // 翻译，失败一直重试
+                    String translated = null;
+                    int retry = 0;
+                    while (translated == null || translated.isEmpty()) {
+                        try {
+                            translated = callAiTranslation(desc);
+                            if (translated == null || translated.isEmpty()) {
+                                retry++;
+                                if (retry % 5 == 0) log.info("翻译重试中... topic={} period={} retry={}", topic, period, retry);
+                                sleep(2000);
+                            }
+                        } catch (Exception e) {
+                            retry++;
+                            if (retry % 5 == 0) log.info("翻译重试中... topic={} period={} retry={} err={}", topic, period, retry, e.getMessage());
+                            sleep(2000);
+                        }
+                    }
+                    translationCache.put(desc, translated);
+                    r.put("descriptionZh", translated);
+                    updated = true;
+                    totalDone++;
+                }
+
+                if (updated) {
+                    Map<String, Object> data = new LinkedHashMap<>();
+                    data.put("total", parsed.getTotal());
+                    data.put("records", parsed.getRecords());
+                    snap.setDataJson(toJson(data));
+                    snapshotMapper.insert(snap); // upsert
+                }
+            }
+        }
+        log.info("翻译全部完成: 共 {} 条描述已汉化", totalDone);
+    }
+
+    private String callAiTranslation(String text) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("model", aiModel);
+        List<Map<String, String>> messages = new ArrayList<>();
+        Map<String, String> msg = new LinkedHashMap<>();
+        msg.put("role", "user");
+        msg.put("content", "将以下英文翻译为简洁中文，只输出翻译结果，不要解释：\n" + text);
+        messages.add(msg);
+        body.put("messages", messages);
+        body.put("max_tokens", 200);
+        body.put("temperature", 0.3);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + aiApiKey);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
+        ResponseEntity<Map> response = restTemplate.postForEntity(
+                aiEndpoint + "/chat/completions", entity, Map.class);
+
+        if (response.getBody() != null && response.getBody().containsKey("choices")) {
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> choices = (List<Map<String, Object>>) response.getBody().get("choices");
+            if (!choices.isEmpty()) {
+                Map<String, Object> choice = choices.get(0);
+                Map<String, Object> message = (Map<String, Object>) choice.get("message");
+                String content = (String) message.get("content");
+                return content != null ? content.trim() : null;
+            }
+        }
+        return null;
+    }
+
+    private PageResult<Map<String, Object>> parsePageResult(String json) {
+        try {
+            int totalStart = json.indexOf("\"total\":") + 8;
+            int totalEnd = json.indexOf(",", totalStart);
+            long total = Long.parseLong(json.substring(totalStart, totalEnd).trim());
+            List<Map<String, Object>> records = new ArrayList<>();
+            int arrStart = json.indexOf("\"records\":[") + 11;
+            int arrEnd = json.lastIndexOf("]}");
+            if (arrEnd < 0) arrEnd = json.length() - 2;
+            String arrStr = json.substring(arrStart, arrEnd);
+            int depth = 0, objStart = -1;
+            for (int i = 0; i < arrStr.length(); i++) {
+                if (arrStr.charAt(i) == '{') {
+                    if (depth == 0) objStart = i;
+                    depth++;
+                } else if (arrStr.charAt(i) == '}') {
+                    depth--;
+                    if (depth == 0 && objStart >= 0) {
+                        String objStr = arrStr.substring(objStart + 1, i);
+                        Map<String, Object> map = new LinkedHashMap<>();
+                        String[] pairs = objStr.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+                        for (String pair : pairs) {
+                            int colon = pair.indexOf(":");
+                            if (colon < 0) continue;
+                            String key = pair.substring(0, colon).trim().replaceAll("^\"|\"$", "");
+                            String val = pair.substring(colon + 1).trim().replaceAll("^\"|\"$", "");
+                            if (val.matches("-?\\d+(\\.\\d+)?")) {
+                                if (val.contains(".")) map.put(key, Double.parseDouble(val));
+                                else map.put(key, Long.parseLong(val));
+                            } else if ("null".equals(val)) {
+                                map.put(key, null);
+                            } else {
+                                map.put(key, val.replace("\\\"", "\"").replace("\\n", "\n"));
+                            }
+                        }
+                        records.add(map);
+                    }
+                }
+            }
+            return new PageResult<>(total, records);
+        } catch (Exception e) { return null; }
     }
 
     // ==================== RAG README 自动采集 ====================

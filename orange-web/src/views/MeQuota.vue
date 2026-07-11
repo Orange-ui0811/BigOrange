@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="page-title">我的配额</h3>
-    <p class="page-subtitle">管理 segments 余额，用于 AI 趋势分析和方案设计</p>
+    <p class="page-subtitle">管理 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" /> 余额，用于 AI 趋势分析和方案设计</p>
 
     <!-- 余额卡片 -->
     <el-row :gutter="16" class="balance-row">
@@ -20,7 +20,7 @@
       <el-col :span="8">
         <el-card shadow="never" class="stat-card">
           <div class="balance-yuan">&#8776; &yen;{{ (balance / 100).toFixed(2) }}</div>
-          <div class="balance-note">100 segments = 1 元</div>
+          <div class="balance-note">100 <PixelOrangeSlice :size="12" style="display:inline-block;vertical-align:middle" /> = 1 元</div>
         </el-card>
       </el-col>
     </el-row>
@@ -44,10 +44,10 @@
             <el-radio-button value="alipay">支付宝</el-radio-button>
           </el-radio-group>
           <el-select v-model="payAmount" size="small" class="pay-select">
-            <el-option :value="1000" label="¥10 = 1000 segments" />
-            <el-option :value="3000" label="¥30 = 3000 segments" />
-            <el-option :value="5000" label="¥50 = 5000 segments" />
-            <el-option :value="10000" label="¥100 = 10000 segments" />
+            <el-option :value="1000" label="¥10 = 1000 🍊" />
+            <el-option :value="3000" label="¥30 = 3000 🍊" />
+            <el-option :value="5000" label="¥50 = 5000 🍊" />
+            <el-option :value="10000" label="¥100 = 10000 🍊" />
           </el-select>
           <el-button @click="doPay" type="primary" :loading="paying" class="btn-primary btn-block">前往支付</el-button>
         </el-card>

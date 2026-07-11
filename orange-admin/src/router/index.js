@@ -21,6 +21,7 @@ const routes = [
       { path: 'redemption', name: 'Redemption', component: () => import('../views/Redemption.vue'), meta: { title: '充值码管理' } },
       { path: 'job-audit', name: 'JobAudit', component: () => import('../views/JobAudit.vue'), meta: { title: '岗位审核' } },
       { path: 'ai-config', name: 'AIConfig', component: () => import('../views/AIConfig.vue'), meta: { title: 'AI 调用设置' } },
+      { path: 'pricing', name: 'Pricing', component: () => import('../views/Pricing.vue'), meta: { title: 'AI 消费定价' } },
       { path: 'usage', name: 'UsageStats', component: () => import('../views/UsageStats.vue'), meta: { title: '用量统计' } },
       { path: 'settings', name: 'Settings', component: () => import('../views/Settings.vue'), meta: { title: '修改密码' } },
       { path: 'work/:id', name: 'WorkDetail', component: () => import('../views/WorkDetail.vue'), meta: { title: '作品详情' } },

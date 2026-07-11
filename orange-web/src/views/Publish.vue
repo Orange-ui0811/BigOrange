@@ -102,7 +102,7 @@
             <el-tab-pane label="需求" name="requirement" />
           </el-tabs>
           <el-form label-position="top">
-            <el-form-item label="封面图"><el-upload :action="API+'/app/common/upload?dir=cover'" :headers="uploadHeaders" :on-success="onCoverSuccess" :show-file-list="false" accept="image/*"><el-button size="small">上传封面</el-button></el-upload><el-image v-if="form.coverUrl" :src="API+form.coverUrl" class="cover-preview" fit="cover"/></el-form-item>
+            <el-form-item label="封面图"><el-upload :action="API+'/app/common/upload?dir=cover'" :headers="uploadHeaders" :on-success="onCoverSuccess" :show-file-list="false" accept="image/*"><el-button size="small">上传封面</el-button></el-upload><el-image v-if="form.coverUrl" :src="form.coverUrl" class="cover-preview" fit="cover"/></el-form-item>
             <el-form-item label="演示链接">
               <template v-if="tab==='work'">
                 <el-collapse class="guide-collapse">
@@ -170,7 +170,7 @@ const uploadHeaders = { 'App-Token': sessionStorage.getItem('appToken') || '' }
 const onCoverSuccess = (res) => { if (res.code === 1) form.coverUrl = res.data }
 const onDetailImage = (res) => {
   if (res.code === 1 && res.data) {
-    const url = res.data.startsWith('http') ? res.data : API + res.data
+    const url = res.data.startsWith('http') ? res.data : res.data
     form.detail = (form.detail || '') + '<img src="' + url + '" style="max-width:100%">\n'
   }
 }

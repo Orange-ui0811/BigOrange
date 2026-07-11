@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Pixel Orange Exact Match</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* 强制浏览器硬像素渲染，消除抗锯齿模糊 */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+body {
+  /* 匹配原图浅米黄背景 */
+  background-color: #ffe9c8;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 橙子总容器，整体尺寸 480px 正方形 */
+.orange-container {
+  width: 480px;
+  height: 480px;
+  position: relative;
+}
+/* 橙子主体渐变球体 + 阶梯式4px黑色像素外框 */
+.orange-main {
+  width: 420px;
+  height: 420px;
+  position: absolute;
+  left: 30px;
+  top: 40px;
+  border-radius: 50%;
+  /* 原图左右橙渐变 */
+  background: linear-gradient(90deg, #ffaa33 0%, #ff8822 100%);
+  /* 像素阶梯黑色轮廓，统一4px像素块描边 */
+  box-shadow:
+    -4px 0 0 #2c160e,
+    -8px 0 0 #2c160e,
+    -12px 0 0 #2c160e,
+    -16px 0 0 #2c160e,
+    4px 0 0 #2c160e,
+    8px 0 0 #2c160e,
+    12px 0 0 #2c160e,
+    16px 0 0 #2c160e,
+    0 -4px 0 #2c160e,
+    0 -8px 0 #2c160e,
+    0 -12px 0 #2c160e,
+    0 -16px 0 #2c160e,
+    0 4px 0 #2c160e,
+    0 8px 0 #2c160e,
+    0 12px 0 #2c160e,
+    0 16px 0 #2c160e;
+}
+/* 左侧4格阶梯白色高光像素块，从上到下依次缩小 */
+.highlight-1 {
+  position: absolute;
+  top: 60px;
+  left: 70px;
+  width: 36px;
+  height: 36px;
+  background: #fff8d8;
+}
+.highlight-2 {
+  position: absolute;
+  top: 96px;
+  left: 106px;
+  width: 32px;
+  height: 32px;
+  background: #fff8d8;
+}
+.highlight-3 {
+  position: absolute;
+  top: 128px;
+  left: 74px;
+  width: 28px;
+  height: 28px;
+  background: #fff8d8;
+}
+.highlight-4 {
+  position: absolute;
+  top: 160px;
+  left: 40px;
+  width: 40px;
+  height: 40px;
+  background: #fff8d8;
+}
+/* 顶部像素绿叶：竖直梗叶片 */
+.leaf-stem {
+  position: absolute;
+  top: 0px;
+  left: 200px;
+  width: 48px;
+  height: 96px;
+  background: #52b936;
+  box-shadow:
+    -4px 0 0 #2c160e,
+    4px 0 0 #2c160e,
+    0 -4px 0 #2c160e,
+    0 4px 0 #2c160e;
+}
+/* 顶部侧横向叶片 */
+.leaf-side {
+  position: absolute;
+  top: 24px;
+  left: 248px;
+  width: 112px;
+  height: 64px;
+  background: #63ca47;
+  box-shadow:
+    4px 0 0 #2c160e,
+    0 -4px 0 #2c160e,
+    0 4px 0 #2c160e;
+}
+/* 左右方形像素眼睛 */
+.eye-left {
+  position: absolute;
+  top: 200px;
+  left: 110px;
+  width: 36px;
+  height: 36px;
+  background: #2c160e;
+}
+.eye-right {
+  position: absolute;
+  top: 200px;
+  right: 110px;
+  width: 36px;
+  height: 36px;
+  background: #2c160e;
+}
+/* 三段式像素微笑嘴巴（两个方块+底部横条） */
+.mouth-left {
+  position: absolute;
+  bottom: 110px;
+  left: 176px;
+  width: 24px;
+  height: 24px;
+  background: #2c160e;
+}
+.mouth-right {
+  position: absolute;
+  bottom: 110px;
+  right: 176px;
+  width: 24px;
+  height: 24px;
+  background: #2c160e;
+}
+.mouth-bottom {
+  position: absolute;
+  bottom: 86px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 24px;
+  background: #2c160e;
+}
+/* 橙子底部像素投影阴影 */
+.bottom-shadow {
+  position: absolute;
+  bottom: 0px;
+  left: 40px;
+  width: 400px;
+  height: 32px;
+  background: #703c28;
+  opacity: 0.6;
+}
+</style>
+</head>
+<body>
+<div class="orange-container">
+  <!-- 橙子主体球体 -->
+  <div class="orange-main">
+    <!-- 四阶阶梯高光 -->
+    <div class="highlight-1"></div>
+    <div class="highlight-2"></div>
+    <div class="highlight-3"></div>
+    <div class="highlight-4"></div>
+    <!-- 双眼 -->
+    <div class="eye-left"></div>
+    <div class="eye-right"></div>
+    <!-- 三段像素微笑嘴 -->
+    <div class="mouth-left"></div>
+    <div class="mouth-right"></div>
+    <div class="mouth-bottom"></div>
+  </div>
+  <!-- 顶部两片像素绿叶 -->
+  <div class="leaf-stem"></div>
+  <div class="leaf-side"></div>
+  <!-- 底部地面阴影 -->
+  <div class="bottom-shadow"></div>
+</div>
+</body>
+</html>

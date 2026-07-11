@@ -37,6 +37,9 @@ public class TrendAnalysisService {
     @Autowired
     private QuotaService quotaService;
 
+    @Autowired
+    private PricingService pricingService;
+
     @Autowired(required = false)
     private StringRedisTemplate redisTemplate;
 
@@ -62,7 +65,7 @@ public class TrendAnalysisService {
         String requestId = null;
         if (accountId != null && accountId > 0) {
             requestId = "trend_v1_" + accountId + "_" + System.currentTimeMillis();
-            try { quotaService.consume(accountId, 50, "趋势分析 V1", requestId); }
+            try { int cost = pricingService.getCost("ai:trend:v1"); quotaService.consume(accountId, cost, "趋势分析 V1", requestId); }
             catch (Exception e) { result.put("error", e.getMessage()); return result; }
         }
 
@@ -230,7 +233,8 @@ public class TrendAnalysisService {
         if (accountId != null && accountId > 0) {
             requestId = "trend_v2_" + accountId + "_" + System.currentTimeMillis();
             try {
-                int balance = quotaService.consume(accountId, 50, "趋势分析 V2", requestId);
+                int cost = pricingService.getCost("ai:trend:v2");
+                int balance = quotaService.consume(accountId, cost, "趋势分析 V2", requestId);
                 consumed = true;
                 result.put("balance", balance);
                 log.info("[QUOTA] 趋势分析预扣: accountId={}, balance={}", accountId, balance);

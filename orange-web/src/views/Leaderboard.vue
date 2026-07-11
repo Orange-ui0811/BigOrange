@@ -93,7 +93,7 @@
             <div class="card-title">{{ item.name }}</div>
             <div class="card-fullname">{{ item.fullName }}</div>
             <div class="card-description">
-              {{ item.description || '暂无描述' }}
+              {{ item.descriptionZh || item.description || '暂无描述' }}
             </div>
             <div class="card-footer">
               <span class="card-score">&#9733; {{ item.stars }}</span>

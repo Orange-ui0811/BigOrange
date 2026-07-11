@@ -60,7 +60,8 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public KnowledgeDocumentVO importFromGithub(String fullName, String content, String period) {
-        String sourceRef = "week".equals(period) ? fullName + "|week" : fullName;
+        String sourceRef = ("new".equals(period) || "week".equals(period))
+                ? fullName + "|" + period : fullName;
         // 翻译为中文
         String chineseContent = translateReadme(fullName, content);
         // 提取翻译后第一行 Markdown 标题作为显示名
@@ -261,7 +262,9 @@ public class DocumentServiceImpl implements DocumentService {
     private String resolvePeriod(KnowledgeDocument e) {
         if (!SOURCE_GITHUB.equals(e.getSource())) return "all";
         String ref = e.getSourceRef();
-        return (ref != null && ref.endsWith("|week")) ? "week" : "all";
+        if (ref != null && ref.endsWith("|week")) return "week";
+        if (ref != null && ref.endsWith("|new")) return "new";
+        return "all";
     }
 
     private KnowledgeDocumentVO toVO(KnowledgeDocument e) {

@@ -366,3 +366,35 @@ CREATE TABLE IF NOT EXISTS knowledge_document (
     KEY idx_source (source),
     UNIQUE KEY uk_source_ref (source_ref)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='知识库文档表';
+
+-- ============================================================
+-- Phase 7: AI 服务消费定价管理
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS ai_service_pricing (
+    service_key  VARCHAR(64)   NOT NULL COMMENT '服务标识，如 ai:trend:v1',
+    service_name VARCHAR(128)  NOT NULL COMMENT '显示名，如 趋势分析 V1',
+    segment_cost INT           NOT NULL DEFAULT 50 COMMENT '消费金额（segments）',
+    updated_by   BIGINT                 COMMENT '最后修改人 admin_id',
+    updated_at   DATETIME               COMMENT '最后修改时间',
+    PRIMARY KEY (service_key)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='AI 服务消费定价表';
+
+-- 初始化默认定价
+INSERT IGNORE INTO ai_service_pricing (service_key, service_name, segment_cost) VALUES
+    ('ai:trend:v1', '趋势分析 V1', 50),
+    ('ai:trend:v2', '趋势分析 V2', 50),
+    ('ai:plan',     '方案设计',   40),
+    ('ai:match',    '岗位匹配',   50);
+
+CREATE TABLE IF NOT EXISTS pricing_change_log (
+    id          BIGINT       NOT NULL AUTO_INCREMENT,
+    service_key VARCHAR(64)  NOT NULL COMMENT '服务标识',
+    old_cost    INT          NOT NULL COMMENT '旧定价',
+    new_cost    INT          NOT NULL COMMENT '新定价',
+    admin_id    BIGINT       NOT NULL COMMENT '操作人 admin_id',
+    changed_at  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '变更时间',
+    PRIMARY KEY (id),
+    KEY idx_service_key (service_key),
+    KEY idx_changed_at (changed_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定价变更审计日志表';

@@ -58,7 +58,7 @@
 
       <!-- 用户面板 -->
       <div class="sidebar-user">
-        <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl ? API+avatarUrl : undefined">
+        <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
           {{ (nickname || me.nickname || me.username || '?')[0] }}
         </el-avatar>
         <div class="sidebar-user-info">

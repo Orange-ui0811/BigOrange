@@ -30,6 +30,6 @@
     <select id="selectOldGithubWeekly" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
         SELECT id, title, source, source_ref, chunk_count, file_size, create_time
         FROM knowledge_document
-        WHERE source = 'GITHUB' AND source_ref LIKE '%|week' AND create_time &lt; #{beforeDate}
+        WHERE source = 'GITHUB' AND (source_ref LIKE '%|week' OR source_ref LIKE '%|new') AND create_time &lt; #{beforeDate}
     </select>
 </mapper>

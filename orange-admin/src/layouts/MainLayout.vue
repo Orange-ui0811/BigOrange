@@ -14,6 +14,7 @@
         <el-menu-item index="/knowledge"><el-icon><Collection /></el-icon> 知识库</el-menu-item>
         <el-menu-item index="/redemption"><el-icon><Ticket /></el-icon> 充值码管理</el-menu-item>
         <el-menu-item index="/ai-config"><el-icon><Setting /></el-icon> AI 调用设置</el-menu-item>
+        <el-menu-item index="/pricing"><el-icon><Coin /></el-icon> AI 消费定价</el-menu-item>
         <el-menu-item index="/job-audit"><el-icon><Checked /></el-icon> 岗位审核</el-menu-item>
         <el-menu-item index="/usage"><el-icon><DataAnalysis /></el-icon> 用量统计</el-menu-item>
         <el-menu-item index="/settings"><el-icon><Setting /></el-icon> 修改密码</el-menu-item>
