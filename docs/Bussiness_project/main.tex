@@ -1,73 +1,57 @@
-% \documentclass{article}
-% \usepackage{graphicx} % Required for inserting images
+\documentclass[12pt,a4paper,openany,fontset=none]{ctexrep}
 
-% \title{BigOrange_BP}
-% \author{鸣伟 马}
-% \date{July 2026}
-
-% \begin{document}
-
-% \maketitle
-
-% \section{Introduction}
-
-% \end{document}
-\documentclass[12pt,a4paper,openany]{ctexrep}
-
-% ==================== 宏包 ====================
 \usepackage[
   left=2.8cm,
   right=2.8cm,
   top=2.6cm,
   bottom=2.6cm
 ]{geometry}
-
-\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{longtable}
-\usepackage{multirow}
 \usepackage{xcolor}
-\usepackage{fontawesome5}
 \usepackage{enumitem}
-\usepackage{float}
-\usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{setspace}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+
+\setCJKmainfont{PingFang SC}
+\setCJKsansfont{PingFang SC}
+\setCJKmonofont{PingFang SC}
 
 \pgfplotsset{compat=1.18}
 
-% ==================== 颜色 ====================
-\definecolor{MainBlue}{HTML}{22577A}
-\definecolor{LightBlue}{HTML}{D9EDF7}
-\definecolor{AccentGreen}{HTML}{38A3A5}
+\definecolor{MainOrange}{HTML}{E96A2C}
+\definecolor{DarkBrown}{HTML}{4B2E1F}
+\definecolor{SoftOrange}{HTML}{FFF3E8}
+\definecolor{AccentBlue}{HTML}{2F6FED}
 \definecolor{DarkGray}{HTML}{333333}
-\definecolor{LightGray}{HTML}{F5F5F5}
+\definecolor{LightGray}{HTML}{F6F6F6}
 
-% ==================== 超链接 ====================
 \hypersetup{
   colorlinks=true,
-  linkcolor=MainBlue,
-  urlcolor=AccentGreen,
-  citecolor=MainBlue,
-  pdfauthor={项目团队},
-  pdftitle={项目商业计划书}
+  linkcolor=MainOrange,
+  urlcolor=AccentBlue,
+  citecolor=MainOrange,
+  pdfauthor={OrangeVC 项目团队},
+  pdftitle={OrangeVC AI 创意服务交易平台商业计划书}
 }
 
-% ==================== 标题格式 ====================
 \titleformat{\chapter}
-  {\Huge\bfseries\color{MainBlue}}
+  {\Huge\bfseries\color{MainOrange}}
   {\thechapter}
   {1em}
   {}
 
 \titleformat{\section}
-  {\Large\bfseries\color{MainBlue}}
+  {\Large\bfseries\color{DarkBrown}}
   {\thesection}
   {0.8em}
   {}
@@ -78,576 +62,417 @@
   {0.8em}
   {}
 
-% ==================== 页眉页脚 ====================
 \pagestyle{fancy}
+\setlength{\headheight}{15pt}
 \fancyhf{}
-\fancyhead[L]{\color{DarkGray}项目商业计划书}
-\fancyhead[R]{\color{DarkGray}\leftmark}
+\fancyhead[L]{OrangeVC 商业计划书}
+\fancyhead[R]{\leftmark}
 \fancyfoot[C]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
 
-% ==================== 表格设置 ====================
-\renewcommand{\arraystretch}{1.4}
-\setlength{\tabcolsep}{8pt}
+\setstretch{1.25}
+\setlist[itemize]{itemsep=0.25em, topsep=0.4em}
+\setlist[enumerate]{itemsep=0.25em, topsep=0.4em}
 
-% ==================== 自定义命令 ====================
-\newcommand{\projectname}{项目名称}
-\newcommand{\teamname}{团队名称}
-\newcommand{\versionnumber}{V1.0}
-\newcommand{\reportdate}{2026年7月}
-
-\newcommand{\highlightbox}[1]{
-  \begin{center}
-    \fcolorbox{MainBlue}{LightBlue}{
-      \parbox{0.9\textwidth}{
-        \vspace{0.3cm}
-        #1
-        \vspace{0.3cm}
-      }
-    }
-  \end{center}
-}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\source}[1]{\par{\small\color{DarkGray}依据：\texttt{#1}}\par}
 
 \begin{document}
 
-% ==================== 封面 ====================
 \begin{titlepage}
-  \pagecolor{MainBlue}
-  \color{white}
-
-  \begin{center}
-    \vspace*{2cm}
-
-    {\Huge\bfseries \projectname\par}
-
-    \vspace{0.8cm}
-
-    {\LARGE 商业计划书\par}
-
-    \vspace{1.5cm}
-
-    \rule{0.75\textwidth}{1.2pt}
-
-    \vspace{1.5cm}
-
-    {\Large
-    基于知识图谱的vibecoding软件交易平台项目
-    \par}
-
-    \vfill
-
-    \begin{tabular}{rl}
-      项目团队： & \teamname \\[0.4cm]
-      文档版本： & \versionnumber \\[0.4cm]
-      编制日期： & \reportdate
-    \end{tabular}
-
-    \vspace{1.5cm}
-  \end{center}
+  \centering
+  \vspace*{2.5cm}
+  {\Huge\bfseries\color{MainOrange} OrangeVC\par}
+  \vspace{0.6cm}
+  {\LARGE AI 创意服务交易平台商业计划书\par}
+  \vspace{1.2cm}
+  {\large 基于 GitHub 仓库 \texttt{Orange-ui0811/BigOrange} 当前 \texttt{main} 分支内容生成\par}
+  \vspace{0.5cm}
+  {\large 版本日期：2026 年 7 月 12 日\par}
+  \vfill
+  \begin{tikzpicture}
+    \fill[SoftOrange] (0,0) circle (2.1);
+    \fill[MainOrange] (0,0) circle (1.65);
+    \draw[white,line width=2pt] (-0.9,0.7) -- (0.9,0.7);
+    \draw[white,line width=2pt] (-1.05,0.1) -- (1.05,0.1);
+    \draw[white,line width=2pt] (-0.75,-0.5) -- (0.75,-0.5);
+    \fill[DarkBrown] (-0.45,0.25) circle (0.08);
+    \fill[DarkBrown] (0.45,0.25) circle (0.08);
+    \draw[DarkBrown,line width=1.3pt] (-0.35,-0.25) .. controls (0,-0.55) .. (0.35,-0.25);
+  \end{tikzpicture}
+  \vfill
+  {\small 本文只使用仓库中可核验的信息；仓库未提供的财务预测、真实用户规模、收入流水和融资信息未作虚构。}
 \end{titlepage}
 
-\nopagecolor
-\color{DarkGray}
-
-% ==================== 声明 ====================
-\chapter*{保密声明}
-本商业计划书包含项目团队的商业构想、产品设计、技术方案及财务预测等信息，
-仅供潜在合作伙伴、投资机构及项目相关人员参考。
-
-未经项目团队书面许可，不得复制、传播或用于其他商业用途。
-
-\clearpage
-
-% ==================== 目录 ====================
 \tableofcontents
 \clearpage
 
-% ==================== 执行摘要 ====================
 \chapter{执行摘要}
 
-\section{项目概述}
+OrangeVC 是一个面向 AI 创意开发者、AI 实习生、自由开发者与项目需求方的创意服务交易平台。仓库 README 将其定义为“AI 创意服务交易平台”，系统架构文档进一步描述为“Vibe Coding 作品交易与职业匹配平台”。平台以作品展示、需求发布、沟通协商、报价下单、交付验收为交易主线，并叠加 GitHub 榜单、RAG 知识库、趋势分析、方案设计、岗位匹配、AI 自动审核、配额消费等 AI 增强能力。
 
-\projectname 是一款面向【目标用户】的【产品类型】，
-旨在解决【核心痛点】。项目通过【核心技术或产品机制】，
-帮助用户实现【核心价值】。
+\source{README.md；docs/OrangeJD系统架构设计说明书.md}
 
-\highlightbox{
-\textbf{一句话项目定位：}
-
-为【目标用户】提供【核心功能】，相比传统方案，
-能够实现【关键优势】。
-}
-
-\section{核心亮点}
-
-\begin{itemize}[leftmargin=2em]
-  \item \textbf{真实需求：}目标用户当前面临明确且高频的使用痛点。
-  \item \textbf{技术可行：}核心功能已经完成原型验证或技术储备。
-  \item \textbf{快速开发：}采用 Vibe Coding 和 AI 辅助开发，提高迭代效率。
-  \item \textbf{商业闭环：}通过订阅、增值服务或企业授权实现收入。
-  \item \textbf{规模潜力：}产品具备标准化、在线化和全球化扩展能力。
-\end{itemize}
-
-\section{关键数据}
-
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{>{\bfseries}l X}
-    \toprule
-    指标 & 当前情况或目标 \\
-    \midrule
-    目标用户 & 【填写目标用户群体】 \\
-    市场规模 & 【填写预计市场规模】 \\
-    当前进度 & 【创意阶段 / MVP / 内测 / 正式运营】 \\
-    商业模式 & 【订阅制 / 按次收费 / 企业服务 / 广告】 \\
-    融资需求 & 【填写金额或暂不融资】 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-% ==================== 项目背景 ====================
-\chapter{项目背景与市场痛点}
-
-\section{行业背景}
-
-介绍项目所属行业的发展趋势，包括：
+从当前仓库实现看，OrangeVC 已不是概念原型，而是具备双前端、后端服务、数据库结构、部署文档和线上访问记录的全栈系统：
 
 \begin{itemize}
-  \item 行业数字化或智能化趋势；
-  \item AI 编程和自动化工具的发展；
-  \item 用户行为和消费习惯变化；
-  \item 当前市场中尚未被满足的需求。
+  \item 用户端：\texttt{orange-web}，提供市场、AI 工具、榜单、趋势分析、方案设计、聊天、发布、个人中心、配额等页面。
+  \item 管理端：\texttt{orange-admin}，提供控制台、审核、内容、用户、订单、知识库、岗位审核、AI 配置、定价、用量统计等页面。
+  \item 后端：\texttt{orange-server}，基于 Spring Boot 3.3.5、Java 21、MyBatis、Redis Stack、Spring AI、WebSocket 实现。
+  \item 数据库：\texttt{schema-v1.sql} 当前声明 22 张业务表，覆盖账号、内容、互动、交易、知识库、榜单、趋势、定价等模块。
+  \item API：当前 Controller 目录下有 41 个 Controller 文件，显式 \texttt{@GetMapping}/\texttt{@PostMapping}/\texttt{@PutMapping}/\texttt{@DeleteMapping} 映射共 166 个。
 \end{itemize}
 
-\section{用户痛点}
+\source{orange-web/src/router/index.js；orange-admin/src/router/index.js；orange-server/src/main/java/com/orangejd/server/controller；orange-server/src/main/resources/sql/schema-v1.sql}
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l X X}
-    \toprule
-    编号 & 用户痛点 & 现有解决方案的不足 \\
-    \midrule
-    1 & 【痛点一】 & 【不足说明】 \\
-    2 & 【痛点二】 & 【不足说明】 \\
-    3 & 【痛点三】 & 【不足说明】 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+本商业计划书的重点不是虚构融资模型，而是基于仓库现有产品能力，说明 OrangeVC 的商业定位、用户场景、可交付产品范围、技术壁垒、运营闭环和后续商业化路径。
 
-\section{目标用户画像}
+\chapter{项目定位与用户问题}
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{>{\bfseries}l X}
-    \toprule
-    维度 & 用户特征 \\
-    \midrule
-    用户类型 & 【个人开发者 / 学生 / 科研人员 / 企业团队】 \\
-    年龄范围 & 【填写年龄范围】 \\
-    使用场景 & 【填写典型场景】 \\
-    付费能力 & 【低 / 中 / 高】 \\
-    核心诉求 & 【效率、成本、自动化、远程控制等】 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+\section{项目定位}
 
-% ==================== 产品方案 ====================
-\chapter{产品与解决方案}
+OrangeVC 的核心定位是“AI 创意服务交易平台”。它不是单纯的代码托管平台，也不是传统外包平台，而是把 AI 开发作品、项目需求、沟通交易、AI 趋势洞察和岗位能力参考放在同一平台内。
 
-\section{产品介绍}
+平台面向四类角色：
 
-说明产品是什么、为谁服务、在什么场景下使用，以及能够带来什么价值。
+\begin{longtable}{p{3.2cm} p{10.5cm}}
+\toprule
+角色 & 核心诉求 \\
+\midrule
+AI 创意开发者 & 展示作品、沉淀个人主页、获得收藏评论、与需求方沟通、通过报价和订单完成交易。 \\
+项目需求方 & 发布需求、浏览作品、联系作者、接受报价、按阶段推进交付验收。 \\
+AI 实习生/学习者 & 查看 GitHub 热门项目、趋势图谱、岗位方向和能力要求，用 AI 方案设计拆解学习路径。 \\
+平台管理员 & 审核内容、管理用户和订单、配置 AI 审核/知识库/定价/充值码，维护平台内容质量和交易秩序。 \\
+\bottomrule
+\end{longtable}
 
-\section{核心功能}
+\source{README.md；docs/OrangeJD系统架构设计说明书.md；orange-web/src/router/index.js；orange-admin/src/router/index.js}
 
-\begin{enumerate}[leftmargin=2em]
-  \item \textbf{功能一：}描述主要用途和用户价值。
-  \item \textbf{功能二：}描述主要用途和用户价值。
-  \item \textbf{功能三：}描述主要用途和用户价值。
-  \item \textbf{功能四：}描述主要用途和用户价值。
+\section{待解决问题}
+
+仓库架构文档给出了四个明确痛点：
+
+\begin{enumerate}
+  \item AI 开发者缺少面向商业价值的作品展示渠道。
+  \item 需求方在传统外包平台中难以按 AI 技能、项目类型、作品能力精准找人。
+  \item GitHub Trending、招聘 JD、技术文章分散，技术趋势信息割裂。
+  \item AI 实习生缺少面向真实岗位的技能参照和学习路径。
 \end{enumerate}
 
-\section{用户使用流程}
+OrangeVC 的产品解法是：以交易平台承接供需，以榜单和知识库承接趋势，以方案设计和岗位匹配承接学习成长，以管理后台和 AI 审核承接平台治理。
 
-\begin{center}
-\begin{tikzpicture}[
-  node distance=1.1cm,
-  box/.style={
-    rectangle,
-    rounded corners,
-    draw=MainBlue,
-    fill=LightBlue,
-    minimum width=3.2cm,
-    minimum height=1cm,
-    align=center
-  },
-  arrow/.style={
-    ->,
-    thick,
-    color=MainBlue
-  }
-]
+\source{docs/OrangeJD系统架构设计说明书.md}
 
-\node[box] (a) {用户注册或登录};
-\node[box, below=of a] (b) {创建项目或连接设备};
-\node[box, below=of b] (c) {调用核心功能};
-\node[box, below=of c] (d) {查看结果与操作反馈};
-\node[box, below=of d] (e) {订阅或购买增值服务};
+\chapter{产品能力与业务闭环}
 
-\draw[arrow] (a) -- (b);
-\draw[arrow] (b) -- (c);
-\draw[arrow] (c) -- (d);
-\draw[arrow] (d) -- (e);
+\section{用户端功能}
 
-\end{tikzpicture}
-\end{center}
+当前用户端路由显示，\texttt{orange-web} 已覆盖如下页面：
 
-\section{产品价值}
+\begin{longtable}{p{3.5cm} p{10.2cm}}
+\toprule
+页面/模块 & 功能说明 \\
+\midrule
+市场 & 浏览作品与需求，是内容发现和交易入口。 \\
+AI 工具 & 汇总趋势分析、方案设计、榜单等 AI 能力入口。 \\
+榜单 & 展示本平台作品/创作者榜，以及 GitHub 仓库榜。 \\
+趋势分析 & 展示 Topic 图谱、AI 分析结果和历史记录。 \\
+方案设计 & 将项目想法拆成需求理解、成功标准、风险、任务和岗位匹配等阶段。 \\
+作品/需求详情 & 查看详情、评论、联系作者、进入交易或沟通流程。 \\
+聊天 & 支持会话、消息、未读提醒和与报价流程衔接。 \\
+发布/编辑 & 支持作品和需求发布，进入审核状态流转。 \\
+个人中心 & 管理作品、订单、收藏、历史、通知、配额、资料和设置。 \\
+岗位投稿 & 用户提交岗位信息，经管理端审核后进入岗位能力体系。 \\
+\bottomrule
+\end{longtable}
+
+\source{orange-web/src/router/index.js}
+
+\section{管理端功能}
+
+当前管理端路由显示，\texttt{orange-admin} 已覆盖平台运营所需的主要后台能力：
+
+\begin{longtable}{p{3.5cm} p{10.2cm}}
+\toprule
+页面/模块 & 功能说明 \\
+\midrule
+控制台 & 查看平台概览，并配置交易模式、AI 托管等关键开关。 \\
+审核管理 & 处理作品和需求审核，支持 AI 自动审核状态查看、触发和人工覆盖。 \\
+内容管理 & 查看作品与需求详情，执行下架等治理动作。 \\
+用户管理 & 用户列表与账号状态控制。 \\
+订单管理 & 查看订单详情和订单列表。 \\
+知识库 & 管理 RAG 文档，查看统计、上传、列表、删除和详情。 \\
+充值码管理 & 生成和查看配额充值码。 \\
+岗位审核 & 审核用户投稿岗位，支持导入、同步知识库、通过、拒绝和删除。 \\
+AI 调用设置 & 保存 AI 调用配置。 \\
+AI 消费定价 & 管理 AI 服务定价，并记录价格变更。 \\
+用量统计 & 查看配额使用统计。 \\
+\bottomrule
+\end{longtable}
+
+\source{orange-admin/src/router/index.js；orange-server/src/main/java/com/orangejd/server/controller/admin}
+
+\section{交易闭环}
+
+OrangeVC 的交易链路由内容、沟通、报价、订单、支付阶段和交付记录共同构成。数据库中对应表包括 \texttt{work}、\texttt{requirement}、\texttt{conversation}、\texttt{message}、\texttt{quote}、\texttt{order}、\texttt{payment\_stage}、\texttt{delivery}。
+
+根据项目进度文档，交易有两条路径：
+
+\begin{enumerate}
+  \item 协商路径：聊天沟通 $\rightarrow$ 报价 $\rightarrow$ 接受报价 $\rightarrow$ 生成订单。
+  \item 直接购买路径：作品详情 $\rightarrow$ 下单 $\rightarrow$ 支付阶段 $\rightarrow$ 交付验收。
+\end{enumerate}
+
+订单状态机覆盖 \texttt{CREATED}、\texttt{WAITING\_DEPOSIT}、\texttt{DEPOSIT\_PAID}、\texttt{IN\_PROGRESS}、\texttt{WAITING\_FINAL\_PAYMENT}、\texttt{DELIVERED}、\texttt{FINAL\_PAID}、\texttt{COMPLETED}、\texttt{CANCELLED}、\texttt{DISPUTED} 等阶段。
+
+\source{docs/项目进度记录.md；orange-server/src/main/resources/sql/schema-v1.sql；orange-server/src/main/java/com/orangejd/server/controller/app/OrderController.java；orange-server/src/main/java/com/orangejd/server/controller/app/QuoteController.java}
+
+\section{内容审核与平台治理}
+
+平台内容治理由人工审核和 AI 自动审核共同完成。作品和需求使用状态机：
+
+\[
+\mathrm{DRAFT} \rightarrow \mathrm{PENDING\_REVIEW} \rightarrow \mathrm{APPROVED} / \mathrm{REJECTED}
+\]
+
+管理端提供作品、需求审核接口，并提供 AI 自动审核开关、测试、立即运行等接口。开发日志显示，AI 审核使用 DeepSeek V4 Pro，覆盖标题规范、描述完整性、违规内容、图片合规等维度；图片审核失败时降级为纯文本审核，API 异常时保留待审状态。
+
+\source{docs/项目进度记录.md；orange-server/src/main/java/com/orangejd/server/controller/admin/AdminAuditController.java}
+
+\chapter{AI 增强能力}
+
+\section{GitHub 榜单与趋势分析}
+
+OrangeVC 将 GitHub 生态作为创意技术趋势来源。当前分类表插入了 15 个作品类 Topic，其中包括 14 个技术 Topic 和 Other：Creative Coding、Game Development、WebGL、Canvas、Web Audio、AI Agents、RAG、Self-Hosted、Home Assistant、Awesome Self-Host、ESP32、Raspberry Pi、Home Automation、3D Printing、Other。
+
+榜单功能支持：
 
 \begin{itemize}
-  \item 将用户完成任务所需时间由【原时间】缩短至【目标时间】；
-  \item 降低用户的学习、操作或管理成本；
-  \item 提供跨设备、跨平台或远程协作能力；
-  \item 通过自动化提高任务执行的连续性和可靠性。
+  \item 本平台作品榜：按收藏数等指标排序。
+  \item 本平台创作者榜：按创作者表现排序。
+  \item GitHub 仓库榜：按 topic 与 period 拉取 GitHub 数据。
+  \item 三段式 period：\texttt{all} 全时段、\texttt{week} 本周涨星、\texttt{new} 本周新增。
 \end{itemize}
 
-% ==================== 技术方案 ====================
-\chapter{技术实现与开发方案}
+\source{orange-server/src/main/resources/sql/schema-v1.sql；docs/开发日志/2026-07-09-多模块增强.md；orange-server/src/main/java/com/orangejd/server/controller/app/AppLeaderboardController.java}
+
+\section{RAG 知识库}
+
+仓库集成 Spring AI 1.0.0、Redis Stack Vector Store 和自定义 \texttt{GiteeAiEmbeddingModel}。知识库能力包括文档上传、列表、删除、统计、详情查看，以及 GitHub README 自动采集和向量化。
+
+README 和开发日志显示，系统使用 \texttt{bge-small-zh-v1.5} 作为中文 embedding 模型；为解决中文问题与英文 README 的跨语言检索效果问题，项目采用“入库时将 README 翻译为中文”的策略，并区分全时段永久文档、本周/新增 30 天生命周期文档。
+
+\source{README.md；docs/开发日志/2026-06-24-RAG集成.md；docs/开发日志/2026-06-27-RAG优化.md；orange-server/src/main/java/com/orangejd/server/ai/GiteeAiEmbeddingModel.java；orange-server/src/main/java/com/orangejd/server/controller/admin/AdminKnowledgeController.java}
+
+\section{方案设计与岗位匹配}
+
+用户端 \texttt{PlanDesigner.vue} 与后端 \texttt{AppPlanController} 提供方案设计能力。根据项目文档，该功能按六阶段生成项目规划：想法、需求理解、成功标准、约束风险、任务计划、岗位匹配。岗位模块提供方向列表、岗位列表、岗位详情、用户投稿和 AI 匹配接口；管理端提供岗位导入、审核、同步知识库、编辑和删除。
+
+该能力的商业价值在于把平台从“交易撮合”延伸到“能力成长与项目规划”，使实习生、创作者和需求方都能获得更结构化的决策辅助。
+
+\source{README.md；orange-web/src/views/PlanDesigner.vue；orange-server/src/main/java/com/orangejd/server/controller/app/AppPlanController.java；orange-server/src/main/java/com/orangejd/server/controller/app/JobController.java；orange-server/src/main/java/com/orangejd/server/controller/admin/AdminJobController.java}
+
+\section{配额、定价与充值}
+
+当前仓库包含 \texttt{QuotaService}、\texttt{AppQuotaController}、\texttt{AdminPricingController}、\texttt{AdminRedemptionController}、\texttt{EpayController}，并在数据库中包含 \texttt{ai\_service\_pricing}、\texttt{pricing\_change\_log} 等表。用户端有“我的配额”页面，管理端有“AI 消费定价”和“充值码管理”页面。
+
+这说明平台已具备 AI 服务计费基础设施：按服务配置价格、记录价格变更、用户查询余额、兑换充值码、发起在线充值、查看消耗日志。仓库没有提供真实营收或付费用户数据，因此本文不写收入流水和财务预测。
+
+\source{orange-web/src/router/index.js；orange-admin/src/router/index.js；orange-server/src/main/java/com/orangejd/server/controller/app/AppQuotaController.java；orange-server/src/main/java/com/orangejd/server/controller/admin/AdminPricingController.java；orange-server/src/main/java/com/orangejd/server/controller/admin/AdminRedemptionController.java；orange-server/src/main/resources/sql/schema-v1.sql}
+
+\chapter{技术实现与数据资产}
 
 \section{系统架构}
 
-系统主要由以下模块组成：
+项目采用单体 Spring Boot 后端加双 Vue 前端结构：
 
 \begin{itemize}
-  \item \textbf{客户端：}Web、桌面端、移动端、小程序或可穿戴设备端；
-  \item \textbf{服务端：}用户管理、任务调度、消息推送和数据同步；
-  \item \textbf{AI 模块：}大语言模型、智能体或自动化工作流；
-  \item \textbf{数据层：}数据库、文件存储、日志和权限管理；
-  \item \textbf{安全层：}身份验证、数据加密、访问控制和审计。
+  \item \texttt{orange-common}：统一响应、分页结果、JWT 工具、上下文、异常等公共能力。
+  \item \texttt{orange-pojo}：Entity、DTO、VO 等数据对象。
+  \item \texttt{orange-server}：Controller、Service、Mapper、Task、Config、AI、WebSocket 等核心后端实现。
+  \item \texttt{orange-web}：用户端 Vue 3 应用。
+  \item \texttt{orange-admin}：管理端 Vue 3 应用。
 \end{itemize}
 
-\section{技术选型}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node/.style={draw, rounded corners, fill=SoftOrange, minimum width=3.2cm, minimum height=0.9cm, align=center},
+  arrow/.style={->, thick, color=MainOrange}
+]
+\node[node] (web) at (0,3) {用户端\\orange-web};
+\node[node] (admin) at (5,3) {管理端\\orange-admin};
+\node[node] (nginx) at (2.5,1.6) {Nginx\\静态资源/API/WS};
+\node[node] (server) at (2.5,0.2) {Spring Boot\\orange-server};
+\node[node] (mysql) at (-1.2,-1.4) {MySQL\\业务数据};
+\node[node] (redis) at (2.5,-1.4) {Redis Stack\\缓存/向量};
+\node[node] (ext) at (6.2,-1.4) {外部服务\\Gitee AI/GitHub/飞书/Epay/SMTP};
+\draw[arrow] (web) -- (nginx);
+\draw[arrow] (admin) -- (nginx);
+\draw[arrow] (nginx) -- (server);
+\draw[arrow] (server) -- (mysql);
+\draw[arrow] (server) -- (redis);
+\draw[arrow] (server) -- (ext);
+\end{tikzpicture}
+\caption{OrangeVC 当前仓库对应的系统结构}
+\end{figure}
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l l X}
-    \toprule
-    模块 & 技术方案 & 选择理由 \\
-    \midrule
-    前端 & React / Vue / Flutter & 跨平台、生态成熟、开发效率高 \\
-    后端 & Python / Node.js / Go & 适合快速开发和服务部署 \\
-    数据库 & PostgreSQL / MySQL & 数据结构清晰、稳定性高 \\
-    缓存 & Redis & 支持任务队列和高频数据访问 \\
-    AI 服务 & OpenAI / Claude / 本地模型 & 支持自然语言交互和自动化能力 \\
-    部署 & Docker / 云服务器 & 便于扩展、迁移和维护 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+\source{README.md；pom.xml；orange-server/pom.xml；nginx.conf}
 
-\section{Vibe Coding 开发方式}
+\section{技术栈}
 
-项目将利用 AI 编程工具辅助完成：
+\begin{longtable}{p{3.5cm} p{10.2cm}}
+\toprule
+层级 & 技术 \\
+\midrule
+后端框架 & Spring Boot 3.3.5，Java 21。 \\
+数据访问 & MyBatis 3.0.3，PageHelper 2.0.0，MySQL Connector/J 8.0.33。 \\
+缓存与向量 & Spring Data Redis，Jedis，Redis Stack Vector Store。 \\
+AI 框架 & Spring AI 1.0.0，自定义 Gitee AI EmbeddingModel。 \\
+鉴权安全 & JWT，BCrypt，双通道 Header：\texttt{Admin-Token} 与 \texttt{App-Token}，Cloudflare Turnstile。 \\
+实时通信 & Spring WebSocket，用于消息和通知实时推送。 \\
+用户端前端 & Vue 3.5.34，Element Plus 2.14.1，Vite 8.0.12，ECharts 6.1.0，Marked。 \\
+管理端前端 & Vue 3.5.34，Element Plus 2.14.1，Vite 8.0.12。 \\
+外部集成 & GitHub API，Gitee AI，飞书 Webhook，易支付，QQ 邮箱 SMTP。 \\
+\bottomrule
+\end{longtable}
 
-\begin{itemize}
-  \item 产品原型和界面快速搭建；
-  \item 前后端代码生成与重构；
-  \item 自动化测试和错误排查；
-  \item 技术文档和接口文档生成；
-  \item 用户反馈驱动的快速版本迭代。
-\end{itemize}
+\source{README.md；pom.xml；orange-server/pom.xml；orange-web/package.json；orange-admin/package.json；orange-server/src/main/resources/application-prod.yml}
 
-需要强调的是，AI 辅助开发并不等同于完全自动生成产品。
-项目团队仍需负责产品设计、架构决策、安全审核、测试验证和商业运营。
+\section{数据表与资产沉淀}
 
-% ==================== 市场分析 ====================
-\chapter{市场分析}
+当前 \texttt{schema-v1.sql} 声明 22 张表：
 
-\section{市场规模}
+\begin{longtable}{p{4cm} p{9.7cm}}
+\toprule
+数据域 & 表 \\
+\midrule
+账号与资料 & \texttt{account}，\texttt{user\_profile}。 \\
+内容与审核 & \texttt{category}，\texttt{work}，\texttt{work\_sale\_option}，\texttt{requirement}，\texttt{audit\_record}。 \\
+互动与沟通 & \texttt{favorite}，\texttt{comment}，\texttt{browse\_history}，\texttt{conversation}，\texttt{message}，\texttt{notification}。 \\
+交易与交付 & \texttt{quote}，\texttt{order}，\texttt{payment\_stage}，\texttt{delivery}。 \\
+趋势与知识库 & \texttt{leaderboard\_snapshot}，\texttt{trend\_history}，\texttt{knowledge\_document}。 \\
+AI 定价与审计 & \texttt{ai\_service\_pricing}，\texttt{pricing\_change\_log}。 \\
+\bottomrule
+\end{longtable}
 
-可以采用 TAM、SAM 和 SOM 模型：
+这些表使平台能够积累四类关键资产：创意作品资产、需求与交易资产、技术趋势资产、岗位与知识库资产。对商业化而言，这比单纯论坛或展示站更有价值，因为数据可以反哺推荐、审核、定价、技能匹配和平台运营。
 
-\begin{itemize}
-  \item \textbf{TAM：}项目所在领域的全球或全国总体市场规模；
-  \item \textbf{SAM：}产品当前能力能够覆盖的细分市场；
-  \item \textbf{SOM：}未来三至五年实际有机会获得的市场份额。
-\end{itemize}
+\source{orange-server/src/main/resources/sql/schema-v1.sql}
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l X r}
-    \toprule
-    市场层级 & 定义 & 预计规模 \\
-    \midrule
-    TAM & 【总体目标市场】 & 【金额】 \\
-    SAM & 【可服务市场】 & 【金额】 \\
-    SOM & 【初期可获取市场】 & 【金额】 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-\section{市场趋势}
-
-\begin{itemize}
-  \item AI 编程工具逐渐进入个人和企业开发流程；
-  \item 用户对跨平台、远程协作和自动化管理需求增加；
-  \item 独立开发者和小团队的产品开发成本持续下降；
-  \item 订阅制软件和垂直 SaaS 产品接受度不断提高。
-\end{itemize}
-
-% ==================== 竞争分析 ====================
-\chapter{竞争分析}
-
-\section{主要竞争对手}
-
-\begin{table}[H]
-  \centering
-  \small
-  \begin{tabularx}{\textwidth}{l X X X}
-    \toprule
-    对比维度 & 本项目 & 竞争产品 A & 竞争产品 B \\
-    \midrule
-    核心定位 & 【填写】 & 【填写】 & 【填写】 \\
-    目标用户 & 【填写】 & 【填写】 & 【填写】 \\
-    主要功能 & 【填写】 & 【填写】 & 【填写】 \\
-    使用成本 & 【填写】 & 【填写】 & 【填写】 \\
-    技术优势 & 【填写】 & 【填写】 & 【填写】 \\
-    商业模式 & 【填写】 & 【填写】 & 【填写】 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-\section{竞争壁垒}
-
-\begin{enumerate}
-  \item \textbf{产品壁垒：}针对特定场景形成更加完整的工作流。
-  \item \textbf{技术壁垒：}积累任务调度、跨设备通信和智能决策能力。
-  \item \textbf{数据壁垒：}通过用户反馈持续优化产品体验。
-  \item \textbf{生态壁垒：}接入更多开发工具、模型和第三方服务。
-  \item \textbf{品牌壁垒：}在核心开发者社区中形成口碑。
-\end{enumerate}
-
-% ==================== 商业模式 ====================
 \chapter{商业模式}
 
-\section{收入来源}
+\section{当前可支撑的商业化路径}
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l X X}
-    \toprule
-    收入方式 & 说明 & 适用用户 \\
-    \midrule
-    免费版 & 基础功能和有限使用次数 & 新用户和个人体验用户 \\
-    专业订阅版 & 高级功能、更高额度和多设备支持 & 个人开发者和专业用户 \\
-    团队版 & 团队协作、权限管理和共享资源 & 小型团队和工作室 \\
-    企业版 & 私有部署、定制接口和技术支持 & 企业客户 \\
-    增值服务 & 模型额度、存储空间或插件市场 & 高频使用用户 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-\section{定价策略}
-
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l r X}
-    \toprule
-    套餐 & 建议价格 & 主要权益 \\
-    \midrule
-    免费版 & 0 元/月 & 基础功能、有限任务数 \\
-    专业版 & 29--99 元/月 & 高级功能、更高使用额度 \\
-    团队版 & 199--999 元/月 & 多人协作和团队管理 \\
-    企业版 & 定制报价 & 私有化部署和专属支持 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-% ==================== 市场推广 ====================
-\chapter{市场推广与用户增长}
-
-\section{冷启动策略}
-
-\begin{itemize}
-  \item 在 GitHub、Product Hunt、V2EX 等开发者社区发布；
-  \item 制作产品演示视频和真实使用案例；
-  \item 邀请种子用户参与内测；
-  \item 面向高校实验室、独立开发者和创业团队推广；
-  \item 通过免费版降低初次使用门槛。
-\end{itemize}
-
-\section{增长路径}
+基于当前代码，OrangeVC 可以支撑三条商业化路径：
 
 \begin{enumerate}
-  \item 获取首批 50--100 名种子用户；
-  \item 根据反馈完成产品核心功能闭环；
-  \item 通过内容营销和社区传播扩大用户量；
-  \item 推出专业订阅版，验证用户付费意愿；
-  \item 开展团队版和企业版销售。
+  \item 交易撮合服务：围绕作品售卖、需求报价、订单阶段和交付验收形成平台交易闭环。仓库已实现报价、订单、支付阶段和交付表结构及 API。
+  \item AI 增值服务：趋势分析、RAG 知识库、方案设计、岗位匹配等功能通过配额体系消费。仓库已实现配额余额、兑换、定价、用量统计和 Epay 接口。
+  \item B 端/教育场景服务：面向 AI 实习生培养、项目训练营或团队技术选型，提供榜单、知识库、岗位能力图谱和方案设计工具。
 \end{enumerate}
 
-\section{核心运营指标}
+\section{暂不写入的商业数字}
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l X}
-    \toprule
-    指标 & 含义 \\
-    \midrule
-    MAU & 月活跃用户数 \\
-    留存率 & 用户持续使用产品的比例 \\
-    付费转化率 & 免费用户转为付费用户的比例 \\
-    CAC & 获取一个付费用户的平均成本 \\
-    LTV & 一个用户生命周期内创造的总收入 \\
-    MRR & 每月经常性收入 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-% ==================== 团队 ====================
-\chapter{团队介绍}
-
-\section{核心团队}
-
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l l X}
-    \toprule
-    姓名 & 角色 & 主要职责及背景 \\
-    \midrule
-    【姓名】 & 项目负责人 & 产品规划、技术架构和项目管理 \\
-    【姓名】 & 技术负责人 & 前后端开发、部署和系统安全 \\
-    【姓名】 & 产品运营 & 用户调研、市场推广和商业合作 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-\section{团队优势}
+仓库中没有真实 GMV、付费用户数、月活用户数、获客成本、转化率、毛利率、融资计划等数据。因此本文不提供这些数字。后续如果需要形成对外融资版 BP，应由项目方补充：
 
 \begin{itemize}
-  \item 具备软件开发、人工智能或科研项目经验；
-  \item 对目标用户群体和使用场景有深入理解；
-  \item 能够利用 AI 工具快速完成产品验证；
-  \item 具备持续迭代和长期运营项目的能力。
+  \item 当前注册用户、活跃用户、发布作品数、需求数、订单数。
+  \item 实际付费记录、充值码兑换记录、AI 配额消耗记录。
+  \item 服务器成本、AI 调用成本、支付通道成本。
+  \item 目标客户访谈、真实成交案例、复购或留存数据。
 \end{itemize}
 
-% ==================== 里程碑 ====================
-\chapter{项目进度与里程碑}
+这些信息补齐后，才能计算交易佣金、AI 配额收入、订阅收入和企业版服务收入的财务模型。
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l l X}
-    \toprule
-    阶段 & 时间 & 主要目标 \\
-    \midrule
-    第一阶段 & 第 1--2 个月 & 完成需求分析、原型设计和技术验证 \\
-    第二阶段 & 第 3--4 个月 & 完成 MVP 并邀请种子用户测试 \\
-    第三阶段 & 第 5--6 个月 & 优化产品体验，推出公开测试版 \\
-    第四阶段 & 第 7--9 个月 & 上线订阅功能并验证商业模式 \\
-    第五阶段 & 第 10--12 个月 & 扩大用户规模并探索企业客户 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+\chapter{竞争优势}
 
-% ==================== 财务预测 ====================
-\chapter{财务预测}
+\section{产品组合优势}
 
-\section{成本构成}
+OrangeVC 的差异点不在单个功能，而在“交易 + AI 趋势 + 岗位能力 + 知识库”的组合：
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l r X}
-    \toprule
-    成本项目 & 年度预算 & 说明 \\
-    \midrule
-    云服务器及存储 & 30,000 元 & 服务器、数据库和文件存储 \\
-    AI 模型调用 & 50,000 元 & 大语言模型 API 使用费用 \\
-    软件及开发工具 & 10,000 元 & 域名、证书和开发工具 \\
-    市场推广 & 30,000 元 & 内容制作、社区推广和广告 \\
-    人员成本 & 180,000 元 & 核心开发及运营人员投入 \\
-    其他费用 & 20,000 元 & 法务、差旅和不可预见费用 \\
-    \midrule
-    \textbf{总计} & \textbf{320,000 元} & \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+\begin{itemize}
+  \item 相比代码托管平台，OrangeVC 更强调作品的商业展示、沟通和交易。
+  \item 相比传统外包平台，OrangeVC 增加 AI 技术标签、GitHub 趋势和岗位能力参考。
+  \item 相比单一 AI 工具站，OrangeVC 具备用户、内容、订单、审核、知识库和配额的完整平台基础。
+  \item 相比普通学习平台，OrangeVC 将学习路径与真实作品、需求和岗位能力连接起来。
+\end{itemize}
 
-\section{三年收入预测}
+\section{技术壁垒}
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l r r r}
-    \toprule
-    指标 & 第一年 & 第二年 & 第三年 \\
-    \midrule
-    注册用户数 & 5,000 & 30,000 & 100,000 \\
-    付费用户数 & 300 & 2,400 & 10,000 \\
-    年度收入 & 18 万元 & 180 万元 & 800 万元 \\
-    年度成本 & 32 万元 & 100 万元 & 350 万元 \\
-    净利润 & -14 万元 & 80 万元 & 450 万元 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+仓库已实现或明确包含以下技术要素：
 
-以上数据仅为示例，正式商业计划书应根据产品定价、用户规模和实际运营成本重新计算。
+\begin{itemize}
+  \item 双端前端和完整后台，使平台具备运营治理能力。
+  \item 166 个显式 REST 映射和 WebSocket 通信，覆盖主要业务链路。
+  \item Redis Stack 向量检索和 Spring AI 集成，支撑 RAG 能力。
+  \item GitHub Topic 榜单与 README 入库，形成可持续更新的技术趋势知识源。
+  \item AI 审核、飞书通知、Turnstile、人机验证、JWT 双通道、Token 黑名单等安全与治理机制。
+  \item 配额、定价、充值码、支付回调，为 AI 功能商业化提供基础设施。
+\end{itemize}
 
-% ==================== 融资计划 ====================
-\chapter{融资需求与资金用途}
+\source{README.md；docs/开发日志；orange-server/src/main/java；orange-server/src/main/resources/sql/schema-v1.sql}
 
-\section{融资需求}
+\chapter{部署状态与交付成熟度}
 
-本项目计划融资【金额】，预计可支持项目未来【月数】个月的开发和运营。
+\section{线上部署记录}
 
-\section{资金用途}
+README 给出在线地址：
 
-\begin{table}[H]
-  \centering
-  \begin{tabularx}{\textwidth}{l r X}
-    \toprule
-    用途 & 占比 & 说明 \\
-    \midrule
-    产品研发 & 40\% & 核心功能开发、测试和系统优化 \\
-    市场推广 & 25\% & 用户获取、品牌建设和内容营销 \\
-    团队建设 & 20\% & 引入开发、产品和运营人才 \\
-    基础设施 & 10\% & 服务器、API 和安全服务 \\
-    流动资金 & 5\% & 日常运营和不可预见支出 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+\begin{itemize}
+  \item 用户端：\url{http://47.116.8.45}
+  \item 管理后台：\url{http://47.116.8.45/admin}
+\end{itemize}
 
-% ==================== 风险分析 ====================
-\chapter{风险分析与应对措施}
+开发日志记录服务器为阿里云 ECS 2 核 4G，系统为 CentOS 7.9；2026 年 7 月 11 日部署环境包含 JDK 21.0.2、MySQL 8.0.45、Redis Stack Docker、Nginx、Spring Boot 3.3.5 jar、用户端和管理端静态文件。
 
-\begin{table}[H]
-  \centering
-  \small
-  \begin{tabularx}{\textwidth}{l X X}
-    \toprule
-    风险类型 & 风险描述 & 应对措施 \\
-    \midrule
-    技术风险 & 系统稳定性和跨平台兼容性不足 & 采用模块化架构并建立自动化测试 \\
-    市场风险 & 用户需求不明确或付费意愿不足 & 通过 MVP 和种子用户快速验证 \\
-    竞争风险 & 大型平台进入同类市场 & 聚焦垂直场景和差异化体验 \\
-    安全风险 & 用户账号、代码或数据泄露 & 加密传输、最小权限和安全审计 \\
-    成本风险 & AI API 和服务器费用过高 & 设置配额、缓存机制并支持本地模型 \\
-    合规风险 & 第三方平台接口和服务条款限制 & 遵循官方 API 及平台使用政策 \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
+\source{README.md；docs/开发日志/2026-07-11-服务器部署与引导教程.md；docs/服务器部署完整指南.md}
 
-% ==================== 总结 ====================
-\chapter{总结}
+\section{交付成熟度}
 
-\projectname 聚焦于【核心应用场景】，通过【核心产品能力】
-解决【目标用户】在【具体任务】中的效率和体验问题。
+从仓库文档看，项目已经经历了账号体系、分类、内容发布、内容发现、聊天通知、交易闭环、管理端、文件上传、WebSocket、安全加固、部署上线、榜单、趋势分析、AI 审核、RAG、岗位匹配、配额和引导教程等多个阶段。
 
-项目将采用小步快跑的方式完成 MVP 验证，并根据真实用户反馈持续迭代。
-在实现产品价值验证后，将通过订阅服务、团队授权和企业解决方案形成可持续收入。
+项目进度记录中给出的全链路验收为：
 
-\vfill
+\begin{quote}
+注册 $\rightarrow$ 登录 $\rightarrow$ 发布作品 $\rightarrow$ 审核通过 $\rightarrow$ 市场可见 $\rightarrow$ 聊天（WebSocket）$\rightarrow$ 报价 $\rightarrow$ 下单 $\rightarrow$ 付定金 $\rightarrow$ 交付 $\rightarrow$ 付尾款 $\rightarrow$ 订单完成 $\rightarrow$ 管理后台统计。
+\end{quote}
 
-\begin{center}
-  \Large\bfseries\color{MainBlue}
-  感谢阅读
-\end{center}
+\source{docs/项目进度记录.md}
+
+\chapter{风险与下一步计划}
+
+\section{已识别风险}
+
+仓库文档和配置显示，项目仍有以下需要治理的风险：
+
+\begin{longtable}{p{3.2cm} p{10.5cm}}
+\toprule
+风险 & 说明与处理方向 \\
+\midrule
+敏感配置治理 & 开发配置中出现过具体邮箱和 AI Key；生产配置已通过环境变量注入。下一步应清理历史敏感信息并轮换密钥。 \\
+数据同步风险 & 部署日志明确指出全量导入数据库会覆盖服务器用户数据，日常更新应只执行增量 schema。 \\
+移动端适配 & 2026-07-11 日志记录引导教程仅在 PC 端测试，移动端尚未验证。 \\
+AI 成本控制 & 已有定价与配额基础，但缺少真实调用成本、失败率和用户付费数据，商业化前需建立成本报表。 \\
+GitHub/API 限流 & 榜单依赖 GitHub API，文档中已有间隔调用和本地缓存策略，后续仍需监控失败重试与限流。 \\
+交易合规 & 已实现订单和交付状态，但平台规则、退款争议、内容版权和发票税务规则需要业务制度补齐。 \\
+\bottomrule
+\end{longtable}
+
+\source{docs/开发日志/2026-07-11-服务器部署与引导教程.md；docs/服务器部署完整指南.md；orange-server/src/main/resources/application-dev.yml；orange-server/src/main/resources/application-prod.yml}
+
+\section{建议路线图}
+
+\begin{enumerate}
+  \item 短期：清理敏感配置、补充自动化测试、确认线上环境健康检查、完善移动端适配。
+  \item 中期：沉淀真实运营指标，包括注册、活跃、发布、审核通过率、订单转化、AI 消耗、充值和支付成功率。
+  \item 中期：完善交易规则，包括退款、争议、版权、违规内容、服务交付标准。
+  \item 长期：基于真实数据训练推荐与定价策略，形成作品推荐、岗位推荐、AI 成本优化和企业版能力。
+\end{enumerate}
+
+\chapter{结论}
+
+基于当前 GitHub \texttt{main} 分支克隆内容，OrangeVC 已具备一个 AI 创意服务交易平台的核心产品形态：双前端、完整后端、22 张业务表、166 个显式 API 映射、RAG 知识库、GitHub 榜单、趋势分析、方案设计、岗位匹配、AI 审核、配额定价和部署文档。
+
+项目当前最适合的商业表达是“以 AI 创意作品交易为入口，以趋势知识库和岗位能力图谱增强供需匹配，以配额和 AI 服务定价承接增值收入”。下一阶段的关键不是继续堆功能，而是补齐真实业务数据、交易规则、成本核算和运营指标，使商业计划从“可交付产品说明”升级为“可验证增长模型”。
 
 \end{document}
