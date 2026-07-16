@@ -16,7 +16,7 @@ public class AdminRequirementController {
 
     @GetMapping("/{id}")
     public Result<RequirementVO> detail(@PathVariable Long id) {
-        return Result.success(requirementService.getDetail(id));
+        return Result.success(requirementService.getAdminDetail(id));
     }
 
     @GetMapping

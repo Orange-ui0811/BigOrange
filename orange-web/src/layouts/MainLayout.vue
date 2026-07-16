@@ -1,5 +1,6 @@
 <template>
-  <el-container style="height:100vh">
+  <el-container class="app-shell">
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
     <!-- ═══ 侧边栏 ═══ -->
     <el-aside width="252px" class="app-sidebar">
 
@@ -118,14 +119,14 @@
       <!-- ═══ 底部工具 ═══ -->
       <div class="sidebar-tools">
         <div class="sidebar-divider"></div>
-        <button class="tool-btn" @click="$router.push('/me/notifications')">
+        <button class="tool-btn" type="button" @click="$router.push('/me/notifications')">
           <span>系统通知</span>
           <span v-if="unreadCount" class="menu-badge">{{ unreadCount }}</span>
         </button>
-        <button class="tool-btn" @click="$router.push('/me/settings')">
+        <button class="tool-btn" type="button" @click="$router.push('/me/settings')">
           <span>设置</span>
         </button>
-        <button class="tool-btn logout-btn" @click="logout">
+        <button class="tool-btn logout-btn" type="button" @click="logout">
           <span>退出</span>
         </button>
       </div>
@@ -139,10 +140,20 @@
         </div>
         <div class="top-actions"></div>
       </el-header>
-      <el-main class="app-main">
+      <el-main id="main-content" class="app-main" tabindex="-1">
         <router-view />
       </el-main>
     </el-container>
+
+    <nav class="mobile-nav" aria-label="主导航">
+      <button v-for="item in mobileNavItems" :key="item.path" type="button"
+              :class="{ active: activeMenu === item.path }" :aria-current="activeMenu === item.path ? 'page' : undefined"
+              @click="router.push(item.path)">
+        <el-icon><component :is="item.icon" /></el-icon>
+        <span>{{ item.label }}</span>
+        <span v-if="item.path === '/chat' && chatUnread" class="mobile-badge">{{ chatUnread }}</span>
+      </button>
+    </nav>
   </el-container>
 </template>
 
@@ -160,7 +171,20 @@ const route = useRoute()
 const router = useRouter()
 const me = ref({ username: '', nickname: '' })
 const chatUnread = ref(0)
-const logout = () => { sessionStorage.removeItem('appToken'); router.push('/login') }
+const mobileNavItems = [
+  { path: '/market', label: '发现', icon: Shop },
+  { path: '/ai', label: 'AI 工具', icon: Cpu },
+  { path: '/publish', label: '发布', icon: Edit },
+  { path: '/chat', label: '消息', icon: ChatDotRound },
+  { path: '/me', label: '我的', icon: User },
+]
+const logout = async () => {
+  try { await request.get('/app/auth/logout') } catch {}
+  finally {
+    sessionStorage.removeItem('appToken')
+    await router.replace('/login')
+  }
+}
 
 /* ---- 根据子路由高亮父级菜单 ---- */
 const activeMenu = computed(() => {
@@ -185,11 +209,32 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.app-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 12px;
+  z-index: 1000;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: var(--text-primary);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform .15s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
 /* ===== 侧边栏 ===== */
 .app-sidebar {
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh;
   background: rgba(255, 255, 255, .86) !important;
   border-right: 1px solid rgba(254, 215, 170, .85) !important;
   display: flex !important;
@@ -436,5 +481,71 @@ onMounted(async () => {
 .app-main {
   background: transparent !important;
   padding: 24px 32px 48px !important;
+}
+
+.mobile-nav { display: none; }
+
+@media (max-width: 860px) {
+  .app-sidebar { display: none !important; }
+  .app-header {
+    padding: 0 18px !important;
+    height: 50px !important;
+  }
+  .topbar-title h1 { font-size: 16px; }
+  .app-main {
+    width: 100%;
+    padding: 18px 14px calc(92px + env(safe-area-inset-bottom)) !important;
+  }
+  .mobile-nav {
+    position: fixed;
+    z-index: 50;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: 62px;
+    padding: 6px;
+    border: 1px solid rgba(254, 215, 170, .92);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 12px 32px rgba(92, 38, 15, .16);
+    backdrop-filter: blur(16px);
+  }
+  .mobile-nav button {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    border: 0;
+    border-radius: 14px;
+    background: transparent;
+    color: var(--text-secondary);
+    font: 700 10px/1.2 var(--font-body);
+    cursor: pointer;
+  }
+  .mobile-nav button.active {
+    background: var(--brand-soft);
+    color: var(--brand-strong);
+  }
+  .mobile-nav .el-icon { font-size: 20px; }
+  .mobile-badge {
+    position: absolute;
+    top: 2px;
+    right: max(8px, calc(50% - 23px));
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 9px;
+    line-height: 13px;
+  }
 }
 </style>

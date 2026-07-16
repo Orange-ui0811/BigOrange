@@ -1,0 +1,100 @@
+name: nxz-bigorange
+
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-orangejd}
+      MYSQL_USER: ${MYSQL_USER:-orangejd}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-orangejd_dev}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_dev}
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+    volumes:
+      - orangejd-mysql-data:/var/lib/mysql
+      - ./orange-server/src/main/resources/sql/schema-v1.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  redis:
+    image: redis/redis-stack-server:latest
+    volumes:
+      - orangejd-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  backend:
+    image: maven:3.9.9-eclipse-temurin-21
+    working_dir: /workspace
+    command: >-
+      sh -c "mvn -B -DskipTests install &&
+      mvn -B -f orange-server/pom.xml spring-boot:run -Dspring-boot.run.profiles=dev"
+    environment:
+      MYSQL_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-orangejd}?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      MYSQL_USER: ${MYSQL_USER:-orangejd}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-orangejd_dev}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      UPLOAD_PATH: /workspace/uploads
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      AI_AUDIT_KEY: ${AI_AUDIT_KEY:-}
+      AI_TREND_KEY: ${AI_TREND_KEY:-}
+      AI_EMBEDDING_KEY: ${AI_EMBEDDING_KEY:-}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
+      ALLOWED_ORIGINS: http://localhost:15173,http://127.0.0.1:15173,http://localhost:15174,http://127.0.0.1:15174
+    volumes:
+      - .:/workspace
+      - orangejd-maven-cache:/root/.m2
+    ports:
+      - "18080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  web:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    environment:
+      VITE_API_BASE_URL: http://127.0.0.1:18080
+      VITE_WS_URL: ws://127.0.0.1:18080
+    volumes:
+      - ./orange-web:/app
+      - orangejd-web-node-modules:/app/node_modules
+    ports:
+      - "15173:5173"
+    depends_on:
+      - backend
+
+  admin:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 5174"
+    environment:
+      VITE_API_BASE_URL: http://127.0.0.1:18080
+    volumes:
+      - ./orange-admin:/app
+      - orangejd-admin-node-modules:/app/node_modules
+    ports:
+      - "15174:5174"
+    depends_on:
+      - backend
+
+volumes:
+  orangejd-mysql-data:
+  orangejd-redis-data:
+  orangejd-maven-cache:
+  orangejd-web-node-modules:
+  orangejd-admin-node-modules:

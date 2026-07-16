@@ -17,22 +17,23 @@ import com.orangejd.server.mapper.UserProfileMapper;
 import com.orangejd.server.service.AuthService;
 import com.orangejd.server.service.MailService;
 import com.orangejd.server.service.QuotaService;
-import com.orangejd.server.service.impl.QuotaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+import java.util.UUID;
+import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.Locale;
 
 @Slf4j
 @Service
 public class AuthServiceImpl implements AuthService {
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
     @Autowired
     private AccountMapper accountMapper;
@@ -69,7 +70,7 @@ public class AuthServiceImpl implements AuthService {
         if (!"ACTIVE".equals(account.getStatus())) {
             throw new LoginFailedException("账号已被禁用");
         }
-        return buildLoginVO(account, jwtProperties.getAdminSecretKey(), jwtProperties.getAdminTtl());
+        return buildLoginVO(account, jwtProperties.getAdminSecretKey(), jwtProperties.getAdminTtl(), "ADMIN");
     }
 
     @Override
@@ -84,7 +85,7 @@ public class AuthServiceImpl implements AuthService {
         if (!"ACTIVE".equals(account.getStatus())) {
             throw new LoginFailedException("账号已被禁用");
         }
-        return buildLoginVO(account, jwtProperties.getAppSecretKey(), jwtProperties.getAppTtl());
+        return buildLoginVO(account, jwtProperties.getAppSecretKey(), jwtProperties.getAppTtl(), "APP");
     }
 
     @Override
@@ -103,7 +104,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // 校验邮箱验证码
-        String email = registerDTO.getEmail();
+        String email = registerDTO.getEmail().trim().toLowerCase(Locale.ROOT);
         if (redisTemplate != null) {
             String cachedCode = redisTemplate.opsForValue().get("mail:code:" + email);
             if (cachedCode == null) {
@@ -131,13 +132,13 @@ public class AuthServiceImpl implements AuthService {
         profile.setNickname(registerDTO.getNickname() != null ? registerDTO.getNickname() : registerDTO.getUsername());
         profile.setHomepageVisible(1);
         userProfileMapper.insert(profile);
-        log.info("用户注册 username={} email={}", registerDTO.getUsername(), registerDTO.getEmail());
+        log.info("用户注册 accountId={} username={}", account.getId(), registerDTO.getUsername());
 
         // 新用户赠送试用额度
         ((QuotaServiceImpl) quotaService).grantNewUserBonus(account.getId());
 
         // 注册后直接返回登录态
-        return buildLoginVO(account, jwtProperties.getAppSecretKey(), jwtProperties.getAppTtl());
+        return buildLoginVO(account, jwtProperties.getAppSecretKey(), jwtProperties.getAppTtl(), "APP");
     }
 
     @Override
@@ -164,26 +165,29 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void sendResetCode(String email) {
+        email = email.trim().toLowerCase(Locale.ROOT);
         // 检查邮箱是否已注册
         Account account = accountMapper.selectByEmail(email);
         if (account == null) {
-            throw new BaseException("该邮箱未注册");
+            log.info("忽略未注册邮箱的密码重置请求");
+            return;
         }
         // 频率限制
         if (redisTemplate != null && redisTemplate.hasKey("mail:reset:limit:" + email)) {
             throw new BaseException("验证码已发送，请60秒后再试");
         }
-        String code = String.format("%06d", new Random().nextInt(999999));
+        String code = String.format("%06d", SECURE_RANDOM.nextInt(1_000_000));
         mailService.sendCode(email, code);
         if (redisTemplate != null) {
             redisTemplate.opsForValue().set("mail:reset:code:" + email, code, 5, TimeUnit.MINUTES);
             redisTemplate.opsForValue().set("mail:reset:limit:" + email, "1", 60, TimeUnit.SECONDS);
         }
-        log.info("密码重置验证码已发送 email={}", email);
+        log.info("密码重置验证码已发送 accountId={}", account.getId());
     }
 
     @Override
     public void resetPassword(String email, String code, String newPassword) {
+        email = email.trim().toLowerCase(Locale.ROOT);
         // 验证码校验
         if (redisTemplate != null) {
             String cachedCode = redisTemplate.opsForValue().get("mail:reset:code:" + email);
@@ -197,18 +201,23 @@ public class AuthServiceImpl implements AuthService {
             redisTemplate.delete("mail:reset:limit:" + email);
         }
         // 密码格式校验
-        if (newPassword == null || !newPassword.matches("^(?=.*[A-Za-z])(?=.*\\d).{6,}$")) {
-            throw new BaseException("密码至少6位且必须包含字母和数字");
+        if (newPassword == null || !newPassword.matches("^(?=.*[A-Za-z])(?=.*\\d).{6,128}$")) {
+            throw new BaseException("密码需为6到128位且必须包含字母和数字");
         }
         Account account = accountMapper.selectByEmail(email);
         accountMapper.updatePassword(account.getId(), passwordEncoder.encode(newPassword));
-        log.info("密码重置成功 email={}", email);
+        log.info("密码重置成功 accountId={}", account.getId());
     }
 
-    private LoginVO buildLoginVO(Account account, String secretKey, long ttl) {
+    private LoginVO buildLoginVO(Account account, String secretKey, long ttl, String tokenType) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", account.getId());
         claims.put("username", account.getUsername());
+        claims.put("role", account.getRole());
+        claims.put("tokenType", tokenType);
+        claims.put("jti", UUID.randomUUID().toString());
+        claims.put("iss", "orangejd");
+        claims.put("aud", tokenType);
 
         LoginVO loginVO = new LoginVO();
         loginVO.setId(account.getId());
@@ -217,4 +226,3 @@ public class AuthServiceImpl implements AuthService {
         return loginVO;
     }
 }
-

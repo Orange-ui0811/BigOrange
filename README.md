@@ -6,8 +6,8 @@
 
 | 入口 | 地址 |
 |------|------|
-| 用户端 | http://47.116.8.45 |
-| 管理后台 | http://47.116.8.45/admin |
+| 用户端 | 由生产环境 HTTPS 域名配置 |
+| 管理后台 | 由生产环境 HTTPS 域名的 `/admin/` 路径提供 |
 
 ## 技术栈
 
@@ -91,6 +91,26 @@ OrangeJD
 
 ### 本地启动
 
+推荐使用 Docker Compose（无需在宿主机安装 JDK、Maven、MySQL 或 Redis）：
+
+```bash
+cp .env.local.example .env.local
+docker compose --env-file .env.local -f compose.local.yml up -d
+```
+
+本地 Compose 使用独立端口，避免与其他开发实例冲突：用户端
+`http://localhost:15173`、管理端 `http://localhost:15174/admin/`、后端及
+Swagger `http://localhost:18080/swagger-ui/index.html`。停止服务使用：
+
+```bash
+docker compose --env-file .env.local -f compose.local.yml down
+```
+
+需要邮件、AI、GitHub 或 Turnstile 功能时，在 `.env.local` 中填入对应密钥；
+不配置时不影响核心页面、数据库与登录功能启动。
+
+手动启动方式：
+
 ```bash
 # 1. Redis Stack
 docker start redis-stack || docker run -d --name redis-stack -p 6380:6379 -p 8002:8001 redis/redis-stack:latest
@@ -121,47 +141,48 @@ cd orange-admin && npx vite --host
 | 用户端 | http://localhost:5173 |
 | 管理后台 | http://localhost:5174/admin/ |
 
-### 测试账号
+### 本地开发测试账号
 
 | 身份 | 用户名 | 密码 |
 |------|--------|------|
 | 管理员 | admin | 123456 |
 | 用户 | 自行注册（需邮箱验证码） | — |
 
+本地 `dev` 环境不要求配置 SMTP。点击“获取验证码”后，在后端日志中查找
+`[仅本地开发] 邮箱验证码`；生产环境仍使用真实邮件发送，不会输出明文验证码。
+
+该管理员口令仅用于隔离的本地开发数据库；生产环境不得使用或公开默认口令。
+
 ## 生产部署
 
-详细指南见 `docs/服务器部署完整指南.md`。
+详细指南见 `docs/服务器部署完整指南.md`，上线安全、数据治理与支付门禁见
+`docs/生产上线安全与数据治理.md`。生产变量从 `.env.prod.example` 复制到密钥管理系统，
+不要把真实值写回仓库；数据库结构由 Flyway 在后端启动时校验和迁移。
 
 ```bash
-# 构建
-cd D:/Orangejd
-mvn clean install -DskipTests
-cd orange-web && npm run build
-cd orange-admin && npm run build
+# 发布前验证与构建
+mvn test
+mvn clean package -DskipTests
+npm --prefix orange-web ci && npm --prefix orange-web run build
+npm --prefix orange-admin ci && npm --prefix orange-admin run build
 
-# 打包
-cp -r orange-server/target/orange-server-1.0.0-SNAPSHOT.jar orange-web/dist/ orange-admin/dist/ deploy/
-mysqldump -uroot -p123456 orangejd > deploy/orangejd_backup.sql
+# 发布前备份（密码通过环境变量或密钥管理系统注入）
+MYSQL_PASSWORD='从密钥管理系统读取' BACKUP_DIR=/data/backups/orangejd ./backup.sh
 
-# 上传 + 部署（服务器）
-\cp -f deploy/orange-server-1.0.0-SNAPSHOT.jar /root/
-rm -rf /data/www/orangejd/web/* && cp -r deploy/web/* /data/www/orangejd/web/
-rm -rf /data/www/orangejd/admin/* && cp -r deploy/admin/* /data/www/orangejd/admin/
-mysql -uroot -p orangejd < deploy/orangejd_backup.sql
-nohup /root/start.sh > /root/app.log 2>&1 &
+# 后端首次启动会由 Flyway 自动校验并迁移数据库
+APP_JAR=/data/orangejd/orange-server-1.0.0-SNAPSHOT.jar ./start.sh
 ```
 
 ### 关键配置
 
 ```bash
-# start.sh 环境变量
-export MAIL_USERNAME=你的QQ邮箱
-export MAIL_PASSWORD=SMTP授权码
-export AI_TREND_KEY=GiteeAIKey
-export AI_EMBEDDING_KEY=GiteeAIKey
-export TURNSTILE_SECRET_KEY=CloudflareKey
+# 必填变量；完整清单见 .env.prod.example
+export MYSQL_PASSWORD='随机数据库密码'
+export REDIS_PASSWORD='随机 Redis 密码'
 export JWT_ADMIN_SECRET=$(openssl rand -base64 48)
 export JWT_APP_SECRET=$(openssl rand -base64 48)
+export ALLOWED_ORIGINS='https://example.com,https://admin.example.com'
+export TURNSTILE_SECRET_KEY='CloudflareKey'
 ```
 
 ### Nginx 配置要点
@@ -198,6 +219,7 @@ location ^~ /uploads/ { alias /root/uploads/; }  # 必须 ^~ 覆盖图片正则
 |------|------|
 | 服务器部署完整指南 | `docs/服务器部署完整指南.md` |
 | 系统架构设计说明书 | `docs/OrangeJD系统架构设计说明书.md` |
+| 生产上线安全与数据治理 | `docs/生产上线安全与数据治理.md` |
 | 项目进度记录 | `docs/项目进度记录.md` |
 | 开发日志（最新） | `docs/开发日志/2026-07-09-多模块增强.md` |
 | 前端 UI 设计规范 | `docs/OrangeJD前端UI设计规范.md` |

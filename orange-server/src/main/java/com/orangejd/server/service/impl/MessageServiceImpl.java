@@ -30,6 +30,7 @@ public class MessageServiceImpl implements MessageService {
         Long currentId = BaseContext.getCurrentId();
         if (dto.getContent() == null || dto.getContent().trim().isEmpty())
             throw new BaseException("消息不能为空");
+        if (dto.getContent().length() > 5000) throw new BaseException("消息不能超过5000字");
 
         Conversation conv = conversationMapper.selectById(dto.getConversationId());
         if (conv == null) throw new BaseException("会话不存在");
@@ -66,13 +67,17 @@ public class MessageServiceImpl implements MessageService {
         if (!currentId.equals(conv.getInitiatorId()) && !currentId.equals(conv.getReceiverId()))
             throw new BaseException(MessageConstant.NO_PERMISSION);
 
-        int offset = (page - 1) * size;
+        int offset = PageUtil.offset(page, size);
         return messageMapper.selectByConversationId(conversationId, offset, size);
     }
 
     @Override
     public void markAsRead(Long conversationId) {
         Long currentId = BaseContext.getCurrentId();
+        Conversation conv = conversationMapper.selectById(conversationId);
+        if (conv == null) throw new BaseException("会话不存在");
+        if (!currentId.equals(conv.getInitiatorId()) && !currentId.equals(conv.getReceiverId()))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
         messageMapper.markAsRead(conversationId, currentId);
     }
 }

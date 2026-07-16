@@ -24,11 +24,11 @@
                 <p>适合已经做出 demo、原型或可演示产品的创作者。重点是让别人快速看懂价值、完成度和适用场景。</p>
                 <div class="choice-preview">
                   <strong>下一步会填写</strong>
-                  <span>作品封面</span><span>演示地址</span><span>展示方式</span><span>功能亮点</span>
+                  <span>作品封面</span><span>演示地址</span><span>视频展示</span><span>功能亮点</span>
                 </div>
                 <ul class="prepare-list">
                   <li><span class="check-dot">✓</span>产品标题、简介和封面</li>
-                  <li><span class="check-dot">✓</span>演示链接或截图</li>
+                  <li><span class="check-dot">✓</span>演示链接、截图或视频</li>
                   <li><span class="check-dot">✓</span>功能亮点和适用场景</li>
                   <li><span class="check-dot">✓</span>当前完成度和注意事项</li>
                 </ul>
@@ -120,6 +120,31 @@
               <el-input v-model="form.demoUrl" placeholder="https://你的作品演示地址（可选）" />
               <span class="field-hint">粘贴演示链接后，买家可在线体验你的作品，源码不可见</span>
             </el-form-item>
+            <el-form-item v-if="tab==='work'" label="作品视频展示">
+              <div class="video-upload-box">
+                <el-upload
+                  :action="API+'/app/common/upload/video'"
+                  :headers="uploadHeaders"
+                  :show-file-list="false"
+                  :before-upload="beforeVideoUpload"
+                  :on-progress="onVideoProgress"
+                  :on-success="onVideoSuccess"
+                  :on-error="onVideoError"
+                  accept=".mp4,.mov,.m4v,.webm,video/mp4,video/quicktime,video/x-m4v,video/webm"
+                >
+                  <el-button type="primary" plain :loading="videoUploading">
+                    {{ form.videoUrl ? '重新上传视频' : '选择视频文件' }}
+                  </el-button>
+                </el-upload>
+                <el-button v-if="form.videoUrl" type="danger" text @click="removeVideo">移除视频</el-button>
+              </div>
+              <el-progress v-if="videoUploading" :percentage="videoProgress" :stroke-width="8" class="video-progress" />
+              <span class="field-hint">支持 MP4、MOV、M4V、WebM，单个文件不超过 200MB；上传完成后可在下方预览</span>
+              <div v-if="legacyVideoUrl && !form.videoUrl" class="legacy-video-tip">
+                该作品原有的是外部视频链接。现在已改为文件上传，请重新选择视频；保存后旧链接会被移除。
+              </div>
+              <VideoShowcase v-if="form.videoUrl" :url="form.videoUrl" :poster="form.coverUrl" title="发布预览" compact class="publish-video-preview" />
+            </el-form-item>
             <el-form-item label="标题" required><el-input v-model="form.title" placeholder="一句话描述你的作品/需求" /></el-form-item>
             <el-form-item label="简介"><el-input v-model="form.summary" type="textarea" :rows="2" placeholder="简短介绍" /></el-form-item>
             <el-form-item label="详情">
@@ -153,6 +178,7 @@
 import { ref, reactive, watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
+import VideoShowcase from '../components/VideoShowcase.vue'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
 import { tradeEnabled } from '../stores/tradeMode'
@@ -172,8 +198,12 @@ const tab = ref(isEdit ? (route.params.type === 'work' ? 'work' : 'requirement')
 const cats = ref([])
 const editId = ref(isEdit ? route.params.id : null)
 const loading = ref(false)
-const form = reactive({ title: '', summary: '', detail: '', categoryId: null, price: '', budgetMin: '', budgetMax: '', coverUrl: '', demoUrl: '' })
+const form = reactive({ title: '', summary: '', detail: '', categoryId: null, price: '', budgetMin: '', budgetMax: '', coverUrl: '', demoUrl: '', videoUrl: '' })
+const videoUploading = ref(false)
+const videoProgress = ref(0)
+const legacyVideoUrl = ref('')
 const uploadHeaders = { 'App-Token': sessionStorage.getItem('appToken') || '' }
+const uploadedVideoPattern = /^\/uploads\/video\/[0-9a-f-]{36}\.(mp4|mov|m4v|webm)$/i
 
 const onCoverSuccess = (res) => { if (res.code === 1) form.coverUrl = res.data }
 const onDetailImage = (res) => {
@@ -181,6 +211,46 @@ const onDetailImage = (res) => {
     const url = res.data.startsWith('http') ? res.data : res.data
     form.detail = (form.detail || '') + '<img src="' + url + '" style="max-width:100%">\n'
   }
+}
+const beforeVideoUpload = (file) => {
+  const ext = (file.name.match(/\.[^.]+$/)?.[0] || '').toLowerCase()
+  const allowedExtensions = ['.mp4', '.mov', '.m4v', '.webm']
+  const allowedTypes = ['video/mp4', 'video/quicktime', 'video/x-m4v', 'video/webm']
+  if (!allowedExtensions.includes(ext) || !allowedTypes.includes(file.type)) {
+    ElMessage.warning('仅支持 MP4、MOV、M4V、WebM 视频文件')
+    return false
+  }
+  if (file.size > 200 * 1024 * 1024) {
+    ElMessage.warning('视频文件不能超过 200MB')
+    return false
+  }
+  videoProgress.value = 0
+  videoUploading.value = true
+  return true
+}
+const onVideoProgress = (event) => {
+  videoUploading.value = true
+  videoProgress.value = Math.min(99, Math.round(event.percent || 0))
+}
+const onVideoSuccess = (res) => {
+  videoUploading.value = false
+  videoProgress.value = 100
+  if (res?.code === 1 && uploadedVideoPattern.test(res.data || '')) {
+    form.videoUrl = res.data
+    legacyVideoUrl.value = ''
+    ElMessage.success('视频上传成功')
+    return
+  }
+  ElMessage.error(res?.msg || '视频上传失败')
+}
+const onVideoError = () => {
+  videoUploading.value = false
+  videoProgress.value = 0
+  ElMessage.error('视频上传失败，请检查文件格式、大小或网络连接')
+}
+const removeVideo = () => {
+  form.videoUrl = ''
+  videoProgress.value = 0
 }
 
 const startPublish = (type) => {
@@ -210,6 +280,8 @@ onMounted(async () => {
         const d = res.data
         form.title = d.title || ''; form.summary = d.summary || ''; form.detail = d.detail || ''
         form.categoryId = d.categoryId || null; form.coverUrl = d.coverUrl || ''; form.demoUrl = d.demoUrl || ''
+        if (uploadedVideoPattern.test(d.videoUrl || '')) form.videoUrl = d.videoUrl
+        else { form.videoUrl = ''; legacyVideoUrl.value = d.videoUrl || '' }
         form.price = d.saleOptions?.[0]?.price || ''
         form.budgetMin = d.budgetMin || ''; form.budgetMax = d.budgetMax || ''
       }
@@ -219,15 +291,16 @@ onMounted(async () => {
 
 const submit = async () => {
   if (!form.title.trim()) return ElMessage.warning('标题必填')
+  if (videoUploading.value) return ElMessage.warning('请等待视频上传完成')
   loading.value = true
   try {
     const baseApi = tab.value === 'work' ? '/app/work' : '/app/requirement'
     const api = isEdit ? `${baseApi}/${editId.value}` : baseApi
     const data = tab.value === 'work'
-      ? { title: form.title, summary: form.summary, detail: form.detail, categoryId: form.categoryId, coverUrl: form.coverUrl, demoUrl: form.demoUrl }
+      ? { title: form.title, summary: form.summary, detail: form.detail, categoryId: form.categoryId, coverUrl: form.coverUrl, demoUrl: form.demoUrl, videoUrl: form.videoUrl }
       : { title: form.title, detail: form.detail, categoryId: form.categoryId, budgetMin: form.budgetMin||null, budgetMax: form.budgetMax||null }
     const res = isEdit ? await request.put(api, data) : await request.post(api, data)
-    if (res.code === 1) { ElMessage.success(isEdit?'保存成功':'发布成功'); form.title=''; form.summary=''; form.detail=''; form.price=''; form.budgetMin=''; form.budgetMax='' }
+    if (res.code === 1) { ElMessage.success(isEdit?'保存成功':'发布成功'); form.title=''; form.summary=''; form.detail=''; form.price=''; form.budgetMin=''; form.budgetMax=''; form.videoUrl=''; legacyVideoUrl.value='' }
   } finally { loading.value = false }
 }
 </script>
@@ -424,6 +497,15 @@ const submit = async () => {
 .pub-tabs :deep(.el-tabs__item) { font-family: var(--font-mono); }
 .cover-preview { width: 120px; height: 80px; border-radius: 12px; margin-top: 8px; }
 .field-hint { font-size: 11px; color: var(--text-muted); }
+.field-error { display: block; width: 100%; margin-top: 4px; color: #c2410c; font-size: 11px; }
+.video-upload-box { display: flex; width: 100%; align-items: center; gap: 8px; margin-bottom: 6px; }
+.video-progress { width: 100%; margin: 3px 0 7px; }
+.legacy-video-tip {
+  width: 100%; margin-top: 8px; padding: 10px 12px;
+  border: 1px solid #fed7aa; border-radius: 12px;
+  color: #9a3412; background: #fff7ed; font-size: 12px; line-height: 1.6;
+}
+.publish-video-preview { width: 100%; }
 .inline-hint { margin-left: 6px; }
 .guide-collapse { margin-bottom: 8px; }
 .guide-body { font-size: 12px; line-height: 1.8; color: var(--text-primary); padding: 4px 0; }

@@ -36,10 +36,11 @@ public class JobMatchService {
     public Map<String, Object> match(String planContent) {
         Long accountId = BaseContext.getCurrentId();
         String requestId = "match_" + accountId + "_" + System.currentTimeMillis();
+        int chargedCost = 0;
 
         // 预扣
         if (accountId != null && accountId > 0) {
-            try { int cost = pricingService.getCost("ai:match"); quotaService.consume(accountId, cost, "岗位匹配", requestId); }
+            try { chargedCost = pricingService.getCost("ai:match"); quotaService.consume(accountId, chargedCost, "岗位匹配", requestId); }
             catch (Exception e) { throw new RuntimeException(e.getMessage()); }
         }
 
@@ -101,9 +102,9 @@ public class JobMatchService {
             return result;
         } catch (Exception e) {
             if (accountId != null && accountId > 0) {
-                try { quotaService.refund(accountId, 50, requestId, "岗位匹配失败退款"); } catch (Exception ignored) {}
+                try { quotaService.refund(accountId, chargedCost, requestId, "岗位匹配失败退款"); } catch (Exception ignored) {}
             }
-            throw new RuntimeException("AI匹配失败: " + e.getMessage());
+            throw new RuntimeException("AI匹配失败，请稍后重试");
         }
     }
 }

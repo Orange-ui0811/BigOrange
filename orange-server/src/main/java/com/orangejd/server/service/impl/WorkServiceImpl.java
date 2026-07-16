@@ -48,6 +48,7 @@ public class WorkServiceImpl implements WorkService {
         work.setTags(dto.getTags());
         work.setCoverUrl(dto.getCoverUrl());
         work.setDemoUrl(dto.getDemoUrl());
+        work.setVideoUrl(normalizeVideoUrl(dto.getVideoUrl()));
         work.setAuditStatus("DRAFT");
         work.setVisibilityStatus("PUBLIC");
         work.setPublishStatus("UNPUBLISHED");
@@ -85,6 +86,7 @@ public class WorkServiceImpl implements WorkService {
         work.setTags(dto.getTags() != null ? dto.getTags() : work.getTags());
         work.setCoverUrl(dto.getCoverUrl() != null ? dto.getCoverUrl() : work.getCoverUrl());
         work.setDemoUrl(dto.getDemoUrl() != null ? dto.getDemoUrl() : work.getDemoUrl());
+        if (dto.getVideoUrl() != null) work.setVideoUrl(normalizeVideoUrl(dto.getVideoUrl()));
         workMapper.update(work);
 
         // 已审核通过的作品被编辑后需重新提交审核
@@ -153,6 +155,17 @@ public class WorkServiceImpl implements WorkService {
     public WorkDetailVO getDetail(Long id) {
         Work work = workMapper.selectById(id);
         if (work == null) throw new BaseException(MessageConstant.WORK_NOT_FOUND);
+        Long currentId = BaseContext.getCurrentId();
+        if (!work.getOwnerId().equals(currentId)
+                && (!("APPROVED".equals(work.getAuditStatus())) || !("PUBLIC".equals(work.getVisibilityStatus()))))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
+        return toDetailVO(work);
+    }
+
+    @Override
+    public WorkDetailVO getAdminDetail(Long id) {
+        Work work = workMapper.selectById(id);
+        if (work == null) throw new BaseException(MessageConstant.WORK_NOT_FOUND);
         return toDetailVO(work);
     }
 
@@ -161,7 +174,7 @@ public class WorkServiceImpl implements WorkService {
         size = com.orangejd.common.util.PageUtil.capSize(size);
         Long currentId = BaseContext.getCurrentId();
         int total = workMapper.countByOwnerId(currentId);
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         List<WorkVO> records = workMapper.selectByOwnerId(currentId, offset, size)
                 .stream().map(this::toVO).collect(Collectors.toList());
         return new PageResult<>(total, records);
@@ -170,7 +183,7 @@ public class WorkServiceImpl implements WorkService {
     @Override
     public PageResult<WorkVO> listPublic(WorkQueryDTO query) {
         query.setSize(com.orangejd.common.util.PageUtil.capSize(query.getSize()));
-        int offset = (query.getPage() - 1) * query.getSize();
+        int offset = com.orangejd.common.util.PageUtil.offset(query.getPage(), query.getSize());
         String orderBy = query.getKeyword() != null && query.getKeyword().startsWith("hot:") ? "favorites" : null;
         int total = workMapper.countPublic(query.getCategoryId(), query.getKeyword());
         List<WorkVO> records = workMapper.selectPublic(query.getCategoryId(), query.getKeyword(), orderBy, offset, query.getSize())
@@ -181,7 +194,7 @@ public class WorkServiceImpl implements WorkService {
     @Override
     public PageResult<WorkVO> listAll(WorkQueryDTO query) {
         query.setSize(com.orangejd.common.util.PageUtil.capSize(query.getSize()));
-        int offset = (query.getPage() - 1) * query.getSize();
+        int offset = com.orangejd.common.util.PageUtil.offset(query.getPage(), query.getSize());
         int total = workMapper.countAll(query.getAuditStatus());
         List<WorkVO> records = workMapper.selectAll(query.getAuditStatus(), offset, query.getSize())
                 .stream().map(this::toVO).collect(Collectors.toList());
@@ -192,7 +205,7 @@ public class WorkServiceImpl implements WorkService {
         WorkVO vo = new WorkVO();
         vo.setId(w.getId()); vo.setOwnerId(w.getOwnerId()); vo.setTitle(w.getTitle());
         vo.setSummary(w.getSummary()); vo.setDetail(w.getDetail()); vo.setCategoryId(w.getCategoryId());
-        vo.setTags(w.getTags()); vo.setCoverUrl(w.getCoverUrl()); vo.setDemoUrl(w.getDemoUrl());
+        vo.setTags(w.getTags()); vo.setCoverUrl(w.getCoverUrl()); vo.setDemoUrl(w.getDemoUrl()); vo.setVideoUrl(w.getVideoUrl());
         vo.setAuditStatus(w.getAuditStatus()); vo.setVisibilityStatus(w.getVisibilityStatus());
         vo.setPublishStatus(w.getPublishStatus());
         vo.setCreateTime(w.getCreateTime()); vo.setUpdateTime(w.getUpdateTime());
@@ -205,7 +218,7 @@ public class WorkServiceImpl implements WorkService {
         WorkDetailVO vo = new WorkDetailVO();
         vo.setId(w.getId()); vo.setOwnerId(w.getOwnerId()); vo.setTitle(w.getTitle());
         vo.setSummary(w.getSummary()); vo.setDetail(w.getDetail()); vo.setCategoryId(w.getCategoryId());
-        vo.setTags(w.getTags()); vo.setCoverUrl(w.getCoverUrl()); vo.setDemoUrl(w.getDemoUrl());
+        vo.setTags(w.getTags()); vo.setCoverUrl(w.getCoverUrl()); vo.setDemoUrl(w.getDemoUrl()); vo.setVideoUrl(w.getVideoUrl());
         vo.setAuditStatus(w.getAuditStatus()); vo.setVisibilityStatus(w.getVisibilityStatus());
         vo.setPublishStatus(w.getPublishStatus());
         vo.setCreateTime(w.getCreateTime()); vo.setUpdateTime(w.getUpdateTime());
@@ -217,5 +230,15 @@ public class WorkServiceImpl implements WorkService {
             return s;
         }).collect(Collectors.toList()));
         return vo;
+    }
+
+    private String normalizeVideoUrl(String value) {
+        if (value == null) return null;
+        String url = value.trim();
+        if (url.isEmpty()) return "";
+        if (!url.matches("^/uploads/video/[0-9a-fA-F-]{36}\\.(mp4|mov|m4v|webm)$")) {
+            throw new BaseException("请通过作品发布页上传视频文件");
+        }
+        return url;
     }
 }

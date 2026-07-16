@@ -40,7 +40,7 @@
     </update>
 
     <select id="selectAll" resultMap="accountMap">
-        SELECT id, username, phone, email, password, status, role, create_time, update_time FROM account
+        SELECT id, username, phone, email, quota, status, role, create_time, update_time FROM account
         ORDER BY id ASC LIMIT #{offset}, #{limit}
     </select>
 

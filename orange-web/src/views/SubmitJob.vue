@@ -45,7 +45,7 @@
         <!-- 岗位详情 -->
         <div v-if="jobDetail" class="job-detail-card">
           <strong class="detail-label">岗位详情</strong>
-          <div class="job-detail-content" v-html="jobDetailHtml"></div>
+          <div class="job-detail-content" v-safe-html="jobDetailHtml"></div>
           <p class="job-disclaimer">本页面岗位信息由平台注册用户自主上传分享，本平台仅提供信息存储空间服务，不对内容版权、真实性承担责任。如涉及侵权，请联系 1281748852@qq.com，我们将在 3 个工作日内下架对应内容。</p>
         </div>
         <el-empty v-if="jobDirection && !jobId && !jobDetail" description="请选择岗位查看详情" />

@@ -16,10 +16,13 @@
         <el-descriptions-item label="时间">{{ detail.createTime }}</el-descriptions-item>
         <el-descriptions-item label="简介" :span="2">{{ detail.summary || '无' }}</el-descriptions-item>
         <el-descriptions-item label="详情" :span="2">
-          <div style="line-height:1.8;max-height:400px;overflow:auto" v-html="detail.detail || '无'"></div>
+          <div style="line-height:1.8;max-height:400px;overflow:auto" v-safe-html="detail.detail || '无'"></div>
         </el-descriptions-item>
         <el-descriptions-item v-if="detail.demoUrl" label="演示链接" :span="2">
-          <a :href="detail.demoUrl" target="_blank" style="color:#409EFF">{{ detail.demoUrl }}</a>
+          <a :href="detail.demoUrl" target="_blank" rel="noopener noreferrer" style="color:#409EFF">{{ detail.demoUrl }}</a>
+        </el-descriptions-item>
+        <el-descriptions-item v-if="detail.videoUrl" label="视频展示" :span="2">
+          <AdminVideoPreview :url="detail.videoUrl" :poster="detail.coverUrl" />
         </el-descriptions-item>
         <el-descriptions-item v-if="detail.tags" label="标签">{{ detail.tags }}</el-descriptions-item>
       </el-descriptions>
@@ -34,7 +37,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import request from '../api/request'
-const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
+import AdminVideoPreview from '../components/AdminVideoPreview.vue'
 const route = useRoute()
 const detail = ref({})
 const loading = ref(false)

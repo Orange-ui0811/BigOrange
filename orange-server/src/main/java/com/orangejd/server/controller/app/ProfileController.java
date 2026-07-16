@@ -8,7 +8,6 @@ import com.orangejd.pojo.vo.WorkVO;
 import com.orangejd.server.service.impl.ProfileServiceImpl;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.service.ProfileService;
-import com.orangejd.server.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,6 +59,10 @@ public class ProfileController {
         AccountVO account = profileService.getAuthorProfile(accountId);
         if (account == null) return Result.success(null);
         UserProfileVO detail = profileService.getAuthorProfileDetail(accountId);
+        if (detail != null && Integer.valueOf(0).equals(detail.getHomepageVisible())
+                && !accountId.equals(BaseContext.getCurrentId())) {
+            return Result.error("该用户主页未公开");
+        }
         PageResult<WorkVO> works = profileService.getAuthorWorks(accountId, page, size);
 
         Map<String, Object> result = new LinkedHashMap<>();

@@ -63,16 +63,20 @@ public class TrendAnalysisService {
         // 配额消费
         Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
         String requestId = null;
+        int chargedCost = 0;
         if (accountId != null && accountId > 0) {
             requestId = "trend_v1_" + accountId + "_" + System.currentTimeMillis();
-            try { int cost = pricingService.getCost("ai:trend:v1"); quotaService.consume(accountId, cost, "趋势分析 V1", requestId); }
+            try { chargedCost = pricingService.getCost("ai:trend:v1"); quotaService.consume(accountId, chargedCost, "趋势分析 V1", requestId); }
             catch (Exception e) { result.put("error", e.getMessage()); return result; }
         }
 
         // 获取双周图谱数据
         Map<String, Object> compareData;
         try { compareData = graphService.buildCompareGraph(); }
-        catch (Exception e) { result.put("error", "图谱数据获取失败: " + e.getMessage()); return result; }
+        catch (Exception e) {
+            if (chargedCost > 0) quotaService.refund(accountId, chargedCost, requestId, "图谱获取失败退款");
+            result.put("error", "图谱数据获取失败"); return result;
+        }
 
         // 格式化数据摘要
         String dataSummary = formatDataSummary(compareData);
@@ -131,7 +135,8 @@ public class TrendAnalysisService {
             }
         } catch (Exception e) {
             log.warn("AI趋势分析V1失败: {}", e.getMessage());
-            result.put("error", "AI分析失败: " + e.getMessage());
+            if (chargedCost > 0) quotaService.refund(accountId, chargedCost, requestId, "AI分析失败退款");
+            result.put("error", "AI分析失败，请稍后重试");
         }
         return result;
     }
@@ -230,11 +235,12 @@ public class TrendAnalysisService {
         Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
         String requestId = null;
         boolean consumed = false;
+        int chargedCost = 0;
         if (accountId != null && accountId > 0) {
             requestId = "trend_v2_" + accountId + "_" + System.currentTimeMillis();
             try {
-                int cost = pricingService.getCost("ai:trend:v2");
-                int balance = quotaService.consume(accountId, cost, "趋势分析 V2", requestId);
+                chargedCost = pricingService.getCost("ai:trend:v2");
+                int balance = quotaService.consume(accountId, chargedCost, "趋势分析 V2", requestId);
                 consumed = true;
                 result.put("balance", balance);
                 log.info("[QUOTA] 趋势分析预扣: accountId={}, balance={}", accountId, balance);
@@ -248,7 +254,7 @@ public class TrendAnalysisService {
         Map<String, Object> compareData;
         try { compareData = graphService.buildCompareGraph(); }
         catch (Exception e) {
-            if (consumed) quotaService.refund(accountId, 50, requestId, "图谱获取失败退款");
+            if (consumed) quotaService.refund(accountId, chargedCost, requestId, "图谱获取失败退款");
             result.put("error", "图谱数据获取失败"); return result;
         }
 
@@ -327,10 +333,10 @@ public class TrendAnalysisService {
         } catch (Exception e) {
             log.warn("AI趋势分析V2失败: {}", e.getMessage());
             if (consumed) {
-                quotaService.refund(accountId, 50, requestId, "AI分析失败退款");
-                log.info("[QUOTA] 退款: accountId={}, amount=50", accountId);
+                quotaService.refund(accountId, chargedCost, requestId, "AI分析失败退款");
+                log.info("[QUOTA] 退款: accountId={}, amount={}", accountId, chargedCost);
             }
-            result.put("error", "AI分析失败: " + e.getMessage());
+            result.put("error", "AI分析失败，请稍后重试");
         }
         return result;
     }

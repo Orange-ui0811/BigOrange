@@ -11,6 +11,7 @@ import java.util.List;
 public interface QuoteMapper {
     int insert(Quote quote);
     Quote selectById(@Param("id") Long id);
+    Quote selectByIdForUpdate(@Param("id") Long id);
     List<Quote> selectByConversationId(@Param("conversationId") Long conversationId);
     int updateStatus(@Param("id") Long id, @Param("status") String status);
     List<Quote> selectExpired(@Param("status") String status, @Param("now") LocalDateTime now);

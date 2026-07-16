@@ -9,6 +9,7 @@ public class Work extends BaseEntity {
     private String tags;
     private String coverUrl;
     private String demoUrl;
+    private String videoUrl;
     private String auditStatus;
     private String visibilityStatus;
     private String publishStatus;
@@ -34,6 +35,8 @@ public class Work extends BaseEntity {
     public void setCoverUrl(String coverUrl) { this.coverUrl = coverUrl; }
     public String getDemoUrl() { return demoUrl; }
     public void setDemoUrl(String demoUrl) { this.demoUrl = demoUrl; }
+    public String getVideoUrl() { return videoUrl; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
     public String getAuditStatus() { return auditStatus; }
     public void setAuditStatus(String auditStatus) { this.auditStatus = auditStatus; }
     public String getVisibilityStatus() { return visibilityStatus; }

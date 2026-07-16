@@ -8,11 +8,14 @@ import com.orangejd.pojo.dto.PasswordChangeDTO;
 import com.orangejd.pojo.vo.LoginVO;
 import com.orangejd.server.service.AuthService;
 import com.orangejd.server.service.TokenBlacklistService;
+import com.orangejd.server.service.RateLimitService;
+import com.orangejd.server.util.ClientIpResolver;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/auth")
@@ -21,14 +24,18 @@ public class AdminAuthController {
     @Autowired private AuthService authService;
     @Autowired private JwtProperties jwtProperties;
     @Autowired private TokenBlacklistService blacklistService;
+    @Autowired private RateLimitService rateLimitService;
 
     @PostMapping("/login")
-    public Result<LoginVO> login(@RequestBody LoginDTO loginDTO) {
+    public Result<LoginVO> login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request) {
+        if (!rateLimitService.allow("admin-login:ip:" + ClientIpResolver.resolve(request), 5, 300)) {
+            return Result.error("登录尝试过多，请稍后重试");
+        }
         return Result.success(authService.adminLogin(loginDTO));
     }
 
     @PutMapping("/password")
-    public Result<?> changePassword(@RequestBody PasswordChangeDTO dto) {
+    public Result<?> changePassword(@Valid @RequestBody PasswordChangeDTO dto) {
         authService.changePassword(dto);
         return Result.success();
     }
@@ -50,4 +57,3 @@ public class AdminAuthController {
         } catch (Exception e) { return 0; }
     }
 }
-

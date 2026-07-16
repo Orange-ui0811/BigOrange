@@ -74,7 +74,7 @@
 
         <!-- 已生成 -->
         <div v-if="phases[currentPhase-1]?.done" class="card result-card">
-          <div v-if="!editing" class="result-content" v-html="renderedContent" @dblclick="startEdit"></div>
+          <div v-if="!editing" class="result-content" v-safe-html="renderedContent" @dblclick="startEdit"></div>
           <el-input v-else v-model="editContent" type="textarea" :rows="12" class="mb-12" />
           <div class="btn-row">
             <template v-if="!editing">

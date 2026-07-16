@@ -12,6 +12,7 @@ import com.orangejd.pojo.vo.CommentVO;
 import com.orangejd.server.mapper.CommentMapper;
 import com.orangejd.server.mapper.RequirementMapper;
 import com.orangejd.server.mapper.WorkMapper;
+import com.orangejd.server.service.ContentAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,13 @@ public class CommentServiceImpl implements CommentService {
     @Autowired private WorkMapper workMapper;
     @Autowired private RequirementMapper requirementMapper;
     @Autowired private NotificationService notificationService;
+    @Autowired private ContentAccessService contentAccessService;
 
     public void create(CommentCreateDTO dto) {
         if (dto.getContent() == null || dto.getContent().trim().isEmpty()) throw new BaseException(MessageConstant.COMMENT_EMPTY);
         if (dto.getContent().length() > 1024) throw new BaseException(MessageConstant.COMMENT_TOO_LONG);
         Long currentId = BaseContext.getCurrentId();
+        Long ownerId = contentAccessService.requireAccessibleOwner(dto.getTargetType(), dto.getTargetId(), currentId);
         Comment c = new Comment();
         c.setAccountId(currentId);
         c.setTargetType(dto.getTargetType());
@@ -36,15 +39,15 @@ public class CommentServiceImpl implements CommentService {
         c.setContent(dto.getContent().trim());
         commentMapper.insert(c);
         // 通知内容作者
-        Long ownerId = null; String title = "";
+        String title = "";
         if ("WORK".equals(dto.getTargetType())) {
             com.orangejd.pojo.entity.Work w = workMapper.selectById(dto.getTargetId());
-            if (w != null && !currentId.equals(w.getOwnerId())) { ownerId = w.getOwnerId(); title = w.getTitle(); }
+            if (w != null) title = w.getTitle();
         } else if ("REQUIREMENT".equals(dto.getTargetType())) {
             com.orangejd.pojo.entity.Requirement r = requirementMapper.selectById(dto.getTargetId());
-            if (r != null && !currentId.equals(r.getPublisherId())) { ownerId = r.getPublisherId(); title = r.getTitle(); }
+            if (r != null) title = r.getTitle();
         }
-        if (ownerId != null) {
+        if (!currentId.equals(ownerId)) {
             notificationService.send(ownerId, "COMMENT", "有人评论了你的" + ("WORK".equals(dto.getTargetType()) ? "作品《" : "需求《") + title + "》", dto.getTargetId());
         }
     }
@@ -67,8 +70,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public PageResult<CommentVO> listByTarget(String targetType, Long targetId, int page, int size) {
+        contentAccessService.requireAccessibleOwner(targetType, targetId, BaseContext.getCurrentId());
         size = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         int total = commentMapper.countByTarget(targetType, targetId);
         List<CommentVO> records = commentMapper.selectByTarget(targetType, targetId, offset, size);
         return new PageResult<>(total, records);
@@ -76,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
 
     public PageResult<CommentVO> listMyComments(int page, int size) {
         size = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         Long currentId = BaseContext.getCurrentId();
         int total = commentMapper.countByAccountId(currentId);
         List<CommentVO> records = commentMapper.selectByAccountId(currentId, offset, size);
@@ -85,7 +89,7 @@ public class CommentServiceImpl implements CommentService {
 
     public PageResult<CommentVO> listCommentsOnMyContent(int page, int size) {
         size = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         Long currentId = BaseContext.getCurrentId();
         int total = commentMapper.countOnMyContent(currentId);
         List<CommentVO> records = commentMapper.selectOnMyContent(currentId, offset, size);
@@ -94,7 +98,7 @@ public class CommentServiceImpl implements CommentService {
 
     public PageResult<CommentVO> listAll(int page, int size) {
         size = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         int total = commentMapper.countAll();
         List<CommentVO> records = commentMapper.selectAll(offset, size);
         return new PageResult<>(total, records);

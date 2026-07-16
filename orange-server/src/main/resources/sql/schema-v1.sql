@@ -5,6 +5,8 @@
 -- Phase 1-2 先落地验证；Phase 3-6 表在各自实现阶段二次确认后执行。
 -- ============================================================
 
+SET NAMES utf8mb4;
+
 -- ============================================================
 -- Phase 1: 账号体系
 -- ============================================================
@@ -13,12 +15,16 @@ CREATE TABLE IF NOT EXISTS account (
     id          BIGINT          NOT NULL AUTO_INCREMENT,
     username    VARCHAR(64)     NOT NULL COMMENT '用户名',
     password    VARCHAR(256)    NOT NULL COMMENT '密码密文（BCrypt）',
+    phone       VARCHAR(32)              COMMENT '手机号（兼容旧账号）',
+    email       VARCHAR(128)             COMMENT '绑定邮箱',
+    quota       BIGINT          NOT NULL DEFAULT 0 COMMENT '可用配额（segments）',
     status      VARCHAR(16)     NOT NULL DEFAULT 'ACTIVE' COMMENT '账号状态: ACTIVE / DISABLED',
     role        VARCHAR(16)     NOT NULL DEFAULT 'USER' COMMENT '角色: ADMIN / USER',
     create_time DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY uk_username (username),
+    UNIQUE KEY uk_email (email),
     KEY idx_status (status),
     KEY idx_role (role)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='账号表';
@@ -41,7 +47,7 @@ CREATE TABLE IF NOT EXISTS user_profile (
 
 -- 初始管理员账号（密码 123456 的 BCrypt 密文）
 INSERT INTO account (username, password, status, role) VALUES
-    ('admin', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iAt6Z5Eh', 'ACTIVE', 'ADMIN');
+    ('admin', '$2y$10$51sct1ovTDC5ET7ad.XX/eM7Y7s.GOl9EoiehUOx.kLgiusX8AOeW', 'ACTIVE', 'ADMIN');
 
 
 -- ============================================================
@@ -51,6 +57,7 @@ INSERT INTO account (username, password, status, role) VALUES
 CREATE TABLE IF NOT EXISTS category (
     id          BIGINT      NOT NULL AUTO_INCREMENT,
     name        VARCHAR(64) NOT NULL COMMENT '分类名称',
+    topic_name  VARCHAR(64)          COMMENT 'GitHub topic名称（英文）',
     type        VARCHAR(16) NOT NULL COMMENT '分类类型: WORK / REQUIREMENT',
     sort        INT         NOT NULL DEFAULT 0 COMMENT '排序值（越小越靠前）',
     status      VARCHAR(16) NOT NULL DEFAULT 'ACTIVE' COMMENT '状态: ACTIVE / DISABLED',
@@ -77,6 +84,7 @@ CREATE TABLE IF NOT EXISTS work (
     tags             VARCHAR(512)          COMMENT '标签（逗号分隔）',
     cover_url        VARCHAR(512)          COMMENT '封面图URL',
     demo_url         VARCHAR(512)          COMMENT '演示链接',
+    video_url        VARCHAR(512)          COMMENT '作品视频文件地址',
     audit_status     VARCHAR(32)  NOT NULL DEFAULT 'DRAFT' COMMENT '审核状态: DRAFT / PENDING_REVIEW / APPROVED / REJECTED',
     visibility_status VARCHAR(16) NOT NULL DEFAULT 'PUBLIC' COMMENT '可见性: PUBLIC / PRIVATE',
     publish_status   VARCHAR(16)  NOT NULL DEFAULT 'UNPUBLISHED' COMMENT '发布状态: PUBLISHED / UNPUBLISHED',
@@ -256,6 +264,8 @@ CREATE TABLE IF NOT EXISTS `order` (
     final_amount DECIMAL(12,2)           COMMENT '尾款金额',
     total_amount DECIMAL(12,2)  NOT NULL COMMENT '订单总金额',
     order_status VARCHAR(32)    NOT NULL DEFAULT 'CREATED' COMMENT '订单状态',
+    buyer_deleted TINYINT       NOT NULL DEFAULT 0 COMMENT '买方列表隐藏',
+    seller_deleted TINYINT      NOT NULL DEFAULT 0 COMMENT '卖方列表隐藏',
     create_time DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
@@ -294,9 +304,6 @@ CREATE TABLE IF NOT EXISTS delivery (
 -- ============================================================
 -- 榜单功能: 分类迁移（2026-06-17）
 -- ============================================================
-
--- Step 1.2: 新增 topic_name 字段
-ALTER TABLE category ADD COLUMN IF NOT EXISTS topic_name VARCHAR(64) DEFAULT NULL COMMENT 'GitHub topic名称（英文）' AFTER name;
 
 -- Step 1.3: 插入 14 个新 Topic 分类（四大领域）
 INSERT INTO category (name, topic_name, type, sort, status) VALUES
@@ -338,7 +345,7 @@ CREATE TABLE IF NOT EXISTS leaderboard_snapshot (
 
 CREATE TABLE IF NOT EXISTS trend_history (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    browser_id VARCHAR(64) NOT NULL,
+    account_id BIGINT NOT NULL,
     topics VARCHAR(512),
     purpose VARCHAR(128),
     experience VARCHAR(128),
@@ -347,7 +354,7 @@ CREATE TABLE IF NOT EXISTS trend_history (
     result_json MEDIUMTEXT,
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    KEY idx_browser_id (browser_id)
+    KEY idx_trend_account_id (account_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ============================================================
@@ -361,11 +368,120 @@ CREATE TABLE IF NOT EXISTS knowledge_document (
     source_ref   VARCHAR(512)          COMMENT '来源引用（GitHub full_name 或文件路径，幂等键）',
     chunk_count  INT          NOT NULL DEFAULT 0 COMMENT '切片数',
     file_size    BIGINT                COMMENT '原始文件大小（字节）',
+    content      MEDIUMTEXT            COMMENT '原始文档内容',
     create_time  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     KEY idx_source (source),
     UNIQUE KEY uk_source_ref (source_ref)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='知识库文档表';
+
+-- ============================================================
+-- Segments 配额与支付账务
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS quota_log (
+    id           BIGINT       NOT NULL AUTO_INCREMENT,
+    account_id   BIGINT       NOT NULL COMMENT '用户ID',
+    type         VARCHAR(16)  NOT NULL COMMENT 'CONSUME/RECHARGE/REFUND/ADMIN',
+    amount       INT          NOT NULL COMMENT '变动量（正=加，负=减）',
+    balance      BIGINT       NOT NULL COMMENT '变动后余额',
+    source       VARCHAR(32)           COMMENT 'REDEMPTION/EPAY/REGISTER/MANUAL',
+    description  VARCHAR(256)          COMMENT '操作描述',
+    request_id   VARCHAR(64)           COMMENT '业务幂等键',
+    create_time  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_quota_account (account_id),
+    KEY idx_quota_create_time (create_time),
+    UNIQUE KEY uk_quota_request_id (request_id),
+    CONSTRAINT fk_quota_account FOREIGN KEY (account_id) REFERENCES account(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='不可变配额流水';
+
+CREATE TABLE IF NOT EXISTS top_up (
+    id                 BIGINT        NOT NULL AUTO_INCREMENT,
+    account_id         BIGINT        NOT NULL COMMENT '用户ID',
+    amount             INT           NOT NULL COMMENT '配额数（segments）',
+    money              DECIMAL(10,2) NOT NULL COMMENT '订单金额（元）',
+    trade_no           VARCHAR(64)   NOT NULL COMMENT '本地订单号',
+    payment_method     VARCHAR(32)   NOT NULL COMMENT 'wxpay/alipay',
+    payment_provider   VARCHAR(32)   NOT NULL COMMENT '支付渠道',
+    provider_trade_no  VARCHAR(128)           COMMENT '支付渠道流水号',
+    status             VARCHAR(16)   NOT NULL DEFAULT 'pending',
+    create_time        DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    complete_time      DATETIME               COMMENT '完成时间',
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_top_up_trade_no (trade_no),
+    UNIQUE KEY uk_top_up_provider_trade_no (provider_trade_no),
+    KEY idx_top_up_account (account_id),
+    KEY idx_top_up_status_time (status, create_time),
+    CONSTRAINT fk_top_up_account FOREIGN KEY (account_id) REFERENCES account(id),
+    CONSTRAINT chk_top_up_amount CHECK (amount > 0),
+    CONSTRAINT chk_top_up_money CHECK (money > 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='充值支付订单';
+
+CREATE TABLE IF NOT EXISTS payment_callback_event (
+    id                  BIGINT       NOT NULL AUTO_INCREMENT,
+    provider            VARCHAR(32)  NOT NULL,
+    provider_event_id   VARCHAR(192) NOT NULL COMMENT '渠道事件幂等键',
+    trade_no            VARCHAR(64)  NOT NULL,
+    provider_trade_no   VARCHAR(128) NOT NULL,
+    trade_status        VARCHAR(32)  NOT NULL,
+    payload             JSON         NOT NULL COMMENT '已移除签名的原始回调',
+    create_time         DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_payment_event (provider, provider_event_id),
+    KEY idx_payment_event_trade_no (trade_no),
+    CONSTRAINT fk_payment_event_top_up FOREIGN KEY (trade_no) REFERENCES top_up(trade_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='支付回调审计事件';
+
+CREATE TABLE IF NOT EXISTS redemption_code (
+    id           BIGINT       NOT NULL AUTO_INCREMENT,
+    code         VARCHAR(48)  NOT NULL COMMENT '充值码',
+    quota        INT          NOT NULL COMMENT '所含配额',
+    status       TINYINT      NOT NULL DEFAULT 1 COMMENT '1未使用 2禁用 3已使用',
+    created_by   BIGINT       NOT NULL COMMENT '管理员ID',
+    used_by      BIGINT                COMMENT '使用者ID',
+    used_time    DATETIME              COMMENT '使用时间',
+    create_time  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_redemption_code (code),
+    KEY idx_redemption_status (status),
+    CONSTRAINT chk_redemption_quota CHECK (quota > 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='充值码';
+
+CREATE TABLE IF NOT EXISTS plan_history (
+    id          BIGINT      NOT NULL AUTO_INCREMENT,
+    account_id  BIGINT      NOT NULL,
+    summary     VARCHAR(512),
+    phase1      MEDIUMTEXT,
+    phase2      MEDIUMTEXT,
+    phase3      MEDIUMTEXT,
+    phase4      MEDIUMTEXT,
+    phase5      MEDIUMTEXT,
+    phase6      MEDIUMTEXT,
+    create_time DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_plan_account (account_id),
+    CONSTRAINT fk_plan_account FOREIGN KEY (account_id) REFERENCES account(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='AI方案历史';
+
+CREATE TABLE IF NOT EXISTS job_posting (
+    id              BIGINT       NOT NULL AUTO_INCREMENT,
+    company         VARCHAR(128)  NOT NULL,
+    position        VARCHAR(128)  NOT NULL,
+    direction       VARCHAR(128),
+    content         MEDIUMTEXT,
+    display_content MEDIUMTEXT,
+    audit_status    VARCHAR(16)   NOT NULL DEFAULT 'PENDING',
+    submitter_id    BIGINT,
+    submitter_ip    VARCHAR(64),
+    submitter_role  VARCHAR(16),
+    reject_reason   VARCHAR(512),
+    create_time     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_job_status (audit_status),
+    KEY idx_job_direction (direction),
+    KEY idx_job_company_position (company, position)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='岗位投稿';
 
 -- ============================================================
 -- Phase 7: AI 服务消费定价管理

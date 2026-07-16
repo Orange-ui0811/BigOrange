@@ -42,14 +42,13 @@ public class AdminOrderController {
     public Result<PageResult<OrderVO>> list(@RequestParam(defaultValue = "1") int page,
                                              @RequestParam(defaultValue = "20") int size) {
         int s = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = (page - 1) * s;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, s);
         return Result.success(new PageResult<>(orderMapper.countAllOrders(),
                 orderMapper.selectAll(offset, s)));
     }
 
     @DeleteMapping("/batch")
     public Result<?> batchDelete(@RequestBody java.util.List<Long> ids) {
-        for (Long id : ids) orderMapper.deleteById(id);
-        return Result.success();
+        return Result.error("订单属于财务审计记录，禁止物理删除");
     }
 }

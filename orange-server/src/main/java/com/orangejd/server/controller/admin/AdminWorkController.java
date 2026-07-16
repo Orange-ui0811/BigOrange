@@ -17,7 +17,7 @@ public class AdminWorkController {
 
     @GetMapping("/{id}")
     public Result<WorkDetailVO> detail(@PathVariable Long id) {
-        return Result.success(workService.getDetail(id));
+        return Result.success(workService.getAdminDetail(id));
     }
 
     @GetMapping

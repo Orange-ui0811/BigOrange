@@ -46,4 +46,10 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+router.afterEach(to => {
+  document.title = `${to.meta.title || '管理端'} · OrangeJD`
+  window.scrollTo({ top: 0, left: 0 })
+  requestAnimationFrame(() => document.getElementById('admin-main-content')?.focus({ preventScroll: true }))
+})
+
 export default router

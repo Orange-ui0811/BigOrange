@@ -1,5 +1,6 @@
 package com.orangejd.server.service;
 
+import com.orangejd.pojo.entity.TopUp;
 import java.util.Map;
 
 public interface EpayService {
@@ -9,4 +10,7 @@ public interface EpayService {
 
     /** 验签回调参数 */
     boolean verify(Map<String, String> params);
+
+    /** Validate provider identity, successful status and immutable order amount. */
+    void validateSuccessfulCallback(Map<String, String> params, TopUp topUp);
 }

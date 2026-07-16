@@ -16,6 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -51,6 +55,7 @@ public class DocumentServiceImpl implements DocumentService {
     public KnowledgeDocumentVO upload(MultipartFile file) {
         String title = file.getOriginalFilename();
         if (title == null || title.isEmpty()) title = "未命名.md";
+        title = sanitizeTitle(title);
         validateFile(file, title);
         String content = readContent(file);
         return storeDocument(title, SOURCE_MANUAL, null, content, file.getSize());
@@ -255,8 +260,24 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     private String readContent(MultipartFile file) {
-        try { return new String(file.getBytes(), "UTF-8"); }
-        catch (IOException e) { throw new RuntimeException("文件读取失败", e); }
+        try {
+            String content = StandardCharsets.UTF_8.newDecoder()
+                    .onMalformedInput(CodingErrorAction.REPORT)
+                    .onUnmappableCharacter(CodingErrorAction.REPORT)
+                    .decode(ByteBuffer.wrap(file.getBytes())).toString();
+            if (content.indexOf('\0') >= 0) throw new IllegalArgumentException("文件包含不支持的二进制内容");
+            return content;
+        } catch (CharacterCodingException e) {
+            throw new IllegalArgumentException("文件必须使用 UTF-8 编码");
+        } catch (IOException e) {
+            throw new RuntimeException("文件读取失败", e);
+        }
+    }
+
+    private String sanitizeTitle(String title) {
+        String cleaned = title.replaceAll("[\\p{Cntrl}]", "").trim();
+        if (cleaned.isEmpty()) return "未命名.md";
+        return cleaned.length() > 120 ? cleaned.substring(cleaned.length() - 120) : cleaned;
     }
 
     private String resolvePeriod(KnowledgeDocument e) {

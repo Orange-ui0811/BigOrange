@@ -65,6 +65,7 @@
             <div v-else class="window">
               <i style="width:62%"></i><i style="width:86%"></i><i style="width:48%"></i><i style="width:74%"></i>
             </div>
+            <span v-if="item.videoUrl" class="video-chip">▶ 视频</span>
           </div>
           <!-- 信息 -->
           <div class="work-body">
@@ -445,6 +446,7 @@ watch([categoryId], () => { worksPage.value = 1; reqsPage.value = 1; load() })
 
 /* 封面 */
 .work-cover {
+  position: relative;
   height: 140px;
   padding: 12px;
   border-bottom: 2px solid #f2c49b;
@@ -452,6 +454,22 @@ watch([categoryId], () => { worksPage.value = 1; reqsPage.value = 1; load() })
     radial-gradient(circle at 20% 20%, rgba(255,255,255,.62), transparent 24%),
     linear-gradient(135deg, #fffaf4, #fdba74);
   overflow: hidden;
+}
+.video-chip {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  min-height: 25px;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 9px;
+  color: #fff;
+  background: rgba(33, 23, 17, .82);
+  box-shadow: 2px 2px 0 rgba(92,38,15,.18);
+  backdrop-filter: blur(8px);
+  font: 800 10px/1 var(--font-body);
 }
 .work-cover.dark {
   background:

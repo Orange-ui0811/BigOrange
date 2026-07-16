@@ -45,9 +45,9 @@ public class LeaderboardServiceImpl implements LeaderboardService {
 
     @Override
     public PageResult<Map<String, Object>> getWorks(Long categoryId, String period, int page, int size) {
-        size = Math.min(size, 50);
+        size = com.orangejd.common.util.PageUtil.capSize(size);
+        page = com.orangejd.common.util.PageUtil.safePage(page);
         int limit = size;
-        int offset = (page - 1) * size;
 
         String cacheKey = "leaderboard:local:works:" + (categoryId == null ? "all" : categoryId) + ":" + period + ":p" + page;
         String cached = getCache(cacheKey);
@@ -75,7 +75,8 @@ public class LeaderboardServiceImpl implements LeaderboardService {
 
     @Override
     public PageResult<Map<String, Object>> getCreators(String period, int page, int size) {
-        size = Math.min(size, 50);
+        size = com.orangejd.common.util.PageUtil.capSize(size);
+        page = com.orangejd.common.util.PageUtil.safePage(page);
         int limit = size;
 
         String cacheKey = "leaderboard:local:creators:" + period + ":p" + page;
@@ -106,7 +107,8 @@ public class LeaderboardServiceImpl implements LeaderboardService {
 
     @Override
     public Map<String, Object> getGithubRepos(String topicName, String period, int page, int size) {
-        size = Math.min(size, 50);
+        size = com.orangejd.common.util.PageUtil.capSize(size);
+        page = com.orangejd.common.util.PageUtil.safePage(page);
         String today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
         String yesterday = LocalDate.now().minusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE);
 

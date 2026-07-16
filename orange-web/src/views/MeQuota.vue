@@ -129,15 +129,14 @@ const doRedeem = async () => {
 }
 
 const doPay = async () => {
+  if (paying.value) return
   paying.value = true
   try {
     const r = await createEpayOrder(payAmount.value, payMethod.value)
-    if (r.data?.payUrl) {
-      window.open(r.data.payUrl, '_blank')
-      ElMessage.info('已打开支付页面，支付完成后刷新查看余额')
-    } else {
-      ElMessage.error('创建支付失败')
-    }
+    if (r.code !== 1) return
+    if (!r.data?.payUrl) { ElMessage.error('创建支付失败'); return }
+    if (r.data.tradeNo) sessionStorage.setItem('pendingTopUpTradeNo', r.data.tradeNo)
+    window.location.assign(r.data.payUrl)
   } catch (e) { ElMessage.error('支付服务暂不可用') }
   finally { paying.value = false }
 }

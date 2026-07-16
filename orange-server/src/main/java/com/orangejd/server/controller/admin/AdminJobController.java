@@ -195,8 +195,9 @@ public class AdminJobController {
     @GetMapping("/pending")
     public Result<List<JobPosting>> pending(@RequestParam(defaultValue = "1") int page,
                                             @RequestParam(defaultValue = "20") int size) {
-        int offset = (page - 1) * size;
-        return Result.success(mapper.selectPending(offset, Math.min(size, 100)));
+        int safeSize = com.orangejd.common.util.PageUtil.capSize(size);
+        int offset = com.orangejd.common.util.PageUtil.offset(page, safeSize);
+        return Result.success(mapper.selectPending(offset, safeSize));
     }
 
     /** 全部列表 */
@@ -204,8 +205,9 @@ public class AdminJobController {
     public Result<Map<String, Object>> list(@RequestParam(defaultValue = "") String status,
                                             @RequestParam(defaultValue = "1") int page,
                                             @RequestParam(defaultValue = "30") int size) {
-        int offset = (page - 1) * size;
-        List<JobPosting> list = mapper.selectAll(status, offset, Math.min(size, 100));
+        int safeSize = com.orangejd.common.util.PageUtil.capSize(size);
+        int offset = com.orangejd.common.util.PageUtil.offset(page, safeSize);
+        List<JobPosting> list = mapper.selectAll(status, offset, safeSize);
         long total = mapper.countAll(status);
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("records", list);

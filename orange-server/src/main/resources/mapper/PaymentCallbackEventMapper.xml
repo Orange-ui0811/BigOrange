@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.PaymentCallbackEventMapper">
+    <insert id="insertIgnore" useGeneratedKeys="true" keyProperty="id">
+        INSERT IGNORE INTO payment_callback_event
+            (provider, provider_event_id, trade_no, provider_trade_no, trade_status, payload)
+        VALUES
+            (#{provider}, #{providerEventId}, #{tradeNo}, #{providerTradeNo}, #{tradeStatus}, #{payload})
+    </insert>
+</mapper>

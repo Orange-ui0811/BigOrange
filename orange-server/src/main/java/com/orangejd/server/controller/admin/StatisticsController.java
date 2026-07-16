@@ -30,6 +30,7 @@ public class StatisticsController {
 
     @GetMapping("/trend")
     public Result<Map<String, Object>> trend(@RequestParam(defaultValue = "30") int days) {
+        days = Math.max(1, Math.min(days, 365));
         // Phase 7+ 可扩展：按天查询新增数据
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("days", days);
@@ -40,11 +41,11 @@ public class StatisticsController {
 
     @GetMapping("/top-works")
     public Result<List<Map<String, Object>>> topWorks(@RequestParam(defaultValue = "10") int limit) {
-        return Result.success(workMapper.selectTopByFavorites(limit));
+        return Result.success(workMapper.selectTopByFavorites(com.orangejd.common.util.PageUtil.capSize(limit)));
     }
 
     @GetMapping("/top-creators")
     public Result<List<Map<String, Object>>> topCreators(@RequestParam(defaultValue = "10") int limit) {
-        return Result.success(accountMapper.selectTopCreators(limit));
+        return Result.success(accountMapper.selectTopCreators(com.orangejd.common.util.PageUtil.capSize(limit)));
     }
 }

@@ -130,12 +130,18 @@ const route = useRoute()
 const myId = ref(sessionStorage.getItem('myId') || null)
 
 let ws = null
-const connectWs = () => {
+const connectWs = async () => {
   if (ws) try { ws.close() } catch {}
   const uid = myId.value; if (!uid) return
-  const token = sessionStorage.getItem('appToken')
-  const wsBase = import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8080'
-  ws = new WebSocket(wsBase + '/ws/'+uid+'?token='+token)
+  try {
+    const ticketRes = await request.post('/app/auth/ws-ticket')
+    if (!ticketRes.data?.ticket) throw new Error('ticket unavailable')
+    const wsBase = import.meta.env.VITE_WS_URL || `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}`
+    ws = new WebSocket(wsBase + '/ws/'+uid+'?ticket='+encodeURIComponent(ticketRes.data.ticket))
+  } catch {
+    setTimeout(connectWs, 5000)
+    return
+  }
   ws.onmessage = (e) => {
     try {
       const data = JSON.parse(e.data)

@@ -43,7 +43,7 @@ public class HealthController {
         try (Connection conn = dataSource.getConnection()) {
             return conn.isValid(3) ? "UP" : "DOWN";
         } catch (Exception e) {
-            return "DOWN: " + e.getMessage();
+            return "DOWN";
         }
     }
 
@@ -52,7 +52,7 @@ public class HealthController {
         try {
             return "PONG".equals(redisTemplate.getConnectionFactory().getConnection().ping()) ? "UP" : "DOWN";
         } catch (Exception e) {
-            return "DOWN: " + e.getMessage();
+            return "DOWN";
         }
     }
 }

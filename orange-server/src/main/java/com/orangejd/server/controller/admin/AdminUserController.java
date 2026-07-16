@@ -21,7 +21,8 @@ public class AdminUserController {
     @GetMapping
     public Result<PageResult<AccountVO>> list(@RequestParam(defaultValue = "1") int page,
                                                @RequestParam(defaultValue = "20") int size) {
-        int offset = (page - 1) * com.orangejd.common.util.PageUtil.capSize(size);
+        size = com.orangejd.common.util.PageUtil.capSize(size);
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         // 简化实现：返回所有账号
         List<AccountVO> records = accountMapper.selectAll(offset, size).stream().map(a -> {
             AccountVO vo = new AccountVO();

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -22,6 +23,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Value("${orange.upload.path}")
     private String uploadPath;
+
+    @Value("${orange.security.allowed-origins:http://localhost:5173,http://localhost:5174,http://localhost:15173,http://localhost:15174}")
+    private String allowedOrigins;
 
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
@@ -32,9 +36,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*")
+                .allowedOrigins(Arrays.stream(allowedOrigins.split(","))
+                        .map(String::trim).filter(s -> !s.isEmpty()).toArray(String[]::new))
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
+                .exposedHeaders("X-Request-Id")
                 .allowCredentials(true);
     }
 
@@ -65,8 +71,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                         "/app/category", "/app/work/public", "/app/requirement/public",
                         "/app/config/trade-mode",
                         "/app/leaderboard/**",
-                        "/app/trend/graph", "/app/trend/analyze", "/app/trend/analyze-v2",
+                        "/app/trend/graph",
                         "/ws/**");
     }
 }
-

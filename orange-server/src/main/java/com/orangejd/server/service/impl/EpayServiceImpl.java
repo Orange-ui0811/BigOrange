@@ -1,5 +1,7 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.exception.BaseException;
+import com.orangejd.pojo.entity.TopUp;
 import com.orangejd.server.config.EpayProperties;
 import com.orangejd.server.service.EpayService;
 import org.slf4j.Logger;
@@ -57,7 +59,9 @@ public class EpayServiceImpl implements EpayService {
     @Override
     public boolean verify(Map<String, String> params) {
         String receivedSign = params.get("sign");
-        if (receivedSign == null) return false;
+        if (receivedSign == null || receivedSign.isBlank() || props.getKey() == null || props.getKey().isBlank()) {
+            return false;
+        }
 
         // 除了 sign 和 sign_type 之外的参数参与签名
         Map<String, String> toSign = new LinkedHashMap<>(params);
@@ -65,9 +69,34 @@ public class EpayServiceImpl implements EpayService {
         toSign.remove("sign_type");
 
         String computed = sign(toSign, props.getKey());
-        boolean ok = receivedSign.equals(computed);
-        if (!ok) log.warn("Epay 签名验证失败: received={}, computed={}", receivedSign, computed);
+        boolean ok = MessageDigest.isEqual(
+                receivedSign.toLowerCase(Locale.ROOT).getBytes(StandardCharsets.UTF_8),
+                computed.getBytes(StandardCharsets.UTF_8));
+        if (!ok) log.warn("Epay 签名验证失败");
         return ok;
+    }
+
+    @Override
+    public void validateSuccessfulCallback(Map<String, String> params, TopUp topUp) {
+        if (!Objects.equals(props.getPid(), params.get("pid"))) {
+            throw new BaseException("支付回调商户号不匹配");
+        }
+        if (!"TRADE_SUCCESS".equals(params.get("trade_status"))) {
+            throw new BaseException("支付状态不是成功状态");
+        }
+        String providerTradeNo = params.get("trade_no");
+        if (providerTradeNo == null || providerTradeNo.isBlank()) {
+            throw new BaseException("支付渠道流水号缺失");
+        }
+        try {
+            BigDecimal callbackMoney = new BigDecimal(params.get("money")).setScale(2, RoundingMode.UNNECESSARY);
+            BigDecimal expectedMoney = topUp.getMoney().setScale(2, RoundingMode.UNNECESSARY);
+            if (callbackMoney.compareTo(expectedMoney) != 0) {
+                throw new BaseException("支付回调金额不匹配");
+            }
+        } catch (NumberFormatException | ArithmeticException e) {
+            throw new BaseException("支付回调金额格式错误");
+        }
     }
 
     /** MD5 签名 */

@@ -27,6 +27,8 @@ public class EpayProperties {
     public void setReturnUrl(String returnUrl) { this.returnUrl = returnUrl; }
 
     public boolean isConfigured() {
-        return pid != null && !pid.isEmpty() && key != null && !key.isEmpty();
+        return hasText(pid) && hasText(key) && hasText(gateway) && hasText(notifyUrl) && hasText(returnUrl);
     }
+
+    private boolean hasText(String value) { return value != null && !value.isBlank(); }
 }

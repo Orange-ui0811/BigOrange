@@ -33,7 +33,7 @@
 
             <template v-if="req.detail">
               <h3>需求重点</h3>
-              <div class="req-detail" v-html="req.detail"></div>
+              <div class="req-detail" v-safe-html="req.detail"></div>
             </template>
 
             <div v-if="req.publisherName" class="supplement-card">
@@ -98,9 +98,7 @@ const contactPublisher = async () => {
 }
 const stripHtml = (html) => {
   if (!html) return ''
-  const div = document.createElement('div')
-  div.innerHTML = html
-  return div.textContent || div.innerText || ''
+  return new DOMParser().parseFromString(html, 'text/html').body.textContent || ''
 }
 onMounted(async()=>{loading.value=true;try{const r=await request.get('/app/requirement/'+route.params.id);if(r.code===1)req.value=r.data}catch{}finally{loading.value=false}})
 </script>

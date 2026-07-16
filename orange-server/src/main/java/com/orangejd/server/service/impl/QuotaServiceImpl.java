@@ -29,6 +29,7 @@ public class QuotaServiceImpl implements QuotaService {
     @Override
     @Transactional
     public int consume(Long accountId, int amount, String description, String requestId) {
+        requirePositiveAmount(amount);
         // ① 幂等检查
         if (requestId != null && quotaLogMapper.existsByRequestId(requestId) > 0) {
             Account acc = accountMapper.selectById(accountId);
@@ -57,6 +58,7 @@ public class QuotaServiceImpl implements QuotaService {
     @Override
     @Transactional
     public int recharge(Long accountId, int amount, String source, String description) {
+        requirePositiveAmount(amount);
         Account acc = accountMapper.selectByIdForUpdate(accountId);
         if (acc == null) throw new BaseException("账户不存在");
 
@@ -73,13 +75,19 @@ public class QuotaServiceImpl implements QuotaService {
     @Override
     @Transactional
     public int refund(Long accountId, int amount, String requestId, String description) {
+        requirePositiveAmount(amount);
+        String refundRequestId = requestId == null ? null : requestId + ":refund";
+        if (refundRequestId != null && quotaLogMapper.existsByRequestId(refundRequestId) > 0) {
+            Account current = accountMapper.selectById(accountId);
+            return current != null ? current.getQuota().intValue() : 0;
+        }
         Account acc = accountMapper.selectByIdForUpdate(accountId);
         if (acc == null) return 0;
 
         accountMapper.increaseQuota(accountId, amount);
         long balance = acc.getQuota() + amount;
 
-        writeLog(accountId, "REFUND", amount, balance, null, description, requestId);
+        writeLog(accountId, "REFUND", amount, balance, null, description, refundRequestId);
         log.info("配额退款: accountId={}, amount={}, balance={}", accountId, amount, balance);
         return (int) balance;
     }
@@ -94,6 +102,7 @@ public class QuotaServiceImpl implements QuotaService {
         if (rc == null) throw new BaseException("充值码不存在");
         if (rc.getStatus() == 3) throw new BaseException("此充值码已被使用");
         if (rc.getStatus() == 2) throw new BaseException("此充值码已禁用");
+        requirePositiveAmount(rc.getQuota());
 
         // ② 标记已使用
         redemptionCodeMapper.updateUsed(code, accountId);
@@ -105,7 +114,8 @@ public class QuotaServiceImpl implements QuotaService {
 
         writeLog(accountId, "RECHARGE", rc.getQuota(), balance, "REDEMPTION",
                 "兑换充值码 +" + rc.getQuota() + " segments", null);
-        log.info("充值码兑换: accountId={}, code={}, quota={}, balance={}", accountId, code, rc.getQuota(), balance);
+        log.info("充值码兑换: accountId={}, redemptionCodeId={}, quota={}, balance={}",
+                accountId, rc.getId(), rc.getQuota(), balance);
         return (int) balance;
     }
 
@@ -114,6 +124,7 @@ public class QuotaServiceImpl implements QuotaService {
     @Override
     @Transactional
     public int adminAdjust(Long accountId, long newQuota, Long adminId) {
+        if (newQuota < 0 || newQuota > Integer.MAX_VALUE) throw new BaseException("配额调整值超出允许范围");
         Account acc = accountMapper.selectByIdForUpdate(accountId);
         if (acc == null) throw new BaseException("账户不存在");
 
@@ -158,5 +169,9 @@ public class QuotaServiceImpl implements QuotaService {
         ql.setDescription(description != null ? description : type);
         ql.setRequestId(requestId);
         quotaLogMapper.insert(ql);
+    }
+
+    private void requirePositiveAmount(int amount) {
+        if (amount <= 0) throw new BaseException("配额数量必须大于 0");
     }
 }

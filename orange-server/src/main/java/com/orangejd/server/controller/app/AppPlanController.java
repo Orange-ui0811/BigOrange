@@ -62,11 +62,12 @@ public class AppPlanController {
         Long accountId = BaseContext.getCurrentId();
         String requestId = null;
         boolean consumed = false;
+        int chargedCost = 0;
         if (accountId != null && accountId > 0) {
             requestId = "plan_p" + phase + "_" + accountId + "_" + System.currentTimeMillis();
             try {
-                int cost = pricingService.getCost("ai:plan");
-                int balance = quotaService.consume(accountId, cost, "方案设计 Phase " + phase, requestId);
+                chargedCost = pricingService.getCost("ai:plan");
+                int balance = quotaService.consume(accountId, chargedCost, "方案设计 Phase " + phase, requestId);
                 consumed = true;
             } catch (Exception e) {
                 return Result.error(e.getMessage());
@@ -120,8 +121,8 @@ public class AppPlanController {
             }
             return Result.error("AI 返回为空");
         } catch (Exception e) {
-            if (consumed) quotaService.refund(accountId, 40, requestId, "方案设计失败退款");
-            return Result.error("AI 调用失败: " + (e.getMessage() != null ? e.getMessage().substring(0, Math.min(80, e.getMessage().length())) : ""));
+            if (consumed) quotaService.refund(accountId, chargedCost, requestId, "方案设计失败退款");
+            return Result.error("AI 调用失败，请稍后重试");
         }
     }
 

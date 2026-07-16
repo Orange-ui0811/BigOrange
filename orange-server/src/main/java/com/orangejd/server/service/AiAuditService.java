@@ -144,6 +144,7 @@ public class AiAuditService {
         String detail = nvl(work.getDetail());
         if (detail.length() > 3000) detail = detail.substring(0, 3000) + "...";
         String demoUrl = nvl(work.getDemoUrl());
+        String videoUrl = nvl(work.getVideoUrl());
         String coverUrl = buildPublicUrl(work.getCoverUrl());
         String categoryName = "";
         if (work.getCategoryId() != null) {
@@ -155,8 +156,8 @@ public class AiAuditService {
         if (author != null) authorName = author.getUsername();
 
         String userPrompt = String.format(
-            "请审核以下内容：\n\n标题：%s\n简介：%s\n详情：%s\n分类：%s\n演示链接：%s\n提交者：%s",
-            title, summary, detail, categoryName, demoUrl, authorName);
+            "请审核以下内容：\n\n标题：%s\n简介：%s\n详情：%s\n分类：%s\n演示链接：%s\n视频链接：%s\n提交者：%s",
+            title, summary, detail, categoryName, demoUrl, videoUrl, authorName);
 
         List<String> detailImages = extractImageUrls(detail);
         AuditResult result = callAi(userPrompt, coverUrl, detailImages);

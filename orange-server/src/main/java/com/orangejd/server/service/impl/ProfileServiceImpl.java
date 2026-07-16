@@ -63,7 +63,7 @@ public class ProfileServiceImpl implements com.orangejd.server.service.ProfileSe
 
     public PageResult<WorkVO> getAuthorWorks(Long accountId, int page, int size) {
         size = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         List<Work> works = workMapper.selectByOwnerId(accountId, offset, size);
         Long currentId = BaseContext.getCurrentId();
         boolean isOwner = currentId != null && currentId.equals(accountId);

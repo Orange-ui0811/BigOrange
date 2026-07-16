@@ -18,4 +18,9 @@ public class AppCommonController {
                                   @RequestParam(defaultValue = "general") String dir) {
         return Result.success(fileUploadService.upload(file, dir));
     }
+
+    @PostMapping("/upload/video")
+    public Result<String> uploadVideo(@RequestParam("file") MultipartFile file) {
+        return Result.success(fileUploadService.uploadVideo(file));
+    }
 }

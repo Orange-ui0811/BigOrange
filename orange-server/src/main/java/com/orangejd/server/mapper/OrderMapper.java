@@ -17,11 +17,13 @@ public interface OrderMapper {
     List<OrderVO> selectBySellerId(@Param("sellerId") Long sellerId, @Param("offset") int offset, @Param("limit") int limit);
     int countBySellerId(@Param("sellerId") Long sellerId);
     int updateStatus(@Param("id") Long id, @Param("orderStatus") String orderStatus);
-    int deleteById(@Param("id") Long id);
+    int hideForBuyer(@Param("id") Long id, @Param("buyerId") Long buyerId);
+    int hideForSeller(@Param("id") Long id, @Param("sellerId") Long sellerId);
 
     java.util.List<com.orangejd.pojo.vo.OrderVO> selectAll(@Param("offset") int offset, @Param("limit") int limit);
 
     int countAllOrders();
+    int countBySource(@Param("sourceType") String sourceType, @Param("sourceId") Long sourceId);
 
     java.util.List<com.orangejd.pojo.entity.Order> selectTimeoutOrders(@Param("status") String status, @Param("days") int days);
 }

@@ -21,17 +21,20 @@ spring:
   data:
     redis:
       client-type: jedis
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      database: ${REDIS_DB:0}
   ai:
     vectorstore:
       redis:
         initialize-schema: true
-  redis:
-    host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:6379}
-    password: ${REDIS_PASSWORD}
-    database: ${REDIS_DB:0}
 
 orange:
+  trade:
+    simulated-payment-enabled: false
+  security:
+    allowed-origins: ${ALLOWED_ORIGINS}
   jwt:
     admin-secret-key: ${JWT_ADMIN_SECRET}
     admin-ttl: ${JWT_ADMIN_TTL:7200000}
@@ -41,11 +44,18 @@ orange:
     app-token-name: App-Token
   upload:
     path: ${UPLOAD_PATH:/data/orangejd/uploads}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD}
+    database: ${REDIS_DB:0}
+  turnstile:
+    secret-key: ${TURNSTILE_SECRET_KEY}
   oss:
-    endpoint: ${OSS_ENDPOINT}
-    access-key-id: ${OSS_ACCESS_KEY}
-    access-key-secret: ${OSS_ACCESS_SECRET}
-    bucket-name: ${OSS_BUCKET}
+    endpoint: ${OSS_ENDPOINT:}
+    access-key-id: ${OSS_ACCESS_KEY:}
+    access-key-secret: ${OSS_ACCESS_SECRET:}
+    bucket-name: ${OSS_BUCKET:}
   leaderboard:
     github-token: ${GITHUB_TOKEN:}
     local-cache-ttl-minutes: ${LEADERBOARD_LOCAL_CACHE_TTL:15}
@@ -61,6 +71,12 @@ orange:
     endpoint: ${AI_EMBEDDING_ENDPOINT:https://ai.gitee.com/v1}
     api-key: ${AI_EMBEDDING_KEY:}
     model: ${AI_EMBEDDING_MODEL:bge-small-zh-v1.5}
+  epay:
+    pid: ${EPAY_PID:}
+    key: ${EPAY_KEY:}
+    gateway: ${EPAY_GATEWAY:}
+    notify-url: ${EPAY_NOTIFY_URL:}
+    return-url: ${EPAY_RETURN_URL:}
   feishu:
     webhook-url: ${FEISHU_WEBHOOK_URL:}
 

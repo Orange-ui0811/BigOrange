@@ -47,7 +47,7 @@
 
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="800px" top="5vh">
       <div v-if="detailLoading" v-loading="true" style="min-height:200px" />
-      <div v-else v-html="rendered" style="max-height:70vh;overflow:auto;background:#fafafa;padding:20px;border-radius:8px;font-size:14px;line-height:1.8" />
+      <div v-else v-safe-html="rendered" style="max-height:70vh;overflow:auto;background:#fafafa;padding:20px;border-radius:8px;font-size:14px;line-height:1.8" />
     </el-dialog>
   </div>
 </template>

@@ -11,7 +11,9 @@ public interface TopUpMapper {
     int insert(TopUp record);
     TopUp selectByTradeNo(@Param("tradeNo") String tradeNo);
     TopUp selectByTradeNoForUpdate(@Param("tradeNo") String tradeNo);
-    int updateStatus(@Param("tradeNo") String tradeNo, @Param("status") String status);
+    int updateStatusIfPending(@Param("tradeNo") String tradeNo,
+                              @Param("status") String status,
+                              @Param("providerTradeNo") String providerTradeNo);
     List<TopUp> selectPending(@Param("accountId") Long accountId);
     List<TopUp> selectAll(@Param("offset") int offset, @Param("limit") int limit);
 }

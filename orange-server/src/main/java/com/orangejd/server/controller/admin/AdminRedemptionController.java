@@ -49,8 +49,9 @@ public class AdminRedemptionController {
     @GetMapping("/list")
     public Result<Map<String, Object>> list(@RequestParam(defaultValue = "1") int page,
                                             @RequestParam(defaultValue = "50") int size) {
-        int offset = (page - 1) * size;
-        List<RedemptionCode> list = mapper.selectAll(offset, Math.min(size, 100));
+        int safeSize = com.orangejd.common.util.PageUtil.capSize(size);
+        int offset = com.orangejd.common.util.PageUtil.offset(page, safeSize);
+        List<RedemptionCode> list = mapper.selectAll(offset, safeSize);
         long total = mapper.countAll();
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("records", list);

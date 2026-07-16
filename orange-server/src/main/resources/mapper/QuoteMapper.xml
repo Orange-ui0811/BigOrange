@@ -18,6 +18,7 @@
         VALUES (#{conversationId}, #{senderId}, #{receiverId}, #{price}, #{description}, #{expireTime})
     </insert>
     <select id="selectById" resultMap="quoteMap">SELECT * FROM quote WHERE id = #{id}</select>
+    <select id="selectByIdForUpdate" resultMap="quoteMap">SELECT * FROM quote WHERE id = #{id} FOR UPDATE</select>
     <select id="selectByConversationId" resultMap="quoteMap">
         SELECT * FROM quote WHERE conversation_id = #{conversationId} ORDER BY create_time DESC
     </select>

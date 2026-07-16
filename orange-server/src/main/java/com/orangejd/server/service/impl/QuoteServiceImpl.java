@@ -94,6 +94,11 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     public List<Quote> getByConversation(Long conversationId) {
+        Conversation conversation = conversationMapper.selectById(conversationId);
+        if (conversation == null) throw new BaseException("会话不存在");
+        Long currentId = BaseContext.getCurrentId();
+        if (!currentId.equals(conversation.getInitiatorId()) && !currentId.equals(conversation.getReceiverId()))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
         return quoteMapper.selectByConversationId(conversationId);
     }
 

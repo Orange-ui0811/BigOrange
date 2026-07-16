@@ -245,7 +245,7 @@
         </el-select>
         <el-button size="small" type="primary" class="jobs-submit-btn" @click="$router.push('/submit-job')">投稿岗位</el-button>
       </div>
-      <div v-if="jobDetail" class="job-detail-card" v-html="jobDetailHtml"></div>
+      <div v-if="jobDetail" class="job-detail-card" v-safe-html="jobDetailHtml"></div>
       <p v-if="jobDetail" class="job-disclaimer">本页面岗位信息由平台注册用户自主上传分享，本平台仅提供信息存储空间服务，不对内容版权、真实性承担责任。如涉及侵权，请联系 1281748852@qq.com，我们将在 3 个工作日内下架对应内容。</p>
       <el-empty v-if="jobDirection && !jobId && !jobDetail" description="请选择岗位" />
       <el-empty v-if="!jobDirection" description="请选择方向查看岗位" />
@@ -348,7 +348,7 @@
       <el-input v-model="aiQuestion" placeholder="自由提问，基于知识库和GitHub数据回答..." size="small" @keyup.enter="askAI">
         <template #append><el-button :loading="aiLoading" @click="askAI" class="send-btn">发送</el-button></template>
       </el-input>
-      <div v-if="aiReply" class="v1-reply" v-html="aiReplyHtml"></div>
+      <div v-if="aiReply" class="v1-reply" v-safe-html="aiReplyHtml"></div>
       <div v-if="aiError" class="v1-error">{{ aiError }}</div>
       <p v-if="aiReply" class="v1-disclaimer">
         以上分析由 AI 生成，仅供参考。每次提问消耗 50 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" />

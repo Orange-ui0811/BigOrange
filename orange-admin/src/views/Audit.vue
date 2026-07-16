@@ -39,10 +39,14 @@
         <h3 style="margin:0 0 4px">{{ detail.title }}</h3>
         <p style="color:#909399;font-size:13px;margin:0 0 8px">by {{ detail.ownerName || detail.publisherName || '#'+(detail.ownerId||detail.publisherId) }} · {{ detail.auditStatus }} · {{ detail.createTime }}</p>
         <el-alert v-if="detail.demoUrl" title="在线演示" type="info" :closable="false" style="margin-bottom:12px">
-          <a :href="detail.demoUrl" target="_blank" style="color:#e65100;font-weight:600">{{ detail.demoUrl }}</a>
+          <a :href="detail.demoUrl" target="_blank" rel="noopener noreferrer" style="color:#e65100;font-weight:600">{{ detail.demoUrl }}</a>
         </el-alert>
+        <div v-if="detail.videoUrl" style="margin-bottom:12px">
+          <div style="margin-bottom:6px;font-weight:600;color:#606266">作品视频</div>
+          <AdminVideoPreview :url="detail.videoUrl" :poster="detail.coverUrl" />
+        </div>
         <p v-if="detail.summary" style="color:#6b6b6b;white-space:pre-wrap">{{ detail.summary }}</p>
-        <div v-if="detail.detail" style="color:#2c2c2c;max-height:50vh;overflow:auto" v-html="detail.detail"></div>
+        <div v-if="detail.detail" style="color:#2c2c2c;max-height:50vh;overflow:auto" v-safe-html="detail.detail"></div>
         <div v-if="tradeEnabled && detail.saleOptions?.length" style="margin-top:12px;padding-top:12px;border-top:1px solid #eee">
           <b>售卖项：</b>
           <el-tag v-for="so in detail.saleOptions" :key="so.id" type="warning" style="margin:4px 8px 4px 0">¥{{ so.price }} {{ so.saleType }}</el-tag>
@@ -62,6 +66,7 @@ import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import request from '../api/request'
 import { tradeEnabled } from '../stores/tradeMode'
+import AdminVideoPreview from '../components/AdminVideoPreview.vue'
 
 const aiEnabled = ref(false)
 const aiRunning = ref(false)

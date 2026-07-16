@@ -44,4 +44,10 @@ router.beforeEach((to, from, next) => {
   else next()
 })
 
+router.afterEach(to => {
+  document.title = `${to.meta.title || 'OrangeVC'} · OrangeVC`
+  window.scrollTo({ top: 0, left: 0 })
+  requestAnimationFrame(() => document.getElementById('main-content')?.focus({ preventScroll: true }))
+})
+
 export default router
