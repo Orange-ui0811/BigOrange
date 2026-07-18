@@ -8,12 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import jakarta.annotation.PostConstruct;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -45,7 +46,10 @@ public class AiAuditService {
     @Value("${orange.upload.path:}")
     private String uploadPath;
 
-    @PostConstruct
+    @Value("${orange.public-base-url:}")
+    private String publicBaseUrl;
+
+    @EventListener(ApplicationReadyEvent.class)
     public void init() {
         // 启动后 10 秒检查：如果开关开着，自动扫描积压
         new Thread(() -> {
@@ -395,7 +399,9 @@ public class AiAuditService {
         if (coverUrl == null || coverUrl.isEmpty()) return null;
         if (coverUrl.startsWith("http")) return coverUrl;
         // 相对路径 → 公网 URL
-        return "http://47.116.8.45" + (coverUrl.startsWith("/") ? "" : "/") + coverUrl;
+        if (publicBaseUrl == null || publicBaseUrl.isBlank()) return null;
+        String base = publicBaseUrl.replaceAll("/+$", "");
+        return base + (coverUrl.startsWith("/") ? "" : "/") + coverUrl;
     }
 
     private String nvl(String s) { return s == null ? "" : s.trim(); }

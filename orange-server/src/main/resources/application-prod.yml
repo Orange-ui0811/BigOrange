@@ -15,7 +15,7 @@ spring:
       mail.smtp.starttls.enable: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangejd}?useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangevc}?sslMode=REQUIRED&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD}
   data:
@@ -44,6 +44,7 @@ orange:
     app-token-name: App-Token
   upload:
     path: ${UPLOAD_PATH:/data/orangejd/uploads}
+  public-base-url: ${PUBLIC_BASE_URL}
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
@@ -52,10 +53,14 @@ orange:
   turnstile:
     secret-key: ${TURNSTILE_SECRET_KEY}
   oss:
+    enabled: ${OSS_ENABLED:false}
     endpoint: ${OSS_ENDPOINT:}
+    public-endpoint: ${OSS_PUBLIC_ENDPOINT:}
+    region: ${OSS_REGION:cn-shanghai}
     access-key-id: ${OSS_ACCESS_KEY:}
     access-key-secret: ${OSS_ACCESS_SECRET:}
     bucket-name: ${OSS_BUCKET:}
+    signed-url-ttl-seconds: ${OSS_SIGNED_URL_TTL_SECONDS:300}
   leaderboard:
     github-token: ${GITHUB_TOKEN:}
     local-cache-ttl-minutes: ${LEADERBOARD_LOCAL_CACHE_TTL:15}
@@ -79,6 +84,7 @@ orange:
     return-url: ${EPAY_RETURN_URL:}
   feishu:
     webhook-url: ${FEISHU_WEBHOOK_URL:}
+    job-webhook-url: ${FEISHU_JOB_WEBHOOK_URL:}
 
 mybatis:
   configuration:

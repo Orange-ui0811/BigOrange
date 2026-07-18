@@ -29,16 +29,18 @@ const props = defineProps({
 })
 
 const API = (import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080').replace(/\/$/, '')
-const uploadedVideoPattern = /^\/uploads\/video\/[0-9a-f-]{36}\.(mp4|mov|m4v|webm)$/i
-const uploadedImagePattern = /^\/uploads\/(cover|general)\/[0-9a-f-]{8,36}\.(png|jpe?g|gif|webp)$/i
+const uploadedVideoPattern = /^\/(?:uploads\/video|api\/media\/video)\/[0-9a-f-]{36}\.(mp4|mov|m4v|webm)$/i
+const uploadedImagePattern = /^\/(?:uploads\/(?:cover|general)|api\/media\/(?:cover|general))\/[0-9a-f-]{8,36}\.(png|jpe?g|gif|webp)$/i
+const assetOrigin = /^https?:\/\//i.test(API) ? new URL(API).origin : window.location.origin
+const resolveAsset = (value) => new URL(value, assetOrigin).href
 
 const playableUrl = computed(() => {
   const value = props.url?.trim()
-  return uploadedVideoPattern.test(value) ? API + value : ''
+  return uploadedVideoPattern.test(value) ? resolveAsset(value) : ''
 })
 const posterUrl = computed(() => {
   const value = props.poster?.trim()
-  return uploadedImagePattern.test(value) ? API + value : ''
+  return uploadedImagePattern.test(value) ? resolveAsset(value) : ''
 })
 </script>
 

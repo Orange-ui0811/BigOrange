@@ -35,7 +35,7 @@
     </el-table>
     <el-dialog v-model="detailVisible" title="内容详情" width="700px" top="3vh">
       <div style="max-height:65vh;overflow:auto;line-height:1.8">
-        <el-image v-if="detail.coverUrl" :src="'/api'+detail.coverUrl" style="width:100%;max-height:300px;object-fit:cover;border-radius:12px;margin-bottom:12px" fit="cover" />
+        <el-image v-if="detail.coverUrl" :src="detail.coverUrl" style="width:100%;max-height:300px;object-fit:cover;border-radius:12px;margin-bottom:12px" fit="cover" />
         <h3 style="margin:0 0 4px">{{ detail.title }}</h3>
         <p style="color:#909399;font-size:13px;margin:0 0 8px">by {{ detail.ownerName || detail.publisherName || '#'+(detail.ownerId||detail.publisherId) }} · {{ detail.auditStatus }} · {{ detail.createTime }}</p>
         <el-alert v-if="detail.demoUrl" title="在线演示" type="info" :closable="false" style="margin-bottom:12px">

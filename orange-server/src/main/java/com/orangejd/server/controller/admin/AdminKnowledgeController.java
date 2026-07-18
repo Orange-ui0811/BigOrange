@@ -5,6 +5,7 @@ import com.orangejd.pojo.entity.KnowledgeDocument;
 import com.orangejd.pojo.vo.KnowledgeDocumentVO;
 import com.orangejd.server.mapper.KnowledgeDocumentMapper;
 import com.orangejd.server.service.DocumentService;
+import com.orangejd.server.service.impl.KnowledgeReindexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +23,9 @@ public class AdminKnowledgeController {
 
     @Autowired
     private KnowledgeDocumentMapper knowledgeDocumentMapper;
+
+    @Autowired
+    private KnowledgeReindexService knowledgeReindexService;
 
     @GetMapping("/stats")
     public Result<Map<String, Object>> stats() {
@@ -70,5 +74,19 @@ public class AdminKnowledgeController {
     public Result<Void> delete(@PathVariable Long id) {
         documentService.delete(id);
         return Result.success();
+    }
+
+    @PostMapping("/reindex")
+    public Result<KnowledgeReindexService.ReindexStatus> reindex() {
+        try {
+            return Result.success(knowledgeReindexService.start());
+        } catch (IllegalStateException e) {
+            return Result.error(e.getMessage());
+        }
+    }
+
+    @GetMapping("/reindex/status")
+    public Result<KnowledgeReindexService.ReindexStatus> reindexStatus() {
+        return Result.success(knowledgeReindexService.status());
     }
 }

@@ -13,6 +13,8 @@ public interface KnowledgeDocumentMapper {
 
     List<KnowledgeDocument> selectAll();
 
+    List<KnowledgeDocument> selectAllWithContent();
+
     KnowledgeDocument selectById(@Param("id") Long id);
 
     KnowledgeDocument selectBySourceRef(@Param("sourceRef") String sourceRef);

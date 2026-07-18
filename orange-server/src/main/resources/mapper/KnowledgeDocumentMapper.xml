@@ -13,6 +13,12 @@
         ORDER BY id DESC
     </select>
 
+    <select id="selectAllWithContent" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
+        SELECT id, title, source, source_ref, chunk_count, file_size, content, create_time
+        FROM knowledge_document
+        ORDER BY id
+    </select>
+
     <select id="selectById" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
         SELECT id, title, source, source_ref, chunk_count, file_size, content, create_time
         FROM knowledge_document WHERE id = #{id}

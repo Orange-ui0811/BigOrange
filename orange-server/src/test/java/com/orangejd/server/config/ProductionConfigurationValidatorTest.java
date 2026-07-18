@@ -37,6 +37,7 @@ class ProductionConfigurationValidatorTest {
         ProductionConfigurationValidator validator = new ProductionConfigurationValidator(jwt, epay);
         ReflectionTestUtils.setField(validator, "allowedOrigins", "https://app.example.test,https://admin.example.test");
         ReflectionTestUtils.setField(validator, "turnstileSecret", "turnstile-secret");
+        ReflectionTestUtils.setField(validator, "publicBaseUrl", "https://app.example.test");
         return validator;
     }
 

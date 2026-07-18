@@ -251,6 +251,20 @@ public class DocumentServiceImpl implements DocumentService {
         return cleaned;
     }
 
+    List<Document> buildVectorDocuments(KnowledgeDocument entity) {
+        List<String> chunks = sanitizeChunks(splitChunks(entity.getContent()), entity.getTitle());
+        List<Document> docs = new ArrayList<>(chunks.size());
+        for (int i = 0; i < chunks.size(); i++) {
+            Map<String, Object> meta = new LinkedHashMap<>();
+            meta.put("docId", entity.getId().toString());
+            meta.put("docTitle", entity.getTitle());
+            meta.put("chunkIndex", i);
+            meta.put("source", entity.getSource());
+            docs.add(new Document("knowledge-" + entity.getId() + "-" + i, chunks.get(i), meta));
+        }
+        return docs;
+    }
+
     private void validateFile(MultipartFile file, String title) {
         if (file.isEmpty()) throw new IllegalArgumentException("文件为空");
         if (file.getSize() > MAX_FILE_SIZE) throw new IllegalArgumentException("文件过大");

@@ -17,6 +17,7 @@ public class ProductionConfigurationValidator implements InitializingBean {
 
     @Value("${orange.security.allowed-origins:}") private String allowedOrigins;
     @Value("${orange.turnstile.secret-key:}") private String turnstileSecret;
+    @Value("${orange.public-base-url:}") private String publicBaseUrl;
 
     public ProductionConfigurationValidator(JwtProperties jwt, EpayProperties epay) {
         this.jwt = jwt;
@@ -36,6 +37,7 @@ public class ProductionConfigurationValidator implements InitializingBean {
         for (String origin : allowedOrigins.split(",")) {
             requireHttpsUrl("生产 CORS 来源", origin.trim(), true);
         }
+        requireHttpsUrl("PUBLIC_BASE_URL", publicBaseUrl, true);
         if (!hasText(turnstileSecret)) {
             throw new IllegalStateException("生产环境必须配置 TURNSTILE_SECRET_KEY");
         }

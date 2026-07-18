@@ -10,8 +10,8 @@
 : "${ALLOWED_ORIGINS:?请配置 ALLOWED_ORIGINS}"
 : "${TURNSTILE_SECRET_KEY:?请配置 TURNSTILE_SECRET_KEY}"
 
-export MYSQL_USER="${MYSQL_USER:-orangejd}"
-export MYSQL_DB="${MYSQL_DB:-orangejd}"
+export MYSQL_USER="${MYSQL_USER:-orangevc}"
+export MYSQL_DB="${MYSQL_DB:-orangevc}"
 export UPLOAD_PATH="${UPLOAD_PATH:-/data/orangejd/uploads}"
 
 exec "${JAVA_BIN:-java}" -jar "${APP_JAR:-/root/orange-server-1.0.0-SNAPSHOT.jar}" --spring.profiles.active=prod

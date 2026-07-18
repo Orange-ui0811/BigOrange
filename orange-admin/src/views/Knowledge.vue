@@ -2,9 +2,24 @@
   <div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <h3 style="margin:0">知识库管理</h3>
+      <div style="display:flex;gap:8px;align-items:center">
+      <el-button :loading="reindexRunning" @click="handleReindex">
+        <el-icon style="margin-right:4px"><Refresh /></el-icon>重建向量索引
+      </el-button>
       <el-upload :before-upload="handleUpload" :show-file-list="false" accept=".md,.txt" :http-request="() => {}">
         <el-button type="primary" :loading="uploading"><el-icon style="margin-right:4px"><Upload /></el-icon>上传文档</el-button>
       </el-upload>
+      </div>
+    </div>
+
+    <div v-if="reindexStatus.state !== 'IDLE'" style="margin-bottom:16px">
+      <el-alert :title="reindexStatusText" :type="reindexAlertType" :closable="false" show-icon />
+      <el-progress
+        v-if="reindexRunning"
+        :percentage="reindexPercent"
+        :stroke-width="8"
+        style="margin-top:10px"
+      />
     </div>
 
     <!-- 统计概览 -->
@@ -53,10 +68,16 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Upload } from '@element-plus/icons-vue'
-import { uploadDocument, listDocuments, deleteDocument } from '../api/knowledge'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { Upload, Refresh } from '@element-plus/icons-vue'
+import {
+  uploadDocument,
+  listDocuments,
+  deleteDocument,
+  startKnowledgeReindex,
+  getKnowledgeReindexStatus
+} from '../api/knowledge'
 import request from '../api/request'
 
 const docs = ref([])
@@ -69,6 +90,26 @@ const dialogTitle = ref('')
 const detailContent = ref('')
 const detailLoading = ref(false)
 const stats = ref({ totalDocs: 0, githubCount: 0, manualCount: 0, totalChunks: 0 })
+const reindexStatus = ref({ state: 'IDLE', totalDocuments: 0, processedDocuments: 0, indexedChunks: 0, skippedDocuments: 0, message: '' })
+let reindexTimer = null
+
+const reindexRunning = computed(() => ['QUEUED', 'CHECKING', 'RUNNING'].includes(reindexStatus.value.state))
+const reindexPercent = computed(() => {
+  const total = reindexStatus.value.totalDocuments || 0
+  return total ? Math.min(100, Math.round((reindexStatus.value.processedDocuments || 0) * 100 / total)) : 0
+})
+const reindexAlertType = computed(() => {
+  if (reindexStatus.value.state === 'FAILED') return 'error'
+  if (reindexStatus.value.state === 'COMPLETED') return 'success'
+  return 'info'
+})
+const reindexStatusText = computed(() => {
+  const s = reindexStatus.value
+  if (s.state === 'COMPLETED') return `向量索引重建完成：${s.indexedChunks} 个分片，跳过 ${s.skippedDocuments} 篇无原文文档`
+  if (s.state === 'FAILED') return `向量索引重建失败：${s.message || '未知错误'}`
+  if (reindexRunning.value) return `正在重建向量索引：${s.processedDocuments || 0}/${s.totalDocuments || 0} 篇，已写入 ${s.indexedChunks || 0} 个分片`
+  return s.message || '尚未开始'
+})
 
 const filtered = computed(() => {
   let result = docs.value
@@ -114,6 +155,40 @@ const load = async () => {
   } finally { loading.value = false }
 }
 
+const scheduleReindexPoll = () => {
+  if (reindexTimer) clearTimeout(reindexTimer)
+  if (reindexRunning.value) reindexTimer = setTimeout(pollReindexStatus, 2000)
+}
+
+const pollReindexStatus = async () => {
+  try {
+    const response = await getKnowledgeReindexStatus()
+    if (response.data) reindexStatus.value = response.data
+  } finally {
+    scheduleReindexPoll()
+  }
+}
+
+const handleReindex = async () => {
+  try {
+    await ElMessageBox.confirm('重建期间向量检索结果可能暂时不完整，确认继续吗？', '重建向量索引', {
+      confirmButtonText: '开始重建',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+    const response = await startKnowledgeReindex()
+    if (response.code !== 1) {
+      ElMessage.error(response.msg || '启动失败')
+      return
+    }
+    if (response.data) reindexStatus.value = response.data
+    ElMessage.success('重建任务已启动')
+    scheduleReindexPoll()
+  } catch (error) {
+    if (error !== 'cancel' && error !== 'close') ElMessage.error(error?.response?.data?.msg || '启动失败')
+  }
+}
+
 const openDetail = async (doc) => {
   dialogTitle.value = doc.title; dialogVisible.value = true; detailLoading.value = true
   try {
@@ -133,5 +208,11 @@ const handleUpload = async (file) => {
 
 const handleDelete = async (id) => { try { await deleteDocument(id); ElMessage.success('已删除'); await load() } catch { ElMessage.error('删除失败') } }
 
-onMounted(() => load())
+onMounted(async () => {
+  await Promise.all([load(), pollReindexStatus()])
+})
+
+onBeforeUnmount(() => {
+  if (reindexTimer) clearTimeout(reindexTimer)
+})
 </script>

@@ -40,6 +40,7 @@ orange:
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://localhost:5174,http://localhost:15173,http://localhost:15174}
   upload:
     path: D:/Orangejd/uploads
+  public-base-url: ${PUBLIC_BASE_URL:http://localhost:8080}
   jwt:
     admin-secret-key: change-me-admin
     admin-ttl: 7200000
@@ -48,7 +49,11 @@ orange:
     app-ttl: 7200000
     app-token-name: App-Token
   oss:
-    endpoint: ${orange.oss.endpoint}
-    access-key-id: ${orange.oss.access-key-id}
-    access-key-secret: ${orange.oss.access-key-secret}
-    bucket-name: ${orange.oss.bucket-name}
+    enabled: ${OSS_ENABLED:false}
+    endpoint: ${OSS_ENDPOINT:}
+    public-endpoint: ${OSS_PUBLIC_ENDPOINT:}
+    region: ${OSS_REGION:cn-shanghai}
+    access-key-id: ${OSS_ACCESS_KEY:}
+    access-key-secret: ${OSS_ACCESS_SECRET:}
+    bucket-name: ${OSS_BUCKET:}
+    signed-url-ttl-seconds: ${OSS_SIGNED_URL_TTL_SECONDS:300}

@@ -236,7 +236,7 @@ public class WorkServiceImpl implements WorkService {
         if (value == null) return null;
         String url = value.trim();
         if (url.isEmpty()) return "";
-        if (!url.matches("^/uploads/video/[0-9a-fA-F-]{36}\\.(mp4|mov|m4v|webm)$")) {
+        if (!url.matches("^/(?:uploads/video|api/media/video)/[0-9a-fA-F-]{36}\\.(mp4|mov|m4v|webm)$")) {
             throw new BaseException("请通过作品发布页上传视频文件");
         }
         return url;

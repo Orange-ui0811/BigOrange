@@ -2,6 +2,7 @@ package com.orangejd.server.service.impl;
 
 import com.orangejd.server.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +19,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 @Service
+@ConditionalOnProperty(name = "orange.oss.enabled", havingValue = "false", matchIfMissing = true)
 public class LocalFileUploadServiceImpl implements FileUploadService {
 
     private static final Map<String, String> ALLOWED_TYPES = Map.of(

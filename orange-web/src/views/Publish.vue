@@ -203,7 +203,7 @@ const videoUploading = ref(false)
 const videoProgress = ref(0)
 const legacyVideoUrl = ref('')
 const uploadHeaders = { 'App-Token': sessionStorage.getItem('appToken') || '' }
-const uploadedVideoPattern = /^\/uploads\/video\/[0-9a-f-]{36}\.(mp4|mov|m4v|webm)$/i
+const uploadedVideoPattern = /^\/(?:uploads\/video|api\/media\/video)\/[0-9a-f-]{36}\.(mp4|mov|m4v|webm)$/i
 
 const onCoverSuccess = (res) => { if (res.code === 1) form.coverUrl = res.data }
 const onDetailImage = (res) => {
