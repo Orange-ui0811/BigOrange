@@ -10,4 +10,5 @@ import java.util.List;
 public interface DeliveryMapper {
     int insert(Delivery delivery);
     List<Delivery> selectByOrderId(@Param("orderId") Long orderId);
+    Delivery selectById(@Param("id") Long id);
 }

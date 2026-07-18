@@ -1,5 +1,6 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,28 +41,17 @@ public class LocalFileUploadServiceImpl implements FileUploadService {
 
     @Override
     public String upload(MultipartFile file, String subDir) {
-        if (file.isEmpty()) throw new RuntimeException("文件为空");
-        // 类型校验
-        String contentType = file.getContentType();
-        if (contentType == null || !ALLOWED_TYPES.containsKey(contentType))
-            throw new RuntimeException("不支持的文件类型，仅允许 png/jpeg/gif/webp");
-        // 大小校验
-        if (file.getSize() > MAX_SIZE)
-            throw new RuntimeException("文件过大，最大允许 10MB");
-        if (!ALLOWED_DIRS.contains(subDir)) throw new RuntimeException("上传目录无效");
-        String ext = ALLOWED_TYPES.get(contentType);
-        String name = UUID.randomUUID() + ext;
+        UploadValidation.ValidatedUpload validated =
+                UploadValidation.image(file, subDir, BaseContext.getCurrentId());
         Path base = Paths.get(basePath).toAbsolutePath().normalize();
-        Path dir = base.resolve(subDir).normalize();
-        if (!dir.startsWith(base)) throw new RuntimeException("上传目录无效");
+        Path target = base.resolve(validated.objectKey()).normalize();
+        if (!target.startsWith(base)) throw new RuntimeException("上传目录无效");
         try {
-            validateSignature(file, contentType);
-            validateDimensions(file, contentType);
-            Files.createDirectories(dir);
+            Files.createDirectories(target.getParent());
             try (InputStream input = file.getInputStream()) {
-                Files.copy(input, dir.resolve(name));
+                Files.copy(input, target);
             }
-            return "/uploads/" + subDir + "/" + name;
+            return "/uploads/" + validated.objectKey();
         } catch (IOException e) {
             throw new RuntimeException("文件上传失败");
         }
@@ -69,29 +59,17 @@ public class LocalFileUploadServiceImpl implements FileUploadService {
 
     @Override
     public String uploadVideo(MultipartFile file) {
-        if (file == null || file.isEmpty()) throw new RuntimeException("视频文件为空");
-        if (file.getSize() > MAX_VIDEO_SIZE) throw new RuntimeException("视频文件过大，最大允许 200MB");
-
-        String contentType = file.getContentType();
-        String ext = contentType == null ? null : ALLOWED_VIDEO_TYPES.get(contentType.toLowerCase(Locale.ROOT));
-        if (ext == null) throw new RuntimeException("不支持的视频格式，仅允许 MP4、MOV、M4V、WebM");
-
-        String originalName = file.getOriginalFilename();
-        if (originalName == null || !originalName.toLowerCase(Locale.ROOT).endsWith(ext)) {
-            throw new RuntimeException("视频扩展名与文件类型不一致");
-        }
-
-        String name = UUID.randomUUID() + ext;
+        UploadValidation.ValidatedUpload validated =
+                UploadValidation.video(file, BaseContext.getCurrentId());
         Path base = Paths.get(basePath).toAbsolutePath().normalize();
-        Path dir = base.resolve(VIDEO_DIR).normalize();
-        if (!dir.startsWith(base)) throw new RuntimeException("上传目录无效");
+        Path target = base.resolve(validated.objectKey()).normalize();
+        if (!target.startsWith(base)) throw new RuntimeException("上传目录无效");
         try {
-            validateVideoSignature(file, contentType.toLowerCase(Locale.ROOT));
-            Files.createDirectories(dir);
+            Files.createDirectories(target.getParent());
             try (InputStream input = file.getInputStream()) {
-                Files.copy(input, dir.resolve(name));
+                Files.copy(input, target);
             }
-            return "/uploads/" + VIDEO_DIR + "/" + name;
+            return "/uploads/" + validated.objectKey();
         } catch (IOException e) {
             throw new RuntimeException("视频上传失败");
         }

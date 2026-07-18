@@ -3,10 +3,13 @@ package com.orangejd.server.controller.app;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.OrderCreateDTO;
+import com.orangejd.pojo.dto.DeliverySubmitDTO;
+import com.orangejd.pojo.vo.DeliveryAttachmentVO;
 import com.orangejd.pojo.vo.OrderVO;
 import com.orangejd.server.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -45,11 +48,27 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/deliver")
-    public Result<?> deliver(@PathVariable Long id, @RequestBody(required = false) Map<String, String> body) {
-        String content = body != null ? body.getOrDefault("content", "") : "";
-        String url = body != null ? body.getOrDefault("attachmentUrl", null) : null;
-        orderService.deliver(id, content, url);
+    public Result<?> deliver(@PathVariable Long id, @RequestBody(required = false) DeliverySubmitDTO body) {
+        orderService.deliver(id, body == null ? new DeliverySubmitDTO() : body);
         return Result.success();
+    }
+
+    @PostMapping("/{id}/delivery/attachment")
+    public Result<DeliveryAttachmentVO> uploadDeliveryAttachment(@PathVariable Long id,
+                                                                  @RequestParam("file") MultipartFile file) {
+        return Result.success(orderService.uploadDeliveryAttachment(id, file));
+    }
+
+    @DeleteMapping("/{id}/delivery/attachment")
+    public Result<?> deletePendingDeliveryAttachment(@PathVariable Long id,
+                                                       @RequestBody Map<String, String> body) {
+        orderService.deletePendingDeliveryAttachment(id, body.get("objectKey"));
+        return Result.success();
+    }
+
+    @GetMapping("/{orderId}/delivery/{deliveryId}/attachment-url")
+    public Result<String> deliveryAttachmentUrl(@PathVariable Long orderId, @PathVariable Long deliveryId) {
+        return Result.success(orderService.getDeliveryAttachmentUrl(orderId, deliveryId));
     }
 
     @PutMapping("/{id}/confirm")

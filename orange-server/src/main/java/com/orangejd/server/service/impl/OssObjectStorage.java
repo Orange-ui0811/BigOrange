@@ -17,6 +17,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.time.Instant;
 import java.util.Date;
+import java.nio.charset.StandardCharsets;
+import java.net.URLEncoder;
 
 @Component
 @ConditionalOnProperty(name = "orange.oss.enabled", havingValue = "true")
@@ -33,10 +35,26 @@ public class OssObjectStorage {
     }
 
     public void put(String objectKey, String contentType, long contentLength, InputStream input) {
+        put(objectKey, contentType, contentLength, input, null);
+    }
+
+    public void put(String objectKey, String contentType, long contentLength, InputStream input, String downloadName) {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType(contentType);
         metadata.setContentLength(contentLength);
+        if (downloadName != null) {
+            String encoded = URLEncoder.encode(downloadName, StandardCharsets.UTF_8).replace("+", "%20");
+            metadata.setContentDisposition("attachment; filename*=UTF-8''" + encoded);
+        }
         uploadClient.putObject(properties.getBucketName(), objectKey, input, metadata);
+    }
+
+    public boolean exists(String objectKey) {
+        return uploadClient.doesObjectExist(properties.getBucketName(), objectKey);
+    }
+
+    public void delete(String objectKey) {
+        uploadClient.deleteObject(properties.getBucketName(), objectKey);
     }
 
     public URL signedGetUrl(String objectKey) {

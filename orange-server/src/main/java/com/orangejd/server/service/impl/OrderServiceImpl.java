@@ -9,7 +9,9 @@ import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.common.util.PageUtil;
 import com.orangejd.pojo.dto.OrderCreateDTO;
+import com.orangejd.pojo.dto.DeliverySubmitDTO;
 import com.orangejd.pojo.entity.*;
+import com.orangejd.pojo.vo.DeliveryAttachmentVO;
 import com.orangejd.pojo.vo.OrderVO;
 import com.orangejd.server.mapper.*;
 import com.orangejd.server.service.OrderService;
@@ -23,6 +25,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.Locale;
 
 @Slf4j
 @Service
@@ -37,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired private NotificationService notificationService;
     @Autowired private WorkSaleOptionMapper workSaleOptionMapper;
     @Autowired private com.orangejd.server.service.ContentAccessService contentAccessService;
+    @Autowired private ManagedFileStorageService managedFileStorageService;
     @Value("${orange.trade.simulated-payment-enabled:false}")
     private boolean simulatedPaymentEnabled;
 
@@ -135,6 +140,9 @@ public class OrderServiceImpl implements OrderService {
             OrderVO.DeliveryVO dvo = new OrderVO.DeliveryVO();
             dvo.setId(d.getId()); dvo.setDelivererId(d.getDelivererId());
             dvo.setContent(d.getContent()); dvo.setAttachmentUrl(d.getAttachmentUrl());
+            dvo.setAttachmentName(d.getAttachmentName());
+            dvo.setAttachmentContentType(d.getAttachmentContentType());
+            dvo.setAttachmentSize(d.getAttachmentSize());
             dvo.setCreateTime(d.getCreateTime()); return dvo;
         }).collect(Collectors.toList()));
         return vo;
@@ -153,15 +161,60 @@ public class OrderServiceImpl implements OrderService {
         notificationService.send(o.getBuyerId(), "ORDER", "定金支付成功，等待卖家交付", id);
     }
 
+    @Override
+    public DeliveryAttachmentVO uploadDeliveryAttachment(Long id, MultipartFile file) {
+        Order order = getAndCheckSeller(id);
+        if (!OrderStatus.DEPOSIT_PAID.equals(order.getOrderStatus()))
+            throw new BaseException("定金支付后才能上传交付附件");
+        ManagedFileStorageService.StoredAttachment stored =
+                managedFileStorageService.uploadDelivery(file, id, BaseContext.getCurrentId());
+        return new DeliveryAttachmentVO(stored.objectKey(), stored.originalName(),
+                stored.contentType(), stored.size());
+    }
+
+    @Override
+    public void deletePendingDeliveryAttachment(Long id, String objectKey) {
+        Order order = getAndCheckSeller(id);
+        if (!OrderStatus.DEPOSIT_PAID.equals(order.getOrderStatus()))
+            throw new BaseException("已提交的交付附件不可删除");
+        managedFileStorageService.deleteDelivery(objectKey, id, BaseContext.getCurrentId());
+    }
+
+    @Override
+    public String getDeliveryAttachmentUrl(Long orderId, Long deliveryId) {
+        Order order = getAndCheckParticipant(orderId);
+        Delivery delivery = deliveryMapper.selectById(deliveryId);
+        if (delivery == null || !order.getId().equals(delivery.getOrderId())
+                || delivery.getAttachmentUrl() == null || delivery.getAttachmentUrl().isBlank()) {
+            throw new BaseException("交付附件不存在");
+        }
+        return managedFileStorageService.createDownloadUrl(delivery.getAttachmentUrl(), orderId);
+    }
+
     @Override @Transactional
-    public void deliver(Long id, String content, String attachmentUrl) {
+    public void deliver(Long id, DeliverySubmitDTO dto) {
         Order o = getAndCheckSeller(id);
         if (!OrderStatus.DEPOSIT_PAID.equals(o.getOrderStatus()))
             throw new BaseException("定金支付后才能交付");
+        String content = dto.getContent() == null ? "" : dto.getContent().trim();
+        if (content.length() > 2048) throw new BaseException("交付内容不能超过 2048 字");
+        String attachmentUrl = blankToNull(dto.getAttachmentUrl());
+        if (content.isEmpty() && attachmentUrl == null) throw new BaseException("请填写交付内容或上传附件");
+        if (attachmentUrl != null) {
+            ManagedFileStorageService.requireDeliveryOwner(attachmentUrl, id, BaseContext.getCurrentId());
+            if (!managedFileStorageService.existsDelivery(attachmentUrl, id, BaseContext.getCurrentId()))
+                throw new BaseException("交付附件不存在或已被删除");
+        }
         orderMapper.updateStatus(id, OrderStatus.WAITING_FINAL_PAYMENT);
         Delivery d = new Delivery();
         d.setOrderId(id); d.setDelivererId(BaseContext.getCurrentId());
         d.setContent(content); d.setAttachmentUrl(attachmentUrl);
+        if (attachmentUrl != null) {
+            d.setAttachmentName(normalizeAttachmentName(dto.getAttachmentName()));
+            d.setAttachmentContentType(contentTypeFor(attachmentUrl));
+            Long size = dto.getAttachmentSize();
+            d.setAttachmentSize(size != null && size >= 0 && size <= 50L * 1024 * 1024 ? size : null);
+        }
         deliveryMapper.insert(d);
         notificationService.send(o.getBuyerId(), "ORDER", "卖家已提交交付，请确认并支付尾款", id);
         notificationService.send(o.getSellerId(), "ORDER", "交付已提交，等待买家确认并支付尾款", id);
@@ -245,6 +298,36 @@ public class OrderServiceImpl implements OrderService {
         Order o = orderMapper.selectById(id); if (o == null) throw new BaseException("订单不存在");
         if (!BaseContext.getCurrentId().equals(o.getSellerId())) throw new BaseException("只有卖家可以此操作");
         return o;
+    }
+    private Order getAndCheckParticipant(Long id) {
+        Order o = orderMapper.selectById(id); if (o == null) throw new BaseException("订单不存在");
+        Long currentId = BaseContext.getCurrentId();
+        if (!currentId.equals(o.getBuyerId()) && !currentId.equals(o.getSellerId()))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
+        return o;
+    }
+
+    private String normalizeAttachmentName(String value) {
+        if (value == null || value.isBlank()) return "交付附件";
+        String name = value.replace('\\', '/');
+        name = name.substring(name.lastIndexOf('/') + 1).trim();
+        if (name.isBlank() || name.length() > 180 || name.contains("\r") || name.contains("\n"))
+            throw new BaseException("附件文件名无效");
+        return name;
+    }
+
+    private String contentTypeFor(String objectKey) {
+        String lower = objectKey.toLowerCase(Locale.ROOT);
+        if (lower.endsWith(".pdf")) return "application/pdf";
+        if (lower.endsWith(".docx")) return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+        if (lower.endsWith(".xlsx")) return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        if (lower.endsWith(".pptx")) return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+        if (lower.endsWith(".txt")) return "text/plain";
+        return "application/zip";
+    }
+
+    private String blankToNull(String value) {
+        return value == null || value.isBlank() ? null : value.trim();
     }
     private void updatePaymentStage(Long orderId, String stageType) {
         List<PaymentStage> stages = paymentStageMapper.selectByOrderId(orderId);

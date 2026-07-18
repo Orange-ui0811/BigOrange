@@ -1,5 +1,8 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.context.BaseContext;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockMultipartFile;
 
@@ -17,6 +20,9 @@ class OssFileUploadServiceImplTest {
     private static final byte[] PNG = Base64.getDecoder().decode(
             "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=");
 
+    @BeforeEach void setUser() { BaseContext.setCurrentId(42L); }
+    @AfterEach void clearUser() { BaseContext.clear(); }
+
     @Test
     void uploadsValidatedImageAndReturnsStableMediaPath() {
         OssObjectStorage storage = mock(OssObjectStorage.class);
@@ -25,7 +31,7 @@ class OssFileUploadServiceImplTest {
 
         String url = service.upload(file, "cover");
 
-        assertTrue(url.matches("^/api/media/cover/[0-9a-f-]{36}\\.png$"));
+        assertTrue(url.matches("^/api/media/cover/42/[0-9a-f-]{36}\\.png$"));
         String objectKey = url.substring("/api/media/".length());
         verify(storage).put(eq(objectKey), eq("image/png"), eq((long) PNG.length), any(InputStream.class));
     }

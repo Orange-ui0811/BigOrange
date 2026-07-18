@@ -1,5 +1,8 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.context.BaseContext;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.mock.web.MockMultipartFile;
@@ -17,12 +20,15 @@ class LocalFileUploadServiceImplTest {
 
     @TempDir Path tempDir;
 
+    @BeforeEach void setUser() { BaseContext.setCurrentId(42L); }
+    @AfterEach void clearUser() { BaseContext.clear(); }
+
     @Test
     void acceptsRealImageInKnownDirectory() {
         LocalFileUploadServiceImpl service = service();
         MockMultipartFile file = new MockMultipartFile("file", "x.png", "image/png", PNG);
         String url = service.upload(file, "avatar");
-        assertTrue(url.startsWith("/uploads/avatar/"));
+        assertTrue(url.startsWith("/uploads/avatar/42/"));
     }
 
     @Test
@@ -47,10 +53,10 @@ class LocalFileUploadServiceImplTest {
                 "file", "demo.webm", "video/webm",
                 new byte[] {0x1a, 0x45, (byte) 0xdf, (byte) 0xa3, 0x01, 0x02}));
 
-        assertTrue(mp4Url.matches("^/uploads/video/[0-9a-f-]{36}\\.mp4$"));
+        assertTrue(mp4Url.matches("^/uploads/video/42/[0-9a-f-]{36}\\.mp4$"));
         assertTrue(movUrl.endsWith(".mov"));
         assertTrue(webmUrl.endsWith(".webm"));
-        assertEquals(3, Files.list(tempDir.resolve("video")).count());
+        assertEquals(3, Files.list(tempDir.resolve("video/42")).count());
     }
 
     @Test

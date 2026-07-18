@@ -25,6 +25,14 @@
         <h4 class="section-title">交付记录</h4>
         <el-table :data="order.deliveries" size="small" class="data-table">
           <el-table-column prop="content" label="内容"/>
+          <el-table-column label="附件">
+            <template #default="{row}">
+              <el-button v-if="row.attachmentUrl" link type="primary" @click="downloadAttachment(row)">
+                {{row.attachmentName||'下载附件'}}
+              </el-button>
+              <span v-else>-</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="createTime" label="时间"/>
         </el-table>
       </div>
@@ -35,9 +43,19 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import request from '../api/request'
+import { ElMessage } from 'element-plus'
 const route=useRoute()
 const order=ref(null),loading=ref(false)
 onMounted(async()=>{loading.value=true;try{const r=await request.get('/app/order/'+route.params.id);if(r.code===1)order.value=r.data}catch{}finally{loading.value=false}})
+const downloadAttachment=async row=>{
+  const downloadWindow=window.open('about:blank','_blank')
+  try{
+    const r=await request.get(`/app/order/${order.value.id}/delivery/${row.id}/attachment-url`)
+    if(r.code!==1)throw new Error(r.msg||'获取下载地址失败')
+    if(downloadWindow)downloadWindow.location=r.data
+    else window.location.href=r.data
+  }catch(error){if(downloadWindow)downloadWindow.close();ElMessage.error(error?.message||'附件下载失败')}
+}
 </script>
 <style scoped>
 .detail-card {

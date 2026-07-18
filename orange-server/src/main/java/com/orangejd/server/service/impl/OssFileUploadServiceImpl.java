@@ -1,5 +1,6 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.service.FileUploadService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,12 @@ public class OssFileUploadServiceImpl implements FileUploadService {
 
     @Override
     public String upload(MultipartFile file, String subDir) {
-        return upload(file, UploadValidation.image(file, subDir));
+        return upload(file, UploadValidation.image(file, subDir, BaseContext.getCurrentId()));
     }
 
     @Override
     public String uploadVideo(MultipartFile file) {
-        return upload(file, UploadValidation.video(file));
+        return upload(file, UploadValidation.video(file, BaseContext.getCurrentId()));
     }
 
     private String upload(MultipartFile file, UploadValidation.ValidatedUpload validated) {

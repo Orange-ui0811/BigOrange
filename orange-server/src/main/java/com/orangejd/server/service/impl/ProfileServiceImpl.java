@@ -12,10 +12,12 @@ import com.orangejd.server.mapper.UserProfileMapper;
 import com.orangejd.server.mapper.WorkMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 public class ProfileServiceImpl implements com.orangejd.server.service.ProfileService {
@@ -23,17 +25,23 @@ public class ProfileServiceImpl implements com.orangejd.server.service.ProfileSe
     @Autowired private AccountMapper accountMapper;
     @Autowired private UserProfileMapper userProfileMapper;
     @Autowired private WorkMapper workMapper;
+    @Autowired private ManagedFileStorageService managedFileStorageService;
 
+    @Transactional
     public void updateProfile(Map<String, String> body) {
         Long id = BaseContext.getCurrentId();
         UserProfile profile = userProfileMapper.selectByAccountId(id);
         if (profile == null) { profile = new UserProfile(); profile.setAccountId(id); profile.setHomepageVisible(1); userProfileMapper.insert(profile); profile = userProfileMapper.selectByAccountId(id); }
+        String previousAvatar = profile.getAvatarUrl();
         if (body.containsKey("nickname")) profile.setNickname(body.get("nickname"));
         if (body.containsKey("bio")) profile.setBio(body.get("bio"));
         if (body.containsKey("skills")) profile.setSkills(body.get("skills"));
         if (body.containsKey("contactIntro")) profile.setContactIntro(body.get("contactIntro"));
         if (body.containsKey("avatarUrl")) profile.setAvatarUrl(body.get("avatarUrl"));
         userProfileMapper.update(profile);
+        if (!Objects.equals(previousAvatar, profile.getAvatarUrl())) {
+            managedFileStorageService.deleteOwnedMediaAfterCommit(id, List.of(previousAvatar == null ? "" : previousAvatar));
+        }
     }
 
     public AccountVO getAuthorProfile(Long accountId) {

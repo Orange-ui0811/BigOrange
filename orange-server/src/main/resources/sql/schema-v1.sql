@@ -294,11 +294,27 @@ CREATE TABLE IF NOT EXISTS delivery (
     deliverer_id  BIGINT       NOT NULL COMMENT '交付方 account.id',
     content       VARCHAR(2048) NOT NULL COMMENT '交付内容描述',
     attachment_url VARCHAR(512)          COMMENT '交付附件URL',
+    attachment_name VARCHAR(255)         COMMENT '附件原始文件名',
+    attachment_content_type VARCHAR(128) COMMENT '附件媒体类型',
+    attachment_size BIGINT               COMMENT '附件大小（字节）',
     create_time   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     KEY idx_order_id (order_id),
     CONSTRAINT fk_delivery_order FOREIGN KEY (order_id) REFERENCES `order`(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='交付记录表';
+
+CREATE TABLE IF NOT EXISTS storage_cleanup_job (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    object_key VARCHAR(512) NOT NULL,
+    attempts INT NOT NULL DEFAULT 0,
+    next_retry_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_error VARCHAR(1000) NULL,
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_storage_cleanup_object (object_key),
+    KEY idx_storage_cleanup_retry (next_retry_time)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='存储对象删除重试队列';
 
 
 -- ============================================================

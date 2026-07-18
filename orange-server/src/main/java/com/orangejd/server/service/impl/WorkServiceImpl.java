@@ -23,6 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -31,6 +34,7 @@ public class WorkServiceImpl implements WorkService {
     @Autowired private WorkMapper workMapper;
     @Autowired private WorkSaleOptionMapper optionMapper;
     @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
+    @Autowired private ManagedFileStorageService managedFileStorageService;
 
     @Override
     @Transactional
@@ -79,6 +83,9 @@ public class WorkServiceImpl implements WorkService {
         if (!work.getOwnerId().equals(BaseContext.getCurrentId()))
             throw new BaseException(MessageConstant.WORK_EDIT_DENIED);
 
+        String previousCover = work.getCoverUrl();
+        String previousVideo = work.getVideoUrl();
+        String previousDetail = work.getDetail();
         work.setTitle(dto.getTitle() != null ? dto.getTitle() : work.getTitle());
         work.setSummary(dto.getSummary() != null ? dto.getSummary() : work.getSummary());
         work.setDetail(dto.getDetail() != null ? dto.getDetail() : work.getDetail());
@@ -88,6 +95,14 @@ public class WorkServiceImpl implements WorkService {
         work.setDemoUrl(dto.getDemoUrl() != null ? dto.getDemoUrl() : work.getDemoUrl());
         if (dto.getVideoUrl() != null) work.setVideoUrl(normalizeVideoUrl(dto.getVideoUrl()));
         workMapper.update(work);
+
+        Set<String> removedMedia = new LinkedHashSet<>();
+        if (!Objects.equals(previousCover, work.getCoverUrl()) && previousCover != null) removedMedia.add(previousCover);
+        if (!Objects.equals(previousVideo, work.getVideoUrl()) && previousVideo != null) removedMedia.add(previousVideo);
+        Set<String> removedDetailMedia = managedFileStorageService.findOwnedMediaUrls(work.getOwnerId(), previousDetail);
+        removedDetailMedia.removeAll(managedFileStorageService.findOwnedMediaUrls(work.getOwnerId(), work.getDetail()));
+        removedMedia.addAll(removedDetailMedia);
+        managedFileStorageService.deleteOwnedMediaAfterCommit(work.getOwnerId(), removedMedia);
 
         // 已审核通过的作品被编辑后需重新提交审核
         if ("APPROVED".equals(work.getAuditStatus())) {
@@ -118,6 +133,10 @@ public class WorkServiceImpl implements WorkService {
             throw new BaseException(MessageConstant.WORK_DELETE_DENIED);
         optionMapper.deleteByWorkId(id);
         workMapper.deleteById(id);
+        Set<String> media = managedFileStorageService.findOwnedMediaUrls(work.getOwnerId(), work.getDetail());
+        if (work.getCoverUrl() != null) media.add(work.getCoverUrl());
+        if (work.getVideoUrl() != null) media.add(work.getVideoUrl());
+        managedFileStorageService.deleteOwnedMediaAfterCommit(work.getOwnerId(), media);
     }
 
     @Autowired private com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
@@ -236,7 +255,7 @@ public class WorkServiceImpl implements WorkService {
         if (value == null) return null;
         String url = value.trim();
         if (url.isEmpty()) return "";
-        if (!url.matches("^/(?:uploads/video|api/media/video)/[0-9a-fA-F-]{36}\\.(mp4|mov|m4v|webm)$")) {
+        if (!url.matches("^/(?:uploads/video|api/media/video)/(?:[1-9][0-9]*/)?[0-9a-fA-F-]{36}\\.(mp4|mov|m4v|webm)$")) {
             throw new BaseException("请通过作品发布页上传视频文件");
         }
         return url;
