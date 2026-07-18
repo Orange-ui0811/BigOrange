@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,7 +20,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Component
 public class LeaderboardRefreshTask {
@@ -31,6 +36,7 @@ public class LeaderboardRefreshTask {
     };
     private static final int README_ALL_TOP_N = 20;   // 全时段 Top 20（永久保留）
     private static final int README_WEEK_TOP_N = 3;   // 每周 Top 3（30 天过期）
+    private static final int GITHUB_TIMEOUT_MS = 10000;
     private static final int README_TIMEOUT_MS = 10000;
 
     @Autowired private LeaderboardSnapshotMapper snapshotMapper;
@@ -50,13 +56,19 @@ public class LeaderboardRefreshTask {
     @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
     private String aiModel;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
     private final RestTemplate readmeRestTemplate;
 
     // 翻译缓存 — 避免同一描述每天重复调用 AI
     private final Map<String, String> translationCache = new ConcurrentHashMap<>();
+    private final AtomicBoolean refreshRunning = new AtomicBoolean(false);
 
     {
+        restTemplate = new RestTemplate();
+        restTemplate.setRequestFactory(new org.springframework.http.client.SimpleClientHttpRequestFactory() {{
+            setConnectTimeout(GITHUB_TIMEOUT_MS);
+            setReadTimeout(GITHUB_TIMEOUT_MS);
+        }});
         readmeRestTemplate = new RestTemplate();
         readmeRestTemplate.setRequestFactory(new org.springframework.http.client.SimpleClientHttpRequestFactory() {{
             setConnectTimeout(README_TIMEOUT_MS);
@@ -64,9 +76,16 @@ public class LeaderboardRefreshTask {
         }});
     }
 
-    // 每周一凌晨 2:00 执行（爬取 + 翻译全流程）
-    @Scheduled(cron = "0 0 2 * * 1")
+    // 每周一凌晨刷新；cron 和时区可通过生产配置覆盖。
+    @Scheduled(
+            cron = "${orange.leaderboard.refresh-cron:0 0 2 * * 1}",
+            zone = "${orange.leaderboard.refresh-zone:Asia/Shanghai}")
     public void refreshAll() {
+        if (!refreshRunning.compareAndSet(false, true)) {
+            log.info("LeaderboardRefreshTask: 已有刷新任务运行，跳过重复触发");
+            return;
+        }
+        try {
         log.info("LeaderboardRefreshTask: 开始刷新 GitHub 榜单");
         LocalDate today = LocalDate.now();
         LocalDate monday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -110,6 +129,33 @@ public class LeaderboardRefreshTask {
                 log.warn("[RAG] weekly 清理异常: {}", e.getMessage());
             }
         }
+        } finally {
+            refreshRunning.set(false);
+        }
+    }
+
+    /**
+     * 应用启动后检查本周任务是否漏跑。只有最近快照早于本周一时才补抓一次，
+     * 同一周内反复重启不会重复刷新。
+     */
+    @EventListener(ApplicationReadyEvent.class)
+    public void refreshMissingSnapshotsAfterStartup() {
+        CompletableFuture.delayedExecutor(30, TimeUnit.SECONDS).execute(() -> {
+            LocalDate weekStart = LocalDate.now()
+                    .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+            boolean missing = isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "all"), weekStart)
+                    || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "week"), weekStart)
+                    || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "new"), weekStart);
+            if (missing) {
+                log.info("LeaderboardRefreshTask: 启动后检测到本周快照缺失，开始补抓");
+                refreshAll();
+            }
+        });
+    }
+
+    private boolean isSnapshotBeforeWeek(LeaderboardSnapshot snapshot, LocalDate weekStart) {
+        return snapshot == null || snapshot.getSnapshotDate() == null
+                || snapshot.getSnapshotDate().isBefore(weekStart);
     }
 
     private void refreshAndSave(String topicName, String period, LocalDate today, String isoDate) {
@@ -282,7 +328,7 @@ public class LeaderboardRefreshTask {
 
     /**
      * 榜单爬取全部完成后，逐条翻译所有缺失 descriptionZh 的描述
-     * 翻译失败则一直重试（每次等待 2s），直到成功
+     * 翻译失败时持续重试，直到成功。
      */
     private void translateAllToday(LocalDate today) {
         if (aiApiKey == null || aiApiKey.isEmpty()) {
@@ -314,7 +360,7 @@ public class LeaderboardRefreshTask {
                         continue;
                     }
 
-                    // 翻译，失败一直重试
+                    // 翻译失败后持续重试，确保最终写入中文描述。
                     String translated = null;
                     int retry = 0;
                     while (translated == null || translated.isEmpty()) {
@@ -322,12 +368,17 @@ public class LeaderboardRefreshTask {
                             translated = callAiTranslation(desc);
                             if (translated == null || translated.isEmpty()) {
                                 retry++;
-                                if (retry % 5 == 0) log.info("翻译重试中... topic={} period={} retry={}", topic, period, retry);
+                                if (retry % 5 == 0) {
+                                    log.info("翻译重试中... topic={} period={} retry={}", topic, period, retry);
+                                }
                                 sleep(2000);
                             }
                         } catch (Exception e) {
                             retry++;
-                            if (retry % 5 == 0) log.info("翻译重试中... topic={} period={} retry={} err={}", topic, period, retry, e.getMessage());
+                            if (retry % 5 == 0) {
+                                log.info("翻译重试中... topic={} period={} retry={} err={}",
+                                        topic, period, retry, e.getMessage());
+                            }
                             sleep(2000);
                         }
                     }

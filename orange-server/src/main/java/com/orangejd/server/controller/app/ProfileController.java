@@ -28,6 +28,9 @@ public class ProfileController {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("username", account != null ? account.getUsername() : "");
         result.put("nickname", detail != null && detail.getNickname() != null ? detail.getNickname() : (account != null ? account.getUsername() : ""));
+        result.put("avatarUrl", detail != null ? detail.getAvatarUrl() : null);
+        result.put("bio", detail != null ? detail.getBio() : null);
+        result.put("skills", detail != null ? detail.getSkills() : null);
         return Result.success(result);
     }
 

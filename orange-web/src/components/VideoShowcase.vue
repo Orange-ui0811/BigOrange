@@ -41,7 +41,7 @@ const props = defineProps({
   compact: { type: Boolean, default: false },
 })
 
-const localVideoPattern = /^\/(?:uploads\/video|api\/media\/video)\/[0-9a-f-]{36}\.(mp4|mov|m4v|webm)$/i
+const localVideoPattern = /^\/(?:uploads\/video|api\/media\/video)\/(?:[1-9][0-9]*\/)?[0-9a-f-]{36}\.(mp4|mov|m4v|webm)$/i
 const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const assetOrigin = (() => {
   try { return new URL(apiBase, window.location.origin).origin }
@@ -61,7 +61,7 @@ const safeUrl = computed(() => parsedUrl.value?.href || '')
 const safePoster = computed(() => {
   const value = props.poster?.trim()
   if (!value) return ''
-  if (/^\/(?:uploads\/(?:cover|general)|api\/media\/(?:cover|general))\/[0-9a-f-]{8,36}\.(png|jpe?g|gif|webp)$/i.test(value)) {
+  if (/^\/(?:uploads\/(?:cover|general)|api\/media\/(?:cover|general))\/(?:[1-9][0-9]*\/)?[0-9a-f-]{8,36}\.(png|jpe?g|gif|webp)$/i.test(value)) {
     return new URL(value, assetOrigin).href
   }
   try {

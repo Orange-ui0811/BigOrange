@@ -6,7 +6,9 @@
       <div>
         <div class="eyebrow">我的</div>
         <div class="author-row">
-          <el-avatar :size="44" class="me-avatar">{{ (me.username || '?')[0] }}</el-avatar>
+          <el-avatar :size="44" class="me-avatar" :src="me.avatarUrl || undefined">
+            {{ (me.nickname || me.username || '?')[0] }}
+          </el-avatar>
           <div>
             <strong>{{ me.nickname || me.username }}</strong>
             <span>{{ me.bio || 'AI 应用开发者' }}</span>

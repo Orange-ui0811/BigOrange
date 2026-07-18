@@ -2,7 +2,9 @@
   <div v-loading="loading" class="profile-page">
     <el-card v-if="account" shadow="never" class="profile-card">
       <div class="profile-header">
-        <el-avatar :size="64" class="profile-avatar">{{ (profile?.nickname || account.username)[0] }}</el-avatar>
+        <el-avatar :size="64" class="profile-avatar" :src="profile?.avatarUrl || undefined">
+          {{ (profile?.nickname || account.username || '?')[0] }}
+        </el-avatar>
         <div class="profile-info">
           <h3 class="profile-name">{{ profile?.nickname || account.username }}</h3>
           <p class="profile-bio">{{ profile?.bio || '这个人很懒，什么都没写' }}</p>
@@ -43,7 +45,15 @@ onMounted(async () => {
     const res = await request.get(url)
     if (res.code === 1 && res.data) {
       if (id) { account.value = res.data.account; profile.value = res.data.profile; works.value = res.data.works }
-      else { account.value = { username: res.data.username }; profile.value = { nickname: res.data.nickname } }
+      else {
+        account.value = { username: res.data.username }
+        profile.value = {
+          nickname: res.data.nickname,
+          avatarUrl: res.data.avatarUrl,
+          bio: res.data.bio,
+          skills: res.data.skills,
+        }
+      }
     }
   } finally { loading.value = false }
 })

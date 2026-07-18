@@ -99,7 +99,9 @@
         <!-- ═══ 侧栏 ═══ -->
         <aside class="deal-panel">
           <div class="author-card">
-            <el-avatar :size="44" class="author-avatar">{{ (work.ownerName || '?')[0] }}</el-avatar>
+            <el-avatar :size="44" class="author-avatar" :src="work.ownerAvatar || undefined">
+              {{ (work.ownerName || '?')[0] }}
+            </el-avatar>
             <div>
               <strong>{{ work.ownerName || '#'+work.ownerId }}</strong>
               <span>AI 应用开发者</span>

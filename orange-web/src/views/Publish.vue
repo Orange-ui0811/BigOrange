@@ -166,7 +166,19 @@
                 <el-input v-model="form.budgetMax" type="number" placeholder="最高" class="budget-input" />
               </el-form-item>
             </template>
-            <el-button type="primary" @click="submit" :loading="loading" style="width:100%">{{ isEdit?'保存修改':'发布' }}</el-button>
+            <div class="form-actions">
+              <el-button
+                @click="submit(false)"
+                :loading="loading && saveAction === 'draft'"
+                :disabled="loading && saveAction !== 'draft'"
+              >保存草稿</el-button>
+              <el-button
+                type="primary"
+                @click="submit(true)"
+                :loading="loading && saveAction === 'review'"
+                :disabled="loading && saveAction !== 'review'"
+              >保存并提交审核</el-button>
+            </div>
           </el-form>
         </div>
       </div>
@@ -198,6 +210,7 @@ const tab = ref(isEdit ? (route.params.type === 'work' ? 'work' : 'requirement')
 const cats = ref([])
 const editId = ref(isEdit ? route.params.id : null)
 const loading = ref(false)
+const saveAction = ref('')
 const form = reactive({ title: '', summary: '', detail: '', categoryId: null, price: '', budgetMin: '', budgetMax: '', coverUrl: '', demoUrl: '', videoUrl: '' })
 const videoUploading = ref(false)
 const videoProgress = ref(0)
@@ -289,9 +302,10 @@ onMounted(async () => {
   }
 })
 
-const submit = async () => {
+const submit = async (submitReview = false) => {
   if (!form.title.trim()) return ElMessage.warning('标题必填')
   if (videoUploading.value) return ElMessage.warning('请等待视频上传完成')
+  saveAction.value = submitReview ? 'review' : 'draft'
   loading.value = true
   try {
     const baseApi = tab.value === 'work' ? '/app/work' : '/app/requirement'
@@ -300,8 +314,24 @@ const submit = async () => {
       ? { title: form.title, summary: form.summary, detail: form.detail, categoryId: form.categoryId, coverUrl: form.coverUrl, demoUrl: form.demoUrl, videoUrl: form.videoUrl }
       : { title: form.title, detail: form.detail, categoryId: form.categoryId, budgetMin: form.budgetMin||null, budgetMax: form.budgetMax||null }
     const res = isEdit ? await request.put(api, data) : await request.post(api, data)
-    if (res.code === 1) { ElMessage.success(isEdit?'保存成功':'发布成功'); form.title=''; form.summary=''; form.detail=''; form.price=''; form.budgetMin=''; form.budgetMax=''; form.videoUrl=''; legacyVideoUrl.value='' }
-  } finally { loading.value = false }
+    if (res.code === 1) {
+      const savedId = isEdit ? editId.value : res.data?.id
+      if (submitReview) {
+        if (!savedId) throw new Error('保存成功，但未返回内容 ID')
+        const reviewRes = await request.post(`${baseApi}/${savedId}/submit`)
+        if (reviewRes.code === 1) {
+          ElMessage.success('已保存并提交审核')
+          await router.push('/me/works')
+        }
+      } else {
+        ElMessage.success('草稿已保存')
+        if (!isEdit) await router.push('/me/works')
+      }
+    }
+  } finally {
+    loading.value = false
+    saveAction.value = ''
+  }
 }
 </script>
 
@@ -517,7 +547,16 @@ const submit = async () => {
 .guide-text { margin: 4px 0 0; }
 .detail-upload-row { margin-bottom: 4px; }
 .budget-input { width: 120px; }
+.form-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.form-actions :deep(.el-button) { width: 100%; margin: 0; }
 
 @media (max-width: 1120px) { .publish-studio { grid-template-columns: 1fr; } }
-@media (max-width: 780px) { .publish-choices { grid-template-columns: 1fr; } }
+@media (max-width: 780px) {
+  .publish-choices { grid-template-columns: 1fr; }
+  .form-actions { grid-template-columns: 1fr; }
+}
 </style>

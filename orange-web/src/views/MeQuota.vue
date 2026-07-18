@@ -2,11 +2,11 @@
   <div>
     <PageTour storageKey="mequota" :steps="quotaTour" />
     <h3 class="page-title">我的配额</h3>
-    <p class="page-subtitle">管理 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" /> 余额，用于 AI 趋势分析和方案设计</p>
+    <p class="page-subtitle">管理 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" /> 余额，用于 AI 趋势分析、方案设计和上线体检</p>
 
     <!-- 余额卡片 -->
     <el-row :gutter="16" class="balance-row">
-      <el-col :span="8">
+      <el-col :xs="24" :sm="12" :md="8">
         <el-card shadow="never" class="stat-card">
           <div class="balance-num">
             <PixelOrangeSlice class="segment-coin" />
@@ -16,12 +16,6 @@
             <PixelOrangeSlice :size="16" />
             segments
           </div>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <el-card shadow="never" class="stat-card">
-          <div class="balance-yuan">&#8776; &yen;{{ (balance / 100).toFixed(2) }}</div>
-          <div class="balance-note">100 <PixelOrangeSlice :size="12" style="display:inline-block;vertical-align:middle" /> = 1 元</div>
         </el-card>
       </el-col>
     </el-row>
@@ -94,7 +88,7 @@ import PageTour from '../components/PageTour.vue'
 import { getBalance, redeemCode, getLog, createEpayOrder } from '../api/quota'
 
 const quotaTour = [
-  { selector: '.balance-row', text: '这里是你的 🍊 余额！大卡片显示剩余数量，旁边是对应的人民币价值。', expression: 'love' },
+  { selector: '.balance-row', text: '这里显示当前可用于 AI 工具的配额余额。', expression: 'love' },
   { selector: '.action-row', text: '左边输入兑换码兑换，右边选金额在线充值。消费记录在下方表格里随时查看～', expression: 'smile' },
 ]
 
@@ -193,14 +187,6 @@ onMounted(() => { loadBalance(); loadLogs() })
   display: flex;
   align-items: center;
   gap: 4px;
-}
-.balance-yuan {
-  font-size: 14px;
-  color: #3a302a;
-}
-.balance-note {
-  font-size: 12px;
-  color: #bfb8b0;
 }
 .action-row {
   margin-bottom: 16px;

@@ -14,6 +14,7 @@ import com.orangejd.server.service.NotificationService;
 import com.orangejd.server.service.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,6 +47,7 @@ public class RequirementServiceImpl implements RequirementService {
     }
 
     @Override
+    @Transactional
     public RequirementVO edit(Long id, RequirementEditDTO dto) {
         Requirement r = requirementMapper.selectById(id);
         if (r == null) throw new BaseException(MessageConstant.REQ_NOT_FOUND);
@@ -59,7 +61,7 @@ public class RequirementServiceImpl implements RequirementService {
         r.setBudgetMax(dto.getBudgetMax() != null ? dto.getBudgetMax() : r.getBudgetMax());
         requirementMapper.update(r);
 
-        if ("APPROVED".equals(r.getAuditStatus())) {
+        if ("APPROVED".equals(r.getAuditStatus()) || "PENDING_REVIEW".equals(r.getAuditStatus())) {
             requirementMapper.updateAuditStatus(id, "DRAFT");
         }
 

@@ -36,7 +36,8 @@ public class PricingService {
         "ai:trend:v1", 50,
         "ai:trend:v2", 50,
         "ai:plan", 40,
-        "ai:match", 50
+        "ai:match", 50,
+        "ai:launch-check", 40
     );
 
     @PostConstruct

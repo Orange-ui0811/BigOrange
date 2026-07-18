@@ -105,7 +105,7 @@ public class WorkServiceImpl implements WorkService {
         managedFileStorageService.deleteOwnedMediaAfterCommit(work.getOwnerId(), removedMedia);
 
         // 已审核通过的作品被编辑后需重新提交审核
-        if ("APPROVED".equals(work.getAuditStatus())) {
+        if ("APPROVED".equals(work.getAuditStatus()) || "PENDING_REVIEW".equals(work.getAuditStatus())) {
             workMapper.updateAuditStatus(id, "DRAFT");
         }
 
@@ -241,6 +241,7 @@ public class WorkServiceImpl implements WorkService {
         vo.setAuditStatus(w.getAuditStatus()); vo.setVisibilityStatus(w.getVisibilityStatus());
         vo.setPublishStatus(w.getPublishStatus());
         vo.setCreateTime(w.getCreateTime()); vo.setUpdateTime(w.getUpdateTime());
+        vo.setOwnerName(w.getOwnerName()); vo.setOwnerAvatar(w.getOwnerAvatar());
 
         List<WorkSaleOption> options = optionMapper.selectByWorkId(w.getId());
         vo.setSaleOptions(options.stream().map(o -> {

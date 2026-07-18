@@ -110,17 +110,16 @@ public class LeaderboardServiceImpl implements LeaderboardService {
         size = com.orangejd.common.util.PageUtil.capSize(size);
         page = com.orangejd.common.util.PageUtil.safePage(page);
         String today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
-        String yesterday = LocalDate.now().minusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         // 尝试读今天的快照
         LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", topicName, period, today);
         String warning = null;
 
-        // 今天没有 → 回退昨天的
+        // 今天没有时回退到最近一次成功快照，避免定时抓取或 GitHub 临时故障让榜单消失。
         if (snap == null) {
-            snap = snapshotMapper.selectByKey("github", topicName, period, yesterday);
+            snap = snapshotMapper.selectLatest("github", topicName, period);
             if (snap != null) {
-                warning = "榜单数据更新中，当前展示昨日数据";
+                warning = "榜单数据更新中，当前展示 " + snap.getSnapshotDate() + " 的最近快照";
             }
         }
 

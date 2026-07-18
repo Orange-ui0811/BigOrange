@@ -6,7 +6,7 @@
       <div>
         <span class="eyebrow">AI 工具 · 从榜单看方向</span>
         <h2>先看热度，再决定下一步做什么。</h2>
-        <p>这里是 AI 工具入口页。Hero 展示滚动榜单预览；下方只保留趋势分析、方案设计和工作能力参考三个工具入口。</p>
+        <p>从方向洞察、方案规划到上线验收，在同一条项目路径中持续推进。</p>
         <div class="leaderboard-alert">滚动预览：本周本网站热门项目 · GitHub AI 热门仓库 · 创作者热度变化</div>
       </div>
       <div class="hub-card-actions">
@@ -87,6 +87,14 @@
         </div>
         <el-button class="card-btn" size="small">进入工作能力参考</el-button>
       </article>
+      <article class="hub-card tool-launch" @click="$router.push('/launch-check')">
+        <div>
+          <div class="tag-row"><span class="hub-tag blue">上线体检</span></div>
+          <h3>上线体检</h3>
+          <p>八阶段评估部署形态、资源选型、安全门禁、生产验收和持续运维。</p>
+        </div>
+        <el-button class="card-btn" size="small">进入上线体检</el-button>
+      </article>
     </div>
   </div>
 </template>
@@ -100,7 +108,7 @@ import request from '../api/request'
 const tourSteps = [
   { selector: '.hub-hero, .ticker-row:first-child', text: '这是 AI 工具入口页！上面滚动条展示 GitHub 最火的项目，下面三个卡片是趋势分析、方案设计和工作能力参考。', expression: 'wink' },
   { selector: '.ticker-row', text: '这两行滚动条分别是本周最火和全时段最火的项目，点一下进入榜单看完整排名。', expression: 'smile' },
-  { selector: '.hub-grid', text: '三个入口：趋势分析看方向热度、方案设计做项目规划、工作能力参考看岗位要求。点进去试试吧！', expression: 'sparkle' },
+  { selector: '.hub-grid', text: '这里集中提供趋势分析、方案设计、工作能力参考和上线体检。', expression: 'sparkle' },
 ]
 
 const tickerItems = ref([])
@@ -282,6 +290,11 @@ onMounted(async () => {
     linear-gradient(135deg, rgba(255,250,244,.96), rgba(255,247,237,.82)),
     radial-gradient(circle at 92% 12%, rgba(154,90,36,.10), transparent 32%);
 }
+.tool-launch {
+  border-color: #bfdbfe;
+  border-left: 3px solid #2563eb;
+  background: #f8fbff;
+}
 
 .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
 .hub-tag {
@@ -299,6 +312,7 @@ onMounted(async () => {
 }
 .hub-tag.yellow { color: #92400e; background: #fffbeb; border-color: #fde68a; }
 .hub-tag.green  { color: #9a5a24; background: #fff7ed; border-color: #fed7aa; }
+.hub-tag.blue { color: #1d4ed8; background: #eff6ff; border-color: #bfdbfe; }
 
 /* ═══ Ticker ═══ */
 .ticker-row {
