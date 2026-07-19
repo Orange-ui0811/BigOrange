@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -17,6 +20,8 @@ import java.util.*;
 @RestController
 @RequestMapping("/app/plan")
 public class AppPlanController {
+
+    private static final Logger log = LoggerFactory.getLogger(AppPlanController.class);
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -39,7 +44,7 @@ public class AppPlanController {
     @Autowired
     private com.orangejd.server.service.PricingService pricingService;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = createRestTemplate();
 
     private static final String[] PHASE_TITLES = {
         "", "需求理解", "成功标准定义", "约束风险识别", "可执行任务计划"
@@ -58,6 +63,14 @@ public class AppPlanController {
 
         if (summary.isEmpty()) return Result.error("请输入项目描述");
 
+        boolean lite = "lite".equals(mode) && phase == 4;
+        String prompt = lite ? buildPromptLite(phase, summary, extra, prevContents)
+                             : buildPrompt(phase, summary, extra, prevContents);
+        if (prompt == null) return Result.error("无效的阶段编号");
+        if (apiEndpoint == null || apiEndpoint.isBlank() || apiKey == null || apiKey.isBlank()) {
+            return Result.error("AI 方案设计服务尚未配置");
+        }
+
         // 配额消费
         Long accountId = BaseContext.getCurrentId();
         String requestId = null;
@@ -73,12 +86,6 @@ public class AppPlanController {
                 return Result.error(e.getMessage());
             }
         }
-
-        // 精简模式：只影响最终计划（阶段4），前三个阶段和详细模式一样
-        boolean lite = "lite".equals(mode) && phase == 4;
-        String prompt = lite ? buildPromptLite(phase, summary, extra, prevContents)
-                             : buildPrompt(phase, summary, extra, prevContents);
-        if (prompt == null) return Result.error("无效的阶段编号");
 
         try {
             String url = apiEndpoint.trim();
@@ -112,18 +119,28 @@ public class AppPlanController {
                 List<Map<String, Object>> choices = (List<Map<String, Object>>) resp.getBody().get("choices");
                 if (choices != null && !choices.isEmpty()) {
                     Map<String, Object> msg = (Map<String, Object>) choices.get(0).get("message");
+                    String content = Objects.toString(msg.get("content"), "").trim();
+                    if (content.isEmpty()) throw new IllegalStateException("AI returned empty content");
                     Map<String, Object> result = new LinkedHashMap<>();
-                    result.put("content", msg.getOrDefault("content", ""));
+                    result.put("content", content);
                     result.put("phase", phase);
                     result.put("phaseTitle", PHASE_TITLES[phase]);
                     return Result.success(result);
                 }
             }
-            return Result.error("AI 返回为空");
+            throw new IllegalStateException("AI returned no choices");
         } catch (Exception e) {
             if (consumed) quotaService.refund(accountId, chargedCost, requestId, "方案设计失败退款");
+            log.error("Plan generation failed: accountId={}, phase={}, mode={}", accountId, phase, mode, e);
             return Result.error("AI 调用失败，请稍后重试");
         }
+    }
+
+    private static RestTemplate createRestTemplate() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(10_000);
+        factory.setReadTimeout(240_000);
+        return new RestTemplate(factory);
     }
 
     private String buildPrompt(int phase, String summary, String extra, String prevContents) {
@@ -212,6 +229,8 @@ public class AppPlanController {
         record.put("phase2", body.getOrDefault("phase2", ""));
         record.put("phase3", body.getOrDefault("phase3", ""));
         record.put("phase4", body.getOrDefault("phase4", ""));
+        record.put("phase5", body.getOrDefault("phase5", ""));
+        record.put("phase6", body.getOrDefault("phase6", ""));
         planHistoryMapper.insert(record);
         return Result.success(Collections.singletonMap("id", record.get("id")));
     }

@@ -80,6 +80,9 @@
             <template v-if="!editing">
               <button class="orange-btn" @click="generatePhase(currentPhase)">重新生成</button>
               <button class="nav-btn" @click="startEdit">编辑</button>
+              <button v-if="currentPhase === 5" class="nav-btn import-launch-btn" @click="importToLaunchCheck">
+                一键导入上线体检
+              </button>
               <button v-if="currentPhase < 6" class="nav-btn nav-btn-next" @click="switchPhase(currentPhase+1)">下一步 →</button>
             </template>
             <template v-else>
@@ -101,11 +104,14 @@
 
 <script setup>
 import { h, ref, reactive, computed, nextTick, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { marked } from 'marked'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
+
+const router = useRouter()
 
 const tourSteps = [
   { selector: '.plan-main textarea, .plan-main .el-textarea__inner', text: '在这里写下你的项目想法！描述清楚想做什么、有什么特殊需求，AI 会帮你规划得更精准～', expression: 'smile' },
@@ -176,16 +182,15 @@ const doJobMatch = async () => {
   const p5 = phases[5]; p5.generating = true
   try {
     const r = await request.post('/app/job/match', { planContent: planContent }, { timeout: 120000 })
-    if (r.code === 1 && r.data?.result) {
-      const parsed = JSON.parse(r.data.result.replace(/```json|```/g,'').trim())
-      const matches = parsed.matches || []
+    if (r.code === 1 && Array.isArray(r.data?.matches) && r.data.matches.length) {
+      const matches = r.data.matches
       let content = ''
       for (const m of matches) {
         content += `### ${m.position}\n\n📌 **匹配原因**：${m.reason}\n\n📚 **学习重点**：${m.focus}\n\n---\n\n`
       }
       p5.content = content; p5.done = true
     } else { ElMessage.error(r.msg || '匹配失败') }
-  } catch (e) { ElMessage.error('匹配失败') }
+  } catch (e) { ElMessage.error(e.response?.data?.msg || '匹配失败，本次配额会自动退回') }
   finally { p5.generating = false }
 }
 
@@ -211,7 +216,7 @@ const generatePhase = async (n) => {
       summary: summary.value,
       extra: extra.value,
       prevContents: getPrevContents(n)
-    }, { timeout: 0 })
+    }, { timeout: 240000 })
     if (r.code === 1 && r.data?.content) {
       p.content = r.data.content
       p.done = true
@@ -219,7 +224,14 @@ const generatePhase = async (n) => {
       phaseError.value = r.msg || '生成失败'
     }
   } catch (e) {
-    phaseError.value = '请求失败，请检查网络连接'
+    const status = e.response?.status
+    if (status === 502 || status === 504) {
+      phaseError.value = 'AI 生成等待超时，请稍后重试；本次配额会自动退回'
+    } else if (e.response?.data?.msg) {
+      phaseError.value = e.response.data.msg
+    } else {
+      phaseError.value = '请求未完成，请检查网络后重试'
+    }
   } finally { p.generating = false }
 }
 
@@ -227,14 +239,41 @@ const editing = ref(false)
 const editContent = ref('')
 
 const startEdit = () => {
-  editContent.value = phases[currentPhase.value].content
+  editContent.value = phases[currentPhase.value - 1].content
   editing.value = true
 }
 const saveEdit = () => {
-  phases[currentPhase.value].content = editContent.value
+  phases[currentPhase.value - 1].content = editContent.value
   editing.value = false
 }
 const cancelEdit = () => { editing.value = false }
+
+const cleanProjectName = (value) => {
+  const firstLine = String(value || '').split(/\r?\n/).find(line => line.trim()) || '未命名项目'
+  return firstLine.replace(/^#+\s*/, '').replace(/[*_`]/g, '').trim().slice(0, 128) || '未命名项目'
+}
+
+const importToLaunchCheck = () => {
+  const sections = [
+    ['项目概要', summary.value],
+    ['需求理解', phases[1].content],
+    ['成功标准', phases[2].content],
+    ['约束风险', phases[3].content],
+    ['任务计划', phases[4].content]
+  ]
+  const projectSummary = sections
+    .filter(([, content]) => String(content || '').trim())
+    .map(([title, content]) => `## ${title}\n${String(content).trim()}`)
+    .join('\n\n')
+    .slice(0, 10000)
+
+  sessionStorage.setItem('launch_check_import', JSON.stringify({
+    projectName: cleanProjectName(summary.value),
+    projectSummary
+  }))
+  ElMessage.success('任务计划已整理，正在前往上线体检')
+  router.push('/launch-check')
+}
 
 const hasToken = computed(() => !!sessionStorage.getItem('appToken'))
 const planHistory = ref([])
@@ -247,18 +286,24 @@ const loadPlanHistory = async () => {
 const savePlan = async () => {
   if (!hasToken.value || !allDone.value) return
   try {
-    await request.post('/app/plan/history/save', {
+    const response = await request.post('/app/plan/history/save', {
       summary: summary.value, phase1: phases[0].content, phase2: phases[1].content,
       phase3: phases[2].content, phase4: phases[3].content,
       phase5: phases[4].content, phase6: phases[5].content
     })
-    loadPlanHistory()
+    if (response.code !== 1) return
+    await loadPlanHistory()
     ElMessage.success('方案已保存')
   } catch { ElMessage.error('保存失败') }
 }
 const loadPlan = (h) => {
   summary.value = h.summary || ''
   started.value = true
+  for (const phase of phases) {
+    phase.content = ''
+    phase.done = false
+    phase.generating = false
+  }
   if (h.phase1) { phases[0].content = h.phase1; phases[0].done = true }
   if (h.phase2) { phases[1].content = h.phase2; phases[1].done = true }
   if (h.phase3) { phases[2].content = h.phase3; phases[2].done = true }

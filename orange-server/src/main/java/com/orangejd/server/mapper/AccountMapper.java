@@ -21,6 +21,8 @@ public interface AccountMapper {
 
     int updateStatus(@Param("id") Long id, @Param("status") String status);
 
+    java.util.List<Long> selectActiveAdminIdsForUpdate();
+
     java.util.List<java.util.Map<String, Object>> selectTopCreators(@Param("limit") int limit);
 
     /** 榜单: 全时段创作者收藏排行 */

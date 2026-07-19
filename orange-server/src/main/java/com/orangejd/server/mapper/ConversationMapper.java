@@ -29,5 +29,7 @@ public interface ConversationMapper {
 
     int hideByUser(@Param("id") Long id, @Param("userId") Long userId, @Param("isInitiator") boolean isInitiator);
 
+    int showForAll(@Param("id") Long id);
+
     int deleteMessagesByUser(@Param("conversationId") Long conversationId, @Param("userId") Long userId);
 }

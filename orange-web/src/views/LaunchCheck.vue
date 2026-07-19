@@ -94,7 +94,8 @@
         </div>
         <el-form-item label="项目说明" prop="projectSummary">
           <el-input v-model="form.projectSummary" type="textarea" :rows="7" maxlength="10000"
-                    show-word-limit placeholder="说明技术栈、已有功能、运行方式、数据库、缓存、文件上传、AI 服务和当前遇到的上线问题。" />
+                    show-word-limit placeholder="可以填写项目方案或系统架构，包括技术栈、已有功能、运行方式、数据库、缓存、文件上传、AI 服务和当前遇到的上线问题。" />
+          <p class="summary-tip">方案设计的“任务计划”支持一键整理并导入到这里。</p>
         </el-form-item>
         <div class="form-actions">
           <el-button type="primary" native-type="submit" :loading="creating">创建体检项目</el-button>
@@ -312,6 +313,19 @@ const downloadReport = () => {
 }
 
 onMounted(async () => {
+  const imported = sessionStorage.getItem('launch_check_import')
+  if (imported) {
+    try {
+      const payload = JSON.parse(imported)
+      form.projectName = String(payload.projectName || '').slice(0, 128)
+      form.projectSummary = String(payload.projectSummary || '').slice(0, 10000)
+      ElMessage.success('已导入方案设计中的项目资料，请检查并补充后创建体检')
+    } catch {
+      ElMessage.warning('导入的项目资料格式无效，请重新从方案设计导入')
+    } finally {
+      sessionStorage.removeItem('launch_check_import')
+    }
+  }
   await Promise.all([loadConfig(), loadHistory()])
 })
 </script>
@@ -335,6 +349,7 @@ onMounted(async () => {
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; }
 .project-form :deep(.el-input__wrapper), .project-form :deep(.el-select__wrapper), .project-form :deep(.el-textarea__inner) { min-height: 44px; border-radius: 6px; }
 .project-form :deep(.el-textarea__inner) { line-height: 1.65; }
+.summary-tip { margin: 7px 0 0; color: var(--text-muted); font-size: 12px; line-height: 1.5; }
 .form-actions { display: flex; justify-content: flex-end; }
 .history-list { border-top: 1px solid var(--border-weak); }
 .history-item { display: flex; align-items: center; gap: 10px; min-height: 76px; border-bottom: 1px solid var(--border-weak); }

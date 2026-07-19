@@ -113,13 +113,14 @@ const handleSave = async (row) => {
   } catch { return }
 
   try {
-    await request.post('/admin/pricing/save', {
+    const response = await request.post('/admin/pricing/save', {
       serviceKey: row.serviceKey,
       newCost: newCost,
       serviceName: row.serviceName
     })
+    if (response.code !== 1) return
     ElMessage.success('定价已更新，即时生效')
-    loadData()
+    await loadData()
   } catch (e) {
     ElMessage.error(e?.response?.data?.msg || '保存失败')
   }

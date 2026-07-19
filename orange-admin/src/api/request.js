@@ -22,7 +22,7 @@ request.interceptors.response.use(
   err => {
     if (err.response?.status === 401) {
       localStorage.removeItem('adminToken')
-      window.location.href = '/login'
+      window.location.href = '/admin/#/login'
     }
     ElMessage.error(err.response?.data?.msg || '请求失败')
     return Promise.reject(err)

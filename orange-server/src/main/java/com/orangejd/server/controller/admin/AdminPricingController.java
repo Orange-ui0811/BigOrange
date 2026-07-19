@@ -33,13 +33,18 @@ public class AdminPricingController {
     @PostMapping("/save")
     public Result<?> save(@RequestBody Map<String, Object> body) {
         String serviceKey = (String) body.get("serviceKey");
-        Integer newCost = body.get("newCost") instanceof Integer
-            ? (Integer) body.get("newCost")
-            : Integer.valueOf(body.get("newCost").toString());
         String serviceName = (String) body.get("serviceName");
 
-        if (serviceKey == null || newCost == null) {
+        if (serviceKey == null || body.get("newCost") == null) {
             return Result.error("缺少 serviceKey 或 newCost 参数");
+        }
+
+        final int newCost;
+        try {
+            newCost = body.get("newCost") instanceof Number number
+                    ? number.intValue() : Integer.parseInt(body.get("newCost").toString());
+        } catch (NumberFormatException e) {
+            return Result.error("newCost 必须是整数");
         }
 
         Long adminId = BaseContext.getCurrentId();

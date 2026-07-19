@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -94,6 +95,7 @@ public class PricingService {
      * @param adminId 操作管理员 ID
      * @return 更新后的 cost
      */
+    @Transactional
     public int updateCost(String serviceKey, int newCost, Long adminId, String serviceName) {
         // 校验范围
         if (newCost < 1 || newCost > 10000) {

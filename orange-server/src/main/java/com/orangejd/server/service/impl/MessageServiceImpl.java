@@ -45,7 +45,8 @@ public class MessageServiceImpl implements MessageService {
         msg.setContent(dto.getContent().trim());
         messageMapper.insert(msg);
 
-        // 更新会话时间
+        // A new message makes the conversation relevant to both participants again.
+        conversationMapper.showForAll(dto.getConversationId());
         conversationMapper.updateTime(dto.getConversationId());
 
         // 不创建通知——聊天未读数单独显示在「聊天」角标

@@ -52,6 +52,13 @@
         UPDATE account SET status = #{status}, update_time = NOW() WHERE id = #{id}
     </update>
 
+    <select id="selectActiveAdminIdsForUpdate" resultType="long">
+        SELECT id FROM account
+        WHERE role = 'ADMIN' AND status = 'ACTIVE'
+        ORDER BY id
+        FOR UPDATE
+    </select>
+
     <select id="selectTopCreators" resultType="java.util.HashMap">
         SELECT a.id, a.username, COUNT(w.id) AS workCount
         FROM account a LEFT JOIN work w ON a.id = w.owner_id AND w.audit_status='APPROVED'

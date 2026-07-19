@@ -78,19 +78,17 @@ public class ConversationServiceImpl implements ConversationService {
         Long currentId = BaseContext.getCurrentId();
         if (!currentId.equals(c.getInitiatorId()) && !currentId.equals(c.getReceiverId()))
             throw new BaseException(MessageConstant.NO_PERMISSION);
-        conversationMapper.deleteMessagesByConvId(id);
+        conversationMapper.hideByUser(id, currentId, currentId.equals(c.getInitiatorId()));
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional
     public void deleteConversation(Long id) {
         Conversation c = conversationMapper.selectById(id);
         if (c == null) throw new BaseException("会话不存在");
         Long currentId = BaseContext.getCurrentId();
         if (!currentId.equals(c.getInitiatorId()) && !currentId.equals(c.getReceiverId()))
             throw new BaseException(MessageConstant.NO_PERMISSION);
-        conversationMapper.deleteMessagesByConvId(id);
-        conversationMapper.deleteById(id);
+        conversationMapper.hideByUser(id, currentId, currentId.equals(c.getInitiatorId()));
     }
 
     @Override

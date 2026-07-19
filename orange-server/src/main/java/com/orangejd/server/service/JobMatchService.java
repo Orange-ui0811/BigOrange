@@ -1,5 +1,7 @@
 package com.orangejd.server.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.service.impl.QuotaServiceImpl;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,7 +34,18 @@ public class JobMatchService {
     @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
     private String model;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+    private final ObjectMapper objectMapper;
+
+    @Autowired
+    public JobMatchService(ObjectMapper objectMapper) {
+        this(objectMapper, createRestTemplate());
+    }
+
+    JobMatchService(ObjectMapper objectMapper, RestTemplate restTemplate) {
+        this.objectMapper = objectMapper;
+        this.restTemplate = restTemplate;
+    }
 
     public Map<String, Object> match(String planContent) {
         Long accountId = BaseContext.getCurrentId();
@@ -96,15 +110,50 @@ public class JobMatchService {
                     resp.getBody().get("choices")).get(0).get("message")).get("content");
             content = content.replaceAll("```json\\s*", "").replaceAll("```\\s*", "").trim();
 
+            // Only confirm success after the AI response is valid and renderable by the client.
+            List<Map<String, String>> matches = parseMatches(content);
+
             log.info("[JOB_MATCH] 匹配完成 accountId={}", accountId);
             Map<String, Object> result = new LinkedHashMap<>();
             result.put("result", content);
+            result.put("matches", matches);
             return result;
         } catch (Exception e) {
             if (accountId != null && accountId > 0) {
                 try { quotaService.refund(accountId, chargedCost, requestId, "岗位匹配失败退款"); } catch (Exception ignored) {}
             }
+            log.warn("[JOB_MATCH] 匹配失败并已尝试退款 accountId={}, reason={}", accountId, e.getMessage());
             throw new RuntimeException("AI匹配失败，请稍后重试");
         }
+    }
+
+    List<Map<String, String>> parseMatches(String content) throws Exception {
+        JsonNode root = objectMapper.readTree(content);
+        JsonNode items = root.path("matches");
+        if (!items.isArray() || items.isEmpty()) {
+            throw new IllegalArgumentException("AI返回缺少岗位匹配结果");
+        }
+
+        List<Map<String, String>> matches = new ArrayList<>();
+        for (JsonNode item : items) {
+            String position = requiredText(item, "position");
+            String reason = requiredText(item, "reason");
+            String focus = requiredText(item, "focus");
+            matches.add(Map.of("position", position, "reason", reason, "focus", focus));
+        }
+        return matches;
+    }
+
+    private String requiredText(JsonNode item, String field) {
+        String value = item.path(field).asText("").trim();
+        if (value.isEmpty()) throw new IllegalArgumentException("AI返回字段不完整: " + field);
+        return value;
+    }
+
+    private static RestTemplate createRestTemplate() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(10_000);
+        factory.setReadTimeout(110_000);
+        return new RestTemplate(factory);
     }
 }

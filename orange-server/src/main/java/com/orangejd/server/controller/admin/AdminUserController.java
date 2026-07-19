@@ -2,11 +2,13 @@ package com.orangejd.server.controller.admin;
 
 import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
+import com.orangejd.common.context.BaseContext;
 import com.orangejd.pojo.vo.AccountVO;
 import com.orangejd.server.mapper.AccountMapper;
 import com.orangejd.server.mapper.UserProfileMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,10 +38,18 @@ public class AdminUserController {
     }
 
     @PutMapping("/{id}/status")
+    @Transactional
     public Result<?> toggleStatus(@PathVariable Long id) {
         com.orangejd.pojo.entity.Account account = accountMapper.selectById(id);
         if (account == null) return Result.error("用户不存在");
         String newStatus = "ACTIVE".equals(account.getStatus()) ? "DISABLED" : "ACTIVE";
+        if ("DISABLED".equals(newStatus) && id.equals(BaseContext.getCurrentId())) {
+            return Result.error("不能禁用当前登录的管理员");
+        }
+        if ("DISABLED".equals(newStatus) && "ADMIN".equals(account.getRole())) {
+            List<Long> activeAdminIds = accountMapper.selectActiveAdminIdsForUpdate();
+            if (activeAdminIds.size() <= 1) return Result.error("不能禁用唯一可用的管理员");
+        }
         accountMapper.updateStatus(id, newStatus);
         return Result.success();
     }
