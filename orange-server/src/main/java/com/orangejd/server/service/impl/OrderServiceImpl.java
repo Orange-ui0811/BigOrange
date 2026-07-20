@@ -54,6 +54,9 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal finalAmount = money(dto.getFinalAmount(), "尾款");
         BigDecimal requestedTotal = money(dto.getTotalAmount(), "订单总额");
         if (requestedTotal.signum() <= 0) throw new BaseException("订单金额必须大于0");
+        if (deposit.signum() <= 0 || finalAmount.signum() <= 0) {
+            throw new BaseException("当前交付流程要求定金和尾款都大于0");
+        }
 
         Order order = new Order();
         order.setSourceType(dto.getSourceType());
@@ -232,9 +235,8 @@ public class OrderServiceImpl implements OrderService {
     public void payFinal(Long id) {
         requirePaymentIntegration();
         Order o = getAndCheckBuyer(id);
-        if (!OrderStatus.WAITING_FINAL_PAYMENT.equals(o.getOrderStatus())
-                && !OrderStatus.DELIVERED.equals(o.getOrderStatus()))
-            throw new BaseException("当前状态不允许支付尾款");
+        if (!OrderStatus.DELIVERED.equals(o.getOrderStatus()))
+            throw new BaseException("请先确认交付，再支付尾款");
         orderMapper.updateStatus(id, OrderStatus.FINAL_PAID);
         updatePaymentStage(id, "FINAL");
         orderMapper.updateStatus(id, OrderStatus.COMPLETED);
@@ -250,8 +252,8 @@ public class OrderServiceImpl implements OrderService {
         Long currentId = BaseContext.getCurrentId();
         if (!currentId.equals(o.getBuyerId()) && !currentId.equals(o.getSellerId()))
             throw new BaseException(MessageConstant.NO_PERMISSION);
-        if (OrderStatus.COMPLETED.equals(o.getOrderStatus()) || OrderStatus.CANCELLED.equals(o.getOrderStatus()))
-            throw new BaseException("已完成或已取消的订单不可操作");
+        if (!OrderStatus.WAITING_DEPOSIT.equals(o.getOrderStatus()))
+            throw new BaseException("已进入履约或已付款的订单不能直接取消，请通过争议和退款流程处理");
         orderMapper.updateStatus(id, OrderStatus.CANCELLED);
         Long otherId = currentId.equals(o.getBuyerId()) ? o.getSellerId() : o.getBuyerId();
         notificationService.send(otherId, "ORDER", "订单已被取消", id);

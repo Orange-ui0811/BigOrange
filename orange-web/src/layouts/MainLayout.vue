@@ -126,6 +126,11 @@
         <button class="tool-btn" type="button" @click="$router.push('/me/settings')">
           <span>设置</span>
         </button>
+        <div class="legal-links" aria-label="法律与安全">
+          <router-link to="/legal/terms">用户协议</router-link>
+          <router-link to="/legal/privacy">隐私政策</router-link>
+          <router-link to="/support">举报申诉</router-link>
+        </div>
         <button class="tool-btn logout-btn" type="button" @click="logout">
           <span>退出</span>
         </button>
@@ -164,7 +169,7 @@ import { Shop, Cpu, Edit, ChatDotRound, User } from '@element-plus/icons-vue'
 import GuideBubble from '../components/GuideBubble.vue'
 import request from '../api/request'
 import { unreadCount, avatarUrl, nickname } from '../stores/unread'
-import { tradeEnabled } from '../stores/tradeMode'
+import { applyTradeMode } from '../stores/tradeMode'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
@@ -204,7 +209,7 @@ onMounted(async () => {
     const res = await request.get('/app/conversation/list?page=1&size=50')
     if (res.code === 1 && res.data?.records) chatUnread.value = res.data.records.reduce((s, c) => s + (c.unreadCount || 0), 0)
   } catch {}
-  try { const r = await request.get('/app/config/trade-mode'); if (r.code === 1) tradeEnabled.value = r.data.enabled } catch {}
+  try { const r = await request.get('/app/config/trade-mode'); if (r.code === 1) applyTradeMode(r.data.enabled) } catch {}
 })
 </script>
 
@@ -443,6 +448,18 @@ onMounted(async () => {
   background: #fff7ed;
   color: var(--brand-strong);
 }
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+  padding: 5px 12px 8px;
+}
+.legal-links a {
+  color: var(--text-muted);
+  font: 700 10px/1.4 var(--font-body);
+  text-decoration: none;
+}
+.legal-links a:hover { color: var(--brand-strong); }
 .logout-btn:hover {
   color: #e53935;
   background: #fff5f5;

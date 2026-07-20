@@ -157,8 +157,11 @@
               <el-input v-model="form.detail" type="textarea" :rows="6" placeholder="详细描述（支持HTML富文本）" />
             </el-form-item>
             <el-form-item label="分类"><el-select v-model="form.categoryId" placeholder="选择分类" clearable><el-option v-for="c in cats" :key="c.id" :label="c.name" :value="c.id" /></el-select></el-form-item>
-            <template v-if="tab==='work' && tradeEnabled">
-              <el-form-item label="售卖价格"><el-input v-model="form.price" type="number" placeholder="¥ 留空则面议" /></el-form-item>
+            <template v-if="tab==='work'">
+              <el-form-item label="参考价格">
+                <el-input v-model="form.price" type="number" min="0" placeholder="¥ 留空则面议" />
+                <div class="field-note">价格仅用于展示；在线支付功能即将开放。</div>
+              </el-form-item>
             </template>
             <template v-else>
               <el-form-item label="预算范围">
@@ -193,7 +196,6 @@ import PageTour from '../components/PageTour.vue'
 import VideoShowcase from '../components/VideoShowcase.vue'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
-import { tradeEnabled } from '../stores/tradeMode'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
@@ -311,7 +313,18 @@ const submit = async (submitReview = false) => {
     const baseApi = tab.value === 'work' ? '/app/work' : '/app/requirement'
     const api = isEdit ? `${baseApi}/${editId.value}` : baseApi
     const data = tab.value === 'work'
-      ? { title: form.title, summary: form.summary, detail: form.detail, categoryId: form.categoryId, coverUrl: form.coverUrl, demoUrl: form.demoUrl, videoUrl: form.videoUrl }
+      ? {
+          title: form.title,
+          summary: form.summary,
+          detail: form.detail,
+          categoryId: form.categoryId,
+          coverUrl: form.coverUrl,
+          demoUrl: form.demoUrl,
+          videoUrl: form.videoUrl,
+          saleOptions: form.price === '' || form.price === null
+            ? []
+            : [{ saleType: 'FIXED_PRICE', price: Number(form.price), description: '公开参考价格' }],
+        }
       : { title: form.title, detail: form.detail, categoryId: form.categoryId, budgetMin: form.budgetMin||null, budgetMax: form.budgetMax||null }
     const res = isEdit ? await request.put(api, data) : await request.post(api, data)
     if (res.code === 1) {
@@ -547,6 +560,7 @@ const submit = async (submitReview = false) => {
 .guide-text { margin: 4px 0 0; }
 .detail-upload-row { margin-bottom: 4px; }
 .budget-input { width: 120px; }
+.field-note { margin-top: 6px; color: var(--text-muted); font-size: 12px; line-height: 1.5; }
 .form-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

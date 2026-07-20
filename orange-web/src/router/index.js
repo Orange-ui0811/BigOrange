@@ -1,7 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { transactionUiEnabled } from '../stores/tradeMode'
 
 const routes = [
   { path: '/login', name: 'Login', component: () => import('../views/Login.vue') },
+  { path: '/legal/:document(terms|privacy|third-parties)', name: 'LegalDocument', component: () => import('../views/LegalDocument.vue'), meta: { title: '法律与隐私', public: true } },
+  { path: '/support', name: 'SupportCenter', component: () => import('../views/SupportCenter.vue'), meta: { title: '账号、数据、举报与申诉', public: true } },
   {
     path: '/',
     name: 'Main',
@@ -21,7 +24,7 @@ const routes = [
       { path: 'publish', name: 'Publish', component: () => import('../views/Publish.vue'), meta: { title: '发布' } },
       { path: 'edit/:type/:id', name: 'Edit', component: () => import('../views/Publish.vue'), meta: { title: '编辑' } },
       { path: 'me/works', name: 'MyWorks', component: () => import('../views/MyWorks.vue'), meta: { title: '我的作品' } },
-      { path: 'me/orders', name: 'MyOrders', component: () => import('../views/MyOrders.vue'), meta: { title: '我的订单' } },
+      { path: 'me/orders', name: 'MyOrders', component: () => import('../views/MyOrders.vue'), meta: { title: '我的订单', requiresTransactionUi: true } },
       { path: 'me/favorites', name: 'MyFavorites', component: () => import('../views/MyFavorites.vue'), meta: { title: '收藏夹' } },
       { path: 'me/history', name: 'MyHistory', component: () => import('../views/MyHistory.vue'), meta: { title: '浏览历史' } },
       { path: 'me/edit', name: 'EditProfile', component: () => import('../views/EditProfile.vue'), meta: { title: '编辑资料' } },
@@ -31,7 +34,7 @@ const routes = [
       { path: 'me/settings', name: 'Settings', component: () => import('../views/Settings.vue'), meta: { title: '设置' } },
       { path: 'profile/:id', name: 'Profile', component: () => import('../views/Profile.vue'), meta: { title: '作者主页' } },
       { path: 'requirement/:id', name: 'ReqDetail', component: () => import('../views/ReqDetail.vue'), meta: { title: '需求详情' } },
-      { path: 'order/:id', name: 'OrderDetail', component: () => import('../views/OrderDetail.vue'), meta: { title: '订单详情' } }
+      { path: 'order/:id', name: 'OrderDetail', component: () => import('../views/OrderDetail.vue'), meta: { title: '订单详情', requiresTransactionUi: true } }
     ]
   }
 ]
@@ -40,8 +43,10 @@ const router = createRouter({ history: createWebHistory(), routes })
 
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('appToken')
-  if (to.path !== '/login' && !token) next('/login')
+  if (to.meta.public) next()
+  else if (to.path !== '/login' && !token) next('/login')
   else if (to.path === '/login' && token) next('/market')
+  else if (to.meta.requiresTransactionUi && !transactionUiEnabled) next('/market')
   else next()
 })
 

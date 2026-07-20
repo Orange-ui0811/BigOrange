@@ -114,7 +114,7 @@ import request from '../api/request'
 
 const chatTour = [
   { selector: '.conv-panel', text: '左边是会话列表。点击任意会话进入聊天，橙色角标提醒你有新消息。', expression: 'wink' },
-  { selector: '.chat-input-row', text: '在这里输入消息，回车发送。聊得差不多可以点「发报价」创建订单～', expression: 'smile' },
+  { selector: '.chat-input-row', text: '在这里输入消息，回车发送。当前可沟通作品与需求细节，在线交易功能将在后续开放。', expression: 'smile' },
   { selector: '.summary-panel', text: '右边面板显示当前沟通状态：关联了什么内容、需求范围确认了没、下一步该做什么。', expression: 'smile' },
 ]
 import { unreadCount } from '../stores/unread'

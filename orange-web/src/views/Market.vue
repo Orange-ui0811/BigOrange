@@ -143,8 +143,6 @@ const marketTour = [
   { selector: '.content-tabs', text: '用这些小药丸快速筛选：全部看、只看作品、只看需求。右边还有分类下拉帮你精确筛选～', expression: 'wink' },
   { selector: '.market-grid, .req-list', text: '点击任意卡片进入详情页。作品有封面和演示链接，需求有预算范围。看到喜欢的记得收藏！', expression: 'sparkle' },
 ]
-import { tradeEnabled } from '../stores/tradeMode'
-
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const router = useRouter()
 const activeTab = ref('all')

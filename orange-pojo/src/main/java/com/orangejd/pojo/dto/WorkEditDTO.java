@@ -1,5 +1,7 @@
 package com.orangejd.pojo.dto;
 
+import java.util.List;
+
 public class WorkEditDTO {
     private String title;
     private String summary;
@@ -9,6 +11,7 @@ public class WorkEditDTO {
     private String coverUrl;
     private String demoUrl;
     private String videoUrl;
+    private List<WorkCreateDTO.SaleOption> saleOptions;
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
@@ -26,4 +29,6 @@ public class WorkEditDTO {
     public void setDemoUrl(String demoUrl) { this.demoUrl = demoUrl; }
     public String getVideoUrl() { return videoUrl; }
     public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
+    public List<WorkCreateDTO.SaleOption> getSaleOptions() { return saleOptions; }
+    public void setSaleOptions(List<WorkCreateDTO.SaleOption> saleOptions) { this.saleOptions = saleOptions; }
 }

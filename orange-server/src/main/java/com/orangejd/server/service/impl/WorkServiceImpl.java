@@ -96,6 +96,21 @@ public class WorkServiceImpl implements WorkService {
         if (dto.getVideoUrl() != null) work.setVideoUrl(normalizeVideoUrl(dto.getVideoUrl()));
         workMapper.update(work);
 
+        if (dto.getSaleOptions() != null) {
+            optionMapper.deleteByWorkId(id);
+            if (!dto.getSaleOptions().isEmpty()) {
+                List<WorkSaleOption> options = dto.getSaleOptions().stream().map(o -> {
+                    WorkSaleOption opt = new WorkSaleOption();
+                    opt.setWorkId(id);
+                    opt.setSaleType(o.getSaleType());
+                    opt.setPrice(o.getPrice());
+                    opt.setDescription(o.getDescription());
+                    return opt;
+                }).collect(Collectors.toList());
+                optionMapper.insertBatch(options);
+            }
+        }
+
         Set<String> removedMedia = new LinkedHashSet<>();
         if (!Objects.equals(previousCover, work.getCoverUrl()) && previousCover != null) removedMedia.add(previousCover);
         if (!Objects.equals(previousVideo, work.getVideoUrl()) && previousVideo != null) removedMedia.add(previousVideo);

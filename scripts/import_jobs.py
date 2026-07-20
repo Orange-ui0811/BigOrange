@@ -1,9 +1,11 @@
 """批量导入岗位 MD 文件——完整版（公司/元信息存 content，display_content 剥离敏感信息）"""
-import os, re, urllib.request, json
+import argparse
+import getpass
+import json
+import os
+import re
+import urllib.request
 
-MD_DIR = r"C:\Users\l\Desktop\各公司实习要求"
-API = "http://localhost:8080/admin/job/import"
-TOKEN_URL = "http://localhost:8080/admin/auth/login"
 SKIP_FILES = {"飞书招聘链接汇总.md", "按技术方向分类.md"}
 
 COMPANIES = ["拓竹", "字节跳动", "腾讯", "阿里巴巴", "百度", "美团", "华为", "网易", "米哈游", "小米", "DJI",
@@ -32,9 +34,9 @@ DIRECTION_MAP = {
     "开发者社区": "AI 产品", "Post-training": "LLM 研究",
 }
 
-def login():
-    data = json.dumps({"username":"admin","password":"123456"}).encode()
-    req = urllib.request.Request(TOKEN_URL, data=data, headers={"Content-Type":"application/json"})
+def login(token_url, username, password):
+    data = json.dumps({"username": username, "password": password}).encode()
+    req = urllib.request.Request(token_url, data=data, headers={"Content-Type":"application/json"})
     return json.loads(urllib.request.urlopen(req).read())["data"]["token"]
 
 def strip_display(text):
@@ -67,17 +69,30 @@ def parse_md(filepath):
     return company, position, direction, text, display
 
 def main():
-    token = login()
-    files = sorted([f for f in os.listdir(MD_DIR) if f.endswith(".md") and f not in SKIP_FILES])
+    parser = argparse.ArgumentParser(description="批量导入岗位 Markdown 文件")
+    parser.add_argument("source_dir", help="岗位 Markdown 文件目录")
+    parser.add_argument("--base-url", default=os.environ.get("ORANGE_ADMIN_BASE_URL", "http://127.0.0.1:8080"))
+    parser.add_argument("--username", default=os.environ.get("ORANGE_ADMIN_USERNAME", "admin"))
+    parser.add_argument("--password", default=os.environ.get("ORANGE_ADMIN_PASSWORD"))
+    args = parser.parse_args()
+
+    source_dir = os.path.abspath(args.source_dir)
+    if not os.path.isdir(source_dir):
+        parser.error(f"目录不存在: {source_dir}")
+    password = args.password or getpass.getpass("管理员密码: ")
+    base_url = args.base_url.rstrip("/")
+    token = login(f"{base_url}/admin/auth/login", args.username, password)
+    api = f"{base_url}/admin/job/import"
+    files = sorted([f for f in os.listdir(source_dir) if f.endswith(".md") and f not in SKIP_FILES])
     total, success, skip = len(files), 0, 0
 
     for i, fname in enumerate(files):
-        filepath = os.path.join(MD_DIR, fname)
+        filepath = os.path.join(source_dir, fname)
         try:
             company, position, direction, content, display = parse_md(filepath)
             body = json.dumps({"company":company,"position":position,"direction":direction,
                 "content":content,"displayContent":display}, ensure_ascii=False).encode("utf-8")
-            req = urllib.request.Request(API, data=body,
+            req = urllib.request.Request(api, data=body,
                 headers={"Content-Type":"application/json; charset=utf-8","Admin-Token":token})
             resp = json.loads(urllib.request.urlopen(req).read())
             if resp["code"] == 1: success += 1; print(f"[{i+1}/{total}] OK  {company} - {position}")

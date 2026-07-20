@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.OrderPaymentMapper">
+    <resultMap id="orderPaymentMap" type="com.orangejd.pojo.entity.OrderPayment">
+        <id property="id" column="id"/>
+        <result property="tradeNo" column="trade_no"/>
+        <result property="orderId" column="order_id"/>
+        <result property="paymentStageId" column="payment_stage_id"/>
+        <result property="payerAccountId" column="payer_account_id"/>
+        <result property="stageType" column="stage_type"/>
+        <result property="amount" column="amount"/>
+        <result property="paymentMethod" column="payment_method"/>
+        <result property="paymentProvider" column="payment_provider"/>
+        <result property="providerTradeNo" column="provider_trade_no"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="completeTime" column="complete_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO order_payment
+            (trade_no, order_id, payment_stage_id, payer_account_id, stage_type, amount,
+             payment_method, payment_provider, status)
+        VALUES
+            (#{tradeNo}, #{orderId}, #{paymentStageId}, #{payerAccountId}, #{stageType}, #{amount},
+             #{paymentMethod}, #{paymentProvider}, #{status})
+    </insert>
+
+    <select id="selectByTradeNo" resultMap="orderPaymentMap">
+        SELECT * FROM order_payment WHERE trade_no = #{tradeNo}
+    </select>
+
+    <select id="selectByTradeNoForUpdate" resultMap="orderPaymentMap">
+        SELECT * FROM order_payment WHERE trade_no = #{tradeNo} FOR UPDATE
+    </select>
+
+    <select id="selectByStageForUpdate" resultMap="orderPaymentMap">
+        SELECT * FROM order_payment WHERE payment_stage_id = #{paymentStageId} FOR UPDATE
+    </select>
+
+    <update id="updateStatusIfPending">
+        UPDATE order_payment
+        SET status = 'SUCCESS', provider_trade_no = #{providerTradeNo}, complete_time = NOW()
+        WHERE trade_no = #{tradeNo} AND status = 'PENDING'
+    </update>
+</mapper>

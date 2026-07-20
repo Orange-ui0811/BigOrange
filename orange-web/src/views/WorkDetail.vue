@@ -60,11 +60,12 @@
             <VideoShowcase v-if="work.videoUrl" :url="work.videoUrl" :poster="work.coverUrl" :title="work.title" />
 
             <!-- 售卖项 -->
-            <div v-if="tradeEnabled && work.saleOptions?.length" class="sale-options">
-              <h3>售卖项</h3>
+            <div v-if="work.saleOptions?.length" class="sale-options">
+              <h3>参考价格</h3>
               <div class="sale-option-list">
-                <el-tag v-for="(so,i) in work.saleOptions" :key="i" type="warning" size="large">¥{{ so.price }} {{ so.saleType }}</el-tag>
+                <el-tag v-for="(so,i) in work.saleOptions" :key="i" type="warning" size="large">¥{{ so.price }}</el-tag>
               </div>
+              <p class="payment-coming-soon">价格仅供展示，在线支付功能即将开放。</p>
             </div>
 
             <!-- 演示链接 -->
@@ -138,7 +139,6 @@ import { useRoute, useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
 import VideoShowcase from '../components/VideoShowcase.vue'
 import request from '../api/request'
-import { tradeEnabled } from '../stores/tradeMode'
 
 const workdetailTour = [
   { selector: '.detail-cover', text: '顶部是作品封面；作者提供演示地址或视频时，可以继续向下查看和体验。', expression: 'curious' },
@@ -388,6 +388,7 @@ const sendCmt=async()=>{if(!cmtText.value.trim())return;try{await request.post('
 .sale-card strong { font-size: 14px; }
 .sale-card span { display: block; margin-top: 3px; color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
 .price { color: var(--brand-strong); font-family: var(--font-mono); font-weight: 900; font-size: 13px; }
+.payment-coming-soon { margin: 10px 0 0; color: var(--text-muted); font-size: 12px; }
 
 .trust-box {
   margin-top: 14px; padding: 12px;

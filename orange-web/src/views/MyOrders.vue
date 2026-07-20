@@ -27,10 +27,14 @@
           <el-tag :type="st(row.orderStatus)" size="small">{{row.orderStatus}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="140">
+      <el-table-column label="操作" width="210">
         <template #default="{row}">
-          <el-button size="small" v-if="tab==='buy'&&row.orderStatus==='WAITING_DEPOSIT'" type="primary" @click.stop="act(row.id,'deposit')">付定金</el-button>
-          <el-button size="small" v-if="tab==='buy'&&(row.orderStatus==='WAITING_FINAL_PAYMENT'||row.orderStatus==='DELIVERED')" type="success" @click.stop="act(row.id,'final-pay')">付尾款</el-button>
+          <el-button size="small" v-if="tab==='buy'&&row.orderStatus==='WAITING_DEPOSIT'" type="primary"
+                     :disabled="!orderPaymentEnabled" @click.stop="openPayment(row,'DEPOSIT')">付定金</el-button>
+          <el-button size="small" v-if="tab==='buy'&&row.orderStatus==='WAITING_FINAL_PAYMENT'"
+                     type="primary" plain @click.stop="confirmDelivery(row.id)">确认交付</el-button>
+          <el-button size="small" v-if="tab==='buy'&&row.orderStatus==='DELIVERED'" type="success"
+                     :disabled="!orderPaymentEnabled" @click.stop="openPayment(row,'FINAL')">付尾款</el-button>
           <el-button size="small" v-if="tab==='sell'&&row.orderStatus==='DEPOSIT_PAID'" type="primary" @click.stop="deliver(row.id)">交付</el-button>
         </template>
       </el-table-column>
@@ -95,6 +99,24 @@
         <el-button type="primary" :loading="deliverySubmitting" @click="submitDelivery">确认交付</el-button>
       </template>
     </el-dialog>
+    <el-dialog v-model="paymentDialog" title="订单支付" width="min(420px, calc(100vw - 32px))"
+               :close-on-click-modal="!paymentSubmitting" :show-close="!paymentSubmitting">
+      <el-alert v-if="!orderPaymentEnabled" title="产品订单在线支付尚未开放" type="warning" :closable="false"/>
+      <el-descriptions v-else :column="1" border size="small">
+        <el-descriptions-item label="订单">#{{ paymentForm.orderId }}</el-descriptions-item>
+        <el-descriptions-item label="阶段">{{ paymentForm.stageType==='DEPOSIT'?'定金':'尾款' }}</el-descriptions-item>
+        <el-descriptions-item label="金额">¥{{ paymentForm.amount }}</el-descriptions-item>
+      </el-descriptions>
+      <el-radio-group v-model="paymentForm.method" :disabled="paymentSubmitting" style="margin-top:16px">
+        <el-radio-button value="wxpay">微信支付</el-radio-button>
+        <el-radio-button value="alipay">支付宝</el-radio-button>
+      </el-radio-group>
+      <template #footer>
+        <el-button :disabled="paymentSubmitting" @click="paymentDialog=false">取消</el-button>
+        <el-button type="primary" :loading="paymentSubmitting" :disabled="!orderPaymentEnabled"
+                   @click="submitPayment">前往安全支付</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -105,12 +127,48 @@ import request from '../api/request'
 const tab=ref('buy'),list=ref([]),loading=ref(false),selected=ref([]),selectAll=ref(false),dlg=ref(false),d=ref(null)
 const deliveryDialog=ref(false),deliverySubmitting=ref(false),deliveryOrderId=ref(null),deliveryFiles=ref([])
 const deliveryForm=ref({content:'',file:null})
+const orderPaymentEnabled=ref(false),paymentDialog=ref(false),paymentSubmitting=ref(false)
+const paymentForm=ref({orderId:null,stageType:'DEPOSIT',amount:'0.00',method:'wxpay'})
 const st=s=>({COMPLETED:'success',CANCELLED:'info'}[s]||(s?.includes('WAITING')||s==='PENDING')?'warning':'')
 const load=async()=>{loading.value=true;try{const r=await request.get('/app/order/'+(tab.value==='buy'?'buy':'sell'),{params:{page:1,size:50}});if(r.code===1)list.value=r.data?.records||[];selected.value=[];selectAll.value=false}finally{loading.value=false}}
 const toggle=id=>{const i=selected.value.indexOf(id);i>=0?selected.value.splice(i,1):selected.value.push(id);selectAll.value=selected.value.length===list.value.length}
 const toggleAll=v=>{selected.value=v?list.value.map(o=>o.id):[]}
 const batchDelete=async()=>{if(!selected.value.length)return;try{await ElMessageBox.confirm('删除选中订单？','批量删除',{type:'warning'})}catch{return};await request.delete('/app/order/batch',{data:selected.value});selected.value=[];load()}
-const act=async(id,a)=>{await request.put(`/app/order/${id}/${a}`);load()}
+const confirmDelivery=async id=>{await request.put(`/app/order/${id}/confirm`);ElMessage.success('交付已确认，请支付尾款');await load()}
+const loadPaymentMode=async()=>{try{const r=await request.get('/app/config/trade-mode');orderPaymentEnabled.value=Boolean(r.data?.orderPaymentEnabled)}catch{orderPaymentEnabled.value=false}}
+const openPayment=(row,stageType)=>{
+  if(!orderPaymentEnabled.value){ElMessage.warning('产品订单在线支付尚未开放');return}
+  paymentForm.value={orderId:row.id,stageType,amount:stageType==='DEPOSIT'?row.deposit:row.finalAmount,method:'wxpay'}
+  paymentDialog.value=true
+}
+const submitPayment=async()=>{
+  if(paymentSubmitting.value||!orderPaymentEnabled.value)return
+  paymentSubmitting.value=true
+  try{
+    const r=await request.post('/app/epay/order/create',{
+      orderId:paymentForm.value.orderId,
+      stageType:paymentForm.value.stageType,
+      method:paymentForm.value.method
+    })
+    if(r.code!==1||!r.data?.payUrl||!r.data?.tradeNo)throw new Error(r.msg||'创建支付失败')
+    const target=new URL(r.data.payUrl)
+    if(target.protocol!=='https:')throw new Error('支付网关地址不安全')
+    window.sessionStorage.setItem('orange-order-payment-trade-no',r.data.tradeNo)
+    window.location.assign(target.toString())
+  }catch(error){ElMessage.error(error?.message||'创建支付失败')}
+  finally{paymentSubmitting.value=false}
+}
+const checkReturnedPayment=async()=>{
+  const tradeNo=window.sessionStorage.getItem('orange-order-payment-trade-no')
+  if(!tradeNo)return
+  try{
+    const r=await request.get(`/app/epay/order/status/${encodeURIComponent(tradeNo)}`)
+    if(r.data?.status==='SUCCESS'){
+      window.sessionStorage.removeItem('orange-order-payment-trade-no')
+      ElMessage.success('支付已确认');await load()
+    }else ElMessage.info('支付结果确认中，请稍后刷新订单')
+  }catch{}
+}
 const deliver=id=>{deliveryOrderId.value=id;deliveryDialog.value=true}
 const selectDeliveryFile=file=>{deliveryForm.value.file=file.raw;deliveryFiles.value=[file]}
 const removeDeliveryFile=()=>{deliveryForm.value.file=null;deliveryFiles.value=[]}
@@ -155,7 +213,7 @@ const downloadAttachment=async(orderId,row)=>{
   }catch(error){if(downloadWindow)downloadWindow.close();ElMessage.error(error?.message||'附件下载失败')}
 }
 const showDetail=async r=>{try{const res=await request.get('/app/order/'+r.id);if(res.code===1){d.value=res.data;dlg.value=true}}catch{}}
-watch(tab,load);onMounted(load)
+watch(tab,load);onMounted(async()=>{await Promise.all([load(),loadPaymentMode()]);await checkReturnedPayment()})
 </script>
 
 <style scoped>

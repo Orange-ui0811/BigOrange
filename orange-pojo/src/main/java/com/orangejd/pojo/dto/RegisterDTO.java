@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.NotNull;
 
 public class RegisterDTO {
     @NotBlank(message = "用户名不能为空")
@@ -23,6 +25,12 @@ public class RegisterDTO {
     private String code;
     @Size(max = 2048, message = "人机验证参数过长")
     private String turnstileToken;
+    @NotNull(message = "请明确选择是否同意用户协议和隐私政策")
+    @AssertTrue(message = "请先同意用户协议和隐私政策")
+    private Boolean legalAccepted;
+    @NotBlank(message = "协议版本不能为空")
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "协议版本格式不正确")
+    private String legalVersion;
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
@@ -36,4 +44,8 @@ public class RegisterDTO {
     public void setCode(String code) { this.code = code; }
     public String getTurnstileToken() { return turnstileToken; }
     public void setTurnstileToken(String turnstileToken) { this.turnstileToken = turnstileToken; }
+    public Boolean getLegalAccepted() { return legalAccepted; }
+    public void setLegalAccepted(Boolean legalAccepted) { this.legalAccepted = legalAccepted; }
+    public String getLegalVersion() { return legalVersion; }
+    public void setLegalVersion(String legalVersion) { this.legalVersion = legalVersion; }
 }

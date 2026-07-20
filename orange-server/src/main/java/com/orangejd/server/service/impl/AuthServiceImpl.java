@@ -34,6 +34,7 @@ import java.util.Locale;
 @Service
 public class AuthServiceImpl implements AuthService {
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+    private static final String CURRENT_LEGAL_VERSION = "2026-07-19";
 
     @Autowired
     private AccountMapper accountMapper;
@@ -91,6 +92,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public LoginVO register(RegisterDTO registerDTO) {
+        if (!Boolean.TRUE.equals(registerDTO.getLegalAccepted())
+                || !CURRENT_LEGAL_VERSION.equals(registerDTO.getLegalVersion())) {
+            throw new BaseException("请阅读并同意当前版本的用户协议和隐私政策");
+        }
         // 检查用户名重复
         Account existing = accountMapper.selectByUsername(registerDTO.getUsername());
         if (existing != null) {
@@ -124,6 +129,7 @@ public class AuthServiceImpl implements AuthService {
         account.setStatus("ACTIVE");
         account.setRole("USER");
         account.setEmail(email);
+        account.setLegalVersion(registerDTO.getLegalVersion());
         accountMapper.insert(account);
 
         // 创建用户资料

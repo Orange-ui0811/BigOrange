@@ -153,7 +153,7 @@
           <button
             type="button"
             class="code-btn"
-            :disabled="codeCooldown > 0"
+            :disabled="codeCooldown > 0 || !legalAccepted"
             @click="sendCode"
           >{{ codeCooldown > 0 ? codeCooldown + 's' : '获取验证码' }}</button>
         </div>
@@ -183,12 +183,29 @@
           type="text"
           autocomplete="nickname"
         />
+        <label class="consent-row" for="legal-consent">
+          <input
+            id="legal-consent"
+            v-model="legalAccepted"
+            name="legalAccepted"
+            type="checkbox"
+            required
+            aria-required="true"
+          />
+          <span><strong class="required-mark">必选</strong> 我已阅读并同意 <router-link to="/legal/terms" target="_blank" rel="noopener noreferrer" @click.stop>《用户协议》</router-link>和<router-link to="/legal/privacy" target="_blank" rel="noopener noreferrer" @click.stop>《隐私政策》</router-link>，并已知悉<router-link to="/legal/third-parties" target="_blank" rel="noopener noreferrer" @click.stop>《第三方服务清单》</router-link></span>
+        </label>
         <!-- Turnstile 人机验证 -->
-        <div ref="turnstileRef" class="turnstile-widget"></div>
-        <button type="submit" class="login-btn" :disabled="loading">
+        <div v-if="legalAccepted" ref="turnstileRef" class="turnstile-widget"></div>
+        <button type="submit" class="login-btn" :disabled="loading || !legalAccepted">
           {{ loading ? '注册中...' : '注册' }}
         </button>
       </form>
+      <footer class="login-legal">
+        <router-link to="/legal/terms">用户协议</router-link>
+        <router-link to="/legal/privacy">隐私政策</router-link>
+        <router-link to="/legal/third-parties">第三方服务</router-link>
+        <router-link to="/support">举报与申诉</router-link>
+      </footer>
     </div>
   </div>
 </template>
@@ -198,6 +215,7 @@ import { ref, reactive, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
+import { LEGAL_VERSION } from '../content/legal'
 
 const router = useRouter()
 const tab = ref('login')
@@ -209,6 +227,7 @@ const showRegPwd = ref(false)
 const loginForm = reactive({ username: '', password: '' })
 const codeCooldown = ref(0)
 const regForm = reactive({ username: '', password: '', nickname: '', email: '', code: '', turnstileToken: '' })
+const legalAccepted = ref(false)
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'
 
 // 忘记密码
@@ -247,6 +266,7 @@ const doResetPwd = async () => {
 }
 
 const sendCode = async () => {
+  if (!legalAccepted.value) { ElMessage.warning('请先阅读并同意用户协议和隐私政策'); return }
   if (!regForm.email || !regForm.email.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
   try {
     await request.post('/app/auth/send-code', { email: regForm.email })
@@ -258,19 +278,44 @@ const sendCode = async () => {
   }
 }
 
-// 切换到注册 Tab 时初始化 Turnstile
-watch(tab, (val) => {
-  if (val === 'register') {
-    nextTick(() => {
-      if (window.turnstile && turnstileRef.value) {
-        if (turnstileId !== null) window.turnstile.remove(turnstileId)
-        turnstileId = window.turnstile.render(turnstileRef.value, {
-          sitekey: TURNSTILE_SITE_KEY,
-          callback: (token) => { regForm.turnstileToken = token },
-          'expired-callback': () => { regForm.turnstileToken = '' },
-        })
-      }
+let turnstileLoader = null
+const loadTurnstile = () => {
+  if (window.turnstile) return Promise.resolve()
+  if (turnstileLoader) return turnstileLoader
+  turnstileLoader = new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
+    script.async = true
+    script.defer = true
+    script.onload = resolve
+    script.onerror = () => reject(new Error('人机验证加载失败'))
+    document.head.appendChild(script)
+  })
+  return turnstileLoader
+}
+
+// 仅在用户主动勾选协议后加载第三方人机验证脚本。
+watch([tab, legalAccepted], async ([currentTab, accepted]) => {
+  regForm.turnstileToken = ''
+  if (currentTab !== 'register' || !accepted) {
+    if (turnstileId !== null && window.turnstile) {
+      try { window.turnstile.remove(turnstileId) } catch {}
+    }
+    turnstileId = null
+    return
+  }
+  try {
+    await loadTurnstile()
+    await nextTick()
+    if (!window.turnstile || !turnstileRef.value) return
+    if (turnstileId !== null) window.turnstile.remove(turnstileId)
+    turnstileId = window.turnstile.render(turnstileRef.value, {
+      sitekey: TURNSTILE_SITE_KEY,
+      callback: (token) => { regForm.turnstileToken = token },
+      'expired-callback': () => { regForm.turnstileToken = '' },
     })
+  } catch {
+    ElMessage.error('人机验证加载失败，请检查网络后重试')
   }
 })
 
@@ -286,13 +331,20 @@ const doLogin = async () => {
 }
 
 const doRegister = async () => {
+  if (!legalAccepted.value) { ElMessage.warning('请先阅读并同意用户协议和隐私政策'); return }
   if (regForm.password.length < 6 || !/[a-zA-Z]/.test(regForm.password) || !/\d/.test(regForm.password)) { ElMessage.error('密码至少6位且包含字母和数字'); return }
   if (!regForm.email || !regForm.email.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
   if (!regForm.code) { ElMessage.error('请输入验证码'); return }
   if (!regForm.username) { ElMessage.warning('请输入用户名'); return }
+  if (!regForm.turnstileToken) { ElMessage.warning('请先完成人机验证'); return }
   loading.value = true
   try {
-    const res = await request.post('/app/auth/register', { ...regForm, turnstileToken: regForm.turnstileToken })
+    const res = await request.post('/app/auth/register', {
+      ...regForm,
+      turnstileToken: regForm.turnstileToken,
+      legalAccepted: legalAccepted.value,
+      legalVersion: LEGAL_VERSION,
+    })
     if (res.code === 1) { sessionStorage.setItem('appToken', res.data.token); sessionStorage.setItem('myId', res.data.id); router.push('/market') }
     else ElMessage.error(res.msg)
   } catch (e) { ElMessage.error(e?.response?.data?.msg || '网络连接失败') }
@@ -312,13 +364,17 @@ const doRegister = async () => {
 /* ===== 背景 ===== */
 .login-bg {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, #ff8a33 0%, #fff4d9 100%);
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 90px 0 40px;
 }
 
 .login-bg::after {
@@ -533,6 +589,31 @@ const doRegister = async () => {
   margin: 12px 0 18px;
   display: flex;
   justify-content: center;
+}
+.consent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 2px 0 14px;
+  color: #6b5a50;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.consent-row input { width: 16px; height: 16px; margin-top: 2px; accent-color: #ff7b22; flex: 0 0 auto; }
+.required-mark {
+  color: #c2410c;
+  font-size: 11px;
+}
+.consent-row a, .login-legal a { color: #c2410c; text-decoration: none; }
+.login-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px 12px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #ffedd5;
+  font-size: 11px;
 }
 .forgot-link {
   text-align: center;

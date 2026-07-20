@@ -20,6 +20,7 @@
         VALUES (#{sourceType}, #{sourceId}, #{buyerId}, #{sellerId}, #{workId}, #{deposit}, #{finalAmount}, #{totalAmount}, #{orderStatus})
     </insert>
     <select id="selectById" resultMap="orderMap">SELECT * FROM `order` WHERE id = #{id}</select>
+    <select id="selectByIdForUpdate" resultMap="orderMap">SELECT * FROM `order` WHERE id = #{id} FOR UPDATE</select>
     <select id="selectVOById" resultType="com.orangejd.pojo.vo.OrderVO">
         SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
         FROM `order` o
@@ -50,6 +51,10 @@
     <select id="countBySellerId" resultType="int">SELECT COUNT(*) FROM `order` WHERE seller_id = #{sellerId} AND seller_deleted = 0</select>
     <update id="updateStatus">
         UPDATE `order` SET order_status = #{orderStatus}, update_time = NOW() WHERE id = #{id}
+    </update>
+    <update id="updateStatusIfCurrent">
+        UPDATE `order` SET order_status = #{newStatus}, update_time = NOW()
+        WHERE id = #{id} AND order_status = #{currentStatus}
     </update>
     <update id="hideForBuyer">
         UPDATE `order` SET buyer_deleted = 1, update_time = NOW() WHERE id = #{id} AND buyer_id = #{buyerId}

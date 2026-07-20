@@ -246,7 +246,7 @@
         <el-button size="small" type="primary" class="jobs-submit-btn" @click="$router.push('/submit-job')">投稿岗位</el-button>
       </div>
       <div v-if="jobDetail" class="job-detail-card" v-safe-html="jobDetailHtml"></div>
-      <p v-if="jobDetail" class="job-disclaimer">本页面岗位信息由平台注册用户自主上传分享，本平台仅提供信息存储空间服务，不对内容版权、真实性承担责任。如涉及侵权，请联系 1281748852@qq.com，我们将在 3 个工作日内下架对应内容。</p>
+      <p v-if="jobDetail" class="job-disclaimer">本页面岗位信息由平台注册用户自主上传分享，仅供参考。如涉及侵权，请联系 {{ LEGAL_CONTACT }}，平台将按举报、下架与申诉流程及时核验处理。</p>
       <el-empty v-if="jobDirection && !jobId && !jobDetail" description="请选择岗位" />
       <el-empty v-if="!jobDirection" description="请选择方向查看岗位" />
     </div>
@@ -367,6 +367,7 @@ import * as echarts from 'echarts'
 import { marked } from 'marked'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
+import { LEGAL_CONTACT } from '../content/legal'
 import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
 
 const chartRef = ref(null)

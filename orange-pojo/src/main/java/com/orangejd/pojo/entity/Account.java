@@ -1,5 +1,7 @@
 package com.orangejd.pojo.entity;
 
+import java.time.LocalDateTime;
+
 public class Account extends BaseEntity {
     private String username;
     private String password;
@@ -8,6 +10,8 @@ public class Account extends BaseEntity {
     private Long quota;
     private String status;
     private String role;
+    private String legalVersion;
+    private LocalDateTime legalAcceptedTime;
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
@@ -23,4 +27,8 @@ public class Account extends BaseEntity {
     public void setEmail(String email) { this.email = email; }
     public Long getQuota() { return quota; }
     public void setQuota(Long quota) { this.quota = quota; }
+    public String getLegalVersion() { return legalVersion; }
+    public void setLegalVersion(String legalVersion) { this.legalVersion = legalVersion; }
+    public LocalDateTime getLegalAcceptedTime() { return legalAcceptedTime; }
+    public void setLegalAcceptedTime(LocalDateTime legalAcceptedTime) { this.legalAcceptedTime = legalAcceptedTime; }
 }

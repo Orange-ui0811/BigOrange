@@ -24,6 +24,14 @@ class ProductionConfigurationValidatorTest {
     }
 
     @Test
+    void rejectsOrderPaymentsWithoutCompleteProviderConfiguration() {
+        EpayProperties epay = new EpayProperties();
+        epay.setOrderPaymentsEnabled(true);
+        ProductionConfigurationValidator validator = validator(epay);
+        assertThrows(IllegalStateException.class, validator::afterPropertiesSet);
+    }
+
+    @Test
     void rejectsCorsOriginWithCredentialsOrPath() {
         ProductionConfigurationValidator validator = validator(new EpayProperties());
         ReflectionTestUtils.setField(validator, "allowedOrigins", "https://trusted.example@evil.example/path");

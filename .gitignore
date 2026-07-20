@@ -20,12 +20,45 @@ Thumbs.db
 *.log
 deploy/
 
-# Local environment overrides
-.env.local
+# Environment and secret material. Only redacted examples belong in Git.
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!.env.*.example
+!**/.env.example
+!**/.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_ed25519
+
+# Build and package output
+build/
+release/
+**/node_modules/
+**/dist/
+**/target/
 
 # Generated database backups
 backup/
+*.sql.gz
+*.dump
 
 # Runtime uploads and local analysis indexes
 uploads/
 .codegraph/
+.codex/
+
+# Internal-only workspace material and obsolete snapshots
+.agents/
+orangejd-skeleton/
+test-frontend.html
+docs/开发日志/
+docs/当前生产部署与运维手册.md
+docs/项目进度记录.md

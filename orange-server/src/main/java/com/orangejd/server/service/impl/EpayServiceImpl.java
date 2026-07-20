@@ -30,14 +30,27 @@ public class EpayServiceImpl implements EpayService {
         // 100 segments = 1 元
         BigDecimal money = new BigDecimal(amount).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
 
+        return createPayment(tradeNo, money, method, "OrangeJD 配额充值");
+    }
+
+    @Override
+    public String createPayment(String tradeNo, BigDecimal money, String method, String subject) {
+        if (money == null || money.signum() <= 0 || money.scale() > 2) {
+            throw new BaseException("支付金额格式错误");
+        }
+        String safeSubject = subject == null ? "OrangeJD 订单支付" : subject.trim();
+        if (safeSubject.isEmpty() || safeSubject.length() > 64) {
+            throw new BaseException("支付商品名称无效");
+        }
+
         Map<String, String> params = new LinkedHashMap<>();
         params.put("pid", props.getPid());
         params.put("type", method);
         params.put("out_trade_no", tradeNo);
         params.put("notify_url", props.getNotifyUrl());
         params.put("return_url", props.getReturnUrl());
-        params.put("name", "OrangeJD 配额充值");
-        params.put("money", money.toPlainString());
+        params.put("name", safeSubject);
+        params.put("money", money.setScale(2, RoundingMode.UNNECESSARY).toPlainString());
         params.put("param", tradeNo); // 自定义参数，回调时原样返回
 
         // 加签
@@ -52,7 +65,7 @@ public class EpayServiceImpl implements EpayService {
             sb.append(e.getKey()).append("=").append(urlEncode(e.getValue())).append("&");
         }
         String payUrl = sb.substring(0, sb.length() - 1);
-        log.info("Epay 支付链接生成: tradeNo={}, amount={}, money={}", tradeNo, amount, money.toPlainString());
+        log.info("Epay 支付链接生成: tradeNo={}, money={}", tradeNo, money.toPlainString());
         return payUrl;
     }
 
@@ -78,6 +91,11 @@ public class EpayServiceImpl implements EpayService {
 
     @Override
     public void validateSuccessfulCallback(Map<String, String> params, TopUp topUp) {
+        validateSuccessfulCallback(params, topUp.getMoney());
+    }
+
+    @Override
+    public void validateSuccessfulCallback(Map<String, String> params, BigDecimal expectedAmount) {
         if (!Objects.equals(props.getPid(), params.get("pid"))) {
             throw new BaseException("支付回调商户号不匹配");
         }
@@ -90,11 +108,11 @@ public class EpayServiceImpl implements EpayService {
         }
         try {
             BigDecimal callbackMoney = new BigDecimal(params.get("money")).setScale(2, RoundingMode.UNNECESSARY);
-            BigDecimal expectedMoney = topUp.getMoney().setScale(2, RoundingMode.UNNECESSARY);
+            BigDecimal expectedMoney = expectedAmount.setScale(2, RoundingMode.UNNECESSARY);
             if (callbackMoney.compareTo(expectedMoney) != 0) {
                 throw new BaseException("支付回调金额不匹配");
             }
-        } catch (NumberFormatException | ArithmeticException e) {
+        } catch (NumberFormatException | ArithmeticException | NullPointerException e) {
             throw new BaseException("支付回调金额格式错误");
         }
     }

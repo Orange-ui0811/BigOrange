@@ -37,7 +37,7 @@ OrangeJD
 ├── orange-web/         用户端前端（Vue 3 + Element Plus）
 ├── orange-admin/      管理后台前端（Vue 3 + Element Plus）
 ├── docs/               项目文档 + 开发日志 + 部署指南
-└── deploy/             部署包（jar + 前端 dist + 数据库导出）
+└── scripts/            构建、公开导出与服务器服务模板
 ```
 
 ## 功能模块
@@ -155,16 +155,18 @@ cd orange-admin && npx vite --host
 
 ## 生产部署
 
-详细指南见 `docs/服务器部署完整指南.md`，上线安全、数据治理与支付门禁见
-`docs/生产上线安全与数据治理.md`。生产变量从 `.env.prod.example` 复制到密钥管理系统，
-不要把真实值写回仓库；数据库结构由 Flyway 在后端启动时校验和迁移。
+从 GitHub 克隆、初始化数据库、构建发布包和回滚的完整指南见
+`docs/GitHub克隆与服务器数据库部署.md`；Cloudflare 与 HTTPS 见
+`docs/Cloudflare域名与HTTPS接入手册.md`；支付门禁见
+`docs/ePay订单支付接入与服务器交接手册.md`。生产变量从 `.env.prod.example`
+复制到服务器密钥文件，不要把真实值写回仓库。
 
 ```bash
 # 发布前验证与构建
-mvn test
-mvn clean package -DskipTests
-npm --prefix orange-web ci && npm --prefix orange-web run build
-npm --prefix orange-admin ci && npm --prefix orange-admin run build
+VITE_TURNSTILE_SITE_KEY='PUBLIC_SITE_KEY' \
+VITE_LEGAL_OPERATOR='运营主体全称' \
+VITE_LEGAL_CONTACT_EMAIL='网站公示的联系邮箱' \
+./scripts/build-release.sh
 
 # 发布前备份（密码通过环境变量或密钥管理系统注入）
 MYSQL_PASSWORD='从密钥管理系统读取' BACKUP_DIR=/data/backups/orangejd ./backup.sh
@@ -217,9 +219,10 @@ location ^~ /uploads/ { alias /root/uploads/; }  # 必须 ^~ 覆盖图片正则
 
 | 文档 | 路径 |
 |------|------|
-| 服务器部署完整指南 | `docs/服务器部署完整指南.md` |
+| GitHub 克隆与生产部署 | `docs/GitHub克隆与服务器数据库部署.md` |
+| Cloudflare 域名与 HTTPS | `docs/Cloudflare域名与HTTPS接入手册.md` |
+| ePay 接入与服务器交接 | `docs/ePay订单支付接入与服务器交接手册.md` |
 | 系统架构设计说明书 | `docs/OrangeJD系统架构设计说明书.md` |
-| 生产上线安全与数据治理 | `docs/生产上线安全与数据治理.md` |
 | 项目进度记录 | `docs/项目进度记录.md` |
 | 开发日志（最新） | `docs/开发日志/2026-07-09-多模块增强.md` |
 | 前端 UI 设计规范 | `docs/OrangeJD前端UI设计规范.md` |

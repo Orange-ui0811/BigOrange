@@ -11,12 +11,16 @@ import java.util.List;
 public interface OrderMapper {
     int insert(Order order);
     Order selectById(@Param("id") Long id);
+    Order selectByIdForUpdate(@Param("id") Long id);
     OrderVO selectVOById(@Param("id") Long id);
     List<OrderVO> selectByBuyerId(@Param("buyerId") Long buyerId, @Param("offset") int offset, @Param("limit") int limit);
     int countByBuyerId(@Param("buyerId") Long buyerId);
     List<OrderVO> selectBySellerId(@Param("sellerId") Long sellerId, @Param("offset") int offset, @Param("limit") int limit);
     int countBySellerId(@Param("sellerId") Long sellerId);
     int updateStatus(@Param("id") Long id, @Param("orderStatus") String orderStatus);
+    int updateStatusIfCurrent(@Param("id") Long id,
+                              @Param("currentStatus") String currentStatus,
+                              @Param("newStatus") String newStatus);
     int hideForBuyer(@Param("id") Long id, @Param("buyerId") Long buyerId);
     int hideForSeller(@Param("id") Long id, @Param("sellerId") Long sellerId);
 

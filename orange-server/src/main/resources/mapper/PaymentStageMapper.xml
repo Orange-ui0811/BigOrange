@@ -10,7 +10,14 @@
         INSERT INTO payment_stage (order_id, stage_type, amount) VALUES (#{orderId}, #{stageType}, #{amount})
     </insert>
     <select id="selectByOrderId" resultMap="psMap">SELECT * FROM payment_stage WHERE order_id = #{orderId}</select>
+    <select id="selectByOrderAndTypeForUpdate" resultMap="psMap">
+        SELECT * FROM payment_stage WHERE order_id = #{orderId} AND stage_type = #{stageType} FOR UPDATE
+    </select>
     <update id="updatePayStatus">
         UPDATE payment_stage SET pay_status = #{payStatus}, pay_time = NOW() WHERE id = #{id}
+    </update>
+    <update id="updatePayStatusIfUnpaid">
+        UPDATE payment_stage SET pay_status = 'PAID', pay_time = NOW()
+        WHERE id = #{id} AND pay_status = 'UNPAID'
     </update>
 </mapper>

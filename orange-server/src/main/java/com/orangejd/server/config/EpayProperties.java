@@ -14,6 +14,8 @@ public class EpayProperties {
     private String notifyUrl = "";
     /** 支付完成跳转地址 */
     private String returnUrl = "";
+    /** 产品订单真实支付开关；服务商查单、退款和结算能力验收前必须保持关闭。 */
+    private boolean orderPaymentsEnabled;
 
     public String getPid() { return pid; }
     public void setPid(String pid) { this.pid = pid; }
@@ -25,6 +27,8 @@ public class EpayProperties {
     public void setNotifyUrl(String notifyUrl) { this.notifyUrl = notifyUrl; }
     public String getReturnUrl() { return returnUrl; }
     public void setReturnUrl(String returnUrl) { this.returnUrl = returnUrl; }
+    public boolean isOrderPaymentsEnabled() { return orderPaymentsEnabled; }
+    public void setOrderPaymentsEnabled(boolean orderPaymentsEnabled) { this.orderPaymentsEnabled = orderPaymentsEnabled; }
 
     public boolean isConfigured() {
         return hasText(pid) && hasText(key) && hasText(gateway) && hasText(notifyUrl) && hasText(returnUrl);

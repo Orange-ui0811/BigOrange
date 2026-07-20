@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.orangejd.server.config.EpayProperties;
 
 import java.util.Map;
 
@@ -18,10 +19,14 @@ public class AppConfigController {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    @Autowired
+    private EpayProperties epayProperties;
+
     @GetMapping("/trade-mode")
     public Result<Map<String, Boolean>> getTradeMode() {
         String val = redisTemplate.opsForValue().get(TRADE_MODE_KEY);
         boolean enabled = !"false".equals(val);
-        return Result.success(Map.of("enabled", enabled));
+        boolean orderPaymentEnabled = epayProperties.isConfigured() && epayProperties.isOrderPaymentsEnabled();
+        return Result.success(Map.of("enabled", enabled, "orderPaymentEnabled", orderPaymentEnabled));
     }
 }

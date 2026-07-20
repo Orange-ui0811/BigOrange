@@ -4,10 +4,12 @@ import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.Result;
 import com.orangejd.common.util.PageUtil;
 import com.orangejd.pojo.entity.TopUp;
+import com.orangejd.pojo.dto.OrderPaymentCreateDTO;
 import com.orangejd.server.config.EpayProperties;
 import com.orangejd.server.mapper.TopUpMapper;
 import com.orangejd.server.service.EpayService;
 import com.orangejd.server.service.PaymentApplicationService;
+import com.orangejd.server.service.OrderPaymentApplicationService;
 import com.orangejd.server.service.RateLimitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,7 @@ public class EpayController {
     @Autowired private TopUpMapper topUpMapper;
     @Autowired private EpayProperties epayProperties;
     @Autowired private PaymentApplicationService paymentApplicationService;
+    @Autowired private OrderPaymentApplicationService orderPaymentApplicationService;
     @Autowired private RateLimitService rateLimitService;
 
     private static final Set<Integer> ALLOWED_AMOUNTS = Set.of(1000, 3000, 5000, 10000);
@@ -78,13 +81,30 @@ public class EpayController {
         return Result.success(result);
     }
 
+    /** 创建产品订单定金或尾款支付。金额只能从订单支付阶段读取。 */
+    @PostMapping("/app/epay/order/create")
+    public Result<Map<String, String>> createOrderPayment(@RequestBody OrderPaymentCreateDTO body) {
+        return Result.success(orderPaymentApplicationService.create(body));
+    }
+
+    /** 买家查询自己的产品订单支付结果；浏览器 return_url 不能直接确认付款。 */
+    @GetMapping("/app/epay/order/status/{tradeNo}")
+    public Result<Map<String, Object>> orderPaymentStatus(@PathVariable String tradeNo) {
+        return Result.success(orderPaymentApplicationService.status(tradeNo));
+    }
+
     /** Epay 回调通知（POST） */
     @PostMapping("/api/epay/notify")
     public String notify(HttpServletRequest request) {
         try {
             Map<String, String> params = parseParams(request);
             log.info("Epay 回调: tradeNo={}, status={}", safeLog(params.get("out_trade_no")), safeLog(params.get("trade_status")));
-            paymentApplicationService.processEpayCallback(params);
+            String tradeNo = params.get("out_trade_no");
+            if (tradeNo != null && tradeNo.startsWith("ORD_")) {
+                orderPaymentApplicationService.processEpayCallback(params);
+            } else {
+                paymentApplicationService.processEpayCallback(params);
+            }
         } catch (Exception e) {
             log.warn("Epay 回调处理失败: ip={}, error={}", request.getRemoteAddr(), e.getClass().getSimpleName());
             return "fail";

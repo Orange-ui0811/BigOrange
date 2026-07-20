@@ -46,6 +46,9 @@ public class ProductionConfigurationValidator implements InitializingBean {
         if (anyPaymentValue && !epay.isConfigured()) {
             throw new IllegalStateException("支付配置不完整；请全部配置或全部留空以关闭支付");
         }
+        if (epay.isOrderPaymentsEnabled() && !epay.isConfigured()) {
+            throw new IllegalStateException("开启产品订单支付前必须完整配置 Epay");
+        }
         if (epay.isConfigured()) {
             requireHttpsUrl("EPAY_GATEWAY", epay.getGateway(), false);
             requireHttpsUrl("EPAY_NOTIFY_URL", epay.getNotifyUrl(), false);
