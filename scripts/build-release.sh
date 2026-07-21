@@ -14,6 +14,14 @@ command -v npm >/dev/null 2>&1 || { echo "Node.js/npm is required" >&2; exit 1; 
 export VITE_API_BASE_URL="${VITE_API_BASE_URL:-/api}"
 export VITE_WS_URL="${VITE_WS_URL:-}"
 
+# Git for Windows otherwise rewrites values such as /api into a local MSYS path
+# when npm is launched from this script.
+case "$(uname -s)" in
+  MINGW*|MSYS*)
+    export MSYS2_ENV_CONV_EXCL="${MSYS2_ENV_CONV_EXCL:+$MSYS2_ENV_CONV_EXCL;}VITE_API_BASE_URL;VITE_WS_URL"
+    ;;
+esac
+
 cd "$ROOT_DIR"
 if [[ "${SKIP_TESTS:-false}" == "true" ]]; then
   mvn -B clean package -DskipTests

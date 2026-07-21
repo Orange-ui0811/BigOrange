@@ -24,6 +24,7 @@ const routes = [
       { path: 'pricing', name: 'Pricing', component: () => import('../views/Pricing.vue'), meta: { title: 'AI 消费定价' } },
       { path: 'usage', name: 'UsageStats', component: () => import('../views/UsageStats.vue'), meta: { title: '用量统计' } },
       { path: 'launch-checks', name: 'LaunchChecks', component: () => import('../views/LaunchChecks.vue'), meta: { title: '上线体检' } },
+      { path: 'open-source', name: 'OpenSource', component: () => import('../views/OpenSource.vue'), meta: { title: '开源贡献' } },
       { path: 'settings', name: 'Settings', component: () => import('../views/Settings.vue'), meta: { title: '修改密码' } },
       { path: 'work/:id', name: 'WorkDetail', component: () => import('../views/WorkDetail.vue'), meta: { title: '作品详情' } },
       { path: 'requirement/:id', name: 'ReqDetail', component: () => import('../views/WorkDetail.vue'), meta: { title: '需求详情' } }

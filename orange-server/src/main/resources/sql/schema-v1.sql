@@ -573,3 +573,91 @@ CREATE TABLE IF NOT EXISTS pricing_change_log (
     KEY idx_service_key (service_key),
     KEY idx_changed_at (changed_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定价变更审计日志表';
+
+-- ============================================================
+-- Open source contribution discovery and saved guides
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS open_source_repository (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    full_name VARCHAR(160) NOT NULL,
+    display_name VARCHAR(160),
+    organization_name VARCHAR(128),
+    html_url VARCHAR(512) NOT NULL,
+    stars INT NOT NULL DEFAULT 0,
+    primary_language VARCHAR(64),
+    tech_stack VARCHAR(512),
+    node_version VARCHAR(64),
+    package_manager VARCHAR(32),
+    system_requirement VARCHAR(128),
+    memory_requirement VARCHAR(128),
+    disk_requirement VARCHAR(128),
+    contribution_url VARCHAR(512),
+    environment_notes VARCHAR(1000),
+    tier VARCHAR(16) NOT NULL DEFAULT 'EXTENDED',
+    priority INT NOT NULL DEFAULT 100,
+    enabled TINYINT(1) NOT NULL DEFAULT 1,
+    last_sync_status VARCHAR(16),
+    last_sync_error VARCHAR(1000),
+    last_sync_time DATETIME,
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_open_source_repository_name (full_name),
+    KEY idx_open_source_repository_enabled (enabled, priority)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='开源贡献仓库源';
+
+CREATE TABLE IF NOT EXISTS open_source_issue (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    repository_id BIGINT NOT NULL,
+    github_issue_id BIGINT NOT NULL,
+    issue_number INT NOT NULL,
+    title_original VARCHAR(512) NOT NULL,
+    title_zh VARCHAR(512),
+    summary_zh VARCHAR(1000),
+    body_original MEDIUMTEXT,
+    html_url VARCHAR(512) NOT NULL,
+    labels_json JSON,
+    state VARCHAR(16) NOT NULL DEFAULT 'open',
+    comments_count INT NOT NULL DEFAULT 0,
+    assignees_json JSON,
+    linked_pr_count INT NOT NULL DEFAULT 0,
+    claim_status VARCHAR(16) NOT NULL DEFAULT 'NONE',
+    participation_status VARCHAR(32) NOT NULL DEFAULT 'TRY',
+    difficulty VARCHAR(16) NOT NULL DEFAULT 'EASY',
+    risk_flags_json JSON,
+    github_created_at DATETIME,
+    github_updated_at DATETIME,
+    verified_at DATETIME,
+    translated_at DATETIME,
+    translation_status VARCHAR(16) NOT NULL DEFAULT 'PENDING',
+    published TINYINT(1) NOT NULL DEFAULT 1,
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_open_source_issue_github_id (github_issue_id),
+    UNIQUE KEY uk_open_source_issue_repo_number (repository_id, issue_number),
+    KEY idx_open_source_issue_public (published, state, participation_status, github_updated_at),
+    KEY idx_open_source_issue_translation (translation_status, published),
+    CONSTRAINT fk_open_source_issue_repository FOREIGN KEY (repository_id) REFERENCES open_source_repository(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='开源贡献Issue缓存';
+
+CREATE TABLE IF NOT EXISTS open_source_guide (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    account_id BIGINT NOT NULL,
+    issue_id BIGINT NOT NULL,
+    content MEDIUMTEXT NOT NULL,
+    segment_cost INT NOT NULL,
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_open_source_guide_account_issue (account_id, issue_id),
+    KEY idx_open_source_guide_account_time (account_id, update_time),
+    CONSTRAINT fk_open_source_guide_account FOREIGN KEY (account_id) REFERENCES account(id),
+    CONSTRAINT fk_open_source_guide_issue FOREIGN KEY (issue_id) REFERENCES open_source_issue(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户开源贡献指南';
+
+INSERT IGNORE INTO ai_service_pricing (service_key, service_name, segment_cost) VALUES
+    ('ai:open-source-match', '开源 Issue 智能匹配', 40),
+    ('ai:open-source-job-match', '开源 Issue 岗位匹配', 40),
+    ('ai:open-source-guide', '开源贡献指南', 50);

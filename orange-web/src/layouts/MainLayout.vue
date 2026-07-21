@@ -195,7 +195,7 @@ const logout = async () => {
 const activeMenu = computed(() => {
   const p = route.path
   if (p.startsWith('/market') || p.startsWith('/work/') || p.startsWith('/req/') || p.startsWith('/order/')) return '/market'
-  if (p.startsWith('/ai') || p.startsWith('/leaderboard') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/launch-check') || p.startsWith('/job')) return '/ai'
+  if (p.startsWith('/ai') || p.startsWith('/project-tools') || p.startsWith('/leaderboard') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/launch-check') || p.startsWith('/open-source') || p.startsWith('/job')) return '/ai'
   if (p.startsWith('/publish')) return '/publish'
   if (p.startsWith('/chat')) return '/chat'
   if (p.startsWith('/me') || p.startsWith('/profile')) return '/me'

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.OpenSourceMapper">
+
+    <sql id="repositoryColumns">
+        id, full_name AS fullName, display_name AS displayName,
+        organization_name AS organizationName, html_url AS htmlUrl,
+        stars, primary_language AS primaryLanguage, tech_stack AS techStack,
+        node_version AS nodeVersion, package_manager AS packageManager,
+        system_requirement AS systemRequirement, memory_requirement AS memoryRequirement,
+        disk_requirement AS diskRequirement,
+        contribution_url AS contributionUrl, environment_notes AS environmentNotes,
+        tier, priority, enabled, last_sync_status AS lastSyncStatus,
+        last_sync_error AS lastSyncError, last_sync_time AS lastSyncTime,
+        create_time AS createTime, update_time AS updateTime
+    </sql>
+
+    <select id="selectEnabledRepositories" resultType="map">
+        SELECT <include refid="repositoryColumns"/>
+        FROM open_source_repository
+        WHERE enabled = 1
+        ORDER BY priority, id
+    </select>
+
+    <select id="selectRepositories" resultType="map">
+        SELECT <include refid="repositoryColumns"/>
+        FROM open_source_repository
+        ORDER BY enabled DESC, priority, id
+    </select>
+
+    <select id="selectRepositoryById" resultType="map">
+        SELECT <include refid="repositoryColumns"/>
+        FROM open_source_repository WHERE id = #{id}
+    </select>
+
+    <select id="selectRepositoryByFullName" resultType="map">
+        SELECT <include refid="repositoryColumns"/>
+        FROM open_source_repository WHERE full_name = #{fullName}
+    </select>
+
+    <insert id="insertRepository" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO open_source_repository
+            (full_name, display_name, organization_name, html_url, tier, priority, enabled,
+             tech_stack, system_requirement, memory_requirement, disk_requirement, environment_notes)
+        VALUES
+            (#{fullName}, #{displayName}, #{organizationName}, #{htmlUrl}, #{tier}, #{priority}, #{enabled},
+             #{techStack}, #{systemRequirement}, #{memoryRequirement}, #{diskRequirement}, #{environmentNotes})
+    </insert>
+
+    <update id="updateRepository">
+        UPDATE open_source_repository
+        SET full_name = #{fullName}, html_url = #{htmlUrl},
+            display_name = #{displayName}, organization_name = #{organizationName},
+            tier = #{tier}, priority = #{priority}, enabled = #{enabled},
+            tech_stack = #{techStack}, system_requirement = #{systemRequirement},
+            memory_requirement = #{memoryRequirement}, disk_requirement = #{diskRequirement},
+            environment_notes = #{environmentNotes}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateRepositoryMetadata">
+        UPDATE open_source_repository
+        SET display_name = COALESCE(#{displayName}, display_name),
+            organization_name = COALESCE(#{organizationName}, organization_name),
+            html_url = #{htmlUrl}, stars = #{stars}, primary_language = #{primaryLanguage},
+            tech_stack = #{techStack}, node_version = #{nodeVersion},
+            package_manager = #{packageManager}, contribution_url = #{contributionUrl},
+            environment_notes = #{environmentNotes}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateRepositorySync">
+        UPDATE open_source_repository
+        SET last_sync_status = #{status}, last_sync_error = #{error}, last_sync_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <insert id="upsertIssue" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO open_source_issue
+            (repository_id, github_issue_id, issue_number, title_original, body_original,
+             html_url, labels_json, state, comments_count, assignees_json,
+             linked_pr_count, claim_status, participation_status, difficulty,
+             risk_flags_json, github_created_at, github_updated_at, verified_at, published)
+        VALUES
+            (#{repositoryId}, #{githubIssueId}, #{issueNumber}, #{titleOriginal}, #{bodyOriginal},
+             #{htmlUrl}, CAST(#{labelsJson} AS JSON), #{state}, #{commentsCount},
+             CAST(#{assigneesJson} AS JSON), #{linkedPrCount}, #{claimStatus},
+             #{participationStatus}, #{difficulty}, CAST(#{riskFlagsJson} AS JSON),
+             #{githubCreatedAt}, #{githubUpdatedAt}, NULL, #{published})
+        ON DUPLICATE KEY UPDATE
+            translation_status = IF(title_original = VALUES(title_original)
+                AND body_original &lt;=&gt; VALUES(body_original), translation_status, 'PENDING'),
+            title_zh = IF(title_original = VALUES(title_original)
+                AND body_original &lt;=&gt; VALUES(body_original), title_zh, NULL),
+            summary_zh = IF(title_original = VALUES(title_original)
+                AND body_original &lt;=&gt; VALUES(body_original), summary_zh, NULL),
+            translated_at = IF(title_original = VALUES(title_original)
+                AND body_original &lt;=&gt; VALUES(body_original), translated_at, NULL),
+            repository_id = VALUES(repository_id), issue_number = VALUES(issue_number),
+            title_original = VALUES(title_original), body_original = VALUES(body_original),
+            html_url = VALUES(html_url), labels_json = VALUES(labels_json), state = VALUES(state),
+            comments_count = VALUES(comments_count), assignees_json = VALUES(assignees_json),
+            linked_pr_count = IF(github_updated_at &lt;=&gt; VALUES(github_updated_at),
+                linked_pr_count, VALUES(linked_pr_count)),
+            claim_status = IF(github_updated_at &lt;=&gt; VALUES(github_updated_at),
+                claim_status, VALUES(claim_status)),
+            participation_status = IF(github_updated_at &lt;=&gt; VALUES(github_updated_at),
+                participation_status, VALUES(participation_status)),
+            difficulty = VALUES(difficulty),
+            risk_flags_json = VALUES(risk_flags_json), github_created_at = VALUES(github_created_at),
+            verified_at = IF(github_updated_at &lt;=&gt; VALUES(github_updated_at), verified_at, NULL),
+            github_updated_at = VALUES(github_updated_at)
+    </insert>
+
+    <sql id="issueJoinColumns">
+        i.id, i.repository_id AS repositoryId, i.github_issue_id AS githubIssueId,
+        i.issue_number AS issueNumber, i.title_original AS titleOriginal,
+        i.title_zh AS titleZh, i.summary_zh AS summaryZh, i.body_original AS bodyOriginal,
+        i.html_url AS htmlUrl, i.labels_json AS labelsJson, i.state,
+        i.comments_count AS commentsCount, i.assignees_json AS assigneesJson,
+        i.linked_pr_count AS linkedPrCount, i.claim_status AS claimStatus,
+        i.participation_status AS participationStatus, i.difficulty,
+        i.risk_flags_json AS riskFlagsJson, i.github_created_at AS githubCreatedAt,
+        i.github_updated_at AS githubUpdatedAt, i.verified_at AS verifiedAt,
+        i.translated_at AS translatedAt, i.translation_status AS translationStatus,
+        i.published, i.create_time AS createTime, i.update_time AS updateTime,
+        r.full_name AS repositoryFullName, r.display_name AS repositoryDisplayName,
+        r.organization_name AS organizationName, r.html_url AS repositoryUrl,
+        r.stars, r.primary_language AS primaryLanguage, r.tech_stack AS techStack,
+        r.node_version AS nodeVersion, r.package_manager AS packageManager,
+        r.system_requirement AS systemRequirement, r.memory_requirement AS memoryRequirement,
+        r.disk_requirement AS diskRequirement,
+        r.contribution_url AS contributionUrl, r.environment_notes AS environmentNotes
+    </sql>
+
+    <select id="selectIssueById" resultType="map">
+        SELECT <include refid="issueJoinColumns"/>
+        FROM open_source_issue i
+        JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE i.id = #{id}
+    </select>
+
+    <select id="selectIssuesByIds" resultType="map">
+        SELECT <include refid="issueJoinColumns"/>
+        FROM open_source_issue i
+        JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE i.published = 1 AND i.state = 'open' AND r.enabled = 1
+          AND i.id IN
+          <foreach collection="ids" item="id" open="(" separator="," close=")">#{id}</foreach>
+        ORDER BY FIELD(i.id,
+          <foreach collection="ids" item="id" separator=",">#{id}</foreach>
+        )
+    </select>
+
+    <sql id="publicIssueWhere">
+        i.published = 1 AND i.state = 'open' AND r.enabled = 1
+        <if test="difficulty != null and difficulty != ''">AND i.difficulty = #{difficulty}</if>
+        <if test="participationStatus != null and participationStatus != ''">AND i.participation_status = #{participationStatus}</if>
+        <if test="tech != null and tech != ''">
+            AND (r.tech_stack LIKE CONCAT('%', #{tech}, '%') OR r.primary_language = #{tech}
+                 OR i.labels_json LIKE CONCAT('%', #{tech}, '%'))
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (i.title_zh LIKE CONCAT('%', #{keyword}, '%')
+                 OR i.title_original LIKE CONCAT('%', #{keyword}, '%')
+                 OR i.summary_zh LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="updatedDays != null">AND i.github_updated_at &gt;= DATE_SUB(NOW(), INTERVAL #{updatedDays} DAY)</if>
+    </sql>
+
+    <select id="selectPublicIssues" resultType="map">
+        SELECT <include refid="issueJoinColumns"/>
+        FROM open_source_issue i
+        JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE <include refid="publicIssueWhere"/>
+        ORDER BY FIELD(i.participation_status, 'TRY', 'POSSIBLY_CLAIMED', 'NOT_RECOMMENDED'),
+                 FIELD(i.difficulty, 'BEGINNER', 'EASY', 'MEDIUM'),
+                 i.github_updated_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countPublicIssues" resultType="long">
+        SELECT COUNT(*) FROM open_source_issue i
+        JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE <include refid="publicIssueWhere"/>
+    </select>
+
+    <select id="selectTickerIssues" resultType="map">
+        SELECT i.id, COALESCE(i.title_zh, i.title_original) AS title,
+               i.participation_status AS participationStatus, i.difficulty,
+               i.github_updated_at AS githubUpdatedAt
+        FROM open_source_issue i
+        JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE i.published = 1 AND i.state = 'open' AND r.enabled = 1
+        ORDER BY FIELD(i.participation_status, 'TRY', 'POSSIBLY_CLAIMED', 'NOT_RECOMMENDED'),
+                 i.github_updated_at DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectPublishedForVerification" resultType="map">
+        SELECT <include refid="issueJoinColumns"/>
+        FROM open_source_issue i JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE i.published = 1 AND i.state = 'open' AND r.enabled = 1
+        ORDER BY i.verified_at ASC, i.github_updated_at DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectTranslationPending" resultType="map">
+        SELECT <include refid="issueJoinColumns"/>
+        FROM open_source_issue i JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE i.published = 1 AND i.state = 'open' AND i.translation_status IN ('PENDING', 'FAILED')
+        ORDER BY i.github_updated_at DESC LIMIT #{limit}
+    </select>
+
+    <update id="updateIssueTranslation">
+        UPDATE open_source_issue
+        SET title_zh = #{titleZh}, summary_zh = #{summaryZh},
+            translation_status = #{status}, translated_at = IF(#{status} = 'DONE', NOW(), translated_at)
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateIssueVerification">
+        UPDATE open_source_issue
+        SET state = #{state}, comments_count = #{commentsCount},
+            assignees_json = CAST(#{assigneesJson} AS JSON),
+            linked_pr_count = #{linkedPrCount}, claim_status = #{claimStatus},
+            participation_status = #{participationStatus}, difficulty = #{difficulty},
+            risk_flags_json = CAST(#{riskFlagsJson} AS JSON),
+            github_updated_at = #{githubUpdatedAt}, verified_at = NOW(),
+            published = CASE WHEN #{state} = 'open' THEN published ELSE 0 END
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectAdminIssues" resultType="map">
+        SELECT <include refid="issueJoinColumns"/>
+        FROM open_source_issue i JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE 1 = 1
+        <if test="keyword != null and keyword != ''">
+            AND (i.title_original LIKE CONCAT('%', #{keyword}, '%')
+                 OR i.title_zh LIKE CONCAT('%', #{keyword}, '%')
+                 OR r.full_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="published != null">AND i.published = #{published}</if>
+        <if test="translationStatus != null and translationStatus != ''">AND i.translation_status = #{translationStatus}</if>
+        ORDER BY i.github_updated_at DESC LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAdminIssues" resultType="long">
+        SELECT COUNT(*) FROM open_source_issue i JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE 1 = 1
+        <if test="keyword != null and keyword != ''">
+            AND (i.title_original LIKE CONCAT('%', #{keyword}, '%')
+                 OR i.title_zh LIKE CONCAT('%', #{keyword}, '%')
+                 OR r.full_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="published != null">AND i.published = #{published}</if>
+        <if test="translationStatus != null and translationStatus != ''">AND i.translation_status = #{translationStatus}</if>
+    </select>
+
+    <select id="selectAdminStats" resultType="map">
+        SELECT COUNT(*) AS total,
+               SUM(CASE WHEN published = 1 AND state = 'open' THEN 1 ELSE 0 END) AS published,
+               SUM(CASE WHEN translation_status = 'DONE' THEN 1 ELSE 0 END) AS translated,
+               SUM(CASE WHEN translation_status IN ('PENDING', 'FAILED') THEN 1 ELSE 0 END) AS translationPending,
+               MAX(verified_at) AS lastVerifiedAt
+        FROM open_source_issue
+    </select>
+
+    <update id="updateIssueAdmin">
+        UPDATE open_source_issue
+        SET title_zh = #{titleZh}, summary_zh = #{summaryZh}, difficulty = #{difficulty},
+            participation_status = #{participationStatus}, published = #{published},
+            translation_status = CASE WHEN #{titleZh} IS NOT NULL AND #{summaryZh} IS NOT NULL
+                THEN 'DONE' ELSE translation_status END
+        WHERE id = #{id}
+    </update>
+
+    <insert id="upsertGuide" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO open_source_guide (account_id, issue_id, content, segment_cost)
+        VALUES (#{accountId}, #{issueId}, #{content}, #{segmentCost})
+        ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id), content = VALUES(content),
+            segment_cost = VALUES(segment_cost), update_time = NOW()
+    </insert>
+
+    <select id="selectGuidesByAccount" resultType="map">
+        SELECT g.id, g.issue_id AS issueId, g.content, g.segment_cost AS segmentCost,
+               g.create_time AS createTime, g.update_time AS updateTime,
+               COALESCE(i.title_zh, i.title_original) AS issueTitle, i.html_url AS issueUrl,
+               r.full_name AS repositoryFullName
+        FROM open_source_guide g
+        JOIN open_source_issue i ON i.id = g.issue_id
+        JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE g.account_id = #{accountId}
+        ORDER BY g.update_time DESC
+    </select>
+
+    <select id="selectGuideOwned" resultType="map">
+        SELECT g.id, g.issue_id AS issueId, g.content, g.segment_cost AS segmentCost,
+               g.create_time AS createTime, g.update_time AS updateTime,
+               COALESCE(i.title_zh, i.title_original) AS issueTitle, i.html_url AS issueUrl,
+               r.full_name AS repositoryFullName
+        FROM open_source_guide g
+        JOIN open_source_issue i ON i.id = g.issue_id
+        JOIN open_source_repository r ON r.id = i.repository_id
+        WHERE g.id = #{id} AND g.account_id = #{accountId}
+    </select>
+</mapper>

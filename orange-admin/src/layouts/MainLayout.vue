@@ -59,6 +59,7 @@ const navItems = [
   { path: '/job-audit', label: '岗位审核', icon: 'Checked' },
   { path: '/usage', label: '用量统计', icon: 'DataAnalysis' },
   { path: '/launch-checks', label: '上线体检', icon: 'DocumentChecked' },
+  { path: '/open-source', label: '开源贡献', icon: 'Connection' },
   { path: '/settings', label: '修改密码', icon: 'Setting' },
 ]
 const visibleNavItems = computed(() => navItems.filter(item => !item.tradeOnly || tradeEnabled.value))
