@@ -34,6 +34,7 @@ const routes = [
       { path: 'submit-job', name: 'SubmitJob', component: () => import('../views/SubmitJob.vue'), meta: { title: '投稿岗位' } },
       { path: 'me/quota', name: 'MeQuota', component: () => import('../views/MeQuota.vue'), meta: { title: '我的配额' } },
       { path: 'me/settings', name: 'Settings', component: () => import('../views/Settings.vue'), meta: { title: '设置' } },
+      { path: 'me/agent-devices', name: 'AgentDevices', component: () => import('../views/AgentDevices.vue'), meta: { title: '智能设备' } },
       { path: 'profile/:id', name: 'Profile', component: () => import('../views/Profile.vue'), meta: { title: '作者主页' } },
       { path: 'requirement/:id', name: 'ReqDetail', component: () => import('../views/ReqDetail.vue'), meta: { title: '需求详情' } },
       { path: 'order/:id', name: 'OrderDetail', component: () => import('../views/OrderDetail.vue'), meta: { title: '订单详情', requiresTransactionUi: true } }

@@ -29,6 +29,14 @@
           <a class="mail-button" :href="cancelMail">发起注销申请</a>
         </div>
       </el-card>
+
+      <el-card shadow="never" class="settings-card device-card">
+        <div class="device-card-heading">
+          <el-icon><Connection /></el-icon>
+          <div><h3>智能设备</h3><p>管理 StackChan 与本地智能体的账号授权。</p></div>
+        </div>
+        <el-button type="primary" plain @click="$router.push('/me/agent-devices')">管理设备</el-button>
+      </el-card>
     </div>
 
     <section class="legal-panel">
@@ -51,6 +59,7 @@ import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
 import { LEGAL_CONTACT } from '../content/legal'
+import { Connection } from '@element-plus/icons-vue'
 
 const loading = ref(false)
 const form = reactive({ old: '', new: '' })
@@ -89,6 +98,11 @@ const submit = async () => {
 .btn-primary { background: var(--brand); border-color: var(--brand); }
 .rights-card p, .rights-card li { color: var(--text-secondary); line-height: 1.75; }.rights-card ul { padding-left: 20px; }
 .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.device-card { display: flex; flex-direction: column; justify-content: space-between; }
+.device-card-heading { display: flex; align-items: flex-start; gap: 14px; }
+.device-card-heading > .el-icon { width: 38px; height: 38px; color: var(--brand-strong); background: var(--brand-light); border: 1px solid var(--border-orange); }
+.device-card-heading h3 { margin-bottom: 5px; }
+.device-card-heading p { margin: 0 0 18px; color: var(--text-secondary); line-height: 1.6; }
 .mail-button { display: inline-flex; align-items: center; padding: 8px 15px; border-radius: 7px; background: #fff7ed; color: var(--brand-strong); font-size: 14px; font-weight: 700; text-decoration: none; }
 .legal-panel { margin-top: 20px; padding: 28px; border-radius: 22px; background: #431d0c; color: #fff7ed; }.legal-panel h3 { margin: 8px 0 20px; font-size: 22px; }
 .legal-panel nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }.legal-panel a { display: grid; gap: 5px; padding: 16px; border: 1px solid rgba(253,186,116,.28); border-radius: 14px; color: #fff7ed; text-decoration: none; }.legal-panel a:hover { border-color: #fdba74; background: rgba(255,255,255,.04); }.legal-panel small { color: #fed7aa; line-height: 1.5; }

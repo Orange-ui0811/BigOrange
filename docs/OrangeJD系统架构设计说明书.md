@@ -1,6 +1,6 @@
 # OrangeJD 系统架构设计说明书
 
-> **版本**: v1.2 | **日期**: 2026-07-21 | **状态**: 持续演进
+> **版本**: v1.3 | **日期**: 2026-07-22 | **状态**: 持续演进
 >
 > **适用范围**: 团队技术评审、新成员入职、项目落地交付、运维部署参考
 
@@ -16,12 +16,12 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 
 | 指标 | 数值 |
 |------|------|
-| 初始化数据表 | 34 张（MySQL 8.0 InnoDB，Flyway 最新 V12） |
-| 控制器 | 43 个 `@RequestMapping` 控制器，其中开源贡献新增用户端/管理端控制器各 1 个 |
+| 初始化数据表 | 37 张（MySQL 8.0 InnoDB，Flyway 最新 V13） |
+| 控制器 | 46 个 `@RequestMapping` 控制器，含用户端、管理端与设备 Agent 三类入口 |
 | Maven 模块 | 3 个（common / pojo / server） |
 | 前端入口 | 2 个（用户端 orange-web / 管理端 orange-admin） |
 | AI 模型 | DeepSeek V4 Pro + bge-small-zh-v1.5 Embedding |
-| 外部集成 | GitHub API / Gitee AI / 飞书 / Epay / QQ 邮箱 |
+| 外部集成 | GitHub API / Gitee AI / 飞书 / Epay / QQ 邮箱 / 小智 MCP |
 
 ---
 
@@ -52,6 +52,7 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 | **岗位招聘** | 用户投稿→管理员审核→向量化入库→AI 岗位匹配（方案设计→推荐岗位） |
 | **方案设计** | 六阶段 AI 项目规划（想法→需求理解→成功标准→约束风险→任务计划→岗位匹配） |
 | **配额系统** | 充值码/Epay 支付/消费预扣+退款/新用户赠送/审核奖励 |
+| **StackChan 语音接入** | 官方固件不刷机；Windows Bridge 经小智 MCP 调用受限的 OrangeVC 动作 |
 
 ### 2.3 非功能需求
 
@@ -76,6 +77,7 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 │  Nginx 反向代理 → CORS 过滤器 → RequestID 拦截器          │
 │  → JWT Admin 拦截器 ( /admin/** )                        │
 │  → JWT App 拦截器   ( /app/** )                          │
+│  → Device Token 拦截器 ( /agent/** )                    │
 ├─────────────────────────────────────────────────────────┤
 │                    业务层 (Business Layer)                │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐               │
@@ -88,10 +90,10 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 ├─────────────────────────────────────────────────────────┤
 │                   数据层 (Data Layer)                     │
 │  RDS MySQL 8.0 (MyBatis) │ Redis 8 (Jedis + RediSearch)  │
-│  34 张初始化表            │ Cache + Vector + Token Blacklist│
+│  37 张初始化表            │ Cache + Vector + Token Blacklist│
 ├─────────────────────────────────────────────────────────┤
 │                   外部集成 (External)                     │
-│  Gitee AI │ GitHub API │ 飞书 Webhook │ Epay │ QQ 邮箱   │
+│ Gitee AI │ GitHub API │ 飞书 │ Epay │ QQ邮箱 │ 小智 MCP │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -235,6 +237,24 @@ RequestIdInterceptor (全局 /**)
 | 黑名单 | Redis Set `token:blacklist` | 同 |
 
 JWT 生成 `sk-` 前缀 + 兼容解析（`parseJwt` 自动去前缀），保证旧 token 平滑过渡。
+
+#### 4.1.3 StackChan 设备令牌通道
+
+小智客户端通过小智 MCP 和用户电脑上的 `OrangeVC 小智连接器` 接入；StackChan 是首个推荐设备，但不是使用前提。该方式不刷机，也不向平台上传用户本地模型密钥。用户在已登录网页生成 10 分钟一次性连接码；连接器交换得到独立 Device Token，令牌明文保存在 Windows Credential Manager，服务端只保存 SHA-256 哈希。
+
+Windows 端提供独立开源的 `OrangeVC-XiaoZhi-Connector.cmd` 图形连接器，负责首次环境准备、测试期 SSH 隧道、正式 HTTPS 地址、一次性绑定、连接器启停和脱敏日志；旧的 StackChan 启动脚本仅在 v0.2.x 作为兼容入口。它不保存 SSH 私钥内容，不在普通配置文件中写入小智地址或 Device Token。
+
+Bridge 默认使用确定性规则识别菜单和多轮语音流程，不调用用户模型。用户可选启用“使用我的模型辅助理解自由表达”，填写 OpenAI 兼容 API 接口、模型名称和 API Key；只有连接测试成功后才生效，且仅在规则无法识别时调用。API Key 保存在 Windows Credential Manager，不上传到 OrangeVC。GitHub 榜单通过只读设备动作 `leaderboard.github.list` 读取平台现有快照，支持本周涨星、本周新增、全时段热门和 Topic 方向筛选，最多返回五张卡片供语音选择与朗读，不触发 GitHub 抓取或 AI 扣费。
+
+每次 Bridge 与小智重新建立 MCP 会话后，OrangeVC 平台能力默认锁定。用户必须先说“可以使用 OrangeVC 平台了吗”，由 `orangevc_agent_prepare` 解锁当前连接会话；StackChan 回复“可以使用了，你想使用什么功能呢”并列举功能菜单。断线重连或明确退出后重新锁定，避免普通闲聊误触发平台操作。对外 MCP 工具为 `orangevc_agent_prepare`、`orangevc_agent_confirm`、`orangevc_agent_status` 和 `orangevc_agent_cancel`；内部 Python 包名及 `/agent/**` HTTP 路径为兼容既有部署继续保留。
+
+| 路径 | 鉴权与职责 |
+|------|-----------|
+| `/app/agent-devices/**` | App JWT；创建连接码、查看设备、撤销设备 |
+| `/agent/connect/exchange` | 公开但限流；一次性连接码交换 Device Token |
+| `/agent/actions/**` | Bearer Device Token；校验状态、有效期和 scope |
+
+设备动作采用服务端白名单与 `PREPARED → QUEUED → RUNNING → SUCCEEDED/FAILED` 状态机。写入和付费动作必须确认，账户身份只从 Device Token 获取；上线体检复用 `LaunchCheckService`，开源岗位匹配和贡献指南复用 `OpenSourceContributionService`，自由趋势分析复用 `TrendAnalysisService.analyze`，画像趋势分析由 `TrendProfileAnalysisService` 调用 `TrendAnalysisService.analyzeV2` 并保存网站历史，方案设计复用 `PlanGenerationService`，因此网页与语音具有相同价格、扣费和失败退款规则。只读动作还包括配额、最近语音任务和未读通知数量。Windows Bridge 用持久化会话状态收集画像、锁定运行任务、展示推荐选项并把选中项目导入方案设计；任务确认后通过短时长轮询与 `autoPoll` 指令要求小智在同一轮持续查询，完成后主动播报。方案设计第 2 至 4 阶段可从同一设备最近成功任务中继承项目描述与上一阶段结果。用户端可查看最近 30 条设备任务并打开完整结果；单机服务重启时遗留任务会标记为 `SERVER_RESTARTED`，不会自动重跑。公网 Bridge 地址强制 HTTPS，HTTP 只允许本机开发地址。
 
 ### 4.2 业务模块详细设计
 

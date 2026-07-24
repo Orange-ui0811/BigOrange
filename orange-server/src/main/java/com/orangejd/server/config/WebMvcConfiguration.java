@@ -3,6 +3,7 @@ package com.orangejd.server.config;
 import com.orangejd.common.json.JacksonObjectMapper;
 import com.orangejd.server.interceptor.JwtTokenAdminInterceptor;
 import com.orangejd.server.interceptor.JwtTokenAppInterceptor;
+import com.orangejd.server.interceptor.AgentDeviceInterceptor;
 import com.orangejd.server.interceptor.RequestIdInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +33,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private JwtTokenAppInterceptor jwtTokenAppInterceptor;
+
+    @Autowired
+    private AgentDeviceInterceptor agentDeviceInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -73,5 +77,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                         "/app/leaderboard/**",
                         "/app/trend/graph",
                         "/ws/**");
+
+        registry.addInterceptor(agentDeviceInterceptor)
+                .addPathPatterns("/agent/**")
+                .excludePathPatterns("/agent/connect/exchange");
     }
 }
