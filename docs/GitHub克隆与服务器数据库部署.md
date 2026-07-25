@@ -36,20 +36,18 @@ VITE_LEGAL_CONTACT_EMAIL='网站公示的联系邮箱' \
 
 ### 已有生产数据库
 
-不要再次导入 `schema-v1.sql`。先用数据库平台快照或 `backup.sh` 完成可恢复备份，再发布新 JAR。应用启动时 Flyway 从现有版本继续执行迁移；上线后确认 `flyway_schema_history` 全部 `success=1`。
+不要手工导入任何结构快照。先用数据库平台快照或 `backup.sh` 完成可恢复备份，再发布新 JAR。应用启动时 Flyway 从现有版本继续执行迁移；上线后确认 `flyway_schema_history` 全部 `success=1`。
 
 ### 全新空数据库
 
-先创建 `utf8mb4` 数据库和最小权限应用账号，再且仅再导入一次基础结构：
+先创建 `utf8mb4` 空数据库和最小权限应用账号：
 
 ```bash
 mysql --host=YOUR_MYSQL_HOST --user=DB_ADMIN -p \
   --execute="CREATE DATABASE orangejd CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci"
-mysql --host=YOUR_MYSQL_HOST --user=DB_ADMIN -p orangejd \
-  < orange-server/src/main/resources/sql/schema-v1.sql
 ```
 
-随后首次启动后端。项目启用 `baseline-on-migrate`，会建立 V1 基线并继续应用 V2 至 V11。不要对已有库重复执行基础 SQL。
+随后首次启动后端，Flyway 会按顺序执行 V1 至当前最新迁移。空库不包含默认管理员，需要临时提供 `ORANGE_ADMIN_BOOTSTRAP_USERNAME` 和至少 12 位的 `ORANGE_ADMIN_BOOTSTRAP_PASSWORD`；创建成功后从环境文件删除。不要对已有库手工执行 V1。
 
 MySQL 和 Redis 只能由应用服务器内网访问，禁止向公网开放 3306、6379。生产数据库账号不应有建库、删库或全局管理权限；首次 Flyway 迁移需要目标 schema 的建表和改表权限。
 

@@ -5,6 +5,8 @@ import com.orangejd.server.interceptor.JwtTokenAdminInterceptor;
 import com.orangejd.server.interceptor.JwtTokenAppInterceptor;
 import com.orangejd.server.interceptor.AgentDeviceInterceptor;
 import com.orangejd.server.interceptor.RequestIdInterceptor;
+import com.orangejd.server.security.ApiRoutePolicy;
+import com.orangejd.server.security.RateLimitInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +39,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Autowired
     private AgentDeviceInterceptor agentDeviceInterceptor;
 
+    @Autowired
+    private RateLimitInterceptor rateLimitInterceptor;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -64,22 +69,17 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RequestIdInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(rateLimitInterceptor).addPathPatterns("/app/**", "/admin/**", "/agent/**");
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/auth/login");
+                .excludePathPatterns(ApiRoutePolicy.ADMIN_PUBLIC_PATHS);
 
         registry.addInterceptor(jwtTokenAppInterceptor)
                 .addPathPatterns("/app/**")
-                .excludePathPatterns("/app/auth/login", "/app/auth/register", "/app/auth/send-code",
-                        "/app/auth/send-reset-code", "/app/auth/reset-password",
-                        "/app/category", "/app/work/public", "/app/requirement/public",
-                        "/app/config/trade-mode",
-                        "/app/leaderboard/**",
-                        "/app/trend/graph",
-                        "/ws/**");
+                .excludePathPatterns(ApiRoutePolicy.APP_PUBLIC_PATHS);
 
         registry.addInterceptor(agentDeviceInterceptor)
                 .addPathPatterns("/agent/**")
-                .excludePathPatterns("/agent/connect/exchange");
+                .excludePathPatterns(ApiRoutePolicy.AGENT_PUBLIC_PATHS);
     }
 }

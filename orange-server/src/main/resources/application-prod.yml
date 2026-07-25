@@ -98,3 +98,11 @@ logging:
     com.orangejd: warn
     com.orangejd.server.task.LeaderboardRefreshTask: info
     root: error
+
+management:
+  server:
+    address: 127.0.0.1
+    port: ${MANAGEMENT_PORT:8081}
+  endpoint:
+    health:
+      show-details: when_authorized

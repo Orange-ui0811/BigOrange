@@ -19,6 +19,12 @@ public interface JobPostingMapper {
     int countAll(@Param("status") String status);
     int countPending();
     int updateAuditStatus(@Param("id") Long id, @Param("status") String status, @Param("reason") String reason);
+    int updateReviewDecision(@Param("id") Long id,
+                             @Param("status") String status,
+                             @Param("reason") String reason,
+                             @Param("source") String source,
+                             @Param("confidence") Double confidence,
+                             @Param("reviewerId") Long reviewerId);
     int deleteById(@Param("id") Long id);
     int countByCompanyPosition(@Param("company") String company, @Param("position") String position);
     int updateContent(@Param("id") Long id, @Param("position") String position,

@@ -30,7 +30,8 @@ public class JwtTokenAppInterceptor implements HandlerInterceptor {
         try {
             Claims claims = JwtUtil.parseJwt(jwtProperties.getAppSecretKey(), token);
             if ((claims.get("tokenType") != null && !"APP".equals(claims.get("tokenType")))
-                    || (claims.get("iss") != null && !"orangejd".equals(claims.get("iss")))
+                    || (claims.get("iss") != null
+                        && !java.util.Set.of("orangejd", "orangevc").contains(String.valueOf(claims.get("iss"))))
                     || (claims.getAudience() != null && !claims.getAudience().contains("APP"))) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return false;

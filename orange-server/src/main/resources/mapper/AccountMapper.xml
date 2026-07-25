@@ -50,6 +50,10 @@
         SELECT COUNT(*) FROM account
     </select>
 
+    <select id="countActiveAdmins" resultType="int">
+        SELECT COUNT(*) FROM account WHERE role = 'ADMIN' AND status = 'ACTIVE'
+    </select>
+
     <update id="updateStatus">
         UPDATE account SET status = #{status}, update_time = NOW() WHERE id = #{id}
     </update>

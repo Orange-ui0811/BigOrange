@@ -19,6 +19,8 @@ public interface AccountMapper {
 
     int countAll();
 
+    int countActiveAdmins();
+
     int updateStatus(@Param("id") Long id, @Param("status") String status);
 
     java.util.List<Long> selectActiveAdminIdsForUpdate();

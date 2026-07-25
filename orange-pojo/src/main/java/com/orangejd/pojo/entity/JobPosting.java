@@ -14,6 +14,11 @@ public class JobPosting {
     private String submitterIp;
     private String submitterRole;
     private String rejectReason;
+    private String auditSource;
+    private Double auditConfidence;
+    private String auditReason;
+    private Long reviewerId;
+    private LocalDateTime reviewedAt;
     private LocalDateTime createTime;
 
     public Long getId() { return id; }
@@ -38,6 +43,16 @@ public class JobPosting {
     public void setSubmitterRole(String submitterRole) { this.submitterRole = submitterRole; }
     public String getRejectReason() { return rejectReason; }
     public void setRejectReason(String rejectReason) { this.rejectReason = rejectReason; }
+    public String getAuditSource() { return auditSource; }
+    public void setAuditSource(String auditSource) { this.auditSource = auditSource; }
+    public Double getAuditConfidence() { return auditConfidence; }
+    public void setAuditConfidence(Double auditConfidence) { this.auditConfidence = auditConfidence; }
+    public String getAuditReason() { return auditReason; }
+    public void setAuditReason(String auditReason) { this.auditReason = auditReason; }
+    public Long getReviewerId() { return reviewerId; }
+    public void setReviewerId(Long reviewerId) { this.reviewerId = reviewerId; }
+    public LocalDateTime getReviewedAt() { return reviewedAt; }
+    public void setReviewedAt(LocalDateTime reviewedAt) { this.reviewedAt = reviewedAt; }
     public LocalDateTime getCreateTime() { return createTime; }
     public void setCreateTime(LocalDateTime createTime) { this.createTime = createTime; }
 }

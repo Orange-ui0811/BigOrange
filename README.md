@@ -115,11 +115,12 @@ docker compose --env-file .env.local -f compose.local.yml down
 # 1. Redis Stack
 docker start redis-stack || docker run -d --name redis-stack -p 6380:6379 -p 8002:8001 redis/redis-stack:latest
 
-# 2. 数据库
-mysql -uroot -p123456 -e "CREATE DATABASE IF NOT EXISTS orangejd"
-mysql -uroot -p123456 orangejd < orange-server/src/main/resources/sql/schema-v1.sql
+# 2. 数据库（只创建空库，应用启动后由 Flyway 执行 V1 到最新版本）
+mysql -uroot -p -e "CREATE DATABASE IF NOT EXISTS orangejd CHARACTER SET utf8mb4"
 
-# 3. 后端
+# 3. 后端。仅在空库第一次启动时提供一次性管理员凭据
+export ORANGE_ADMIN_BOOTSTRAP_USERNAME=owner
+export ORANGE_ADMIN_BOOTSTRAP_PASSWORD='replace-with-a-strong-password'
 cd OrangeJD
 mvn install -DskipTests
 cd orange-server
@@ -143,15 +144,12 @@ cd orange-admin && npx vite --host
 
 ### 本地开发测试账号
 
-| 身份 | 用户名 | 密码 |
-|------|--------|------|
-| 管理员 | admin | 123456 |
-| 用户 | 自行注册（需邮箱验证码） | — |
+仓库不再内置固定管理员账号。空库首次启动时通过
+`ORANGE_ADMIN_BOOTSTRAP_USERNAME` 和 `ORANGE_ADMIN_BOOTSTRAP_PASSWORD`
+创建管理员；创建成功后应从环境文件删除这两个值。普通用户仍通过注册流程创建。
 
 本地 `dev` 环境不要求配置 SMTP。点击“获取验证码”后，在后端日志中查找
 `[仅本地开发] 邮箱验证码`；生产环境仍使用真实邮件发送，不会输出明文验证码。
-
-该管理员口令仅用于隔离的本地开发数据库；生产环境不得使用或公开默认口令。
 
 ## 生产部署
 
@@ -171,8 +169,8 @@ VITE_LEGAL_CONTACT_EMAIL='网站公示的联系邮箱' \
 # 发布前备份（密码通过环境变量或密钥管理系统注入）
 MYSQL_PASSWORD='从密钥管理系统读取' BACKUP_DIR=/data/backups/orangejd ./backup.sh
 
-# 后端首次启动会由 Flyway 自动校验并迁移数据库
-APP_JAR=/data/orangejd/orange-server-1.0.0-SNAPSHOT.jar ./start.sh
+# 上传发布包后，由统一安装脚本备份、切换并健康检查
+./scripts/install-release.sh /home/admin/orangejd-release.tar.gz '发布包SHA256'
 ```
 
 ### 关键配置
@@ -193,15 +191,14 @@ export TURNSTILE_SECRET_KEY='CloudflareKey'
 location / { try_files $uri /index.html; }
 location /api/ { proxy_pass http://127.0.0.1:8080/; }
 location /ws/ { proxy_pass http://127.0.0.1:8080; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection "upgrade"; }
-location ^~ /admin { alias /data/www/orangejd/admin; try_files $uri /admin/index.html; }
-location ^~ /uploads/ { alias /root/uploads/; }  # 必须 ^~ 覆盖图片正则
+location ^~ /admin { alias /data/orangejd/web-dist/admin; try_files $uri /admin/index.html; }
 ```
 
 ## AI 功能配置
 
 ### AI 自动审核
 
-管理端开启「AI 托管」→ 新提交自动审核（DeepSeek V4 Pro 多模态）→ 结果飞书通知。
+管理端开启「AI 托管」后，新提交进入持久化 AI 审核任务。只有高置信度结果自动处理并发放奖励，其他结果进入人工审核。
 
 ### AI 趋势分析
 
@@ -209,11 +206,11 @@ location ^~ /uploads/ { alias /root/uploads/; }  # 必须 ^~ 覆盖图片正则
 
 ### GitHub 榜单爬取
 
-每周一凌晨 2:00 自动爬取 15 个 Topic × 3 时段，爬完后统一逐条翻译为中文，失败死磕到成功。
+每周一凌晨 2:00 自动刷新。翻译失败进入持久化重试等待，不占住工作线程，应用重启后可继续。
 
 ### 换 AI 模型
 
-修改 `start.sh` 中 `AI_TREND_MODEL` / `AI_AUDIT_MODEL` / `AI_EMBEDDING_MODEL` 环境变量，重启即生效。
+修改 `/etc/orangejd/orangejd.env` 中的 `AI_TREND_MODEL`、`AI_AUDIT_MODEL` 或 `AI_EMBEDDING_MODEL`，再通过 systemd 重启应用。
 
 ## 项目文档
 
@@ -223,10 +220,11 @@ location ^~ /uploads/ { alias /root/uploads/; }  # 必须 ^~ 覆盖图片正则
 | Cloudflare 域名与 HTTPS | `docs/Cloudflare域名与HTTPS接入手册.md` |
 | ePay 接入与服务器交接 | `docs/ePay订单支付接入与服务器交接手册.md` |
 | 系统架构设计说明书 | `docs/OrangeJD系统架构设计说明书.md` |
+| 架构治理实施说明 | `docs/架构治理实施说明.md` |
 | 项目进度记录 | `docs/项目进度记录.md` |
 | 开发日志（最新） | `docs/开发日志/2026-07-09-多模块增强.md` |
 | 前端 UI 设计规范 | `docs/OrangeJD前端UI设计规范.md` |
-| 全量表设计 | `orange-server/src/main/resources/sql/schema-v1.sql` |
+| 数据库迁移 | `orange-server/src/main/resources/db/migration/` |
 
 ## License
 

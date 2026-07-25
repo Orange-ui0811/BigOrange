@@ -1,19 +1,32 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { toUserMessage } from './errorMessage'
 
-const api = axios.create({ baseURL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080', timeout: 15000 })
+const request = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080',
+  timeout: 15000,
+})
 
-api.interceptors.request.use(config => {
+request.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('appToken')
   if (token) config.headers['App-Token'] = token
   return config
 })
 
-api.interceptors.response.use(
-  res => { if (res.data?.code === 0) ElMessage.warning(res.data.msg || '操作失败'); return res.data },
-  err => {
-    if (err.response?.status === 401) { sessionStorage.removeItem('appToken'); window.location.href = '/login' }
-    return Promise.reject(err)
-  }
+request.interceptors.response.use(
+  (response) => {
+    if (response.data?.code === 0) ElMessage.warning(response.data.msg || '操作失败')
+    return response.data
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      sessionStorage.removeItem('appToken')
+      window.location.href = '/login'
+    } else {
+      ElMessage.error(toUserMessage(error))
+    }
+    return Promise.reject(error)
+  },
 )
-export default api
+
+export default request

@@ -14,7 +14,6 @@ services:
       - --collation-server=utf8mb4_0900_ai_ci
     volumes:
       - orangejd-mysql-data:/var/lib/mysql
-      - ./orange-server/src/main/resources/sql/schema-v1.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
       interval: 5s
@@ -51,6 +50,8 @@ services:
       AI_EMBEDDING_KEY: ${AI_EMBEDDING_KEY:-}
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
       TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
+      ORANGE_ADMIN_BOOTSTRAP_USERNAME: ${ORANGE_ADMIN_BOOTSTRAP_USERNAME:-}
+      ORANGE_ADMIN_BOOTSTRAP_PASSWORD: ${ORANGE_ADMIN_BOOTSTRAP_PASSWORD:-}
       ALLOWED_ORIGINS: http://localhost:15173,http://127.0.0.1:15173,http://localhost:15174,http://127.0.0.1:15174
     volumes:
       - .:/workspace

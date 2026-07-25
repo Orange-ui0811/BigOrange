@@ -3,6 +3,9 @@ package com.orangejd.server.task;
 import com.orangejd.common.result.PageResult;
 import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
+import com.orangejd.server.foundation.task.SystemTask;
+import com.orangejd.server.foundation.task.SystemTaskHandler;
+import com.orangejd.server.foundation.task.SystemTaskService;
 import com.orangejd.server.service.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +23,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Component
-public class LeaderboardRefreshTask {
+public class LeaderboardRefreshTask implements SystemTaskHandler {
+    public static final String TASK_TYPE = "LEADERBOARD_REFRESH";
 
     private static final Logger log = LoggerFactory.getLogger(LeaderboardRefreshTask.class);
     private static final String[] TOPICS = {
@@ -40,6 +42,7 @@ public class LeaderboardRefreshTask {
     private static final int README_TIMEOUT_MS = 10000;
 
     @Autowired private LeaderboardSnapshotMapper snapshotMapper;
+    @Autowired private SystemTaskService systemTaskService;
 
     @Autowired(required = false)
     private DocumentService documentService;
@@ -80,6 +83,10 @@ public class LeaderboardRefreshTask {
     @Scheduled(
             cron = "${orange.leaderboard.refresh-cron:0 0 2 * * 1}",
             zone = "${orange.leaderboard.refresh-zone:Asia/Shanghai}")
+    public void scheduleRefresh() {
+        enqueue("scheduled:" + LocalDate.now());
+    }
+
     public void refreshAll() {
         if (!refreshRunning.compareAndSet(false, true)) {
             log.info("LeaderboardRefreshTask: 已有刷新任务运行，跳过重复触发");
@@ -140,17 +147,26 @@ public class LeaderboardRefreshTask {
      */
     @EventListener(ApplicationReadyEvent.class)
     public void refreshMissingSnapshotsAfterStartup() {
-        CompletableFuture.delayedExecutor(30, TimeUnit.SECONDS).execute(() -> {
-            LocalDate weekStart = LocalDate.now()
-                    .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-            boolean missing = isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "all"), weekStart)
-                    || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "week"), weekStart)
-                    || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "new"), weekStart);
-            if (missing) {
+        LocalDate weekStart = LocalDate.now()
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        boolean missing = isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "all"), weekStart)
+                || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "week"), weekStart)
+                || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "new"), weekStart);
+        if (missing) {
                 log.info("LeaderboardRefreshTask: 启动后检测到本周快照缺失，开始补抓");
-                refreshAll();
-            }
-        });
+                enqueue("startup:" + weekStart);
+        }
+    }
+
+    @Override
+    public String taskType() {
+        return TASK_TYPE;
+    }
+
+    @Override
+    public Object execute(SystemTask task) {
+        refreshAll();
+        return Map.of("refreshedAt", LocalDate.now().toString());
     }
 
     private boolean isSnapshotBeforeWeek(LeaderboardSnapshot snapshot, LocalDate weekStart) {
@@ -363,7 +379,7 @@ public class LeaderboardRefreshTask {
                     // 翻译失败后持续重试，确保最终写入中文描述。
                     String translated = null;
                     int retry = 0;
-                    while (translated == null || translated.isEmpty()) {
+                    for (int attempt = 0; attempt < 1 && (translated == null || translated.isEmpty()); attempt++) {
                         try {
                             translated = callAiTranslation(desc);
                             if (translated == null || translated.isEmpty()) {
@@ -381,6 +397,9 @@ public class LeaderboardRefreshTask {
                             }
                             sleep(2000);
                         }
+                    }
+                    if (translated == null || translated.isBlank()) {
+                        throw new IllegalStateException("AI translation failed; the persistent task will retry later");
                     }
                     translationCache.put(desc, translated);
                     r.put("descriptionZh", translated);
@@ -530,6 +549,11 @@ public class LeaderboardRefreshTask {
 
     private void sleep(long ms) {
         try { Thread.sleep(ms); } catch (Exception ignored) {}
+    }
+
+    private void enqueue(String businessKey) {
+        // maxAttempts=0 preserves retry-until-success semantics without pinning a worker forever.
+        systemTaskService.enqueue(TASK_TYPE, businessKey, Map.of(), 0);
     }
 
     // 简单 JSON 序列化

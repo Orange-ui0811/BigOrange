@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, V2]
   pull_request:
+    branches: [main, V2]
 
 permissions:
   contents: read
@@ -18,21 +19,78 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - run: mvn -B verify
+      - name: Test backend and architecture rules
+        run: mvn -B clean verify
+
+  flyway-empty-database:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: orangevc-ci
+          MYSQL_DATABASE: orangevc
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -porangevc-ci"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y default-mysql-client
+      - name: Apply V1 through latest migration to an empty database
+        env:
+          MYSQL_PWD: orangevc-ci
+        run: |
+          find orange-server/src/main/resources/db/migration \
+            -maxdepth 1 -name 'V*.sql' -print0 \
+            | sort -zV \
+            | while IFS= read -r -d '' migration; do
+                echo "Applying $migration"
+                mysql -h 127.0.0.1 -uroot orangevc < "$migration"
+              done
 
   frontend:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: [orange-web, orange-admin]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: ${{ matrix.app }}/package-lock.json
-      - run: npm ci
-        working-directory: ${{ matrix.app }}
-      - run: npm run build
-        working-directory: ${{ matrix.app }}
+          cache-dependency-path: |
+            orange-web/package-lock.json
+            orange-admin/package-lock.json
+      - name: Validate user application
+        working-directory: orange-web
+        run: |
+          npm ci
+          npm run lint
+          npm run typecheck
+          npm test -- --run
+          npm run build
+          npm audit --omit=dev --audit-level=high
+      - name: Validate admin application
+        working-directory: orange-admin
+        run: |
+          npm ci
+          npm run lint
+          npm run typecheck
+          npm test -- --run
+          npm run build
+          npm audit --omit=dev --audit-level=high
+      - name: Enforce JavaScript bundle budget
+        run: node scripts/check-frontend-bundles.mjs
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

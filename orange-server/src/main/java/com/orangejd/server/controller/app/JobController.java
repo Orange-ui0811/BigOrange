@@ -3,6 +3,7 @@ package com.orangejd.server.controller.app;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.JobPosting;
+import com.orangejd.server.contribution.application.JobAiAuditOrchestrator;
 import com.orangejd.server.mapper.JobPostingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class JobController {
 
     @Autowired private JobPostingMapper mapper;
     @Autowired private com.orangejd.server.service.JobMatchService jobMatchService;
+    @Autowired private JobAiAuditOrchestrator jobAiAuditOrchestrator;
 
     @PostMapping("/match")
     public Result<?> match(@RequestBody Map<String, String> body) {
@@ -95,7 +97,12 @@ public class JobController {
         jp.setSubmitterIp(ip);
         jp.setSubmitterRole("USER");
         mapper.insert(jp);
-        return Result.success(Map.of("id", jp.getId()));
+        Long taskId = jobAiAuditOrchestrator.enqueueIfEnabled(jp.getId());
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("id", jp.getId());
+        response.put("aiAuditQueued", taskId != null);
+        if (taskId != null) response.put("taskId", taskId);
+        return Result.success(response);
     }
 
     private String stripCompanyNames(String text) {

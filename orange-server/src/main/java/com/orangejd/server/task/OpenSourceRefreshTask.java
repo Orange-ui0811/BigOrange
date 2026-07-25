@@ -1,5 +1,9 @@
 package com.orangejd.server.task;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.orangejd.server.foundation.task.SystemTask;
+import com.orangejd.server.foundation.task.SystemTaskHandler;
+import com.orangejd.server.foundation.task.SystemTaskService;
 import com.orangejd.server.mapper.OpenSourceMapper;
 import com.orangejd.server.service.OpenSourceGithubService;
 import com.orangejd.server.service.OpenSourceTranslationService;
@@ -12,17 +16,20 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.UUID;
 
 @Component
-public class OpenSourceRefreshTask {
+public class OpenSourceRefreshTask implements SystemTaskHandler {
+    public static final String TASK_TYPE = "OPEN_SOURCE_REFRESH";
 
     private static final Logger log = LoggerFactory.getLogger(OpenSourceRefreshTask.class);
 
     private final OpenSourceMapper mapper;
     private final OpenSourceGithubService githubService;
     private final OpenSourceTranslationService translationService;
+    private final SystemTaskService taskService;
+    private final ObjectMapper objectMapper;
     private final AtomicBoolean fullRunning = new AtomicBoolean(false);
     private final AtomicBoolean verifyRunning = new AtomicBoolean(false);
     private volatile LocalDateTime lastFullStart;
@@ -31,35 +38,62 @@ public class OpenSourceRefreshTask {
     private volatile int lastSaved;
     private volatile int lastTranslated;
 
-    public OpenSourceRefreshTask(OpenSourceMapper mapper, OpenSourceGithubService githubService,
-                                 OpenSourceTranslationService translationService) {
+    public OpenSourceRefreshTask(OpenSourceMapper mapper,
+                                 OpenSourceGithubService githubService,
+                                 OpenSourceTranslationService translationService,
+                                 SystemTaskService taskService,
+                                 ObjectMapper objectMapper) {
         this.mapper = mapper;
         this.githubService = githubService;
         this.translationService = translationService;
+        this.taskService = taskService;
+        this.objectMapper = objectMapper;
     }
 
     @Scheduled(cron = "${orange.open-source.full-refresh-cron:0 20 3 */2 * *}",
             zone = "${orange.open-source.refresh-zone:Asia/Shanghai}")
     public void scheduledFullRefresh() {
-        runFullRefresh();
+        enqueue("FULL", "scheduled-full:" + java.time.LocalDate.now(), 8);
     }
 
     @Scheduled(cron = "${orange.open-source.verify-cron:0 0 */12 * * *}",
             zone = "${orange.open-source.refresh-zone:Asia/Shanghai}")
     public void scheduledVerification() {
-        runLightVerification();
+        String bucket = LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHH"));
+        enqueue("VERIFY", "scheduled-verify:" + bucket, 5);
     }
 
     public boolean triggerFullRefresh() {
         if (fullRunning.get()) return false;
-        CompletableFuture.runAsync(this::runFullRefresh);
+        enqueue("FULL", "manual-full:" + UUID.randomUUID(), 8);
         return true;
     }
 
     public boolean triggerVerification() {
         if (verifyRunning.get()) return false;
-        CompletableFuture.runAsync(this::runLightVerification);
+        enqueue("VERIFY", "manual-verify:" + UUID.randomUUID(), 5);
         return true;
+    }
+
+    @Override
+    public String taskType() {
+        return TASK_TYPE;
+    }
+
+    @Override
+    public Object execute(SystemTask task) throws Exception {
+        String mode = objectMapper.readTree(task.getPayloadJson()).path("mode").asText();
+        if ("FULL".equals(mode)) {
+            runFullRefresh();
+            if (lastFullError != null) {
+                throw new IllegalStateException("Open source refresh failed: " + lastFullError);
+            }
+        } else if ("VERIFY".equals(mode)) {
+            runLightVerification();
+        } else {
+            throw new IllegalArgumentException("Unsupported open source refresh mode: " + mode);
+        }
+        return status();
     }
 
     public Map<String, Object> status() {
@@ -118,5 +152,9 @@ public class OpenSourceRefreshTask {
     private void sleep(long millis) {
         try { Thread.sleep(millis); }
         catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+    }
+
+    private void enqueue(String mode, String businessKey, int maxAttempts) {
+        taskService.enqueue(TASK_TYPE, businessKey, Map.of("mode", mode), maxAttempts);
     }
 }

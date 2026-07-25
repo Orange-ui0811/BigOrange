@@ -222,7 +222,7 @@ public class AuthServiceImpl implements AuthService {
         claims.put("role", account.getRole());
         claims.put("tokenType", tokenType);
         claims.put("jti", UUID.randomUUID().toString());
-        claims.put("iss", "orangejd");
+        claims.put("iss", "orangevc");
         claims.put("aud", tokenType);
 
         LoginVO loginVO = new LoginVO();

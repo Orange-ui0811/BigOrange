@@ -1,217 +1,214 @@
 package com.orangejd.server.controller.admin;
 
+import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.Result;
+import com.orangejd.common.util.PageUtil;
 import com.orangejd.pojo.entity.JobPosting;
+import com.orangejd.server.contribution.application.JobAiAuditOrchestrator;
+import com.orangejd.server.contribution.application.JobReviewService;
 import com.orangejd.server.mapper.JobPostingMapper;
 import com.orangejd.server.service.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestClient;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-@RestController
+@Controller
+@ResponseBody
 @RequestMapping("/admin/job")
 public class AdminJobController {
-
     private static final Logger log = LoggerFactory.getLogger(AdminJobController.class);
 
-    @Autowired private JobPostingMapper mapper;
-    @Autowired private DocumentService documentService;
-    @Autowired private com.orangejd.server.service.impl.QuotaServiceImpl quotaService;
-    @Autowired(required = false) private org.springframework.data.redis.core.StringRedisTemplate redisTemplate;
+    private final JobPostingMapper mapper;
+    private final DocumentService documentService;
+    private final JobReviewService reviewService;
+    private final JobAiAuditOrchestrator auditOrchestrator;
+    private final RestClient restClient;
+    private final String jobWebhookUrl;
 
-    @org.springframework.beans.factory.annotation.Value("${orange.feishu.job-webhook-url:}")
-    private String jobWebhookUrl;
-
-    private static final String AI_AUDIT_KEY = "system:job-ai-audit:enabled";
+    public AdminJobController(JobPostingMapper mapper,
+                              DocumentService documentService,
+                              JobReviewService reviewService,
+                              JobAiAuditOrchestrator auditOrchestrator,
+                              RestClient.Builder restClientBuilder,
+                              @Value("${orange.feishu.job-webhook-url:}") String jobWebhookUrl) {
+        this.mapper = mapper;
+        this.documentService = documentService;
+        this.reviewService = reviewService;
+        this.auditOrchestrator = auditOrchestrator;
+        this.restClient = restClientBuilder.build();
+        this.jobWebhookUrl = jobWebhookUrl == null ? "" : jobWebhookUrl.trim();
+    }
 
     @GetMapping("/ai-auto/status")
     public Result<Map<String, Object>> aiStatus() {
-        boolean enabled = redisTemplate != null && "true".equals(redisTemplate.opsForValue().get(AI_AUDIT_KEY));
-        return Result.success(Map.of("enabled", enabled));
+        return Result.success(Map.of(
+                "enabled", auditOrchestrator.isEnabled(),
+                "configured", auditOrchestrator.isConfigured()
+        ));
     }
 
     @PutMapping("/ai-auto/toggle")
     public Result<?> aiToggle(@RequestBody Map<String, Boolean> body) {
-        if (redisTemplate == null) return Result.error("Redis不可用");
-        boolean enabled = body.getOrDefault("enabled", false);
-        redisTemplate.opsForValue().set(AI_AUDIT_KEY, String.valueOf(enabled));
-        if (enabled) {
-            new Thread(() -> {
-                List<JobPosting> pending = mapper.selectPending(0, 100);
-                for (JobPosting jp : pending) {
-                    try { approve(jp.getId()); log.info("AI自动审核通过岗位: {}", jp.getPosition()); }
-                    catch (Exception e) { log.warn("AI审核失败: {}", e.getMessage()); }
-                }
-            }).start();
+        try {
+            boolean enabled = body.getOrDefault("enabled", false);
+            auditOrchestrator.setEnabled(enabled);
+            return Result.success(Map.of("enabled", enabled));
+        } catch (IllegalStateException ex) {
+            return Result.error(ex.getMessage());
         }
-        return Result.success(Map.of("enabled", enabled));
     }
 
-    /** 批量导入已有 MD 文件 */
     @PostMapping("/import")
     @Transactional
     public Result<Map<String, Object>> importJob(@RequestBody Map<String, Object> body) {
-        String company = (String) body.get("company");
-        String position = (String) body.get("position");
-        String direction = (String) body.get("direction");
-        String content = (String) body.get("content");
-        String displayContent = (String) body.get("displayContent");
-
-        if (company == null || position == null || content == null) {
-            return Result.error("公司、岗位、内容不能为空");
+        String company = stringValue(body.get("company"));
+        String position = stringValue(body.get("position"));
+        String direction = stringValue(body.get("direction"));
+        String content = stringValue(body.get("content"));
+        String displayContent = stringValue(body.get("displayContent"));
+        if (company.isBlank() || position.isBlank() || content.isBlank()) {
+            return Result.error("公司、岗位和内容不能为空");
         }
-
-        // 查重
         if (mapper.countByCompanyPosition(company, position) > 0) {
-            return Result.error("已存在: " + company + " - " + position);
+            return Result.error("该岗位已经存在");
         }
 
-        // 入库
-        JobPosting jp = new JobPosting();
-        jp.setCompany(company);
-        jp.setPosition(position);
-        jp.setDirection(direction != null ? direction : "");
-        jp.setContent(content);
-        jp.setDisplayContent(displayContent != null ? displayContent : content);
-        jp.setAuditStatus("APPROVED");
-        jp.setSubmitterId(1L);
-        jp.setSubmitterIp("127.0.0.1");
-        jp.setSubmitterRole("ADMIN_IMPORT");
-        mapper.insert(jp);
-
-        // 向量化入库
-        if (displayContent != null && !displayContent.isEmpty()) {
-            try {
-                documentService.importJobPosting(jp.getId(), position, direction, displayContent);
-            } catch (Exception e) {
-                log.warn("向量化失败: {}", e.getMessage());
-            }
+        JobPosting job = new JobPosting();
+        job.setCompany(company);
+        job.setPosition(position);
+        job.setDirection(direction);
+        job.setContent(content);
+        job.setDisplayContent(displayContent.isBlank() ? content : displayContent);
+        job.setAuditStatus("APPROVED");
+        job.setSubmitterId(BaseContext.getCurrentId());
+        job.setSubmitterIp("127.0.0.1");
+        job.setSubmitterRole("ADMIN_IMPORT");
+        mapper.insert(job);
+        try {
+            documentService.importJobPosting(job.getId(), position, direction, job.getDisplayContent());
+        } catch (Exception ex) {
+            log.warn("Imported job knowledge sync failed, jobId={}: {}", job.getId(), ex.getMessage());
         }
-
-        return Result.success(Map.of("id", jp.getId()));
+        return Result.success(Map.of("id", job.getId()));
     }
 
-    /** 查看详情（含公司名，管理员可见） */
     @GetMapping("/{id}")
     public Result<Map<String, Object>> detail(@PathVariable Long id) {
-        JobPosting jp = mapper.selectById(id);
-        if (jp == null) return Result.error("不存在");
-        Map<String, Object> m = new LinkedHashMap<>();
-        m.put("id", jp.getId());
-        m.put("company", jp.getCompany());
-        m.put("position", jp.getPosition());
-        m.put("direction", jp.getDirection());
-        m.put("content", jp.getContent());
-        m.put("displayContent", jp.getDisplayContent());
-        m.put("auditStatus", jp.getAuditStatus());
-        m.put("submitterId", jp.getSubmitterId());
-        m.put("createTime", jp.getCreateTime() != null ? jp.getCreateTime().toString() : "");
-        return Result.success(m);
+        JobPosting job = mapper.selectById(id);
+        if (job == null) return Result.error("岗位不存在");
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("id", job.getId());
+        result.put("company", job.getCompany());
+        result.put("position", job.getPosition());
+        result.put("direction", job.getDirection());
+        result.put("content", job.getContent());
+        result.put("displayContent", job.getDisplayContent());
+        result.put("auditStatus", job.getAuditStatus());
+        result.put("auditSource", job.getAuditSource());
+        result.put("auditConfidence", job.getAuditConfidence());
+        result.put("auditReason", job.getAuditReason());
+        result.put("submitterId", job.getSubmitterId());
+        result.put("createTime", job.getCreateTime());
+        return Result.success(result);
     }
 
-    /** 审核通过 */
     @PostMapping("/{id}/approve")
-    @Transactional
     public Result<?> approve(@PathVariable Long id) {
-        JobPosting jp = mapper.selectByIdForUpdate(id);
-        if (jp == null) return Result.error("不存在");
-        if (!"PENDING".equals(jp.getAuditStatus())) return Result.error("状态不正确");
-        // 奖励和审核状态处于同一事务，奖励失败时不允许出现“已通过但未到账”。
-        quotaService.grantReward(jp.getSubmitterId(), 50, "岗位投稿审核通过");
-        mapper.updateAuditStatus(id, "APPROVED", null);
-
-        try {
-            documentService.importJobPosting(jp.getId(), jp.getPosition(), jp.getDirection(), jp.getDisplayContent());
-        } catch (Exception e) {
-            log.warn("向量化失败: {}", e.getMessage());
-        }
-        // 飞书通知（岗位审核专用 webhook）
-        if (jobWebhookUrl != null && !jobWebhookUrl.isEmpty()) {
-            try {
-                Map<String, Object> card = new LinkedHashMap<>();
-                card.put("msg_type", "interactive");
-                Map<String, Object> cardBody = new LinkedHashMap<>();
-                Map<String, Object> header = new LinkedHashMap<>();
-                header.put("template", "green");
-                Map<String, Object> titleObj = new LinkedHashMap<>();
-                titleObj.put("tag", "plain_text");
-                titleObj.put("content", "✅ 岗位审核通过");
-                header.put("title", titleObj);
-                cardBody.put("header", header);
-                Map<String, Object> element = new LinkedHashMap<>();
-                element.put("tag", "markdown");
-                element.put("content", "**岗位：**" + jp.getPosition() + "\n**方向：**" + jp.getDirection());
-                cardBody.put("elements", java.util.Collections.singletonList(element));
-                card.put("card", cardBody);
-                new org.springframework.web.client.RestTemplate().postForEntity(jobWebhookUrl, card, String.class);
-            } catch (Exception ignored) {}
-        }
+        JobPosting job = reviewService.approve(
+                id, "ADMIN", null, BaseContext.getCurrentId(), "管理员审核通过");
+        notifyApproval(job);
         return Result.success();
     }
 
-    /** 删除 */
+    @PostMapping("/{id}/reject")
+    public Result<?> reject(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        reviewService.reject(id, "ADMIN", null, BaseContext.getCurrentId(), body.get("reason"));
+        return Result.success();
+    }
+
     @DeleteMapping("/{id}")
     public Result<?> delete(@PathVariable Long id) {
         mapper.deleteById(id);
         return Result.success();
     }
 
-    /** 同步到知识库 */
     @PostMapping("/{id}/sync-knowledge")
     public Result<?> syncKnowledge(@PathVariable Long id) {
-        JobPosting jp = mapper.selectById(id);
-        if (jp == null) return Result.error("不存在");
+        JobPosting job = mapper.selectById(id);
+        if (job == null) return Result.error("岗位不存在");
         try {
-            documentService.importJobPosting(jp.getId(), jp.getPosition(), jp.getDirection(), jp.getDisplayContent());
-        } catch (Exception e) { return Result.error("同步失败: " + e.getMessage()); }
-        return Result.success();
+            documentService.importJobPosting(job.getId(), job.getPosition(), job.getDirection(), job.getDisplayContent());
+            return Result.success();
+        } catch (Exception ex) {
+            return Result.error("同步失败：" + ex.getMessage());
+        }
     }
 
-    /** 编辑 */
     @PutMapping("/{id}")
     public Result<?> update(@PathVariable Long id, @RequestBody Map<String, String> body) {
-        JobPosting jp = mapper.selectById(id);
-        if (jp == null) return Result.error("不存在");
-        String position = body.getOrDefault("position", jp.getPosition());
-        String direction = body.getOrDefault("direction", jp.getDirection());
-        String displayContent = body.getOrDefault("displayContent", jp.getDisplayContent());
-        mapper.updateContent(id, position, direction, displayContent);
+        JobPosting job = mapper.selectById(id);
+        if (job == null) return Result.error("岗位不存在");
+        mapper.updateContent(
+                id,
+                body.getOrDefault("position", job.getPosition()),
+                body.getOrDefault("direction", job.getDirection()),
+                body.getOrDefault("displayContent", job.getDisplayContent())
+        );
         return Result.success();
     }
 
-    /** 拒绝 */
-    @PostMapping("/{id}/reject")
-    public Result<?> reject(@PathVariable Long id, @RequestBody Map<String, String> body) {
-        String reason = body.getOrDefault("reason", "");
-        mapper.updateAuditStatus(id, "REJECTED", reason);
-        return Result.success();
-    }
-
-    /** 待审列表 */
     @GetMapping("/pending")
     public Result<List<JobPosting>> pending(@RequestParam(defaultValue = "1") int page,
                                             @RequestParam(defaultValue = "20") int size) {
-        int safeSize = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = com.orangejd.common.util.PageUtil.offset(page, safeSize);
-        return Result.success(mapper.selectPending(offset, safeSize));
+        int safeSize = PageUtil.capSize(size);
+        return Result.success(mapper.selectPending(PageUtil.offset(page, safeSize), safeSize));
     }
 
-    /** 全部列表 */
     @GetMapping("/list")
     public Result<Map<String, Object>> list(@RequestParam(defaultValue = "") String status,
                                             @RequestParam(defaultValue = "1") int page,
                                             @RequestParam(defaultValue = "30") int size) {
-        int safeSize = com.orangejd.common.util.PageUtil.capSize(size);
-        int offset = com.orangejd.common.util.PageUtil.offset(page, safeSize);
-        List<JobPosting> list = mapper.selectAll(status, offset, safeSize);
-        long total = mapper.countAll(status);
-        Map<String, Object> result = new LinkedHashMap<>();
-        result.put("records", list);
-        result.put("total", total);
-        return Result.success(result);
+        int safeSize = PageUtil.capSize(size);
+        List<JobPosting> records = mapper.selectAll(status, PageUtil.offset(page, safeSize), safeSize);
+        return Result.success(Map.of("records", records, "total", mapper.countAll(status)));
+    }
+
+    private void notifyApproval(JobPosting job) {
+        if (jobWebhookUrl.isBlank()) return;
+        try {
+            Map<String, Object> payload = Map.of(
+                    "msg_type", "text",
+                    "content", Map.of("text", "岗位审核通过：" + job.getPosition() + " / " + job.getDirection())
+            );
+            restClient.post()
+                    .uri(jobWebhookUrl)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(payload)
+                    .retrieve()
+                    .toBodilessEntity();
+        } catch (Exception ex) {
+            log.warn("Job approval notification failed: {}", ex.getMessage());
+        }
+    }
+
+    private String stringValue(Object value) {
+        return value == null ? "" : String.valueOf(value).trim();
     }
 }
