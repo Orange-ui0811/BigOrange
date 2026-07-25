@@ -13,6 +13,7 @@ public class Work extends BaseEntity {
     private String auditStatus;
     private String visibilityStatus;
     private String publishStatus;
+    private Boolean approvalRewardGranted;
     // JOIN 查询时填充，非表字段
     private String ownerName;
     private String ownerAvatar;
@@ -43,6 +44,8 @@ public class Work extends BaseEntity {
     public void setVisibilityStatus(String visibilityStatus) { this.visibilityStatus = visibilityStatus; }
     public String getPublishStatus() { return publishStatus; }
     public void setPublishStatus(String publishStatus) { this.publishStatus = publishStatus; }
+    public Boolean getApprovalRewardGranted() { return approvalRewardGranted; }
+    public void setApprovalRewardGranted(Boolean approvalRewardGranted) { this.approvalRewardGranted = approvalRewardGranted; }
     public String getOwnerName() { return ownerName; }
     public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
     public String getOwnerAvatar() { return ownerAvatar; }

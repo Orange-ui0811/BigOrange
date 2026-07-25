@@ -12,7 +12,7 @@
       <div class="hero-actions" aria-label="快捷入口">
         <el-button type="primary" @click="router.push('/open-source?tab=discover')"><Search />开源项目榜单</el-button>
         <el-button class="btn-ghost" @click="router.push('/leaderboard')"><TrendCharts />完整 GitHub 榜单</el-button>
-        <el-button class="btn-ghost" @click="router.push('/trend')"><MagicStick />趋势分析</el-button>
+        <el-button class="btn-ghost" @click="router.push('/ai/career')"><Trophy />AI 比赛列表</el-button>
       </div>
     </section>
 
@@ -58,6 +58,23 @@
           </div>
         </div>
       </div>
+
+      <div class="ticker-row competition-ticker" @click="router.push('/ai/career')">
+        <div class="ticker-label competition-label">
+          <PixelOrangeLogo class="ticker-logo" />
+          <div><strong>AI 大赛</strong><span>正在进行与即将开始</span></div>
+        </div>
+        <div class="ticker-window">
+          <div v-if="competitionTickerItems.length" class="ticker-track competition-track">
+            <button v-for="item in competitionTickerLoop" :key="item.loopKey" type="button" class="ticker-item competition-item" @click.stop="router.push('/ai/career')">
+              <strong>{{ item.name }}</strong><span>{{ competitionPhaseText(item.phase) }} · {{ item.organizer || '举办方待确认' }}</span>
+            </button>
+          </div>
+          <button v-else type="button" class="ticker-empty" @click.stop="router.push('/ai/career')">
+            暂无已发布比赛，进入大赛列表查看或投稿
+          </button>
+        </div>
+      </div>
     </section>
 
     <section class="path-section">
@@ -89,38 +106,43 @@ import request from '../api/request'
 const router = useRouter()
 const tourRef = ref(null)
 const tourSteps = [
-  { selector: '.hub-hero', text: '顶部提供三个等尺寸快捷入口，可以直接查看开源项目、GitHub 榜单或趋势分析。', expression: 'wink' },
-  { selector: '.ranking-streams', text: '三行实时榜单帮助你快速观察项目热度和近期可参与的 Issue。', expression: 'smile' },
+  { selector: '.hub-hero', text: '顶部提供三个等尺寸快捷入口，可以直接查看开源项目、GitHub 榜单或 AI 比赛。', expression: 'wink' },
+  { selector: '.ranking-streams', text: '四行滚动信息帮助你观察项目热度、开源 Issue 和近期 AI 大赛。', expression: 'smile' },
   { selector: '.path-grid', text: '选择一条行动路径后会进入独立页面，不会再在首页展开复杂工具。', expression: 'sparkle' },
 ]
 
 const paths = [
   { id: 'build', index: '01', title: '做自己的项目', icon: 'Aim', meta: '4 个工具', route: '/project-tools', description: '从 GitHub 榜单寻找灵感，再完成趋势判断、方案设计和上线体检。' },
   { id: 'contribute', index: '02', title: '参与开源项目', icon: 'Collection', meta: '4 个阶段', route: '/open-source?tab=discover', description: '发现真实可参与的 Issue，让 AI 帮你选择、理解岗位价值并生成贡献指南。' },
-  { id: 'career', index: '03', title: '工作能力参考', icon: 'Briefcase', meta: '岗位能力库', route: '/submit-job', description: '用真实岗位要求校准学习方向，理解项目经历能够证明哪些工作能力。' },
+  { id: 'career', index: '03', title: 'AI大赛与能力参考', icon: 'Trophy', meta: '大赛与岗位', route: '/ai/career', description: '通过参加AI大赛积累自己的项目，用真实岗位要求校准学习方向' },
 ]
 
 const tickerItems = ref([])
 const tickerAllItems = ref([])
 const issueTickerItems = ref([])
+const competitionTickerItems = ref([])
 const makeLoop = items => [...items, ...items].map((item, index) => ({ ...item, loopKey: `${item.id || item.fullName || item.name}-${index}` }))
 const tickerLoop = computed(() => makeLoop(tickerItems.value))
 const tickerAllLoop = computed(() => makeLoop(tickerAllItems.value))
 const issueTickerLoop = computed(() => makeLoop(issueTickerItems.value))
+const competitionTickerLoop = computed(() => makeLoop(competitionTickerItems.value))
 const statusText = value => ({ TRY: '可尝试', POSSIBLY_CLAIMED: '可能被认领', NOT_RECOMMENDED: '不建议' }[value] || '待核验')
 const difficultyText = value => ({ BEGINNER: '入门', EASY: '简单', MEDIUM: '中等' }[value] || '待评估')
+const competitionPhaseText = value => ({ UPCOMING: '即将开始', ONGOING: '进行中', UNSCHEDULED: '时间待公布' }[value] || '可查看')
 const openGithub = url => { if (url) window.open(url, '_blank', 'noopener') }
 const normalizeRepository = item => ({ name: item.name || '', fullName: item.fullName || item.name || '', stars: item.stars || 0, language: item.language || '', htmlUrl: item.htmlUrl || '' })
 
 onMounted(async () => {
-  const [weekly, allTime, issues] = await Promise.allSettled([
+  const [weekly, allTime, issues, competitions] = await Promise.allSettled([
     request.get('/app/leaderboard/github', { params: { period: 'week', size: 8 } }),
     request.get('/app/leaderboard/github', { params: { period: 'all', size: 8 } }),
     request.get('/app/open-source/ticker'),
+    request.get('/app/competition/list', { params: { scope: 'ACTIVE', page: 1, size: 8 } }),
   ])
   if (weekly.status === 'fulfilled' && weekly.value.code === 1) tickerItems.value = (weekly.value.data?.records || []).map(normalizeRepository)
   if (allTime.status === 'fulfilled' && allTime.value.code === 1) tickerAllItems.value = (allTime.value.data?.records || []).map(normalizeRepository)
   if (issues.status === 'fulfilled' && issues.value.code === 1) issueTickerItems.value = issues.value.data || []
+  if (competitions.status === 'fulfilled' && competitions.value.code === 1) competitionTickerItems.value = competitions.value.data?.records || []
 })
 </script>
 
@@ -144,14 +166,20 @@ onMounted(async () => {
 .ticker-label span { color: var(--text-muted); font: 10px/1.4 var(--font-mono); }
 .ticker-label.all-time { border-color: #e7c9a8; background: #fffaf4; }.ticker-label.all-time strong { color: #8a4d1d; }
 .ticker-label.issue-label { border-color: #bfdbfe; background: #eff6ff; }.ticker-label.issue-label strong { color: #1d4ed8; }
+.ticker-label.competition-label { border-color: #bbf7d0; background: #f0fdf4; }.ticker-label.competition-label strong { color: #166534; }
 .ticker-window { min-width: 0; flex: 1; overflow: hidden; padding: 4px 0; border: 1px solid var(--border-orange); border-left: 0; border-radius: 0 8px 8px 0; background: rgba(255,255,255,.78); box-shadow: var(--shadow-card); }
 .issue-ticker .ticker-window { border-color: #bfdbfe; }
+.competition-ticker .ticker-window { border-color: #bbf7d0; }
 .ticker-track { display: flex; width: max-content; gap: 12px; padding: 8px 12px; animation: ticker-scroll 30s linear infinite; }.ticker-track-slow { animation-duration: 35s; }.issue-track { animation-duration: 38s; }
+.competition-track { animation-duration: 42s; }
 .ticker-track:hover, .ticker-track:focus-within { animation-play-state: paused; }
 .ticker-item { display: block; min-width: 260px; max-width: 320px; min-height: 48px; flex-shrink: 0; padding: 8px 12px; border: 1px solid #f2c49b; border-radius: 8px; background: #fffdf9; color: var(--text-primary); text-align: left; cursor: pointer; transition: border-color .18s, transform .18s; }
 .ticker-item:hover, .ticker-item:focus-visible { border-color: var(--brand); outline: none; transform: translateY(-2px); }
 .ticker-item strong { display: block; overflow: hidden; margin-bottom: 4px; font: 800 13px/1.3 var(--font-mono); text-overflow: ellipsis; white-space: nowrap; }.ticker-item span { color: var(--text-secondary); font-size: 11px; }
 .issue-item { min-width: 310px; border-color: #bfdbfe; background: #fff; }
+.competition-item { min-width: 300px; border-color: #bbf7d0; background: #fbfffc; }
+.ticker-empty { min-height: 48px; margin: 8px 12px; padding: 0 14px; border: 1px dashed #86efac; border-radius: 8px; background: #fbfffc; color: #166534; font-size: 12px; font-weight: 700; cursor: pointer; }
+.ticker-empty:hover,.ticker-empty:focus-visible { border-style: solid; outline: 2px solid rgba(22,101,52,.18); }
 .path-section { margin-top: 42px; }
 .section-heading { display: flex; min-height: 64px; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px solid var(--border-weak); }
 .section-kicker { color: var(--brand-strong); font: 800 11px/1.2 var(--font-mono); }.section-heading h2 { margin: 7px 0 0; font: 900 25px/1.25 var(--font-mono); letter-spacing: 0; }
@@ -167,5 +195,6 @@ onMounted(async () => {
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (max-width: 980px) { .hub-hero { grid-template-columns: 1fr; }.hero-actions { width: 100%; grid-template-columns: repeat(3,minmax(0,1fr)); grid-template-rows: 48px; }.path-grid { grid-template-columns: 1fr; }.path-card { min-height: 190px; }.path-description { min-height: auto; } }
 @media (max-width: 680px) { .hub-hero { padding: 20px; border-radius: 12px; }.hero-actions { grid-template-columns: 1fr; grid-template-rows: repeat(3,48px); }.ticker-row { display: block; }.ticker-label { width: 100%; min-height: 56px; border-right: 1px solid var(--border-orange); border-bottom: 0; border-radius: 8px 8px 0 0; }.ticker-label.issue-label { border-right-color: #bfdbfe; }.ticker-window { border-top: 0; border-left: 1px solid var(--border-orange); border-radius: 0 0 8px 8px; }.issue-ticker .ticker-window { border-left-color: #bfdbfe; }.ticker-item,.issue-item { min-width: 240px; max-width: 280px; }.section-heading { align-items: flex-start; flex-direction: column; }.section-heading h2 { font-size: 22px; } }
+@media (max-width: 680px) { .ticker-label.competition-label { border-right-color: #bbf7d0; }.competition-ticker .ticker-window { border-left-color: #bbf7d0; }.competition-item { min-width: 240px; max-width: 280px; } }
 @media (prefers-reduced-motion: reduce) { .ticker-track { width: 100%; overflow-x: auto; animation: none; transform: none; }.path-card,.ticker-item { transition: none; } }
 </style>

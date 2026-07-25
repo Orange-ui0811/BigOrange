@@ -195,7 +195,7 @@ const logout = async () => {
 const activeMenu = computed(() => {
   const p = route.path
   if (p.startsWith('/market') || p.startsWith('/work/') || p.startsWith('/req/') || p.startsWith('/order/')) return '/market'
-  if (p.startsWith('/ai') || p.startsWith('/project-tools') || p.startsWith('/leaderboard') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/launch-check') || p.startsWith('/open-source') || p.startsWith('/job')) return '/ai'
+  if (p.startsWith('/ai') || p.startsWith('/submit-job') || p.startsWith('/project-tools') || p.startsWith('/leaderboard') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/launch-check') || p.startsWith('/open-source') || p.startsWith('/job')) return '/ai'
   if (p.startsWith('/publish')) return '/publish'
   if (p.startsWith('/chat')) return '/chat'
   if (p.startsWith('/me') || p.startsWith('/profile')) return '/me'
@@ -218,6 +218,7 @@ onMounted(async () => {
   min-height: 100vh;
   min-height: 100dvh;
 }
+.app-shell > .el-container { min-width: 0; }
 
 .skip-link {
   position: fixed;
@@ -496,6 +497,7 @@ onMounted(async () => {
 
 /* ===== 内容区 ===== */
 .app-main {
+  min-width: 0;
   background: transparent !important;
   padding: 24px 32px 48px !important;
 }

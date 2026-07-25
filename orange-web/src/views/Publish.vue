@@ -22,6 +22,10 @@
                 </div>
                 <h3>发布 AI 产品作品</h3>
                 <p>适合已经做出 demo、原型或可演示产品的创作者。重点是让别人快速看懂价值、完成度和适用场景。</p>
+                <div class="work-reward">
+                  <strong>审核通过奖励</strong>
+                  <span>发布一个作品并通过审核，可获得 50 segments</span>
+                </div>
                 <div class="choice-preview">
                   <strong>下一步会填写</strong>
                   <span>作品封面</span><span>演示地址</span><span>视频展示</span><span>功能亮点</span>
@@ -430,6 +434,9 @@ const submit = async (submitReview = false) => {
   color: var(--text-secondary);
   line-height: 1.7; margin: 0; font-size: 13px;
 }
+.work-reward { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 16px 0; padding: 12px 14px; border: 1px solid #bbf7d0; border-left: 4px solid #16a34a; border-radius: 8px; background: #f0fdf4; }
+.work-reward strong { flex-shrink: 0; color: #166534; font-size: 13px; }
+.work-reward span { color: #14532d; font-size: 13px; font-weight: 700; line-height: 1.5; text-align: right; }
 .choice-btn { width: 100%; margin-top: 16px; }
 .ghost-btn {
   border: 1px solid var(--border-orange) !important;

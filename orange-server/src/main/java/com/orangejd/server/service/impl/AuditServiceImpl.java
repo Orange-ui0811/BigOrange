@@ -26,17 +26,25 @@ public class AuditServiceImpl implements AuditService {
     @Autowired private RequirementMapper requirementMapper;
     @Autowired private AuditRecordMapper auditRecordMapper;
     @Autowired private NotificationService notificationService;
+    @Autowired private QuotaServiceImpl quotaService;
 
     @Override
     @Transactional
     public void auditWork(Long workId, boolean approved, String reason) {
-        Work work = workMapper.selectById(workId);
+        Work work = workMapper.selectByIdForUpdate(workId);
         if (work == null) throw new BaseException(MessageConstant.WORK_NOT_FOUND);
         if (!"PENDING_REVIEW".equals(work.getAuditStatus()))
             throw new BaseException(MessageConstant.WORK_AUDIT_DENIED);
 
         String auditStatus = approved ? "APPROVED" : "REJECTED";
-        workMapper.updateAuditStatus(workId, auditStatus);
+        if (approved) {
+            quotaService.grantReward(work.getOwnerId(), 50, "作品审核通过奖励");
+            if (workMapper.approveAndMarkRewarded(workId) != 1) {
+                throw new BaseException(MessageConstant.WORK_AUDIT_DENIED);
+            }
+        } else {
+            workMapper.updateAuditStatus(workId, auditStatus);
+        }
         log.info("审核作品 workId={} result={}", workId, auditStatus);
 
         AuditRecord record = new AuditRecord();

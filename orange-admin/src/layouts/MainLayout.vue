@@ -56,7 +56,7 @@ const navItems = [
   { path: '/redemption', label: '充值码管理', icon: 'Ticket' },
   { path: '/ai-config', label: 'AI 调用设置', icon: 'Setting' },
   { path: '/pricing', label: 'AI 消费定价', icon: 'Coin' },
-  { path: '/job-audit', label: '岗位审核', icon: 'Checked' },
+  { path: '/job-audit', label: '投稿审核', icon: 'Checked' },
   { path: '/usage', label: '用量统计', icon: 'DataAnalysis' },
   { path: '/launch-checks', label: '上线体检', icon: 'DocumentChecked' },
   { path: '/open-source', label: '开源贡献', icon: 'Connection' },

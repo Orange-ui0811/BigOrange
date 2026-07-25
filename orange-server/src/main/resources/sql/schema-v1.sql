@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS work (
     audit_status     VARCHAR(32)  NOT NULL DEFAULT 'DRAFT' COMMENT '审核状态: DRAFT / PENDING_REVIEW / APPROVED / REJECTED',
     visibility_status VARCHAR(16) NOT NULL DEFAULT 'PUBLIC' COMMENT '可见性: PUBLIC / PRIVATE',
     publish_status   VARCHAR(16)  NOT NULL DEFAULT 'UNPUBLISHED' COMMENT '发布状态: PUBLISHED / UNPUBLISHED',
+    approval_reward_granted TINYINT(1) NOT NULL DEFAULT 0 COMMENT '作品首次审核通过奖励是否已发放',
     create_time      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
@@ -541,6 +542,34 @@ CREATE TABLE IF NOT EXISTS job_posting (
     KEY idx_job_direction (direction),
     KEY idx_job_company_position (company, position)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='岗位投稿';
+
+CREATE TABLE IF NOT EXISTS ai_competition (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    source_url VARCHAR(768) NOT NULL,
+    normalized_url VARCHAR(768) NOT NULL,
+    summary VARCHAR(1200) NOT NULL,
+    organizer VARCHAR(200) NOT NULL,
+    start_time DATETIME NULL,
+    end_time DATETIME NULL,
+    audit_status VARCHAR(16) NOT NULL DEFAULT 'PENDING',
+    submission_source VARCHAR(16) NOT NULL DEFAULT 'USER',
+    submitter_id BIGINT NULL,
+    submitter_ip VARCHAR(64) NULL,
+    reviewer_id BIGINT NULL,
+    reject_reason VARCHAR(500) NULL,
+    reward_granted TINYINT(1) NOT NULL DEFAULT 0,
+    reward_quota INT NOT NULL DEFAULT 0,
+    approved_at DATETIME NULL,
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_ai_competition_url (normalized_url),
+    KEY idx_ai_competition_public (audit_status, end_time, start_time),
+    KEY idx_ai_competition_submitter (submitter_id, create_time),
+    KEY idx_ai_competition_review (audit_status, create_time),
+    CONSTRAINT fk_ai_competition_submitter FOREIGN KEY (submitter_id) REFERENCES account(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='AI 大赛投稿与展示';
 
 -- ============================================================
 -- Phase 7: AI 服务消费定价管理

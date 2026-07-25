@@ -120,6 +120,8 @@ public class AdminJobController {
         JobPosting jp = mapper.selectByIdForUpdate(id);
         if (jp == null) return Result.error("不存在");
         if (!"PENDING".equals(jp.getAuditStatus())) return Result.error("状态不正确");
+        // 奖励和审核状态处于同一事务，奖励失败时不允许出现“已通过但未到账”。
+        quotaService.grantReward(jp.getSubmitterId(), 50, "岗位投稿审核通过");
         mapper.updateAuditStatus(id, "APPROVED", null);
 
         try {
@@ -127,8 +129,6 @@ public class AdminJobController {
         } catch (Exception e) {
             log.warn("向量化失败: {}", e.getMessage());
         }
-        // 发奖励
-        try { quotaService.grantReward(jp.getSubmitterId(), 50, "岗位投稿审核通过"); } catch (Exception ignored) {}
         // 飞书通知（岗位审核专用 webhook）
         if (jobWebhookUrl != null && !jobWebhookUrl.isEmpty()) {
             try {

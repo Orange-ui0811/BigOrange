@@ -17,6 +17,7 @@
         <result property="auditStatus" column="audit_status"/>
         <result property="visibilityStatus" column="visibility_status"/>
         <result property="publishStatus" column="publish_status"/>
+        <result property="approvalRewardGranted" column="approval_reward_granted"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="ownerName" column="owner_name"/>
@@ -52,6 +53,10 @@
         WHERE w.id = #{id}
     </select>
 
+    <select id="selectByIdForUpdate" resultMap="workMap">
+        SELECT * FROM work WHERE id = #{id} FOR UPDATE
+    </select>
+
     <select id="selectByOwnerId" resultMap="workMap">
         SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
@@ -70,6 +75,14 @@
 
     <update id="updateAuditStatus">
         UPDATE work SET audit_status = #{auditStatus}, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="approveAndMarkRewarded">
+        UPDATE work
+        SET audit_status = 'APPROVED', approval_reward_granted = 1, update_time = NOW()
+        WHERE id = #{id}
+          AND audit_status = 'PENDING_REVIEW'
+          AND approval_reward_granted = 0
     </update>
 
     <update id="updateVisibility">
