@@ -260,6 +260,8 @@ public class OpenSourceContributionService {
     public boolean triggerFullRefresh() { return refreshTask.triggerFullRefresh(); }
     public boolean triggerVerification() { return refreshTask.triggerVerification(); }
 
+    public boolean triggerTranslation() { return refreshTask.triggerTranslation(); }
+
     private Map<String, Object> requireIssue(Long id) {
         Map<String, Object> issue = mapper.selectIssueById(id);
         if (issue == null) throw new BaseException("Issue 不存在");

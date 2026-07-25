@@ -58,7 +58,7 @@
         </el-table-column>
         <el-table-column prop="createTime" label="投稿时间" width="180" />
         <el-table-column label="奖励" width="110">
-          <template #default>50 配额</template>
+          <template #default>{{ rewardLabel(rewardPricing.job) }}</template>
         </el-table-column>
         <el-table-column label="操作" width="260" fixed="right">
           <template #default="{ row }">
@@ -122,7 +122,7 @@
     <el-dialog v-model="jobDetailVisible" title="岗位投稿详情" width="min(720px, calc(100vw - 32px))">
       <div class="detail-meta">
         <span>投稿用户：{{ jobDetail.submitterId ? `#${jobDetail.submitterId}` : '系统导入' }}</span>
-        <span>审核通过奖励：50 配额</span>
+        <span>审核通过奖励：{{ rewardLabel(rewardPricing.job) }}</span>
       </div>
       <div class="job-detail">{{ jobDetail.content || '无内容' }}</div>
       <template v-if="status === 'PENDING'" #footer>
@@ -153,7 +153,9 @@
       <div v-if="competitionMode === 'edit'" class="detail-meta">
         <span>投稿来源：{{ competitionEditor.submissionSource === 'USER' ? `用户 #${competitionEditor.submitterId}` : '管理员录入' }}</span>
         <span v-if="competitionEditor.rewardGranted" class="reward-done">奖励已发放：{{ competitionEditor.rewardQuota }} 配额</span>
-        <span v-else>审核通过奖励：{{ competitionEditor.submissionSource === 'USER' ? '20 配额' : '不发放' }}</span>
+        <span v-else>
+          审核通过奖励：{{ competitionEditor.submissionSource === 'USER' ? rewardLabel(rewardPricing.competition) : '不发放' }}
+        </span>
       </div>
       <el-form label-position="top">
         <el-form-item label="比赛名称" required><el-input v-model="competitionEditor.name" maxlength="200" /></el-form-item>
@@ -214,6 +216,10 @@ import { onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Briefcase, Download, Plus, Trophy } from '@element-plus/icons-vue'
 import request from '../api/request'
+
+const rewardPricing = ref({ work: 50, job: 50, competition: 20 })
+const rewardLabel = amount => amount > 0 ? `${amount} 配额` : '不发放'
+const rewardActionText = amount => amount > 0 ? `发放 ${amount} 配额` : '不发放配额奖励'
 
 const contentType = ref('JOB')
 const status = ref('PENDING')
@@ -287,9 +293,9 @@ const showJobDetail = async row => {
 }
 const approveJob = async id => {
   try {
-    await ElMessageBox.confirm('审核通过后将向投稿用户发放 50 配额，确认继续？', '确认岗位投稿', { type: 'warning' })
+    await ElMessageBox.confirm(`审核通过后将${rewardActionText(rewardPricing.value.job)}，确认继续？`, '确认岗位投稿', { type: 'warning' })
     ensureOk(await request.post(`/admin/job/${id}/approve`))
-    ElMessage.success('已通过并发放 50 配额')
+    ElMessage.success(`已通过，${rewardActionText(rewardPricing.value.job)}`)
     jobDetailVisible.value = false
     loadList()
   } catch (error) {
@@ -429,7 +435,11 @@ const saveCompetition = async approve => {
 }
 const approveCompetition = async id => {
   try {
-    await ElMessageBox.confirm('用户投稿通过后将发放 20 配额，管理员录入内容不发奖励。确认继续？', '确认比赛投稿', { type: 'warning' })
+    await ElMessageBox.confirm(
+      `用户投稿通过后将${rewardActionText(rewardPricing.value.competition)}，管理员录入内容不发奖励。确认继续？`,
+      '确认比赛投稿',
+      { type: 'warning' }
+    )
     ensureOk(await request.post(`/admin/competition/${id}/approve`))
     ElMessage.success('比赛已通过，用户奖励已处理')
     loadList()
@@ -480,6 +490,11 @@ const shortDate = value => value ? value.replace('T', ' ').slice(0, 16) : '待�
 
 onMounted(async () => {
   loadList()
+  try {
+    const rewardResponse = await request.get('/app/config/rewards')
+    ensureOk(rewardResponse)
+    rewardPricing.value = { ...rewardPricing.value, ...(rewardResponse.data || {}) }
+  } catch {}
   try {
     const response = await request.get('/admin/job/ai-auto/status')
     ensureOk(response)

@@ -24,7 +24,7 @@
                 <p>适合已经做出 demo、原型或可演示产品的创作者。重点是让别人快速看懂价值、完成度和适用场景。</p>
                 <div class="work-reward">
                   <strong>审核通过奖励</strong>
-                  <span>发布一个作品并通过审核，可获得 50 segments</span>
+                  <span>{{ workRewardText }}</span>
                 </div>
                 <div class="choice-preview">
                   <strong>下一步会填写</strong>
@@ -200,10 +200,15 @@ import PageTour from '../components/PageTour.vue'
 import VideoShowcase from '../components/VideoShowcase.vue'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
+import { DEFAULT_REWARDS, getRewardPricing } from '../api/rewards'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
 const router = useRouter()
+const workReward = ref(DEFAULT_REWARDS.work)
+const workRewardText = computed(() => workReward.value > 0
+  ? `发布一个作品并通过审核，可获得 ${workReward.value} segments`
+  : '作品通过审核后当前暂不发放 segments 奖励')
 const tourSteps = [
   { selector: '.publish-choices', text: '选左边的「发布作品」展示你的 AI 产品，或选右边的「发布需求」找人帮你做。每边都列了要准备什么～', expression: 'wink' },
   { selector: '.publish-note.strong', text: '发布的流程：填写内容→提交审核→审核通过→公开展示→有人感兴趣→聊天沟通。', expression: 'smile' },
@@ -289,6 +294,7 @@ const loadCats = async () => {
 }
 watch(tab, () => { if (!isEdit) form.categoryId = null; loadCats() })
 onMounted(async () => {
+  getRewardPricing().then(value => { workReward.value = value.work })
   loadCats()
   if (isEdit) {
     loading.value = true

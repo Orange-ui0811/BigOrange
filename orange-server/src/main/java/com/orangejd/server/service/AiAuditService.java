@@ -270,9 +270,8 @@ public class AiAuditService {
         } catch (Exception e) {
             String errMsg = e.getMessage() != null ? e.getMessage() : "";
             // 图片相关错误 → 降级重试
-            if (!allImages.isEmpty() &&
-                (errMsg.contains("image") || errMsg.contains("图片") || errMsg.contains("invalid_image"))) {
-                log.warn("AI图片审核失败，降级文本审核: {}", errMsg);
+            if (!allImages.isEmpty()) {
+                log.warn("AI多模态审核失败，降级文本审核: {}", truncate(errMsg, 200));
                 try {
                     // 去掉图片重试
                     userMsg.put("content", userPrompt);

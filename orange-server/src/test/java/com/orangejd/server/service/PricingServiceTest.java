@@ -4,11 +4,11 @@ import com.orangejd.pojo.entity.AiServicePricing;
 import com.orangejd.server.mapper.PricingMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -22,8 +22,19 @@ class PricingServiceTest {
     @BeforeEach
     void setUp() {
         mapper = mock(PricingMapper.class);
-        service = new PricingService();
-        ReflectionTestUtils.setField(service, "pricingMapper", mapper);
+        service = new PricingService(mapper);
+    }
+
+    @Test
+    void rewardCanBeDisabledWithZeroButAiConsumptionCannot() {
+        when(mapper.selectAll()).thenReturn(List.of());
+        service.loadFromDB();
+
+        service.updateCost(PricingService.REWARD_WORK_APPROVED, 0, 3L, "ignored");
+
+        assertEquals(0, service.getReward(PricingService.REWARD_WORK_APPROVED));
+        assertThrows(IllegalArgumentException.class,
+                () -> service.updateCost("ai:plan", 0, 3L, "ignored"));
     }
 
     @Test

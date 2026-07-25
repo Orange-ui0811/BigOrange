@@ -25,13 +25,16 @@ class CompetitionServiceTest {
 
     private AiCompetitionMapper mapper;
     private QuotaServiceImpl quotaService;
+    private PricingService pricingService;
     private CompetitionService service;
 
     @BeforeEach
     void setUp() {
         mapper = mock(AiCompetitionMapper.class);
         quotaService = mock(QuotaServiceImpl.class);
-        service = new CompetitionService(mapper, quotaService);
+        pricingService = mock(PricingService.class);
+        when(pricingService.getReward(PricingService.REWARD_COMPETITION_APPROVED)).thenReturn(35);
+        service = new CompetitionService(mapper, quotaService, pricingService);
     }
 
     @Test
@@ -72,20 +75,20 @@ class CompetitionServiceTest {
         approved.setAuditStatus("APPROVED");
         approved.setRewardGranted(true);
         when(mapper.selectByIdForUpdate(12L)).thenReturn(pending, approved);
-        when(mapper.approve(eq(12L), eq(3L), eq(true), eq(20))).thenReturn(1);
+        when(mapper.approve(eq(12L), eq(3L), eq(true), eq(35))).thenReturn(1);
 
         service.approve(12L, 3L);
         assertThrows(BaseException.class, () -> service.approve(12L, 3L));
 
-        verify(quotaService).grantReward(7L, 20, "AI大赛投稿审核通过");
-        verify(mapper).approve(12L, 3L, true, 20);
+        verify(quotaService).grantReward(7L, 35, "AI大赛投稿审核通过");
+        verify(mapper).approve(12L, 3L, true, 35);
     }
 
     @Test
     void rewardFailurePreventsApprovalUpdate() {
         when(mapper.selectByIdForUpdate(12L)).thenReturn(pendingCompetition());
         doThrow(new BaseException("奖励失败"))
-                .when(quotaService).grantReward(7L, 20, "AI大赛投稿审核通过");
+                .when(quotaService).grantReward(7L, 35, "AI大赛投稿审核通过");
 
         assertThrows(BaseException.class, () -> service.approve(12L, 3L));
 

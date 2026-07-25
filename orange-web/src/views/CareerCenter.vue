@@ -57,7 +57,10 @@
 
       <div class="reward-banner competition-reward">
         <Present />
-        <div><strong>投稿通过可获得 20 配额奖励</strong><span>请提交真实、可公开访问的比赛信息。</span></div>
+        <div>
+          <strong>{{ rewardText(rewards.competition, '投稿通过可获得') }}</strong>
+          <span>请提交真实、可公开访问的比赛信息。</span>
+        </div>
       </div>
 
       <div v-if="competitionLoading" class="competition-grid" aria-label="正在加载比赛">
@@ -122,7 +125,10 @@
 
       <div class="reward-banner job-reward">
         <Present />
-        <div><strong>投稿通过可获得 50 配额奖励</strong><span>请对招聘信息进行原创整理，避免直接搬运完整文案。</span></div>
+        <div>
+          <strong>{{ rewardText(rewards.job, '投稿通过可获得') }}</strong>
+          <span>请对招聘信息进行原创整理，避免直接搬运完整文案。</span>
+        </div>
       </div>
 
       <div class="career-layout">
@@ -201,7 +207,7 @@
             <el-date-picker v-model="competitionForm.endTime" type="datetime" value-format="YYYY-MM-DDTHH:mm:ss" placeholder="尚未公布可留空" />
           </el-form-item>
         </div>
-        <div class="dialog-reward"><Present />审核通过后，奖励 20 配额</div>
+        <div class="dialog-reward"><Present />{{ rewardText(rewards.competition, '审核通过后，奖励') }}</div>
       </el-form>
       <template #footer>
         <el-button @click="competitionDialog = false">取消</el-button>
@@ -225,7 +231,7 @@
           <p>禁止直接复制企业官网完整招聘文案或搬运他人原创内容。平台会保留投稿账号、IP 和时间用于审核与侵权追溯。</p>
           <el-checkbox v-model="jobAgreed">我已阅读并同意投稿规则</el-checkbox>
         </div>
-        <div class="dialog-reward"><Present />审核通过后，奖励 50 配额</div>
+        <div class="dialog-reward"><Present />{{ rewardText(rewards.job, '审核通过后，奖励') }}</div>
       </el-form>
       <template #footer>
         <el-button @click="jobDialog = false">取消</el-button>
@@ -247,13 +253,17 @@ import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
 import { getCompetitions, submitCompetition } from '../api/competition'
 import { getDirections, getJobDetail, getJobsByDirection } from '../api/job'
+import { DEFAULT_REWARDS, getRewardPricing } from '../api/rewards'
 import { LEGAL_CONTACT } from '../content/legal'
 
-const tourSteps = [
+const rewards = ref({ ...DEFAULT_REWARDS })
+const rewardText = (amount, prefix) => amount > 0 ? `${prefix} ${amount} 配额奖励` : '当前暂不发放配额奖励'
+
+const tourSteps = computed(() => [
   { selector: '.section-switch', text: '这里可以切换大赛列表和工作能力参考，两类信息彼此独立。', expression: 'smile' },
-  { selector: '.competition-reward', text: '发现真实比赛后可以投稿，审核通过会获得 20 配额奖励。', expression: 'wink' },
+  { selector: '.competition-reward', text: rewardText(rewards.value.competition, '发现真实比赛并投稿，审核通过可获得'), expression: 'wink' },
   { selector: '.competition-grid', text: '卡片会告诉你比赛内容、举办方和时间，点击查看详情会打开官方页面。', expression: 'sparkle' },
-]
+])
 
 const section = ref('competitions')
 const competitionScope = ref('ACTIVE')
@@ -330,7 +340,7 @@ const submitCompetitionForm = async () => {
       endTime: form.endTime || null,
     })
     if (response.code !== 1) throw new Error(response.msg || '投稿失败')
-    ElMessage.success('投稿成功，审核通过后将奖励 20 配额')
+    ElMessage.success(rewardText(rewards.value.competition, '投稿成功，审核通过后将奖励'))
     competitionDialog.value = false
     competitionForm.value = blankCompetition()
   } catch (error) {
@@ -404,7 +414,7 @@ const submitJobForm = async () => {
   try {
     const response = await request.post('/app/job/submit', jobForm.value)
     if (response.code !== 1) throw new Error(response.msg || '投稿失败')
-    ElMessage.success('投稿成功，审核通过后将奖励 50 配额')
+    ElMessage.success(rewardText(rewards.value.job, '投稿成功，审核通过后将奖励'))
     jobDialog.value = false
     jobAgreed.value = false
     jobForm.value = { position: '', direction: '', content: '' }
@@ -416,6 +426,7 @@ const submitJobForm = async () => {
 }
 
 onMounted(() => {
+  getRewardPricing().then(value => { rewards.value = value })
   loadCompetitions()
   loadDirections()
 })

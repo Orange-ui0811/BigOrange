@@ -1,18 +1,18 @@
 package com.orangejd.server.service.impl;
 
 import com.orangejd.common.constant.MessageConstant;
-import lombok.extern.slf4j.Slf4j;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.pojo.entity.AuditRecord;
-import com.orangejd.pojo.entity.Work;
 import com.orangejd.pojo.entity.Requirement;
+import com.orangejd.pojo.entity.Work;
 import com.orangejd.server.mapper.AuditRecordMapper;
-import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.mapper.RequirementMapper;
+import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.service.AuditService;
 import com.orangejd.server.service.NotificationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.orangejd.server.service.PricingService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,23 +22,42 @@ import java.util.List;
 @Service
 public class AuditServiceImpl implements AuditService {
 
-    @Autowired private WorkMapper workMapper;
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired private AuditRecordMapper auditRecordMapper;
-    @Autowired private NotificationService notificationService;
-    @Autowired private QuotaServiceImpl quotaService;
+    private final WorkMapper workMapper;
+    private final RequirementMapper requirementMapper;
+    private final AuditRecordMapper auditRecordMapper;
+    private final NotificationService notificationService;
+    private final QuotaServiceImpl quotaService;
+    private final PricingService pricingService;
+
+    public AuditServiceImpl(WorkMapper workMapper,
+                            RequirementMapper requirementMapper,
+                            AuditRecordMapper auditRecordMapper,
+                            NotificationService notificationService,
+                            QuotaServiceImpl quotaService,
+                            PricingService pricingService) {
+        this.workMapper = workMapper;
+        this.requirementMapper = requirementMapper;
+        this.auditRecordMapper = auditRecordMapper;
+        this.notificationService = notificationService;
+        this.quotaService = quotaService;
+        this.pricingService = pricingService;
+    }
 
     @Override
     @Transactional
     public void auditWork(Long workId, boolean approved, String reason) {
         Work work = workMapper.selectByIdForUpdate(workId);
         if (work == null) throw new BaseException(MessageConstant.WORK_NOT_FOUND);
-        if (!"PENDING_REVIEW".equals(work.getAuditStatus()))
+        if (!"PENDING_REVIEW".equals(work.getAuditStatus())) {
             throw new BaseException(MessageConstant.WORK_AUDIT_DENIED);
+        }
 
         String auditStatus = approved ? "APPROVED" : "REJECTED";
         if (approved) {
-            quotaService.grantReward(work.getOwnerId(), 50, "作品审核通过奖励");
+            int reward = pricingService.getReward(PricingService.REWARD_WORK_APPROVED);
+            if (reward > 0) {
+                quotaService.grantReward(work.getOwnerId(), reward, "作品审核通过奖励");
+            }
             if (workMapper.approveAndMarkRewarded(workId) != 1) {
                 throw new BaseException(MessageConstant.WORK_AUDIT_DENIED);
             }
@@ -54,18 +73,23 @@ public class AuditServiceImpl implements AuditService {
         record.setAuditStatus(auditStatus);
         record.setReason(reason);
         auditRecordMapper.insert(record);
-        notificationService.send(work.getOwnerId(), "AUDIT",
-                approved ? "你的作品《" + work.getTitle() + "》审核通过" : "你的作品《" + work.getTitle() + "》审核未通过",
-                workId);
+        notificationService.send(
+                work.getOwnerId(),
+                "AUDIT",
+                approved ? "你的作品《" + work.getTitle() + "》审核通过"
+                        : "你的作品《" + work.getTitle() + "》审核未通过",
+                workId
+        );
     }
 
     @Override
     @Transactional
     public void auditRequirement(Long requirementId, boolean approved, String reason) {
-        Requirement req = requirementMapper.selectById(requirementId);
-        if (req == null) throw new BaseException(MessageConstant.REQ_NOT_FOUND);
-        if (!"PENDING_REVIEW".equals(req.getAuditStatus()))
+        Requirement requirement = requirementMapper.selectById(requirementId);
+        if (requirement == null) throw new BaseException(MessageConstant.REQ_NOT_FOUND);
+        if (!"PENDING_REVIEW".equals(requirement.getAuditStatus())) {
             throw new BaseException(MessageConstant.REQ_AUDIT_DENIED);
+        }
 
         String auditStatus = approved ? "APPROVED" : "REJECTED";
         requirementMapper.updateAuditStatus(requirementId, auditStatus);
@@ -77,9 +101,13 @@ public class AuditServiceImpl implements AuditService {
         record.setAuditStatus(auditStatus);
         record.setReason(reason);
         auditRecordMapper.insert(record);
-        notificationService.send(req.getPublisherId(), "AUDIT",
-                approved ? "你的需求《" + req.getTitle() + "》审核通过" : "你的需求《" + req.getTitle() + "》审核未通过",
-                requirementId);
+        notificationService.send(
+                requirement.getPublisherId(),
+                "AUDIT",
+                approved ? "你的需求《" + requirement.getTitle() + "》审核通过"
+                        : "你的需求《" + requirement.getTitle() + "》审核未通过",
+                requirementId
+        );
     }
 
     @Override

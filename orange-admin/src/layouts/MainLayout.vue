@@ -55,7 +55,7 @@ const navItems = [
   { path: '/knowledge', label: '知识库', icon: 'Collection' },
   { path: '/redemption', label: '充值码管理', icon: 'Ticket' },
   { path: '/ai-config', label: 'AI 调用设置', icon: 'Setting' },
-  { path: '/pricing', label: 'AI 消费定价', icon: 'Coin' },
+  { path: '/pricing', label: '配额定价', icon: 'Coin' },
   { path: '/job-audit', label: '投稿审核', icon: 'Checked' },
   { path: '/usage', label: '用量统计', icon: 'DataAnalysis' },
   { path: '/launch-checks', label: '上线体检', icon: 'DocumentChecked' },

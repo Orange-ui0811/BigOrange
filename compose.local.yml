@@ -34,7 +34,7 @@ services:
     image: maven:3.9.9-eclipse-temurin-21
     working_dir: /workspace
     command: >-
-      sh -c "mvn -B -DskipTests install &&
+      sh -c "mvn -B -DskipTests clean install &&
       mvn -B -f orange-server/pom.xml spring-boot:run -Dspring-boot.run.profiles=dev"
     environment:
       MYSQL_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-orangejd}?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
@@ -45,9 +45,15 @@ services:
       UPLOAD_PATH: /workspace/uploads
       MAIL_USERNAME: ${MAIL_USERNAME:-}
       MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      AI_AUDIT_ENDPOINT: ${AI_AUDIT_ENDPOINT:-https://ai.gitee.com/v1}
       AI_AUDIT_KEY: ${AI_AUDIT_KEY:-}
+      AI_AUDIT_MODEL: ${AI_AUDIT_MODEL:-DeepSeek-V4-Pro}
+      AI_TREND_ENDPOINT: ${AI_TREND_ENDPOINT:-https://ai.gitee.com/v1}
       AI_TREND_KEY: ${AI_TREND_KEY:-}
+      AI_TREND_MODEL: ${AI_TREND_MODEL:-DeepSeek-V4-Pro}
+      AI_EMBEDDING_ENDPOINT: ${AI_EMBEDDING_ENDPOINT:-https://ai.gitee.com/v1}
       AI_EMBEDDING_KEY: ${AI_EMBEDDING_KEY:-}
+      AI_EMBEDDING_MODEL: ${AI_EMBEDDING_MODEL:-bge-small-zh-v1.5}
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
       TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
       ORANGE_ADMIN_BOOTSTRAP_USERNAME: ${ORANGE_ADMIN_BOOTSTRAP_USERNAME:-}
@@ -71,6 +77,10 @@ services:
     environment:
       VITE_API_BASE_URL: http://127.0.0.1:18080
       VITE_WS_URL: ws://127.0.0.1:18080
+      NPM_CONFIG_REGISTRY: ${NPM_CONFIG_REGISTRY:-https://registry.npmmirror.com}
+      NPM_CONFIG_FETCH_RETRIES: 5
+      NPM_CONFIG_FETCH_RETRY_MINTIMEOUT: 10000
+      NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT: 60000
     volumes:
       - ./orange-web:/app
       - orangejd-web-node-modules:/app/node_modules
@@ -85,6 +95,10 @@ services:
     command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 5174"
     environment:
       VITE_API_BASE_URL: http://127.0.0.1:18080
+      NPM_CONFIG_REGISTRY: ${NPM_CONFIG_REGISTRY:-https://registry.npmmirror.com}
+      NPM_CONFIG_FETCH_RETRIES: 5
+      NPM_CONFIG_FETCH_RETRY_MINTIMEOUT: 10000
+      NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT: 60000
     volumes:
       - ./orange-admin:/app
       - orangejd-admin-node-modules:/app/node_modules

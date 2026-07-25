@@ -1,135 +1,197 @@
 <template>
-  <div>
-    <h3 style="margin:0 0 4px;font-weight:700">AI 消费定价</h3>
-    <p style="color:#909399;font-size:13px;margin:0 0 16px">
-      管控用户端所有 AI 服务消费金额，修改后即时生效
-    </p>
+  <div class="pricing-page">
+    <header class="page-header">
+      <div>
+        <h3>配额定价管理</h3>
+        <p>统一管理 AI 功能消费和内容贡献奖励，保存后立即生效。</p>
+      </div>
+      <el-button :loading="loading" @click="loadData">刷新</el-button>
+    </header>
 
-    <!-- 定价表格 -->
-    <el-table :data="pricingList" border stripe v-loading="loading" style="margin-bottom:24px">
-      <el-table-column prop="serviceName" label="服务名称" min-width="140" />
-      <el-table-column prop="serviceKey" label="标识" min-width="120">
-        <template #default="{ row }">
-          <el-tag size="small" type="info">{{ row.serviceKey }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="segmentCost" label="当前定价 (segments)" width="160" align="center">
-        <template #default="{ row }">
-          <span style="font-weight:700;font-size:16px;color:#e65100">{{ row.segmentCost }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="新定价" width="180" align="center">
-        <template #default="{ row }">
-          <el-input-number
-            v-model="editMap[row.serviceKey]"
-            :min="1"
-            :max="10000"
-            size="small"
-            controls-position="right"
-            style="width:120px"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" width="100" align="center">
-        <template #default="{ row }">
-          <el-button
-            type="primary"
-            size="small"
-            :disabled="!isChanged(row)"
-            @click="handleSave(row)"
-          >保存</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <section class="pricing-section">
+      <div class="section-heading">
+        <div>
+          <h4>AI 消费定价</h4>
+          <p>用户每次使用对应 AI 功能时扣除的 segments，最低为 1。</p>
+        </div>
+        <el-tag type="warning" effect="plain">消费</el-tag>
+      </div>
+      <pricing-table
+        :rows="aiPricing"
+        :edit-map="editMap"
+        :loading="loading"
+        @save="handleSave"
+      />
+    </section>
 
-    <!-- 变更日志 -->
-    <h4 style="font-weight:600;margin-bottom:12px">变更记录</h4>
-    <el-table :data="changeLogs" border stripe size="small" empty-text="暂无变更记录">
-      <el-table-column prop="serviceKey" label="服务标识" width="130">
-        <template #default="{ row }">
-          <el-tag size="small">{{ row.serviceKey }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="oldCost" label="旧定价" width="80" align="center" />
-      <el-table-column prop="newCost" label="新定价" width="80" align="center">
-        <template #default="{ row }">
-          <span style="font-weight:700;color:#e65100">{{ row.newCost }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="adminId" label="操作人 ID" width="100" align="center" />
-      <el-table-column prop="changedAt" label="变更时间" min-width="160">
-        <template #default="{ row }">
-          {{ formatTime(row.changedAt) }}
-        </template>
-      </el-table-column>
-    </el-table>
+    <section class="pricing-section">
+      <div class="section-heading">
+        <div>
+          <h4>奖励定价</h4>
+          <p>审核通过后实际发放的 segments。设置为 0 可暂停该项奖励，不影响审核流程。</p>
+        </div>
+        <el-tag type="success" effect="plain">奖励</el-tag>
+      </div>
+      <pricing-table
+        :rows="rewardPricing"
+        :edit-map="editMap"
+        :loading="loading"
+        reward
+        @save="handleSave"
+      />
+    </section>
+
+    <section class="pricing-section">
+      <div class="section-heading">
+        <div>
+          <h4>变更记录</h4>
+          <p>记录管理员对消费和奖励配额的每次修改。</p>
+        </div>
+      </div>
+      <el-table :data="changeLogs" border size="small" empty-text="暂无变更记录">
+        <el-table-column prop="serviceKey" label="定价标识" min-width="190">
+          <template #default="{ row }">
+            <el-tag size="small" :type="isReward(row.serviceKey) ? 'success' : 'info'">
+              {{ row.serviceKey }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="oldCost" label="修改前" width="100" align="center" />
+        <el-table-column prop="newCost" label="修改后" width="100" align="center">
+          <template #default="{ row }">
+            <strong class="cost-value">{{ row.newCost }}</strong>
+          </template>
+        </el-table-column>
+        <el-table-column prop="adminId" label="管理员 ID" width="110" align="center" />
+        <el-table-column prop="changedAt" label="变更时间" min-width="170">
+          <template #default="{ row }">{{ formatTime(row.changedAt) }}</template>
+        </el-table-column>
+      </el-table>
+    </section>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { computed, defineComponent, h, onMounted, reactive, ref } from 'vue'
+import { ElButton, ElInputNumber, ElMessage, ElMessageBox, ElTable, ElTableColumn, ElTag } from 'element-plus'
 import request from '../api/request'
+
+const PricingTable = defineComponent({
+  name: 'PricingTable',
+  props: {
+    rows: { type: Array, required: true },
+    editMap: { type: Object, required: true },
+    loading: Boolean,
+    reward: Boolean
+  },
+  emits: ['save'],
+  setup(props, { emit }) {
+    return () => h(ElTable, {
+      data: props.rows,
+      border: true,
+      loading: props.loading,
+      emptyText: '暂无定价项'
+    }, {
+      default: () => [
+        h(ElTableColumn, { prop: 'serviceName', label: '项目名称', minWidth: 180 }),
+        h(ElTableColumn, { prop: 'serviceKey', label: '定价标识', minWidth: 210 }, {
+          default: ({ row }) => h(ElTag, { size: 'small', type: props.reward ? 'success' : 'info' }, () => row.serviceKey)
+        }),
+        h(ElTableColumn, { prop: 'segmentCost', label: '当前配额', width: 120, align: 'center' }, {
+          default: ({ row }) => h('strong', { class: 'cost-value' }, String(row.segmentCost))
+        }),
+        h(ElTableColumn, { label: '新配额', width: 180, align: 'center' }, {
+          default: ({ row }) => h(ElInputNumber, {
+            modelValue: props.editMap[row.serviceKey],
+            'onUpdate:modelValue': value => { props.editMap[row.serviceKey] = value },
+            min: props.reward ? 0 : 1,
+            max: 10000,
+            size: 'small',
+            controlsPosition: 'right'
+          })
+        }),
+        h(ElTableColumn, { label: '操作', width: 100, align: 'center' }, {
+          default: ({ row }) => h(ElButton, {
+            type: 'primary',
+            size: 'small',
+            disabled: props.editMap[row.serviceKey] === row.segmentCost,
+            onClick: () => emit('save', row)
+          }, () => '保存')
+        })
+      ]
+    })
+  }
+})
 
 const loading = ref(false)
 const pricingList = ref([])
 const changeLogs = ref([])
 const editMap = reactive({})
 
+const isReward = key => key?.startsWith('reward:')
+const aiPricing = computed(() => pricingList.value.filter(item => !isReward(item.serviceKey)))
+const rewardPricing = computed(() => pricingList.value.filter(item => isReward(item.serviceKey)))
+
 const loadData = async () => {
   loading.value = true
   try {
-    const r = await request.get('/admin/pricing')
-    if (r.data) {
-      pricingList.value = r.data.pricing || []
-      changeLogs.value = r.data.changeLogs || []
-      // 初始化编辑值 = 当前值
-      for (const p of pricingList.value) {
-        editMap[p.serviceKey] = p.segmentCost
-      }
-    }
-  } catch (e) {
+    const response = await request.get('/admin/pricing')
+    pricingList.value = response.data?.pricing || []
+    changeLogs.value = response.data?.changeLogs || []
+    for (const item of pricingList.value) editMap[item.serviceKey] = item.segmentCost
+  } catch {
     ElMessage.error('加载定价失败')
-  } finally { loading.value = false }
+  } finally {
+    loading.value = false
+  }
 }
 
-const isChanged = (row) => {
-  return editMap[row.serviceKey] !== row.segmentCost
-}
-
-const handleSave = async (row) => {
+const handleSave = async row => {
   const newCost = editMap[row.serviceKey]
-  if (newCost < 1 || newCost > 10000) {
-    ElMessage.warning('定价范围：1 ~ 10000 segments')
+  const minimum = isReward(row.serviceKey) ? 0 : 1
+  if (!Number.isInteger(newCost) || newCost < minimum || newCost > 10000) {
+    ElMessage.warning(`${isReward(row.serviceKey) ? '奖励' : '消费'}配额必须在 ${minimum}-10000 之间`)
     return
   }
 
   try {
     await ElMessageBox.confirm(
-      `"${row.serviceName}"：${row.segmentCost} → ${newCost}，确认修改？`,
-      '二次确认',
-      { confirmButtonText: '确认修改', cancelButtonText: '取消', type: 'warning' }
+      `将“${row.serviceName}”从 ${row.segmentCost} 调整为 ${newCost} segments，确认保存？`,
+      '确认修改',
+      { type: 'warning', confirmButtonText: '确认保存', cancelButtonText: '取消' }
     )
-  } catch { return }
-
-  try {
     const response = await request.post('/admin/pricing/save', {
       serviceKey: row.serviceKey,
-      newCost: newCost,
-      serviceName: row.serviceName
+      serviceName: row.serviceName,
+      newCost
     })
     if (response.code !== 1) return
-    ElMessage.success('定价已更新，即时生效')
+    ElMessage.success('定价已更新并立即生效')
     await loadData()
-  } catch (e) {
-    ElMessage.error(e?.response?.data?.msg || '保存失败')
+  } catch (error) {
+    if (error !== 'cancel' && error !== 'close') {
+      ElMessage.error(error?.response?.data?.msg || '保存失败')
+    }
   }
 }
 
-const formatTime = (t) => {
-  if (!t) return ''
-  return t.replace('T', ' ').substring(0, 19)
-}
+const formatTime = value => value ? value.replace('T', ' ').substring(0, 19) : ''
 
-onMounted(() => loadData())
+onMounted(loadData)
 </script>
+
+<style scoped>
+.pricing-page { display: grid; gap: 18px; }
+.page-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.page-header h3, .section-heading h4 { margin: 0; color: #202124; }
+.page-header h3 { font-size: 22px; }
+.page-header p, .section-heading p { margin: 6px 0 0; color: #73777f; font-size: 13px; line-height: 1.6; }
+.pricing-section { padding: 20px; background: #fff; border: 1px solid #e7e9ee; border-radius: 8px; }
+.section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.section-heading h4 { font-size: 16px; }
+.cost-value { color: #d45113; font-size: 16px; }
+@media (max-width: 720px) {
+  .page-header { align-items: center; }
+  .pricing-section { padding: 14px; overflow-x: auto; }
+}
+</style>

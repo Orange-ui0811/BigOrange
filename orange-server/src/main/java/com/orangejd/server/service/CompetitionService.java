@@ -18,14 +18,16 @@ import java.util.Locale;
 @Service
 public class CompetitionService {
 
-    public static final int COMPETITION_REWARD = 20;
-
     private final AiCompetitionMapper mapper;
     private final QuotaServiceImpl quotaService;
+    private final PricingService pricingService;
 
-    public CompetitionService(AiCompetitionMapper mapper, QuotaServiceImpl quotaService) {
+    public CompetitionService(AiCompetitionMapper mapper,
+                              QuotaServiceImpl quotaService,
+                              PricingService pricingService) {
         this.mapper = mapper;
         this.quotaService = quotaService;
+        this.pricingService = pricingService;
     }
 
     public PageResult<AiCompetition> publicList(boolean history, int page, int size) {
@@ -96,14 +98,16 @@ public class CompetitionService {
         if (competition == null) throw new BaseException("比赛不存在");
         if (!"PENDING".equals(competition.getAuditStatus())) throw new BaseException("比赛状态已变化，请刷新后重试");
 
-        boolean grantReward = "USER".equals(competition.getSubmissionSource())
+        boolean rewardEligible = "USER".equals(competition.getSubmissionSource())
                 && competition.getSubmitterId() != null
                 && !Boolean.TRUE.equals(competition.getRewardGranted());
-        int reward = grantReward ? COMPETITION_REWARD : 0;
-        if (grantReward) {
+        int reward = rewardEligible
+                ? pricingService.getReward(PricingService.REWARD_COMPETITION_APPROVED)
+                : 0;
+        if (rewardEligible && reward > 0) {
             quotaService.grantReward(competition.getSubmitterId(), reward, "AI大赛投稿审核通过");
         }
-        if (mapper.approve(id, adminId, grantReward, reward) != 1) {
+        if (mapper.approve(id, adminId, rewardEligible, reward) != 1) {
             throw new BaseException("比赛状态已变化，请刷新后重试");
         }
     }

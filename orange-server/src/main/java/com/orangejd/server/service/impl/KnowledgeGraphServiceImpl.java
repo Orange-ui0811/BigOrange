@@ -131,7 +131,9 @@ public class KnowledgeGraphServiceImpl implements KnowledgeGraphService {
         Map<String, Map<String, Integer>> topicLanguages = new LinkedHashMap<>();
 
         for (String topicName : TOPIC_NAMES.keySet()) {
-            LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", topicName, "all", snapshotDate);
+            LeaderboardSnapshot snap = "__LATEST__".equals(snapshotDate)
+                    ? snapshotMapper.selectLatest("github", topicName, "all")
+                    : snapshotMapper.selectByKey("github", topicName, "all", snapshotDate);
             List<Map<String, Object>> repos = snap != null ? parseRepos(snap.getDataJson()) : Collections.emptyList();
 
             long totalStars = 0;
@@ -550,7 +552,7 @@ public class KnowledgeGraphServiceImpl implements KnowledgeGraphService {
 
     private Map<String, Object> buildGraphWithFallback(String date) {
         Map<String, Object> graph = buildGraph(date);
-        // 如果所有节点 totalStars 为 0，退回前一天
+        // Prefer nearby snapshots, then use the newest complete data set available.
         if (allZero(graph)) {
             LocalDate d = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
             for (int i = 1; i <= 7; i++) {
@@ -559,7 +561,14 @@ public class KnowledgeGraphServiceImpl implements KnowledgeGraphService {
                 if (!allZero(graph)) break;
             }
         }
+        if (allZero(graph)) {
+            graph = buildLatestGraph();
+        }
         return graph;
+    }
+
+    private Map<String, Object> buildLatestGraph() {
+        return buildGraph("__LATEST__");
     }
 
     @SuppressWarnings("unchecked")

@@ -196,13 +196,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
                     + "&sort=stars&order=desc&per_page=20";
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Accept", "application/vnd.github.v3+json");
-            if (githubToken != null && !githubToken.isEmpty()) {
-                headers.set("Authorization", "Bearer " + githubToken);
-            }
-            HttpEntity<String> entity = new HttpEntity<>(headers);
-            ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
+            ResponseEntity<Map> response = exchangeGithub(url);
 
             if (response.getBody() != null && response.getBody().containsKey("items")) {
                 @SuppressWarnings("unchecked")
@@ -284,13 +278,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
                     + "&sort=stars&order=desc&per_page=20";
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Accept", "application/vnd.github.v3+json");
-            if (githubToken != null && !githubToken.isEmpty()) {
-                headers.set("Authorization", "Bearer " + githubToken);
-            }
-            HttpEntity<String> entity = new HttpEntity<>(headers);
-            ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
+            ResponseEntity<Map> response = exchangeGithub(url);
 
             if (response.getBody() != null && response.getBody().containsKey("items")) {
                 @SuppressWarnings("unchecked")
@@ -545,6 +533,28 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             // README 拉取失败静默跳过
         }
         return null;
+    }
+
+    private ResponseEntity<Map> exchangeGithub(String url) {
+        try {
+            return restTemplate.exchange(url, HttpMethod.GET,
+                    new HttpEntity<>(githubHeaders(true)), Map.class);
+        } catch (org.springframework.web.client.HttpClientErrorException.Unauthorized unauthorized) {
+            if (githubToken == null || githubToken.isBlank()) throw unauthorized;
+            log.warn("GitHub Token 已失效，本次榜单请求降级为匿名访问");
+            return restTemplate.exchange(url, HttpMethod.GET,
+                    new HttpEntity<>(githubHeaders(false)), Map.class);
+        }
+    }
+
+    private HttpHeaders githubHeaders(boolean includeAuthorization) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", "application/vnd.github.v3+json");
+        headers.set("User-Agent", "OrangeVC-Leaderboard");
+        if (includeAuthorization && githubToken != null && !githubToken.isBlank()) {
+            headers.setBearerAuth(githubToken.trim());
+        }
+        return headers;
     }
 
     private void sleep(long ms) {

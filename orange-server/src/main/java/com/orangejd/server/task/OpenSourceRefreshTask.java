@@ -75,6 +75,11 @@ public class OpenSourceRefreshTask implements SystemTaskHandler {
         return true;
     }
 
+    public boolean triggerTranslation() {
+        enqueue("TRANSLATE", "manual-translate:" + UUID.randomUUID(), 5);
+        return true;
+    }
+
     @Override
     public String taskType() {
         return TASK_TYPE;
@@ -88,6 +93,8 @@ public class OpenSourceRefreshTask implements SystemTaskHandler {
             if (lastFullError != null) {
                 throw new IllegalStateException("Open source refresh failed: " + lastFullError);
             }
+        } else if ("TRANSLATE".equals(mode)) {
+            lastTranslated = translationService.translatePending(100);
         } else if ("VERIFY".equals(mode)) {
             runLightVerification();
         } else {
@@ -115,6 +122,8 @@ public class OpenSourceRefreshTask implements SystemTaskHandler {
         lastSaved = 0;
         lastTranslated = 0;
         try {
+            // Repair cached issues first so translation is not blocked by a long GitHub crawl.
+            lastTranslated += translationService.translatePending(80);
             List<Map<String, Object>> repositories = mapper.selectEnabledRepositories();
             for (Map<String, Object> repository : repositories) {
                 try {
@@ -124,7 +133,7 @@ public class OpenSourceRefreshTask implements SystemTaskHandler {
                 }
                 sleep(1_200);
             }
-            lastTranslated = translationService.translatePending(80);
+            lastTranslated += translationService.translatePending(80);
             lastFullFinish = LocalDateTime.now();
             log.info("开源 Issue 完整刷新完成 saved={}, translated={}", lastSaved, lastTranslated);
         } catch (Exception e) {

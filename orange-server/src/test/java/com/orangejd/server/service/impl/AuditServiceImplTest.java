@@ -7,9 +7,9 @@ import com.orangejd.server.mapper.AuditRecordMapper;
 import com.orangejd.server.mapper.RequirementMapper;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.service.NotificationService;
+import com.orangejd.server.service.PricingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +25,7 @@ class AuditServiceImplTest {
     private AuditRecordMapper auditRecordMapper;
     private NotificationService notificationService;
     private QuotaServiceImpl quotaService;
+    private PricingService pricingService;
     private AuditServiceImpl service;
 
     @BeforeEach
@@ -33,12 +34,16 @@ class AuditServiceImplTest {
         auditRecordMapper = mock(AuditRecordMapper.class);
         notificationService = mock(NotificationService.class);
         quotaService = mock(QuotaServiceImpl.class);
-        service = new AuditServiceImpl();
-        ReflectionTestUtils.setField(service, "workMapper", workMapper);
-        ReflectionTestUtils.setField(service, "requirementMapper", mock(RequirementMapper.class));
-        ReflectionTestUtils.setField(service, "auditRecordMapper", auditRecordMapper);
-        ReflectionTestUtils.setField(service, "notificationService", notificationService);
-        ReflectionTestUtils.setField(service, "quotaService", quotaService);
+        pricingService = mock(PricingService.class);
+        when(pricingService.getReward(PricingService.REWARD_WORK_APPROVED)).thenReturn(65);
+        service = new AuditServiceImpl(
+                workMapper,
+                mock(RequirementMapper.class),
+                auditRecordMapper,
+                notificationService,
+                quotaService,
+                pricingService
+        );
     }
 
     @Test
@@ -49,7 +54,7 @@ class AuditServiceImplTest {
 
         service.auditWork(11L, true, "");
 
-        verify(quotaService).grantReward(7L, 50, "作品审核通过奖励");
+        verify(quotaService).grantReward(7L, 65, "作品审核通过奖励");
         verify(workMapper).approveAndMarkRewarded(11L);
         verify(auditRecordMapper).insert(any(AuditRecord.class));
         verify(notificationService).send(7L, "AUDIT", "你的作品《测试作品》审核通过", 11L);
@@ -59,12 +64,24 @@ class AuditServiceImplTest {
     void rewardFailureLeavesWorkPending() {
         when(workMapper.selectByIdForUpdate(11L)).thenReturn(pendingWork());
         doThrow(new BaseException("奖励失败"))
-                .when(quotaService).grantReward(7L, 50, "作品审核通过奖励");
+                .when(quotaService).grantReward(7L, 65, "作品审核通过奖励");
 
         assertThrows(BaseException.class, () -> service.auditWork(11L, true, ""));
 
         verify(workMapper, never()).approveAndMarkRewarded(11L);
         verify(auditRecordMapper, never()).insert(any());
+    }
+
+    @Test
+    void zeroRewardStillApprovesWithoutCallingQuotaService() {
+        when(pricingService.getReward(PricingService.REWARD_WORK_APPROVED)).thenReturn(0);
+        when(workMapper.selectByIdForUpdate(11L)).thenReturn(pendingWork());
+        when(workMapper.approveAndMarkRewarded(11L)).thenReturn(1);
+
+        service.auditWork(11L, true, "");
+
+        verify(quotaService, never()).grantReward(any(), any(Integer.class), any());
+        verify(workMapper).approveAndMarkRewarded(11L);
     }
 
     private Work pendingWork() {

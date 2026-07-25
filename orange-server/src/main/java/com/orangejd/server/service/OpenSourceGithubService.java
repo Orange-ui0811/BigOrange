@@ -180,8 +180,16 @@ public class OpenSourceGithubService {
 
     private JsonNode getJson(String url) {
         try {
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET,
-                    new HttpEntity<>(headers()), String.class);
+            ResponseEntity<String> response;
+            try {
+                response = restTemplate.exchange(url, HttpMethod.GET,
+                        new HttpEntity<>(headers(true)), String.class);
+            } catch (HttpClientErrorException.Unauthorized unauthorized) {
+                if (githubToken == null || githubToken.isBlank()) throw unauthorized;
+                log.warn("GitHub Token 已失效，本次请求降级为匿名访问");
+                response = restTemplate.exchange(url, HttpMethod.GET,
+                        new HttpEntity<>(headers(false)), String.class);
+            }
             return objectMapper.readTree(response.getBody());
         } catch (HttpClientErrorException e) {
             throw new BaseException("GitHub API 返回 " + e.getStatusCode().value());
@@ -195,12 +203,14 @@ public class OpenSourceGithubService {
         catch (Exception e) { log.debug("可选 GitHub 文件不存在: {}", url); return null; }
     }
 
-    private HttpHeaders headers() {
+    private HttpHeaders headers(boolean includeAuthorization) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(List.of(MediaType.valueOf("application/vnd.github+json")));
         headers.set("X-GitHub-Api-Version", "2022-11-28");
         headers.set("User-Agent", "OrangeVC-OpenSource-Discovery");
-        if (githubToken != null && !githubToken.isBlank()) headers.setBearerAuth(githubToken.trim());
+        if (includeAuthorization && githubToken != null && !githubToken.isBlank()) {
+            headers.setBearerAuth(githubToken.trim());
+        }
         return headers;
     }
 

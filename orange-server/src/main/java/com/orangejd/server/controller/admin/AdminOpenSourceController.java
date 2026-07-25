@@ -72,4 +72,9 @@ public class AdminOpenSourceController {
     public Result<?> verifyRefresh() {
         return Result.success(Map.of("started", service.triggerVerification()));
     }
+
+    @PostMapping("/refresh/translate")
+    public Result<?> translateRefresh() {
+        return Result.success(Map.of("started", service.triggerTranslation()));
+    }
 }
