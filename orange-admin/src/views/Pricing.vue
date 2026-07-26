@@ -20,6 +20,7 @@
         :rows="aiPricing"
         :edit-map="editMap"
         :loading="loading"
+        @update-cost="handleEdit"
         @save="handleSave"
       />
     </section>
@@ -37,6 +38,7 @@
         :edit-map="editMap"
         :loading="loading"
         reward
+        @update-cost="handleEdit"
         @save="handleSave"
       />
     </section>
@@ -84,7 +86,7 @@ const PricingTable = defineComponent({
     loading: Boolean,
     reward: Boolean
   },
-  emits: ['save'],
+  emits: ['save', 'update-cost'],
   setup(props, { emit }) {
     return () => h(ElTable, {
       data: props.rows,
@@ -103,7 +105,7 @@ const PricingTable = defineComponent({
         h(ElTableColumn, { label: '新配额', width: 180, align: 'center' }, {
           default: ({ row }) => h(ElInputNumber, {
             modelValue: props.editMap[row.serviceKey],
-            'onUpdate:modelValue': value => { props.editMap[row.serviceKey] = value },
+            'onUpdate:modelValue': value => emit('update-cost', row.serviceKey, value),
             min: props.reward ? 0 : 1,
             max: 10000,
             size: 'small',
@@ -131,6 +133,10 @@ const editMap = reactive({})
 const isReward = key => key?.startsWith('reward:')
 const aiPricing = computed(() => pricingList.value.filter(item => !isReward(item.serviceKey)))
 const rewardPricing = computed(() => pricingList.value.filter(item => isReward(item.serviceKey)))
+
+const handleEdit = (serviceKey, value) => {
+  editMap[serviceKey] = value
+}
 
 const loadData = async () => {
   loading.value = true
