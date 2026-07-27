@@ -128,6 +128,8 @@ const currentPhase = ref(1)
 const phaseError = ref('')
 const matchLoading = ref(false)
 const matchResult = ref(null)
+const planStageCost = ref(null)
+const jobMatchCost = ref(null)
 
 const phases = reactive([
   { title: '想法描述', done: false, generating: false, content: '' },
@@ -174,9 +176,13 @@ const getPrevContents = (n) => {
 const onPhaseJump = (n) => { phaseError.value = ''; matchResult.value = null }
 
 const doJobMatch = async () => {
+  if (!Number.isFinite(jobMatchCost.value)) {
+    ElMessage.error('岗位匹配价格尚未加载，请刷新页面后重试')
+    return
+  }
   const planContent = phases[4].content + '\n\n方案概要：' + phases[0].content.substring(0, 200)
   try { await ElMessageBox.confirm(
-    h('span', { style: 'display:flex;align-items:center;gap:6px' }, ['匹配岗位将消耗 50 ', h(PixelOrangeSlice, { size: 16 })]),
+    h('span', { style: 'display:flex;align-items:center;gap:6px' }, [`匹配岗位将消耗 ${jobMatchCost.value} `, h(PixelOrangeSlice, { size: 16 })]),
     '确认', { confirmButtonText:'确认',cancelButtonText:'取消',type:'info' }
   ) } catch { return }
   const p5 = phases[5]; p5.generating = true
@@ -202,8 +208,12 @@ const generatePhase = async (n) => {
     return
   }
   if (n === 6) { await doJobMatch(); return }
+  if (!Number.isFinite(planStageCost.value)) {
+    ElMessage.error('方案设计价格尚未加载，请刷新页面后重试')
+    return
+  }
   try { await ElMessageBox.confirm(
-    h('span', { style: 'display:flex;align-items:center;gap:6px' }, ['本阶段将消耗 40 ', h(PixelOrangeSlice, { size: 16 })]),
+    h('span', { style: 'display:flex;align-items:center;gap:6px' }, [`本阶段将消耗 ${planStageCost.value} `, h(PixelOrangeSlice, { size: 16 })]),
     '确认生成', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
   ) } catch { return }
   const p = phases[n-1]
@@ -319,7 +329,19 @@ const clearPlanHistory = async () => {
   try { await request.delete('/app/plan/history/clear'); planHistory.value = [] } catch {}
 }
 
-onMounted(() => {
+onMounted(async () => {
+  try {
+    const response = await request.get('/app/config/ai-pricing')
+    if (Number.isFinite(Number(response.data?.plan))) {
+      planStageCost.value = Number(response.data.plan)
+    }
+    if (Number.isFinite(Number(response.data?.jobMatch))) {
+      jobMatchCost.value = Number(response.data.jobMatch)
+    }
+  } catch {
+    planStageCost.value = null
+    jobMatchCost.value = null
+  }
   loadPlanHistory()
   const imported = sessionStorage.getItem('plan_import')
   if (imported) {

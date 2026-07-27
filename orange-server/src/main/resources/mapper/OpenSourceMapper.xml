@@ -123,6 +123,10 @@
         i.risk_flags_json AS riskFlagsJson, i.github_created_at AS githubCreatedAt,
         i.github_updated_at AS githubUpdatedAt, i.verified_at AS verifiedAt,
         i.translated_at AS translatedAt, i.translation_status AS translationStatus,
+        i.visibility_status AS visibilityStatus,
+        i.verification_status AS verificationStatus,
+        i.translation_attempts AS translationAttempts,
+        i.translation_error AS translationError,
         i.published, i.create_time AS createTime, i.update_time AS updateTime,
         r.full_name AS repositoryFullName, r.display_name AS repositoryDisplayName,
         r.organization_name AS organizationName, r.html_url AS repositoryUrl,
@@ -144,7 +148,8 @@
         SELECT <include refid="issueJoinColumns"/>
         FROM open_source_issue i
         JOIN open_source_repository r ON r.id = i.repository_id
-        WHERE i.published = 1 AND i.state = 'open' AND r.enabled = 1
+        WHERE i.state = 'open' AND r.enabled = 1
+          AND i.visibility_status IN ('LEGACY_VISIBLE', 'PUBLIC')
           AND i.id IN
           <foreach collection="ids" item="id" open="(" separator="," close=")">#{id}</foreach>
         ORDER BY FIELD(i.id,
@@ -153,7 +158,8 @@
     </select>
 
     <sql id="publicIssueWhere">
-        i.published = 1 AND i.state = 'open' AND r.enabled = 1
+        i.state = 'open' AND r.enabled = 1
+        AND i.visibility_status IN ('LEGACY_VISIBLE', 'PUBLIC')
         <if test="difficulty != null and difficulty != ''">AND i.difficulty = #{difficulty}</if>
         <if test="participationStatus != null and participationStatus != ''">AND i.participation_status = #{participationStatus}</if>
         <if test="tech != null and tech != ''">
@@ -191,7 +197,8 @@
                i.github_updated_at AS githubUpdatedAt
         FROM open_source_issue i
         JOIN open_source_repository r ON r.id = i.repository_id
-        WHERE i.published = 1 AND i.state = 'open' AND r.enabled = 1
+        WHERE i.state = 'open' AND r.enabled = 1
+          AND i.visibility_status IN ('LEGACY_VISIBLE', 'PUBLIC')
         ORDER BY FIELD(i.participation_status, 'TRY', 'POSSIBLY_CLAIMED', 'NOT_RECOMMENDED'),
                  i.github_updated_at DESC
         LIMIT #{limit}
@@ -200,22 +207,39 @@
     <select id="selectPublishedForVerification" resultType="map">
         SELECT <include refid="issueJoinColumns"/>
         FROM open_source_issue i JOIN open_source_repository r ON r.id = i.repository_id
-        WHERE i.published = 1 AND i.state = 'open' AND r.enabled = 1
-        ORDER BY i.verified_at ASC, i.github_updated_at DESC
+        WHERE i.state = 'open' AND r.enabled = 1
+        ORDER BY FIELD(i.verification_status, 'PENDING', 'FAILED', 'DONE'),
+                 i.verified_at ASC,
+                 i.github_updated_at DESC
         LIMIT #{limit}
     </select>
 
     <select id="selectTranslationPending" resultType="map">
         SELECT <include refid="issueJoinColumns"/>
         FROM open_source_issue i JOIN open_source_repository r ON r.id = i.repository_id
-        WHERE i.published = 1 AND i.state = 'open' AND i.translation_status IN ('PENDING', 'FAILED')
+        WHERE i.state = 'open' AND i.translation_status IN ('PENDING', 'FAILED')
         ORDER BY i.github_updated_at DESC LIMIT #{limit}
     </select>
 
     <update id="updateIssueTranslation">
         UPDATE open_source_issue
         SET title_zh = #{titleZh}, summary_zh = #{summaryZh},
-            translation_status = #{status}, translated_at = IF(#{status} = 'DONE', NOW(), translated_at)
+            translation_status = #{status},
+            translated_at = IF(#{status} = 'DONE', NOW(), translated_at),
+            translation_attempts = translation_attempts + 1,
+            translation_error = #{error},
+            visibility_status = CASE
+                WHEN visibility_status = 'LEGACY_VISIBLE' THEN visibility_status
+                WHEN #{status} = 'DONE' AND verification_status = 'DONE'
+                    AND state = 'open' THEN 'PUBLIC'
+                ELSE 'PENDING'
+            END,
+            published = CASE
+                WHEN visibility_status = 'LEGACY_VISIBLE' THEN published
+                WHEN #{status} = 'DONE' AND verification_status = 'DONE'
+                    AND state = 'open' THEN 1
+                ELSE 0
+            END
         WHERE id = #{id}
     </update>
 
@@ -227,7 +251,21 @@
             participation_status = #{participationStatus}, difficulty = #{difficulty},
             risk_flags_json = CAST(#{riskFlagsJson} AS JSON),
             github_updated_at = #{githubUpdatedAt}, verified_at = NOW(),
-            published = CASE WHEN #{state} = 'open' THEN published ELSE 0 END
+            verification_status = 'DONE',
+            visibility_status = CASE
+                WHEN #{state} != 'open' OR #{linkedPrCount} &gt; 0 OR #{claimStatus} = 'CLAIMED'
+                    THEN 'HIDDEN'
+                WHEN visibility_status = 'LEGACY_VISIBLE' THEN 'LEGACY_VISIBLE'
+                WHEN translation_status = 'DONE' THEN 'PUBLIC'
+                ELSE 'PENDING'
+            END,
+            published = CASE
+                WHEN #{state} != 'open' OR #{linkedPrCount} &gt; 0 OR #{claimStatus} = 'CLAIMED'
+                    THEN 0
+                WHEN visibility_status = 'LEGACY_VISIBLE' THEN 1
+                WHEN translation_status = 'DONE' THEN 1
+                ELSE 0
+            END
         WHERE id = #{id}
     </update>
 

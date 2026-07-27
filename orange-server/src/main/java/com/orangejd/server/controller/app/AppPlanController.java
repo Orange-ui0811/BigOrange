@@ -6,6 +6,7 @@ import com.orangejd.common.result.Result;
 import com.orangejd.common.utils.JwtUtil;
 import com.orangejd.server.mapper.PlanHistoryMapper;
 import com.orangejd.server.service.PlanGenerationService;
+import com.orangejd.server.service.PricingService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,20 @@ public class AppPlanController {
     private JwtProperties jwtProperties;
     @Autowired
     private PlanGenerationService generationService;
+    @Autowired
+    private PricingService pricingService;
 
     @PostMapping("/generate")
     public Result<?> generate(@RequestBody Map<String, Object> body, HttpServletRequest request) {
         setCurrentUserFromToken(request);
         return Result.success(generationService.generate(BaseContext.getCurrentId(), body));
+    }
+
+    @GetMapping("/config")
+    public Result<?> config() {
+        return Result.success(Map.of(
+                "stageCost", generationService.cost(),
+                "jobMatchCost", pricingService.getCost("ai:match")));
     }
 
     @GetMapping("/history")

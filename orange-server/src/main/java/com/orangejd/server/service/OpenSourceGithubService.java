@@ -174,7 +174,8 @@ public class OpenSourceGithubService {
         value.put("riskFlagsJson", json(risks));
         value.put("githubCreatedAt", parseDate(issue.path("created_at").asText(null)));
         value.put("githubUpdatedAt", parseDate(issue.path("updated_at").asText(null)));
-        value.put("published", issue.path("assignees").isEmpty() ? 1 : 0);
+        // New issues stay private until both verification and translation succeed.
+        value.put("published", 0);
         return value;
     }
 

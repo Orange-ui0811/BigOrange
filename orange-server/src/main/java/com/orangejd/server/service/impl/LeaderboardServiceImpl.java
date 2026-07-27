@@ -8,6 +8,8 @@ import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.service.LeaderboardService;
 import com.orangejd.pojo.entity.Category;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -32,6 +34,7 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     @Autowired private CategoryMapper categoryMapper;
     @Autowired private LeaderboardSnapshotMapper snapshotMapper;
     @Autowired(required = false) private StringRedisTemplate redisTemplate;
+    @Autowired(required = false) private ObjectMapper objectMapper = new ObjectMapper();
 
     @Value("${orange.leaderboard.local-cache-ttl-minutes:15}")
     private int localCacheTtl;
@@ -111,13 +114,20 @@ public class LeaderboardServiceImpl implements LeaderboardService {
         page = com.orangejd.common.util.PageUtil.safePage(page);
         String today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
-        // 尝试读今天的快照
-        LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", topicName, period, today);
+        String stableTopic = topicName == null || topicName.isBlank() ? "__ALL__" : topicName;
+        // 尝试读今天的快照；聚合榜单优先使用稳定键。
+        LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", stableTopic, period, today);
+        if (snap == null && "__ALL__".equals(stableTopic)) {
+            snap = snapshotMapper.selectByKey("github", null, period, today);
+        }
         String warning = null;
 
         // 今天没有时回退到最近一次成功快照，避免定时抓取或 GitHub 临时故障让榜单消失。
         if (snap == null) {
-            snap = snapshotMapper.selectLatest("github", topicName, period);
+            snap = snapshotMapper.selectLatest("github", stableTopic, period);
+            if (snap == null && "__ALL__".equals(stableTopic)) {
+                snap = snapshotMapper.selectLatest("github", null, period);
+            }
             if (snap != null) {
                 warning = "榜单数据更新中，当前展示 " + snap.getSnapshotDate() + " 的最近快照";
             }
@@ -151,75 +161,23 @@ public class LeaderboardServiceImpl implements LeaderboardService {
         try { redisTemplate.opsForValue().set(key, value, ttlMinutes, TimeUnit.MINUTES); } catch (Exception e) { }
     }
 
-    // 简单 JSON 序列化（避免引入额外依赖）
     private String toJson(PageResult<Map<String, Object>> result) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\"total\":").append(result.getTotal()).append(",\"records\":[");
-        boolean first = true;
-        for (Map<String, Object> m : result.getRecords()) {
-            if (!first) sb.append(",");
-            first = false;
-            sb.append("{");
-            boolean firstField = true;
-            for (Map.Entry<String, Object> e : m.entrySet()) {
-                if (!firstField) sb.append(",");
-                firstField = false;
-                sb.append("\"").append(e.getKey()).append("\":");
-                Object v = e.getValue();
-                if (v == null) sb.append("null");
-                else if (v instanceof Number) sb.append(v);
-                else sb.append("\"").append(v.toString().replace("\"", "\\\"").replace("\n", "\\n")).append("\"");
-            }
-            sb.append("}");
+        try {
+            return objectMapper.writeValueAsString(Map.of(
+                    "total", result.getTotal(),
+                    "records", result.getRecords()));
+        } catch (Exception ex) {
+            throw new IllegalArgumentException("榜单缓存序列化失败", ex);
         }
-        sb.append("]}");
-        return sb.toString();
     }
 
     @SuppressWarnings("unchecked")
     private PageResult<Map<String, Object>> parsePageResult(String json) {
-        // 简化的 JSON 解析
         try {
-            int totalStart = json.indexOf("\"total\":") + 8;
-            int totalEnd = json.indexOf(",", totalStart);
-            long total = Long.parseLong(json.substring(totalStart, totalEnd).trim());
-
-            List<Map<String, Object>> records = new ArrayList<>();
-            int arrStart = json.indexOf("\"records\":[") + 11;
-            int arrEnd = json.lastIndexOf("]}");
-            if (arrEnd < 0) arrEnd = json.length() - 2;
-            String arrStr = json.substring(arrStart, arrEnd);
-
-            // 解析对象数组
-            int depth = 0, objStart = -1;
-            for (int i = 0; i < arrStr.length(); i++) {
-                if (arrStr.charAt(i) == '{') {
-                    if (depth == 0) objStart = i;
-                    depth++;
-                } else if (arrStr.charAt(i) == '}') {
-                    depth--;
-                    if (depth == 0 && objStart >= 0) {
-                        String objStr = arrStr.substring(objStart + 1, i);
-                        Map<String, Object> map = new LinkedHashMap<>();
-                        String[] pairs = objStr.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-                        for (String pair : pairs) {
-                            int colon = pair.indexOf(":");
-                            if (colon < 0) continue;
-                            String key = pair.substring(0, colon).trim().replaceAll("^\"|\"$", "");
-                            String val = pair.substring(colon + 1).trim().replaceAll("^\"|\"$", "");
-                            if (val.matches("-?\\d+(\\.\\d+)?")) {
-                                if (val.contains(".")) map.put(key, Double.parseDouble(val));
-                                else map.put(key, Long.parseLong(val));
-                            } else if ("null".equals(val)) {
-                                map.put(key, null);
-                            } else {
-                                map.put(key, val.replace("\\\"", "\"").replace("\\n", "\n"));
-                            }
-                        }
-                        records.add(map);
-                    }
-                }
-            }
+            Map<String, Object> data = objectMapper.readValue(json, new TypeReference<>() {});
+            long total = data.get("total") instanceof Number number ? number.longValue() : 0L;
+            List<Map<String, Object>> records = objectMapper.convertValue(
+                    data.getOrDefault("records", Collections.emptyList()), new TypeReference<>() {});
             return new PageResult<>(total, records);
         } catch (Exception e) {
             return new PageResult<>(0L, Collections.emptyList());

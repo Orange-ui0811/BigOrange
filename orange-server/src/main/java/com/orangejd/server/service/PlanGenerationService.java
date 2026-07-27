@@ -14,6 +14,8 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,6 +34,8 @@ public class PlanGenerationService {
     private final QuotaService quotaService;
     private final PricingService pricingService;
     private final RestTemplate restTemplate;
+    @Autowired(required = false)
+    private AiRuntimeConfigService aiConfigService;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -58,6 +62,7 @@ public class PlanGenerationService {
 
     @SuppressWarnings("unchecked")
     public Map<String, Object> generate(Long accountId, Map<String, Object> body) {
+        AiRuntimeConfig runtime = runtimeConfig();
         int phase = integer(body.getOrDefault("phase", 1), "无效的阶段编号");
         if (phase < 1 || phase > 4) throw new BaseException("无效的阶段编号");
         String mode = text(body.getOrDefault("mode", "full"), 16);
@@ -65,7 +70,7 @@ public class PlanGenerationService {
         String extra = text(body.get("extra"), 4_000);
         String prevContents = text(body.get("prevContents"), 30_000);
         if (!StringUtils.hasText(summary)) throw new BaseException("请输入项目描述");
-        if (!StringUtils.hasText(apiEndpoint) || !StringUtils.hasText(apiKey)) {
+        if (!StringUtils.hasText(runtime.endpoint()) || !StringUtils.hasText(runtime.apiKey())) {
             throw new BaseException("AI 方案设计服务尚未配置");
         }
 
@@ -83,13 +88,13 @@ public class PlanGenerationService {
         }
 
         try {
-            String url = apiEndpoint.trim();
+            String url = runtime.endpoint().trim();
             if (!url.startsWith("http")) url = "https://" + url;
             if (!url.endsWith("/chat/completions")) {
                 url = url.replaceAll("/$", "") + "/chat/completions";
             }
             Map<String, Object> request = new LinkedHashMap<>();
-            request.put("model", model);
+            request.put("model", runtime.model());
             request.put("messages", List.of(
                     Map.of("role", "system", "content",
                             "你是专业的技术架构师和项目规划专家。请用 Markdown 输出结构清晰、可验证、可执行的方案。"),
@@ -98,7 +103,7 @@ public class PlanGenerationService {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setBearerAuth(apiKey);
+            headers.setBearerAuth(runtime.apiKey());
             ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST,
                     new HttpEntity<>(request, headers), Map.class);
             List<Map<String, Object>> choices = response.getBody() == null ? null
@@ -123,6 +128,13 @@ public class PlanGenerationService {
                     accountId, phase, mode, e);
             throw new BaseException("AI 调用失败，本次配额已退回");
         }
+    }
+
+    private AiRuntimeConfig runtimeConfig() {
+        return aiConfigService == null
+                ? new AiRuntimeConfig(AiRuntimeConfigService.PROJECT, "env",
+                        apiEndpoint, apiKey, model, "ENV")
+                : aiConfigService.current(AiRuntimeConfigService.PROJECT);
     }
 
     private String buildPrompt(int phase, String summary, String extra, String previous) {

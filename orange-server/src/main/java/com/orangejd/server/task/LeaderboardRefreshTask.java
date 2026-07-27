@@ -6,7 +6,16 @@ import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
 import com.orangejd.server.foundation.task.SystemTask;
 import com.orangejd.server.foundation.task.SystemTaskHandler;
 import com.orangejd.server.foundation.task.SystemTaskService;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.external.ExternalAiClient;
+import com.orangejd.server.foundation.external.TranslationCacheMapper;
+import com.orangejd.server.foundation.ingestion.IngestionCoordinatorService;
+import com.orangejd.server.foundation.ingestion.IngestionRunService;
 import com.orangejd.server.service.DocumentService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +32,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 @Component
 public class LeaderboardRefreshTask implements SystemTaskHandler {
@@ -40,9 +50,17 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
     private static final int README_WEEK_TOP_N = 3;   // 每周 Top 3（30 天过期）
     private static final int GITHUB_TIMEOUT_MS = 10000;
     private static final int README_TIMEOUT_MS = 10000;
+    private static final String ALL_TOPICS = "__ALL__";
+    private static final int TRANSLATION_BATCH_SIZE = 8;
 
     @Autowired private LeaderboardSnapshotMapper snapshotMapper;
     @Autowired private SystemTaskService systemTaskService;
+    @Autowired private IngestionCoordinatorService ingestionCoordinator;
+    @Autowired private IngestionRunService ingestionRunService;
+    @Autowired private AiRuntimeConfigService aiConfigService;
+    @Autowired private ExternalAiClient externalAiClient;
+    @Autowired private TranslationCacheMapper translationCacheMapper;
+    @Autowired private ObjectMapper objectMapper;
 
     @Autowired(required = false)
     private DocumentService documentService;
@@ -50,21 +68,13 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
     @Value("${orange.leaderboard.github-token:}")
     private String githubToken;
 
-    @Value("${orange.ai-trend.endpoint:https://ai.gitee.com/v1}")
-    private String aiEndpoint;
-
-    @Value("${orange.ai-trend.api-key:}")
-    private String aiApiKey;
-
-    @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
-    private String aiModel;
+    @Value("${orange.ingestion.pipeline-v2-enabled:false}")
+    private boolean pipelineV2Enabled;
 
     private final RestTemplate restTemplate;
     private final RestTemplate readmeRestTemplate;
-
-    // 翻译缓存 — 避免同一描述每天重复调用 AI
-    private final Map<String, String> translationCache = new ConcurrentHashMap<>();
     private final AtomicBoolean refreshRunning = new AtomicBoolean(false);
+    private final ThreadLocal<RunContext> runContext = new ThreadLocal<>();
 
     {
         restTemplate = new RestTemplate();
@@ -84,14 +94,25 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             cron = "${orange.leaderboard.refresh-cron:0 0 2 * * 1}",
             zone = "${orange.leaderboard.refresh-zone:Asia/Shanghai}")
     public void scheduleRefresh() {
-        enqueue("scheduled:" + LocalDate.now());
+        if (pipelineV2Enabled) {
+            ingestionCoordinator.scheduled(IngestionCoordinatorService.LEADERBOARD_FULL,
+                    LocalDate.now().toString());
+        } else {
+            enqueue("scheduled:" + LocalDate.now());
+        }
     }
 
     public void refreshAll() {
+        refreshAll(null, null);
+    }
+
+    private void refreshAll(Long runId, String configVersion) {
         if (!refreshRunning.compareAndSet(false, true)) {
             log.info("LeaderboardRefreshTask: 已有刷新任务运行，跳过重复触发");
             return;
         }
+        RunContext context = new RunContext(runId, configVersion);
+        runContext.set(context);
         try {
         log.info("LeaderboardRefreshTask: 开始刷新 GitHub 榜单");
         LocalDate today = LocalDate.now();
@@ -100,7 +121,10 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
         if (monday.equals(today)) monday = monday.minusWeeks(1);
         String weekStart = monday.atStartOfDay().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
+        int totalStages = (TOPICS.length + 1) * 3;
+        context.total = totalStages;
         for (String topic : TOPICS) {
+            checkCancelled();
             refreshAndSave(topic, "all", today, null);
             sleep(6000);
             String isoDate = monday
@@ -111,12 +135,12 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             sleep(6000);
         }
 
-        // 也刷新全部分类的（topic_name=NULL）
-        refreshAndSave(null, "all", today, null);
+        // 聚合榜单使用稳定键，读取层仍兼容旧 NULL 快照。
+        refreshAndSave(ALL_TOPICS, "all", today, null);
         sleep(6000);
-        refreshAndSave(null, "new", today, monday.format(DateTimeFormatter.ISO_LOCAL_DATE));
+        refreshAndSave(ALL_TOPICS, "new", today, monday.format(DateTimeFormatter.ISO_LOCAL_DATE));
         sleep(6000);
-        refreshWeekStars(null, today);
+        refreshWeekStars(ALL_TOPICS, today);
 
         // 所有爬取完成后，统一翻译描述为中文
         log.info("LeaderboardRefreshTask: 榜单爬取完成，开始翻译描述");
@@ -138,6 +162,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
         }
         } finally {
             refreshRunning.set(false);
+            runContext.remove();
         }
     }
 
@@ -149,12 +174,17 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
     public void refreshMissingSnapshotsAfterStartup() {
         LocalDate weekStart = LocalDate.now()
                 .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        boolean missing = isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "all"), weekStart)
-                || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "week"), weekStart)
-                || isSnapshotBeforeWeek(snapshotMapper.selectLatest("github", null, "new"), weekStart);
+        boolean missing = isSnapshotBeforeWeek(selectAggregateLatest("all"), weekStart)
+                || isSnapshotBeforeWeek(selectAggregateLatest("week"), weekStart)
+                || isSnapshotBeforeWeek(selectAggregateLatest("new"), weekStart);
         if (missing) {
                 log.info("LeaderboardRefreshTask: 启动后检测到本周快照缺失，开始补抓");
-                enqueue("startup:" + weekStart);
+                if (pipelineV2Enabled) {
+                    ingestionCoordinator.start(IngestionCoordinatorService.LEADERBOARD_FULL,
+                            "STARTUP", "startup:" + weekStart, Map.of());
+                } else {
+                    enqueue("startup:" + weekStart);
+                }
         }
     }
 
@@ -165,8 +195,10 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
 
     @Override
     public Object execute(SystemTask task) {
-        refreshAll();
-        return Map.of("refreshedAt", LocalDate.now().toString());
+        refreshAll(task.getRunId(), task.getConfigVersion());
+        RunContext context = runContext.get();
+        return Map.of("refreshedAt", LocalDate.now().toString(),
+                "runId", task.getRunId() == null ? 0 : task.getRunId());
     }
 
     private boolean isSnapshotBeforeWeek(LeaderboardSnapshot snapshot, LocalDate weekStart) {
@@ -184,7 +216,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
         }
         try {
             StringBuilder q = new StringBuilder();
-            if (topicName != null && !topicName.isEmpty()) {
+            if (topicName != null && !topicName.isEmpty() && !ALL_TOPICS.equals(topicName)) {
                 q.append("topic:").append(topicName).append(" ");
             }
             if ("new".equals(period) && isoDate != null) {
@@ -233,6 +265,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
                 snapshot.setSnapshotDate(today);
                 snapshot.setDataJson(json);
                 snapshotMapper.insert(snapshot);
+                itemSucceeded("FETCH", topicName + ":" + period, Map.of("records", records.size()));
                 log.info("GitHub 快照已保存: topic={}, period={}", topicName, period);
 
                 // RAG：自动采集 README（all Top 20 / week Top 3）
@@ -243,6 +276,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
                 }
             }
         } catch (Exception e) {
+            itemFailed("FETCH", topicName + ":" + period, e);
             log.error("GitHub 快照失败 topic={} period={}: {}", topicName, period, e.getMessage());
         }
     }
@@ -269,7 +303,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             String pushedAfter = monday.format(DateTimeFormatter.ISO_LOCAL_DATE);
 
             StringBuilder q = new StringBuilder();
-            if (topicName != null && !topicName.isEmpty()) {
+            if (topicName != null && !topicName.isEmpty() && !ALL_TOPICS.equals(topicName)) {
                 q.append("topic:").append(topicName).append(" ");
             }
             // pushed: 近期有代码推送 → 活跃仓库 → 更可能在涨星
@@ -315,6 +349,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
                 snapshot.setSnapshotDate(today);
                 snapshot.setDataJson(json);
                 snapshotMapper.insert(snapshot);
+                itemSucceeded("FETCH", topicName + ":week", Map.of("records", records.size()));
                 log.info("GitHub 涨星快照已保存: topic={}, period=week, pushed>{}", topicName, pushedAfter);
 
                 // RAG：本周涨星 Top 5 自动采集 README
@@ -324,6 +359,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
                 }
             }
         } catch (Exception e) {
+            itemFailed("FETCH", topicName + ":week", e);
             log.error("GitHub 涨星快照失败 topic={}: {}", topicName, e.getMessage());
         }
     }
@@ -335,13 +371,17 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
      * 翻译失败时持续重试，直到成功。
      */
     private void translateAllToday(LocalDate today) {
-        if (aiApiKey == null || aiApiKey.isEmpty()) {
+        RunContext context = currentContext();
+        AiRuntimeConfig config = aiConfigService.resolve(AiRuntimeConfigService.TREND, context.configVersion);
+        if (config.apiKey() == null || config.apiKey().isEmpty()) {
             log.info("AI API Key 未配置，跳过翻译");
             return;
         }
         String todayStr = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
         int totalDone = 0;
-        for (String topic : TOPICS) {
+        List<String> topics = new ArrayList<>(Arrays.asList(TOPICS));
+        topics.add(ALL_TOPICS);
+        for (String topic : topics) {
             for (String period : new String[]{"all", "new", "week"}) {
                 LeaderboardSnapshot snap = snapshotMapper.selectByKey("github", topic, period, todayStr);
                 if (snap == null || snap.getDataJson() == null) continue;
@@ -349,137 +389,146 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
                 if (parsed == null || parsed.getRecords().isEmpty()) continue;
 
                 boolean updated = false;
+                List<Map<String, Object>> missing = new ArrayList<>();
                 for (Map<String, Object> r : parsed.getRecords()) {
                     if (r.containsKey("descriptionZh") && r.get("descriptionZh") != null
                             && !((String) r.get("descriptionZh")).isEmpty()) continue;
                     String desc = (String) r.getOrDefault("description", "");
                     if (desc == null || desc.trim().isEmpty()) continue;
-                    desc = desc.trim();
-
-                    // 缓存命中
-                    String cached = translationCache.get(desc);
+                    String cached = cachedTranslation(desc.trim(), config.model());
                     if (cached != null) {
-                        if (!cached.isEmpty()) r.put("descriptionZh", cached);
-                        updated = true; totalDone++;
-                        continue;
+                        r.put("descriptionZh", cached);
+                        updated = true;
+                        totalDone++;
+                    } else {
+                        missing.add(r);
                     }
-
-                    // 翻译失败后持续重试，确保最终写入中文描述。
-                    String translated = null;
-                    int retry = 0;
-                    for (int attempt = 0; attempt < 1 && (translated == null || translated.isEmpty()); attempt++) {
-                        try {
-                            translated = callAiTranslation(desc);
-                            if (translated == null || translated.isEmpty()) {
-                                retry++;
-                                if (retry % 5 == 0) {
-                                    log.info("翻译重试中... topic={} period={} retry={}", topic, period, retry);
-                                }
-                                sleep(2000);
-                            }
-                        } catch (Exception e) {
-                            retry++;
-                            if (retry % 5 == 0) {
-                                log.info("翻译重试中... topic={} period={} retry={} err={}",
-                                        topic, period, retry, e.getMessage());
-                            }
-                            sleep(2000);
-                        }
+                }
+                for (int start = 0; start < missing.size(); start += TRANSLATION_BATCH_SIZE) {
+                    List<Map<String, Object>> batch = missing.subList(start,
+                            Math.min(start + TRANSLATION_BATCH_SIZE, missing.size()));
+                    try {
+                        int done = translateBatch(batch, config);
+                        totalDone += done;
+                        updated |= done > 0;
+                    } catch (Exception ex) {
+                        itemFailed("TRANSLATE", topic + ":" + period + ":" + start, ex);
+                        log.warn("AI translation batch failed topic={} period={} start={} message={}",
+                                topic, period, start, abbreviate(ex.getMessage()));
                     }
-                    if (translated == null || translated.isBlank()) {
-                        throw new IllegalStateException("AI translation failed; the persistent task will retry later");
-                    }
-                    translationCache.put(desc, translated);
-                    r.put("descriptionZh", translated);
-                    updated = true;
-                    totalDone++;
+                    persistTranslatedSnapshot(snap, parsed, updated);
                 }
 
-                if (updated) {
-                    Map<String, Object> data = new LinkedHashMap<>();
-                    data.put("total", parsed.getTotal());
-                    data.put("records", parsed.getRecords());
-                    snap.setDataJson(toJson(data));
-                    snapshotMapper.insert(snap); // upsert
-                }
+                persistTranslatedSnapshot(snap, parsed, updated);
             }
         }
         log.info("翻译全部完成: 共 {} 条描述已汉化", totalDone);
     }
 
-    private String callAiTranslation(String text) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("model", aiModel);
-        List<Map<String, String>> messages = new ArrayList<>();
-        Map<String, String> msg = new LinkedHashMap<>();
-        msg.put("role", "user");
-        msg.put("content", "将以下英文翻译为简洁中文，只输出翻译结果，不要解释：\n" + text);
-        messages.add(msg);
-        body.put("messages", messages);
-        body.put("max_tokens", 200);
-        body.put("temperature", 0.3);
+    private void persistTranslatedSnapshot(LeaderboardSnapshot snap,
+                                           PageResult<Map<String, Object>> parsed,
+                                           boolean updated) {
+        if (!updated) return;
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put("total", parsed.getTotal());
+        data.put("records", parsed.getRecords());
+        snap.setDataJson(toJson(data));
+        snapshotMapper.insert(snap);
+    }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + aiApiKey);
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
-        ResponseEntity<Map> response = restTemplate.postForEntity(
-                aiEndpoint + "/chat/completions", entity, Map.class);
-
-        if (response.getBody() != null && response.getBody().containsKey("choices")) {
-            @SuppressWarnings("unchecked")
-            List<Map<String, Object>> choices = (List<Map<String, Object>>) response.getBody().get("choices");
-            if (!choices.isEmpty()) {
-                Map<String, Object> choice = choices.get(0);
-                Map<String, Object> message = (Map<String, Object>) choice.get("message");
-                String content = (String) message.get("content");
-                return content != null ? content.trim() : null;
-            }
+    private int translateBatch(List<Map<String, Object>> batch, AiRuntimeConfig config) {
+        List<Map<String, Object>> input = new ArrayList<>();
+        for (int i = 0; i < batch.size(); i++) {
+            input.add(Map.of("index", i, "text", String.valueOf(batch.get(i).get("description"))));
         }
-        return null;
+        String prompt;
+        try {
+            prompt = objectMapper.writeValueAsString(input);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException("榜单翻译输入序列化失败", ex);
+        }
+        String content = externalAiClient.call(config,
+                "你是开源项目翻译助手。忠实、简洁地翻译，不添加原文没有的信息。",
+                "将每项 text 翻译为简体中文。严格输出 JSON："
+                        + "{\"items\":[{\"index\":0,\"translated\":\"\"}]}。\n" + prompt,
+                0.1, "leaderboard-translation");
+        try {
+            JsonNode items = objectMapper.readTree(content).path("items");
+            Map<Integer, String> translated = new HashMap<>();
+            if (items.isArray()) {
+                items.forEach(node -> translated.put(node.path("index").asInt(-1),
+                        node.path("translated").asText("")));
+            }
+            int success = 0;
+            for (int i = 0; i < batch.size(); i++) {
+                String value = translated.get(i);
+                if (value == null || value.isBlank()) continue;
+                Map<String, Object> record = batch.get(i);
+                String source = String.valueOf(record.get("description")).trim();
+                record.put("descriptionZh", value.trim());
+                saveTranslation(source, config.model(), value.trim());
+                itemSucceeded("TRANSLATE", String.valueOf(record.get("fullName")), null);
+                success++;
+            }
+            if (success != batch.size()) {
+                throw new IllegalStateException("榜单翻译批次返回不完整: " + success + "/" + batch.size());
+            }
+            return success;
+        } catch (Exception ex) {
+            if (ex instanceof IllegalStateException state) throw state;
+            throw new IllegalStateException("榜单翻译响应格式无效", ex);
+        }
+    }
+
+    static String resolveChatCompletionsUrl(String endpoint) {
+        if (endpoint == null || endpoint.isBlank()) {
+            throw new IllegalStateException("AI endpoint is not configured");
+        }
+        String normalized = endpoint.trim().replaceAll("/+$", "");
+        return normalized.endsWith("/chat/completions")
+                ? normalized
+                : normalized + "/chat/completions";
+    }
+
+    private String cachedTranslation(String source, String model) {
+        String hash = sha256(source);
+        String value = translationCacheMapper.find(hash, "LEADERBOARD", model);
+        if (value != null) translationCacheMapper.touch(hash, "LEADERBOARD", model);
+        return value;
+    }
+
+    private void saveTranslation(String source, String model, String translated) {
+        translationCacheMapper.save(sha256(source), "LEADERBOARD", model, translated);
+    }
+
+    private String sha256(String value) {
+        try {
+            byte[] digest = MessageDigest.getInstance("SHA-256")
+                    .digest(value.getBytes(StandardCharsets.UTF_8));
+            return java.util.HexFormat.of().formatHex(digest);
+        } catch (Exception ex) {
+            throw new IllegalStateException("无法计算翻译缓存键", ex);
+        }
+    }
+
+    private String abbreviate(String message) {
+        if (message == null || message.isBlank()) return "no details";
+        return message.length() <= 500 ? message : message.substring(0, 500);
     }
 
     private PageResult<Map<String, Object>> parsePageResult(String json) {
         try {
-            int totalStart = json.indexOf("\"total\":") + 8;
-            int totalEnd = json.indexOf(",", totalStart);
-            long total = Long.parseLong(json.substring(totalStart, totalEnd).trim());
-            List<Map<String, Object>> records = new ArrayList<>();
-            int arrStart = json.indexOf("\"records\":[") + 11;
-            int arrEnd = json.lastIndexOf("]}");
-            if (arrEnd < 0) arrEnd = json.length() - 2;
-            String arrStr = json.substring(arrStart, arrEnd);
-            int depth = 0, objStart = -1;
-            for (int i = 0; i < arrStr.length(); i++) {
-                if (arrStr.charAt(i) == '{') {
-                    if (depth == 0) objStart = i;
-                    depth++;
-                } else if (arrStr.charAt(i) == '}') {
-                    depth--;
-                    if (depth == 0 && objStart >= 0) {
-                        String objStr = arrStr.substring(objStart + 1, i);
-                        Map<String, Object> map = new LinkedHashMap<>();
-                        String[] pairs = objStr.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-                        for (String pair : pairs) {
-                            int colon = pair.indexOf(":");
-                            if (colon < 0) continue;
-                            String key = pair.substring(0, colon).trim().replaceAll("^\"|\"$", "");
-                            String val = pair.substring(colon + 1).trim().replaceAll("^\"|\"$", "");
-                            if (val.matches("-?\\d+(\\.\\d+)?")) {
-                                if (val.contains(".")) map.put(key, Double.parseDouble(val));
-                                else map.put(key, Long.parseLong(val));
-                            } else if ("null".equals(val)) {
-                                map.put(key, null);
-                            } else {
-                                map.put(key, val.replace("\\\"", "\"").replace("\\n", "\n"));
-                            }
-                        }
-                        records.add(map);
-                    }
-                }
-            }
+            Map<String, Object> data = objectMapper.readValue(json, new TypeReference<>() {});
+            long total = data.get("total") instanceof Number number ? number.longValue() : 0L;
+            Object recordsValue = data.get("records");
+            List<Map<String, Object>> records = recordsValue == null
+                    ? Collections.emptyList()
+                    : objectMapper.convertValue(recordsValue, new TypeReference<>() {});
             return new PageResult<>(total, records);
-        } catch (Exception e) { return null; }
+        } catch (Exception e) {
+            log.warn("榜单快照 JSON 无法解析: {}", e.getMessage());
+            return new PageResult<>(0L, Collections.emptyList());
+        }
     }
 
     // ==================== RAG README 自动采集 ====================
@@ -499,9 +548,11 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             if (content == null) continue;
 
             try {
-                documentService.importFromGithub(fullName, content, period);
+                documentService.importFromGithub(fullName, content, period, currentContext().configVersion);
                 imported++;
+                itemSucceeded("README", sourceRef, null);
             } catch (Exception e) {
+                itemFailed("README", sourceRef, e);
                 log.warn("[RAG] README 入库失败 {}: {}", fullName, e.getMessage());
             }
         }
@@ -558,7 +609,12 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
     }
 
     private void sleep(long ms) {
-        try { Thread.sleep(ms); } catch (Exception ignored) {}
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("榜单刷新被中断", ex);
+        }
     }
 
     private void enqueue(String businessKey) {
@@ -566,30 +622,62 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
         systemTaskService.enqueue(TASK_TYPE, businessKey, Map.of(), 0);
     }
 
-    // 简单 JSON 序列化
     private String toJson(Map<String, Object> data) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\"total\":").append(data.get("total")).append(",\"records\":[");
-        @SuppressWarnings("unchecked")
-        List<Map<String, Object>> records = (List<Map<String, Object>>) data.get("records");
-        boolean first = true;
-        for (Map<String, Object> m : records) {
-            if (!first) sb.append(",");
-            first = false;
-            sb.append("{");
-            boolean ff = true;
-            for (Map.Entry<String, Object> e : m.entrySet()) {
-                if (!ff) sb.append(",");
-                ff = false;
-                sb.append("\"").append(e.getKey()).append("\":");
-                Object v = e.getValue();
-                if (v == null) sb.append("null");
-                else if (v instanceof Number) sb.append(v);
-                else sb.append("\"").append(v.toString().replace("\"", "\\\"").replace("\n", "\\n")).append("\"");
-            }
-            sb.append("}");
+        try {
+            return objectMapper.writeValueAsString(data);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException("榜单快照序列化失败", ex);
         }
-        sb.append("]}");
-        return sb.toString();
+    }
+
+    private void checkCancelled() {
+        RunContext context = currentContext();
+        if (context.runId != null && ingestionRunService.cancelled(context.runId)) {
+            throw new IllegalStateException("抓取任务已取消");
+        }
+    }
+
+    private void itemSucceeded(String stage, String key, Object result) {
+        RunContext context = currentContext();
+        context.success++;
+        ingestionRunService.item(context.runId, stage, key, "SUCCEEDED", result, null);
+        publishProgress(context);
+    }
+
+    private void itemFailed(String stage, String key, Exception error) {
+        RunContext context = currentContext();
+        context.failed++;
+        ingestionRunService.item(context.runId, stage, key, "FAILED", null, abbreviate(error.getMessage()));
+        publishProgress(context);
+    }
+
+    private void publishProgress(RunContext context) {
+        ingestionRunService.progress(context.runId, Math.max(context.total, context.success + context.failed),
+                context.success, context.failed, context.skipped,
+                context.failed > 0 ? "存在失败项，可在管理端查看并重试" : null);
+    }
+
+    private RunContext currentContext() {
+        RunContext context = runContext.get();
+        return context == null ? new RunContext(null, null) : context;
+    }
+
+    private LeaderboardSnapshot selectAggregateLatest(String period) {
+        LeaderboardSnapshot snapshot = snapshotMapper.selectLatest("github", ALL_TOPICS, period);
+        return snapshot != null ? snapshot : snapshotMapper.selectLatest("github", null, period);
+    }
+
+    private static final class RunContext {
+        private final Long runId;
+        private final String configVersion;
+        private int total;
+        private int success;
+        private int failed;
+        private int skipped;
+
+        private RunContext(Long runId, String configVersion) {
+            this.runId = runId;
+            this.configVersion = configVersion;
+        }
     }
 }

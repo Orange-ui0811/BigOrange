@@ -45,4 +45,18 @@ public class AppConfigController {
         rewards.put("competition", pricingService.getReward(PricingService.REWARD_COMPETITION_APPROVED));
         return Result.success(rewards);
     }
+
+    @GetMapping("/ai-pricing")
+    public Result<Map<String, Integer>> getAiPricing() {
+        Map<String, Integer> pricing = new LinkedHashMap<>();
+        pricing.put("trendV1", pricingService.getCost("ai:trend:v1"));
+        pricing.put("trendV2", pricingService.getCost("ai:trend:v2"));
+        pricing.put("plan", pricingService.getCost("ai:plan"));
+        pricing.put("jobMatch", pricingService.getCost("ai:match"));
+        pricing.put("launchCheck", pricingService.getCost("ai:launch-check"));
+        pricing.put("openSourceMatch", pricingService.getCost("ai:open-source-match"));
+        pricing.put("openSourceJobMatch", pricingService.getCost("ai:open-source-job-match"));
+        pricing.put("openSourceGuide", pricingService.getCost("ai:open-source-guide"));
+        return Result.success(pricing);
+    }
 }

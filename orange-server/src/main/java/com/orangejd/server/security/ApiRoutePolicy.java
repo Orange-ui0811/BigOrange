@@ -16,6 +16,7 @@ public final class ApiRoutePolicy {
             "/app/requirement/public",
             "/app/config/trade-mode",
             "/app/config/rewards",
+            "/app/config/ai-pricing",
             "/app/leaderboard/**",
             "/app/trend/graph",
             "/ws/**"

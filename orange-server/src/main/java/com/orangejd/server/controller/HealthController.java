@@ -1,6 +1,7 @@
 package com.orangejd.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,8 +50,8 @@ public class HealthController {
 
     private String checkRedis() {
         if (redisTemplate == null) return "NOT_CONFIGURED";
-        try {
-            return "PONG".equals(redisTemplate.getConnectionFactory().getConnection().ping()) ? "UP" : "DOWN";
+        try (RedisConnection connection = redisTemplate.getConnectionFactory().getConnection()) {
+            return "PONG".equals(connection.ping()) ? "UP" : "DOWN";
         } catch (Exception e) {
             return "DOWN";
         }

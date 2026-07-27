@@ -3,6 +3,8 @@ package com.orangejd.server.controller;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.controller.app.AppPlanController;
 import com.orangejd.server.mapper.PlanHistoryMapper;
+import com.orangejd.server.service.PlanGenerationService;
+import com.orangejd.server.service.PricingService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -15,6 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class AppPlanControllerTest {
 
@@ -51,5 +54,21 @@ class AppPlanControllerTest {
         assertEquals("任务计划", captured.get("phase5"));
         assertEquals("岗位匹配", captured.get("phase6"));
         verify(mapper).insert(any());
+    }
+
+    @Test
+    void exposesCurrentPlanAndJobMatchPricing() {
+        PlanGenerationService generationService = mock(PlanGenerationService.class);
+        PricingService pricingService = mock(PricingService.class);
+        when(generationService.cost()).thenReturn(10);
+        when(pricingService.getCost("ai:match")).thenReturn(25);
+
+        AppPlanController controller = new AppPlanController();
+        ReflectionTestUtils.setField(controller, "generationService", generationService);
+        ReflectionTestUtils.setField(controller, "pricingService", pricingService);
+
+        Map<?, ?> data = (Map<?, ?>) controller.config().getData();
+        assertEquals(10, data.get("stageCost"));
+        assertEquals(25, data.get("jobMatchCost"));
     }
 }

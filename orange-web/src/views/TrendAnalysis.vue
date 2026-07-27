@@ -351,7 +351,7 @@
       <div v-if="aiReply" class="v1-reply" v-safe-html="aiReplyHtml"></div>
       <div v-if="aiError" class="v1-error">{{ aiError }}</div>
       <p v-if="aiReply" class="v1-disclaimer">
-        以上分析由 AI 生成，仅供参考。每次提问消耗 50 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" />
+        以上分析由 AI 生成，仅供参考。每次提问消耗 {{ trendV1Cost }} <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" />
       </p>
     </div>
   </div>
@@ -408,6 +408,8 @@ const aiReply = ref('')
 const aiReplyHtml = ref('')
 const aiLoading = ref(false)
 const aiError = ref('')
+const trendV1Cost = ref(50)
+const trendV2Cost = ref(50)
 
 const tourSteps = [
   { selector: '.graph-card', text: '这是 Topic 全景图！圆圈代表技术方向，越大越热门～ 点击圆圈看详情，连线表示它们共享编程语言。试着拖拽和缩放看看！', expression: 'curious' },
@@ -498,7 +500,7 @@ const startJuicing = async () => {
   try {
     await ElMessageBox.confirm(
       h('span', { style: 'display:flex;align-items:center;gap:6px' }, [
-        '本次分析将消耗 50 ',
+        `本次分析将消耗 ${trendV2Cost.value} `,
         h(PixelOrangeSlice, { size: 16 })
       ]),
       '确认分析', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
@@ -703,7 +705,7 @@ const askAI = async () => {
   if (!aiQuestion.value.trim()) { aiError.value = '请输入分析问题'; return }
   try { await ElMessageBox.confirm(
     h('span', { style: 'display:flex;align-items:center;gap:6px' }, [
-      '本次提问将消耗 50 ',
+      `本次提问将消耗 ${trendV1Cost.value} `,
       h(PixelOrangeSlice, { size: 16 })
     ]),
     '确认发送', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
@@ -741,7 +743,15 @@ const loadJobDetail = async () => {
   } catch {}
 }
 
-onMounted(() => { loadGraph(); loadHistoryFromDB(); loadDirections() })
+const loadAiPricing = async () => {
+  try {
+    const response = await request.get('/app/config/ai-pricing')
+    if (Number.isFinite(Number(response.data?.trendV1))) trendV1Cost.value = Number(response.data.trendV1)
+    if (Number.isFinite(Number(response.data?.trendV2))) trendV2Cost.value = Number(response.data.trendV2)
+  } catch {}
+}
+
+onMounted(() => { loadGraph(); loadHistoryFromDB(); loadDirections(); loadAiPricing() })
 onUnmounted(() => { chart?.dispose(); chart = null })
 </script>
 

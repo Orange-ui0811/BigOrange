@@ -15,6 +15,8 @@ import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 
 import java.util.*;
 
@@ -36,6 +38,7 @@ public class JobMatchService {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+    @Autowired(required = false) private AiRuntimeConfigService aiConfigService;
 
     @Autowired
     public JobMatchService(ObjectMapper objectMapper) {
@@ -92,20 +95,21 @@ public class JobMatchService {
                 "{\"matches\":[{\"position\":\"岗位名\",\"reason\":\"详细匹配原因\",\"focus\":\"详细学习重点\"}]}";
 
             // 调 AI
+            AiRuntimeConfig runtime = runtimeConfig();
             Map<String, Object> body = new LinkedHashMap<>();
-            body.put("model", model);
+            body.put("model", runtime.model());
             List<Map<String, String>> msgs = new ArrayList<>();
             msgs.add(Map.of("role", "user", "content", prompt));
             body.put("messages", msgs);
             body.put("temperature", 0.3);
 
-            String url = endpoint.trim();
+            String url = runtime.endpoint().trim();
             if (!url.startsWith("http")) url = "https://" + url;
             if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer " + apiKey);
+            headers.setBearerAuth(runtime.apiKey());
             ResponseEntity<Map> resp = restTemplate.exchange(url, HttpMethod.POST,
                     new HttpEntity<>(body, headers), Map.class);
 
@@ -129,6 +133,13 @@ public class JobMatchService {
             log.warn("[JOB_MATCH] 匹配失败并已尝试退款 accountId={}, reason={}", accountId, e.getMessage());
             throw new RuntimeException("AI匹配失败，请稍后重试");
         }
+    }
+
+    private AiRuntimeConfig runtimeConfig() {
+        return aiConfigService == null
+                ? new AiRuntimeConfig(AiRuntimeConfigService.CONTRIBUTION, "env",
+                        endpoint, apiKey, model, "ENV")
+                : aiConfigService.current(AiRuntimeConfigService.CONTRIBUTION);
     }
 
     List<Map<String, String>> parseMatches(String content) throws Exception {

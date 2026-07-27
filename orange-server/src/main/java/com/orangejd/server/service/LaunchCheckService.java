@@ -12,6 +12,8 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -48,6 +50,8 @@ public class LaunchCheckService {
     private final PricingService pricingService;
     private final LaunchAssessmentReportService reportService;
     private final RestTemplate restTemplate;
+    @org.springframework.beans.factory.annotation.Autowired(required = false)
+    private AiRuntimeConfigService aiConfigService;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -114,12 +118,13 @@ public class LaunchCheckService {
     }
 
     public Map<String, Object> generate(Long accountId, Long id, int stageNo) {
+        AiRuntimeConfig runtime = runtimeConfig();
         if (stageNo < 1 || stageNo > STAGE_COUNT) throw new BaseException("无效的体检阶段");
         Map<String, Object> assessment = requireOwned(accountId, id);
         if (stageNo > 1 && mapper.selectStage(id, stageNo - 1) == null) {
             throw new BaseException("请先完成上一阶段");
         }
-        if (!StringUtils.hasText(apiEndpoint) || !StringUtils.hasText(apiKey)) {
+        if (!StringUtils.hasText(runtime.endpoint()) || !StringUtils.hasText(runtime.apiKey())) {
             throw new BaseException("AI 上线体检服务尚未配置");
         }
 
@@ -215,20 +220,21 @@ public class LaunchCheckService {
 
     @SuppressWarnings("unchecked")
     private String callAi(String prompt) {
-        String url = apiEndpoint.trim();
+        AiRuntimeConfig runtime = runtimeConfig();
+        String url = runtime.endpoint().trim();
         if (!url.startsWith("http")) url = "https://" + url;
         if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(apiKey);
+        headers.setBearerAuth(runtime.apiKey());
 
         List<Map<String, String>> messages = List.of(
                 Map.of("role", "system", "content",
                         "你是严谨的生产架构、测试、安全与运维专家。你的结论必须可验证，不能把健康检查等同于正式上线。"),
                 Map.of("role", "user", "content", prompt));
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("model", model);
+        body.put("model", runtime.model());
         body.put("messages", messages);
         body.put("temperature", 0.25);
 
@@ -239,6 +245,13 @@ public class LaunchCheckService {
         if (choices == null || choices.isEmpty()) return null;
         Map<String, Object> message = (Map<String, Object>) choices.get(0).get("message");
         return message == null ? null : String.valueOf(message.getOrDefault("content", "")).trim();
+    }
+
+    private AiRuntimeConfig runtimeConfig() {
+        return aiConfigService == null
+                ? new AiRuntimeConfig(AiRuntimeConfigService.PROJECT, "env",
+                        apiEndpoint, apiKey, model, "ENV")
+                : aiConfigService.current(AiRuntimeConfigService.PROJECT);
     }
 
     private void validateRepositoryUrl(String url) {

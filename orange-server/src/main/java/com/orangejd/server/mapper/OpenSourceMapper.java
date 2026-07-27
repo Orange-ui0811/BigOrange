@@ -38,7 +38,8 @@ public interface OpenSourceMapper {
     List<Map<String, Object>> selectTranslationPending(int limit);
     int updateIssueTranslation(@Param("id") Long id, @Param("titleZh") String titleZh,
                                @Param("summaryZh") String summaryZh,
-                               @Param("status") String status);
+                               @Param("status") String status,
+                               @Param("error") String error);
     int updateIssueVerification(Map<String, Object> issue);
 
     List<Map<String, Object>> selectAdminIssues(@Param("offset") int offset,

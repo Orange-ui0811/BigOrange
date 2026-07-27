@@ -15,6 +15,8 @@ import java.util.*;
 
 @Service
 public class TrendAnalysisService {
+    @org.springframework.beans.factory.annotation.Autowired(required = false)
+    private com.orangejd.server.foundation.external.AiRuntimeConfigService aiConfigService;
 
     private static final Logger log = LoggerFactory.getLogger(TrendAnalysisService.class);
     private static final int TIMEOUT_MS = 90000;
@@ -101,8 +103,10 @@ public class TrendAnalysisService {
                 "\n\n用户问题: " + question;
 
         // 构建请求（使用服务端配置）
+        com.orangejd.server.foundation.external.AiRuntimeConfig runtime =
+                projectRuntimeConfig();
         Map<String, Object> requestBody = new LinkedHashMap<>();
-        requestBody.put("model", trendModel);
+        requestBody.put("model", runtime.model());
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> sys = new LinkedHashMap<>();
         sys.put("role", "system");
@@ -117,12 +121,12 @@ public class TrendAnalysisService {
 
         // 调大模型
         try {
-            String url = trendEndpoint.trim();
+            String url = runtime.endpoint().trim();
             if (!url.startsWith("http")) url = "https://" + url;
             if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer " + trendApiKey);
+            headers.set("Authorization", "Bearer " + runtime.apiKey());
             ResponseEntity<Map> response = trendRestTemplate.exchange(url, HttpMethod.POST,
                     new HttpEntity<>(requestBody, headers), Map.class);
             if (response.getBody() != null) {
@@ -295,9 +299,10 @@ public class TrendAnalysisService {
 
         // 调 AI
         try {
-            String endpoint = getRedisOrDefault("ai:trend:endpoint", trendEndpoint);
-            String apiKey = getRedisOrDefault("ai:trend:api-key", trendApiKey);
-            String model = getRedisOrDefault("ai:trend:model", trendModel);
+            com.orangejd.server.foundation.external.AiRuntimeConfig runtime = projectRuntimeConfig();
+            String endpoint = runtime.endpoint();
+            String apiKey = runtime.apiKey();
+            String model = runtime.model();
 
             Map<String, Object> body = new LinkedHashMap<>();
             body.put("model", model);
@@ -339,6 +344,15 @@ public class TrendAnalysisService {
             result.put("error", "AI分析失败，请稍后重试");
         }
         return result;
+    }
+
+    private com.orangejd.server.foundation.external.AiRuntimeConfig projectRuntimeConfig() {
+        return aiConfigService == null
+                ? new com.orangejd.server.foundation.external.AiRuntimeConfig(
+                        com.orangejd.server.foundation.external.AiRuntimeConfigService.PROJECT,
+                        "env", trendEndpoint, trendApiKey, trendModel, "ENV")
+                : aiConfigService.current(
+                        com.orangejd.server.foundation.external.AiRuntimeConfigService.PROJECT);
     }
 
     @SuppressWarnings("unchecked")

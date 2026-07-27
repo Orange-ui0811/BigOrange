@@ -28,6 +28,10 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 orange:
+  ingestion:
+    pipeline-v2-enabled: ${INGESTION_PIPELINE_V2_ENABLED:false}
+  ai-config:
+    encryption-key: ${AI_CONFIG_ENCRYPTION_KEY:}
   trade:
     simulated-payment-enabled: true
   upload:
@@ -52,6 +56,14 @@ orange:
     endpoint: ${AI_TREND_ENDPOINT:https://ai.gitee.com/v1}
     api-key: ${AI_TREND_KEY:}
     model: ${AI_TREND_MODEL:DeepSeek-V4-Pro}
+  ai-project:
+    endpoint: ${AI_PROJECT_ENDPOINT:}
+    api-key: ${AI_PROJECT_KEY:}
+    model: ${AI_PROJECT_MODEL:}
+  ai-contribution:
+    endpoint: ${AI_CONTRIBUTION_ENDPOINT:}
+    api-key: ${AI_CONTRIBUTION_KEY:}
+    model: ${AI_CONTRIBUTION_MODEL:}
   ai-embedding:
     endpoint: ${AI_EMBEDDING_ENDPOINT:https://ai.gitee.com/v1}
     api-key: ${AI_EMBEDDING_KEY:}

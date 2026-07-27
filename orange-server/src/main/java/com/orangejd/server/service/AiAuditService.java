@@ -4,20 +4,24 @@ import com.orangejd.common.context.BaseContext;
 import com.orangejd.pojo.entity.*;
 import com.orangejd.server.mapper.*;
 import com.orangejd.server.service.impl.AuditServiceImpl;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.external.ExternalAiClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.http.*;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +29,8 @@ import java.util.regex.Pattern;
 public class AiAuditService {
 
     private static final Logger log = LoggerFactory.getLogger(AiAuditService.class);
+    static final int CONNECTION_TEST_MAX_TOKENS = 256;
+    static final int CONTENT_AUDIT_MAX_TOKENS = 800;
 
     @Autowired private WorkMapper workMapper;
     @Autowired private RequirementMapper requirementMapper;
@@ -33,6 +39,10 @@ public class AiAuditService {
     @Autowired private AuditServiceImpl auditService;
     @Autowired(required = false) private FeishuNotifyService feishuNotifyService;
     @Autowired(required = false) private StringRedisTemplate redisTemplate;
+    @Autowired private AiRuntimeConfigService aiConfigService;
+    @Autowired private ExternalAiClient externalAiClient;
+    @Autowired @Qualifier("orangeAiAuditExecutor") private Executor executor;
+    @Autowired @Qualifier("orangeTaskScheduler") private TaskScheduler taskScheduler;
 
     @Value("${orange.ai-audit.endpoint:}")
     private String apiEndpoint;
@@ -51,20 +61,16 @@ public class AiAuditService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
-        // 启动后 10 秒检查：如果开关开着，自动扫描积压
-        new Thread(() -> {
-            try { Thread.sleep(10000); } catch (Exception ignored) {}
+        taskScheduler.schedule(() -> {
             if (isEnabled()) {
                 log.info("AI托管已开启，启动扫描积压");
                 auditAllPending();
             }
-        }).start();
+        }, Instant.now().plusSeconds(10));
     }
 
     // 最多 2 个并发审核
-    private final ExecutorService executor = Executors.newFixedThreadPool(2);
-    private final RestTemplate restTemplate = new RestTemplate();
-    private int runningCount = 0;
+    private final AtomicInteger runningCount = new AtomicInteger();
 
     private static final String SYSTEM_PROMPT =
         "你是 OrangeJD 平台的 AI 内容审核员。审核用户提交的作品/需求。\n\n" +
@@ -93,20 +99,20 @@ public class AiAuditService {
     /** 异步审核单条作品 */
     public void auditWorkAsync(Long workId) {
         if (!isEnabled()) return;
-        executor.submit(() -> {
-            runningCount++;
+        executor.execute(() -> {
+            runningCount.incrementAndGet();
             try { auditWork(workId); } catch (Exception e) { log.error("AI审核作品失败 workId={}: {}", workId, e.getMessage()); }
-            finally { runningCount--; }
+            finally { runningCount.decrementAndGet(); }
         });
     }
 
     /** 异步审核单条需求 */
     public void auditRequirementAsync(Long reqId) {
         if (!isEnabled()) return;
-        executor.submit(() -> {
-            runningCount++;
+        executor.execute(() -> {
+            runningCount.incrementAndGet();
             try { auditRequirement(reqId); } catch (Exception e) { log.error("AI审核需求失败 reqId={}: {}", reqId, e.getMessage()); }
-            finally { runningCount--; }
+            finally { runningCount.decrementAndGet(); }
         });
     }
 
@@ -122,13 +128,13 @@ public class AiAuditService {
         return count;
     }
 
-    public int getRunningCount() { return runningCount; }
+    public int getRunningCount() { return runningCount.get(); }
 
     /** 测试大模型连接 */
     public String testConnection() {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("model", model);
-        body.put("max_tokens", 10);
+        body.put("max_tokens", CONNECTION_TEST_MAX_TOKENS);
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> m = new LinkedHashMap<>();
         m.put("role", "user"); m.put("content", "回复OK");
@@ -215,7 +221,7 @@ public class AiAuditService {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("model", model);
         body.put("temperature", 0.1);
-        body.put("max_tokens", 300);
+        body.put("max_tokens", CONTENT_AUDIT_MAX_TOKENS);
 
         // system message
         Map<String, String> sysMsg = new LinkedHashMap<>();
@@ -292,24 +298,8 @@ public class AiAuditService {
 
     @SuppressWarnings("unchecked")
     private String postAi(Map<String, Object> body) {
-        String url = apiEndpoint;
-        if (!url.startsWith("http")) url = "https://" + url;
-        if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + apiKey);
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
-
-        ResponseEntity<Map> resp = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-        if (resp.getBody() != null) {
-            List<Map<String, Object>> choices = (List<Map<String, Object>>) resp.getBody().get("choices");
-            if (choices != null && !choices.isEmpty()) {
-                Map<String, Object> msg = (Map<String, Object>) choices.get(0).get("message");
-                return (String) msg.getOrDefault("content", "");
-            }
-        }
-        throw new RuntimeException("AI 返回为空");
+        AiRuntimeConfig config = aiConfigService.current(AiRuntimeConfigService.AUDIT);
+        return externalAiClient.call(config, body, "content-audit");
     }
 
     private AuditResult parseResponse(String content) {
