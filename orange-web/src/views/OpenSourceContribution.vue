@@ -348,49 +348,98 @@
           <Warning /><h4>指南列表加载失败</h4><p>{{ guidesError }}</p>
           <el-button type="primary" @click="loadGuides">重新加载</el-button>
         </section>
-        <section v-else-if="!guides.length" class="feedback-state">
-          <DocumentChecked />
-          <h4>还没有贡献指南</h4>
-          <p>在 Issue 详情中确认任务后，即可生成并保存完成指南。</p>
-          <el-button type="primary" @click="switchTab('discover')">选择一个 Issue</el-button>
-        </section>
-        <div v-else class="guide-workspace">
-          <section class="guide-list">
-            <header>
-              <div><strong>{{ guides.length }}</strong><span>份已保存指南</span></div>
-              <small>选择一份，在右侧连续阅读</small>
-            </header>
-            <button
-              v-for="guide in guides"
-              :key="guide.id"
-              type="button"
-              :class="{ active: currentGuide?.id === guide.id }"
-              @click="openGuide(guide.id)"
-            >
-              <DocumentChecked />
-              <span>
-                <strong>{{ guide.issueTitle }}</strong>
-                <small>{{ guide.repositoryFullName }} · {{ formatTime(guide.updateTime) }}</small>
-              </span>
-              <ArrowRight />
-            </button>
-          </section>
-          <section class="guide-reader" aria-live="polite">
-            <AnalysisProgress
-              v-if="guideLoading"
-              :active="guideLoading"
-              title="正在打开贡献指南"
-              message="正在整理指南内容和结项检查事项。"
-            />
-            <div v-else-if="guideError" class="inline-error">
-              <Warning /><span>{{ guideError }}</span>
+        <template v-else>
+          <section v-if="jobCandidates.length" class="guide-generator">
+            <div class="guide-generator-copy">
+              <span class="generator-icon"><EditPen /></span>
+              <div>
+                <strong>为候选 Issue 生成指南</strong>
+                <p>可直接选择已加入候选或 AI 匹配出的 Issue，无需返回发现页。</p>
+              </div>
             </div>
-            <div v-else-if="currentGuide" class="markdown-body" v-html="renderMarkdown(currentGuide.content)"></div>
-            <div v-else class="feedback-state compact">
-              <Reading /><h4>选择一份指南开始阅读</h4><p>阅读位置会保持在当前工作台中。</p>
+            <div class="guide-generator-controls">
+              <el-select
+                v-model="guideTargetId"
+                filterable
+                placeholder="选择一个候选 Issue"
+                aria-label="选择要生成指南的 Issue"
+              >
+                <el-option
+                  v-for="issue in jobCandidates"
+                  :key="issue.id"
+                  :label="`${guideSourceLabel(issue)} · ${issueTitle(issue)}`"
+                  :value="Number(issue.id)"
+                />
+              </el-select>
+              <el-button
+                type="primary"
+                :disabled="!guideTarget || !pricingReady"
+                :loading="guideGenerating"
+                @click="generateGuideFor(guideTarget)"
+              >
+                生成贡献指南 · {{ priceText(config.guideCost) }}
+              </el-button>
+            </div>
+            <div v-if="guideTarget" class="guide-target-preview">
+              <span>{{ guideSourceLabel(guideTarget) }}</span>
+              <strong>{{ issueTitle(guideTarget) }}</strong>
+              <small>{{ guideTarget.repositoryFullName || 'GitHub Issue' }} · {{ difficultyText(guideTarget.difficulty) }}</small>
             </div>
           </section>
-        </div>
+
+          <section v-if="!jobCandidates.length && !guides.length" class="feedback-state">
+            <DocumentChecked />
+            <h4>还没有候选 Issue</h4>
+            <p>先加入至少一个候选，之后就能在这里直接选择并生成指南。</p>
+            <el-button type="primary" @click="switchTab('discover')">前往发现 Issue</el-button>
+          </section>
+
+          <section v-else-if="!guides.length" class="guide-first-empty">
+            <DocumentChecked />
+            <div>
+              <h4>选择上方 Issue，生成第一份贡献指南</h4>
+              <p>指南将整理复现、最小修改、测试、提交 PR 和结项检查事项。</p>
+            </div>
+          </section>
+
+          <div v-else class="guide-workspace">
+            <section class="guide-list">
+              <header>
+                <div><strong>{{ guides.length }}</strong><span>份已保存指南</span></div>
+                <small>选择一份，在右侧连续阅读</small>
+              </header>
+              <button
+                v-for="guide in guides"
+                :key="guide.id"
+                type="button"
+                :class="{ active: currentGuide?.id === guide.id }"
+                @click="openGuide(guide.id)"
+              >
+                <DocumentChecked />
+                <span>
+                  <strong>{{ guide.issueTitle }}</strong>
+                  <small>{{ guide.repositoryFullName }} · {{ formatTime(guide.updateTime) }}</small>
+                </span>
+                <ArrowRight />
+              </button>
+            </section>
+            <section class="guide-reader" aria-live="polite">
+              <AnalysisProgress
+                v-if="guideLoading"
+                :active="guideLoading"
+                title="正在打开贡献指南"
+                message="正在整理指南内容和结项检查事项。"
+              />
+              <div v-else-if="guideError" class="inline-error">
+                <Warning /><span>{{ guideError }}</span>
+              </div>
+              <div v-else-if="currentGuide" class="markdown-body" v-html="renderMarkdown(currentGuide.content)"></div>
+              <div v-else class="feedback-state compact">
+                <Reading /><h4>选择一份指南开始阅读</h4><p>阅读位置会保持在当前工作台中。</p>
+              </div>
+            </section>
+          </div>
+        </template>
       </template>
     </main>
 
@@ -463,7 +512,7 @@
             type="primary"
             :disabled="!pricingReady"
             :loading="guideGenerating"
-            @click="generateGuide"
+            @click="generateGuideFor(detail)"
           >
             生成指南 · {{ priceText(config.guideCost) }}
           </el-button>
@@ -508,6 +557,7 @@ const detail = ref(null)
 const currentGuide = ref(null)
 const recommendedIssueId = ref(null)
 const jobTarget = ref(null)
+const guideTargetId = ref(null)
 const detailId = ref(null)
 const page = ref(1)
 const total = ref(0)
@@ -554,6 +604,7 @@ const jobCandidates = computed(() => {
   matches.value.map(item => item.issue).filter(Boolean).forEach(issue => byId.set(Number(issue.id), issue))
   return [...byId.values()]
 })
+const guideTarget = computed(() => jobCandidates.value.find(issue => Number(issue.id) === Number(guideTargetId.value)) || null)
 const candidateSourceText = computed(() => selectedIds.value.length >= 3
   ? `将比较你保留的 ${selectedIds.value.length} 个候选 Issue。`
   : '候选不足 3 项时，将结合当前筛选条件寻找合适任务。')
@@ -571,7 +622,8 @@ const stageTourSteps = {
     { selector: '.job-workspace, .feedback-state', text: '选择一个候选 Issue，理解它对应的岗位方向和学习重点。', expression: 'wink' },
   ],
   guides: [
-    { selector: '.guide-workspace, .feedback-state', text: '指南采用列表加阅读区布局，方便连续查看和执行。', expression: 'smile' },
+    { selector: '.guide-generator, .feedback-state', text: '直接从候选或 AI 匹配结果中选择 Issue，并在当前页面生成指南。', expression: 'sparkle' },
+    { selector: '.guide-workspace, .guide-first-empty', text: '已生成的指南采用列表加阅读区布局，方便连续查看和执行。', expression: 'smile' },
   ],
 }
 const tourSteps = computed(() => [
@@ -729,12 +781,18 @@ const runJobMatchFor = async issue => {
 
 const runJobMatch = () => runJobMatchFor(detail.value)
 
-const generateGuide = async () => {
-  if (!detail.value?.id) return
+const guideSourceLabel = issue => {
+  if (Number(issue?.id) === Number(recommendedIssueId.value)) return 'AI 优先推荐'
+  if (matches.value.some(item => Number(item.issue?.id) === Number(issue?.id))) return 'AI 匹配'
+  return '已加入候选'
+}
+
+const generateGuideFor = async issue => {
+  if (!issue?.id) return
   if (!(await confirmCharge('生成贡献指南', config.value.guideCost))) return
   guideGenerating.value = true
   try {
-    const response = await request.post(`/app/open-source/issues/${detail.value.id}/guide`, {}, { timeout: 150000 })
+    const response = await request.post(`/app/open-source/issues/${issue.id}/guide`, {}, { timeout: 150000 })
     if (!requestOk(response)) throw new Error(responseMessage(response, 'AI 未返回贡献指南'))
     currentGuide.value = response.data?.guide
     detailOpen.value = false
@@ -794,6 +852,16 @@ watch(() => route.query.tab, value => {
 watch(() => route.query.issue, value => {
   if (value) openIssue(value)
 })
+
+watch(jobCandidates, items => {
+  if (!items.length) {
+    guideTargetId.value = null
+    return
+  }
+  if (items.some(issue => Number(issue.id) === Number(guideTargetId.value))) return
+  const preferred = items.find(issue => Number(issue.id) === Number(recommendedIssueId.value)) || items[0]
+  guideTargetId.value = Number(preferred.id)
+}, { immediate: true })
 
 onMounted(async () => {
   if (validTabs.has(route.query.tab)) activeTab.value = route.query.tab
@@ -1259,6 +1327,112 @@ onMounted(async () => {
   color: #92400e;
   line-height: 1.6;
 }
+.guide-generator {
+  display: grid;
+  grid-template-columns: minmax(250px, .8fr) minmax(360px, 1.15fr);
+  gap: 16px 24px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid var(--border-orange);
+  border-radius: 8px;
+  background: var(--brand-light);
+}
+.guide-generator-copy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.generator-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--brand-strong);
+}
+.generator-icon :deep(svg) {
+  width: 18px;
+}
+.guide-generator-copy strong,
+.guide-generator-copy p {
+  display: block;
+}
+.guide-generator-copy strong {
+  font-size: 14px;
+}
+.guide-generator-copy p {
+  margin: 5px 0 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.guide-generator-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+.guide-generator-controls :deep(.el-button) {
+  min-height: 40px;
+}
+.guide-target-preview {
+  display: grid;
+  grid-column: 2;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 9px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(243, 112, 33, .18);
+}
+.guide-target-preview > span {
+  grid-row: 1 / 3;
+  align-self: start;
+  padding: 5px 7px;
+  border: 1px solid var(--border-orange);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--brand-strong);
+  font-size: 10px;
+  font-weight: 800;
+}
+.guide-target-preview strong {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.guide-target-preview small {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+.guide-first-empty {
+  display: flex;
+  min-height: 190px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 26px;
+  border: 1px dashed var(--border-orange);
+  border-radius: 8px;
+  background: #fff;
+}
+.guide-first-empty > :deep(svg) {
+  width: 34px;
+  color: var(--brand-strong);
+}
+.guide-first-empty h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.guide-first-empty p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+}
 .guide-workspace {
   display: grid;
   grid-template-columns: minmax(280px, .72fr) minmax(0, 1.35fr);
@@ -1520,6 +1694,12 @@ onMounted(async () => {
   .job-workspace {
     grid-template-columns: 1fr;
   }
+  .guide-generator {
+    grid-template-columns: 1fr;
+  }
+  .guide-target-preview {
+    grid-column: 1;
+  }
   .match-form,
   .job-targets {
     padding-right: 0;
@@ -1573,6 +1753,9 @@ onMounted(async () => {
   }
   .advanced-filters {
     grid-column: auto;
+  }
+  .guide-generator-controls {
+    grid-template-columns: 1fr;
   }
   .guide-list {
     max-height: 330px;
