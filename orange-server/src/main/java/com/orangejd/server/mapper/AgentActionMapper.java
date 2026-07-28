@@ -1,6 +1,7 @@
 package com.orangejd.server.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -135,4 +136,11 @@ public interface AgentActionMapper {
             WHERE status IN ('QUEUED', 'RUNNING')
             """)
     int markInterruptedAfterRestart();
+
+    @Delete("""
+            DELETE FROM agent_action_task
+            WHERE id = #{id} AND account_id = #{accountId}
+              AND status IN ('SUCCEEDED', 'FAILED', 'CANCELLED', 'EXPIRED')
+            """)
+    int deleteTerminalByAccount(@Param("id") String id, @Param("accountId") Long accountId);
 }

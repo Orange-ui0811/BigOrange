@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.orangejd.common.exception.BaseException;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doAnswer;
@@ -203,5 +205,21 @@ class AgentActionServiceTest {
                 String.valueOf(stored.get().get("parametersJson")), Map.class);
         assertEquals("第一阶段方案内容", parameters.get("prevContents"));
         assertEquals("设计一个面向开发者的协作平台", parameters.get("summary"));
+    }
+
+    @Test
+    void deletesOnlyOwnedTerminalTask() {
+        when(mapper.deleteTerminalByAccount("task-1", 7L)).thenReturn(1);
+
+        service.deleteHistory(7L, "task-1");
+
+        verify(mapper).deleteTerminalByAccount("task-1", 7L);
+    }
+
+    @Test
+    void rejectsDeletingRunningOrForeignTask() {
+        when(mapper.deleteTerminalByAccount("task-1", 7L)).thenReturn(0);
+
+        assertThrows(BaseException.class, () -> service.deleteHistory(7L, "task-1"));
     }
 }

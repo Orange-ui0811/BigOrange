@@ -3,12 +3,20 @@
 <mapper namespace="com.orangejd.server.mapper.TrendHistoryMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO trend_history (account_id, topics, purpose, experience, languages, time_commitment, result_json)
-        VALUES (#{accountId}, #{topics}, #{purpose}, #{experience}, #{languages}, #{timeCommitment}, #{resultJson})
+        INSERT INTO trend_history (
+            account_id, topics, purpose, experience, languages, time_commitment,
+            custom_topics, custom_purpose, custom_exp, custom_lang, custom_time, use_rag, result_json
+        )
+        VALUES (
+            #{accountId}, #{topics}, #{purpose}, #{experience}, #{languages}, #{timeCommitment},
+            #{customTopics}, #{customPurpose}, #{customExp}, #{customLang}, #{customTime}, #{useRag}, #{resultJson}
+        )
     </insert>
 
     <select id="selectByBrowserId" resultType="com.orangejd.pojo.entity.TrendHistory">
-        SELECT id, account_id, topics, purpose, experience, languages, time_commitment, result_json, create_time
+        SELECT id, account_id, topics, purpose, experience, languages, time_commitment,
+               custom_topics, custom_purpose, custom_exp, custom_lang, custom_time, use_rag,
+               result_json, create_time
         FROM trend_history WHERE account_id = #{accountId}
         ORDER BY id DESC LIMIT #{limit}
     </select>

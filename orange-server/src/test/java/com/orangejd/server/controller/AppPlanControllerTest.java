@@ -5,6 +5,8 @@ import com.orangejd.server.controller.app.AppPlanController;
 import com.orangejd.server.mapper.PlanHistoryMapper;
 import com.orangejd.server.service.PlanGenerationService;
 import com.orangejd.server.service.PricingService;
+import com.orangejd.server.service.AiRecordMetrics;
+import com.orangejd.common.exception.BaseException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -13,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -31,6 +34,7 @@ class AppPlanControllerTest {
         PlanHistoryMapper mapper = mock(PlanHistoryMapper.class);
         AppPlanController controller = new AppPlanController();
         ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
+        ReflectionTestUtils.setField(controller, "recordMetrics", mock(AiRecordMetrics.class));
         BaseContext.setCurrentId(7L);
 
         Map<String, Object> captured = new LinkedHashMap<>();
@@ -53,7 +57,21 @@ class AppPlanControllerTest {
 
         assertEquals("任务计划", captured.get("phase5"));
         assertEquals("岗位匹配", captured.get("phase6"));
+        assertEquals(64, String.valueOf(captured.get("contentHash")).length());
         verify(mapper).insert(any());
+    }
+
+    @Test
+    void rejectsOversizedSummaryBeforeDatabaseWrite() {
+        PlanHistoryMapper mapper = mock(PlanHistoryMapper.class);
+        AppPlanController controller = new AppPlanController();
+        ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
+        ReflectionTestUtils.setField(controller, "recordMetrics", mock(AiRecordMetrics.class));
+        BaseContext.setCurrentId(7L);
+
+        assertThrows(BaseException.class, () -> controller.saveHistory(
+                Map.of("summary", "x".repeat(10_001))));
+        verify(mapper, org.mockito.Mockito.never()).insert(any());
     }
 
     @Test

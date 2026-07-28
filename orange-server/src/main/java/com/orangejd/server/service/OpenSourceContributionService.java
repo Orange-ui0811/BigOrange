@@ -203,6 +203,12 @@ public class OpenSourceContributionService {
         return guide;
     }
 
+    public void deleteGuide(Long accountId, Long id) {
+        if (mapper.deleteGuideOwned(id, accountId) != 1) {
+            throw new BaseException("指南不存在");
+        }
+    }
+
     public Map<String, Object> adminOverview(int page, int size, String keyword,
                                              Integer published, String translationStatus) {
         int safePage = Math.max(1, page);

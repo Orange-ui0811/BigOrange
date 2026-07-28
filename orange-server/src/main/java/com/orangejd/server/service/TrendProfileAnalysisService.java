@@ -6,10 +6,12 @@ import com.orangejd.pojo.entity.TrendHistory;
 import com.orangejd.server.mapper.TrendHistoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ public class TrendProfileAnalysisService {
     private final TrendHistoryMapper trendHistoryMapper;
     private final PricingService pricingService;
     private final ObjectMapper objectMapper;
+    @Autowired(required = false)
+    private AiRecordMetrics recordMetrics;
 
     public TrendProfileAnalysisService(TrendAnalysisService trendAnalysisService,
                                        TrendHistoryMapper trendHistoryMapper,
@@ -49,7 +53,7 @@ public class TrendProfileAnalysisService {
             throw new BaseException("趋势分析画像信息不完整");
         }
 
-        Map<String, Object> result = trendAnalysisService.analyzeV2(
+        Map<String, Object> analysis = trendAnalysisService.analyzeV2(
                 topics, purpose, experience, languages, timeCommitment,
                 text(parameters.get("customTopics"), 200),
                 text(parameters.get("customPurpose"), 200),
@@ -57,29 +61,43 @@ public class TrendProfileAnalysisService {
                 text(parameters.get("customLang"), 200),
                 text(parameters.get("customTime"), 200),
                 !Boolean.FALSE.equals(parameters.get("useRag")));
-        if (result.containsKey("error")) {
-            throw new BaseException(String.valueOf(result.get("error")));
+        if (analysis.containsKey("error")) {
+            throw new BaseException(String.valueOf(analysis.get("error")));
         }
-        saveHistory(accountId, topics, purpose, experience, languages, timeCommitment, result);
+        Map<String, Object> result = new LinkedHashMap<>(analysis);
+        Long historyId = saveHistory(accountId, topics, purpose, experience, languages,
+                timeCommitment, parameters, result);
+        result.put("historySaved", historyId != null);
+        if (historyId != null) result.put("historyId", historyId);
         return result;
     }
 
-    private void saveHistory(Long accountId, List<String> topics, String purpose,
-                             String experience, List<String> languages,
-                             String timeCommitment, Map<String, Object> result) {
-        if (accountId == null || accountId <= 0) return;
+    private Long saveHistory(Long accountId, List<String> topics, String purpose,
+                             String experience, List<String> languages, String timeCommitment,
+                             Map<String, Object> parameters, Map<String, Object> result) {
+        if (accountId == null || accountId <= 0) return null;
         try {
             TrendHistory history = new TrendHistory();
             history.setAccountId(accountId);
-            history.setTopics(String.join(",", topics));
+            history.setTopics(objectMapper.writeValueAsString(topics));
             history.setPurpose(purpose);
             history.setExperience(experience);
-            history.setLanguages(String.join(",", languages));
+            history.setLanguages(objectMapper.writeValueAsString(languages));
             history.setTimeCommitment(timeCommitment);
+            history.setCustomTopics(text(parameters.get("customTopics"), 200));
+            history.setCustomPurpose(text(parameters.get("customPurpose"), 200));
+            history.setCustomExp(text(parameters.get("customExp"), 200));
+            history.setCustomLang(text(parameters.get("customLang"), 200));
+            history.setCustomTime(text(parameters.get("customTime"), 200));
+            history.setUseRag(!Boolean.FALSE.equals(parameters.get("useRag")));
             history.setResultJson(objectMapper.writeValueAsString(result));
             trendHistoryMapper.insert(history);
+            if (recordMetrics != null) recordMetrics.success("trend", "save");
+            return history.getId();
         } catch (Exception e) {
-            log.warn("设备趋势分析已生成，但保存历史记录失败: accountId={}", accountId, e);
+            if (recordMetrics != null) recordMetrics.failure("trend", "save");
+            log.error("AI_RECORD_SAVE_FAILED type=trend accountId={}", accountId, e);
+            return null;
         }
     }
 

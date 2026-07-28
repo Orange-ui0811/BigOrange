@@ -197,6 +197,13 @@ public class AgentActionService {
         return tasks;
     }
 
+    public void deleteHistory(Long accountId, String taskId) {
+        if (!StringUtils.hasText(taskId)
+                || mapper.deleteTerminalByAccount(taskId, accountId) != 1) {
+            throw new BaseException("任务不存在、尚未结束或无权删除");
+        }
+    }
+
     @PreDestroy
     public void shutdown() { executor.shutdownNow(); }
 

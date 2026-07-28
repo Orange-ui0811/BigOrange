@@ -408,20 +408,27 @@
                 <div><strong>{{ guides.length }}</strong><span>份已保存指南</span></div>
                 <small>选择一份，在右侧连续阅读</small>
               </header>
-              <button
+              <article
                 v-for="guide in guides"
                 :key="guide.id"
-                type="button"
+                class="guide-entry"
                 :class="{ active: currentGuide?.id === guide.id }"
+                role="button"
+                tabindex="0"
                 @click="openGuide(guide.id)"
+                @keydown.enter.prevent="openGuide(guide.id)"
               >
                 <DocumentChecked />
                 <span>
                   <strong>{{ guide.issueTitle }}</strong>
                   <small>{{ guide.repositoryFullName }} · {{ formatTime(guide.updateTime) }}</small>
                 </span>
-                <ArrowRight />
-              </button>
+                <button class="guide-delete" type="button" title="删除指南"
+                  :disabled="guideDeletingId === guide.id"
+                  @click.stop="deleteGuide(guide)">
+                  <Delete />
+                </button>
+              </article>
             </section>
             <section class="guide-reader" aria-live="polite">
               <AnalysisProgress
@@ -549,6 +556,7 @@ const jobMatching = ref(false)
 const guideGenerating = ref(false)
 const guidesLoading = ref(false)
 const guideLoading = ref(false)
+const guideDeletingId = ref(null)
 const issues = ref([])
 const matches = ref([])
 const guides = ref([])
@@ -832,6 +840,22 @@ const openGuide = async id => {
     guideError.value = error?.message || '请稍后重试'
   } finally {
     guideLoading.value = false
+  }
+}
+
+const deleteGuide = async guide => {
+  if (guideDeletingId.value) return
+  await ElMessageBox.confirm(`删除“${guide.issueTitle || '这份指南'}”？删除后无法恢复。`,
+    '删除贡献指南', { type: 'warning' })
+  guideDeletingId.value = guide.id
+  try {
+    await request.delete(`/app/open-source/guides/${guide.id}`)
+    if (currentGuide.value?.id === guide.id) currentGuide.value = null
+    await loadGuides(false)
+    if (!currentGuide.value && guides.value.length) await openGuide(guides.value[0].id)
+    ElMessage.success('贡献指南已删除')
+  } finally {
+    guideDeletingId.value = null
   }
 }
 
@@ -1247,7 +1271,7 @@ onMounted(async () => {
   width: 14px;
 }
 .job-targets > button,
-.guide-list > button {
+.guide-entry {
   display: grid;
   width: 100%;
   min-height: 74px;
@@ -1270,7 +1294,7 @@ onMounted(async () => {
   line-height: 1.45;
 }
 .job-targets > button small,
-.guide-list > button small {
+.guide-entry small {
   color: var(--text-muted);
   font-size: 10px;
 }
@@ -1467,28 +1491,46 @@ onMounted(async () => {
   margin-top: 5px;
   color: var(--text-muted);
 }
-.guide-list > button {
+.guide-entry {
   grid-template-columns: 24px minmax(0, 1fr) 15px;
   padding: 12px 15px;
 }
-.guide-list > button.active {
+.guide-entry.active {
   box-shadow: inset 3px 0 0 var(--brand);
   background: #fff;
 }
-.guide-list > button > :deep(svg) {
+.guide-entry > :deep(svg) {
   width: 17px;
   color: var(--brand-strong);
 }
-.guide-list > button span strong,
-.guide-list > button span small {
+.guide-entry span strong,
+.guide-entry span small {
   display: block;
 }
-.guide-list > button span strong {
+.guide-entry span strong {
   font-size: 12px;
   line-height: 1.5;
 }
-.guide-list > button span small {
+.guide-entry span small {
   margin-top: 4px;
+}
+.guide-delete {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.guide-delete:hover {
+  color: var(--el-color-danger);
+}
+.guide-delete:disabled {
+  cursor: wait;
+  opacity: .45;
 }
 .guide-reader {
   min-width: 0;

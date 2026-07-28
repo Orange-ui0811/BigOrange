@@ -5,6 +5,7 @@ import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.result.Result;
 import com.orangejd.server.service.OpenSourceContributionService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,6 +70,12 @@ public class AppOpenSourceController {
     @GetMapping("/guides/{id}")
     public Result<?> guideDetail(@PathVariable Long id) {
         return Result.success(service.guide(requireAccountId(), id));
+    }
+
+    @DeleteMapping("/guides/{id}")
+    public Result<?> deleteGuide(@PathVariable Long id) {
+        service.deleteGuide(requireAccountId(), id);
+        return Result.success();
     }
 
     private Long requireAccountId() {

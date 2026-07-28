@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doAnswer;
 
 class TrendProfileAnalysisServiceTest {
 
@@ -31,6 +33,11 @@ class TrendProfileAnalysisServiceTest {
                 eq(List.of("Python")), eq("每周5小时"),
                 eq(""), eq(""), eq(""), eq(""), eq(""), eq(true)))
                 .thenReturn(analysis);
+        doAnswer(invocation -> {
+            TrendHistory history = invocation.getArgument(0);
+            history.setId(31L);
+            return 1;
+        }).when(historyMapper).insert(any(TrendHistory.class));
 
         Map<String, Object> result = service.analyze(7L, Map.of(
                 "topics", List.of("AI智能体"),
@@ -40,7 +47,9 @@ class TrendProfileAnalysisServiceTest {
                 "timeCommitment", "每周5小时",
                 "useRag", true));
 
-        assertEquals(analysis, result);
+        assertEquals(analysis.get("recommendations"), result.get("recommendations"));
+        assertTrue((Boolean) result.get("historySaved"));
+        assertEquals(31L, result.get("historyId"));
         verify(historyMapper).insert(any(TrendHistory.class));
     }
 }

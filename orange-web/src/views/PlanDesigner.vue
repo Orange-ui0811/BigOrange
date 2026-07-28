@@ -20,6 +20,8 @@
               </div>
               <el-button size="small" text type="danger" @click.stop="delPlanHistory(i,h.id)">✕</el-button>
             </div>
+            <el-button v-if="planHistory.length" class="history-clear" text type="danger"
+              @click="clearPlanHistory">清空全部记录</el-button>
           </div>
         </el-popover>
       </div>
@@ -39,7 +41,9 @@
       </div>
 
       <div v-if="allDone && hasToken" class="save-row">
-        <button class="orange-btn save-btn" @click="savePlan">保存方案到我的记录</button>
+        <button class="orange-btn save-btn" :disabled="planSaving" @click="savePlan">
+          {{ planSaving ? '保存中…' : '保存方案到我的记录' }}
+        </button>
       </div>
 
       <div class="phase-content">
@@ -287,14 +291,19 @@ const importToLaunchCheck = () => {
 
 const hasToken = computed(() => !!sessionStorage.getItem('appToken'))
 const planHistory = ref([])
+const planSaving = ref(false)
 const allDone = computed(() => phases.slice(0,5).every(p => p.done))
 
 const loadPlanHistory = async () => {
   if (!hasToken.value) return
-  try { const r = await request.get('/app/plan/history'); if (r.code === 1) planHistory.value = r.data } catch {}
+  try {
+    const r = await request.get('/app/plan/history', { params: { limit: 200 } })
+    if (r.code === 1) planHistory.value = r.data
+  } catch {}
 }
 const savePlan = async () => {
-  if (!hasToken.value || !allDone.value) return
+  if (!hasToken.value || !allDone.value || planSaving.value) return
+  planSaving.value = true
   try {
     const response = await request.post('/app/plan/history/save', {
       summary: summary.value, phase1: phases[0].content, phase2: phases[1].content,
@@ -305,6 +314,7 @@ const savePlan = async () => {
     await loadPlanHistory()
     ElMessage.success('方案已保存')
   } catch { ElMessage.error('保存失败') }
+  finally { planSaving.value = false }
 }
 const loadPlan = (h) => {
   summary.value = h.summary || ''
@@ -323,10 +333,20 @@ const loadPlan = (h) => {
   currentPhase.value = 1
 }
 const delPlanHistory = async (i, id) => {
-  try { await request.delete('/app/plan/history/' + id); loadPlanHistory() } catch {}
+  try {
+    await request.delete('/app/plan/history/' + id)
+    await loadPlanHistory()
+  } catch {}
 }
 const clearPlanHistory = async () => {
-  try { await request.delete('/app/plan/history/clear'); planHistory.value = [] } catch {}
+  try {
+    await ElMessageBox.confirm('清空后无法恢复全部方案记录。', '清空方案记录', { type: 'warning' })
+    await request.delete('/app/plan/history/clear')
+    planHistory.value = []
+    ElMessage.success('方案记录已清空')
+  } catch (error) {
+    if (error !== 'cancel' && error !== 'close') ElMessage.error('清空失败')
+  }
 }
 
 onMounted(async () => {

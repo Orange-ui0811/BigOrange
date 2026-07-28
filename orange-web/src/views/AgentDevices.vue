@@ -82,6 +82,8 @@
           <b>{{ task.quotaCost || 0 }} 点</b>
           <span>{{ formatTime(task.createTime) }}</span>
           <el-button v-if="task.result" link type="primary" @click="showResult(task)">查看结果</el-button>
+          <el-button v-if="terminalStatuses.includes(task.status)" link type="danger"
+            @click="removeTask(task)">删除记录</el-button>
         </div>
       </article>
     </section>
@@ -102,7 +104,9 @@
 import { computed, onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { ArrowLeft, Connection as Link, CopyDocument, Delete, Monitor, Refresh } from '@element-plus/icons-vue'
-import { createAgentLinkCode, listAgentDevices, listAgentTasks, revokeAgentDevice } from '../api/agentDevices'
+import {
+  createAgentLinkCode, deleteAgentTask, listAgentDevices, listAgentTasks, revokeAgentDevice
+} from '../api/agentDevices'
 
 const deviceName = ref('小智客户端')
 const linkCode = ref(null)
@@ -113,6 +117,7 @@ const loading = ref(false)
 const tasksLoading = ref(false)
 const resultVisible = ref(false)
 const selectedTask = ref(null)
+const terminalStatuses = ['SUCCEEDED', 'FAILED', 'CANCELLED', 'EXPIRED']
 const configuredApiBase = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const agentBaseUrl = new URL(configuredApiBase, window.location.origin).toString().replace(/\/$/, '')
 const agentBase = new URL(agentBaseUrl)
@@ -156,6 +161,14 @@ const revoke = async (device) => {
   await revokeAgentDevice(device.id)
   ElMessage.success('设备授权已撤销')
   loadDevices()
+}
+
+const removeTask = async (task) => {
+  await ElMessageBox.confirm('删除后将无法在网页中恢复这条任务记录。', '删除任务记录', { type: 'warning' })
+  await deleteAgentTask(task.id)
+  if (selectedTask.value?.id === task.id) resultVisible.value = false
+  await loadTasks()
+  ElMessage.success('任务记录已删除')
 }
 
 const statusLabels = {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
@@ -34,8 +35,8 @@ public class AppLaunchCheckController {
     }
 
     @GetMapping("/projects")
-    public Result<?> history() {
-        return Result.success(service.history(requireAccountId()));
+    public Result<?> history(@RequestParam(defaultValue = "100") int limit) {
+        return Result.success(service.history(requireAccountId(), limit));
     }
 
     @GetMapping("/projects/{id}")

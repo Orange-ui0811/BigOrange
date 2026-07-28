@@ -80,6 +80,22 @@ class OpenSourceContributionServiceTest {
                 eq("开源 Issue 匹配失败退款"));
     }
 
+    @Test
+    void deletesOnlyOwnedGuide() {
+        when(mapper.deleteGuideOwned(21L, 7L)).thenReturn(1);
+
+        service.deleteGuide(7L, 21L);
+
+        verify(mapper).deleteGuideOwned(21L, 7L);
+    }
+
+    @Test
+    void rejectsMissingOrForeignGuideDelete() {
+        when(mapper.deleteGuideOwned(21L, 7L)).thenReturn(0);
+
+        assertThrows(BaseException.class, () -> service.deleteGuide(7L, 21L));
+    }
+
     private Map<String, Object> issue(Long id) {
         Map<String, Object> issue = new LinkedHashMap<>();
         issue.put("id", id);

@@ -342,4 +342,9 @@
         JOIN open_source_repository r ON r.id = i.repository_id
         WHERE g.id = #{id} AND g.account_id = #{accountId}
     </select>
+
+    <delete id="deleteGuideOwned">
+        DELETE FROM open_source_guide
+        WHERE id = #{id} AND account_id = #{accountId}
+    </delete>
 </mapper>

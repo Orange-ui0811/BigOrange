@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
@@ -39,8 +40,14 @@ public class AppAgentDeviceController {
     }
 
     @GetMapping("/tasks")
-    public Result<?> tasks() {
-        return Result.success(actionService.history(accountId(), 30));
+    public Result<?> tasks(@RequestParam(defaultValue = "100") int limit) {
+        return Result.success(actionService.history(accountId(), limit));
+    }
+
+    @DeleteMapping("/tasks/{id}")
+    public Result<?> deleteTask(@PathVariable String id) {
+        actionService.deleteHistory(accountId(), id);
+        return Result.success();
     }
 
     @DeleteMapping("/{id}")

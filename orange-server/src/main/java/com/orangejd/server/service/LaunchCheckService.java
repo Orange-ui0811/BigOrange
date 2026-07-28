@@ -108,7 +108,11 @@ public class LaunchCheckService {
     }
 
     public List<Map<String, Object>> history(Long accountId) {
-        return mapper.selectByAccountId(accountId, 30);
+        return history(accountId, 30);
+    }
+
+    public List<Map<String, Object>> history(Long accountId, int limit) {
+        return mapper.selectByAccountId(accountId, Math.max(1, Math.min(limit, 200)));
     }
 
     public Map<String, Object> detail(Long accountId, Long id) {

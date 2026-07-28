@@ -223,7 +223,7 @@ const loadConfig = async () => {
 const loadHistory = async () => {
   historyLoading.value = true
   try {
-    const response = await request.get('/app/launch-check/projects')
+    const response = await request.get('/app/launch-check/projects', { params: { limit: 200 } })
     if (response.code === 1) history.value = response.data || []
   } finally { historyLoading.value = false }
 }

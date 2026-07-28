@@ -144,7 +144,7 @@
                 <div v-if="!history.length" class="history-empty">暂无记录</div>
                 <div v-for="(h,i) in history" :key="i" class="history-item" @click="loadHistory(h)">
                   <div class="history-item-text">
-                    <span class="history-topic">{{ (Array.isArray(h.topics) ? h.topics.join('、') : String(h.topics||'全部').replace(/[\[\"]/g,'')) }}</span>
+                    <span class="history-topic">{{ Array.isArray(h.topics) && h.topics.length ? h.topics.join('、') : '全部' }}</span>
                     <span class="history-time">{{ (h.time||'').substring(0,16) }}</span>
                   </div>
                   <el-button size="small" text type="danger" @click.stop="delHistory(i)">✕</el-button>
@@ -465,32 +465,43 @@ const history = ref([])
 
 const loadHistoryFromDB = async () => {
   if (!hasAppToken.value) return
-  try { const r = await request.get('/app/trend/history'); if (r.code === 1) history.value = r.data.map(h => ({ ...h, time: h.createTime, result: typeof h.result === 'string' ? JSON.parse(h.result) : h.result })) } catch {}
-}
-const saveToHistory = async () => {
-  if (!v2Result.value || !hasAppToken.value) return
   try {
-    await request.post('/app/trend/history/save', {
-      topics: profile.topics, purpose: profile.purpose, experience: profile.experience,
-      languages: profile.languages, timeCommitment: profile.timeCommitment,
-      resultString: JSON.stringify(v2Result.value)
-    })
-    loadHistoryFromDB()
-  } catch (e) { console.error('保存历史失败:', e) }
+    const r = await request.get('/app/trend/history', { params: { limit: 200 } })
+    if (r.code === 1) history.value = (r.data || []).map(h => ({ ...h, time: h.createTime }))
+  } catch { ElMessage.error('趋势记录加载失败，请稍后重试') }
 }
 const delHistory = async (i) => {
-  try { await request.delete('/app/trend/history/' + history.value[i].id); loadHistoryFromDB() } catch {}
+  try {
+    const response = await request.delete('/app/trend/history/' + history.value[i].id)
+    if (response.code === 1) await loadHistoryFromDB()
+  } catch { ElMessage.error('删除记录失败') }
 }
 const clearHistory = async () => {
-  try { await request.delete('/app/trend/history/clear'); history.value = [] } catch {}
+  try {
+    await ElMessageBox.confirm('清空全部趋势分析记录？此操作不可撤销。', '清空记录', {
+      type: 'warning', confirmButtonText: '清空', cancelButtonText: '取消'
+    })
+    const response = await request.delete('/app/trend/history/clear')
+    if (response.code === 1) history.value = []
+  } catch {}
 }
 const loadHistory = (h) => {
+  if (h.corrupted || !h.result) {
+    ElMessage.error('这条历史记录已损坏，无法恢复；你仍可单独删除它')
+    return
+  }
   v2Result.value = h.result
-  profile.topics = h.topics || []
+  profile.topics = Array.isArray(h.topics) ? h.topics : []
   profile.purpose = h.purpose || ''
   profile.experience = h.experience || ''
-  profile.languages = h.languages || []
+  profile.languages = Array.isArray(h.languages) ? h.languages : []
   profile.timeCommitment = h.timeCommitment || ''
+  profile.customTopics = h.customTopics || ''
+  profile.customPurpose = h.customPurpose || ''
+  profile.customExp = h.customExp || ''
+  profile.customLang = h.customLang || ''
+  profile.customTime = h.customTime || ''
+  profile.useRag = h.useRag !== false
   currentStep.value = 3
 }
 
@@ -527,7 +538,11 @@ const startJuicing = async () => {
     }, { timeout: 0 })
     if (r.code === 1 && r.data) {
       v2Result.value = r.data
-      setTimeout(() => saveToHistory(), 500)
+      if (r.data.historySaved === false) {
+        ElMessage.warning('分析已完成，但历史记录暂未保存，请复制结果后稍后重试')
+      } else {
+        await loadHistoryFromDB()
+      }
     } else {
       v2Error.value = r.msg || '分析失败'
     }

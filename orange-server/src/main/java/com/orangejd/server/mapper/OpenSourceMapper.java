@@ -56,4 +56,5 @@ public interface OpenSourceMapper {
     int upsertGuide(Map<String, Object> guide);
     List<Map<String, Object>> selectGuidesByAccount(Long accountId);
     Map<String, Object> selectGuideOwned(@Param("id") Long id, @Param("accountId") Long accountId);
+    int deleteGuideOwned(@Param("id") Long id, @Param("accountId") Long accountId);
 }
