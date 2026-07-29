@@ -220,6 +220,8 @@ public class AuthServiceImpl implements AuthService {
         claims.put("id", account.getId());
         claims.put("username", account.getUsername());
         claims.put("role", account.getRole());
+        claims.put("passwordVersion",
+                account.getPasswordVersion() == null ? 0L : account.getPasswordVersion());
         claims.put("tokenType", tokenType);
         claims.put("jti", UUID.randomUUID().toString());
         claims.put("iss", "orangevc");

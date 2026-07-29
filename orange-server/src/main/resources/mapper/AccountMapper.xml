@@ -7,6 +7,7 @@
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
+        <result property="passwordVersion" column="password_version"/>
         <result property="status" column="status"/>
         <result property="phone" column="phone"/>
         <result property="email" column="email"/>
@@ -19,13 +20,13 @@
     </resultMap>
 
     <select id="selectByUsername" resultMap="accountMap">
-        SELECT id, username, password, phone, email, quota, status, role, create_time, update_time
+        SELECT id, username, password, password_version, phone, email, quota, status, role, create_time, update_time
         FROM account
         WHERE username = #{username}
     </select>
 
     <select id="selectById" resultMap="accountMap">
-        SELECT id, username, password, phone, email, quota, status, role, create_time, update_time
+        SELECT id, username, password, password_version, phone, email, quota, status, role, create_time, update_time
         FROM account
         WHERE id = #{id}
     </select>
@@ -37,7 +38,9 @@
 
     <update id="updatePassword">
         UPDATE account
-        SET password = #{password}, update_time = NOW()
+        SET password = #{password},
+            password_version = password_version + 1,
+            update_time = NOW()
         WHERE id = #{id}
     </update>
 
@@ -105,7 +108,7 @@
     <!-- ==================== 配额系统 ==================== -->
 
     <select id="selectByIdForUpdate" resultMap="accountMap">
-        SELECT id, username, password, phone, email, quota, status, role, create_time, update_time
+        SELECT id, username, password, password_version, phone, email, quota, status, role, create_time, update_time
         FROM account WHERE id = #{id} FOR UPDATE
     </select>
 
@@ -122,7 +125,7 @@
     </update>
 
     <select id="selectByEmail" resultMap="accountMap">
-        SELECT id, username, password, phone, email, quota, status, role, create_time, update_time
+        SELECT id, username, password, password_version, phone, email, quota, status, role, create_time, update_time
         FROM account WHERE email = #{email}
     </select>
 </mapper>

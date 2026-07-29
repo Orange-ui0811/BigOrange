@@ -5,6 +5,7 @@ import com.orangejd.common.properties.JwtProperties;
 import com.orangejd.common.utils.JwtUtil;
 import com.orangejd.server.service.TokenBlacklistService;
 import com.orangejd.server.mapper.AccountMapper;
+import com.orangejd.server.security.PasswordSessionVersion;
 import com.orangejd.pojo.entity.Account;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class JwtTokenAppInterceptor implements HandlerInterceptor {
             }
             Long accountId = Long.valueOf(claims.get("id").toString());
             Account account = accountMapper.selectById(accountId);
-            if (account == null || !"ACTIVE".equals(account.getStatus())) {
+            if (account == null || !"ACTIVE".equals(account.getStatus())
+                    || !PasswordSessionVersion.matches(claims, account)) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return false;
             }

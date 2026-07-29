@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Account extends BaseEntity {
     private String username;
     private String password;
+    private Long passwordVersion;
     private String phone;
     private String email;
     private Long quota;
@@ -17,6 +18,8 @@ public class Account extends BaseEntity {
     public void setUsername(String username) { this.username = username; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+    public Long getPasswordVersion() { return passwordVersion; }
+    public void setPasswordVersion(Long passwordVersion) { this.passwordVersion = passwordVersion; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public String getRole() { return role; }
