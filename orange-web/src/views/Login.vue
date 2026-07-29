@@ -72,11 +72,12 @@
 
       <!-- 登录表单 -->
       <form v-if="tab === 'login' && resetStep === 0" @submit.prevent="doLogin">
-        <label class="form-label">用户名</label>
+        <label class="form-label">用户名或邮箱</label>
         <input
           v-model="loginForm.username"
           class="form-input"
           type="text"
+          placeholder="请输入用户名或注册邮箱"
           autocomplete="username"
           @keyup.enter="doLogin"
         />
@@ -107,8 +108,8 @@
         <template v-if="resetStep === 1">
           <label class="form-label">注册邮箱</label>
           <input v-model="resetEmail" class="form-input" type="email" placeholder="输入你注册时用的邮箱" />
-          <button class="code-btn reset-btn" :disabled="resetCooldown > 0" @click="sendResetCode">
-            {{ resetCooldown > 0 ? resetCooldown + 's' : '发送验证码' }}
+          <button class="code-btn reset-btn" :disabled="resetCooldown > 0 || resetSending" @click="sendResetCode">
+            {{ resetSending ? '发送中...' : (resetCooldown > 0 ? resetCooldown + 's' : '发送验证码') }}
           </button>
         </template>
 
@@ -153,9 +154,10 @@
           <button
             type="button"
             class="code-btn"
-            :disabled="codeCooldown > 0 || !legalAccepted"
+            :disabled="codeCooldown > 0 || codeSending"
+            :aria-disabled="!legalAccepted || undefined"
             @click="sendCode"
-          >{{ codeCooldown > 0 ? codeCooldown + 's' : '获取验证码' }}</button>
+          >{{ codeSending ? '发送中...' : (codeCooldown > 0 ? codeCooldown + 's' : '获取验证码') }}</button>
         </div>
         <label class="form-label">用户名</label>
         <input
@@ -211,7 +213,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, nextTick } from 'vue'
+import { ref, reactive, watch, nextTick, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
@@ -226,6 +228,7 @@ const showPwd = ref(false)
 const showRegPwd = ref(false)
 const loginForm = reactive({ username: '', password: '' })
 const codeCooldown = ref(0)
+const codeSending = ref(false)
 const regForm = reactive({ username: '', password: '', nickname: '', email: '', code: '', turnstileToken: '' })
 const legalAccepted = ref(false)
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'
@@ -236,17 +239,31 @@ const resetEmail = ref('')
 const resetCode = ref('')
 const resetNewPwd = ref('')
 const resetCooldown = ref(0)
+const resetSending = ref(false)
 const showResetPwd = ref(false)
+let codeTimer = null
+let resetTimer = null
 
 const sendResetCode = async () => {
+  if (resetSending.value || resetCooldown.value > 0) return
   if (!resetEmail.value || !resetEmail.value.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
+  resetSending.value = true
   try {
-    await request.post('/app/auth/send-reset-code', { email: resetEmail.value })
+    const res = await request.post('/app/auth/send-reset-code', { email: resetEmail.value })
+    if (res.code !== 1) return
     ElMessage.success('验证码已发送')
     resetCooldown.value = 60
-    const timer = setInterval(() => { resetCooldown.value--; if (resetCooldown.value <= 0) clearInterval(timer) }, 1000)
+    clearInterval(resetTimer)
+    resetTimer = setInterval(() => {
+      resetCooldown.value--
+      if (resetCooldown.value <= 0) clearInterval(resetTimer)
+    }, 1000)
     resetStep.value = 2
-  } catch (e) { ElMessage.error(e?.response?.data?.msg || '发送失败') }
+  } catch {
+    // 网络和服务端错误由统一响应拦截器展示。
+  } finally {
+    resetSending.value = false
+  }
 }
 
 const doResetPwd = async () => {
@@ -266,18 +283,31 @@ const doResetPwd = async () => {
 }
 
 const sendCode = async () => {
+  if (codeSending.value || codeCooldown.value > 0) return
   if (!legalAccepted.value) { ElMessage.warning('请先阅读并同意用户协议和隐私政策'); return }
   if (!regForm.email || !regForm.email.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
+  codeSending.value = true
   try {
-    await request.post('/app/auth/send-code', { email: regForm.email })
+    const res = await request.post('/app/auth/send-code', { email: regForm.email })
+    if (res.code !== 1) return
     ElMessage.success('验证码已发送')
     codeCooldown.value = 60
-    const timer = setInterval(() => { codeCooldown.value--; if (codeCooldown.value <= 0) clearInterval(timer) }, 1000)
-  } catch (e) {
-    ElMessage.error(e?.response?.data?.msg || '发送失败')
+    clearInterval(codeTimer)
+    codeTimer = setInterval(() => {
+      codeCooldown.value--
+      if (codeCooldown.value <= 0) clearInterval(codeTimer)
+    }, 1000)
+  } catch {
+    // 网络和服务端错误由统一响应拦截器展示。
+  } finally {
+    codeSending.value = false
   }
 }
 
+onBeforeUnmount(() => {
+  clearInterval(codeTimer)
+  clearInterval(resetTimer)
+})
 let turnstileLoader = null
 const loadTurnstile = () => {
   if (window.turnstile) return Promise.resolve()
@@ -320,7 +350,7 @@ watch([tab, legalAccepted], async ([currentTab, accepted]) => {
 })
 
 const doLogin = async () => {
-  if (!loginForm.username || !loginForm.password) { ElMessage.warning('请输入用户名和密码'); return }
+  if (!loginForm.username || !loginForm.password) { ElMessage.warning('请输入用户名或邮箱和密码'); return }
   loading.value = true
   try {
     const res = await request.post('/app/auth/login', loginForm)

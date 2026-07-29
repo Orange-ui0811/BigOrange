@@ -15,7 +15,7 @@ import com.orangejd.pojo.vo.LoginVO;
 import com.orangejd.server.mapper.AccountMapper;
 import com.orangejd.server.mapper.UserProfileMapper;
 import com.orangejd.server.service.AuthService;
-import com.orangejd.server.service.MailService;
+import com.orangejd.server.service.EmailVerificationCodeService;
 import com.orangejd.server.service.QuotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -26,14 +26,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.security.SecureRandom;
-import java.util.concurrent.TimeUnit;
 import java.util.Locale;
 
 @Slf4j
 @Service
 public class AuthServiceImpl implements AuthService {
-    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
     private static final String CURRENT_LEGAL_VERSION = "2026-07-19";
 
     @Autowired
@@ -54,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private QuotaService quotaService;
     @Autowired
-    private MailService mailService;
+    private EmailVerificationCodeService verificationCodeService;
 
     @Override
     public LoginVO adminLogin(LoginDTO loginDTO) {
@@ -76,7 +73,11 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginVO appLogin(LoginDTO loginDTO) {
-        Account account = accountMapper.selectByUsername(loginDTO.getUsername());
+        String identity = loginDTO.getUsername().trim();
+        Account account = accountMapper.selectByUsername(identity);
+        if (account == null && identity.contains("@")) {
+            account = accountMapper.selectByEmail(identity.toLowerCase(Locale.ROOT));
+        }
         if (account == null) {
             throw new LoginFailedException("用户名或密码错误");
         }
@@ -178,16 +179,7 @@ public class AuthServiceImpl implements AuthService {
             log.info("忽略未注册邮箱的密码重置请求");
             return;
         }
-        // 频率限制
-        if (redisTemplate != null && redisTemplate.hasKey("mail:reset:limit:" + email)) {
-            throw new BaseException("验证码已发送，请60秒后再试");
-        }
-        String code = String.format("%06d", SECURE_RANDOM.nextInt(1_000_000));
-        mailService.sendCode(email, code);
-        if (redisTemplate != null) {
-            redisTemplate.opsForValue().set("mail:reset:code:" + email, code, 5, TimeUnit.MINUTES);
-            redisTemplate.opsForValue().set("mail:reset:limit:" + email, "1", 60, TimeUnit.SECONDS);
-        }
+        verificationCodeService.sendPasswordResetCode(email);
         log.info("密码重置验证码已发送 accountId={}", account.getId());
     }
 

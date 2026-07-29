@@ -8,7 +8,7 @@ import com.orangejd.pojo.dto.PasswordChangeDTO;
 import com.orangejd.pojo.dto.RegisterDTO;
 import com.orangejd.pojo.vo.LoginVO;
 import com.orangejd.server.service.AuthService;
-import com.orangejd.server.service.MailService;
+import com.orangejd.server.service.EmailVerificationCodeService;
 import com.orangejd.server.service.TokenBlacklistService;
 import com.orangejd.server.service.TurnstileService;
 import com.orangejd.server.service.RateLimitService;
@@ -17,26 +17,20 @@ import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.util.ClientIpResolver;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.util.Map;
-import java.security.SecureRandom;
-import java.util.concurrent.TimeUnit;
 import java.util.Locale;
 
 @RestController
 @RequestMapping("/app/auth")
 public class AppAuthController {
-    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
-
     @Autowired private AuthService authService;
     @Autowired private JwtProperties jwtProperties;
     @Autowired private TokenBlacklistService blacklistService;
-    @Autowired private MailService mailService;
-    @Autowired(required = false) private StringRedisTemplate redisTemplate;
+    @Autowired private EmailVerificationCodeService verificationCodeService;
     @Autowired private TurnstileService turnstileService;
     @Autowired private RateLimitService rateLimitService;
     @Autowired private WebSocketTicketService webSocketTicketService;
@@ -62,15 +56,7 @@ public class AppAuthController {
         if (!validEmail(email)) return Result.error("邮箱格式不正确");
         if (!rateLimitService.allow("mail-code:ip:" + ClientIpResolver.resolve(request), 10, 3600))
             return Result.error("验证码请求过多，请稍后重试");
-        // 频率限制：同一邮箱 60 秒内只能发一次
-        if (redisTemplate != null && redisTemplate.hasKey("mail:limit:" + email))
-            return Result.error("验证码已发送，请60秒后再试");
-        String code = String.format("%06d", SECURE_RANDOM.nextInt(1_000_000));
-        mailService.sendCode(email, code);
-        if (redisTemplate != null) {
-            redisTemplate.opsForValue().set("mail:code:" + email, code, 5, TimeUnit.MINUTES);
-            redisTemplate.opsForValue().set("mail:limit:" + email, "1", 60, TimeUnit.SECONDS);
-        }
+        verificationCodeService.sendRegistrationCode(email);
         return Result.success();
     }
 
