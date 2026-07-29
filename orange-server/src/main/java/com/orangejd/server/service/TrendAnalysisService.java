@@ -1,5 +1,11 @@
 package com.orangejd.server.service;
 
+import com.orangejd.common.exception.BaseException;
+import com.orangejd.server.foundation.aitool.AiToolContext;
+import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRouter;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
@@ -17,6 +23,8 @@ import java.util.*;
 public class TrendAnalysisService {
     @org.springframework.beans.factory.annotation.Autowired(required = false)
     private com.orangejd.server.foundation.external.AiRuntimeConfigService aiConfigService;
+    @org.springframework.beans.factory.annotation.Autowired(required = false)
+    private AiToolRouter aiToolRouter;
 
     private static final Logger log = LoggerFactory.getLogger(TrendAnalysisService.class);
     private static final int TIMEOUT_MS = 90000;
@@ -54,20 +62,33 @@ public class TrendAnalysisService {
             setConnectTimeout(TIMEOUT_MS);
             setReadTimeout(TIMEOUT_MS);
         }});
-        // 趋势分析不设超时
         this.trendRestTemplate = new RestTemplate();
+        this.trendRestTemplate.setRequestFactory(new org.springframework.http.client.SimpleClientHttpRequestFactory() {{
+            setConnectTimeout(10_000);
+            setReadTimeout(120_000);
+        }});
+    }
+
+    public Map<String, Object> analyze(String question) {
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        String requestId = "trend_v1_" + accountId + "_" + UUID.randomUUID();
+        if (aiToolRouter == null) {
+            return analyzeWithRuntime(question, accountId, requestId, projectRuntimeConfig());
+        }
+        AiToolContext context = new AiToolContext("trend.v1.analyze", requestId,
+                accountId, "TREND_V1", null, AiRuntimeConfigService.PROJECT);
+        return aiToolRouter.execute(context,
+                runtime -> analyzeWithRuntime(question, accountId, requestId, runtime));
     }
 
     @SuppressWarnings("unchecked")
-    public Map<String, Object> analyze(String question) {
+    private Map<String, Object> analyzeWithRuntime(String question, Long accountId,
+                                                   String requestId, AiRuntimeConfig runtime) {
         Map<String, Object> result = new LinkedHashMap<>();
 
         // 配额消费
-        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
-        String requestId = null;
         int chargedCost = 0;
         if (accountId != null && accountId > 0) {
-            requestId = "trend_v1_" + accountId + "_" + System.currentTimeMillis();
             try { chargedCost = pricingService.getCost("ai:trend:v1"); quotaService.consume(accountId, chargedCost, "趋势分析 V1", requestId); }
             catch (Exception e) { result.put("error", e.getMessage()); return result; }
         }
@@ -103,8 +124,6 @@ public class TrendAnalysisService {
                 "\n\n用户问题: " + question;
 
         // 构建请求（使用服务端配置）
-        com.orangejd.server.foundation.external.AiRuntimeConfig runtime =
-                projectRuntimeConfig();
         Map<String, Object> requestBody = new LinkedHashMap<>();
         requestBody.put("model", runtime.model());
         List<Map<String, String>> messages = new ArrayList<>();
@@ -140,7 +159,10 @@ public class TrendAnalysisService {
         } catch (Exception e) {
             log.warn("AI趋势分析V1失败: {}", e.getMessage());
             if (chargedCost > 0) quotaService.refund(accountId, chargedCost, requestId, "AI分析失败退款");
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
             result.put("error", "AI分析失败，请稍后重试");
+            if (aiToolRouter != null) throw new BaseException("AI分析失败，请稍后重试");
         }
         return result;
     }
@@ -227,21 +249,37 @@ public class TrendAnalysisService {
         "每个字段都要详细写，不要省略，不要简写。recommendations 1-3 个。analysis 四个子字段必填。" +
         "description 至少 80 字。recommendReason 至少 60 字。";
 
-    @SuppressWarnings("unchecked")
     public Map<String, Object> analyzeV2(
             List<String> topics, String purpose, String experience, List<String> languages, String timeCommitment,
             String customTopics, String customPurpose, String customExp, String customLang, String customTime,
             Boolean useRag) {
+        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        String requestId = "trend_v2_" + accountId + "_" + UUID.randomUUID();
+        if (aiToolRouter == null) {
+            return analyzeV2WithRuntime(topics, purpose, experience, languages, timeCommitment,
+                    customTopics, customPurpose, customExp, customLang, customTime, useRag,
+                    accountId, requestId, projectRuntimeConfig());
+        }
+        AiToolContext context = new AiToolContext("trend.v2.analyze", requestId,
+                accountId, "TREND_V2", null, AiRuntimeConfigService.PROJECT);
+        return aiToolRouter.execute(context, runtime -> analyzeV2WithRuntime(
+                topics, purpose, experience, languages, timeCommitment,
+                customTopics, customPurpose, customExp, customLang, customTime, useRag,
+                accountId, requestId, runtime));
+    }
 
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> analyzeV2WithRuntime(
+            List<String> topics, String purpose, String experience, List<String> languages,
+            String timeCommitment, String customTopics, String customPurpose, String customExp,
+            String customLang, String customTime, Boolean useRag, Long accountId,
+            String requestId, AiRuntimeConfig runtime) {
         Map<String, Object> result = new LinkedHashMap<>();
 
         // 配额消费
-        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
-        String requestId = null;
         boolean consumed = false;
         int chargedCost = 0;
         if (accountId != null && accountId > 0) {
-            requestId = "trend_v2_" + accountId + "_" + System.currentTimeMillis();
             try {
                 chargedCost = pricingService.getCost("ai:trend:v2");
                 int balance = quotaService.consume(accountId, chargedCost, "趋势分析 V2", requestId);
@@ -299,7 +337,6 @@ public class TrendAnalysisService {
 
         // 调 AI
         try {
-            com.orangejd.server.foundation.external.AiRuntimeConfig runtime = projectRuntimeConfig();
             String endpoint = runtime.endpoint();
             String apiKey = runtime.apiKey();
             String model = runtime.model();
@@ -341,7 +378,10 @@ public class TrendAnalysisService {
                 quotaService.refund(accountId, chargedCost, requestId, "AI分析失败退款");
                 log.info("[QUOTA] 退款: accountId={}, amount={}", accountId, chargedCost);
             }
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
             result.put("error", "AI分析失败，请稍后重试");
+            if (aiToolRouter != null) throw new BaseException("AI分析失败，请稍后重试");
         }
         return result;
     }

@@ -6,6 +6,12 @@ import com.orangejd.common.exception.BaseException;
 import com.orangejd.server.mapper.OpenSourceMapper;
 import com.orangejd.server.service.impl.QuotaServiceImpl;
 import com.orangejd.server.task.OpenSourceRefreshTask;
+import com.orangejd.server.foundation.aitool.AiToolContext;
+import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRouter;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -34,6 +40,8 @@ public class OpenSourceContributionService {
     private final PricingService pricingService;
     private final QuotaServiceImpl quotaService;
     private final ObjectMapper objectMapper;
+    @Autowired(required = false)
+    private AiToolRouter aiToolRouter;
 
     public OpenSourceContributionService(OpenSourceMapper mapper, OpenSourceGithubService githubService,
                                          OpenSourceTranslationService translationService,
@@ -120,9 +128,22 @@ public class OpenSourceContributionService {
 
         int cost = pricingService.getCost(MATCH_PRICING_KEY);
         String requestId = "opensource_match_" + accountId + "_" + UUID.randomUUID();
+        if (aiToolRouter == null) {
+            return matchWithRuntime(accountId, profile, context.toString(), allowedIds,
+                    cost, requestId, null);
+        }
+        AiToolContext toolContext = new AiToolContext("open-source.issue.match", requestId,
+                accountId, "OPEN_SOURCE_MATCH", null, AiRuntimeConfigService.CONTRIBUTION);
+        return aiToolRouter.execute(toolContext, runtime -> matchWithRuntime(
+                accountId, profile, context.toString(), allowedIds, cost, requestId, runtime));
+    }
+
+    private Map<String, Object> matchWithRuntime(Long accountId, String profile, String context,
+                                                 Set<Long> allowedIds, int cost, String requestId,
+                                                 AiRuntimeConfig runtime) {
         int balance = quotaService.consume(accountId, cost, "开源 Issue 智能匹配", requestId);
         try {
-            String result = aiClient.call("你是谨慎的开源贡献机会顾问，只能从给定候选中选择。",
+            String result = callAi(runtime, "你是谨慎的开源贡献机会顾问，只能从给定候选中选择。",
                     "用户条件：" + (StringUtils.hasText(profile) ? profile : "未补充")
                             + "\n候选 Issue：" + context
                             + "\n选择3到5条并推荐最容易完成的一条。严格输出JSON："
@@ -152,6 +173,8 @@ public class OpenSourceContributionService {
                     "matches", matches, "segmentCost", cost, "balance", balance);
         } catch (Exception e) {
             quotaService.refund(accountId, cost, requestId, "开源 Issue 匹配失败退款");
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
             throw new BaseException("AI 匹配失败，本次配额已退回");
         }
     }
@@ -169,6 +192,19 @@ public class OpenSourceContributionService {
         Map<String, Object> issue = requireIssue(issueId);
         int cost = pricingService.getCost(GUIDE_PRICING_KEY);
         String requestId = "opensource_guide_" + accountId + "_" + issueId + "_" + UUID.randomUUID();
+        if (aiToolRouter == null) {
+            return generateGuideWithRuntime(accountId, issueId, issue, cost, requestId, null);
+        }
+        AiToolContext context = new AiToolContext("open-source.guide.generate", requestId,
+                accountId, "OPEN_SOURCE_GUIDE", String.valueOf(issueId),
+                AiRuntimeConfigService.CONTRIBUTION);
+        return aiToolRouter.execute(context, runtime ->
+                generateGuideWithRuntime(accountId, issueId, issue, cost, requestId, runtime));
+    }
+
+    private Map<String, Object> generateGuideWithRuntime(Long accountId, Long issueId,
+                                                         Map<String, Object> issue, int cost,
+                                                         String requestId, AiRuntimeConfig runtime) {
         int balance = quotaService.consume(accountId, cost, "生成开源贡献指南", requestId);
         try {
             String prompt = "仓库：" + issue.get("repositoryFullName")
@@ -181,7 +217,9 @@ public class OpenSourceContributionService {
                     + "一、Issue要解决什么；二、开始前准备；三、推荐完成流程；四、验证清单；"
                     + "五、提交PR注意事项；六、结项准备清单。"
                     + "不要生成修复代码，不要虚构文件和测试结果；无法确认的内容明确标为需要用户核对。";
-            String content = aiClient.call("你是开源贡献导师，负责给出边界清晰、由用户自行执行的完成指南。", prompt, 0.25);
+            String content = callAi(runtime,
+                    "你是开源贡献导师，负责给出边界清晰、由用户自行执行的完成指南。",
+                    prompt, 0.25);
             Map<String, Object> guide = new LinkedHashMap<>();
             guide.put("accountId", accountId);
             guide.put("issueId", issueId);
@@ -191,8 +229,17 @@ public class OpenSourceContributionService {
             return Map.of("guide", guide, "balance", balance);
         } catch (Exception e) {
             quotaService.refund(accountId, cost, requestId, "开源贡献指南生成失败退款");
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
             throw new BaseException("指南生成失败，本次配额已退回");
         }
+    }
+
+    private String callAi(AiRuntimeConfig runtime, String systemPrompt,
+                          String userPrompt, double temperature) {
+        return runtime == null
+                ? aiClient.call(systemPrompt, userPrompt, temperature)
+                : aiClient.call(runtime, systemPrompt, userPrompt, temperature);
     }
 
     public List<Map<String, Object>> guides(Long accountId) { return mapper.selectGuidesByAccount(accountId); }

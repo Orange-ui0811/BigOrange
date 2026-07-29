@@ -32,6 +32,24 @@ orange:
     pipeline-v2-enabled: ${INGESTION_PIPELINE_V2_ENABLED:false}
   ai-config:
     encryption-key: ${AI_CONFIG_ENCRYPTION_KEY:}
+  ai-tool-pool:
+    enabled: ${AI_TOOL_POOL_ENABLED:false}
+    global-max-concurrency: ${AI_TOOL_GLOBAL_MAX_CONCURRENCY:50}
+    acquire-wait-millis: ${AI_TOOL_ACQUIRE_WAIT_MS:2000}
+    lease-millis: ${AI_TOOL_LEASE_MS:330000}
+    endpoint: ${GITEE_AI_ENDPOINT:}
+    model: ${GITEE_AI_MODEL:}
+    keys:
+      - ${GITEE_AI_KEY_1:}
+      - ${GITEE_AI_KEY_2:}
+      - ${GITEE_AI_KEY_3:}
+      - ${GITEE_AI_KEY_4:}
+      - ${GITEE_AI_KEY_5:}
+      - ${GITEE_AI_KEY_6:}
+      - ${GITEE_AI_KEY_7:}
+      - ${GITEE_AI_KEY_8:}
+      - ${GITEE_AI_KEY_9:}
+      - ${GITEE_AI_KEY_10:}
   trade:
     simulated-payment-enabled: true
   upload:
@@ -56,6 +74,10 @@ orange:
     endpoint: ${AI_TREND_ENDPOINT:https://ai.gitee.com/v1}
     api-key: ${AI_TREND_KEY:}
     model: ${AI_TREND_MODEL:DeepSeek-V4-Pro}
+  ai-text:
+    endpoint: ${AI_TEXT_ENDPOINT:${AI_TREND_ENDPOINT:https://ai.gitee.com/v1}}
+    api-key: ${AI_TEXT_KEY:${AI_TREND_KEY:}}
+    model: ${AI_TEXT_MODEL:${AI_TREND_MODEL:DeepSeek-V4-Pro}}
   ai-project:
     endpoint: ${AI_PROJECT_ENDPOINT:}
     api-key: ${AI_PROJECT_KEY:}

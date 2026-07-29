@@ -26,6 +26,8 @@ public class AdminAIConfigController {
         config.put("project", configService.describe(AiRuntimeConfigService.PROJECT));
         config.put("contribution", configService.describe(AiRuntimeConfigService.CONTRIBUTION));
         config.put("trend", configService.describe(AiRuntimeConfigService.TREND));
+        config.put("text", configService.describe(AiRuntimeConfigService.TEXT));
+        config.put("toolFallback", configService.describe(AiRuntimeConfigService.TOOL_FALLBACK));
         config.put("audit", configService.describe(AiRuntimeConfigService.AUDIT));
         config.put("embedding", configService.describe(AiRuntimeConfigService.EMBEDDING));
         config.put("leaderboard", Map.of(
@@ -42,6 +44,8 @@ public class AdminAIConfigController {
             case "ai:project" -> AiRuntimeConfigService.PROJECT;
             case "ai:contribution" -> AiRuntimeConfigService.CONTRIBUTION;
             case "ai:trend" -> AiRuntimeConfigService.TREND;
+            case "ai:text" -> AiRuntimeConfigService.TEXT;
+            case "ai:toolFallback" -> AiRuntimeConfigService.TOOL_FALLBACK;
             case "ai:audit" -> AiRuntimeConfigService.AUDIT;
             case "ai:embedding" -> AiRuntimeConfigService.EMBEDDING;
             default -> throw new IllegalArgumentException("AI 配置类型无效");

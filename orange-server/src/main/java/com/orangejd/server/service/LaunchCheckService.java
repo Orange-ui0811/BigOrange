@@ -14,6 +14,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.aitool.AiToolContext;
+import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRouter;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -52,6 +55,8 @@ public class LaunchCheckService {
     private final RestTemplate restTemplate;
     @org.springframework.beans.factory.annotation.Autowired(required = false)
     private AiRuntimeConfigService aiConfigService;
+    @org.springframework.beans.factory.annotation.Autowired(required = false)
+    private AiToolRouter aiToolRouter;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -122,23 +127,34 @@ public class LaunchCheckService {
     }
 
     public Map<String, Object> generate(Long accountId, Long id, int stageNo) {
-        AiRuntimeConfig runtime = runtimeConfig();
         if (stageNo < 1 || stageNo > STAGE_COUNT) throw new BaseException("无效的体检阶段");
         Map<String, Object> assessment = requireOwned(accountId, id);
         if (stageNo > 1 && mapper.selectStage(id, stageNo - 1) == null) {
             throw new BaseException("请先完成上一阶段");
         }
+        String requestId = "launch_" + accountId + "_" + id + "_" + stageNo + "_" + UUID.randomUUID();
+        if (aiToolRouter == null) {
+            return generateWithRuntime(accountId, id, stageNo, assessment, requestId, runtimeConfig());
+        }
+        AiToolContext context = new AiToolContext("launch-check.stage.generate", requestId,
+                accountId, "LAUNCH_CHECK", id + ":" + stageNo, AiRuntimeConfigService.PROJECT);
+        return aiToolRouter.execute(context, runtime ->
+                generateWithRuntime(accountId, id, stageNo, assessment, requestId, runtime));
+    }
+
+    private Map<String, Object> generateWithRuntime(Long accountId, Long id, int stageNo,
+                                                    Map<String, Object> assessment,
+                                                    String requestId, AiRuntimeConfig runtime) {
         if (!StringUtils.hasText(runtime.endpoint()) || !StringUtils.hasText(runtime.apiKey())) {
             throw new BaseException("AI 上线体检服务尚未配置");
         }
 
         int cost = pricingService.getCost(PRICING_KEY);
-        String requestId = "launch_" + accountId + "_" + id + "_" + stageNo + "_" + UUID.randomUUID();
         int balance = quotaService.consume(accountId, cost,
                 "上线体检 · " + STAGE_TITLES[stageNo], requestId);
 
         try {
-            String content = callAi(buildPrompt(assessment, id, stageNo));
+            String content = callAi(buildPrompt(assessment, id, stageNo), runtime);
             if (!StringUtils.hasText(content)) throw new IllegalStateException("AI 返回为空");
 
             reportService.saveStage(accountId, id, stageNo, STAGE_TITLES[stageNo], content, cost);
@@ -147,6 +163,8 @@ public class LaunchCheckService {
                     "content", content, "segmentCost", cost, "balance", balance);
         } catch (Exception e) {
             quotaService.refund(accountId, cost, requestId, "上线体检失败退款");
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
             throw new BaseException("AI 生成失败，请稍后重试");
         }
     }
@@ -223,8 +241,7 @@ public class LaunchCheckService {
     }
 
     @SuppressWarnings("unchecked")
-    private String callAi(String prompt) {
-        AiRuntimeConfig runtime = runtimeConfig();
+    private String callAi(String prompt, AiRuntimeConfig runtime) {
         String url = runtime.endpoint().trim();
         if (!url.startsWith("http")) url = "https://" + url;
         if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";

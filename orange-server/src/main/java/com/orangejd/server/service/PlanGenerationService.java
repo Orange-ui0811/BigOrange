@@ -16,6 +16,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.aitool.AiToolContext;
+import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRouter;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -36,6 +39,8 @@ public class PlanGenerationService {
     private final RestTemplate restTemplate;
     @Autowired(required = false)
     private AiRuntimeConfigService aiConfigService;
+    @Autowired(required = false)
+    private AiToolRouter aiToolRouter;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -62,7 +67,6 @@ public class PlanGenerationService {
 
     @SuppressWarnings("unchecked")
     public Map<String, Object> generate(Long accountId, Map<String, Object> body) {
-        AiRuntimeConfig runtime = runtimeConfig();
         int phase = integer(body.getOrDefault("phase", 1), "无效的阶段编号");
         if (phase < 1 || phase > 4) throw new BaseException("无效的阶段编号");
         String mode = text(body.getOrDefault("mode", "full"), 16);
@@ -70,6 +74,23 @@ public class PlanGenerationService {
         String extra = text(body.get("extra"), 4_000);
         String prevContents = text(body.get("prevContents"), 30_000);
         if (!StringUtils.hasText(summary)) throw new BaseException("请输入项目描述");
+        String operationRequestId = "plan_p" + phase + "_"
+                + (accountId == null ? "guest" : accountId) + "_" + UUID.randomUUID();
+        if (aiToolRouter == null) {
+            return generateWithRuntime(accountId, phase, mode, summary, extra, prevContents,
+                    operationRequestId, runtimeConfig());
+        }
+        AiToolContext context = new AiToolContext("plan.phase.generate", operationRequestId,
+                accountId, "PLAN", String.valueOf(phase), AiRuntimeConfigService.PROJECT);
+        return aiToolRouter.execute(context, runtime -> generateWithRuntime(
+                accountId, phase, mode, summary, extra, prevContents, operationRequestId, runtime));
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> generateWithRuntime(Long accountId, int phase, String mode,
+                                                     String summary, String extra,
+                                                     String prevContents, String operationRequestId,
+                                                     AiRuntimeConfig runtime) {
         if (!StringUtils.hasText(runtime.endpoint()) || !StringUtils.hasText(runtime.apiKey())) {
             throw new BaseException("AI 方案设计服务尚未配置");
         }
@@ -82,7 +103,7 @@ public class PlanGenerationService {
         long balance = accountId == null ? 0 : quotaService.getBalance(accountId);
         if (accountId != null && accountId > 0) {
             chargedCost = cost();
-            requestId = "plan_p" + phase + "_" + accountId + "_" + UUID.randomUUID();
+            requestId = operationRequestId;
             balance = quotaService.consume(accountId, chargedCost,
                     "方案设计 Phase " + phase, requestId);
         }
@@ -126,6 +147,8 @@ public class PlanGenerationService {
             }
             log.error("Plan generation failed: accountId={}, phase={}, mode={}",
                     accountId, phase, mode, e);
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
             throw new BaseException("AI 调用失败，本次配额已退回");
         }
     }

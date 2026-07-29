@@ -3,8 +3,9 @@
     <header class="page-heading">
       <div>
         <h3>AI 调用设置</h3>
-        <p>项目创作、开源参与、翻译和审核使用独立配置；保存到 Redis 后即时用于新请求，Embedding 仍由服务器环境变量固定。</p>
+        <p>互动工具通过全局并发门禁、Gitee 独占槽位和 DeepSeek 兜底统一调度；密钥原文不会由管理接口返回。</p>
       </div>
+      <el-button :loading="poolLoading" @click="loadPool">刷新运行状态</el-button>
     </header>
 
     <el-alert
@@ -14,6 +15,69 @@
       :closable="false"
       show-icon
     />
+
+    <section class="pool-panel" v-loading="poolLoading">
+      <div class="pool-summary">
+        <div>
+          <strong>互动 AI 调用池</strong>
+          <span>{{ pool.enabled ? '已启用' : '安全旁路（沿用旧配置）' }}</span>
+        </div>
+        <el-tag :type="pool.enabled ? 'success' : 'warning'">
+          {{ pool.globalRunning || 0 }} / {{ pool.globalMax || 0 }} 运行中
+        </el-tag>
+      </div>
+      <el-alert
+        v-if="!pool.enabled"
+        title="调用池尚未启用；完成全部槽位连通测试和灰度验证后，再在服务器设置 AI_TOOL_POOL_ENABLED=true。"
+        type="warning"
+        :closable="false"
+        show-icon
+      />
+      <div class="pool-stats">
+        <span>Gitee：{{ pool.giteeRunning || 0 }}</span>
+        <span>DeepSeek 兜底：{{ pool.fallbackRunning || 0 }}</span>
+        <span>已配置槽位：{{ pool.configuredSlots || 0 }}</span>
+        <span>全局上限：{{ pool.globalMax || 0 }}</span>
+      </div>
+      <el-table :data="pool.slots || []" size="small" empty-text="尚未配置 Gitee Key">
+        <el-table-column prop="slotNo" label="槽位" width="72" />
+        <el-table-column prop="fingerprint" label="Key 指纹" min-width="140" />
+        <el-table-column label="状态" width="120">
+          <template #default="{ row }">
+            <el-tag size="small" :type="slotTagType(row.status)">{{ slotStatusText(row.status) }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="220" align="right">
+          <template #default="{ row }">
+            <el-button size="small" :loading="testingSlot === row.slotNo" @click="testSlot(row)">短请求测试</el-button>
+            <el-button
+              size="small"
+              :type="row.status === 'DISABLED' ? 'success' : 'danger'"
+              plain
+              @click="toggleSlot(row)"
+            >
+              {{ row.status === 'DISABLED' ? '启用' : '停用' }}
+            </el-button>
+            <el-button
+              v-if="row.status === 'INVALID' || row.status === 'THROTTLED'"
+              size="small"
+              plain
+              @click="resetSlot(row)"
+            >恢复状态</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="recent-heading">最近调用（不记录 Prompt、响应正文或密钥原文）</div>
+      <el-table :data="recentCalls" size="small" max-height="280" empty-text="暂无调用记录">
+        <el-table-column prop="startedAt" label="开始时间" min-width="170" />
+        <el-table-column prop="purpose" label="用途" min-width="165" />
+        <el-table-column prop="provider" label="提供方" width="105" />
+        <el-table-column prop="slotNo" label="槽位" width="68" />
+        <el-table-column prop="status" label="结果" width="105" />
+        <el-table-column prop="durationMs" label="耗时(ms)" width="105" />
+        <el-table-column prop="errorSummary" label="错误摘要" min-width="160" show-overflow-tooltip />
+      </el-table>
+    </section>
 
     <div class="config-grid" v-loading="loading">
       <section v-for="item in editableItems" :key="item.key" class="config-panel">
@@ -79,12 +143,15 @@ import { ElMessage } from 'element-plus'
 import request from '../api/request'
 
 const loading = ref(false)
+const poolLoading = ref(false)
+const pool = ref({})
+const recentCalls = ref([])
+const testingSlot = ref(null)
 const embeddingTesting = ref(false)
 const embedding = ref({})
 const items = reactive([
-  { key: 'project', title: '做自己的项目', data: {}, edit: {}, editing: false, saving: false, testing: false },
-  { key: 'contribution', title: '参与开源项目', data: {}, edit: {}, editing: false, saving: false, testing: false },
-  { key: 'trend', title: '文本生成与翻译', data: {}, edit: {}, editing: false, saving: false, testing: false },
+  { key: 'toolFallback', title: '互动工具 DeepSeek 兜底', data: {}, edit: {}, editing: false, saving: false, testing: false },
+  { key: 'text', title: '定时文本生成与翻译', data: {}, edit: {}, editing: false, saving: false, testing: false },
   { key: 'audit', title: 'AI 托管审核', data: {}, edit: {}, editing: false, saving: false, testing: false },
 ])
 const editableItems = computed(() => items)
@@ -105,6 +172,59 @@ const loadData = async () => {
     loading.value = false
   }
 }
+
+const loadPool = async () => {
+  poolLoading.value = true
+  try {
+    const [overview, calls] = await Promise.all([
+      request.get('/admin/ai-tool-pool'),
+      request.get('/admin/ai-tool-pool/calls', { params: { limit: 50 } }),
+    ])
+    pool.value = overview.data || {}
+    recentCalls.value = calls.data || []
+  } finally {
+    poolLoading.value = false
+  }
+}
+
+const testSlot = async row => {
+  testingSlot.value = row.slotNo
+  try {
+    const response = await request.post(`/admin/ai-tool-pool/slots/${row.slotNo}/test`, {}, { timeout: 130000 })
+    ElMessage.success(response.data?.message || `槽位 ${row.slotNo} 连接成功`)
+  } finally {
+    testingSlot.value = null
+    await loadPool()
+  }
+}
+
+const toggleSlot = async row => {
+  const action = row.status === 'DISABLED' ? 'enable' : 'disable'
+  await request.post(`/admin/ai-tool-pool/slots/${row.slotNo}/${action}`)
+  ElMessage.success(`槽位 ${row.slotNo} 已${action === 'enable' ? '启用' : '停用'}`)
+  await loadPool()
+}
+
+const resetSlot = async row => {
+  await request.post(`/admin/ai-tool-pool/slots/${row.slotNo}/reset`)
+  ElMessage.success(`槽位 ${row.slotNo} 状态已恢复`)
+  await loadPool()
+}
+
+const slotTagType = status => ({
+  AVAILABLE: 'success',
+  BUSY: 'warning',
+  THROTTLED: 'warning',
+  INVALID: 'danger',
+  DISABLED: 'danger',
+}[status] || 'info')
+const slotStatusText = status => ({
+  AVAILABLE: '可用',
+  BUSY: '调用中',
+  THROTTLED: '限流中',
+  INVALID: '密钥失效',
+  DISABLED: '已停用',
+}[status] || status || '未知')
 
 const cancel = item => {
   item.editing = false
@@ -148,13 +268,21 @@ const testEmbedding = async () => {
   }
 }
 
-onMounted(loadData)
+onMounted(() => Promise.all([loadData(), loadPool()]))
 </script>
 
 <style scoped>
 .config-page { display: grid; gap: 16px; }
+.page-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .page-heading h3 { margin: 0; color: #303133; font-size: 18px; }
 .page-heading p { margin: 5px 0 0; color: #727985; font-size: 13px; }
+.pool-panel { padding: 18px; border: 1px solid #e2e5ea; border-radius: 8px; background: #fff; display: grid; gap: 14px; }
+.pool-summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.pool-summary strong, .pool-summary span { display: block; }
+.pool-summary strong { color: #303133; font-size: 15px; }
+.pool-summary span { margin-top: 4px; color: #8b929d; font-size: 12px; }
+.pool-stats { display: flex; flex-wrap: wrap; gap: 10px 24px; color: #606975; font-size: 13px; }
+.recent-heading { margin-top: 4px; color: #303133; font-size: 14px; font-weight: 600; }
 .config-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .config-panel { min-width: 0; padding: 18px; border: 1px solid #e2e5ea; border-radius: 8px; background: #fff; }
 .panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }

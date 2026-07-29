@@ -39,12 +39,12 @@ public class IngestionCoordinatorService {
     public IngestionRunService.StartResult start(String pipelineType, String triggerSource,
                                                   String businessKey, Map<String, Object> options) {
         if (!TYPES.contains(pipelineType)) throw new IllegalArgumentException("不支持的抓取任务类型");
-        AiRuntimeConfig config = configService.current(AiRuntimeConfigService.TREND);
+        AiRuntimeConfig config = configService.current(AiRuntimeConfigService.TEXT);
         String key = businessKey == null || businessKey.isBlank()
                 ? triggerSource.toLowerCase() + ":" + UUID.randomUUID()
                 : businessKey;
         IngestionRunService.StartResult result = runService.create(
-                pipelineType, triggerSource, key, AiRuntimeConfigService.TREND, config.version());
+                pipelineType, triggerSource, key, AiRuntimeConfigService.TEXT, config.version());
         if (result.started()) enqueue(result.runId(), pipelineType, config.version(), options);
         return result;
     }

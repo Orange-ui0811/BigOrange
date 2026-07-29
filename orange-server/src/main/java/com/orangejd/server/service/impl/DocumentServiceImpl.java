@@ -218,7 +218,7 @@ public class DocumentServiceImpl implements DocumentService {
     private String translateReadme(String fullName, String content, String configVersion) {
         if (content == null || content.isEmpty()) return content;
         String toTranslate = content.length() > 4000 ? content.substring(0, 4000) : content;
-        String translated = externalAiClient.callTrend(configVersion,
+        String translated = externalAiClient.callText(configVersion,
                 "请将 GitHub README 翻译为中文，保留 Markdown 结构和代码块，代码内容不翻译。",
                 toTranslate, 0.1, "readme-translation");
         log.info("[RAG] 翻译完成: {} ({} → {} chars)", fullName, content.length(), translated.length());

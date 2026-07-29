@@ -1,5 +1,7 @@
 package com.orangejd.server.service;
 
+import com.orangejd.common.exception.BaseException;
+import com.orangejd.server.foundation.aitool.AiToolRouter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,12 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 class PlanGenerationServiceTest {
@@ -66,6 +70,18 @@ class PlanGenerationServiceTest {
                 "phase", 1, "summary", "设计一个面向开发者的协作平台")));
 
         verify(quotaService).refund(eq(7L), eq(40), anyString(), anyString());
+    }
+
+    @Test
+    void capacityRejectionHappensBeforeQuotaConsumption() {
+        AiToolRouter router = mock(AiToolRouter.class);
+        ReflectionTestUtils.setField(service, "aiToolRouter", router);
+        when(router.execute(any(), any())).thenThrow(new BaseException("AI 服务繁忙，请稍后重试"));
+
+        assertThrows(BaseException.class, () -> service.generate(7L, Map.of(
+                "phase", 1, "summary", "设计一个面向开发者的协作平台")));
+
+        verify(quotaService, never()).consume(any(), anyInt(), anyString(), anyString());
     }
 
     @Test

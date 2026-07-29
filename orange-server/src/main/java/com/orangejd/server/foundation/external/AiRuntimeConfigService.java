@@ -18,10 +18,12 @@ public class AiRuntimeConfigService {
     public static final String TREND = "trend";
     public static final String PROJECT = "project";
     public static final String CONTRIBUTION = "contribution";
+    public static final String TEXT = "text";
+    public static final String TOOL_FALLBACK = "tool_fallback";
     public static final String AUDIT = "audit";
     public static final String EMBEDDING = "embedding";
     private static final Set<String> DYNAMIC_TYPES = Set.of(
-            TREND, PROJECT, CONTRIBUTION, AUDIT);
+            TREND, PROJECT, CONTRIBUTION, TEXT, TOOL_FALLBACK, AUDIT);
     private static final String ROOT = "orangevc:ai-config:";
 
     private final StringRedisTemplate redis;
@@ -41,6 +43,9 @@ public class AiRuntimeConfigService {
             @Value("${orange.ai-contribution.endpoint:}") String contributionEndpoint,
             @Value("${orange.ai-contribution.api-key:}") String contributionKey,
             @Value("${orange.ai-contribution.model:}") String contributionModel,
+            @Value("${orange.ai-text.endpoint:}") String textEndpoint,
+            @Value("${orange.ai-text.api-key:}") String textKey,
+            @Value("${orange.ai-text.model:}") String textModel,
             @Value("${orange.ai-audit.endpoint:}") String auditEndpoint,
             @Value("${orange.ai-audit.api-key:}") String auditKey,
             @Value("${orange.ai-audit.model:}") String auditModel,
@@ -58,6 +63,9 @@ public class AiRuntimeConfigService {
                 CONTRIBUTION, envWithFallback(CONTRIBUTION,
                         contributionEndpoint, contributionKey, contributionModel,
                         trendEndpoint, trendKey, trendModel),
+                TEXT, envWithFallback(TEXT, textEndpoint, textKey, textModel,
+                        trendEndpoint, trendKey, trendModel),
+                TOOL_FALLBACK, env(TOOL_FALLBACK, trendEndpoint, trendKey, trendModel),
                 AUDIT, env(AUDIT, auditEndpoint, auditKey, auditModel),
                 EMBEDDING, env(EMBEDDING, embeddingEndpoint, embeddingKey, embeddingModel));
     }
@@ -95,6 +103,15 @@ public class AiRuntimeConfigService {
                 crypto.decrypt(string(values.get("apiKey"))),
                 string(values.get("model")),
                 "REDIS");
+    }
+
+    public AiRuntimeConfig resolveText(String version) {
+        try {
+            return resolve(TEXT, version);
+        } catch (IllegalStateException missingTextVersion) {
+            // Jobs created before TEXT existed pinned versions under TREND.
+            return resolve(TREND, version);
+        }
     }
 
     @Transactional

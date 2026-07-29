@@ -372,7 +372,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
      */
     private void translateAllToday(LocalDate today) {
         RunContext context = currentContext();
-        AiRuntimeConfig config = aiConfigService.resolve(AiRuntimeConfigService.TREND, context.configVersion);
+        AiRuntimeConfig config = aiConfigService.resolveText(context.configVersion);
         if (config.apiKey() == null || config.apiKey().isEmpty()) {
             log.info("AI API Key 未配置，跳过翻译");
             return;

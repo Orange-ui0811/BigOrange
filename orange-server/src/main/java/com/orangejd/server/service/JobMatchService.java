@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.aitool.AiToolContext;
+import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRouter;
 
 import java.util.*;
 
@@ -39,6 +42,7 @@ public class JobMatchService {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
     @Autowired(required = false) private AiRuntimeConfigService aiConfigService;
+    @Autowired(required = false) private AiToolRouter aiToolRouter;
 
     @Autowired
     public JobMatchService(ObjectMapper objectMapper) {
@@ -56,7 +60,20 @@ public class JobMatchService {
 
     public Map<String, Object> match(String planContent, String pricingKey, String quotaDescription) {
         Long accountId = BaseContext.getCurrentId();
-        String requestId = "match_" + accountId + "_" + System.currentTimeMillis();
+        String requestId = "match_" + accountId + "_" + UUID.randomUUID();
+        if (aiToolRouter == null) {
+            return matchWithRuntime(planContent, pricingKey, quotaDescription, accountId,
+                    requestId, runtimeConfig());
+        }
+        AiToolContext context = new AiToolContext("job-match.generate", requestId,
+                accountId, "JOB_MATCH", pricingKey, AiRuntimeConfigService.CONTRIBUTION);
+        return aiToolRouter.execute(context, runtime -> matchWithRuntime(
+                planContent, pricingKey, quotaDescription, accountId, requestId, runtime));
+    }
+
+    private Map<String, Object> matchWithRuntime(String planContent, String pricingKey,
+                                                 String quotaDescription, Long accountId,
+                                                 String requestId, AiRuntimeConfig runtime) {
         int chargedCost = 0;
 
         // 预扣
@@ -95,7 +112,6 @@ public class JobMatchService {
                 "{\"matches\":[{\"position\":\"岗位名\",\"reason\":\"详细匹配原因\",\"focus\":\"详细学习重点\"}]}";
 
             // 调 AI
-            AiRuntimeConfig runtime = runtimeConfig();
             Map<String, Object> body = new LinkedHashMap<>();
             body.put("model", runtime.model());
             List<Map<String, String>> msgs = new ArrayList<>();
@@ -127,10 +143,12 @@ public class JobMatchService {
             result.put("matches", matches);
             return result;
         } catch (Exception e) {
-            if (accountId != null && accountId > 0) {
+            if (accountId != null && accountId > 0 && chargedCost > 0) {
                 try { quotaService.refund(accountId, chargedCost, requestId, quotaDescription + "失败退款"); } catch (Exception ignored) {}
             }
             log.warn("[JOB_MATCH] 匹配失败并已尝试退款 accountId={}, reason={}", accountId, e.getMessage());
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
             throw new RuntimeException("AI匹配失败，请稍后重试");
         }
     }

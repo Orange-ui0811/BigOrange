@@ -1,6 +1,7 @@
 package com.orangejd.server.foundation.external;
 
 import com.orangejd.common.exception.BaseException;
+import com.orangejd.server.foundation.aitool.AiToolProviderException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -32,6 +33,12 @@ public class ExternalAiClient {
     public String callTrend(String configVersion, String systemPrompt, String userPrompt,
                             double temperature, String purpose) {
         return callConfigured(AiRuntimeConfigService.TREND, configVersion,
+                systemPrompt, userPrompt, temperature, purpose);
+    }
+
+    public String callText(String configVersion, String systemPrompt, String userPrompt,
+                           double temperature, String purpose) {
+        return call(configService.resolveText(configVersion),
                 systemPrompt, userPrompt, temperature, purpose);
     }
 
@@ -94,7 +101,7 @@ public class ExternalAiClient {
         } catch (HttpStatusCodeException ex) {
             log.warn("External AI rejected purpose={} status={} durationMs={}",
                     purpose, ex.getStatusCode().value(), elapsedMillis(started));
-            throw new BaseException("AI 服务请求失败（HTTP " + ex.getStatusCode().value() + "）");
+            throw AiToolProviderException.from(ex);
         } catch (BaseException ex) {
             throw ex;
         } catch (Exception ex) {

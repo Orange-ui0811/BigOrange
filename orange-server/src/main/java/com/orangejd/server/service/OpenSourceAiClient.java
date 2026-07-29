@@ -1,6 +1,7 @@
 package com.orangejd.server.service;
 
 import com.orangejd.server.foundation.external.ExternalAiClient;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,8 +18,13 @@ public class OpenSourceAiClient {
                 temperature, "open-source");
     }
 
+    public String call(AiRuntimeConfig config, String systemPrompt, String userPrompt,
+                       double temperature) {
+        return aiClient.call(config, systemPrompt, userPrompt, temperature, "open-source");
+    }
+
     public String callText(String systemPrompt, String userPrompt, double temperature) {
-        return aiClient.callTrend(PINNED_VERSION.get(), systemPrompt, userPrompt,
+        return aiClient.callText(PINNED_VERSION.get(), systemPrompt, userPrompt,
                 temperature, "open-source-translation");
     }
 
