@@ -155,7 +155,6 @@
             type="button"
             class="code-btn"
             :disabled="codeCooldown > 0 || codeSending"
-            :aria-disabled="!legalAccepted || undefined"
             @click="sendCode"
           >{{ codeSending ? '发送中...' : (codeCooldown > 0 ? codeCooldown + 's' : '获取验证码') }}</button>
         </div>
