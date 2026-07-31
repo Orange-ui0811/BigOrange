@@ -148,6 +148,9 @@ cd orange-admin && npx vite --host
 `ORANGE_ADMIN_BOOTSTRAP_USERNAME` 和 `ORANGE_ADMIN_BOOTSTRAP_PASSWORD`
 创建管理员；创建成功后应从环境文件删除这两个值。普通用户仍通过注册流程创建。
 
+需要恢复已加密的协作数据库时，按
+`local-deploy/database/README.md` 操作。仓库不保存数据库明文或解密私钥。
+
 本地 `dev` 环境不要求配置 SMTP。点击“获取验证码”后，在后端日志中查找
 `[仅本地开发] 邮箱验证码`；生产环境仍使用真实邮件发送，不会输出明文验证码。
 
@@ -206,7 +209,8 @@ location ^~ /admin { alias /data/orangejd/web-dist/admin; try_files $uri /admin/
 
 ### GitHub 榜单爬取
 
-每周一凌晨 2:00 自动刷新。翻译失败进入持久化重试等待，不占住工作线程，应用重启后可继续。
+每周一、周四北京时间 08:00 自动刷新。翻译失败进入持久化重试等待，不占住工作线程，
+应用重启后可继续。
 
 ### 换 AI 模型
 
