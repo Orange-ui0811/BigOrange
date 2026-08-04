@@ -1,0 +1,14 @@
+import request from './request'
+
+export const getPersonaWorkshop = () => request.get('/app/persona-workshop')
+export const getPublicPersonaWorkshop = accountId => request.get(`/app/persona-workshop/public/${accountId}`)
+export const getPersonaAvatar = () => request.get('/app/persona-workshop/avatar')
+export const createPersonaEntry = payload => request.post('/app/persona-workshop/entries', payload)
+export const updatePersonaEntry = (id, payload) => request.put(`/app/persona-workshop/entries/${id}`, payload)
+export const deletePersonaEntry = id => request.delete(`/app/persona-workshop/entries/${id}`)
+export const getPersonaMaterials = status => request.get('/app/persona-workshop/materials', { params: { status } })
+export const acceptPersonaMaterial = (id, content) => request.post(`/app/persona-workshop/materials/${id}/accept`, { content })
+export const rejectPersonaMaterial = id => request.post(`/app/persona-workshop/materials/${id}/reject`)
+export const updatePersonaEquipment = (slotCode, payload) => request.put(`/app/persona-workshop/equipment/${slotCode}`, payload)
+export const updatePersonaAccessoryBlueprint = (slotCode, payload) => request.put(`/app/persona-workshop/equipment/${slotCode}/blueprint`, payload)
+export const updatePersonaSettings = payload => request.put('/app/persona-workshop/settings', payload)

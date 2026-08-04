@@ -35,6 +35,7 @@ public class WorkServiceImpl implements WorkService {
     @Autowired private WorkSaleOptionMapper optionMapper;
     @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
     @Autowired private ManagedFileStorageService managedFileStorageService;
+    @Autowired(required = false) private com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector;
 
     @Override
     @Transactional
@@ -136,7 +137,21 @@ public class WorkServiceImpl implements WorkService {
         if (!"DRAFT".equals(work.getAuditStatus()) && !"REJECTED".equals(work.getAuditStatus()))
             throw new BaseException(MessageConstant.WORK_SUBMIT_DENIED);
         workMapper.updateAuditStatus(id, "PENDING_REVIEW");
+        capturePersonaMaterial(work.getOwnerId(), com.orangejd.server.service.PersonaDimension.SKILL,
+                "WORK_SUBMITTED", id, "提交作品《" + work.getTitle() + "》进入审核",
+                "我完成了作品《" + work.getTitle() + "》的整理并提交审核");
         if (aiAuditService != null) aiAuditService.auditWorkAsync(id);
+    }
+
+    private void capturePersonaMaterial(Long accountId, com.orangejd.server.service.PersonaDimension dimension,
+                                        String eventType, Long workId, String evidence, String suggestion) {
+        if (personaMaterialCollector == null) return;
+        try {
+            personaMaterialCollector.capture(accountId, dimension, eventType, "WORK",
+                    String.valueOf(workId), evidence, suggestion);
+        } catch (Exception exception) {
+            log.warn("PERSONA_MATERIAL_CAPTURE_FAILED workId={} accountId={}", workId, accountId, exception);
+        }
     }
 
     @Override

@@ -68,6 +68,17 @@ public interface AiResultRecordMapper {
     Map<String, Object> selectOwned(@Param("id") Long id,
                                     @Param("accountId") Long accountId);
 
+    @Select("""
+            SELECT id, request_id AS requestId, business_type AS businessType,
+                   title, summary, create_time AS createTime
+            FROM ai_result_record
+            WHERE account_id = #{accountId}
+            ORDER BY id DESC
+            LIMIT #{limit}
+            """)
+    List<Map<String, Object>> selectRecentForPersona(@Param("accountId") Long accountId,
+                                                      @Param("limit") int limit);
+
     @Delete("DELETE FROM ai_result_record WHERE id = #{id} AND account_id = #{accountId}")
     int deleteOwned(@Param("id") Long id, @Param("accountId") Long accountId);
 }

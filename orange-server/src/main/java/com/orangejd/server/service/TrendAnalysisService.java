@@ -62,6 +62,9 @@ public class TrendAnalysisService {
     @Autowired(required = false)
     private CareerProjectService careerProjectService;
 
+    @Autowired(required = false)
+    private PersonaPromptContextService personaPromptContextService;
+
     private final RestTemplate restTemplate;
     private final RestTemplate trendRestTemplate;
 
@@ -129,7 +132,9 @@ public class TrendAnalysisService {
             } catch (Exception ignored) {}
         }
 
+        String personaContext = confirmedPersonaContext(accountId);
         String userPrompt = dataSummary + (ragContext.isEmpty() ? "" : "\n\n参考资料：\n" + ragContext) +
+                (personaContext.isEmpty() ? "" : "\n\n" + personaContext) +
                 "\n\n用户问题: " + question;
 
         // 构建请求（使用服务端配置）
@@ -335,6 +340,8 @@ public class TrendAnalysisService {
         profile.append("- 时间投入: ").append(nvl(timeCommitment));
         if (customTime != null && !customTime.isEmpty()) profile.append("（").append(customTime).append("）");
         profile.append("\n");
+        String personaContext = confirmedPersonaContext(accountId);
+        if (!personaContext.isEmpty()) profile.append("\n").append(personaContext).append("\n");
 
         // 数据摘要
         String dataSummary = formatDataSummary(compareData);
@@ -423,6 +430,10 @@ public class TrendAnalysisService {
             if (aiToolRouter != null) throw new BaseException("AI分析失败，本次配额已退回");
         }
         return result;
+    }
+
+    private String confirmedPersonaContext(Long accountId) {
+        return personaPromptContextService == null ? "" : personaPromptContextService.confirmedContext(accountId);
     }
 
     private String formatBeginnerCases(List<BeginnerProjectView> cases) {

@@ -7,6 +7,7 @@ import com.orangejd.server.foundation.aitool.AiResultRecorder;
 import com.orangejd.server.foundation.aitool.AiToolContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
@@ -22,6 +23,9 @@ public class AiResultRecordService implements AiResultRecorder {
     private final ObjectMapper objectMapper;
     private final QuotaService quotaService;
     private final PricingService pricingService;
+
+    @Autowired(required = false)
+    private PersonaMaterialCollector personaMaterialCollector;
 
     public AiResultRecordService(AiResultRecordMapper mapper, ObjectMapper objectMapper,
                                  QuotaService quotaService, PricingService pricingService) {
@@ -49,11 +53,25 @@ public class AiResultRecordService implements AiResultRecorder {
             record.put("summary", summary(context, result));
             record.put("resultJson", resultJson);
             mapper.upsert(record);
+            capturePersonaMaterial(context, String.valueOf(record.get("title")));
         } catch (Exception exception) {
             log.error("AI_RESULT_SAVE_FAILED requestId={} accountId={} type={}",
                     context.requestId(), context.accountId(), context.businessType(), exception);
             refundAfterSaveFailure(context);
             throw new BaseException("分析结果保存失败，本次额度已自动退回，请重新发起分析");
+        }
+    }
+
+    private void capturePersonaMaterial(AiToolContext context, String title) {
+        if (personaMaterialCollector == null) return;
+        try {
+            personaMaterialCollector.capture(context.accountId(), PersonaDimension.GROWTH,
+                    "AI_RESULT_COMPLETED", "AI_RESULT", context.requestId(),
+                    "完成 AI 工具任务：" + title,
+                    "我使用 OrangeVC 的「" + title + "」完成了一次分析或方案生成");
+        } catch (Exception exception) {
+            log.warn("PERSONA_MATERIAL_CAPTURE_FAILED requestId={} accountId={}",
+                    context.requestId(), context.accountId(), exception);
         }
     }
 

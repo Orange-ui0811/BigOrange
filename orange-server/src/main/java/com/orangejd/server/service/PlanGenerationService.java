@@ -42,6 +42,8 @@ public class PlanGenerationService {
     private AiRuntimeConfigService aiConfigService;
     @Autowired(required = false)
     private AiToolRouter aiToolRouter;
+    @Autowired(required = false)
+    private PersonaPromptContextService personaPromptContextService;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -99,6 +101,11 @@ public class PlanGenerationService {
         String prompt = "lite".equals(mode) && phase == 4
                 ? buildPromptLite(summary, prevContents)
                 : buildPrompt(phase, summary, extra, prevContents);
+        String personaContext = personaPromptContextService == null
+                ? "" : personaPromptContextService.confirmedContext(accountId);
+        if (StringUtils.hasText(personaContext)) {
+            prompt += "\n\n" + personaContext;
+        }
         String requestId = null;
         int chargedCost = 0;
         long balance = accountId == null ? 0 : quotaService.getBalance(accountId);

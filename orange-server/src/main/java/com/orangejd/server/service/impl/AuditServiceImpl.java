@@ -14,6 +14,7 @@ import com.orangejd.server.service.NotificationService;
 import com.orangejd.server.service.PricingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public class AuditServiceImpl implements AuditService {
     private final NotificationService notificationService;
     private final QuotaServiceImpl quotaService;
     private final PricingService pricingService;
+
+    @Autowired(required = false)
+    private com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector;
 
     public AuditServiceImpl(WorkMapper workMapper,
                             RequirementMapper requirementMapper,
@@ -86,6 +90,18 @@ public class AuditServiceImpl implements AuditService {
                         : "你的作品《" + work.getTitle() + "》审核未通过",
                 workId
         );
+        if (approved && personaMaterialCollector != null) {
+            try {
+                personaMaterialCollector.capture(work.getOwnerId(),
+                        com.orangejd.server.service.PersonaDimension.GROWTH,
+                        "WORK_APPROVED", "WORK", String.valueOf(workId),
+                        "作品《" + work.getTitle() + "》已通过平台审核",
+                        "我完成并发布了作品《" + work.getTitle() + "》");
+            } catch (Exception exception) {
+                log.warn("PERSONA_MATERIAL_CAPTURE_FAILED workId={} accountId={}",
+                        workId, work.getOwnerId(), exception);
+            }
+        }
     }
 
     @Override

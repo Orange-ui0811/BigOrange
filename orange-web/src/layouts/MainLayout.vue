@@ -59,7 +59,8 @@
 
       <!-- 用户面板 -->
       <div class="sidebar-user">
-        <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
+        <PersonaOrangeBadge v-if="personaAvatar.enabled" compact :equipment="personaAvatar.equipment" :appearance="personaAvatar.appearance" label="我的橙子画像头像" />
+        <el-avatar v-else :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
           {{ (nickname || me.nickname || me.username || '?')[0] }}
         </el-avatar>
         <div class="sidebar-user-info">
@@ -91,6 +92,12 @@
             <span>AI 记录</span>
           </span>
         </el-menu-item>
+        <el-menu-item index="/persona-workshop">
+          <span class="nav-item-content">
+            <el-icon><MagicStick /></el-icon>
+            <span>橙子画像工坊</span>
+          </span>
+        </el-menu-item>
         <el-menu-item index="/publish">
           <span class="nav-item-content">
             <el-icon><Edit /></el-icon>
@@ -119,6 +126,7 @@
       <div class="nav-hint">
         <strong>功能归属</strong>
         榜单、趋势分析、方案设计 → AI 工具<br/>
+        画像、素材箱、橙子换装 → 橙子画像工坊<br/>
         通知、收藏、历史、配额、设置 → 我的
       </div>
 
@@ -171,9 +179,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Shop, Cpu, Edit, ChatDotRound, User, Document } from '@element-plus/icons-vue'
+import { Shop, Cpu, Edit, ChatDotRound, User, Document, MagicStick } from '@element-plus/icons-vue'
 import GuideBubble from '../components/GuideBubble.vue'
+import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
 import request from '../api/request'
+import { getPersonaAvatar } from '../api/personaWorkshop'
 import { unreadCount, avatarUrl, nickname } from '../stores/unread'
 import { applyTradeMode } from '../stores/tradeMode'
 
@@ -182,10 +192,12 @@ const route = useRoute()
 const router = useRouter()
 const me = ref({ username: '', nickname: '' })
 const chatUnread = ref(0)
+const personaAvatar = ref({ enabled: false, equipment: [], appearance: {} })
 const mobileNavItems = [
   { path: '/market', label: '发现', icon: Shop },
   { path: '/ai', label: 'AI 工具', icon: Cpu },
   { path: '/ai-records', label: '记录', icon: Document },
+  { path: '/persona-workshop', label: '画像', icon: MagicStick },
   { path: '/publish', label: '发布', icon: Edit },
   { path: '/chat', label: '消息', icon: ChatDotRound },
   { path: '/me', label: '我的', icon: User },
@@ -202,6 +214,7 @@ const logout = async () => {
 const activeMenu = computed(() => {
   const p = route.path
   if (p.startsWith('/ai-records')) return '/ai-records'
+  if (p.startsWith('/persona-workshop')) return '/persona-workshop'
   if (p.startsWith('/market') || p.startsWith('/work/') || p.startsWith('/req/') || p.startsWith('/order/')) return '/market'
   if (p.startsWith('/ai') || p.startsWith('/submit-job') || p.startsWith('/project-tools') || p.startsWith('/leaderboard') || p.startsWith('/beginner-projects') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/launch-check') || p.startsWith('/open-source') || p.startsWith('/job')) return '/ai'
   if (p.startsWith('/publish')) return '/publish'
@@ -213,6 +226,7 @@ const activeMenu = computed(() => {
 onMounted(async () => {
   try { const res = await request.get('/app/notification/unread-count'); if (res.code === 1) unreadCount.value = res.data } catch {}
   try { const res = await request.get('/app/profile/me'); if (res.code === 1) { me.value = res.data; nickname.value = res.data.nickname || ''; avatarUrl.value = res.data.avatarUrl || '' } } catch {}
+  try { const res = await getPersonaAvatar(); if (res.code === 1 && res.data) personaAvatar.value = res.data } catch {}
   try {
     const res = await request.get('/app/conversation/list?page=1&size=50')
     if (res.code === 1 && res.data?.records) chatUnread.value = res.data.records.reduce((s, c) => s + (c.unreadCount || 0), 0)
@@ -530,7 +544,7 @@ onMounted(async () => {
     bottom: max(10px, env(safe-area-inset-bottom));
     left: 10px;
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     min-height: 62px;
     padding: 6px;
     border: 1px solid rgba(254, 215, 170, .92);

@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,28 @@ class PlanGenerationServiceTest {
         assertEquals("可执行方案", result.get("content"));
         assertEquals(40, result.get("segmentCost"));
         assertEquals(60L, result.get("balance"));
+    }
+
+    @Test
+    void appendsConfirmedPersonaAsBoundedBackgroundContext() {
+        PersonaPromptContextService contextService = mock(PersonaPromptContextService.class);
+        when(contextService.confirmedContext(7L)).thenReturn(
+                "## 账号中已由用户确认的长期画像\n- Build an Agent project");
+        ReflectionTestUtils.setField(service, "personaPromptContextService", contextService);
+        when(restTemplate.exchange(anyString(), eq(HttpMethod.POST),
+                any(HttpEntity.class), eq(Map.class))).thenReturn(ResponseEntity.ok(Map.of(
+                "choices", List.of(Map.of("message", Map.of("content", "可执行方案"))))));
+
+        service.generate(7L, Map.of("phase", 1, "summary", "设计协作平台"));
+
+        @SuppressWarnings("rawtypes")
+        ArgumentCaptor<HttpEntity> request = ArgumentCaptor.forClass(HttpEntity.class);
+        verify(restTemplate).exchange(anyString(), eq(HttpMethod.POST), request.capture(), eq(Map.class));
+        @SuppressWarnings("unchecked")
+        Map<String, Object> body = (Map<String, Object>) request.getValue().getBody();
+        @SuppressWarnings("unchecked")
+        List<Map<String, String>> messages = (List<Map<String, String>>) body.get("messages");
+        assertEquals(true, messages.get(1).get("content").contains("Build an Agent project"));
     }
 
     @Test

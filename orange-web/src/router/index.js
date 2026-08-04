@@ -14,6 +14,7 @@ const routes = [
       { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '市场' } },
       { path: 'ai', name: 'AiHub', component: () => import('../views/AiHub.vue'), meta: { title: 'AI 工具' } },
       { path: 'ai-records', name: 'AiRecords', component: () => import('../views/AiRecords.vue'), meta: { title: 'AI 分析记录' } },
+      { path: 'persona-workshop', name: 'PersonaWorkshop', component: () => import('../views/PersonaWorkshop.vue'), meta: { title: '橙子画像工坊' } },
       { path: 'project-tools', name: 'ProjectTools', component: () => import('../views/ProjectTools.vue'), meta: { title: '做自己的项目' } },
       { path: 'me', name: 'MeHub', component: () => import('../views/MeHub.vue'), meta: { title: '我的' } },
       { path: 'leaderboard', name: 'Leaderboard', component: () => import('../views/Leaderboard.vue'), meta: { title: '榜单排行' } },
