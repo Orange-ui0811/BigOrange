@@ -5,8 +5,8 @@
     <div class="compact-head">
       <div>
         <span class="eyebrow">榜单中心</span>
-        <h2>本网站作品/创作者榜单，以及 GitHub 仓库榜单。</h2>
-        <p>数据源、时间、分类、榜单类型自由切换。GitHub 数据依赖 API 可用性。</p>
+        <h2>从平台热度到 GitHub 趋势，找到真正适合你的项目。</h2>
+        <p>浏览站内作品、GitHub 热门仓库、新手可落地项目，或按真实岗位能力筛选职业成长项目。</p>
       </div>
     </div>
 
@@ -16,31 +16,37 @@
       <el-radio-group v-model="source" size="default" @change="onSourceChange" class="filter-group">
         <el-radio-button value="local">本网站</el-radio-button>
         <el-radio-button value="github">GitHub</el-radio-button>
+        <el-radio-button value="beginner">新手推荐</el-radio-button>
+        <el-radio-button value="career">职业成长</el-radio-button>
       </el-radio-group>
 
-      <span class="filter-label filter-label-spaced">时间</span>
-      <el-radio-group v-model="period" size="default" @change="load" class="filter-group">
+      <span v-if="!['beginner','career'].includes(source)" class="filter-label filter-label-spaced">时间</span>
+      <el-radio-group v-if="!['beginner','career'].includes(source)" v-model="period" size="default" @change="load" class="filter-group">
         <el-radio-button value="all">全时段</el-radio-button>
         <el-radio-button value="week">本周涨星</el-radio-button>
         <el-radio-button value="new" v-if="source==='github'">本周新增</el-radio-button>
       </el-radio-group>
 
-      <span class="filter-label filter-label-spaced">分类</span>
-      <el-select v-model="category" placeholder="全部" clearable size="default" class="filter-select" @change="load">
+      <span v-if="!['beginner','career'].includes(source)" class="filter-label filter-label-spaced">分类</span>
+      <el-select v-if="!['beginner','career'].includes(source)" v-model="category" placeholder="全部" clearable size="default" class="filter-select" @change="load">
         <el-option label="全部" :value="undefined" />
         <el-option v-for="c in categories" :key="c.id" :label="c.name" :value="source==='github'?(c.topicName||c.id):c.id" />
       </el-select>
     </div>
 
-    <!-- GitHub 降级提示 -->
-    <el-alert v-if="warning" :title="warning" type="warning" show-icon closable class="leaderboard-alert" />
+    <BeginnerProjects v-if="source === 'beginner'" embedded class="beginner-source" />
+    <CareerProjects v-if="source === 'career'" class="beginner-source" />
 
-    <!-- 子 Tab -->
-    <el-tabs v-model="type" class="leaderboard-tabs" @tab-change="load">
-      <el-tab-pane label="作品" name="works" v-if="source==='local'" />
-      <el-tab-pane label="仓库" name="repos" v-if="source==='github'" />
-      <el-tab-pane label="创作者" name="creators" v-if="source==='local'" />
-    </el-tabs>
+    <template v-if="!['beginner','career'].includes(source)">
+      <!-- GitHub 降级提示 -->
+      <el-alert v-if="warning" :title="warning" type="warning" show-icon closable class="leaderboard-alert" />
+
+      <!-- 子 Tab -->
+      <el-tabs v-model="type" class="leaderboard-tabs" @tab-change="load">
+        <el-tab-pane label="作品" name="works" v-if="source==='local'" />
+        <el-tab-pane label="仓库" name="repos" v-if="source==='github'" />
+        <el-tab-pane label="创作者" name="creators" v-if="source==='local'" />
+      </el-tabs>
 
     <!-- 加载态 -->
     <el-row :gutter="16" v-if="loading">
@@ -105,34 +111,40 @@
       </el-col>
     </el-row>
 
-    <!-- 空态 -->
-    <el-empty v-if="!loading && !list.length" :description="emptyText" />
+      <!-- 空态 -->
+      <el-empty v-if="!loading && !list.length" :description="emptyText" />
 
-    <!-- 分页 -->
-    <div v-if="total > pageSize" class="leaderboard-pagination">
-      <el-pagination background layout="total, prev, pager, next" :total="total" :page-size="pageSize" v-model:current-page="page" @current-change="load" />
-    </div>
+      <!-- 分页 -->
+      <div v-if="total > pageSize" class="leaderboard-pagination">
+        <el-pagination background layout="total, prev, pager, next" :total="total" :page-size="pageSize" v-model:current-page="page" @current-change="load" />
+      </div>
+    </template>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
+import BeginnerProjects from './BeginnerProjects.vue'
+import CareerProjects from './CareerProjects.vue'
 import request from '../api/request'
 
 const router = useRouter()
+const route = useRoute()
 
 const tourSteps = [
-  { selector: '.leaderboard-filters', text: '切换数据源看本网站排名或 GitHub 热门仓库。选时段看全时段/本周涨星/本周新增。GitHub 专属「本周新增」可以看到刚出炉的项目！', expression: 'wink' },
+  { selector: '.leaderboard-filters', text: '切换本网站、GitHub 和新手推荐三个数据源。新手推荐只展示已经完成环境核验和中文说明的真实仓库。', expression: 'wink' },
   { selector: '.leaderboard-tabs', text: '本网站榜单分作品和创作者两个维度，分别看哪些作品最受欢迎、哪些创作者最高产。', expression: 'smile' },
   { selector: '.rank-grid, .rank-card', text: '点击任意卡片跳转到作品详情或 GitHub 仓库。排名越靠前越热门，看看有没有你感兴趣的方向～', expression: 'sparkle' },
 ]
 
-const source = ref('local')
+const validSources = new Set(['local', 'github', 'beginner', 'career'])
+const normalizeSource = value => validSources.has(String(value)) ? String(value) : 'local'
+const source = ref(normalizeSource(route.query.source))
 const period = ref('all')
 const category = ref(null)
-const type = ref('works')
+const type = ref(source.value === 'github' ? 'repos' : ['beginner', 'career'].includes(source.value) ? source.value : 'works')
 const list = ref([])
 const loading = ref(false)
 const page = ref(1)
@@ -149,7 +161,7 @@ const emptyText = computed(() => {
   if (category.value) return '该分类暂无内容'
   if (period.value === 'week') return '本周涨星暂无数据'
   if (period.value === 'new') return '本周暂无新增项目'
-  if (source.value === 'github') return 'GitHub 榜单暂无数据'
+  if (source.value === 'github') return 'GitHub 数据暂无内容'
   return '暂无内容'
 })
 
@@ -163,6 +175,12 @@ const loadCategories = async () => {
 }
 
 const load = async () => {
+  if (['beginner', 'career'].includes(source.value)) {
+    list.value = []
+    total.value = 0
+    warning.value = ''
+    return
+  }
   loading.value = true
   try {
     let endpoint, params = { page: page.value, size: pageSize.value }
@@ -205,13 +223,24 @@ const onSourceChange = () => {
   page.value = 1
   category.value = null
   warning.value = ''
+  router.replace({ path: '/leaderboard', query: source.value === 'local' ? {} : { source: source.value } })
   if (source.value === 'github') type.value = 'repos'
+  else if (source.value === 'beginner') type.value = 'beginner'
+  else if (source.value === 'career') type.value = 'career'
   else {
-    if (type.value === 'repos') type.value = 'works'
+    if (!['works', 'creators'].includes(type.value)) type.value = 'works'
     if (period.value === 'new') period.value = 'all' // "本周新增"仅 GitHub 有
   }
   load()
 }
+
+watch(() => route.query.source, value => {
+  const next = normalizeSource(value)
+  if (next !== source.value) {
+    source.value = next
+    onSourceChange()
+  }
+})
 
 const onClick = (item) => {
   if (source.value === 'local' && type.value === 'works') {
@@ -233,6 +262,7 @@ onMounted(async () => {
 .leaderboard-page {
   /* outer wrapper — no extra card, compact-head handles the top */
 }
+.beginner-source { margin-top: 4px; }
 
 /* Compact Head */
 .compact-head {

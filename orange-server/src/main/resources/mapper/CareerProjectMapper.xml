@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.CareerProjectMapper">
+    <sql id="profileColumns">
+        cp.project_id, bp.full_name, bp.owner_name, bp.repository_name, bp.html_url,
+        bp.description_original, bp.description_zh, bp.primary_language, bp.tech_stack,
+        bp.license_spdx, bp.stars, bp.archived, bp.has_readme, bp.has_quick_start,
+        bp.requires_docker, bp.requires_database, bp.requires_secrets,
+        bp.requires_external_service, bp.codebase_size, bp.github_updated_at,
+        cp.overall_score, cp.best_role_code, cp.difficulty, cp.summary_zh,
+        cp.career_value, cp.proof_points, cp.interview_topics, cp.modification_plan,
+        cp.main_risks, cp.estimated_duration, cp.status, cp.hidden_reason,
+        cp.score_version, cp.taxonomy_version, cp.content_hash, cp.last_verified_at,
+        cp.source_run_id, cp.create_time, cp.update_time
+    </sql>
+
+    <insert id="upsertProfile">
+        INSERT INTO career_project_profile
+        (project_id, overall_score, best_role_code, difficulty, status, score_version,
+         taxonomy_version, content_hash, last_verified_at, source_run_id)
+        VALUES
+        (#{projectId}, #{overallScore}, #{bestRoleCode}, #{difficulty}, #{status}, #{scoreVersion},
+         #{taxonomyVersion}, #{contentHash}, CURRENT_TIMESTAMP, #{sourceRunId})
+        ON DUPLICATE KEY UPDATE
+          overall_score = VALUES(overall_score), best_role_code = VALUES(best_role_code),
+          difficulty = VALUES(difficulty),
+          summary_zh = IF(content_hash &lt;=&gt; VALUES(content_hash)
+              AND score_version = VALUES(score_version), summary_zh, NULL),
+          career_value = IF(content_hash &lt;=&gt; VALUES(content_hash)
+              AND score_version = VALUES(score_version), career_value, NULL),
+          proof_points = IF(content_hash &lt;=&gt; VALUES(content_hash)
+              AND score_version = VALUES(score_version), proof_points, NULL),
+          interview_topics = IF(content_hash &lt;=&gt; VALUES(content_hash)
+              AND score_version = VALUES(score_version), interview_topics, NULL),
+          modification_plan = IF(content_hash &lt;=&gt; VALUES(content_hash)
+              AND score_version = VALUES(score_version), modification_plan, NULL),
+          main_risks = IF(content_hash &lt;=&gt; VALUES(content_hash)
+              AND score_version = VALUES(score_version), main_risks, NULL),
+          estimated_duration = IF(content_hash &lt;=&gt; VALUES(content_hash)
+              AND score_version = VALUES(score_version), estimated_duration, NULL),
+          status = CASE
+              WHEN status = 'HIDDEN' THEN 'HIDDEN'
+              WHEN VALUES(status) = 'INVALID' THEN 'INVALID'
+              WHEN NOT (content_hash &lt;=&gt; VALUES(content_hash))
+                   OR NOT (score_version &lt;=&gt; VALUES(score_version)) THEN 'CANDIDATE'
+              ELSE status END,
+          score_version = VALUES(score_version), taxonomy_version = VALUES(taxonomy_version),
+          content_hash = VALUES(content_hash), last_verified_at = CURRENT_TIMESTAMP,
+          source_run_id = VALUES(source_run_id)
+    </insert>
+
+    <delete id="deleteRoleScores">DELETE FROM career_project_role_score WHERE project_id = #{projectId}</delete>
+    <insert id="insertRoleScore">
+        INSERT INTO career_project_role_score
+        (project_id, role_code, role_relevance, provable_ability, knowledge_coverage,
+         portfolio_completeness, interview_value, total_score, job_sample_count,
+         evidence_json, score_version)
+        VALUES
+        (#{projectId}, #{roleCode}, #{roleRelevance}, #{provableAbility}, #{knowledgeCoverage},
+         #{portfolioCompleteness}, #{interviewValue}, #{totalScore}, #{jobSampleCount},
+         CAST(#{evidenceJson} AS JSON), #{scoreVersion})
+    </insert>
+
+    <select id="selectById" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE cp.project_id = #{projectId}
+    </select>
+    <select id="selectRoleScores" resultType="com.orangejd.pojo.entity.CareerRoleScore">
+        SELECT project_id, role_code, role_relevance, provable_ability, knowledge_coverage,
+               portfolio_completeness, interview_value, total_score, job_sample_count,
+               evidence_json, score_version
+        FROM career_project_role_score WHERE project_id = #{projectId}
+        ORDER BY total_score DESC, role_code
+    </select>
+
+    <sql id="publicFilters">
+        cp.status = 'PUBLISHED'
+        <if test="keyword != null and keyword != ''">
+            AND (bp.full_name LIKE CONCAT('%', #{keyword}, '%')
+              OR cp.summary_zh LIKE CONCAT('%', #{keyword}, '%')
+              OR cp.career_value LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="language != null and language != ''">AND bp.primary_language = #{language}</if>
+        <if test="difficulty != null and difficulty != ''">AND cp.difficulty = #{difficulty}</if>
+        <if test="roleCode != null and roleCode != ''">
+            AND EXISTS (SELECT 1 FROM career_project_role_score crs
+                        WHERE crs.project_id = cp.project_id AND crs.role_code = #{roleCode}
+                          AND crs.total_score &gt;= 55)
+        </if>
+    </sql>
+    <select id="selectPublic" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE <include refid="publicFilters"/>
+        ORDER BY cp.overall_score DESC, bp.github_updated_at DESC, bp.full_name
+        LIMIT #{offset}, #{limit}
+    </select>
+    <select id="countPublic" resultType="long">
+        SELECT COUNT(*) FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE <include refid="publicFilters"/>
+    </select>
+    <select id="selectAdmin" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        <where>
+            <if test="status != null and status != ''">cp.status = #{status}</if>
+            <if test="keyword != null and keyword != ''">
+                AND (bp.full_name LIKE CONCAT('%', #{keyword}, '%') OR cp.summary_zh LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+        ORDER BY cp.update_time DESC, cp.project_id DESC LIMIT #{offset}, #{limit}
+    </select>
+    <select id="countAdmin" resultType="long">
+        SELECT COUNT(*) FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        <where>
+            <if test="status != null and status != ''">cp.status = #{status}</if>
+            <if test="keyword != null and keyword != ''">
+                AND (bp.full_name LIKE CONCAT('%', #{keyword}, '%') OR cp.summary_zh LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+    </select>
+    <select id="selectPendingEnrichment" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE cp.status IN ('CANDIDATE', 'PUBLISHED') AND cp.overall_score &gt;= 55
+          AND (cp.summary_zh IS NULL OR cp.summary_zh = '')
+        ORDER BY cp.overall_score DESC, cp.update_time DESC LIMIT #{limit}
+    </select>
+    <update id="updateEnrichment">
+        UPDATE career_project_profile
+        SET summary_zh = #{summaryZh}, career_value = #{careerValue}, proof_points = #{proofPoints},
+            interview_topics = #{interviewTopics}, modification_plan = #{modificationPlan},
+            main_risks = #{mainRisks}, estimated_duration = #{estimatedDuration}, status = #{status}
+        WHERE project_id = #{projectId}
+    </update>
+    <update id="updateStatus">
+        UPDATE career_project_profile SET status = #{status}, hidden_reason = #{hiddenReason}
+        WHERE project_id = #{projectId}
+    </update>
+
+    <delete id="deleteWeeklyPicks">DELETE FROM career_project_weekly_pick WHERE week_start = #{weekStart}</delete>
+    <insert id="insertWeeklyPick">
+        INSERT INTO career_project_weekly_pick (week_start, project_id, rank_no, selection_source)
+        VALUES (#{weekStart}, #{projectId}, #{rankNo}, #{selectionSource})
+    </insert>
+    <select id="selectWeeklyPicks" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_weekly_pick wp
+        JOIN career_project_profile cp ON cp.project_id = wp.project_id
+        JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE wp.week_start = #{weekStart} AND cp.status = 'PUBLISHED'
+        ORDER BY wp.rank_no
+    </select>
+    <select id="selectWeeklyPickSource" resultType="string">
+        SELECT selection_source FROM career_project_weekly_pick
+        WHERE week_start = #{weekStart} ORDER BY rank_no LIMIT 1
+    </select>
+    <select id="selectTopForWeekly" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE cp.status = 'PUBLISHED'
+        ORDER BY cp.overall_score DESC, bp.github_updated_at DESC, bp.full_name LIMIT #{limit}
+    </select>
+</mapper>

@@ -60,7 +60,9 @@ public class TrendProfileAnalysisService {
                 text(parameters.get("customExp"), 200),
                 text(parameters.get("customLang"), 200),
                 text(parameters.get("customTime"), 200),
-                !Boolean.FALSE.equals(parameters.get("useRag")));
+                !Boolean.FALSE.equals(parameters.get("useRag")),
+                Boolean.TRUE.equals(parameters.get("preferBeginnerProjects")),
+                Boolean.TRUE.equals(parameters.get("preferCareerProjects")));
         if (analysis.containsKey("error")) {
             throw new BaseException(String.valueOf(analysis.get("error")));
         }
@@ -90,6 +92,8 @@ public class TrendProfileAnalysisService {
             history.setCustomLang(text(parameters.get("customLang"), 200));
             history.setCustomTime(text(parameters.get("customTime"), 200));
             history.setUseRag(!Boolean.FALSE.equals(parameters.get("useRag")));
+            history.setPreferBeginnerProjects(Boolean.TRUE.equals(parameters.get("preferBeginnerProjects")));
+            history.setPreferCareerProjects(Boolean.TRUE.equals(parameters.get("preferCareerProjects")));
             history.setResultJson(objectMapper.writeValueAsString(result));
             trendHistoryMapper.insert(history);
             if (recordMetrics != null) recordMetrics.success("trend", "save");

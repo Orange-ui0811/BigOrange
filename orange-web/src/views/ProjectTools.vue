@@ -43,7 +43,7 @@ const router = useRouter()
 const tourRef = ref(null)
 const steps = ['寻找灵感', '判断趋势', '形成方案', '上线验收']
 const tools = [
-  { id: 'github', stage: '01 · DISCOVER', title: 'GitHub 榜单', icon: 'Star', route: '/leaderboard', description: '查看本周涨星和长期热门项目，观察技术方向与产品机会。', outcome: '获得项目灵感与技术参考' },
+  { id: 'github', stage: '01 · DISCOVER', title: '榜单排行', icon: 'Star', route: '/leaderboard', description: '在本网站、GitHub 与新手推荐之间切换，寻找热门作品、技术趋势和能跑起来的参考项目。', outcome: '获得项目灵感与技术参考' },
   { id: 'trend', stage: '02 · ANALYZE', title: '趋势分析', icon: 'TrendCharts', route: '/trend', description: '围绕技术或产品问题进行检索、分析和方向判断。', outcome: '形成可解释的方向结论' },
   { id: 'plan', stage: '03 · PLAN', title: '方案设计', icon: 'Document', route: '/plan', description: '把想法拆成需求、风险、任务计划和岗位能力要求。', outcome: '获得可执行的项目方案' },
   { id: 'launch', stage: '04 · VERIFY', title: '上线体检', icon: 'DocumentChecked', route: '/launch-check', description: '按阶段检查部署形态、安全边界、生产验收和后续运维。', outcome: '获得上线准备报告' },

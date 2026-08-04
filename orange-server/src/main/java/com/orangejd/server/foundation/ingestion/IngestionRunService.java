@@ -98,6 +98,11 @@ public class IngestionRunService {
         mapper.upsertItem(runId, stage, itemKey, status, json(result), abbreviate(error));
     }
 
+    public List<String> succeededItemKeys(Long runId, String stage) {
+        if (runId == null) return List.of();
+        return mapper.selectSucceededItemKeys(runId, stage);
+    }
+
     public void progress(Long runId, int total, int success, int failed, int skipped, String error) {
         if (runId == null) return;
         int done = success + failed + skipped;
@@ -131,6 +136,7 @@ public class IngestionRunService {
         if (pipelineType.startsWith("ISSUE_VERIFY")) return "ISSUE_VERIFY";
         if (pipelineType.startsWith("ISSUE")) return "ISSUE_FULL";
         if (pipelineType.startsWith("README")) return "README_PIPELINE";
+        if (pipelineType.startsWith("BEGINNER")) return "BEGINNER_PROJECT_PIPELINE";
         return pipelineType;
     }
 

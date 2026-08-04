@@ -177,6 +177,8 @@ import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
+import { confirmQuotaUsage } from '../utils/quotaConfirm'
+import { AI_AUTO_RETRY_NOTICE } from '../utils/aiRetry'
 
 const viewMode = ref('workspace')
 const assessment = ref(null)
@@ -260,20 +262,20 @@ const startNew = () => {
 
 const confirmGenerate = async () => {
   const hasCurrent = !!currentContent.value
-  const message = hasCurrent
-    ? `重新生成将消耗 ${stageCost.value} 配额，并使后续阶段报告失效。`
-    : `生成本阶段报告将消耗 ${stageCost.value} 配额。`
-  try {
-    await ElMessageBox.confirm(message, hasCurrent ? '确认重新生成' : '确认生成', {
-      type: 'warning', confirmButtonText: '确认并生成', cancelButtonText: '取消'
-    })
-  } catch { return }
+  if (!(await confirmQuotaUsage({
+    actionLabel: hasCurrent ? '重新生成本阶段报告' : '生成本阶段报告',
+    cost: stageCost.value,
+    title: hasCurrent ? '确认重新生成' : '确认生成',
+    confirmButtonText: '确认并生成',
+    notice: hasCurrent ? '重新生成后，后续阶段报告将失效。' : '',
+    estimatedTime: '1～3 分钟',
+  }))) return
 
   generating.value = true
   try {
     const response = await request.post(
       `/app/launch-check/projects/${assessment.value.id}/stages/${currentStage.value}/generate`,
-      {}, { timeout: 150000 }
+      {}, { timeout: 0 }
     )
     if (response.code === 1) {
       await openAssessment(assessment.value.id)
@@ -281,7 +283,7 @@ const confirmGenerate = async () => {
       ElMessage.success('阶段报告已生成并保存')
     }
   } catch {
-    ElMessage.error('生成失败，已消费的配额将自动退回')
+    ElMessage.info(AI_AUTO_RETRY_NOTICE)
   } finally { generating.value = false }
 }
 

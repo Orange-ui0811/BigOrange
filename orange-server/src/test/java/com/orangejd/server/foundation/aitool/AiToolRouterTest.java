@@ -13,6 +13,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 class AiToolRouterTest {
@@ -44,7 +46,8 @@ class AiToolRouterTest {
         AiRuntimeConfig legacy = new AiRuntimeConfig("project", "legacy",
                 "https://legacy.example/v1", "legacy-key", "legacy-model", "ENV");
         when(configs.current(AiRuntimeConfigService.PROJECT)).thenReturn(legacy);
-        router = new AiToolRouter(properties, leases, configs, logs, new SimpleMeterRegistry());
+        router = new AiToolRouter(properties, leases, configs, logs,
+                mock(AiResultRecorder.class), new SimpleMeterRegistry());
 
         String result = router.execute(context(), AiRuntimeConfig::model);
 
@@ -59,7 +62,8 @@ class AiToolRouterTest {
         AiToolSlotLeaseService leases = mock(AiToolSlotLeaseService.class);
         when(leases.acquireGlobal(any(), anyInt(), anyLong())).thenReturn(Optional.empty());
         router = new AiToolRouter(properties, leases, mock(AiRuntimeConfigService.class),
-                mock(AiToolCallLogMapper.class), new SimpleMeterRegistry());
+                mock(AiToolCallLogMapper.class), mock(AiResultRecorder.class),
+                new SimpleMeterRegistry());
         AtomicBoolean invoked = new AtomicBoolean();
 
         assertThrows(BaseException.class, () -> router.execute(context(), config -> {
@@ -83,13 +87,16 @@ class AiToolRouterTest {
                 new AiToolSlotLeaseService.SlotLease("slot-1", "lease-value", slot, 330_000);
         when(leases.acquireGlobal(any(), anyInt(), anyLong())).thenReturn(Optional.of(global));
         when(leases.acquireSlot(any(), any(), anyLong())).thenReturn(Optional.of(slotLease));
-        router = new AiToolRouter(properties, leases, configs, logs, new SimpleMeterRegistry());
+        AiResultRecorder records = mock(AiResultRecorder.class);
+        router = new AiToolRouter(properties, leases, configs, logs, records,
+                new SimpleMeterRegistry());
 
         String result = router.execute(context(), AiRuntimeConfig::model);
 
         assertEquals("gitee-model", result);
+        verify(records).saveRequired(context(), "gitee-model");
         verify(configs, never()).current(AiRuntimeConfigService.TOOL_FALLBACK);
-        verify(logs).finish("request-1", "SUCCEEDED", null, null, null);
+        verify(logs).finish("request-1", 1, "SUCCEEDED", null, null, null);
         verify(leases).release(global, slotLease);
     }
 
@@ -106,7 +113,8 @@ class AiToolRouterTest {
         when(leases.acquireGlobal(any(), anyInt(), anyLong())).thenReturn(Optional.of(global));
         when(leases.acquireSlot(any(), any(), anyLong())).thenReturn(Optional.empty());
         when(configs.current(AiRuntimeConfigService.TOOL_FALLBACK)).thenReturn(fallback);
-        router = new AiToolRouter(properties, leases, configs, logs, new SimpleMeterRegistry());
+        router = new AiToolRouter(properties, leases, configs, logs,
+                mock(AiResultRecorder.class), new SimpleMeterRegistry());
 
         String result = router.execute(context(), AiRuntimeConfig::model);
 
@@ -128,7 +136,7 @@ class AiToolRouterTest {
         when(leases.acquireSlot(any(), any(), anyLong())).thenReturn(Optional.of(slotLease));
         doThrow(new IllegalStateException("database unavailable")).when(logs).insert(any());
         router = new AiToolRouter(properties, leases, mock(AiRuntimeConfigService.class),
-                logs, new SimpleMeterRegistry());
+                logs, mock(AiResultRecorder.class), new SimpleMeterRegistry());
 
         assertThrows(IllegalStateException.class,
                 () -> router.execute(context(), config -> "unexpected"));
@@ -146,7 +154,7 @@ class AiToolRouterTest {
         }));
 
         verify(fixture.leases()).setInvalid(1);
-        verify(fixture.logs()).finish("request-1", "FAILED", 401,
+        verify(fixture.logs()).finish("request-1", 1, "FAILED", 401,
                 "AUTH_REJECTED", "AI 服务请求失败（HTTP 401）");
         verify(fixture.leases()).release(fixture.global(), fixture.slotLease());
     }
@@ -161,8 +169,43 @@ class AiToolRouterTest {
         }));
 
         verify(fixture.leases()).setThrottled(1, 45_000);
-        verify(fixture.logs()).finish("request-1", "FAILED", 429,
+        verify(fixture.logs()).finish("request-1", 1, "FAILED", 429,
                 "RATE_LIMITED", "AI 服务请求失败（HTTP 429）");
+    }
+
+    @Test
+    void automaticallyRetriesTransientAiFailuresUntilResultIsSaved() {
+        AiToolPoolProperties properties = properties(true, 50, "gitee-key-1", true, 3);
+        AiToolSlotLeaseService leases = mock(AiToolSlotLeaseService.class);
+        AiToolCallLogMapper logs = mock(AiToolCallLogMapper.class);
+        AiResultRecorder records = mock(AiResultRecorder.class);
+        AiToolSlotLeaseService.GlobalLease global =
+                new AiToolSlotLeaseService.GlobalLease("global-1", 330_000);
+        AiToolPoolProperties.Slot slot = properties.slots().getFirst();
+        AiToolSlotLeaseService.SlotLease slotLease =
+                new AiToolSlotLeaseService.SlotLease("slot-1", "lease-value", slot, 330_000);
+        when(leases.acquireGlobal(any(), anyInt(), anyLong())).thenReturn(Optional.of(global));
+        when(leases.acquireSlot(any(), any(), anyLong())).thenReturn(Optional.of(slotLease));
+        router = new AiToolRouter(properties, leases, mock(AiRuntimeConfigService.class),
+                logs, records, new SimpleMeterRegistry());
+        AtomicInteger attempts = new AtomicInteger();
+
+        String result = router.execute(context(), config -> {
+            if (attempts.incrementAndGet() < 3) {
+                throw new BaseException("AI 调用暂时失败，系统将自动重试");
+            }
+            return "最终结果";
+        });
+
+        assertEquals("最终结果", result);
+        assertEquals(3, attempts.get());
+        verify(logs).finish("request-1", 1, "RETRY_WAIT", null,
+                "BaseException", "AI 调用暂时失败，系统将自动重试");
+        verify(logs).finish("request-1", 2, "RETRY_WAIT", null,
+                "BaseException", "AI 调用暂时失败，系统将自动重试");
+        verify(logs).finish("request-1", 3, "SUCCEEDED", null, null, null);
+        verify(records).saveRequired(context(), "最终结果");
+        verify(leases, times(3)).release(global, slotLease);
     }
 
     @Test
@@ -197,9 +240,15 @@ class AiToolRouterTest {
     }
 
     private AiToolPoolProperties properties(boolean enabled, int max, String key1) {
+        return properties(enabled, max, key1, false, 1);
+    }
+
+    private AiToolPoolProperties properties(boolean enabled, int max, String key1,
+                                            boolean autoRetry, int maxAttempts) {
         return new AiToolPoolProperties(enabled, max, 0, 330_000,
                 "https://ai.example/v1", "gitee-model", key1,
-                "", "", "", "", "", "", "", "", "");
+                "", "", "", "", "", "", "", "", "",
+                autoRetry, maxAttempts, 0, 0);
     }
 
     private RoutedFixture routedFixture() {
@@ -214,7 +263,7 @@ class AiToolRouterTest {
         when(leases.acquireGlobal(any(), anyInt(), anyLong())).thenReturn(Optional.of(global));
         when(leases.acquireSlot(any(), any(), anyLong())).thenReturn(Optional.of(slotLease));
         router = new AiToolRouter(properties, leases, mock(AiRuntimeConfigService.class),
-                logs, new SimpleMeterRegistry());
+                logs, mock(AiResultRecorder.class), new SimpleMeterRegistry());
         return new RoutedFixture(leases, logs, global, slotLease);
     }
 

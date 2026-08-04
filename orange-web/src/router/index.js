@@ -13,9 +13,11 @@ const routes = [
     children: [
       { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '市场' } },
       { path: 'ai', name: 'AiHub', component: () => import('../views/AiHub.vue'), meta: { title: 'AI 工具' } },
+      { path: 'ai-records', name: 'AiRecords', component: () => import('../views/AiRecords.vue'), meta: { title: 'AI 分析记录' } },
       { path: 'project-tools', name: 'ProjectTools', component: () => import('../views/ProjectTools.vue'), meta: { title: '做自己的项目' } },
       { path: 'me', name: 'MeHub', component: () => import('../views/MeHub.vue'), meta: { title: '我的' } },
-      { path: 'leaderboard', name: 'Leaderboard', component: () => import('../views/Leaderboard.vue'), meta: { title: '榜单' } },
+      { path: 'leaderboard', name: 'Leaderboard', component: () => import('../views/Leaderboard.vue'), meta: { title: '榜单排行' } },
+      { path: 'beginner-projects', redirect: '/leaderboard?source=beginner' },
       { path: 'trend', name: 'TrendAnalysis', component: () => import('../views/TrendAnalysis.vue'), meta: { title: '趋势分析' } },
       { path: 'plan', name: 'PlanDesigner', component: () => import('../views/PlanDesigner.vue'), meta: { title: '方案设计' } },
       { path: 'launch-check', name: 'LaunchCheck', component: () => import('../views/LaunchCheck.vue'), meta: { title: '上线体检' } },

@@ -16,6 +16,7 @@ import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 import com.orangejd.server.foundation.aitool.AiToolContext;
 import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRetryPolicy;
 import com.orangejd.server.foundation.aitool.AiToolRouter;
 
 import java.net.URI;
@@ -162,10 +163,13 @@ public class LaunchCheckService {
             return Map.of("stageNo", stageNo, "stageTitle", STAGE_TITLES[stageNo],
                     "content", content, "segmentCost", cost, "balance", balance);
         } catch (Exception e) {
-            quotaService.refund(accountId, cost, requestId, "上线体检失败退款");
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (!retryManaged) quotaService.refund(accountId, cost, requestId, "上线体检失败退款");
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
-            throw new BaseException("AI 生成失败，请稍后重试");
+            throw new BaseException(retryManaged
+                    ? "AI 生成暂时失败，系统将自动重试"
+                    : "AI 生成失败，本次配额已退回");
         }
     }
 

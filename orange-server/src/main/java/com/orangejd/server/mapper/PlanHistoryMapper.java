@@ -19,6 +19,23 @@ public interface PlanHistoryMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Map<String, Object> record);
 
+    @Update("""
+            UPDATE plan_history
+            SET content_hash = #{contentHash}, summary = #{summary},
+                phase1 = #{phase1}, phase2 = #{phase2}, phase3 = #{phase3},
+                phase4 = #{phase4}, phase5 = #{phase5}, phase6 = #{phase6}
+            WHERE id = #{id} AND account_id = #{accountId}
+            """)
+    int updateOwned(Map<String, Object> record);
+
+    @Update("""
+            UPDATE plan_history
+            SET phase6 = #{phase6}, content_hash = NULL
+            WHERE id = #{id} AND account_id = #{accountId}
+            """)
+    int updatePhase6Owned(@Param("id") Long id, @Param("accountId") Long accountId,
+                          @Param("phase6") String phase6);
+
     @Select("""
             SELECT id, summary, phase1, phase2, phase3, phase4, phase5, phase6,
                    create_time AS createTime

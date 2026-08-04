@@ -95,6 +95,14 @@ const pipelineOptions = [
   { value: 'ISSUE_VERIFY', label: 'Issue 状态核验' },
   { value: 'ISSUE_TRANSLATE', label: 'Issue 翻译' },
   { value: 'README_RETRY', label: 'README 失败恢复' },
+  { value: 'BEGINNER_DISCOVERY', label: '新手项目发现与评分' },
+  { value: 'BEGINNER_VERIFY', label: '新手项目重新核验' },
+  { value: 'BEGINNER_ENRICH', label: '新手项目中文说明' },
+  { value: 'BEGINNER_WEEKLY_PICK', label: '新手项目周精选' },
+  { value: 'CAREER_DISCOVERY', label: '职业项目发现与评分' },
+  { value: 'CAREER_VERIFY', label: '职业项目重新核验' },
+  { value: 'CAREER_ENRICH', label: '职业项目说明生成' },
+  { value: 'CAREER_WEEKLY_PICK', label: '职业项目周精选' },
 ]
 const statusOptions = ['PENDING', 'RUNNING', 'RETRY_WAIT', 'SUCCEEDED', 'PARTIAL_FAILED', 'FAILED', 'CANCELLED']
 const records = ref([])

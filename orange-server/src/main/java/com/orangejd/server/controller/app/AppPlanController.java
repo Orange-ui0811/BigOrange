@@ -46,7 +46,17 @@ public class AppPlanController {
     @PostMapping("/generate")
     public Result<?> generate(@RequestBody Map<String, Object> body, HttpServletRequest request) {
         setCurrentUserFromToken(request);
-        return Result.success(generationService.generate(BaseContext.getCurrentId(), body));
+        Long accountId = BaseContext.getCurrentId();
+        Map<String, Object> result = generationService.generate(accountId, body);
+        if (accountId != null && accountId > 0 && result.get("content") != null) {
+            int generatedPhase = number(result.get("phase"), 0L).intValue() + 1;
+            if (generatedPhase >= 2 && generatedPhase <= 5) {
+                Map<String, Object> snapshot = new LinkedHashMap<>(body);
+                snapshot.put("phase" + generatedPhase, result.get("content"));
+                result.put("historyId", upsertHistory(accountId, snapshot));
+            }
+        }
+        return Result.success(result);
     }
 
     @GetMapping("/config")
@@ -69,17 +79,9 @@ public class AppPlanController {
         Long accountId = BaseContext.getCurrentId();
         if (accountId == null || accountId == 0) return Result.error("请先登录");
         try {
-            Map<String, Object> record = new LinkedHashMap<>();
-            record.put("accountId", accountId);
-            record.put("summary", text(body.get("summary"), 10_000, "方案摘要"));
-            for (int phase = 1; phase <= 6; phase++) {
-                String key = "phase" + phase;
-                record.put(key, text(body.get(key), 2_000_000, "方案阶段"));
-            }
-            record.put("contentHash", contentHash(record));
-            planHistoryMapper.insert(record);
+            Long id = upsertHistory(accountId, body);
             recordMetrics.success("plan", "save");
-            return Result.success(Collections.singletonMap("id", record.get("id")));
+            return Result.success(Collections.singletonMap("id", id));
         } catch (BaseException e) {
             recordMetrics.failure("plan", "save");
             throw e;
@@ -111,6 +113,34 @@ public class AppPlanController {
         String result = value == null ? "" : String.valueOf(value).trim();
         if (result.length() > maxLength) throw new BaseException(fieldName + "内容过长");
         return result;
+    }
+
+    private Long upsertHistory(Long accountId, Map<String, Object> body) {
+        Map<String, Object> record = new LinkedHashMap<>();
+        record.put("accountId", accountId);
+        record.put("summary", text(body.get("summary"), 10_000, "方案摘要"));
+        for (int phase = 1; phase <= 6; phase++) {
+            String key = "phase" + phase;
+            record.put(key, text(body.get(key), 2_000_000, "方案阶段"));
+        }
+        record.put("contentHash", contentHash(record));
+
+        Long historyId = number(body.get("historyId"), null);
+        if (historyId == null) historyId = number(body.get("id"), null);
+        if (historyId != null && historyId > 0) {
+            record.put("id", historyId);
+            if (planHistoryMapper.updateOwned(record) > 0) return historyId;
+            record.remove("id");
+        }
+        planHistoryMapper.insert(record);
+        return number(record.get("id"), null);
+    }
+
+    private Long number(Object value, Long fallback) {
+        if (value instanceof Number number) return number.longValue();
+        if (value == null || String.valueOf(value).isBlank()) return fallback;
+        try { return Long.parseLong(String.valueOf(value)); }
+        catch (NumberFormatException ignored) { return fallback; }
     }
 
     private String contentHash(Map<String, Object> record) {

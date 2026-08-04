@@ -116,6 +116,13 @@ public interface IngestionRunMapper {
             """)
     List<Map<String, Object>> selectItems(Long runId);
 
+    @Select("""
+            SELECT item_key FROM ingestion_run_item
+            WHERE run_id = #{runId} AND stage = #{stage} AND status = 'SUCCEEDED'
+            ORDER BY id
+            """)
+    List<String> selectSucceededItemKeys(@Param("runId") Long runId, @Param("stage") String stage);
+
     @Select("SELECT run_id FROM ingestion_pipeline_lock WHERE pipeline_key = #{pipelineKey} AND lease_until > NOW()")
     Long selectActiveLock(String pipelineKey);
 

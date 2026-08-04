@@ -85,6 +85,12 @@
             <span>AI 工具</span>
           </span>
         </el-menu-item>
+        <el-menu-item index="/ai-records">
+          <span class="nav-item-content">
+            <el-icon><Document /></el-icon>
+            <span>AI 记录</span>
+          </span>
+        </el-menu-item>
         <el-menu-item index="/publish">
           <span class="nav-item-content">
             <el-icon><Edit /></el-icon>
@@ -165,7 +171,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Shop, Cpu, Edit, ChatDotRound, User } from '@element-plus/icons-vue'
+import { Shop, Cpu, Edit, ChatDotRound, User, Document } from '@element-plus/icons-vue'
 import GuideBubble from '../components/GuideBubble.vue'
 import request from '../api/request'
 import { unreadCount, avatarUrl, nickname } from '../stores/unread'
@@ -179,6 +185,7 @@ const chatUnread = ref(0)
 const mobileNavItems = [
   { path: '/market', label: '发现', icon: Shop },
   { path: '/ai', label: 'AI 工具', icon: Cpu },
+  { path: '/ai-records', label: '记录', icon: Document },
   { path: '/publish', label: '发布', icon: Edit },
   { path: '/chat', label: '消息', icon: ChatDotRound },
   { path: '/me', label: '我的', icon: User },
@@ -194,8 +201,9 @@ const logout = async () => {
 /* ---- 根据子路由高亮父级菜单 ---- */
 const activeMenu = computed(() => {
   const p = route.path
+  if (p.startsWith('/ai-records')) return '/ai-records'
   if (p.startsWith('/market') || p.startsWith('/work/') || p.startsWith('/req/') || p.startsWith('/order/')) return '/market'
-  if (p.startsWith('/ai') || p.startsWith('/submit-job') || p.startsWith('/project-tools') || p.startsWith('/leaderboard') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/launch-check') || p.startsWith('/open-source') || p.startsWith('/job')) return '/ai'
+  if (p.startsWith('/ai') || p.startsWith('/submit-job') || p.startsWith('/project-tools') || p.startsWith('/leaderboard') || p.startsWith('/beginner-projects') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/launch-check') || p.startsWith('/open-source') || p.startsWith('/job')) return '/ai'
   if (p.startsWith('/publish')) return '/publish'
   if (p.startsWith('/chat')) return '/chat'
   if (p.startsWith('/me') || p.startsWith('/profile')) return '/me'
@@ -522,7 +530,7 @@ onMounted(async () => {
     bottom: max(10px, env(safe-area-inset-bottom));
     left: 10px;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     min-height: 62px;
     padding: 6px;
     border: 1px solid rgba(254, 215, 170, .92);

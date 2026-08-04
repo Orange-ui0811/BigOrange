@@ -87,6 +87,8 @@ public class AppTrendController {
         parameters.put("customLang", profile.getCustomLang());
         parameters.put("customTime", profile.getCustomTime());
         parameters.put("useRag", profile.getUseRag());
+        parameters.put("preferBeginnerProjects", profile.getPreferBeginnerProjects());
+        parameters.put("preferCareerProjects", profile.getPreferCareerProjects());
         return Result.success(profileAnalysisService.analyze(BaseContext.getCurrentId(), parameters));
     }
 
@@ -114,6 +116,8 @@ public class AppTrendController {
             m.put("customLang", h.getCustomLang());
             m.put("customTime", h.getCustomTime());
             m.put("useRag", !Boolean.FALSE.equals(h.getUseRag()));
+            m.put("preferBeginnerProjects", Boolean.TRUE.equals(h.getPreferBeginnerProjects()));
+            m.put("preferCareerProjects", Boolean.TRUE.equals(h.getPreferCareerProjects()));
             m.put("createTime", h.getCreateTime() != null ? h.getCreateTime().toString() : "");
             try {
                 m.put("result", objectMapper.readValue(h.getResultJson(), Object.class));
@@ -146,6 +150,8 @@ public class AppTrendController {
             h.setCustomLang(text(body.get("customLang"), 200));
             h.setCustomTime(text(body.get("customTime"), 200));
             h.setUseRag(!Boolean.FALSE.equals(body.get("useRag")));
+            h.setPreferBeginnerProjects(Boolean.TRUE.equals(body.get("preferBeginnerProjects")));
+            h.setPreferCareerProjects(Boolean.TRUE.equals(body.get("preferCareerProjects")));
             Object rawResult = body.containsKey("result") ? body.get("result") : body.get("resultString");
             Object parsedResult = rawResult instanceof String value
                     ? objectMapper.readValue(value, Object.class) : rawResult;

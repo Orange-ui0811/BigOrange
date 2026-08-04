@@ -19,6 +19,7 @@ import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 import com.orangejd.server.foundation.aitool.AiToolContext;
 import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRetryPolicy;
 import com.orangejd.server.foundation.aitool.AiToolRouter;
 
 import java.util.*;
@@ -143,13 +144,17 @@ public class JobMatchService {
             result.put("matches", matches);
             return result;
         } catch (Exception e) {
-            if (accountId != null && accountId > 0 && chargedCost > 0) {
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (accountId != null && accountId > 0 && chargedCost > 0 && !retryManaged) {
                 try { quotaService.refund(accountId, chargedCost, requestId, quotaDescription + "失败退款"); } catch (Exception ignored) {}
             }
-            log.warn("[JOB_MATCH] 匹配失败并已尝试退款 accountId={}, reason={}", accountId, e.getMessage());
+            log.warn("[JOB_MATCH] 匹配失败 accountId={}, autoRetry={}, reason={}",
+                    accountId, retryManaged, e.getMessage());
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
-            throw new RuntimeException("AI匹配失败，请稍后重试");
+            throw new RuntimeException(retryManaged
+                    ? "AI 匹配暂时失败，系统将自动重试"
+                    : "AI匹配失败，本次配额已退回");
         }
     }
 

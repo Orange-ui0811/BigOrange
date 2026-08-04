@@ -12,7 +12,11 @@ spring:
     password: ${MAIL_PASSWORD:}
     properties:
       mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.enable: ${MAIL_STARTTLS_ENABLE:true}
+      mail.smtp.ssl.enable: ${MAIL_SSL_ENABLE:false}
+      mail.smtp.connectiontimeout: ${MAIL_CONNECTION_TIMEOUT_MS:10000}
+      mail.smtp.timeout: ${MAIL_READ_TIMEOUT_MS:15000}
+      mail.smtp.writetimeout: ${MAIL_WRITE_TIMEOUT_MS:15000}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangevc}?sslMode=REQUIRED&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
@@ -31,6 +35,11 @@ spring:
         initialize-schema: true
 
 orange:
+  beginner-projects:
+    auto-refresh-enabled: ${BEGINNER_PROJECT_AUTO_REFRESH_ENABLED:false}
+  career-projects:
+    auto-refresh-enabled: ${CAREER_PROJECT_AUTO_REFRESH_ENABLED:false}
+    refresh-cron: ${CAREER_PROJECT_REFRESH_CRON:0 0 5 * * 1}
   ingestion:
     pipeline-v2-enabled: ${INGESTION_PIPELINE_V2_ENABLED:false}
   ai-config:
@@ -40,6 +49,10 @@ orange:
     global-max-concurrency: ${AI_TOOL_GLOBAL_MAX_CONCURRENCY:50}
     acquire-wait-millis: ${AI_TOOL_ACQUIRE_WAIT_MS:2000}
     lease-millis: ${AI_TOOL_LEASE_MS:330000}
+    auto-retry-enabled: ${AI_TOOL_AUTO_RETRY_ENABLED:true}
+    auto-retry-max-attempts: ${AI_TOOL_AUTO_RETRY_MAX_ATTEMPTS:0}
+    auto-retry-initial-delay-millis: ${AI_TOOL_AUTO_RETRY_INITIAL_DELAY_MS:2000}
+    auto-retry-max-delay-millis: ${AI_TOOL_AUTO_RETRY_MAX_DELAY_MS:30000}
     endpoint: ${GITEE_AI_ENDPOINT:}
     model: ${GITEE_AI_MODEL:}
     keys:

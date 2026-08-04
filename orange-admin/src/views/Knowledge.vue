@@ -37,6 +37,7 @@
         <el-radio-button value="">全部</el-radio-button>
         <el-radio-button value="MANUAL">手动上传</el-radio-button>
         <el-radio-button value="GITHUB">GitHub采集</el-radio-button>
+        <el-radio-button value="BEGINNER_PROJECT">新手项目</el-radio-button>
         <el-radio-button value="JOB_POSTING">岗位招聘</el-radio-button>
       </el-radio-group>
     </div>
@@ -47,8 +48,8 @@
         <div style="display:flex;justify-content:space-between;align-items:center">
           <div style="flex:1;min-width:0">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
-              <span style="font-weight:600;font-size:14px;color:#e65100;cursor:pointer" @click="openDetail(doc)">{{ doc.source === 'GITHUB' ? '📦' : '📄' }} {{ doc.title }}</span>
-              <el-tag size="small" :type="doc.source==='GITHUB'?'success':doc.source==='JOB_POSTING'?'danger':''">{{ doc.source==='GITHUB'?'GitHub采集':doc.source==='JOB_POSTING'?'岗位招聘':'手动上传' }}</el-tag>
+              <span style="font-weight:600;font-size:14px;color:#e65100;cursor:pointer" @click="openDetail(doc)">{{ doc.source === 'GITHUB' || doc.source === 'BEGINNER_PROJECT' ? '📦' : '📄' }} {{ doc.title }}</span>
+              <el-tag size="small" :type="doc.source==='GITHUB'?'success':doc.source==='BEGINNER_PROJECT'?'warning':doc.source==='JOB_POSTING'?'danger':''">{{ doc.source==='GITHUB'?'GitHub采集':doc.source==='BEGINNER_PROJECT'?'新手项目':doc.source==='JOB_POSTING'?'岗位招聘':'手动上传' }}</el-tag>
               <el-tag size="small" :type="doc.period==='week'||doc.period==='new'?'warning':'info'">{{ doc.period==='week'||doc.period==='new'?'30天后清理':'永久' }}</el-tag>
             </div>
             <div style="color:#909399;font-size:12px">{{ doc.chunkCount }} 个切片 <el-divider direction="vertical" /> {{ doc.createTime || '-' }}</div>

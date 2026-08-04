@@ -85,6 +85,14 @@
           AND approval_reward_granted = 0
     </update>
 
+    <update id="approvePreviouslyRewarded">
+        UPDATE work
+        SET audit_status = 'APPROVED', update_time = NOW()
+        WHERE id = #{id}
+          AND audit_status = 'PENDING_REVIEW'
+          AND approval_reward_granted = 1
+    </update>
+
     <update id="updateVisibility">
         UPDATE work SET visibility_status = #{visibilityStatus}, update_time = NOW() WHERE id = #{id}
     </update>

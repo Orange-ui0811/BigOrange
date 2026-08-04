@@ -3,9 +3,12 @@ package com.orangejd.server.service;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.server.foundation.aitool.AiToolContext;
 import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRetryPolicy;
 import com.orangejd.server.foundation.aitool.AiToolRouter;
 import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.dto.BeginnerProjectView;
+import com.orangejd.server.dto.CareerProjectView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
@@ -52,6 +55,12 @@ public class TrendAnalysisService {
 
     @Autowired(required = false)
     private StringRedisTemplate redisTemplate;
+
+    @Autowired(required = false)
+    private BeginnerProjectService beginnerProjectService;
+
+    @Autowired(required = false)
+    private CareerProjectService careerProjectService;
 
     private final RestTemplate restTemplate;
     private final RestTemplate trendRestTemplate;
@@ -158,11 +167,15 @@ public class TrendAnalysisService {
             }
         } catch (Exception e) {
             log.warn("AI趋势分析V1失败: {}", e.getMessage());
-            if (chargedCost > 0) quotaService.refund(accountId, chargedCost, requestId, "AI分析失败退款");
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (chargedCost > 0 && !retryManaged) {
+                quotaService.refund(accountId, chargedCost, requestId, "AI分析失败退款");
+            }
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
-            result.put("error", "AI分析失败，请稍后重试");
-            if (aiToolRouter != null) throw new BaseException("AI分析失败，请稍后重试");
+            if (retryManaged) throw new BaseException("AI 分析暂时失败，系统将自动重试");
+            result.put("error", "AI分析暂时失败，系统会自动重试");
+            if (aiToolRouter != null) throw new BaseException("AI分析失败，本次配额已退回");
         }
         return result;
     }
@@ -252,27 +265,28 @@ public class TrendAnalysisService {
     public Map<String, Object> analyzeV2(
             List<String> topics, String purpose, String experience, List<String> languages, String timeCommitment,
             String customTopics, String customPurpose, String customExp, String customLang, String customTime,
-            Boolean useRag) {
+            Boolean useRag, Boolean preferBeginnerProjects, Boolean preferCareerProjects) {
         Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
         String requestId = "trend_v2_" + accountId + "_" + UUID.randomUUID();
         if (aiToolRouter == null) {
             return analyzeV2WithRuntime(topics, purpose, experience, languages, timeCommitment,
                     customTopics, customPurpose, customExp, customLang, customTime, useRag,
-                    accountId, requestId, projectRuntimeConfig());
+                    preferBeginnerProjects, preferCareerProjects, accountId, requestId, projectRuntimeConfig());
         }
         AiToolContext context = new AiToolContext("trend.v2.analyze", requestId,
                 accountId, "TREND_V2", null, AiRuntimeConfigService.PROJECT);
         return aiToolRouter.execute(context, runtime -> analyzeV2WithRuntime(
                 topics, purpose, experience, languages, timeCommitment,
                 customTopics, customPurpose, customExp, customLang, customTime, useRag,
-                accountId, requestId, runtime));
+                preferBeginnerProjects, preferCareerProjects, accountId, requestId, runtime));
     }
 
     @SuppressWarnings("unchecked")
     private Map<String, Object> analyzeV2WithRuntime(
             List<String> topics, String purpose, String experience, List<String> languages,
             String timeCommitment, String customTopics, String customPurpose, String customExp,
-            String customLang, String customTime, Boolean useRag, Long accountId,
+            String customLang, String customTime, Boolean useRag, Boolean preferBeginnerProjects,
+            Boolean preferCareerProjects, Long accountId,
             String requestId, AiRuntimeConfig runtime) {
         Map<String, Object> result = new LinkedHashMap<>();
 
@@ -331,8 +345,21 @@ public class TrendAnalysisService {
                 customTopics, customPurpose, customExp, customTime)
             : "";
 
+        List<BeginnerProjectView> beginnerCases = Boolean.TRUE.equals(preferBeginnerProjects)
+                && beginnerProjectService != null
+                ? beginnerProjectService.recommend(topics, languages, 5) : List.of();
+        String beginnerContext = formatBeginnerCases(beginnerCases);
+        List<CareerProjectView> careerCases = Boolean.TRUE.equals(preferCareerProjects)
+                && careerProjectService != null
+                ? careerProjectService.recommend(topics, languages, purpose, 5) : List.of();
+        String careerContext = formatCareerCases(careerCases);
+
         String userPrompt = profile.toString() + "\n\n" + dataSummary +
             (ragContext.isEmpty() ? "" : "\n\n## 知识库参考\n" + ragContext) +
+            (beginnerContext.isEmpty() ? "" : "\n\n## 已核验的新手项目案例\n" + beginnerContext
+                    + "\n这些项目只能作为实践案例，不能作为趋势统计证据。项目名称和链接必须原样引用，不得虚构。") +
+            (careerContext.isEmpty() ? "" : "\n\n## 已核验的职业成长项目案例\n" + careerContext
+                    + "\n这些项目用于说明岗位能力和作品证明方式，不能作为趋势统计证据。项目名称和链接必须原样引用，不得虚构。") +
             "\n\n请基于用户画像、数据和知识库参考，严格按 JSON 格式输出推荐结果。";
 
         // 调 AI
@@ -370,20 +397,85 @@ public class TrendAnalysisService {
                     Map<String, Object> msg = (Map<String, Object>) choices.get(0).get("message");
                     String content = (String) msg.getOrDefault("content", "");
                     result = parseV2Response(content);
+                    if (!isCompleteV2Result(result)) {
+                        throw new IllegalStateException("AI 返回的趋势分析结果不完整");
+                    }
+                    result.put("balance", accountId != null ? quotaService.getBalance(accountId) : 0);
+                    result.put("beginnerCases", beginnerCases);
+                    result.put("careerCases", careerCases);
+                    if (Boolean.TRUE.equals(preferBeginnerProjects) || Boolean.TRUE.equals(preferCareerProjects)) {
+                        sanitizeRecommendationReferences(result, beginnerCases, careerCases);
+                    }
                 }
             }
+            if (!isCompleteV2Result(result)) throw new IllegalStateException("AI 返回为空");
         } catch (Exception e) {
             log.warn("AI趋势分析V2失败: {}", e.getMessage());
-            if (consumed) {
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (consumed && !retryManaged) {
                 quotaService.refund(accountId, chargedCost, requestId, "AI分析失败退款");
                 log.info("[QUOTA] 退款: accountId={}, amount={}", accountId, chargedCost);
             }
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
-            result.put("error", "AI分析失败，请稍后重试");
-            if (aiToolRouter != null) throw new BaseException("AI分析失败，请稍后重试");
+            if (retryManaged) throw new BaseException("AI 分析暂时失败，系统将自动重试");
+            result.put("error", "AI分析暂时失败，系统会自动重试");
+            if (aiToolRouter != null) throw new BaseException("AI分析失败，本次配额已退回");
         }
         return result;
+    }
+
+    private String formatBeginnerCases(List<BeginnerProjectView> cases) {
+        if (cases == null || cases.isEmpty()) return "";
+        StringBuilder text = new StringBuilder();
+        for (BeginnerProjectView project : cases) {
+            text.append("- ID=").append(project.id())
+                    .append("; repository=").append(project.fullName())
+                    .append("; url=").append(project.htmlUrl())
+                    .append("; difficulty=").append(project.difficulty())
+                    .append("; score=").append(project.beginnerScore())
+                    .append("; reason=").append(project.beginnerReason())
+                    .append("; verifiedAt=").append(project.lastVerifiedAt()).append('\n');
+        }
+        return text.toString();
+    }
+
+    private String formatCareerCases(List<CareerProjectView> cases) {
+        if (cases == null || cases.isEmpty()) return "";
+        StringBuilder text = new StringBuilder();
+        for (CareerProjectView project : cases) {
+            text.append("- ID=").append(project.id())
+                    .append("; repository=").append(project.fullName())
+                    .append("; url=").append(project.htmlUrl())
+                    .append("; role=").append(project.bestRoleName())
+                    .append("; score=").append(project.overallScore())
+                    .append("; careerValue=").append(project.careerValue())
+                    .append("; verifiedAt=").append(project.lastVerifiedAt()).append('\n');
+        }
+        return text.toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void sanitizeRecommendationReferences(Map<String, Object> result,
+                                                  List<BeginnerProjectView> cases,
+                                                  List<CareerProjectView> careerCases) {
+        Set<String> allowedUrls = cases.stream().map(BeginnerProjectView::htmlUrl)
+                .filter(Objects::nonNull).collect(java.util.stream.Collectors.toSet());
+        careerCases.stream().map(CareerProjectView::htmlUrl).filter(Objects::nonNull).forEach(allowedUrls::add);
+        Object value = result.get("recommendations");
+        if (!(value instanceof List<?> recommendations)) return;
+        for (Object recommendation : recommendations) {
+            if (!(recommendation instanceof Map<?, ?> raw)) continue;
+            Map<String, Object> item = (Map<String, Object>) raw;
+            Object references = item.get("references");
+            if (!(references instanceof List<?> list)) continue;
+            List<Object> verified = list.stream().filter(reference -> {
+                if (!(reference instanceof Map<?, ?> map)) return false;
+                Object url = map.get("url");
+                return url != null && allowedUrls.contains(String.valueOf(url));
+            }).map(reference -> (Object) reference).toList();
+            item.put("references", verified);
+        }
     }
 
     private com.orangejd.server.foundation.external.AiRuntimeConfig projectRuntimeConfig() {
@@ -484,6 +576,27 @@ public class TrendAnalysisService {
     private String regexExtract(String text, String regex) {
         java.util.regex.Matcher m = java.util.regex.Pattern.compile(regex, java.util.regex.Pattern.DOTALL).matcher(text);
         return m.find() ? m.group(1).trim() : null;
+    }
+
+    private boolean isCompleteV2Result(Map<String, Object> result) {
+        if (result == null) return false;
+        Object analysisValue = result.get("analysis");
+        Object learningValue = result.get("learning");
+        Object recommendationsValue = result.get("recommendations");
+        if (!(analysisValue instanceof Map<?, ?> analysis)
+                || !(learningValue instanceof Map<?, ?> learning)
+                || !(recommendationsValue instanceof List<?> recommendations)) return false;
+        return hasText(analysis.get("trend"))
+                && hasText(analysis.get("prospect"))
+                && hasText(analysis.get("demand"))
+                && hasText(analysis.get("summary"))
+                && hasText(learning.get("timeline"))
+                && learning.get("steps") instanceof List<?> steps && !steps.isEmpty()
+                && !recommendations.isEmpty();
+    }
+
+    private boolean hasText(Object value) {
+        return value != null && !String.valueOf(value).isBlank();
     }
 
     private String nvl(String s) { return s == null || s.isEmpty() ? "未填写" : s; }

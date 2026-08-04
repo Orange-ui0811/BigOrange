@@ -8,6 +8,7 @@ import com.orangejd.server.service.impl.QuotaServiceImpl;
 import com.orangejd.server.task.OpenSourceRefreshTask;
 import com.orangejd.server.foundation.aitool.AiToolContext;
 import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRetryPolicy;
 import com.orangejd.server.foundation.aitool.AiToolRouter;
 import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
@@ -172,10 +173,13 @@ public class OpenSourceContributionService {
             return Map.of("recommendedIssueId", recommendedId,
                     "matches", matches, "segmentCost", cost, "balance", balance);
         } catch (Exception e) {
-            quotaService.refund(accountId, cost, requestId, "开源 Issue 匹配失败退款");
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (!retryManaged) quotaService.refund(accountId, cost, requestId, "开源 Issue 匹配失败退款");
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
-            throw new BaseException("AI 匹配失败，本次配额已退回");
+            throw new BaseException(retryManaged
+                    ? "AI 匹配暂时失败，系统将自动重试"
+                    : "AI 匹配失败，本次配额已退回");
         }
     }
 
@@ -228,10 +232,13 @@ public class OpenSourceContributionService {
             mapper.upsertGuide(guide);
             return Map.of("guide", guide, "balance", balance);
         } catch (Exception e) {
-            quotaService.refund(accountId, cost, requestId, "开源贡献指南生成失败退款");
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (!retryManaged) quotaService.refund(accountId, cost, requestId, "开源贡献指南生成失败退款");
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
-            throw new BaseException("指南生成失败，本次配额已退回");
+            throw new BaseException(retryManaged
+                    ? "指南生成暂时失败，系统将自动重试"
+                    : "指南生成失败，本次配额已退回");
         }
     }
 

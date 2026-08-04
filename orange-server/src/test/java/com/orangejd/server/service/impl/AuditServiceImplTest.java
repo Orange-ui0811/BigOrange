@@ -17,6 +17,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 class AuditServiceImplTest {
@@ -82,6 +83,36 @@ class AuditServiceImplTest {
 
         verify(quotaService, never()).grantReward(any(), any(Integer.class), any());
         verify(workMapper).approveAndMarkRewarded(11L);
+    }
+
+    @Test
+    void approvingPreviouslyRewardedWorkDoesNotGrantRewardAgain() {
+        Work work = pendingWork();
+        work.setApprovalRewardGranted(true);
+        when(workMapper.selectByIdForUpdate(11L)).thenReturn(work);
+        when(workMapper.approvePreviouslyRewarded(11L)).thenReturn(1);
+
+        service.auditWork(11L, true, "再次审核通过");
+
+        verify(workMapper).approvePreviouslyRewarded(11L);
+        verify(workMapper, never()).approveAndMarkRewarded(11L);
+        verifyNoInteractions(quotaService);
+        verify(auditRecordMapper).insert(any(AuditRecord.class));
+        verify(notificationService).send(7L, "AUDIT", "你的作品《测试作品》审核通过", 11L);
+    }
+
+    @Test
+    void previouslyRewardedApprovalConflictDoesNotWriteAuditRecord() {
+        Work work = pendingWork();
+        work.setApprovalRewardGranted(true);
+        when(workMapper.selectByIdForUpdate(11L)).thenReturn(work);
+        when(workMapper.approvePreviouslyRewarded(11L)).thenReturn(0);
+
+        assertThrows(BaseException.class, () -> service.auditWork(11L, true, ""));
+
+        verifyNoInteractions(quotaService);
+        verify(auditRecordMapper, never()).insert(any());
+        verify(notificationService, never()).send(any(), any(), any(), any());
     }
 
     private Work pendingWork() {

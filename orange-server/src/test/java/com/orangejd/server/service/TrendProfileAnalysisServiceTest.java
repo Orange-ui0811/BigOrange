@@ -31,7 +31,7 @@ class TrendProfileAnalysisServiceTest {
         when(trend.analyzeV2(
                 eq(List.of("AI智能体")), eq("学习"), eq("新手入门"),
                 eq(List.of("Python")), eq("每周5小时"),
-                eq(""), eq(""), eq(""), eq(""), eq(""), eq(true)))
+                eq(""), eq(""), eq(""), eq(""), eq(""), eq(true), eq(true), eq(true)))
                 .thenReturn(analysis);
         doAnswer(invocation -> {
             TrendHistory history = invocation.getArgument(0);
@@ -45,11 +45,14 @@ class TrendProfileAnalysisServiceTest {
                 "experience", "新手入门",
                 "languages", List.of("Python"),
                 "timeCommitment", "每周5小时",
-                "useRag", true));
+                "useRag", true,
+                "preferBeginnerProjects", true,
+                "preferCareerProjects", true));
 
         assertEquals(analysis.get("recommendations"), result.get("recommendations"));
         assertTrue((Boolean) result.get("historySaved"));
         assertEquals(31L, result.get("historyId"));
         verify(historyMapper).insert(any(TrendHistory.class));
+        verify(trend).analyzeV2(any(), any(), any(), any(), any(), any(), any(), any(), any(), any(), eq(true), eq(true), eq(true));
     }
 }

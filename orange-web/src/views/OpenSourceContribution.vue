@@ -240,7 +240,8 @@
               message="AI 正在核对你的技术、时间和环境限制，完成后会自动显示结果。"
             />
             <div v-else-if="matchError" class="inline-error">
-              <Warning /><span>{{ matchError }}</span><button type="button" @click="runMatch">重试</button>
+              <Warning /><span>{{ matchError }}</span>
+              <button type="button" @click="$router.push('/ai-records')">查看记录</button>
             </div>
             <section v-else-if="!matches.length" class="feedback-state compact">
               <MagicStick />
@@ -306,7 +307,7 @@
             />
             <div v-else-if="jobError" class="inline-error">
               <Warning /><span>{{ jobError }}</span>
-              <button type="button" @click="runJobMatchFor(jobTarget)">重试</button>
+              <button type="button" @click="$router.push('/ai-records')">查看记录</button>
             </div>
             <section v-else-if="!jobTarget" class="feedback-state compact">
               <Briefcase />
@@ -537,6 +538,8 @@ import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
+import { confirmQuotaUsage } from '../utils/quotaConfirm'
+import { AI_AUTO_RETRY_NOTICE } from '../utils/aiRetry'
 import AnalysisProgress from '../features/open-source/AnalysisProgress.vue'
 import CandidateTray from '../features/open-source/CandidateTray.vue'
 import IssueCard from '../features/open-source/IssueCard.vue'
@@ -718,21 +721,20 @@ const appendProfilePreset = preset => {
   matchForm.value.profile = [matchForm.value.profile.trim(), preset].filter(Boolean).join('；')
 }
 
-const confirmCharge = async (title, cost) => {
+const confirmCharge = async (title, cost, estimatedTime) => {
   if (!hasPrice(cost)) {
     ElMessage.warning('最新配额仍在读取，请稍后再试')
     return false
   }
-  try {
-    await ElMessageBox.confirm(
-      `${title}将消耗 ${Number(cost)} 配额。确认后才会开始调用 AI。`,
-      '确认使用配额',
-      { confirmButtonText: '确认开始', cancelButtonText: '暂不开始', type: 'warning' },
-    )
-    return true
-  } catch {
-    return false
-  }
+  return confirmQuotaUsage({
+    actionLabel: title,
+    cost: Number(cost),
+    title: '确认使用额度',
+    confirmButtonText: '确认开始',
+    cancelButtonText: '暂不开始',
+    notice: '确认后才会开始调用 AI。',
+    estimatedTime,
+  })
 }
 
 const runMatch = async () => {
@@ -740,7 +742,7 @@ const runMatch = async () => {
     ElMessage.warning('请先简要描述你的技术能力、时间或环境限制')
     return
   }
-  if (!(await confirmCharge('AI 匹配', config.value.matchCost))) return
+  if (!(await confirmCharge('AI 匹配', config.value.matchCost, '1～3 分钟'))) return
   matching.value = true
   matchError.value = ''
   matches.value = []
@@ -748,7 +750,7 @@ const runMatch = async () => {
     const response = await request.post('/app/open-source/match', {
       ...matchForm.value,
       selectedIssueIds: selectedIds.value,
-    }, { timeout: 150000 })
+    }, { timeout: 0 })
     if (!requestOk(response)) throw new Error(responseMessage(response, 'AI 未返回匹配结果'))
     matches.value = response.data?.matches || []
     recommendedIssueId.value = response.data?.recommendedIssueId
@@ -757,7 +759,7 @@ const runMatch = async () => {
     })
     ElMessage.success('匹配完成')
   } catch (error) {
-    matchError.value = error?.message || '匹配失败，请稍后重试'
+    matchError.value = error?.response?.data?.msg || AI_AUTO_RETRY_NOTICE
   } finally {
     matching.value = false
   }
@@ -771,17 +773,17 @@ const selectJobTarget = issue => {
 
 const runJobMatchFor = async issue => {
   if (!issue?.id) return
-  if (!(await confirmCharge('岗位匹配', config.value.jobMatchCost))) return
+  if (!(await confirmCharge('岗位匹配', config.value.jobMatchCost, '1～3 分钟'))) return
   jobTarget.value = issue
   jobMatches.value = []
   jobError.value = ''
   jobMatching.value = true
   try {
-    const response = await request.post(`/app/open-source/issues/${issue.id}/job-match`, {}, { timeout: 150000 })
+    const response = await request.post(`/app/open-source/issues/${issue.id}/job-match`, {}, { timeout: 0 })
     if (!requestOk(response)) throw new Error(responseMessage(response, 'AI 未返回岗位匹配结果'))
     jobMatches.value = response.data?.matches || []
   } catch (error) {
-    jobError.value = error?.message || '岗位匹配失败，请稍后重试'
+    jobError.value = error?.response?.data?.msg || AI_AUTO_RETRY_NOTICE
   } finally {
     jobMatching.value = false
   }
@@ -797,10 +799,10 @@ const guideSourceLabel = issue => {
 
 const generateGuideFor = async issue => {
   if (!issue?.id) return
-  if (!(await confirmCharge('生成贡献指南', config.value.guideCost))) return
+  if (!(await confirmCharge('生成贡献指南', config.value.guideCost, '2～4 分钟'))) return
   guideGenerating.value = true
   try {
-    const response = await request.post(`/app/open-source/issues/${issue.id}/guide`, {}, { timeout: 150000 })
+    const response = await request.post(`/app/open-source/issues/${issue.id}/guide`, {}, { timeout: 0 })
     if (!requestOk(response)) throw new Error(responseMessage(response, 'AI 未返回贡献指南'))
     currentGuide.value = response.data?.guide
     detailOpen.value = false
@@ -808,7 +810,7 @@ const generateGuideFor = async issue => {
     switchTab('guides')
     ElMessage.success('贡献指南已生成')
   } catch (error) {
-    ElMessage.error(error?.message || '指南生成失败，请稍后重试')
+    ElMessage.info(error?.response?.data?.msg || AI_AUTO_RETRY_NOTICE)
   } finally {
     guideGenerating.value = false
   }

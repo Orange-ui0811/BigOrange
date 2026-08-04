@@ -6,6 +6,8 @@ import com.orangejd.server.foundation.task.SystemTaskService;
 import com.orangejd.server.task.LeaderboardRefreshTask;
 import com.orangejd.server.task.OpenSourceRefreshTask;
 import com.orangejd.server.task.ReadmePipelineTask;
+import com.orangejd.server.task.BeginnerProjectTask;
+import com.orangejd.server.task.CareerProjectTask;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,8 +23,18 @@ public class IngestionCoordinatorService {
     public static final String ISSUE_VERIFY = "ISSUE_VERIFY";
     public static final String ISSUE_TRANSLATE = "ISSUE_TRANSLATE";
     public static final String README_RETRY = "README_RETRY";
+    public static final String BEGINNER_DISCOVERY = "BEGINNER_DISCOVERY";
+    public static final String BEGINNER_VERIFY = "BEGINNER_VERIFY";
+    public static final String BEGINNER_ENRICH = "BEGINNER_ENRICH";
+    public static final String BEGINNER_WEEKLY_PICK = "BEGINNER_WEEKLY_PICK";
+    public static final String CAREER_DISCOVERY = "CAREER_DISCOVERY";
+    public static final String CAREER_VERIFY = "CAREER_VERIFY";
+    public static final String CAREER_ENRICH = "CAREER_ENRICH";
+    public static final String CAREER_WEEKLY_PICK = "CAREER_WEEKLY_PICK";
     private static final Set<String> TYPES = Set.of(
-            LEADERBOARD_FULL, ISSUE_FULL, ISSUE_VERIFY, ISSUE_TRANSLATE, README_RETRY);
+            LEADERBOARD_FULL, ISSUE_FULL, ISSUE_VERIFY, ISSUE_TRANSLATE, README_RETRY,
+            BEGINNER_DISCOVERY, BEGINNER_VERIFY, BEGINNER_ENRICH, BEGINNER_WEEKLY_PICK,
+            CAREER_DISCOVERY, CAREER_VERIFY, CAREER_ENRICH, CAREER_WEEKLY_PICK);
 
     private final IngestionRunService runService;
     private final SystemTaskService taskService;
@@ -70,7 +82,19 @@ public class IngestionCoordinatorService {
         String mode;
         String taskType;
         int maxAttempts;
-        if (LEADERBOARD_FULL.equals(pipelineType)) {
+        if (pipelineType.startsWith("CAREER_")) {
+            mode = CAREER_DISCOVERY.equals(pipelineType) ? "DISCOVERY"
+                    : CAREER_VERIFY.equals(pipelineType) ? "VERIFY"
+                    : CAREER_ENRICH.equals(pipelineType) ? "ENRICH" : "WEEKLY_PICK";
+            taskType = CareerProjectTask.TASK_TYPE;
+            maxAttempts = 3;
+        } else if (pipelineType.startsWith("BEGINNER_")) {
+            mode = BEGINNER_DISCOVERY.equals(pipelineType) ? "DISCOVERY"
+                    : BEGINNER_VERIFY.equals(pipelineType) ? "VERIFY"
+                    : BEGINNER_ENRICH.equals(pipelineType) ? "ENRICH" : "WEEKLY_PICK";
+            taskType = pipelineType;
+            maxAttempts = 3;
+        } else if (LEADERBOARD_FULL.equals(pipelineType)) {
             mode = "FULL";
             taskType = LeaderboardRefreshTask.TASK_TYPE;
             maxAttempts = 0;

@@ -31,6 +31,8 @@ public interface WorkMapper {
 
     int approveAndMarkRewarded(@Param("id") Long id);
 
+    int approvePreviouslyRewarded(@Param("id") Long id);
+
     int updateVisibility(@Param("id") Long id, @Param("visibilityStatus") String visibilityStatus);
 
     /** 市场查询（仅已审核+公开） */

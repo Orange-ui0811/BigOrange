@@ -7,6 +7,8 @@ import com.orangejd.server.service.PlanGenerationService;
 import com.orangejd.server.service.PricingService;
 import com.orangejd.server.service.AiRecordMetrics;
 import com.orangejd.common.exception.BaseException;
+import com.orangejd.common.properties.JwtProperties;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -72,6 +74,61 @@ class AppPlanControllerTest {
         assertThrows(BaseException.class, () -> controller.saveHistory(
                 Map.of("summary", "x".repeat(10_001))));
         verify(mapper, org.mockito.Mockito.never()).insert(any());
+    }
+
+    @Test
+    void updatesExistingDraftInsteadOfCreatingAnotherHistoryRecord() {
+        PlanHistoryMapper mapper = mock(PlanHistoryMapper.class);
+        AppPlanController controller = new AppPlanController();
+        ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
+        ReflectionTestUtils.setField(controller, "recordMetrics", mock(AiRecordMetrics.class));
+        BaseContext.setCurrentId(7L);
+        when(mapper.updateOwned(any())).thenReturn(1);
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("historyId", 21L);
+        body.put("summary", "测试项目");
+        body.put("phase1", "想法描述");
+        body.put("phase2", "需求理解");
+
+        Map<?, ?> data = (Map<?, ?>) controller.saveHistory(body).getData();
+
+        assertEquals(21L, data.get("id"));
+        verify(mapper).updateOwned(any());
+        verify(mapper, org.mockito.Mockito.never()).insert(any());
+    }
+
+    @Test
+    void generatedPhaseIsPersistedBeforeTheResponseReturns() {
+        PlanHistoryMapper mapper = mock(PlanHistoryMapper.class);
+        PlanGenerationService generationService = mock(PlanGenerationService.class);
+        JwtProperties jwtProperties = mock(JwtProperties.class);
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        AppPlanController controller = new AppPlanController();
+        ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
+        ReflectionTestUtils.setField(controller, "generationService", generationService);
+        ReflectionTestUtils.setField(controller, "jwtProperties", jwtProperties);
+        BaseContext.setCurrentId(7L);
+        when(jwtProperties.getAppTokenName()).thenReturn("App-Token");
+        when(request.getHeader("App-Token")).thenReturn(null);
+        when(generationService.generate(any(), any())).thenReturn(new LinkedHashMap<>(Map.of(
+                "phase", 1,
+                "content", "需求理解结果"
+        )));
+        doAnswer(invocation -> {
+            Map<String, Object> record = invocation.getArgument(0);
+            record.put("id", 33L);
+            return 1;
+        }).when(mapper).insert(any());
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("summary", "测试项目");
+        body.put("phase1", "想法描述");
+        Map<?, ?> data = (Map<?, ?>) controller.generate(body, request).getData();
+
+        assertEquals(33L, data.get("historyId"));
+        assertEquals("需求理解结果", data.get("content"));
+        verify(mapper).insert(any());
     }
 
     @Test

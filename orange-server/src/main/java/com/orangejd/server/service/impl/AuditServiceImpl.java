@@ -54,12 +54,18 @@ public class AuditServiceImpl implements AuditService {
 
         String auditStatus = approved ? "APPROVED" : "REJECTED";
         if (approved) {
-            int reward = pricingService.getReward(PricingService.REWARD_WORK_APPROVED);
-            if (reward > 0) {
-                quotaService.grantReward(work.getOwnerId(), reward, "作品审核通过奖励");
-            }
-            if (workMapper.approveAndMarkRewarded(workId) != 1) {
-                throw new BaseException(MessageConstant.WORK_AUDIT_DENIED);
+            if (Boolean.TRUE.equals(work.getApprovalRewardGranted())) {
+                if (workMapper.approvePreviouslyRewarded(workId) != 1) {
+                    throw new BaseException(MessageConstant.WORK_AUDIT_CONFLICT);
+                }
+            } else {
+                int reward = pricingService.getReward(PricingService.REWARD_WORK_APPROVED);
+                if (reward > 0) {
+                    quotaService.grantReward(work.getOwnerId(), reward, "作品审核通过奖励");
+                }
+                if (workMapper.approveAndMarkRewarded(workId) != 1) {
+                    throw new BaseException(MessageConstant.WORK_AUDIT_CONFLICT);
+                }
             }
         } else {
             workMapper.updateAuditStatus(workId, auditStatus);

@@ -18,6 +18,7 @@ import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 import com.orangejd.server.foundation.aitool.AiToolContext;
 import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRetryPolicy;
 import com.orangejd.server.foundation.aitool.AiToolRouter;
 
 import java.util.LinkedHashMap;
@@ -142,14 +143,17 @@ public class PlanGenerationService {
             result.put("balance", balance);
             return result;
         } catch (Exception e) {
-            if (accountId != null && chargedCost > 0) {
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (accountId != null && chargedCost > 0 && !retryManaged) {
                 quotaService.refund(accountId, chargedCost, requestId, "方案设计失败退款");
             }
             log.error("Plan generation failed: accountId={}, phase={}, mode={}",
                     accountId, phase, mode, e);
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
-            throw new BaseException("AI 调用失败，本次配额已退回");
+            throw new BaseException(retryManaged
+                    ? "AI 调用暂时失败，系统将自动重试"
+                    : "AI 调用失败，本次配额已退回");
         }
     }
 

@@ -15,6 +15,8 @@ public class TrendProfileDTO {
     private String customLang;
     private String customTime;
     private Boolean useRag;
+    private Boolean preferBeginnerProjects;
+    private Boolean preferCareerProjects;
 
     public List<String> getTopics() { return topics; }
     public void setTopics(List<String> topics) { this.topics = topics; }
@@ -38,4 +40,8 @@ public class TrendProfileDTO {
     public void setCustomTime(String customTime) { this.customTime = customTime; }
     public Boolean getUseRag() { return useRag; }
     public void setUseRag(Boolean useRag) { this.useRag = useRag; }
+    public Boolean getPreferBeginnerProjects() { return preferBeginnerProjects; }
+    public void setPreferBeginnerProjects(Boolean preferBeginnerProjects) { this.preferBeginnerProjects = preferBeginnerProjects; }
+    public Boolean getPreferCareerProjects() { return preferCareerProjects; }
+    public void setPreferCareerProjects(Boolean preferCareerProjects) { this.preferCareerProjects = preferCareerProjects; }
 }

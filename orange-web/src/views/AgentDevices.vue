@@ -189,7 +189,7 @@ const actionLabels = {
   'plan.phase.generate': '方案设计',
   'agent.task.list': '最近语音任务',
   'notification.unread.read': '未读通知',
-  'leaderboard.github.list': 'GitHub 榜单'
+  'leaderboard.github.list': '榜单排行'
 }
 const statusText = (status) => statusLabels[status] || status || '未知'
 const actionText = (action) => actionLabels[action] || action

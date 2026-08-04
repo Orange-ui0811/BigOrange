@@ -26,6 +26,7 @@ public class AiToolRouter {
     private final AiToolSlotLeaseService leases;
     private final AiRuntimeConfigService configService;
     private final AiToolCallLogMapper callLogMapper;
+    private final AiResultRecorder resultRecorder;
     private final MeterRegistry metrics;
     private final ScheduledExecutorService renewer =
             Executors.newSingleThreadScheduledExecutor(runnable -> {
@@ -36,17 +37,36 @@ public class AiToolRouter {
 
     public AiToolRouter(AiToolPoolProperties properties, AiToolSlotLeaseService leases,
                         AiRuntimeConfigService configService, AiToolCallLogMapper callLogMapper,
-                        MeterRegistry metrics) {
+                        AiResultRecorder resultRecorder, MeterRegistry metrics) {
         this.properties = properties;
         this.leases = leases;
         this.configService = configService;
         this.callLogMapper = callLogMapper;
+        this.resultRecorder = resultRecorder;
         this.metrics = metrics;
     }
 
     public <T> T execute(AiToolContext context, Operation<T> operation) {
+        int attemptNo = 1;
+        while (true) {
+            try {
+                return executeAttempt(context, operation, attemptNo);
+            } catch (RuntimeException exception) {
+                if (!canRetry(attemptNo, exception)) throw exception;
+                long delayMillis = retryDelayMillis(attemptNo, exception);
+                log.warn("AI_TOOL_AUTO_RETRY requestId={} attempt={} delayMs={} reason={}",
+                        context.requestId(), attemptNo, delayMillis, safeMessage(exception));
+                sleepBeforeRetry(delayMillis);
+                if (attemptNo < Integer.MAX_VALUE) attemptNo++;
+            }
+        }
+    }
+
+    private <T> T executeAttempt(AiToolContext context, Operation<T> operation, int attemptNo) {
         if (!properties.enabled()) {
-            return operation.run(configService.current(context.legacyConfigType()));
+            T result = operation.run(configService.current(context.legacyConfigType()));
+            resultRecorder.saveRequired(context, result);
+            return result;
         }
         if (!properties.poolReady()) {
             throw new BaseException("AI 工具调用池尚未完整配置");
@@ -61,32 +81,39 @@ public class AiToolRouter {
                     ? configService.current(AiRuntimeConfigService.TOOL_FALLBACK)
                     : properties.config(slot.slot());
             provider = slot == null ? "DEEPSEEK" : "GITEE";
-            insertLog(context, provider, slot, config);
+            insertLog(context, attemptNo, provider, slot, config);
             AiToolSlotLeaseService.SlotLease leasedSlot = slot;
             renewal = renewer.scheduleAtFixedRate(
                     () -> renewSafely(global, leasedSlot), 30, 30, TimeUnit.SECONDS);
             T result = operation.run(config);
-            finish(context.requestId(), "SUCCEEDED", null, null, null);
+            resultRecorder.saveRequired(context, result);
+            finish(context.requestId(), attemptNo, "SUCCEEDED", null, null, null);
             metrics.counter("orange.ai.tool.calls", "provider", provider,
                     "outcome", "success").increment();
             return result;
         } catch (RuntimeException exception) {
             boolean timeout = causedByTimeout(exception);
             AiToolProviderException providerFailure = AiToolProviderException.from(exception);
-            if (slot != null && providerFailure != null) {
-                if (providerFailure.httpStatus() == 401 || providerFailure.httpStatus() == 403) {
+            boolean retrying = canRetry(attemptNo, exception);
+            if (slot != null) {
+                if (providerFailure != null
+                        && (providerFailure.httpStatus() == 401 || providerFailure.httpStatus() == 403)) {
                     leases.setInvalid(slot.slot().number());
-                } else if (providerFailure.httpStatus() == 429) {
+                } else if (providerFailure != null && providerFailure.httpStatus() == 429) {
                     leases.setThrottled(slot.slot().number(), providerFailure.retryAfterMillis());
+                } else if (retrying) {
+                    long retryDelay = retryDelayMillis(attemptNo, exception);
+                    leases.setThrottled(slot.slot().number(), Math.max(5000,
+                            Math.min(30_000, retryDelay + 5000)));
                 }
             }
-            finish(context.requestId(), timeout ? "TIMEOUT" : "FAILED",
+            finish(context.requestId(), attemptNo, retrying ? "RETRY_WAIT" : timeout ? "TIMEOUT" : "FAILED",
                     providerFailure == null ? null : providerFailure.httpStatus(),
                     timeout ? "TIMEOUT" : providerFailure == null
                             ? exception.getClass().getSimpleName() : providerFailure.errorCode(),
                     safeMessage(exception));
             metrics.counter("orange.ai.tool.calls", "provider", provider,
-                    "outcome", timeout ? "timeout" : "failure").increment();
+                    "outcome", retrying ? "retry" : timeout ? "timeout" : "failure").increment();
             throw exception;
         } finally {
             if (renewal != null) renewal.cancel(false);
@@ -105,14 +132,17 @@ public class AiToolRouter {
             value.put("status", leases.status(slot.number()));
             return value;
         }).toList();
-        return Map.of(
-                "enabled", properties.enabled(),
-                "configuredSlots", properties.slots().size(),
-                "globalMax", properties.globalMaxConcurrency(),
-                "globalRunning", global,
-                "giteeRunning", gitee,
-                "fallbackRunning", Math.max(0, global - gitee),
-                "slots", slots);
+        Map<String, Object> runtime = new LinkedHashMap<>();
+        runtime.put("enabled", properties.enabled());
+        runtime.put("configuredSlots", properties.slots().size());
+        runtime.put("globalMax", properties.globalMaxConcurrency());
+        runtime.put("globalRunning", global);
+        runtime.put("giteeRunning", gitee);
+        runtime.put("fallbackRunning", Math.max(0, global - gitee));
+        runtime.put("autoRetryEnabled", properties.autoRetryEnabled());
+        runtime.put("autoRetryMaxAttempts", properties.autoRetryMaxAttempts());
+        runtime.put("slots", slots);
+        return runtime;
     }
 
     public List<Map<String, Object>> recentCalls(int limit) {
@@ -147,10 +177,11 @@ public class AiToolRouter {
         throw new BaseException("AI 服务繁忙，请稍后重试");
     }
 
-    private void insertLog(AiToolContext context, String provider,
+    private void insertLog(AiToolContext context, int attemptNo, String provider,
                            AiToolSlotLeaseService.SlotLease slot, AiRuntimeConfig config) {
         Map<String, Object> record = new LinkedHashMap<>();
         record.put("requestId", context.requestId());
+        record.put("attemptNo", attemptNo);
         record.put("accountId", context.accountId());
         record.put("businessType", context.businessType());
         record.put("businessId", context.businessId());
@@ -162,12 +193,40 @@ public class AiToolRouter {
         callLogMapper.insert(record);
     }
 
-    private void finish(String requestId, String status, Integer httpStatus,
+    private void finish(String requestId, int attemptNo, String status, Integer httpStatus,
                         String errorCode, String errorSummary) {
         try {
-            callLogMapper.finish(requestId, status, httpStatus, errorCode, errorSummary);
+            callLogMapper.finish(requestId, attemptNo, status, httpStatus, errorCode, errorSummary);
         } catch (RuntimeException exception) {
             log.error("AI_TOOL_LOG_FINISH_FAILED requestId={} status={}", requestId, status, exception);
+        }
+    }
+
+    private boolean canRetry(int attemptNo, RuntimeException exception) {
+        if (!properties.autoRetryEnabled() || !AiToolRetryPolicy.isRetryable(exception)) return false;
+        int maxAttempts = properties.autoRetryMaxAttempts();
+        return maxAttempts == 0 || attemptNo < maxAttempts;
+    }
+
+    private long retryDelayMillis(int attemptNo, RuntimeException exception) {
+        AiToolProviderException provider = AiToolProviderException.from(exception);
+        if (provider != null && provider.retryAfterMillis() > 0) {
+            return Math.min(properties.autoRetryMaxDelayMillis(), provider.retryAfterMillis());
+        }
+        long initial = properties.autoRetryInitialDelayMillis();
+        if (initial == 0) return 0;
+        int shifts = Math.min(Math.max(0, attemptNo - 1), 10);
+        long calculated = initial > (Long.MAX_VALUE >> shifts) ? Long.MAX_VALUE : initial << shifts;
+        return Math.min(properties.autoRetryMaxDelayMillis(), calculated);
+    }
+
+    private void sleepBeforeRetry(long delayMillis) {
+        if (delayMillis <= 0) return;
+        try {
+            Thread.sleep(delayMillis);
+        } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+            throw new BaseException("AI 分析已中断，请在 AI 记录中确认结果");
         }
     }
 

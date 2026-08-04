@@ -99,7 +99,7 @@
         <!-- 报错 -->
         <div v-if="phaseError" class="card error-card">
           <p class="error-text">{{ phaseError }}</p>
-          <button class="orange-btn mt-8" @click="generatePhase(currentPhase)">重试</button>
+          <button class="nav-btn mt-8" @click="$router.push('/ai-records')">查看 AI 记录</button>
         </div>
       </div>
     </div>
@@ -107,13 +107,14 @@
 </template>
 
 <script setup>
-import { h, ref, reactive, computed, nextTick, onMounted } from 'vue'
+import { ref, reactive, computed, nextTick, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { marked } from 'marked'
-import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
+import { confirmQuotaUsage } from '../utils/quotaConfirm'
+import { AI_AUTO_RETRY_NOTICE } from '../utils/aiRetry'
 
 const router = useRouter()
 
@@ -185,13 +186,20 @@ const doJobMatch = async () => {
     return
   }
   const planContent = phases[4].content + '\n\n方案概要：' + phases[0].content.substring(0, 200)
-  try { await ElMessageBox.confirm(
-    h('span', { style: 'display:flex;align-items:center;gap:6px' }, [`匹配岗位将消耗 ${jobMatchCost.value} `, h(PixelOrangeSlice, { size: 16 })]),
-    '确认', { confirmButtonText:'确认',cancelButtonText:'取消',type:'info' }
-  ) } catch { return }
+  if (!(await confirmQuotaUsage({
+    actionLabel: 'AI 岗位匹配',
+    cost: jobMatchCost.value,
+    title: '确认岗位匹配',
+    confirmButtonText: '确认匹配',
+    type: 'info',
+    estimatedTime: '1～3 分钟',
+  }))) return
   const p5 = phases[5]; p5.generating = true
   try {
-    const r = await request.post('/app/job/match', { planContent: planContent }, { timeout: 120000 })
+    const r = await request.post('/app/job/match', {
+      planContent,
+      historyId: activePlanId.value
+    }, { timeout: 0 })
     if (r.code === 1 && Array.isArray(r.data?.matches) && r.data.matches.length) {
       const matches = r.data.matches
       let content = ''
@@ -199,8 +207,10 @@ const doJobMatch = async () => {
         content += `### ${m.position}\n\n📌 **匹配原因**：${m.reason}\n\n📚 **学习重点**：${m.focus}\n\n---\n\n`
       }
       p5.content = content; p5.done = true
+      activePlanId.value = r.data.historyId || activePlanId.value
+      await persistPlan(true)
     } else { ElMessage.error(r.msg || '匹配失败') }
-  } catch (e) { ElMessage.error(e.response?.data?.msg || '匹配失败，本次配额会自动退回') }
+  } catch { ElMessage.info(AI_AUTO_RETRY_NOTICE) }
   finally { p5.generating = false }
 }
 
@@ -209,6 +219,7 @@ const generatePhase = async (n) => {
   if (n === 1) {
     phases[0].content = summary.value + (extra.value ? '\n\n补充：' + extra.value : '')
     phases[0].done = true
+    await persistPlan(true)
     return
   }
   if (n === 6) { await doJobMatch(); return }
@@ -216,10 +227,14 @@ const generatePhase = async (n) => {
     ElMessage.error('方案设计价格尚未加载，请刷新页面后重试')
     return
   }
-  try { await ElMessageBox.confirm(
-    h('span', { style: 'display:flex;align-items:center;gap:6px' }, [`本阶段将消耗 ${planStageCost.value} `, h(PixelOrangeSlice, { size: 16 })]),
-    '确认生成', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
-  ) } catch { return }
+  if (!(await confirmQuotaUsage({
+    actionLabel: `生成“${phases[n - 1]?.title || '本阶段'}”`,
+    cost: planStageCost.value,
+    title: '确认生成',
+    confirmButtonText: '确认生成',
+    type: 'info',
+    estimatedTime: '2～4 分钟',
+  }))) return
   const p = phases[n-1]
   if (!p) { phaseError.value = 'Phase ' + n + ' 不存在, phases长度=' + phases.length; return }
   p.generating = true; phaseError.value = ''
@@ -229,23 +244,25 @@ const generatePhase = async (n) => {
       mode: planMode.value,
       summary: summary.value,
       extra: extra.value,
-      prevContents: getPrevContents(n)
-    }, { timeout: 240000 })
+      prevContents: getPrevContents(n),
+      historyId: activePlanId.value,
+      phase1: phases[0].content,
+      phase2: phases[1].content,
+      phase3: phases[2].content,
+      phase4: phases[3].content,
+      phase5: phases[4].content,
+      phase6: phases[5].content
+    }, { timeout: 0 })
     if (r.code === 1 && r.data?.content) {
       p.content = r.data.content
       p.done = true
+      activePlanId.value = r.data.historyId || activePlanId.value
+      await loadPlanHistory()
     } else {
       phaseError.value = r.msg || '生成失败'
     }
   } catch (e) {
-    const status = e.response?.status
-    if (status === 502 || status === 504) {
-      phaseError.value = 'AI 生成等待超时，请稍后重试；本次配额会自动退回'
-    } else if (e.response?.data?.msg) {
-      phaseError.value = e.response.data.msg
-    } else {
-      phaseError.value = '请求未完成，请检查网络后重试'
-    }
+    phaseError.value = e.response?.data?.msg || AI_AUTO_RETRY_NOTICE
   } finally { p.generating = false }
 }
 
@@ -256,9 +273,10 @@ const startEdit = () => {
   editContent.value = phases[currentPhase.value - 1].content
   editing.value = true
 }
-const saveEdit = () => {
+const saveEdit = async () => {
   phases[currentPhase.value - 1].content = editContent.value
   editing.value = false
+  await persistPlan(true)
 }
 const cancelEdit = () => { editing.value = false }
 
@@ -292,6 +310,7 @@ const importToLaunchCheck = () => {
 const hasToken = computed(() => !!sessionStorage.getItem('appToken'))
 const planHistory = ref([])
 const planSaving = ref(false)
+const activePlanId = ref(null)
 const allDone = computed(() => phases.slice(0,5).every(p => p.done))
 
 const loadPlanHistory = async () => {
@@ -301,22 +320,36 @@ const loadPlanHistory = async () => {
     if (r.code === 1) planHistory.value = r.data
   } catch {}
 }
-const savePlan = async () => {
-  if (!hasToken.value || !allDone.value || planSaving.value) return
+const historyPayload = () => ({
+  historyId: activePlanId.value,
+  summary: summary.value,
+  phase1: phases[0].content,
+  phase2: phases[1].content,
+  phase3: phases[2].content,
+  phase4: phases[3].content,
+  phase5: phases[4].content,
+  phase6: phases[5].content
+})
+
+const persistPlan = async (silent = true) => {
+  if (!hasToken.value || !phases.some(phase => phase.done) || planSaving.value) return false
   planSaving.value = true
   try {
-    const response = await request.post('/app/plan/history/save', {
-      summary: summary.value, phase1: phases[0].content, phase2: phases[1].content,
-      phase3: phases[2].content, phase4: phases[3].content,
-      phase5: phases[4].content, phase6: phases[5].content
-    })
-    if (response.code !== 1) return
+    const response = await request.post('/app/plan/history/save', historyPayload())
+    if (response.code !== 1) return false
+    activePlanId.value = response.data?.id || activePlanId.value
     await loadPlanHistory()
-    ElMessage.success('方案已保存')
-  } catch { ElMessage.error('保存失败') }
+    if (!silent) ElMessage.success('方案已保存')
+    return true
+  } catch {
+    ElMessage.error('方案自动保存失败，请稍后重试')
+    return false
+  }
   finally { planSaving.value = false }
 }
+const savePlan = () => persistPlan(false)
 const loadPlan = (h) => {
+  activePlanId.value = h.id || null
   summary.value = h.summary || ''
   started.value = true
   for (const phase of phases) {
@@ -335,6 +368,7 @@ const loadPlan = (h) => {
 const delPlanHistory = async (i, id) => {
   try {
     await request.delete('/app/plan/history/' + id)
+    if (activePlanId.value === id) activePlanId.value = null
     await loadPlanHistory()
   } catch {}
 }
@@ -343,6 +377,7 @@ const clearPlanHistory = async () => {
     await ElMessageBox.confirm('清空后无法恢复全部方案记录。', '清空方案记录', { type: 'warning' })
     await request.delete('/app/plan/history/clear')
     planHistory.value = []
+    activePlanId.value = null
     ElMessage.success('方案记录已清空')
   } catch (error) {
     if (error !== 'cancel' && error !== 'close') ElMessage.error('清空失败')

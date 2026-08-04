@@ -11,7 +11,7 @@
       </div>
       <div class="hero-actions" aria-label="快捷入口">
         <el-button type="primary" @click="router.push('/open-source?tab=discover')"><Search />开源项目榜单</el-button>
-        <el-button class="btn-ghost" @click="router.push('/leaderboard')"><TrendCharts />完整 GitHub 榜单</el-button>
+        <el-button class="btn-ghost" @click="router.push('/leaderboard')"><TrendCharts />完整榜单</el-button>
         <el-button class="btn-ghost" @click="router.push('/ai/career')"><Trophy />AI 比赛列表</el-button>
       </div>
     </section>
@@ -106,13 +106,13 @@ import request from '../api/request'
 const router = useRouter()
 const tourRef = ref(null)
 const tourSteps = [
-  { selector: '.hub-hero', text: '顶部提供三个等尺寸快捷入口，可以直接查看开源项目、GitHub 榜单或 AI 比赛。', expression: 'wink' },
+  { selector: '.hub-hero', text: '顶部提供三个等尺寸快捷入口，可以直接查看开源项目、完整榜单或 AI 比赛。', expression: 'wink' },
   { selector: '.ranking-streams', text: '四行滚动信息帮助你观察项目热度、开源 Issue 和近期 AI 大赛。', expression: 'smile' },
   { selector: '.path-grid', text: '选择一条行动路径后会进入独立页面，不会再在首页展开复杂工具。', expression: 'sparkle' },
 ]
 
 const paths = [
-  { id: 'build', index: '01', title: '做自己的项目', icon: 'Aim', meta: '4 个工具', route: '/project-tools', description: '从 GitHub 榜单寻找灵感，再完成趋势判断、方案设计和上线体检。' },
+  { id: 'build', index: '01', title: '做自己的项目', icon: 'Aim', meta: '4 个工具', route: '/project-tools', description: '从榜单排行寻找灵感，再完成趋势判断、方案设计和上线体检。' },
   { id: 'contribute', index: '02', title: '参与开源项目', icon: 'Collection', meta: '4 个阶段', route: '/open-source?tab=discover', description: '发现真实可参与的 Issue，让 AI 帮你选择、理解岗位价值并生成贡献指南。' },
   { id: 'career', index: '03', title: 'AI大赛与能力参考', icon: 'Trophy', meta: '大赛与岗位', route: '/ai/career', description: '通过参加AI大赛积累自己的项目，用真实岗位要求校准学习方向' },
 ]

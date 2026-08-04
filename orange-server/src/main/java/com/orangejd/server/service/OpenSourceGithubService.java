@@ -4,26 +4,21 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.exception.BaseException;
+import com.orangejd.server.foundation.external.GithubApiClient;
 import com.orangejd.server.mapper.OpenSourceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.StandardCharsets;
+import java.net.URLEncoder;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -32,7 +27,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 @Service
-public class OpenSourceGithubService {
+public class OpenSourceGithubService implements BeginnerGithubGateway {
 
     private static final Logger log = LoggerFactory.getLogger(OpenSourceGithubService.class);
     private static final String API = "https://api.github.com";
@@ -45,18 +40,205 @@ public class OpenSourceGithubService {
 
     private final OpenSourceMapper mapper;
     private final ObjectMapper objectMapper;
-    private final RestTemplate restTemplate;
+    private final GithubApiClient githubApiClient;
+    private final CareerDiscoveryCandidateSelector careerCandidateSelector;
 
-    @Value("${orange.leaderboard.github-token:}")
-    private String githubToken;
-
-    public OpenSourceGithubService(OpenSourceMapper mapper, ObjectMapper objectMapper) {
+    public OpenSourceGithubService(OpenSourceMapper mapper, ObjectMapper objectMapper,
+                                   GithubApiClient githubApiClient,
+                                   CareerDiscoveryCandidateSelector careerCandidateSelector) {
         this.mapper = mapper;
         this.objectMapper = objectMapper;
-        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout(10_000);
-        factory.setReadTimeout(20_000);
-        this.restTemplate = new RestTemplate(factory);
+        this.githubApiClient = githubApiClient;
+        this.careerCandidateSelector = careerCandidateSelector;
+    }
+
+    @Override
+    public List<String> discoverRepositories(int limit) {
+        int safeLimit = Math.max(1, Math.min(limit, 100));
+        String recent = LocalDate.now().minusDays(45).toString();
+        String newlyCreated = LocalDate.now().minusDays(21).toString();
+        List<String> queries = List.of(
+                "stars:>20 archived:false created:>" + newlyCreated + " language:TypeScript",
+                "stars:>20 archived:false created:>" + newlyCreated + " language:JavaScript",
+                "stars:>20 archived:false created:>" + newlyCreated + " language:Python",
+                "stars:>30 archived:false pushed:>" + recent + " language:TypeScript",
+                "stars:>30 archived:false pushed:>" + recent + " language:JavaScript",
+                "stars:>20 archived:false pushed:>" + recent + " topic:ai-tools",
+                "stars:>20 archived:false pushed:>" + recent + " topic:vibe-coding",
+                "stars:>20 archived:false pushed:>" + recent + " topic:creative-coding",
+                "stars:>20 archived:false pushed:>" + recent + " topic:developer-tools");
+        Map<String, DiscoveryCandidate> candidates = new LinkedHashMap<>();
+        int perQuery = Math.max(10, Math.min(30, (safeLimit + queries.size() - 1) / queries.size() + 8));
+        for (String query : queries) {
+            String sort = query.contains("created:>") ? "stars" : "updated";
+            JsonNode response = getJson(API + "/search/repositories?q="
+                    + URLEncoder.encode(query, StandardCharsets.UTF_8)
+                    + "&sort=" + sort + "&order=desc&per_page=" + perQuery);
+            JsonNode items = response.path("items");
+            log.debug("Beginner repository discovery query completed: total={}, items={}, first={}",
+                    response.path("total_count").asInt(0), items.size(),
+                    items.isArray() && !items.isEmpty() ? items.get(0).path("full_name").asText("") : "none");
+            for (JsonNode item : items) {
+                String fullName = item.path("full_name").asText("");
+                if (!REPOSITORY_NAME.matcher(fullName).matches()) continue;
+                DiscoveryCandidate candidate = discoveryCandidate(item);
+                candidates.merge(fullName, candidate,
+                        (left, right) -> left.discoveryScore() >= right.discoveryScore() ? left : right);
+            }
+        }
+        return candidates.values().stream()
+                .sorted(Comparator.comparingInt(DiscoveryCandidate::discoveryScore).reversed()
+                        .thenComparing(DiscoveryCandidate::fullName))
+                .limit(safeLimit)
+                .map(DiscoveryCandidate::fullName)
+                .toList();
+    }
+
+    @Override
+    public List<String> discoverCareerRepositories(int limit) {
+        int safeLimit = Math.max(1, Math.min(limit, 120));
+        List<CareerSearchProfile> profiles = List.of(
+                new CareerSearchProfile("AGENT_NATIVE_APP", "agent-native in:name,description archived:false"),
+                new CareerSearchProfile("KNOWLEDGE_TO_SKILL", "book skill in:name,description archived:false"),
+                new CareerSearchProfile("AI_DESIGN_ASSISTANCE", "design AI harness in:name,description archived:false"),
+                new CareerSearchProfile("AGENT_APPLICATION", "agent app framework in:name,description archived:false"),
+                new CareerSearchProfile("AGENT_APPLICATION", "mcp agent app in:name,description archived:false"),
+                new CareerSearchProfile("KNOWLEDGE_TOOL", "document skill generator in:name,description archived:false"),
+                new CareerSearchProfile("KNOWLEDGE_TOOL", "knowledge AI tool in:name,description archived:false"),
+                new CareerSearchProfile("AI_DESIGN_TOOL", "frontend design skill in:name,description archived:false"),
+                new CareerSearchProfile("AI_DESIGN_TOOL", "UI audit AI in:name,description archived:false"),
+                new CareerSearchProfile("ENGINEERING_QUALITY", "AI testing tool in:name,description archived:false"),
+                new CareerSearchProfile("ENGINEERING_QUALITY", "LLM observability in:name,description archived:false"),
+                new CareerSearchProfile("FULLSTACK_PRODUCT", "AI starter template in:name,description archived:false"),
+                new CareerSearchProfile("FULLSTACK_PRODUCT", "RAG starter app in:name,description archived:false"));
+        List<CareerDiscoveryCandidateSelector.Candidate> candidates = new ArrayList<>();
+        for (CareerSearchProfile profile : profiles) {
+            JsonNode items = getJson(API + "/search/repositories?q="
+                    + URLEncoder.encode(profile.query(), StandardCharsets.UTF_8)
+                    + "&order=desc&per_page=30").path("items");
+            int rank = 0;
+            for (JsonNode item : items) {
+                rank++;
+                String fullName = item.path("full_name").asText("");
+                if (!REPOSITORY_NAME.matcher(fullName).matches()) continue;
+                candidates.add(new CareerDiscoveryCandidateSelector.Candidate(
+                        fullName, profile.category(), careerDiscoveryScore(item, rank)));
+            }
+        }
+        return careerCandidateSelector.select(candidates, safeLimit);
+    }
+
+    private int careerDiscoveryScore(JsonNode item, int relevanceRank) {
+        int stars = item.path("stargazers_count").asInt(0);
+        LocalDateTime updatedAt = parseDate(item.path("updated_at").asText(null));
+        long updatedDays = updatedAt == null ? 999
+                : java.time.temporal.ChronoUnit.DAYS.between(updatedAt, LocalDateTime.now());
+        int popularityEvidence = Math.min(18, (int) Math.round(Math.log10(Math.max(1, stars)) * 5));
+        int maintenanceEvidence = updatedDays <= 90 ? 10 : updatedDays <= 365 ? 6 : 1;
+        String searchable = (item.path("name").asText("") + " "
+                + item.path("description").asText("")).toLowerCase(Locale.ROOT);
+        int visibleOutcome = containsAny(searchable, "app", "template", "starter", "skill", "generator",
+                "design", "visual", "chat", "assistant", "dashboard", "tool") ? 28 : 10;
+        int engineeringValue = containsAny(searchable, "agent", "rag", "framework", "mcp", "a2a", "testing",
+                "observability", "workflow", "automation", "fullstack", "sdk") ? 24 : 8;
+        // GitHub's best-match order owns semantic recall. Metadata only breaks near ties;
+        // the full README-based career scorer decides whether a repository is publishable.
+        int relevance = Math.max(25, 1_000 - relevanceRank * 50);
+        return relevance + visibleOutcome + engineeringValue + popularityEvidence + maintenanceEvidence;
+    }
+
+    private record CareerSearchProfile(String category, String query) {}
+
+    private DiscoveryCandidate discoveryCandidate(JsonNode item) {
+        int stars = item.path("stargazers_count").asInt(0);
+        LocalDateTime createdAt = parseDate(item.path("created_at").asText(null));
+        LocalDateTime updatedAt = parseDate(item.path("updated_at").asText(null));
+        long createdDays = createdAt == null ? 999 : java.time.temporal.ChronoUnit.DAYS.between(createdAt, LocalDateTime.now());
+        long updatedDays = updatedAt == null ? 999 : java.time.temporal.ChronoUnit.DAYS.between(updatedAt, LocalDateTime.now());
+        int popularity = Math.min(35, (int) Math.round(Math.log10(Math.max(1, stars)) * 10));
+        int freshness = createdDays <= 7 ? 30 : createdDays <= 21 ? 22 : createdDays <= 90 ? 10 : 0;
+        int activity = updatedDays <= 7 ? 20 : updatedDays <= 30 ? 12 : 4;
+        String searchable = (item.path("name").asText("") + " "
+                + item.path("description").asText("")).toLowerCase(Locale.ROOT);
+        int vibeSignal = containsAny(searchable, "starter", "template", "skill", "visual", "design",
+                "generator", "playground", "creative", "agent", "website", "app") ? 15 : 5;
+        return new DiscoveryCandidate(item.path("full_name").asText(),
+                popularity + freshness + activity + vibeSignal);
+    }
+
+    private record DiscoveryCandidate(String fullName, int discoveryScore) {}
+
+    @Override
+    public RepositorySnapshot inspectRepository(String fullName) {
+        validateFullName(fullName);
+        JsonNode repo = getJson(API + "/repos/" + fullName);
+        JsonNode root = getOptionalJson(API + "/repos/" + fullName + "/contents");
+        JsonNode packageResponse = getOptionalJson(API + "/repos/" + fullName + "/contents/package.json");
+        JsonNode readmeResponse = getOptionalJson(API + "/repos/" + fullName + "/readme");
+        JsonNode packageData = decodeContent(packageResponse);
+        String readme = decodeText(readmeResponse);
+
+        List<String> rootNames = new ArrayList<>();
+        if (root != null && root.isArray()) root.forEach(item -> rootNames.add(item.path("name").asText("")));
+        String packageManager = detectPackageManager(rootNames, packageData);
+        String nodeVersion = packageData == null ? null : packageData.path("engines").path("node").asText(null);
+        String techStack = detectTechStack(repo.path("language").asText(null), packageData);
+        String inspectionText = (String.join(" ", rootNames) + " " + readme + " "
+                + (packageData == null ? "" : packageData.toString())).toLowerCase(Locale.ROOT);
+
+        List<String> topics = new ArrayList<>();
+        repo.path("topics").forEach(topic -> topics.add(topic.asText()));
+        return new RepositorySnapshot(
+                repo.path("full_name").asText(fullName),
+                repo.path("owner").path("login").asText(fullName.split("/")[0]),
+                repo.path("name").asText(fullName.split("/")[1]),
+                repo.path("html_url").asText("https://github.com/" + fullName),
+                abbreviate(repo.path("description").asText(""), 1900),
+                abbreviate(readme, 12000),
+                nullable(repo.path("language").asText(null)),
+                topics,
+                techStack,
+                packageManager,
+                nodeVersion,
+                nullable(repo.path("license").path("spdx_id").asText(null)),
+                repo.path("stargazers_count").asInt(0),
+                repo.path("forks_count").asInt(0),
+                repo.path("open_issues_count").asInt(0),
+                repo.path("archived").asBoolean(false),
+                readmeResponse != null && readmeResponse.hasNonNull("content"),
+                containsAny(inspectionText, "quick start", "quickstart", "getting started", "npm install", "npx ", "pip install", "uv sync"),
+                detectSetupSteps(readme),
+                containsAny(inspectionText, "dockerfile", "docker-compose", "kubernetes", "helm"),
+                containsAny(inspectionText, "mysql", "postgres", "mongodb", "redis", "database_url"),
+                containsAny(inspectionText, ".env", "api_key", "api key", "access token", "secret key"),
+                containsAny(inspectionText, "aws", "azure", "google cloud", "cloudflare", "supabase", "firebase"),
+                containsAny(inspectionText, "cuda", "requires gpu", "gpu required", "nvidia"),
+                containsAny(inspectionText, "node-gyp", "cmake", "cargo build", "build-essential", "visual studio build tools"),
+                codebaseSize(repo.path("size").asInt(0)),
+                containsAny(inspectionText, "test", "spec", "pytest", "junit", "vitest", "jest", "playwright"),
+                rootNames.stream().anyMatch(name -> name.equalsIgnoreCase(".github"))
+                        || containsAny(inspectionText, "github actions", "gitlab-ci", "circleci"),
+                containsAny(inspectionText, "deploy", "deployment", "vercel", "netlify", "railway", "render.com"),
+                containsAny(inspectionText, "architecture", "design document", "system design", "adr"),
+                containsAny(inspectionText, "release", "semantic-release", "changesets", "changelog"),
+                parseDate(repo.path("created_at").asText(null)),
+                parseDate(repo.path("updated_at").asText(null)));
+    }
+
+    private int detectSetupSteps(String readme) {
+        if (readme == null || readme.isBlank()) return 0;
+        String normalized = readme.toLowerCase(Locale.ROOT);
+        int count = 0;
+        for (String command : List.of("npm install", "npm run", "npx ", "pnpm ", "yarn ", "pip install", "uv sync", "python ")) {
+            if (normalized.contains(command)) count++;
+        }
+        return Math.min(count, 9);
+    }
+
+    private String codebaseSize(int githubSizeKb) {
+        if (githubSizeKb <= 5_000) return "SMALL";
+        if (githubSizeKb <= 30_000) return "MEDIUM";
+        return "LARGE";
     }
 
     public int refreshRepository(Long repositoryId) {
@@ -180,39 +362,12 @@ public class OpenSourceGithubService {
     }
 
     private JsonNode getJson(String url) {
-        try {
-            ResponseEntity<String> response;
-            try {
-                response = restTemplate.exchange(url, HttpMethod.GET,
-                        new HttpEntity<>(headers(true)), String.class);
-            } catch (HttpClientErrorException.Unauthorized unauthorized) {
-                if (githubToken == null || githubToken.isBlank()) throw unauthorized;
-                log.warn("GitHub Token 已失效，本次请求降级为匿名访问");
-                response = restTemplate.exchange(url, HttpMethod.GET,
-                        new HttpEntity<>(headers(false)), String.class);
-            }
-            return objectMapper.readTree(response.getBody());
-        } catch (HttpClientErrorException e) {
-            throw new BaseException("GitHub API 返回 " + e.getStatusCode().value());
-        } catch (Exception e) {
-            throw new BaseException("GitHub API 请求失败：" + e.getMessage());
-        }
+        return githubApiClient.getJson(url);
     }
 
     private JsonNode getOptionalJson(String url) {
         try { return getJson(url); }
         catch (Exception e) { log.debug("可选 GitHub 文件不存在: {}", url); return null; }
-    }
-
-    private HttpHeaders headers(boolean includeAuthorization) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(List.of(MediaType.valueOf("application/vnd.github+json")));
-        headers.set("X-GitHub-Api-Version", "2022-11-28");
-        headers.set("User-Agent", "OrangeVC-OpenSource-Discovery");
-        if (includeAuthorization && githubToken != null && !githubToken.isBlank()) {
-            headers.setBearerAuth(githubToken.trim());
-        }
-        return headers;
     }
 
     private JsonNode decodeContent(JsonNode response) {
@@ -224,6 +379,21 @@ public class OpenSourceGithubService {
             log.debug("package.json 解析失败: {}", e.getMessage());
             return null;
         }
+    }
+
+    private String decodeText(JsonNode response) {
+        if (response == null || !response.hasNonNull("content")) return "";
+        try {
+            String encoded = response.path("content").asText().replaceAll("\\s", "");
+            return new String(Base64.getDecoder().decode(encoded), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private boolean containsAny(String value, String... needles) {
+        for (String needle : needles) if (value.contains(needle)) return true;
+        return false;
     }
 
     private String detectPackageManager(List<String> names, JsonNode packageData) {

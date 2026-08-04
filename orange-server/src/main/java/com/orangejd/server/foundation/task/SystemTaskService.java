@@ -113,7 +113,7 @@ public class SystemTaskService {
         }
 
         SystemTaskHandler handler = handlers.orderedStream()
-                .filter(candidate -> candidate.taskType().equals(task.getTaskType()))
+                .filter(candidate -> candidate.supports(task.getTaskType()))
                 .findFirst()
                 .orElse(null);
         if (handler == null) {

@@ -181,7 +181,7 @@
                 <!-- 步骤2: 目的 -->
                 <template v-if="currentStep === 1">
                   <div class="step-title">为什么想做这个方向的项目？</div>
-                  <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" class="step-select" placement="bottom-start">
+                  <el-select v-model="profile.purpose" placeholder="选择你的目的" size="large" class="step-select" placement="bottom-start" @change="handlePurposeChange">
                     <el-option v-for="t in purposeOptions" :key="t" :label="t" :value="t" />
                   </el-select>
                   <el-input v-model="profile.customPurpose" placeholder="或输入自定义目的..." class="step-input-mt" maxlength="200" />
@@ -189,7 +189,7 @@
                 <!-- 步骤3: 基础 -->
                 <template v-if="currentStep === 2">
                   <div class="step-title">你的编程基础怎么样？</div>
-                  <el-select v-model="profile.experience" placeholder="编程经验" size="large" class="step-select" placement="bottom-start">
+                  <el-select v-model="profile.experience" placeholder="编程经验" size="large" class="step-select" placement="bottom-start" @change="handleExperienceChange">
                     <el-option v-for="t in expOptions" :key="t" :label="t" :value="t" />
                   </el-select>
                   <el-select v-model="profile.languages" multiple placeholder="掌握的语言（可多选）" size="large" class="step-input-mt" placement="bottom-start">
@@ -209,13 +209,38 @@
             </Transition>
           </div>
 
-          <!-- RAG 知识库开关 -->
-          <div v-if="currentStep === 3" class="rag-switch-row">
-            <el-switch v-model="profile.useRag" active-color="#c55312" />
-            <span class="rag-label">知识库增强</span>
-            <el-tooltip content="开启后会自动检索你上传的方法论文档和开源项目 README，让推荐结果包含更具体的学习路径、案例参考和面试建议" placement="top">
-              <el-icon class="help-icon"><QuestionFilled /></el-icon>
-            </el-tooltip>
+          <!-- 分析增强设置 -->
+          <div v-if="currentStep === 3" class="rag-options-card">
+            <div class="rag-option-row">
+              <el-switch v-model="profile.useRag" active-color="#c55312" />
+              <div class="rag-option-copy">
+                <span class="rag-label">知识库增强</span>
+                <small>检索方法论文档和开源项目 README，补充学习路径与案例。</small>
+              </div>
+              <el-tooltip content="开启后会自动检索你上传的方法论文档和开源项目 README，让推荐结果包含更具体的学习路径、案例参考和面试建议" placement="top">
+                <el-icon class="help-icon"><QuestionFilled /></el-icon>
+              </el-tooltip>
+            </div>
+            <div class="rag-option-row">
+              <el-switch v-model="profile.preferBeginnerProjects" active-color="#0f766e" />
+              <div class="rag-option-copy">
+                <span class="rag-label">优先参考新手友好项目</span>
+                <small>匹配已核验真实仓库，不增加额外配额消耗。</small>
+              </div>
+              <el-tooltip content="趋势数据用于判断方向变化；新手项目只作为具体实践案例，不会替代趋势统计。" placement="top">
+                <el-icon class="help-icon"><QuestionFilled /></el-icon>
+              </el-tooltip>
+            </div>
+            <div class="rag-option-row">
+              <el-switch v-model="profile.preferCareerProjects" active-color="#2563eb" />
+              <div class="rag-option-copy">
+                <span class="rag-label">优先参考职业成长项目</span>
+                <small>用真实项目说明岗位能力与作品证明方式。</small>
+              </div>
+              <el-tooltip content="服务端只会从已核验职业项目库中选择真实仓库；项目案例不会替代趋势统计，也不会增加一次额外模型调用。" placement="top">
+                <el-icon class="help-icon"><QuestionFilled /></el-icon>
+              </el-tooltip>
+            </div>
           </div>
 
           <!-- 底部按钮 -->
@@ -296,6 +321,32 @@
         </div>
       </div>
 
+      <section v-if="v2Result.beginnerCases?.length" class="beginner-cases">
+        <div class="rec-section-title">已核验的新手项目案例</div>
+        <p class="beginner-cases-note">这些仓库用于把趋势结论落到具体实践，不作为趋势热度的统计证据。</p>
+        <div class="beginner-case-grid">
+          <article v-for="project in v2Result.beginnerCases" :key="project.id" class="beginner-case-card">
+            <div><span>{{ project.primaryLanguage || 'GitHub' }}</span><b>{{ project.beginnerScore }}/100</b></div>
+            <h3>{{ project.descriptionZh || project.repositoryName }}</h3>
+            <p>{{ project.beginnerReason }}</p>
+            <footer><a :href="project.htmlUrl" target="_blank" rel="noopener noreferrer">查看仓库</a><button type="button" @click="importBeginnerCase(project)">用于方案设计</button></footer>
+          </article>
+        </div>
+      </section>
+
+      <section v-if="v2Result.careerCases?.length" class="beginner-cases career-cases">
+        <div class="rec-section-title">已核验的职业成长项目案例</div>
+        <p class="beginner-cases-note">这些仓库用于说明岗位能力、作品证明和面试讨论点，不作为趋势热度的统计证据。</p>
+        <div class="beginner-case-grid">
+          <article v-for="project in v2Result.careerCases" :key="project.id" class="beginner-case-card career-case-card">
+            <div><span>{{ project.bestRoleName || '职业成长' }}</span><b>{{ project.overallScore }}/100</b></div>
+            <h3>{{ project.summaryZh || project.repositoryName }}</h3>
+            <p>{{ project.careerValue || project.descriptionOriginal }}</p>
+            <footer><a :href="project.htmlUrl" target="_blank" rel="noopener noreferrer">查看仓库</a><button type="button" @click="importCareerCase(project)">用于方案设计</button></footer>
+          </article>
+        </div>
+      </section>
+
       <!-- 推荐项目 -->
       <div class="rec-section-title">为你推荐</div>
       <el-row :gutter="12">
@@ -359,7 +410,6 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
-import { h } from 'vue'
 import { useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -367,6 +417,8 @@ import * as echarts from 'echarts'
 import { marked } from 'marked'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import request from '../api/request'
+import { confirmQuotaUsage } from '../utils/quotaConfirm'
+import { AI_AUTO_RETRY_NOTICE } from '../utils/aiRetry'
 import { LEGAL_CONTACT } from '../content/legal'
 import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
 
@@ -451,8 +503,12 @@ const formSteps = [
 const profile = reactive({
   topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
   customTopics: '', customPurpose: '', customLang: '', customTime: '',
-  useRag: true
+  useRag: true,
+  preferBeginnerProjects: false,
+  preferCareerProjects: false
 })
+const handleExperienceChange = value => { profile.preferBeginnerProjects = String(value || '').includes('新手') }
+const handlePurposeChange = value => { if (String(value || '').includes('求职')) profile.preferCareerProjects = true }
 
 const topicOptions = ['创意编程','游戏开发','WebGL','Canvas','Web音频','AI智能体','RAG检索增强','自托管','家庭助理','ESP32','树莓派','家居自动化','3D打印','其他']
 const purposeOptions = ['🎓 学习 AI 编程知识', '💼 应对求职面试', '💰 赚钱/接单/创业', '🔬 探索技术兴趣']
@@ -502,21 +558,21 @@ const loadHistory = (h) => {
   profile.customLang = h.customLang || ''
   profile.customTime = h.customTime || ''
   profile.useRag = h.useRag !== false
+  profile.preferBeginnerProjects = h.preferBeginnerProjects === true
+  profile.preferCareerProjects = h.preferCareerProjects === true
   currentStep.value = 3
 }
 
 const startJuicing = async () => {
   if (!profile.topics.length) { v2Error.value = '请至少选择一个技术方向'; currentStep.value = 0; return }
-  // 消费确认
-  try {
-    await ElMessageBox.confirm(
-      h('span', { style: 'display:flex;align-items:center;gap:6px' }, [
-        `本次分析将消耗 ${trendV2Cost.value} `,
-        h(PixelOrangeSlice, { size: 16 })
-      ]),
-      '确认分析', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
-    )
-  } catch { return }
+  if (!(await confirmQuotaUsage({
+    actionLabel: '本次趋势分析',
+    cost: trendV2Cost.value,
+    title: '确认分析',
+    confirmButtonText: '确认分析',
+    type: 'info',
+    estimatedTime: '1～3 分钟',
+  }))) return
   juicing.value = true; analyzing.value = true; v2Error.value = ''; v2Result.value = null
   squeezeText.value = '🍊 正在收集数据...'; let idx = 0
   squeezeTimer = setInterval(() => { idx = (idx+1) % squeezeTexts.length; squeezeText.value = squeezeTexts[idx] }, 3000)
@@ -534,7 +590,9 @@ const startJuicing = async () => {
       customPurpose: profile.customPurpose || '',
       customLang: profile.customLang || '',
       customTime: profile.customTime || '',
-      useRag: profile.useRag
+      useRag: profile.useRag,
+      preferBeginnerProjects: profile.preferBeginnerProjects,
+      preferCareerProjects: profile.preferCareerProjects
     }, { timeout: 0 })
     if (r.code === 1 && r.data) {
       v2Result.value = r.data
@@ -546,7 +604,7 @@ const startJuicing = async () => {
     } else {
       v2Error.value = r.msg || '分析失败'
     }
-  } catch { v2Error.value = '请求失败，请检查网络连接' }
+  } catch { v2Error.value = AI_AUTO_RETRY_NOTICE }
   finally { analyzing.value = false; juicing.value = false; if (squeezeTimer) clearInterval(squeezeTimer) }
 }
 
@@ -716,20 +774,33 @@ const importToPlan = (r) => {
   router.push('/plan')
 }
 
+const importBeginnerCase = project => {
+  const text = `项目名称：${project.descriptionZh || project.repositoryName}\n参考仓库：${project.htmlUrl}\n适合原因：${project.beginnerReason}\n可改造方向：${project.modificationIdeas || ''}\n难度：${project.difficulty}\n预计时间：${project.estimatedDuration || '待评估'}`
+  sessionStorage.setItem('plan_import', text)
+  router.push('/plan')
+}
+
+const importCareerCase = project => {
+  const text = `项目名称：${project.summaryZh || project.repositoryName}\n参考仓库：${project.htmlUrl}\n目标岗位：${project.bestRoleName || '待选择'}\n职业价值：${project.careerValue || ''}\n可证明能力：${project.proofPoints || ''}\n差异化方向：${project.modificationPlan || ''}\n预计时间：${project.estimatedDuration || '待评估'}`
+  sessionStorage.setItem('plan_import', text)
+  router.push('/plan')
+}
+
 const askAI = async () => {
   if (!aiQuestion.value.trim()) { aiError.value = '请输入分析问题'; return }
-  try { await ElMessageBox.confirm(
-    h('span', { style: 'display:flex;align-items:center;gap:6px' }, [
-      `本次提问将消耗 ${trendV1Cost.value} `,
-      h(PixelOrangeSlice, { size: 16 })
-    ]),
-    '确认发送', { confirmButtonText: '确认', cancelButtonText: '取消', type: 'info' }
-  ) } catch { return }
+  if (!(await confirmQuotaUsage({
+    actionLabel: '本次趋势提问',
+    cost: trendV1Cost.value,
+    title: '确认发送',
+    confirmButtonText: '确认发送',
+    type: 'info',
+    estimatedTime: '1～2 分钟',
+  }))) return
   aiLoading.value = true; aiError.value = ''; aiReply.value = ''; aiReplyHtml.value = ''
   try {
     const r = await request.post('/app/trend/analyze', {
       question: aiQuestion.value.trim()
-    }, { timeout: 90000 })
+    }, { timeout: 0 })
     if (r.code === 1 && r.data) {
       aiReply.value = r.data.content || ''
       aiReplyHtml.value = marked.parse(aiReply.value)
@@ -737,7 +808,7 @@ const askAI = async () => {
       aiError.value = r.msg || '分析失败'
     }
   } catch {
-    aiError.value = '请求失败，请检查网络连接'
+    aiError.value = AI_AUTO_RETRY_NOTICE
   } finally { aiLoading.value = false }
 }
 
@@ -1284,22 +1355,29 @@ onUnmounted(() => { chart?.dispose(); chart = null })
   to { opacity: .4; transform: translate(-50%,-50%) rotate(0); }
 }
 
-/* --- RAG SWITCH --- */
-.rag-switch-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 16px;
-  padding: 12px 16px;
-  background: #faf9f7;
-  border: 2px solid #f0ece6;
-  border-radius: 2px;
-}
+/* --- ANALYSIS ENHANCEMENTS --- */
+.rag-options-card { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 16px; border: 2px solid #f0ece6; border-radius: 8px; background: #faf9f7; }
+.rag-option-row { display: grid; min-width: 0; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 12px 16px; }
+.rag-option-row + .rag-option-row { border-left: 1px solid #e7e1d9; }
 .rag-label {
   font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
   font-size: 13px;
   color: #3a302a;
 }
+.rag-option-copy { display: grid; min-width: 0; gap: 3px; }
+.rag-option-copy small { color: #7b716b; font-size: 11px; line-height: 1.5; }
+@media (max-width: 720px) { .rag-options-card { grid-template-columns: 1fr; }.rag-option-row + .rag-option-row { border-top: 1px solid #e7e1d9; border-left: 0; } }
+.beginner-cases { margin: 18px 0 26px; }
+.beginner-cases-note { margin: -4px 0 12px; color: #7b716b; font-size: 12px; }
+.beginner-case-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.beginner-case-card { display: flex; min-height: 235px; flex-direction: column; padding: 18px; border: 1px solid #d7e8e4; border-radius: 8px; background: #fbfffe; }
+.beginner-case-card > div,.beginner-case-card footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.beginner-case-card > div { color: #0f766e; font-size: 11px; font-weight: 800; }
+.beginner-case-card h3 { margin: 18px 0 8px; font-size: 16px; line-height: 1.45; }
+.beginner-case-card p { display: -webkit-box; overflow: hidden; margin: 0; color: #5e5752; font-size: 12px; line-height: 1.7; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+.beginner-case-card footer { margin-top: auto; padding-top: 14px; border-top: 1px solid #d7e8e4; }
+.beginner-case-card footer a,.beginner-case-card footer button { border: 0; background: transparent; color: #0f766e; font-size: 12px; font-weight: 800; text-decoration: none; cursor: pointer; }
+@media (max-width: 820px) { .beginner-case-grid { grid-template-columns: 1fr; } }
 
 /* --- BUTTONS --- */
 .nav-btn-row {

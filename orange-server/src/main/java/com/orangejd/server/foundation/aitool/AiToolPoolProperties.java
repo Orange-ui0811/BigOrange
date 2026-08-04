@@ -17,6 +17,10 @@ public class AiToolPoolProperties {
     private final int globalMaxConcurrency;
     private final long acquireWaitMillis;
     private final long leaseMillis;
+    private final boolean autoRetryEnabled;
+    private final int autoRetryMaxAttempts;
+    private final long autoRetryInitialDelayMillis;
+    private final long autoRetryMaxDelayMillis;
     private final String endpoint;
     private final String model;
     private final List<Slot> slots;
@@ -37,11 +41,20 @@ public class AiToolPoolProperties {
             @Value("${orange.ai-tool-pool.keys[6]:}") String key7,
             @Value("${orange.ai-tool-pool.keys[7]:}") String key8,
             @Value("${orange.ai-tool-pool.keys[8]:}") String key9,
-            @Value("${orange.ai-tool-pool.keys[9]:}") String key10) {
+            @Value("${orange.ai-tool-pool.keys[9]:}") String key10,
+            @Value("${orange.ai-tool-pool.auto-retry-enabled:true}") boolean autoRetryEnabled,
+            @Value("${orange.ai-tool-pool.auto-retry-max-attempts:0}") int autoRetryMaxAttempts,
+            @Value("${orange.ai-tool-pool.auto-retry-initial-delay-millis:2000}") long autoRetryInitialDelayMillis,
+            @Value("${orange.ai-tool-pool.auto-retry-max-delay-millis:30000}") long autoRetryMaxDelayMillis) {
         this.enabled = enabled;
         this.globalMaxConcurrency = Math.max(1, Math.min(globalMaxConcurrency, 80));
         this.acquireWaitMillis = Math.max(0, Math.min(acquireWaitMillis, 10_000));
         this.leaseMillis = Math.max(60_000, Math.min(leaseMillis, 600_000));
+        this.autoRetryEnabled = autoRetryEnabled;
+        this.autoRetryMaxAttempts = Math.max(0, Math.min(autoRetryMaxAttempts, 1000));
+        this.autoRetryInitialDelayMillis = Math.max(0, Math.min(autoRetryInitialDelayMillis, 60_000));
+        this.autoRetryMaxDelayMillis = Math.max(this.autoRetryInitialDelayMillis,
+                Math.min(Math.max(0, autoRetryMaxDelayMillis), 60_000));
         this.endpoint = endpoint == null ? "" : endpoint.trim().replaceAll("/+$", "");
         this.model = model == null ? "" : model.trim();
         List<String> values = List.of(key1, key2, key3, key4, key5, key6, key7, key8, key9, key10);
@@ -59,6 +72,10 @@ public class AiToolPoolProperties {
     public int globalMaxConcurrency() { return globalMaxConcurrency; }
     public long acquireWaitMillis() { return acquireWaitMillis; }
     public long leaseMillis() { return leaseMillis; }
+    public boolean autoRetryEnabled() { return autoRetryEnabled; }
+    public int autoRetryMaxAttempts() { return autoRetryMaxAttempts; }
+    public long autoRetryInitialDelayMillis() { return autoRetryInitialDelayMillis; }
+    public long autoRetryMaxDelayMillis() { return autoRetryMaxDelayMillis; }
     public List<Slot> slots() { return slots; }
     public boolean poolReady() {
         return StringUtils.hasText(endpoint) && StringUtils.hasText(model) && !slots.isEmpty();

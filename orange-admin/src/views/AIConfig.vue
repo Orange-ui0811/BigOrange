@@ -38,6 +38,11 @@
         <span>DeepSeek 兜底：{{ pool.fallbackRunning || 0 }}</span>
         <span>已配置槽位：{{ pool.configuredSlots || 0 }}</span>
         <span>全局上限：{{ pool.globalMax || 0 }}</span>
+        <span>
+          自动重试：{{ pool.autoRetryEnabled
+            ? (pool.autoRetryMaxAttempts > 0 ? `最多 ${pool.autoRetryMaxAttempts} 次` : '持续到成功')
+            : '未启用' }}
+        </span>
       </div>
       <el-table :data="pool.slots || []" size="small" empty-text="尚未配置 Gitee Key">
         <el-table-column prop="slotNo" label="槽位" width="72" />
@@ -70,10 +75,29 @@
       <div class="recent-heading">最近调用（不记录 Prompt、响应正文或密钥原文）</div>
       <el-table :data="recentCalls" size="small" max-height="280" empty-text="暂无调用记录">
         <el-table-column prop="startedAt" label="开始时间" min-width="170" />
+        <el-table-column label="调用用户" min-width="175">
+          <template #default="{ row }">
+            <div class="caller-cell">
+              <strong>{{ row.userDisplayName || '系统任务' }}</strong>
+              <span v-if="row.accountId">
+                {{ row.username ? `@${row.username}` : '' }} · ID {{ row.accountId }}
+              </span>
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column prop="purpose" label="用途" min-width="165" />
+        <el-table-column prop="attemptNo" label="尝试" width="68">
+          <template #default="{ row }">第 {{ row.attemptNo || 1 }} 次</template>
+        </el-table-column>
         <el-table-column prop="provider" label="提供方" width="105" />
         <el-table-column prop="slotNo" label="槽位" width="68" />
-        <el-table-column prop="status" label="结果" width="105" />
+        <el-table-column label="结果" width="105">
+          <template #default="{ row }">
+            <el-tag size="small" :type="row.status === 'SUCCEEDED' ? 'success' : row.status === 'RETRY_WAIT' ? 'warning' : 'danger'">
+              {{ row.status === 'RETRY_WAIT' ? '自动重试中' : row.status }}
+            </el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="durationMs" label="耗时(ms)" width="105" />
         <el-table-column prop="errorSummary" label="错误摘要" min-width="160" show-overflow-tooltip />
       </el-table>
@@ -283,6 +307,9 @@ onMounted(() => Promise.all([loadData(), loadPool()]))
 .pool-summary span { margin-top: 4px; color: #8b929d; font-size: 12px; }
 .pool-stats { display: flex; flex-wrap: wrap; gap: 10px 24px; color: #606975; font-size: 13px; }
 .recent-heading { margin-top: 4px; color: #303133; font-size: 14px; font-weight: 600; }
+.caller-cell strong, .caller-cell span { display: block; }
+.caller-cell strong { color: #303133; font-size: 12px; }
+.caller-cell span { margin-top: 2px; color: #9098a3; font-size: 11px; }
 .config-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .config-panel { min-width: 0; padding: 18px; border: 1px solid #e2e5ea; border-radius: 8px; background: #fff; }
 .panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }

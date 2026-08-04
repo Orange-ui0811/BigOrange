@@ -94,15 +94,16 @@ public interface LaunchAssessmentMapper {
 
     @Select("""
             SELECT la.id, la.account_id AS accountId, a.username,
-                   COALESCE(NULLIF(a.nickname, ''), a.username) AS accountName,
+                   COALESCE(NULLIF(up.nickname, ''), a.username) AS accountName,
                    la.project_name AS projectName, la.repository_url AS repositoryUrl,
                    la.current_stage AS currentStage, la.status,
                    COALESCE(SUM(las.segment_cost), 0) AS totalCost,
                    la.create_time AS createTime, la.update_time AS updateTime
             FROM launch_assessment la
             JOIN account a ON a.id = la.account_id
+            LEFT JOIN user_profile up ON up.account_id = a.id
             LEFT JOIN launch_assessment_stage las ON las.assessment_id = la.id
-            GROUP BY la.id, la.account_id, a.username, a.nickname, la.project_name,
+            GROUP BY la.id, la.account_id, a.username, up.nickname, la.project_name,
                      la.repository_url, la.current_stage, la.status, la.create_time, la.update_time
             ORDER BY la.update_time DESC, la.id DESC
             LIMIT #{limit} OFFSET #{offset}
@@ -120,7 +121,7 @@ public interface LaunchAssessmentMapper {
 
     @Select("""
             SELECT la.id, la.account_id AS accountId, a.username,
-                   COALESCE(NULLIF(a.nickname, ''), a.username) AS accountName,
+                   COALESCE(NULLIF(up.nickname, ''), a.username) AS accountName,
                    la.project_name AS projectName, la.repository_url AS repositoryUrl,
                    la.project_summary AS projectSummary, la.target_audience AS targetAudience,
                    la.budget, la.region, la.expected_users AS expectedUsers,
@@ -129,6 +130,7 @@ public interface LaunchAssessmentMapper {
                    la.create_time AS createTime, la.update_time AS updateTime
             FROM launch_assessment la
             JOIN account a ON a.id = la.account_id
+            LEFT JOIN user_profile up ON up.account_id = a.id
             WHERE la.id = #{id}
             """)
     Map<String, Object> selectAdminDetail(Long id);

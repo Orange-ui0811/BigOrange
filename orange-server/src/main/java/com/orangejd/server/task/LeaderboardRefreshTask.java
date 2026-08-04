@@ -10,6 +10,7 @@ import com.orangejd.server.foundation.external.AiRuntimeConfig;
 import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 import com.orangejd.server.foundation.external.ExternalAiClient;
 import com.orangejd.server.foundation.external.TranslationCacheMapper;
+import com.orangejd.server.foundation.external.GithubApiClient;
 import com.orangejd.server.foundation.ingestion.IngestionCoordinatorService;
 import com.orangejd.server.foundation.ingestion.IngestionRunService;
 import com.orangejd.server.service.DocumentService;
@@ -61,6 +62,7 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
     @Autowired private ExternalAiClient externalAiClient;
     @Autowired private TranslationCacheMapper translationCacheMapper;
     @Autowired private ObjectMapper objectMapper;
+    @Autowired private GithubApiClient githubApiClient;
 
     @Autowired(required = false)
     private DocumentService documentService;
@@ -71,17 +73,11 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
     @Value("${orange.ingestion.pipeline-v2-enabled:false}")
     private boolean pipelineV2Enabled;
 
-    private final RestTemplate restTemplate;
     private final RestTemplate readmeRestTemplate;
     private final AtomicBoolean refreshRunning = new AtomicBoolean(false);
     private final ThreadLocal<RunContext> runContext = new ThreadLocal<>();
 
     {
-        restTemplate = new RestTemplate();
-        restTemplate.setRequestFactory(new org.springframework.http.client.SimpleClientHttpRequestFactory() {{
-            setConnectTimeout(GITHUB_TIMEOUT_MS);
-            setReadTimeout(GITHUB_TIMEOUT_MS);
-        }});
         readmeRestTemplate = new RestTemplate();
         readmeRestTemplate.setRequestFactory(new org.springframework.http.client.SimpleClientHttpRequestFactory() {{
             setConnectTimeout(README_TIMEOUT_MS);
@@ -228,12 +224,12 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
                     + "&sort=stars&order=desc&per_page=20";
 
-            ResponseEntity<Map> response = exchangeGithub(url);
+            Map<String, Object> response = githubApiClient.getMap(url);
 
-            if (response.getBody() != null && response.getBody().containsKey("items")) {
+            if (response.containsKey("items")) {
                 @SuppressWarnings("unchecked")
-                List<Map<String, Object>> items = (List<Map<String, Object>>) response.getBody().get("items");
-                int totalCount = (int) response.getBody().getOrDefault("total_count", 0);
+                List<Map<String, Object>> items = (List<Map<String, Object>>) response.get("items");
+                int totalCount = ((Number) response.getOrDefault("total_count", 0)).intValue();
 
                 List<Map<String, Object>> records = new ArrayList<>();
                 for (Map<String, Object> item : items) {
@@ -312,12 +308,12 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
                     + "&sort=stars&order=desc&per_page=20";
 
-            ResponseEntity<Map> response = exchangeGithub(url);
+            Map<String, Object> response = githubApiClient.getMap(url);
 
-            if (response.getBody() != null && response.getBody().containsKey("items")) {
+            if (response.containsKey("items")) {
                 @SuppressWarnings("unchecked")
-                List<Map<String, Object>> items = (List<Map<String, Object>>) response.getBody().get("items");
-                int totalCount = (int) response.getBody().getOrDefault("total_count", 0);
+                List<Map<String, Object>> items = (List<Map<String, Object>>) response.get("items");
+                int totalCount = ((Number) response.getOrDefault("total_count", 0)).intValue();
 
                 List<Map<String, Object>> records = new ArrayList<>();
                 for (Map<String, Object> item : items) {
@@ -584,28 +580,6 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
             // README 拉取失败静默跳过
         }
         return null;
-    }
-
-    private ResponseEntity<Map> exchangeGithub(String url) {
-        try {
-            return restTemplate.exchange(url, HttpMethod.GET,
-                    new HttpEntity<>(githubHeaders(true)), Map.class);
-        } catch (org.springframework.web.client.HttpClientErrorException.Unauthorized unauthorized) {
-            if (githubToken == null || githubToken.isBlank()) throw unauthorized;
-            log.warn("GitHub Token 已失效，本次榜单请求降级为匿名访问");
-            return restTemplate.exchange(url, HttpMethod.GET,
-                    new HttpEntity<>(githubHeaders(false)), Map.class);
-        }
-    }
-
-    private HttpHeaders githubHeaders(boolean includeAuthorization) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Accept", "application/vnd.github.v3+json");
-        headers.set("User-Agent", "OrangeVC-Leaderboard");
-        if (includeAuthorization && githubToken != null && !githubToken.isBlank()) {
-            headers.setBearerAuth(githubToken.trim());
-        }
-        return headers;
     }
 
     private void sleep(long ms) {
