@@ -158,7 +158,12 @@ class PersonaWorkshopServiceTest {
     }
 
     private PersonaWorkshopService service(PersonaWorkshopMapper mapper) {
-        return new PersonaWorkshopService(mapper, new PersonaMaterialCollector(mapper),
-                mock(UserProfileMapper.class), mock(WorkMapper.class), mock(AiResultRecordMapper.class));
+        PersonaSettingsService settings = new PersonaSettingsService(mapper);
+        PersonaEquipmentService equipment = new PersonaEquipmentService(mapper, new PersonaBlueprintValidator());
+        PersonaSnapshotAssembler snapshots = new PersonaSnapshotAssembler(mapper,
+                new PersonaMaterialCollector(mapper), mock(UserProfileMapper.class), mock(WorkMapper.class),
+                mock(AiResultRecordMapper.class), settings, equipment, new PersonaRecommendationPolicy());
+        return new PersonaWorkshopService(snapshots, new PersonaEntryService(mapper),
+                new PersonaMaterialService(mapper), equipment, settings);
     }
 }
