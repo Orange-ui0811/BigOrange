@@ -10,6 +10,7 @@ const api = vi.hoisted(() => ({
   acceptPersonaMaterial: vi.fn(),
   rejectPersonaMaterial: vi.fn(),
   updatePersonaEquipment: vi.fn(),
+  updatePersonaAccessoryBlueprint: vi.fn(),
   updatePersonaSettings: vi.fn(),
 }))
 

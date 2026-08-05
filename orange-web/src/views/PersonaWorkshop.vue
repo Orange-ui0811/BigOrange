@@ -1,5 +1,5 @@
 <template>
-  <div class="persona-workshop" v-loading="loading">
+  <div class="persona-workshop" v-loading="store.loading">
     <header class="workshop-header">
       <div>
         <span class="eyebrow">ORANGE PERSONA ATELIER · 画像由你确认</span>
@@ -158,41 +158,28 @@
 </template>
 
 <script setup>
-import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { computed, defineAsyncComponent, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ArrowRight, Box, Check, Close, Delete, EditPen, Plus } from '@element-plus/icons-vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
 import PersonaAccessoryBlueprintEditor from '../components/PersonaAccessoryBlueprintEditor.vue'
 import PersonaEquipmentTransformEditor from '../components/PersonaEquipmentTransformEditor.vue'
 import PersonaFaceEditor from '../components/PersonaFaceEditor.vue'
 import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
-import {
-  acceptPersonaMaterial,
-  createPersonaEntry,
-  deletePersonaEntry,
-  getPersonaWorkshop,
-  rejectPersonaMaterial,
-  updatePersonaEntry,
-  updatePersonaAccessoryBlueprint,
-  updatePersonaEquipment,
-  updatePersonaSettings,
-} from '../api/personaWorkshop'
+import { usePersonaAppearance } from '../composables/usePersonaAppearance'
+import { usePersonaEquipment } from '../composables/usePersonaEquipment'
+import { usePersonaStoryRail } from '../composables/usePersonaStoryRail'
+import { usePersonaWorkshop } from '../composables/usePersonaWorkshop'
 
 const router = useRouter()
 const OrangePersonaScene = defineAsyncComponent(() => import('../components/OrangePersonaScene.vue'))
-const storyRail = ref(null)
-const loading = ref(false)
-const activeFocus = ref('overview')
-const compactMode = ref(false)
-const editVisible = ref(false)
-const editForm = reactive({ id: null, dimension: 'GOAL', content: '' })
-const drafts = reactive({ GOAL: '', INTEREST: '', SKILL: '', RESOURCE: '', GROWTH: '' })
-const materialDrafts = reactive({})
-const appearanceSaveState = ref('已自动保存')
-const snapshot = reactive({ dimensions: [], materials: [], equipment: [], recommendations: [], settings: { showcaseEnabled: false, avatarEnabled: false, bodyColor: '#F37021', faceStyle: 'FRIENDLY', leafStyle: 'CLASSIC', surfaceStyle: 'NATURAL', faceConfig: {} }, completion: {}, materialCount: 0 })
-let observer
-let mediaQuery
-let appearanceSaveTimer
+const { storyRail, activeFocus, compactMode, focusMeta, observeNodes, scrollToFocus } = usePersonaStoryRail()
+const workshop = usePersonaWorkshop({ afterLoad: observeNodes })
+const { store, snapshot, editVisible, editForm, drafts, materialDrafts, load, addEntry,
+  openEdit, saveEdit, removeEntry, acceptMaterial, rejectMaterial } = workshop
+const { appearance, faceConfig, appearanceSaveState, setAppearance, updateFaceConfig,
+  scheduleAppearanceSave, saveSettings } = usePersonaAppearance(snapshot)
+const { equipmentFor, saveEquipment, setEquipmentVariant, updateEquipmentTransform,
+  updateAccessoryBlueprint, saveAccessoryBlueprint } = usePersonaEquipment({ snapshot, reload: load })
 
 const dimensionMeta = {
   GOAL: { kicker: 'CURRENT DIRECTION', description: '你此刻最想推进什么。目标可以变化，记录的是当前选择，不是永久标签。', example: '例如：三个月内做出一个可投递前端岗位的完整作品', placeholder: '学习、求职、参赛、开源、接单……也可以写得更具体' },
@@ -208,22 +195,7 @@ const focusNavigation = [
   { code: 'skill', index: '03', short: '技能' }, { code: 'resource', index: '04', short: '资源' },
   { code: 'growth', index: '05', short: '成长' }, { code: 'recommendation', index: '07', short: '下一步' },
 ]
-const focusCopy = {
-  overview: { title: '你的原创橙子', caption: '每件装备对应一种稳定画像维度' }, goal: { title: '方向罗盘', caption: '目标决定朝哪里走，不定义你是谁' },
-  interest: { title: '兴趣星环', caption: '正在吸引你的主题，环绕而不固化' }, skill: { title: '能力目镜', caption: '只表达已经使用或完成过的能力' },
-  resource: { title: '资源能量包', caption: '时间、设备、预算和协作条件' }, growth: { title: '成长足迹', caption: '由你确认后才留下的真实行动' },
-  recommendation: { title: '下一步入口', caption: '用已确认画像连接平台现有内容' },
-}
-const focusMeta = computed(() => focusCopy[activeFocus.value] || focusCopy.overview)
 const unlockedCount = computed(() => snapshot.equipment.filter(item => item.unlocked).length)
-const appearance = computed(() => ({
-  bodyColor: snapshot.settings.bodyColor || '#F37021',
-  faceStyle: snapshot.settings.faceStyle || 'FRIENDLY',
-  leafStyle: snapshot.settings.leafStyle || 'CLASSIC',
-  surfaceStyle: snapshot.settings.surfaceStyle || 'NATURAL',
-  faceConfig: snapshot.settings.faceConfig || {},
-}))
-const faceConfig = computed(() => snapshot.settings.faceConfig || {})
 const bodyColorPresets = ['#F37021', '#FF9F1C', '#FF6B35', '#F43F5E', '#8B5CF6', '#0EA5E9']
 const appearanceControls = [
   { key: 'faceStyle', label: '表情', options: [{ value: 'FRIENDLY', label: '友好', icon: '◡' }, { value: 'CURIOUS', label: '好奇', icon: '○' }, { value: 'COOL', label: '酷感', icon: '⌐' }] },
@@ -231,132 +203,7 @@ const appearanceControls = [
   { key: 'surfaceStyle', label: '质感', options: [{ value: 'NATURAL', label: '自然', icon: '••' }, { value: 'GLOSSY', label: '亮面', icon: '✦' }, { value: 'MATTE', label: '磨砂', icon: '▪' }] },
 ]
 
-const equipmentFor = dimension => snapshot.equipment.find(item => item.dimension === dimension)
-
-const load = async () => {
-  loading.value = true
-  try {
-    const response = await getPersonaWorkshop()
-    if (response.code === 1) {
-      Object.assign(snapshot, response.data || {})
-      snapshot.materials?.forEach(item => { materialDrafts[item.id] = item.suggestedContent })
-      await nextTick()
-      observeNodes()
-    }
-  } finally { loading.value = false }
-}
-
-const addEntry = async dimension => {
-  const content = drafts[dimension]?.trim()
-  if (!content) return
-  await createPersonaEntry({ dimension, content })
-  drafts[dimension] = ''
-  ElMessage.success('已加入画像，对应装备现在可以解锁')
-  await load()
-}
-
-const openEdit = entry => { editForm.id = entry.id; editForm.dimension = entry.dimensionCode; editForm.content = entry.content; editVisible.value = true }
-const saveEdit = async () => { await updatePersonaEntry(editForm.id, { dimension: editForm.dimension, content: editForm.content.trim() }); editVisible.value = false; ElMessage.success('画像内容已更新'); await load() }
-const removeEntry = async entry => {
-  try {
-    await ElMessageBox.confirm('删除后这条内容不再参与画像；如果该维度没有其他内容，对应装备会自动收起。', '删除画像内容', { type: 'warning', confirmButtonText: '确认删除', cancelButtonText: '保留' })
-    await deletePersonaEntry(entry.id)
-    ElMessage.success('画像内容已删除')
-    await load()
-  } catch (error) {
-    if (error !== 'cancel' && error !== 'close') throw error
-  }
-}
-
-const acceptMaterial = async material => { await acceptPersonaMaterial(material.id, materialDrafts[material.id]?.trim()); ElMessage.success('素材已由你确认并加入画像'); await load() }
-const rejectMaterial = async material => { await rejectPersonaMaterial(material.id); ElMessage.success('已忽略这条素材'); await load() }
-const saveEquipment = async item => {
-  try {
-    await updatePersonaEquipment(item.slotCode, { itemCode: item.itemCode, variantCode: item.variantCode, colorHex: item.colorHex, equipped: item.equipped, transform: item.transform })
-    ElMessage.success(item.equipped ? `${item.name}已穿戴` : `${item.name}已收起`)
-  } catch (error) {
-    await load()
-    throw error
-  }
-}
-const setEquipmentVariant = async (item, variant) => {
-  item.variantCode = variant
-  await saveEquipment(item)
-}
-const updateEquipmentTransform = (item, transform) => { item.transform = transform }
-const updateAccessoryBlueprint = (item, blueprint) => { item.blueprint = blueprint }
-const saveAccessoryBlueprint = async (item, blueprint) => {
-  item.blueprint = blueprint
-  try {
-    await updatePersonaAccessoryBlueprint(item.slotCode, blueprint)
-  } catch (error) {
-    await load()
-    throw error
-  }
-}
-const setAppearance = (key, value) => {
-  snapshot.settings[key] = value
-  scheduleAppearanceSave()
-}
-const updateFaceConfig = value => { snapshot.settings.faceConfig = value }
-const settingsPayload = () => ({
-  showcaseEnabled: snapshot.settings.showcaseEnabled,
-  avatarEnabled: snapshot.settings.avatarEnabled,
-  bodyColor: snapshot.settings.bodyColor,
-  faceStyle: snapshot.settings.faceStyle,
-  leafStyle: snapshot.settings.leafStyle,
-  surfaceStyle: snapshot.settings.surfaceStyle,
-  faceConfig: snapshot.settings.faceConfig,
-})
-const scheduleAppearanceSave = () => {
-  clearTimeout(appearanceSaveTimer)
-  appearanceSaveState.value = '等待保存…'
-  appearanceSaveTimer = setTimeout(async () => {
-    appearanceSaveState.value = '保存中…'
-    try {
-      await updatePersonaSettings(settingsPayload())
-      appearanceSaveState.value = '已自动保存'
-    } catch {
-      appearanceSaveState.value = '保存失败'
-    }
-  }, 260)
-}
-const saveSettings = async () => {
-  if (!snapshot.settings.showcaseEnabled) snapshot.settings.avatarEnabled = false
-  await updatePersonaSettings(settingsPayload())
-  ElMessage.success('展示设置已保存')
-}
-
-const scrollToFocus = code => {
-  const element = document.querySelector(`[data-focus="${code}"]`)
-  element?.scrollIntoView({ behavior: compactMode.value ? 'auto' : 'smooth', block: 'center' })
-  activeFocus.value = code
-}
-
-const observeNodes = () => {
-  observer?.disconnect()
-  if (compactMode.value) return
-  observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-    if (visible?.target?.dataset.focus) activeFocus.value = visible.target.dataset.focus
-  }, { rootMargin: '-28% 0px -40% 0px', threshold: [0, .25, .55] })
-  document.querySelectorAll('.story-rail [data-focus]').forEach(element => observer.observe(element))
-}
-
-const syncCompactMode = event => { compactMode.value = event.matches; nextTick(observeNodes) }
-onMounted(() => {
-  mediaQuery = window.matchMedia('(max-width: 900px)')
-  compactMode.value = mediaQuery.matches
-  if (mediaQuery.addEventListener) mediaQuery.addEventListener('change', syncCompactMode)
-  else mediaQuery.addListener(syncCompactMode)
-  load()
-})
-onBeforeUnmount(() => {
-  clearTimeout(appearanceSaveTimer)
-  observer?.disconnect()
-  if (mediaQuery?.removeEventListener) mediaQuery.removeEventListener('change', syncCompactMode)
-  else mediaQuery?.removeListener(syncCompactMode)
-})
+onMounted(load)
 </script>
 
 <style scoped>
