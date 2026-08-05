@@ -9,6 +9,7 @@ import com.orangejd.server.dto.PersonaEquipmentRequest;
 import com.orangejd.server.dto.PersonaMaterialDecisionRequest;
 import com.orangejd.server.dto.PersonaSettingsRequest;
 import com.orangejd.server.service.PersonaWorkshopService;
+import com.orangejd.server.service.PersonaAppearanceShareService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/persona-workshop")
 public class AppPersonaWorkshopController {
     private final PersonaWorkshopService service;
+    private final PersonaAppearanceShareService appearanceShareService;
 
-    public AppPersonaWorkshopController(PersonaWorkshopService service) {
+    public AppPersonaWorkshopController(PersonaWorkshopService service,
+                                        PersonaAppearanceShareService appearanceShareService) {
         this.service = service;
+        this.appearanceShareService = appearanceShareService;
     }
 
     @GetMapping
@@ -93,6 +97,21 @@ public class AppPersonaWorkshopController {
     @PutMapping("/settings")
     public Result<?> updateSettings(@RequestBody PersonaSettingsRequest request) {
         return Result.success(service.updateSettings(accountId(), request));
+    }
+
+    @PostMapping("/appearance-codes")
+    public Result<?> exportAppearanceCode() {
+        return Result.success(appearanceShareService.exportCode(accountId()));
+    }
+
+    @GetMapping("/appearance-codes/{code}")
+    public Result<?> previewAppearanceCode(@PathVariable String code) {
+        return Result.success(appearanceShareService.preview(accountId(), code));
+    }
+
+    @PostMapping("/appearance-codes/{code}/apply")
+    public Result<?> applyAppearanceCode(@PathVariable String code) {
+        return Result.success(appearanceShareService.apply(accountId(), code));
     }
 
     private Long accountId() {

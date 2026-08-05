@@ -1,4 +1,4 @@
-export const RELEASE_ANNOUNCEMENT_VERSION = '2026-08-05-persona-knowledge'
+export const RELEASE_ANNOUNCEMENT_VERSION = '2026-08-05-persona-knowledge-full'
 
 export const releaseAnnouncementStorageKey = accountId =>
   `orangevc:release-announcement:${RELEASE_ANNOUNCEMENT_VERSION}:${String(accountId || 'anonymous')}`

@@ -1,0 +1,49 @@
+import { ref } from 'vue'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { usePersonaAppearanceShare } from './usePersonaAppearanceShare'
+
+const api = vi.hoisted(() => ({ exportCode: vi.fn(), preview: vi.fn(), apply: vi.fn() }))
+const ui = vi.hoisted(() => ({ success: vi.fn(), warning: vi.fn(), confirm: vi.fn() }))
+vi.mock('../api/personaWorkshop', () => ({
+  exportPersonaAppearanceCode: api.exportCode,
+  previewPersonaAppearanceCode: api.preview,
+  applyPersonaAppearanceCode: api.apply,
+}))
+vi.mock('element-plus', () => ({
+  ElMessage: { success: ui.success, warning: ui.warning },
+  ElMessageBox: { confirm: ui.confirm },
+}))
+
+describe('usePersonaAppearanceShare', () => {
+  beforeEach(() => {
+    Object.values(api).forEach(mock => mock.mockReset())
+    Object.values(ui).forEach(mock => mock.mockReset())
+    api.exportCode.mockResolvedValue({ data: { code: 'OVC-ABCD-2345' } })
+    api.preview.mockResolvedValue({ data: { code: 'OVC-ABCD-2345', readyToImport: true } })
+    api.apply.mockResolvedValue({ data: { importedEquipment: 7 } })
+    ui.confirm.mockResolvedValue(true)
+  })
+
+  it('exports, previews and applies a visual-only code for a complete persona', async () => {
+    const afterImport = vi.fn()
+    const feature = usePersonaAppearanceShare({ completion: ref({ percent: 100 }), afterImport })
+    await feature.generateCode()
+    expect(feature.generatedCode.value).toBe('OVC-ABCD-2345')
+    feature.importCode.value = 'ovc-abcd-2345'
+    await feature.loadPreview()
+    expect(api.preview).toHaveBeenCalledWith('OVC-ABCD-2345')
+    await feature.applyCode()
+    expect(api.apply).toHaveBeenCalledWith('OVC-ABCD-2345')
+    expect(afterImport).toHaveBeenCalledOnce()
+  })
+
+  it('does not export before completion while keeping preview data non-destructive', async () => {
+    const feature = usePersonaAppearanceShare({ completion: ref({ percent: 86 }) })
+    feature.importCode.value = 'OVC-ABCD-2345'
+    await feature.generateCode()
+    await feature.loadPreview()
+    expect(api.exportCode).not.toHaveBeenCalled()
+    expect(api.preview).toHaveBeenCalledOnce()
+    expect(feature.isComplete.value).toBe(false)
+  })
+})

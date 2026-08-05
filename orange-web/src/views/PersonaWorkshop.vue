@@ -66,6 +66,10 @@
             </div>
           </div>
         </section>
+        <section class="persona-node share-node" data-focus="overview">
+          <div class="node-marker"><span>SH</span><i></i></div>
+          <PersonaAppearanceShareCard :completion="snapshot.completion" @imported="load" />
+        </section>
         <section v-for="(dimension, index) in snapshot.dimensions" :id="`persona-${dimension.code.toLowerCase()}`" :key="dimension.code" class="persona-node" :data-focus="dimension.code.toLowerCase()">
           <div class="node-marker"><span>0{{ index + 1 }}</span><i></i></div>
           <div class="node-card">
@@ -167,6 +171,7 @@ import PersonaEquipmentTransformEditor from '../components/PersonaEquipmentTrans
 import PersonaFaceEditor from '../components/PersonaFaceEditor.vue'
 import PersonaHandEditor from '../components/PersonaHandEditor.vue'
 import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
+import PersonaAppearanceShareCard from '../components/PersonaAppearanceShareCard.vue'
 import { usePersonaAppearance } from '../composables/usePersonaAppearance'
 import { usePersonaEquipment } from '../composables/usePersonaEquipment'
 import { usePersonaStoryRail } from '../composables/usePersonaStoryRail'
