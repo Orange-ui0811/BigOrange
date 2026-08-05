@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/conversation")
+@lombok.RequiredArgsConstructor
 public class AppConversationController {
 
-    @Autowired private ConversationService conversationService;
+    private final ConversationService conversationService;
 
     @PostMapping
     public Result<ConversationVO> create(@RequestBody ConversationCreateDTO dto) {

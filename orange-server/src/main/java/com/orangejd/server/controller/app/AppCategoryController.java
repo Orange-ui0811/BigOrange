@@ -10,10 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/app/category")
+@lombok.RequiredArgsConstructor
 public class AppCategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @GetMapping
     public Result<List<CategoryVO>> listActive(@RequestParam(required = false) String type) {

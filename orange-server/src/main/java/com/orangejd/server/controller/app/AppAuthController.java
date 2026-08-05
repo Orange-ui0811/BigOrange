@@ -26,14 +26,15 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("/app/auth")
+@lombok.RequiredArgsConstructor
 public class AppAuthController {
-    @Autowired private AuthService authService;
-    @Autowired private JwtProperties jwtProperties;
-    @Autowired private TokenBlacklistService blacklistService;
-    @Autowired private EmailVerificationCodeService verificationCodeService;
-    @Autowired private TurnstileService turnstileService;
-    @Autowired private RateLimitService rateLimitService;
-    @Autowired private WebSocketTicketService webSocketTicketService;
+    private final AuthService authService;
+    private final JwtProperties jwtProperties;
+    private final TokenBlacklistService blacklistService;
+    private final EmailVerificationCodeService verificationCodeService;
+    private final TurnstileService turnstileService;
+    private final RateLimitService rateLimitService;
+    private final WebSocketTicketService webSocketTicketService;
 
     @PostMapping("/ws-ticket")
     public Result<Map<String, String>> webSocketTicket() {

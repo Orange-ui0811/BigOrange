@@ -6,7 +6,7 @@ import com.orangejd.common.util.PageUtil;
 import com.orangejd.pojo.entity.JobPosting;
 import com.orangejd.server.contribution.application.JobAiAuditOrchestrator;
 import com.orangejd.server.contribution.application.JobReviewService;
-import com.orangejd.server.mapper.JobPostingMapper;
+import com.orangejd.server.service.JobPostingAccessService;
 import com.orangejd.server.service.DocumentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,14 +35,14 @@ import java.util.Map;
 public class AdminJobController {
     private static final Logger log = LoggerFactory.getLogger(AdminJobController.class);
 
-    private final JobPostingMapper mapper;
+    private final JobPostingAccessService mapper;
     private final DocumentService documentService;
     private final JobReviewService reviewService;
     private final JobAiAuditOrchestrator auditOrchestrator;
     private final RestClient restClient;
     private final String jobWebhookUrl;
 
-    public AdminJobController(JobPostingMapper mapper,
+    public AdminJobController(JobPostingAccessService mapper,
                               DocumentService documentService,
                               JobReviewService reviewService,
                               JobAiAuditOrchestrator auditOrchestrator,

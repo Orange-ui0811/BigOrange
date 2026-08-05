@@ -25,11 +25,11 @@ public class AiConfig {
 
     private final AiEmbeddingProperties properties;
 
-    @Autowired
-    private ApplicationContext ctx;
+    private final ApplicationContext ctx;
 
-    public AiConfig(AiEmbeddingProperties properties) {
+    public AiConfig(AiEmbeddingProperties properties, ApplicationContext ctx) {
         this.properties = properties;
+        this.ctx = ctx;
     }
 
     @PostConstruct

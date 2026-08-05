@@ -20,10 +20,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class RequirementServiceImpl implements RequirementService {
 
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
+    private final RequirementMapper requirementMapper;
+    private final @org.springframework.lang.Nullable com.orangejd.server.service.AiAuditService aiAuditService;
 
     @Override
     public RequirementVO create(RequirementCreateDTO dto) {
@@ -89,8 +90,8 @@ public class RequirementServiceImpl implements RequirementService {
         requirementMapper.deleteById(id);
     }
 
-    @Autowired private com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
-    @Autowired private NotificationService notificationService;
+    private final com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
+    private final NotificationService notificationService;
 
     @Override
     public void offline(Long id, String reason) {

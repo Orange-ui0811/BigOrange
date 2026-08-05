@@ -9,12 +9,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/config")
+@lombok.RequiredArgsConstructor
 public class AdminConfigController {
 
     private static final String TRADE_MODE_KEY = "system:trade-mode";
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    private final StringRedisTemplate redisTemplate;
 
     @PutMapping("/trade-mode")
     public Result<?> setTradeMode(@RequestBody Map<String, Boolean> body) {

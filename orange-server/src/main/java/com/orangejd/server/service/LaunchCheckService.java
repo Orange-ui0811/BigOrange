@@ -54,10 +54,8 @@ public class LaunchCheckService {
     private final PricingService pricingService;
     private final LaunchAssessmentReportService reportService;
     private final RestTemplate restTemplate;
-    @org.springframework.beans.factory.annotation.Autowired(required = false)
-    private AiRuntimeConfigService aiConfigService;
-    @org.springframework.beans.factory.annotation.Autowired(required = false)
-    private AiToolRouter aiToolRouter;
+    private final @org.springframework.lang.Nullable AiRuntimeConfigService aiConfigService;
+    private final @org.springframework.lang.Nullable AiToolRouter aiToolRouter;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -65,21 +63,23 @@ public class LaunchCheckService {
     @Value("${orange.ai-trend.api-key:}")
     private String apiKey;
 
-    @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
-    private String model;
-
+    @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}") private String model;
     public LaunchCheckService(LaunchAssessmentMapper mapper, QuotaService quotaService,
-                              PricingService pricingService, LaunchAssessmentReportService reportService) {
-        this.mapper = mapper;
-        this.quotaService = quotaService;
-        this.pricingService = pricingService;
-        this.reportService = reportService;
+            PricingService pricingService, LaunchAssessmentReportService reportService) {
+        this(mapper, quotaService, pricingService, reportService, null, null); }
+    @org.springframework.beans.factory.annotation.Autowired public LaunchCheckService(
+            LaunchAssessmentMapper mapper, QuotaService quotaService, PricingService pricingService,
+            LaunchAssessmentReportService reportService,
+            @org.springframework.lang.Nullable AiRuntimeConfigService aiConfigService,
+            @org.springframework.lang.Nullable AiToolRouter aiToolRouter) {
+        this.mapper = mapper; this.quotaService = quotaService;
+        this.pricingService = pricingService; this.reportService = reportService;
+        this.aiConfigService = aiConfigService; this.aiToolRouter = aiToolRouter;
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(10_000);
         factory.setReadTimeout(120_000);
         this.restTemplate = new RestTemplate(factory);
     }
-
     public Map<String, Object> config() {
         List<Map<String, Object>> stages = new ArrayList<>();
         for (int i = 1; i <= STAGE_COUNT; i++) {

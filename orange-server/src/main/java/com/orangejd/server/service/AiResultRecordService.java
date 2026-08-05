@@ -24,15 +24,22 @@ public class AiResultRecordService implements AiResultRecorder {
     private final QuotaService quotaService;
     private final PricingService pricingService;
 
-    @Autowired(required = false)
-    private PersonaMaterialCollector personaMaterialCollector;
+    private final PersonaMaterialCollector personaMaterialCollector;
 
     public AiResultRecordService(AiResultRecordMapper mapper, ObjectMapper objectMapper,
                                  QuotaService quotaService, PricingService pricingService) {
+        this(mapper, objectMapper, quotaService, pricingService, null);
+    }
+
+    @Autowired
+    public AiResultRecordService(AiResultRecordMapper mapper, ObjectMapper objectMapper,
+                                 QuotaService quotaService, PricingService pricingService,
+                                 @org.springframework.lang.Nullable PersonaMaterialCollector personaMaterialCollector) {
         this.mapper = mapper;
         this.objectMapper = objectMapper;
         this.quotaService = quotaService;
         this.pricingService = pricingService;
+        this.personaMaterialCollector = personaMaterialCollector;
     }
 
     @Override

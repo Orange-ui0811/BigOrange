@@ -1,4 +1,4 @@
-package com.orangejd.server.task;
+package com.orangejd.server.service.leaderboard;
 import com.fasterxml.jackson.core.type.TypeReference; import com.fasterxml.jackson.databind.*; import com.orangejd.common.result.PageResult; import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.foundation.external.*; import com.orangejd.server.mapper.LeaderboardSnapshotMapper; import org.slf4j.*; import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets; import java.security.MessageDigest; import java.time.*; import java.time.format.*; import java.util.*;

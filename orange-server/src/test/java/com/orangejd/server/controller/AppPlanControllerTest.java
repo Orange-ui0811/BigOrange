@@ -6,6 +6,7 @@ import com.orangejd.server.mapper.PlanHistoryMapper;
 import com.orangejd.server.service.PlanGenerationService;
 import com.orangejd.server.service.PricingService;
 import com.orangejd.server.service.AiRecordMetrics;
+import com.orangejd.server.service.PlanHistoryService;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.properties.JwtProperties;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,9 +35,7 @@ class AppPlanControllerTest {
     @Test
     void savesTaskPlanAndJobMatchInHistory() {
         PlanHistoryMapper mapper = mock(PlanHistoryMapper.class);
-        AppPlanController controller = new AppPlanController();
-        ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
-        ReflectionTestUtils.setField(controller, "recordMetrics", mock(AiRecordMetrics.class));
+        AppPlanController controller = controller(mapper, null, null, mock(AiRecordMetrics.class), null);
         BaseContext.setCurrentId(7L);
 
         Map<String, Object> captured = new LinkedHashMap<>();
@@ -66,9 +65,7 @@ class AppPlanControllerTest {
     @Test
     void rejectsOversizedSummaryBeforeDatabaseWrite() {
         PlanHistoryMapper mapper = mock(PlanHistoryMapper.class);
-        AppPlanController controller = new AppPlanController();
-        ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
-        ReflectionTestUtils.setField(controller, "recordMetrics", mock(AiRecordMetrics.class));
+        AppPlanController controller = controller(mapper, null, null, mock(AiRecordMetrics.class), null);
         BaseContext.setCurrentId(7L);
 
         assertThrows(BaseException.class, () -> controller.saveHistory(
@@ -79,9 +76,7 @@ class AppPlanControllerTest {
     @Test
     void updatesExistingDraftInsteadOfCreatingAnotherHistoryRecord() {
         PlanHistoryMapper mapper = mock(PlanHistoryMapper.class);
-        AppPlanController controller = new AppPlanController();
-        ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
-        ReflectionTestUtils.setField(controller, "recordMetrics", mock(AiRecordMetrics.class));
+        AppPlanController controller = controller(mapper, null, null, mock(AiRecordMetrics.class), null);
         BaseContext.setCurrentId(7L);
         when(mapper.updateOwned(any())).thenReturn(1);
 
@@ -104,10 +99,8 @@ class AppPlanControllerTest {
         PlanGenerationService generationService = mock(PlanGenerationService.class);
         JwtProperties jwtProperties = mock(JwtProperties.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
-        AppPlanController controller = new AppPlanController();
-        ReflectionTestUtils.setField(controller, "planHistoryMapper", mapper);
-        ReflectionTestUtils.setField(controller, "generationService", generationService);
-        ReflectionTestUtils.setField(controller, "jwtProperties", jwtProperties);
+        AppPlanController controller = controller(mapper, generationService, null,
+                mock(AiRecordMetrics.class), jwtProperties);
         BaseContext.setCurrentId(7L);
         when(jwtProperties.getAppTokenName()).thenReturn("App-Token");
         when(request.getHeader("App-Token")).thenReturn(null);
@@ -138,12 +131,22 @@ class AppPlanControllerTest {
         when(generationService.cost()).thenReturn(10);
         when(pricingService.getCost("ai:match")).thenReturn(25);
 
-        AppPlanController controller = new AppPlanController();
-        ReflectionTestUtils.setField(controller, "generationService", generationService);
-        ReflectionTestUtils.setField(controller, "pricingService", pricingService);
+        AppPlanController controller = controller(mock(PlanHistoryMapper.class), generationService,
+                pricingService, mock(AiRecordMetrics.class), mock(JwtProperties.class));
 
         Map<?, ?> data = (Map<?, ?>) controller.config().getData();
         assertEquals(10, data.get("stageCost"));
         assertEquals(25, data.get("jobMatchCost"));
+    }
+
+    private AppPlanController controller(PlanHistoryMapper mapper,
+                                         PlanGenerationService generationService,
+                                         PricingService pricingService,
+                                         AiRecordMetrics metrics,
+                                         JwtProperties jwtProperties) {
+        return new AppPlanController(new PlanHistoryService(mapper),
+                jwtProperties != null ? jwtProperties : mock(JwtProperties.class),
+                generationService != null ? generationService : mock(PlanGenerationService.class),
+                pricingService != null ? pricingService : mock(PricingService.class), metrics);
     }
 }

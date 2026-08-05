@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.server.mapper.OpenSourceMapper;
 import com.orangejd.server.service.impl.QuotaServiceImpl;
-import com.orangejd.server.task.OpenSourceRefreshTask;
 import com.orangejd.server.foundation.aitool.AiToolContext;
 import com.orangejd.server.foundation.aitool.AiToolProviderException;
 import com.orangejd.server.foundation.aitool.AiToolRetryPolicy;
@@ -35,29 +34,30 @@ public class OpenSourceContributionService {
     private final OpenSourceMapper mapper;
     private final OpenSourceGithubService githubService;
     private final OpenSourceTranslationService translationService;
-    private final OpenSourceRefreshTask refreshTask;
+    private final OpenSourceRefreshService refreshTask;
     private final OpenSourceAiClient aiClient;
     private final JobMatchService jobMatchService;
     private final PricingService pricingService;
     private final QuotaServiceImpl quotaService;
     private final ObjectMapper objectMapper;
-    @Autowired(required = false)
-    private AiToolRouter aiToolRouter;
-
+    private final AiToolRouter aiToolRouter;
     public OpenSourceContributionService(OpenSourceMapper mapper, OpenSourceGithubService githubService,
-                                         OpenSourceTranslationService translationService,
-                                         OpenSourceRefreshTask refreshTask, OpenSourceAiClient aiClient,
-                                         JobMatchService jobMatchService, PricingService pricingService,
-                                         QuotaServiceImpl quotaService, ObjectMapper objectMapper) {
-        this.mapper = mapper;
-        this.githubService = githubService;
-        this.translationService = translationService;
-        this.refreshTask = refreshTask;
-        this.aiClient = aiClient;
-        this.jobMatchService = jobMatchService;
-        this.pricingService = pricingService;
-        this.quotaService = quotaService;
-        this.objectMapper = objectMapper;
+            OpenSourceTranslationService translationService, OpenSourceRefreshService refreshTask,
+            OpenSourceAiClient aiClient, JobMatchService jobMatchService, PricingService pricingService,
+            QuotaServiceImpl quotaService, ObjectMapper objectMapper) {
+        this(mapper, githubService, translationService, refreshTask, aiClient, jobMatchService,
+                pricingService, quotaService, objectMapper, null); }
+    @Autowired public OpenSourceContributionService(OpenSourceMapper mapper,
+            OpenSourceGithubService githubService, OpenSourceTranslationService translationService,
+            OpenSourceRefreshService refreshTask, OpenSourceAiClient aiClient,
+            JobMatchService jobMatchService, PricingService pricingService,
+            QuotaServiceImpl quotaService, ObjectMapper objectMapper,
+            @org.springframework.lang.Nullable AiToolRouter aiToolRouter) {
+        this.mapper = mapper; this.githubService = githubService;
+        this.translationService = translationService; this.refreshTask = refreshTask;
+        this.aiClient = aiClient; this.jobMatchService = jobMatchService;
+        this.pricingService = pricingService; this.quotaService = quotaService;
+        this.objectMapper = objectMapper; this.aiToolRouter = aiToolRouter;
     }
 
     public Map<String, Object> config() {

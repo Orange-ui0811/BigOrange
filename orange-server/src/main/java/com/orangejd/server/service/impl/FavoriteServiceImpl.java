@@ -16,13 +16,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class FavoriteServiceImpl implements FavoriteService {
 
-    @Autowired private FavoriteMapper favoriteMapper;
-    @Autowired private WorkMapper workMapper;
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired private NotificationService notificationService;
-    @Autowired private ContentAccessService contentAccessService;
+    private final FavoriteMapper favoriteMapper;
+    private final WorkMapper workMapper;
+    private final RequirementMapper requirementMapper;
+    private final NotificationService notificationService;
+    private final ContentAccessService contentAccessService;
 
     public void favorite(String targetType, Long targetId) {
         Long currentId = BaseContext.getCurrentId();

@@ -16,10 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService {
 
-    @Autowired private NotificationMapper notificationMapper;
-    @Autowired private ObjectMapper objectMapper;
+    private final NotificationMapper notificationMapper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public void send(Long accountId, String type, String message, Long relatedId) {

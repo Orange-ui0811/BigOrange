@@ -27,14 +27,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class LeaderboardServiceImpl implements LeaderboardService {
 
-    @Autowired private WorkMapper workMapper;
-    @Autowired private AccountMapper accountMapper;
-    @Autowired private CategoryMapper categoryMapper;
-    @Autowired private LeaderboardSnapshotMapper snapshotMapper;
-    @Autowired(required = false) private StringRedisTemplate redisTemplate;
-    @Autowired(required = false) private ObjectMapper objectMapper = new ObjectMapper();
+    private final WorkMapper workMapper;
+    private final AccountMapper accountMapper;
+    private final CategoryMapper categoryMapper;
+    private final LeaderboardSnapshotMapper snapshotMapper;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
+    private final @org.springframework.lang.Nullable ObjectMapper objectMapper = new ObjectMapper();
 
     @Value("${orange.leaderboard.local-cache-ttl-minutes:15}")
     private int localCacheTtl;

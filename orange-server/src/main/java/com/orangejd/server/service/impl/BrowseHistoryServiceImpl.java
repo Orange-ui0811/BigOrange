@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     private static final int MAX_HISTORY_PER_USER = 200;
 
-    @Autowired private BrowseHistoryMapper browseHistoryMapper;
-    @Autowired private ContentAccessService contentAccessService;
+    private final BrowseHistoryMapper browseHistoryMapper;
+    private final ContentAccessService contentAccessService;
 
     public void record(String targetType, Long targetId) {
         Long accountId = BaseContext.getCurrentId();

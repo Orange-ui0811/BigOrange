@@ -19,12 +19,13 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/admin/auth")
+@lombok.RequiredArgsConstructor
 public class AdminAuthController {
 
-    @Autowired private AuthService authService;
-    @Autowired private JwtProperties jwtProperties;
-    @Autowired private TokenBlacklistService blacklistService;
-    @Autowired private RateLimitService rateLimitService;
+    private final AuthService authService;
+    private final JwtProperties jwtProperties;
+    private final TokenBlacklistService blacklistService;
+    private final RateLimitService rateLimitService;
 
     @PostMapping("/login")
     public Result<LoginVO> login(@Valid @RequestBody LoginDTO loginDTO, HttpServletRequest request) {

@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/comment")
+@lombok.RequiredArgsConstructor
 public class CommentController {
 
-    @Autowired private CommentService commentService;
+    private final CommentService commentService;
 
     @PostMapping
     public Result<?> create(@RequestBody CommentCreateDTO dto) {

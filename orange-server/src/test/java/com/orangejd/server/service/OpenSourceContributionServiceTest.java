@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.server.mapper.OpenSourceMapper;
 import com.orangejd.server.service.impl.QuotaServiceImpl;
-import com.orangejd.server.task.OpenSourceRefreshTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +40,7 @@ class OpenSourceContributionServiceTest {
         when(pricingService.getCost(OpenSourceContributionService.MATCH_PRICING_KEY)).thenReturn(40);
         when(quotaService.consume(eq(7L), eq(40), anyString(), anyString())).thenReturn(960);
         service = new OpenSourceContributionService(mapper, mock(OpenSourceGithubService.class),
-                mock(OpenSourceTranslationService.class), mock(OpenSourceRefreshTask.class), aiClient,
+                mock(OpenSourceTranslationService.class), mock(OpenSourceRefreshService.class), aiClient,
                 mock(JobMatchService.class), pricingService, quotaService, new ObjectMapper());
     }
 

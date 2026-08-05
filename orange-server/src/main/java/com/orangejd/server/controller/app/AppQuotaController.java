@@ -3,7 +3,7 @@ package com.orangejd.server.controller.app;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.QuotaLog;
-import com.orangejd.server.mapper.QuotaLogMapper;
+import com.orangejd.server.service.QuotaLogService;
 import com.orangejd.server.service.QuotaService;
 import com.orangejd.server.service.RateLimitService;
 import com.orangejd.server.util.ClientIpResolver;
@@ -15,11 +15,12 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/app/quota")
+@lombok.RequiredArgsConstructor
 public class AppQuotaController {
 
-    @Autowired private QuotaService quotaService;
-    @Autowired private QuotaLogMapper quotaLogMapper;
-    @Autowired private RateLimitService rateLimitService;
+    private final QuotaService quotaService;
+    private final QuotaLogService quotaLogMapper;
+    private final RateLimitService rateLimitService;
 
     @PostMapping("/redeem")
     public Result<Long> redeem(@RequestBody Map<String, String> body, HttpServletRequest request) {

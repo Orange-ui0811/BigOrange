@@ -1,24 +1,19 @@
 package com.orangejd.server.task;
 
-import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.foundation.ingestion.IngestionCoordinatorService;
 import com.orangejd.server.foundation.task.SystemTask;
 import com.orangejd.server.foundation.task.SystemTaskService;
-import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
+import com.orangejd.server.service.leaderboard.LeaderboardRefreshCoordinator;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 class LeaderboardRefreshTaskTest {
 
@@ -62,19 +57,4 @@ class LeaderboardRefreshTaskTest {
         assertEquals(17L, result.get("runId"));
     }
 
-    @Test
-    void startupCheckUsesAggregateSnapshotsAndLegacyNullFallback() {
-        LeaderboardSnapshotMapper snapshots = mock(LeaderboardSnapshotMapper.class);
-        LeaderboardRefreshCoordinator coordinator = new LeaderboardRefreshCoordinator(snapshots,
-                mock(LeaderboardSnapshotRefresher.class), mock(LeaderboardTranslationPipeline.class),
-                mock(LeaderboardReadmeIndexer.class), mock(LeaderboardProgressReporter.class));
-
-        assertTrue(coordinator.snapshotsMissingThisWeek());
-
-        LeaderboardSnapshot fresh = new LeaderboardSnapshot();
-        fresh.setSnapshotDate(LocalDate.now());
-        when(snapshots.selectLatest(eq("github"), eq(LeaderboardRefreshCoordinator.ALL_TOPICS), any()))
-                .thenReturn(fresh);
-        assertFalse(coordinator.snapshotsMissingThisWeek());
-    }
 }

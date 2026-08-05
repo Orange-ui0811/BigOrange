@@ -28,9 +28,8 @@ class AuthorizationGuardsTest {
         ConversationMapper conversationMapper = mock(ConversationMapper.class);
         Conversation conversation = conversation(1L, 2L);
         when(conversationMapper.selectById(9L)).thenReturn(conversation);
-        MessageServiceImpl service = new MessageServiceImpl();
-        ReflectionTestUtils.setField(service, "messageMapper", messageMapper);
-        ReflectionTestUtils.setField(service, "conversationMapper", conversationMapper);
+        MessageServiceImpl service = new MessageServiceImpl(messageMapper, conversationMapper,
+                mock(com.orangejd.server.service.NotificationService.class));
         BaseContext.setCurrentId(3L);
 
         assertThrows(BaseException.class, () -> service.markAsRead(9L));
@@ -42,9 +41,8 @@ class AuthorizationGuardsTest {
         QuoteMapper quoteMapper = mock(QuoteMapper.class);
         ConversationMapper conversationMapper = mock(ConversationMapper.class);
         when(conversationMapper.selectById(9L)).thenReturn(conversation(1L, 2L));
-        QuoteServiceImpl service = new QuoteServiceImpl();
-        ReflectionTestUtils.setField(service, "quoteMapper", quoteMapper);
-        ReflectionTestUtils.setField(service, "conversationMapper", conversationMapper);
+        QuoteServiceImpl service = new QuoteServiceImpl(quoteMapper, conversationMapper,
+                mock(com.orangejd.server.service.NotificationService.class));
         BaseContext.setCurrentId(3L);
 
         assertThrows(BaseException.class, () -> service.getByConversation(9L));
@@ -54,8 +52,11 @@ class AuthorizationGuardsTest {
     @Test
     void favoriteDeletionIsScopedToCurrentAccount() {
         FavoriteMapper favoriteMapper = mock(FavoriteMapper.class);
-        FavoriteServiceImpl service = new FavoriteServiceImpl();
-        ReflectionTestUtils.setField(service, "favoriteMapper", favoriteMapper);
+        FavoriteServiceImpl service = new FavoriteServiceImpl(favoriteMapper,
+                mock(com.orangejd.server.mapper.WorkMapper.class),
+                mock(com.orangejd.server.mapper.RequirementMapper.class),
+                mock(com.orangejd.server.service.NotificationService.class),
+                mock(com.orangejd.server.service.ContentAccessService.class));
         BaseContext.setCurrentId(42L);
 
         service.unfavoriteById(8L);
@@ -67,8 +68,8 @@ class AuthorizationGuardsTest {
     void deletingConversationOnlyHidesItForCurrentParticipant() {
         ConversationMapper conversationMapper = mock(ConversationMapper.class);
         when(conversationMapper.selectById(9L)).thenReturn(conversation(1L, 2L));
-        ConversationServiceImpl service = new ConversationServiceImpl();
-        ReflectionTestUtils.setField(service, "conversationMapper", conversationMapper);
+        ConversationServiceImpl service = new ConversationServiceImpl(conversationMapper,
+                mock(com.orangejd.server.service.ContentAccessService.class));
         BaseContext.setCurrentId(1L);
 
         service.deleteConversation(9L);
@@ -82,8 +83,8 @@ class AuthorizationGuardsTest {
     void hidingConversationOnlyAffectsCurrentParticipant() {
         ConversationMapper conversationMapper = mock(ConversationMapper.class);
         when(conversationMapper.selectById(9L)).thenReturn(conversation(1L, 2L));
-        ConversationServiceImpl service = new ConversationServiceImpl();
-        ReflectionTestUtils.setField(service, "conversationMapper", conversationMapper);
+        ConversationServiceImpl service = new ConversationServiceImpl(conversationMapper,
+                mock(com.orangejd.server.service.ContentAccessService.class));
         BaseContext.setCurrentId(2L);
 
         service.hideConversation(9L);
@@ -97,9 +98,8 @@ class AuthorizationGuardsTest {
         MessageMapper messageMapper = mock(MessageMapper.class);
         ConversationMapper conversationMapper = mock(ConversationMapper.class);
         when(conversationMapper.selectById(9L)).thenReturn(conversation(1L, 2L));
-        MessageServiceImpl service = new MessageServiceImpl();
-        ReflectionTestUtils.setField(service, "messageMapper", messageMapper);
-        ReflectionTestUtils.setField(service, "conversationMapper", conversationMapper);
+        MessageServiceImpl service = new MessageServiceImpl(messageMapper, conversationMapper,
+                mock(com.orangejd.server.service.NotificationService.class));
         BaseContext.setCurrentId(1L);
         MessageSendDTO dto = new MessageSendDTO();
         dto.setConversationId(9L);

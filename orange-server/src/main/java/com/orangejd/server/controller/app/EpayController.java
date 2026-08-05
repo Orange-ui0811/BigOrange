@@ -6,7 +6,7 @@ import com.orangejd.common.util.PageUtil;
 import com.orangejd.pojo.entity.TopUp;
 import com.orangejd.pojo.dto.OrderPaymentCreateDTO;
 import com.orangejd.server.config.EpayProperties;
-import com.orangejd.server.mapper.TopUpMapper;
+import com.orangejd.server.service.TopUpService;
 import com.orangejd.server.service.EpayService;
 import com.orangejd.server.service.PaymentApplicationService;
 import com.orangejd.server.service.OrderPaymentApplicationService;
@@ -22,16 +22,17 @@ import java.math.BigDecimal;
 import java.util.*;
 
 @RestController
+@lombok.RequiredArgsConstructor
 public class EpayController {
 
     private static final Logger log = LoggerFactory.getLogger(EpayController.class);
 
-    @Autowired private EpayService epayService;
-    @Autowired private TopUpMapper topUpMapper;
-    @Autowired private EpayProperties epayProperties;
-    @Autowired private PaymentApplicationService paymentApplicationService;
-    @Autowired private OrderPaymentApplicationService orderPaymentApplicationService;
-    @Autowired private RateLimitService rateLimitService;
+    private final EpayService epayService;
+    private final TopUpService topUpMapper;
+    private final EpayProperties epayProperties;
+    private final PaymentApplicationService paymentApplicationService;
+    private final OrderPaymentApplicationService orderPaymentApplicationService;
+    private final RateLimitService rateLimitService;
 
     private static final Set<Integer> ALLOWED_AMOUNTS = Set.of(1000, 3000, 5000, 10000);
     private static final Set<String> ALLOWED_METHODS = Set.of("wxpay", "alipay");

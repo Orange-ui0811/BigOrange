@@ -26,8 +26,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class DocumentServiceImpl implements DocumentService {
-
     private static final Logger log = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
     private static final int MAX_FILE_SIZE = 1_048_576;
@@ -38,10 +38,10 @@ public class DocumentServiceImpl implements DocumentService {
     private static final String SOURCE_MANUAL = "MANUAL";
     private static final String SOURCE_GITHUB = "GITHUB";
 
-    @Autowired private KnowledgeDocumentMapper mapper;
-    @Autowired(required = false) private VectorStore vectorStore;
-    @Autowired private ExternalAiClient externalAiClient;
-    @Autowired private IngestionRunService ingestionRunService;
+    private final KnowledgeDocumentMapper mapper;
+    private final @org.springframework.lang.Nullable VectorStore vectorStore;
+    private final ExternalAiClient externalAiClient;
+    private final IngestionRunService ingestionRunService;
 
     // ---- upload ----
 

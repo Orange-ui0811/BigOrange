@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/work")
+@lombok.RequiredArgsConstructor
 public class AppWorkController {
 
-    @Autowired private WorkService workService;
+    private final WorkService workService;
 
     @PostMapping
     public Result<WorkDetailVO> create(@RequestBody WorkCreateDTO dto) {

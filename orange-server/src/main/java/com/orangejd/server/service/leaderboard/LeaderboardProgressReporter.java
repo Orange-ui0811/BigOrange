@@ -1,4 +1,4 @@
-package com.orangejd.server.task;
+package com.orangejd.server.service.leaderboard;
 import com.orangejd.server.foundation.ingestion.IngestionRunService;
 import org.springframework.stereotype.Component;
 @Component
@@ -14,4 +14,3 @@ class LeaderboardProgressReporter {
  private void publish(LeaderboardRunContext value){runs.progress(value.runId,Math.max(value.total,value.success+value.failed),value.success,value.failed,value.skipped,value.failed>0?"存在失败项，可在管理端查看并重试":null);}
  private String shortMessage(String value){if(value==null||value.isBlank())return "no details";return value.length()<=500?value:value.substring(0,500);}
 }
-

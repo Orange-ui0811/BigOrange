@@ -26,23 +26,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class AiAuditService {
-
     private static final Logger log = LoggerFactory.getLogger(AiAuditService.class);
     static final int CONNECTION_TEST_MAX_TOKENS = 256;
     static final int CONTENT_AUDIT_MAX_TOKENS = 800;
 
-    @Autowired private WorkMapper workMapper;
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired private CategoryMapper categoryMapper;
-    @Autowired private AccountMapper accountMapper;
-    @Autowired private AuditServiceImpl auditService;
-    @Autowired(required = false) private FeishuNotifyService feishuNotifyService;
-    @Autowired(required = false) private StringRedisTemplate redisTemplate;
-    @Autowired private AiRuntimeConfigService aiConfigService;
-    @Autowired private ExternalAiClient externalAiClient;
-    @Autowired @Qualifier("orangeAiAuditExecutor") private Executor executor;
-    @Autowired @Qualifier("orangeTaskScheduler") private TaskScheduler taskScheduler;
+    private final WorkMapper workMapper;
+    private final RequirementMapper requirementMapper;
+    private final CategoryMapper categoryMapper;
+    private final AccountMapper accountMapper;
+    private final AuditServiceImpl auditService;
+    private final @org.springframework.lang.Nullable FeishuNotifyService feishuNotifyService;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
+    private final AiRuntimeConfigService aiConfigService;
+    private final ExternalAiClient externalAiClient;
+    private final @Qualifier("orangeAiAuditExecutor") Executor executor;
+    private final @Qualifier("orangeTaskScheduler") TaskScheduler taskScheduler;
 
     @Value("${orange.ai-audit.endpoint:}")
     private String apiEndpoint;

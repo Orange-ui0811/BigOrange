@@ -21,31 +21,24 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/app/trend")
+@lombok.RequiredArgsConstructor
 public class AppTrendController {
 
-    @Autowired
-    private KnowledgeGraphService graphService;
+    private final KnowledgeGraphService graphService;
 
-    @Autowired
-    private TrendAnalysisService analysisService;
+    private final TrendAnalysisService analysisService;
 
-    @Autowired
-    private TrendProfileAnalysisService profileAnalysisService;
+    private final TrendProfileAnalysisService profileAnalysisService;
 
-    @Autowired
-    private com.orangejd.server.mapper.TrendHistoryMapper trendHistoryMapper;
+    private final com.orangejd.server.service.TrendHistoryService trendHistoryMapper;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-    @Autowired
-    private AiRecordMetrics recordMetrics;
+    private final AiRecordMetrics recordMetrics;
 
-    @Autowired
-    private com.orangejd.common.properties.JwtProperties jwtProperties;
+    private final com.orangejd.common.properties.JwtProperties jwtProperties;
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
     @GetMapping("/graph")
     public Result<Map<String, Object>> graph() {

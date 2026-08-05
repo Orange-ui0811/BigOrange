@@ -29,13 +29,14 @@ import java.util.Set;
 
 @Slf4j
 @Service
+@lombok.RequiredArgsConstructor
 public class WorkServiceImpl implements WorkService {
 
-    @Autowired private WorkMapper workMapper;
-    @Autowired private WorkSaleOptionMapper optionMapper;
-    @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
-    @Autowired private ManagedFileStorageService managedFileStorageService;
-    @Autowired(required = false) private com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector;
+    private final WorkMapper workMapper;
+    private final WorkSaleOptionMapper optionMapper;
+    private final @org.springframework.lang.Nullable com.orangejd.server.service.AiAuditService aiAuditService;
+    private final ManagedFileStorageService managedFileStorageService;
+    private final @org.springframework.lang.Nullable com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector;
 
     @Override
     @Transactional
@@ -169,8 +170,8 @@ public class WorkServiceImpl implements WorkService {
         managedFileStorageService.deleteOwnedMediaAfterCommit(work.getOwnerId(), media);
     }
 
-    @Autowired private com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
-    @Autowired private NotificationService notificationService;
+    private final com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
+    private final NotificationService notificationService;
 
     @Override
     @Transactional

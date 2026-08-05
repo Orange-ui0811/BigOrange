@@ -15,14 +15,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class QuotaServiceImpl implements QuotaService {
 
     private static final Logger log = LoggerFactory.getLogger(QuotaServiceImpl.class);
     private static final int NEW_USER_BONUS = 100;
 
-    @Autowired private AccountMapper accountMapper;
-    @Autowired private QuotaLogMapper quotaLogMapper;
-    @Autowired private RedemptionCodeMapper redemptionCodeMapper;
+    private final AccountMapper accountMapper;
+    private final QuotaLogMapper quotaLogMapper;
+    private final RedemptionCodeMapper redemptionCodeMapper;
 
     // ==================== 消费 ====================
 

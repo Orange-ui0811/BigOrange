@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/comment")
+@lombok.RequiredArgsConstructor
 public class AdminCommentController {
 
-    @Autowired private CommentService commentService;
+    private final CommentService commentService;
 
     @GetMapping("/{targetType}/{targetId}")
     public Result<PageResult<CommentVO>> list(@PathVariable String targetType, @PathVariable Long targetId,

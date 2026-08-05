@@ -18,11 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
 
-    @Autowired private MessageMapper messageMapper;
-    @Autowired private ConversationMapper conversationMapper;
-    @Autowired private NotificationService notificationService;
+    private final MessageMapper messageMapper;
+    private final ConversationMapper conversationMapper;
+    private final NotificationService notificationService;
 
     @Override
     @Transactional

@@ -38,12 +38,9 @@ public class PlanGenerationService {
     private final QuotaService quotaService;
     private final PricingService pricingService;
     private final RestTemplate restTemplate;
-    @Autowired(required = false)
-    private AiRuntimeConfigService aiConfigService;
-    @Autowired(required = false)
-    private AiToolRouter aiToolRouter;
-    @Autowired(required = false)
-    private PersonaPromptContextService personaPromptContextService;
+    private final AiRuntimeConfigService aiConfigService;
+    private final AiToolRouter aiToolRouter;
+    private final PersonaPromptContextService personaPromptContextService;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String apiEndpoint;
@@ -53,15 +50,29 @@ public class PlanGenerationService {
     private String model;
 
     @Autowired
-    public PlanGenerationService(QuotaService quotaService, PricingService pricingService) {
-        this(quotaService, pricingService, createRestTemplate());
+    public PlanGenerationService(QuotaService quotaService, PricingService pricingService,
+                                 @org.springframework.lang.Nullable AiRuntimeConfigService aiConfigService,
+                                 @org.springframework.lang.Nullable AiToolRouter aiToolRouter,
+                                 @org.springframework.lang.Nullable PersonaPromptContextService personaPromptContextService) {
+        this(quotaService, pricingService, createRestTemplate(), aiConfigService,
+                aiToolRouter, personaPromptContextService);
     }
 
     PlanGenerationService(QuotaService quotaService, PricingService pricingService,
                           RestTemplate restTemplate) {
+        this(quotaService, pricingService, restTemplate, null, null, null);
+    }
+
+    private PlanGenerationService(QuotaService quotaService, PricingService pricingService,
+                                  RestTemplate restTemplate, AiRuntimeConfigService aiConfigService,
+                                  AiToolRouter aiToolRouter,
+                                  PersonaPromptContextService personaPromptContextService) {
         this.quotaService = quotaService;
         this.pricingService = pricingService;
         this.restTemplate = restTemplate;
+        this.aiConfigService = aiConfigService;
+        this.aiToolRouter = aiToolRouter;
+        this.personaPromptContextService = personaPromptContextService;
     }
 
     public int cost() {

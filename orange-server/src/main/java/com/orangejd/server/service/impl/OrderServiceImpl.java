@@ -30,18 +30,18 @@ import java.util.Locale;
 
 @Slf4j
 @Service
+@lombok.RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
-
-    @Autowired private OrderMapper orderMapper;
-    @Autowired private PaymentStageMapper paymentStageMapper;
-    @Autowired private DeliveryMapper deliveryMapper;
-    @Autowired private WorkMapper workMapper;
-    @Autowired private QuoteMapper quoteMapper;
-    @Autowired private ConversationMapper conversationMapper;
-    @Autowired private NotificationService notificationService;
-    @Autowired private WorkSaleOptionMapper workSaleOptionMapper;
-    @Autowired private com.orangejd.server.service.ContentAccessService contentAccessService;
-    @Autowired private ManagedFileStorageService managedFileStorageService;
+    private final OrderMapper orderMapper;
+    private final PaymentStageMapper paymentStageMapper;
+    private final DeliveryMapper deliveryMapper;
+    private final WorkMapper workMapper;
+    private final QuoteMapper quoteMapper;
+    private final ConversationMapper conversationMapper;
+    private final NotificationService notificationService;
+    private final WorkSaleOptionMapper workSaleOptionMapper;
+    private final com.orangejd.server.service.ContentAccessService contentAccessService;
+    private final ManagedFileStorageService managedFileStorageService;
     @Value("${orange.trade.simulated-payment-enabled:false}")
     private boolean simulatedPaymentEnabled;
 

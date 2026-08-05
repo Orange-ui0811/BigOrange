@@ -5,7 +5,7 @@ import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.properties.JwtProperties;
 import com.orangejd.common.result.Result;
 import com.orangejd.common.utils.JwtUtil;
-import com.orangejd.server.mapper.PlanHistoryMapper;
+import com.orangejd.server.service.PlanHistoryService;
 import com.orangejd.server.service.PlanGenerationService;
 import com.orangejd.server.service.AiRecordMetrics;
 import com.orangejd.server.service.PricingService;
@@ -30,18 +30,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/app/plan")
+@lombok.RequiredArgsConstructor
 public class AppPlanController {
 
-    @Autowired
-    private PlanHistoryMapper planHistoryMapper;
-    @Autowired
-    private JwtProperties jwtProperties;
-    @Autowired
-    private PlanGenerationService generationService;
-    @Autowired
-    private PricingService pricingService;
-    @Autowired
-    private AiRecordMetrics recordMetrics;
+    private final PlanHistoryService planHistoryMapper;
+    private final JwtProperties jwtProperties;
+    private final PlanGenerationService generationService;
+    private final PricingService pricingService;
+    private final AiRecordMetrics recordMetrics;
 
     @PostMapping("/generate")
     public Result<?> generate(@RequestBody Map<String, Object> body, HttpServletRequest request) {

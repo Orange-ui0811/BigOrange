@@ -12,10 +12,10 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/admin/stats")
+@lombok.RequiredArgsConstructor
 public class AdminStatsController {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     @GetMapping("/quota-usage")
     public Result<Map<String, Object>> quotaUsage(@RequestParam(defaultValue = "7") int days) {

@@ -1,4 +1,4 @@
-package com.orangejd.server.task;
+package com.orangejd.server.service.leaderboard;
 import com.orangejd.server.service.DocumentService;
 import org.slf4j.*; import org.springframework.beans.factory.ObjectProvider; import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*; import org.springframework.stereotype.Component; import org.springframework.web.client.RestTemplate;
@@ -66,4 +66,3 @@ private String fetchUrl(String url) {
         return null;
     }
 }
-

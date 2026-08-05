@@ -3,7 +3,7 @@ package com.orangejd.server.controller.admin;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.KnowledgeDocument;
 import com.orangejd.pojo.vo.KnowledgeDocumentVO;
-import com.orangejd.server.mapper.KnowledgeDocumentMapper;
+import com.orangejd.server.service.KnowledgeDocumentQueryService;
 import com.orangejd.server.service.DocumentService;
 import com.orangejd.server.service.impl.KnowledgeReindexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +16,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/knowledge/document")
+@lombok.RequiredArgsConstructor
 public class AdminKnowledgeController {
 
-    @Autowired
-    private DocumentService documentService;
+    private final DocumentService documentService;
 
-    @Autowired
-    private KnowledgeDocumentMapper knowledgeDocumentMapper;
+    private final KnowledgeDocumentQueryService knowledgeDocumentMapper;
 
-    @Autowired
-    private KnowledgeReindexService knowledgeReindexService;
+    private final KnowledgeReindexService knowledgeReindexService;
 
     @GetMapping("/stats")
     public Result<Map<String, Object>> stats() {

@@ -24,17 +24,26 @@ public class TrendProfileAnalysisService {
     private final TrendHistoryMapper trendHistoryMapper;
     private final PricingService pricingService;
     private final ObjectMapper objectMapper;
-    @Autowired(required = false)
-    private AiRecordMetrics recordMetrics;
+    private final AiRecordMetrics recordMetrics;
 
     public TrendProfileAnalysisService(TrendAnalysisService trendAnalysisService,
                                        TrendHistoryMapper trendHistoryMapper,
                                        PricingService pricingService,
                                        ObjectMapper objectMapper) {
+        this(trendAnalysisService, trendHistoryMapper, pricingService, objectMapper, null);
+    }
+
+    @Autowired
+    public TrendProfileAnalysisService(TrendAnalysisService trendAnalysisService,
+                                       TrendHistoryMapper trendHistoryMapper,
+                                       PricingService pricingService,
+                                       ObjectMapper objectMapper,
+                                       @org.springframework.lang.Nullable AiRecordMetrics recordMetrics) {
         this.trendAnalysisService = trendAnalysisService;
         this.trendHistoryMapper = trendHistoryMapper;
         this.pricingService = pricingService;
         this.objectMapper = objectMapper;
+        this.recordMetrics = recordMetrics;
     }
 
     public int cost() {

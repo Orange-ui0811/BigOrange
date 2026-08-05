@@ -4,8 +4,7 @@ import com.orangejd.common.result.PageResult;
 import com.orangejd.common.result.Result;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.pojo.vo.AccountVO;
-import com.orangejd.server.mapper.AccountMapper;
-import com.orangejd.server.mapper.UserProfileMapper;
+import com.orangejd.server.service.AdminUserAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +14,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin/users")
+@lombok.RequiredArgsConstructor
 public class AdminUserController {
 
-    @Autowired private AccountMapper accountMapper;
-    @Autowired private UserProfileMapper userProfileMapper;
+    private final AdminUserAccessService accountMapper;
 
     @GetMapping
     public Result<PageResult<AccountVO>> list(@RequestParam(defaultValue = "1") int page,
