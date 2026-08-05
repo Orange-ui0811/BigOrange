@@ -70,7 +70,7 @@ jobs:
           npm ci
           npm run lint -- --max-warnings 65
           npm run typecheck
-          npm test -- --run
+          npm run test:coverage
           npm run build
           npm audit --omit=dev --audit-level=high
       - name: Validate admin application
@@ -86,6 +86,12 @@ jobs:
         run: node scripts/check-architecture-budgets.mjs
       - name: Enforce JavaScript bundle budget
         run: node scripts/check-frontend-bundles.mjs
+      - name: Install Playwright browser
+        working-directory: orange-web
+        run: npx playwright install --with-deps chromium
+      - name: Run critical user flows
+        working-directory: orange-web
+        run: npm run test:e2e
 
   secret-scan:
     runs-on: ubuntu-latest

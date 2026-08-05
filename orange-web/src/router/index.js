@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { transactionUiEnabled } from '../stores/tradeMode'
+import { pinia } from '../stores'
+import { useAuthStore } from '../stores/authStore'
 
-const routes = [
+export const routes = [
   { path: '/login', name: 'Login', component: () => import('../views/Login.vue') },
   { path: '/legal/:document(terms|privacy|third-parties)', name: 'LegalDocument', component: () => import('../views/LegalDocument.vue'), meta: { title: '法律与隐私', public: true } },
   { path: '/support', name: 'SupportCenter', component: () => import('../views/SupportCenter.vue'), meta: { title: '账号、数据、举报与申诉', public: true } },
@@ -49,7 +51,7 @@ const routes = [
 const router = createRouter({ history: createWebHistory(), routes })
 
 router.beforeEach((to, from, next) => {
-  const token = sessionStorage.getItem('appToken')
+  const token = useAuthStore(pinia).token
   if (to.meta.public) next()
   else if (to.path !== '/login' && !token) next('/login')
   else if (to.path === '/login' && token) next('/market')

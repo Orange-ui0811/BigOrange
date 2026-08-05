@@ -1,0 +1,307 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  font-family: "SimHei", monospace;
+}
+
+/* ===== 背景 ===== */
+.login-bg {
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #ff8a33 0%, #fff4d9 100%);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 90px 0 40px;
+}
+
+.login-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#ff9944 1px, transparent 1px);
+  background-size: 6px 6px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/* ===== 卡片 ===== */
+.login-card {
+  width: 420px;
+  background: #ffffff;
+  box-shadow:
+    4px 0 0 #ff7b22,
+    -4px 0 0 #ff7b22,
+    0 4px 0 #ff7b22,
+    0 -4px 0 #ff7b22;
+  padding: 36px 30px 28px;
+  position: relative;
+}
+
+/* ===== 像素橙子 SVG LOGO ===== */
+.orange-wrapper {
+  position: absolute;
+  top: -46px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 7px 0 rgba(92, 38, 15, .14));
+}
+.orange-mark {
+  width: 100px;
+  height: 100px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  animation: orange-float 3s ease-in-out infinite;
+}
+
+.highlight-pixel {
+  animation: highlight-shimmer 2.5s ease-in-out infinite;
+}
+@keyframes orange-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes highlight-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* ===== 品牌名 ===== */
+.brand-title {
+  text-align: center;
+  font-size: 32px;
+  color: #ff7b22;
+  font-weight: 900;
+  margin-bottom: 24px;
+  margin-top: 30px;
+  letter-spacing: 3px;
+  font-family: "Courier New", "SimHei", monospace;
+  text-shadow: 2px 2px 0 #c55312, 4px 4px 0 rgba(197,83,18,0.15);
+}
+
+/* ===== Tab ===== */
+.tab-wrap {
+  display: flex;
+  margin-bottom: 22px;
+  border-bottom: 2px solid #e2e2e2;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding-bottom: 8px;
+  font-size: 16px;
+  color: #777;
+  cursor: pointer;
+  font-family: "Courier New", "SimHei", monospace;
+  letter-spacing: 1px;
+}
+
+.tab-item.active {
+  color: #ff7b22;
+  border-bottom: 2px solid #ff7b22;
+  margin-bottom: -2px;
+}
+
+/* ===== 表单 ===== */
+.form-label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+  font-family: "Courier New", "SimHei", monospace;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.form-input {
+  width: 100%;
+  height: 44px;
+  border: 2px solid #ffb270;
+  background: #fff;
+  padding: 0 12px;
+  font-size: 14px;
+  margin-bottom: 18px;
+  outline: none;
+  font-family: "Courier New", "SimHei", monospace;
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+.form-input:focus {
+  border-color: #ff7b22;
+}
+
+.form-input::placeholder {
+  color: #ccc;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+}
+
+/* ===== 密码眼睛 ===== */
+.pwd-wrap {
+  position: relative;
+}
+
+.pwd-wrap .form-input {
+  padding-right: 40px;
+}
+
+.eye-toggle {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+  user-select: none;
+}
+
+.eye-toggle:hover {
+  opacity: 0.9;
+}
+
+/* ===== 验证码行 ===== */
+.code-row {
+  display: flex;
+  gap: 8px;
+}
+
+.code-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.code-btn {
+  height: 44px;
+  padding: 0 14px;
+  border: 2px solid #ffb270;
+  font-family: "Courier New", "SimHei", monospace;
+  background: #fff;
+  color: #ff7b22;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  margin-bottom: 18px;
+}
+
+.code-btn:hover:not(:disabled) {
+  border-color: #ff7b22;
+  background: #fff7f0;
+}
+
+.code-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===== 登录按钮 ===== */
+.login-btn {
+  width: 100%;
+  height: 50px;
+  background: #ff7b22;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 900;
+  box-shadow: 0 4px 0 #e66e00;
+  cursor: pointer;
+  margin-top: 6px;
+  font-family: "Courier New", "SimHei", monospace;
+  letter-spacing: 2px;
+}
+
+.login-btn:hover:not(:disabled) {
+  background: #ff8a33;
+}
+
+.login-btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #e66e00;
+}
+
+.turnstile-widget {
+  margin: 12px 0 18px;
+  display: flex;
+  justify-content: center;
+}
+.consent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 2px 0 14px;
+  color: #6b5a50;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.consent-row input { width: 16px; height: 16px; margin-top: 2px; accent-color: #ff7b22; flex: 0 0 auto; }
+.required-mark {
+  color: #c2410c;
+  font-size: 11px;
+}
+.consent-row a, .login-legal a { color: #c2410c; text-decoration: none; }
+.login-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px 12px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #ffedd5;
+  font-size: 11px;
+}
+.forgot-link {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+.forgot-link:hover { color: var(--brand-strong); }
+.reset-section { margin-top: 20px; }
+.reset-title {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--brand-strong);
+  margin-bottom: 18px;
+}
+.reset-btn { width: 100%; margin-top: 8px; }
+.reset-eye {
+  position: absolute;
+  right: 10px;
+  top: -42px;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.reset-success { text-align: center; margin-top: 10px; }
+.reset-success p { font-family: var(--font-mono); font-size: 15px; color: var(--brand-strong); margin-bottom: 16px; }
+.login-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 460px) {
+  .login-card {
+    width: 92%;
+    padding: 30px 18px 22px;
+  }
+  .brand-title {
+    font-size: 26px;
+    margin-top: 24px;
+  }
+}
