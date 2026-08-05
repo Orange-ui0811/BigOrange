@@ -68,7 +68,7 @@ jobs:
         working-directory: orange-web
         run: |
           npm ci
-          npm run lint
+          npm run lint -- --max-warnings 65
           npm run typecheck
           npm test -- --run
           npm run build
@@ -77,11 +77,13 @@ jobs:
         working-directory: orange-admin
         run: |
           npm ci
-          npm run lint
+          npm run lint -- --max-warnings 19
           npm run typecheck
           npm test -- --run
           npm run build
           npm audit --omit=dev --audit-level=high
+      - name: Enforce architecture size budgets
+        run: node scripts/check-architecture-budgets.mjs
       - name: Enforce JavaScript bundle budget
         run: node scripts/check-frontend-bundles.mjs
 
