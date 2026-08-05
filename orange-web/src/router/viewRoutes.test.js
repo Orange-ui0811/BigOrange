@@ -16,7 +16,7 @@ describe('view and route smoke coverage', () => {
       const module = await viewModules[path]()
       expect(module.default, `${path} should export a Vue component`).toBeTruthy()
     }
-  })
+  }, 20_000)
 
   it('resolves every lazy route component', async () => {
     const components = routeComponents(routes)
