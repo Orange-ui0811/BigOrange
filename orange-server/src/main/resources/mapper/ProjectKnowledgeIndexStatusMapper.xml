@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.ProjectKnowledgeIndexStatusMapper">
+    <insert id="markPending">
+        INSERT INTO project_knowledge_index_status
+            (project_type, project_id, source_ref, content_hash, index_status, chunk_count, last_error)
+        VALUES (#{projectType}, #{projectId}, #{sourceRef}, #{contentHash}, 'PENDING', 0, NULL)
+        ON DUPLICATE KEY UPDATE source_ref = VALUES(source_ref), content_hash = VALUES(content_hash),
+            index_status = 'PENDING', chunk_count = 0, last_error = NULL
+    </insert>
+    <update id="markIndexing">
+        UPDATE project_knowledge_index_status SET index_status = 'INDEXING', last_error = NULL
+        WHERE project_type = #{projectType} AND project_id = #{projectId}
+    </update>
+    <update id="markDone">
+        UPDATE project_knowledge_index_status SET knowledge_document_id = #{documentId},
+            content_hash = #{contentHash}, index_status = 'DONE', chunk_count = #{chunkCount},
+            last_error = NULL, last_indexed_at = CURRENT_TIMESTAMP
+        WHERE project_type = #{projectType} AND project_id = #{projectId}
+    </update>
+    <update id="markFailed">
+        UPDATE project_knowledge_index_status SET index_status = 'FAILED', last_error = #{error}
+        WHERE project_type = #{projectType} AND project_id = #{projectId}
+    </update>
+    <update id="markRemoved">
+        UPDATE project_knowledge_index_status SET knowledge_document_id = NULL,
+            index_status = 'REMOVED', chunk_count = 0, last_error = NULL
+        WHERE project_type = #{projectType} AND project_id = #{projectId}
+    </update>
+    <select id="selectBySourceRef" resultType="com.orangejd.pojo.entity.ProjectKnowledgeIndexStatus">
+        SELECT id, project_type, project_id, source_ref, knowledge_document_id, content_hash,
+               index_status, chunk_count, last_error, last_indexed_at, create_time, update_time
+        FROM project_knowledge_index_status WHERE source_ref = #{sourceRef}
+    </select>
+    <select id="selectAll" resultType="com.orangejd.pojo.entity.ProjectKnowledgeIndexStatus">
+        SELECT id, project_type, project_id, source_ref, knowledge_document_id, content_hash,
+               index_status, chunk_count, last_error, last_indexed_at, create_time, update_time
+        FROM project_knowledge_index_status ORDER BY update_time DESC, id DESC
+    </select>
+</mapper>

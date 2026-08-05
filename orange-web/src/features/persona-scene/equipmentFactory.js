@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { accessoryPreset } from './accessoryPresetCatalog'
 import { focusGroup, material, mesh } from './primitives'
 
 const colorOf = item => new THREE.Color(item.colorHex || '#f37021')
@@ -80,6 +81,13 @@ const growth = item => {
   return group
 }
 
+const weapon = item => {
+  const side = item.slotCode === 'LEFT_HAND_WEAPON' ? 'left' : 'right'
+  const preset = accessoryPreset(item.slotCode, item.variantCode, item.colorHex)
+  const group = blueprint({ ...item, focusCode: `${side}_hand`, blueprint: preset })
+  return group
+}
+
 const starGeometry = (radius, depth, points) => {
   const shape = new THREE.Shape()
   const count = Math.max(3, Math.min(12, Math.round(points || 5)))
@@ -130,11 +138,13 @@ const blueprint = item => {
 }
 
 const creators = { GOAL_CROWN: goal, INTEREST_ORBIT: interest, SKILL_VISOR: skill,
-  RESOURCE_PACK: resource, GROWTH_TRAIL: growth }
+  RESOURCE_PACK: resource, GROWTH_TRAIL: growth, LEFT_HAND_WEAPON: weapon, RIGHT_HAND_WEAPON: weapon }
 
-export const createEquipmentRoot = equipment => {
+export const createEquipmentRoot = (equipment, appearance = {}) => {
   const root = new THREE.Group()
   let interestOrbit = null
+  const hands = { leftX: -1.72, leftY: -.12, leftZ: .18, rightX: 1.72, rightY: -.12, rightZ: .18,
+    ...(appearance?.handConfig || {}) }
   equipment.filter(item => item.equipped && item.unlocked).forEach(item => {
     const creator = item.blueprint?.parts?.length ? blueprint : creators[item.slotCode]
     if (!creator) return
@@ -143,6 +153,8 @@ export const createEquipmentRoot = equipment => {
       rotationX: 0, rotationY: 0, rotationZ: 0, ...(item.transform || {}) }
     object.scale.setScalar(transform.scale)
     object.position.set(transform.offsetX, transform.offsetY, transform.offsetZ)
+    if (item.slotCode === 'LEFT_HAND_WEAPON') object.position.add(new THREE.Vector3(hands.leftX, hands.leftY, hands.leftZ + .12))
+    if (item.slotCode === 'RIGHT_HAND_WEAPON') object.position.add(new THREE.Vector3(hands.rightX, hands.rightY, hands.rightZ + .12))
     object.rotation.x += THREE.MathUtils.degToRad(transform.rotationX)
     object.rotation.y += THREE.MathUtils.degToRad(transform.rotationY)
     object.rotation.z += THREE.MathUtils.degToRad(transform.rotationZ)

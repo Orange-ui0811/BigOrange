@@ -3,6 +3,7 @@ package com.orangejd.server.service.impl;
 import com.orangejd.pojo.entity.KnowledgeDocument;
 import com.orangejd.server.config.AiEmbeddingProperties;
 import com.orangejd.server.mapper.KnowledgeDocumentMapper;
+import com.orangejd.server.service.ProjectKnowledgeSyncService;
 import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,7 @@ public class KnowledgeReindexService {
     private final EmbeddingModel embeddingModel;
     private final AiEmbeddingProperties embeddingProperties;
     private final RedisVectorStoreProperties redisProperties;
+    private final ProjectKnowledgeSyncService projectKnowledgeSyncService;
     private final AtomicBoolean running = new AtomicBoolean(false);
     private final ExecutorService executor;
 
@@ -49,13 +51,15 @@ public class KnowledgeReindexService {
                                    VectorStore vectorStore,
                                    EmbeddingModel embeddingModel,
                                    AiEmbeddingProperties embeddingProperties,
-                                   RedisVectorStoreProperties redisProperties) {
+                                   RedisVectorStoreProperties redisProperties,
+                                   ProjectKnowledgeSyncService projectKnowledgeSyncService) {
         this.mapper = mapper;
         this.documentService = documentService;
         this.vectorStore = vectorStore;
         this.embeddingModel = embeddingModel;
         this.embeddingProperties = embeddingProperties;
         this.redisProperties = redisProperties;
+        this.projectKnowledgeSyncService = projectKnowledgeSyncService;
         ThreadFactory factory = task -> {
             Thread thread = new Thread(task, "knowledge-reindex");
             thread.setDaemon(true);
@@ -94,6 +98,10 @@ public class KnowledgeReindexService {
     private void runReindex() {
         String startedAt = Instant.now().toString();
         try {
+            ProjectKnowledgeSyncService.SyncSummary projectSync = projectKnowledgeSyncService.syncAllPublished();
+            if (projectSync.failed() > 0) {
+                throw new IllegalStateException("项目知识同步失败 " + projectSync.failed() + " 条");
+            }
             List<KnowledgeDocument> entities = mapper.selectAllWithContent();
             current = new ReindexStatus("CHECKING", entities.size(), 0, 0, 0, 0, 0,
                     startedAt, null, "Checking embedding service");

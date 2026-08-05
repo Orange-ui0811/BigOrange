@@ -51,6 +51,8 @@ const mountFlow = async useFlow => {
     { path: '/', component: { template: '<div />' } },
     { path: '/login', component: { template: '<div />' } },
     { path: '/market', component: { template: '<div />' } },
+    { path: '/leaderboard', component: { template: '<div />' } },
+    { path: '/trend', component: { template: '<div />' } },
     { path: '/launch-check', component: { template: '<div />' } },
   ] })
   await router.push('/'); await router.isReady()
@@ -102,6 +104,8 @@ describe('page flow composables', () => {
     await leaderboard.exposed.load(); leaderboard.exposed.source.value = 'github'
     leaderboard.exposed.onSourceChange(); leaderboard.exposed.source.value = 'local'
     leaderboard.exposed.onClick({ id: 2 })
+    leaderboard.exposed.source.value = 'beginner'; await leaderboard.exposed.recommendWithPersona()
+    expect(leaderboard.router.currentRoute.value.query.preset).toBe('beginner')
     leaderboard.wrapper.unmount()
     expect(request.get).toHaveBeenCalled()
   })

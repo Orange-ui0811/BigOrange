@@ -10,6 +10,14 @@
     </header>
     <label class="blueprint-name">饰品名称<input v-model.trim="local.name" maxlength="48" @change="commit" /></label>
 
+    <fieldset class="preset-library">
+      <legend>复制现有建模</legend>
+      <button v-for="variant in availablePresets" :key="variant" type="button" @click="loadPreset(variant)">
+        <span>{{ variant === props.variantCode ? '当前' : '款式' }}</span>{{ accessoryVariantLabels[variant] || variant }}
+      </button>
+      <small>复制后每个零件都可以继续编辑</small>
+    </fieldset>
+
     <fieldset class="shape-library">
       <legend>添加零件</legend>
       <button v-for="shape in availableShapes" :key="shape" type="button" :disabled="local.parts.length >= 15" @click="addPart(shape)">
@@ -67,6 +75,7 @@
 
 <script setup>
 import { computed, defineComponent, h, reactive, ref, watch } from 'vue'
+import { accessoryPreset, accessoryVariantLabels, variantsForSlot } from '../features/persona-scene/accessoryPresetCatalog'
 
 const RangeControl = defineComponent({
   props: { modelValue: Number, label: String, min: Number, max: Number, step: Number, disabled: Boolean, angle: Boolean },
@@ -86,6 +95,7 @@ const RangeControl = defineComponent({
 const props = defineProps({
   modelValue: { type: Object, default: null }, slotCode: { type: String, required: true },
   title: { type: String, default: '饰品' }, defaultColor: { type: String, default: '#F37021' },
+  variantCode: { type: String, default: 'CLASSIC' },
 })
 const emit = defineEmits(['update:modelValue', 'change'])
 const clone = value => JSON.parse(JSON.stringify(value))
@@ -95,10 +105,13 @@ const slotShapes = {
   SKILL_VISOR: ['TORUS', 'BOX', 'CYLINDER', 'SPHERE'],
   RESOURCE_PACK: ['BOX', 'CYLINDER', 'SPHERE', 'OCTAHEDRON'],
   GROWTH_TRAIL: ['TORUS', 'BOX', 'STAR', 'SPHERE'],
+  LEFT_HAND_WEAPON: ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'TORUS', 'OCTAHEDRON'],
+  RIGHT_HAND_WEAPON: ['BOX', 'CYLINDER', 'CONE', 'SPHERE', 'TORUS', 'OCTAHEDRON'],
 }
 const shapeLabels = { TORUS: '圆环', CONE: '锥体', STAR: '星形', SPHERE: '球体', CYLINDER: '圆柱', BOX: '方块', OCTAHEDRON: '菱形' }
 const shapeIcons = { TORUS: '○', CONE: '△', STAR: '★', SPHERE: '●', CYLINDER: '▰', BOX: '■', OCTAHEDRON: '◆' }
 const availableShapes = computed(() => slotShapes[props.slotCode] || [])
+const availablePresets = computed(() => variantsForSlot(props.slotCode))
 const initial = () => props.modelValue ? clone(props.modelValue) : { name: `我的${props.title}`, anchor: props.slotCode, parts: [] }
 const local = reactive(initial())
 const selectedId = ref(local.parts[0]?.id || null)
@@ -120,6 +133,7 @@ const anchorPosition = () => {
     GOAL_CROWN: { x: 0, y: 1.95, z: 0 }, INTEREST_ORBIT: { x: 1.7, y: .1, z: 0 },
     SKILL_VISOR: { x: 0, y: .35, z: 1.42 }, RESOURCE_PACK: { x: -.95, y: .05, z: -.9 },
     GROWTH_TRAIL: { x: 0, y: -1.5, z: 0 },
+    LEFT_HAND_WEAPON: { x: 0, y: .2, z: 0 }, RIGHT_HAND_WEAPON: { x: 0, y: .2, z: 0 },
   }
   return positions[props.slotCode] || { x: 0, y: 0, z: 0 }
 }
@@ -134,6 +148,11 @@ const transformDefaults = shape => {
   if (props.slotCode === 'SKILL_VISOR' && shape !== 'TORUS') Object.assign(transform, { x: .58, y: .36, z: 1.46 })
   if (props.slotCode === 'RESOURCE_PACK' && shape !== 'BOX') Object.assign(transform, { x: -1.12, y: .28, z: -.82 })
   if (props.slotCode === 'GROWTH_TRAIL' && shape !== 'TORUS') Object.assign(transform, { x: .72, y: -1.42, z: .16 })
+  if (props.slotCode.endsWith('_HAND_WEAPON')) {
+    if (shape === 'CYLINDER' || shape === 'CONE') Object.assign(transform, { y: .58, rotationY: 45 })
+    if (shape === 'BOX') Object.assign(transform, { y: .42 })
+    if (shape === 'TORUS' || shape === 'SPHERE') Object.assign(transform, { y: .18, z: .12 })
+  }
   if (shape === 'TORUS' && ['GOAL_CROWN', 'GROWTH_TRAIL'].includes(props.slotCode)) transform.rotationX = 90
   if (shape === 'TORUS' && props.slotCode === 'INTEREST_ORBIT') Object.assign(transform, { rotationX: 64, rotationY: 14, rotationZ: 10 })
   return transform
@@ -172,6 +191,14 @@ const duplicatePart = mirror => {
 }
 const removePart = () => { const index = local.parts.findIndex(part => part.id === selectedId.value); if (index < 0) return; local.parts.splice(index, 1); selectedId.value = local.parts[Math.min(index, local.parts.length - 1)]?.id || null; commit() }
 const resetBlueprint = () => { local.parts.splice(0); local.name = `我的${props.title}`; selectedId.value = null; commit() }
+const loadPreset = variant => {
+  const preset = accessoryPreset(props.slotCode, variant, props.defaultColor)
+  local.name = `${props.title} · ${accessoryVariantLabels[variant] || variant}`
+  local.anchor = preset.anchor
+  local.parts.splice(0, local.parts.length, ...preset.parts)
+  selectedId.value = local.parts[0]?.id || null
+  commit()
+}
 const applyHistory = index => { syncing = true; historyIndex.value = index; Object.assign(local, clone(history.value[index])); selectedId.value = local.parts[0]?.id || null; publish(true); syncing = false }
 const undo = () => { if (historyIndex.value > 0) applyHistory(historyIndex.value - 1) }
 const redo = () => { if (historyIndex.value < history.value.length - 1) applyHistory(historyIndex.value + 1) }
@@ -203,4 +230,5 @@ watch(() => props.modelValue, value => {
 
 <style scoped>
 .blueprint-editor{box-sizing:border-box;width:100%;max-width:100%;padding:14px;border:1px solid #e9c9aa;border-radius:13px;background:#fffdf9;overflow:hidden}.blueprint-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.blueprint-head>div:first-child span,.blueprint-head>div:first-child strong{display:block}.blueprint-head span{color:#c2410c;font:800 8px/1 var(--font-mono);letter-spacing:.1em}.blueprint-head strong{margin-top:4px;font:900 13px/1.2 var(--font-mono)}.blueprint-history,.part-actions{display:flex;gap:4px;flex-wrap:wrap}.blueprint-history button,.part-actions button,.shape-library button{min-height:27px;padding:0 7px;border:1px solid #ead8c9;border-radius:7px;background:#fff;color:#725f53;font-size:9px;font-weight:800;cursor:pointer}.blueprint-history button:disabled,.shape-library button:disabled{cursor:not-allowed;opacity:.35}.blueprint-history button:hover:not(:disabled),.part-actions button:hover,.shape-library button:hover:not(:disabled){border-color:#f37021;color:#9a3412}.blueprint-name,.compact-input{display:flex;align-items:center;gap:8px;margin-top:10px;color:#725f53;font-size:9px;font-weight:800}.blueprint-name input,.compact-input input{box-sizing:border-box;min-width:0;flex:1;padding:7px 9px;border:1px solid #ead8c9;border-radius:7px;background:#fff;color:#3f2416}.shape-library{box-sizing:border-box;display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-width:0;margin:10px 0 0;padding:10px;border:1px dashed #e6c9b1;border-radius:10px}.shape-library legend{padding:0 5px;color:#9a3412;font:850 9px/1 var(--font-mono)}.shape-library button span{margin-right:4px;color:#ea580c}.shape-library small{margin-left:auto;color:#927c6c}.blueprint-workspace{display:grid;min-width:0;grid-template-columns:minmax(94px,112px) minmax(0,1fr);gap:9px;margin-top:10px}.layer-panel,.part-inspector{box-sizing:border-box;min-width:0;padding:9px;border:1px solid #f0dfd1;border-radius:10px;background:#fff}.panel-label{margin-bottom:6px;color:#9a3412;font:850 9px/1 var(--font-mono)}.layer-row{box-sizing:border-box;display:grid;width:100%;grid-template-columns:18px minmax(0,1fr);gap:1px 4px;margin-top:4px;padding:7px;border:1px solid transparent;border-radius:7px;background:#fffaf5;color:#725f53;text-align:left;cursor:pointer}.layer-row strong{overflow:hidden;font-size:9px;text-overflow:ellipsis;white-space:nowrap}.layer-row i{grid-column:2;color:#a38b7c;font-size:7px;font-style:normal}.layer-row.active{border-color:#f37021;background:#fff2e6;color:#9a3412}.layer-row.muted{opacity:.5}.empty-layers,.empty-inspector{color:#a38b7c;font-size:9px;line-height:1.5}.part-actions .danger{color:#dc2626}.compact-input{margin:8px 0}.part-inspector details{padding:7px 0;border-top:1px dashed #ead8c9}.part-inspector summary{color:#7c2d12;font-size:9px;font-weight:850;cursor:pointer}.control-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin-top:7px}.range-control{display:block;min-width:0}.range-control>span{display:flex;justify-content:space-between;gap:8px}.range-control strong,.range-control output{font-size:8px}.range-control output{color:#c2410c;font-family:var(--font-mono)}.range-control input{box-sizing:border-box;width:100%;height:15px;accent-color:#f37021}.material-row{margin:8px 0}.material-row label{display:flex;align-items:center;justify-content:space-between;color:#725f53;font-size:9px;font-weight:800}.material-row input{width:34px;height:25px;border:0;background:transparent}.blueprint-note{margin:8px 0 0;color:#927c6c;font-size:8px;line-height:1.5}@media(max-width:560px){.blueprint-workspace{grid-template-columns:1fr}.layer-panel{max-height:150px;overflow:auto}}
+.preset-library{box-sizing:border-box;display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-width:0;margin:10px 0 0;padding:10px;border:1px solid #fdba74;border-radius:10px;background:#fff7ed}.preset-library legend{padding:0 5px;color:#9a3412;font:850 9px/1 var(--font-mono)}.preset-library button{min-height:30px;padding:0 8px;border:1px solid #fed7aa;border-radius:7px;background:#fff;color:#7c2d12;font-size:9px;font-weight:850;cursor:pointer}.preset-library button:hover,.preset-library button:focus-visible{border-color:#f37021;outline:2px solid rgba(243,112,33,.14)}.preset-library button span{margin-right:5px;padding:2px 4px;border-radius:4px;background:#ffedd5;color:#c2410c;font-size:7px}.preset-library small{margin-left:auto;color:#927c6c;font-size:8px}@media(max-width:560px){.preset-library small{width:100%;margin-left:0}}
 </style>

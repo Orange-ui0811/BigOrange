@@ -22,7 +22,12 @@ export const useTrendAnalysis = (profile, onHistorySaved) => {
   const squeezeTexts = ['🍊 正在榨取分析精华...', '🍊 找到了！为你生成推荐...']
 
   const startJuicing = async currentStep => {
-    if (!profile.topics.length) { error.value = '请至少选择一个技术方向'; currentStep.value = 0; return }
+    if (!profile.topics.length && !profile.usePersona) {
+      error.value = '请先选择一个技术方向，或开启“使用橙子画像进行分析”'
+      ElMessage.warning(error.value)
+      currentStep.value = 0
+      return
+    }
     if (!(await confirmQuotaUsage({ actionLabel: '本次趋势分析', cost: trendV2Cost.value,
       title: '确认分析', confirmButtonText: '确认分析', type: 'info', estimatedTime: '1～3 分钟' }))) return
     juicing.value = true
@@ -43,7 +48,7 @@ export const useTrendAnalysis = (profile, onHistorySaved) => {
         experience: profile.experience || '', languages: Array.isArray(profile.languages) ? profile.languages : [],
         timeCommitment: profile.timeCommitment || '', customTopics: profile.customTopics || '',
         customPurpose: profile.customPurpose || '', customLang: profile.customLang || '',
-        customTime: profile.customTime || '', useRag: profile.useRag,
+        customTime: profile.customTime || '', useRag: profile.useRag, usePersona: profile.usePersona,
         preferBeginnerProjects: profile.preferBeginnerProjects,
         preferCareerProjects: profile.preferCareerProjects,
       }, { timeout: 0 })

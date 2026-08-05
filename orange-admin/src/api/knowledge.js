@@ -15,3 +15,5 @@ export const deleteDocument = (id) => request.delete(`/admin/knowledge/document/
 export const startKnowledgeReindex = () => request.post('/admin/knowledge/document/reindex')
 
 export const getKnowledgeReindexStatus = () => request.get('/admin/knowledge/document/reindex/status')
+
+export const getProjectKnowledgeIndexStatus = () => request.get('/admin/knowledge/document/project-index/status')

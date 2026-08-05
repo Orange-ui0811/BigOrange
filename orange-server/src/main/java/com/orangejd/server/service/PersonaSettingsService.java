@@ -28,6 +28,15 @@ public class PersonaSettingsService {
             Map.entry("mouthWidth", new double[]{0.62, 1.45}), Map.entry("mouthCurve", new double[]{-1.15, 1.25}),
             Map.entry("mouthHeight", new double[]{-0.22, 0.2}), Map.entry("mouthThickness", new double[]{0.65, 1.5}),
             Map.entry("mouthOpen", new double[]{0.0, 1.0}));
+    static final Map<String, Double> HAND_DEFAULTS = Map.ofEntries(
+            Map.entry("leftSize", 1.0), Map.entry("leftX", -1.72), Map.entry("leftY", -0.12),
+            Map.entry("leftZ", 0.18), Map.entry("rightSize", 1.0), Map.entry("rightX", 1.72),
+            Map.entry("rightY", -0.12), Map.entry("rightZ", 0.18));
+    private static final Map<String, double[]> HAND_RANGES = Map.ofEntries(
+            Map.entry("leftSize", new double[]{0.55, 1.65}), Map.entry("leftX", new double[]{-2.6, -1.05}),
+            Map.entry("leftY", new double[]{-1.25, 1.1}), Map.entry("leftZ", new double[]{-0.8, 1.4}),
+            Map.entry("rightSize", new double[]{0.55, 1.65}), Map.entry("rightX", new double[]{1.05, 2.6}),
+            Map.entry("rightY", new double[]{-1.25, 1.1}), Map.entry("rightZ", new double[]{-0.8, 1.4}));
 
     private final PersonaWorkshopMapper mapper;
 
@@ -40,6 +49,7 @@ public class PersonaSettingsService {
         if (saved == null) return defaults();
         Map<String, Object> settings = new LinkedHashMap<>(saved);
         settings.put("faceConfig", PersonaValueSupport.config(settings.get("faceConfig"), FACE_DEFAULTS));
+        settings.put("handConfig", PersonaValueSupport.config(settings.get("handConfig"), HAND_DEFAULTS));
         return settings;
     }
 
@@ -50,6 +60,7 @@ public class PersonaSettingsService {
         result.put("leafStyle", value(null, settings, "leafStyle", "CLASSIC"));
         result.put("surfaceStyle", value(null, settings, "surfaceStyle", "NATURAL"));
         result.put("faceConfig", PersonaValueSupport.config(settings.get("faceConfig"), FACE_DEFAULTS));
+        result.put("handConfig", PersonaValueSupport.config(settings.get("handConfig"), HAND_DEFAULTS));
         return result;
     }
 
@@ -67,6 +78,10 @@ public class PersonaSettingsService {
                 PersonaValueSupport.config(current.get("faceConfig"), FACE_DEFAULTS), FACE_RANGES,
                 "五官调整参数无效");
         settings.put("faceConfigJson", PersonaValueSupport.json(face, "DIY 参数保存失败"));
+        Map<String, Double> hands = PersonaValueSupport.validatedConfig(request.handConfig(),
+                PersonaValueSupport.config(current.get("handConfig"), HAND_DEFAULTS), HAND_RANGES,
+                "手部调整参数无效");
+        settings.put("handConfigJson", PersonaValueSupport.json(hands, "手部 DIY 参数保存失败"));
         mapper.upsertSettings(settings);
         return load(accountId);
     }
@@ -80,6 +95,7 @@ public class PersonaSettingsService {
         result.put("leafStyle", "CLASSIC");
         result.put("surfaceStyle", "NATURAL");
         result.put("faceConfig", new LinkedHashMap<>(FACE_DEFAULTS));
+        result.put("handConfig", new LinkedHashMap<>(HAND_DEFAULTS));
         return result;
     }
 

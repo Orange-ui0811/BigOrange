@@ -128,9 +128,19 @@ const onClick = (item) => {
   }
 }
 
+const recommendWithPersona = () => {
+  const preset = source.value === 'beginner' ? 'beginner'
+    : source.value === 'career' ? 'career' : 'general'
+  return router.push({
+    path: '/trend',
+    query: { persona: '1', rag: '1', preset, autoAnalyze: '1', leaderboardSource: source.value },
+  })
+}
+
 onMounted(async () => {
   await loadCategories()
   load()
 })
   return { PageTour, BeginnerProjects, CareerProjects, tourSteps, source, period, category, type,
-    list, loading, page, pageSize, total, categories, warning, emptyText, load, onSourceChange, onClick }}
+    list, loading, page, pageSize, total, categories, warning, emptyText, load, onSourceChange,
+    onClick, recommendWithPersona }}

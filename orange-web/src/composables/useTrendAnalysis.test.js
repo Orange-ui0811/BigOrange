@@ -18,18 +18,21 @@ describe('useTrendAnalysis', () => {
   afterEach(() => vi.useRealTimers())
 
   it('validates topics and saves a completed analysis', async () => {
-    const profile = reactive({ topics: [], languages: [], useRag: true })
+    const profile = reactive({ topics: [], languages: [], useRag: true, usePersona: false })
     const saved = vi.fn()
     const feature = useTrendAnalysis(profile, saved)
     const step = ref(2)
     await feature.startJuicing(step)
     expect(feature.v2Error.value).toContain('技术方向')
-    profile.topics = ['Agent']
+    expect(warning).toHaveBeenCalled()
+    profile.usePersona = true
     request.post.mockResolvedValue({ code: 1, data: { analysis: {}, historySaved: true } })
     const pending = feature.startJuicing(step)
     await vi.advanceTimersByTimeAsync(2500)
     await pending
     expect(feature.v2Result.value.analysis).toEqual({})
+    expect(request.post).toHaveBeenCalledWith('/app/trend/analyze-v2',
+      expect.objectContaining({ useRag: true, usePersona: true }), { timeout: 0 })
     expect(saved).toHaveBeenCalledOnce()
     expect(feature.analyzing.value).toBe(false)
   })

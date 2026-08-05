@@ -197,4 +197,8 @@
         ORDER BY editorial_score DESC, content_potential DESC, scope_clarity DESC,
           stars DESC, github_updated_at DESC, full_name ASC LIMIT #{limit}
     </select>
+    <select id="selectAllPublished" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        WHERE status = 'PUBLISHED' ORDER BY id
+    </select>
 </mapper>

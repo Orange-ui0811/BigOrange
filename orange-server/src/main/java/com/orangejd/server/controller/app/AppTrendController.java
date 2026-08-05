@@ -64,8 +64,9 @@ public class AppTrendController {
     @PostMapping("/analyze-v2")
     public Result<?> analyzeV2(@RequestBody TrendProfileDTO profile, HttpServletRequest request) {
         setCurrentUserFromToken(request);
-        if (profile.getTopics() == null || profile.getTopics().isEmpty())
-            return Result.error("请至少选择一个技术方向");
+        boolean hasTopics = profile.getTopics() != null && !profile.getTopics().isEmpty();
+        if (!hasTopics && !Boolean.TRUE.equals(profile.getUsePersona()))
+            return Result.error("请至少选择一个技术方向，或开启橙子画像分析");
         if (!acquireRateLimit(request)) return Result.error("请求过于频繁，请 10 秒后重试");
 
         Map<String, Object> parameters = new LinkedHashMap<>();
@@ -80,6 +81,7 @@ public class AppTrendController {
         parameters.put("customLang", profile.getCustomLang());
         parameters.put("customTime", profile.getCustomTime());
         parameters.put("useRag", profile.getUseRag());
+        parameters.put("usePersona", profile.getUsePersona());
         parameters.put("preferBeginnerProjects", profile.getPreferBeginnerProjects());
         parameters.put("preferCareerProjects", profile.getPreferCareerProjects());
         return Result.success(profileAnalysisService.analyze(BaseContext.getCurrentId(), parameters));
@@ -109,6 +111,7 @@ public class AppTrendController {
             m.put("customLang", h.getCustomLang());
             m.put("customTime", h.getCustomTime());
             m.put("useRag", !Boolean.FALSE.equals(h.getUseRag()));
+            m.put("usePersona", Boolean.TRUE.equals(h.getUsePersona()));
             m.put("preferBeginnerProjects", Boolean.TRUE.equals(h.getPreferBeginnerProjects()));
             m.put("preferCareerProjects", Boolean.TRUE.equals(h.getPreferCareerProjects()));
             m.put("createTime", h.getCreateTime() != null ? h.getCreateTime().toString() : "");
@@ -143,6 +146,7 @@ public class AppTrendController {
             h.setCustomLang(text(body.get("customLang"), 200));
             h.setCustomTime(text(body.get("customTime"), 200));
             h.setUseRag(!Boolean.FALSE.equals(body.get("useRag")));
+            h.setUsePersona(Boolean.TRUE.equals(body.get("usePersona")));
             h.setPreferBeginnerProjects(Boolean.TRUE.equals(body.get("preferBeginnerProjects")));
             h.setPreferCareerProjects(Boolean.TRUE.equals(body.get("preferCareerProjects")));
             Object rawResult = body.containsKey("result") ? body.get("result") : body.get("resultString");

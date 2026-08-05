@@ -11,14 +11,21 @@ public record PersonaSettingsRequest(
         @Pattern(regexp = "^(FRIENDLY|CURIOUS|COOL)$", message = "橙子表情无效") String faceStyle,
         @Pattern(regexp = "^(CLASSIC|DOUBLE|SPROUT)$", message = "叶子造型无效") String leafStyle,
         @Pattern(regexp = "^(NATURAL|GLOSSY|MATTE)$", message = "橙子质感无效") String surfaceStyle,
-        Map<String, Double> faceConfig) {
+        Map<String, Double> faceConfig,
+        Map<String, Double> handConfig) {
 
     public PersonaSettingsRequest(boolean showcaseEnabled, boolean avatarEnabled) {
-        this(showcaseEnabled, avatarEnabled, null, null, null, null, null);
+        this(showcaseEnabled, avatarEnabled, null, null, null, null, null, null);
     }
 
     public PersonaSettingsRequest(boolean showcaseEnabled, boolean avatarEnabled, String bodyColor,
                                   String faceStyle, String leafStyle, String surfaceStyle) {
-        this(showcaseEnabled, avatarEnabled, bodyColor, faceStyle, leafStyle, surfaceStyle, null);
+        this(showcaseEnabled, avatarEnabled, bodyColor, faceStyle, leafStyle, surfaceStyle, null, null);
+    }
+
+    public PersonaSettingsRequest(boolean showcaseEnabled, boolean avatarEnabled, String bodyColor,
+                                  String faceStyle, String leafStyle, String surfaceStyle,
+                                  Map<String, Double> faceConfig) {
+        this(showcaseEnabled, avatarEnabled, bodyColor, faceStyle, leafStyle, surfaceStyle, faceConfig, null);
     }
 }

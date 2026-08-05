@@ -13,6 +13,10 @@ class PersonaVisualLanguageTest {
         assertEquals(PersonaDimension.values().length, PersonaVisualLanguage.CATALOG.size());
         assertEquals(PersonaDimension.GOAL, PersonaVisualLanguage.requireSlot("goal_crown").dimension());
         assertEquals(PersonaDimension.SKILL, PersonaVisualLanguage.requireSlot("SKILL_VISOR").dimension());
+        assertEquals(PersonaDimension.LEFT_HAND,
+                PersonaVisualLanguage.requireSlot("LEFT_HAND_WEAPON").dimension());
+        assertEquals(PersonaDimension.RIGHT_HAND,
+                PersonaVisualLanguage.requireSlot("RIGHT_HAND_WEAPON").dimension());
     }
 
     @Test

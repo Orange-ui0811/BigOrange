@@ -72,7 +72,7 @@ class TrendArchitectureServicesTest {
 
         assertEquals("ok", service.analyze("question").get("content"));
         service.analyzeV2(List.of("Agent"), "学习", "新手", List.of("Java"), "5h",
-                "", "", "", "", "", true, true, false);
+                "", "", "", "", "", true, true, true, false);
 
         verify(v1).analyze(eq("question"), eq(7L), any(),
                 org.mockito.ArgumentMatchers.argThat(runtime -> "model-name".equals(runtime.model())), eq(false));

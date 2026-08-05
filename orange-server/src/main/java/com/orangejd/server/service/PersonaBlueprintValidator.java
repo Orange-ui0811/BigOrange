@@ -13,12 +13,14 @@ import java.util.Set;
 
 @Service
 public class PersonaBlueprintValidator {
-    private static final Map<String, Set<String>> SHAPES = Map.of(
-            "GOAL_CROWN", Set.of("TORUS", "CONE", "STAR", "SPHERE", "CYLINDER"),
-            "INTEREST_ORBIT", Set.of("TORUS", "SPHERE", "STAR", "OCTAHEDRON"),
-            "SKILL_VISOR", Set.of("TORUS", "BOX", "CYLINDER", "SPHERE"),
-            "RESOURCE_PACK", Set.of("BOX", "CYLINDER", "SPHERE", "OCTAHEDRON"),
-            "GROWTH_TRAIL", Set.of("TORUS", "BOX", "STAR", "SPHERE"));
+    private static final Map<String, Set<String>> SHAPES = Map.ofEntries(
+            Map.entry("GOAL_CROWN", Set.of("TORUS", "CONE", "STAR", "SPHERE", "CYLINDER")),
+            Map.entry("INTEREST_ORBIT", Set.of("TORUS", "SPHERE", "STAR", "OCTAHEDRON")),
+            Map.entry("SKILL_VISOR", Set.of("TORUS", "BOX", "CYLINDER", "SPHERE")),
+            Map.entry("RESOURCE_PACK", Set.of("BOX", "CYLINDER", "SPHERE", "OCTAHEDRON")),
+            Map.entry("GROWTH_TRAIL", Set.of("TORUS", "BOX", "STAR", "SPHERE")),
+            Map.entry("LEFT_HAND_WEAPON", Set.of("BOX", "CYLINDER", "CONE", "SPHERE", "TORUS", "OCTAHEDRON")),
+            Map.entry("RIGHT_HAND_WEAPON", Set.of("BOX", "CYLINDER", "CONE", "SPHERE", "TORUS", "OCTAHEDRON")));
     private static final Map<String, double[]> PARAMETER_RANGES = Map.ofEntries(
             Map.entry("radius", new double[]{0.06, 1.8}), Map.entry("tube", new double[]{0.015, 0.35}),
             Map.entry("width", new double[]{0.05, 2.5}), Map.entry("height", new double[]{0.05, 2.5}),

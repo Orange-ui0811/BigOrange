@@ -28,17 +28,29 @@ public class AdminKnowledgeController {
     @GetMapping("/stats")
     public Result<Map<String, Object>> stats() {
         List<KnowledgeDocument> all = knowledgeDocumentMapper.selectAll();
-        long manual = 0, github = 0, totalChunks = 0;
+        long manual = 0, github = 0, beginner = 0, career = 0, jobs = 0, totalChunks = 0;
         for (KnowledgeDocument d : all) {
-            if ("GITHUB".equals(d.getSource())) github++; else manual++;
+            if ("GITHUB".equals(d.getSource())) github++;
+            else if ("BEGINNER_PROJECT".equals(d.getSource())) beginner++;
+            else if ("CAREER_PROJECT".equals(d.getSource())) career++;
+            else if ("JOB_POSTING".equals(d.getSource())) jobs++;
+            else manual++;
             totalChunks += d.getChunkCount() != null ? d.getChunkCount() : 0;
         }
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("totalDocs", all.size());
         map.put("manualCount", manual);
         map.put("githubCount", github);
+        map.put("beginnerCount", beginner);
+        map.put("careerCount", career);
+        map.put("jobCount", jobs);
         map.put("totalChunks", totalChunks);
         return Result.success(map);
+    }
+
+    @GetMapping("/project-index/status")
+    public Result<?> projectIndexStatus() {
+        return Result.success(knowledgeDocumentMapper.selectProjectIndexStatuses());
     }
 
     @GetMapping("/{id}")

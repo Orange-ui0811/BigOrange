@@ -11,6 +11,8 @@ const focusPositions = {
   skill: { camera: [0, .65, 4.6], target: [0, .3, .05] },
   resource: { camera: [-4.55, .55, 4.35], target: [-.15, .05, -.1] },
   growth: { camera: [0, -1.05, 5.65], target: [0, -.8, 0] },
+  left_hand: { camera: [-3.7, .1, 5.1], target: [-1.25, -.1, .1] },
+  right_hand: { camera: [3.7, .1, 5.1], target: [1.25, -.1, .1] },
   recommendation: { camera: [4.25, -.3, 5.1], target: [0, -.25, 0] },
 }
 
@@ -45,7 +47,7 @@ export const usePersonaScene = (props, emit) => {
   const rebuildEquipment = () => {
     if (!orangeRoot) return
     if (equipmentRoot) { orangeRoot.remove(equipmentRoot); disposeGroup(equipmentRoot) }
-    const result = createEquipmentRoot(props.equipment)
+    const result = createEquipmentRoot(props.equipment, props.appearance)
     equipmentRoot = result.root
     interestOrbit = result.interestOrbit
     orangeRoot.add(equipmentRoot)

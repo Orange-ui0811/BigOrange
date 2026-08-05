@@ -305,6 +305,7 @@ public class DocumentServiceImpl implements DocumentService {
             meta.put("docTitle", entity.getTitle());
             meta.put("chunkIndex", i);
             meta.put("source", entity.getSource());
+            ProjectKnowledgeDocumentWriter.enrichMetadata(meta, entity);
             docs.add(new Document("knowledge-" + entity.getId() + "-" + i, chunks.get(i), meta));
         }
         return docs;
@@ -354,6 +355,8 @@ public class DocumentServiceImpl implements DocumentService {
         vo.setChunkCount(e.getChunkCount() != null ? e.getChunkCount() : 0);
         vo.setFileSize(e.getFileSize());
         vo.setPeriod(resolvePeriod(e));
+        vo.setVectorStatus(e.getVectorStatus());
+        vo.setPipelineError(e.getPipelineError());
         if (e.getCreateTime() != null)
             vo.setCreateTime(e.getCreateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         return vo;

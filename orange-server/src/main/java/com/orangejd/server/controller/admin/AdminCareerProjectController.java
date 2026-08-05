@@ -9,6 +9,7 @@ import com.orangejd.server.dto.CareerWeeklyPickView;
 import com.orangejd.server.foundation.ingestion.IngestionCoordinatorService;
 import com.orangejd.server.foundation.ingestion.IngestionRunService;
 import com.orangejd.server.service.CareerProjectService;
+import com.orangejd.server.service.ProjectKnowledgeSyncService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +26,14 @@ import java.util.Map;
 @RequestMapping("/admin/career-projects")
 public class AdminCareerProjectController {
     private final CareerProjectService service;
+    private final ProjectKnowledgeSyncService projectKnowledgeSyncService;
     private final IngestionCoordinatorService coordinator;
 
-    public AdminCareerProjectController(CareerProjectService service, IngestionCoordinatorService coordinator) {
+    public AdminCareerProjectController(CareerProjectService service,
+                                        ProjectKnowledgeSyncService projectKnowledgeSyncService,
+                                        IngestionCoordinatorService coordinator) {
         this.service = service;
+        this.projectKnowledgeSyncService = projectKnowledgeSyncService;
         this.coordinator = coordinator;
     }
 
@@ -46,6 +51,7 @@ public class AdminCareerProjectController {
     @PutMapping("/{id}/status")
     public Result<?> status(@PathVariable Long id, @Valid @RequestBody BeginnerProjectStatusRequest request) {
         service.updateStatus(id, request.status(), request.hiddenReason());
+        projectKnowledgeSyncService.syncCareer(id);
         return Result.success();
     }
 

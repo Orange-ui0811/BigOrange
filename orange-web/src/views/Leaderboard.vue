@@ -8,6 +8,7 @@
         <h2>从平台热度到 GitHub 趋势，找到真正适合你的项目。</h2>
         <p>浏览站内作品、GitHub 热门仓库、新手可落地项目，或按真实岗位能力筛选职业成长项目。</p>
       </div>
+      <LeaderboardPersonaCard :source="source" @recommend="recommendWithPersona" />
     </div>
 
     <!-- 筛选栏 -->
@@ -124,10 +125,11 @@
 
 <script setup>
 import { useLeaderboard } from '../composables/useLeaderboard'
+import LeaderboardPersonaCard from '../components/LeaderboardPersonaCard.vue'
 
 const { PageTour, BeginnerProjects, CareerProjects, tourSteps, source, period, category, type,
   list, loading, page, pageSize, total, categories, warning, emptyText, load, onSourceChange,
-  onClick } = useLeaderboard()
+  onClick, recommendWithPersona } = useLeaderboard()
 </script>
 
 <style scoped src="../styles/views/leaderboard.css"></style>

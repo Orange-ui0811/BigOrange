@@ -11,13 +11,16 @@ export const usePersonaAppearance = snapshot => {
     leafStyle: snapshot.settings.leafStyle || 'CLASSIC',
     surfaceStyle: snapshot.settings.surfaceStyle || 'NATURAL',
     faceConfig: snapshot.settings.faceConfig || {},
+    handConfig: snapshot.settings.handConfig || {},
   }))
   const faceConfig = computed(() => snapshot.settings.faceConfig || {})
+  const handConfig = computed(() => snapshot.settings.handConfig || {})
   const payload = () => ({
     showcaseEnabled: snapshot.settings.showcaseEnabled, avatarEnabled: snapshot.settings.avatarEnabled,
     bodyColor: snapshot.settings.bodyColor, faceStyle: snapshot.settings.faceStyle,
     leafStyle: snapshot.settings.leafStyle, surfaceStyle: snapshot.settings.surfaceStyle,
     faceConfig: snapshot.settings.faceConfig,
+    handConfig: snapshot.settings.handConfig,
   })
   const scheduleSave = () => {
     clearTimeout(timer)
@@ -30,12 +33,13 @@ export const usePersonaAppearance = snapshot => {
   }
   const setAppearance = (key, value) => { snapshot.settings[key] = value; scheduleSave() }
   const updateFaceConfig = value => { snapshot.settings.faceConfig = value }
+  const updateHandConfig = value => { snapshot.settings.handConfig = value }
   const saveSettings = async () => {
     if (!snapshot.settings.showcaseEnabled) snapshot.settings.avatarEnabled = false
     await updatePersonaSettings(payload())
     ElMessage.success('展示设置已保存')
   }
   onBeforeUnmount(() => clearTimeout(timer))
-  return { appearance, faceConfig, appearanceSaveState: saveState, setAppearance,
-    updateFaceConfig, scheduleAppearanceSave: scheduleSave, saveSettings }
+  return { appearance, faceConfig, handConfig, appearanceSaveState: saveState, setAppearance,
+    updateFaceConfig, updateHandConfig, scheduleAppearanceSave: scheduleSave, saveSettings }
 }

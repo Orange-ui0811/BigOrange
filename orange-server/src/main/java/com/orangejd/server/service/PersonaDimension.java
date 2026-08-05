@@ -9,7 +9,9 @@ public enum PersonaDimension {
     INTEREST("兴趣方向"),
     SKILL("技能与经验"),
     RESOURCE("可投入资源"),
-    GROWTH("成长轨迹");
+    GROWTH("成长轨迹"),
+    LEFT_HAND("避雷清单"),
+    RIGHT_HAND("期望成果");
 
     private final String label;
 

@@ -79,14 +79,8 @@ public class TrendV2Analyzer {
     private String prompt(TrendAnalysisInput input, Long accountId, Map<String, Object> graph,
                           List<BeginnerProjectView> beginner, List<CareerProjectView> career) {
         String rag = contextBuilder.rag(input);
-        String beginnerText = contextBuilder.beginnerCases(beginner);
-        String careerText = contextBuilder.careerCases(career);
         return contextBuilder.profile(input, accountId) + "\n\n" + contextBuilder.graphSummary(graph)
                 + (rag.isEmpty() ? "" : "\n\n## 知识库参考\n" + rag)
-                + (beginnerText.isEmpty() ? "" : "\n\n## 已核验的新手项目案例\n" + beginnerText
-                + "\n这些项目只能作为实践案例，不能作为趋势统计证据。项目名称和链接必须原样引用，不得虚构。")
-                + (careerText.isEmpty() ? "" : "\n\n## 已核验的职业成长项目案例\n" + careerText
-                + "\n这些项目用于说明岗位能力和作品证明方式，不能作为趋势统计证据。项目名称和链接必须原样引用，不得虚构。")
                 + "\n\n请基于用户画像、数据和知识库参考，严格按 JSON 格式输出推荐结果。";
     }
 

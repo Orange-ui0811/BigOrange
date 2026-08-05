@@ -52,13 +52,15 @@ public class TrendProfileAnalysisService {
 
     public Map<String, Object> analyze(Long accountId, Map<String, Object> parameters) {
         List<String> topics = strings(parameters.get("topics"));
-        if (topics.isEmpty()) throw new BaseException("请至少说明一个感兴趣的技术方向");
+        boolean usePersona = Boolean.TRUE.equals(parameters.get("usePersona"));
+        if (topics.isEmpty() && !usePersona)
+            throw new BaseException("请至少说明一个感兴趣的技术方向，或开启橙子画像分析");
         List<String> languages = strings(parameters.get("languages"));
         String purpose = text(parameters.get("purpose"), 200);
         String experience = text(parameters.get("experience"), 200);
         String timeCommitment = text(parameters.get("timeCommitment"), 200);
-        if (!StringUtils.hasText(purpose) || !StringUtils.hasText(experience)
-                || !StringUtils.hasText(timeCommitment)) {
+        if (!usePersona && (!StringUtils.hasText(purpose) || !StringUtils.hasText(experience)
+                || !StringUtils.hasText(timeCommitment))) {
             throw new BaseException("趋势分析画像信息不完整");
         }
 
@@ -70,6 +72,7 @@ public class TrendProfileAnalysisService {
                 text(parameters.get("customLang"), 200),
                 text(parameters.get("customTime"), 200),
                 !Boolean.FALSE.equals(parameters.get("useRag")),
+                usePersona,
                 Boolean.TRUE.equals(parameters.get("preferBeginnerProjects")),
                 Boolean.TRUE.equals(parameters.get("preferCareerProjects")));
         if (analysis.containsKey("error")) {
@@ -101,6 +104,7 @@ public class TrendProfileAnalysisService {
             history.setCustomLang(text(parameters.get("customLang"), 200));
             history.setCustomTime(text(parameters.get("customTime"), 200));
             history.setUseRag(!Boolean.FALSE.equals(parameters.get("useRag")));
+            history.setUsePersona(Boolean.TRUE.equals(parameters.get("usePersona")));
             history.setPreferBeginnerProjects(Boolean.TRUE.equals(parameters.get("preferBeginnerProjects")));
             history.setPreferCareerProjects(Boolean.TRUE.equals(parameters.get("preferCareerProjects")));
             history.setResultJson(objectMapper.writeValueAsString(result));

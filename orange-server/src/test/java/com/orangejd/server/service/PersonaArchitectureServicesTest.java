@@ -47,7 +47,8 @@ class PersonaArchitectureServicesTest {
 
         assertEquals(List.of("dimensions", "materials", "materialCount", "equipment", "settings",
                 "completion", "recommendations"), new ArrayList<>(snapshot.keySet()));
-        assertEquals(20, ((Map<?, ?>) snapshot.get("completion")).get("percent"));
+        assertEquals(100 / PersonaDimension.values().length,
+                ((Map<?, ?>) snapshot.get("completion")).get("percent"));
         assertEquals("#F37021", ((Map<?, ?>) snapshot.get("settings")).get("bodyColor"));
     }
 

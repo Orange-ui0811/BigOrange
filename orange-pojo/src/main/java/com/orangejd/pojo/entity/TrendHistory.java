@@ -16,6 +16,7 @@ public class TrendHistory {
     private String customLang;
     private String customTime;
     private Boolean useRag;
+    private Boolean usePersona;
     private Boolean preferBeginnerProjects;
     private Boolean preferCareerProjects;
     private String resultJson;
@@ -47,6 +48,8 @@ public class TrendHistory {
     public void setCustomTime(String customTime) { this.customTime = customTime; }
     public Boolean getUseRag() { return useRag; }
     public void setUseRag(Boolean useRag) { this.useRag = useRag; }
+    public Boolean getUsePersona() { return usePersona; }
+    public void setUsePersona(Boolean usePersona) { this.usePersona = usePersona; }
     public Boolean getPreferBeginnerProjects() { return preferBeginnerProjects; }
     public void setPreferBeginnerProjects(Boolean preferBeginnerProjects) { this.preferBeginnerProjects = preferBeginnerProjects; }
     public Boolean getPreferCareerProjects() { return preferCareerProjects; }

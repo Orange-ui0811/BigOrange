@@ -162,4 +162,9 @@
         WHERE cp.status = 'PUBLISHED'
         ORDER BY cp.overall_score DESC, bp.github_updated_at DESC, bp.full_name LIMIT #{limit}
     </select>
+    <select id="selectAllPublished" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE cp.status = 'PUBLISHED' ORDER BY cp.project_id
+    </select>
 </mapper>

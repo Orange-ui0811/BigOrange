@@ -152,6 +152,42 @@ class PersonaWorkshopServiceTest {
                 new PersonaAccessoryBlueprintRequest("非法饰品", List.of(illegal))));
     }
 
+    @Test
+    void leftAndRightWeaponsUnlockIndependentlyFromAvoidanceAndDesiredOutcome() {
+        PersonaWorkshopMapper mapper = mock(PersonaWorkshopMapper.class);
+        when(mapper.selectEntries(7L)).thenReturn(List.of(Map.of(
+                "dimensionCode", "LEFT_HAND", "content", "不要必须付费的项目")));
+        when(mapper.selectEquipment(7L)).thenReturn(List.of());
+        PersonaWorkshopService service = service(mapper);
+
+        service.updateEquipment(7L, "LEFT_HAND_WEAPON",
+                new PersonaEquipmentRequest("LEFT_WEAPON", "SWORD", "#64748B", true));
+
+        assertThrows(BaseException.class, () -> service.updateEquipment(7L, "RIGHT_HAND_WEAPON",
+                new PersonaEquipmentRequest("RIGHT_WEAPON", "SHIELD", "#64748B", true)));
+        ArgumentCaptor<Map<String, Object>> equipment = mapCaptor();
+        verify(mapper).upsertEquipment(equipment.capture());
+        assertEquals("LEFT_HAND_WEAPON", equipment.getValue().get("slotCode"));
+    }
+
+    @Test
+    void handSizeAndPositionAreValidatedAndSerialized() {
+        PersonaWorkshopMapper mapper = mock(PersonaWorkshopMapper.class);
+        when(mapper.selectSettings(7L)).thenReturn(Map.of("showcaseEnabled", false, "avatarEnabled", false));
+        PersonaWorkshopService service = service(mapper);
+
+        service.updateSettings(7L, new PersonaSettingsRequest(false, false, "#F37021",
+                "FRIENDLY", "CLASSIC", "NATURAL", Map.of(),
+                Map.of("leftSize", 1.2, "leftY", 0.3, "rightX", 2.1)));
+
+        ArgumentCaptor<Map<String, Object>> settings = mapCaptor();
+        verify(mapper).upsertSettings(settings.capture());
+        assertTrue(String.valueOf(settings.getValue().get("handConfigJson")).contains("\"leftSize\":1.2"));
+        assertThrows(BaseException.class, () -> service.updateSettings(7L,
+                new PersonaSettingsRequest(false, false, "#F37021", "FRIENDLY", "CLASSIC",
+                        "NATURAL", Map.of(), Map.of("leftX", 1.5))));
+    }
+
     @SuppressWarnings({"rawtypes", "unchecked"})
     private static ArgumentCaptor<Map<String, Object>> mapCaptor() {
         return (ArgumentCaptor) ArgumentCaptor.forClass(Map.class);

@@ -74,6 +74,7 @@ public class PersonaEquipmentService {
         persistence.put("accountId", accountId);
         persistence.put("slotCode", slot);
         persistence.put("itemCode", definition.itemCode());
+        persistence.put("variantCode", definition.variants().get(0));
         persistence.put("colorHex", definition.defaultColor());
         persistence.put("blueprintJson", PersonaValueSupport.json(blueprint, "饰品蓝图保存失败"));
         mapper.upsertAccessoryBlueprint(persistence);
@@ -95,7 +96,7 @@ public class PersonaEquipmentService {
             view.put("focusCode", definition.focusCode());
             view.put("variants", definition.variants());
             view.put("unlocked", completed.contains(definition.dimension()));
-            view.put("variantCode", state == null ? "CLASSIC" : state.get("variantCode"));
+            view.put("variantCode", state == null ? definition.variants().get(0) : state.get("variantCode"));
             view.put("colorHex", state == null ? definition.defaultColor() : state.get("colorHex"));
             view.put("equipped", state != null && completed.contains(definition.dimension())
                     && PersonaValueSupport.bool(state.get("equipped")));

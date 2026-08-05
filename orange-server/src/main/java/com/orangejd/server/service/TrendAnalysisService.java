@@ -55,13 +55,13 @@ public class TrendAnalysisService {
     public Map<String, Object> analyzeV2(
             List<String> topics, String purpose, String experience, List<String> languages,
             String timeCommitment, String customTopics, String customPurpose, String customExp,
-            String customLang, String customTime, Boolean useRag,
+            String customLang, String customTime, Boolean useRag, Boolean usePersona,
             Boolean preferBeginnerProjects, Boolean preferCareerProjects) {
         Long accountId = BaseContext.getCurrentId();
         String requestId = "trend_v2_" + accountId + "_" + UUID.randomUUID();
         TrendAnalysisInput input = new TrendAnalysisInput(topics, purpose, experience, languages,
                 timeCommitment, customTopics, customPurpose, customExp, customLang, customTime,
-                useRag, preferBeginnerProjects, preferCareerProjects);
+                useRag, usePersona, preferBeginnerProjects, preferCareerProjects);
         if (aiToolRouter == null) {
             return v2Analyzer.analyze(input, accountId, requestId, projectRuntimeConfig(), false);
         }

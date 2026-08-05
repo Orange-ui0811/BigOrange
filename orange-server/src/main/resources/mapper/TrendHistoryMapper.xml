@@ -5,19 +5,19 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO trend_history (
             account_id, topics, purpose, experience, languages, time_commitment,
-            custom_topics, custom_purpose, custom_exp, custom_lang, custom_time, use_rag,
+            custom_topics, custom_purpose, custom_exp, custom_lang, custom_time, use_rag, use_persona,
             prefer_beginner_projects, prefer_career_projects, result_json
         )
         VALUES (
             #{accountId}, #{topics}, #{purpose}, #{experience}, #{languages}, #{timeCommitment},
-            #{customTopics}, #{customPurpose}, #{customExp}, #{customLang}, #{customTime}, #{useRag},
+            #{customTopics}, #{customPurpose}, #{customExp}, #{customLang}, #{customTime}, #{useRag}, #{usePersona},
             #{preferBeginnerProjects}, #{preferCareerProjects}, #{resultJson}
         )
     </insert>
 
     <select id="selectByBrowserId" resultType="com.orangejd.pojo.entity.TrendHistory">
         SELECT id, account_id, topics, purpose, experience, languages, time_commitment,
-               custom_topics, custom_purpose, custom_exp, custom_lang, custom_time, use_rag,
+               custom_topics, custom_purpose, custom_exp, custom_lang, custom_time, use_rag, use_persona,
                prefer_beginner_projects, prefer_career_projects,
                result_json, create_time
         FROM trend_history WHERE account_id = #{accountId}

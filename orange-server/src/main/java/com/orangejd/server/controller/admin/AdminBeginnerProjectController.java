@@ -9,6 +9,7 @@ import com.orangejd.server.dto.BeginnerWeeklyPickView;
 import com.orangejd.server.foundation.ingestion.IngestionCoordinatorService;
 import com.orangejd.server.foundation.ingestion.IngestionRunService;
 import com.orangejd.server.service.BeginnerProjectService;
+import com.orangejd.server.service.ProjectKnowledgeSyncService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +26,14 @@ import java.util.Map;
 @RequestMapping("/admin/beginner-projects")
 public class AdminBeginnerProjectController {
     private final BeginnerProjectService service;
+    private final ProjectKnowledgeSyncService projectKnowledgeSyncService;
     private final IngestionCoordinatorService coordinator;
 
     public AdminBeginnerProjectController(BeginnerProjectService service,
+                                          ProjectKnowledgeSyncService projectKnowledgeSyncService,
                                           IngestionCoordinatorService coordinator) {
         this.service = service;
+        this.projectKnowledgeSyncService = projectKnowledgeSyncService;
         this.coordinator = coordinator;
     }
 
@@ -51,6 +55,7 @@ public class AdminBeginnerProjectController {
     public Result<?> updateStatus(@PathVariable Long id,
                                   @Valid @RequestBody BeginnerProjectStatusRequest request) {
         service.updateStatus(id, request.status(), request.hiddenReason());
+        projectKnowledgeSyncService.syncBeginner(id);
         return Result.success();
     }
 

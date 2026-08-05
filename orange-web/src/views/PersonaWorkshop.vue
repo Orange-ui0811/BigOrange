@@ -10,7 +10,7 @@
         <span>画像完整度</span>
         <strong>{{ snapshot.completion?.percent || 0 }}<small>%</small></strong>
         <div><i :style="{ width: `${snapshot.completion?.percent || 0}%` }"></i></div>
-        <small>{{ snapshot.completion?.completedDimensions || 0 }} / {{ snapshot.completion?.totalDimensions || 5 }} 个维度</small>
+        <small>{{ snapshot.completion?.completedDimensions || 0 }} / {{ snapshot.completion?.totalDimensions || 7 }} 个维度</small>
       </div>
     </header>
 
@@ -62,6 +62,7 @@
                 </div>
               </fieldset>
               <PersonaFaceEditor :model-value="faceConfig" @update:model-value="updateFaceConfig" @change="scheduleAppearanceSave" />
+              <PersonaHandEditor :model-value="handConfig" @update:model-value="updateHandConfig" @change="scheduleAppearanceSave" />
             </div>
           </div>
         </section>
@@ -100,7 +101,7 @@
                 <label class="color-control">饰品颜色<input v-model="equipmentFor(dimension.code).colorHex" type="color" aria-label="装备颜色" @change="saveEquipment(equipmentFor(dimension.code))" /></label>
                 <el-switch v-model="equipmentFor(dimension.code).equipped" inline-prompt active-text="穿戴" inactive-text="收起" @change="saveEquipment(equipmentFor(dimension.code))" />
                 <PersonaEquipmentTransformEditor :model-value="equipmentFor(dimension.code).transform" @update:model-value="updateEquipmentTransform(equipmentFor(dimension.code), $event)" @change="saveEquipment(equipmentFor(dimension.code))" />
-                <PersonaAccessoryBlueprintEditor :model-value="equipmentFor(dimension.code).blueprint" :slot-code="equipmentFor(dimension.code).slotCode" :title="equipmentFor(dimension.code).name" :default-color="equipmentFor(dimension.code).colorHex" @update:model-value="updateAccessoryBlueprint(equipmentFor(dimension.code), $event)" @change="saveAccessoryBlueprint(equipmentFor(dimension.code), $event)" />
+                <PersonaAccessoryBlueprintEditor :model-value="equipmentFor(dimension.code).blueprint" :slot-code="equipmentFor(dimension.code).slotCode" :variant-code="equipmentFor(dimension.code).variantCode" :title="equipmentFor(dimension.code).name" :default-color="equipmentFor(dimension.code).colorHex" @update:model-value="updateAccessoryBlueprint(equipmentFor(dimension.code), $event)" @change="saveAccessoryBlueprint(equipmentFor(dimension.code), $event)" />
               </div>
               <span v-else class="unlock-hint">先写下一条真实内容，即可解锁</span>
             </div>
@@ -108,7 +109,7 @@
         </section>
 
         <section id="persona-materials" class="persona-node material-node" data-focus="growth">
-          <div class="node-marker"><span>06</span><i></i></div>
+          <div class="node-marker"><span>{{ String(snapshot.dimensions.length + 1).padStart(2, '0') }}</span><i></i></div>
           <div class="node-card">
             <header class="node-heading">
               <div><span>MATERIAL INBOX · 只收集，不擅自采用</span><h3>素材箱</h3></div>
@@ -127,7 +128,7 @@
         </section>
 
         <section id="persona-recommendation" class="persona-node recommendation-node" data-focus="recommendation">
-          <div class="node-marker"><span>07</span><i></i></div>
+          <div class="node-marker"><span>{{ String(snapshot.dimensions.length + 2).padStart(2, '0') }}</span><i></i></div>
           <div class="node-card">
             <header class="node-heading"><div><span>NEXT BEST ACTION · 不消耗 AI 配额</span><h3>下一步推荐</h3></div><el-tag type="success" effect="plain">基于已确认画像</el-tag></header>
             <p class="node-intro">先用可解释规则连接现有平台内容，不为推荐额外调用模型。画像越完整，入口越贴近你的当前目标。</p>
@@ -140,7 +141,7 @@
         </section>
 
         <section class="persona-node settings-node" data-focus="overview">
-          <div class="node-marker"><span>08</span></div>
+          <div class="node-marker"><span>{{ String(snapshot.dimensions.length + 3).padStart(2, '0') }}</span></div>
           <div class="node-card">
             <header class="node-heading"><div><span>ACCOUNT DISPLAY · 整体设置</span><h3>展示方式</h3></div></header>
             <div class="setting-row"><div><strong>在个人主页展示画像摘要</strong><span>只展示你已经确认的画像，不展示素材箱内容</span></div><el-switch v-model="snapshot.settings.showcaseEnabled" @change="saveSettings" /></div>
@@ -164,6 +165,7 @@ import { ArrowRight, Box, Check, Close, Delete, EditPen, Plus } from '@element-p
 import PersonaAccessoryBlueprintEditor from '../components/PersonaAccessoryBlueprintEditor.vue'
 import PersonaEquipmentTransformEditor from '../components/PersonaEquipmentTransformEditor.vue'
 import PersonaFaceEditor from '../components/PersonaFaceEditor.vue'
+import PersonaHandEditor from '../components/PersonaHandEditor.vue'
 import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
 import { usePersonaAppearance } from '../composables/usePersonaAppearance'
 import { usePersonaEquipment } from '../composables/usePersonaEquipment'
@@ -176,7 +178,7 @@ const { storyRail, activeFocus, compactMode, focusMeta, observeNodes, scrollToFo
 const workshop = usePersonaWorkshop({ afterLoad: observeNodes })
 const { store, snapshot, editVisible, editForm, drafts, materialDrafts, load, addEntry,
   openEdit, saveEdit, removeEntry, acceptMaterial, rejectMaterial } = workshop
-const { appearance, faceConfig, appearanceSaveState, setAppearance, updateFaceConfig,
+const { appearance, faceConfig, handConfig, appearanceSaveState, setAppearance, updateFaceConfig, updateHandConfig,
   scheduleAppearanceSave, saveSettings } = usePersonaAppearance(snapshot)
 const { equipmentFor, saveEquipment, setEquipmentVariant, updateEquipmentTransform,
   updateAccessoryBlueprint, saveAccessoryBlueprint } = usePersonaEquipment({ snapshot, reload: load })
@@ -187,13 +189,16 @@ const dimensionMeta = {
   SKILL: { kicker: 'PROVEN CRAFT', description: '你已经使用过的语言、工具和完成过的作品。尽量写可验证的事实。', example: '例如：用 Vue 做过两个网站，能独立部署到 Linux 服务器', placeholder: '语言、框架、工具、作品或真实经验' },
   RESOURCE: { kicker: 'AVAILABLE ENERGY', description: '能投入的时间、预算、设备和协作条件，用来避免生成不切实际的方案。', example: '例如：每周 6 小时、个人电脑、暂时没有团队、预算 200 元', placeholder: '时间、预算、设备、团队情况' },
   GROWTH: { kicker: 'CONFIRMED TRAIL', description: '你确认过的行动与里程碑。系统行为只能成为候选素材，不能自动写入这里。', example: '例如：完成第一次趋势分析，并按方案上线了一个项目', placeholder: '最近完成的行动、作品、比赛或开源贡献' },
+  LEFT_HAND: { kicker: 'HARD EXCLUSIONS · LEFT HAND', description: '明确告诉系统哪些项目不要推荐。这里是硬性排除条件，不会被兴趣关键词覆盖。', example: '例如：不要纯算法项目、不接受付费 API、不做超过两周或必须组队的项目', placeholder: '不想要的技术、难度、成本、周期或协作方式' },
+  RIGHT_HAND: { kicker: 'DESIRED OUTCOME · RIGHT HAND', description: '说明做完项目后希望得到什么，用于判断项目对你是否真正有价值。', example: '例如：得到一个可在线演示、能写进前端简历的完整作品', placeholder: '希望得到的作品、能力证明、比赛、开源或职业成果' },
 }
-const variantLabels = { CLASSIC: '经典', ORBIT: '环航', BEACON: '信标', SPARK: '火花', CONSTELLATION: '星座', ROUND: '圆框', WIDE: '宽屏', COMPACT: '轻量', TEAM: '协作', RINGS: '年轮', STEPS: '阶梯' }
+const variantLabels = { CLASSIC: '经典', ORBIT: '环航', BEACON: '信标', SPARK: '火花', CONSTELLATION: '星座', ROUND: '圆框', WIDE: '宽屏', COMPACT: '轻量', TEAM: '协作', RINGS: '年轮', STEPS: '阶梯', SWORD: '剑', KNIFE: '刀', SHIELD: '盾牌', BLASTER: '能量枪' }
 const eventLabels = { PROFILE_SKILLS: '账号资料', WORK_CREATED: '作品草稿', WORK_SUBMITTED: '作品投稿', WORK_APPROVED: '作品通过审核', AI_RESULT_COMPLETED: 'AI 工具记录' }
 const focusNavigation = [
   { code: 'goal', index: '01', short: '目标' }, { code: 'interest', index: '02', short: '兴趣' },
   { code: 'skill', index: '03', short: '技能' }, { code: 'resource', index: '04', short: '资源' },
-  { code: 'growth', index: '05', short: '成长' }, { code: 'recommendation', index: '07', short: '下一步' },
+  { code: 'growth', index: '05', short: '成长' }, { code: 'left_hand', index: '06', short: '左手' },
+  { code: 'right_hand', index: '07', short: '右手' }, { code: 'recommendation', index: '09', short: '下一步' },
 ]
 const unlockedCount = computed(() => snapshot.equipment.filter(item => item.unlocked).length)
 const bodyColorPresets = ['#F37021', '#FF9F1C', '#FF6B35', '#F43F5E', '#8B5CF6', '#0EA5E9']
@@ -209,6 +214,7 @@ onMounted(load)
 <style scoped>
 .persona-workshop{--atelier-ink:#24160f;--atelier-muted:#725f53;--atelier-line:#ead8c9;--atelier-paper:#fffdf9;max-width:1480px;margin:0 auto;color:var(--atelier-ink)}.workshop-header{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:32px;align-items:end;padding:22px 0 28px;border-bottom:1px solid var(--atelier-line)}.eyebrow{display:inline-flex;padding:7px 10px;border:1px solid #fdba74;border-radius:999px;background:#fff7ed;color:#9a3412;font:850 10px/1 var(--font-mono);letter-spacing:.08em}.workshop-header h2{margin:13px 0 8px;font:950 clamp(32px,5vw,54px)/1.02 var(--font-mono);letter-spacing:-.04em}.workshop-header p{max-width:760px;margin:0;color:var(--atelier-muted);font-size:14px;line-height:1.8}.completion-card{padding:17px 18px;border:1px solid var(--atelier-line);border-radius:14px;background:#fff;box-shadow:var(--shadow-card)}.completion-card>span,.completion-card>small{display:block;color:var(--atelier-muted);font-size:11px}.completion-card strong{display:block;margin:5px 0;color:#c2410c;font:900 34px/1 var(--font-mono)}.completion-card strong small{font-size:14px}.completion-card>div{height:6px;margin:10px 0 7px;overflow:hidden;border-radius:999px;background:#ffedd5}.completion-card i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#fb923c,#ea580c);transition:width .35s ease}.workshop-layout{display:grid;grid-template-columns:minmax(460px,1.05fr) minmax(480px,.95fr);gap:30px;margin-top:28px}.stage-column{position:relative}.stage-shell{position:sticky;top:82px;height:calc(100vh - 106px);min-height:680px;padding:12px;border:1px solid #f3d8c2;border-radius:30px;background:#fff;box-shadow:0 26px 70px rgba(124,45,18,.12)}.stage-topline{position:absolute;z-index:2;top:29px;left:30px;right:30px;display:flex;align-items:center;justify-content:space-between;color:#9a3412;font:800 10px/1 var(--font-mono);letter-spacing:.08em;pointer-events:none}.live-dot{display:flex;align-items:center;gap:6px;color:#166534}.live-dot::before{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 5px rgba(34,197,94,.12);content:''}.stage-caption{position:absolute;z-index:2;left:32px;right:32px;bottom:83px;display:flex;align-items:end;justify-content:space-between;gap:18px;padding:12px 14px;border:1px solid rgba(255,255,255,.85);border-radius:12px;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);pointer-events:none}.stage-caption div strong,.stage-caption div span{display:block}.stage-caption div strong{font:850 14px/1.3 var(--font-mono)}.stage-caption div span,.stage-caption>span{margin-top:4px;color:var(--atelier-muted);font-size:10px}.focus-nav{position:absolute;z-index:3;left:25px;right:25px;bottom:21px;display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.focus-nav button{display:flex;min-width:0;height:38px;align-items:center;justify-content:center;gap:5px;border:1px solid #f0dfd1;border-radius:8px;background:rgba(255,255,255,.88);color:var(--atelier-muted);font-size:10px;font-weight:800;cursor:pointer}.focus-nav button span{color:#d97706;font:800 9px/1 var(--font-mono)}.focus-nav button.active,.focus-nav button:hover,.focus-nav button:focus-visible{border-color:#f37021;background:#fff7ed;color:#9a3412;outline:2px solid rgba(243,112,33,.16)}.story-rail{position:relative;padding:0 0 30vh}.story-rail::before{position:absolute;top:0;bottom:0;left:25px;width:1px;background:linear-gradient(#fb923c,#e9d5ff 24%,#bae6fd 42%,#a7f3d0 62%,#fed7aa 82%,transparent);content:''}.persona-node{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);min-height:72vh;align-content:center;padding:46px 0}.node-marker{position:relative;z-index:2;display:flex;align-items:center;flex-direction:column}.node-marker span{display:grid;width:40px;height:40px;place-items:center;border:1px solid #fdba74;border-radius:50%;background:#fff;color:#c2410c;font:850 10px/1 var(--font-mono);box-shadow:0 0 0 7px #fffdf9}.node-marker i{width:1px;flex:1;background:transparent}.node-card{padding:24px;border:1px solid var(--atelier-line);border-radius:18px;background:rgba(255,255,255,.96);box-shadow:0 18px 50px rgba(72,40,20,.06)}.node-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.node-heading>div>span{color:#b45309;font:800 9px/1.2 var(--font-mono);letter-spacing:.09em}.node-heading h3{margin:8px 0 0;font:900 25px/1.12 var(--font-mono);letter-spacing:-.025em}.node-intro{margin:14px 0 18px;color:var(--atelier-muted);font-size:13px;line-height:1.75}.entry-list{display:grid;gap:8px}.entry-chip{display:flex;min-height:48px;align-items:center;justify-content:space-between;gap:12px;padding:10px 11px 10px 14px;border:1px solid #f0dfd1;border-radius:10px;background:#fffaf5}.entry-chip>span{font-size:13px;line-height:1.55}.entry-chip>div{display:flex;flex-shrink:0;gap:3px}.entry-chip button{display:grid;width:32px;height:32px;place-items:center;border:0;border-radius:7px;background:transparent;color:#9a8070;cursor:pointer}.entry-chip button:hover,.entry-chip button:focus-visible{background:#ffedd5;color:#c2410c;outline:2px solid rgba(243,112,33,.18)}.entry-chip svg{width:14px}.entry-empty{padding:14px;border:1px dashed #dfc9b8;border-radius:10px;color:#927c6c;background:#fffdf9;font-size:12px;line-height:1.6}.entry-compose{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:12px}.entry-compose :deep(.el-button svg){width:15px;margin-right:5px}.equipment-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;margin-top:18px;padding:15px;border:1px solid #fed7aa;border-radius:12px;background:linear-gradient(110deg,#fff7ed,#fff)}.equipment-panel.locked{border-style:dashed;filter:saturate(.7)}.equipment-copy{display:flex;align-items:center;gap:12px}.equipment-icon{display:grid;width:38px;height:38px;flex-shrink:0;place-items:center;border-radius:10px;background:#ffedd5;color:#c2410c}.equipment-icon svg{width:18px}.equipment-copy strong,.equipment-copy p{display:block;margin:0}.equipment-copy strong{font:850 13px/1.3 var(--font-mono)}.equipment-copy p{margin-top:4px;color:var(--atelier-muted);font-size:10px;line-height:1.45}.equipment-controls{display:flex;align-items:center;gap:7px}.equipment-controls :deep(.el-select){width:92px}.color-control{display:flex;height:32px;align-items:center;gap:5px;padding:0 7px;border:1px solid #dcdfe6;border-radius:5px;color:#766357;font-size:10px}.color-control input{width:22px;height:22px;padding:0;border:0;background:transparent;cursor:pointer}.unlock-hint{color:#a16207;font-size:11px;font-weight:750}.material-node{min-height:82vh}.material-list{display:grid;gap:11px}.material-card{padding:15px;border:1px solid #fde68a;border-radius:12px;background:#fffdf4}.material-evidence{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.material-evidence span{padding:4px 7px;border-radius:5px;background:#fef3c7;color:#92400e;font-size:10px;font-weight:800}.material-evidence small{overflow:hidden;color:#8a7668;text-overflow:ellipsis;white-space:nowrap}.material-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:10px}.material-actions :deep(svg){width:14px;margin-right:4px}.recommendation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.recommendation-grid button{position:relative;display:flex;min-height:190px;align-items:flex-start;flex-direction:column;padding:15px;border:1px solid #d1fae5;border-radius:12px;background:#fbfffd;color:var(--atelier-ink);text-align:left;cursor:pointer}.recommendation-grid button:hover,.recommendation-grid button:focus-visible{border-color:#10b981;box-shadow:0 12px 30px rgba(5,150,105,.1);outline:2px solid rgba(16,185,129,.15);transform:translateY(-2px)}.recommendation-grid button>span{color:#047857;font:800 9px/1 var(--font-mono)}.recommendation-grid button strong{margin-top:20px;font:850 15px/1.35 var(--font-mono)}.recommendation-grid button p{margin:8px 0;color:var(--atelier-muted);font-size:11px;line-height:1.6}.recommendation-grid button svg{width:17px;margin-top:auto;color:#047857}.settings-node{min-height:55vh}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid #f1e6dd}.setting-row:last-child{border-bottom:0}.setting-row strong,.setting-row span{display:block}.setting-row strong{font-size:13px}.setting-row span{margin-top:4px;color:var(--atelier-muted);font-size:11px}.mobile-preview{display:none}
 @media(max-width:1180px){.workshop-layout{grid-template-columns:minmax(400px,.9fr) minmax(440px,1.1fr)}.stage-shell{min-height:610px}.equipment-panel{grid-template-columns:1fr}.equipment-controls{justify-content:flex-start}.recommendation-grid{grid-template-columns:1fr}.recommendation-grid button{min-height:135px}}
+.focus-nav{grid-template-columns:repeat(8,1fr)}
 @media(max-width:900px){.workshop-header{grid-template-columns:1fr;padding-top:10px}.completion-card{display:none}.mobile-preview{display:flex;align-items:center;gap:15px;margin-top:18px;padding:14px;border:1px solid var(--atelier-line);border-radius:16px;background:#fff}.mobile-preview>div strong,.mobile-preview>div span{display:block}.mobile-preview>div strong{font:850 14px/1.3 var(--font-mono)}.mobile-preview>div span{margin-top:5px;color:var(--atelier-muted);font-size:11px}.workshop-layout{display:block;margin-top:0}.stage-column{display:none}.story-rail{padding-bottom:80px}.story-rail::before{left:19px}.persona-node{grid-template-columns:40px minmax(0,1fr);min-height:0;padding:24px 0}.node-marker span{width:34px;height:34px}.node-card{padding:18px}.entry-compose{grid-template-columns:1fr}.entry-compose :deep(.el-button){width:100%;margin:0}.equipment-controls{flex-wrap:wrap}.material-evidence{align-items:flex-start;flex-direction:column}.material-evidence small{white-space:normal}.setting-row{align-items:flex-start}}
 @media(max-width:560px){.workshop-header h2{font-size:34px}.node-heading{align-items:flex-start;flex-direction:column;gap:9px}.node-heading h3{font-size:21px}.equipment-controls{display:grid;grid-template-columns:1fr auto}.equipment-controls :deep(.el-select){width:100%}.equipment-controls :deep(.el-switch){grid-column:1/-1}.material-actions{display:grid;grid-template-columns:1fr 1fr}.material-actions :deep(.el-button){margin:0}.recommendation-grid button{min-height:140px}}
 @media(prefers-reduced-motion:reduce){.completion-card i,.recommendation-grid button{transition:none}.recommendation-grid button:hover{transform:none}}

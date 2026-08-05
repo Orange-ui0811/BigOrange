@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Comparator;
 
 @Component
 public class TrendContextBuilder {
@@ -68,7 +69,7 @@ public class TrendContextBuilder {
         appendCustom(profile, input.customLang());
         profile.append("\n- 时间投入: ").append(nvl(input.timeCommitment()));
         appendCustom(profile, input.customTime());
-        String confirmed = confirmedPersona(accountId);
+        String confirmed = Boolean.TRUE.equals(input.usePersona()) ? confirmedPersona(accountId) : "";
         if (!confirmed.isEmpty()) profile.append("\n\n").append(confirmed);
         return profile.append('\n').toString();
     }
@@ -97,18 +98,26 @@ public class TrendContextBuilder {
                             + " " + purposeContext(nvl(input.purpose())),
                     "编程经验：" + nvl(input.experience()) + " " + nvlEmpty(input.customExp()) + " 学习路径入门",
                     "时间投入：" + nvl(input.timeCommitment()) + " " + nvlEmpty(input.customTime()) + " 学习计划 时间管理");
-            Map<String, Document> seen = new LinkedHashMap<>();
+            Map<String, WeightedDocument> seen = new LinkedHashMap<>();
             for (String query : queries) try {
-                for (Document document : vectorStore.similaritySearch(SearchRequest.builder()
-                        .query(query).topK(2).similarityThreshold(.6).build())) {
+                List<Document> matches = vectorStore.similaritySearch(SearchRequest.builder()
+                        .query(query).topK(6).similarityThreshold(.55).build());
+                for (int rank = 0; rank < matches.size(); rank++) {
+                    Document document = matches.get(rank);
                     String body = document.getText();
-                    seen.putIfAbsent(body.substring(0, Math.min(50, body.length())), document);
+                    String key = String.valueOf(document.getMetadata().getOrDefault("docId", ""))
+                            + ':' + document.getMetadata().getOrDefault("chunkIndex",
+                            body.substring(0, Math.min(50, body.length())));
+                    double score = 1.0 / (rank + 1) + sourceBoost(document, input);
+                    seen.merge(key, new WeightedDocument(document, score),
+                            (left, right) -> new WeightedDocument(left.document(), left.score() + right.score()));
                 }
             } catch (Exception error) {
                 log.debug("[RAG] 单维度检索异常: {}", error.getMessage());
             }
-            List<Document> selected = new ArrayList<>(seen.values());
-            if (selected.size() > 3) selected = selected.subList(0, 3);
+            List<Document> selected = seen.values().stream()
+                    .sorted(Comparator.comparingDouble(WeightedDocument::score).reversed())
+                    .limit(4).map(WeightedDocument::document).toList();
             StringBuilder result = new StringBuilder();
             for (int index = 0; index < selected.size(); index++) {
                 Document document = selected.get(index);
@@ -122,6 +131,19 @@ public class TrendContextBuilder {
             log.warn("[RAG] 检索失败，跳过增强: {}", error.getMessage());
             return "";
         }
+    }
+
+    private double sourceBoost(Document document, TrendAnalysisInput input) {
+        String source = String.valueOf(document.getMetadata().getOrDefault("source", ""));
+        if ("BEGINNER_PROJECT".equals(source)) {
+            if (Boolean.TRUE.equals(input.preferBeginnerProjects())) return .85;
+            if (nvlEmpty(input.experience()).contains("新手") || nvlEmpty(input.purpose()).contains("学习")) return .25;
+        }
+        if ("CAREER_PROJECT".equals(source)) {
+            if (Boolean.TRUE.equals(input.preferCareerProjects())) return .85;
+            if (nvlEmpty(input.purpose()).contains("求职") || nvlEmpty(input.customPurpose()).contains("求职")) return .25;
+        }
+        return 0;
     }
 
     public String beginnerCases(List<BeginnerProjectView> cases) {
@@ -164,4 +186,6 @@ public class TrendContextBuilder {
         if (purpose.contains("探索")) return "技术趋势 新兴方向 兴趣探索";
         return "";
     }
+
+    private record WeightedDocument(Document document, double score) {}
 }

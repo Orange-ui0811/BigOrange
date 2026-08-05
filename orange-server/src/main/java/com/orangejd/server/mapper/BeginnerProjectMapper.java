@@ -70,4 +70,5 @@ public interface BeginnerProjectMapper {
     List<BeginnerProject> selectWeeklyPicks(@Param("weekStart") LocalDate weekStart);
     String selectWeeklyPickSource(@Param("weekStart") LocalDate weekStart);
     List<BeginnerProject> selectTopForWeekly(@Param("limit") int limit);
+    List<BeginnerProject> selectAllPublished();
 }

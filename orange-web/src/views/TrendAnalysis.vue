@@ -209,52 +209,23 @@
             </Transition>
           </div>
 
-          <!-- 分析增强设置 -->
-          <div v-if="currentStep === 3" class="rag-options-card">
-            <div class="rag-option-row">
-              <el-switch v-model="profile.useRag" active-color="#c55312" />
-              <div class="rag-option-copy">
-                <span class="rag-label">知识库增强</span>
-                <small>检索方法论文档和开源项目 README，补充学习路径与案例。</small>
-              </div>
-              <el-tooltip content="开启后会自动检索你上传的方法论文档和开源项目 README，让推荐结果包含更具体的学习路径、案例参考和面试建议" placement="top">
-                <el-icon class="help-icon"><QuestionFilled /></el-icon>
-              </el-tooltip>
-            </div>
-            <div class="rag-option-row">
-              <el-switch v-model="profile.preferBeginnerProjects" active-color="#0f766e" />
-              <div class="rag-option-copy">
-                <span class="rag-label">优先参考新手友好项目</span>
-                <small>匹配已核验真实仓库，不增加额外配额消耗。</small>
-              </div>
-              <el-tooltip content="趋势数据用于判断方向变化；新手项目只作为具体实践案例，不会替代趋势统计。" placement="top">
-                <el-icon class="help-icon"><QuestionFilled /></el-icon>
-              </el-tooltip>
-            </div>
-            <div class="rag-option-row">
-              <el-switch v-model="profile.preferCareerProjects" active-color="#2563eb" />
-              <div class="rag-option-copy">
-                <span class="rag-label">优先参考职业成长项目</span>
-                <small>用真实项目说明岗位能力与作品证明方式。</small>
-              </div>
-              <el-tooltip content="服务端只会从已核验职业项目库中选择真实仓库；项目案例不会替代趋势统计，也不会增加一次额外模型调用。" placement="top">
-                <el-icon class="help-icon"><QuestionFilled /></el-icon>
-              </el-tooltip>
-            </div>
-          </div>
-
           <!-- 底部按钮 -->
           <div class="nav-btn-row">
             <button v-if="currentStep > 0" class="nav-btn" @click="goStep(currentStep-1)">← 上一步</button>
             <div v-else />
             <button v-if="currentStep < 3" class="orange-btn" @click="goStep(currentStep+1)">下一步 →</button>
-            <button v-else class="orange-btn squeeze-btn" @click="startJuicing" :disabled="analyzing">
-              <span v-if="!analyzing">开始榨汁分析</span>
-              <span v-else class="squeezing">榨汁中...</span>
-            </button>
+            <div v-else />
           </div>
           <div v-if="v2Error" class="error-box">{{ v2Error }}</div>
         </div>
+        <TrendPersonaAnalysisCard
+          v-model:use-persona="profile.usePersona"
+          v-model:use-rag="profile.useRag"
+          v-model:prefer-beginner-projects="profile.preferBeginnerProjects"
+          v-model:prefer-career-projects="profile.preferCareerProjects"
+          :analyzing="analyzing"
+          @analyze="startJuicing"
+        />
       </div>
     </div>
 
@@ -409,12 +380,13 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { marked } from 'marked'
 import PageTour from '../components/PageTour.vue'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
+import TrendPersonaAnalysisCard from '../components/TrendPersonaAnalysisCard.vue'
 import request from '../api/request'
 import { LEGAL_CONTACT } from '../content/legal'
 import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
@@ -423,14 +395,20 @@ import { useTrendChart } from '../composables/useTrendChart'
 import { useTrendHistory } from '../composables/useTrendHistory'
 
 const router = useRouter()
+const route = useRoute()
 const trendTab = ref('v2')
 const currentStep = ref(0)
 const animDirection = ref('')
 const profile = reactive({
   topics: [], purpose: '', experience: '', languages: [], timeCommitment: '',
   customTopics: '', customPurpose: '', customExp: '', customLang: '', customTime: '',
-  useRag: true, preferBeginnerProjects: false, preferCareerProjects: false,
+  usePersona: false, useRag: true, preferBeginnerProjects: false, preferCareerProjects: false,
 })
+const leaderboardAutoAnalyze = route.query.autoAnalyze === '1'
+if (route.query.persona === '1') profile.usePersona = true
+if (route.query.rag === '1') profile.useRag = true
+if (route.query.preset === 'beginner') profile.preferBeginnerProjects = true
+if (route.query.preset === 'career') profile.preferCareerProjects = true
 let refreshHistory
 const analysis = useTrendAnalysis(profile, () => refreshHistory?.())
 const { analyzing, v2Result, v2Error, juicing, squeezeText, trendV1Cost, trendV2Cost,
@@ -464,6 +442,15 @@ const goStep = step => {
 const startJuicing = () => analysis.startJuicing(currentStep)
 const handleExperienceChange = value => { profile.preferBeginnerProjects = String(value || '').includes('新手') }
 const handlePurposeChange = value => { if (String(value || '').includes('求职')) profile.preferCareerProjects = true }
+
+watch(() => profile.preferBeginnerProjects, enabled => { if (enabled) profile.useRag = true })
+watch(() => profile.preferCareerProjects, enabled => { if (enabled) profile.useRag = true })
+watch(() => profile.useRag, enabled => {
+  if (!enabled) {
+    profile.preferBeginnerProjects = false
+    profile.preferCareerProjects = false
+  }
+})
 
 const formSteps = [
   { icon: '🎯', label: '方向' }, { icon: '💡', label: '目的' },
@@ -527,7 +514,16 @@ const loadJobDetail = async () => {
   } catch {}
 }
 
-onMounted(() => { loadGraph(); loadHistoryFromDB(); loadDirections(); analysis.loadPricing() })
+onMounted(async () => {
+  loadGraph(); loadHistoryFromDB(); loadDirections(); analysis.loadPricing()
+  if (leaderboardAutoAnalyze) {
+    const query = { ...route.query }
+    delete query.autoAnalyze
+    await router.replace({ path: route.path, query })
+    await nextTick()
+    await startJuicing()
+  }
+})
 onUnmounted(analysis.dispose)
 </script>
 

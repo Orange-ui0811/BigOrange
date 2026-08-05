@@ -19,7 +19,7 @@ public interface PersonaWorkshopMapper {
                    create_time AS createTime, update_time AS updateTime
             FROM persona_profile_entry
             WHERE account_id = #{accountId} AND status = 'ACTIVE'
-            ORDER BY FIELD(dimension_code, 'GOAL','INTEREST','SKILL','RESOURCE','GROWTH'),
+            ORDER BY FIELD(dimension_code, 'GOAL','INTEREST','SKILL','RESOURCE','GROWTH','LEFT_HAND','RIGHT_HAND'),
                      position_no, id
             """)
     List<Map<String, Object>> selectEntries(Long accountId);
@@ -143,7 +143,7 @@ public interface PersonaWorkshopMapper {
                 (account_id, slot_code, item_code, variant_code, color_hex, equipped,
                  transform_json, blueprint_json, blueprint_version)
             VALUES
-                (#{accountId}, #{slotCode}, #{itemCode}, 'CLASSIC', #{colorHex}, 0,
+                (#{accountId}, #{slotCode}, #{itemCode}, #{variantCode}, #{colorHex}, 0,
                  NULL, #{blueprintJson}, 1)
             ON DUPLICATE KEY UPDATE
                 blueprint_json = VALUES(blueprint_json),
@@ -156,7 +156,7 @@ public interface PersonaWorkshopMapper {
             SELECT showcase_enabled AS showcaseEnabled, avatar_enabled AS avatarEnabled,
                    body_color AS bodyColor, face_style AS faceStyle,
                    leaf_style AS leafStyle, surface_style AS surfaceStyle,
-                   face_config AS faceConfig,
+                   face_config AS faceConfig, hand_config AS handConfig,
                    update_time AS updateTime
             FROM persona_workshop_setting
             WHERE account_id = #{accountId}
@@ -165,15 +165,15 @@ public interface PersonaWorkshopMapper {
 
     @Insert("""
             INSERT INTO persona_workshop_setting
-                (account_id, showcase_enabled, avatar_enabled, body_color, face_style, leaf_style, surface_style, face_config)
+                (account_id, showcase_enabled, avatar_enabled, body_color, face_style, leaf_style, surface_style, face_config, hand_config)
             VALUES
-                (#{accountId}, #{showcaseEnabled}, #{avatarEnabled}, #{bodyColor}, #{faceStyle}, #{leafStyle}, #{surfaceStyle}, #{faceConfigJson})
+                (#{accountId}, #{showcaseEnabled}, #{avatarEnabled}, #{bodyColor}, #{faceStyle}, #{leafStyle}, #{surfaceStyle}, #{faceConfigJson}, #{handConfigJson})
             ON DUPLICATE KEY UPDATE
                 showcase_enabled = VALUES(showcase_enabled),
                 avatar_enabled = VALUES(avatar_enabled),
                 body_color = VALUES(body_color), face_style = VALUES(face_style),
                 leaf_style = VALUES(leaf_style), surface_style = VALUES(surface_style),
-                face_config = VALUES(face_config),
+                face_config = VALUES(face_config), hand_config = VALUES(hand_config),
                 update_time = NOW(3)
             """)
     int upsertSettings(Map<String, Object> settings);

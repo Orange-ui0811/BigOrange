@@ -35,7 +35,13 @@ public final class PersonaVisualLanguage {
                     List.of("CLASSIC", "COMPACT", "TEAM")),
             new EquipmentDefinition("GROWTH_TRAIL", PersonaDimension.GROWTH, "MILESTONE_TRAIL", "成长足迹",
                     "位于脚下，表达已经发生且由用户确认的行动积累", "growth", "#F97316",
-                    List.of("CLASSIC", "RINGS", "STEPS"))
+                    List.of("CLASSIC", "RINGS", "STEPS")),
+            new EquipmentDefinition("LEFT_HAND_WEAPON", PersonaDimension.LEFT_HAND, "LEFT_WEAPON", "左手武器",
+                    "握在左手，提醒系统避开不接受的难度、技术、成本与项目方式", "left_hand", "#64748B",
+                    List.of("SWORD", "KNIFE", "SHIELD", "BLASTER")),
+            new EquipmentDefinition("RIGHT_HAND_WEAPON", PersonaDimension.RIGHT_HAND, "RIGHT_WEAPON", "右手武器",
+                    "握在右手，表达希望项目最终带来的作品、能力或职业成果", "right_hand", "#64748B",
+                    List.of("SWORD", "KNIFE", "SHIELD", "BLASTER"))
     );
 
     private static final Map<String, EquipmentDefinition> BY_SLOT = CATALOG.stream()

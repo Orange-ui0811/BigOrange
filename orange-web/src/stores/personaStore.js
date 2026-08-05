@@ -4,7 +4,7 @@ import { getPersonaWorkshop } from '../api/personaWorkshop'
 
 const defaultSettings = () => ({
   showcaseEnabled: false, avatarEnabled: false, bodyColor: '#F37021',
-  faceStyle: 'FRIENDLY', leafStyle: 'CLASSIC', surfaceStyle: 'NATURAL', faceConfig: {},
+  faceStyle: 'FRIENDLY', leafStyle: 'CLASSIC', surfaceStyle: 'NATURAL', faceConfig: {}, handConfig: {},
 })
 
 export const usePersonaStore = defineStore('persona', () => {

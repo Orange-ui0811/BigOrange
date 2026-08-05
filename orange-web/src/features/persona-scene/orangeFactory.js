@@ -30,6 +30,24 @@ export const createOrange = (appearance = {}) => {
   body.name = 'original-orange-body'
   group.add(body)
 
+  const hands = {
+    leftSize: 1, leftX: -1.72, leftY: -.12, leftZ: .18,
+    rightSize: 1, rightX: 1.72, rightY: -.12, rightZ: .18,
+    ...(appearance.handConfig || {}),
+  }
+  const handMaterial = material(appearance.bodyColor || '#f37021', {
+    roughness: surfaceStyle === 'GLOSSY' ? .2 : .68, metalness: surfaceStyle === 'GLOSSY' ? .1 : .02,
+  })
+  const createHand = side => {
+    const size = hands[`${side}Size`]
+    const hand = mesh(new THREE.SphereGeometry(.25, 32, 24), handMaterial,
+      [hands[`${side}X`], hands[`${side}Y`], hands[`${side}Z`]])
+    hand.scale.setScalar(size)
+    hand.name = `${side}-orange-hand`
+    return hand
+  }
+  group.add(createHand('left'), createHand('right'))
+
   const dimple = mesh(new THREE.TorusGeometry(.28, .035, 12, 48), material(0xc94b0b), [0, 1.37 * face.bodyHeight, 0])
   dimple.rotation.x = Math.PI / 2
   group.add(dimple)

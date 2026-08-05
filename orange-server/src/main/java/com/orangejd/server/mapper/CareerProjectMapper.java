@@ -51,4 +51,5 @@ public interface CareerProjectMapper {
     List<CareerProjectProfile> selectWeeklyPicks(@Param("weekStart") LocalDate weekStart);
     String selectWeeklyPickSource(@Param("weekStart") LocalDate weekStart);
     List<CareerProjectProfile> selectTopForWeekly(@Param("limit") int limit);
+    List<CareerProjectProfile> selectAllPublished();
 }

@@ -40,6 +40,7 @@ export const useTrendHistory = ({ profile, result, currentStep }) => {
     profile.topics = Array.isArray(item.topics) ? item.topics : []
     profile.languages = Array.isArray(item.languages) ? item.languages : []
     profile.useRag = item.useRag !== false
+    profile.usePersona = item.usePersona === true
     profile.preferBeginnerProjects = item.preferBeginnerProjects === true
     profile.preferCareerProjects = item.preferCareerProjects === true
     currentStep.value = 3
