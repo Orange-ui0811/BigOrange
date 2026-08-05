@@ -1,10 +1,11 @@
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { pinia } from './index'
+import { transactionUiEnabled, useTradeModeStore } from './tradeModeStore'
 
-const transactionUiConfigured = String(import.meta.env.VITE_TRANSACTION_UI_ENABLED || 'false').toLowerCase() === 'true'
+const store = useTradeModeStore(pinia)
 
-export const transactionUiEnabled = transactionUiConfigured
-export const tradeEnabled = ref(false)
-
-export const applyTradeMode = (serverEnabled) => {
-  tradeEnabled.value = transactionUiEnabled && Boolean(serverEnabled)
-}
+export { transactionUiEnabled }
+export const { tradeEnabled } = storeToRefs(store)
+export const applyTradeMode = store.applyServerEnabled
+export const loadTradeMode = store.load
+export const resetTradeMode = store.reset

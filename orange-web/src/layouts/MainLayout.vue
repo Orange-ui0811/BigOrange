@@ -184,9 +184,8 @@ import GuideBubble from '../components/GuideBubble.vue'
 import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
 import request from '../api/request'
 import { getPersonaAvatar } from '../api/personaWorkshop'
-import { unreadCount, avatarUrl, nickname } from '../stores/unread'
-import { applyTradeMode } from '../stores/tradeMode'
-
+import { unreadCount, avatarUrl, nickname, loadUnreadCount, resetNotificationState } from '../stores/unread'
+import { loadTradeMode, resetTradeMode } from '../stores/tradeMode'
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const route = useRoute()
 const router = useRouter()
@@ -206,6 +205,7 @@ const logout = async () => {
   try { await request.get('/app/auth/logout') } catch {}
   finally {
     sessionStorage.removeItem('appToken')
+    resetNotificationState(); resetTradeMode()
     await router.replace('/login')
   }
 }
@@ -224,14 +224,14 @@ const activeMenu = computed(() => {
 })
 
 onMounted(async () => {
-  try { const res = await request.get('/app/notification/unread-count'); if (res.code === 1) unreadCount.value = res.data } catch {}
+  try { await loadUnreadCount() } catch {}
   try { const res = await request.get('/app/profile/me'); if (res.code === 1) { me.value = res.data; nickname.value = res.data.nickname || ''; avatarUrl.value = res.data.avatarUrl || '' } } catch {}
   try { const res = await getPersonaAvatar(); if (res.code === 1 && res.data) personaAvatar.value = res.data } catch {}
   try {
     const res = await request.get('/app/conversation/list?page=1&size=50')
     if (res.code === 1 && res.data?.records) chatUnread.value = res.data.records.reduce((s, c) => s + (c.unreadCount || 0), 0)
   } catch {}
-  try { const r = await request.get('/app/config/trade-mode'); if (r.code === 1) applyTradeMode(r.data.enabled) } catch {}
+  try { await loadTradeMode() } catch {}
 })
 </script>
 
