@@ -30,28 +30,22 @@ import java.util.Locale;
 
 @Slf4j
 @Service
+@lombok.RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private static final String CURRENT_LEGAL_VERSION = "2026-07-19";
 
-    @Autowired
-    private AccountMapper accountMapper;
+    private final AccountMapper accountMapper;
 
-    @Autowired
-    private UserProfileMapper userProfileMapper;
+    private final UserProfileMapper userProfileMapper;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JwtProperties jwtProperties;
+    private final JwtProperties jwtProperties;
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
-    @Autowired
-    private QuotaService quotaService;
-    @Autowired
-    private EmailVerificationCodeService verificationCodeService;
+    private final QuotaService quotaService;
+    private final EmailVerificationCodeService verificationCodeService;
 
     @Override
     public LoginVO adminLogin(LoginDTO loginDTO) {

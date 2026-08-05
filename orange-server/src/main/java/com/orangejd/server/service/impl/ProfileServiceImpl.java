@@ -20,12 +20,13 @@ import java.util.stream.Collectors;
 import java.util.Objects;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class ProfileServiceImpl implements com.orangejd.server.service.ProfileService {
 
-    @Autowired private AccountMapper accountMapper;
-    @Autowired private UserProfileMapper userProfileMapper;
-    @Autowired private WorkMapper workMapper;
-    @Autowired private ManagedFileStorageService managedFileStorageService;
+    private final AccountMapper accountMapper;
+    private final UserProfileMapper userProfileMapper;
+    private final WorkMapper workMapper;
+    private final ManagedFileStorageService managedFileStorageService;
 
     @Transactional
     public void updateProfile(Map<String, String> body) {

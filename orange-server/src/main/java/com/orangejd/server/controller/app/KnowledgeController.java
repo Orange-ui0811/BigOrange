@@ -10,10 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/app/knowledge/document")
+@lombok.RequiredArgsConstructor
 public class KnowledgeController {
 
-    @Autowired
-    private DocumentService documentService;
+    private final DocumentService documentService;
 
     @GetMapping("/list")
     public Result<List<KnowledgeDocumentVO>> list() {

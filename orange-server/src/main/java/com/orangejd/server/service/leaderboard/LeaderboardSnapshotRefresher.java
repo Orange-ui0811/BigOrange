@@ -1,4 +1,4 @@
-package com.orangejd.server.task;
+package com.orangejd.server.service.leaderboard;
 import com.fasterxml.jackson.databind.ObjectMapper; import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.foundation.external.GithubApiClient; import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
 import org.slf4j.*; import org.springframework.stereotype.Component; import java.time.*; import java.time.format.*; import java.time.temporal.*; import java.util.*;
@@ -165,4 +165,3 @@ private String toJson(Map<String, Object> data) {
         }
     }
 }
-

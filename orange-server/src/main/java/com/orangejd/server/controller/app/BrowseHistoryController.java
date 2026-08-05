@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/history")
+@lombok.RequiredArgsConstructor
 public class BrowseHistoryController {
 
-    @Autowired private BrowseHistoryService browseHistoryService;
+    private final BrowseHistoryService browseHistoryService;
 
     @PostMapping
     public Result<?> record(@RequestParam String targetType, @RequestParam Long targetId) {

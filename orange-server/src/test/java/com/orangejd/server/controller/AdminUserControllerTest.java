@@ -5,6 +5,7 @@ import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.Account;
 import com.orangejd.server.controller.admin.AdminUserController;
 import com.orangejd.server.mapper.AccountMapper;
+import com.orangejd.server.service.AdminUserAccessService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -49,9 +50,7 @@ class AdminUserControllerTest {
     }
 
     private AdminUserController controller(AccountMapper mapper) {
-        AdminUserController controller = new AdminUserController();
-        ReflectionTestUtils.setField(controller, "accountMapper", mapper);
-        return controller;
+        return new AdminUserController(new AdminUserAccessService(mapper));
     }
 
     private Account account(String role, String status) {

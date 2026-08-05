@@ -15,11 +15,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
+@lombok.RequiredArgsConstructor
 public class JwtTokenAdminInterceptor implements HandlerInterceptor {
 
-    @Autowired private JwtProperties jwtProperties;
-    @Autowired private TokenBlacklistService blacklistService;
-    @Autowired private AccountMapper accountMapper;
+    private final JwtProperties jwtProperties;
+    private final TokenBlacklistService blacklistService;
+    private final AccountMapper accountMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

@@ -30,8 +30,7 @@ public class AuditServiceImpl implements AuditService {
     private final QuotaServiceImpl quotaService;
     private final PricingService pricingService;
 
-    @Autowired(required = false)
-    private com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector;
+    private final com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector;
 
     public AuditServiceImpl(WorkMapper workMapper,
                             RequirementMapper requirementMapper,
@@ -39,12 +38,25 @@ public class AuditServiceImpl implements AuditService {
                             NotificationService notificationService,
                             QuotaServiceImpl quotaService,
                             PricingService pricingService) {
+        this(workMapper, requirementMapper, auditRecordMapper, notificationService,
+                quotaService, pricingService, null);
+    }
+
+    @Autowired
+    public AuditServiceImpl(WorkMapper workMapper,
+                            RequirementMapper requirementMapper,
+                            AuditRecordMapper auditRecordMapper,
+                            NotificationService notificationService,
+                            QuotaServiceImpl quotaService,
+                            PricingService pricingService,
+                            @org.springframework.lang.Nullable com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector) {
         this.workMapper = workMapper;
         this.requirementMapper = requirementMapper;
         this.auditRecordMapper = auditRecordMapper;
         this.notificationService = notificationService;
         this.quotaService = quotaService;
         this.pricingService = pricingService;
+        this.personaMaterialCollector = personaMaterialCollector;
     }
 
     @Override

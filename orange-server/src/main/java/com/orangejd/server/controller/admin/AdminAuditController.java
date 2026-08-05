@@ -18,12 +18,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/audit")
+@lombok.RequiredArgsConstructor
 public class AdminAuditController {
 
-    @Autowired private AuditService auditService;
-    @Autowired private WorkService workService;
-    @Autowired private RequirementService requirementService;
-    @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
+    private final AuditService auditService;
+    private final WorkService workService;
+    private final RequirementService requirementService;
+    private final @org.springframework.lang.Nullable com.orangejd.server.service.AiAuditService aiAuditService;
 
     // ---- AI 托管 ----
 

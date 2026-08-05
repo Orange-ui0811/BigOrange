@@ -13,13 +13,13 @@ import java.util.HexFormat;
 
 /** Atomic fixed-window limiter shared by all application instances. */
 @Service
+@lombok.RequiredArgsConstructor
 public class RateLimitService {
     private static final DefaultRedisScript<Long> INCREMENT_WITH_EXPIRY = new DefaultRedisScript<>(
             "local n=redis.call('INCR',KEYS[1]); if n==1 then redis.call('EXPIRE',KEYS[1],ARGV[1]); end; return n",
             Long.class);
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
     public boolean allow(String key, int limit, int windowSeconds) {
         if (redisTemplate == null) return true;

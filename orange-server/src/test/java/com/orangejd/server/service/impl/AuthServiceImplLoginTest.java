@@ -29,14 +29,14 @@ class AuthServiceImplLoginTest {
 
     @BeforeEach
     void setUp() {
-        authService = new AuthServiceImpl();
-        ReflectionTestUtils.setField(authService, "accountMapper", accountMapper);
-        ReflectionTestUtils.setField(authService, "passwordEncoder", passwordEncoder);
-
         JwtProperties jwtProperties = new JwtProperties();
         jwtProperties.setAppSecretKey("app-login-test-secret-key-at-least-32-characters");
         jwtProperties.setAppTtl(3_600_000L);
-        ReflectionTestUtils.setField(authService, "jwtProperties", jwtProperties);
+        authService = new AuthServiceImpl(accountMapper,
+                org.mockito.Mockito.mock(com.orangejd.server.mapper.UserProfileMapper.class),
+                passwordEncoder, jwtProperties, null,
+                org.mockito.Mockito.mock(com.orangejd.server.service.QuotaService.class),
+                org.mockito.Mockito.mock(com.orangejd.server.service.EmailVerificationCodeService.class));
     }
 
     @Test

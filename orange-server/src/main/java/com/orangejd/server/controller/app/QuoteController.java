@@ -11,9 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/app/quote")
+@lombok.RequiredArgsConstructor
 public class QuoteController {
 
-    @Autowired private QuoteService quoteService;
+    private final QuoteService quoteService;
 
     @PostMapping
     public Result<Quote> create(@RequestBody QuoteCreateDTO dto) {

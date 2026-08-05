@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
+@lombok.RequiredArgsConstructor
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Value("${orange.upload.path}")
@@ -30,17 +31,13 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Value("${orange.security.allowed-origins:http://localhost:5173,http://localhost:5174,http://localhost:15173,http://localhost:15174}")
     private String allowedOrigins;
 
-    @Autowired
-    private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
+    private final JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
 
-    @Autowired
-    private JwtTokenAppInterceptor jwtTokenAppInterceptor;
+    private final JwtTokenAppInterceptor jwtTokenAppInterceptor;
 
-    @Autowired
-    private AgentDeviceInterceptor agentDeviceInterceptor;
+    private final AgentDeviceInterceptor agentDeviceInterceptor;
 
-    @Autowired
-    private RateLimitInterceptor rateLimitInterceptor;
+    private final RateLimitInterceptor rateLimitInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

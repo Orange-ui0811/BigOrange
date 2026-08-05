@@ -31,9 +31,14 @@ class AiAuditServiceTest {
         when(configService.current(AiRuntimeConfigService.AUDIT)).thenReturn(config);
         when(aiClient.call(eq(config), any(Map.class), eq("content-audit"))).thenReturn("OK");
 
-        AiAuditService service = new AiAuditService();
-        ReflectionTestUtils.setField(service, "aiConfigService", configService);
-        ReflectionTestUtils.setField(service, "externalAiClient", aiClient);
+        AiAuditService service = new AiAuditService(
+                mock(com.orangejd.server.mapper.WorkMapper.class),
+                mock(com.orangejd.server.mapper.RequirementMapper.class),
+                mock(com.orangejd.server.mapper.CategoryMapper.class),
+                mock(com.orangejd.server.mapper.AccountMapper.class),
+                mock(com.orangejd.server.service.impl.AuditServiceImpl.class),
+                null, null, configService, aiClient, Runnable::run,
+                mock(org.springframework.scheduling.TaskScheduler.class));
         ReflectionTestUtils.setField(service, "model", "reasoning-model");
 
         assertEquals("OK", service.testConnection());

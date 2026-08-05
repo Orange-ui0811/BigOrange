@@ -39,8 +39,7 @@ class ArchitectureGovernanceTest {
     @Test
     void governedPackagesUseConstructorInjection() {
         fields()
-                .that().areDeclaredInClassesThat()
-                .resideInAnyPackage("..foundation..", "..contribution..", "..security..")
+                .that().areDeclaredInClassesThat().resideInAPackage("com.orangejd.server..")
                 .should().notBeAnnotatedWith(org.springframework.beans.factory.annotation.Autowired.class)
                 .check(classes);
     }
@@ -53,7 +52,7 @@ class ArchitectureGovernanceTest {
                 .map(JavaClass::getName)
                 .collect(Collectors.toCollection(HashSet::new));
 
-        assertNoNewDebt("field-injection", actual);
+        assertTrue(actual.isEmpty(), () -> "Field injection must be zero: " + actual);
     }
 
     @Test
@@ -65,7 +64,7 @@ class ArchitectureGovernanceTest {
                 .map(JavaClass::getName)
                 .collect(Collectors.toCollection(HashSet::new));
 
-        assertNoNewDebt("controller-mapper", actual);
+        assertTrue(actual.isEmpty(), () -> "Controller to Mapper dependencies must be zero: " + actual);
     }
 
     @Test
@@ -73,6 +72,11 @@ class ArchitectureGovernanceTest {
         noClasses()
                 .that().resideInAPackage("..service..")
                 .should().dependOnClassesThat().resideInAPackage("..controller..")
+                .check(classes);
+        noClasses()
+                .that().resideInAPackage("..task..")
+                .should().dependOnClassesThat()
+                .resideInAnyPackage("..controller..", "..mapper..")
                 .check(classes);
         noClasses()
                 .that().resideInAPackage("..mapper..")

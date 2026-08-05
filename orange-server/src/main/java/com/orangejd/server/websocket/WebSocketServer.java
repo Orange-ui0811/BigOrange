@@ -1,8 +1,6 @@
 package com.orangejd.server.websocket;
 
 import com.orangejd.server.service.WebSocketTicketService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
@@ -11,14 +9,12 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component
 @ServerEndpoint("/ws/{userId}")
 public class WebSocketServer {
     private static final Map<String, Session> SESSIONS = new ConcurrentHashMap<>();
     private static WebSocketTicketService ticketService;
 
-    @Autowired
-    public void setTicketService(WebSocketTicketService service) { ticketService = service; }
+    static void installTicketService(WebSocketTicketService service) { ticketService = service; }
 
     @OnOpen
     public void onOpen(Session session, @PathParam("userId") String userId) {

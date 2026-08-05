@@ -4,8 +4,7 @@ import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.JobPosting;
 import com.orangejd.server.contribution.application.JobAiAuditOrchestrator;
-import com.orangejd.server.mapper.JobPostingMapper;
-import com.orangejd.server.mapper.PlanHistoryMapper;
+import com.orangejd.server.service.JobPostingAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +13,12 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/app/job")
+@lombok.RequiredArgsConstructor
 public class JobController {
 
-    @Autowired private JobPostingMapper mapper;
-    @Autowired private com.orangejd.server.service.JobMatchService jobMatchService;
-    @Autowired private JobAiAuditOrchestrator jobAiAuditOrchestrator;
-    @Autowired private PlanHistoryMapper planHistoryMapper;
+    private final JobPostingAccessService mapper;
+    private final com.orangejd.server.service.JobMatchService jobMatchService;
+    private final JobAiAuditOrchestrator jobAiAuditOrchestrator;
 
     @PostMapping("/match")
     public Result<?> match(@RequestBody Map<String, Object> body) {
@@ -31,7 +30,7 @@ public class JobController {
             Long accountId = BaseContext.getCurrentId();
             if (historyId != null && accountId != null && accountId > 0) {
                 String phase6 = formatMatches(result.get("matches"));
-                if (!phase6.isBlank() && planHistoryMapper.updatePhase6Owned(historyId, accountId, phase6) > 0) {
+                if (!phase6.isBlank() && mapper.updatePhase6Owned(historyId, accountId, phase6) > 0) {
                     result.put("historyId", historyId);
                 }
             }

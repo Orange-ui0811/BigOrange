@@ -27,8 +27,10 @@ class LeaderboardServiceImplTest {
     @BeforeEach
     void setUp() {
         snapshotMapper = mock(LeaderboardSnapshotMapper.class);
-        service = new LeaderboardServiceImpl();
-        ReflectionTestUtils.setField(service, "snapshotMapper", snapshotMapper);
+        service = new LeaderboardServiceImpl(
+                mock(com.orangejd.server.mapper.WorkMapper.class),
+                mock(com.orangejd.server.mapper.AccountMapper.class),
+                mock(com.orangejd.server.mapper.CategoryMapper.class), snapshotMapper, null);
     }
 
     @Test

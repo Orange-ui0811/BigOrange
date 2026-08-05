@@ -29,9 +29,9 @@ public class JobMatchService {
 
     private static final Logger log = LoggerFactory.getLogger(JobMatchService.class);
 
-    @Autowired(required = false) private VectorStore vectorStore;
-    @Autowired private QuotaServiceImpl quotaService;
-    @Autowired private PricingService pricingService;
+    private final VectorStore vectorStore;
+    private final QuotaServiceImpl quotaService;
+    private final PricingService pricingService;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String endpoint;
@@ -42,17 +42,35 @@ public class JobMatchService {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
-    @Autowired(required = false) private AiRuntimeConfigService aiConfigService;
-    @Autowired(required = false) private AiToolRouter aiToolRouter;
+    private final AiRuntimeConfigService aiConfigService;
+    private final AiToolRouter aiToolRouter;
 
     @Autowired
-    public JobMatchService(ObjectMapper objectMapper) {
-        this(objectMapper, createRestTemplate());
+    public JobMatchService(ObjectMapper objectMapper,
+                           @org.springframework.lang.Nullable VectorStore vectorStore,
+                           QuotaServiceImpl quotaService,
+                           PricingService pricingService,
+                           @org.springframework.lang.Nullable AiRuntimeConfigService aiConfigService,
+                           @org.springframework.lang.Nullable AiToolRouter aiToolRouter) {
+        this(objectMapper, createRestTemplate(), vectorStore, quotaService, pricingService,
+                aiConfigService, aiToolRouter);
     }
 
     JobMatchService(ObjectMapper objectMapper, RestTemplate restTemplate) {
+        this(objectMapper, restTemplate, null, null, null, null, null);
+    }
+
+    private JobMatchService(ObjectMapper objectMapper, RestTemplate restTemplate,
+                            VectorStore vectorStore, QuotaServiceImpl quotaService,
+                            PricingService pricingService, AiRuntimeConfigService aiConfigService,
+                            AiToolRouter aiToolRouter) {
         this.objectMapper = objectMapper;
         this.restTemplate = restTemplate;
+        this.vectorStore = vectorStore;
+        this.quotaService = quotaService;
+        this.pricingService = pricingService;
+        this.aiConfigService = aiConfigService;
+        this.aiToolRouter = aiToolRouter;
     }
 
     public Map<String, Object> match(String planContent) {

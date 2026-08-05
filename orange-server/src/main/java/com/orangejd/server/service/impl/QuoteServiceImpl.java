@@ -19,11 +19,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class QuoteServiceImpl implements QuoteService {
 
-    @Autowired private QuoteMapper quoteMapper;
-    @Autowired private ConversationMapper conversationMapper;
-    @Autowired private NotificationService notificationService;
+    private final QuoteMapper quoteMapper;
+    private final ConversationMapper conversationMapper;
+    private final NotificationService notificationService;
 
     @Override
     public Quote create(QuoteCreateDTO dto) {

@@ -11,7 +11,14 @@ class WorkVideoPathValidationTest {
 
     @Test
     void acceptsOnlyUploadedVideoPath() {
-        WorkServiceImpl service = new WorkServiceImpl();
+        WorkServiceImpl service = new WorkServiceImpl(
+                org.mockito.Mockito.mock(com.orangejd.server.mapper.WorkMapper.class),
+                org.mockito.Mockito.mock(com.orangejd.server.mapper.WorkSaleOptionMapper.class),
+                null,
+                org.mockito.Mockito.mock(ManagedFileStorageService.class),
+                null,
+                org.mockito.Mockito.mock(com.orangejd.server.mapper.AuditRecordMapper.class),
+                org.mockito.Mockito.mock(com.orangejd.server.service.NotificationService.class));
         String path = "/uploads/video/123e4567-e89b-12d3-a456-426614174000.mp4";
         String ossPath = "/api/media/video/123e4567-e89b-12d3-a456-426614174000.mp4";
         String ownedOssPath = "/api/media/video/42/123e4567-e89b-12d3-a456-426614174000.mp4";

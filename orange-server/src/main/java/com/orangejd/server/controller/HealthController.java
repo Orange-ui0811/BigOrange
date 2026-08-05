@@ -12,16 +12,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
+@lombok.RequiredArgsConstructor
 public class HealthController {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
-    @Autowired(required = false)
-    private org.springframework.ai.vectorstore.VectorStore vectorStore;
+    private final @org.springframework.lang.Nullable org.springframework.ai.vectorstore.VectorStore vectorStore;
 
     @GetMapping("/health")
     public Map<String, Object> health() {

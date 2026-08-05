@@ -14,12 +14,12 @@ import java.util.concurrent.TimeUnit;
  * JWT 黑名单：退出登录后将 token 加入 Redis，TTL 后自动过期
  */
 @Service
+@lombok.RequiredArgsConstructor
 public class TokenBlacklistService {
 
     private static final String PREFIX = "blacklist:token:";
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
     public void blacklist(String token, long ttlMillis) {
         if (redisTemplate == null) return;

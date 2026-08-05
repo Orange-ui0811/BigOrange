@@ -17,10 +17,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class ConversationServiceImpl implements ConversationService {
 
-    @Autowired private ConversationMapper conversationMapper;
-    @Autowired private ContentAccessService contentAccessService;
+    private final ConversationMapper conversationMapper;
+    private final ContentAccessService contentAccessService;
 
     @Override
     public ConversationVO create(ConversationCreateDTO dto) {

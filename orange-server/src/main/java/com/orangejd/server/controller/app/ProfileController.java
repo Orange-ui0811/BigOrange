@@ -16,9 +16,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/app/profile")
+@lombok.RequiredArgsConstructor
 public class ProfileController {
 
-    @Autowired private ProfileService profileService;
+    private final ProfileService profileService;
 
     @GetMapping("/me-info")
     public Result<Map<String, Object>> meInfo() {

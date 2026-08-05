@@ -15,9 +15,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/app/order")
+@lombok.RequiredArgsConstructor
 public class OrderController {
 
-    @Autowired private OrderService orderService;
+    private final OrderService orderService;
 
     @PostMapping
     public Result<OrderVO> create(@RequestBody OrderCreateDTO dto) {

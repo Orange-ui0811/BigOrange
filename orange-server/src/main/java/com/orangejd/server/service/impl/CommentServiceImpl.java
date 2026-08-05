@@ -19,13 +19,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
 
-    @Autowired private CommentMapper commentMapper;
-    @Autowired private WorkMapper workMapper;
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired private NotificationService notificationService;
-    @Autowired private ContentAccessService contentAccessService;
+    private final CommentMapper commentMapper;
+    private final WorkMapper workMapper;
+    private final RequirementMapper requirementMapper;
+    private final NotificationService notificationService;
+    private final ContentAccessService contentAccessService;
 
     public void create(CommentCreateDTO dto) {
         if (dto.getContent() == null || dto.getContent().trim().isEmpty()) throw new BaseException(MessageConstant.COMMENT_EMPTY);

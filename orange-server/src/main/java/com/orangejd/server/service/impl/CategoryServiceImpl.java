@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
-    private CategoryMapper categoryMapper;
+    private final CategoryMapper categoryMapper;
 
     @Override
     public CategoryVO create(CategoryDTO dto) {

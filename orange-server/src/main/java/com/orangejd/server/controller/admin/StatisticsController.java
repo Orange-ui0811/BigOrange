@@ -1,7 +1,7 @@
 package com.orangejd.server.controller.admin;
 
 import com.orangejd.common.result.Result;
-import com.orangejd.server.mapper.*;
+import com.orangejd.server.service.PlatformStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,21 +9,14 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/admin/statistics")
+@lombok.RequiredArgsConstructor
 public class StatisticsController {
 
-    @Autowired private AccountMapper accountMapper;
-    @Autowired private WorkMapper workMapper;
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired private OrderMapper orderMapper;
+    private final PlatformStatisticsService statisticsService;
 
     @GetMapping("/dashboard")
     public Result<Map<String, Object>> dashboard() {
-        Map<String, Object> data = new LinkedHashMap<>();
-        data.put("totalUsers", accountMapper.countAll());
-        data.put("totalWorks", workMapper.countAll(""));
-        data.put("totalRequirements", requirementMapper.countAll(""));
-        data.put("pendingAudits", workMapper.countAll("PENDING_REVIEW") + requirementMapper.countAll("PENDING_REVIEW"));
-        data.put("totalOrders", orderMapper.countAllOrders());
+        Map<String, Object> data = new LinkedHashMap<>(statisticsService.overview());
         data.put("todayRevenue", 0); // Phase 7+ SQL聚合
         return Result.success(data);
     }
@@ -41,11 +34,11 @@ public class StatisticsController {
 
     @GetMapping("/top-works")
     public Result<List<Map<String, Object>>> topWorks(@RequestParam(defaultValue = "10") int limit) {
-        return Result.success(workMapper.selectTopByFavorites(com.orangejd.common.util.PageUtil.capSize(limit)));
+        return Result.success(statisticsService.topWorks(com.orangejd.common.util.PageUtil.capSize(limit)));
     }
 
     @GetMapping("/top-creators")
     public Result<List<Map<String, Object>>> topCreators(@RequestParam(defaultValue = "10") int limit) {
-        return Result.success(accountMapper.selectTopCreators(com.orangejd.common.util.PageUtil.capSize(limit)));
+        return Result.success(statisticsService.topCreators(com.orangejd.common.util.PageUtil.capSize(limit)));
     }
 }

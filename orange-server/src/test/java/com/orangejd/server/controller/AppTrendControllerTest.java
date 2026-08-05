@@ -7,6 +7,11 @@ import com.orangejd.pojo.entity.TrendHistory;
 import com.orangejd.server.controller.app.AppTrendController;
 import com.orangejd.server.mapper.TrendHistoryMapper;
 import com.orangejd.server.service.AiRecordMetrics;
+import com.orangejd.server.service.TrendHistoryService;
+import com.orangejd.server.service.KnowledgeGraphService;
+import com.orangejd.server.service.TrendAnalysisService;
+import com.orangejd.server.service.TrendProfileAnalysisService;
+import com.orangejd.common.properties.JwtProperties;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -66,11 +71,10 @@ class AppTrendControllerTest {
     }
 
     private AppTrendController controller(TrendHistoryMapper mapper, AiRecordMetrics metrics) {
-        AppTrendController controller = new AppTrendController();
-        ReflectionTestUtils.setField(controller, "trendHistoryMapper", mapper);
-        ReflectionTestUtils.setField(controller, "objectMapper", new ObjectMapper());
-        ReflectionTestUtils.setField(controller, "recordMetrics", metrics);
-        return controller;
+        return new AppTrendController(mock(KnowledgeGraphService.class),
+                mock(TrendAnalysisService.class), mock(TrendProfileAnalysisService.class),
+                new TrendHistoryService(mapper), new ObjectMapper(), metrics,
+                mock(JwtProperties.class), null);
     }
 
     private TrendHistory history(Long id, String topics, String resultJson) {
