@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { toUserMessage } from './errorMessage'
+import { pinia } from '../stores'
+import { useAuthStore } from '../stores/authStore'
 
 const request = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080',
@@ -8,7 +10,7 @@ const request = axios.create({
 })
 
 request.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem('appToken')
+  const token = useAuthStore(pinia).token
   if (token) config.headers['App-Token'] = token
   return config
 })
@@ -20,7 +22,7 @@ request.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      sessionStorage.removeItem('appToken')
+      useAuthStore(pinia).clear()
       window.location.href = '/login'
     } else {
       ElMessage.error(toUserMessage(error))

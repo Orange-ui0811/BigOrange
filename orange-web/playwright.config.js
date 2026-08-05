@@ -12,4 +12,16 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  webServer: process.env.ORANGEVC_E2E_EXTERNAL ? undefined : [
+    {
+      command: 'node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 15173',
+      url: 'http://127.0.0.1:15173',
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: 'node ../orange-admin/node_modules/vite/bin/vite.js ../orange-admin --host 127.0.0.1 --port 15174',
+      url: 'http://127.0.0.1:15174',
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 })

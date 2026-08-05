@@ -103,11 +103,12 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import { Document } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { deleteAiRecord, getAiRecordDetail, getAiRecords } from '../api/aiRecords'
 import AiRecordResult from '../components/AiRecordResult.vue'
+import { useAiRecordStore } from '../stores/aiRecordStore'
 
 const toolOptions = [
   { value: 'TREND_V1', label: '趋势分析提问' },
@@ -119,12 +120,13 @@ const toolOptions = [
   { value: 'OPEN_SOURCE_GUIDE', label: '开源贡献指南' },
 ]
 
-const records = ref([])
-const total = ref(0)
+const recordStore = useAiRecordStore()
+const { data: recordData, loading } = storeToRefs(recordStore)
+const records = computed(() => recordData.value.records)
+const total = computed(() => recordData.value.total)
 const page = ref(1)
 const pageSize = 20
 const businessType = ref('')
-const loading = ref(false)
 const detailOpen = ref(false)
 const detailLoading = ref(false)
 const current = ref(null)
@@ -132,14 +134,7 @@ const current = ref(null)
 const toolName = value => toolOptions.find(item => item.value === value)?.label || 'AI 工具'
 const formatTime = value => value ? String(value).replace('T', ' ').substring(0, 19) : ''
 const loadRecords = async () => {
-  loading.value = true
-  try {
-    const response = await getAiRecords({ page: page.value, size: pageSize, businessType: businessType.value })
-    records.value = response.data?.records || []
-    total.value = Number(response.data?.total || 0)
-  } finally {
-    loading.value = false
-  }
+  await recordStore.load({ page: page.value, size: pageSize, businessType: businessType.value })
 }
 
 const changeFilter = () => {
@@ -152,8 +147,7 @@ const openRecord = async row => {
   detailLoading.value = true
   current.value = { ...row }
   try {
-    const response = await getAiRecordDetail(row.id)
-    current.value = response.data
+    current.value = await recordStore.loadDetail(row.id)
   } finally {
     detailLoading.value = false
   }
@@ -165,7 +159,7 @@ const removeRecord = async row => {
       type: 'warning', confirmButtonText: '删除', cancelButtonText: '取消',
     })
   } catch { return }
-  await deleteAiRecord(row.id)
+  await recordStore.remove(row.id)
   ElMessage.success('AI 记录已删除')
   if (records.value.length === 1 && page.value > 1) page.value -= 1
   await loadRecords()

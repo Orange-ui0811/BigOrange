@@ -102,19 +102,23 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { ArrowLeft, Connection as Link, CopyDocument, Delete, Monitor, Refresh } from '@element-plus/icons-vue'
 import {
-  createAgentLinkCode, deleteAgentTask, listAgentDevices, listAgentTasks, revokeAgentDevice
+  createAgentLinkCode, deleteAgentTask, revokeAgentDevice
 } from '../api/agentDevices'
+import { useAgentDeviceStore } from '../stores/agentDeviceStore'
 
 const deviceName = ref('小智客户端')
 const linkCode = ref(null)
-const devices = ref([])
-const tasks = ref([])
+const agentDeviceStore = useAgentDeviceStore()
+const { data: agentData, loading: collectionLoading } = storeToRefs(agentDeviceStore)
+const devices = computed(() => agentData.value.devices)
+const tasks = computed(() => agentData.value.tasks)
 const creating = ref(false)
-const loading = ref(false)
-const tasksLoading = ref(false)
+const loading = computed(() => collectionLoading.value.devices)
+const tasksLoading = computed(() => collectionLoading.value.tasks)
 const resultVisible = ref(false)
 const selectedTask = ref(null)
 const terminalStatuses = ['SUCCEEDED', 'FAILED', 'CANCELLED', 'EXPIRED']
@@ -136,19 +140,11 @@ const createCode = async () => {
 }
 
 const loadDevices = async () => {
-  loading.value = true
-  try {
-    const response = await listAgentDevices()
-    devices.value = response.data || []
-  } finally { loading.value = false }
+  await agentDeviceStore.loadDevices()
 }
 
 const loadTasks = async () => {
-  tasksLoading.value = true
-  try {
-    const response = await listAgentTasks()
-    tasks.value = response.data || []
-  } finally { tasksLoading.value = false }
+  await agentDeviceStore.loadTasks()
 }
 
 const copyCommand = async () => {
