@@ -173,15 +173,16 @@
         <span v-if="item.path === '/chat' && chatUnread" class="mobile-badge">{{ chatUnread }}</span>
       </button>
     </nav>
+    <ReleaseAnnouncementDialog :account-id="accountId" />
   </el-container>
 </template>
 
 <script setup>
 import { useMainLayout } from '../composables/useMainLayout'
 
-const { GuideBubble, PersonaOrangeBadge, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
+const { GuideBubble, PersonaOrangeBadge, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
   MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, personaAvatar, mobileNavItems,
-  logout, activeMenu } = useMainLayout()
+  accountId, logout, activeMenu } = useMainLayout()
 </script>
 
 <style scoped src="../styles/layouts/main-layout.css"></style>

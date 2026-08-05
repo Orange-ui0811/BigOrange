@@ -3,6 +3,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { Shop, Cpu, Edit, ChatDotRound, User, Document, MagicStick } from '@element-plus/icons-vue'
 import GuideBubble from '../components/GuideBubble.vue'
 import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
+import ReleaseAnnouncementDialog from '../components/ReleaseAnnouncementDialog.vue'
 import request from '../api/request'
 import { getPersonaAvatar } from '../api/personaWorkshop'
 import { unreadCount, avatarUrl, nickname, loadUnreadCount, resetNotificationState } from '../stores/unread'
@@ -57,6 +58,6 @@ onMounted(async () => {
   } catch {}
   try { await loadTradeMode() } catch {}
 })
-  return { GuideBubble, PersonaOrangeBadge, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
+  return { GuideBubble, PersonaOrangeBadge, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
     MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, personaAvatar, mobileNavItems,
-    logout, activeMenu }}
+    accountId: authStore.accountId, logout, activeMenu }}

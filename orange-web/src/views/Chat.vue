@@ -106,7 +106,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted } from 'vue'
+import { ref, nextTick, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import PageTour from '../components/PageTour.vue'
@@ -130,16 +130,38 @@ const route = useRoute()
 const myId = ref(sessionStorage.getItem('myId') || null)
 
 let ws = null
+let reconnectTimer = null
+let destroyed = false
+const closeSocket = socket => {
+  try {
+    socket.close()
+  } catch (error) {
+    if (import.meta.env.DEV) console.debug('WebSocket close ignored', error)
+  }
+}
+const scheduleReconnect = () => {
+  if (destroyed || reconnectTimer) return
+  reconnectTimer = setTimeout(() => {
+    reconnectTimer = null
+    connectWs()
+  }, 5000)
+}
 const connectWs = async () => {
-  if (ws) try { ws.close() } catch {}
+  if (destroyed) return
+  if (ws) {
+    ws.onclose = null
+    closeSocket(ws)
+    ws = null
+  }
   const uid = myId.value; if (!uid) return
   try {
     const ticketRes = await request.post('/app/auth/ws-ticket')
     if (!ticketRes.data?.ticket) throw new Error('ticket unavailable')
     const wsBase = import.meta.env.VITE_WS_URL || `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}`
-    ws = new WebSocket(wsBase + '/ws/'+uid+'?ticket='+encodeURIComponent(ticketRes.data.ticket))
+    const socket = new WebSocket(wsBase + '/ws/'+uid+'?ticket='+encodeURIComponent(ticketRes.data.ticket))
+    ws = socket
   } catch {
-    setTimeout(connectWs, 5000)
+    scheduleReconnect()
     return
   }
   ws.onmessage = (e) => {
@@ -149,7 +171,10 @@ const connectWs = async () => {
       if (data.type === 'notification') { convList(); unreadCount.value++ }
     } catch {}
   }
-  ws.onclose = () => { setTimeout(connectWs, 5000) }
+  ws.onclose = () => {
+    ws = null
+    scheduleReconnect()
+  }
 }
 
 const convList = async () => {
@@ -162,6 +187,16 @@ onMounted(async () => {
   if (route.params.id) {
     const c = convs.value.find(c => String(c.id) === route.params.id)
     if (c) openConv(c)
+  }
+})
+onUnmounted(() => {
+  destroyed = true
+  if (reconnectTimer) clearTimeout(reconnectTimer)
+  reconnectTimer = null
+  if (ws) {
+    ws.onclose = null
+    closeSocket(ws)
+    ws = null
   }
 })
 const showQuoteDialog = ref(false)

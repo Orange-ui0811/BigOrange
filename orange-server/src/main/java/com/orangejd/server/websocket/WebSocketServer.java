@@ -5,11 +5,13 @@ import com.orangejd.server.service.WebSocketTicketService;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint("/ws/{userId}")
+@Component
 public class WebSocketServer {
     private static final Map<String, Session> SESSIONS = new ConcurrentHashMap<>();
     private static WebSocketTicketService ticketService;
