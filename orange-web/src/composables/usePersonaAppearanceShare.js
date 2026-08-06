@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   applyPersonaAppearanceCode,
@@ -14,6 +14,19 @@ export const usePersonaAppearanceShare = ({ completion, afterImport }) => {
   const previewing = ref(false)
   const importing = ref(false)
   const isComplete = computed(() => Number(completion.value?.percent || 0) === 100)
+
+  const normalizeCode = value => String(value || '').replace(/\s+/g, '').toUpperCase()
+  const normalizePreview = data => data ? {
+    ...data,
+    appearance: data.appearance || {},
+    equipment: Array.isArray(data.equipment)
+      ? data.equipment.map(item => ({ ...item, unlocked: item.unlocked ?? item.available ?? false }))
+      : [],
+  } : null
+
+  watch(importCode, value => {
+    if (preview.value && normalizeCode(value) !== preview.value.code) preview.value = null
+  })
 
   const generateCode = async () => {
     if (!isComplete.value || exporting.value) return
@@ -38,12 +51,12 @@ export const usePersonaAppearanceShare = ({ completion, afterImport }) => {
   }
 
   const loadPreview = async () => {
-    const code = importCode.value.trim().toUpperCase()
+    const code = normalizeCode(importCode.value)
     if (!code || previewing.value) return
     previewing.value = true
     try {
       const response = await previewPersonaAppearanceCode(code)
-      preview.value = response.data || null
+      preview.value = normalizePreview(response.data)
       importCode.value = response.data?.code || code
     } finally {
       previewing.value = false
