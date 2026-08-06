@@ -18,6 +18,7 @@ describe('LeaderboardPersonaCard', () => {
   beforeEach(() => {
     usePersonaStore(pinia).reset()
     api.mockReset(); push.mockReset()
+    localStorage.clear()
   })
 
   it('shows the current leaderboard context and emits a persona recommendation', async () => {
@@ -29,7 +30,7 @@ describe('LeaderboardPersonaCard', () => {
     await flushPromises()
 
     expect(wrapper.text()).toContain('职业榜 · 个性推荐')
-    await wrapper.find('button').trigger('click')
+    await wrapper.get('.recommend-button').trigger('click')
     expect(wrapper.emitted('recommend')).toHaveLength(1)
   })
 
@@ -39,8 +40,20 @@ describe('LeaderboardPersonaCard', () => {
     await flushPromises()
 
     expect(wrapper.text()).toContain('请先去橙子画像工坊')
-    await wrapper.find('button').trigger('click')
+    await wrapper.get('.recommend-button').trigger('click')
     expect(push).toHaveBeenCalledWith('/persona-workshop')
     expect(wrapper.emitted('recommend')).toBeUndefined()
+  })
+
+  it('lets the user hide and restore the 3D orange model', async () => {
+    api.mockResolvedValue({ code: 1, data: { dimensions: [], completion: { completedDimensions: 0 } } })
+    const wrapper = mountCard('local')
+    await flushPromises()
+
+    expect(wrapper.find('.mini-stage').exists()).toBe(true)
+    await wrapper.get('.model-visibility-button').trigger('click')
+    expect(wrapper.find('.mini-stage').exists()).toBe(false)
+    expect(localStorage.getItem('orangevc.leaderboardPersonaModelVisible')).toBe('false')
+    expect(wrapper.get('.model-visibility-button').text()).toContain('显示3D橙子')
   })
 })

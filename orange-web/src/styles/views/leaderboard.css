@@ -5,28 +5,29 @@
 
 /* Compact Head */
 .compact-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 440px);
+  align-items: center;
+  gap: clamp(24px, 4vw, 54px);
   margin-bottom: 20px;
   padding: 22px;
   border: 1px solid rgba(254, 215, 170, .76);
   border-radius: 28px;
   background: rgba(255,255,255,.86);
   box-shadow: var(--shadow-card-lg);
-  flex-wrap: wrap;
 }
+.compact-head > div:first-child { min-width: 0; padding-left: 4px; }
 .compact-head h2 {
-  margin: 0;
+  max-width: 20ch;
+  margin: 12px 0 0;
   font-family: var(--font-mono);
   font-size: clamp(22px, 3.5vw, 32px);
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: -.05em;
 }
 .compact-head p {
-  max-width: 680px;
-  margin: 6px 0 0;
+  max-width: 58ch;
+  margin: 12px 0 0;
   color: var(--text-secondary);
   line-height: 1.6;
   font-size: 13px;
@@ -349,4 +350,15 @@
 .leaderboard-pagination :deep(.btn-prev),
 .leaderboard-pagination :deep(.btn-next) {
   border-radius: 2px;
+}
+
+@media (max-width: 1050px) {
+  .compact-head { grid-template-columns: 1fr; }
+  .compact-head h2 { max-width: 26ch; }
+}
+
+@media (max-width: 620px) {
+  .compact-head { gap: 20px; padding: 18px; border-radius: 18px; }
+  .compact-head > div:first-child { padding-left: 0; }
+  .compact-head h2 { font-size: 24px; letter-spacing: -.035em; }
 }

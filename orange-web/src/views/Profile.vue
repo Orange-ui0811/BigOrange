@@ -14,15 +14,7 @@
         <el-button v-if="isMe" size="small" @click="$router.push('/me/edit')" class="profile-edit-btn">编辑资料</el-button>
       </div>
     </el-card>
-    <section v-if="persona.enabled" class="persona-showcase" aria-labelledby="persona-showcase-title">
-      <header><div><span>ORANGE PERSONA</span><h4 id="persona-showcase-title">橙子画像</h4></div><strong>{{ persona.completion?.percent || 0 }}% 完整</strong></header>
-      <div class="persona-dimensions">
-        <article v-for="dimension in persona.dimensions" :key="dimension.code">
-          <span>{{ dimension.label }}</span>
-          <p>{{ dimension.entries?.map(item => item.content).join(' · ') || '尚未填写' }}</p>
-        </article>
-      </div>
-    </section>
+    <PersonaProfileShowcase v-if="persona.enabled" :persona="persona" />
     <h4 class="profile-section-title">公开作品 ({{ works?.total || 0 }})</h4>
     <el-row :gutter="16">
       <el-col :span="8" v-for="w in works?.records" :key="w.id" class="profile-work-col">
@@ -40,10 +32,13 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import request from '../api/request'
 import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
+import PersonaProfileShowcase from '../components/PersonaProfileShowcase.vue'
 import { getPublicPersonaWorkshop } from '../api/personaWorkshop'
+import { useAuthStore } from '../stores/authStore'
 
 const route = useRoute()
 const isMe = route.params.id === 'me'
+const authStore = useAuthStore()
 const account = ref(null)
 const profile = ref(null)
 const works = ref(null)
@@ -53,7 +48,7 @@ const persona = ref({ enabled: false, avatarEnabled: false, equipment: [], dimen
 onMounted(async () => {
   loading.value = true
   try {
-    const id = route.params.id === 'me' ? null : route.params.id
+    const id = route.params.id === 'me' ? authStore.accountId : route.params.id
     const url = id ? `/app/profile/${id}` : '/app/profile/me-info'
     const res = await request.get(url)
     if (res.code === 1 && res.data) {
@@ -91,9 +86,6 @@ onMounted(async () => {
 .profile-card :deep(.el-card__body) {
   padding: 20px;
 }
-
-.persona-showcase{margin:0 0 22px;padding:18px;border:1px solid #fed7aa;border-radius:14px;background:linear-gradient(120deg,#fff7ed,#fff);box-shadow:var(--shadow-card)}.persona-showcase header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}.persona-showcase header span{color:#c2410c;font:800 9px/1 var(--font-mono);letter-spacing:.09em}.persona-showcase h4{margin:6px 0 0;font:900 18px/1.2 var(--font-mono)}.persona-showcase header>strong{color:#9a3412;font:850 12px/1 var(--font-mono)}.persona-dimensions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}.persona-dimensions article{padding:10px 12px;border:1px solid #f3dfce;border-radius:9px;background:rgba(255,255,255,.82)}.persona-dimensions span{color:#b45309;font-size:10px;font-weight:850}.persona-dimensions p{margin:5px 0 0;color:#6f5b4e;font-size:12px;line-height:1.55}
-@media(max-width:620px){.persona-dimensions{grid-template-columns:1fr}}
 
 .profile-header {
   display: flex;

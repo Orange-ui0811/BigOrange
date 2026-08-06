@@ -23,7 +23,7 @@
           <div><strong>本周热门</strong><span>GitHub 涨星项目</span></div>
         </div>
         <div class="ticker-window">
-          <div class="ticker-track">
+          <div class="ticker-track" :style="{ '--ticker-duration': tickerDuration }">
             <button v-for="item in tickerLoop" :key="item.loopKey" type="button" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
               <strong>{{ item.fullName || item.name }}</strong><span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
             </button>
@@ -37,7 +37,7 @@
           <div><strong>新手推荐</strong><span>已核验可落地</span></div>
         </div>
         <div class="ticker-window">
-          <div v-if="beginnerTickerItems.length" class="ticker-track beginner-track">
+          <div v-if="beginnerTickerItems.length" class="ticker-track beginner-track" :style="{ '--ticker-duration': tickerDuration }">
             <button v-for="item in beginnerTickerLoop" :key="item.loopKey" type="button" class="ticker-item beginner-item" @click.stop="openLeaderboardSource('beginner')">
               <strong>{{ item.title }}</strong><span>{{ difficultyText(item.difficulty) }} · {{ item.score }}/100 新手分 · {{ item.language || '多技术栈' }}</span>
             </button>
@@ -54,7 +54,7 @@
           <div><strong>职业成长</strong><span>真实岗位能力</span></div>
         </div>
         <div class="ticker-window">
-          <div v-if="careerTickerItems.length" class="ticker-track career-track">
+          <div v-if="careerTickerItems.length" class="ticker-track career-track" :style="{ '--ticker-duration': tickerDuration }">
             <button v-for="item in careerTickerLoop" :key="item.loopKey" type="button" class="ticker-item career-item" @click.stop="openLeaderboardSource('career')">
               <strong>{{ item.title }}</strong><span>{{ item.role || '职业方向待评估' }} · {{ item.score }}/100 职业分</span>
             </button>
@@ -142,6 +142,7 @@ const beginnerTickerItems = ref([])
 const careerTickerItems = ref([])
 const issueTickerItems = ref([])
 const competitionTickerItems = ref([])
+const tickerDuration = '30s'
 const makeLoop = items => [...items, ...items].map((item, index) => ({ ...item, loopKey: `${item.id || item.fullName || item.name}-${index}` }))
 const tickerLoop = computed(() => makeLoop(tickerItems.value))
 const beginnerTickerLoop = computed(() => makeLoop(beginnerTickerItems.value))
@@ -200,7 +201,7 @@ onMounted(async () => {
 .career-ticker .ticker-window { border-color: #99d8cf; }
 .issue-ticker .ticker-window { border-color: #bfdbfe; }
 .competition-ticker .ticker-window { border-color: #bbf7d0; }
-.ticker-track { display: flex; width: max-content; gap: 12px; padding: 8px 12px; animation: ticker-scroll 30s linear infinite; }.beginner-track { animation-duration: 35s; }.career-track { animation-duration: 39s; }.issue-track { animation-duration: 38s; }
+.ticker-track { display: flex; width: max-content; gap: 12px; padding: 8px 12px; animation: ticker-scroll var(--ticker-duration, 30s) linear infinite; }.issue-track { animation-duration: 38s; }
 .competition-track { animation-duration: 42s; }
 .ticker-track:hover, .ticker-track:focus-within { animation-play-state: paused; }
 .ticker-item { display: block; min-width: 260px; max-width: 320px; min-height: 48px; flex-shrink: 0; padding: 8px 12px; border: 1px solid #f2c49b; border-radius: 8px; background: #fffdf9; color: var(--text-primary); text-align: left; cursor: pointer; transition: border-color .18s, transform .18s; }

@@ -50,6 +50,10 @@ describe('AiHub moving leaderboards', () => {
     expect(get).toHaveBeenCalledWith('/app/beginner-projects/weekly')
     expect(get).toHaveBeenCalledWith('/app/career-projects/weekly')
 
+    const weeklyDuration = wrapper.get('.ticker-track').attributes('style')
+    expect(wrapper.get('.beginner-track').attributes('style')).toBe(weeklyDuration)
+    expect(wrapper.get('.career-track').attributes('style')).toBe(weeklyDuration)
+
     await wrapper.get('.beginner-ticker').trigger('click')
     expect(push).toHaveBeenCalledWith({ path: '/leaderboard', query: { source: 'beginner' } })
   })
