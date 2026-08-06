@@ -104,6 +104,11 @@ public class AppPersonaWorkshopController {
         return Result.success(appearanceShareService.exportCode(accountId()));
     }
 
+    @GetMapping("/appearance-codes/current")
+    public Result<?> currentAppearanceCode() {
+        return Result.success(appearanceShareService.currentCode(accountId()));
+    }
+
     @GetMapping("/appearance-codes/{code}")
     public Result<?> previewAppearanceCode(@PathVariable String code) {
         return Result.success(appearanceShareService.preview(accountId(), code));

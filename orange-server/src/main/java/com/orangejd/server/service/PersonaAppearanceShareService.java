@@ -50,10 +50,7 @@ public class PersonaAppearanceShareService {
     @Transactional
     public Map<String, Object> exportCode(Long accountId) {
         Set<PersonaDimension> completed = requireComplete(accountId);
-        Map<String, Object> payload = new LinkedHashMap<>();
-        payload.put("schemaVersion", SCHEMA_VERSION);
-        payload.put("appearance", settingsService.appearance(settingsService.load(accountId)));
-        payload.put("equipment", shareableEquipment(equipmentService.view(accountId, completed)));
+        Map<String, Object> payload = visualPayload(accountId, completed);
         String payloadJson = json(payload);
         String payloadHash = sha256(payloadJson);
         Map<String, Object> active = shareMapper.selectActiveByOwner(accountId);
@@ -70,6 +67,15 @@ public class PersonaAppearanceShareService {
             if (shareMapper.insert(share) == 1) return codeView(share);
         }
         throw new BaseException("形象码生成失败，请稍后重试");
+    }
+
+    public Map<String, Object> currentCode(Long accountId) {
+        Set<PersonaDimension> completed = completedDimensions(accountId);
+        if (completed.size() != PersonaDimension.values().length) return null;
+        Map<String, Object> active = shareMapper.selectActiveByOwner(accountId);
+        if (active == null) return null;
+        String currentHash = sha256(json(visualPayload(accountId, completed)));
+        return currentHash.equals(active.get("payloadHash")) ? codeView(active) : null;
     }
 
     public Map<String, Object> preview(Long accountId, String requestedCode) {
@@ -158,6 +164,14 @@ public class PersonaAppearanceShareService {
             result.add(shared);
         }
         return result;
+    }
+
+    private Map<String, Object> visualPayload(Long accountId, Set<PersonaDimension> completed) {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("schemaVersion", SCHEMA_VERSION);
+        payload.put("appearance", settingsService.appearance(settingsService.load(accountId)));
+        payload.put("equipment", shareableEquipment(equipmentService.view(accountId, completed)));
+        return payload;
     }
 
     private Set<PersonaDimension> requireComplete(Long accountId) {

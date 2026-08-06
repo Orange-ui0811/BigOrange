@@ -62,6 +62,31 @@ class PersonaAppearanceShareServiceTest {
     }
 
     @Test
+    void currentCodeIsReturnedOnlyWhileItMatchesTheCurrentVisualState() {
+        PersonaAppearanceShareMapper shares = mock(PersonaAppearanceShareMapper.class);
+        PersonaWorkshopMapper workshop = mock(PersonaWorkshopMapper.class);
+        PersonaSettingsService settings = mock(PersonaSettingsService.class);
+        PersonaEquipmentService equipment = mock(PersonaEquipmentService.class);
+        when(workshop.selectEntries(7L)).thenReturn(completeEntries());
+        when(settings.load(7L)).thenReturn(Map.of("showcaseEnabled", true));
+        when(settings.appearance(any())).thenReturn(Map.of("bodyColor", "#F37021"));
+        when(equipment.view(any(), any())).thenReturn(List.of());
+        when(shares.insert(any())).thenReturn(1);
+        PersonaAppearanceShareService service = service(shares, workshop, settings, equipment);
+        Map<String, Object> exported = service.exportCode(7L);
+        ArgumentCaptor<Map<String, Object>> saved = mapCaptor();
+        verify(shares).insert(saved.capture());
+        when(shares.selectActiveByOwner(7L)).thenReturn(Map.of(
+                "code", exported.get("code"), "schemaVersion", 1,
+                "payloadHash", saved.getValue().get("payloadHash")));
+
+        assertEquals(exported.get("code"), service.currentCode(7L).get("code"));
+
+        when(settings.appearance(any())).thenReturn(Map.of("bodyColor", "#8B5CF6"));
+        assertEquals(null, service.currentCode(7L));
+    }
+
+    @Test
     void previewMarksEquipmentWhosePersonaDimensionIsStillLocked() throws Exception {
         PersonaAppearanceShareMapper shares = mock(PersonaAppearanceShareMapper.class);
         PersonaWorkshopMapper workshop = mock(PersonaWorkshopMapper.class);

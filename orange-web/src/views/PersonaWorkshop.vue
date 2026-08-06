@@ -68,7 +68,7 @@
         </section>
         <section class="persona-node share-node" data-focus="overview">
           <div class="node-marker"><span>SH</span><i></i></div>
-          <PersonaAppearanceShareCard :completion="snapshot.completion" @imported="load" />
+          <PersonaAppearanceShareCard :completion="snapshot.completion" :visual-fingerprint="visualFingerprint" @imported="load" />
         </section>
         <section v-for="(dimension, index) in snapshot.dimensions" :id="`persona-${dimension.code.toLowerCase()}`" :key="dimension.code" class="persona-node" :data-focus="dimension.code.toLowerCase()">
           <div class="node-marker"><span>0{{ index + 1 }}</span><i></i></div>
@@ -205,6 +205,7 @@ const focusNavigation = [
   { code: 'right_hand', index: '07', short: '右手' }, { code: 'recommendation', index: '09', short: '下一步' },
 ]
 const unlockedCount = computed(() => snapshot.equipment.filter(item => item.unlocked).length)
+const visualFingerprint = computed(() => JSON.stringify({ appearance: appearance.value, equipment: snapshot.equipment }))
 const bodyColorPresets = ['#F37021', '#FF9F1C', '#FF6B35', '#F43F5E', '#8B5CF6', '#0EA5E9']
 const appearanceControls = [
   { key: 'faceStyle', label: '表情', options: [{ value: 'FRIENDLY', label: '友好', icon: '◡' }, { value: 'CURIOUS', label: '好奇', icon: '○' }, { value: 'COOL', label: '酷感', icon: '⌐' }] },

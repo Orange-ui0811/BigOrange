@@ -3,16 +3,19 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   applyPersonaAppearanceCode,
   exportPersonaAppearanceCode,
+  getCurrentPersonaAppearanceCode,
   previewPersonaAppearanceCode,
 } from '../api/personaWorkshop'
 
-export const usePersonaAppearanceShare = ({ completion, afterImport }) => {
+export const usePersonaAppearanceShare = ({ completion, visualFingerprint, afterImport }) => {
   const generatedCode = ref('')
   const importCode = ref('')
   const preview = ref(null)
   const exporting = ref(false)
   const previewing = ref(false)
   const importing = ref(false)
+  const loadingCurrent = ref(false)
+  const codeFingerprint = ref('')
   const isComplete = computed(() => Number(completion.value?.percent || 0) === 100)
 
   const normalizeCode = value => String(value || '').replace(/\s+/g, '').toUpperCase()
@@ -28,12 +31,34 @@ export const usePersonaAppearanceShare = ({ completion, afterImport }) => {
     if (preview.value && normalizeCode(value) !== preview.value.code) preview.value = null
   })
 
+  const loadCurrentCode = async () => {
+    if (!isComplete.value || loadingCurrent.value) return
+    loadingCurrent.value = true
+    try {
+      const response = await getCurrentPersonaAppearanceCode()
+      generatedCode.value = response.data?.code || ''
+      codeFingerprint.value = generatedCode.value ? visualFingerprint?.value || '' : ''
+    } finally {
+      loadingCurrent.value = false
+    }
+  }
+
+  watch(isComplete, complete => {
+    if (complete) loadCurrentCode()
+    else generatedCode.value = ''
+  }, { immediate: true })
+
+  if (visualFingerprint) watch(visualFingerprint, fingerprint => {
+    if (codeFingerprint.value && fingerprint !== codeFingerprint.value) generatedCode.value = ''
+  })
+
   const generateCode = async () => {
     if (!isComplete.value || exporting.value) return
     exporting.value = true
     try {
       const response = await exportPersonaAppearanceCode()
       generatedCode.value = response.data?.code || ''
+      codeFingerprint.value = generatedCode.value ? visualFingerprint?.value || '' : ''
       if (generatedCode.value) ElMessage.success('橙子形象码已生成')
     } finally {
       exporting.value = false
@@ -79,6 +104,6 @@ export const usePersonaAppearanceShare = ({ completion, afterImport }) => {
     }
   }
 
-  return { generatedCode, importCode, preview, exporting, previewing, importing,
+  return { generatedCode, importCode, preview, exporting, previewing, importing, loadingCurrent,
     isComplete, generateCode, copyCode, loadPreview, applyCode }
 }

@@ -13,5 +13,6 @@ export const updatePersonaEquipment = (slotCode, payload) => request.put(`/app/p
 export const updatePersonaAccessoryBlueprint = (slotCode, payload) => request.put(`/app/persona-workshop/equipment/${slotCode}/blueprint`, payload)
 export const updatePersonaSettings = payload => request.put('/app/persona-workshop/settings', payload)
 export const exportPersonaAppearanceCode = () => request.post('/app/persona-workshop/appearance-codes')
+export const getCurrentPersonaAppearanceCode = () => request.get('/app/persona-workshop/appearance-codes/current')
 export const previewPersonaAppearanceCode = code => request.get(`/app/persona-workshop/appearance-codes/${encodeURIComponent(code)}`)
 export const applyPersonaAppearanceCode = code => request.post(`/app/persona-workshop/appearance-codes/${encodeURIComponent(code)}/apply`)
