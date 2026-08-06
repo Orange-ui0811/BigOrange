@@ -23,7 +23,7 @@
           <div><strong>本周热门</strong><span>GitHub 涨星项目</span></div>
         </div>
         <div class="ticker-window">
-          <div class="ticker-track" :style="{ '--ticker-duration': tickerDuration }">
+          <div :ref="element => setTrackElement('weekly', element)" class="ticker-track" :style="tickerStyle('weekly')">
             <button v-for="item in tickerLoop" :key="item.loopKey" type="button" class="ticker-item" @click.stop="openGithub(item.htmlUrl)">
               <strong>{{ item.fullName || item.name }}</strong><span>★ {{ item.stars }} · {{ item.language || 'N/A' }}</span>
             </button>
@@ -37,7 +37,7 @@
           <div><strong>新手推荐</strong><span>已核验可落地</span></div>
         </div>
         <div class="ticker-window">
-          <div v-if="beginnerTickerItems.length" class="ticker-track beginner-track" :style="{ '--ticker-duration': tickerDuration }">
+          <div v-if="beginnerTickerItems.length" :ref="element => setTrackElement('beginner', element)" class="ticker-track beginner-track" :style="tickerStyle('beginner')">
             <button v-for="item in beginnerTickerLoop" :key="item.loopKey" type="button" class="ticker-item beginner-item" @click.stop="openLeaderboardSource('beginner')">
               <strong>{{ item.title }}</strong><span>{{ difficultyText(item.difficulty) }} · {{ item.score }}/100 新手分 · {{ item.language || '多技术栈' }}</span>
             </button>
@@ -54,7 +54,7 @@
           <div><strong>职业成长</strong><span>真实岗位能力</span></div>
         </div>
         <div class="ticker-window">
-          <div v-if="careerTickerItems.length" class="ticker-track career-track" :style="{ '--ticker-duration': tickerDuration }">
+          <div v-if="careerTickerItems.length" :ref="element => setTrackElement('career', element)" class="ticker-track career-track" :style="tickerStyle('career')">
             <button v-for="item in careerTickerLoop" :key="item.loopKey" type="button" class="ticker-item career-item" @click.stop="openLeaderboardSource('career')">
               <strong>{{ item.title }}</strong><span>{{ item.role || '职业方向待评估' }} · {{ item.score }}/100 职业分</span>
             </button>
@@ -122,6 +122,7 @@ import { useRouter } from 'vue-router'
 import PixelOrangeLogo from '../components/PixelOrangeLogo.vue'
 import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
+import { useSynchronizedTickerMotion } from '../composables/useSynchronizedTickerMotion'
 
 const router = useRouter()
 const tourRef = ref(null)
@@ -142,7 +143,7 @@ const beginnerTickerItems = ref([])
 const careerTickerItems = ref([])
 const issueTickerItems = ref([])
 const competitionTickerItems = ref([])
-const tickerDuration = '30s'
+const { setTrackElement, tickerStyle } = useSynchronizedTickerMotion()
 const makeLoop = items => [...items, ...items].map((item, index) => ({ ...item, loopKey: `${item.id || item.fullName || item.name}-${index}` }))
 const tickerLoop = computed(() => makeLoop(tickerItems.value))
 const beginnerTickerLoop = computed(() => makeLoop(beginnerTickerItems.value))
