@@ -59,8 +59,7 @@
 
       <!-- 用户面板 -->
       <div class="sidebar-user">
-        <PersonaOrangeBadge v-if="personaAvatar.enabled" compact :equipment="personaAvatar.equipment" :appearance="personaAvatar.appearance" label="我的橙子画像头像" />
-        <el-avatar v-else :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
+        <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
           {{ (nickname || me.nickname || me.username || '?')[0] }}
         </el-avatar>
         <div class="sidebar-user-info">
@@ -180,8 +179,8 @@
 <script setup>
 import { useMainLayout } from '../composables/useMainLayout'
 
-const { GuideBubble, PersonaOrangeBadge, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
-  MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, personaAvatar, mobileNavItems,
+const { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
+  MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, mobileNavItems,
   accountId, logout, activeMenu } = useMainLayout()
 </script>
 

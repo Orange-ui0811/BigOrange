@@ -20,7 +20,6 @@ const mountProfile = () => mount(Profile, {
     mocks: { $router: { push: vi.fn() } },
     stubs: {
       PersonaProfileShowcase: { props: ['persona'], template: '<section class="profile-persona-3d">3D橙子画像</section>' },
-      PersonaOrangeBadge: { template: '<div class="persona-avatar" />' },
       'el-card': { template: '<section><slot /></section>' },
       'el-avatar': { template: '<div><slot /></div>' },
       'el-button': { template: '<button><slot /></button>' },
@@ -41,7 +40,7 @@ describe('Profile persona showcase', () => {
     } })
   })
 
-  it('loads the signed-in account public persona and renders its 3D showcase and avatar', async () => {
+  it('loads the signed-in account public persona and renders its 3D showcase without the retired persona avatar', async () => {
     getPublicPersona.mockResolvedValue({ code: 1, data: {
       enabled: true, avatarEnabled: true, equipment: [], appearance: {},
       dimensions: [{ code: 'GOAL', label: '当前目标', entries: [{ content: '学习 Agent' }] }],
@@ -53,7 +52,8 @@ describe('Profile persona showcase', () => {
     expect(get).toHaveBeenCalledWith('/app/profile/17')
     expect(getPublicPersona).toHaveBeenCalledWith('17')
     expect(wrapper.find('.profile-persona-3d').exists()).toBe(true)
-    expect(wrapper.find('.persona-avatar').exists()).toBe(true)
+    expect(wrapper.find('.profile-avatar').exists()).toBe(true)
+    expect(wrapper.find('.persona-avatar').exists()).toBe(false)
   })
 
   it('keeps private persona content off the personal homepage', async () => {

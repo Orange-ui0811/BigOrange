@@ -101,5 +101,6 @@ describe('PersonaWorkshop', () => {
     expect(wrapper.text()).toContain('先写下一条真实内容，即可解锁')
     expect(wrapper.text()).toContain('完成趋势分析')
     expect(wrapper.text()).toContain('从新手项目开始')
+    expect(wrapper.text()).not.toContain('使用橙子画像头像')
   })
 })

@@ -149,7 +149,6 @@
           <div class="node-card">
             <header class="node-heading"><div><span>ACCOUNT DISPLAY · 整体设置</span><h3>展示方式</h3></div></header>
             <div class="setting-row"><div><strong>在个人主页展示3D橙子与画像</strong><span>展示你的3D橙子、已确认画像和完成度，不展示素材箱内容</span></div><el-switch v-model="snapshot.settings.showcaseEnabled" @change="saveSettings" /></div>
-            <div class="setting-row"><div><strong>使用橙子画像头像</strong><span>在侧栏、我的页面和个人主页同步显示轻量橙子头像</span></div><el-switch v-model="snapshot.settings.avatarEnabled" :disabled="!snapshot.settings.showcaseEnabled" @change="saveSettings" /></div>
           </div>
         </section>
       </main>

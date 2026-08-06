@@ -4,11 +4,21 @@
     <!-- Compact Head -->
     <div class="compact-head">
       <div>
-        <span class="eyebrow">榜单中心</span>
+        <div class="head-toolbar">
+          <span class="eyebrow">榜单中心</span>
+          <label class="persona-model-control">
+            <span><strong>3D橙子</strong><small>{{ personaModelVisible ? '正在显示' : '已隐藏' }}</small></span>
+            <el-switch
+              :model-value="personaModelVisible"
+              aria-label="在榜单页显示3D橙子"
+              @change="setPersonaModelVisible"
+            />
+          </label>
+        </div>
         <h2>从平台热度到 GitHub 趋势，找到真正适合你的项目。</h2>
         <p>浏览站内作品、GitHub 热门仓库、新手可落地项目，或按真实岗位能力筛选职业成长项目。</p>
       </div>
-      <LeaderboardPersonaCard :source="source" @recommend="recommendWithPersona" />
+      <LeaderboardPersonaCard :source="source" :model-visible="personaModelVisible" @recommend="recommendWithPersona" />
     </div>
 
     <!-- 筛选栏 -->
@@ -126,10 +136,12 @@
 <script setup>
 import { useLeaderboard } from '../composables/useLeaderboard'
 import LeaderboardPersonaCard from '../components/LeaderboardPersonaCard.vue'
+import { useLeaderboardPersonaVisibility } from '../composables/useLeaderboardPersonaVisibility'
 
 const { PageTour, BeginnerProjects, CareerProjects, tourSteps, source, period, category, type,
   list, loading, page, pageSize, total, categories, warning, emptyText, load, onSourceChange,
   onClick, recommendWithPersona } = useLeaderboard()
+const { personaModelVisible, setPersonaModelVisible } = useLeaderboardPersonaVisibility()
 </script>
 
 <style scoped src="../styles/views/leaderboard.css"></style>

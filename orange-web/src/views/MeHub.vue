@@ -6,8 +6,7 @@
       <div>
         <div class="eyebrow">我的</div>
         <div class="author-row">
-          <PersonaOrangeBadge v-if="personaAvatar.enabled" compact :equipment="personaAvatar.equipment" :appearance="personaAvatar.appearance" label="我的橙子画像头像" />
-          <el-avatar v-else :size="44" class="me-avatar" :src="me.avatarUrl || undefined">
+          <el-avatar :size="44" class="me-avatar" :src="me.avatarUrl || undefined">
             {{ (me.nickname || me.username || '?')[0] }}
           </el-avatar>
           <div>
@@ -58,12 +57,10 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import PageTour from '../components/PageTour.vue'
-import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
 import request from '../api/request'
-import { usePersonaStore } from '../stores/personaStore'
 
 const mehubTour = [
   { selector: '.profile-summary', text: '顶部是你的个人信息和快捷操作：查看公开主页、编辑个人资料。', expression: 'smile' },
@@ -72,16 +69,9 @@ const mehubTour = [
 ]
 
 const me = ref({ username: '', nickname: '' })
-const personaStore = usePersonaStore()
-const personaAvatar = computed(() => ({
-  enabled: Boolean(personaStore.data.settings.showcaseEnabled && personaStore.data.settings.avatarEnabled),
-  equipment: personaStore.data.equipment,
-  appearance: personaStore.data.settings,
-}))
 
 onMounted(async () => {
   try { const res = await request.get('/app/profile/me'); if (res.code === 1) me.value = res.data } catch {}
-  try { await personaStore.load() } catch { personaStore.reset() }
 })
 </script>
 

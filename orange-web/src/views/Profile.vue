@@ -2,8 +2,7 @@
   <div v-loading="loading" class="profile-page">
     <el-card v-if="account" shadow="never" class="profile-card">
       <div class="profile-header">
-        <PersonaOrangeBadge v-if="persona.avatarEnabled" compact :equipment="persona.equipment" :appearance="persona.appearance" :label="`${profile?.nickname || account.username}的橙子画像头像`" />
-        <el-avatar v-else :size="64" class="profile-avatar" :src="profile?.avatarUrl || undefined">
+        <el-avatar :size="64" class="profile-avatar" :src="profile?.avatarUrl || undefined">
           {{ (profile?.nickname || account.username || '?')[0] }}
         </el-avatar>
         <div class="profile-info">
@@ -31,7 +30,6 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import request from '../api/request'
-import PersonaOrangeBadge from '../components/PersonaOrangeBadge.vue'
 import PersonaProfileShowcase from '../components/PersonaProfileShowcase.vue'
 import { getPublicPersonaWorkshop } from '../api/personaWorkshop'
 import { useAuthStore } from '../stores/authStore'

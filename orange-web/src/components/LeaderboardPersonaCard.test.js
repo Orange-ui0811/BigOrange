@@ -9,8 +9,8 @@ const push = vi.hoisted(() => vi.fn())
 vi.mock('../api/personaWorkshop', () => ({ getPersonaWorkshop: api }))
 vi.mock('vue-router', () => ({ useRouter: () => ({ push }) }))
 
-const mountCard = source => mount(LeaderboardPersonaCard, {
-  props: { source },
+const mountCard = (source, modelVisible = true) => mount(LeaderboardPersonaCard, {
+  props: { source, modelVisible },
   global: { plugins: [pinia], stubs: { OrangePersonaScene: true } },
 })
 
@@ -18,7 +18,6 @@ describe('LeaderboardPersonaCard', () => {
   beforeEach(() => {
     usePersonaStore(pinia).reset()
     api.mockReset(); push.mockReset()
-    localStorage.clear()
   })
 
   it('shows the current leaderboard context and emits a persona recommendation', async () => {
@@ -45,15 +44,13 @@ describe('LeaderboardPersonaCard', () => {
     expect(wrapper.emitted('recommend')).toBeUndefined()
   })
 
-  it('lets the user hide and restore the 3D orange model', async () => {
+  it('obeys the prominent page-level 3D model visibility control', async () => {
     api.mockResolvedValue({ code: 1, data: { dimensions: [], completion: { completedDimensions: 0 } } })
-    const wrapper = mountCard('local')
+    const wrapper = mountCard('local', false)
     await flushPromises()
 
-    expect(wrapper.find('.mini-stage').exists()).toBe(true)
-    await wrapper.get('.model-visibility-button').trigger('click')
     expect(wrapper.find('.mini-stage').exists()).toBe(false)
-    expect(localStorage.getItem('orangevc.leaderboardPersonaModelVisible')).toBe('false')
-    expect(wrapper.get('.model-visibility-button').text()).toContain('显示3D橙子')
+    await wrapper.setProps({ modelVisible: true })
+    expect(wrapper.find('.mini-stage').exists()).toBe(true)
   })
 })
