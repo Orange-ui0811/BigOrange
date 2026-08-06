@@ -34,7 +34,7 @@ class AuthServiceImplLoginTest {
         jwtProperties.setAppTtl(3_600_000L);
         authService = new AuthServiceImpl(accountMapper,
                 org.mockito.Mockito.mock(com.orangejd.server.mapper.UserProfileMapper.class),
-                passwordEncoder, jwtProperties, null,
+                passwordEncoder, jwtProperties,
                 org.mockito.Mockito.mock(com.orangejd.server.service.QuotaService.class),
                 org.mockito.Mockito.mock(com.orangejd.server.service.EmailVerificationCodeService.class));
     }

@@ -17,8 +17,6 @@ import com.orangejd.server.mapper.UserProfileMapper;
 import com.orangejd.server.service.AuthService;
 import com.orangejd.server.service.EmailVerificationCodeService;
 import com.orangejd.server.service.QuotaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,8 +39,6 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     private final JwtProperties jwtProperties;
-
-    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
     private final QuotaService quotaService;
     private final EmailVerificationCodeService verificationCodeService;
@@ -103,19 +99,8 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseException("该邮箱已注册，请直接登录");
         }
 
-        // 校验邮箱验证码
         String email = registerDTO.getEmail().trim().toLowerCase(Locale.ROOT);
-        if (redisTemplate != null) {
-            String cachedCode = redisTemplate.opsForValue().get("mail:code:" + email);
-            if (cachedCode == null) {
-                throw new BaseException("验证码已过期，请重新获取");
-            }
-            if (!cachedCode.equals(registerDTO.getCode())) {
-                throw new BaseException("验证码错误");
-            }
-            redisTemplate.delete("mail:code:" + email);
-            redisTemplate.delete("mail:limit:" + email);
-        }
+        verificationCodeService.verifyAndConsumeRegistrationCode(email, registerDTO.getCode());
 
         // 创建账号
         Account account = new Account();
@@ -180,23 +165,14 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void resetPassword(String email, String code, String newPassword) {
         email = email.trim().toLowerCase(Locale.ROOT);
-        // 验证码校验
-        if (redisTemplate != null) {
-            String cachedCode = redisTemplate.opsForValue().get("mail:reset:code:" + email);
-            if (cachedCode == null) {
-                throw new BaseException("验证码已过期，请重新获取");
-            }
-            if (!cachedCode.equals(code)) {
-                throw new BaseException("验证码错误");
-            }
-            redisTemplate.delete("mail:reset:code:" + email);
-            redisTemplate.delete("mail:reset:limit:" + email);
-        }
-        // 密码格式校验
         if (newPassword == null || !newPassword.matches("^(?=.*[A-Za-z])(?=.*\\d).{6,128}$")) {
             throw new BaseException("密码需为6到128位且必须包含字母和数字");
         }
         Account account = accountMapper.selectByEmail(email);
+        if (account == null) {
+            throw new BaseException("验证码已过期，请重新获取");
+        }
+        verificationCodeService.verifyAndConsumePasswordResetCode(email, code);
         accountMapper.updatePassword(account.getId(), passwordEncoder.encode(newPassword));
         log.info("密码重置成功 accountId={}", account.getId());
     }

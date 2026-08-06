@@ -37,6 +37,7 @@ const sendResetCode = async () => {
   if (!resetEmail.value || !resetEmail.value.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
   resetSending.value = true
   try {
+    resetEmail.value = resetEmail.value.trim().toLowerCase()
     const res = await request.post('/app/auth/send-reset-code', { email: resetEmail.value })
     if (res.code !== 1) return
     ElMessage.success('验证码已发送')
@@ -62,7 +63,7 @@ const doResetPwd = async () => {
   loading.value = true
   try {
     const res = await request.post('/app/auth/reset-password', {
-      email: resetEmail.value, code: resetCode.value, newPassword: resetNewPwd.value
+      email: resetEmail.value, code: resetCode.value.trim(), newPassword: resetNewPwd.value
     })
     if (res.code === 1) { resetStep.value = 3 }
     else ElMessage.error(res.msg)

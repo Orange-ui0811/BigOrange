@@ -116,9 +116,9 @@
         <!-- Step 2: 输入验证码 + 新密码 -->
         <template v-if="resetStep === 2">
           <label class="form-label">验证码</label>
-          <input v-model="resetCode" class="form-input" type="text" maxlength="6" placeholder="6位验证码" />
+          <input v-model="resetCode" class="form-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6位验证码" />
           <label class="form-label">新密码</label>
-          <input v-model="resetNewPwd" class="form-input" :type="showResetPwd ? 'text' : 'password'" placeholder="至少6位，包含字母和数字" />
+          <input v-model="resetNewPwd" class="form-input" :type="showResetPwd ? 'text' : 'password'" autocomplete="new-password" maxlength="128" placeholder="至少6位，包含字母和数字" />
           <span class="eye-toggle reset-eye" @click="showResetPwd = !showResetPwd">{{ showResetPwd ? '🙈' : '👁' }}</span>
           <button class="login-btn" :disabled="loading" @click="doResetPwd">{{ loading ? '修改中...' : '确认修改' }}</button>
         </template>

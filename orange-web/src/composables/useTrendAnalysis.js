@@ -13,6 +13,7 @@ export const useTrendAnalysis = (profile, onHistorySaved) => {
   const squeezeText = ref('🍊 正在收集数据...')
   const trendV1Cost = ref(50)
   const trendV2Cost = ref(50)
+  const pricingReady = ref(false)
   const aiQuestion = ref('')
   const aiReply = ref('')
   const aiReplyHtml = ref('')
@@ -26,6 +27,11 @@ export const useTrendAnalysis = (profile, onHistorySaved) => {
       error.value = '请先选择一个技术方向，或开启“使用橙子画像进行分析”'
       ElMessage.warning(error.value)
       currentStep.value = 0
+      return
+    }
+    if (!(await loadPricing())) {
+      error.value = '暂时无法获取最新配额定价，请稍后重试'
+      ElMessage.warning(error.value)
       return
     }
     if (!(await confirmQuotaUsage({ actionLabel: '本次趋势分析', cost: trendV2Cost.value,
@@ -64,6 +70,7 @@ export const useTrendAnalysis = (profile, onHistorySaved) => {
 
   const askAI = async () => {
     if (!aiQuestion.value.trim()) { aiError.value = '请输入分析问题'; return }
+    if (!(await loadPricing())) { aiError.value = '暂时无法获取最新配额定价，请稍后重试'; return }
     if (!(await confirmQuotaUsage({ actionLabel: '本次趋势提问', cost: trendV1Cost.value,
       title: '确认发送', confirmButtonText: '确认发送', type: 'info', estimatedTime: '1～2 分钟' }))) return
     aiLoading.value = true
@@ -83,12 +90,20 @@ export const useTrendAnalysis = (profile, onHistorySaved) => {
   const loadPricing = async () => {
     try {
       const response = await request.get('/app/config/ai-pricing')
-      if (Number.isFinite(Number(response.data?.trendV1))) trendV1Cost.value = Number(response.data.trendV1)
-      if (Number.isFinite(Number(response.data?.trendV2))) trendV2Cost.value = Number(response.data.trendV2)
-    } catch { /* defaults preserve current pricing labels */ }
+      const v1 = Number(response.data?.trendV1)
+      const v2 = Number(response.data?.trendV2)
+      if (!Number.isFinite(v1) || !Number.isFinite(v2)) throw new Error('invalid pricing response')
+      trendV1Cost.value = v1
+      trendV2Cost.value = v2
+      pricingReady.value = true
+      return true
+    } catch {
+      pricingReady.value = false
+      return false
+    }
   }
   const dispose = () => clearInterval(squeezeTimer)
   return { analyzing, v2Result: result, v2Error: error, juicing, squeezeText,
-    trendV1Cost, trendV2Cost, aiQuestion, aiReply, aiReplyHtml, aiLoading, aiError,
+    trendV1Cost, trendV2Cost, pricingReady, aiQuestion, aiReply, aiReplyHtml, aiLoading, aiError,
     startJuicing, askAI, loadPricing, dispose }
 }

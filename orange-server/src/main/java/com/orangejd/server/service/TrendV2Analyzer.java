@@ -18,6 +18,7 @@ import java.util.Map;
 @Service
 public class TrendV2Analyzer {
     private static final Logger log = LoggerFactory.getLogger(TrendV2Analyzer.class);
+    private static final int MATCH_LIMIT = 3;
     private final KnowledgeGraphService graphService;
     private final QuotaService quotaService;
     private final PricingService pricingService;
@@ -59,17 +60,18 @@ public class TrendV2Analyzer {
             return result;
         }
         List<BeginnerProjectView> beginner = Boolean.TRUE.equals(input.preferBeginnerProjects())
-                && beginnerProjects != null ? beginnerProjects.recommend(input.topics(), input.languages(), 5) : List.of();
+                && beginnerProjects != null
+                ? beginnerProjects.recommend(input.topics(), input.languages(), MATCH_LIMIT) : List.of();
         List<CareerProjectView> career = Boolean.TRUE.equals(input.preferCareerProjects())
                 && careerProjects != null ? careerProjects.recommend(
-                input.topics(), input.languages(), input.purpose(), 5) : List.of();
+                input.topics(), input.languages(), input.purpose(), MATCH_LIMIT) : List.of();
         String prompt = prompt(input, accountId, graph, beginner, career);
         try {
             String content = modelClient.complete(runtime, promptFactory.v2(runtime, prompt));
             long balance = accountId != null ? quotaService.getBalance(accountId) : 0;
             return resultAssembler.assemble(content, balance, beginner, career,
                     Boolean.TRUE.equals(input.preferBeginnerProjects())
-                            || Boolean.TRUE.equals(input.preferCareerProjects()));
+                            || Boolean.TRUE.equals(input.preferCareerProjects()), input);
         } catch (Exception error) {
             handleFailure(error, accountId, requestId, charge, routerManaged, result);
             return result;
@@ -79,8 +81,12 @@ public class TrendV2Analyzer {
     private String prompt(TrendAnalysisInput input, Long accountId, Map<String, Object> graph,
                           List<BeginnerProjectView> beginner, List<CareerProjectView> career) {
         String rag = contextBuilder.rag(input);
+        String beginnerContext = contextBuilder.beginnerCases(beginner);
+        String careerContext = contextBuilder.careerCases(career);
         return contextBuilder.profile(input, accountId) + "\n\n" + contextBuilder.graphSummary(graph)
                 + (rag.isEmpty() ? "" : "\n\n## 知识库参考\n" + rag)
+                + (beginnerContext.isEmpty() ? "" : "\n\n## 本次匹配的新手项目（最多 3 个）\n" + beginnerContext)
+                + (careerContext.isEmpty() ? "" : "\n\n## 本次匹配的职业成长项目（最多 3 个）\n" + careerContext)
                 + "\n\n请基于用户画像、数据和知识库参考，严格按 JSON 格式输出推荐结果。";
     }
 

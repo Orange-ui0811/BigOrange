@@ -136,24 +136,7 @@
               <span class="form-title">智能分析</span>
               <span class="form-title-sub">告诉我你的想法</span>
             </div>
-            <el-popover placement="bottom-end" width="320" trigger="click" v-if="hasAppToken">
-              <template #reference>
-                <el-button size="small" text>{{ history.length ? '记录 ('+history.length+')' : '记录' }}</el-button>
-              </template>
-              <div class="history-popover">
-                <div v-if="!history.length" class="history-empty">暂无记录</div>
-                <div v-for="(h,i) in history" :key="i" class="history-item" @click="loadHistory(h)">
-                  <div class="history-item-text">
-                    <span class="history-topic">{{ Array.isArray(h.topics) && h.topics.length ? h.topics.join('、') : '全部' }}</span>
-                    <span class="history-time">{{ (h.time||'').substring(0,16) }}</span>
-                  </div>
-                  <el-button size="small" text type="danger" @click.stop="delHistory(i)">✕</el-button>
-                </div>
-              </div>
-              <div v-if="history.length" class="history-clear-row">
-                <el-button size="small" type="danger" text @click="clearHistory">清空全部</el-button>
-              </div>
-            </el-popover>
+            <TrendHistoryPopover v-if="hasAppToken" :history="history" @select="loadHistory" @delete="delHistory" @clear="clearHistory" />
           </div>
           <!-- 步骤指示器 -->
           <div class="steps-bar">
@@ -225,7 +208,11 @@
           v-model:prefer-career-projects="profile.preferCareerProjects"
           :analyzing="analyzing"
           @analyze="startJuicing"
-        />
+        >
+          <template #actions>
+            <TrendHistoryPopover v-if="hasAppToken" :history="history" @select="loadHistory" @delete="delHistory" @clear="clearHistory" />
+          </template>
+        </TrendPersonaAnalysisCard>
       </div>
     </div>
 
@@ -299,7 +286,7 @@
           <article v-for="project in v2Result.beginnerCases" :key="project.id" class="beginner-case-card">
             <div><span>{{ project.primaryLanguage || 'GitHub' }}</span><b>{{ project.beginnerScore }}/100</b></div>
             <h3>{{ project.descriptionZh || project.repositoryName }}</h3>
-            <p>{{ project.beginnerReason }}</p>
+            <p><b>匹配说明：</b>{{ project.matchExplanation || project.beginnerReason }}</p>
             <footer><a :href="project.htmlUrl" target="_blank" rel="noopener noreferrer">查看仓库</a><button type="button" @click="importBeginnerCase(project)">用于方案设计</button></footer>
           </article>
         </div>
@@ -312,7 +299,7 @@
           <article v-for="project in v2Result.careerCases" :key="project.id" class="beginner-case-card career-case-card">
             <div><span>{{ project.bestRoleName || '职业成长' }}</span><b>{{ project.overallScore }}/100</b></div>
             <h3>{{ project.summaryZh || project.repositoryName }}</h3>
-            <p>{{ project.careerValue || project.descriptionOriginal }}</p>
+            <p><b>匹配说明：</b>{{ project.matchExplanation || project.careerValue || project.descriptionOriginal }}</p>
             <footer><a :href="project.htmlUrl" target="_blank" rel="noopener noreferrer">查看仓库</a><button type="button" @click="importCareerCase(project)">用于方案设计</button></footer>
           </article>
         </div>
@@ -387,6 +374,7 @@ import { marked } from 'marked'
 import PageTour from '../components/PageTour.vue'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import TrendPersonaAnalysisCard from '../components/TrendPersonaAnalysisCard.vue'
+import TrendHistoryPopover from '../components/TrendHistoryPopover.vue'
 import request from '../api/request'
 import { LEGAL_CONTACT } from '../content/legal'
 import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
@@ -515,7 +503,8 @@ const loadJobDetail = async () => {
 }
 
 onMounted(async () => {
-  loadGraph(); loadHistoryFromDB(); loadDirections(); analysis.loadPricing()
+  loadGraph(); loadHistoryFromDB(); loadDirections()
+  await analysis.loadPricing()
   if (leaderboardAutoAnalyze) {
     const query = { ...route.query }
     delete query.autoAnalyze

@@ -85,7 +85,7 @@ public class AppAuthController {
     @PostMapping("/reset-password")
     public Result<?> resetPassword(@RequestBody Map<String, String> body, HttpServletRequest request) {
         String email = normalizeEmail(body.get("email"));
-        String code = body.get("code");
+        String code = body.get("code") == null ? null : body.get("code").trim();
         String newPassword = body.get("newPassword");
         if (!validEmail(email) || code == null || !code.matches("^\\d{6}$")
                 || newPassword == null || newPassword.length() > 128) return Result.error("参数格式不正确");
