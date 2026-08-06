@@ -402,7 +402,7 @@ const analysis = useTrendAnalysis(profile, () => refreshHistory?.())
 const { analyzing, v2Result, v2Error, juicing, squeezeText, trendV1Cost, trendV2Cost,
   aiQuestion, aiReply, aiReplyHtml, aiLoading, aiError, askAI } = analysis
 const historyFeature = useTrendHistory({ profile, result: v2Result, currentStep })
-const { history, loadHistoryFromDB, delHistory, clearHistory, loadHistory } = historyFeature
+const { history, hasAppToken, loadHistoryFromDB, delHistory, clearHistory, loadHistory } = historyFeature
 refreshHistory = loadHistoryFromDB
 const chartFeature = useTrendChart()
 const { chartRef, graphLoading, viewMode, graphData, insights, selectedNode, selectedEdge,
