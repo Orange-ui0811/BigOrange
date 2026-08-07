@@ -29,7 +29,7 @@ cleanup() {
 }
 
 restore_nginx() {
-  if [[ "$NGINX_HAD_CONFIG" == true && -f "$BACKUP/nginx-site.conf" ]]; then
+  if [[ "$NGINX_HAD_CONFIG" == true ]] && sudo test -f "$BACKUP/nginx-site.conf"; then
     sudo install -o root -g root -m 0644 "$BACKUP/nginx-site.conf" "$NGINX_TARGET"
   else
     sudo rm -f -- "$NGINX_TARGET"
@@ -43,10 +43,10 @@ rollback() {
   if [[ "$ROLLED_BACK" == false ]]; then
     ROLLED_BACK=true
     echo "Deployment failed; restoring files from $BACKUP" >&2
-    if [[ -f "$BACKUP/orange-server.jar" ]]; then
+    if sudo test -f "$BACKUP/orange-server.jar"; then
       sudo systemctl stop "$SERVICE" || true
       sudo install -o admin -g admin -m 0640 "$BACKUP/orange-server.jar" "$APP_ROOT/orange-server.jar"
-      if [[ -d "$BACKUP/web-dist" ]]; then
+      if sudo test -d "$BACKUP/web-dist"; then
         sudo rm -rf -- "$APP_ROOT/web-dist"
         sudo cp -a "$BACKUP/web-dist" "$APP_ROOT/web-dist"
         sudo chown -R admin:admin "$APP_ROOT/web-dist"
@@ -153,7 +153,7 @@ sudo systemctl is-active --quiet "$SERVICE"
 sudo systemctl reload nginx
 
 PUBLIC_URL="https://$DOMAIN"
-CURL_TARGET_ARGS=(--resolve "$DOMAIN:443:127.0.0.1")
+CURL_TARGET_ARGS=(--noproxy '*' --resolve "$DOMAIN:443:127.0.0.1")
 assert_http_status "$PUBLIC_URL/market" 200
 assert_http_status "$PUBLIC_URL/assets/release-check-$STAMP.js" 404
 assert_http_status "$PUBLIC_URL/.env" 404
