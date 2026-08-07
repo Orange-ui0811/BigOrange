@@ -18,6 +18,10 @@ public final class ApiRoutePolicy {
             "/app/config/rewards",
             "/app/config/ai-pricing",
             "/app/leaderboard/**",
+            "/app/beginner-projects/weekly",
+            "/app/career-projects/weekly",
+            "/app/open-source/ticker",
+            "/app/competition/list",
             "/app/trend/graph",
             "/ws/**"
     );

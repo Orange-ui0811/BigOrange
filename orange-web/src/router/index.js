@@ -12,10 +12,10 @@ export const routes = [
     path: '/',
     name: 'Main',
     component: () => import('../layouts/MainLayout.vue'),
-    redirect: '/market',
+    redirect: '/ai',
     children: [
       { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '公开作品与需求市场', description: '公开浏览 Vibe Coding 作品与真实项目需求，登录后再进行互动。', public: true } },
-      { path: 'ai', name: 'AiHub', component: () => import('../views/AiHub.vue'), meta: { title: 'AI 工具' } },
+      { path: 'ai', name: 'AiHub', component: () => import('../views/AiHub.vue'), meta: { title: 'AI 工具', description: `${PUBLIC_BRAND_NAME} AI 工具、新手项目、职业成长与开源机会入口。`, public: true } },
       { path: 'ai-records', name: 'AiRecords', component: () => import('../views/AiRecords.vue'), meta: { title: 'AI 分析记录' } },
       { path: 'persona-workshop', name: 'PersonaWorkshop', component: () => import('../views/PersonaWorkshop.vue'), meta: { title: '橙子画像工坊' } },
       { path: 'project-tools', name: 'ProjectTools', component: () => import('../views/ProjectTools.vue'), meta: { title: '做自己的项目' } },

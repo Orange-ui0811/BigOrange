@@ -157,7 +157,7 @@ describe('page flow composables', () => {
   it('keeps public browsing free of protected account requests', async () => {
     const { exposed, wrapper } = await mountFlow(useMainLayout)
     expect(exposed.authenticated.value).toBe(false)
-    expect(exposed.visibleMobileNavItems.value.map(item => item.path)).toEqual(['/market', '/login'])
+    expect(exposed.visibleMobileNavItems.value.map(item => item.path)).toEqual(['/ai', '/market', '/login'])
     expect(request.get).not.toHaveBeenCalled()
     wrapper.unmount()
   })

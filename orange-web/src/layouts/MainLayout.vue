@@ -70,7 +70,7 @@
       </div>
       <div v-else class="sidebar-guest">
         <strong>公开浏览模式</strong>
-        <span>当前可安全浏览公开作品与需求，登录后再使用发布、消息和 AI 工具。</span>
+        <span>当前可浏览 AI 工具首页与公开作品，登录后即可开始分析、保存记录和使用完整功能。</span>
         <button type="button" @click="router.push('/login')">登录或注册</button>
       </div>
 
@@ -85,7 +85,7 @@
             <span>发现</span>
           </span>
         </el-menu-item>
-        <el-menu-item v-if="authenticated" index="/ai">
+        <el-menu-item index="/ai">
           <span class="nav-item-content">
             <el-icon><Cpu /></el-icon>
             <span>AI 工具</span>

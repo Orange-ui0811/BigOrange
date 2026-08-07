@@ -31,12 +31,15 @@ describe('view and route smoke coverage', () => {
     }
   })
 
-  it('keeps the public market crawlable and unknown routes out of the login flow', () => {
+  it('uses the public AI tools page as the default entry and keeps unknown routes out of the login flow', () => {
     const main = routes.find(route => route.name === 'Main')
     const market = main.children.find(route => route.name === 'Market')
+    const aiHub = main.children.find(route => route.name === 'AiHub')
     const notFound = routes.find(route => route.name === 'NotFound')
     const login = routes.find(route => route.name === 'Login')
 
+    expect(main.redirect).toBe('/ai')
+    expect(aiHub.meta.public).toBe(true)
     expect(market.meta.public).toBe(true)
     expect(notFound.meta.public).toBe(true)
     expect(notFound.meta.robots).toBe('noindex,nofollow')
@@ -44,6 +47,7 @@ describe('view and route smoke coverage', () => {
   })
 
   it('publishes consistent crawler and security contact files', () => {
+    expect(sitemap).toContain('<loc>https://orangevf.com/ai</loc>')
     expect(sitemap).toContain('<loc>https://orangevf.com/market</loc>')
     expect(sitemap).not.toContain('<loc>https://orangevf.com/login</loc>')
     expect(robots).toContain('Sitemap: https://orangevf.com/sitemap.xml')

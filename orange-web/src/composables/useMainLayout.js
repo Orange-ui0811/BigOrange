@@ -27,6 +27,7 @@ const mobileNavItems = [
   { path: '/me', label: '我的', icon: User },
 ]
 const guestMobileNavItems = [
+  { path: '/ai', label: 'AI 工具', icon: Cpu },
   { path: '/market', label: '公开市场', icon: Shop },
   { path: '/login', label: '登录', icon: User },
 ]
@@ -50,7 +51,7 @@ const activeMenu = computed(() => {
   if (p.startsWith('/publish')) return '/publish'
   if (p.startsWith('/chat')) return '/chat'
   if (p.startsWith('/me') || p.startsWith('/profile')) return '/me'
-  return '/market'
+  return '/ai'
 })
 
 onMounted(async () => {
