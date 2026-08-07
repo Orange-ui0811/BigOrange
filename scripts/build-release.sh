@@ -42,6 +42,7 @@ npm --prefix orange-admin run lint
 npm --prefix orange-admin run typecheck
 npm --prefix orange-admin test -- --run
 npm --prefix orange-admin run build
+node scripts/check-public-brand.mjs --include-dist
 node scripts/check-frontend-bundles.mjs
 
 mkdir -p "$STAGE_DIR/web-dist/admin" "$STAGE_DIR/config" "$STAGE_DIR/database"

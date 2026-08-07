@@ -30,7 +30,7 @@
 ## 项目结构
 
 ```
-OrangeJD
+OrangeVC
 ├── orange-common/     共享工具：Result、PageResult、JwtUtil、BaseContext、异常类
 ├── orange-pojo/       数据模型：Entity、DTO、VO
 ├── orange-server/     后端服务：Controller、Service、Mapper、Task、Config、AI
@@ -121,7 +121,7 @@ mysql -uroot -p -e "CREATE DATABASE IF NOT EXISTS orangejd CHARACTER SET utf8mb4
 # 3. 后端。仅在空库第一次启动时提供一次性管理员凭据
 export ORANGE_ADMIN_BOOTSTRAP_USERNAME=owner
 export ORANGE_ADMIN_BOOTSTRAP_PASSWORD='replace-with-a-strong-password'
-cd OrangeJD
+cd <repository-root>
 mvn install -DskipTests
 cd orange-server
 mvn spring-boot:run -Dspring-boot.run.profiles=dev

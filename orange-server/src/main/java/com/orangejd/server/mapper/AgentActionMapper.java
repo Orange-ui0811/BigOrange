@@ -131,7 +131,7 @@ public interface AgentActionMapper {
 
     @Update("""
             UPDATE agent_action_task SET status = 'FAILED', error_code = 'SERVER_RESTARTED',
-                spoken_summary = '任务因 OrangeJD 服务重启而中断，请在网页核对结果和配额记录。',
+                spoken_summary = '任务因 OrangeVC 服务重启而中断，请在网页核对结果和配额记录。',
                 finished_at = NOW()
             WHERE status IN ('QUEUED', 'RUNNING')
             """)

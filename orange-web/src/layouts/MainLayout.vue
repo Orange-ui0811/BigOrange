@@ -52,7 +52,7 @@
           <rect x="20" y="30" width="1" height="1" fill="#5c260f" />
         </svg>
         <div class="sidebar-brand-text">
-          <span class="brand-name">OrangeVC</span>
+          <span class="brand-name">{{ PUBLIC_BRAND_NAME }}</span>
           <span class="brand-sub">vibe coding market</span>
         </div>
       </div>
@@ -167,7 +167,7 @@
     <el-container>
       <el-header class="app-header">
         <div class="topbar-title">
-          <h1>{{ route.meta.title || 'OrangeVC' }}</h1>
+          <h1>{{ route.meta.title || PUBLIC_BRAND_NAME }}</h1>
         </div>
         <div class="top-actions"></div>
       </el-header>
@@ -191,6 +191,7 @@
 
 <script setup>
 import { useMainLayout } from '../composables/useMainLayout'
+import { PUBLIC_BRAND_NAME } from '../config/brand'
 
 const { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
   MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, visibleMobileNavItems,

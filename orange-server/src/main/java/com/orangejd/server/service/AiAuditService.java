@@ -73,7 +73,7 @@ public class AiAuditService {
     private final AtomicInteger runningCount = new AtomicInteger();
 
     private static final String SYSTEM_PROMPT =
-        "你是 OrangeJD 平台的 AI 内容审核员。审核用户提交的作品/需求。\n\n" +
+        "你是 OrangeVC 平台的 AI 内容审核员。审核用户提交的作品/需求。\n\n" +
         "审核规则（按优先级）：\n" +
         "1. 【红线-必拒】内容涉及血腥暴力、色情、政治敏感、违法犯罪、不良诱导 → 直接拒绝\n" +
         "2. 【基础质量】标题有意义且长度 ≥ 2 字；简介/描述 ≥ 10 字 → 否则拒绝\n" +

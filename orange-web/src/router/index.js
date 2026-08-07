@@ -2,9 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { transactionUiEnabled } from '../stores/tradeMode'
 import { pinia } from '../stores'
 import { useAuthStore } from '../stores/authStore'
+import { PUBLIC_BRAND_NAME } from '../config/brand'
 
 export const routes = [
-  { path: '/login', name: 'Login', component: () => import('../views/Login.vue'), meta: { title: '登录与注册', description: '登录或注册 OrangeVC 官方账号。', robots: 'noindex,nofollow' } },
+  { path: '/login', name: 'Login', component: () => import('../views/Login.vue'), meta: { title: '登录与注册', description: `登录或注册 ${PUBLIC_BRAND_NAME} 官方账号。`, robots: 'noindex,nofollow' } },
   { path: '/legal/:document(terms|privacy|third-parties)', name: 'LegalDocument', component: () => import('../views/LegalDocument.vue'), meta: { title: '法律与隐私', description: 'OrangeVC 用户协议、隐私政策与第三方服务清单。', public: true } },
   { path: '/support', name: 'SupportCenter', component: () => import('../views/SupportCenter.vue'), meta: { title: '账号、数据、举报与申诉', description: 'OrangeVC 账号、数据权利、安全举报与申诉渠道。', public: true } },
   {
@@ -62,7 +63,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(to => {
-  document.title = `${to.meta.title || 'OrangeVC'} · OrangeVC`
+  document.title = `${to.meta.title || PUBLIC_BRAND_NAME} · ${PUBLIC_BRAND_NAME}`
   const setMeta = (name, content) => {
     let element = document.head.querySelector(`meta[name="${name}"]`)
     if (!element) {
@@ -72,7 +73,7 @@ router.afterEach(to => {
     }
     element.setAttribute('content', content)
   }
-  setMeta('description', to.meta.description || 'OrangeVC · Vibe Coding 作品、项目与 AI 工具平台')
+  setMeta('description', to.meta.description || `${PUBLIC_BRAND_NAME} · Vibe Coding 作品、项目与 AI 工具平台`)
   setMeta('robots', to.meta.robots || 'index,follow')
   let canonical = document.head.querySelector('link[rel="canonical"]')
   if (!canonical) {

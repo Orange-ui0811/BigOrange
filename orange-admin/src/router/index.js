@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { PUBLIC_BRAND_NAME } from '../config/brand'
 
 const routes = [
   {
@@ -51,7 +52,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(to => {
-  document.title = `${to.meta.title || '管理端'} · OrangeJD`
+  document.title = `${to.meta.title || '管理端'} · ${PUBLIC_BRAND_NAME}`
   window.scrollTo({ top: 0, left: 0 })
   requestAnimationFrame(() => document.getElementById('admin-main-content')?.focus({ preventScroll: true }))
 })

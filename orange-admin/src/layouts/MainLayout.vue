@@ -3,7 +3,7 @@
     <a class="skip-link" href="#admin-main-content">跳到主要内容</a>
     <el-aside width="220px" class="admin-sidebar">
       <div class="admin-brand">
-        OrangeJD
+        {{ PUBLIC_BRAND_NAME }}
         <span>管理端</span>
       </div>
       <el-menu :default-active="route.path" background-color="#1a1a2e" text-color="#8890a0" active-text-color="#e65100" router>
@@ -28,7 +28,7 @@
     </el-container>
 
     <el-drawer v-model="mobileMenuOpen" direction="ltr" size="280px" :with-header="false" class="admin-mobile-drawer">
-      <div class="drawer-brand">OrangeJD <span>管理端</span></div>
+      <div class="drawer-brand">{{ PUBLIC_BRAND_NAME }} <span>管理端</span></div>
       <el-menu :default-active="route.path" router @select="mobileMenuOpen = false">
         <el-menu-item v-for="item in visibleNavItems" :key="item.path" :index="item.path">
           <el-icon><component :is="item.icon" /></el-icon>{{ item.label }}
@@ -43,6 +43,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import request from '../api/request'
 import { tradeEnabled } from '../stores/tradeMode'
+import { PUBLIC_BRAND_NAME } from '../config/brand'
 const route = useRoute()
 const router = useRouter()
 const mobileMenuOpen = ref(false)

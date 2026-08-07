@@ -1,5 +1,6 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.constant.BrandConstant;
 import com.orangejd.common.exception.BaseException;
 import com.orangejd.pojo.entity.TopUp;
 import com.orangejd.server.config.EpayProperties;
@@ -30,7 +31,7 @@ public class EpayServiceImpl implements EpayService {
         // 100 segments = 1 元
         BigDecimal money = new BigDecimal(amount).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
 
-        return createPayment(tradeNo, money, method, "OrangeJD 配额充值");
+        return createPayment(tradeNo, money, method, BrandConstant.PUBLIC_NAME + " 配额充值");
     }
 
     @Override
@@ -38,7 +39,7 @@ public class EpayServiceImpl implements EpayService {
         if (money == null || money.signum() <= 0 || money.scale() > 2) {
             throw new BaseException("支付金额格式错误");
         }
-        String safeSubject = subject == null ? "OrangeJD 订单支付" : subject.trim();
+        String safeSubject = subject == null ? BrandConstant.PUBLIC_NAME + " 订单支付" : subject.trim();
         if (safeSubject.isEmpty() || safeSubject.length() > 64) {
             throw new BaseException("支付商品名称无效");
         }

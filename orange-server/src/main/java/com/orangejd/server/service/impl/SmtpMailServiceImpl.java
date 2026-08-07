@@ -1,5 +1,6 @@
 package com.orangejd.server.service.impl;
 
+import com.orangejd.common.constant.BrandConstant;
 import com.orangejd.server.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class SmtpMailServiceImpl implements MailService {
             SimpleMailMessage msg = new SimpleMailMessage();
             msg.setFrom(from);
             msg.setTo(toEmail);
-            msg.setSubject("OrangeJD 注册验证码");
+            msg.setSubject(BrandConstant.PUBLIC_NAME + " 安全验证码");
             msg.setText("您的验证码是：" + code + "，5 分钟内有效。请勿泄露给他人。");
             mailSender.send(msg);
             log.info("验证码邮件发送成功: {}", maskEmail(toEmail));

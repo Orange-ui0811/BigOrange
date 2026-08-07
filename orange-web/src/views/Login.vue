@@ -56,7 +56,7 @@
       </div>
 
       <!-- 品牌标题 -->
-      <h1 class="brand-title">OrangeVC</h1>
+      <h1 class="brand-title">{{ PUBLIC_BRAND_NAME }}</h1>
       <p class="brand-summary">面向 Vibe Coding 学习者与创作者的作品、项目和 AI 工具平台</p>
       <div class="official-site" aria-label="官方网站信息">
         <span>官方网站</span>
@@ -234,6 +234,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useAuthFlow } from '../composables/useAuthFlow'
+import { PUBLIC_BRAND_NAME } from '../config/brand'
 import {
   LEGAL_CONTACT,
   LEGAL_ICP_RECORD,

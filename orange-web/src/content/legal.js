@@ -1,3 +1,5 @@
+import { OFFICIAL_SITE_URL as DEFAULT_OFFICIAL_SITE_URL } from '../config/brand'
+
 export const LEGAL_VERSION = '2026-07-19'
 export const LEGAL_CONTACT = import.meta.env.VITE_LEGAL_CONTACT_EMAIL || 'support@example.com'
 export const LEGAL_UPDATED_AT = '2026年7月19日'
@@ -7,7 +9,8 @@ export const LEGAL_REGISTERED_ADDRESS = import.meta.env.VITE_LEGAL_REGISTERED_AD
 export const LEGAL_CREDIT_CODE = import.meta.env.VITE_LEGAL_CREDIT_CODE || ''
 export const LEGAL_ICP_RECORD = import.meta.env.VITE_LEGAL_ICP_RECORD || ''
 export const LEGAL_PUBLIC_SECURITY_RECORD = import.meta.env.VITE_LEGAL_PUBLIC_SECURITY_RECORD || ''
-export const OFFICIAL_SITE_URL = import.meta.env.VITE_OFFICIAL_SITE_URL || 'https://orangevf.com'
+
+export const OFFICIAL_SITE_URL = import.meta.env.VITE_OFFICIAL_SITE_URL || DEFAULT_OFFICIAL_SITE_URL
 
 const incompleteIdentityValues = ['OrangeVC 运营者（以网站首页/备案公示的主体信息为准）', 'orange团队', 'YOUR_LEGAL_ENTITY_NAME']
 export const LEGAL_IDENTITY_COMPLETE = Boolean(

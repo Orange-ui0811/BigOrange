@@ -106,7 +106,7 @@ public class KnowledgeReindexService {
             current = new ReindexStatus("CHECKING", entities.size(), 0, 0, 0, 0, 0,
                     startedAt, null, "Checking embedding service");
 
-            float[] probe = embeddingModel.embed("OrangeJD knowledge reindex connectivity check");
+            float[] probe = embeddingModel.embed("OrangeVC knowledge reindex connectivity check");
             if (probe == null || probe.length == 0) {
                 throw new IllegalStateException("Embedding service returned an empty vector");
             }

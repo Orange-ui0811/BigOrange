@@ -1,5 +1,6 @@
 package com.orangejd.server.service;
 
+import com.orangejd.common.constant.BrandConstant;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.constant.OrderStatus;
@@ -113,7 +114,7 @@ public class OrderPaymentApplicationService {
             }
         }
 
-        String subject = "OrangeJD 订单#" + order.getId()
+        String subject = BrandConstant.PUBLIC_NAME + " 订单#" + order.getId()
                 + ("DEPOSIT".equals(stageType) ? " 定金" : " 尾款");
         String payUrl = epayService.createPayment(
                 payment.getTradeNo(), payment.getAmount(), payment.getPaymentMethod(), subject);
