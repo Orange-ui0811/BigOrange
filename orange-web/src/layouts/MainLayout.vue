@@ -152,7 +152,7 @@
           <router-link to="/support">举报申诉</router-link>
         </div>
         <div class="site-identity-mini">
-          <span>{{ legalOperator }}</span>
+          <span>{{ publicOperatorLabel }}</span>
           <a :href="officialSiteUrl">orangevf.com</a>
           <a v-if="legalIcpRecord" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ legalIcpRecord }}</a>
         </div>
@@ -175,6 +175,11 @@
       </el-header>
       <el-main id="main-content" class="app-main" tabindex="-1">
         <router-view />
+        <footer class="app-site-footer" aria-label="网站备案信息">
+          <span>{{ publicOperatorLabel }}</span>
+          <a :href="officialSiteUrl">orangevf.com</a>
+          <a v-if="legalIcpRecord" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ legalIcpRecord }}</a>
+        </footer>
       </el-main>
     </el-container>
 
@@ -198,7 +203,7 @@ import { PUBLIC_BRAND_NAME } from '../config/brand'
 const { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
   MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, visibleMobileNavItems,
   accountId, authenticated, router, logout, activeMenu,
-  legalIcpRecord, legalOperator, officialSiteUrl } = useMainLayout()
+  legalIcpRecord, publicOperatorLabel, officialSiteUrl } = useMainLayout()
 </script>
 
 <style scoped src="../styles/layouts/main-layout.css"></style>

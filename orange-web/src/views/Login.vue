@@ -221,8 +221,8 @@
         <router-link to="/legal/third-parties">第三方服务</router-link>
         <router-link to="/support">举报与申诉</router-link>
       </footer>
-      <div class="login-identity" aria-label="运营主体信息">
-        <span>{{ LEGAL_OPERATOR }}</span>
+      <div class="login-identity" aria-label="网站公示信息">
+        <span>{{ PUBLIC_OPERATOR_LABEL }}</span>
         <a :href="`mailto:${LEGAL_CONTACT}`">{{ LEGAL_CONTACT }}</a>
         <a v-if="LEGAL_ICP_RECORD" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ LEGAL_ICP_RECORD }}</a>
         <strong v-if="!LEGAL_IDENTITY_COMPLETE" class="identity-warning">生产上线前须配置真实运营主体与备案信息</strong>
@@ -234,12 +234,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useAuthFlow } from '../composables/useAuthFlow'
-import { PUBLIC_BRAND_NAME } from '../config/brand'
+import { PUBLIC_BRAND_NAME, PUBLIC_OPERATOR_LABEL } from '../config/brand'
 import {
   LEGAL_CONTACT,
   LEGAL_ICP_RECORD,
   LEGAL_IDENTITY_COMPLETE,
-  LEGAL_OPERATOR,
   OFFICIAL_SITE_URL,
   REGISTRATION_ENABLED,
 } from '../content/legal'

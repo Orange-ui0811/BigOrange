@@ -7,7 +7,8 @@ import request from '../api/request'
 import { unreadCount, avatarUrl, nickname, loadUnreadCount, resetNotificationState } from '../stores/unread'
 import { loadTradeMode, resetTradeMode } from '../stores/tradeMode'
 import { useAuthStore } from '../stores/authStore'
-import { LEGAL_ICP_RECORD, LEGAL_OPERATOR, OFFICIAL_SITE_URL } from '../content/legal'
+import { LEGAL_ICP_RECORD, OFFICIAL_SITE_URL } from '../content/legal'
+import { PUBLIC_OPERATOR_LABEL } from '../config/brand'
 
 export const useMainLayout = () => {
 const route = useRoute()
@@ -65,4 +66,5 @@ onMounted(async () => {
   return { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
     MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, visibleMobileNavItems,
     accountId: authStore.accountId, authenticated, router, logout, activeMenu,
-    legalIcpRecord: LEGAL_ICP_RECORD, legalOperator: LEGAL_OPERATOR, officialSiteUrl: OFFICIAL_SITE_URL }}
+    legalIcpRecord: LEGAL_ICP_RECORD, publicOperatorLabel: PUBLIC_OPERATOR_LABEL,
+    officialSiteUrl: OFFICIAL_SITE_URL }}

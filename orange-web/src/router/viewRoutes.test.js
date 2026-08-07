@@ -54,4 +54,9 @@ describe('view and route smoke coverage', () => {
     expect(loginSource).toContain('v-if="REGISTRATION_ENABLED"')
     expect(loginSource).not.toContain('v-if="LEGAL_IDENTITY_COMPLETE"')
   })
+
+  it('keeps the personal filing name out of the login page presentation', () => {
+    expect(loginSource).toContain('{{ PUBLIC_OPERATOR_LABEL }}')
+    expect(loginSource).not.toContain('{{ LEGAL_OPERATOR }}')
+  })
 })
