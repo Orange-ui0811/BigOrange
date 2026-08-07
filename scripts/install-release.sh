@@ -154,6 +154,12 @@ sudo systemctl reload nginx
 
 PUBLIC_URL="https://$DOMAIN"
 CURL_TARGET_ARGS=(--noproxy '*' --resolve "$DOMAIN:443:127.0.0.1")
+for _ in {1..20}; do
+  if [[ "$(curl "${CURL_TARGET_ARGS[@]}" --max-time 5 -sS -o /dev/null -w '%{http_code}' "$PUBLIC_URL/assets/release-ready-$STAMP.js")" == "404" ]]; then
+    break
+  fi
+  sleep 0.25
+done
 assert_http_status "$PUBLIC_URL/market" 200
 assert_http_status "$PUBLIC_URL/assets/release-check-$STAMP.js" 404
 assert_http_status "$PUBLIC_URL/.env" 404
