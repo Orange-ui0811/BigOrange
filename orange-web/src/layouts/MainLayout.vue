@@ -57,6 +57,7 @@
         </div>
       </div>
 
+      <div class="sidebar-scroll-area">
       <!-- 用户面板 -->
       <div v-if="authenticated" class="sidebar-user">
         <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
@@ -132,6 +133,7 @@
         榜单、趋势分析、方案设计 → AI 工具<br/>
         画像、素材箱、橙子换装 → 橙子画像工坊<br/>
         通知、收藏、历史、配额、设置 → 我的
+      </div>
       </div>
 
       <!-- ═══ 底部工具 ═══ -->

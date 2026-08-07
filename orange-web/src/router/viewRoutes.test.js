@@ -3,6 +3,7 @@ import { routes } from './index'
 import robots from '../../public/robots.txt?raw'
 import securityContact from '../../public/.well-known/security.txt?raw'
 import sitemap from '../../public/sitemap.xml?raw'
+import loginSource from '../views/Login.vue?raw'
 
 const viewModules = import.meta.glob('../views/*.vue')
 
@@ -47,5 +48,10 @@ describe('view and route smoke coverage', () => {
     expect(sitemap).not.toContain('<loc>https://orangevf.com/login</loc>')
     expect(robots).toContain('Sitemap: https://orangevf.com/sitemap.xml')
     expect(securityContact).toContain('Contact: https://orangevf.com/support')
+  })
+
+  it('controls registration with its own feature switch instead of legal display completeness', () => {
+    expect(loginSource).toContain('v-if="REGISTRATION_ENABLED"')
+    expect(loginSource).not.toContain('v-if="LEGAL_IDENTITY_COMPLETE"')
   })
 })

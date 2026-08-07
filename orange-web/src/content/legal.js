@@ -9,6 +9,7 @@ export const LEGAL_REGISTERED_ADDRESS = import.meta.env.VITE_LEGAL_REGISTERED_AD
 export const LEGAL_CREDIT_CODE = import.meta.env.VITE_LEGAL_CREDIT_CODE || ''
 export const LEGAL_ICP_RECORD = import.meta.env.VITE_LEGAL_ICP_RECORD || ''
 export const LEGAL_PUBLIC_SECURITY_RECORD = import.meta.env.VITE_LEGAL_PUBLIC_SECURITY_RECORD || ''
+export const REGISTRATION_ENABLED = import.meta.env.VITE_REGISTRATION_ENABLED !== 'false'
 
 export const OFFICIAL_SITE_URL = import.meta.env.VITE_OFFICIAL_SITE_URL || DEFAULT_OFFICIAL_SITE_URL
 

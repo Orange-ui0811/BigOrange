@@ -4,7 +4,7 @@ PUBLIC_BUILD_CONFIG_KEYS=(
   VITE_API_BASE_URL VITE_WS_URL VITE_TURNSTILE_SITE_KEY
   VITE_LEGAL_OPERATOR VITE_LEGAL_CONTACT_EMAIL VITE_LEGAL_REGISTERED_ADDRESS
   VITE_LEGAL_CREDIT_CODE VITE_LEGAL_ICP_RECORD VITE_LEGAL_PUBLIC_SECURITY_RECORD
-  VITE_OFFICIAL_SITE_URL VITE_TRANSACTION_UI_ENABLED
+  VITE_OFFICIAL_SITE_URL VITE_TRANSACTION_UI_ENABLED VITE_REGISTRATION_ENABLED
 )
 
 apply_public_build_defaults() {
@@ -14,6 +14,7 @@ apply_public_build_defaults() {
   export VITE_LEGAL_CREDIT_CODE="${VITE_LEGAL_CREDIT_CODE:-}"
   export VITE_LEGAL_PUBLIC_SECURITY_RECORD="${VITE_LEGAL_PUBLIC_SECURITY_RECORD:-}"
   export VITE_TRANSACTION_UI_ENABLED="${VITE_TRANSACTION_UI_ENABLED:-false}"
+  export VITE_REGISTRATION_ENABLED="${VITE_REGISTRATION_ENABLED:-true}"
 }
 
 invalid_public_value() {
@@ -42,6 +43,7 @@ validate_public_build_config() {
   [[ "$VITE_LEGAL_CONTACT_EMAIL" =~ ^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$ ]] || { echo "VITE_LEGAL_CONTACT_EMAIL is invalid" >&2; return 1; }
   [[ "$VITE_TURNSTILE_SITE_KEY" != "1x00000000000000000000AA" ]] || { echo "Turnstile test keys are forbidden in production" >&2; return 1; }
   [[ "$VITE_TRANSACTION_UI_ENABLED" == "true" || "$VITE_TRANSACTION_UI_ENABLED" == "false" ]] || { echo "VITE_TRANSACTION_UI_ENABLED must be true or false" >&2; return 1; }
+  [[ "$VITE_REGISTRATION_ENABLED" == "true" || "$VITE_REGISTRATION_ENABLED" == "false" ]] || { echo "VITE_REGISTRATION_ENABLED must be true or false" >&2; return 1; }
 }
 
 emit_public_build_config() {
@@ -73,6 +75,7 @@ load_public_build_config_from_env_file() {
     case "$key" in
       VITE_API_BASE_URL) value="$(read_env_file_value "$file" "$key" "/api")" ;;
       VITE_TRANSACTION_UI_ENABLED) value="$(read_env_file_value "$file" "$key" "false")" ;;
+      VITE_REGISTRATION_ENABLED) value="$(read_env_file_value "$file" "$key" "true")" ;;
       *) value="$(read_env_file_value "$file" "$key")" ;;
     esac
     printf -v "$key" '%s' "$value"

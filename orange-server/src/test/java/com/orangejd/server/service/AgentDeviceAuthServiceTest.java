@@ -5,11 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
@@ -18,6 +21,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class AgentDeviceAuthServiceTest {
+
+    @Test
+    void linkCodeExpiryIncludesAnExplicitUtcOffset() {
+        AgentDeviceMapper mapper = mock(AgentDeviceMapper.class);
+        AgentDeviceAuthService service = new AgentDeviceAuthService(mapper);
+
+        Map<String, Object> result = service.createLinkCode(7L, "StackChan");
+
+        String expiresAt = assertInstanceOf(String.class, result.get("expiresAt"));
+        OffsetDateTime.parse(expiresAt, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        verify(mapper).insertLinkCode(any());
+    }
 
     @Test
     void exchangesOneTimeCodeForHashedScopedToken() {
@@ -39,6 +54,8 @@ class AgentDeviceAuthServiceTest {
         Map<String, Object> result = service.exchange("ABCD-EFGH", "My StackChan");
 
         assertEquals(9L, result.get("deviceId"));
+        String expiresAt = assertInstanceOf(String.class, result.get("expiresAt"));
+        OffsetDateTime.parse(expiresAt, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         assertTrue(String.valueOf(result.get("token")).startsWith("ojd_"));
         ArgumentCaptor<Map<String, Object>> captor = ArgumentCaptor.forClass(Map.class);
         verify(mapper).insertCredential(captor.capture());

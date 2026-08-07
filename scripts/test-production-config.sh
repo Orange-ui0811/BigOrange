@@ -14,6 +14,7 @@ set_valid_config() {
   export VITE_LEGAL_PUBLIC_SECURITY_RECORD=
   export VITE_OFFICIAL_SITE_URL=https://orangevf.com
   export VITE_TRANSACTION_UI_ENABLED=false
+  export VITE_REGISTRATION_ENABLED=true
 }
 
 assert_rejected() {
@@ -32,6 +33,7 @@ set_valid_config; VITE_LEGAL_CONTACT_EMAIL=support@example.com; assert_rejected 
 set_valid_config; VITE_LEGAL_ICP_RECORD=; assert_rejected missing-icp
 set_valid_config; VITE_OFFICIAL_SITE_URL=https://example.org; assert_rejected wrong-site
 set_valid_config; VITE_TURNSTILE_SITE_KEY=1x00000000000000000000AA; assert_rejected test-key
+set_valid_config; VITE_REGISTRATION_ENABLED=maybe; assert_rejected invalid-registration-switch
 set_valid_config
 [[ "$first" == "$(public_build_config_fingerprint)" ]]
 VITE_LEGAL_OPERATOR='Another Operator'

@@ -37,6 +37,7 @@ services:
       sh -c "mvn -B -DskipTests clean install &&
       mvn -B -f orange-server/pom.xml spring-boot:run -Dspring-boot.run.profiles=dev"
     environment:
+      TZ: Asia/Shanghai
       MYSQL_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-orangejd}?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
       MYSQL_USER: ${MYSQL_USER:-orangejd}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-orangejd_dev}
@@ -82,7 +83,8 @@ services:
       AI_EMBEDDING_KEY: ${AI_EMBEDDING_KEY:-}
       AI_EMBEDDING_MODEL: ${AI_EMBEDDING_MODEL:-bge-small-zh-v1.5}
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
-      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
+      # Local-only Cloudflare test secret. Production always reads the real server secret.
+      TURNSTILE_SECRET_KEY: ${LOCAL_TURNSTILE_SECRET_KEY:-1x0000000000000000000000000000000AA}
       FEISHU_WEBHOOK_URL: ${FEISHU_WEBHOOK_URL:-}
       FEISHU_JOB_WEBHOOK_URL: ${FEISHU_JOB_WEBHOOK_URL:-}
       ORANGE_ADMIN_BOOTSTRAP_USERNAME: ${ORANGE_ADMIN_BOOTSTRAP_USERNAME:-}
@@ -107,6 +109,8 @@ services:
       VITE_API_BASE_URL: http://127.0.0.1:18080
       VITE_WS_URL: ws://127.0.0.1:18080
       VITE_FS_POLLING: "true"
+      VITE_REGISTRATION_ENABLED: "true"
+      VITE_TURNSTILE_SITE_KEY: ${LOCAL_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
       NPM_CONFIG_REGISTRY: ${NPM_CONFIG_REGISTRY:-https://registry.npmmirror.com}
       NPM_CONFIG_FETCH_RETRIES: 5
       NPM_CONFIG_FETCH_RETRY_MINTIMEOUT: 10000

@@ -70,13 +70,13 @@
           @click="tab = 'login'"
         >登录</div>
         <div
-          v-if="LEGAL_IDENTITY_COMPLETE"
+          v-if="REGISTRATION_ENABLED"
           :class="['tab-item', { active: tab === 'register' }]"
           @click="tab = 'register'"
         >注册</div>
       </div>
-      <div v-if="!LEGAL_IDENTITY_COMPLETE && resetStep === 0" class="identity-gate">
-        新用户注册将在真实运营主体与备案信息配置完成后开放；已有账号仍可正常登录。
+      <div v-if="!REGISTRATION_ENABLED && resetStep === 0" class="identity-gate">
+        新用户注册当前暂停；已有账号仍可正常登录。
       </div>
 
       <aside v-if="tab === 'login' && resetStep === 0" class="login-safety" aria-label="安全登录提示">
@@ -147,7 +147,7 @@
       </div>
 
       <!-- 注册表单 -->
-      <form v-if="LEGAL_IDENTITY_COMPLETE && tab === 'register' && resetStep === 0" @submit.prevent="doRegister">
+      <form v-if="REGISTRATION_ENABLED && tab === 'register' && resetStep === 0" @submit.prevent="doRegister">
         <label class="form-label">邮箱</label>
         <input
           v-model="regForm.email"
@@ -241,6 +241,7 @@ import {
   LEGAL_IDENTITY_COMPLETE,
   LEGAL_OPERATOR,
   OFFICIAL_SITE_URL,
+  REGISTRATION_ENABLED,
 } from '../content/legal'
 
 const officialSiteHost = computed(() => {

@@ -127,7 +127,7 @@ const agentBaseUrl = new URL(configuredApiBase, window.location.origin).toString
 const agentBase = new URL(agentBaseUrl)
 const secureConnection = agentBase.protocol === 'https:' || ['127.0.0.1', 'localhost', '::1'].includes(agentBase.hostname)
 const bindCommand = computed(() => linkCode.value
-  ? `python -m orangevc_xiaozhi_connector configure-orangejd --base-url ${agentBaseUrl} --code ${linkCode.value.code}`
+  ? `python -m orangevc_xiaozhi_connector configure-orangevc --base-url ${agentBaseUrl} --code ${linkCode.value.code}`
   : '')
 
 const createCode = async () => {

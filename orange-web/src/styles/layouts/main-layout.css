@@ -32,6 +32,23 @@
   overflow: hidden !important;
 }
 
+.sidebar-scroll-area {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 115, 22, .36) transparent;
+}
+.sidebar-scroll-area::-webkit-scrollbar { width: 6px; }
+.sidebar-scroll-area::-webkit-scrollbar-track { background: transparent; }
+.sidebar-scroll-area::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(249, 115, 22, .32);
+}
+
 /* 品牌 */
 .sidebar-brand {
   display: flex;
@@ -227,12 +244,28 @@
 
 /* 底部工具区 */
 .sidebar-tools {
+  flex: 0 0 auto;
   padding: 14px 8px 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   border-top: 1px solid rgba(254, 215, 170, .85);
-  margin-top: auto;
+  margin-top: 0;
+  background: rgba(255, 255, 255, .9);
+}
+
+@media (max-height: 760px) and (min-width: 861px) {
+  .sidebar-tools {
+    gap: 3px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .sidebar-tools > .sidebar-divider,
+  .sidebar-tools .legal-links,
+  .sidebar-tools .site-identity-mini {
+    display: none;
+  }
+  .tool-btn { min-height: 34px; }
 }
 
 .tool-btn {

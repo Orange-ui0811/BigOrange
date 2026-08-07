@@ -11,6 +11,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
@@ -56,7 +58,8 @@ public class AgentDeviceAuthService {
         record.put("expiresAt", expiresAt);
         mapper.insertLinkCode(record);
         return Map.of("code", code.substring(0, 4) + "-" + code.substring(4),
-                "deviceName", deviceName, "expiresAt", expiresAt, "expiresInSeconds", 600);
+                "deviceName", deviceName, "expiresAt", withSystemOffset(expiresAt),
+                "expiresInSeconds", 600);
     }
 
     @Transactional
@@ -83,7 +86,8 @@ public class AgentDeviceAuthService {
         credential.put("expiresAt", expiresAt);
         mapper.insertCredential(credential);
         return Map.of("deviceId", credential.get("id"), "deviceName", deviceName,
-                "token", token, "scopes", List.of(SCOPES.split(",")), "expiresAt", expiresAt);
+                "token", token, "scopes", List.of(SCOPES.split(",")),
+                "expiresAt", withSystemOffset(expiresAt));
     }
 
     public Map<String, Object> authenticate(String authorization) {
@@ -127,6 +131,12 @@ public class AgentDeviceAuthService {
         byte[] bytes = new byte[size];
         RANDOM.nextBytes(bytes);
         return bytes;
+    }
+
+    private String withSystemOffset(LocalDateTime value) {
+        return value.atZone(ZoneId.systemDefault())
+                .toOffsetDateTime()
+                .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
     }
 
     private String hash(String value) {
