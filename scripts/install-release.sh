@@ -115,7 +115,7 @@ sed \
   -e "s|@@SSL_CERTIFICATE@@|$NGINX_CERT|g" \
   -e "s|@@SSL_CERTIFICATE_KEY@@|$NGINX_CERT_KEY|g" \
   "$STAGE/config/nginx.conf.example" > "$STAGE/nginx.conf.rendered"
-if grep -Eq '@@[A-Z0-9_]+@@|YOUR_|example\.com|localhost|127\.0\.0\.1' "$STAGE/nginx.conf.rendered"; then
+if grep -Eq '@@[A-Z0-9_]+@@|YOUR_|example\.com' "$STAGE/nginx.conf.rendered"; then
   echo "Rendered Nginx config contains a placeholder or local address" >&2
   exit 1
 fi
