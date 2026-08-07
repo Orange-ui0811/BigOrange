@@ -84,6 +84,7 @@ import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ArrowLeft, ArrowRight, CircleCheck, Close, Search } from '@element-plus/icons-vue'
 import request from '../api/request'
+import { openExternalSafely } from '../composables/useSafeExternalNavigation'
 
 defineProps({ embedded: { type: Boolean, default: false } })
 
@@ -104,7 +105,7 @@ const loadWeekly = async () => { weeklyLoading.value = true; try { const r = awa
 const loadProjects = async () => { loading.value = true; try { const r = await request.get('/app/beginner-projects', { params: { ...filters, page: page.value, size: pageSize } }); projects.value = r.data?.records || []; total.value = Number(r.data?.total || 0) } finally { loading.value = false } }
 const search = () => { page.value = 1; loadProjects() }
 const openDetail = async id => { const r = await request.get(`/app/beginner-projects/${id}`); detail.project = r.data?.project; detailVisible.value = true }
-const openGithub = url => window.open(url, '_blank', 'noopener,noreferrer')
+const openGithub = url => openExternalSafely(url)
 const importToPlan = project => {
   const text = [
     `项目想法：基于 ${project.fullName} 做一个适合展示的 Vibe Coding 项目`,

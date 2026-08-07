@@ -64,6 +64,7 @@ import { ArrowRight, Briefcase, Close, DocumentAdd, MagicStick, Search } from '@
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
 import { confirmQuotaUsage } from '../utils/quotaConfirm'
+import { openExternalSafely } from '../composables/useSafeExternalNavigation'
 
 const router = useRouter()
 const weekly = ref([]), projects = ref([]), roles = ref([]), jobs = ref([]), total = ref(0), page = ref(1)
@@ -79,7 +80,7 @@ const loadWeekly = async () => { weeklyLoading.value = true; try { const r = awa
 const loadProjects = async () => { loading.value = true; try { const r = await request.get('/app/career-projects', { params: { ...filters, page: page.value, size: pageSize } }); projects.value = r.data?.records || []; total.value = Number(r.data?.total || 0) } finally { loading.value = false } }
 const search = () => { page.value = 1; loadProjects() }
 const openDetail = async id => { const r = await request.get(`/app/career-projects/${id}`); detail.value = r.data; detailVisible.value = true }
-const openGithub = url => window.open(url, '_blank', 'noopener,noreferrer')
+const openGithub = url => openExternalSafely(url)
 const openAssessment = () => { assessment.roleCode = detail.value?.bestRoleCode || ''; assessment.jobId = null; assessmentResult.value = []; assessmentVisible.value = true; if (assessment.roleCode) loadJobs() }
 const loadJobs = async () => { assessment.jobId = null; jobs.value = []; if (!assessment.roleCode || !detail.value) return; const r = await request.get(`/app/career-projects/${detail.value.id}/jobs`, { params: { roleCode: assessment.roleCode } }); jobs.value = r.data || [] }
 const loadPricing = async () => {

@@ -71,7 +71,7 @@
             <!-- 演示链接 -->
             <div v-if="work.demoUrl" class="demo-box">
               <span class="demo-label">🔗 在线演示：</span>
-              <a :href="work.demoUrl" target="_blank" rel="noopener noreferrer" class="demo-link">点击体验 →</a>
+              <a :href="safeExternalHref(work.demoUrl)" class="demo-link" @click.prevent="openExternalSafely(work.demoUrl)">点击体验 →</a>
             </div>
 
             <!-- 评论区 -->
@@ -139,6 +139,8 @@ import { useRoute, useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
 import VideoShowcase from '../components/VideoShowcase.vue'
 import request from '../api/request'
+import { openExternalSafely } from '../composables/useSafeExternalNavigation'
+import { safeExternalHref } from '../utils/safeExternalUrl'
 
 const workdetailTour = [
   { selector: '.detail-cover', text: '顶部是作品封面；作者提供演示地址或视频时，可以继续向下查看和体验。', expression: 'curious' },

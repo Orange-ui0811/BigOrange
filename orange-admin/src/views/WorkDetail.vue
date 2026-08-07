@@ -19,7 +19,8 @@
           <div style="line-height:1.8;max-height:400px;overflow:auto" v-safe-html="detail.detail || '无'"></div>
         </el-descriptions-item>
         <el-descriptions-item v-if="detail.demoUrl" label="演示链接" :span="2">
-          <a :href="detail.demoUrl" target="_blank" rel="noopener noreferrer" style="color:#409EFF">{{ detail.demoUrl }}</a>
+          <span style="word-break:break-all">{{ detail.demoUrl }}</span>
+          <div style="font-size:12px;color:#909399">历史外链不会在管理端直接打开，请结合内容审计报告核验。</div>
         </el-descriptions-item>
         <el-descriptions-item v-if="detail.videoUrl" label="视频展示" :span="2">
           <AdminVideoPreview :url="detail.videoUrl" :poster="detail.coverUrl" />

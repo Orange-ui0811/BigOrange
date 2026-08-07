@@ -4,6 +4,7 @@ import PageTour from '../components/PageTour.vue'
 import BeginnerProjects from '../views/BeginnerProjects.vue'
 import CareerProjects from '../views/CareerProjects.vue'
 import request from '../api/request'
+import { openExternalSafely } from './useSafeExternalNavigation'
 
 export const useLeaderboard = () => {
 const router = useRouter()
@@ -124,7 +125,7 @@ const onClick = (item) => {
   } else if (source.value === 'local' && type.value === 'creators') {
     router.push('/profile/' + item.id)
   } else if (source.value === 'github') {
-    window.open(item.htmlUrl, '_blank')
+    openExternalSafely(item.htmlUrl)
   }
 }
 

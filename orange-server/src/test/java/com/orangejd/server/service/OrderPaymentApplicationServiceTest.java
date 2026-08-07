@@ -1,6 +1,7 @@
 package com.orangejd.server.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.orangejd.common.constant.BrandConstant;
 import com.orangejd.common.constant.OrderStatus;
 import com.orangejd.common.constant.PayStatus;
 import com.orangejd.common.context.BaseContext;
@@ -73,7 +74,7 @@ class OrderPaymentApplicationServiceTest {
         when(stageMapper.selectByOrderAndTypeForUpdate(10L, "DEPOSIT")).thenReturn(stage);
         when(paymentMapper.selectByStageForUpdate(100L)).thenReturn(null);
         when(epayService.createPayment(anyString(), eq(new BigDecimal("19.90")), eq("wxpay"),
-                eq("OrangeJD 订单#10 定金"))).thenReturn("https://pay.example.test/checkout");
+                eq(BrandConstant.PUBLIC_NAME + " 订单#10 定金"))).thenReturn("https://pay.example.test/checkout");
 
         Map<String, String> result = service.create(dto(10L, "DEPOSIT", "wxpay"));
 

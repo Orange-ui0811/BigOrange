@@ -16,6 +16,7 @@ class WorkVideoPathValidationTest {
                 org.mockito.Mockito.mock(com.orangejd.server.mapper.WorkSaleOptionMapper.class),
                 null,
                 org.mockito.Mockito.mock(ManagedFileStorageService.class),
+                new com.orangejd.server.foundation.security.ExternalUrlPolicy(),
                 null,
                 org.mockito.Mockito.mock(com.orangejd.server.mapper.AuditRecordMapper.class),
                 org.mockito.Mockito.mock(com.orangejd.server.service.NotificationService.class));

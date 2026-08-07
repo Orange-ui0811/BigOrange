@@ -474,7 +474,7 @@
             <small>{{ detail.repositoryFullName }} · ★ {{ detail.stars || 0 }}</small>
             <h2>{{ issueTitle(detail) }}</h2>
           </div>
-          <a :href="detail.htmlUrl" target="_blank" rel="noopener noreferrer">GitHub 原文</a>
+          <a :href="safeExternalHref(detail.htmlUrl)" @click.prevent="openExternalSafely(detail.htmlUrl)">GitHub 原文</a>
         </div>
         <p class="detail-summary">{{ detail.summaryZh || '中文摘要生成中，请以英文原文为准。' }}</p>
         <dl class="facts">
@@ -543,6 +543,8 @@ import { useCandidateSelection } from '../features/open-source/useCandidateSelec
 import { useOpenSourceIssues } from '../composables/useOpenSourceIssues'
 import { useContributionMatch } from '../composables/useContributionMatch'
 import { useContributionGuides } from '../composables/useContributionGuides'
+import { openExternalSafely } from '../composables/useSafeExternalNavigation'
+import { safeExternalHref } from '../utils/safeExternalUrl'
 
 const route = useRoute()
 const router = useRouter()

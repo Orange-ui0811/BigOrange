@@ -123,6 +123,7 @@ import PixelOrangeLogo from '../components/PixelOrangeLogo.vue'
 import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
 import { useSynchronizedTickerMotion } from '../composables/useSynchronizedTickerMotion'
+import { openExternalSafely } from '../composables/useSafeExternalNavigation'
 
 const router = useRouter()
 const tourRef = ref(null)
@@ -153,7 +154,7 @@ const competitionTickerLoop = computed(() => makeLoop(competitionTickerItems.val
 const statusText = value => ({ TRY: '可尝试', POSSIBLY_CLAIMED: '可能被认领', NOT_RECOMMENDED: '不建议' }[value] || '待核验')
 const difficultyText = value => ({ BEGINNER: '入门', EASY: '简单', MEDIUM: '中等' }[value] || '待评估')
 const competitionPhaseText = value => ({ UPCOMING: '即将开始', ONGOING: '进行中', UNSCHEDULED: '时间待公布' }[value] || '可查看')
-const openGithub = url => { if (url) window.open(url, '_blank', 'noopener') }
+const openGithub = url => { if (url) openExternalSafely(url) }
 const openLeaderboardSource = source => router.push({ path: '/leaderboard', query: { source } })
 const normalizeRepository = item => ({ name: item.name || '', fullName: item.fullName || item.name || '', stars: item.stars || 0, language: item.language || '', htmlUrl: item.htmlUrl || '' })
 const normalizeBeginnerProject = item => ({ id: item.id, title: item.descriptionZh || item.repositoryName || item.fullName || '待命名项目', score: item.beginnerScore || 0, difficulty: item.difficulty, language: item.primaryLanguage || '' })

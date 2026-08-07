@@ -14,6 +14,7 @@ import com.orangejd.pojo.vo.WorkDetailVO;
 import com.orangejd.pojo.vo.WorkVO;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.mapper.WorkSaleOptionMapper;
+import com.orangejd.server.foundation.security.ExternalUrlPolicy;
 import com.orangejd.server.service.NotificationService;
 import com.orangejd.server.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class WorkServiceImpl implements WorkService {
     private final WorkSaleOptionMapper optionMapper;
     private final @org.springframework.lang.Nullable com.orangejd.server.service.AiAuditService aiAuditService;
     private final ManagedFileStorageService managedFileStorageService;
+    private final ExternalUrlPolicy externalUrlPolicy;
     private final @org.springframework.lang.Nullable com.orangejd.server.service.PersonaMaterialCollector personaMaterialCollector;
 
     @Override
@@ -53,7 +55,7 @@ public class WorkServiceImpl implements WorkService {
         work.setCategoryId(dto.getCategoryId());
         work.setTags(dto.getTags());
         work.setCoverUrl(dto.getCoverUrl());
-        work.setDemoUrl(dto.getDemoUrl());
+        work.setDemoUrl(externalUrlPolicy.requireSafeOptional("演示链接", dto.getDemoUrl()));
         work.setVideoUrl(normalizeVideoUrl(dto.getVideoUrl()));
         work.setAuditStatus("DRAFT");
         work.setVisibilityStatus("PUBLIC");
@@ -94,7 +96,9 @@ public class WorkServiceImpl implements WorkService {
         work.setCategoryId(dto.getCategoryId() != null ? dto.getCategoryId() : work.getCategoryId());
         work.setTags(dto.getTags() != null ? dto.getTags() : work.getTags());
         work.setCoverUrl(dto.getCoverUrl() != null ? dto.getCoverUrl() : work.getCoverUrl());
-        work.setDemoUrl(dto.getDemoUrl() != null ? dto.getDemoUrl() : work.getDemoUrl());
+        work.setDemoUrl(dto.getDemoUrl() != null
+                ? externalUrlPolicy.requireSafeOptional("演示链接", dto.getDemoUrl())
+                : work.getDemoUrl());
         if (dto.getVideoUrl() != null) work.setVideoUrl(normalizeVideoUrl(dto.getVideoUrl()));
         workMapper.update(work);
 

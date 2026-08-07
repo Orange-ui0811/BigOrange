@@ -5,6 +5,7 @@ import VideoShowcase from '../components/VideoShowcase.vue'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
 import { DEFAULT_REWARDS, getRewardPricing } from '../api/rewards'
+import { inspectExternalUrl } from '../utils/safeExternalUrl'
 
 export const usePublish = () => {
 const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
@@ -122,6 +123,9 @@ onMounted(async () => {
 const submit = async (submitReview = false) => {
   if (!form.title.trim()) return ElMessage.warning('标题必填')
   if (videoUploading.value) return ElMessage.warning('请等待视频上传完成')
+  if (tab.value === 'work' && form.demoUrl.trim() && !inspectExternalUrl(form.demoUrl).safe) {
+    return ElMessage.warning('演示链接仅支持安全的 HTTPS 公网地址')
+  }
   saveAction.value = submitReview ? 'review' : 'draft'
   loading.value = true
   try {

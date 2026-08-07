@@ -11,6 +11,7 @@ import { getCompetitions, submitCompetition } from '../api/competition'
 import { getDirections, getJobDetail, getJobsByDirection } from '../api/job'
 import { DEFAULT_REWARDS, getRewardPricing } from '../api/rewards'
 import { LEGAL_CONTACT } from '../content/legal'
+import { openExternalSafely } from './useSafeExternalNavigation'
 
 export const useCareerCenter = () => {
 const rewards = ref({ ...DEFAULT_REWARDS })
@@ -65,15 +66,7 @@ const formatTime = value => {
     year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
   }).format(date)
 }
-const openCompetition = value => {
-  try {
-    const url = new URL(value)
-    if (url.protocol !== 'https:') throw new Error()
-    window.open(url.href, '_blank', 'noopener,noreferrer')
-  } catch {
-    ElMessage.error('比赛链接无效')
-  }
-}
+const openCompetition = value => openExternalSafely(value)
 
 const submitCompetitionForm = async () => {
   const form = competitionForm.value

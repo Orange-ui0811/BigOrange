@@ -39,7 +39,8 @@
         <h3 style="margin:0 0 4px">{{ detail.title }}</h3>
         <p style="color:#909399;font-size:13px;margin:0 0 8px">by {{ detail.ownerName || detail.publisherName || '#'+(detail.ownerId||detail.publisherId) }} · {{ detail.auditStatus }} · {{ detail.createTime }}</p>
         <el-alert v-if="detail.demoUrl" title="在线演示" type="info" :closable="false" style="margin-bottom:12px">
-          <a :href="detail.demoUrl" target="_blank" rel="noopener noreferrer" style="color:#e65100;font-weight:600">{{ detail.demoUrl }}</a>
+          <span style="color:#e65100;font-weight:600;word-break:break-all">{{ detail.demoUrl }}</span>
+          <div style="font-size:12px;color:#909399">历史外链不会在管理端直接打开，请结合内容审计报告核验。</div>
         </el-alert>
         <div v-if="detail.videoUrl" style="margin-bottom:12px">
           <div style="margin-bottom:6px;font-weight:600;color:#606266">作品视频</div>

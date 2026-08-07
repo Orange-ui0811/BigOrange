@@ -104,7 +104,7 @@
                 <div v-if="selectedNode.topRepos?.length">
                   <div class="section-label">Top 5 仓库</div>
                   <div v-for="r in selectedNode.topRepos" :key="r.name" class="repo-item">
-                    <a :href="r.htmlUrl" target="_blank" class="repo-link">{{ r.name }}</a>
+                    <a :href="safeExternalHref(r.htmlUrl)" class="repo-link" @click.prevent="openExternalSafely(r.htmlUrl)">{{ r.name }}</a>
                     <span class="repo-stars">⭐{{ formatNum(r.stars) }}</span>
                     <div class="repo-desc">{{ r.description || '' }}</div>
                   </div>
@@ -287,7 +287,7 @@
             <div><span>{{ project.primaryLanguage || 'GitHub' }}</span><b>{{ project.beginnerScore }}/100</b></div>
             <h3>{{ project.descriptionZh || project.repositoryName }}</h3>
             <p><b>匹配说明：</b>{{ project.matchExplanation || project.beginnerReason }}</p>
-            <footer><a :href="project.htmlUrl" target="_blank" rel="noopener noreferrer">查看仓库</a><button type="button" @click="importBeginnerCase(project)">用于方案设计</button></footer>
+            <footer><a :href="safeExternalHref(project.htmlUrl)" @click.prevent="openExternalSafely(project.htmlUrl)">查看仓库</a><button type="button" @click="importBeginnerCase(project)">用于方案设计</button></footer>
           </article>
         </div>
       </section>
@@ -300,7 +300,7 @@
             <div><span>{{ project.bestRoleName || '职业成长' }}</span><b>{{ project.overallScore }}/100</b></div>
             <h3>{{ project.summaryZh || project.repositoryName }}</h3>
             <p><b>匹配说明：</b>{{ project.matchExplanation || project.careerValue || project.descriptionOriginal }}</p>
-            <footer><a :href="project.htmlUrl" target="_blank" rel="noopener noreferrer">查看仓库</a><button type="button" @click="importCareerCase(project)">用于方案设计</button></footer>
+            <footer><a :href="safeExternalHref(project.htmlUrl)" @click.prevent="openExternalSafely(project.htmlUrl)">查看仓库</a><button type="button" @click="importCareerCase(project)">用于方案设计</button></footer>
           </article>
         </div>
       </section>
@@ -381,6 +381,8 @@ import { getDirections, getJobsByDirection, getJobDetail } from '../api/job'
 import { useTrendAnalysis } from '../composables/useTrendAnalysis'
 import { useTrendChart } from '../composables/useTrendChart'
 import { useTrendHistory } from '../composables/useTrendHistory'
+import { openExternalSafely } from '../composables/useSafeExternalNavigation'
+import { safeExternalHref } from '../utils/safeExternalUrl'
 
 const router = useRouter()
 const route = useRoute()
