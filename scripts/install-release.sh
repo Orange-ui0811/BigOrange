@@ -61,13 +61,13 @@ rollback() {
 
 assert_http_status() {
   local url="$1" expected="$2" actual
-  actual="$(curl --max-time 15 -sS -o /dev/null -w '%{http_code}' "$url")"
+  actual="$(curl "${CURL_TARGET_ARGS[@]}" --max-time 15 -sS -o /dev/null -w '%{http_code}' "$url")"
   [[ "$actual" == "$expected" ]] || { echo "$url returned $actual, expected $expected" >&2; return 1; }
 }
 
 assert_content_type() {
   local url="$1" expected="$2"
-  curl --max-time 15 -fsSI "$url" | tr -d '\r' | grep -Eiq "^Content-Type: ${expected}"
+  curl "${CURL_TARGET_ARGS[@]}" --max-time 15 -fsSI "$url" | tr -d '\r' | grep -Eiq "^Content-Type: ${expected}"
 }
 
 trap rollback ERR
@@ -153,13 +153,14 @@ sudo systemctl is-active --quiet "$SERVICE"
 sudo systemctl reload nginx
 
 PUBLIC_URL="https://$DOMAIN"
+CURL_TARGET_ARGS=(--resolve "$DOMAIN:443:127.0.0.1")
 assert_http_status "$PUBLIC_URL/market" 200
-assert_http_status "$PUBLIC_URL/assets/not-exist.js" 404
+assert_http_status "$PUBLIC_URL/assets/release-check-$STAMP.js" 404
 assert_http_status "$PUBLIC_URL/.env" 404
 assert_content_type "$PUBLIC_URL/robots.txt" 'text/plain'
 assert_content_type "$PUBLIC_URL/sitemap.xml" '(application|text)/xml'
 assert_content_type "$PUBLIC_URL/.well-known/security.txt" 'text/plain'
-HEADERS="$(curl --max-time 15 -fsSI "$PUBLIC_URL/market" | tr -d '\r')"
+HEADERS="$(curl "${CURL_TARGET_ARGS[@]}" --max-time 15 -fsSI "$PUBLIC_URL/market" | tr -d '\r')"
 grep -Eiq '^Strict-Transport-Security:' <<< "$HEADERS"
 grep -Eiq '^Content-Security-Policy:' <<< "$HEADERS"
 grep -Eiq '^X-Content-Type-Options:[[:space:]]*nosniff' <<< "$HEADERS"
