@@ -153,4 +153,12 @@ describe('page flow composables', () => {
     await exposed.logout(); wrapper.unmount()
     expect(sessionStorage.getItem('appToken')).toBeNull()
   })
+
+  it('keeps public browsing free of protected account requests', async () => {
+    const { exposed, wrapper } = await mountFlow(useMainLayout)
+    expect(exposed.authenticated.value).toBe(false)
+    expect(exposed.visibleMobileNavItems.value.map(item => item.path)).toEqual(['/market', '/login'])
+    expect(request.get).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })

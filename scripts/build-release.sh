@@ -51,6 +51,10 @@ mkdir -p "$STAGE_DIR/web-dist/admin" "$STAGE_DIR/config" "$STAGE_DIR/database"
 install -m 0644 orange-server/target/orange-server-1.0.0-SNAPSHOT.jar "$STAGE_DIR/orange-server.jar"
 cp -R orange-web/dist/. "$STAGE_DIR/web-dist/"
 cp -R orange-admin/dist/. "$STAGE_DIR/web-dist/admin/"
+printf '%s' "$VITE_TURNSTILE_SITE_KEY" \
+  | sha256sum \
+  | awk '{print $1}' \
+  > "$STAGE_DIR/config/turnstile-site-key.sha256"
 install -m 0644 .env.prod.example "$STAGE_DIR/config/orangejd.env.example"
 install -m 0644 nginx.conf "$STAGE_DIR/config/nginx.conf.example"
 install -m 0644 scripts/orangejd.service "$STAGE_DIR/config/orangejd.service.example"

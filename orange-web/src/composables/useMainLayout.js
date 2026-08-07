@@ -7,11 +7,13 @@ import request from '../api/request'
 import { unreadCount, avatarUrl, nickname, loadUnreadCount, resetNotificationState } from '../stores/unread'
 import { loadTradeMode, resetTradeMode } from '../stores/tradeMode'
 import { useAuthStore } from '../stores/authStore'
+import { LEGAL_ICP_RECORD, LEGAL_OPERATOR, OFFICIAL_SITE_URL } from '../content/legal'
 
 export const useMainLayout = () => {
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
+const authenticated = computed(() => authStore.authenticated)
 const me = ref({ username: '', nickname: '' })
 const chatUnread = ref(0)
 const mobileNavItems = [
@@ -23,6 +25,11 @@ const mobileNavItems = [
   { path: '/chat', label: '消息', icon: ChatDotRound },
   { path: '/me', label: '我的', icon: User },
 ]
+const guestMobileNavItems = [
+  { path: '/market', label: '公开市场', icon: Shop },
+  { path: '/login', label: '登录', icon: User },
+]
+const visibleMobileNavItems = computed(() => authenticated.value ? mobileNavItems : guestMobileNavItems)
 const logout = async () => {
   try { await request.get('/app/auth/logout') } catch {}
   finally {
@@ -46,6 +53,7 @@ const activeMenu = computed(() => {
 })
 
 onMounted(async () => {
+  if (!authenticated.value) return
   try { await loadUnreadCount() } catch {}
   try { const res = await request.get('/app/profile/me'); if (res.code === 1) { me.value = res.data; authStore.setCurrentUser(res.data); nickname.value = res.data.nickname || ''; avatarUrl.value = res.data.avatarUrl || '' } } catch {}
   try {
@@ -55,5 +63,6 @@ onMounted(async () => {
   try { await loadTradeMode() } catch {}
 })
   return { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
-    MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, mobileNavItems,
-    accountId: authStore.accountId, logout, activeMenu }}
+    MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, visibleMobileNavItems,
+    accountId: authStore.accountId, authenticated, router, logout, activeMenu,
+    legalIcpRecord: LEGAL_ICP_RECORD, legalOperator: LEGAL_OPERATOR, officialSiteUrl: OFFICIAL_SITE_URL }}

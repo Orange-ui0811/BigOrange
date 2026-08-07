@@ -12,8 +12,13 @@
           <el-button type="primary" @click="doSearch">开始搜索</el-button>
         </div>
         <div class="trust-rail">
+          <span class="trust-chip">无需登录即可浏览</span>
           <span class="trust-chip">作品与需求先审核</span>
           <span class="trust-chip">演示、截图、说明分开展示</span>
+        </div>
+        <div v-if="!authenticated" class="guest-actions">
+          <span>发布、收藏、联系作者和使用 AI 工具时才需要登录。</span>
+          <el-button type="primary" @click="$router.push('/login')">登录或注册</el-button>
         </div>
       </div>
       <div class="hero-side">
@@ -38,7 +43,7 @@
       <button :class="['pill', { active: activeTab === 'works' }]" @click="switchTab('works')">作品</button>
       <button :class="['pill', { active: activeTab === 'reqs' }]" @click="switchTab('reqs')">需求</button>
       <el-select v-model="categoryId" placeholder="全部分类" clearable size="small" style="width:140px;margin-left:auto;" @change="load">
-        <el-option label="全部分类" :value="null" />
+        <el-option label="全部分类" value="" />
         <el-option v-for="c in categories" :key="c.id" :label="c.name" :value="c.id" />
       </el-select>
     </div>
@@ -133,7 +138,12 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useMarket } from '../composables/useMarket'
+import { useAuthStore } from '../stores/authStore'
+
+const authStore = useAuthStore()
+const authenticated = computed(() => authStore.authenticated)
 
 const { PageTour, marketTour, activeTab, works, reqs, worksTotal, reqsTotal, categories,
   categoryId, keyword, worksPage, reqsPage, pageSize, loading, coverVariant, load,

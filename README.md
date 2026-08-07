@@ -167,6 +167,11 @@ cd orange-admin && npx vite --host
 VITE_TURNSTILE_SITE_KEY='PUBLIC_SITE_KEY' \
 VITE_LEGAL_OPERATOR='运营主体全称' \
 VITE_LEGAL_CONTACT_EMAIL='网站公示的联系邮箱' \
+VITE_LEGAL_REGISTERED_ADDRESS='运营主体注册地址' \
+VITE_LEGAL_CREDIT_CODE='统一社会信用代码' \
+VITE_LEGAL_ICP_RECORD='ICP备案号' \
+VITE_LEGAL_PUBLIC_SECURITY_RECORD='公安备案号（取得后填写）' \
+VITE_OFFICIAL_SITE_URL='https://orangevf.com' \
 ./scripts/build-release.sh
 
 # 发布前备份（密码通过环境变量或密钥管理系统注入）
@@ -192,10 +197,17 @@ export TURNSTILE_SECRET_KEY='CloudflareKey'
 
 ```nginx
 location / { try_files $uri /index.html; }
+location = /robots.txt { try_files $uri =404; }
+location = /sitemap.xml { try_files $uri =404; }
+location = /.well-known/security.txt { try_files $uri =404; }
 location /api/ { proxy_pass http://127.0.0.1:8080/; }
 location /ws/ { proxy_pass http://127.0.0.1:8080; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection "upgrade"; }
 location ^~ /admin { alias /data/orangejd/web-dist/admin; try_files $uri /admin/index.html; }
 ```
+
+生产站点开放注册前，必须使用真实主体和备案信息完成用户端构建，部署仓库根目录
+`nginx.conf` 中的安全响应头，并确认 `/market` 可公开浏览、未知前端路由显示 404 页面。
+不要使用“团队”“待补充”或示例邮箱作为生产主体信息。
 
 ## AI 功能配置
 

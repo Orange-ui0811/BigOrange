@@ -4,16 +4,16 @@ import { pinia } from '../stores'
 import { useAuthStore } from '../stores/authStore'
 
 export const routes = [
-  { path: '/login', name: 'Login', component: () => import('../views/Login.vue') },
-  { path: '/legal/:document(terms|privacy|third-parties)', name: 'LegalDocument', component: () => import('../views/LegalDocument.vue'), meta: { title: '法律与隐私', public: true } },
-  { path: '/support', name: 'SupportCenter', component: () => import('../views/SupportCenter.vue'), meta: { title: '账号、数据、举报与申诉', public: true } },
+  { path: '/login', name: 'Login', component: () => import('../views/Login.vue'), meta: { title: '登录与注册', description: '登录或注册 OrangeVC 官方账号。', robots: 'noindex,nofollow' } },
+  { path: '/legal/:document(terms|privacy|third-parties)', name: 'LegalDocument', component: () => import('../views/LegalDocument.vue'), meta: { title: '法律与隐私', description: 'OrangeVC 用户协议、隐私政策与第三方服务清单。', public: true } },
+  { path: '/support', name: 'SupportCenter', component: () => import('../views/SupportCenter.vue'), meta: { title: '账号、数据、举报与申诉', description: 'OrangeVC 账号、数据权利、安全举报与申诉渠道。', public: true } },
   {
     path: '/',
     name: 'Main',
     component: () => import('../layouts/MainLayout.vue'),
     redirect: '/market',
     children: [
-      { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '市场' } },
+      { path: 'market', name: 'Market', component: () => import('../views/Market.vue'), meta: { title: '公开作品与需求市场', description: '公开浏览 Vibe Coding 作品与真实项目需求，登录后再进行互动。', public: true } },
       { path: 'ai', name: 'AiHub', component: () => import('../views/AiHub.vue'), meta: { title: 'AI 工具' } },
       { path: 'ai-records', name: 'AiRecords', component: () => import('../views/AiRecords.vue'), meta: { title: 'AI 分析记录' } },
       { path: 'persona-workshop', name: 'PersonaWorkshop', component: () => import('../views/PersonaWorkshop.vue'), meta: { title: '橙子画像工坊' } },
@@ -46,7 +46,8 @@ export const routes = [
       { path: 'requirement/:id', name: 'ReqDetail', component: () => import('../views/ReqDetail.vue'), meta: { title: '需求详情' } },
       { path: 'order/:id', name: 'OrderDetail', component: () => import('../views/OrderDetail.vue'), meta: { title: '订单详情', requiresTransactionUi: true } }
     ]
-  }
+  },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue'), meta: { title: '页面不存在', description: '您访问的 OrangeVC 页面不存在。', robots: 'noindex,nofollow', public: true } },
 ]
 
 const router = createRouter({ history: createWebHistory(), routes })
@@ -62,6 +63,24 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(to => {
   document.title = `${to.meta.title || 'OrangeVC'} · OrangeVC`
+  const setMeta = (name, content) => {
+    let element = document.head.querySelector(`meta[name="${name}"]`)
+    if (!element) {
+      element = document.createElement('meta')
+      element.setAttribute('name', name)
+      document.head.appendChild(element)
+    }
+    element.setAttribute('content', content)
+  }
+  setMeta('description', to.meta.description || 'OrangeVC · Vibe Coding 作品、项目与 AI 工具平台')
+  setMeta('robots', to.meta.robots || 'index,follow')
+  let canonical = document.head.querySelector('link[rel="canonical"]')
+  if (!canonical) {
+    canonical = document.createElement('link')
+    canonical.setAttribute('rel', 'canonical')
+    document.head.appendChild(canonical)
+  }
+  canonical.setAttribute('href', `${window.location.origin}${to.path}`)
   window.scrollTo({ top: 0, left: 0 })
   requestAnimationFrame(() => document.getElementById('main-content')?.focus({ preventScroll: true }))
 })

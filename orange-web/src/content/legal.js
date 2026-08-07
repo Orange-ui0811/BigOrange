@@ -3,6 +3,30 @@ export const LEGAL_CONTACT = import.meta.env.VITE_LEGAL_CONTACT_EMAIL || 'suppor
 export const LEGAL_UPDATED_AT = '2026年7月19日'
 export const LEGAL_EFFECTIVE_AT = '首次上线公示之日'
 export const LEGAL_OPERATOR = import.meta.env.VITE_LEGAL_OPERATOR || 'OrangeVC 运营者（以网站首页/备案公示的主体信息为准）'
+export const LEGAL_REGISTERED_ADDRESS = import.meta.env.VITE_LEGAL_REGISTERED_ADDRESS || ''
+export const LEGAL_CREDIT_CODE = import.meta.env.VITE_LEGAL_CREDIT_CODE || ''
+export const LEGAL_ICP_RECORD = import.meta.env.VITE_LEGAL_ICP_RECORD || ''
+export const LEGAL_PUBLIC_SECURITY_RECORD = import.meta.env.VITE_LEGAL_PUBLIC_SECURITY_RECORD || ''
+export const OFFICIAL_SITE_URL = import.meta.env.VITE_OFFICIAL_SITE_URL || 'https://orangevf.com'
+
+const incompleteIdentityValues = ['OrangeVC 运营者（以网站首页/备案公示的主体信息为准）', 'orange团队', 'YOUR_LEGAL_ENTITY_NAME']
+export const LEGAL_IDENTITY_COMPLETE = Boolean(
+  LEGAL_OPERATOR
+  && !incompleteIdentityValues.includes(LEGAL_OPERATOR)
+  && LEGAL_CONTACT
+  && LEGAL_CONTACT !== 'support@example.com'
+  && LEGAL_ICP_RECORD,
+)
+
+export const publicIdentityRows = [
+  ['运营主体', LEGAL_OPERATOR],
+  ['官方网站', OFFICIAL_SITE_URL],
+  ['联系邮箱', LEGAL_CONTACT],
+  ['ICP备案', LEGAL_ICP_RECORD],
+  ['注册地址', LEGAL_REGISTERED_ADDRESS],
+  ['统一社会信用代码', LEGAL_CREDIT_CODE],
+  ['公安备案', LEGAL_PUBLIC_SECURITY_RECORD],
+].filter(([, value]) => Boolean(value))
 
 const sharedMeta = {
   updatedAt: LEGAL_UPDATED_AT,
@@ -110,12 +134,12 @@ export const documents = {
     ...sharedMeta,
     title: 'OrangeVC 隐私政策',
     summary: '本政策按照 OrangeVC 当前代码和拟上线功能，说明个人信息处理目的、方式、种类、保存期限、第三方服务及您的权利。',
-    callout: '重要提示：正式上线前必须补全并公示运营主体名称、注册地址、统一社会信用代码、备案信息和个人信息保护负责人联系方式。未补全前不应开放公开注册或真实交易。',
+    callout: 'OrangeVC 在本政策、登录页和网站公共区域持续公示运营主体、官方域名、联系邮箱及备案信息。若公示信息与实际访问域名不一致，请暂停注册并通过公示邮箱联系我们。',
     sections: [
       {
         title: '一、个人信息处理者',
         paragraphs: [
-          `个人信息处理者为${LEGAL_OPERATOR}。个人信息保护与数据权利联系邮箱：${LEGAL_CONTACT}。正式主体信息以首页/页脚备案公示为准。`,
+          `个人信息处理者为${LEGAL_OPERATOR}。个人信息保护与数据权利联系邮箱：${LEGAL_CONTACT}。官方网站为 ${OFFICIAL_SITE_URL}。${LEGAL_ICP_RECORD ? `ICP备案信息：${LEGAL_ICP_RECORD}。` : ''}`,
         ],
       },
       {

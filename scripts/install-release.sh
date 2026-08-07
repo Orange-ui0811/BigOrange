@@ -53,6 +53,26 @@ test -f "$STAGE/orange-server.jar"
 test -f "$STAGE/web-dist/index.html"
 test -f "$STAGE/web-dist/admin/index.html"
 test -f "$STAGE/manifest.json"
+test -f "$STAGE/config/turnstile-site-key.sha256"
+
+# Vite embeds public environment variables at build time. Refuse a release
+# whose embedded Turnstile widget does not match the production configuration,
+# otherwise the browser and server would use keys from different widgets.
+BUILT_TURNSTILE_SHA="$(tr -d '[:space:]' < "$STAGE/config/turnstile-site-key.sha256")"
+PRODUCTION_TURNSTILE_SITE_KEY="$(
+  sudo sed -n 's/^VITE_TURNSTILE_SITE_KEY=//p' /etc/orangejd/orangejd.env | tail -n 1
+)"
+[[ -n "$PRODUCTION_TURNSTILE_SITE_KEY" ]] || {
+  echo "Production VITE_TURNSTILE_SITE_KEY is not configured" >&2
+  exit 1
+}
+PRODUCTION_TURNSTILE_SHA="$(
+  printf '%s' "$PRODUCTION_TURNSTILE_SITE_KEY" | sha256sum | awk '{print $1}'
+)"
+[[ "$BUILT_TURNSTILE_SHA" == "$PRODUCTION_TURNSTILE_SHA" ]] || {
+  echo "Release Turnstile site key does not match production configuration" >&2
+  exit 1
+}
 
 sudo install -d -m 0750 "$BACKUP"
 sudo cp -a "$APP_ROOT/orange-server.jar" "$BACKUP/"

@@ -57,6 +57,11 @@
 
       <!-- 品牌标题 -->
       <h1 class="brand-title">OrangeVC</h1>
+      <p class="brand-summary">面向 Vibe Coding 学习者与创作者的作品、项目和 AI 工具平台</p>
+      <div class="official-site" aria-label="官方网站信息">
+        <span>官方网站</span>
+        <strong>{{ officialSiteHost }}</strong>
+      </div>
 
       <!-- Tab 切换 -->
       <div class="tab-wrap" v-show="resetStep === 0">
@@ -65,10 +70,19 @@
           @click="tab = 'login'"
         >登录</div>
         <div
+          v-if="LEGAL_IDENTITY_COMPLETE"
           :class="['tab-item', { active: tab === 'register' }]"
           @click="tab = 'register'"
         >注册</div>
       </div>
+      <div v-if="!LEGAL_IDENTITY_COMPLETE && resetStep === 0" class="identity-gate">
+        新用户注册将在真实运营主体与备案信息配置完成后开放；已有账号仍可正常登录。
+      </div>
+
+      <aside v-if="tab === 'login' && resetStep === 0" class="login-safety" aria-label="安全登录提示">
+        <strong>安全登录提示</strong>
+        <span>本页仅用于 OrangeVC 本站账号。请勿输入邮箱、银行或其他网站的密码；平台不会通过私信索取密码或验证码。</span>
+      </aside>
 
       <!-- 登录表单 -->
       <form v-if="tab === 'login' && resetStep === 0" @submit.prevent="doLogin">
@@ -133,7 +147,7 @@
       </div>
 
       <!-- 注册表单 -->
-      <form v-if="tab === 'register' && resetStep === 0" @submit.prevent="doRegister">
+      <form v-if="LEGAL_IDENTITY_COMPLETE && tab === 'register' && resetStep === 0" @submit.prevent="doRegister">
         <label class="form-label">邮箱</label>
         <input
           v-model="regForm.email"
@@ -207,12 +221,31 @@
         <router-link to="/legal/third-parties">第三方服务</router-link>
         <router-link to="/support">举报与申诉</router-link>
       </footer>
+      <div class="login-identity" aria-label="运营主体信息">
+        <span>{{ LEGAL_OPERATOR }}</span>
+        <a :href="`mailto:${LEGAL_CONTACT}`">{{ LEGAL_CONTACT }}</a>
+        <a v-if="LEGAL_ICP_RECORD" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ LEGAL_ICP_RECORD }}</a>
+        <strong v-if="!LEGAL_IDENTITY_COMPLETE" class="identity-warning">生产上线前须配置真实运营主体与备案信息</strong>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useAuthFlow } from '../composables/useAuthFlow'
+import {
+  LEGAL_CONTACT,
+  LEGAL_ICP_RECORD,
+  LEGAL_IDENTITY_COMPLETE,
+  LEGAL_OPERATOR,
+  OFFICIAL_SITE_URL,
+} from '../content/legal'
+
+const officialSiteHost = computed(() => {
+  try { return new URL(OFFICIAL_SITE_URL).host }
+  catch { return OFFICIAL_SITE_URL }
+})
 
 const { tab, turnstileRef, loading, showPwd, showRegPwd, loginForm, codeCooldown, codeSending,
   regForm, legalAccepted, resetStep, resetEmail, resetCode, resetNewPwd, resetCooldown,

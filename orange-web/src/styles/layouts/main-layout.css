@@ -101,6 +101,30 @@
   color: var(--text-secondary);
 }
 
+.sidebar-guest {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--border-orange);
+  border-radius: 18px;
+  background: #fffaf4;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.sidebar-guest strong { color: var(--brand-strong); font-size: 13px; }
+.sidebar-guest button,
+.login-tool-btn {
+  border: 1px solid var(--brand) !important;
+  border-radius: 10px;
+  background: var(--brand-soft) !important;
+  color: var(--brand-strong) !important;
+  font-weight: 900;
+  cursor: pointer;
+}
+.sidebar-guest button { min-height: 34px; }
+
 /* 分割线 */
 .sidebar-divider {
   height: 1px;
@@ -245,6 +269,14 @@
   text-decoration: none;
 }
 .legal-links a:hover { color: var(--brand-strong); }
+.site-identity-mini {
+  display: grid;
+  gap: 3px;
+  padding: 0 12px 6px;
+  color: var(--text-muted);
+  font: 700 9px/1.45 var(--font-body);
+}
+.site-identity-mini a { color: var(--brand-strong); text-decoration: none; }
 .logout-btn:hover {
   color: #e53935;
   background: #fff5f5;
@@ -306,7 +338,7 @@
     bottom: max(10px, env(safe-area-inset-bottom));
     left: 10px;
     display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(62px, 1fr));
     min-height: 62px;
     padding: 6px;
     border: 1px solid rgba(254, 215, 170, .92);

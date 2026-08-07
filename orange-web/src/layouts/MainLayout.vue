@@ -58,7 +58,7 @@
       </div>
 
       <!-- 用户面板 -->
-      <div class="sidebar-user">
+      <div v-if="authenticated" class="sidebar-user">
         <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
           {{ (nickname || me.nickname || me.username || '?')[0] }}
         </el-avatar>
@@ -66,6 +66,11 @@
           <strong>{{ nickname || me.nickname || me.username }}</strong>
           <span>创作者</span>
         </div>
+      </div>
+      <div v-else class="sidebar-guest">
+        <strong>公开浏览模式</strong>
+        <span>当前可安全浏览公开作品与需求，登录后再使用发布、消息和 AI 工具。</span>
+        <button type="button" @click="router.push('/login')">登录或注册</button>
       </div>
 
       <div class="sidebar-divider"></div>
@@ -79,38 +84,38 @@
             <span>发现</span>
           </span>
         </el-menu-item>
-        <el-menu-item index="/ai">
+        <el-menu-item v-if="authenticated" index="/ai">
           <span class="nav-item-content">
             <el-icon><Cpu /></el-icon>
             <span>AI 工具</span>
           </span>
         </el-menu-item>
-        <el-menu-item index="/ai-records">
+        <el-menu-item v-if="authenticated" index="/ai-records">
           <span class="nav-item-content">
             <el-icon><Document /></el-icon>
             <span>AI 记录</span>
           </span>
         </el-menu-item>
-        <el-menu-item index="/persona-workshop">
+        <el-menu-item v-if="authenticated" index="/persona-workshop">
           <span class="nav-item-content">
             <el-icon><MagicStick /></el-icon>
             <span>橙子画像工坊</span>
           </span>
         </el-menu-item>
-        <el-menu-item index="/publish">
+        <el-menu-item v-if="authenticated" index="/publish">
           <span class="nav-item-content">
             <el-icon><Edit /></el-icon>
             <span>发布</span>
           </span>
         </el-menu-item>
-        <el-menu-item index="/chat">
+        <el-menu-item v-if="authenticated" index="/chat">
           <span class="nav-item-content">
             <el-icon><ChatDotRound /></el-icon>
             <span>消息</span>
           </span>
           <span v-if="chatUnread" class="menu-badge">{{ chatUnread }}</span>
         </el-menu-item>
-        <el-menu-item index="/me">
+        <el-menu-item v-if="authenticated" index="/me">
           <span class="nav-item-content">
             <el-icon><User /></el-icon>
             <span>我的</span>
@@ -119,10 +124,10 @@
       </el-menu>
 
       <!-- 橙子使用指南 -->
-      <GuideBubble />
+      <GuideBubble v-if="authenticated" />
 
       <!-- 功能归属提示 -->
-      <div class="nav-hint">
+      <div v-if="authenticated" class="nav-hint">
         <strong>功能归属</strong>
         榜单、趋势分析、方案设计 → AI 工具<br/>
         画像、素材箱、橙子换装 → 橙子画像工坊<br/>
@@ -132,11 +137,11 @@
       <!-- ═══ 底部工具 ═══ -->
       <div class="sidebar-tools">
         <div class="sidebar-divider"></div>
-        <button class="tool-btn" type="button" @click="$router.push('/me/notifications')">
+        <button v-if="authenticated" class="tool-btn" type="button" @click="$router.push('/me/notifications')">
           <span>系统通知</span>
           <span v-if="unreadCount" class="menu-badge">{{ unreadCount }}</span>
         </button>
-        <button class="tool-btn" type="button" @click="$router.push('/me/settings')">
+        <button v-if="authenticated" class="tool-btn" type="button" @click="$router.push('/me/settings')">
           <span>设置</span>
         </button>
         <div class="legal-links" aria-label="法律与安全">
@@ -144,8 +149,16 @@
           <router-link to="/legal/privacy">隐私政策</router-link>
           <router-link to="/support">举报申诉</router-link>
         </div>
-        <button class="tool-btn logout-btn" type="button" @click="logout">
+        <div class="site-identity-mini">
+          <span>{{ legalOperator }}</span>
+          <a :href="officialSiteUrl">orangevf.com</a>
+          <a v-if="legalIcpRecord" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ legalIcpRecord }}</a>
+        </div>
+        <button v-if="authenticated" class="tool-btn logout-btn" type="button" @click="logout">
           <span>退出</span>
+        </button>
+        <button v-else class="tool-btn login-tool-btn" type="button" @click="router.push('/login')">
+          <span>登录或注册</span>
         </button>
       </div>
     </el-aside>
@@ -164,7 +177,7 @@
     </el-container>
 
     <nav class="mobile-nav" aria-label="主导航">
-      <button v-for="item in mobileNavItems" :key="item.path" type="button"
+      <button v-for="item in visibleMobileNavItems" :key="item.path" type="button"
               :class="{ active: activeMenu === item.path }" :aria-current="activeMenu === item.path ? 'page' : undefined"
               @click="router.push(item.path)">
         <el-icon><component :is="item.icon" /></el-icon>
@@ -172,7 +185,7 @@
         <span v-if="item.path === '/chat' && chatUnread" class="mobile-badge">{{ chatUnread }}</span>
       </button>
     </nav>
-    <ReleaseAnnouncementDialog :account-id="accountId" />
+    <ReleaseAnnouncementDialog v-if="authenticated" :account-id="accountId" />
   </el-container>
 </template>
 
@@ -180,8 +193,9 @@
 import { useMainLayout } from '../composables/useMainLayout'
 
 const { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
-  MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, mobileNavItems,
-  accountId, logout, activeMenu } = useMainLayout()
+  MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, visibleMobileNavItems,
+  accountId, authenticated, router, logout, activeMenu,
+  legalIcpRecord, legalOperator, officialSiteUrl } = useMainLayout()
 </script>
 
 <style scoped src="../styles/layouts/main-layout.css"></style>
