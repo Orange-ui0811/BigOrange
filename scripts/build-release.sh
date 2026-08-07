@@ -5,6 +5,7 @@ ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD_DIR="$ROOT_DIR/build"
 STAGE_DIR="$(mktemp -d "${TMPDIR:-/tmp}/orangejd-release.XXXXXX")"
 trap 'rm -rf -- "$STAGE_DIR"' EXIT
+source "$ROOT_DIR/scripts/lib/production-config.sh"
 
 command -v mvn >/dev/null 2>&1 || { echo "Maven 3.9+ is required" >&2; exit 1; }
 command -v npm >/dev/null 2>&1 || { echo "Node.js/npm is required" >&2; exit 1; }
@@ -12,11 +13,7 @@ if [[ "${ALLOW_DIRTY_RELEASE:-false}" != "true" ]] && [[ -n "$(git status --porc
   echo "Refusing to build an untraceable release from a dirty Git worktree" >&2
   exit 1
 fi
-: "${VITE_TURNSTILE_SITE_KEY:?Set the public Turnstile site key for the production build}"
-: "${VITE_LEGAL_OPERATOR:?Set the legal operator name for the production build}"
-: "${VITE_LEGAL_CONTACT_EMAIL:?Set the legal contact email for the production build}"
-export VITE_API_BASE_URL="${VITE_API_BASE_URL:-/api}"
-export VITE_WS_URL="${VITE_WS_URL:-}"
+validate_public_build_config
 
 # Git for Windows otherwise rewrites values such as /api into a local MSYS path
 # when npm is launched from this script.
@@ -51,10 +48,8 @@ mkdir -p "$STAGE_DIR/web-dist/admin" "$STAGE_DIR/config" "$STAGE_DIR/database"
 install -m 0644 orange-server/target/orange-server-1.0.0-SNAPSHOT.jar "$STAGE_DIR/orange-server.jar"
 cp -R orange-web/dist/. "$STAGE_DIR/web-dist/"
 cp -R orange-admin/dist/. "$STAGE_DIR/web-dist/admin/"
-printf '%s' "$VITE_TURNSTILE_SITE_KEY" \
-  | sha256sum \
-  | awk '{print $1}' \
-  > "$STAGE_DIR/config/turnstile-site-key.sha256"
+public_build_config_fingerprint > "$STAGE_DIR/config/public-build-config.sha256"
+install -m 0644 scripts/lib/production-config.sh "$STAGE_DIR/config/production-config.sh"
 install -m 0644 .env.prod.example "$STAGE_DIR/config/orangejd.env.example"
 install -m 0644 nginx.conf "$STAGE_DIR/config/nginx.conf.example"
 install -m 0644 scripts/orangejd.service "$STAGE_DIR/config/orangejd.service.example"
