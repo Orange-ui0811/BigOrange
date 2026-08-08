@@ -1,5 +1,7 @@
 package com.orangejd.pojo.entity;
 
+import java.math.BigDecimal;
+
 public class Work extends BaseEntity {
     private Long ownerId;
     private String title;
@@ -19,6 +21,7 @@ public class Work extends BaseEntity {
     private String ownerAvatar;
     private Integer favoriteCount;
     private Integer commentCount;
+    private BigDecimal referencePrice;
 
     public Long getOwnerId() { return ownerId; }
     public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
@@ -54,4 +57,6 @@ public class Work extends BaseEntity {
     public void setFavoriteCount(Integer favoriteCount) { this.favoriteCount = favoriteCount; }
     public Integer getCommentCount() { return commentCount; }
     public void setCommentCount(Integer commentCount) { this.commentCount = commentCount; }
+    public BigDecimal getReferencePrice() { return referencePrice; }
+    public void setReferencePrice(BigDecimal referencePrice) { this.referencePrice = referencePrice; }
 }

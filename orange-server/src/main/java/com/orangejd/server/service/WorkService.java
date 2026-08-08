@@ -15,6 +15,8 @@ public interface WorkService {
 
     void submitForReview(Long id);
 
+    void withdraw(Long id);
+
     void delete(Long id);
 
     void toggleVisibility(Long id);

@@ -148,6 +148,18 @@ public class WorkServiceImpl implements WorkService {
         if (aiAuditService != null) aiAuditService.auditWorkAsync(id);
     }
 
+    @Override
+    @Transactional
+    public void withdraw(Long id) {
+        Work work = workMapper.selectById(id);
+        if (work == null) throw new BaseException(MessageConstant.WORK_NOT_FOUND);
+        if (!work.getOwnerId().equals(BaseContext.getCurrentId()))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
+        if (!"PENDING_REVIEW".equals(work.getAuditStatus()) && !"APPROVED".equals(work.getAuditStatus()))
+            throw new BaseException(MessageConstant.WORK_WITHDRAW_DENIED);
+        workMapper.updateAuditStatus(id, "DRAFT");
+    }
+
     private void capturePersonaMaterial(Long accountId, com.orangejd.server.service.PersonaDimension dimension,
                                         String eventType, Long workId, String evidence, String suggestion) {
         if (personaMaterialCollector == null) return;
@@ -265,6 +277,7 @@ public class WorkServiceImpl implements WorkService {
         vo.setCreateTime(w.getCreateTime()); vo.setUpdateTime(w.getUpdateTime());
         vo.setOwnerName(w.getOwnerName()); vo.setOwnerAvatar(w.getOwnerAvatar());
         vo.setFavoriteCount(w.getFavoriteCount()); vo.setCommentCount(w.getCommentCount());
+        vo.setPrice(w.getReferencePrice());
         return vo;
     }
 

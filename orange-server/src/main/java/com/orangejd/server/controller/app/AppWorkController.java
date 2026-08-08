@@ -34,6 +34,12 @@ public class AppWorkController {
         return Result.success();
     }
 
+    @PostMapping("/{id}/withdraw")
+    public Result<?> withdraw(@PathVariable Long id) {
+        workService.withdraw(id);
+        return Result.success();
+    }
+
     @DeleteMapping("/{id}")
     public Result<?> delete(@PathVariable Long id) {
         workService.delete(id);

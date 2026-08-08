@@ -83,7 +83,7 @@
             <p>{{ item.summary || item.detail || '暂无简介' }}</p>
             <div class="card-foot">
               <span>{{ item.ownerName || '#'+item.ownerId }} · {{ item.favoriteCount || 0 }} 收藏 · {{ item.commentCount || 0 }} 评论</span>
-              <strong class="price">查看详情</strong>
+              <strong class="price">{{ formatWorkPrice(item.price) }}</strong>
             </div>
           </div>
         </article>
@@ -141,6 +141,7 @@
 import { computed } from 'vue'
 import { useMarket } from '../composables/useMarket'
 import { useAuthStore } from '../stores/authStore'
+import { formatWorkPrice } from '../utils/workPrice'
 
 const authStore = useAuthStore()
 const authenticated = computed(() => authStore.authenticated)

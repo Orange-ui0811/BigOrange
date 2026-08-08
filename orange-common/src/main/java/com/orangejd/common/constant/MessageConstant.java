@@ -27,6 +27,7 @@ public class MessageConstant {
     public static final String WORK_EDIT_DENIED = "无权限编辑此作品";
     public static final String WORK_DELETE_DENIED = "无权限删除此作品";
     public static final String WORK_SUBMIT_DENIED = "仅草稿或被驳回的作品可提交审核";
+    public static final String WORK_WITHDRAW_DENIED = "仅待审核或已通过的作品可撤回";
     public static final String WORK_AUDIT_DENIED = "作品不是待审核状态";
     public static final String WORK_AUDIT_CONFLICT = "作品审核状态已变化，请刷新后重试";
 

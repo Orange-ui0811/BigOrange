@@ -5,6 +5,7 @@ import com.orangejd.server.controller.admin.AdminUserController;
 import com.orangejd.server.controller.app.AppAiResultRecordController;
 import com.orangejd.server.controller.app.AppPersonaWorkshopController;
 import com.orangejd.server.controller.app.AppTrendController;
+import com.orangejd.server.controller.app.AppWorkController;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,12 @@ class PublicApiContractTest {
         assertBase(AdminUserController.class, "/admin/users");
         assertRoute(AdminUserController.class, "list", RequestMethod.GET, "");
         assertRoute(AdminUserController.class, "toggleStatus", RequestMethod.PUT, "/{id}/status");
+    }
+
+    @Test
+    void workWithdrawalRouteRemainsStable() {
+        assertBase(AppWorkController.class, "/app/work");
+        assertRoute(AppWorkController.class, "withdraw", RequestMethod.POST, "/{id}/withdraw");
     }
 
     private void assertBase(Class<?> controller, String path) {

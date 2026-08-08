@@ -106,9 +106,12 @@
               <span v-if="works[0].categoryName">{{ works[0].categoryName }}</span>
               <h3>{{ works[0].title }}</h3>
               <p>{{ workSummary(works[0]) }}</p>
-              <button type="button" @click.stop="openWork(works[0].id)">
-                查看作品 <el-icon aria-hidden="true"><Right /></el-icon>
-              </button>
+              <div class="work-cta">
+                <strong class="work-price">{{ formatWorkPrice(works[0].price) }}</strong>
+                <button type="button" @click.stop="openWork(works[0].id)">
+                  查看作品 <el-icon aria-hidden="true"><Right /></el-icon>
+                </button>
+              </div>
             </div>
           </article>
 
@@ -124,6 +127,7 @@
                 <span v-if="work.categoryName">{{ work.categoryName }}</span>
                 <h3>{{ work.title }}</h3>
                 <p>{{ workSummary(work) }}</p>
+                <strong class="work-price compact-price">{{ formatWorkPrice(work.price) }}</strong>
               </div>
               <el-icon class="work-arrow" aria-hidden="true"><Right /></el-icon>
             </article>
@@ -244,6 +248,7 @@ import {
 import request from '../api/request'
 import PixelOrangeLogo from '../components/PixelOrangeLogo.vue'
 import PixelOrangeMascot from '../components/PixelOrangeMascot.vue'
+import { formatWorkPrice } from '../utils/workPrice'
 import heroVisual from '../assets/home/orangevc-maker-marketplace.jpg'
 import makerDesk from '../assets/home/orangevc-maker-desk.jpg'
 
@@ -438,7 +443,10 @@ onMounted(loadWorks)
 .work-info > span { color: var(--home-accent); font: 800 11px/1.4 "Courier New", monospace; letter-spacing: .08em; }
 .work-info h3 { margin: 8px 0 8px; font-size: 24px; line-height: 1.25; }
 .work-info p { margin: 0; color: color-mix(in srgb, currentColor 78%, transparent); font-size: 13px; line-height: 1.65; }
-.work-featured .work-info button { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; padding: 0; border: 0; color: #fff; background: transparent; font-weight: 800; cursor: pointer; }
+.work-cta { display: flex; align-items: center; gap: 18px; margin-top: 18px; }
+.work-featured .work-info button { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; color: #fff; background: transparent; font-weight: 800; cursor: pointer; }
+.work-price { color: #ffd7ba; font: 800 15px/1.4 "Courier New", monospace; }
+.compact-price { display: block; margin-top: 8px; color: #c55312; font-size: 12px; }
 .work-compact { display: grid; grid-template-columns: 36% 1fr auto; align-items: stretch; min-height: 0; }
 .work-compact img { min-width: 0; }
 .work-compact .work-info { align-self: center; min-width: 0; padding: 18px 14px 18px 18px; }

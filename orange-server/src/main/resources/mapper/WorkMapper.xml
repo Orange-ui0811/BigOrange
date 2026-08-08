@@ -24,6 +24,7 @@
         <result property="ownerAvatar" column="owner_avatar"/>
         <result property="favoriteCount" column="favorite_count"/>
         <result property="commentCount" column="comment_count"/>
+        <result property="referencePrice" column="reference_price"/>
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -48,7 +49,8 @@
     </update>
 
     <select id="selectById" resultMap="workMap">
-        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
         WHERE w.id = #{id}
     </select>
@@ -58,7 +60,8 @@
     </select>
 
     <select id="selectByOwnerId" resultMap="workMap">
-        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
         WHERE w.owner_id = #{ownerId}
         ORDER BY w.create_time DESC
@@ -99,6 +102,7 @@
 
     <select id="selectPublic" resultMap="workMap">
         SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price,
                (SELECT COUNT(*) FROM favorite f WHERE f.target_type='WORK' AND f.target_id=w.id) AS favorite_count,
                (SELECT COUNT(*) FROM comment c WHERE c.target_type='WORK' AND c.target_id=w.id) AS comment_count
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
@@ -125,7 +129,8 @@
     </select>
 
     <select id="selectAll" resultMap="workMap">
-        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
         <where>
             <if test="auditStatus != null and auditStatus != ''">w.audit_status = #{auditStatus}</if>
