@@ -1,8 +1,10 @@
 import { ref, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
 import request from '../api/request'
 
 export const useMarket = () => {
+const route = useRoute()
 const marketTour = [
   { selector: '.hero-search', text: '在这里搜索作品和需求！输入关键词找你想看的 AI 产品或创意需求。', expression: 'smile' },
   { selector: '.content-tabs', text: '用这些小药丸快速筛选：全部看、只看作品、只看需求。右边还有分类下拉帮你精确筛选～', expression: 'wink' },
@@ -15,7 +17,7 @@ const worksTotal = ref(0)
 const reqsTotal = ref(0)
 const categories = ref([])
 const categoryId = ref('')
-const keyword = ref('')
+const keyword = ref(typeof route.query.keyword === 'string' ? route.query.keyword : '')
 const worksPage = ref(1)
 const reqsPage = ref(1)
 const pageSize = ref(12)

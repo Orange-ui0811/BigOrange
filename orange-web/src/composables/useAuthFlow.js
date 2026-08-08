@@ -1,5 +1,5 @@
 import { ref, reactive, watch, nextTick, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import request from '../api/request'
 import { LEGAL_VERSION } from '../content/legal'
@@ -7,6 +7,7 @@ import { useAuthStore } from '../stores/authStore'
 
 export const useAuthFlow = () => {
 const router = useRouter()
+const route = useRoute()
 const authStore = useAuthStore()
 const tab = ref('login')
 const turnstileRef = ref(null)
@@ -20,6 +21,13 @@ const codeSending = ref(false)
 const regForm = reactive({ username: '', password: '', nickname: '', email: '', code: '', turnstileToken: '' })
 const legalAccepted = ref(false)
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'
+
+const destinationAfterAuth = () => {
+  const redirect = route.query.redirect
+  return typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//')
+    ? redirect
+    : '/market'
+}
 
 // 忘记密码
 const resetStep = ref(0)
@@ -143,7 +151,7 @@ const doLogin = async () => {
   loading.value = true
   try {
     const res = await request.post('/app/auth/login', loginForm)
-    if (res.code === 1) { authStore.setSession(res.data); router.push('/market') }
+    if (res.code === 1) { authStore.setSession(res.data); router.push(destinationAfterAuth()) }
     else ElMessage.error(res.msg)
   } catch (e) { ElMessage.error(e?.response?.data?.msg || '网络连接失败') }
   finally { loading.value = false }
@@ -164,7 +172,7 @@ const doRegister = async () => {
       legalAccepted: legalAccepted.value,
       legalVersion: LEGAL_VERSION,
     })
-    if (res.code === 1) { authStore.setSession(res.data); router.push('/market') }
+    if (res.code === 1) { authStore.setSession(res.data); router.push(destinationAfterAuth()) }
     else ElMessage.error(res.msg)
   } catch (e) { ElMessage.error(e?.response?.data?.msg || '网络连接失败') }
   finally { loading.value = false }

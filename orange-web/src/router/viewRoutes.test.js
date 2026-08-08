@@ -13,9 +13,9 @@ const routeComponents = routeList => routeList.flatMap(route => [
 ])
 
 describe('view and route smoke coverage', () => {
-  it('loads every one of the 35 view modules', async () => {
+  it('loads every one of the 36 view modules', async () => {
     const paths = Object.keys(viewModules).sort()
-    expect(paths).toHaveLength(35)
+    expect(paths).toHaveLength(36)
     for (const path of paths) {
       const module = await viewModules[path]()
       expect(module.default, `${path} should export a Vue component`).toBeTruthy()
@@ -31,14 +31,20 @@ describe('view and route smoke coverage', () => {
     }
   })
 
-  it('uses the public AI tools page as the default entry and keeps unknown routes out of the login flow', () => {
+  it('uses the public homepage as the default entry and keeps app routes stable', () => {
+    const home = routes.find(route => route.name === 'Home')
     const main = routes.find(route => route.name === 'Main')
     const market = main.children.find(route => route.name === 'Market')
     const aiHub = main.children.find(route => route.name === 'AiHub')
     const notFound = routes.find(route => route.name === 'NotFound')
     const login = routes.find(route => route.name === 'Login')
 
+    expect(home.path).toBe('/')
+    expect(home.meta.public).toBe(true)
+    expect(main.path).toBe('/app')
     expect(main.redirect).toBe('/ai')
+    expect(market.path).toBe('/market')
+    expect(aiHub.path).toBe('/ai')
     expect(aiHub.meta.public).toBe(true)
     expect(market.meta.public).toBe(true)
     expect(notFound.meta.public).toBe(true)
