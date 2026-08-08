@@ -6,12 +6,11 @@ import com.orangejd.pojo.entity.QuotaLog;
 import com.orangejd.pojo.entity.QuotaOperation;
 import com.orangejd.pojo.entity.RedemptionCode;
 import com.orangejd.server.mapper.AccountMapper;
-import com.orangejd.server.mapper.QuotaLogMapper;
-import com.orangejd.server.mapper.QuotaOperationMapper;
 import com.orangejd.server.mapper.RedemptionCodeMapper;
 import com.orangejd.server.service.PricingService;
 import com.orangejd.server.service.PricingSnapshot;
 import com.orangejd.server.service.QuotaCharge;
+import com.orangejd.server.service.QuotaLedgerService;
 import com.orangejd.server.service.QuotaRequestIdentity;
 import com.orangejd.server.service.QuotaService;
 import org.slf4j.Logger;
@@ -19,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -30,10 +28,9 @@ public class QuotaServiceImpl implements QuotaService {
     private static final long MAX_QUOTA = 1_000_000_000_000L;
 
     private final AccountMapper accountMapper;
-    private final QuotaLogMapper quotaLogMapper;
-    private final QuotaOperationMapper quotaOperationMapper;
     private final RedemptionCodeMapper redemptionCodeMapper;
     private final PricingService pricingService;
+    private final QuotaLedgerService quotaLedgerService;
 
     @Override
     @Transactional
@@ -56,9 +53,9 @@ public class QuotaServiceImpl implements QuotaService {
                                      QuotaRequestIdentity identity) {
         requirePositiveAmount(amount);
         Account account = requireAccountForUpdate(accountId);
-        QuotaOperation existing = quotaOperationMapper.selectByRequestIdForUpdate(identity.requestId());
+        QuotaOperation existing = quotaLedgerService.findOperationForUpdate(identity.requestId());
         if (existing != null) {
-            validateReplay(existing, accountId, identity);
+            quotaLedgerService.validateReplay(existing, accountId, identity);
             if ("REFUNDED".equals(existing.getStatus())) {
                 throw new BaseException("该请求已失败并退回配额，请重新发起");
             }
@@ -75,15 +72,12 @@ public class QuotaServiceImpl implements QuotaService {
                     + " segments，需 " + amount + " segments");
         }
         long balance = Math.subtractExact(account.getQuota(), amount);
-        QuotaOperation operation = operation(accountId, amount, serviceKey, priceVersion,
+        QuotaOperation operation = quotaLedgerService.createOperation(accountId, amount, serviceKey, priceVersion,
                 "CONSUMED", identity);
-        quotaOperationMapper.insert(operation);
-        QuotaLog entry = writeLog(operation, accountId, "CONSUME", -amount, balance,
+        QuotaLog entry = quotaLedgerService.writeLog(operation, accountId, "CONSUME", -amount, balance,
                 null, serviceKey, priceVersion, description, identity.requestId(),
                 identity.requestHash(), null);
-        if (quotaOperationMapper.attachDebitLog(operation.getId(), entry.getId()) != 1) {
-            throw new BaseException("配额流水关联失败");
-        }
+        quotaLedgerService.attachDebitLog(operation, entry);
         log.info("配额消费: operationNo={}, accountId={}, serviceKey={}, amount={}, balance={}",
                 operation.getOperationNo(), accountId, serviceKey, amount, balance);
         return new QuotaCharge(balance, amount, priceVersion == null ? 0L : priceVersion,
@@ -116,7 +110,7 @@ public class QuotaServiceImpl implements QuotaService {
                                 String description) {
         if (requestId == null || requestId.isBlank()) throw new BaseException("原配额请求号不能为空");
         Account account = requireAccountForUpdate(accountId);
-        QuotaOperation operation = quotaOperationMapper.selectByRequestIdForUpdate(requestId);
+        QuotaOperation operation = quotaLedgerService.findOperationForUpdate(requestId);
         if (operation == null) {
             return refundLegacy(account, expectedAmount, requestId, description);
         }
@@ -133,13 +127,11 @@ public class QuotaServiceImpl implements QuotaService {
         ensureCreditWithinLimit(account.getQuota(), amount);
         if (accountMapper.increaseQuota(accountId, amount) != 1) throw new BaseException("配额退款失败");
         long balance = Math.addExact(account.getQuota(), amount);
-        String refundRequestId = refundRequestId(requestId);
-        QuotaLog entry = writeLog(operation, accountId, "REFUND", amount, balance,
+        String refundRequestId = quotaLedgerService.refundRequestId(requestId);
+        QuotaLog entry = quotaLedgerService.writeLog(operation, accountId, "REFUND", amount, balance,
                 null, operation.getServiceKey(), operation.getPriceVersion(), description,
                 refundRequestId, operation.getRequestHash(), operation.getDebitLogId());
-        if (quotaOperationMapper.markRefunded(operation.getId(), entry.getId()) != 1) {
-            throw new BaseException("配额退款状态更新失败");
-        }
+        quotaLedgerService.markRefunded(operation, entry);
         log.info("配额退款: operationNo={}, accountId={}, amount={}, balance={}",
                 operation.getOperationNo(), accountId, amount, balance);
         return balance;
@@ -147,7 +139,7 @@ public class QuotaServiceImpl implements QuotaService {
 
     private long refundLegacy(Account account, Long expectedAmount, String requestId,
                               String description) {
-        QuotaLog original = quotaLogMapper.selectByRequestIdForUpdate(requestId);
+        QuotaLog original = quotaLedgerService.findLegacyDebitForUpdate(requestId);
         if (original == null || !"CONSUME".equals(original.getType())
                 || !account.getId().equals(original.getAccountId()) || original.getAmount() >= 0) {
             throw new BaseException("原配额消费流水不存在");
@@ -156,12 +148,12 @@ public class QuotaServiceImpl implements QuotaService {
         if (expectedAmount != null && expectedAmount.longValue() != amount) {
             throw new BaseException("退款金额与原消费不一致");
         }
-        String refundRequestId = refundRequestId(requestId);
-        if (quotaLogMapper.existsByRequestId(refundRequestId) > 0) return account.getQuota();
+        String refundRequestId = quotaLedgerService.refundRequestId(requestId);
+        if (quotaLedgerService.legacyRequestExists(refundRequestId)) return account.getQuota();
         ensureCreditWithinLimit(account.getQuota(), amount);
         if (accountMapper.increaseQuota(account.getId(), amount) != 1) throw new BaseException("配额退款失败");
         long balance = Math.addExact(account.getQuota(), amount);
-        writeLog(null, account.getId(), "REFUND", amount, balance, null,
+        quotaLedgerService.writeLog(null, account.getId(), "REFUND", amount, balance, null,
                 original.getServiceKey(), original.getPriceVersion(), description,
                 refundRequestId, original.getRequestHash(), original.getId());
         return balance;
@@ -194,14 +186,13 @@ public class QuotaServiceImpl implements QuotaService {
         long amount = Math.abs(delta);
         QuotaRequestIdentity identity = QuotaRequestIdentity.legacy("quota:admin-adjust",
                 "admin_adjust_" + UUID.randomUUID());
-        QuotaOperation operation = operation(accountId, amount, null, null,
+        QuotaOperation operation = quotaLedgerService.createOperation(accountId, amount, null, null,
                 delta > 0 ? "CREDITED" : "CONSUMED", identity);
-        quotaOperationMapper.insert(operation);
-        QuotaLog entry = writeLog(operation, accountId, "ADMIN", delta, newQuota,
+        QuotaLog entry = quotaLedgerService.writeLog(operation, accountId, "ADMIN", delta, newQuota,
                 "MANUAL", null, null,
                 "管理员 #" + adminId + " 调整配额: " + account.getQuota() + " → " + newQuota,
                 identity.requestId(), identity.requestHash(), null);
-        quotaOperationMapper.attachDebitLog(operation.getId(), entry.getId());
+        quotaLedgerService.attachDebitLog(operation, entry);
         log.info("管理员调整配额: operationNo={}, accountId={}, old={}, new={}, adminId={}",
                 operation.getOperationNo(), accountId, account.getQuota(), newQuota, adminId);
         return newQuota;
@@ -241,67 +232,24 @@ public class QuotaServiceImpl implements QuotaService {
                              QuotaRequestIdentity identity) {
         requirePositiveAmount(amount);
         Account account = requireAccountForUpdate(accountId);
-        QuotaOperation existing = quotaOperationMapper.selectByRequestIdForUpdate(identity.requestId());
+        QuotaOperation existing = quotaLedgerService.findOperationForUpdate(identity.requestId());
         if (existing != null) {
-            validateReplay(existing, accountId, identity);
+            quotaLedgerService.validateReplay(existing, accountId, identity);
             if (!"CREDITED".equals(existing.getStatus())) throw new BaseException("配额请求状态冲突");
             return account.getQuota();
         }
         ensureCreditWithinLimit(account.getQuota(), amount);
         if (accountMapper.increaseQuota(accountId, amount) != 1) throw new BaseException("配额入账失败");
         long balance = Math.addExact(account.getQuota(), amount);
-        QuotaOperation operation = operation(accountId, amount, serviceKey, priceVersion,
+        QuotaOperation operation = quotaLedgerService.createOperation(accountId, amount, serviceKey, priceVersion,
                 "CREDITED", identity);
-        quotaOperationMapper.insert(operation);
-        QuotaLog entry = writeLog(operation, accountId, type, amount, balance, source,
+        QuotaLog entry = quotaLedgerService.writeLog(operation, accountId, type, amount, balance, source,
                 serviceKey, priceVersion, description, identity.requestId(),
                 identity.requestHash(), null);
-        if (quotaOperationMapper.attachDebitLog(operation.getId(), entry.getId()) != 1) {
-            throw new BaseException("配额流水关联失败");
-        }
+        quotaLedgerService.attachDebitLog(operation, entry);
         log.info("配额入账: operationNo={}, accountId={}, source={}, amount={}, balance={}",
                 operation.getOperationNo(), accountId, source, amount, balance);
         return balance;
-    }
-
-    private QuotaOperation operation(Long accountId, long amount, String serviceKey,
-                                     Long priceVersion, String status,
-                                     QuotaRequestIdentity identity) {
-        QuotaOperation operation = new QuotaOperation();
-        operation.setOperationNo(transactionNo());
-        operation.setAccountId(accountId);
-        operation.setIdempotencyScope(identity.scope());
-        operation.setRequestId(identity.requestId());
-        operation.setIdempotencyKeyHash(identity.idempotencyKeyHash());
-        operation.setRequestHash(identity.requestHash());
-        operation.setServiceKey(serviceKey);
-        operation.setPriceVersion(priceVersion);
-        operation.setAmount(amount);
-        operation.setStatus(status);
-        return operation;
-    }
-
-    private QuotaLog writeLog(QuotaOperation operation, Long accountId, String type,
-                              long amount, long balance, String source, String serviceKey,
-                              Long priceVersion, String description, String requestId,
-                              String requestHash, Long originalLogId) {
-        QuotaLog entry = new QuotaLog();
-        entry.setTransactionNo(transactionNo());
-        entry.setOperationId(operation == null ? null : operation.getId());
-        entry.setOriginalLogId(originalLogId);
-        entry.setAccountId(accountId);
-        entry.setType(type);
-        entry.setAmount(amount);
-        entry.setBalance(balance);
-        entry.setSource(source);
-        entry.setServiceKey(serviceKey);
-        entry.setPriceVersion(priceVersion);
-        entry.setDescription(description == null ? type : description);
-        entry.setRequestId(requestId);
-        entry.setRequestHash(requestHash);
-        entry.setStatus("POSTED");
-        if (quotaLogMapper.insert(entry) != 1) throw new BaseException("配额流水写入失败");
-        return entry;
     }
 
     private Account requireAccountForUpdate(Long accountId) {
@@ -309,17 +257,6 @@ public class QuotaServiceImpl implements QuotaService {
         Account account = accountMapper.selectByIdForUpdate(accountId);
         if (account == null) throw new BaseException("账户不存在");
         return account;
-    }
-
-    private void validateReplay(QuotaOperation operation, Long accountId,
-                                QuotaRequestIdentity identity) {
-        if (!accountId.equals(operation.getAccountId())
-                || !identity.scope().equals(operation.getIdempotencyScope())) {
-            throw new BaseException("配额幂等键作用域冲突");
-        }
-        if (!Objects.equals(identity.requestHash(), operation.getRequestHash())) {
-            throw new BaseException("同一幂等键不能用于不同请求内容");
-        }
     }
 
     private void ensureCreditWithinLimit(long balance, long amount) {
@@ -332,11 +269,4 @@ public class QuotaServiceImpl implements QuotaService {
         if (amount <= 0 || amount > MAX_QUOTA) throw new BaseException("配额数量必须大于 0");
     }
 
-    private String refundRequestId(String originalRequestId) {
-        return "refund_" + QuotaRequestIdentity.sha256(originalRequestId);
-    }
-
-    private String transactionNo() {
-        return "OVCQ_" + UUID.randomUUID().toString().replace("-", "");
-    }
 }

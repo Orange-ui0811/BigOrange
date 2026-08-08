@@ -24,6 +24,7 @@ case "$(uname -s)" in
 esac
 
 cd "$ROOT_DIR"
+node scripts/check-architecture-budgets.mjs
 if [[ "${SKIP_TESTS:-false}" == "true" ]]; then
   mvn -B clean package -DskipTests
 else

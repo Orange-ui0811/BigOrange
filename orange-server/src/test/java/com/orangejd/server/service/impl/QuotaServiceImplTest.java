@@ -11,6 +11,7 @@ import com.orangejd.server.mapper.RedemptionCodeMapper;
 import com.orangejd.server.service.PricingService;
 import com.orangejd.server.service.PricingSnapshot;
 import com.orangejd.server.service.QuotaCharge;
+import com.orangejd.server.service.QuotaLedgerService;
 import com.orangejd.server.service.QuotaRequestIdentity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,8 +48,8 @@ class QuotaServiceImplTest {
         logs = mock(QuotaLogMapper.class);
         operations = mock(QuotaOperationMapper.class);
         pricing = mock(PricingService.class);
-        service = new QuotaServiceImpl(accounts, logs, operations,
-                mock(RedemptionCodeMapper.class), pricing);
+        service = new QuotaServiceImpl(accounts, mock(RedemptionCodeMapper.class), pricing,
+                new QuotaLedgerService(logs, operations));
         storedOperation = new AtomicReference<>();
         storedLogs = new ArrayList<>();
         AtomicLong operationIds = new AtomicLong(10);

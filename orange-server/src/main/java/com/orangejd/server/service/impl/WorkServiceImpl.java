@@ -242,7 +242,7 @@ public class WorkServiceImpl implements WorkService {
         int total = workMapper.countByOwnerId(currentId);
         int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         List<WorkVO> records = workMapper.selectByOwnerId(currentId, offset, size)
-                .stream().map(this::toVO).collect(Collectors.toList());
+                .stream().map(WorkViewAssembler::toListItem).collect(Collectors.toList());
         return new PageResult<>(total, records);
     }
 
@@ -253,7 +253,7 @@ public class WorkServiceImpl implements WorkService {
         String orderBy = query.getKeyword() != null && query.getKeyword().startsWith("hot:") ? "favorites" : null;
         int total = workMapper.countPublic(query.getCategoryId(), query.getKeyword());
         List<WorkVO> records = workMapper.selectPublic(query.getCategoryId(), query.getKeyword(), orderBy, offset, query.getSize())
-                .stream().map(this::toVO).collect(Collectors.toList());
+                .stream().map(WorkViewAssembler::toListItem).collect(Collectors.toList());
         return new PageResult<>(total, records);
     }
 
@@ -263,41 +263,12 @@ public class WorkServiceImpl implements WorkService {
         int offset = com.orangejd.common.util.PageUtil.offset(query.getPage(), query.getSize());
         int total = workMapper.countAll(query.getAuditStatus());
         List<WorkVO> records = workMapper.selectAll(query.getAuditStatus(), offset, query.getSize())
-                .stream().map(this::toVO).collect(Collectors.toList());
+                .stream().map(WorkViewAssembler::toListItem).collect(Collectors.toList());
         return new PageResult<>(total, records);
     }
 
-    private WorkVO toVO(Work w) {
-        WorkVO vo = new WorkVO();
-        vo.setId(w.getId()); vo.setOwnerId(w.getOwnerId()); vo.setTitle(w.getTitle());
-        vo.setSummary(w.getSummary()); vo.setDetail(w.getDetail()); vo.setCategoryId(w.getCategoryId());
-        vo.setTags(w.getTags()); vo.setCoverUrl(w.getCoverUrl()); vo.setDemoUrl(w.getDemoUrl()); vo.setVideoUrl(w.getVideoUrl());
-        vo.setAuditStatus(w.getAuditStatus()); vo.setVisibilityStatus(w.getVisibilityStatus());
-        vo.setPublishStatus(w.getPublishStatus());
-        vo.setCreateTime(w.getCreateTime()); vo.setUpdateTime(w.getUpdateTime());
-        vo.setOwnerName(w.getOwnerName()); vo.setOwnerAvatar(w.getOwnerAvatar());
-        vo.setFavoriteCount(w.getFavoriteCount()); vo.setCommentCount(w.getCommentCount());
-        vo.setPrice(w.getReferencePrice());
-        return vo;
-    }
-
     private WorkDetailVO toDetailVO(Work w) {
-        WorkDetailVO vo = new WorkDetailVO();
-        vo.setId(w.getId()); vo.setOwnerId(w.getOwnerId()); vo.setTitle(w.getTitle());
-        vo.setSummary(w.getSummary()); vo.setDetail(w.getDetail()); vo.setCategoryId(w.getCategoryId());
-        vo.setTags(w.getTags()); vo.setCoverUrl(w.getCoverUrl()); vo.setDemoUrl(w.getDemoUrl()); vo.setVideoUrl(w.getVideoUrl());
-        vo.setAuditStatus(w.getAuditStatus()); vo.setVisibilityStatus(w.getVisibilityStatus());
-        vo.setPublishStatus(w.getPublishStatus());
-        vo.setCreateTime(w.getCreateTime()); vo.setUpdateTime(w.getUpdateTime());
-        vo.setOwnerName(w.getOwnerName()); vo.setOwnerAvatar(w.getOwnerAvatar());
-
-        List<WorkSaleOption> options = optionMapper.selectByWorkId(w.getId());
-        vo.setSaleOptions(options.stream().map(o -> {
-            WorkDetailVO.SaleOptionVO s = new WorkDetailVO.SaleOptionVO();
-            s.setId(o.getId()); s.setSaleType(o.getSaleType()); s.setPrice(o.getPrice()); s.setDescription(o.getDescription());
-            return s;
-        }).collect(Collectors.toList()));
-        return vo;
+        return WorkViewAssembler.toDetail(w, optionMapper.selectByWorkId(w.getId()));
     }
 
     private String normalizeVideoUrl(String value) {

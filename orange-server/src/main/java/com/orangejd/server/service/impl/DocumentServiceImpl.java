@@ -1,5 +1,4 @@
 package com.orangejd.server.service.impl;
-
 import com.orangejd.pojo.entity.KnowledgeDocument;
 import com.orangejd.pojo.vo.KnowledgeDocumentVO;
 import com.orangejd.server.mapper.KnowledgeDocumentMapper;
@@ -15,7 +14,6 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -24,7 +22,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 @Service
 @lombok.RequiredArgsConstructor
 public class DocumentServiceImpl implements DocumentService {

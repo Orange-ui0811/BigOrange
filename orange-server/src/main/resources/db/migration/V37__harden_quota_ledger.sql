@@ -48,9 +48,13 @@ SET transaction_no = CONCAT('OVCQ_', LEFT(SHA2(CONCAT('legacy:', id, ':', create
 WHERE transaction_no IS NULL;
 
 ALTER TABLE quota_log
-    MODIFY COLUMN transaction_no VARCHAR(64) NOT NULL,
     ADD UNIQUE KEY uk_quota_transaction_no (transaction_no),
     ADD KEY idx_quota_operation_id (operation_id),
     ADD KEY idx_quota_original_log_id (original_log_id),
     ADD CONSTRAINT fk_quota_log_operation FOREIGN KEY (operation_id) REFERENCES quota_operation(id),
     ADD CONSTRAINT fk_quota_log_original FOREIGN KEY (original_log_id) REFERENCES quota_log(id);
+
+-- Keep transaction_no nullable during the rollback window. The V37 application
+-- always writes it, while the previous production JAR does not. A later
+-- contract migration may enforce NOT NULL after the old JAR is no longer a
+-- supported rollback target.
