@@ -253,4 +253,6 @@ const { tab, turnstileRef, loading, showPwd, showRegPwd, loginForm, codeCooldown
   resetSending, showResetPwd, sendResetCode, doResetPwd, sendCode, doLogin, doRegister } = useAuthFlow()
 </script>
 
-<style scoped src="../styles/views/login.css"></style>
+<style scoped>
+@import '../styles/views/login.css';
+</style>

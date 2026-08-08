@@ -253,4 +253,6 @@ const { PageTour, ArrowLeft, Briefcase, OfficeBuilding, Present, TopRight, Plus,
   jobForm, selectDirection, selectJob, selectedJobName, jobTechStack, submitJobForm } = useCareerCenter()
 </script>
 
-<style scoped src="../styles/views/career-center.css"></style>
+<style scoped>
+@import '../styles/views/career-center.css';
+</style>

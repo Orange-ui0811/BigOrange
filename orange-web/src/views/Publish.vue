@@ -202,4 +202,6 @@ const { PageTour, VideoShowcase, API, workRewardText, tourSteps, isEdit, showFor
   removeVideo, startPublish, backToChoice, onTabChange, submit } = usePublish()
 </script>
 
-<style scoped src="../styles/views/publish.css"></style>
+<style scoped>
+@import '../styles/views/publish.css';
+</style>

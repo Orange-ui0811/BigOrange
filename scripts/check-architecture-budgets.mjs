@@ -29,9 +29,13 @@ const walk = async directory => {
       const path = normalize(relative(root, absolute))
       const limit = limitFor(path)
       if (!limit) continue
-      const lines = countLines(await readFile(absolute, 'utf8'))
+      const source = await readFile(absolute, 'utf8')
+      const lines = countLines(source)
       const allowed = baseline[path] ?? limit
       if (lines > allowed) failures.push(`${path}: ${lines} lines exceeds ${allowed}`)
+      if (path.endsWith('.vue') && /<style\b(?=[^>]*\bscoped\b)(?=[^>]*\bsrc=)[^>]*>/i.test(source)) {
+        failures.push(`${path}: external scoped styles break scope ids in the Vite development server; use a scoped @import block`)
+      }
     }
   }
 }

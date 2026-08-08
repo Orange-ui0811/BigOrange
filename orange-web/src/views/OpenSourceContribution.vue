@@ -682,4 +682,6 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped src="../styles/open-source-contribution.css"></style>
+<style scoped>
+@import '../styles/open-source-contribution.css';
+</style>

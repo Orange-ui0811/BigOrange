@@ -144,4 +144,6 @@ const { PageTour, BeginnerProjects, CareerProjects, tourSteps, source, period, c
 const { personaModelVisible, setPersonaModelVisible } = useLeaderboardPersonaVisibility()
 </script>
 
-<style scoped src="../styles/views/leaderboard.css"></style>
+<style scoped>
+@import '../styles/views/leaderboard.css';
+</style>

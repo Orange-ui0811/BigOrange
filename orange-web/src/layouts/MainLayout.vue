@@ -206,4 +206,6 @@ const { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, U
   legalIcpRecord, publicOperatorLabel, officialSiteUrl } = useMainLayout()
 </script>
 
-<style scoped src="../styles/layouts/main-layout.css"></style>
+<style scoped>
+@import '../styles/layouts/main-layout.css';
+</style>

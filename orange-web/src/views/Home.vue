@@ -256,4 +256,6 @@ const {
 } = usePublicHome()
 </script>
 
-<style scoped src="../styles/home.css"></style>
+<style scoped>
+@import '../styles/home.css';
+</style>

@@ -116,4 +116,6 @@ const { PageTour, tourSteps, summary, extra, planMode, currentPhase, phaseError,
   clearPlanHistory, switchPhase } = usePlanDesigner()
 </script>
 
-<style scoped src="../styles/views/plan-designer.css"></style>
+<style scoped>
+@import '../styles/views/plan-designer.css';
+</style>

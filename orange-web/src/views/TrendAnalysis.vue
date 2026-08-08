@@ -518,4 +518,6 @@ onMounted(async () => {
 onUnmounted(analysis.dispose)
 </script>
 
-<style scoped src="../styles/trend-analysis.css"></style>
+<style scoped>
+@import '../styles/trend-analysis.css';
+</style>

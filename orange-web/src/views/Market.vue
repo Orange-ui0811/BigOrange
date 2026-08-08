@@ -151,4 +151,6 @@ const { PageTour, marketTour, activeTab, works, reqs, worksTotal, reqsTotal, cat
   switchTab, doSearch, scrollToSection } = useMarket()
 </script>
 
-<style scoped src="../styles/views/market.css"></style>
+<style scoped>
+@import '../styles/views/market.css';
+</style>
