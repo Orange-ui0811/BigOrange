@@ -34,14 +34,21 @@ public class TrendV1Analyzer {
 
     public Map<String, Object> analyze(String question, Long accountId, String requestId,
                                        AiRuntimeConfig runtime, boolean routerManaged) {
+        return analyze(question, accountId,
+                QuotaRequestIdentity.legacy("ai:trend:v1", requestId), runtime, routerManaged);
+    }
+
+    public Map<String, Object> analyze(String question, Long accountId,
+                                       QuotaRequestIdentity identity,
+                                       AiRuntimeConfig runtime, boolean routerManaged) {
         Map<String, Object> result = new LinkedHashMap<>();
-        int cost = charge(accountId, requestId, result);
+        long cost = charge(accountId, identity, result);
         if (result.containsKey("error")) return result;
         Map<String, Object> graph;
         try {
             graph = graphService.buildCompareGraph();
         } catch (Exception error) {
-            if (cost > 0) quotaService.refund(accountId, cost, requestId, "图谱获取失败退款");
+            if (cost > 0) quotaService.refund(accountId, identity.requestId(), "图谱获取失败退款");
             result.put("error", "图谱数据获取失败");
             return result;
         }
@@ -54,28 +61,30 @@ public class TrendV1Analyzer {
             result.put("content", modelClient.complete(runtime, promptFactory.v1(runtime, prompt)));
             result.put("balance", accountId != null ? quotaService.getBalance(accountId) : 0);
         } catch (Exception error) {
-            handleFailure(error, accountId, requestId, cost, routerManaged, result);
+            handleFailure(error, accountId, identity.requestId(), cost, routerManaged, result);
         }
         return result;
     }
 
-    private int charge(Long accountId, String requestId, Map<String, Object> result) {
+    private long charge(Long accountId, QuotaRequestIdentity identity,
+                        Map<String, Object> result) {
         if (accountId == null || accountId <= 0) return 0;
         try {
-            int cost = pricingService.getCost("ai:trend:v1");
-            quotaService.consume(accountId, cost, "趋势分析 V1", requestId);
-            return cost;
+            QuotaCharge charge = quotaService.consume(accountId, "ai:trend:v1",
+                    "趋势分析 V1", identity);
+            result.put("balance", charge.balance());
+            return charge.amount();
         } catch (Exception error) {
             result.put("error", error.getMessage());
             return 0;
         }
     }
 
-    private void handleFailure(Exception error, Long accountId, String requestId, int cost,
+    private void handleFailure(Exception error, Long accountId, String requestId, long cost,
                                boolean routerManaged, Map<String, Object> result) {
         log.warn("AI趋势分析V1失败: {}", error.getMessage());
         boolean retryManaged = routerManaged && AiToolRetryPolicy.isRetryable(error);
-        if (cost > 0 && !retryManaged) quotaService.refund(accountId, cost, requestId, "AI分析失败退款");
+        if (cost > 0 && !retryManaged) quotaService.refund(accountId, requestId, "AI分析失败退款");
         AiToolProviderException provider = AiToolProviderException.from(error);
         if (provider != null) throw provider;
         if (retryManaged) throw new BaseException("AI 分析暂时失败，系统将自动重试");

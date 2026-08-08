@@ -43,10 +43,10 @@ public interface AccountMapper {
     Account selectByIdForUpdate(@Param("id") Long id);
 
     /** 配额: 原子扣减（返回受影响行数，0=余额不足） */
-    int decreaseQuota(@Param("id") Long id, @Param("amount") int amount);
+    int decreaseQuota(@Param("id") Long id, @Param("amount") long amount);
 
     /** 配额: 原子增加 */
-    int increaseQuota(@Param("id") Long id, @Param("amount") int amount);
+    int increaseQuota(@Param("id") Long id, @Param("amount") long amount);
 
     /** 配额: 管理端直接设置（审计用） */
     int setQuota(@Param("id") Long id, @Param("quota") Long quota);

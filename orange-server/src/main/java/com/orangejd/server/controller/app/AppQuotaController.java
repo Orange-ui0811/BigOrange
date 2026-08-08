@@ -35,8 +35,8 @@ public class AppQuotaController {
                 || !rateLimitService.allow("redeem:account:" + accountId, 5, 60))
             return Result.error("操作频繁，请稍后重试");
 
-        int balance = quotaService.redeemCode(accountId, code);
-        return Result.success((long) balance);
+        long balance = quotaService.redeemCode(accountId, code);
+        return Result.success(balance);
     }
 
     @GetMapping("/balance")

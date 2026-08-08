@@ -28,6 +28,9 @@ class PricingServiceTest {
     @Test
     void rewardCanBeDisabledWithZeroButAiConsumptionCannot() {
         when(mapper.selectAll()).thenReturn(List.of());
+        when(mapper.selectByKey(PricingService.REWARD_WORK_APPROVED))
+                .thenReturn(pricing(PricingService.REWARD_WORK_APPROVED,
+                        "作品审核通过奖励", 0, 2));
         service.loadFromDB();
 
         service.updateCost(PricingService.REWARD_WORK_APPROVED, 0, 3L, "ignored");
@@ -39,23 +42,26 @@ class PricingServiceTest {
 
     @Test
     void savedCostRemainsAfterReloadFromDatabase() {
-        when(mapper.selectAll()).thenReturn(List.of(pricing("ai:plan", "方案设计", 40)));
+        when(mapper.selectAll()).thenReturn(List.of(pricing("ai:plan", "方案设计", 40, 1)));
+        when(mapper.selectByKey("ai:plan"))
+                .thenReturn(pricing("ai:plan", "方案设计", 75, 2));
         service.loadFromDB();
 
         service.updateCost("ai:plan", 75, 3L, "方案设计");
         assertEquals(75, service.getCost("ai:plan"));
         verify(mapper).upsert(any(AiServicePricing.class));
 
-        when(mapper.selectAll()).thenReturn(List.of(pricing("ai:plan", "方案设计", 75)));
+        when(mapper.selectAll()).thenReturn(List.of(pricing("ai:plan", "方案设计", 75, 2)));
         service.loadFromDB();
         assertEquals(75, service.getCost("ai:plan"));
     }
 
-    private AiServicePricing pricing(String key, String name, int cost) {
+    private AiServicePricing pricing(String key, String name, int cost, long version) {
         AiServicePricing pricing = new AiServicePricing();
         pricing.setServiceKey(key);
         pricing.setServiceName(name);
         pricing.setSegmentCost(cost);
+        pricing.setVersion(version);
         return pricing;
     }
 }

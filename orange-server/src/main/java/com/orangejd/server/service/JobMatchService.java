@@ -79,25 +79,33 @@ public class JobMatchService {
 
     public Map<String, Object> match(String planContent, String pricingKey, String quotaDescription) {
         Long accountId = BaseContext.getCurrentId();
-        String requestId = "match_" + accountId + "_" + UUID.randomUUID();
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(pricingKey, accountId,
+                Map.of("content", planContent, "pricingKey", pricingKey));
+        String requestId = identity.requestId();
         if (aiToolRouter == null) {
             return matchWithRuntime(planContent, pricingKey, quotaDescription, accountId,
-                    requestId, runtimeConfig());
+                    identity, runtimeConfig());
         }
         AiToolContext context = new AiToolContext("job-match.generate", requestId,
-                accountId, "JOB_MATCH", pricingKey, AiRuntimeConfigService.CONTRIBUTION);
+                accountId, "JOB_MATCH", pricingKey, AiRuntimeConfigService.CONTRIBUTION,
+                identity.requestHash());
         return aiToolRouter.execute(context, runtime -> matchWithRuntime(
-                planContent, pricingKey, quotaDescription, accountId, requestId, runtime));
+                planContent, pricingKey, quotaDescription, accountId, identity, runtime));
     }
 
     private Map<String, Object> matchWithRuntime(String planContent, String pricingKey,
                                                  String quotaDescription, Long accountId,
-                                                 String requestId, AiRuntimeConfig runtime) {
-        int chargedCost = 0;
+                                                 QuotaRequestIdentity identity,
+                                                 AiRuntimeConfig runtime) {
+        long chargedCost = 0;
 
         // 预扣
         if (accountId != null && accountId > 0) {
-            try { chargedCost = pricingService.getCost(pricingKey); quotaService.consume(accountId, chargedCost, quotaDescription, requestId); }
+            try {
+                QuotaCharge charge = quotaService.consume(accountId, pricingKey,
+                        quotaDescription, identity);
+                chargedCost = charge.amount();
+            }
             catch (Exception e) { throw new RuntimeException(e.getMessage()); }
         }
 
@@ -164,7 +172,7 @@ public class JobMatchService {
         } catch (Exception e) {
             boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
             if (accountId != null && accountId > 0 && chargedCost > 0 && !retryManaged) {
-                try { quotaService.refund(accountId, chargedCost, requestId, quotaDescription + "失败退款"); } catch (Exception ignored) {}
+                try { quotaService.refund(accountId, identity.requestId(), quotaDescription + "失败退款"); } catch (Exception ignored) {}
             }
             log.warn("[JOB_MATCH] 匹配失败 accountId={}, autoRetry={}, reason={}",
                     accountId, retryManaged, e.getMessage());

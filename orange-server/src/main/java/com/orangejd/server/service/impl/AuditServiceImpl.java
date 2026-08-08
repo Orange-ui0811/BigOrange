@@ -77,7 +77,8 @@ public class AuditServiceImpl implements AuditService {
             } else {
                 int reward = pricingService.getReward(PricingService.REWARD_WORK_APPROVED);
                 if (reward > 0) {
-                    quotaService.grantReward(work.getOwnerId(), reward, "作品审核通过奖励");
+                    quotaService.grantReward(work.getOwnerId(), PricingService.REWARD_WORK_APPROVED,
+                            "work:" + workId, "作品审核通过奖励");
                 }
                 if (workMapper.approveAndMarkRewarded(workId) != 1) {
                     throw new BaseException(MessageConstant.WORK_AUDIT_CONFLICT);

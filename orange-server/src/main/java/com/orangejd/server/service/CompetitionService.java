@@ -105,7 +105,9 @@ public class CompetitionService {
                 ? pricingService.getReward(PricingService.REWARD_COMPETITION_APPROVED)
                 : 0;
         if (rewardEligible && reward > 0) {
-            quotaService.grantReward(competition.getSubmitterId(), reward, "AI大赛投稿审核通过");
+            quotaService.grantReward(competition.getSubmitterId(),
+                    PricingService.REWARD_COMPETITION_APPROVED, "competition:" + id,
+                    "AI大赛投稿审核通过");
         }
         if (mapper.approve(id, adminId, rewardEligible, reward) != 1) {
             throw new BaseException("比赛状态已变化，请刷新后重试");

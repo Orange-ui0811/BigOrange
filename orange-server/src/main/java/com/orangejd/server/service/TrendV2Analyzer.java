@@ -48,14 +48,21 @@ public class TrendV2Analyzer {
 
     public Map<String, Object> analyze(TrendAnalysisInput input, Long accountId, String requestId,
                                        AiRuntimeConfig runtime, boolean routerManaged) {
+        return analyze(input, accountId,
+                QuotaRequestIdentity.legacy("ai:trend:v2", requestId), runtime, routerManaged);
+    }
+
+    public Map<String, Object> analyze(TrendAnalysisInput input, Long accountId,
+                                       QuotaRequestIdentity identity,
+                                       AiRuntimeConfig runtime, boolean routerManaged) {
         Map<String, Object> result = new LinkedHashMap<>();
-        Charge charge = charge(accountId, requestId, result);
+        QuotaCharge charge = charge(accountId, identity, result);
         if (result.containsKey("error")) return result;
         Map<String, Object> graph;
         try {
             graph = graphService.buildCompareGraph();
         } catch (Exception error) {
-            if (charge.consumed()) quotaService.refund(accountId, charge.cost(), requestId, "图谱获取失败退款");
+            if (charge.amount() > 0) quotaService.refund(accountId, identity.requestId(), "图谱获取失败退款");
             result.put("error", "图谱数据获取失败");
             return result;
         }
@@ -73,7 +80,7 @@ public class TrendV2Analyzer {
                     Boolean.TRUE.equals(input.preferBeginnerProjects())
                             || Boolean.TRUE.equals(input.preferCareerProjects()), input);
         } catch (Exception error) {
-            handleFailure(error, accountId, requestId, charge, routerManaged, result);
+            handleFailure(error, accountId, identity.requestId(), charge, routerManaged, result);
             return result;
         }
     }
@@ -90,33 +97,31 @@ public class TrendV2Analyzer {
                 + "\n\n请基于用户画像、数据和知识库参考，严格按 JSON 格式输出推荐结果。";
     }
 
-    private Charge charge(Long accountId, String requestId, Map<String, Object> result) {
-        if (accountId == null || accountId <= 0) return new Charge(false, 0);
+    private QuotaCharge charge(Long accountId, QuotaRequestIdentity identity,
+                               Map<String, Object> result) {
+        if (accountId == null || accountId <= 0) return new QuotaCharge(0, 0, 0, null, false);
         try {
-            int cost = pricingService.getCost("ai:trend:v2");
-            int balance = quotaService.consume(accountId, cost, "趋势分析 V2", requestId);
-            result.put("balance", balance);
-            return new Charge(true, cost);
+            QuotaCharge charge = quotaService.consume(accountId, "ai:trend:v2",
+                    "趋势分析 V2", identity);
+            result.put("balance", charge.balance());
+            return charge;
         } catch (Exception error) {
             result.put("error", error.getMessage());
-            return new Charge(false, 0);
+            return new QuotaCharge(0, 0, 0, null, false);
         }
     }
 
-    private void handleFailure(Exception error, Long accountId, String requestId, Charge charge,
+    private void handleFailure(Exception error, Long accountId, String requestId, QuotaCharge charge,
                                boolean routerManaged, Map<String, Object> result) {
         log.warn("AI趋势分析V2失败: {}", error.getMessage());
         boolean retryManaged = routerManaged && AiToolRetryPolicy.isRetryable(error);
-        if (charge.consumed() && !retryManaged) {
-            quotaService.refund(accountId, charge.cost(), requestId, "AI分析失败退款");
+        if (charge.amount() > 0 && !retryManaged) {
+            quotaService.refund(accountId, requestId, "AI分析失败退款");
         }
         AiToolProviderException provider = AiToolProviderException.from(error);
         if (provider != null) throw provider;
         if (retryManaged) throw new BaseException("AI 分析暂时失败，系统将自动重试");
         result.put("error", "AI分析暂时失败，系统会自动重试");
         if (routerManaged) throw new BaseException("AI分析失败，本次配额已退回");
-    }
-
-    private record Charge(boolean consumed, int cost) {
     }
 }

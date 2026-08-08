@@ -49,6 +49,9 @@ class JobMatchServiceTest {
         ReflectionTestUtils.setField(service, "model", "test-model");
 
         when(pricingService.getCost("ai:match")).thenReturn(50);
+        when(quotaService.consume(eq(7L), eq("ai:match"), eq("岗位匹配"),
+                any(QuotaRequestIdentity.class)))
+                .thenReturn(new QuotaCharge(950, 50, 1, "operation-1", false));
         Map<String, Object> message = Map.of("content", "not-json");
         Map<String, Object> response = Map.of("choices", List.of(Map.of("message", message)));
         when(restTemplate.exchange(anyString(), any(), any(), eq(Map.class)))
@@ -57,7 +60,8 @@ class JobMatchServiceTest {
 
         assertThrows(RuntimeException.class, () -> service.match("测试方案"));
 
-        verify(quotaService).consume(eq(7L), eq(50), eq("岗位匹配"), startsWith("match_7_"));
-        verify(quotaService).refund(eq(7L), eq(50), startsWith("match_7_"), eq("岗位匹配失败退款"));
+        verify(quotaService).consume(eq(7L), eq("ai:match"), eq("岗位匹配"),
+                any(QuotaRequestIdentity.class));
+        verify(quotaService).refund(eq(7L), anyString(), eq("岗位匹配失败退款"));
     }
 }

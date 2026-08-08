@@ -44,7 +44,9 @@ class PlanGenerationServiceTest {
         ReflectionTestUtils.setField(service, "model", "test-model");
         when(pricingService.getCost(PlanGenerationService.PRICING_KEY)).thenReturn(40);
         when(quotaService.getBalance(7L)).thenReturn(100L);
-        when(quotaService.consume(eq(7L), eq(40), anyString(), anyString())).thenReturn(60);
+        when(quotaService.consume(eq(7L), eq(PlanGenerationService.PRICING_KEY),
+                anyString(), any(QuotaRequestIdentity.class)))
+                .thenReturn(new QuotaCharge(60, 40, 1, "operation-1", false));
     }
 
     @Test
@@ -57,7 +59,7 @@ class PlanGenerationServiceTest {
                 "phase", 1, "summary", "设计一个面向开发者的协作平台"));
 
         assertEquals("可执行方案", result.get("content"));
-        assertEquals(40, result.get("segmentCost"));
+        assertEquals(40L, result.get("segmentCost"));
         assertEquals(60L, result.get("balance"));
     }
 
@@ -92,7 +94,7 @@ class PlanGenerationServiceTest {
         assertThrows(RuntimeException.class, () -> service.generate(7L, Map.of(
                 "phase", 1, "summary", "设计一个面向开发者的协作平台")));
 
-        verify(quotaService).refund(eq(7L), eq(40), anyString(), anyString());
+        verify(quotaService).refund(eq(7L), anyString(), anyString());
     }
 
     @Test
@@ -104,7 +106,8 @@ class PlanGenerationServiceTest {
         assertThrows(BaseException.class, () -> service.generate(7L, Map.of(
                 "phase", 1, "summary", "设计一个面向开发者的协作平台")));
 
-        verify(quotaService, never()).consume(any(), anyInt(), anyString(), anyString());
+        verify(quotaService, never()).consume(any(), anyString(), anyString(),
+                any(QuotaRequestIdentity.class));
     }
 
     @Test

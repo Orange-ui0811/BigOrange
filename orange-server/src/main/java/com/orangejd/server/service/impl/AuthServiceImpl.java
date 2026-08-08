@@ -121,7 +121,7 @@ public class AuthServiceImpl implements AuthService {
         log.info("用户注册 accountId={} username={}", account.getId(), registerDTO.getUsername());
 
         // 新用户赠送试用额度
-        ((QuotaServiceImpl) quotaService).grantNewUserBonus(account.getId());
+        quotaService.grantNewUserBonus(account.getId());
 
         // 注册后直接返回登录态
         return buildLoginVO(account, jwtProperties.getAppSecretKey(), jwtProperties.getAppTtl(), "APP");

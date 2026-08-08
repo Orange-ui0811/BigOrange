@@ -127,22 +127,28 @@ public class OpenSourceContributionService {
                     .append(" | 评论=").append(issue.get("commentsCount"));
         }
 
-        int cost = pricingService.getCost(MATCH_PRICING_KEY);
-        String requestId = "opensource_match_" + accountId + "_" + UUID.randomUUID();
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(MATCH_PRICING_KEY, accountId,
+                Map.of("profile", profile == null ? "" : profile,
+                        "candidateIds", allowedIds.stream().sorted().toList()));
+        String requestId = identity.requestId();
         if (aiToolRouter == null) {
             return matchWithRuntime(accountId, profile, context.toString(), allowedIds,
-                    cost, requestId, null);
+                    identity, null);
         }
         AiToolContext toolContext = new AiToolContext("open-source.issue.match", requestId,
-                accountId, "OPEN_SOURCE_MATCH", null, AiRuntimeConfigService.CONTRIBUTION);
+                accountId, "OPEN_SOURCE_MATCH", null, AiRuntimeConfigService.CONTRIBUTION,
+                identity.requestHash());
         return aiToolRouter.execute(toolContext, runtime -> matchWithRuntime(
-                accountId, profile, context.toString(), allowedIds, cost, requestId, runtime));
+                accountId, profile, context.toString(), allowedIds, identity, runtime));
     }
 
     private Map<String, Object> matchWithRuntime(Long accountId, String profile, String context,
-                                                 Set<Long> allowedIds, int cost, String requestId,
+                                                 Set<Long> allowedIds, QuotaRequestIdentity identity,
                                                  AiRuntimeConfig runtime) {
-        int balance = quotaService.consume(accountId, cost, "开源 Issue 智能匹配", requestId);
+        QuotaCharge charge = quotaService.consume(accountId, MATCH_PRICING_KEY,
+                "开源 Issue 智能匹配", identity);
+        long cost = charge.amount();
+        long balance = charge.balance();
         try {
             String result = callAi(runtime, "你是谨慎的开源贡献机会顾问，只能从给定候选中选择。",
                     "用户条件：" + (StringUtils.hasText(profile) ? profile : "未补充")
@@ -174,7 +180,7 @@ public class OpenSourceContributionService {
                     "matches", matches, "segmentCost", cost, "balance", balance);
         } catch (Exception e) {
             boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
-            if (!retryManaged) quotaService.refund(accountId, cost, requestId, "开源 Issue 匹配失败退款");
+            if (!retryManaged) quotaService.refund(accountId, identity.requestId(), "开源 Issue 匹配失败退款");
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
             throw new BaseException(retryManaged
@@ -194,22 +200,27 @@ public class OpenSourceContributionService {
 
     public Map<String, Object> generateGuide(Long accountId, Long issueId) {
         Map<String, Object> issue = requireIssue(issueId);
-        int cost = pricingService.getCost(GUIDE_PRICING_KEY);
-        String requestId = "opensource_guide_" + accountId + "_" + issueId + "_" + UUID.randomUUID();
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(GUIDE_PRICING_KEY, accountId,
+                Map.of("issueId", issueId));
+        String requestId = identity.requestId();
         if (aiToolRouter == null) {
-            return generateGuideWithRuntime(accountId, issueId, issue, cost, requestId, null);
+            return generateGuideWithRuntime(accountId, issueId, issue, identity, null);
         }
         AiToolContext context = new AiToolContext("open-source.guide.generate", requestId,
                 accountId, "OPEN_SOURCE_GUIDE", String.valueOf(issueId),
-                AiRuntimeConfigService.CONTRIBUTION);
+                AiRuntimeConfigService.CONTRIBUTION, identity.requestHash());
         return aiToolRouter.execute(context, runtime ->
-                generateGuideWithRuntime(accountId, issueId, issue, cost, requestId, runtime));
+                generateGuideWithRuntime(accountId, issueId, issue, identity, runtime));
     }
 
     private Map<String, Object> generateGuideWithRuntime(Long accountId, Long issueId,
-                                                         Map<String, Object> issue, int cost,
-                                                         String requestId, AiRuntimeConfig runtime) {
-        int balance = quotaService.consume(accountId, cost, "生成开源贡献指南", requestId);
+                                                         Map<String, Object> issue,
+                                                         QuotaRequestIdentity identity,
+                                                         AiRuntimeConfig runtime) {
+        QuotaCharge charge = quotaService.consume(accountId, GUIDE_PRICING_KEY,
+                "生成开源贡献指南", identity);
+        long cost = charge.amount();
+        long balance = charge.balance();
         try {
             String prompt = "仓库：" + issue.get("repositoryFullName")
                     + "\nIssue：" + issue.get("titleOriginal")
@@ -228,12 +239,12 @@ public class OpenSourceContributionService {
             guide.put("accountId", accountId);
             guide.put("issueId", issueId);
             guide.put("content", content);
-            guide.put("segmentCost", cost);
+            guide.put("segmentCost", Math.toIntExact(cost));
             mapper.upsertGuide(guide);
             return Map.of("guide", guide, "balance", balance);
         } catch (Exception e) {
             boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
-            if (!retryManaged) quotaService.refund(accountId, cost, requestId, "开源贡献指南生成失败退款");
+            if (!retryManaged) quotaService.refund(accountId, identity.requestId(), "开源贡献指南生成失败退款");
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
             throw new BaseException(retryManaged

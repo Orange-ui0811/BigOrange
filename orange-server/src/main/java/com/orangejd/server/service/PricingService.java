@@ -1,5 +1,6 @@
 package com.orangejd.server.service;
 
+import com.orangejd.common.exception.BaseException;
 import com.orangejd.pojo.entity.AiServicePricing;
 import com.orangejd.pojo.entity.PricingChangeLog;
 import com.orangejd.server.mapper.PricingMapper;
@@ -53,6 +54,7 @@ public class PricingService {
     private final PricingMapper pricingMapper;
     private final Map<String, Integer> costCache = new ConcurrentHashMap<>();
     private final Map<String, String> nameCache = new ConcurrentHashMap<>();
+    private final Map<String, PricingSnapshot> snapshotCache = new ConcurrentHashMap<>();
 
     public PricingService(PricingMapper pricingMapper) {
         this.pricingMapper = pricingMapper;
@@ -66,15 +68,20 @@ public class PricingService {
     public synchronized void loadFromDB() {
         costCache.clear();
         nameCache.clear();
+        snapshotCache.clear();
         DEFAULTS.forEach(costCache::put);
         SERVICE_NAMES.forEach(nameCache::put);
         try {
             for (AiServicePricing pricing : pricingMapper.selectAll()) {
                 costCache.put(pricing.getServiceKey(), pricing.getSegmentCost());
                 nameCache.put(pricing.getServiceKey(), pricing.getServiceName());
+                long version = pricing.getVersion() == null ? 1L : pricing.getVersion();
+                snapshotCache.put(pricing.getServiceKey(), new PricingSnapshot(
+                        pricing.getServiceKey(), pricing.getSegmentCost().longValue(), version));
             }
         } catch (Exception exception) {
-            log.error("[pricing] Failed to load pricing, using defaults: {}", exception.getMessage());
+            log.error("[pricing] Failed to load versioned pricing; charging is disabled: {}",
+                    exception.getMessage());
         }
     }
 
@@ -83,9 +90,14 @@ public class PricingService {
         if (cost != null) {
             return cost;
         }
-        Integer fallback = DEFAULTS.getOrDefault(serviceKey, 50);
-        log.warn("[pricing] Missing {}, using fallback {}", serviceKey, fallback);
-        return fallback;
+        throw new IllegalArgumentException("未知定价项: " + serviceKey);
+    }
+
+    /** Charging is fail-closed until a versioned price is loaded from the database. */
+    public PricingSnapshot getSnapshot(String serviceKey) {
+        PricingSnapshot snapshot = snapshotCache.get(serviceKey);
+        if (snapshot == null) throw new BaseException("配额定价暂不可用，请稍后重试");
+        return snapshot;
     }
 
     public int getReward(String serviceKey) {
@@ -134,8 +146,15 @@ public class PricingService {
         logEntry.setAdminId(adminId);
         pricingMapper.insertChangeLog(logEntry);
 
-        costCache.put(serviceKey, newCost);
-        nameCache.put(serviceKey, serviceName);
+        AiServicePricing persisted = pricingMapper.selectByKey(serviceKey);
+        if (persisted == null || persisted.getVersion() == null) {
+            snapshotCache.remove(serviceKey);
+            throw new BaseException("定价已保存但版本读取失败，请刷新后重试");
+        }
+        costCache.put(serviceKey, persisted.getSegmentCost());
+        nameCache.put(serviceKey, persisted.getServiceName());
+        snapshotCache.put(serviceKey, new PricingSnapshot(serviceKey,
+                persisted.getSegmentCost().longValue(), persisted.getVersion()));
         log.info("[pricing] adminId={} updated {}: {} -> {}", adminId, serviceKey, oldCost, newCost);
         return newCost;
     }

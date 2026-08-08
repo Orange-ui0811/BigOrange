@@ -3,20 +3,23 @@
 <mapper namespace="com.orangejd.server.mapper.PricingMapper">
 
     <select id="selectAll" resultType="com.orangejd.pojo.entity.AiServicePricing">
-        SELECT service_key, service_name, segment_cost, updated_by, updated_at
+        SELECT service_key, service_name, segment_cost, version, updated_by, updated_at
         FROM ai_service_pricing ORDER BY service_key
     </select>
 
     <select id="selectByKey" resultType="com.orangejd.pojo.entity.AiServicePricing">
-        SELECT service_key, service_name, segment_cost, updated_by, updated_at
+        SELECT service_key, service_name, segment_cost, version, updated_by, updated_at
         FROM ai_service_pricing WHERE service_key = #{serviceKey}
     </select>
 
     <insert id="upsert">
-        INSERT INTO ai_service_pricing (service_key, service_name, segment_cost, updated_by, updated_at)
-        VALUES (#{serviceKey}, #{serviceName}, #{segmentCost}, #{updatedBy}, NOW())
+        INSERT INTO ai_service_pricing
+            (service_key, service_name, segment_cost, version, updated_by, updated_at)
+        VALUES
+            (#{serviceKey}, #{serviceName}, #{segmentCost}, 1, #{updatedBy}, NOW())
         ON DUPLICATE KEY UPDATE
             segment_cost = VALUES(segment_cost),
+            version = version + 1,
             updated_by = VALUES(updated_by),
             updated_at = NOW()
     </insert>

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class LaunchCheckService {
@@ -133,26 +132,31 @@ public class LaunchCheckService {
         if (stageNo > 1 && mapper.selectStage(id, stageNo - 1) == null) {
             throw new BaseException("请先完成上一阶段");
         }
-        String requestId = "launch_" + accountId + "_" + id + "_" + stageNo + "_" + UUID.randomUUID();
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(PRICING_KEY, accountId,
+                Map.of("assessmentId", id, "stageNo", stageNo));
+        String requestId = identity.requestId();
         if (aiToolRouter == null) {
-            return generateWithRuntime(accountId, id, stageNo, assessment, requestId, runtimeConfig());
+            return generateWithRuntime(accountId, id, stageNo, assessment, identity, runtimeConfig());
         }
         AiToolContext context = new AiToolContext("launch-check.stage.generate", requestId,
-                accountId, "LAUNCH_CHECK", id + ":" + stageNo, AiRuntimeConfigService.PROJECT);
+                accountId, "LAUNCH_CHECK", id + ":" + stageNo, AiRuntimeConfigService.PROJECT,
+                identity.requestHash());
         return aiToolRouter.execute(context, runtime ->
-                generateWithRuntime(accountId, id, stageNo, assessment, requestId, runtime));
+                generateWithRuntime(accountId, id, stageNo, assessment, identity, runtime));
     }
 
     private Map<String, Object> generateWithRuntime(Long accountId, Long id, int stageNo,
                                                     Map<String, Object> assessment,
-                                                    String requestId, AiRuntimeConfig runtime) {
+                                                    QuotaRequestIdentity identity,
+                                                    AiRuntimeConfig runtime) {
         if (!StringUtils.hasText(runtime.endpoint()) || !StringUtils.hasText(runtime.apiKey())) {
             throw new BaseException("AI 上线体检服务尚未配置");
         }
 
-        int cost = pricingService.getCost(PRICING_KEY);
-        int balance = quotaService.consume(accountId, cost,
-                "上线体检 · " + STAGE_TITLES[stageNo], requestId);
+        QuotaCharge charge = quotaService.consume(accountId, PRICING_KEY,
+                "上线体检 · " + STAGE_TITLES[stageNo], identity);
+        int cost = Math.toIntExact(charge.amount());
+        long balance = charge.balance();
 
         try {
             String content = callAi(buildPrompt(assessment, id, stageNo), runtime);
@@ -164,7 +168,7 @@ public class LaunchCheckService {
                     "content", content, "segmentCost", cost, "balance", balance);
         } catch (Exception e) {
             boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
-            if (!retryManaged) quotaService.refund(accountId, cost, requestId, "上线体检失败退款");
+            if (!retryManaged) quotaService.refund(accountId, identity.requestId(), "上线体检失败退款");
             AiToolProviderException providerFailure = AiToolProviderException.from(e);
             if (providerFailure != null) throw providerFailure;
             throw new BaseException(retryManaged

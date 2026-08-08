@@ -47,6 +47,14 @@ public class AiToolRouter {
     }
 
     public <T> T execute(AiToolContext context, Operation<T> operation) {
+        Object existing = resultRecorder.findExisting(context);
+        if (existing != null) {
+            log.info("AI_TOOL_RESULT_REPLAY requestId={} accountId={}",
+                    context.requestId(), context.accountId());
+            @SuppressWarnings("unchecked")
+            T replay = (T) existing;
+            return replay;
+        }
         int attemptNo = 1;
         while (true) {
             try {

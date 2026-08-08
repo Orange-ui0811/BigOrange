@@ -55,7 +55,8 @@ class AuditServiceImplTest {
 
         service.auditWork(11L, true, "");
 
-        verify(quotaService).grantReward(7L, 65, "作品审核通过奖励");
+        verify(quotaService).grantReward(7L, PricingService.REWARD_WORK_APPROVED,
+                "work:11", "作品审核通过奖励");
         verify(workMapper).approveAndMarkRewarded(11L);
         verify(auditRecordMapper).insert(any(AuditRecord.class));
         verify(notificationService).send(7L, "AUDIT", "你的作品《测试作品》审核通过", 11L);
@@ -65,7 +66,8 @@ class AuditServiceImplTest {
     void rewardFailureLeavesWorkPending() {
         when(workMapper.selectByIdForUpdate(11L)).thenReturn(pendingWork());
         doThrow(new BaseException("奖励失败"))
-                .when(quotaService).grantReward(7L, 65, "作品审核通过奖励");
+                .when(quotaService).grantReward(7L, PricingService.REWARD_WORK_APPROVED,
+                        "work:11", "作品审核通过奖励");
 
         assertThrows(BaseException.class, () -> service.auditWork(11L, true, ""));
 
@@ -81,7 +83,10 @@ class AuditServiceImplTest {
 
         service.auditWork(11L, true, "");
 
-        verify(quotaService, never()).grantReward(any(), any(Integer.class), any());
+        verify(quotaService, never()).grantReward(
+                any(), org.mockito.ArgumentMatchers.anyString(),
+                org.mockito.ArgumentMatchers.anyString(),
+                org.mockito.ArgumentMatchers.anyString());
         verify(workMapper).approveAndMarkRewarded(11L);
     }
 

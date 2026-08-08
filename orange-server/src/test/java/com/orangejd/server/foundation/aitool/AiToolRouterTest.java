@@ -57,6 +57,29 @@ class AiToolRouterTest {
     }
 
     @Test
+    void returnsAnAlreadySavedResultWithoutCallingProviderOrTakingQuotaCapacity() {
+        AiToolPoolProperties properties = properties(true, 50, "gitee-key-1");
+        AiToolSlotLeaseService leases = mock(AiToolSlotLeaseService.class);
+        AiRuntimeConfigService configs = mock(AiRuntimeConfigService.class);
+        AiToolCallLogMapper logs = mock(AiToolCallLogMapper.class);
+        AiResultRecorder records = mock(AiResultRecorder.class);
+        when(records.findExisting(context())).thenReturn("saved-result");
+        router = new AiToolRouter(properties, leases, configs, logs, records,
+                new SimpleMeterRegistry());
+        AtomicBoolean invoked = new AtomicBoolean();
+
+        String result = router.execute(context(), config -> {
+            invoked.set(true);
+            return "new-result";
+        });
+
+        assertEquals("saved-result", result);
+        assertFalse(invoked.get());
+        verify(leases, never()).acquireGlobal(any(), anyInt(), anyLong());
+        verify(records, never()).saveRequired(any(), any());
+    }
+
+    @Test
     void rejectsBeforeBusinessOperationWhenGlobalCapacityIsFull() {
         AiToolPoolProperties properties = properties(true, 50, "gitee-key-1");
         AiToolSlotLeaseService leases = mock(AiToolSlotLeaseService.class);

@@ -48,12 +48,12 @@ class AiResultRecordServiceTest {
         AiToolContext context = new AiToolContext("trend.v2.analyze", "request-2", 8L,
                 "TREND_V2", null, "project");
         doThrow(new IllegalStateException("database unavailable")).when(mapper).upsert(any());
-        when(pricingService.getCost("ai:trend:v2")).thenReturn(50);
 
         assertThrows(BaseException.class,
                 () -> service.saveRequired(context, Map.of("content", "result")));
 
-        verify(quotaService).refund(eq(8L), eq(50), eq("request-2"), startsWith("AI 结果保存失败"));
+        verify(quotaService).refund(eq(8L), eq("request-2"),
+                startsWith("AI 结果保存失败"));
     }
 
     private AiResultRecordService service(AiResultRecordMapper mapper,

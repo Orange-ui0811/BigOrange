@@ -80,7 +80,8 @@ class CompetitionServiceTest {
         service.approve(12L, 3L);
         assertThrows(BaseException.class, () -> service.approve(12L, 3L));
 
-        verify(quotaService).grantReward(7L, 35, "AI大赛投稿审核通过");
+        verify(quotaService).grantReward(7L, PricingService.REWARD_COMPETITION_APPROVED,
+                "competition:12", "AI大赛投稿审核通过");
         verify(mapper).approve(12L, 3L, true, 35);
     }
 
@@ -88,7 +89,9 @@ class CompetitionServiceTest {
     void rewardFailurePreventsApprovalUpdate() {
         when(mapper.selectByIdForUpdate(12L)).thenReturn(pendingCompetition());
         doThrow(new BaseException("奖励失败"))
-                .when(quotaService).grantReward(7L, 35, "AI大赛投稿审核通过");
+                .when(quotaService).grantReward(7L,
+                        PricingService.REWARD_COMPETITION_APPROVED,
+                        "competition:12", "AI大赛投稿审核通过");
 
         assertThrows(BaseException.class, () -> service.approve(12L, 3L));
 
@@ -105,8 +108,11 @@ class CompetitionServiceTest {
 
         service.approve(12L, 3L);
 
-        verify(quotaService, never()).grantReward(org.mockito.ArgumentMatchers.any(), anyInt(),
-                org.mockito.ArgumentMatchers.any());
+        verify(quotaService, never()).grantReward(
+                org.mockito.ArgumentMatchers.any(),
+                org.mockito.ArgumentMatchers.anyString(),
+                org.mockito.ArgumentMatchers.anyString(),
+                org.mockito.ArgumentMatchers.anyString());
         verify(mapper).approve(12L, 3L, false, 0);
     }
 

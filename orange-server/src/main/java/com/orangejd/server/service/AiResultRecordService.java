@@ -43,6 +43,21 @@ public class AiResultRecordService implements AiResultRecorder {
     }
 
     @Override
+    public Object findExisting(AiToolContext context) {
+        if (context.accountId() == null || context.accountId() <= 0) return null;
+        String resultJson = mapper.selectResultJson(
+                context.requestId(), context.accountId(), context.requestHash());
+        if (resultJson == null || resultJson.isBlank()) return null;
+        try {
+            return objectMapper.readValue(resultJson, Object.class);
+        } catch (Exception exception) {
+            log.error("AI_RESULT_REPLAY_READ_FAILED requestId={} accountId={}",
+                    context.requestId(), context.accountId(), exception);
+            throw new BaseException("已保存的分析结果读取失败，请联系管理员");
+        }
+    }
+
+    @Override
     public void saveRequired(AiToolContext context, Object result) {
         if (context.accountId() == null || context.accountId() <= 0) return;
         try {
@@ -59,6 +74,7 @@ public class AiResultRecordService implements AiResultRecorder {
             record.put("title", title(context, result));
             record.put("summary", summary(context, result));
             record.put("resultJson", resultJson);
+            record.put("requestHash", context.requestHash());
             mapper.upsert(record);
             capturePersonaMaterial(context, String.valueOf(record.get("title")));
         } catch (Exception exception) {
@@ -120,8 +136,7 @@ public class AiResultRecordService implements AiResultRecorder {
         String pricingKey = pricingKey(context);
         if (pricingKey == null) return;
         try {
-            int cost = pricingService.getCost(pricingKey);
-            quotaService.refund(context.accountId(), cost, context.requestId(), "AI 结果保存失败退款");
+            quotaService.refund(context.accountId(), context.requestId(), "AI 结果保存失败退款");
         } catch (Exception refundFailure) {
             log.error("AI_RESULT_REFUND_FAILED requestId={} accountId={}",
                     context.requestId(), context.accountId(), refundFailure);

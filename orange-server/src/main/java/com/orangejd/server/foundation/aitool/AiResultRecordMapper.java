@@ -12,16 +12,27 @@ import java.util.Map;
 @Mapper
 public interface AiResultRecordMapper {
 
+    @Select("""
+            SELECT result_json
+            FROM ai_result_record
+            WHERE request_id = #{requestId} AND account_id = #{accountId}
+              AND request_hash = #{requestHash}
+            """)
+    String selectResultJson(@Param("requestId") String requestId,
+                            @Param("accountId") Long accountId,
+                            @Param("requestHash") String requestHash);
+
     @Insert("""
             INSERT INTO ai_result_record
                 (request_id, account_id, business_type, business_id, purpose,
-                 title, summary, result_json)
+                 title, summary, result_json, request_hash)
             VALUES
                 (#{requestId}, #{accountId}, #{businessType}, #{businessId}, #{purpose},
-                 #{title}, #{summary}, #{resultJson})
+                 #{title}, #{summary}, #{resultJson}, #{requestHash})
             ON DUPLICATE KEY UPDATE
                 title = VALUES(title), summary = VALUES(summary),
-                result_json = VALUES(result_json), update_time = NOW(3)
+                result_json = VALUES(result_json),
+                request_hash = VALUES(request_hash), update_time = NOW(3)
             """)
     int upsert(Map<String, Object> record);
 

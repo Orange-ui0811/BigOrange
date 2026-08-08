@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /** Compatibility facade retaining the existing trend-analysis API and runtime routing. */
 @Service
@@ -42,14 +41,17 @@ public class TrendAnalysisService {
 
     public Map<String, Object> analyze(String question) {
         Long accountId = BaseContext.getCurrentId();
-        String requestId = "trend_v1_" + accountId + "_" + UUID.randomUUID();
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(
+                "ai:trend:v1", accountId, Map.of("question", question));
+        String requestId = identity.requestId();
         if (aiToolRouter == null) {
-            return v1Analyzer.analyze(question, accountId, requestId, projectRuntimeConfig(), false);
+            return v1Analyzer.analyze(question, accountId, identity, projectRuntimeConfig(), false);
         }
         AiToolContext context = new AiToolContext("trend.v1.analyze", requestId,
-                accountId, "TREND_V1", null, AiRuntimeConfigService.PROJECT);
+                accountId, "TREND_V1", null, AiRuntimeConfigService.PROJECT,
+                identity.requestHash());
         return aiToolRouter.execute(context,
-                runtime -> v1Analyzer.analyze(question, accountId, requestId, runtime, true));
+                runtime -> v1Analyzer.analyze(question, accountId, identity, runtime, true));
     }
 
     public Map<String, Object> analyzeV2(
@@ -58,17 +60,20 @@ public class TrendAnalysisService {
             String customLang, String customTime, Boolean useRag, Boolean usePersona,
             Boolean preferBeginnerProjects, Boolean preferCareerProjects) {
         Long accountId = BaseContext.getCurrentId();
-        String requestId = "trend_v2_" + accountId + "_" + UUID.randomUUID();
         TrendAnalysisInput input = new TrendAnalysisInput(topics, purpose, experience, languages,
                 timeCommitment, customTopics, customPurpose, customExp, customLang, customTime,
                 useRag, usePersona, preferBeginnerProjects, preferCareerProjects);
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(
+                "ai:trend:v2", accountId, input);
+        String requestId = identity.requestId();
         if (aiToolRouter == null) {
-            return v2Analyzer.analyze(input, accountId, requestId, projectRuntimeConfig(), false);
+            return v2Analyzer.analyze(input, accountId, identity, projectRuntimeConfig(), false);
         }
         AiToolContext context = new AiToolContext("trend.v2.analyze", requestId,
-                accountId, "TREND_V2", null, AiRuntimeConfigService.PROJECT);
+                accountId, "TREND_V2", null, AiRuntimeConfigService.PROJECT,
+                identity.requestHash());
         return aiToolRouter.execute(context,
-                runtime -> v2Analyzer.analyze(input, accountId, requestId, runtime, true));
+                runtime -> v2Analyzer.analyze(input, accountId, identity, runtime, true));
     }
 
     private AiRuntimeConfig projectRuntimeConfig() {

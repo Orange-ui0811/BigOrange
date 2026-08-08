@@ -25,7 +25,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 @Service
 public class PlanGenerationService {
@@ -88,22 +87,25 @@ public class PlanGenerationService {
         String extra = text(body.get("extra"), 4_000);
         String prevContents = text(body.get("prevContents"), 30_000);
         if (!StringUtils.hasText(summary)) throw new BaseException("请输入项目描述");
-        String operationRequestId = "plan_p" + phase + "_"
-                + (accountId == null ? "guest" : accountId) + "_" + UUID.randomUUID();
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(PRICING_KEY, accountId,
+                Map.of("phase", phase, "mode", mode, "summary", summary,
+                        "extra", extra, "prevContents", prevContents));
+        String operationRequestId = identity.requestId();
         if (aiToolRouter == null) {
             return generateWithRuntime(accountId, phase, mode, summary, extra, prevContents,
-                    operationRequestId, runtimeConfig());
+                    identity, runtimeConfig());
         }
         AiToolContext context = new AiToolContext("plan.phase.generate", operationRequestId,
-                accountId, "PLAN", String.valueOf(phase), AiRuntimeConfigService.PROJECT);
+                accountId, "PLAN", String.valueOf(phase), AiRuntimeConfigService.PROJECT,
+                identity.requestHash());
         return aiToolRouter.execute(context, runtime -> generateWithRuntime(
-                accountId, phase, mode, summary, extra, prevContents, operationRequestId, runtime));
+                accountId, phase, mode, summary, extra, prevContents, identity, runtime));
     }
 
     @SuppressWarnings("unchecked")
     private Map<String, Object> generateWithRuntime(Long accountId, int phase, String mode,
                                                      String summary, String extra,
-                                                     String prevContents, String operationRequestId,
+                                                     String prevContents, QuotaRequestIdentity identity,
                                                      AiRuntimeConfig runtime) {
         if (!StringUtils.hasText(runtime.endpoint()) || !StringUtils.hasText(runtime.apiKey())) {
             throw new BaseException("AI 方案设计服务尚未配置");
@@ -117,14 +119,14 @@ public class PlanGenerationService {
         if (StringUtils.hasText(personaContext)) {
             prompt += "\n\n" + personaContext;
         }
-        String requestId = null;
-        int chargedCost = 0;
+        String requestId = identity.requestId();
+        long chargedCost = 0;
         long balance = accountId == null ? 0 : quotaService.getBalance(accountId);
         if (accountId != null && accountId > 0) {
-            chargedCost = cost();
-            requestId = operationRequestId;
-            balance = quotaService.consume(accountId, chargedCost,
-                    "方案设计 Phase " + phase, requestId);
+            QuotaCharge charge = quotaService.consume(accountId, PRICING_KEY,
+                    "方案设计 Phase " + phase, identity);
+            chargedCost = charge.amount();
+            balance = charge.balance();
         }
 
         try {
@@ -163,7 +165,7 @@ public class PlanGenerationService {
         } catch (Exception e) {
             boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
             if (accountId != null && chargedCost > 0 && !retryManaged) {
-                quotaService.refund(accountId, chargedCost, requestId, "方案设计失败退款");
+                quotaService.refund(accountId, requestId, "方案设计失败退款");
             }
             log.error("Plan generation failed: accountId={}, phase={}, mode={}",
                     accountId, phase, mode, e);

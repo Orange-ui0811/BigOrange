@@ -64,8 +64,10 @@ class TrendArchitectureServicesTest {
     void compatibilityFacadeKeepsRuntimeSourceAndPublicEntryPoints() {
         TrendV1Analyzer v1 = mock(TrendV1Analyzer.class);
         TrendV2Analyzer v2 = mock(TrendV2Analyzer.class);
-        when(v1.analyze(any(), any(), any(), any(), eq(false))).thenReturn(Map.of("content", "ok"));
-        when(v2.analyze(any(), any(), any(), any(), eq(false))).thenReturn(Map.of("analysis", "ok"));
+        when(v1.analyze(any(), any(), any(QuotaRequestIdentity.class), any(), eq(false)))
+                .thenReturn(Map.of("content", "ok"));
+        when(v2.analyze(any(), any(), any(QuotaRequestIdentity.class), any(), eq(false)))
+                .thenReturn(Map.of("analysis", "ok"));
         TrendAnalysisService service = new TrendAnalysisService(provider(null), provider(null), v1, v2,
                 "https://model.example/v1", "secret", "model-name");
         BaseContext.setCurrentId(7L);
@@ -74,9 +76,9 @@ class TrendArchitectureServicesTest {
         service.analyzeV2(List.of("Agent"), "学习", "新手", List.of("Java"), "5h",
                 "", "", "", "", "", true, true, true, false);
 
-        verify(v1).analyze(eq("question"), eq(7L), any(),
+        verify(v1).analyze(eq("question"), eq(7L), any(QuotaRequestIdentity.class),
                 org.mockito.ArgumentMatchers.argThat(runtime -> "model-name".equals(runtime.model())), eq(false));
-        verify(v2).analyze(any(), eq(7L), any(),
+        verify(v2).analyze(any(), eq(7L), any(QuotaRequestIdentity.class),
                 org.mockito.ArgumentMatchers.argThat(runtime -> "ENV".equals(runtime.source())), eq(false));
     }
 

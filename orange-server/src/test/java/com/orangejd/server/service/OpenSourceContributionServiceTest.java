@@ -38,7 +38,10 @@ class OpenSourceContributionServiceTest {
         pricingService = mock(PricingService.class);
         quotaService = mock(QuotaServiceImpl.class);
         when(pricingService.getCost(OpenSourceContributionService.MATCH_PRICING_KEY)).thenReturn(40);
-        when(quotaService.consume(eq(7L), eq(40), anyString(), anyString())).thenReturn(960);
+        when(quotaService.consume(eq(7L),
+                eq(OpenSourceContributionService.MATCH_PRICING_KEY),
+                anyString(), any(QuotaRequestIdentity.class)))
+                .thenReturn(new QuotaCharge(960, 40, 1, "operation-1", false));
         service = new OpenSourceContributionService(mapper, mock(OpenSourceGithubService.class),
                 mock(OpenSourceTranslationService.class), mock(OpenSourceRefreshService.class), aiClient,
                 mock(JobMatchService.class), pricingService, quotaService, new ObjectMapper());
@@ -75,7 +78,7 @@ class OpenSourceContributionServiceTest {
 
         assertThrows(BaseException.class, () -> service.match(7L, Map.of()));
 
-        verify(quotaService).refund(eq(7L), eq(40), startsWith("opensource_match_7_"),
+        verify(quotaService).refund(eq(7L), anyString(),
                 eq("开源 Issue 匹配失败退款"));
     }
 

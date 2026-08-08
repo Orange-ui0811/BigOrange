@@ -72,7 +72,8 @@ class LaunchCheckServiceTest {
         Map<String, Object> created = service.create(7L, validProject());
 
         assertEquals(12L, created.get("id"));
-        verify(quotaService, never()).consume(any(), anyInt(), any(), any());
+        verify(quotaService, never()).consume(any(), any(), any(),
+                any(QuotaRequestIdentity.class));
     }
 
     @Test
@@ -83,7 +84,8 @@ class LaunchCheckServiceTest {
         when(mapper.selectStage(12L, 1)).thenReturn(null);
 
         assertThrows(BaseException.class, () -> service.generate(7L, 12L, 2));
-        verify(quotaService, never()).consume(any(), anyInt(), any(), any());
+        verify(quotaService, never()).consume(any(), any(), any(),
+                any(QuotaRequestIdentity.class));
     }
 
     private Map<String, Object> validProject() {

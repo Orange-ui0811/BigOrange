@@ -11,4 +11,5 @@ public interface QuotaLogMapper {
     int insert(QuotaLog record);
     List<QuotaLog> selectByAccountId(@Param("accountId") Long accountId, @Param("limit") int limit);
     int existsByRequestId(@Param("requestId") String requestId);
+    QuotaLog selectByRequestIdForUpdate(@Param("requestId") String requestId);
 }

@@ -29,7 +29,8 @@ class JobReviewServiceTest {
 
         service.approve(5L, "AI", 0.97, null, "safe");
 
-        verify(quota).grantReward(7L, 70, "岗位投稿审核通过");
+        verify(quota).grantReward(7L, PricingService.REWARD_JOB_APPROVED,
+                "job:5", "岗位投稿审核通过");
         verify(mapper).updateReviewDecision(5L, "APPROVED", "safe", "AI", 0.97, null);
     }
 
@@ -44,7 +45,8 @@ class JobReviewServiceTest {
         when(mapper.selectByIdForUpdate(5L)).thenReturn(job);
 
         assertThrows(BaseException.class, () -> service.approve(5L, "ADMIN", null, 1L, "ok"));
-        verify(quota, never()).grantReward(7L, 50, "岗位投稿审核通过");
+        verify(quota, never()).grantReward(7L, PricingService.REWARD_JOB_APPROVED,
+                "job:5", "岗位投稿审核通过");
     }
 
     private JobPosting pendingJob() {

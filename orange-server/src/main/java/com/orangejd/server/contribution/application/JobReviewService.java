@@ -35,7 +35,8 @@ public class JobReviewService {
         if (job.getSubmitterId() != null && "USER".equals(job.getSubmitterRole())) {
             int reward = pricingService.getReward(PricingService.REWARD_JOB_APPROVED);
             if (reward > 0) {
-                quotaService.grantReward(job.getSubmitterId(), reward, "岗位投稿审核通过");
+                quotaService.grantReward(job.getSubmitterId(), PricingService.REWARD_JOB_APPROVED,
+                        "job:" + id, "岗位投稿审核通过");
             }
         }
         if (mapper.updateReviewDecision(id, "APPROVED", reason, source, confidence, reviewerId) != 1) {
