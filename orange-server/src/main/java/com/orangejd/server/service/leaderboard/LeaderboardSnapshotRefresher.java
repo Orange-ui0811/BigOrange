@@ -155,18 +155,17 @@ void refreshWeekStars(String topicName, LocalDate today) {
         }
     }
 
-private String toJson(Map<String, Object> data) {
+    private String toJson(Map<String, Object> data) {
         try {
             return objectMapper.writeValueAsString(data);
         } catch (Exception ex) {
             throw new IllegalArgumentException("榜单快照序列化失败", ex);
-}
+        }
+    }
 
-}
-
-static String searchUrl(String query) {
-    return "https://api.github.com/search/repositories?q="
-            + URLEncoder.encode(query, StandardCharsets.UTF_8)
-            + "&sort=stars&order=desc&per_page=20";
-}
+    static String searchUrl(String query) {
+        return "https://api.github.com/search/repositories?q="
+                + URLEncoder.encode(query, StandardCharsets.UTF_8)
+                + "&sort=stars&order=desc&per_page=20";
+    }
 }

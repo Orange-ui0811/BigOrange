@@ -12,7 +12,17 @@ if ! mysql -N -e 'SELECT 1' >/dev/null 2>&1; then
   issues+=("local MySQL query failed")
 fi
 
-if ! curl -fsS --max-time 5 http://127.0.0.1:8081/actuator/health >/dev/null 2>&1; then
+application_health_ok=false
+for attempt in 1 2 3; do
+  if curl -fsS --max-time 10 http://127.0.0.1:8081/actuator/health >/dev/null 2>&1; then
+    application_health_ok=true
+    break
+  fi
+  if (( attempt < 3 )); then
+    sleep 2
+  fi
+done
+if [[ "$application_health_ok" != true ]]; then
   issues+=("application health endpoint failed")
 fi
 
