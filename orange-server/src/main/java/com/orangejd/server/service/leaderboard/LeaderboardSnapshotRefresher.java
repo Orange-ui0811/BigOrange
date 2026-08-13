@@ -1,7 +1,7 @@
 package com.orangejd.server.service.leaderboard;
 import com.fasterxml.jackson.databind.ObjectMapper; import com.orangejd.pojo.entity.LeaderboardSnapshot;
 import com.orangejd.server.foundation.external.GithubApiClient; import com.orangejd.server.mapper.LeaderboardSnapshotMapper;
-import org.slf4j.*; import org.springframework.stereotype.Component; import java.time.*; import java.time.format.*; import java.time.temporal.*; import java.util.*;
+import org.slf4j.*; import org.springframework.stereotype.Component; import java.net.URLEncoder; import java.nio.charset.StandardCharsets; import java.time.*; import java.time.format.*; import java.time.temporal.*; import java.util.*;
 @Component
 class LeaderboardSnapshotRefresher {
  private static final Logger log=LoggerFactory.getLogger(LeaderboardSnapshotRefresher.class);
@@ -26,8 +26,7 @@ void refreshAndSave(String topicName, String period, LocalDate today, String iso
                 q.append("stars:>1");
             }
 
-            String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
-                    + "&sort=stars&order=desc&per_page=20";
+            String url = searchUrl(q.toString().trim());
 
             Map<String, Object> response = githubApiClient.getMap(url);
 
@@ -102,8 +101,7 @@ void refreshWeekStars(String topicName, LocalDate today) {
             // pushed: 近期有代码推送 → 活跃仓库 → 更可能在涨星
             q.append("pushed:>").append(pushedAfter).append(" stars:>10");
 
-            String url = "https://api.github.com/search/repositories?q=" + q.toString().trim()
-                    + "&sort=stars&order=desc&per_page=20";
+            String url = searchUrl(q.toString().trim());
 
             Map<String, Object> response = githubApiClient.getMap(url);
 
@@ -162,6 +160,13 @@ private String toJson(Map<String, Object> data) {
             return objectMapper.writeValueAsString(data);
         } catch (Exception ex) {
             throw new IllegalArgumentException("榜单快照序列化失败", ex);
-        }
-    }
+}
+
+}
+
+static String searchUrl(String query) {
+    return "https://api.github.com/search/repositories?q="
+            + URLEncoder.encode(query, StandardCharsets.UTF_8)
+            + "&sort=stars&order=desc&per_page=20";
+}
 }

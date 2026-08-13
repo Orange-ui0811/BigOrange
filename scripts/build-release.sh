@@ -50,6 +50,24 @@ mkdir -p "$STAGE_DIR/web-dist/admin" "$STAGE_DIR/config" "$STAGE_DIR/database"
 install -m 0644 orange-server/target/orange-server-1.0.0-SNAPSHOT.jar "$STAGE_DIR/orange-server.jar"
 cp -R orange-web/dist/. "$STAGE_DIR/web-dist/"
 cp -R orange-admin/dist/. "$STAGE_DIR/web-dist/admin/"
+
+# A release is incomplete if either SPA entry references an asset that was not
+# packaged. This prevents a user-only frontend bundle from replacing the
+# combined user/admin production web root.
+validate_spa_assets() {
+  local web_root="$1" entry_file="$2" asset_path
+  test -s "$web_root/$entry_file"
+  while IFS= read -r asset_path; do
+    test -s "$web_root/${asset_path#/}" || {
+      echo "Missing packaged frontend asset: $asset_path (referenced by $entry_file)" >&2
+      return 1
+    }
+  done < <(grep -oE '(src|href)="/[^"]+\.(js|css)"' "$web_root/$entry_file" \
+    | sed -E 's/^(src|href)="([^"]+)"$/\2/')
+}
+validate_spa_assets "$STAGE_DIR/web-dist" index.html
+validate_spa_assets "$STAGE_DIR/web-dist" admin/index.html
+
 public_build_config_fingerprint > "$STAGE_DIR/config/public-build-config.sha256"
 install -m 0644 scripts/lib/production-config.sh "$STAGE_DIR/config/production-config.sh"
 install -m 0644 .env.prod.example "$STAGE_DIR/config/orangejd.env.example"

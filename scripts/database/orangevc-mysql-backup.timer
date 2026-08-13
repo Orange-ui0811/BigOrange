@@ -1,0 +1,11 @@
+[Unit]
+Description=Run OrangeVC MySQL backup every day at 02:30
+
+[Timer]
+OnCalendar=*-*-* 02:30:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=120
+Unit=orangevc-mysql-backup.service
+
+[Install]
+WantedBy=timers.target

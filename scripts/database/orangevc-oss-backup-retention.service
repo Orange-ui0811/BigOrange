@@ -1,0 +1,18 @@
+[Unit]
+Description=OrangeVC OSS database backup retention
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+WorkingDirectory=/data/orangejd/backups/mysql
+Environment=HOME=/data/orangejd/backups/mysql
+ExecStart=/usr/local/sbin/orangevc-oss-backup-retention
+Nice=15
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/data/orangejd/backups/mysql
+

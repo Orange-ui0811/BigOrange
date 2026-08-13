@@ -70,6 +70,18 @@ assert_content_type() {
   curl "${CURL_TARGET_ARGS[@]}" --max-time 15 -fsSI "$url" | tr -d '\r' | grep -Eiq "^Content-Type: ${expected}"
 }
 
+validate_spa_assets() {
+  local web_root="$1" entry_file="$2" asset_path
+  test -s "$web_root/$entry_file"
+  while IFS= read -r asset_path; do
+    test -s "$web_root/${asset_path#/}" || {
+      echo "Release is missing frontend asset: $asset_path (referenced by $entry_file)" >&2
+      return 1
+    }
+  done < <(grep -oE '(src|href)="/[^"]+\.(js|css)"' "$web_root/$entry_file" \
+    | sed -E 's/^(src|href)="([^"]+)"$/\2/')
+}
+
 trap rollback ERR
 trap cleanup EXIT
 
@@ -81,6 +93,8 @@ test -f "$STAGE/manifest.json"
 test -f "$STAGE/config/public-build-config.sha256"
 test -f "$STAGE/config/production-config.sh"
 test -f "$STAGE/config/nginx.conf.example"
+validate_spa_assets "$STAGE/web-dist" index.html
+validate_spa_assets "$STAGE/web-dist" admin/index.html
 
 # Copy the root-only environment into the private stage solely for validation.
 sudo cat "$PRODUCTION_ENV" > "$STAGE/production.env"
@@ -161,7 +175,9 @@ for _ in {1..20}; do
   sleep 0.25
 done
 assert_http_status "$PUBLIC_URL/market" 200
+assert_http_status "$PUBLIC_URL/admin/" 200
 assert_http_status "$PUBLIC_URL/assets/release-check-$STAMP.js" 404
+assert_http_status "$PUBLIC_URL/admin/assets/release-check-$STAMP.js" 404
 assert_http_status "$PUBLIC_URL/.env" 404
 assert_content_type "$PUBLIC_URL/robots.txt" 'text/plain'
 assert_content_type "$PUBLIC_URL/sitemap.xml" '(application|text)/xml'

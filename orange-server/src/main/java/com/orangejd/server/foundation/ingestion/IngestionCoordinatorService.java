@@ -97,7 +97,7 @@ public class IngestionCoordinatorService {
         } else if (LEADERBOARD_FULL.equals(pipelineType)) {
             mode = "FULL";
             taskType = LeaderboardRefreshTask.TASK_TYPE;
-            maxAttempts = 0;
+            maxAttempts = 1;
         } else if (README_RETRY.equals(pipelineType)) {
             mode = "RETRY";
             taskType = ReadmePipelineTask.TASK_TYPE;

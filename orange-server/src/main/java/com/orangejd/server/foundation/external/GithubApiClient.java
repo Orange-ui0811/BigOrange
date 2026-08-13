@@ -58,16 +58,18 @@ public class GithubApiClient {
     }
 
     public JsonNode getJson(String url) {
+        String body = get(url);
         try {
-            return objectMapper.readTree(get(url));
+            return objectMapper.readTree(body);
         } catch (Exception ex) {
             throw new BaseException("GitHub API returned invalid JSON");
         }
     }
 
     public Map<String, Object> getMap(String url) {
+        String body = get(url);
         try {
-            return objectMapper.readValue(get(url), new TypeReference<>() { });
+            return objectMapper.readValue(body, new TypeReference<>() { });
         } catch (Exception ex) {
             throw new BaseException("GitHub API returned invalid JSON");
         }

@@ -14,5 +14,5 @@ public class LeaderboardRefreshTask implements SystemTaskHandler {
  @Override public String taskType(){return TASK_TYPE;}
  @Override public Object execute(SystemTask task){coordinator.refreshAll(task.getRunId(),task.getConfigVersion());return Map.of("refreshedAt",LocalDate.now().toString(),"runId",task.getRunId()==null?0:task.getRunId());}
  static String resolveChatCompletionsUrl(String endpoint){if(endpoint==null||endpoint.isBlank())throw new IllegalStateException("AI endpoint is not configured");String normalized=endpoint.trim().replaceAll("/+$","");return normalized.endsWith("/chat/completions")?normalized:normalized+"/chat/completions";}
- private void enqueue(String key){tasks.enqueue(TASK_TYPE,key,Map.of(),0);}
+ private void enqueue(String key){tasks.enqueue(TASK_TYPE,key,Map.of(),1);}
 }

@@ -52,7 +52,7 @@ class LeaderboardRefreshTaskTest {
         task.setConfigVersion("v1");
         Map<?, ?> result = (Map<?, ?>) legacyTask.execute(task);
 
-        verify(tasks).enqueue(eq(LeaderboardRefreshTask.TASK_TYPE), any(), eq(Map.of()), eq(0));
+        verify(tasks).enqueue(eq(LeaderboardRefreshTask.TASK_TYPE), any(), eq(Map.of()), eq(1));
         verify(coordinator).refreshAll(17L, "v1");
         assertEquals(17L, result.get("runId"));
     }

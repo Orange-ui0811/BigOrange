@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { transactionUiEnabled } from '../stores/tradeMode'
 import { pinia } from '../stores'
 import { useAuthStore } from '../stores/authStore'
-import { PUBLIC_BRAND_NAME } from '../config/brand'
+import { OFFICIAL_SITE_URL, PUBLIC_BRAND_NAME } from '../config/brand'
+
+export const canonicalUrlForPath = path => `${OFFICIAL_SITE_URL}${path === '/' ? '/' : path}`
 
 export const routes = [
   { path: '/', name: 'Home', component: () => import('../views/Home.vue'), meta: { title: '首页', description: '连接独立开发者与真实需求方，让作品、合作与交付在一个地方发生。', public: true } },
@@ -82,7 +84,7 @@ router.afterEach(to => {
     canonical.setAttribute('rel', 'canonical')
     document.head.appendChild(canonical)
   }
-  canonical.setAttribute('href', `${window.location.origin}${to.path}`)
+  canonical.setAttribute('href', canonicalUrlForPath(to.path))
   window.scrollTo({ top: 0, left: 0 })
   requestAnimationFrame(() => (document.getElementById('main-content') || document.getElementById('home-main'))?.focus({ preventScroll: true }))
 })

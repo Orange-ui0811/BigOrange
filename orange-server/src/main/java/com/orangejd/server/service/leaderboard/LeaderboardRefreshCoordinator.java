@@ -14,6 +14,7 @@ public class LeaderboardRefreshCoordinator {
    for(String topic:TOPICS){progress.checkCancelled();refresher.refreshAndSave(topic,"all",today,null);pause();refresher.refreshAndSave(topic,"new",today,monday.format(DateTimeFormatter.ISO_LOCAL_DATE));pause();refresher.refreshWeekStars(topic,today);pause();}
    refresher.refreshAndSave(ALL_TOPICS,"all",today,null);pause();refresher.refreshAndSave(ALL_TOPICS,"new",today,monday.format(DateTimeFormatter.ISO_LOCAL_DATE));pause();refresher.refreshWeekStars(ALL_TOPICS,today);
    translations.translateAllToday(today);String before=today.minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE);log.info("榜单刷新完成，清理 {} 条快照、{} 篇 README",snapshots.deleteBefore(before),readmes.cleanExpiredWeekly(before));
+   if(context.failed>0)throw new IllegalStateException("Leaderboard refresh completed with "+context.failed+" failed items");
   }finally{running.set(false);progress.end();}
  }
  public boolean snapshotsMissingThisWeek(){var week=LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));return before(latest("all"),week)||before(latest("week"),week)||before(latest("new"),week);}
