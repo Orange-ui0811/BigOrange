@@ -29,5 +29,18 @@ class CustomerEvaluationTest(unittest.TestCase):
         self.assertEqual(result['p95Ms'], 19)
         self.assertEqual(result['reportedTotalTokens'], 200)
 
+    def test_no_expectations_is_unassessed_even_when_http_succeeded(self):
+        self.assertEqual(module.assess_behavior({'status': 'SUCCEEDED'})['status'], 'UNASSESSED')
+        result = module.evaluate([{'turns': [{'status': 'SUCCEEDED', 'result': {'businessOutcome': 'INCOMPLETE'}}]}])['B']
+        self.assertEqual(result['businessOutcomes'], {'INCOMPLETE': 1})
+        self.assertEqual(result['behaviorChecks']['UNASSESSED'], 1)
+
+    def test_explicit_conditions_and_excluded_projects_are_checked(self):
+        row = {'expectations': {'state': {'maxDurationDays': 180}, 'excludedProjectIds': [3]},
+               'result': {'state': {'maxDurationDays': 60}, 'projects': [{'id': '3'}]}}
+        result = module.assess_behavior(row)
+        self.assertEqual(result['status'], 'FAILED')
+        self.assertEqual(result['failures'], ['state.maxDurationDays', 'excludedProjectIds'])
+
 if __name__ == '__main__':
     unittest.main()

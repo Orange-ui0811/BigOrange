@@ -90,6 +90,12 @@ class RagBSearchServiceTest {
         assertThat(result.hits()).extracting(RagBSearchHit::chunkId).containsExactly(100L, 102L);
         org.mockito.Mockito.verify(fixture.mapper, org.mockito.Mockito.times(1)).selectDocument(1L);
     }
+    @Test void explicitProjectDiversityDoesNotDependOnWordsInTheRewrittenQuery() {
+        Fixture fixture=fixture(List.of(hit(1,11,"GITHUB","acme/one",.90,"AI application framework"),hitWithChunk(1,11,102,"GITHUB","acme/one",.89,"database deployment details"),hit(2,22,"GITHUB","acme/two",.80,"agent application runtime")));
+        var result=fixture.service.retrieve("AI application development",2,.5,RagBSearchConstraints.sources(Set.of("GITHUB")).projectDiversity());
+        assertThat(result.hits()).extracting(RagBSearchHit::sourceRef).containsExactly("acme/one","acme/two");
+        org.mockito.Mockito.verify(fixture.indexes).searchWithTrace(any(),org.mockito.ArgumentMatchers.eq("AI application development"),anyInt(),anyDouble(),any());
+    }
 
     @Test
     void removesIdenticalPassagesAcrossWeeklySnapshotsButKeepsNewFacts() {

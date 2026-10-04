@@ -26,6 +26,17 @@ class CustomerConversationTest {
         assertThat(result.getValue()).containsEntry("status","FOLLOW_UP"); assertThat(result.getValue().get("answer").toString()).contains("基础");
         verify(context,never()).knowledge(anyString(),anySet());
     }
+    @Test void mixedExplanationAndChangePerformsExactlyOneRecommendationWithNewLimit() {
+        when(db.run("r")).thenReturn(Map.of("account_id",5,"session_id",1,"message","用途核对是什么？把周期放宽到半年，再推荐项目"));
+        when(store.session(1,5)).thenReturn(Map.of("state_json",json.write(Map.of("maxDurationDays",60))));
+        when(model.call(eq(CustomerState.PROMPT),anyMap(),any(),anyList())).thenReturn(Map.of("intent","RECOMMEND","beforeTask",Map.of("intent","EXPLAIN","quote","用途核对是什么"),"changes",Map.of("maxDurationDays",Map.of("quote","周期放宽到半年","value",Map.of("quantity",6,"unit","MONTH","relation","AT_MOST")))));
+        when(context.projects(anyMap())).thenReturn(List.of());
+        conversation.execute("r",new ArrayList<>(),Instant.now().plusSeconds(90));
+        verify(context,times(1)).projects(argThat(s->Integer.valueOf(180).equals(s.get("maxDurationDays"))));
+        var result=org.mockito.ArgumentCaptor.forClass(Map.class);verify(store).complete(eq("r"),result.capture(),anyMap(),any());
+        assertThat(result.getValue().get("answer").toString()).contains("180");
+        assertThat(result.getValue().get("conditionChangeSummary").toString()).contains("60","180");
+    }
     @Test void greetingUsesModelAndConfirmedProfileWithoutRetrievalAndPreservesConditions() {
         when(db.run("r")).thenReturn(Map.of("account_id",5,"session_id",1,"message","你好！"));
         when(store.session(1,5)).thenReturn(Map.of("state_json","{\"language\":\"Python\"}"));
@@ -124,8 +135,8 @@ class CustomerConversationTest {
         verify(context,never()).detail(eq("BEGINNER"),eq(6L),anyMap());
         var finalState=org.mockito.ArgumentCaptor.forClass(Map.class);
         verify(store).complete(eq("r"),anyMap(),finalState.capture(),any());
-        assertThat((List<?>)finalState.getValue().get("lastCandidates")).hasSize(1);
-        assertThat(((Map<?,?>)((List<?>)finalState.getValue().get("lastCandidates")).getFirst()).get("id")).isEqualTo("7");
+        assertThat((List<?>)finalState.getValue().get("lastCandidates")).hasSize(2);
+        assertThat(((Map<?,?>)finalState.getValue().get("focusedProject")).get("id")).isEqualTo("7");
     }
     @Test void comparisonPreservesMultipleExplicitOrdinals() {
         when(db.run("r")).thenReturn(Map.of("account_id",5,"session_id",1,"message","比较第一个和第三个"));
@@ -139,7 +150,7 @@ class CustomerConversationTest {
         verify(context).detail(eq("BEGINNER_PROJECT"),eq(3L),anyMap());
         verify(context,never()).detail(eq("BEGINNER_PROJECT"),eq(2L),anyMap());
         var finalState=org.mockito.ArgumentCaptor.forClass(Map.class); verify(store).complete(eq("r"),anyMap(),finalState.capture(),any());
-        assertThat((List<?>)finalState.getValue().get("lastCandidates")).hasSize(2);
+        assertThat((List<?>)finalState.getValue().get("lastCandidates")).hasSize(3);
     }
     @Test void longHistoryKeepsConfirmedLanguageAndTraceableSummary() {
         when(db.run("r")).thenReturn(Map.of("account_id",5,"session_id",1,"message","我刚才指定的语言是什么"));
@@ -151,7 +162,7 @@ class CustomerConversationTest {
         when(model.call(eq(CustomerState.PROMPT),anyMap(),any(),anyList())).thenReturn(Map.of("intent","QUESTION","changes",Map.of()));
         conversation.execute("r",new ArrayList<>(),Instant.now().plusSeconds(90));
         var result=org.mockito.ArgumentCaptor.forClass(Map.class); verify(store).complete(eq("r"),result.capture(),anyMap(),any());
-        assertThat(result.getValue().get("answer").toString()).contains("Python"); verify(db).summary(eq(1L),contains("消息10"),eq(10L));
+        assertThat(result.getValue().get("answer").toString()).contains("Python"); verify(db).summary(eq(1L),contains("messageId"),eq(16L));
         verify(context,never()).knowledge(anyString(),anySet());
     }
 }

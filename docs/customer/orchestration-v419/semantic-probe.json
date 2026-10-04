@@ -1,0 +1,460 @@
+{
+  "thinking" : true,
+  "costUsd" : "UNKNOWN",
+  "cases" : [ {
+    "caseId" : "greeting",
+    "message" : "你好",
+    "passed" : true,
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "你好呀！我是项目推荐客服，可以帮你按目标、语言、周期、难度、偏好条件等来找合适的练手项目。\n\n随便说说你的情况就行，比如想学点什么、想用什么语言、大概能投入多长时间，我就能开始帮你找啦。",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : { },
+    "durationMs" : 4730,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1988,
+      "usage" : {
+        "prompt_tokens" : 5123,
+        "completion_tokens" : 159,
+        "total_tokens" : 5282,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 0
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 19
+        },
+        "prompt_cache_hit_tokens" : 0,
+        "prompt_cache_miss_tokens" : 5123
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "tool_calls",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  }, {
+    "caseId" : "composite",
+    "message" : "用途核对是什么？把周期放宽到半年，再推荐项目。",
+    "passed" : true,
+    "action" : {
+      "intent" : "RECOMMEND",
+      "beforeTask" : {
+        "intent" : "EXPLAIN",
+        "quote" : "用途核对是什么？"
+      },
+      "reply" : "**关于「用途核对」**：这是对项目用途/适用场景信息做的一轮只读核对，用来确认资料中的用途说明是否与你的需求对得上；它本身不修改你的条件，具体核对结果以系统返回为准。\n\n**同时我按你说的放宽周期**：已把最长完成周期从 60 天改成半年以内，允许选更短的项目，然后重新找项目。",
+      "changes" : {
+        "maxDurationDays" : {
+          "operation" : "SET",
+          "value" : {
+            "quantity" : 6,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "把周期放宽到半年"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "maxDurationDays" : 180,
+      "language" : "Java",
+      "durationSemantics" : {
+        "quantity" : 6,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "把周期放宽到半年"
+        }
+      }
+    },
+    "durationMs" : 3524,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 3502,
+      "usage" : {
+        "prompt_tokens" : 5146,
+        "completion_tokens" : 686,
+        "total_tokens" : 5832,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 4864
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 435
+        },
+        "prompt_cache_hit_tokens" : 4864,
+        "prompt_cache_miss_tokens" : 282
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "tool_calls",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  }, {
+    "caseId" : "record",
+    "message" : "我想用Python做AI应用开发，目标求职，半年内完成，先记录不用推荐。",
+    "passed" : true,
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "好的，先记下这几条：\n\n- 语言：Python\n- 方向：AI 应用开发\n- 目标：求职\n- 周期：半年内完成（更短的项目也可以）\n\n这轮不给你推项目，等你想看的时候招呼一声就行。方便的话，顺口说说你目前 Python 大概到什么程度，我先一并记着。",
+      "changes" : {
+        "language" : {
+          "operation" : "SET",
+          "value" : "Python",
+          "quote" : "用Python"
+        },
+        "topic" : {
+          "operation" : "SET",
+          "value" : [ "AI应用开发" ],
+          "quote" : "做AI应用开发"
+        },
+        "goal" : {
+          "operation" : "SET",
+          "value" : "求职",
+          "quote" : "目标求职"
+        },
+        "maxDurationDays" : {
+          "operation" : "SET",
+          "value" : {
+            "quantity" : 6,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "半年内完成"
+        }
+      },
+      "profileDefaults" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Python",
+      "provenance" : {
+        "language" : {
+          "source" : "MESSAGE",
+          "quote" : "用Python"
+        },
+        "topic" : {
+          "source" : "MESSAGE",
+          "quote" : "做AI应用开发"
+        },
+        "goal" : {
+          "source" : "MESSAGE",
+          "quote" : "目标求职"
+        },
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "半年内完成"
+        }
+      },
+      "topic" : [ "AI应用开发" ],
+      "goal" : "求职",
+      "durationSemantics" : {
+        "quantity" : 6,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 180
+    },
+    "durationMs" : 3972,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 3945,
+      "usage" : {
+        "prompt_tokens" : 5142,
+        "completion_tokens" : 796,
+        "total_tokens" : 5938,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 4864
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 604
+        },
+        "prompt_cache_hit_tokens" : 4864,
+        "prompt_cache_miss_tokens" : 278
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "stop",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  }, {
+    "caseId" : "clear",
+    "message" : "不再限定刚学对应的难度，继续推荐",
+    "passed" : true,
+    "action" : {
+      "intent" : "RECOMMEND",
+      "reply" : "好的，已取消「入门/新手」这一难度限制，接下来按不限难度的范围继续为你找项目。为了更贴合你，方便说说你希望项目是什么主题方向吗（比如 Web、AI 应用、数据分析等）？",
+      "changes" : {
+        "difficulty" : {
+          "operation" : "CLEAR",
+          "value" : null,
+          "quote" : "不再限定刚学对应的难度"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "experience" : "刚学",
+      "clearedFields" : [ "difficulty" ]
+    },
+    "durationMs" : 1737,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1726,
+      "usage" : {
+        "prompt_tokens" : 5142,
+        "completion_tokens" : 327,
+        "total_tokens" : 5469,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 4864
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 161
+        },
+        "prompt_cache_hit_tokens" : 4864,
+        "prompt_cache_miss_tokens" : 278
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "tool_calls",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  }, {
+    "caseId" : "ordinal",
+    "message" : "第二个怎么部署",
+    "passed" : true,
+    "action" : {
+      "intent" : "DETAIL",
+      "reply" : "好的，你问的是列表里第二个项目（synthetic-two）的部署方式，我这就去调取它的部署说明给你看。",
+      "changes" : { },
+      "positions" : [ 2 ]
+    },
+    "state" : {
+      "lastCandidates" : [ {
+        "type" : "EXTERNAL_PROJECT",
+        "id" : 901,
+        "name" : "synthetic-one"
+      }, {
+        "type" : "EXTERNAL_PROJECT",
+        "id" : 902,
+        "name" : "synthetic-two"
+      } ]
+    },
+    "durationMs" : 1716,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1705,
+      "usage" : {
+        "prompt_tokens" : 5168,
+        "completion_tokens" : 239,
+        "total_tokens" : 5407,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 4864
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 123
+        },
+        "prompt_cache_hit_tokens" : 4864,
+        "prompt_cache_miss_tokens" : 304
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "tool_calls",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  }, {
+    "caseId" : "focus",
+    "message" : "它需要Docker吗",
+    "passed" : true,
+    "action" : {
+      "intent" : "DETAIL",
+      "reply" : "你问的是刚才在聊的「synthetic-two」（列表第 2 个）。我来查一下它的运行环境要求——项目是否需要 Docker 属于项目本身的配置信息，我这边确认后再给你准确答复，不会凭空猜测。",
+      "changes" : { },
+      "positions" : [ 2 ]
+    },
+    "state" : {
+      "focusedProject" : {
+        "type" : "EXTERNAL_PROJECT",
+        "id" : 902,
+        "name" : "synthetic-two"
+      },
+      "lastCandidates" : [ {
+        "type" : "EXTERNAL_PROJECT",
+        "id" : 901,
+        "name" : "synthetic-one"
+      }, {
+        "type" : "EXTERNAL_PROJECT",
+        "id" : 902,
+        "name" : "synthetic-two"
+      } ]
+    },
+    "durationMs" : 1549,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1538,
+      "usage" : {
+        "prompt_tokens" : 5193,
+        "completion_tokens" : 263,
+        "total_tokens" : 5456,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 4864
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 127
+        },
+        "prompt_cache_hit_tokens" : 4864,
+        "prompt_cache_miss_tokens" : 329
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "tool_calls",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  }, {
+    "caseId" : "exclude",
+    "message" : "不要第一个，换一批",
+    "passed" : true,
+    "action" : {
+      "intent" : "RECOMMEND",
+      "reply" : "好的，已把第一个（synthetic-one）排除掉，我按同样的条件再给你换一批新的项目看看。",
+      "changes" : { },
+      "positions" : [ 1 ],
+      "projectFeedback" : [ {
+        "operation" : "DISMISS",
+        "position" : 1,
+        "quote" : "不要第一个"
+      } ]
+    },
+    "state" : {
+      "lastCandidates" : [ {
+        "type" : "EXTERNAL_PROJECT",
+        "id" : 901,
+        "name" : "synthetic-one"
+      }, {
+        "type" : "EXTERNAL_PROJECT",
+        "id" : 902,
+        "name" : "synthetic-two"
+      } ],
+      "excludedProjects" : [ {
+        "runId" : "synthetic",
+        "key" : "EXTERNAL_PROJECT:901",
+        "name" : "synthetic-one",
+        "quote" : "不要第一个"
+      } ]
+    },
+    "durationMs" : 2292,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 2281,
+      "usage" : {
+        "prompt_tokens" : 5170,
+        "completion_tokens" : 377,
+        "total_tokens" : 5547,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 4864
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 226
+        },
+        "prompt_cache_hit_tokens" : 4864,
+        "prompt_cache_miss_tokens" : 306
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "tool_calls",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  }, {
+    "caseId" : "ambiguous-duration",
+    "message" : "项目必须在十来个工作周内完成",
+    "passed" : true,
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "收到，你希望项目能在「十来个工作周」内完成。\\n\\n这个范围有点宽，我还不好直接当成硬性周期条件。你说的十来周，大致算到多少周是你能接受的上限？比如 10 周左右，还是可以到 13、14 周？给我一个上界就行，我按它来筛。",
+      "changes" : { },
+      "positions" : [ ],
+      "pendingConditions" : [ {
+        "field" : "maxDurationDays",
+        "quote" : "项目必须在十来个工作周内完成",
+        "question" : "「十来个工作周」大约是几周？希望确认一个可接受的最长完成周期（上界）。"
+      } ]
+    },
+    "state" : {
+      "pendingConditions" : [ {
+        "question" : "「十来个工作周」大约是几周？希望确认一个可接受的最长完成周期（上界）。",
+        "field" : "maxDurationDays",
+        "quote" : "项目必须在十来个工作周内完成"
+      } ]
+    },
+    "durationMs" : 3200,
+    "calls" : [ {
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 3189,
+      "usage" : {
+        "prompt_tokens" : 5130,
+        "completion_tokens" : 605,
+        "total_tokens" : 5735,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 4864
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 376
+        },
+        "prompt_cache_hit_tokens" : 4864,
+        "prompt_cache_miss_tokens" : 266
+      },
+      "attempt" : 1,
+      "protocol" : "NATIVE_ACTION",
+      "phase" : "ACTION",
+      "requestedModel" : "deepseek-flash",
+      "finishReason" : "tool_calls",
+      "outputBudget" : 4096,
+      "thinking" : true
+    } ]
+  } ],
+  "model" : "deepseek-flash",
+  "scope" : "8 synthetic semantic cases, no real account or project evidence",
+  "promptVersion" : "customer-v4.19-composite-turns"
+}

@@ -2,11 +2,15 @@
 import json
 import subprocess
 import time
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output-directory', type=Path, default=ROOT / 'docs/customer/acceptance')
+    options = parser.parse_args()
     name = 'customer_acceptance_' + str(int(time.time()))
     raw = subprocess.check_output(['docker', 'inspect', 'nxz-bigorange-mysql-1'], text=True)
     env = dict(item.split('=', 1) for item in json.loads(raw)[0]['Config']['Env'] if '=' in item)
@@ -19,11 +23,11 @@ def main():
             'nxz-bigorange-backend-1', 'mvn', '-pl', 'orange-server', '-am',
             '-Dtest=CustomerPersistenceIntegrationTest', '-Dsurefire.failIfNoSpecifiedTests=false', 'test', '-q']
     result = subprocess.run(args, capture_output=True, text=True, encoding='utf-8', errors='replace')
-    folder = ROOT / 'docs/customer/acceptance'
+    folder = options.output_directory
     folder.mkdir(parents=True, exist_ok=True)
     (folder / 'persistence.log').write_text((result.stdout + result.stderr).replace(password, '[REDACTED]'), encoding='utf-8')
     (folder / 'persistence.json').write_text(json.dumps({'database': name, 'exitCode': result.returncode,
-        'scope': 'Fresh database through V40, upgrade to V41, Flyway validation and actual mapper/transaction tests; no live user data or model calls.'}, indent=2), encoding='utf-8')
+        'scope': 'Fresh database through V40, upgrade through current migrations (V43), Flyway validation, actual transaction/replay and source fact revision tests; no live user data or model calls.'}, indent=2), encoding='utf-8')
     print(json.dumps({'database': name, 'exitCode': result.returncode}))
     raise SystemExit(result.returncode)
 

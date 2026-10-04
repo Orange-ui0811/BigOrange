@@ -15,8 +15,23 @@ public final class CustomerUsage {
             cacheHit+=count(usage.get("prompt_cache_hit_tokens")); cacheMiss+=count(usage.get("prompt_cache_miss_tokens"));
             if(usage.get("completion_tokens_details") instanceof Map<?,?> details) reasoning+=count(details.get("reasoning_tokens"));
         }
-        return Map.of("inputTokens",input,"outputTokens",output,"totalTokens",total,"reasoningTokens",reasoning,
-            "cacheHitTokens",cacheHit,"cacheMissTokens",cacheMiss,"calls",calls.size(),"callsWithoutUsage",unknown,"complete",unknown==0,"models",models);
+        Map<String,Object> result=new LinkedHashMap<>(Map.of("inputTokens",input,"outputTokens",output,"totalTokens",total,"reasoningTokens",reasoning,
+            "cacheHitTokens",cacheHit,"cacheMissTokens",cacheMiss,"calls",calls.size(),"callsWithoutUsage",unknown,"complete",unknown==0,"models",models));
+        result.put("reasoningUsageComplete",calls.stream().allMatch(c->c.get("usage") instanceof Map<?,?> u && u.get("completion_tokens_details") instanceof Map<?,?> d && d.get("reasoning_tokens") instanceof Number));
+        result.put("cacheUsageComplete",calls.stream().allMatch(c->c.get("usage") instanceof Map<?,?> u && u.get("prompt_cache_hit_tokens") instanceof Number && u.get("prompt_cache_miss_tokens") instanceof Number));
+        return result;
+    }
+    public static Map<String,Object> byPhase(List<Map<String,Object>> calls) {
+        Map<String,List<Map<String,Object>>> groups=new LinkedHashMap<>();
+        calls.forEach(c->groups.computeIfAbsent(Objects.toString(c.get("phase"),"UNKNOWN"),k->new ArrayList<>()).add(c));
+        Map<String,Object> out=new LinkedHashMap<>();
+        groups.forEach((phase,attempts)->{
+            Map<String,Object> metrics=new LinkedHashMap<>(summarize(attempts));
+            metrics.put("durationMs",attempts.stream().mapToLong(c->count(c.get("durationMs"))).sum());
+            metrics.put("failedAttempts",attempts.stream().filter(c->"FAILED".equals(c.get("status"))).count());
+            metrics.put("costUsd","UNKNOWN");out.put(phase,metrics);
+        });
+        return out;
     }
     private static long count(Object value) { return value instanceof Number n?Math.max(0,n.longValue()):0; }
 }

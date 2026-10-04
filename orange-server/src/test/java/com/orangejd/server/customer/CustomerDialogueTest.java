@@ -23,4 +23,9 @@ class CustomerDialogueTest {
         assertFalse(CustomerDialogue.reply(Map.of("reply","相关链接 https://invented.example")).contains("https://"));
         assertFalse(CustomerDialogue.reply(Map.of("reply","说明[E1]")).contains("[E1]"));
     }
+    @Test void longUserMessageStillFitsWithConfirmedConditionsAndProfile() {
+        var input=CustomerDialogue.input("我想了解"+"技术表达".repeat(490),Map.of("language","Python","topic",List.of("AI应用开发"),"goal",List.of("求职"),"maxDurationDays",180),"画像背景".repeat(250),List.of(),"",6000,json);
+        assertTrue(CustomerModel.estimate(CustomerState.PROMPT+json.write(input))<=6000);
+        assertEquals(180,((Map<?,?>)input.get("state")).get("maxDurationDays"));
+    }
 }

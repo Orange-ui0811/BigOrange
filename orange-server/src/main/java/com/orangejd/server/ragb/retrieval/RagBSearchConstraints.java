@@ -12,7 +12,13 @@ public record RagBSearchConstraints(
         Boolean allowSecrets,
         boolean beginnerPreferred,
         boolean careerPreferred,
-        Set<Long> documentIds) {
+        Set<Long> documentIds,
+        boolean diversifyProjects) {
+
+    public RagBSearchConstraints(Set<String> sources, Set<String> languages, Integer maxDays, String difficulty,
+                                Boolean docker, Boolean database, Boolean secrets, boolean beginner, boolean career,Set<Long> documents) {
+        this(sources,languages,maxDays,difficulty,docker,database,secrets,beginner,career,documents,false);
+    }
 
     public RagBSearchConstraints(Set<String> sources, Set<String> languages, Integer maxDays, String difficulty,
                                 Boolean docker, Boolean database, Boolean secrets, boolean beginner, boolean career) {
@@ -31,7 +37,10 @@ public record RagBSearchConstraints(
         return new RagBSearchConstraints(sourceTypes, Set.of(), null, null, null, null, null, false, false);
     }
     public RagBSearchConstraints documents(Set<Long> ids) {
-        return new RagBSearchConstraints(sourceTypes,requiredLanguages,maxDurationDays,difficulty,allowDocker,allowDatabase,allowSecrets,beginnerPreferred,careerPreferred,ids);
+        return new RagBSearchConstraints(sourceTypes,requiredLanguages,maxDurationDays,difficulty,allowDocker,allowDatabase,allowSecrets,beginnerPreferred,careerPreferred,ids,diversifyProjects);
+    }
+    public RagBSearchConstraints projectDiversity() {
+        return new RagBSearchConstraints(sourceTypes,requiredLanguages,maxDurationDays,difficulty,allowDocker,allowDatabase,allowSecrets,beginnerPreferred,careerPreferred,documentIds,true);
     }
     public RagBSearchConstraints indexScope() { return sources(sourceTypes).documents(documentIds); }
 }

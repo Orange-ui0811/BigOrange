@@ -59,6 +59,13 @@ class CustomerToolsTest {
         context.projectEvidence("部署",List.of(Map.of("type","BEGINNER_PROJECT","sourceRef","beginner:1","name","acme/demo")));
         verify(knowledge).retrieve(eq("部署"),eq(20),eq(.55),argThat((com.orangejd.server.ragb.retrieval.RagBSearchConstraints c)->c.documentIds().equals(Set.of(11L,12L))));
     }
+    @Test void recommendationRecallExplicitlyRequestsDistinctProjectsWithoutChangingTheQuery() {
+        activeIndex();
+        when(knowledge.retrieve(anyString(),anyInt(),eq(.55),any(com.orangejd.server.ragb.retrieval.RagBSearchConstraints.class)))
+            .thenReturn(new RagBSearchService.SearchResult("g","HNSW_HYBRID",0,0,Map.of(),List.of(),List.of(),"REFUSE_NO_MATCH"));
+        tools.context("r",5,Instant.now().plusSeconds(90)).projectRecall("AI application development");
+        verify(knowledge).retrieve(eq("AI application development"),eq(20),eq(.55),argThat((com.orangejd.server.ragb.retrieval.RagBSearchConstraints c)->c.diversifyProjects()));
+    }
     private void activeIndex() {
         var g=new com.orangejd.server.ragb.domain.RagBIndexGeneration(); g.setGenerationKey("g"); g.setEmbeddingModel("bge-m3");
         g.setEmbeddingDimensions(1024); g.setChunkPolicy("STRUCTURE_M3_512_768_64_V1"); g.setAdapterType("HNSW_HYBRID"); when(indexes.selectActiveGeneration()).thenReturn(g);

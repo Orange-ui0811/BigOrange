@@ -42,7 +42,7 @@ class CustomerStoreTest {
     }
     @Test void ownerAndGlobalConcurrencyLimitsApply() {
         when(db.activeOwner(7)).thenReturn(1); assertThatThrownBy(()->store.submit(1,7,"request123","Java")).hasMessageContaining("409");
-        when(db.activeOwner(7)).thenReturn(0); when(db.active()).thenReturn(2); assertThatThrownBy(()->store.submit(1,7,"request123","Java")).hasMessageContaining("409");
+        when(db.activeOwner(7)).thenReturn(0); when(db.active()).thenReturn(4); assertThatThrownBy(()->store.submit(1,7,"request123","Java")).hasMessageContaining("409");
     }
     @Test void jsonIdsAcceptIntegerStringsButRejectInvalidNumericValues() {
         assertThat(CustomerStore.positiveId("9223372036854775807")).isEqualTo(Long.MAX_VALUE);

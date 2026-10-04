@@ -51,6 +51,8 @@ class Api:
                 break
         row['durationMs'] = sum(turn['durationMs'] for turn in row['turns'])
         row['expected'] = case['expected']
+        if 'expectations' in case:
+            row['expectations'] = case['expectations']
         row['split'] = case.get('split', 'development')
         return row
 

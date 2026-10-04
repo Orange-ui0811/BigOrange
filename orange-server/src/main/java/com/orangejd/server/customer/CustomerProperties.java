@@ -18,6 +18,9 @@ public class CustomerProperties {
     private Set<Long> allowedAccounts = Set.of();
     private boolean allAuthenticatedUsers = true;
     private int maxConcurrent = 2;
+    private int maxQueued = 2;
+    public int getMaxQueued() { return maxQueued; }
+    public void setMaxQueued(int v) { if(v<0 || v>4)throw new IllegalArgumentException("客服等待队列必须为0至4");maxQueued=v; }
     private int runSeconds = 90;
     private int modelSeconds = 45;
     private int inputTokens = 6000;

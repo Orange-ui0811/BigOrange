@@ -72,7 +72,7 @@ public class CustomerTools {
         }
         public RagBSearchService.SearchResult projectRecall(String query) {
             Set<String> types=Set.of("BEGINNER_PROJECT","CAREER_PROJECT","GITHUB");
-            return search(query,types,Map.of("purpose","PROJECT_RANKING","topK",20),()->knowledge.retrieve(query,20,0.55,RagBSearchConstraints.sources(types)));
+            return search(query,types,Map.of("purpose","PROJECT_RANKING","topK",20,"projectDiversity",true),()->knowledge.retrieve(query,20,0.55,RagBSearchConstraints.sources(types).projectDiversity()));
         }
         public RagBSearchService.SearchResult projectEvidence(String query,List<Map<String,Object>> cards) {
             Set<String> types=Set.of("BEGINNER_PROJECT","CAREER_PROJECT","GITHUB");

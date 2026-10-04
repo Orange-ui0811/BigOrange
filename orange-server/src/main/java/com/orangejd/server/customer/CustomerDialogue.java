@@ -12,6 +12,8 @@ public final class CustomerDialogue {
         Map<String,Object> visible=new LinkedHashMap<>();
         for(String field:CustomerState.FIELDS) if(state.containsKey(field)) visible.put(field,state.get(field));
         if(state.containsKey("lastCandidates")) visible.put("lastCandidates",state.get("lastCandidates"));
+        if(state.containsKey("focusedProject")) visible.put("focusedProject",state.get("focusedProject"));
+        if(state.get("excludedProjects") instanceof List<?> excluded)visible.put("excludedProjects",excluded.stream().skip(Math.max(0,excluded.size()-3)).toList());
         if(state.containsKey("lastQuestion")) visible.put("lastQuestion",state.get("lastQuestion"));
         if(state.containsKey("clearedFields")) visible.put("clearedFields",state.get("clearedFields"));
         if(state.containsKey("lastChangeSummary")) visible.put("lastChangeSummary",state.get("lastChangeSummary"));

@@ -99,6 +99,7 @@ public class CustomerProjects {
         return unknownFields(card,state).stream().map(field->CustomerState.label(field)+"尚未核实，不能确认满足你的要求").toList();
     }
     public boolean accepts(Map<String,Object> p,Map<String,Object> state) {
+        if(CustomerProjectFeedback.excluded(p,state))return false;
         if(resourceOnly(p)) return false;
         if(state.get("sourceType") instanceof String type && !type.equals(p.get("type"))) return false;
         if(!Set.of("PUBLISHED","CANDIDATE","DOCUMENTED").contains(Objects.toString(p.get("status"),"")) || Boolean.TRUE.equals(p.get("archived"))) return false;

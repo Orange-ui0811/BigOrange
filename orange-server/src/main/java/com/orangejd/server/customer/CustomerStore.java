@@ -63,7 +63,8 @@ public class CustomerStore {
             if(!hash.equals(old.get("input_hash"))) fail(HttpStatus.CONFLICT,"相同请求标识的内容不一致");
             Map<String,Object> replay=new LinkedHashMap<>(old); replay.put("replayed",true); return replay;
         }
-        if(db.activeOwner(owner)>0 || db.active()>=config.getMaxConcurrent()) fail(HttpStatus.CONFLICT,"客服忙碌，请等待当前运行结束");
+        if(db.activeOwner(owner)>0) fail(HttpStatus.CONFLICT,"请等待当前账号的回答结束");
+        if(db.active()>=config.getMaxConcurrent()+config.getMaxQueued()) fail(HttpStatus.CONFLICT,"客服等待队列已满，请稍后再试");
         Map<String,Object> row=new LinkedHashMap<>(); row.put("id",UUID.randomUUID().toString()); row.put("session",session);
         row.put("owner",owner); row.put("request",request); row.put("hash",hash); row.put("message",message);
         row.put("promptVersion",CustomerConversation.PROMPT_VERSION);

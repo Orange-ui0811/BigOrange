@@ -1,0 +1,54 @@
+{
+  "checkpoint": "67381b6",
+  "promptVersion": "customer-v4.19-composite-turns",
+  "backend": {
+    "command": "mvn -B clean verify",
+    "passed": true,
+    "aggregate": {
+      "tests": 534,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 11
+    }
+  },
+  "frontends": {
+    "orange-web": {
+      "lint": true,
+      "typecheck": true,
+      "test": true,
+      "build": true
+    },
+    "orange-admin": {
+      "lint": true,
+      "typecheck": true,
+      "test": true,
+      "build": true
+    }
+  },
+  "pythonEvaluationTests": {
+    "tests": 6,
+    "passed": true
+  },
+  "semantic": {
+    "cases": 8,
+    "passed": 8,
+    "calls": 8,
+    "reportedTokens": 44666,
+    "minimumMs": 1549,
+    "maximumMs": 4730,
+    "scope": "synthetic intent and condition protocol only",
+    "costStatus": "UNKNOWN"
+  },
+  "persistence": {
+    "database": "customer_acceptance_1791105924",
+    "exitCode": 0,
+    "scope": "Fresh database through V40, upgrade through current migrations (V43), Flyway validation, actual transaction/replay and source fact revision tests; no live user data or model calls."
+  },
+  "runtime": "LOCAL_V419_HEALTHY_HTTP_CHECKS_PASSED",
+  "releaseApproved": false,
+  "bundleCheck": true,
+  "mockBrowserE2E": {
+    "passed": true,
+    "cases": 6
+  }
+}

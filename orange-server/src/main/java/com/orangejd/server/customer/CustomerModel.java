@@ -16,6 +16,10 @@ public class CustomerModel {
     public Map<String,Object> call(String system,Object input,Instant deadline,List<Map<String,Object>> usage) {
         String user=json.write(input);
         String phase=CustomerPurpose.PLAN_PROMPT.equals(system)?"QUERY_PLAN":CustomerPurpose.REVIEW_PROMPT.equals(system)?"PURPOSE_REVIEW":CustomerState.PROMPT.equals(system)?"ACTION":CustomerEvidence.VERIFY_PROMPT.equals(system)?"VERIFY":CustomerEvidence.PROMPT.equals(system)?"EVIDENCE":CustomerRecommendationAdvice.PROMPT.equals(system)?"ADVICE":"OTHER";
+        // Retries share one stage budget; they do not each receive another full model timeout.
+        int stageSeconds=switch(phase) {case "QUERY_PLAN"->12;case "PURPOSE_REVIEW","EVIDENCE"->30;case "VERIFY","ADVICE"->20;default->config.getModelSeconds();};
+        Instant stageDeadline=Instant.now().plusSeconds(stageSeconds);
+        if(!"OTHER".equals(phase) && stageDeadline.isBefore(deadline))deadline=stageDeadline;
         int budget=switch(phase) {case "ACTION","ADVICE","PURPOSE_REVIEW"->config.getActionOutputTokens();case "VERIFY"->config.getVerificationOutputTokens();case "EVIDENCE"->config.getEvidenceOutputTokens();default->config.getOutputTokens();};
         boolean evidencePhase=phase.equals("EVIDENCE") || phase.equals("VERIFY") || phase.equals("ADVICE") || phase.equals("QUERY_PLAN") || phase.equals("PURPOSE_REVIEW");
         boolean thinking=phase.equals("PURPOSE_REVIEW")?true:phase.equals("EVIDENCE")?config.isEvidenceThinking():phase.equals("VERIFY")?config.isVerificationThinking():(phase.equals("ADVICE") || phase.equals("QUERY_PLAN") || phase.equals("PURPOSE_REVIEW"))?false:config.isThinking();
@@ -42,10 +46,7 @@ public class CustomerModel {
                 if(CustomerState.PROMPT.equals(system)) {
                     if(!CustomerState.INTENTS.contains(parsed.get("intent"))) throw new IllegalArgumentException("INVALID_ACTION_SCHEMA");
                     for(String key:List.of("changes","profileDefaults")) if(parsed.containsKey(key) && !(parsed.get(key) instanceof Map<?,?>)) throw new IllegalArgumentException("INVALID_ACTION_SCHEMA");
-                    for(String key:List.of("changes","profileDefaults")) if(parsed.get(key) instanceof Map<?,?> changes && changes.get("topic") instanceof Map<?,?> topic && topic.get("value")!=null && !"CLEAR".equals(topic.get("operation"))) {
-                        try { CustomerTopics.normalize(topic.get("value")); }
-                        catch(IllegalArgumentException invalid) { throw new IllegalArgumentException("INVALID_ACTION_SCHEMA"); }
-                    }
+                    // Field-level errors belong to reconcile: preserve valid changes and the conversation.
                     if("CHAT".equals(parsed.get("intent")) && (!(parsed.get("reply") instanceof String text) || text.isBlank())) throw new IllegalArgumentException("INVALID_ACTION_SCHEMA");
                 }
                 return parsed;

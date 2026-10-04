@@ -7,6 +7,8 @@ public final class CustomerConditionFacts {
     private CustomerConditionFacts() {}
     public static String route(String message) {
         String m=message.strip();
+        // Composite turns must reach semantic extraction; a read-only shortcut must not swallow a task.
+        if(CustomerTurnPlan.hasExplicitTask(m))return null;
         // Explain operational questions without another provider call or a counterfactual search.
         if(m.length()<100 && !m.matches("(?s).*(推荐给我|帮我找|开始查找|改成|换成|改为|我想找).*" )
             && (m.matches("(?s).*(用途核对|项目核对|功能核对|相关性核对|用途审核).*(是什么|什么意思|为什么|怎么回事|失败|没完成|未完成).*" )

@@ -90,7 +90,8 @@ public class RagBSearchService {
             else eligible.add(withPreference(hit, constraints));
         }
         com.orangejd.server.service.TrendLabObservation.elapsed("B.databaseMetadataAndFilters",filterStarted);
-        List<RagBSearchHit> immutableHits = com.orangejd.server.service.TrendLabObservation.measure("B.dedupAndSelect", () -> selectEvidence(constraints.documentIds().isEmpty()?query:"推荐 "+query, eligible, Math.max(1, Math.min(topK, 20))));
+        boolean diversify=constraints.diversifyProjects() || !constraints.documentIds().isEmpty() || recommendationQuery(query);
+        List<RagBSearchHit> immutableHits = com.orangejd.server.service.TrendLabObservation.measure("B.dedupAndSelect", () -> selectEvidence(diversify, eligible, Math.max(1, Math.min(topK, 20))));
         long relevanceStarted=System.nanoTime();
         RagBRelevanceGuard.Decision relevance = relevanceGuard.assess(query, immutableHits);
         if (!relevance.relevant() && !immutableHits.isEmpty()) {
@@ -135,7 +136,7 @@ public class RagBSearchService {
         }).toList();
     }
 
-    private List<RagBSearchHit> selectEvidence(String query, List<RagBSearchHit> candidates, int limit) {
+    private List<RagBSearchHit> selectEvidence(boolean diversify, List<RagBSearchHit> candidates, int limit) {
         List<RagBSearchHit> ranked = candidates.stream()
                 .sorted(java.util.Comparator.comparingDouble(RagBSearchHit::score).reversed()).toList();
         // Remove repeated snapshots/identical passages, not distinct facts from one repository.
@@ -143,7 +144,7 @@ public class RagBSearchService {
         ranked = ranked.stream().filter(hit -> fingerprints.add(sourceKey(hit) + "\n"
                 + (hit.content() == null ? "" : hit.content().replace("\r\n", "\n").trim()))).toList();
         ranked = com.orangejd.server.ragb.retrieval.RagBNearDuplicates.distinct(ranked);
-        if (!recommendationQuery(query)) return ranked.stream().limit(limit).toList();
+        if (!diversify) return ranked.stream().limit(limit).toList();
         List<RagBSearchHit> selected = new ArrayList<>();
         Set<String> represented = new java.util.LinkedHashSet<>();
         for (RagBSearchHit hit : ranked) {
