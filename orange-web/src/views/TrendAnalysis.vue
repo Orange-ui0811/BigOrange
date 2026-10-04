@@ -6,14 +6,13 @@
     <div class="compact-head">
       <div>
         <span class="eyebrow">趋势分析</span>
-        <h2>精准推荐、自由提问、工作能力参考。</h2>
+        <h2>精准推荐与工作能力参考。</h2>
         <p>Vibe Coding 开源项目热度 · 每周更新 · AI 辅助编程趋势洞察</p>
       </div>
     </div>
 
     <el-tabs v-model="trendTab" class="trend-tabs">
       <el-tab-pane label="精准推荐" name="v2" />
-      <el-tab-pane label="自由提问" name="v1" />
       <el-tab-pane label="工作能力参考" name="jobs" />
     </el-tabs>
 
@@ -309,32 +308,7 @@
       <div class="rec-section-title">为你推荐</div>
       <el-row :gutter="12">
         <el-col :span="8" v-for="(r, i) in v2Result.recommendations" :key="i">
-          <div class="rec-card">
-            <div class="rec-header">
-              <div class="rec-name-area">
-                <span class="rec-num">#{{ i+1 }}</span>
-                <span class="rec-name">{{ r.name }}</span>
-              </div>
-              <div class="rec-meta-area">
-                <el-tag :type="(r.difficulty==='入门'?'success':r.difficulty==='中等'?'warning':'danger')||'info'" size="small" effect="dark">{{ r.difficulty || '未知' }}</el-tag>
-                <span class="rec-score">{{ r.score }}分</span>
-              </div>
-            </div>
-            <p class="rec-desc">{{ r.description }}</p>
-            <div class="rec-details">
-              <p v-if="r.vibeCodingReason" class="rec-vibe-box"><b>Vibe Coding：</b>{{ r.vibeCodingReason }}</p>
-              <p class="rec-bullet"><span class="bullet-orange">●</span> <b>推荐：</b>{{ r.recommendReason }}</p>
-              <p class="rec-bullet"><span class="bullet-amber">●</span> <b>前置：</b>{{ r.prerequisites }}</p>
-              <p v-if="r.references?.length" class="rec-bullet">
-                <span class="bullet-green">●</span> <b>参考：</b>
-                <span v-for="(ref,j) in r.references" :key="j">
-                  <template v-if="ref.url"><a :href="ref.url" target="_blank" class="ref-link">{{ ref.name }}</a></template>
-                  <template v-else>{{ ref }}</template><span v-if="j < r.references.length-1">、</span>
-                </span>
-              </p>
-            </div>
-            <button class="import-plan-btn" @click="importToPlan(r)">一键导入方案设计</button>
-          </div>
+          <ProjectRecommendationCard :project="r" :index="i" @import="importToPlan(r)" />
         </el-col>
       </el-row>
 
@@ -351,18 +325,6 @@
         <div v-if="v2Result.learning.tips" class="learning-tips">{{ v2Result.learning.tips }}</div>
       </div>
     </div>
-
-    <!-- V1 自由提问 -->
-    <div v-if="trendTab==='v1'" class="v1-section">
-      <el-input v-model="aiQuestion" placeholder="自由提问，基于知识库和GitHub数据回答..." size="small" @keyup.enter="askAI">
-        <template #append><el-button :loading="aiLoading" @click="askAI" class="send-btn">发送</el-button></template>
-      </el-input>
-      <div v-if="aiReply" class="v1-reply" v-safe-html="aiReplyHtml"></div>
-      <div v-if="aiError" class="v1-error">{{ aiError }}</div>
-      <p v-if="aiReply" class="v1-disclaimer">
-        以上分析由 AI 生成，仅供参考。每次提问消耗 {{ trendV1Cost }} <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" />
-      </p>
-    </div>
   </div>
 </template>
 
@@ -374,6 +336,7 @@ import { marked } from 'marked'
 import PageTour from '../components/PageTour.vue'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import TrendPersonaAnalysisCard from '../components/TrendPersonaAnalysisCard.vue'
+import ProjectRecommendationCard from '../components/ProjectRecommendationCard.vue'
 import TrendHistoryPopover from '../components/TrendHistoryPopover.vue'
 import request from '../api/request'
 import { LEGAL_CONTACT } from '../content/legal'
@@ -401,8 +364,7 @@ if (route.query.preset === 'beginner') profile.preferBeginnerProjects = true
 if (route.query.preset === 'career') profile.preferCareerProjects = true
 let refreshHistory
 const analysis = useTrendAnalysis(profile, () => refreshHistory?.())
-const { analyzing, v2Result, v2Error, juicing, squeezeText, trendV1Cost, trendV2Cost,
-  aiQuestion, aiReply, aiReplyHtml, aiLoading, aiError, askAI } = analysis
+const { analyzing, v2Result, v2Error, juicing, squeezeText, trendV2Cost } = analysis
 const historyFeature = useTrendHistory({ profile, result: v2Result, currentStep })
 const { history, hasAppToken, loadHistoryFromDB, delHistory, clearHistory, loadHistory } = historyFeature
 refreshHistory = loadHistoryFromDB
@@ -410,10 +372,6 @@ const chartFeature = useTrendChart()
 const { chartRef, graphLoading, viewMode, graphData, insights, selectedNode, selectedEdge,
   selectedDelta, detailTab, insightCards, loadGraph, onViewChange, formatNum } = chartFeature
 
-const aiEndpoint = ref('https://api.openai.com/v1')
-const aiModel = ref('gpt-4o')
-const aiKey = ref('')
-const testLoading = ref(false)
 const jobDirections = ref([])
 const jobDirection = ref('')
 const jobList = ref([])
@@ -456,25 +414,11 @@ const tourSteps = [
   { selector: '.card-header-row .el-radio-group', text: '点这里可以切换本周和上周的数据，对比两个时段的热度变化，看哪个方向在上升～', expression: 'wink' },
   { selector: '.detail-card', text: '点击全景图里的圆圈后，这里会显示那个 Topic 的详细信息：Top 仓库、语言分布、趋势洞察。', expression: 'smile' },
   { selector: '.insights-result-card', text: 'AI 分析完成后，这里会出现发展趋势、前景预测和热门仓库推荐～ 往下滚动查看完整结果。', expression: 'sparkle' },
-  { selector: '.trend-tabs', text: '三个 Tab 切换模式：精准推荐看图谱+填表单，自由提问直接问 AI，工作能力看岗位要求。', expression: 'smile' },
+  { selector: '.trend-tabs', text: '精准推荐看图谱与条件，工作能力看岗位要求；自由对话请使用左侧项目客服。', expression: 'smile' },
   { selector: '[data-tour="form-panel"]', text: '这是智能分析面板！选好方向、目的、编程基础和时间投入，点「开始分析」AI 会给你一份专属的 Vibe Coding 项目推荐～', expression: 'sparkle' },
 ]
 
-const testConnection = async () => {
-  if (!aiEndpoint.value || !aiKey.value) { aiError.value = '请填写 Endpoint 和 API Key'; return }
-  testLoading.value = true
-  aiError.value = ''
-  try {
-    const response = await request.post('/app/trend/analyze', { question: '回复OK' }, { timeout: 15000 })
-    if (response.code === 1) ElMessage.success('连接成功！模型可用')
-    else aiError.value = response.msg || '连接失败'
-  } catch { aiError.value = '请求超时或网络不通，请检查 Endpoint' }
-  finally { testLoading.value = false }
-}
-const compareTopics = edge => {
-  aiQuestion.value = `请对比分析 ${edge.sourceName} 和 ${edge.targetName} 两个方向的趋势和机会`
-  document.querySelector('.el-card:last-child')?.scrollIntoView({ behavior: 'smooth' })
-}
+const compareTopics = edge => { sessionStorage.setItem('customerDraft', '请对比分析 ' + edge.sourceName + ' 和 ' + edge.targetName + ' 两个方向的趋势和机会'); router.push('/customer') }
 const importToPlan = recommendation => {
   sessionStorage.setItem('plan_import', `项目名称：${recommendation.name}\n项目介绍：${recommendation.description}\n难度：${recommendation.difficulty}\n前置知识：${recommendation.prerequisites}\nVibeCoding适合度：${recommendation.vibeCodingReason || ''}\n推荐理由：${recommendation.recommendReason}`)
   router.push('/plan')

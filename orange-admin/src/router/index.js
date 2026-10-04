@@ -19,6 +19,7 @@ const routes = [
       { path: 'users', name: 'Users', component: () => import('../views/Users.vue'), meta: { title: '用户管理' } },
       { path: 'orders', name: 'Orders', component: () => import('../views/Orders.vue'), meta: { title: '订单管理' } },
       { path: 'knowledge', name: 'Knowledge', component: () => import('../views/Knowledge.vue'), meta: { title: '知识库' } },
+      { path: 'rag-lab', name: 'RagLab', component: () => import('../views/RagLab.vue'), meta: { title: 'RAG 对比实验室' } },
       { path: 'redemption', name: 'Redemption', component: () => import('../views/Redemption.vue'), meta: { title: '充值码管理' } },
       { path: 'job-audit', name: 'JobAudit', component: () => import('../views/JobAudit.vue'), meta: { title: '投稿审核' } },
       { path: 'ai-config', name: 'AIConfig', component: () => import('../views/AIConfig.vue'), meta: { title: 'AI 调用设置' } },

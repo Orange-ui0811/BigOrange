@@ -1,5 +1,8 @@
 package com.orangejd.server.service;
 
+import org.springframework.stereotype.Service;
+import static com.orangejd.server.service.BeginnerProjectServiceValues.*;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,18 +16,14 @@ import com.orangejd.server.foundation.external.AiRuntimeConfigService;
 import com.orangejd.server.foundation.external.ExternalAiClient;
 import com.orangejd.server.foundation.external.TranslationCacheMapper;
 import com.orangejd.server.mapper.BeginnerProjectMapper;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
-import java.util.HexFormat;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -261,6 +260,25 @@ public class BeginnerProjectService {
         return projects.stream().map(this::view).toList();
     }
 
+    /** Strict project-recommendation path: never falls back to an unrelated popular project. */
+    public List<BeginnerProjectView> recommendVerified(List<String> topics, List<String> languages, int limit) {
+        int safeLimit = Math.max(1, Math.min(limit, 5));
+        List<BeginnerProject> projects = mapper.selectAllPublished();
+        if (projects == null) return List.of();
+        return projects.stream()
+                .map(project -> Map.entry(project, TrendCandidateMatcher.score(topics, languages,
+                        String.join(" ", nullToEmpty(project.getFullName()), nullToEmpty(project.getDescriptionZh()),
+                                nullToEmpty(project.getDescriptionOriginal()), nullToEmpty(project.getWhatIsIt()),
+                                nullToEmpty(project.getTechStack()), nullToEmpty(project.getTopicsJson())),
+                        project.getPrimaryLanguage())))
+                .filter(entry -> entry.getValue() >= 0)
+                .sorted(Comparator.<Map.Entry<BeginnerProject, Integer>>comparingInt(Map.Entry::getValue).reversed()
+                        .thenComparingInt(entry -> -value(entry.getKey().getEditorialScore()))
+                        .thenComparingInt(entry -> -value(entry.getKey().getBeginnerScore()))
+                        .thenComparing(entry -> entry.getKey().getFullName()))
+                .limit(safeLimit).map(entry -> view(entry.getKey())).toList();
+    }
+
     private BeginnerProject toEntity(BeginnerGithubGateway.RepositorySnapshot value,
                                      BeginnerProjectScorer.ScoreResult score, Long runId) {
         BeginnerProject project = new BeginnerProject();
@@ -271,7 +289,7 @@ public class BeginnerProjectService {
         project.setDescriptionOriginal(value.description());
         project.setReadmeExcerpt(value.readmeExcerpt());
         project.setPrimaryLanguage(value.primaryLanguage());
-        project.setTopicsJson(json(value.topics()));
+        project.setTopicsJson(json(objectMapper, value.topics()));
         project.setTechStack(value.techStack());
         project.setPackageManager(value.packageManager());
         project.setNodeVersion(value.nodeVersion());
@@ -294,7 +312,7 @@ public class BeginnerProjectService {
         project.setBeginnerScore(score.score());
         project.setScoreVersion(BeginnerProjectScorer.SCORE_VERSION);
         project.setStatus(score.status());
-        project.setContentHash(sha256(json(value)));
+        project.setContentHash(sha256(json(objectMapper, value)));
         project.setGithubCreatedAt(value.githubCreatedAt());
         project.setGithubUpdatedAt(value.githubUpdatedAt());
         project.setSourceRunId(runId);
@@ -326,7 +344,7 @@ public class BeginnerProjectService {
 
     private String enrichmentInput(List<BeginnerProject> projects) {
         List<Map<String, Object>> input = projects.stream().map(this::enrichmentItem).toList();
-        return json(input);
+        return json(objectMapper, input);
     }
 
     private Map<String, Object> enrichmentItem(BeginnerProject project) {
@@ -363,14 +381,6 @@ public class BeginnerProjectService {
                 Boolean.TRUE.equals(project.getRequiresNativeBuild()), text);
     }
 
-    private int value(Integer value) {
-        return value == null ? 0 : value;
-    }
-
-    private String nullToEmpty(String value) {
-        return value == null ? "" : value;
-    }
-
     private BeginnerProjectView view(BeginnerProject project) {
         try {
             List<String> topics = objectMapper.readValue(project.getTopicsJson() == null ? "[]" : project.getTopicsJson(),
@@ -383,27 +393,6 @@ public class BeginnerProjectService {
 
     private LocalDate currentWeekStart() {
         return LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-    }
-
-    private List<String> cleanList(List<String> values) {
-        if (values == null) return List.of();
-        return values.stream().filter(StringUtils::hasText).map(String::trim).distinct().limit(20).toList();
-    }
-
-    private String clean(String value) { return StringUtils.hasText(value) ? value.trim() : null; }
-    private String abbreviate(String value, int max) {
-        if (value == null) return null;
-        return value.length() <= max ? value : value.substring(0, max);
-    }
-    private String json(Object value) {
-        try { return objectMapper.writeValueAsString(value); }
-        catch (Exception e) { throw new IllegalArgumentException("项目数据无法序列化", e); }
-    }
-    private String sha256(String value) {
-        try {
-            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
-                    .digest(value.getBytes(StandardCharsets.UTF_8)));
-        } catch (Exception e) { throw new IllegalStateException("SHA-256 unavailable", e); }
     }
 
     private int rating(JsonNode item, String field) { return Math.max(1, Math.min(5, item.path(field).asInt(1))); }

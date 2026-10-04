@@ -13,13 +13,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ProjectKnowledgeDocumentWriter {
     private static final Set<String> SOURCES = Set.of("BEGINNER_PROJECT", "CAREER_PROJECT");
-    private static final int CHUNK_SIZE = 500;
-    private static final int OVERLAP = 50;
-    private static final int MAX_CHUNKS = 100;
+    private static final Pattern REPOSITORY_URL = Pattern.compile(
+            "https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", Pattern.CASE_INSENSITIVE);
     private final KnowledgeDocumentMapper mapper;
     private final VectorStore vectorStore;
 
@@ -90,25 +91,12 @@ public class ProjectKnowledgeDocumentWriter {
     }
 
     private List<String> chunks(String content) {
-        List<String> values = new ArrayList<>();
-        int start = 0;
-        while (start < content.length() && values.size() < MAX_CHUNKS) {
-            int end = Math.min(start + CHUNK_SIZE, content.length());
-            if (end < content.length()) {
-                int newline = content.lastIndexOf('\n', end);
-                if (newline > start + CHUNK_SIZE / 2) end = newline;
-            }
-            String chunk = content.substring(start, end).trim();
-            String plain = chunk.replaceAll("\\s+", "").replaceAll("[#*\\-`>|]+", "");
-            if (plain.length() >= 10) values.add(chunk.length() > 400 ? chunk.substring(0, 400) : chunk);
-            if (end >= content.length()) break;
-            start = Math.max(end - OVERLAP, start + 1);
-        }
-        return values;
+        return KnowledgeChunker.split(content);
     }
 
     private List<Document> vectorDocuments(KnowledgeDocument entity, List<String> chunks) {
         List<Document> values = new ArrayList<>(chunks.size());
+        String repositoryUrl = repositoryUrl(entity.getContent(), entity.getTitle());
         for (int index = 0; index < chunks.size(); index++) {
             Map<String, Object> metadata = new LinkedHashMap<>();
             metadata.put("docId", entity.getId().toString());
@@ -116,9 +104,19 @@ public class ProjectKnowledgeDocumentWriter {
             metadata.put("chunkIndex", index);
             metadata.put("source", entity.getSource());
             enrichMetadata(metadata, entity);
+            if (repositoryUrl != null) metadata.put("repositoryUrl", repositoryUrl);
             values.add(new Document("knowledge-" + entity.getId() + '-' + index, chunks.get(index), metadata));
         }
         return values;
+    }
+
+    private String repositoryUrl(String content, String title) {
+        Matcher matcher = REPOSITORY_URL.matcher(content == null ? "" : content);
+        if (matcher.find()) return matcher.group().replaceAll("/+$", "").replaceAll("\\.git$", "");
+        if (title != null && title.matches("[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:\\|.*)?")) {
+            return "https://github.com/" + title.split("\\|", 2)[0];
+        }
+        return null;
     }
 
     private KnowledgeDocumentVO view(KnowledgeDocument entity) {

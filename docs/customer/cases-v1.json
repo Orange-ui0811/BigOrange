@@ -1,0 +1,934 @@
+{
+  "version": "customer-cases-v1",
+  "caseCount": 60,
+  "developmentCount": 40,
+  "acceptanceCount": 20,
+  "notes": "Rubric only. No generated expected facts or verdicts. Acceptance cases must remain separate from tuning.",
+  "cases": [
+    {
+      "id": "Q01",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "知识库怎么保证答案有来源？"
+      ],
+      "expected": "平台规则没有入库时拒答，不把常识当平台事实",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q02",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "怎样查看项目的部署依赖？"
+      ],
+      "expected": "说明有证据的依赖，资料缺失明确未知",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q03",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "Java项目为什么可能需要数据库？"
+      ],
+      "expected": "区分一般知识与具体仓库事实",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q04",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "这个平台支持游客免费使用客服吗？"
+      ],
+      "expected": "没有平台FAQ证据不承诺游客政策",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q05",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "客服推荐的项目怎么验证是真实仓库？"
+      ],
+      "expected": "平台机制须有FAQ证据",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q06",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "README里的环境变量有什么用？"
+      ],
+      "expected": "逐条回答绑定实际证据",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q07",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "找包含Docker部署说明的项目资料"
+      ],
+      "expected": "依赖说明不能冒充项目可推荐状态",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q08",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "如何确认项目需要API密钥？"
+      ],
+      "expected": "未知不能推断为不需要",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q09",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "项目许可证允许商用吗？"
+      ],
+      "expected": "必须有许可证内容，不能凭仓库名称推断",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q10",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "Redis和MySQL在项目里分别做什么？"
+      ],
+      "expected": "涉及具体项目必须有相关章节",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q11",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "数据库初始化步骤是什么？"
+      ],
+      "expected": "说明项目身份不足时澄清或拒答",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q12",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "项目的最低Java版本是多少？"
+      ],
+      "expected": "版本数字必须由证据支持",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q13",
+      "category": "KNOWLEDGE",
+      "split": "development",
+      "messages": [
+        "如何更新项目依赖？"
+      ],
+      "expected": "建议与具体项目事实明确区分",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q14",
+      "category": "KNOWLEDGE",
+      "split": "acceptance",
+      "messages": [
+        "这个平台的退款规则是什么？"
+      ],
+      "expected": "无平台政策证据不得编造",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q15",
+      "category": "KNOWLEDGE",
+      "split": "acceptance",
+      "messages": [
+        "README后半部分的部署注意事项有哪些？"
+      ],
+      "expected": "引用实际完整文档章节，不编造位置",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q16",
+      "category": "KNOWLEDGE",
+      "split": "acceptance",
+      "messages": [
+        "这个项目可以不用Docker直接部署吗？"
+      ],
+      "expected": "没有项目指代或替代部署证据不能肯定",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q17",
+      "category": "KNOWLEDGE",
+      "split": "acceptance",
+      "messages": [
+        "英文README中的prerequisites是什么意思？"
+      ],
+      "expected": "中文解释引用相应原文或承认知识不足",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q18",
+      "category": "KNOWLEDGE",
+      "split": "acceptance",
+      "messages": [
+        "这个平台的客服会自动修改我的长期画像吗？"
+      ],
+      "expected": "平台FAQ未入库时不得凭内部提示宣称平台事实",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q19",
+      "category": "KNOWLEDGE",
+      "split": "acceptance",
+      "messages": [
+        "项目演示失败通常有哪些排查步骤？"
+      ],
+      "expected": "不能虚构具体仓库的步骤或端口",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "Q20",
+      "category": "KNOWLEDGE",
+      "split": "acceptance",
+      "messages": [
+        "我想知道项目的资源限制和已知风险"
+      ],
+      "expected": "提供有出处的限制，缺失字段明确未知",
+      "checks": [
+        "事实支持",
+        "原文引用存在性",
+        "中文解释准确性",
+        "证据不足拒答"
+      ]
+    },
+    {
+      "id": "M01",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "推荐一个项目",
+        "我刚学Java",
+        "主要为了学习"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M02",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想找求职项目",
+        "Java后端，刚入门"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M03",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "换成Python"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M04",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "不要Docker"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M05",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "两周内完成"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M06",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "每天两小时"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M07",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "不要数据库"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M08",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "不使用API密钥"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M09",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Python，我是新手",
+        "比较前两个"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M10",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习TypeScript，我是新手",
+        "第二个怎么部署"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M11",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "README是什么",
+        "继续推荐"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M12",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想学习Java，我是新手",
+        "不要Docker",
+        "取消Docker限制"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M13",
+      "category": "MULTI_TURN",
+      "split": "development",
+      "messages": [
+        "我想求职，我是新手，Java后端",
+        "换一个同方向的项目"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M14",
+      "category": "MULTI_TURN",
+      "split": "acceptance",
+      "messages": [
+        "我想学习Java，我是新手",
+        "只要Java，不接受JavaScript"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M15",
+      "category": "MULTI_TURN",
+      "split": "acceptance",
+      "messages": [
+        "我想学习Java，我是新手",
+        "我要不使用数据库、Docker和密钥的项目"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M16",
+      "category": "MULTI_TURN",
+      "split": "acceptance",
+      "messages": [
+        "我想找求职项目，Java，新手",
+        "改成学习用途"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M17",
+      "category": "MULTI_TURN",
+      "split": "acceptance",
+      "messages": [
+        "我想学习Python，我是新手",
+        "换成TypeScript",
+        "我刚才指定的语言是什么"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M18",
+      "category": "MULTI_TURN",
+      "split": "acceptance",
+      "messages": [
+        "我想学习TypeScript，我是新手",
+        "比较第一和第三个"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M19",
+      "category": "MULTI_TURN",
+      "split": "acceptance",
+      "messages": [
+        "第二个怎么部署",
+        "我还没选项目，先找适合学习的Java新手项目"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "M20",
+      "category": "MULTI_TURN",
+      "split": "acceptance",
+      "messages": [
+        "我想学习Java，我是新手",
+        "改成一天内完成",
+        "找不到就保持条件，不要偷偷放宽"
+      ],
+      "expected": "每轮最多追问一个主要问题；修改条件生效；不静默放宽；指代绑定历史候选；没有候选时澄清",
+      "checks": [
+        "状态保持",
+        "显式条件优先",
+        "项目真实性",
+        "硬条件满足",
+        "可追溯引用"
+      ]
+    },
+    {
+      "id": "E01",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "NO_AUTH",
+      "title": "未登录读取会话",
+      "expected": "401且不创建运行",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E02",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "NOT_WHITELISTED",
+      "title": "非白名单访问",
+      "expected": "403且不调用模型",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E03",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "FOREIGN_SESSION",
+      "title": "读取他人会话",
+      "expected": "404且无会话内容",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E04",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "FOREIGN_RUN",
+      "title": "读取他人运行",
+      "expected": "404且无运行内容",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E05",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "DUPLICATE_REQUEST",
+      "title": "相同请求重放",
+      "expected": "同一运行ID，只有一条用户消息",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E06",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "REQUEST_CONFLICT",
+      "title": "相同ID不同内容",
+      "expected": "409且不二次执行",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E07",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "OWNER_CONCURRENCY",
+      "title": "同账号并发",
+      "expected": "只有一个运行可执行",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E08",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "GLOBAL_CONCURRENCY",
+      "title": "全局第三个并发",
+      "expected": "第三个不执行",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E09",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "CANCEL_LATE_RESULT",
+      "title": "取消后迟到回答",
+      "expected": "终态不被覆盖",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E10",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "DISCONNECT_RECOVERY",
+      "title": "断线恢复",
+      "expected": "查询原运行，不重新提交",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E11",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "PROVIDER_AUTH",
+      "title": "供应商401",
+      "expected": "不重试，记录未知费用",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E12",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "PROVIDER_RETRY",
+      "title": "供应商503",
+      "expected": "最多重试一次且记录全部尝试",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E13",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "RESTART",
+      "title": "服务重启",
+      "expected": "未完成运行变成中断，不自动重放",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E14",
+      "category": "BOUNDARY",
+      "split": "development",
+      "scenario": "TOOL_LIMIT",
+      "title": "第六次工具调用",
+      "expected": "执行次数不超过5",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E15",
+      "category": "BOUNDARY",
+      "split": "acceptance",
+      "scenario": "EMPTY_INDEX",
+      "title": "空知识库",
+      "expected": "拒答或明确检索失败，不回退A",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E16",
+      "category": "BOUNDARY",
+      "split": "acceptance",
+      "scenario": "INDEX_POLICY",
+      "title": "B索引模型不匹配",
+      "expected": "拒绝错误索引，不使用small模型",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E17",
+      "category": "BOUNDARY",
+      "split": "acceptance",
+      "scenario": "FORGED_IMPORT",
+      "title": "伪造推荐项目ID导入",
+      "expected": "拒绝未出现在本人运行中的ID",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E18",
+      "category": "BOUNDARY",
+      "split": "acceptance",
+      "scenario": "DOWNLISTED_IMPORT",
+      "title": "下架后旧推荐导入",
+      "expected": "拒绝已下架项目",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E19",
+      "category": "BOUNDARY",
+      "split": "acceptance",
+      "scenario": "STALE_EVIDENCE_IMPORT",
+      "title": "证据已更新后旧推荐导入",
+      "expected": "拒绝旧证据版本",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    },
+    {
+      "id": "E20",
+      "category": "BOUNDARY",
+      "split": "acceptance",
+      "scenario": "LONG_HISTORY",
+      "title": "长对话条件保持",
+      "expected": "关键硬条件保持，摘要可追溯",
+      "checks": [
+        "服务端限制",
+        "无重复执行",
+        "无越权",
+        "失败费用可见"
+      ]
+    }
+  ]
+}

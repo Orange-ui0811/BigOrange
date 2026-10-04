@@ -1,1216 +1,805 @@
-# OrangeJD 系统架构设计说明书
+# OrangeVC 系统架构设计说明书
 
-> **版本**: v1.3 | **日期**: 2026-07-22 | **状态**: 持续演进
->
-> **适用范围**: 团队技术评审、新成员入职、项目落地交付、运维部署参考
-
----
-
-## 1. 文档摘要
-
-OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品交易、项目实践与职业匹配平台**。平台连接 AI 技能持有者与项目需求方，并通过 GitHub 榜单、开源 Issue 发现、AI 方案设计和岗位能力映射，帮助用户完成“做自己的项目”与“参与开源项目”两类实践路径。
-
-**技术定位**：单体 Spring Boot 应用 + 双前端门户，集成 Spring AI 向量检索（RAG）与 LLM 调用链，面向中小规模并发场景（设计目标 500 QPS）。
-
-**核心数据**：
-
-| 指标 | 数值 |
-|------|------|
-| 初始化数据表 | 37 张（MySQL 8.0 InnoDB，Flyway 最新 V13） |
-| 控制器 | 46 个 `@RequestMapping` 控制器，含用户端、管理端与设备 Agent 三类入口 |
-| Maven 模块 | 3 个（common / pojo / server） |
-| 前端入口 | 2 个（用户端 orange-web / 管理端 orange-admin） |
-| AI 模型 | DeepSeek V4 Pro + bge-small-zh-v1.5 Embedding |
-| 外部集成 | GitHub API / Gitee AI / 飞书 / Epay / QQ 邮箱 / 小智 MCP |
+> **文档版本**：v2.0<br>
+> **代码基线**：Git V3，提交 `68913b5`<br>
+> **更新日期**：2026-08-13<br>
+> **状态**：与当前代码同步，持续演进<br>
+> **说明**：外部品牌统一使用 **OrangeVC**；`OrangeJD` 仅作为历史仓库名、Java 包名、数据库兼容名、systemd 服务名及服务器目录名保留。
 
 ---
 
-## 2. 业务需求与系统设计目标
+## 1. 文档目的与事实边界
 
-### 2.1 业务痛点
+本文档用于技术评审、新成员入职、开发维护、生产发布、故障排查和后续架构治理。内容以当前仓库代码、Flyway 迁移、构建脚本和部署脚本为准，不以历史方案或口头规划替代事实。
 
-1. **AI 开发者缺乏作品展示渠道**：GitHub 只能展示代码，无法展示商业价值；自由职业平台缺乏 AI 技能标签
-2. **需求方找人不精准**：传统外包平台按价格排序，缺少 AI 领域技术匹配能力
-3. **技术趋势信息割裂**：GitHub Trending、招聘 JD、技术文章分散，缺少一站式趋势分析
-4. **AI 实习生求职缺少参照系**：不知道自己的技能与真实岗位的差距，缺少学习路径指引
+本文档中的数字是 2026-08-13 基线快照：
 
-### 2.2 功能性需求
+| 指标 | 当前值 | 依据 |
+|---|---:|---|
+| Maven 模块 | 3 | `orange-common`、`orange-pojo`、`orange-server` |
+| 后端 Controller | 59 | 25 个管理端、30 个用户端、2 个 Agent、2 个公共 Controller |
+| HTTP 方法映射 | 286 | Controller 中的 Get/Post/Put/Delete/Patch Mapping 注解 |
+| Mapper 接口 | 46 | `*Mapper.java` |
+| Service 相关类 | 108 | `*Service*.java`，包含接口、实现和内部应用服务 |
+| Flyway 迁移 | V1-V37，共 37 个文件 | `db/migration` |
+| 迁移中创建的业务表 | 60 | 对全部迁移中的 `CREATE TABLE` 去重统计 |
+| 用户端页面 | 36 个 Vue View，39 条路由 | `orange-web` |
+| 管理端页面 | 20 个 Vue View，20 条路由 | `orange-admin` |
+| 当前本地验证 | 后端 238 项、用户端 133 项、管理端 3 项测试通过 | 2026-08-13 本地验证 |
 
-| 模块 | 核心功能 |
-|------|---------|
-| **账号体系** | 邮箱注册/登录，双通道 JWT（用户端/管理端），个人资料管理 |
-| **内容发布** | 作品发布（含富文本详情/封面图/售卖选项），需求发布，草稿→提交审核→通过/拒绝 |
-| **内容发现** | 分类浏览、收藏、评论、浏览历史、公开作品页 |
-| **沟通协商** | 一对一私聊（WebSocket + HTTP 混合）、系统通知 |
-| **交易闭环** | 报价→订单→支付阶段（定金/尾款）→交付记录 |
-| **管理后台** | 分类 CRUD、作品/需求审核、用户管理、报表统计、订单管理 |
-| **GitHub 榜单** | 15 个 Topic 分类，按周刷新并缓存快照，自动采集 README |
-| **开源贡献** | 发现与核验 Issue、AI 候选匹配、岗位能力映射、贡献指南；默认每两天完整刷新 |
-| **AI 趋势分析** | 知识图谱展示 + LLM 深度分析 + RAG 上下文增强 |
-| **AI 自动审核** | DeepSeek V4 Pro 多模态审核（文本+图片），审核开关可配置 |
-| **RAG 知识库** | 文档上传/切片/向量化，GitHub README 自动采集，岗位 JD 向量库 |
-| **岗位招聘** | 用户投稿→管理员审核→向量化入库→AI 岗位匹配（方案设计→推荐岗位） |
-| **方案设计** | 六阶段 AI 项目规划（想法→需求理解→成功标准→约束风险→任务计划→岗位匹配） |
-| **配额系统** | 充值码/Epay 支付/消费预扣+退款/新用户赠送/审核奖励 |
-| **StackChan 语音接入** | 官方固件不刷机；Windows Bridge 经小智 MCP 调用受限的 OrangeVC 动作 |
-
-### 2.3 非功能需求
-
-| 维度 | 要求 | 实现方式 |
-|------|------|---------|
-| **性能** | 核心 API < 500ms P95，AI 调用 < 120s | RestTemplate 连接池 + 异步审核 |
-| **可用性** | 99.5%（允许非核心 AI 功能降级） | `@Autowired(required=false)` 降级注入 |
-| **安全性** | JWT 双通道 + BCrypt + SSRF 防护 + Token 黑名单 | Interceptor + UrlValidator |
-| **可扩展性** | 分类动态管理，AI 模型配置外部化 | Redis 动态配置 + YAML 多环境 |
-| **可观测性** | 全链路 RequestID + 管理审计日志 + 健康检查 | RequestIdInterceptor + AOP + /health |
-| **数据一致性** | 配额消费原子性 | FOR UPDATE 行锁 + 幂等 requestId |
+以上数量会随代码变化，更新本文档时必须重新统计。生产真实版本还应同时核对 Git SHA、发布包 SHA-256、Flyway 历史和线上健康检查。
 
 ---
 
-## 3. 总体架构设计
+## 2. 产品与业务边界
 
-### 3.1 分层架构
+OrangeVC 是面向 Vibe Coding 用户、独立开发者、学习者、求职者和项目需求方的作品展示、项目实践、开源参与、职业成长与 AI 辅助平台。
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    接入层 (Access Layer)                  │
-│  Nginx 反向代理 → CORS 过滤器 → RequestID 拦截器          │
-│  → JWT Admin 拦截器 ( /admin/** )                        │
-│  → JWT App 拦截器   ( /app/** )                          │
-│  → Device Token 拦截器 ( /agent/** )                    │
-├─────────────────────────────────────────────────────────┤
-│                    业务层 (Business Layer)                │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐               │
-│  │ 内容模块  │  │ 交易模块  │  │ AI 模块   │               │
-│  │ Work     │  │ Quote    │  │ Trend    │               │
-│  │ Require  │  │ Order    │  │ Audit   │               │
-│  │ Comment  │  │ Payment  │  │ Plan    │               │
-│  │ Favorite │  │ Delivery │  │ Job/Open│               │
-│  └──────────┘  └──────────┘  └──────────┘               │
-├─────────────────────────────────────────────────────────┤
-│                   数据层 (Data Layer)                     │
-│  RDS MySQL 8.0 (MyBatis) │ Redis 8 (Jedis + RediSearch)  │
-│  37 张初始化表            │ Cache + Vector + Token Blacklist│
-├─────────────────────────────────────────────────────────┤
-│                   外部集成 (External)                     │
-│ Gitee AI │ GitHub API │ 飞书 │ Epay │ QQ邮箱 │ 小智 MCP │
-└─────────────────────────────────────────────────────────┘
-```
+当前主要业务域包括：
 
-### 3.2 系统架构总图
+- 账号、注册登录、个人主页与用户资料；
+- 作品、需求、比赛、岗位的投稿、编辑、审核和公开展示；
+- 评论、收藏、浏览历史、通知、私聊和 WebSocket 消息；
+- 报价、订单、支付阶段、交付、充值码和 Epay；
+- 配额定价、幂等扣减、退款、奖励和流水；
+- GitHub 周榜、本周新增、本周涨星、新手推荐榜和职业成长榜；
+- 开源 Issue 抓取、翻译、核验、匹配和贡献指南；
+- 趋势分析、方案生成、上线体检、岗位匹配和 AI 审核；
+- 通用知识库、项目知识索引、README 和岗位文档向量检索；
+- 橙子画像工坊、画像素材、装备、五官/手部/饰品 DIY 与形象码；
+- 小智/StackChan 设备连接器及受控 Agent 动作。
+
+系统当前采用模块化单体，而不是微服务。目标是在保持部署简单和事务一致性的同时，通过代码分层、持久化任务、幂等账本和自动化测试降低演进风险。
+
+---
+
+## 3. 总体架构
+
+### 3.1 运行时拓扑
 
 ```mermaid
-graph TB
-    subgraph Client["客户端"]
-        Web["用户端 Vue 3<br/>orange-web"]
-        Admin["管理端 Vue 3<br/>orange-admin"]
-    end
+flowchart TB
+    Browser["浏览器"] --> Nginx["Nginx / HTTPS / 静态资源 / 限流"]
+    Nginx --> Web["orange-web 用户端 SPA"]
+    Nginx --> Admin["orange-admin 管理端 SPA"]
+    Nginx --> App["orange-server Spring Boot 3.3.5"]
+    Nginx --> WS["WebSocket /ws/"]
 
-    subgraph Gateway["接入层"]
-        Nginx["Nginx 反向代理<br/>静态资源 + API 转发"]
-    end
+    App --> MySQL["本机 MySQL 8.0\n127.0.0.1:3306"]
+    App --> Redis["Redis + RediSearch\n缓存 / 租约 / 向量 / 配置"]
+    App --> OSS["阿里云 OSS 私有桶\n用户媒体"]
 
-    subgraph Server["Spring Boot 3.3.5<br/>orange-server"]
-        direction TB
+    App --> AI["OpenAI 兼容模型供应商\nKey 池 + DeepSeek 兜底"]
+    App --> GitHub["GitHub REST API"]
+    App --> SMTP["SMTP 邮箱验证码"]
+    App --> Turnstile["Cloudflare Turnstile"]
+    App --> Feishu["飞书 Webhook"]
+    App --> Epay["Epay 支付网关"]
 
-        subgraph Interceptor["拦截器链"]
-            CORS["CORS 跨域"]
-            ReqID["RequestIdInterceptor"]
-            JWT_A["JwtTokenAdminInterceptor<br/>path: /admin/**"]
-            JWT_U["JwtTokenAppInterceptor<br/>path: /app/**"]
-        end
-
-        subgraph Controller["控制器层 43+ controllers"]
-            AdminAPI["管理端 API"]
-            AppAPI["用户端 API"]
-        end
-
-        subgraph Service["服务层"]
-            BizSvc["业务服务<br/>Work/Requirement/Comment/<br/>Favorite/Order/Quote..."]
-            AISvc["AI 服务<br/>Trend/Audit/Plan/Job/<br/>OpenSource"]
-            InfraSvc["基础设施<br/>Mail/Epay/Upload/Quota"]
-        end
-
-        subgraph DataAccess["数据访问层"]
-            MyBatis["MyBatis 3.0.3<br/>15+ Mapper XML"]
-            SpringAI["Spring AI 1.0.0<br/>VectorStore + Embedding"]
-        end
-    end
-
-    subgraph Storage["存储层"]
-        MySQL["RDS MySQL 8.0<br/>34 initialized tables"]
-        Redis["Redis 8 + RediSearch<br/>Cache | Vector | Token"]
-        OSS["阿里云 OSS<br/>文件存储"]
-    end
-
-    subgraph External["外部服务"]
-        GiteeAI["Gitee AI<br/>LLM + Embedding"]
-        GitHub["GitHub API<br/>榜单 + README + Issue"]
-        Feishu["飞书 Bot<br/>审核通知"]
-        Epay["易支付<br/>在线充值"]
-        SMTP["QQ 邮箱 SMTP<br/>验证码"]
-    end
-
-    Web --> Nginx
-    Admin --> Nginx
-    Nginx --> Interceptor
-    Interceptor --> Controller
-    Controller --> Service
-    Service --> DataAccess
-    DataAccess --> MySQL
-    DataAccess --> Redis
-    DataAccess --> OSS
-    AISvc --> GiteeAI
-    AISvc --> GitHub
-    AISvc --> Feishu
-    AISvc --> Epay
-    InfraSvc --> SMTP
+    Backup["MySQL 加密备份任务"] --> MySQL
+    Backup --> BackupPrefix["同一 OSS 桶\ndatabase-backups/ 独立前缀"]
 ```
 
-### 3.3 模块依赖关系
+### 3.2 部署单元
+
+| 部署单元 | 作用 | 生产形态 |
+|---|---|---|
+| `orange-web` | 用户端 SPA | 构建后位于 `/data/orangejd/web-dist/` |
+| `orange-admin` | 管理端 SPA | 构建后位于 `/data/orangejd/web-dist/admin/` |
+| `orange-server` | API、WebSocket、调度、AI、任务执行 | 单个 Spring Boot JAR，由 `orangejd.service` 管理 |
+| MySQL 8.0 | 业务数据、任务、配额账本、索引状态 | 与应用同机，仅监听 `127.0.0.1` |
+| Redis/RediSearch | 缓存、动态配置、限流、租约、向量索引 | 独立系统服务 |
+| Nginx | TLS、域名规范化、静态资源、反向代理、限流 | `orangevf.com` 为规范域名 |
+
+### 3.3 Maven 模块依赖
 
 ```mermaid
-graph LR
-    Server["orange-server<br/>Spring Boot 应用入口"]
-    Common["orange-common<br/>工具类/JWT/属性/上下文"]
-    Pojo["orange-pojo<br/>实体/DTO/VO"]
-
-    Server --> Common
-    Server --> Pojo
-    Common -.-> Pojo
-
-    style Server fill:#e65100,color:#fff
-    style Common fill:#ff9800,color:#fff
-    style Pojo fill:#ffcc80,color:#333
+flowchart LR
+    Server["orange-server\n应用与业务实现"] --> Common["orange-common\nResult/JWT/上下文/公共工具"]
+    Server --> Pojo["orange-pojo\nEntity/DTO/VO"]
 ```
 
-| 模块 | 职责 | 关键内容 |
-|------|------|---------|
-| `orange-common` | 共享工具与基础设施 | `JwtUtil`、`UrlValidator`、`JacksonObjectMapper`、`BaseContext`（ThreadLocal）、`Result<T>` 统一响应、`JwtProperties` |
-| `orange-pojo` | 数据对象定义 | Entity、DTO、VO 与分页查询对象 |
-| `orange-server` | 业务逻辑与 API 入口 | Controllers / Services / Mappers / Interceptors / Config / AI / Task / Aspect |
+`orange-common` 与 `orange-pojo` 不承载单一业务域流程；具体业务编排位于 `orange-server`。
 
 ---
 
-## 4. 核心模块详细设计
+## 4. 后端架构
 
-### 4.1 接入层：安全与路由
+### 4.1 分层约束
 
-#### 4.1.1 拦截器链（执行顺序）
+当前稳定依赖方向为：
 
-```
-HTTP Request
-  │
-  ▼
-CORS Filter (WebMvcConfiguration.addCorsMappings)
-  - allowedOriginPatterns: *
-  - methods: GET/POST/PUT/DELETE/OPTIONS
-  │
-  ▼
-RequestIdInterceptor (全局 /**)
-  - 生成 8 位 UUID → MDC.put("requestId", ...)
-  - 响应头: X-Request-Id
-  │
-  ▼
-┌─ /admin/auth/login ──► 跳过 JWT（登录接口公开）
-├─ /admin/**         ──► JwtTokenAdminInterceptor
-│   - 从 Admin-Token 请求头提取
-│   - parseJwt() + 黑名单检查
-│   - BaseContext.setCurrentId(id)
-└─ /app/**           ──► JwtTokenAppInterceptor
-    - 从 App-Token 请求头提取
-    - 公开路径排除: /app/auth/**, /app/category,
-      /app/work/public, /app/requirement/public,
-      /app/leaderboard/**, /app/trend/*, /ws/**
-    - 消费类接口手动从 Header 提取用户身份
+```text
+Controller
+    ↓
+Application Service / 兼容门面
+    ↓
+领域规则、组装器、校验器、策略
+    ↓
+Mapper / Redis / VectorStore / 外部客户端
 ```
 
-#### 4.1.2 双通道 JWT 设计
+ArchUnit 已强制以下规则：
 
-| 维度 | Admin 通道 | App 通道 |
-|------|-----------|---------|
-| 密钥 | `jwt.admin-secret-key` | `jwt.app-secret-key` |
-| TTL | 7200000ms (2h) | 7200000ms (2h) |
-| Header | `Admin-Token` | `App-Token` |
-| 前缀 | `sk-` | `sk-` |
-| 签名算法 | HmacSHA256（JJWT 0.12.6） | HmacSHA256 |
-| 黑名单 | Redis Set `token:blacklist` | 同 |
+- Controller 直接依赖 Mapper 为 0；
+- Spring Bean 字段注入为 0，统一使用构造器注入；
+- Service 不依赖 Controller；
+- Mapper 不依赖 Service 或 Controller；
+- Task 不依赖 Controller 或 Mapper；
+- `foundation` 不反向依赖 Controller、业务 Service 或 contribution 模块。
 
-JWT 生成 `sk-` 前缀 + 兼容解析（`parseJwt` 自动去前缀），保证旧 token 平滑过渡。
+代码仍处于渐进模块化阶段：`identity`、`contribution`、`foundation` 已形成较清晰边界，大量历史业务仍位于 `controller/service/mapper` 包。该状态不是完整领域驱动重构，也不应被描述成已经全部迁移到 `api/application/domain/infrastructure`。
 
-#### 4.1.3 StackChan 设备令牌通道
+### 4.2 接入与路由
 
-小智客户端通过小智 MCP 和用户电脑上的 `OrangeVC 小智连接器` 接入；StackChan 是首个推荐设备，但不是使用前提。该方式不刷机，也不向平台上传用户本地模型密钥。用户在已登录网页生成 10 分钟一次性连接码；连接器交换得到独立 Device Token，令牌明文保存在 Windows Credential Manager，服务端只保存 SHA-256 哈希。
+请求链如下：
 
-Windows 端提供独立开源的 `OrangeVC-XiaoZhi-Connector.cmd` 图形连接器，负责首次环境准备、测试期 SSH 隧道、正式 HTTPS 地址、一次性绑定、连接器启停和脱敏日志；旧的 StackChan 启动脚本仅在 v0.2.x 作为兼容入口。它不保存 SSH 私钥内容，不在普通配置文件中写入小智地址或 Device Token。
-
-Bridge 默认使用确定性规则识别菜单和多轮语音流程，不调用用户模型。用户可选启用“使用我的模型辅助理解自由表达”，填写 OpenAI 兼容 API 接口、模型名称和 API Key；只有连接测试成功后才生效，且仅在规则无法识别时调用。API Key 保存在 Windows Credential Manager，不上传到 OrangeVC。GitHub 榜单通过只读设备动作 `leaderboard.github.list` 读取平台现有快照，支持本周涨星、本周新增、全时段热门和 Topic 方向筛选，最多返回五张卡片供语音选择与朗读，不触发 GitHub 抓取或 AI 扣费。
-
-每次 Bridge 与小智重新建立 MCP 会话后，OrangeVC 平台能力默认锁定。用户必须先说“可以使用 OrangeVC 平台了吗”，由 `orangevc_agent_prepare` 解锁当前连接会话；StackChan 回复“可以使用了，你想使用什么功能呢”并列举功能菜单。断线重连或明确退出后重新锁定，避免普通闲聊误触发平台操作。对外 MCP 工具为 `orangevc_agent_prepare`、`orangevc_agent_confirm`、`orangevc_agent_status` 和 `orangevc_agent_cancel`；内部 Python 包名及 `/agent/**` HTTP 路径为兼容既有部署继续保留。
-
-| 路径 | 鉴权与职责 |
-|------|-----------|
-| `/app/agent-devices/**` | App JWT；创建连接码、查看设备、撤销设备 |
-| `/agent/connect/exchange` | 公开但限流；一次性连接码交换 Device Token |
-| `/agent/actions/**` | Bearer Device Token；校验状态、有效期和 scope |
-
-设备动作采用服务端白名单与 `PREPARED → QUEUED → RUNNING → SUCCEEDED/FAILED` 状态机。写入和付费动作必须确认，账户身份只从 Device Token 获取；上线体检复用 `LaunchCheckService`，开源岗位匹配和贡献指南复用 `OpenSourceContributionService`，自由趋势分析复用 `TrendAnalysisService.analyze`，画像趋势分析由 `TrendProfileAnalysisService` 调用 `TrendAnalysisService.analyzeV2` 并保存网站历史，方案设计复用 `PlanGenerationService`，因此网页与语音具有相同价格、扣费和失败退款规则。只读动作还包括配额、最近语音任务和未读通知数量。Windows Bridge 用持久化会话状态收集画像、锁定运行任务、展示推荐选项并把选中项目导入方案设计；任务确认后通过短时长轮询与 `autoPoll` 指令要求小智在同一轮持续查询，完成后主动播报。方案设计第 2 至 4 阶段可从同一设备最近成功任务中继承项目描述与上一阶段结果。用户端可查看最近 30 条设备任务并打开完整结果；单机服务重启时遗留任务会标记为 `SERVER_RESTARTED`，不会自动重跑。公网 Bridge 地址强制 HTTPS，HTTP 只允许本机开发地址。
-
-### 4.2 业务模块详细设计
-
-#### 4.2.1 内容发布模块
-
-**职责**：作品/需求的创建、编辑、提交审核、状态流转
-
-```
-状态机:
-DRAFT → PENDING_REVIEW → APPROVED / REJECTED
-  │                          │
-  └──────────────────────────┘ (重新编辑后回到 DRAFT)
+```text
+Nginx
+  → CORS
+  → RequestIdInterceptor
+  → RateLimitInterceptor
+  → Admin/App/Agent 对应鉴权拦截器
+  → Controller
 ```
 
-**关键 Service**：
+三类鉴权通道：
 
-| 服务 | 文件 | 核心职责 |
-|------|------|---------|
-| `WorkServiceImpl` | `service/impl/WorkServiceImpl.java` | 作品 CRUD、草稿管理、提交审核、可见性切换 |
-| `RequirementServiceImpl` | `service/impl/RequirementServiceImpl.java` | 需求 CRUD、预算管理、状态流转 |
-| `AuditServiceImpl` | `service/impl/AuditServiceImpl.java` | 审核执行（`auditWork`/`auditRequirement`），写 `audit_record` 表 |
+| 通道 | 路径 | 凭证 |
+|---|---|---|
+| 管理端 | `/admin/**` | `Admin-Token` |
+| 用户端 | `/app/**` | `App-Token` |
+| 设备端 | `/agent/**` | Bearer Device Token |
 
-**依赖**：`WorkMapper` / `RequirementMapper` / `CategoryMapper` / `AuditRecordMapper` / `FileUploadService`（封面图上传）
+公开路径集中维护在 `ApiRoutePolicy`，避免 Controller 新增后在多处散落白名单。生产 CORS 只能配置明确 HTTPS Origin，禁止通配符。
 
-#### 4.2.2 交易闭环模块
+### 4.3 统一响应与异常
 
-**职责**：报价协商→订单创建→分阶段支付→交付记录
+普通 HTTP API 使用 `Result<T>` 响应外壳。全局异常处理负责把参数错误、业务异常和未知异常转换为稳定响应；请求 ID 进入 MDC 并通过 `X-Request-Id` 返回，便于日志关联。
 
-**状态流转**：
+外部供应商异常在基础设施层分类，例如 AI HTTP 状态、超时、429 和鉴权失败，不应在 Controller 中解析供应商细节。
+
+### 4.4 业务门面与内部服务
+
+复杂业务通过兼容门面保持原 API 不变，并把职责拆给内部组件。例如：
+
+- `PersonaWorkshopService`：画像工坊兼容门面；
+- `PersonaSnapshotAssembler`：私有、公开和头像快照组装；
+- `PersonaEntryService`：画像条目；
+- `PersonaMaterialService`：素材箱确认/拒绝；
+- `PersonaEquipmentService`：装备、变换和蓝图；
+- `PersonaSettingsService`：展示、外观、手部配置；
+- `PersonaAppearanceShareService`：形象码生成、读取和应用；
+- `TrendAnalysisService`：趋势分析入口；
+- `TrendContextBuilder`、`TrendPromptFactory`、`TrendModelClient`、`TrendResponseParser`、`TrendResultAssembler`：上下文、提示词、模型调用、解析和组装；
+- `TrendRecommendationSanitizer`：限制模型推荐链接只能来自已检索的真实项目。
+
+写业务的事务边界位于 Service 入口；Controller 只处理鉴权上下文、参数、服务调用和响应包装。
+
+---
+
+## 5. 前端架构
+
+### 5.1 双 SPA
+
+用户端与管理端均使用 Vue 3、Vue Router、Vite、Element Plus 和 Axios。管理端构建基路径为 `/admin/`，两个构建产物由发布脚本组合到同一 Web 根目录。
+
+用户端额外使用 Pinia、Three.js、ECharts、marked 和 DOMPurify。橙子画像场景和装备几何均在浏览器渲染，不在服务器执行 3D 建模。
+
+### 5.2 用户端职责分层
+
+```text
+View
+  ↓
+Feature Component
+  ↓
+Composable
+  ↓
+Pinia Store / API Module
 ```
-QUOTE: PENDING_CONFIRM → ACCEPTED → (创建订单)
-ORDER: CREATED → DEPOSIT_PAID → IN_PROGRESS → FINAL_PAID → COMPLETED
-PAYMENT: UNPAID → PAID
-```
 
-**关键实体关系**：
-- `Quote` ──1:1──→ `Order`（source_type='QUOTE', source_id=quote.id）
-- `Order` ──1:N──→ `PaymentStage`（最多 2 条：定金 + 尾款）
-- `Order` ──1:N──→ `Delivery`（允许多次交付）
+当前 Pinia Store：
 
-#### 4.2.3 通知与消息模块
+| Store | 职责 |
+|---|---|
+| `authStore` | Token、账号 ID、当前用户、登录恢复和退出清理 |
+| `notificationStore` | 未读状态与同步 |
+| `tradeModeStore` | 交易模式开关 |
+| `aiRecordStore` | AI 记录与详情缓存 |
+| `personaStore` | 画像摘要、素材、展示状态 |
+| `agentDeviceStore` | 设备与任务状态 |
 
-| 通道 | 技术 | 用途 |
-|------|------|------|
-| WebSocket | `spring-boot-starter-websocket` | 实时消息推送（一对一私聊） |
-| 系统通知 | HTTP Polling / `notification` 表 | 审核结果、报价状态变更 |
-| 飞书通知 | Webhook POST | AI 审核结果、岗位审核结果（独立双 webhook） |
+`tradeMode.js`、`unread.js` 仍作为兼容适配层存在。页面流程已逐步迁入 `useTrendAnalysis`、`usePersonaWorkshop`、`usePersonaEquipment`、`useOpenSourceIssues`、`useContributionMatch` 等 Composable。
 
-### 4.3 AI 服务模块
+异步状态采用 `loading/error/lastUpdatedAt/requestId` 语义；核心 Store 和 Composable 实现 latest-request-wins 或销毁保护。Token 仅存于 `sessionStorage`，AI 完整结果不写入浏览器长期存储。
 
-#### 4.3.1 模块依赖图
+### 5.3 HTTP 与幂等请求
+
+用户端 Axios 默认超时为 15 秒。需要长时间处理的 AI 流程由具体 API 或任务流程单独管理，不能假设全局 15 秒适用于模型生成。
+
+配额型 POST 请求自动生成并复用 `Idempotency-Key`。同一个页面请求在网络错误、408、429 或 5xx 后重试时继续使用同一键；确认是非重试型客户端错误或成功后清除。服务端再结合请求哈希和账本唯一约束防止重复扣费。
+
+### 5.4 3D 画像工坊
+
+橙子画像工坊是独立用户模块，包含：
+
+- 画像维度条目；
+- 行为采集形成的待确认“素材箱”；
+- 稳定视觉语言和装备解锁；
+- 五官、手部位置/大小调整；
+- 组合饰品蓝图、镜像和手持武器；
+- 公开主页 3D 展示；
+- 形象码复用、预览与一键应用。
+
+3D 编辑状态主要保留在页面 Composable；跨页面摘要和展示状态进入 Pinia。服务端只保存结构化参数和 JSON 蓝图，不保存每个用户生成的独立模型文件，因此不会因用户 DIY 数量线性增加 3D 文件存储。
+
+---
+
+## 6. AI 调用架构
+
+### 6.1 配置分层
+
+AI 配置类型包括：
+
+- `trend`：趋势分析；
+- `project`：方案和项目类生成；
+- `contribution`：开源贡献；
+- `text`：文本生成与翻译；
+- `tool_fallback`：AI 工具池溢出兜底；
+- `audit`：AI 审核；
+- `embedding`：向量嵌入。
+
+趋势、项目、贡献、文本、兜底和审核配置可以在管理端动态保存到 Redis。API Key 使用 `AI_CONFIG_ENCRYPTION_KEY` 加密，Redis 中保存版本化配置；任务可固定 `configVersion`，避免执行期间配置漂移。Embedding 只能通过服务器环境变量修改。
+
+Redis 不可用时，运行时配置回退到环境变量。项目或贡献没有独立环境配置时，会回退到趋势配置。
+
+### 6.2 AI 工具 Key 池
 
 ```mermaid
-graph TB
-    subgraph AI_Layer["AI 服务层"]
-        AiAudit["AiAuditService<br/>审核: DeepSeek V4 Pro<br/>多模态(文本+图片)"]
-        Trend["TrendAnalysisService<br/>趋势分析: DeepSeek V4 Pro<br/>+ RAG 知识库增强"]
-        Embed["GiteeAiEmbeddingModel<br/>bge-small-zh-v1.5<br/>512维 Embedding"]
-        JobMatch["JobMatchService<br/>岗位匹配: DeepSeek V4 Pro<br/>+ VectorStore 检索"]
-        OpenSource["OpenSourceContributionService<br/>Issue 匹配 / 岗位映射 / 贡献指南"]
-    end
-
-    subgraph SpringAI_Layer["Spring AI 1.0.0"]
-        VS["RedisStackVectorStore<br/>HNSW + COSINE 相似度"]
-        QE["QuestionAnswerAdvisor<br/>检索增强顾问"]
-    end
-
-    subgraph Redis_Stack["Redis 8 + RediSearch"]
-        FT["FT.INDEX default-index<br/>HNSW + COSINE<br/>512-dim float vector"]
-        DocStore["知识库文档向量<br/>+ 岗位 JD 向量"]
-    end
-
-    AiAudit --> GiteeAI["Gitee AI API<br/>POST /v1/chat/completions"]
-    Trend --> GiteeAI
-    Trend --> VS
-    JobMatch --> GiteeAI
-    JobMatch --> VS
-    OpenSource --> GiteeAI
-    OpenSource --> GitHubAPI["GitHub REST API<br/>仓库 / Issue / 评论 / Timeline"]
-    Embed --> GiteeAI_Emb["Gitee AI API<br/>POST /v1/embeddings"]
-    VS --> FT
-    FT --> DocStore
+flowchart LR
+    Req["AI 工具请求"] --> Global["Redis 全局并发租约\n1-80 可配置"]
+    Global --> Slot{"是否有空闲 Key 槽位"}
+    Slot -->|有| Key["GITEE_AI_KEY_1..10\n每槽同一时间 1 个请求"]
+    Slot -->|无| Fallback["AI_TREND / tool_fallback"]
+    Key --> Provider["OpenAI 兼容 Chat Completions"]
+    Fallback --> Provider
+    Provider --> Record["结果记录 + 调用日志"]
 ```
 
-#### 4.3.2 AI 审核服务（AiAuditService）
+当前实现特征：
 
-| 维度 | 说明 |
-|------|------|
-| **入口** | `auditWorkAsync(workId)` / `auditRequirementAsync(reqId)` |
-| **并发控制** | `Executors.newFixedThreadPool(2)`，最多 2 并发 |
-| **模型** | DeepSeek V4 Pro，temperature=0.1 |
-| **输入** | 标题 + 简介 + 详情 + 分类 + 封面图(URL) + 详情内嵌图(最多 5 张) |
-| **SSRF 防护** | 所有图片 URL 经 `UrlValidator.isSafe()` 校验（拦截内网 IP） |
-| **降级** | 图片审核失败 → 自动降级为纯文本审核（标记 `degraded:true`） |
-| **输出** | JSON `{action: "APPROVED"/"REJECTED", reason: "..."}` |
-| **通知** | 飞书 Webhook 推送审核结果（绿色/红色卡片） |
-| **开关** | Redis `system:ai-audit:enabled`（管理后台 `/admin/ai-audit/toggle` 控制） |
+- 最多读取 10 个环境 Key；
+- Redis Lua 脚本保证全局租约和每 Key 独占租约的原子获取；
+- 全局并发配置被代码限制在 1-80；生产环境可配置为 80；
+- Key 槽位均忙时使用 `tool_fallback`，而不是等待任意 Key 释放；
+- 租约定期续期并在完成后释放；
+- 401/403 将 Key 标记为无效，429 根据 Retry-After 进入限流状态；
+- 管理端可查看全局运行数、Gitee/兜底运行数、槽位状态和最近调用；
+- 调用日志记录用户、业务类型、任务、供应商、槽位编号、Key 指纹、模型和状态，不保存明文 Key。
 
-#### 4.3.3 趋势分析服务（TrendAnalysisService）
+默认代码值并不等于生产值：`AiToolPoolProperties` 的代码默认全局并发为 50，生产配置通过环境变量设置，最大允许值为 80。
 
-| 维度 | 说明 |
-|------|------|
-| **输入** | `TrendProfileDTO`：topics/purpose/experience/languages/timeCommitment |
-| **RAG 检索** | 4 维度独立检索（topics/purpose/experience/timeCommitment），每维 Top 2，合并去重取 Top 3 |
-| **阈值** | `similarityThreshold=0.6`（bge-small-zh-v1.5 验证：相关 0.77~0.80 / 无关 0.38~0.45） |
-| **Prompt** | 动态拼接知识库上下文 → DeepSeek V4 Pro |
-| **降级** | `VectorStore == null` 时跳过 RAG，纯 LLM 分析 |
-| **配额** | 50 segments/次，公开接口手动从 Header 提取用户 |
+### 6.3 自动重试与结果保存
 
-#### 4.3.4 岗位匹配服务（JobMatchService）
+AI 工具路由先使用 `requestId` 查询既有结果。已存在成功结果时直接回放，避免重复调用和重复扣费。每次尝试写入 `ai_tool_call_log`，成功结果必须写入 `ai_result_record`。
 
-| 维度 | 说明 |
-|------|------|
-| **输入** | 方案设计内容（Phase 1-5 产出） |
-| **检索** | `VectorStore.similaritySearch(planContent, topK=5, threshold=0.5)` |
-| **Prompt** | 用户方案 + Top 5 JD 摘要 → DeepSeek V4 Pro |
-| **输出** | 3 个匹配岗位，每岗位含 `position`/`reason`(100+字)/`focus`(100+字) |
-| **配额** | 50 segments/次，预扣+失败退款 |
+可重试错误采用指数退避，并尊重供应商 Retry-After。`AI_TOOL_AUTO_RETRY_MAX_ATTEMPTS=0` 在当前代码中代表无限次重试；这会占用当前请求线程，属于需要谨慎配置的运行风险，不应误解为后台持久化重试。
 
-#### 4.3.5 开源贡献服务
+### 6.4 趋势分析与项目推荐
 
-| 组件 | 职责 |
-|------|------|
-| `OpenSourceGithubService` | 读取仓库元数据、最近更新的 open Issue、评论和 Timeline；识别 assignee、关联 PR、认领线索与环境风险 |
-| `OpenSourceTranslationService` | 每批最多 10 条，把英文标题和正文压缩为中文标题与一句摘要，失败记录为 `FAILED` 供管理端重试 |
-| `OpenSourceAiClient` | 复用趋势分析模型配置，生成候选排序和贡献指南 |
-| `OpenSourceContributionService` | 用户端筛选、详情、实时核验、AI 匹配、岗位映射、指南持久化与配额事务边界 |
-| `OpenSourceRefreshTask` | 每两天完整刷新、每 12 小时轻量核验；原子状态避免同类任务重复运行 |
+趋势 V2 可组合：
 
-发现页只展示缓存数据，不在普通分页请求中直接大规模调用 GitHub。AI 匹配、岗位匹配和贡献指南均采用“预扣配额、失败退款”；指南按 `account_id + issue_id` 幂等覆盖保存。
+- 用户输入条件；
+- 橙子画像上下文；
+- 趋势知识图谱；
+- Redis 向量知识库；
+- 新手推荐项目；
+- 职业成长项目。
 
-### 4.4 前端架构
+“知识库增强”与“优先新手/职业”不冲突。V33 后，新手和职业项目也写入通用 VectorStore，并由 `project_knowledge_index_status` 记录来源、文档 ID、内容哈希和索引状态。开启优先按钮时，还会进行结构化候选筛选并提高相关来源权重。
 
-```mermaid
-graph TB
-    subgraph UserPortal["用户端 orange-web"]
-        direction TB
-        Views1["用户业务页面<br/>含 AI Hub / ProjectTools / OpenSource"]
-        API1["同域 /api 请求层<br/>App-Token 鉴权"]
-        Router1["Vue Router<br/>懒加载路由 + 导航守卫"]
-        Layout1["MainLayout.vue<br/>顶部导航 + 侧边栏"]
-    end
-
-    subgraph AdminPortal["管理端 orange-admin"]
-        direction TB
-        Views2["运营管理页面<br/>含开源贡献管理"]
-        API2["同域 /api 请求层<br/>Admin-Token 鉴权"]
-        Router2["Vue Router<br/>Hash 路由 + 导航守卫"]
-        Layout2["MainLayout.vue<br/>顶部导航 + 侧边栏"]
-    end
-
-    UserPortal --> Backend["orange-server<br/>localhost:8080"]
-    AdminPortal --> Backend
-
-    style UserPortal fill:#fff3e0,color:#333
-    style AdminPortal fill:#e3f2fd,color:#333
-```
-
-#### 4.4.1 技术栈
-
-| 项 | orange-web (用户端) | orange-admin (管理端) |
-|-----|---------------------|----------------------|
-| 框架 | Vue 3.5.34 | Vue 3.5.34 |
-| 构建 | Vite 8.0.12 | Vite 8.0.12 |
-| UI 库 | Element Plus 2.14.1 | Element Plus 2.14.1 |
-| HTTP | Axios 1.17.0 | Axios 1.17.0 |
-| 路由 | Vue Router 4.6.4 | Vue Router 4.6.4 |
-| 图表 | ECharts 6.1.0 (趋势分析) | — |
-| Markdown | marked 18.0.5 (方案设计) | — |
-| 图标 | @element-plus/icons-vue | @element-plus/icons-vue |
-
-#### 4.4.2 全局 API 配置模式
-
-两个前端共用相同的 `request.js` 模式：
-```
-axios.create({ baseURL: '/api', timeout: 30000 })
-  → 请求拦截器: 自动附加 Token Header (App-Token / Admin-Token)
-  → 响应拦截器: 统一错误处理 (401 → 清除 token → 跳转登录)
-  → sessionStorage 存储 token (非 localStorage，避免 XSS)
-```
+推荐结果经 Sanitizer 校验，模型不得凭空输出不在候选集合中的项目链接。
 
 ---
 
-## 5. 全链路数据流设计
+## 7. 知识库与检索
 
-### 5.1 AI 趋势分析完整数据流
+### 7.1 统一向量存储
 
-```mermaid
-sequenceDiagram
-    actor User
-    participant Web as orange-web
-    participant API as AppTrendController
-    participant TAS as TrendAnalysisService
-    participant KG as KnowledgeGraphService
-    participant VS as RedisStackVectorStore
-    participant Embed as GiteeAiEmbeddingModel
-    participant LLM as Gitee AI LLM
-    participant MySQL
+系统使用 Spring AI Redis VectorStore。通用文档、GitHub README、岗位 JD、新手项目和职业成长项目共同进入 VectorStore，通过 metadata 区分类型和来源，而不是为榜单项目建立完全隔离的 Redis 索引。
 
-    User->>Web: 填写趋势画像(方向/目的/基础/时间)
-    Web->>API: POST /app/trend/analyze-v2<br/>{topics, purpose, experience, timeCommitment}
-    API->>TAS: analyze(profile)
-    TAS->>KG: getGraph(topics) → 知识图谱数据
-    TAS->>TAS: 预扣配额 50 segments
-    TAS->>VS: similaritySearch(topics, topK=2)
-    VS->>Embed: embedding(topics)
-    Embed->>LLM: POST /v1/embeddings
-    LLM-->>Embed: 512-dim vector
-    VS-->>TAS: Top 2 docs for topics
-    TAS->>VS: similaritySearch(purpose, topK=2)
-    TAS->>VS: similaritySearch(experience, topK=2)
-    TAS->>VS: similaritySearch(timeCommitment, topK=2)
-    TAS->>TAS: 合并去重 → Top 3 → 拼入 Prompt
-    TAS->>LLM: POST /v1/chat/completions<br/>{model, messages[{system, user+rag_context}]}
-    LLM-->>TAS: 分析结果 JSON
-    TAS->>MySQL: INSERT trend_history<br/>(browser_id, profile, result_json)
-    TAS-->>API: {analysis: "...", knowledgeRefs: [...]}
-    API-->>Web: Result.success(result)
-    Web-->>User: Markdown 渲染 + 知识图谱
-```
+MySQL 保存文档元数据和项目索引状态；Redis 保存向量。两者职责如下：
 
-### 5.2 作品 AI 自动审核数据流
+| 存储 | 内容 |
+|---|---|
+| `knowledge_document` | 文档标题、来源、内容和生命周期信息 |
+| `project_knowledge_index_status` | 项目类型、项目 ID、来源引用、内容哈希、索引状态、关联文档 |
+| Redis VectorStore | 向量及检索 metadata |
 
-```mermaid
-sequenceDiagram
-    actor User
-    participant Web
-    participant API as AppWorkController
-    participant AAS as AiAuditService
-    participant UV as UrlValidator
-    participant LLM as Gitee AI LLM
-    participant Audit as AuditServiceImpl
-    participant Feishu as 飞书 Webhook
-    participant MySQL
+`ProjectKnowledgeSyncService` 默认每 5 分钟扫描项目索引状态并同步。内容哈希用于判断是否需要重建；项目删除或失效时同步清理对应向量和元数据。
 
-    User->>Web: 提交作品 (PENDING_REVIEW)
-    Web->>API: POST /app/work/{id}/submit
-    API->>MySQL: UPDATE audit_status=PENDING_REVIEW
-    API->>AAS: auditWorkAsync(workId)
-    Note over AAS: ExecutorService 异步执行
-    AAS->>AAS: 检查 Redis 开关 enabled
-    AAS->>MySQL: SELECT work + category + author
-    AAS->>UV: isSafe(coverUrl) + isSafe(detailImages[])
-    Note over UV: 拦截内网 IP<br/>白名单: 阿里云 OSS
-    AAS->>LLM: POST /v1/chat/completions<br/>{model, messages[{system_prompt, user(文本+图片URL)}]}
-    alt AI 返回 action
-        LLM-->>AAS: {"action":"APPROVED","reason":"..."}
-        AAS->>Audit: auditWork(workId, approved=true, reason)
-        Audit->>MySQL: UPDATE audit_status + INSERT audit_record
-        AAS->>Feishu: POST webhook (绿色卡片)
-    else 图片审核失败
-        LLM-->>AAS: 图片异常
-        AAS->>LLM: 降级重试 (纯文本)
-        LLM-->>AAS: {"action":"APPROVED","reason":"..."}
-        Note over AAS: degraded=true
-    else 全部失败
-        AAS-->>AAS: SKIPPED
-        AAS->>Feishu: sendWarning(标题, 作者, 原因)
-    end
-```
+### 7.2 RAG 降级
 
-### 5.3 岗位投稿→AI匹配全链路
-
-```mermaid
-sequenceDiagram
-    actor User
-    actor Admin
-    participant Web as orange-web
-    participant AdminWeb as orange-admin
-    participant JobAPI as JobController
-    participant AdminAPI as AdminJobController
-    participant JMS as JobMatchService
-    participant DS as DocumentService
-    participant VS as VectorStore
-    participant LLM as Gitee AI LLM
-    participant MySQL
-
-    Note over User,MySQL: ===== 投稿链路 =====
-    User->>Web: 填写岗位 JD + 勾选避风港声明
-    Web->>JobAPI: POST /app/job/submit
-    JobAPI->>JobAPI: stripCompanyNames() 清洗公司名
-    JobAPI->>MySQL: INSERT job_posting (audit_status=PENDING)
-
-    Note over Admin,MySQL: ===== 审核链路 =====
-    Admin->>AdminWeb: 查看待审列表
-    AdminWeb->>AdminAPI: POST /admin/job/{id}/approve
-    AdminAPI->>MySQL: UPDATE audit_status=APPROVED
-    AdminAPI->>DS: importJobPosting(content → chunks → embedding)
-    DS->>VS: add(documents[])
-    AdminAPI->>AdminAPI: grantReward(50 segments)
-    AdminAPI->>Feishu: POST job-webhook (绿色卡片)
-
-    Note over User,MySQL: ===== 匹配链路 =====
-    User->>Web: 方案设计 Phase 6 → 岗位匹配
-    Web->>JobAPI: POST /app/job/match {planContent}
-    JobAPI->>JMS: match(planContent)
-    JMS->>JMS: 预扣 50 segments
-    JMS->>VS: similaritySearch(planContent, topK=5, threshold=0.5)
-    VS-->>JMS: Top 5 JD documents
-    JMS->>LLM: POST /v1/chat/completions<br/>{user方案+5个JD}
-    LLM-->>JMS: {matches: [{position, reason, focus}]}
-    JMS-->>Web: 3 个匹配岗位 + 详细分析
-```
+VectorStore Bean 不可用时应用仍可启动，健康详情会显示向量存储状态。依赖 RAG 的功能应降级为非知识库分析或返回明确错误，不能把 Redis 向量故障误判为 MySQL 故障。
 
 ---
 
-## 6. 存储分层设计
+## 8. 数据架构
 
-### 6.1 数据库总览
+### 8.1 Flyway 是唯一结构来源
 
-```
-MySQL 8.0 (orangejd)
-├── 账号体系
-│   ├── account            — 账号（BCrypt密码，ADMIN/USER角色）
-│   └── user_profile       — 用户资料（昵称/skills/头像/主页可见性）
-├── 基础数据
-│   └── category           — 分类（WORK/REQUIREMENT，支持GitHub Topic映射）
-├── 内容发布
-│   ├── work               — 作品（标题/富文本/封面/演示链接/审核状态）
-│   ├── work_sale_option   — 作品售卖项（整卖/定制/部署服务）
-│   ├── requirement        — 需求（标题/预算/需求状态）
-│   └── audit_record       — 审核记录（target_type/target_id/auditor/结果/原因）
-├── 内容发现
-│   ├── favorite           — 收藏（UK: account_id+target_type+target_id）
-│   ├── comment            — 评论（1024字，按target查询）
-│   └── browse_history     — 浏览历史（按account_id+时间排序）
-├── 沟通协商
-│   ├── conversation       — 会话（work_id/requirement_id + initiator/receiver）
-│   ├── message            — 消息（2048字，附件URL，已读标记）
-│   └── notification       — 系统通知（AUDIT/MESSAGE/QUOTE/ORDER/SYSTEM）
-├── 交易闭环
-│   ├── quote              — 报价单（price/status/expire_time）
-│   ├── order              — 订单（source_type/source_id/buyer/seller/定金/尾款）
-│   ├── payment_stage      — 支付阶段（DEPOSIT/FINAL，FK→order）
-│   └── delivery           — 交付记录（deliverer/content/attachment）
-├── 榜单与趋势
-│   ├── leaderboard_snapshot — 榜单快照（UK: source+topic+period+date，7天保留）
-│   └── trend_history      — 趋势分析历史（browser_id+profile+result_json）
-├── 知识库
-│   └── knowledge_document — 知识库文档（title/source/source_ref/chunk_count）
-├── 岗位招聘
-│   └── job_posting        — 岗位JD（company/position/direction/content/displayContent/auditStatus）
-├── 配额系统
-│   ├── quota_log          — 消费日志（type/amount/balance/requestId幂等）
-│   ├── redemption_code    — 充值码（code/quota/status/USED_BY）
-│   └── top_up             — 充值记录（Epay订单映射）
-├── 方案设计与上线体检
-│   ├── plan_history       — 方案历史（account_id/summary/phase1~phase6）
-│   └── launch_assessment  — 上线体检任务、阶段报告与配额状态
-├── 法律与支付
-│   ├── legal_consent_record — 用户协议和隐私文本同意记录
-│   └── order_epay_transaction — 订单支付请求、回调和幂等状态
-└── 开源贡献
-    ├── open_source_repository — GitHub 仓库源、环境元数据和同步状态
-    ├── open_source_issue      — Issue 缓存、翻译、核验和发布状态
-    └── open_source_guide      — 用户贡献指南记录
-```
+`orange-server/src/main/resources/db/migration` 是数据库结构唯一可执行来源：
 
-### 6.2 存储技术矩阵
+- V1 提供历史基线；
+- V2-V37 只做增量变更；
+- 已在生产执行的迁移不得修改；
+- 新结构必须新增下一版本迁移；
+- 手工数据库快照仅用于备份或核验，不用于代替 Flyway 初始化。
 
-| 存储类型 | 技术选型 | 用途 | 容量 |
-|---------|---------|------|------|
-| **关系数据库** | RDS MySQL 8.0 InnoDB | 账号、内容、交易、AI 记录、开源贡献等 34 张初始化表 | 当前 < 1GB |
-| **缓存** | Redis（Jedis 客户端） | JWT 黑名单 / AI 审核开关 / AI 配置 / 邮箱验证码 | < 100MB |
-| **向量数据库** | Redis 8 RediSearch | 知识库文档切片（512维）、岗位 JD 向量 | 当前 < 500MB |
-| **对象存储** | 阿里云 OSS | 用户上传文件（封面图/附件/富文本图片） | < 10GB |
-| **本地文件** | 服务器磁盘 | 开发环境文件上传 /upload/ | < 5GB |
+当前最新迁移为 `V37__harden_quota_ledger.sql`。
 
-### 6.3 索引设计（核心业务表）
+### 8.2 主要数据域
 
-| 表 | 索引 | 类型 | 用途 |
-|----|------|------|------|
-| `account` | `uk_username` | UNIQUE | 用户名唯一 |
-| `work` | `idx_owner_id` / `idx_audit_status` / `idx_category_id` | INDEX | 按作者/审核状态/分类查询 |
-| `requirement` | `idx_publisher_id` / `idx_audit_status` | INDEX | 按发布者/状态查询 |
-| `favorite` | `uk_favorite(account_id,target_type,target_id)` | UNIQUE | 防止重复收藏 |
-| `leaderboard_snapshot` | `uk_snapshot(source,topic_name,period,snapshot_date)` | UNIQUE | 快照幂等 |
-| `knowledge_document` | `uk_source_ref` | UNIQUE | GitHub repo 去重 |
-| `job_posting` | `uk_company_position` / `idx_direction` / `idx_audit_status` | UNIQUE+INDEX | 岗位去重 + 按方向查询 |
-| `quota_log` | `uk_request_id` | UNIQUE | 幂等消费 |
-| `redemption_code` | `uk_code` | UNIQUE | 充值码唯一 |
-| `open_source_repository` | `uk_open_source_repository_name` | UNIQUE | GitHub 仓库源去重 |
-| `open_source_issue` | `uk_open_source_issue_github_id` / `uk_open_source_issue_repo_number` | UNIQUE | Issue 全局 ID 和仓库编号双重幂等 |
-| `open_source_guide` | `uk_open_source_guide_account_issue` | UNIQUE | 同一用户同一 Issue 只保留一份当前指南 |
+| 数据域 | 代表表 |
+|---|---|
+| 账号与资料 | `account`、`user_profile` |
+| 内容 | `work`、`requirement`、`category`、`comment`、`favorite` |
+| 沟通与交易 | `conversation`、`message`、`quote`、`order`、`payment_stage`、`delivery` |
+| 配额与支付 | `quota_operation`、`quota_log`、`ai_service_pricing`、`top_up`、`redemption_code`、`order_payment` |
+| AI 记录 | `ai_tool_call_log`、`ai_result_record`、`trend_history`、`plan_history` |
+| 榜单与开源 | `leaderboard_snapshot`、`open_source_repository`、`open_source_issue`、`open_source_guide` |
+| 新手与职业 | `beginner_project*`、`career_project*`、`project_knowledge_index_status` |
+| 画像工坊 | `persona_profile_entry`、`persona_material`、`persona_equipment`、`persona_workshop_setting`、`persona_appearance_share` |
+| 后台任务 | `system_task`、`ingestion_run`、`ingestion_run_item`、`ingestion_pipeline_lock` |
+| Agent | `agent_device_credential`、`agent_device_link_code`、`agent_action_task` |
+
+### 8.3 配额账本
+
+V37 引入 `quota_operation` 幂等业务操作表，并增强 `quota_log`：
+
+- `request_id` 全局唯一；
+- `(account_id, idempotency_scope, idempotency_key_hash)` 唯一；
+- 请求体保存 SHA-256，而不是保存客户端幂等键明文；
+- 记录服务键和价格版本；
+- 扣减、补发和退款通过原操作关联；
+- 流水具有公开安全的 `transaction_no`；
+- `ai_result_record.request_hash` 用于校验请求与结果一致性。
+
+前后端双重幂等用于解决重复点击、浏览器重试、网关重试和 AI 结果回放导致的重复扣费问题。
 
 ---
 
-## 7. 服务通信方案
+## 9. 持久化任务与采集流水线
 
-### 7.1 内部服务通信
+### 9.1 System Task
 
-| 通信方式 | 场景 | 实现 |
-|---------|------|------|
-| **同步 HTTP/REST** | 所有 CRUD API、AI 调用 | Spring MVC `@RestController` + RestTemplate |
-| **WebSocket** | 一对一私聊实时推送 | `spring-boot-starter-websocket`，`/ws` 端点 |
-| **异步线程池** | AI 审核（不阻塞用户提交） | `Executors.newFixedThreadPool(2)` |
-| **定时任务** | 榜单刷新（周一凌晨 2:00） | `@Scheduled(cron = "0 0 2 * * 1")` |
-| **应用事件** | 启动预热（延迟 30s 刷新榜单） | `@PostConstruct` + new Thread() |
+`system_task` 是当前规模下的持久化任务中心：
 
-### 7.2 外部 API 集成
+- 业务键幂等入队；
+- 每 2 秒扫描就绪任务；
+- 单批最多领取 20 个；
+- 数据库原子 claim；
+- 120 秒租约，30 秒心跳；
+- 每 60 秒恢复过期任务；
+- 支持取消、结果、错误、重试时间和配置版本；
+- 失败退避上限为 30 分钟。
 
-```mermaid
-graph LR
-    Server["orange-server"] -->|"Bearer Token<br/>POST /v1/chat/completions<br/>POST /v1/embeddings"| Gitee["Gitee AI API"]
-    Server -->|"Bearer Token<br/>GET /search/repositories<br/>GET raw.githubusercontent.com"| GitHub["GitHub API"]
-    Server -->|"POST Webhook<br/>interactive card"| Feishu["飞书 Bot"]
-    Server -->|"POST /submit.php<br/>MD5签名 + 异步回调"| Epay["易支付"]
-    Server -->|"SMTP STARTTLS<br/>587端口"| QQMail["QQ 邮箱"]
-```
+任务由 Spring 管理的线程池执行。`maxAttempts=0` 表示不设次数上限；具体任务必须显式决定是否允许无限重试。GitHub 榜单完整刷新当前设置为 1 次，避免失败任务永久循环。
 
-| 集成服务 | 配置前缀 | 依赖级别 | 降级策略 |
-|---------|---------|---------|---------|
-| **Gitee AI** (LLM) | `orange.ai-audit` / `orange.ai-trend` | 强依赖 | AI 功能不可用 |
-| **Gitee AI** (Embedding) | `orange.ai-embedding` | 弱依赖 | `VectorStore == null`，RAG 跳过 |
-| **GitHub API** | `orange.leaderboard.github-token` | 弱依赖 | 返回空榜单，不影响业务 |
-| **飞书 Webhook** | `orange.feishu.webhook-url` / `job-webhook-url` | 弱依赖 | `@Value("...:}")` 默认空，不发送通知 |
-| **Redis** | `spring.data.redis` / `orange.redis` | 中依赖 | `@Autowired(required=false)`，缓存/AI开关/黑名单降级 |
-| **Epay** | `orange.epay.*` | 弱依赖 | 充值不可用，不影响兑换码 |
-| **QQ 邮箱** | `spring.mail.*` | 中依赖 | 邮箱验证码发送失败时注册不可用 |
-| **阿里云 OSS** | `orange.oss.*` | 弱依赖 | 降级到本地文件上传 |
+### 9.2 Ingestion Run
 
-### 7.3 统一 API 响应格式
+采集流水线使用：
 
-```json
-{
-  "code": 1,        // 1=成功, 0=失败
-  "msg": "success", // 错误信息
-  "data": {}        // 业务数据
-}
-```
+- `ingestion_run`：一次采集运行；
+- `ingestion_run_item`：阶段与单项进度；
+- `ingestion_pipeline_lock`：跨实例租约；
+- `system_task.run_id`：任务与运行关联。
 
-`Result<T>` 泛型类通过 `JacksonObjectMapper` 序列化，自动处理 `LocalDateTime → "yyyy-MM-dd HH:mm:ss"` 格式转换。
+管理端可以创建、查看、重试和取消采集运行。该模型覆盖榜单、开源 Issue、README 等外部数据处理。
+
+### 9.3 定时任务基线
+
+| 任务 | 默认计划 |
+|---|---|
+| GitHub 榜单 | 每周一 02:00 |
+| 开源 Issue 完整刷新 | 每周一 03:30 |
+| 开源 Issue 核验 | 每天 04:30 |
+| 新手项目 | 每周一 04:30 |
+| 职业成长项目 | 每周一 05:00 |
+| 项目知识同步 | 默认每 5 分钟扫描 |
+| 报价超时、存储清理 | 每 10 分钟 |
+| 订单超时 | 每天 02:00 |
+| 通知清理 | 每天 03:00 |
+
+GitHub 榜单抓取使用 URL 编码后的 Search API 查询；请求失败与 JSON 解析失败分别报告。刷新仍同步执行 README 采集、翻译和向量化，因此完整多分类刷新可能耗时较长，这是当前实现的性能边界。
 
 ---
 
-## 8. 部署架构与资源规划
+## 10. 安全架构
 
-### 8.1 部署拓扑
+### 10.1 身份与入口安全
 
-```mermaid
-graph TB
-    subgraph Cloud["阿里云轻量应用服务器（上海，4C8G）"]
-        Nginx["Nginx 1.24<br/>:80/:443"]
-        App["Spring Boot Fat JAR<br/>systemd: orangejd<br/>127.0.0.1:8080"]
-        Redis["APT Redis 8.2.7 + RediSearch<br/>127.0.0.1:6379"]
-    end
+- App/Admin 使用不同 JWT 密钥；生产密钥至少 32 字符且不能相同；
+- 密码使用 BCrypt；
+- 注册和找回密码使用邮箱验证码；
+- 注册接入 Cloudflare Turnstile；
+- 登录、注册、验证码、上传、AI、投稿和 Agent 路径有应用级 Redis 限流；
+- Nginx 普通 API 默认每 IP 20 请求/秒，登录入口每 IP 5 请求/分钟；
+- 外部 URL 只允许符合策略的 HTTPS 公网地址，拒绝 localhost、私网、用户信息等危险形式；
+- 前端外链通过统一安全打开逻辑和 `noopener,noreferrer`；
+- 上传文件执行类型、扩展名、文件签名和路径控制；
+- Token、Key、密码和个人信息不得进入 Git、日志或发布包。
 
-    subgraph RDS["阿里云 RDS（上海）"]
-        MySQL["MySQL 8.0<br/>内网 + TLS"]
-    end
+### 10.2 Nginx 安全
 
-    subgraph Storage_Cloud["阿里云 OSS"]
-        Files["用户上传文件"]
-    end
+生产模板实现：
 
-    subgraph External["外部 SaaS"]
-        GiteeAI["Gitee AI"]
-        GitHub["GitHub API"]
-        Feishu["飞书 Webhook"]
-        QQMail["QQ 邮箱 SMTP"]
-    end
+- HTTP、`www` 统一 301 到 `https://orangevf.com`；
+- HSTS、CSP、`nosniff`、DENY frame、Referrer Policy 和 Permissions Policy；
+- `/assets/*` 与 `/admin/assets/*` 缺失时精确返回 404；
+- `robots.txt`、`sitemap.xml`、`security.txt` 必须返回真实文件；
+- `/.env`、`/.git` 等隐藏路径返回 404；
+- `/health` 仅允许本机访问；
+- 用户上传资源附加独立 CSP。
 
-    Nginx -->|proxy_pass :8080| App
-    Nginx -->|serve /data/orangejd/web-dist| Static["用户端 + /admin 管理端"]
-    App -->|VPC 内网| MySQL
-    App --> Redis
-    App --> GiteeAI
-    App --> GitHub
-    App --> Feishu
-    App --> QQMail
-    App --> Files
-```
+### 10.3 生产配置校验
 
-### 8.2 资源配置预估
+生产启动时校验：
 
-| 组件 | 规格 | 用途 |
-|------|------|------|
-| **轻量服务器** | 4 vCPU / 8 GiB / 70 GiB | Spring Boot、Nginx、Redis 8 |
-| **RDS MySQL** | MySQL 8.0，独立云实例 | 业务数据库，内网 TLS 连接 |
-| **Redis** | APT 安装 Redis 8.2.7，本机最大内存 2GB | 缓存、Token 黑名单、RediSearch 向量索引 |
-| **OSS** | 私有 Bucket，按量计费/试用资源包 | 图片、视频、交付附件和签名读取 |
-| **公网** | 峰值 200 Mbps，按实际产品流量规则计费 | 用户访问；容量判断必须结合业务压测，不以峰值带宽等同稳定吞吐 |
+- JWT 密钥强度和隔离；
+- CORS 明确 HTTPS 白名单；
+- `PUBLIC_BASE_URL` 为 HTTPS Origin；
+- Turnstile 密钥存在；
+- Epay 要么完整配置，要么关闭；
+- AI 动态配置保存前必须具备 `AI_CONFIG_ENCRYPTION_KEY`。
 
-### 8.3 启动方式
-
-```bash
-sudo systemctl start orangejd
-sudo systemctl status orangejd --no-pager -l
-curl -fsS http://127.0.0.1:8080/health/detail
-```
-
-生产秘密由 systemd 的 `EnvironmentFile=/etc/orangejd/orangejd.env` 注入，JAR 固定为 `/data/orangejd/orange-server.jar`。服务只监听回环地址，公网 API 必须经过 Nginx。
-
-### 8.4 当前发布流程
-
-```
-本地 V2 工作区
-  │
-  ▼
-scripts/build-release.sh
-（Maven verify + 双前端 npm ci/build）
-  │
-  ▼
-SHA256 校验 + SCP 统一发布包
-  │
-  ▼
-备份 JAR/双前端/环境和 Nginx → 安装 → systemctl restart
-  │
-  ▼
-健康检查 + Flyway + Nginx + 浏览器业务冒烟
-```
-
-当前无自动化 CI/CD 流水线（Jenkins/GitHub Actions），部署为手动 Maven 打包 + SCP 上传。
+发布构建还会拒绝空值、`YOUR_`、`example.com`、localhost 等生产占位配置，并生成公开构建变量指纹。
 
 ---
 
-## 9. 关键难点技术实现方案
+## 11. 部署、发布与回滚
 
-### 9.1 RAG 检索增强生成
+### 11.1 systemd
 
-**难点**：中文 Embedding 精度、向量检索召回率、跨模态知识匹配
+应用由 `orangejd.service` 启动：
 
-**方案**：
-
-| 环节 | 选型 | 原因 |
-|------|------|------|
-| Embedding 模型 | Gitee AI `bge-small-zh-v1.5` | 512 维中文原生，免费 API，实测相关 0.77~0.80 / 无关 0.38~0.45 |
-| 向量数据库 | Redis Stack RediSearch | 与缓存共用实例，减少运维成本 |
-| 检索策略 | 4 维独立检索 + 合并去重 | 避免单一维度语义偏移 |
-| 切片策略 | 500 字/段 × 重叠 50 字 | bge-small 512 token 限制，截断至 400 字 |
-| 索引算法 | HNSW + COSINE 相似度 | RediSearch 原生支持 |
-
-**初始化必须配置**：
-```yaml
-spring.ai.vectorstore.redis.initialize-schema: true  # 默认 false，不开启 FT.INDEX 不创建
+```text
+/usr/bin/java -Xms512m -Xmx2048m -XX:MaxMetaspaceSize=384m
+  -jar /data/orangejd/orange-server.jar
+  --spring.profiles.active=prod
 ```
 
-### 9.2 多模态 AI 审核
+服务以 `admin` 用户运行，环境变量来自 `/etc/orangejd/orangejd.env`，启用 `NoNewPrivileges`、`PrivateTmp`、受限写目录和失败自动重启。
 
-**难点**：图片违规检测、大模型图片支持不稳定、并发审核控制
+### 11.2 发布包
 
-**方案**：
+`scripts/build-release.sh` 负责：
 
-```
-审核流程:
-  收集所有图片URL → UrlValidator.isSafe() SSRF校验 → 去重 → 最多5张
-  → 多模态请求(文本+图片URL) → AI分析
-  → 成功? → 解析action/reason → 执行审核
-  → 失败且涉及图片? → 降级纯文本 → 标记degraded=true
-  → 全部失败? → SKIPPED + 飞书warning
-```
+- Maven 构建；
+- 两个 Vue 应用构建；
+- 组合用户端与管理端产物；
+- 校验两个 SPA 入口引用的 JS/CSS 均存在；
+- 生成 Git SHA、分支、时间、文件 SHA-256 和迁移清单；
+- 生成公开构建配置指纹；
+- 携带 Nginx 模板和生产配置校验工具。
 
-**并发控制**：`FixedThreadPool(2)` + `runningCount` 计数器，避免大量审核请求打满 AI API 额度。
+`scripts/install-release.sh` 负责：
 
-### 9.3 配额系统并发安全
+- 检查发布包和配置指纹；
+- 备份当前 JAR、前端和 Nginx；
+- 生成并校验候选 Nginx 配置；
+- 切换文件并重启服务；
+- 验证网站、管理端、静态资源 404、安全文件类型和健康接口；
+- 任一步失败时恢复旧 JAR、旧前端和旧 Nginx。
 
-**难点**：高并发消费时防止超扣
-
-**方案**：
-
-```java
-// ① 幂等检查 (requestId UNIQUE KEY)
-if (quotaLogMapper.existsByRequestId(requestId) > 0) return balance;
-
-// ② FOR UPDATE 行锁
-Account acc = accountMapper.selectByIdForUpdate(accountId);
-
-// ③ 原子扣减 (SQL: UPDATE account SET quota = quota - #{amount} WHERE id = #{id} AND quota >= #{amount})
-int rows = accountMapper.decreaseQuota(accountId, amount);
-if (rows == 0) throw new BaseException("余额不足");
-
-// ④ 写消费日志 (requestId 确保唯一)
-writeLog(accountId, "CONSUME", -amount, balance, null, description, requestId);
-```
-
-**关键 SQL**：
-```sql
-UPDATE account SET quota = quota - #{amount}
-WHERE id = #{id} AND quota >= #{amount}
-```
-利用 MySQL InnoDB 行级锁 + 条件更新保证原子性，`rows==0` 表示余额不足或被并发扣减。
-
-### 9.4 方案设计六阶段 Token 优化
-
-**难点**：长对话上下文累积 → Token 消耗激增
-
-**方案**：
-
-| 阶段 | Token 策略 | 上下文传递 |
-|------|-----------|-----------|
-| Phase 1 | 无 AI 调用（用户输入） | — |
-| Phase 2-4 | 标准提示词（400-600 tokens） | 前阶段完整内容 |
-| Phase 5 | 标准模式 ~800 tokens / 精简模式 ~300 tokens | 前 4 阶段全部内容 |
-| Phase 6 | 独立调用（不累积前阶段 prompt） | 仅方案概要 + 向量检索 top JD |
-
-精简模式（`planMode='lite'`）仅影响 Phase 5，Phase 2-4 保持完整分析质量。
-
-### 9.5 岗位匹配版权合规
-
-**难点**：用户提交的 JD 可能来自公司内部渠道，存在保密/版权风险
-
-**方案（避风港原则）**：
-1. **投稿声明**：用户必须勾选"所提交信息来自公开渠道，不含内部保密信息"
-2. **自动清洗**：后端 `stripCompanyNames()` 替换已知公司名为"该公司"
-3. **分层存储**：`content`（管理员可见，含公司名）/ `displayContent`（公开，已脱敏）
-4. **DMCA 声明**：岗位详情页底部展示版权声明 + 构建时配置的网站法律联系邮箱
+发布脚本不应被手工复制单个 `dist` 目录替代，否则可能再次出现用户端覆盖管理端或旧 HTML 引用缺失资源的问题。
 
 ---
 
-## 10. 监控、告警、观测体系
+## 12. MySQL 自建与备份
 
-### 10.1 健康检查
+### 12.1 当前目标配置
 
-| 端点 | 用途 | 鉴权 |
-|------|------|------|
-| `GET /health` | 基础存活检测 | 无 |
-| `GET /health/detail` | 详细状态：DB / Redis / RAG VectorStore | 无 |
+仓库中的生产配置将 MySQL 8.0 设计为：
 
-响应示例：
-```json
-{"db": "UP", "redis": "UP", "rag_vector_store": "UP"}
+- 仅监听 `127.0.0.1:3306`；
+- `require_secure_transport=ON`；
+- 最大连接数 150；
+- InnoDB Buffer Pool 1536 MB；
+- Redo Log 512 MB；
+- 慢查询阈值 1 秒；
+- Binlog 保留 3 天；
+- 2 GB Swap 防止突发 OOM；
+- 字符集和大小写设置保留原 RDS 兼容参数，不能在未评估现有数据前擅自改成新的默认值。
+
+### 12.2 备份安全
+
+数据库备份与用户媒体使用同一私有 OSS 桶，但使用独立 RAM 凭证和独立前缀：
+
+```text
+用户媒体：avatar/ cover/ detail/ general/ video/
+数据库：database-backups/
 ```
 
-### 10.2 日志体系
+应用媒体账号不得访问数据库备份；备份账号不得访问用户媒体。
 
-| Logger | 用途 | 输出 |
-|--------|------|------|
-| `com.orangejd` (root) | 业务日志 | 控制台 + 文件 |
-| `ADMIN_AUDIT` | 管理员操作审计（AOP 切面） | 独立文件 |
-| `LeaderboardRefreshTask` | 榜单刷新任务日志 | INFO 级别 |
-| `AiAuditService` | AI 审核全链路 | INFO/WARN/ERROR |
+每日 02:30 执行：
 
-**日志格式**（通过 RequestIdInterceptor 注入 MDC）：
-```
-2026-07-05 10:30:15.123 [http-nio-8080-exec-1] INFO  [req-a3f2b1c4] c.o.s.c.a.AppWorkController - 作品提交成功 workId=123
-```
+1. `mysqldump --single-transaction --quick --skip-lock-tables`；
+2. gzip 压缩；
+3. 使用 age 公钥加密；
+4. 生成 SHA-256；
+5. 上传日备份和校验文件；
+6. 重新下载并 `cmp` 验证；
+7. 每月 1 日生成月备份；
+8. 本地只保留最近 7 天。
 
-### 10.3 关键指标监控
+OSS 清理由每周任务执行，只允许删除下列前缀：
 
-| 指标 | 采集方式 | 告警阈值 |
-|------|---------|---------|
-| API 响应时间 | RestTemplate timeout (90s AI / 30s normal) | > 5s 连续 10 次 |
-| AI 审核成功率 | `AiAuditService` 日志计数 | < 80% |
-| Redis 连接状态 | `/health/detail` | DOWN |
-| 配额消费异常 | `QuotaServiceImpl` ERROR 日志 | 任意 ERROR |
-| 榜单刷新失败 | `LeaderboardRefreshTask` ERROR 日志 | 连续 2 周失败 |
-| JVM 内存 | Spring Boot Actuator (未集成) | Heap > 80% |
+| 前缀 | 保留时间 |
+|---|---:|
+| `database-backups/daily/` | 30 天 |
+| `database-backups/checksums/` | 30 天 |
+| `database-backups/monthly/` | 400 天 |
+| `database-backups/rehearsal/` | 7 天 |
 
-> **当前状态**：无独立监控系统（Prometheus/Grafana），依赖日志和 `/health/detail` 手动巡检。建议下一迭代引入 Spring Boot Actuator + Micrometer。
+### 12.3 数据库健康检查
 
-### 10.4 管理员审计
+每 15 分钟检查：MySQL、应用、Nginx、备份 Timer、SQL 查询、本地数据库配置、磁盘和最近加密备份。应用 Actuator 健康检查采用 10 秒超时，最多 3 次，间隔 2 秒，避免单次短暂抖动触发飞书误报。
 
-`AdminAuditAspect` AOP 切面拦截所有 `/admin/**` 的 POST/PUT/DELETE 操作：
-```
-[ADMIN_AUDIT] adminId=1 | action=POST /admin/job/123/approve | ip=127.0.0.1 | params={"id":123}
-```
+磁盘 70% 记录警告，85% 进入失败告警；最近备份超过 26 小时视为异常。
 
 ---
 
-## 11. 安全设计
+## 13. 可观测性
 
-### 11.1 安全架构总览
+当前具备：
 
-```
-请求进入
-  │
-  ▼
-CORS 跨域控制 (allowedOriginPatterns: *, allowCredentials: true)
-  │
-  ▼
-RequestID 注入 (全链路追踪)
-  │
-  ▼
-JWT 双通道鉴权 (Admin-Token / App-Token，密钥独立)
-  │
-  ▼
-SSRF 防护 (UrlValidator.isSafe → 拦截内网IP，白名单CDN)
-  │
-  ▼
-Token 黑名单 (Redis Set，退出登录时加入)
-  │
-  ▼
-BCrypt 密码存储 (不可逆)
-```
+- `/health` 和 `/health/detail`；
+- Actuator `health/info/prometheus`；
+- 管理端口默认绑定 `127.0.0.1:8081`；
+- Micrometer Prometheus 指标；
+- 请求 ID 和结构化日志；
+- AI 调用成功、失败、重试、超时和容量拒绝指标；
+- AI 调用记录、系统任务、采集运行、管理员审计日志；
+- systemd Journal；
+- 数据库/备份飞书告警。
 
-### 11.2 各层安全措施
+需要区分三种健康信号：
 
-| 层 | 措施 | 实现 |
-|----|------|------|
-| **传输** | HTTPS（生产 Nginx 终止 TLS） | Nginx 配置 |
-| **认证** | JWT HS256 + `sk-` 前缀 + 2h TTL + 黑名单 | `JwtUtil` + `TokenBlacklistService` |
-| **授权** | 双通道独立密钥（admin token 不能访问 app，反之亦然） | 两个 Interceptor |
-| **密码** | BCrypt 加密存储，不可逆 | `spring-security-crypto` |
-| **输入** | SSRF URL 校验（拦截 10.x/172.16/192.168/127.x/0.0.0.0） | `UrlValidator.isSafe()` |
-| **数据** | 岗位内容自动脱敏（公司名→"该公司"），管理员可见完整版 | `stripCompanyNames()` |
-| **幂等** | `quota_log.uk_request_id` 防止重复消费 | UNIQUE KEY |
-| **审计** | 管理员写操作全程 AOP 记录（adminId/action/IP/params） | `AdminAuditAspect` |
-| **密码找回** | 邮箱验证码（6 位随机数，Redis 5 分钟过期） | `SmtpMailServiceImpl` |
+- 应用存活：进程与轻量接口；
+- 依赖健康：MySQL、Redis、VectorStore；
+- 业务健康：AI 成功率、记录保存率、采集快照日期、备份新鲜度。
 
-### 11.3 数据权限模型
-
-| 角色 | 可见数据 | 不可见数据 |
-|------|---------|-----------|
-| **未登录用户** | 公开作品/需求、分类、榜单、趋势分析 V1、岗位方向列表 | 用户信息、私聊、订单、趋势分析 V2 |
-| **普通用户 (USER)** | 自己的作品/需求/订单/消息/配额，公开内容，岗位详情（脱敏） | 他人私密作品、管理端 |
-| **管理员 (ADMIN)** | 全部数据（含完整岗位 JD、用户列表、审核记录、统计报表） | — |
-
-### 11.4 岗位版权合规（避风港原则）
-
-平台定性为 **UGC 信息聚合平台**，不承担主动审查义务：
-1. 用户投稿时必须勾选强制声明（"信息来自公开渠道，不含内部保密信息"）
-2. 岗位详情页展示 DMCA 版权声明 + 权利人通知路径
-3. 收到权利人通知后，72 小时内下架 + 通知投稿人
-4. 管理员可以随时删除/拒绝任何岗位投稿
+“application health endpoint failed”不等于“MySQL failed”，告警文案和排障必须按具体检查项解释。
 
 ---
 
-## 12. 容灾、扩容、故障处理
+## 14. 测试与质量门禁
 
-### 12.1 故障场景与应对
+### 14.1 CI
 
-| 故障 | 影响范围 | 系统行为 | 恢复方式 |
-|------|---------|---------|---------|
-| **MySQL 宕机** | 全部功能不可用 | 应用无法启动/API 返回 500 | 重启 MySQL + 应用 |
-| **Redis 8 宕机** | AI 审核开关、Token 黑名单、RAG 向量检索不可用 | 部分非核心能力可降级，鉴权和向量能力需重点确认 | `systemctl restart redis-server` 后检查 `FT._LIST` |
-| **Gitee AI API 故障** | AI 审核、趋势、方案、岗位与开源 AI 功能不可用 | 交互型配额功能返回错误并退款；Issue 缓存仍可浏览 | 等待 API 恢复并检查失败记录 |
-| **飞书 Webhook 故障** | 审核通知不发送 | try-catch 静默失败，不影响审核 | 无需恢复 |
-| **GitHub API 限流或 Token 失效** | 榜单与 Issue 不刷新、实时核验失败 | 使用 MySQL 缓存继续展示，管理端记录同步错误 | 更新 Token 或等待限流窗口恢复 |
-| **OSS 故障** | 文件上传失败 | 降级到本地文件存储 | 切换 OSS bucket |
-| **邮箱 SMTP 故障** | 注册验证码发送失败 | 注册接口返回错误 | 检查 SMTP 配置 |
+GitHub Actions 覆盖 `main`、`V2`、`V3` 的 push 和 PR：
 
-### 12.2 降级开关总览
+1. Java 21 下执行 `mvn -B clean verify`；
+2. MySQL 8.0 空库按版本顺序执行全部 Flyway SQL；
+3. 用户端执行安装、Lint、Typecheck、Coverage、Build 和生产依赖审计；
+4. 管理端执行安装、Lint、Typecheck、测试、Build 和生产依赖审计；
+5. 执行 Java/Vue 文件规模预算；
+6. 执行前端 Bundle 预算；
+7. Playwright Chromium 关键流程测试；
+8. Gitleaks 密钥扫描。
 
-| 开关 | 存储位置 | 控制方式 | 默认值 |
-|------|---------|---------|--------|
-| AI 自动审核 | Redis `system:ai-audit:enabled` | 管理后台 `/admin/ai-audit/toggle` | false |
-| AI 配置 | Redis `ai-config:*` | 管理后台 AIConfig 页面 | YAML 默认值 |
-| 交易模式 | Redis `system:trade-mode` | 管理后台配置页 | true |
+### 14.2 当前覆盖现状
 
-### 12.3 数据备份策略
+2026-08-13 本地验证：
 
-| 数据 | 方式 | 频率 | 保留 |
-|------|------|------|------|
-| RDS MySQL | RDS 自动备份 + 重大迁移前手动备份 | 按控制台策略 | 按实际套餐和合规要求 |
-| Redis | AOF + 定期异机副本 | 待自动化 | 不得只保存在同一系统盘 |
-| OSS 文件 | 私有 Bucket + 生命周期/版本策略 | 按业务等级 | 按成本和恢复目标 |
-| 应用日志 | 日志文件轮转 | 按天 | 30 天 |
+- 后端 238 项测试通过；
+- 用户端 43 个测试文件、133 项测试通过；
+- 管理端 2 个测试文件、3 项测试通过；
+- 两个前端生产构建通过；
+- 数据库运维 Shell 脚本通过语法检查；
+- OSS RAM 策略 JSON 可解析。
 
-> **当前状态**：备份策略为手动执行，未配置自动化。建议引入阿里云 DBS 自动备份。
-
-### 12.4 扩容路径
-
-当前为单机部署，未来扩容路径：
-
-```
-当前: 单应用服务器 (Spring Boot + Nginx + Redis) + RDS + OSS
-  │
-  ├─► Redis 分离: 选择支持 RediSearch/Vector 的托管实例
-  │
-  ├─► 应用扩容: Spring Boot × 2 (Nginx upstream)
-  │
-  └─► 静态资源: Nginx → CDN (阿里云 CDN)
-```
+管理端自动化测试数量明显少于用户端，是当前测试分布的主要短板。用户端测试仍存在 Element Plus 组件/指令未完整注册造成的警告，应持续清理，但不影响当前测试通过结论。
 
 ---
 
-## 13. 迭代规划与技术债务说明
+## 15. 已知边界与技术债务
 
-### 13.1 版本历史
-
-| 版本 | 日期 | 核心交付 |
-|------|------|---------|
-| v0.1 | 06-07 | 项目骨架 + 账号体系 |
-| v0.2 | 06-08 | 分类 CRUD + 内容发布 + 审核流程 |
-| v0.3 | 06-09 | 沟通协商(WebSocket) + 交易闭环 + 管理后台 |
-| v0.4 | 06-14 | 前端双门户 + 文件上传 + 安全加固 |
-| v0.5 | 06-16 | 部署上线（阿里云 ECS） |
-| v0.6 | 06-17 | GitHub 榜单 + AI 趋势分析 |
-| v0.7 | 06-18 | AI 自动审核（多模态）+ 富文本编辑器 |
-| v0.8 | 06-24 | RAG 知识库集成（Spring AI + Redis Stack） |
-| v0.9 | 06-30 | 邮箱注册 + 项目对比借鉴 + 安全增强（SSRF/Token前缀/RequestID/审计） |
-| v1.0 | 07-01 | 配额系统 + Epay 支付 + 方案设计（四阶段） |
-| v1.1 | 07-05 | 岗位招聘系统 + 方案设计六阶段重构 + 飞书双 Webhook |
-| v1.2 | 07-21 | 上线体检、法律与支付迁移、开源 Issue 发现/匹配/指南、AI 工具首页重构、统一发布包 |
-
-### 13.2 当前技术债务
-
-| 编号 | 债务 | 严重程度 | 建议修复 |
-|------|------|---------|---------|
-| TD-01 | 向量删除失败（RedisStack FT.INDEX metadata 索引缺失） | 🟡 中 | 升级 Spring AI 1.1.x |
-| TD-02 | 无 CI/CD 流水线 | 🟡 中 | 引入 GitHub Actions |
-| TD-03 | 无自动化测试（单元/集成） | 🔴 高 | 引入 JUnit 5 + Mockito |
-| TD-04 | 无 API 限流 | 🟡 中 | 引入 Guava RateLimiter 或 Sentinel |
-| TD-05 | 无接口文档自动生成（springdoc-openapi 已引入但未配置） | 🟢 低 | 配置 springdoc 扫描路径 |
-| TD-06 | Epay 支付未真实对接（无有效商户号） | 🟢 低 | 注册商户后联调 |
-| TD-07 | 榜单刷新单线程串行（15 个 Topic × 2 窗口 × 6s = 180s+） | 🟡 中 | 改为线程池并行抓取 |
-| TD-08 | 岗位匹配无检索结果时仍消耗配额 | 🟢 低 | 检测 `jobDocs.isEmpty()` 降低费用 |
-| TD-09 | `application-prod.yml` 缺少 `job-webhook-url` 和 `mail` 配置段 | 🟡 中 | 补齐生产环境配置 |
-
-### 13.3 下一迭代（v1.2）建议
-
-1. **自动化测试**（P0）：核心 Service 单元测试 + Controller 集成测试
-2. **CI/CD**（P0）：GitHub Actions → 自动 Maven 打包 + SCP 部署
-3. **监控升级**（P1）：Spring Boot Actuator + Prometheus + Grafana
-4. **API 限流**（P1）：防止 AI API 被刷
-5. **方案设计导出**（P2）：PDF 导出，支持分享链接
-6. **知识库优化**（P2）：向量删除修复 + 混合检索（BM25 + 向量）
+| 编号 | 当前事实 | 风险 | 建议方向 |
+|---|---|---|---|
+| TD-01 | 单体包内仍同时存在业务模块与历史 `controller/service/mapper` | 模块边界仍需人工理解 | 修改业务时渐进迁移，不做一次性重写 |
+| TD-02 | `spring.main.allow-circular-references=true` | 可能掩盖循环依赖 | 统计真实循环后逐个消除 |
+| TD-03 | AI 自动重试在请求线程内执行，0 表示无限次 | 长故障可能长期占用线程和并发租约 | 将长重试迁入持久化任务，生产设置有限次数 |
+| TD-04 | 榜单刷新同步处理多 Topic、README、翻译和向量化 | 完整刷新耗时长，局部失败影响整批状态 | 拆成可并发、有速率限制的子任务流水线 |
+| TD-05 | 前端主要 Bundle 和趋势分析 Chunk 超过 500 KB | 首屏或功能加载成本偏高 | 拆分 Three.js、ECharts、编辑器和分析模块 |
+| TD-06 | 管理端只有 3 项测试 | 回归保护不足 | 补齐登录、分页、审核、AI 设置、采集运行流程 |
+| TD-07 | 用户端 Axios 全局默认 15 秒 | 长 AI 请求若未覆盖会提前超时 | 所有长任务统一异步任务/轮询协议 |
+| TD-08 | MySQL、Redis、应用仍在同一服务器 | 主机级单点故障 | 先验证恢复演练，再按成本选择托管数据库或热备 |
+| TD-09 | Redis 同时承担缓存、动态配置、限流、租约和向量 | 内存或服务故障影响面较大 | 建立容量指标、备份/重建流程，必要时拆实例 |
 
 ---
 
-## 14. 潜在风险与应对
+## 16. 容量与扩展原则
 
-| 编号 | 风险 | 触发条件 | 影响 | 概率 | 应对措施 |
-|------|------|---------|------|------|---------|
-| R-01 | **Gitee AI API 服务中断** | API 欠费/升级/限流 | AI 审核/趋势/方案/匹配全部不可用 | 中 | 配额退款机制已就绪；关键业务不依赖 AI |
-| R-02 | **Redis 8 内存溢出** | 知识库文档激增，向量占用过大 | 向量检索变慢或写入失败 | 低 | 当前 `maxmemory=2gb`、`noeviction`；监控内存并在写入失败前扩容 |
-| R-03 | **MySQL 慢查询** | 数据量增长，缺少索引优化 | API 响应变慢 | 低 | 已有基础索引；后续加入慢查询日志 + EXPLAIN 优化 |
-| R-04 | **AI 审核误杀/漏审** | 模型理解偏差或 prompt 不完善 | 合规内容被拒或不适当内容通过 | 中 | 人工复审机制（管理后台审核页）；飞书通知可人工介入 |
-| R-05 | **版权纠纷** | 用户提交未公开的内部 JD | 法律风险 | 中 | 避风港原则：强制声明 + 自动脱敏 + 72h 下架流程 |
-| R-06 | **配额超扣** | FOR UPDATE 锁失效或并发绕过 | 用户余额变负 | 低 | 已有原子 SQL `WHERE quota >= amount` + UNIQUE requestId 双重防护 |
-| R-07 | **JWT 密钥泄露** | 配置管理不当 | 所有用户账户可被伪造 | 低 | 密钥通过环境变量注入，不写入代码仓库 |
-| R-08 | **单点故障** | ECS 宕机 | 整个平台不可用 | 低 | 当前单机部署；后续通过 RDS + 多应用实例消除单点 |
+平台“同时支持多少用户”不能由 Key 数量或供应商宣称的“不限制并发”直接推出。真实容量取决于：
 
----
+- 全局 AI 并发上限；
+- Key 槽位数和每 Key 的 RPM/TPM；
+- 兜底模型配额；
+- 提示词与输出 Token；
+- 单次响应时间；
+- 自动重试比例；
+- 应用线程、HTTP 连接池、Redis 和 MySQL；
+- 结果保存和配额事务延迟。
 
-## 附录 A：技术栈完整清单
+当前代码允许全局并发最高 80，但这只是入口保护上限，不是经过真实长文本压测后承诺的稳定吞吐。正式容量应使用真实请求体持续压测 10-30 分钟，并同时观测成功率、P95/P99、429、超时、Token 速率、兜底比例、线程、数据库连接、Redis 延迟和结果保存率。
 
-| 类别 | 技术 | 版本 | 用途 |
-|------|------|------|------|
-| **语言** | Java | 21 | 后端 |
-| **框架** | Spring Boot | 3.3.5 | 应用框架 |
-| | Spring AI | 1.0.0 | AI 集成（VectorStore + Embedding） |
-| | Spring AOP | 3.3.5 | 审计切面 |
-| | Spring Cache | 3.3.5 | 缓存抽象 |
-| | Spring WebSocket | 3.3.5 | 实时消息 |
-| | Spring Validation | 3.3.5 | 参数校验 |
-| **ORM** | MyBatis Spring Boot | 3.0.3 | 数据访问 |
-| | PageHelper | 2.0.0 | 分页插件 |
-| **安全** | JJWT | 0.12.6 | JWT 签发/解析 |
-| | Spring Security Crypto | 6.x | BCrypt |
-| **数据库** | MySQL Connector | 8.0.33 | JDBC 驱动，连接 RDS MySQL 8.0 |
-| | Redis (Jedis) | — | 缓存/向量/黑名单 |
-| **文档** | SpringDoc OpenAPI | 1.7.0 | Swagger UI |
-| **文件** | Apache POI | 5.2.5 | Excel 导入导出 |
-| **邮件** | Spring Boot Mail | 3.3.5 | SMTP 邮件 |
-| **前端** | Vue 3 | 3.5.34 | UI 框架 |
-| | Element Plus | 2.14.1 | UI 组件库 |
-| | Axios | 1.17.0 | HTTP 客户端 |
-| | Vue Router | 4.6.4 | 路由 |
-| | Vite | 8.0.12 | 构建工具 |
-| | ECharts | 6.1.0 | 图表（用户端） |
-| | marked | 18.0.5 | Markdown 渲染（用户端） |
-| **AI** | DeepSeek V4 Pro | — | LLM |
-| | bge-small-zh-v1.5 | — | Embedding 模型 (512维) |
-| **基础设施** | systemd | Ubuntu 24.04 | 管理 Spring Boot 与 Redis 服务 |
-| | Nginx | 1.24 | 反向代理 |
-| | MySQL | 8.0 | 业务数据库 |
-| | Redis 8 + RediSearch | 8.2.7 | 缓存、Token 黑名单和向量检索 |
+扩展优先级：
 
-## 附录 B：API 端点总览
-
-### 管理端 Admin API（含开源贡献管理）
-
-| Controller | Base Path | 端点数 | 核心功能 |
-|------------|-----------|--------|---------|
-| `AdminAuthController` | `/admin/auth` | 3 | 登录/改密/登出 |
-| `AdminCategoryController` | `/admin/category` | 5 | 分类 CRUD + 启用/停用 |
-| `AdminWorkController` | `/admin/work` | 5 | 作品列表/详情/下架/审核 |
-| `AdminRequirementController` | `/admin/requirement` | 4 | 需求列表/详情/下架/审核 |
-| `AdminAuditController` | `/admin/audit` | 5 | 待审列表/通过/拒绝/批量 |
-| `AdminCommentController` | `/admin/comment` | 2 | 评论列表/删除 |
-| `AdminUserController` | `/admin/user` | 4 | 用户列表/详情/禁用/启用 |
-| `AdminOrderController` | `/admin/order` | 3 | 订单列表/详情/状态变更 |
-| `AdminConfigController` | `/admin/config` | 3 | 交易模式开关/状态读取 |
-| `AdminAIConfigController` | `/admin/ai-config` | 2 | AI 配置读写（Redis） |
-| `AdminStatsController` | `/admin/stats` | 3 | 用量统计/仪表盘数据 |
-| `AdminRedemptionController` | `/admin/redemption` | 3 | 充值码生成/列表/统计 |
-| `AdminJobController` | `/admin/job` | 10 | 岗位导入/审核/编辑/删除/AI开关/同步 |
-| `AdminKnowledgeController` | `/admin/knowledge` | 2 | 知识库文档管理 |
-| `ReportController` | `/admin/report` | 2 | 报表导出 |
-| `StatisticsController` | `/admin/statistics` | 2 | 平台统计 |
-| `CommonController` | `/admin/common` | 1 | 文件上传 |
-| `AdminOpenSourceController` | `/admin/open-source` | 9 | 仓库源、Issue 编辑/翻译/核验、完整与轻量刷新 |
-
-### 用户端 App API（含开源贡献流程）
-
-| Controller | Base Path | 端点数 | 核心功能 |
-|------------|-----------|--------|---------|
-| `AppAuthController` | `/app/auth` | 6 | 注册/登录/改密/登出/发送验证码 |
-| `AppCategoryController` | `/app/category` | 1 | 可用分类列表 |
-| `AppWorkController` | `/app/work` | 8 | 作品 CRUD/提交审核/可见性/公开列表 |
-| `AppRequirementController` | `/app/requirement` | 8 | 需求 CRUD/提交审核/可见性/公开列表 |
-| `AppConversationController` | `/app/conversation` | 4 | 会话创建/列表/详情 |
-| `AppMessageController` | `/app/message` | 3 | 发送消息/历史/未读数 |
-| `AppNotificationController` | `/app/notification` | 3 | 通知列表/已读/未读数 |
-| `CommentController` | `/app/comment` | 4 | 评论 CRUD/列表 |
-| `FavoriteController` | `/app/favorite` | 3 | 收藏/取消/列表 |
-| `BrowseHistoryController` | `/app/browse-history` | 2 | 记录浏览/查询历史 |
-| `QuoteController` | `/app/quote` | 5 | 报价 CRUD/接受/拒绝 |
-| `OrderController` | `/app/order` | 5 | 订单 CRUD/支付/确认 |
-| `ProfileController` | `/app/profile` | 2 | 资料读写 |
-| `AppLeaderboardController` | `/app/leaderboard` | 3 | GitHub 榜单/分类/详情 |
-| `AppTrendController` | `/app/trend` | 4 | 知识图谱/趋势分析 V1+V2/历史 |
-| `AppPlanController` | `/app/plan` | 5 | 方案生成/历史保存/加载/删除 |
-| `KnowledgeController` | `/app/knowledge` | 3 | 文档上传/列表/删除 |
-| `JobController` | `/app/job` | 5 | 方向列表/岗位列表/详情/投稿/匹配 |
-| `AppQuotaController` | `/app/quota` | 3 | 余额/兑换/消费日志 |
-| `EpayController` | `/app/epay` | 2 | 创建支付/异步回调 |
-| `AppConfigController` | `/app/config` | 1 | 交易模式查询 |
-| `AppCommonController` | `/app/common` | 1 | 文件上传 |
-| `AppOpenSourceController` | `/app/open-source` | 10 | 配置、Issue 列表/详情/核验、AI 匹配、岗位映射、贡献指南 |
-
-## 附录 C：数据库实体关系（核心业务域）
-
-```mermaid
-erDiagram
-    ACCOUNT ||--o| USER_PROFILE : has
-    ACCOUNT ||--o{ WORK : owns
-    ACCOUNT ||--o{ REQUIREMENT : publishes
-    ACCOUNT ||--o{ ORDER : buys
-    ACCOUNT ||--o{ ORDER : sells
-    ACCOUNT ||--o{ COMMENT : writes
-    ACCOUNT ||--o{ FAVORITE : bookmarks
-    ACCOUNT ||--o{ CONVERSATION : initiates
-    ACCOUNT ||--o{ MESSAGE : sends
-    ACCOUNT ||--o{ QUOTA_LOG : consumes
-    ACCOUNT ||--o{ PLAN_HISTORY : saves
-    ACCOUNT ||--o{ OPEN_SOURCE_GUIDE : owns
-
-    WORK ||--o{ WORK_SALE_OPTION : has
-    WORK ||--o{ COMMENT : receives
-    WORK ||--o{ FAVORITE : collected
-    WORK }o--|| CATEGORY : belongs_to
-
-    REQUIREMENT ||--o{ COMMENT : receives
-    REQUIREMENT }o--|| CATEGORY : belongs_to
-
-    CONVERSATION ||--o{ MESSAGE : contains
-    CONVERSATION ||--o{ QUOTE : negotiates
-    QUOTE ||--|| ORDER : converts_to
-    ORDER ||--o{ PAYMENT_STAGE : split_into
-    ORDER ||--o{ DELIVERY : receives
-
-    WORK ||--o{ AUDIT_RECORD : audited_as
-    REQUIREMENT ||--o{ AUDIT_RECORD : audited_as
-    AUDIT_RECORD }o--|| ACCOUNT : audited_by
-
-    OPEN_SOURCE_REPOSITORY ||--o{ OPEN_SOURCE_ISSUE : contains
-    OPEN_SOURCE_ISSUE ||--o{ OPEN_SOURCE_GUIDE : produces
-```
+1. 将长 AI 调用改为提交任务 + 轮询/推送；
+2. 限制无限自动重试并增加任务级退避；
+3. 拆分采集和向量化流水线；
+4. 分离 Redis 向量与运行时状态；
+5. 应用无状态化后增加实例和 Nginx upstream；
+6. 最后才评估按业务域拆微服务。
 
 ---
 
-> **文档维护**：本文档基于 2026-07-21 的 `V2` 工作区实际代码维护。具体发布版本以 `git log -1`、发布包 SHA256、生产 Flyway 记录和业务验收结果共同确定，不能只依赖文档中的日期。
-# 2026-07-25 架构治理补充
+## 17. 关键配置清单
 
-OrangeVC 当前采用模块化单体、渐进治理和全程兼容路线。已建立持久化任务中心、可执行 Flyway V1 基线、岗位 AI 审核证据与事务奖励、集中路由策略、Redis 限流、ArchUnit 规则、前端质量门禁、Actuator 指标和可追踪发布包。
+以下仅列配置名称，不记录任何真实密钥：
 
-完整边界、已完成内容和后续治理队列以 [架构治理实施说明](./架构治理实施说明.md) 及 `docs/adr` 中的架构决策为准。现有文档中若仍描述 `schema-v1.sql` 手工初始化、裸线程刷新或根目录 `deploy.sh/start.sh`，均视为历史方式，不再用于新环境和生产发布。
+| 分类 | 关键配置 |
+|---|---|
+| 数据库 | `MYSQL_HOST`、`MYSQL_PORT`、`MYSQL_DB`、`MYSQL_USER`、`MYSQL_PASSWORD` |
+| Redis | `REDIS_HOST`、`REDIS_PORT`、`REDIS_PASSWORD`、`REDIS_DB` |
+| JWT | `JWT_ADMIN_SECRET`、`JWT_APP_SECRET` |
+| AI 工具池 | `AI_TOOL_POOL_ENABLED`、`AI_TOOL_GLOBAL_MAX_CONCURRENCY`、`GITEE_AI_ENDPOINT`、`GITEE_AI_MODEL`、`GITEE_AI_KEY_1..10` |
+| AI 兜底 | `AI_TREND_ENDPOINT`、`AI_TREND_KEY`、`AI_TREND_MODEL` |
+| AI 动态配置 | `AI_CONFIG_ENCRYPTION_KEY` |
+| 其他 AI | `AI_AUDIT_*`、`AI_TEXT_*`、`AI_PROJECT_*`、`AI_CONTRIBUTION_*`、`AI_EMBEDDING_*` |
+| GitHub | `GITHUB_TOKEN`、榜单与开源刷新 Cron |
+| OSS | `OSS_ENABLED`、Endpoint、Bucket、媒体 RAM 凭证 |
+| 备份 OSS | `/etc/orangejd/mysql-backup.env` 中的独立 RAM 凭证和 age 公钥路径 |
+| 网站 | `PUBLIC_BASE_URL`、`ALLOWED_ORIGINS`、Turnstile、品牌和备案构建变量 |
+| 支付与通知 | Epay、SMTP、飞书 Webhook |
+
+> 注：Embedding 环境变量统一使用 `AI_EMBEDDING_*`，以 `application-prod.yml` 为准。
+
+---
+
+## 18. 运维验收清单
+
+每次生产发布至少验证：
+
+- [ ] Git SHA 与发布包 manifest 一致；
+- [ ] Flyway V1-V37 全部成功且无改写历史迁移；
+- [ ] `/health/detail` 中 MySQL、Redis、VectorStore 状态符合预期；
+- [ ] `/market` 可匿名访问，`/admin/` 可正常加载；
+- [ ] 用户端和管理端入口引用的静态资源全部存在；
+- [ ] 不存在的用户端/管理端资源返回 404；
+- [ ] `robots.txt`、`sitemap.xml`、`security.txt` 类型正确；
+- [ ] HTTP、www 统一跳转到非 www HTTPS；
+- [ ] 登录、注册、Turnstile、邮件验证码可用；
+- [ ] 投稿、编辑、审核及奖励只发生一次；
+- [ ] AI 配额确认、调用、自动重试、结果记录和退款链路正常；
+- [ ] 管理端能看到 AI 调用用户、任务、槽位和状态；
+- [ ] 榜单最新快照日期更新，采集失败不会误报成功；
+- [ ] 画像保存、装备、形象码和主页展示正常；
+- [ ] MySQL 备份完成加密、上传、回读校验；
+- [ ] 媒体账号不能读取备份，备份账号不能读取媒体；
+- [ ] 应用、MySQL、Redis、Nginx 和备份 Timer 均为 active；
+- [ ] 部署备份可用于回滚。
+
+---
+
+## 附录 A：技术栈
+
+| 类别 | 技术 | 当前版本/形态 |
+|---|---|---|
+| 后端语言 | Java | 21 |
+| 应用框架 | Spring Boot | 3.3.5 |
+| AI | Spring AI | 1.0.0 |
+| ORM | MyBatis Spring Boot | 3.0.3 |
+| 分页 | PageHelper | 2.0.0 |
+| JWT | JJWT | 0.12.6 |
+| 数据库驱动 | MySQL Connector/J | 8.0.33 |
+| 数据迁移 | Flyway | Spring Boot 管理，V1-V37 |
+| API 文档 | springdoc-openapi | 2.6.0 |
+| 对象存储 | Aliyun OSS SDK | 3.18.4 |
+| HTML 处理 | jsoup | 1.18.3 |
+| 后端测试 | JUnit 5、Mockito、MockMvc、ArchUnit、JaCoCo | CI 执行 |
+| 用户/管理前端 | Vue | 3.5.34 |
+| UI | Element Plus | 2.14.1 |
+| 状态管理 | Pinia | 3.0.3，用户端 |
+| 路由 | Vue Router | 4.6.4 |
+| HTTP | Axios | 1.18.0 |
+| 构建 | Vite | 8.x |
+| 测试 | Vitest、Vue Test Utils、Playwright | CI 执行 |
+| 3D | Three.js | 0.179.1 |
+| 图表 | ECharts | 6.1.0 |
+| Markdown | marked + DOMPurify | 18.0.5 / 3.4.12 |
+| 数据库 | MySQL | 8.0，自建本机实例 |
+| 缓存/向量 | Redis + RediSearch | 缓存、状态、向量 |
+| 网关 | Nginx | HTTPS、静态资源、反代、限流 |
+| 服务管理 | systemd | 应用、备份、健康检查 |
+
+---
+
+## 附录 B：重要源码入口
+
+| 主题 | 路径 |
+|---|---|
+| Maven 根配置 | `pom.xml` |
+| 后端生产配置 | `orange-server/src/main/resources/application-prod.yml` |
+| Flyway | `orange-server/src/main/resources/db/migration/` |
+| MVC 与鉴权链 | `orange-server/src/main/java/com/orangejd/server/config/WebMvcConfiguration.java` |
+| 路由公开策略 | `orange-server/src/main/java/com/orangejd/server/security/ApiRoutePolicy.java` |
+| AI 工具池 | `orange-server/src/main/java/com/orangejd/server/foundation/aitool/` |
+| 持久化任务 | `orange-server/src/main/java/com/orangejd/server/foundation/task/` |
+| 采集流水线 | `orange-server/src/main/java/com/orangejd/server/foundation/ingestion/` |
+| 趋势分析 | `orange-server/src/main/java/com/orangejd/server/service/Trend*.java` |
+| 画像服务 | `orange-server/src/main/java/com/orangejd/server/service/Persona*.java` |
+| 用户端 Store | `orange-web/src/stores/` |
+| 用户端 Composable | `orange-web/src/composables/` |
+| Nginx 模板 | `nginx.conf` |
+| 发布构建 | `scripts/build-release.sh` |
+| 发布安装 | `scripts/install-release.sh` |
+| 数据库运维 | `scripts/database/` |
+| CI | `.github/workflows/ci.yml` |
+| 架构规则 | `orange-server/src/test/java/com/orangejd/server/architecture/ArchitectureGovernanceTest.java` |
+
+---
+
+## 附录 C：Controller 入口总览
+
+### 管理端入口
+
+| 入口组 | Base Path | 主要职责 |
+|---|---|---|
+| 登录与用户 | `/admin/auth`、`/admin/users` | 管理员登录、退出、密码、用户分页与状态 |
+| 内容审核 | `/admin/audit`、`/admin/work`、`/admin/requirement`、`/admin/comment` | 作品/需求审核、上下架、评论管理和审核证据 |
+| 投稿内容 | `/admin/job`、`/admin/competition` | 岗位和比赛管理、审核及知识同步 |
+| 榜单项目 | `/admin/beginner-projects`、`/admin/career-projects` | 新手/职业项目、周选、核验和刷新 |
+| 开源与采集 | `/admin/open-source`、`/admin/ingestion/runs` | 仓库、Issue、翻译、核验、采集运行和重试 |
+| 知识库 | `/admin/knowledge/document` | 文档、索引、重建和项目来源状态 |
+| AI 管理 | `/admin/ai-config`、`/admin/ai-tool-pool` | 动态模型配置、Key 槽、并发和调用记录 |
+| 运营管理 | `/admin/pricing`、`/admin/redemption`、`/admin/orders`、`/admin/config` | 定价、充值码、订单和交易模式 |
+| 统计与体检 | `/admin/stats`、`/admin/statistics`、`/admin/report`、`/admin/launch-check` | 仪表盘、统计、报表和上线体检 |
+| 公共上传 | `/admin/common` | 管理端文件上传 |
+
+### 用户端入口
+
+| 入口组 | Base Path | 主要职责 |
+|---|---|---|
+| 账号与资料 | `/app/auth`、`/app/profile` | 注册登录、验证码、密码、资料和公开主页 |
+| 内容与发现 | `/app/work`、`/app/requirement`、`/app/category`、`/app/comment`、`/app/favorite`、`/app/history` | 投稿、编辑、审核提交、浏览和互动 |
+| 沟通交易 | `/app/conversation`、`/app/message`、`/app/notification`、`/app/quote`、`/app/order` | 会话、消息、通知、报价、订单、支付阶段和交付 |
+| AI 工具 | `/app/trend`、`/app/plan`、`/app/launch-check`、`/app/ai-records` | 趋势、方案、体检和统一 AI 结果记录 |
+| 榜单与成长 | `/app/leaderboard`、`/app/beginner-projects`、`/app/career-projects` | GitHub/站内榜单、新手与职业项目 |
+| 开源与岗位 | `/app/open-source`、`/app/job`、`/app/competition` | Issue、贡献指南、岗位和比赛 |
+| 画像工坊 | `/app/persona-workshop` | 画像、素材、装备、DIY、设置和形象码 |
+| 配额与配置 | `/app/quota`、`/app/config` | 余额、流水、兑换、价格与交易开关 |
+| 设备与知识 | `/app/agent-devices`、`/app/knowledge/document` | 小智设备、任务记录和知识文档 |
+| 上传 | `/app/common` | 图片、视频和通用文件上传 |
+
+公共入口还包括健康检查、受控媒体读取、Epay 回调和 WebSocket。Agent 入口为 `/agent/connect` 与 `/agent/actions`。
+
+---
+
+## 附录 D：维护规则
+
+本文档必须在以下变化发生时同步更新：
+
+- 新增或拆分部署单元；
+- 新增 Flyway 迁移或核心表；
+- 调整 AI Key 池、重试、配额或结果记录语义；
+- 调整鉴权、公开路径、Nginx 或生产安全策略；
+- 调整持久化任务或采集流水线；
+- 迁移数据库、Redis、OSS 或备份策略；
+- 前端状态层和核心页面职责发生变化；
+- CI 门禁、测试基线或发布回滚流程变化。
+
+维护时不得只在文档末尾追加“补充说明”。应直接修改对应章节，并重新核对代码、配置、迁移、测试和生产部署事实。

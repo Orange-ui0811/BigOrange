@@ -89,6 +89,12 @@
                           AND crs.total_score &gt;= 55)
         </if>
     </sql>
+    <select id="selectByFullName" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
+        SELECT <include refid="profileColumns"/>
+        FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id
+        WHERE bp.full_name = #{fullName}
+    </select>
+
     <select id="selectPublic" resultType="com.orangejd.pojo.entity.CareerProjectProfile">
         SELECT <include refid="profileColumns"/>
         FROM career_project_profile cp JOIN beginner_project bp ON bp.id = cp.project_id

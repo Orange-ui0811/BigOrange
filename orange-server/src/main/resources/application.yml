@@ -46,6 +46,37 @@ management:
       application: orangevc
 
 orange:
+  rag-b:
+    enabled: ${RAG_B_ENABLED:false}
+    redis-prefix: ${RAG_B_REDIS_PREFIX:orange:rag:b:}
+    max-file-bytes: ${RAG_B_MAX_FILE_BYTES:1048576}
+    chunk-size: ${RAG_B_CHUNK_SIZE:500}
+    chunk-overlap: ${RAG_B_CHUNK_OVERLAP:50}
+    max-chunks: ${RAG_B_MAX_CHUNKS:4096}
+    embedding-batch-size: ${RAG_B_EMBEDDING_BATCH_SIZE:16}
+    search-candidate-limit: ${RAG_B_SEARCH_CANDIDATE_LIMIT:20000}
+    route-candidate-limit: ${RAG_B_ROUTE_CANDIDATE_LIMIT:128}
+    fusion-candidate-limit: ${RAG_B_FUSION_CANDIDATE_LIMIT:80}
+    github-sync-enabled: ${RAG_B_GITHUB_SYNC_ENABLED:false}
+    github-sync-limit: ${RAG_B_GITHUB_SYNC_LIMIT:50}
+    github-sync-cron: "${RAG_B_GITHUB_SYNC_CRON:0 15 4 * * *}"
+  customer:
+    enabled: ${CUSTOMER_ENABLED:false}
+    model: ${CUSTOMER_MODEL:deepseek-flash}
+    thinking: ${CUSTOMER_THINKING:false}
+    native-actions: ${CUSTOMER_NATIVE_ACTIONS:false}
+    allowed-accounts: ${CUSTOMER_ALLOWED_ACCOUNTS:}
+    all-authenticated-users: ${CUSTOMER_ALL_AUTHENTICATED_USERS:true}
+    max-concurrent: 2
+    run-seconds: 90
+    model-seconds: 45
+    input-tokens: 6000
+    output-tokens: 1500
+    action-output-tokens: ${CUSTOMER_ACTION_OUTPUT_TOKENS:4096}
+    evidence-output-tokens: ${CUSTOMER_EVIDENCE_OUTPUT_TOKENS:2048}
+    verification-output-tokens: ${CUSTOMER_VERIFICATION_OUTPUT_TOKENS:2048}
+    evidence-thinking: ${CUSTOMER_EVIDENCE_THINKING:false}
+    verification-thinking: ${CUSTOMER_VERIFICATION_THINKING:false}
   bootstrap-admin:
     username: ${ORANGE_ADMIN_BOOTSTRAP_USERNAME:}
     password: ${ORANGE_ADMIN_BOOTSTRAP_PASSWORD:}

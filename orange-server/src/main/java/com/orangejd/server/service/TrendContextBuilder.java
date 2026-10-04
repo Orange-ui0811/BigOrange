@@ -1,5 +1,8 @@
 package com.orangejd.server.service;
 
+import org.springframework.stereotype.Component;
+import static com.orangejd.server.service.TrendRetrievalSupport.*;
+
 import com.orangejd.server.dto.BeginnerProjectView;
 import com.orangejd.server.dto.CareerProjectView;
 import org.slf4j.Logger;
@@ -8,7 +11,6 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -21,19 +23,38 @@ public class TrendContextBuilder {
     private static final Logger log = LoggerFactory.getLogger(TrendContextBuilder.class);
     private final VectorStore vectorStore;
     private final PersonaPromptContextService personaContextService;
+    private final String redisPrefix;
 
     public TrendContextBuilder(ObjectProvider<VectorStore> vectorStore,
                                ObjectProvider<PersonaPromptContextService> personaContextService) {
+        this(vectorStore, personaContextService, null);
+    }
+
+    @org.springframework.beans.factory.annotation.Autowired
+    public TrendContextBuilder(ObjectProvider<VectorStore> vectorStore,
+                               ObjectProvider<PersonaPromptContextService> personaContextService,
+                               ObjectProvider<org.springframework.ai.vectorstore.redis.autoconfigure.RedisVectorStoreProperties> config) {
         this.vectorStore = vectorStore.getIfAvailable();
         this.personaContextService = personaContextService.getIfAvailable();
+        var properties = config == null ? null : config.getIfAvailable();
+        this.redisPrefix = properties == null
+                ? new org.springframework.ai.vectorstore.redis.autoconfigure.RedisVectorStoreProperties().getPrefix()
+                : properties.getPrefix();
     }
 
     @SuppressWarnings("unchecked")
     public String graphSummary(Map<String, Object> compareData) {
+        return graphSummary(compareData, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public String graphSummary(Map<String, Object> compareData, TrendAnalysisInput input) {
         StringBuilder text = new StringBuilder("## 本周 GitHub 热度数据（按 topic 分类）\n\n");
         Map<String, Object> thisWeek = (Map<String, Object>) compareData.get("thisWeek");
         Map<String, Object> lastWeek = (Map<String, Object>) compareData.get("lastWeek");
-        List<Map<String, Object>> current = (List<Map<String, Object>>) thisWeek.get("nodes");
+        List<Map<String, Object>> current = relevantGraphNodes(
+                (List<Map<String, Object>>) thisWeek.get("nodes"), input);
+        if (current == null || current.isEmpty()) return "";
         List<Map<String, Object>> previous = (List<Map<String, Object>>) lastWeek.get("nodes");
         Map<String, Long> lastStars = new LinkedHashMap<>();
         if (previous != null) for (Map<String, Object> node : previous) {
@@ -54,6 +75,45 @@ public class TrendContextBuilder {
                     ((Number) node.get("repoCount")).intValue(), delta, crowdedness, difficulty, score, insight));
         }
         return text.append("\n请基于以上数据分析趋势，回答用户问题。").toString();
+    }
+
+    private static List<Map<String, Object>> relevantGraphNodes(List<Map<String, Object>> nodes,
+                                                                 TrendAnalysisInput input) {
+        if (nodes == null || nodes.isEmpty() || input == null) return nodes;
+        String query = ((input.topics() == null ? "" : String.join(" ", input.topics())) + " "
+                + nvlStatic(input.customTopics()) + " "
+                + (input.languages() == null ? "" : String.join(" ", input.languages()))).toLowerCase();
+        List<String> terms = java.util.Arrays.stream(query.split("[^\\p{L}\\p{N}+#.]+"))
+                .map(String::strip).filter(value -> value.length() >= 2).distinct().toList();
+        return nodes.stream()
+                .map(node -> Map.entry(node, graphRelevance(node, terms)))
+                .filter(entry -> entry.getValue() > 0)
+                .sorted(Comparator.<Map.Entry<Map<String, Object>, Integer>>comparingInt(Map.Entry::getValue).reversed()
+                        .thenComparingInt(entry -> -opportunityScore(entry.getKey())))
+                .limit(5).map(Map.Entry::getKey).toList();
+    }
+
+    private static int graphRelevance(Map<String, Object> node, List<String> terms) {
+        String text = (String.valueOf(node.getOrDefault("id", "")) + " "
+                + node.getOrDefault("name", "") + " " + node.getOrDefault("group", "")).toLowerCase();
+        int score = 0;
+        for (String term : terms) if (text.contains(term) || topicAliasMatch(text, term)) score++;
+        return score;
+    }
+
+    private static boolean topicAliasMatch(String text, String term) {
+        if ((term.contains("agent") || term.contains("智能体")) && (text.contains("agent") || text.contains("智能体"))) return true;
+        if ((term.contains("rag") || term.contains("知识库")) && (text.contains("rag") || text.contains("知识库"))) return true;
+        if (term.contains("数据分析") && (text.contains("data") || text.contains("分析"))) return true;
+        if (term.contains("机器学习") && (text.contains("machine") || text.contains("机器学习"))) return true;
+        return false;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static int opportunityScore(Map<String, Object> node) {
+        Object metrics = node.get("metrics");
+        Object score = metrics instanceof Map<?, ?> map ? map.get("opportunityScore") : null;
+        return score instanceof Number number ? number.intValue() : 0;
     }
 
     public String profile(TrendAnalysisInput input, Long accountId) {
@@ -90,66 +150,126 @@ public class TrendContextBuilder {
     }
 
     public String rag(TrendAnalysisInput input) {
-        if (vectorStore == null || !Boolean.TRUE.equals(input.useRag())) return "";
+        return retrieve(input).text();
+    }
+
+    public record Retrieval(String text, Map<String, Object> trace) {}
+
+    /** Read-only lab adapter using the same retrieval and evidence compression as platform requests. */
+    public Retrieval previewKnowledge(String question) {
+        if (question == null || question.isBlank() || question.length() > 2000) throw new IllegalArgumentException("评测问题无效");
+        return retrieve(new TrendAnalysisInput(List.of(), null, null, List.of(), null, question,
+                null, null, null, null, true, false, false, false));
+    }
+
+    public Retrieval retrieve(TrendAnalysisInput input) {
+        long started = System.nanoTime();
+        if (!Boolean.TRUE.equals(input.useRag())) return retrieval("", "DISABLED", List.of(), List.of(), started);
+        if (vectorStore == null) return retrieval("", "UNAVAILABLE", List.of(), List.of(), started);
         try {
-            List<String> queries = List.of(
-                    "技术方向：" + joined(input.topics()) + " 开源项目入门实践 " + nvlEmpty(input.customTopics()),
-                    "技术学习目的：" + nvl(input.purpose()) + " " + nvlEmpty(input.customPurpose())
-                            + " " + purposeContext(nvl(input.purpose())),
-                    "编程经验：" + nvl(input.experience()) + " " + nvlEmpty(input.customExp()) + " 学习路径入门",
-                    "时间投入：" + nvl(input.timeCommitment()) + " " + nvlEmpty(input.customTime()) + " 学习计划 时间管理");
+            List<String> queries = retrievalQueries(input);
+            if (queries.isEmpty()) return retrieval("", "NO_TOPIC", queries, List.of(), started);
             Map<String, WeightedDocument> seen = new LinkedHashMap<>();
-            for (String query : queries) try {
-                List<Document> matches = vectorStore.similaritySearch(SearchRequest.builder()
-                        .query(query).topK(6).similarityThreshold(.55).build());
+            int failures = 0;
+            for (int route = 0; route <= queries.size(); route++) try {
+                boolean lexical = route == queries.size();
+                List<Document> matches;
+                if (lexical) matches = TrendLabObservation.measure("A.lexical", () -> TrendRedisMetadata.lexical(vectorStore, redisPrefix, TrendTopicGate.lexicalQuery(input)));
+                else {
+                    var request = SearchRequest.builder().query(queries.get(route)).topK(50).similarityThreshold(.55).build();
+                    matches = TrendLabObservation.measure("A.embeddingAndVector", () -> vectorStore.similaritySearch(request));
+                    var rawMatches=matches;
+                    matches = TrendLabObservation.measure("A.restoreMetadata", () -> TrendRedisMetadata.restore(vectorStore, redisPrefix, rawMatches));
+                }
+                long filteringStarted=System.nanoTime();
                 for (int rank = 0; rank < matches.size(); rank++) {
                     Document document = matches.get(rank);
                     String body = document.getText();
-                    String key = String.valueOf(document.getMetadata().getOrDefault("docId", ""))
-                            + ':' + document.getMetadata().getOrDefault("chunkIndex",
-                            body.substring(0, Math.min(50, body.length())));
-                    double score = 1.0 / (rank + 1) + sourceBoost(document, input);
+                    if (body == null || body.isBlank() || !TrendTopicGate.accepts(document, input)) continue;
+                    String key = documentKey(document);
+                    double routeWeight = lexical ? .20 : route == 0 ? .55 : .25;
+                    double score = routeWeight / (20 + rank + 1);
                     seen.merge(key, new WeightedDocument(document, score),
                             (left, right) -> new WeightedDocument(left.document(), left.score() + right.score()));
                 }
+                TrendLabObservation.elapsed("A.topicGateAndFusion",filteringStarted);
             } catch (Exception error) {
+                failures++;
                 log.debug("[RAG] 单维度检索异常: {}", error.getMessage());
             }
+            long selectionStarted=System.nanoTime();
+            java.util.Set<String> projects = new java.util.HashSet<>();
+            int[] jobFragments = {0};
             List<Document> selected = seen.values().stream()
-                    .sorted(Comparator.comparingDouble(WeightedDocument::score).reversed())
-                    .limit(4).map(WeightedDocument::document).toList();
-            StringBuilder result = new StringBuilder();
+                    .sorted(Comparator.comparingDouble((WeightedDocument value) -> value.score() * (1 + ("MANUAL".equals(value.document().getMetadata().get("source")) ? .05 : 0.0)
+                            + Math.min(.2, sourceBoost(value.document(), input)))).reversed()
+                            .thenComparing(value -> documentKey(value.document())))
+                    .map(WeightedDocument::document)
+                    .filter(document -> TrendEvidenceBinder.repositoryUrl(document) != null
+                            || ("MANUAL".equals(document.getMetadata().get("source"))
+                            && document.getMetadata().get("projectId") != null))
+                    .filter(document -> projects.add(TrendTopicGate.projectKey(document)))
+                    .filter(document -> !"JOB_POSTING".equals(document.getMetadata().get("source")) || jobFragments[0]++ == 0)
+                    .limit(3).toList();
+            TrendLabObservation.elapsed("A.selectProjects",selectionStarted);
+            TrendEvidenceCardFormatter.Rendered rendered = TrendLabObservation.measure("A.renderEvidence", () -> TrendEvidenceCardFormatter.render(selected));
+            List<Map<String, Object>> evidence = new ArrayList<>();
             for (int index = 0; index < selected.size(); index++) {
                 Document document = selected.get(index);
-                result.append("【片段").append(index + 1).append("】");
-                Object title = document.getMetadata().get("docTitle");
-                if (title != null) result.append(" 来源：").append(title);
-                result.append('\n').append(document.getText()).append("\n\n");
+                Map<String, Object> item = new LinkedHashMap<>();
+                item.put("evidenceId", "E" + (index + 1));
+                item.put("documentKey", documentKey(document));
+                item.put("source", document.getMetadata().get("source"));
+                item.put("title", document.getMetadata().get("docTitle"));
+                item.put("sourceRef", document.getMetadata().get("sourceRef"));
+                item.put("projectId", document.getMetadata().get("projectId"));
+                item.put("projectType", document.getMetadata().get("projectType"));
+                item.put("mappingStatus", document.getMetadata().get("mappingStatus"));
+                item.put("repositoryUrl", TrendEvidenceBinder.repositoryUrl(document));
+                item.put("text", document.getText());
+                if (index < rendered.cards().size()) {
+                    item.put("card", rendered.cards().get(index));
+                    item.put("promptMode", rendered.modes().get(index));
+                }
+                evidence.add(item);
             }
-            return result.toString();
+            Retrieval retrieval = retrieval(rendered.text(),
+                    failures > 0 ? "PARTIAL_FAILURE" : selected.isEmpty() ? "EMPTY" : "USED",
+                    queries, evidence, started);
+            retrieval.trace().put("candidateCount", seen.size());
+            retrieval.trace().put("selectedCount", selected.size());
+            retrieval.trace().put("confidence", selected.size() >= 2 ? "HIGH" : selected.size() == 1 ? "MEDIUM" : "NONE");
+            retrieval.trace().put("ragApplied", !selected.isEmpty());
+            retrieval.trace().put("evidenceFormat", "CARD_V2_ADAPTIVE");
+            retrieval.trace().put("evidenceOriginalChars", rendered.originalChars());
+            retrieval.trace().put("evidencePromptChars", rendered.renderedChars());
+            retrieval.trace().put("evidenceBudgetChars", TrendEvidenceCardFormatter.MAX_CONTEXT_CHARS);
+            retrieval.trace().put("evidenceFallbackCount", rendered.fallbackCount());
+            retrieval.trace().put("evidenceCompressionRatio", rendered.originalChars() == 0 ? 0.0
+                    : 1.0 - (double) rendered.renderedChars() / rendered.originalChars());
+            return retrieval;
         } catch (Exception error) {
             log.warn("[RAG] 检索失败，跳过增强: {}", error.getMessage());
-            return "";
+            return retrieval("", "FAILED", List.of(), List.of(), started);
         }
     }
 
-    private double sourceBoost(Document document, TrendAnalysisInput input) {
-        String source = String.valueOf(document.getMetadata().getOrDefault("source", ""));
-        if ("BEGINNER_PROJECT".equals(source)) {
-            if (Boolean.TRUE.equals(input.preferBeginnerProjects())) return .85;
-            if (nvlEmpty(input.experience()).contains("新手") || nvlEmpty(input.purpose()).contains("学习")) return .25;
-        }
-        if ("CAREER_PROJECT".equals(source)) {
-            if (Boolean.TRUE.equals(input.preferCareerProjects())) return .85;
-            if (nvlEmpty(input.purpose()).contains("求职") || nvlEmpty(input.customPurpose()).contains("求职")) return .25;
-        }
-        return 0;
+    private static Retrieval retrieval(String text, String status, List<String> queries,
+                                       List<Map<String, Object>> evidence, long started) {
+        Map<String, Object> trace = new LinkedHashMap<>();
+        trace.put("strategyVersion", "hybrid-topic-project-v6-adaptive-card");
+        trace.put("status", status);
+        trace.put("queries", queries);
+        trace.put("evidence", evidence);
+        trace.put("durationMs", (System.nanoTime() - started) / 1_000_000.0);
+        return new Retrieval(text, trace);
     }
 
     public String beginnerCases(List<BeginnerProjectView> cases) {
         if (cases == null || cases.isEmpty()) return "";
         StringBuilder text = new StringBuilder();
         for (BeginnerProjectView project : cases) text.append("- ID=").append(project.id())
+                .append("; candidateId=B:").append(project.id())
                 .append("; repository=").append(project.fullName()).append("; url=").append(project.htmlUrl())
                 .append("; difficulty=").append(project.difficulty()).append("; score=").append(project.beginnerScore())
                 .append("; reason=").append(project.beginnerReason()).append("; verifiedAt=")
@@ -161,6 +281,7 @@ public class TrendContextBuilder {
         if (cases == null || cases.isEmpty()) return "";
         StringBuilder text = new StringBuilder();
         for (CareerProjectView project : cases) text.append("- ID=").append(project.id())
+                .append("; candidateId=C:").append(project.id())
                 .append("; repository=").append(project.fullName()).append("; url=").append(project.htmlUrl())
                 .append("; role=").append(project.bestRoleName()).append("; score=").append(project.overallScore())
                 .append("; careerValue=").append(project.careerValue()).append("; verifiedAt=")
@@ -178,14 +299,7 @@ public class TrendContextBuilder {
     private boolean present(List<?> value) { return value != null && !value.isEmpty(); }
     private String joined(List<String> value) { return present(value) ? String.join(" ", value) : ""; }
     private String nvl(String value) { return value == null || value.isEmpty() ? "未填写" : value; }
-    private String nvlEmpty(String value) { return value == null ? "" : value; }
-    private String purposeContext(String purpose) {
-        if (purpose.contains("求职")) return "面试技巧 项目经验 GitHub作品集";
-        if (purpose.contains("学习")) return "学习路径 入门教程 从零开始";
-        if (purpose.contains("赚钱")) return "商业变现 开源项目商业化";
-        if (purpose.contains("探索")) return "技术趋势 新兴方向 兴趣探索";
-        return "";
-    }
 
+    static List<String> retrievalQueries(TrendAnalysisInput input) { return TrendRetrievalSupport.retrievalQueries(input); }
     private record WeightedDocument(Document document, double score) {}
 }
