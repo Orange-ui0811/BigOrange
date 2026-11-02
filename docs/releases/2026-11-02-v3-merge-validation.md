@@ -8,6 +8,7 @@
 - 原 V3：`68913b58e01911f1ff807f1ffd3a0c5eeb641d29`。
 - 独立工作目录：`D:\BigOrange-merge`。原 `D:\Orangejd` 工作区及客服快照分支保持原样。
 - CI 增加 `pull-requests: read`，让 Gitleaks 能读取 PR 提交；保留实际扫描。
+- 实际扫描核实三条历史误报，仅在 `.gitleaksignore` 中按 commit/file/rule/line 精确豁免：一条单测固定输入和两条 Turnstile 占位符。未豁免整个文件、目录或规则。
 - authStore 新增空会话、accountId 兼容、最新请求失败、过期请求失败、退出登录后请求完成等回归断言。覆盖率门槛保持不变。
 - 更新两端锁文件中的兼容依赖，并将 Vue 最低版本提升至 `^3.5.44`，修复本轮依赖审计发现的生产依赖告警。没有运行强制降级或降低审计门槛。
 
