@@ -37,7 +37,8 @@ const openUserPage = async (page, path) => {
   await page.goto(path)
 }
 
-test('register, login, logout and expired-token routing remains guarded', async ({ page }) => {
+test('public market stays accessible while protected routes require a session', async ({ page }) => {
+  await mockUserApi(page)
   await page.goto('/login')
   await expect(page.locator('input')).toHaveCount(2)
   await page.evaluate(() => sessionStorage.setItem('appToken', 'expired'))
@@ -45,7 +46,26 @@ test('register, login, logout and expired-token routing remains guarded', async 
   await expect(page).toHaveURL(/\/market/)
   await page.evaluate(() => sessionStorage.clear())
   await page.goto('/market')
+  await expect(page).toHaveURL(/\/market/)
+  await page.goto('/me')
   await expect(page).toHaveURL(/\/login/)
+  expect(new URL(page.url()).searchParams.get('redirect')).toBe('/me')
+})
+
+test('an expired token is cleared when a protected API returns 401', async ({ page }) => {
+  await mockUserApi(page)
+  await page.route('**/app/profile/me', route => route.fulfill({
+    status: 401, contentType: 'application/json', body: JSON.stringify({ code: 0, msg: 'expired' }),
+  }))
+  await page.goto('/login')
+  await page.evaluate(() => {
+    sessionStorage.setItem('appToken', 'expired')
+    sessionStorage.setItem('myId', '7')
+  })
+  await page.goto('/me')
+  await expect(page).toHaveURL(/\/login/)
+  expect(await page.evaluate(() => sessionStorage.getItem('appToken'))).toBeNull()
+  expect(await page.evaluate(() => sessionStorage.getItem('myId'))).toBeNull()
 })
 
 test('admin login state, user pagination and status controls render', async ({ page }) => {
