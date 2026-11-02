@@ -1,5 +1,8 @@
 package com.orangejd.server.service;
 
+import org.springframework.stereotype.Service;
+import static com.orangejd.server.service.CareerProjectServiceValues.*;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.exception.BaseException;
@@ -17,19 +20,13 @@ import com.orangejd.server.foundation.external.ExternalAiClient;
 import com.orangejd.server.foundation.external.TranslationCacheMapper;
 import com.orangejd.server.mapper.CareerProjectMapper;
 import com.orangejd.server.mapper.JobPostingMapper;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -109,7 +106,7 @@ public class CareerProjectService {
             role.setInterviewValue(value.interviewValue());
             role.setTotalScore(value.totalScore());
             role.setJobSampleCount(value.jobSampleCount());
-            role.setEvidenceJson(json(value.evidence()));
+            role.setEvidenceJson(json(objectMapper, value.evidence()));
             role.setScoreVersion(CareerProjectScorer.SCORE_VERSION);
             mapper.insertRoleScore(role);
         }
@@ -120,7 +117,7 @@ public class CareerProjectService {
         List<CareerProjectProfile> projects = mapper.selectPendingEnrichment(Math.max(1, Math.min(limit, 10)));
         if (projects.isEmpty()) return new EnrichmentResult(0, 0, List.of());
         AiRuntimeConfig config = configService.resolveText(configVersion);
-        String input = json(projects.stream().map(this::enrichmentInput).toList());
+        String input = json(objectMapper, projects.stream().map(this::enrichmentInput).toList());
         String hash = sha256(input);
         String response = cacheMapper.find(hash, CACHE_PURPOSE, config.model());
         if (response == null) {
@@ -206,7 +203,7 @@ public class CareerProjectService {
                 .append("项目说明：").append(safe(project.summaryZh())).append('\n')
                 .append("技术栈：").append(safe(project.techStack())).append('\n')
                 .append("职业价值：").append(safe(project.careerValue())).append('\n')
-                .append("目标岗位：").append(roleName(roleCode)).append('\n');
+                .append("目标岗位：").append(roleName(taxonomy, roleCode)).append('\n');
         if (jobId != null) {
             JobPosting job = jobMapper.selectById(jobId);
             if (job == null || !"APPROVED".equals(job.getAuditStatus())
@@ -301,6 +298,26 @@ public class CareerProjectService {
                 .toList();
     }
 
+    /** Strict project-recommendation path: a topic match is required when topics were provided. */
+    public List<CareerProjectView> recommendVerified(List<String> topics, List<String> languages,
+                                                     String purpose, int limit) {
+        int safeLimit = Math.max(1, Math.min(limit, 5));
+        List<CareerProjectProfile> projects = mapper.selectPublic(null, null, null, null, 0, 200);
+        if (projects == null) return List.of();
+        return projects.stream()
+                .map(project -> Map.entry(project, TrendCandidateMatcher.score(topics, languages,
+                        String.join(" ", safe(project.getFullName()), safe(project.getPrimaryLanguage()),
+                                safe(project.getTechStack()), safe(project.getDescriptionOriginal()),
+                                safe(project.getDescriptionZh()), safe(project.getSummaryZh()),
+                                safe(project.getCareerValue()), safe(project.getProofPoints())),
+                        project.getPrimaryLanguage())))
+                .filter(entry -> entry.getValue() >= 0)
+                .sorted(Comparator.<Map.Entry<CareerProjectProfile, Integer>>comparingInt(Map.Entry::getValue).reversed()
+                        .thenComparingInt(entry -> -value(entry.getKey().getOverallScore()))
+                        .thenComparing(entry -> entry.getKey().getFullName()))
+                .limit(safeLimit).map(entry -> view(entry.getKey())).toList();
+    }
+
     private int recommendationFit(CareerProjectProfile project, Set<String> terms) {
         String text = String.join(" ", safe(project.getFullName()), safe(project.getPrimaryLanguage()),
                 safe(project.getTechStack()), safe(project.getDescriptionOriginal()), safe(project.getCareerValue()))
@@ -314,7 +331,7 @@ public class CareerProjectService {
 
     private CareerProjectView view(CareerProjectProfile profile) {
         List<CareerRoleScoreView> roles = mapper.selectRoleScores(profile.getProjectId()).stream()
-                .map(score -> new CareerRoleScoreView(score.getRoleCode(), roleName(score.getRoleCode()),
+                .map(score -> new CareerRoleScoreView(score.getRoleCode(), roleName(taxonomy, score.getRoleCode()),
                         value(score.getRoleRelevance()), value(score.getProvableAbility()),
                         value(score.getKnowledgeCoverage()), value(score.getPortfolioCompleteness()),
                         value(score.getInterviewValue()), value(score.getTotalScore()),
@@ -327,7 +344,7 @@ public class CareerProjectService {
                 Boolean.TRUE.equals(profile.getRequiresDocker()), Boolean.TRUE.equals(profile.getRequiresDatabase()),
                 Boolean.TRUE.equals(profile.getRequiresSecrets()), Boolean.TRUE.equals(profile.getRequiresExternalService()),
                 profile.getCodebaseSize(), value(profile.getOverallScore()), profile.getBestRoleCode(),
-                roleName(profile.getBestRoleCode()), profile.getDifficulty(), profile.getSummaryZh(),
+                roleName(taxonomy, profile.getBestRoleCode()), profile.getDifficulty(), profile.getSummaryZh(),
                 profile.getCareerValue(), profile.getProofPoints(), profile.getInterviewTopics(),
                 profile.getModificationPlan(), profile.getMainRisks(), profile.getEstimatedDuration(),
                 profile.getStatus(), profile.getGithubUpdatedAt(), profile.getLastVerifiedAt(), roles);
@@ -350,7 +367,7 @@ public class CareerProjectService {
         input.put("techStack", safe(project.getTechStack()));
         input.put("difficulty", project.getDifficulty());
         input.put("overallScore", project.getOverallScore());
-        input.put("bestRole", roleName(project.getBestRoleCode()));
+        input.put("bestRole", roleName(taxonomy, project.getBestRoleCode()));
         input.put("roleScores", mapper.selectRoleScores(project.getProjectId()));
         return input;
     }
@@ -375,7 +392,6 @@ public class CareerProjectService {
         }
     }
 
-    private String text(JsonNode node, String field) { return node.path(field).asText("").trim(); }
     static String content(JsonNode node, String field) {
         JsonNode value = node.path(field);
         if (value.isTextual() || value.isNumber() || value.isBoolean()) return value.asText("").trim();
@@ -389,28 +405,12 @@ public class CareerProjectService {
         }
         return "";
     }
-    private String roleName(String code) {
-        return taxonomy.categories().stream().filter(item -> item.code().equals(code))
-                .map(CareerRoleTaxonomy.RoleCategory::name).findFirst().orElse("未分类");
-    }
+
     private void validateRoleOptional(String roleCode) { if (StringUtils.hasText(roleCode)) validateRole(roleCode); }
     private void validateRole(String roleCode) {
         if (taxonomy.categories().stream().noneMatch(item -> item.code().equals(roleCode))) {
             throw new BaseException("无效的岗位类别");
         }
-    }
-    private int value(Integer value) { return value == null ? 0 : value; }
-    private String clean(String value) { return StringUtils.hasText(value) ? value.trim() : null; }
-    private String safe(String value) { return value == null ? "" : value; }
-    private String abbreviate(String value, int max) { return value == null || value.length() <= max ? value : value.substring(0, max); }
-    private LocalDate currentWeekStart() { return LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)); }
-    private String json(Object value) {
-        try { return objectMapper.writeValueAsString(value); }
-        catch (Exception e) { throw new IllegalArgumentException("职业项目数据无法序列化", e); }
-    }
-    private String sha256(String value) {
-        try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8))); }
-        catch (Exception e) { throw new IllegalStateException("SHA-256 unavailable", e); }
     }
 
     private record Enrichment(Long id, String summaryZh, String careerValue, String proofPoints,

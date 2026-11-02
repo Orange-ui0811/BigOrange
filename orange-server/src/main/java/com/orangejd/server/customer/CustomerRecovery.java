@@ -1,0 +1,47 @@
+package com.orangejd.server.customer;
+
+import java.util.*;
+
+/** User-facing continuation; the real error and terminal status remain auditable. */
+public final class CustomerRecovery {
+    private CustomerRecovery() {}
+    public static String message(String status,String error) {
+        if("CANCELLED".equals(status)) return "已停止这次回答，之前的消息和已确认条件都保留着。你可以继续聊，或换一个问题。";
+        if("TIMED_OUT".equals(status)) return "这次响应超过了等待时间，我还没有拿到完整结果。会话和已确认条件已保留，你可以继续补充要求或稍后让我接着推荐。";
+        if("INTERRUPTED".equals(status)) return "服务重启打断了这次回答，历史和已确认条件已保留。你可以从这里继续，我不会自动重复执行刚才的请求。";
+        if(error!=null && (error.contains("CONTEXT_BUDGET")||error.contains("CONTEXT_SCOPE")||error.contains("CONTEXT_SOURCE")))
+            return "本轮必要的会话资料超出处理预算或来源未能核实，因此暂未继续处理，也没有删改已确认要求。请明确这次要继续的任务或项目，我会按对应范围接着处理。";
+        if(error!=null && (error.contains("CONDITION") || error.contains("DURATION") || error.contains("MODEL_OUTPUT") || error.contains("MODEL_JSON") || error.contains("INTENT")))
+            return "我还没能可靠地整理这句话中的要求，因此没有擅自更改条件。你可以继续解释最重要的一项，我会接着帮你；已有会话仍然保留。";
+        if(error!=null && (error.contains("EVIDENCE") || error.contains("INDEX") || error.contains("SEARCH")))
+            return "资料核对暂时没有完成，不能据此确认项目细节。我们可以继续讨论需求；恢复后我会根据已确认条件重新查找。";
+        return "这次服务暂时没有返回完整回复，已确认条件和聊天记录仍然保留。你可以继续发消息；我不会把未完成的内容当作已核实的答案。";
+    }
+    public static String code(RuntimeException ex) {
+        var provider=com.orangejd.server.foundation.aitool.AiToolProviderException.find(ex);
+        if(provider!=null)return "PROVIDER_HTTP_"+provider.httpStatus();
+        String code=ex.getMessage();
+        return code!=null && code.matches("[A-Z][A-Z0-9_]{2,70}")?code:"DEPENDENCY_FAILED";
+    }
+    /** Record safe classification only; never log response bodies, prompts, headers or credentials. */
+    public static Map<String,Object> details(RuntimeException ex) {
+        Map<String,Object> details=new LinkedHashMap<>(); details.put("errorCode",code(ex));details.put("errorType",ex.getClass().getSimpleName());
+        var provider=com.orangejd.server.foundation.aitool.AiToolProviderException.find(ex);
+        if(provider!=null) {
+            details.put("httpStatus",provider.httpStatus());
+            details.put("retryable",provider.httpStatus()==429 || provider.httpStatus()>=500);
+            details.put("retryAfterMillis",provider.retryAfterMillis());
+            for(Throwable cause=provider.getCause();cause!=null;cause=cause.getCause()) {
+                if(cause instanceof org.springframework.web.client.HttpStatusCodeException http
+                    && http.getResponseBodyAsString().contains("Content Exists Risk")) {
+                    details.put("providerClassification","CONTENT_EXISTS_RISK");break;
+                }
+            }
+        }
+        return details;
+    }
+    public static void requireRecoverable(RuntimeException ex) {
+        if(Thread.currentThread().isInterrupted() || Set.of("RUN_STOPPED","CUSTOMER_DISABLED","DEADLINE_EXCEEDED","ACCEPTANCE_BUDGET_EXHAUSTED","ACCEPTANCE_LEDGER_UNAVAILABLE","INVALID_ACCEPTANCE_BUDGET","ACCEPTANCE_LEDGER_INVALID").contains(code(ex))) throw ex;
+        if(ex instanceof org.springframework.web.server.ResponseStatusException) throw ex;
+    }
+}

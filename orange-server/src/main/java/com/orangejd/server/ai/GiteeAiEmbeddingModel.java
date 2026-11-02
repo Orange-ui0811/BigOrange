@@ -73,8 +73,10 @@ public class GiteeAiEmbeddingModel extends AbstractEmbeddingModel {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
         try {
+            com.orangejd.server.foundation.external.AiAcceptanceBudget.beforeRequest("GITEE_EMBEDDING");
             @SuppressWarnings("unchecked")
-            ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
+            ResponseEntity<Map> response = com.orangejd.server.service.TrendLabObservation.measure("embedding.http."+properties.getModel(),
+                    () -> restTemplate.exchange(url, HttpMethod.POST, entity, Map.class));
             if (response.getBody() == null || !response.getBody().containsKey("data")) {
                 log.error("Embedding API 返回异常: {}", response.getBody());
                 throw new RuntimeException("Embedding API 返回格式异常");
@@ -112,6 +114,6 @@ public class GiteeAiEmbeddingModel extends AbstractEmbeddingModel {
 
     @Override
     public int dimensions() {
-        return DEFAULT_DIMENSION;
+        return "bge-m3".equals(properties.getModel()) ? 1024 : DEFAULT_DIMENSION;
     }
 }

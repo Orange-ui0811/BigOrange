@@ -91,6 +91,9 @@
             <span>AI 工具</span>
           </span>
         </el-menu-item>
+        <el-menu-item v-if="authenticated" index="/customer">
+          <span class="nav-item-content"><el-icon><ChatDotRound /></el-icon><span>项目客服</span></span>
+        </el-menu-item>
         <el-menu-item v-if="authenticated" index="/ai-records">
           <span class="nav-item-content">
             <el-icon><Document /></el-icon>
@@ -173,9 +176,9 @@
         </div>
         <div class="top-actions"></div>
       </el-header>
-      <el-main id="main-content" class="app-main" tabindex="-1">
+      <el-main id="main-content" class="app-main" :class="{ 'customer-main': route.path.startsWith('/customer') }" tabindex="-1">
         <router-view />
-        <footer class="app-site-footer" aria-label="网站备案信息">
+        <footer v-if="!route.path.startsWith('/customer')" class="app-site-footer" aria-label="网站备案信息">
           <span>{{ publicOperatorLabel }}</span>
           <a :href="officialSiteUrl">orangevf.com</a>
           <a v-if="legalIcpRecord" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ legalIcpRecord }}</a>

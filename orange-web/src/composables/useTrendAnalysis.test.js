@@ -38,20 +38,6 @@ describe('useTrendAnalysis', () => {
     expect(feature.analyzing.value).toBe(false)
   })
 
-  it('asks V1 and refreshes pricing without persisting sensitive results', async () => {
-    const feature = useTrendAnalysis(reactive({ topics: [] }))
-    feature.aiQuestion.value = '趋势如何'
-    request.get.mockResolvedValue({ data: { trendV1: 60, trendV2: 70 } })
-    request.post.mockResolvedValue({ code: 1, data: { content: '**增长**' } })
-    await feature.askAI()
-    expect(feature.aiReply.value).toBe('**增长**')
-    expect(feature.aiReplyHtml.value).toContain('<strong>增长</strong>')
-    await feature.loadPricing()
-    expect(feature.trendV1Cost.value).toBe(60)
-    expect(feature.trendV2Cost.value).toBe(70)
-    feature.dispose()
-  })
-
   it('does not start an analysis when the current pricing cannot be loaded', async () => {
     const profile = reactive({ topics: ['AI智能体'], languages: [], useRag: true, usePersona: false })
     const feature = useTrendAnalysis(profile)

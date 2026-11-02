@@ -13,9 +13,9 @@ const routeComponents = routeList => routeList.flatMap(route => [
 ])
 
 describe('view and route smoke coverage', () => {
-  it('loads every one of the 36 view modules', async () => {
+  it('loads every one of the 37 view modules', async () => {
     const paths = Object.keys(viewModules).sort()
-    expect(paths).toHaveLength(36)
+    expect(paths).toHaveLength(37)
     for (const path of paths) {
       const module = await viewModules[path]()
       expect(module.default, `${path} should export a Vue component`).toBeTruthy()
