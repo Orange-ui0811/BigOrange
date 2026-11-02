@@ -8,15 +8,15 @@ OrangeVC 连接项目创作者、学习者与需求方，提供作品/需求市�
 
 ```mermaid
 flowchart TD
-  U[Vue 用户端 / 管理端] --> API[Spring Boot：鉴权、业务与额度]
-  API --> Catalog[新手与职业项目目录：采集、规则评分、发布]
-  API --> Trend[趋势推荐：目录匹配 + 可选 A 版 RAG + LLM]
-  API --> Customer[Customer Agent：任务、追问、上下文与受控工具]
-  Customer --> B[B 版混合检索 / 可选 Reranker / 证据核验]
-  API --> DB[(MySQL：业务、任务、会话、版本)]
-  Trend --> Redis[(Redis Stack：缓存与向量索引)]
+  U["Vue 用户端 / 管理端"] --> API["Spring Boot：鉴权、业务与额度"]
+  API --> Catalog["新手与职业项目目录：采集、规则评分、发布"]
+  API --> Trend["趋势推荐：目录匹配 + 可选 A 版 RAG + LLM"]
+  API --> Customer["Customer Agent：任务、追问、上下文与受控工具"]
+  Customer --> B["B 版混合检索 / 可选 Reranker / 证据核验"]
+  API --> DB[("MySQL：业务、任务、会话、版本")]
+  Trend --> Redis[("Redis Stack：缓存与向量索引")]
   B --> Redis
-  Trend --> Models[配置的模型服务]
+  Trend --> Models["配置的模型服务"]
   Customer --> Models
 ```
 
