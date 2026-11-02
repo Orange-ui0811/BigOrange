@@ -1,0 +1,2865 @@
+{
+  "case": {
+    "id": "frontend_free",
+    "family": "frontend",
+    "kind": "free",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：做一个网站的前端界面。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "134",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：做一个网站的前端界面。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "83e356f1-ef3f-46bb-a629-b05eec280044",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 15484,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "topic": [
+            "前端界面"
+          ],
+          "provenance": {
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "做一个网站的前端界面"
+            },
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "goal": "学习",
+          "experience": "1年编程基础",
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：1年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "前端界面",
+            "proofs": {
+              "EXTERNAL_PROJECT:257": {
+                "fingerprint": "4be3b14300107346d368cf3dba5258d503d4ab4f8ab521e09dd285439298d903",
+                "quote": "这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。",
+                "relation": "DIRECT",
+                "rank": 1
+              },
+              "EXTERNAL_PROJECT:234": {
+                "fingerprint": "e1a699a3c07a9bc060f0ff5352fc5a4e9f0900c5279e619beeceee42c3b3cd81",
+                "quote": "前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流",
+                "relation": "DIRECT",
+                "rank": 2
+              },
+              "CAREER_PROJECT:271": {
+                "fingerprint": "1893b03c6ad6713a28e347530fce406c8176a2ef726445bc4214f2ee24494cf3",
+                "quote": "一套面向 AI 辅助设计的设计语言规范与实现，结合 Playwright 自动化测试确保 UI 一致性。",
+                "relation": "DIRECT",
+                "rank": 3
+              },
+              "CAREER_PROJECT:257": {
+                "fingerprint": "8531579073d40b281e7e4005ecde546a5f6518cfbfe13fbb8252b21f01bc5243",
+                "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                "relation": "DIRECT",
+                "rank": 4
+              },
+              "BEGINNER_PROJECT:24": {
+                "fingerprint": "3aeb3729887e328fbb52ae3cd4efffbfeeca9dbcfc9ac4f082070219f2e6f5dc",
+                "quote": "前端开发工具包，集成构建与端到端测试能力。",
+                "relation": "DIRECT",
+                "rank": 5
+              }
+            }
+          },
+          "lastCandidates": [
+            {
+              "name": "home-assistant/frontend",
+              "type": "EXTERNAL_PROJECT",
+              "id": 257
+            },
+            {
+              "name": "thedaviddias/Front-End-Checklist",
+              "type": "EXTERNAL_PROJECT",
+              "id": 234
+            },
+            {
+              "name": "pbakaus/impeccable",
+              "type": "CAREER_PROJECT",
+              "id": 271
+            }
+          ]
+        },
+        "projects": [
+          {
+            "type": "EXTERNAL_PROJECT",
+            "id": 257,
+            "sourceRef": "home-assistant/frontend",
+            "name": "home-assistant/frontend",
+            "url": "https://github.com/home-assistant/frontend",
+            "status": "DOCUMENTED",
+            "archived": false,
+            "description": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。 [E1]",
+            "evidenceStatus": "DOCUMENT_IDENTITY",
+            "importable": true,
+            "documentId": 257,
+            "versionId": 476,
+            "catalogTitle": "Home Assistant 前端",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 0.0,
+              "total": 45.0,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 45.0
+            },
+            "recommendReason": "本轮目标：学习；资料涉及前端界面，具体实践范围见项目说明；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E1",
+                "title": "Home Assistant 前端",
+                "sourceRef": "home-assistant/frontend",
+                "spans": [
+                  {
+                    "spanId": "E1.S1",
+                    "text": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                    "startInChunk": 10,
+                    "endInChunk": 94
+                  }
+                ],
+                "documentId": 257,
+                "versionId": 476,
+                "chunkId": 16082,
+                "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                "startOffset": 597,
+                "endOffset": 681,
+                "contentStartInChunk": 10,
+                "quote": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                "text": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E4",
+                "title": "Home Assistant 前端",
+                "sourceRef": "home-assistant/frontend",
+                "spans": [
+                  {
+                    "spanId": "E4.S1",
+                    "text": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                    "startInChunk": 7,
+                    "endInChunk": 180
+                  }
+                ],
+                "documentId": 257,
+                "versionId": 476,
+                "chunkId": 16080,
+                "sectionPath": "Home Assistant 前端 > 开发",
+                "startOffset": 405,
+                "endOffset": 578,
+                "contentStartInChunk": 7,
+                "quote": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                "text": "开发环境命令：初始设置 script/setup，生产构建 script/build_frontend，画廊 cd gallery && script/develop_gallery。",
+                "field": "prerequisites"
+              },
+              {
+                "evidenceId": "E7",
+                "title": "Home Assistant 前端",
+                "sourceRef": "home-assistant/frontend",
+                "spans": [
+                  {
+                    "spanId": "E7.S1",
+                    "text": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                    "startInChunk": 8,
+                    "endInChunk": 295
+                  }
+                ],
+                "documentId": 257,
+                "versionId": 476,
+                "chunkId": 16083,
+                "sectionPath": "Home Assistant 前端 > 许可证",
+                "startOffset": 689,
+                "endOffset": 976,
+                "contentStartInChunk": 8,
+                "quote": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "text": "Home Assistant 是开源软件，采用 Apache 2 许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "whatIsIt": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。 [E1]",
+            "prerequisites": "开发环境命令：初始设置 script/setup，生产构建 script/build_frontend，画廊 cd gallery && script/develop_gallery。 [E4]",
+            "supportedExplanation": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。 [E1]\n开发环境命令：初始设置 script/setup，生产构建 script/build_frontend，画廊 cd gallery && script/develop_gallery。 [E4]\nHome Assistant 是开源软件，采用 Apache 2 许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。 [E7]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议以学习前端界面为目标，先运行已有示例并阅读开发指南，再尝试一个小改造，如调整画廊中的组件样式或文案，避免重做整个仓库。",
+              "difficultyAdvice": "建议先核对 Node 等环境要求，并确认能运行 script/setup 和 script/build_frontend；若命令失败，先解决依赖问题再继续。",
+              "vibeCodingAdvice": "可以尝试用 AI 辅助阅读构建脚本和组件代码，让 AI 解释 script/setup 的作用，并生成小改造的验证步骤，但需手动运行确认。",
+              "steps": [
+                "先核对并运行已有示例，如执行 script/setup 和 script/build_frontend",
+                "实现一个具体小改造，例如修改画廊中某个组件的样式或文案",
+                "测试并形成演示与复盘，记录构建和运行结果"
+              ],
+              "evidenceIds": [
+                "E1",
+                "E4",
+                "E7"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "EXTERNAL_PROJECT",
+            "id": 234,
+            "sourceRef": "thedaviddias/Front-End-Checklist",
+            "name": "thedaviddias/Front-End-Checklist",
+            "url": "https://github.com/thedaviddias/Front-End-Checklist",
+            "status": "DOCUMENTED",
+            "archived": false,
+            "description": "前端检查清单有助于审查实现质量；若还在决定构建什么界面，可用 UX Patterns for Devs 比较常见 UI 模式。 [E2]",
+            "evidenceStatus": "DOCUMENT_IDENTITY",
+            "importable": true,
+            "documentId": 234,
+            "versionId": 453,
+            "catalogTitle": "前端检查清单",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 0.0,
+              "total": 25.98076211353316,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 25.98076211353316
+            },
+            "recommendReason": "本轮目标：学习；资料涉及前端界面，具体实践范围见项目说明；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E2",
+                "title": "前端检查清单",
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "spans": [
+                  {
+                    "spanId": "E2.S1",
+                    "text": "前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                    "startInChunk": 14,
+                    "endInChunk": 153
+                  }
+                ],
+                "documentId": 234,
+                "versionId": 453,
+                "chunkId": 15935,
+                "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                "startOffset": 1490,
+                "endOffset": 1629,
+                "contentStartInChunk": 14,
+                "quote": "前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                "text": "前端检查清单有助于审查实现质量；若还在决定构建什么界面，可用 UX Patterns for Devs 比较常见 UI 模式。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E5",
+                "title": "前端检查清单",
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "spans": [
+                  {
+                    "spanId": "E5.S1",
+                    "text": "- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                    "startInChunk": 10,
+                    "endInChunk": 198
+                  }
+                ],
+                "documentId": 234,
+                "versionId": 453,
+                "chunkId": 15934,
+                "sectionPath": "前端检查清单 > 选择你的工作流 > 在线浏览",
+                "startOffset": 1288,
+                "endOffset": 1476,
+                "contentStartInChunk": 10,
+                "quote": "- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                "text": "可在线浏览所有规则、精选检查清单，并打开类别页面进行专注的审计和实现指导。",
+                "field": "vibeCodingReason"
+              },
+              {
+                "evidenceId": "E8",
+                "title": "前端检查清单",
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "spans": [
+                  {
+                    "spanId": "E8.S1",
+                    "text": "1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+                    "startInChunk": 14,
+                    "endInChunk": 262
+                  }
+                ],
+                "documentId": 234,
+                "versionId": 453,
+                "chunkId": 15931,
+                "sectionPath": "前端检查清单 > 如何使用此检查清单",
+                "startOffset": 817,
+                "endOffset": 1065,
+                "contentStartInChunk": 14,
+                "quote": "1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+                "text": "使用流程：从类别导航器开始，处理复选框项目，打开规则页面获取指导，或用 frontendchecklist.io 交互式浏览。",
+                "field": "vibeCodingReason"
+              }
+            ],
+            "whatIsIt": "前端检查清单有助于审查实现质量；若还在决定构建什么界面，可用 UX Patterns for Devs 比较常见 UI 模式。 [E2]",
+            "vibeCodingReason": "可在线浏览所有规则、精选检查清单，并打开类别页面进行专注的审计和实现指导。 [E5]\n使用流程：从类别导航器开始，处理复选框项目，打开规则页面获取指导，或用 frontendchecklist.io 交互式浏览。 [E8]",
+            "supportedExplanation": "前端检查清单有助于审查实现质量；若还在决定构建什么界面，可用 UX Patterns for Devs 比较常见 UI 模式。 [E2]\n可在线浏览所有规则、精选检查清单，并打开类别页面进行专注的审计和实现指导。 [E5]\n使用流程：从类别导航器开始，处理复选框项目，打开规则页面获取指导，或用 frontendchecklist.io 交互式浏览。 [E8]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议将检查清单作为学习前端界面的审计工具，先浏览类别页面，再针对自己写的小界面逐项核对，帮助发现遗漏。",
+              "difficultyAdvice": "建议先确认能在线浏览规则和检查清单，无需本地环境；若想离线使用，需自行准备静态文件服务。",
+              "vibeCodingAdvice": "可以尝试用 AI 辅助解释检查项的含义，并让 AI 根据你的小界面生成核对建议，但最终判断需自己完成。",
+              "steps": [
+                "先核对并运行已有示例，如打开类别导航器浏览规则",
+                "实现一个具体小改造，例如为自己的界面勾选并处理若干检查项",
+                "测试并形成演示与复盘，记录修改前后的对比"
+              ],
+              "evidenceIds": [
+                "E2",
+                "E5",
+                "E8"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "CAREER_PROJECT",
+            "id": 271,
+            "sourceRef": "career:271",
+            "name": "pbakaus/impeccable",
+            "url": "https://github.com/pbakaus/impeccable",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "JavaScript",
+            "techStack": "JavaScript,Playwright",
+            "difficulty": "进阶",
+            "duration": "兼职约 3～6 个月（基于高级难度和大型体积）",
+            "description": "Impeccable 为 AI 编码代理提供设计指导：1 个技能、23 个命令、实时浏览器迭代和 59 条确定性检测规则。 [E6]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": true,
+            "quality": 72,
+            "analysisReason": "完成本项目可证明你具备将设计规范工程化、用 Playwright 进行高覆盖 UI 自动化测试的能力，极强匹配 AI 创意与交互、前端质量岗位。高级难度作品具有显著区分度，面试中可作为深度技术案例展开。",
+            "proofPoints": "- 大型项目（LARGE），体现复杂工程驾驭能力\n- 带有完整的测试及 CI 流程，自动化程度高\n- 采用 Apache-2.0 开源协议，便于二次开发\n- 已积累大量社区关注，Issue 数量反映维护成熟度",
+            "interviewTopics": "- 如何抽象和表达设计语言，使其可被机器执行？\n- Playwright 在 Visual Regression Testing 中如何落地？\n- 怎样与 AI 生成界面结合，实时校验设计一致性？\n- 面对 44 个开放 Issue，你会如何做优先级排序与改进？\n- 为该大型项目补充架构文档，你会怎么写？",
+            "modificationPlan": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。",
+            "mainRisks": "主要风险：项目规模大缺少架构文档、Playwright 强依赖浏览器环境、设计语言更新缓慢、高级难度要求较高 JS 和测试基础。 [E9]",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 0.0,
+              "total": 27.808401285415222,
+              "semanticAvailable": true,
+              "quality": 10.799999999999999,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 17.008401285415225
+            },
+            "recommendReason": "本轮目标：学习；资料涉及前端界面，具体实践范围见项目说明；资料记录主语言为JavaScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E6",
+                "title": "pbakaus/impeccable",
+                "sourceRef": "career:271",
+                "spans": [
+                  {
+                    "spanId": "E6.S1",
+                    "text": "Design guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                    "startInChunk": 14,
+                    "endInChunk": 356
+                  }
+                ],
+                "documentId": 30,
+                "versionId": 249,
+                "chunkId": 10490,
+                "sectionPath": "Impeccable",
+                "startOffset": 1096,
+                "endOffset": 1438,
+                "contentStartInChunk": 14,
+                "quote": "Design guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                "text": "Impeccable 为 AI 编码代理提供设计指导：1 个技能、23 个命令、实时浏览器迭代和 59 条确定性检测规则。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E3",
+                "title": "pbakaus/impeccable",
+                "sourceRef": "career:271",
+                "spans": [
+                  {
+                    "spanId": "E3.S1",
+                    "text": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 190
+                  }
+                ],
+                "documentId": 30,
+                "versionId": 249,
+                "chunkId": 10479,
+                "sectionPath": "pbakaus/impeccable > 差异化改造方案",
+                "startOffset": 576,
+                "endOffset": 755,
+                "contentStartInChunk": 11,
+                "quote": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+                "text": "差异化方案包括输出全中文文档、提供 Docker 化开发环境、开发交互式 Playground 展示设计 Token 效果等。",
+                "field": "vibeCodingReason"
+              },
+              {
+                "evidenceId": "E9",
+                "title": "pbakaus/impeccable",
+                "sourceRef": "career:271",
+                "spans": [
+                  {
+                    "spanId": "E9.S1",
+                    "text": "- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 132
+                  }
+                ],
+                "documentId": 30,
+                "versionId": 249,
+                "chunkId": 10480,
+                "sectionPath": "pbakaus/impeccable > 主要风险",
+                "startOffset": 763,
+                "endOffset": 887,
+                "contentStartInChunk": 8,
+                "quote": "- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+                "text": "主要风险：项目规模大缺少架构文档、Playwright 强依赖浏览器环境、设计语言更新缓慢、高级难度要求较高 JS 和测试基础。",
+                "field": "mainRisks"
+              }
+            ],
+            "whatIsIt": "Impeccable 为 AI 编码代理提供设计指导：1 个技能、23 个命令、实时浏览器迭代和 59 条确定性检测规则。 [E6]",
+            "vibeCodingReason": "差异化方案包括输出全中文文档、提供 Docker 化开发环境、开发交互式 Playground 展示设计 Token 效果等。 [E3]",
+            "supportedExplanation": "Impeccable 为 AI 编码代理提供设计指导：1 个技能、23 个命令、实时浏览器迭代和 59 条确定性检测规则。 [E6]\n差异化方案包括输出全中文文档、提供 Docker 化开发环境、开发交互式 Playground 展示设计 Token 效果等。 [E3]\n主要风险：项目规模大缺少架构文档、Playwright 强依赖浏览器环境、设计语言更新缓慢、高级难度要求较高 JS 和测试基础。 [E9]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议以学习设计指导为目标，先了解其技能和命令如何辅助 AI 编码，再尝试用 AI 生成一个小界面的设计建议，注意项目规模大且缺少架构文档。",
+              "difficultyAdvice": "建议先核对 JS 和测试基础，并确认能运行 Playwright 相关环境；若浏览器依赖安装困难，可先跳过实时迭代部分。",
+              "vibeCodingAdvice": "可以尝试用 AI 辅助理解 59 条检测规则，并让 AI 根据规则生成小改造建议，但需手动验证规则是否适用。",
+              "steps": [
+                "先核对并运行已有示例，如尝试一个技能或命令",
+                "实现一个具体小改造，例如用 AI 为小界面生成设计 Token 建议",
+                "测试并形成演示与复盘，记录规则检测结果"
+              ],
+              "evidenceIds": [
+                "E6",
+                "E3",
+                "E9"
+              ],
+              "kind": "SUGGESTION"
+            }
+          }
+        ],
+        "references": [
+          {
+            "evidenceId": "E1",
+            "title": "Home Assistant 前端",
+            "sourceRef": "home-assistant/frontend",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "text": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                "startInChunk": 10,
+                "endInChunk": 94
+              }
+            ],
+            "documentId": 257,
+            "versionId": 476,
+            "chunkId": 16082,
+            "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+            "startOffset": 597,
+            "endOffset": 681,
+            "contentStartInChunk": 10,
+            "quote": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+            "text": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "Home Assistant 前端",
+            "sourceRef": "home-assistant/frontend",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                "startInChunk": 7,
+                "endInChunk": 180
+              }
+            ],
+            "documentId": 257,
+            "versionId": 476,
+            "chunkId": 16080,
+            "sectionPath": "Home Assistant 前端 > 开发",
+            "startOffset": 405,
+            "endOffset": 578,
+            "contentStartInChunk": 7,
+            "quote": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+            "text": "开发环境命令：初始设置 script/setup，生产构建 script/build_frontend，画廊 cd gallery && script/develop_gallery。",
+            "field": "prerequisites"
+          },
+          {
+            "evidenceId": "E7",
+            "title": "Home Assistant 前端",
+            "sourceRef": "home-assistant/frontend",
+            "spans": [
+              {
+                "spanId": "E7.S1",
+                "text": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "startInChunk": 8,
+                "endInChunk": 295
+              }
+            ],
+            "documentId": 257,
+            "versionId": 476,
+            "chunkId": 16083,
+            "sectionPath": "Home Assistant 前端 > 许可证",
+            "startOffset": 689,
+            "endOffset": 976,
+            "contentStartInChunk": 8,
+            "quote": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+            "text": "Home Assistant 是开源软件，采用 Apache 2 许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E2",
+            "title": "前端检查清单",
+            "sourceRef": "thedaviddias/Front-End-Checklist",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                "startInChunk": 14,
+                "endInChunk": 153
+              }
+            ],
+            "documentId": 234,
+            "versionId": 453,
+            "chunkId": 15935,
+            "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+            "startOffset": 1490,
+            "endOffset": 1629,
+            "contentStartInChunk": 14,
+            "quote": "前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+            "text": "前端检查清单有助于审查实现质量；若还在决定构建什么界面，可用 UX Patterns for Devs 比较常见 UI 模式。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E5",
+            "title": "前端检查清单",
+            "sourceRef": "thedaviddias/Front-End-Checklist",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                "startInChunk": 10,
+                "endInChunk": 198
+              }
+            ],
+            "documentId": 234,
+            "versionId": 453,
+            "chunkId": 15934,
+            "sectionPath": "前端检查清单 > 选择你的工作流 > 在线浏览",
+            "startOffset": 1288,
+            "endOffset": 1476,
+            "contentStartInChunk": 10,
+            "quote": "- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+            "text": "可在线浏览所有规则、精选检查清单，并打开类别页面进行专注的审计和实现指导。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E8",
+            "title": "前端检查清单",
+            "sourceRef": "thedaviddias/Front-End-Checklist",
+            "spans": [
+              {
+                "spanId": "E8.S1",
+                "text": "1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+                "startInChunk": 14,
+                "endInChunk": 262
+              }
+            ],
+            "documentId": 234,
+            "versionId": 453,
+            "chunkId": 15931,
+            "sectionPath": "前端检查清单 > 如何使用此检查清单",
+            "startOffset": 817,
+            "endOffset": 1065,
+            "contentStartInChunk": 14,
+            "quote": "1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+            "text": "使用流程：从类别导航器开始，处理复选框项目，打开规则页面获取指导，或用 frontendchecklist.io 交互式浏览。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E6",
+            "title": "pbakaus/impeccable",
+            "sourceRef": "career:271",
+            "spans": [
+              {
+                "spanId": "E6.S1",
+                "text": "Design guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                "startInChunk": 14,
+                "endInChunk": 356
+              }
+            ],
+            "documentId": 30,
+            "versionId": 249,
+            "chunkId": 10490,
+            "sectionPath": "Impeccable",
+            "startOffset": 1096,
+            "endOffset": 1438,
+            "contentStartInChunk": 14,
+            "quote": "Design guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+            "text": "Impeccable 为 AI 编码代理提供设计指导：1 个技能、23 个命令、实时浏览器迭代和 59 条确定性检测规则。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "pbakaus/impeccable",
+            "sourceRef": "career:271",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 190
+              }
+            ],
+            "documentId": 30,
+            "versionId": 249,
+            "chunkId": 10479,
+            "sectionPath": "pbakaus/impeccable > 差异化改造方案",
+            "startOffset": 576,
+            "endOffset": 755,
+            "contentStartInChunk": 11,
+            "quote": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+            "text": "差异化方案包括输出全中文文档、提供 Docker 化开发环境、开发交互式 Playground 展示设计 Token 效果等。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E9",
+            "title": "pbakaus/impeccable",
+            "sourceRef": "career:271",
+            "spans": [
+              {
+                "spanId": "E9.S1",
+                "text": "- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+                "startInChunk": 8,
+                "endInChunk": 132
+              }
+            ],
+            "documentId": 30,
+            "versionId": 249,
+            "chunkId": 10480,
+            "sectionPath": "pbakaus/impeccable > 主要风险",
+            "startOffset": 763,
+            "endOffset": 887,
+            "contentStartInChunk": 8,
+            "quote": "- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+            "text": "主要风险：项目规模大缺少架构文档、Playwright 强依赖浏览器环境、设计语言更新缓慢、高级难度要求较高 JS 和测试基础。",
+            "field": "mainRisks"
+          }
+        ],
+        "profileLoaded": false,
+        "generation": "20261002164953-ec113424",
+        "status": "VERIFIED_PROJECTS",
+        "recommendationReport": {
+          "approach": "结合「学习」目标，建议先运行已有示例，再完成一个小改造，通过输入输出与测试理解系统的工作过程。",
+          "timeline": "先运行示例并确认改造范围，再根据实际投入估算进度。",
+          "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。",
+          "direction": "本轮围绕「前端界面」查找项目，下面区分资料事实与实践建议。",
+          "learning": [
+            {
+              "name": "home-assistant/frontend",
+              "key": "EXTERNAL_PROJECT:257",
+              "steps": [
+                "先核对并运行已有示例，如执行 script/setup 和 script/build_frontend",
+                "实现一个具体小改造，例如修改画廊中某个组件的样式或文案",
+                "测试并形成演示与复盘，记录构建和运行结果"
+              ],
+              "personalized": true
+            },
+            {
+              "name": "thedaviddias/Front-End-Checklist",
+              "key": "EXTERNAL_PROJECT:234",
+              "steps": [
+                "先核对并运行已有示例，如打开类别导航器浏览规则",
+                "实现一个具体小改造，例如为自己的界面勾选并处理若干检查项",
+                "测试并形成演示与复盘，记录修改前后的对比"
+              ],
+              "personalized": true
+            },
+            {
+              "name": "pbakaus/impeccable",
+              "key": "CAREER_PROJECT:271",
+              "steps": [
+                "先核对并运行已有示例，如尝试一个技能或命令",
+                "实现一个具体小改造，例如用 AI 为小界面生成设计 Token 建议",
+                "测试并形成演示与复盘，记录规则检测结果"
+              ],
+              "personalized": true
+            }
+          ]
+        },
+        "answer": "已记录基础（排序偏好）：1年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：1年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5287,
+              "completion_tokens": 972,
+              "total_tokens": 6259,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 747
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 295
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 4964,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "usage": {
+              "prompt_tokens": 140,
+              "completion_tokens": 18,
+              "total_tokens": 158,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 140
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 470,
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 1639,
+              "completion_tokens": 209,
+              "total_tokens": 1848,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1511
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 1236,
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 2100,
+              "completion_tokens": 458,
+              "total_tokens": 2558,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1972
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 1902,
+            "protocol": "JSON_OBJECT",
+            "phase": "EVIDENCE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 1335,
+              "completion_tokens": 22,
+              "total_tokens": 1357,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 1335
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 378,
+            "protocol": "JSON_OBJECT",
+            "phase": "VERIFY",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 833,
+              "completion_tokens": 681,
+              "total_tokens": 1514,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 577
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 4068,
+            "protocol": "JSON_OBJECT",
+            "phase": "ADVICE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.13-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 747,
+          "complete": true,
+          "cacheHitTokens": 5504,
+          "inputTokens": 11334,
+          "cacheMissTokens": 5830,
+          "totalTokens": 13694,
+          "outputTokens": 2360,
+          "callsWithoutUsage": 0,
+          "calls": 6,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "前端界面 前端界面开发 前端UI设计 frontend interface",
+            "topic": [
+              "前端界面"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.16779306976926558,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16082,
+                  "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                  "endOffset": 681,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 3,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                  "startOffset": 587,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=13,nameRank=1,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.16584145021645022,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16080,
+                  "content": "## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                  "endOffset": 578,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 1,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 开发",
+                  "startOffset": 398,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=17,nameRank=3,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.16451612903225804,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16081,
+                  "content": "## 前端开发\n\n",
+                  "endOffset": 587,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 2,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发",
+                  "startOffset": 578,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=2,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.16422039969834087,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16079,
+                  "content": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n",
+                  "endOffset": 398,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 0,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=42,nameRank=4,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.14615384615384616,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16083,
+                  "content": "## 许可证\n\nHome Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                  "endOffset": 976,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 4,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 许可证",
+                  "startOffset": 681,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=5,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.017604433077578856,
+                  "title": "dylanneve1/talon",
+                  "chunkId": 10275,
+                  "content": "## Desktop & mobile app\n\nThe `desktop` frontend turns the daemon into a **client bridge** — a versioned HTTP + Server-Sent-Events JSON API (the _Talon Client Bridge Protocol_, `src/frontend/native/protocol.ts`) that any GUI client can speak. The reference client is **[Talon Companion](apps/comp\n\n",
+                  "endOffset": 12624,
+                  "sourceRef": "career:259",
+                  "versionId": 241,
+                  "chunkIndex": 27,
+                  "documentId": 22,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Talon > Desktop & mobile app",
+                  "startOffset": 12327,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "前端检查清单",
+                  "chunkId": 15935,
+                  "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                  "endOffset": 1629,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 6,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                  "startOffset": 1476,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015326881295674505,
+                  "title": "openobserve/openobserve",
+                  "chunkId": 12727,
+                  "content": "### 👀 Frontend Monitoring (RUM)\n\nReal User Monitoring with Core Web Vitals, error tracking, performance analytics, and full session replay — so you can see exactly what your users experience. [Read more →](https://openobserve.ai/frontend-monitoring/)\n\n![Session replay with event timeline](./screenshots/session-replay.png)\n\n",
+                  "endOffset": 7953,
+                  "sourceRef": "career:223",
+                  "versionId": 337,
+                  "chunkIndex": 31,
+                  "documentId": 118,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "openobserve/openobserve > Product Tour > 👀 Frontend Monitoring (RUM)",
+                  "startOffset": 7627,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015289648622981955,
+                  "title": "HKUDS/nanobot",
+                  "chunkId": 10710,
+                  "content": "## 🌐 WebUI\n\nThe WebUI ships **inside the published wheel** with no separate frontend build. It is the browser workbench for persistent topics, visible agent activity, workspace controls, Apps, Skills, Automations, and settings.\n\n<p align=\"center\">\n  <img src=\"images/nanobot_webui.png\" alt=\"nanobot webui preview\" width=\"900\">\n</p>\n\nUse it to:\n\n- keep separate topics for different tasks and projects;\n- inspect reasoning, tool calls, file edits, diffs, command output, and generated artifacts;\n- switch models and workspaces without leaving the conversation;\n- configure providers, chat channels, Apps, Skills, and Automations from one place.\n\nSee the [WebUI guide](./docs/webui.md) for LAN access, background operation, workspace controls, and the full feature tour. Working on the frontend itself? Use [`webui/README.md`](./webui/README.md).\n\n",
+                  "endOffset": 12519,
+                  "sourceRef": "HKUDS/nanobot",
+                  "versionId": 275,
+                  "chunkIndex": 10,
+                  "documentId": 56,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "🌐 WebUI",
+                  "startOffset": 11672,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=21,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10783,
+                  "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                  "endOffset": 243,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 4,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                  "startOffset": 181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015009746588693956,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10490,
+                  "content": "# Impeccable\n\nDesign guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                  "endOffset": 1438,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 18,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Impeccable",
+                  "startOffset": 1082,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=48,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "Oxotka/Landscape1C",
+                  "chunkId": 12033,
+                  "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                  "endOffset": 222,
+                  "sourceRef": "beginner:38",
+                  "versionId": 313,
+                  "chunkIndex": 4,
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                  "startOffset": 149,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "前端检查清单",
+                  "chunkId": 15934,
+                  "content": "### 在线浏览\n\n- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                  "endOffset": 1476,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 5,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流 > 在线浏览",
+                  "startOffset": 1278,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "FreeCAD/FreeCAD",
+                  "chunkId": 16190,
+                  "content": "编译\n---------\n\n构建说明请参阅[开发者手册 – 入门指南](https://freecad.github.io/DevelopersHandbook/gettingstarted/)。\n\n\n",
+                  "endOffset": 1538,
+                  "sourceRef": "FreeCAD/FreeCAD",
+                  "versionId": 496,
+                  "chunkIndex": 4,
+                  "documentId": 277,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "编译",
+                  "startOffset": 1437,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10240,
+                  "content": "## 主界面\n\n![主界面](readme/ui.jpg)\n\n",
+                  "endOffset": 2248,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 19,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 主界面",
+                  "startOffset": 2217,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "CherryHQ/cherry-studio",
+                  "chunkId": 12212,
+                  "content": "## 职业价值\n展示构建高质量 AI 桌面或 Web 应用的能力，熟悉前端与大模型交互，了解 prompt 工程和助手管理。\n\n",
+                  "endOffset": 233,
+                  "sourceRef": "career:123",
+                  "versionId": 321,
+                  "chunkIndex": 4,
+                  "documentId": 102,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "CherryHQ/cherry-studio > 职业价值",
+                  "startOffset": 169,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "seek-oss/sku",
+                  "chunkId": 11941,
+                  "content": "## 中文简介\n前端开发工具包，集成构建与端到端测试能力。\n\n",
+                  "endOffset": 104,
+                  "sourceRef": "beginner:24",
+                  "versionId": 306,
+                  "chunkIndex": 3,
+                  "documentId": 87,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "seek-oss/sku > 中文简介",
+                  "startOffset": 73,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12889,
+                  "content": "</div>\n\n<p align=\"center\">\n  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TARS%20Models-yellow\" alt=\"hugging face model\" /></a>\n  <a href=\"https://npm-compare.com/@midscene/web/#timeRange=THREE_YEARS\"><img src=\"https://img.shields.io/npm/dm/@midscene/web.svg?style=flat-square&color=00a8f0\" alt=\"downloads\" /></a>\n  <a href=\"https://github.com/web-infra-dev/midscene/blob/main/LICENSE\"><img src=\"https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&color=00a8f0\" alt=\"License\" />\n  <a href=\"https://discord.gg/2JyBHxszE4\"><img src=\"https://img.shields.io/discord/1328277792730779648?style=flat-square&color=7289DA&label=Discord&logo=discord&logoColor=white\" alt=\"discord\" /></a>\n  <a href=\"https://x.com/midscene_ai\"><img src=\"https://img.shields.io/twitter/follow/midscene_ai?style=flat-square\" alt=\"twitter\" /></a>\n  <a href=\"https://deepwiki.com/web-infra-dev/midscene\">\n    <img alt=\"Ask DeepWiki.com\" src=\"https://devin.ai/assets/deepwiki-badge.png\" style=\"height: 18px; vertical-align: middle;\" />\n  </a>\n</p>\n\n",
+                  "endOffset": 2639,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 18,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > README 摘要",
+                  "startOffset": 1256,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "SAPTARSHI-coder/EaseMotion-css",
+                  "chunkId": 13279,
+                  "content": "## 职业价值\n完美契合AI创意与交互方向，也适用于前端开发者。能证明在纯CSS动画、UI交互细节和开源框架设计方面的深厚功底，是展示创意作品集的不错选择。\n\n",
+                  "endOffset": 284,
+                  "sourceRef": "career:243",
+                  "versionId": 355,
+                  "chunkIndex": 4,
+                  "documentId": 136,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "SAPTARSHI-coder/EaseMotion-css > 职业价值",
+                  "startOffset": 204,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "huesmith",
+                  "chunkId": 18058,
+                  "content": "## Further Reading\n\n- [`DEVELOPMENT.md`](DEVELOPMENT.md) — FFI layout, pairing quirks, debug techniques\n- [`docs/hue-scene-engine.md`](docs/hue-scene-engine.md) — Scene engine internals\n- [`docs/FFI-SAFETY.md`](docs/FFI-SAFETY.md) — Safety analysis of the Zigbee FFI layer\n\n---\n\n",
+                  "endOffset": 16800,
+                  "sourceRef": "canack/huesmith",
+                  "versionId": 771,
+                  "chunkIndex": 22,
+                  "documentId": 552,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "huesmith > Further Reading",
+                  "startOffset": 16521,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 241,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "Home Assistant 前端",
+                  "evidence": [
+                    {
+                      "score": 0.16779306976926558,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16082,
+                      "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                      "endOffset": 681,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 3,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                      "startOffset": 587,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=13,nameRank=1,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    },
+                    {
+                      "score": 0.16584145021645022,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16080,
+                      "content": "## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                      "endOffset": 578,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 1,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 开发",
+                      "startOffset": 398,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=17,nameRank=3,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    },
+                    {
+                      "score": 0.16451612903225804,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16081,
+                      "content": "## 前端开发\n\n",
+                      "endOffset": 587,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 2,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发",
+                      "startOffset": 578,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=2,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    }
+                  ],
+                  "groupKey": "GITHUB:home-assistant/frontend",
+                  "bestScore": 0.16779306976926558,
+                  "sourceRef": "home-assistant/frontend",
+                  "documentId": 257,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "dylanneve1/talon",
+                  "evidence": [
+                    {
+                      "score": 0.017604433077578856,
+                      "title": "dylanneve1/talon",
+                      "chunkId": 10275,
+                      "content": "## Desktop & mobile app\n\nThe `desktop` frontend turns the daemon into a **client bridge** — a versioned HTTP + Server-Sent-Events JSON API (the _Talon Client Bridge Protocol_, `src/frontend/native/protocol.ts`) that any GUI client can speak. The reference client is **[Talon Companion](apps/comp\n\n",
+                      "endOffset": 12624,
+                      "sourceRef": "career:259",
+                      "versionId": 241,
+                      "chunkIndex": 27,
+                      "documentId": 22,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "Talon > Desktop & mobile app",
+                      "startOffset": 12327,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:259",
+                  "bestScore": 0.017604433077578856,
+                  "sourceRef": "career:259",
+                  "documentId": 22,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "前端检查清单",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "前端检查清单",
+                      "chunkId": 15935,
+                      "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                      "endOffset": 1629,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 6,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                      "startOffset": 1476,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "前端检查清单",
+                      "chunkId": 15934,
+                      "content": "### 在线浏览\n\n- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                      "endOffset": 1476,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 5,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 选择你的工作流 > 在线浏览",
+                      "startOffset": 1278,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:thedaviddias/Front-End-Checklist",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "documentId": 234,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "openobserve/openobserve",
+                  "evidence": [
+                    {
+                      "score": 0.015326881295674505,
+                      "title": "openobserve/openobserve",
+                      "chunkId": 12727,
+                      "content": "### 👀 Frontend Monitoring (RUM)\n\nReal User Monitoring with Core Web Vitals, error tracking, performance analytics, and full session replay — so you can see exactly what your users experience. [Read more →](https://openobserve.ai/frontend-monitoring/)\n\n![Session replay with event timeline](./screenshots/session-replay.png)\n\n",
+                      "endOffset": 7953,
+                      "sourceRef": "career:223",
+                      "versionId": 337,
+                      "chunkIndex": 31,
+                      "documentId": 118,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "openobserve/openobserve > Product Tour > 👀 Frontend Monitoring (RUM)",
+                      "startOffset": 7627,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:223",
+                  "bestScore": 0.015326881295674505,
+                  "sourceRef": "career:223",
+                  "documentId": 118,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "HKUDS/nanobot",
+                  "evidence": [
+                    {
+                      "score": 0.015289648622981955,
+                      "title": "HKUDS/nanobot",
+                      "chunkId": 10710,
+                      "content": "## 🌐 WebUI\n\nThe WebUI ships **inside the published wheel** with no separate frontend build. It is the browser workbench for persistent topics, visible agent activity, workspace controls, Apps, Skills, Automations, and settings.\n\n<p align=\"center\">\n  <img src=\"images/nanobot_webui.png\" alt=\"nanobot webui preview\" width=\"900\">\n</p>\n\nUse it to:\n\n- keep separate topics for different tasks and projects;\n- inspect reasoning, tool calls, file edits, diffs, command output, and generated artifacts;\n- switch models and workspaces without leaving the conversation;\n- configure providers, chat channels, Apps, Skills, and Automations from one place.\n\nSee the [WebUI guide](./docs/webui.md) for LAN access, background operation, workspace controls, and the full feature tour. Working on the frontend itself? Use [`webui/README.md`](./webui/README.md).\n\n",
+                      "endOffset": 12519,
+                      "sourceRef": "HKUDS/nanobot",
+                      "versionId": 275,
+                      "chunkIndex": 10,
+                      "documentId": 56,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "🌐 WebUI",
+                      "startOffset": 11672,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=21,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:HKUDS/nanobot",
+                  "bestScore": 0.015289648622981955,
+                  "sourceRef": "HKUDS/nanobot",
+                  "documentId": 56,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10783,
+                      "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                      "endOffset": 243,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 4,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                      "startOffset": 181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pbakaus/impeccable",
+                  "evidence": [
+                    {
+                      "score": 0.015009746588693956,
+                      "title": "pbakaus/impeccable",
+                      "chunkId": 10490,
+                      "content": "# Impeccable\n\nDesign guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                      "endOffset": 1438,
+                      "sourceRef": "career:271",
+                      "versionId": 249,
+                      "chunkIndex": 18,
+                      "documentId": 30,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "Impeccable",
+                      "startOffset": 1082,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=48,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:271",
+                  "bestScore": 0.015009746588693956,
+                  "sourceRef": "career:271",
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "Oxotka/Landscape1C",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "Oxotka/Landscape1C",
+                      "chunkId": 12033,
+                      "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                      "endOffset": 222,
+                      "sourceRef": "beginner:38",
+                      "versionId": 313,
+                      "chunkIndex": 4,
+                      "documentId": 94,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                      "startOffset": 149,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:38",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "beginner:38",
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "FreeCAD/FreeCAD",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "FreeCAD/FreeCAD",
+                      "chunkId": 16190,
+                      "content": "编译\n---------\n\n构建说明请参阅[开发者手册 – 入门指南](https://freecad.github.io/DevelopersHandbook/gettingstarted/)。\n\n\n",
+                      "endOffset": 1538,
+                      "sourceRef": "FreeCAD/FreeCAD",
+                      "versionId": 496,
+                      "chunkIndex": 4,
+                      "documentId": 277,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "编译",
+                      "startOffset": 1437,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:FreeCAD/FreeCAD",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "FreeCAD/FreeCAD",
+                  "documentId": 277,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "darkmatter2048/WindowsCleaner",
+                      "chunkId": 10240,
+                      "content": "## 主界面\n\n![主界面](readme/ui.jpg)\n\n",
+                      "endOffset": 2248,
+                      "sourceRef": "career:257",
+                      "versionId": 240,
+                      "chunkIndex": 19,
+                      "documentId": 21,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "darkmatter2048/WindowsCleaner > 主界面",
+                      "startOffset": 2217,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:257",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "career:257",
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "CherryHQ/cherry-studio",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "CherryHQ/cherry-studio",
+                      "chunkId": 12212,
+                      "content": "## 职业价值\n展示构建高质量 AI 桌面或 Web 应用的能力，熟悉前端与大模型交互，了解 prompt 工程和助手管理。\n\n",
+                      "endOffset": 233,
+                      "sourceRef": "career:123",
+                      "versionId": 321,
+                      "chunkIndex": 4,
+                      "documentId": 102,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "CherryHQ/cherry-studio > 职业价值",
+                      "startOffset": 169,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:123",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "career:123",
+                  "documentId": 102,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "seek-oss/sku",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "seek-oss/sku",
+                      "chunkId": 11941,
+                      "content": "## 中文简介\n前端开发工具包，集成构建与端到端测试能力。\n\n",
+                      "endOffset": 104,
+                      "sourceRef": "beginner:24",
+                      "versionId": 306,
+                      "chunkIndex": 3,
+                      "documentId": 87,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "seek-oss/sku > 中文简介",
+                      "startOffset": 73,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:24",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "beginner:24",
+                  "documentId": 87,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "web-infra-dev/midscene",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "web-infra-dev/midscene",
+                      "chunkId": 12889,
+                      "content": "</div>\n\n<p align=\"center\">\n  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TARS%20Models-yellow\" alt=\"hugging face model\" /></a>\n  <a href=\"https://npm-compare.com/@midscene/web/#timeRange=THREE_YEARS\"><img src=\"https://img.shields.io/npm/dm/@midscene/web.svg?style=flat-square&color=00a8f0\" alt=\"downloads\" /></a>\n  <a href=\"https://github.com/web-infra-dev/midscene/blob/main/LICENSE\"><img src=\"https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&color=00a8f0\" alt=\"License\" />\n  <a href=\"https://discord.gg/2JyBHxszE4\"><img src=\"https://img.shields.io/discord/1328277792730779648?style=flat-square&color=7289DA&label=Discord&logo=discord&logoColor=white\" alt=\"discord\" /></a>\n  <a href=\"https://x.com/midscene_ai\"><img src=\"https://img.shields.io/twitter/follow/midscene_ai?style=flat-square\" alt=\"twitter\" /></a>\n  <a href=\"https://deepwiki.com/web-infra-dev/midscene\">\n    <img alt=\"Ask DeepWiki.com\" src=\"https://devin.ai/assets/deepwiki-badge.png\" style=\"height: 18px; vertical-align: middle;\" />\n  </a>\n</p>\n\n",
+                      "endOffset": 2639,
+                      "sourceRef": "career:228",
+                      "versionId": 342,
+                      "chunkIndex": 18,
+                      "documentId": 123,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "web-infra-dev/midscene > README 摘要",
+                      "startOffset": 1256,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:228",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "career:228",
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "SAPTARSHI-coder/EaseMotion-css",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "SAPTARSHI-coder/EaseMotion-css",
+                      "chunkId": 13279,
+                      "content": "## 职业价值\n完美契合AI创意与交互方向，也适用于前端开发者。能证明在纯CSS动画、UI交互细节和开源框架设计方面的深厚功底，是展示创意作品集的不错选择。\n\n",
+                      "endOffset": 284,
+                      "sourceRef": "career:243",
+                      "versionId": 355,
+                      "chunkIndex": 4,
+                      "documentId": 136,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "SAPTARSHI-coder/EaseMotion-css > 职业价值",
+                      "startOffset": 204,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:243",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "career:243",
+                  "documentId": 136,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "huesmith",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "huesmith",
+                      "chunkId": 18058,
+                      "content": "## Further Reading\n\n- [`DEVELOPMENT.md`](DEVELOPMENT.md) — FFI layout, pairing quirks, debug techniques\n- [`docs/hue-scene-engine.md`](docs/hue-scene-engine.md) — Scene engine internals\n- [`docs/FFI-SAFETY.md`](docs/FFI-SAFETY.md) — Safety analysis of the Zigbee FFI layer\n\n---\n\n",
+                      "endOffset": 16800,
+                      "sourceRef": "canack/huesmith",
+                      "versionId": 771,
+                      "chunkIndex": 22,
+                      "documentId": 552,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "huesmith > Further Reading",
+                      "startOffset": 16521,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:canack/huesmith",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "canack/huesmith",
+                  "documentId": 552,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "前端界面 前端界面开发 前端UI设计 frontend interface",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 257,
+                "url": "https://github.com/home-assistant/frontend",
+                "name": "home-assistant/frontend",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "importable": false,
+                "catalogText": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n## 前端开发\n\n### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n## 许可证\n\nHome Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Home Assistant 前端",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 259,
+                "url": "https://github.com/dylanneve1/talon",
+                "name": "dylanneve1/talon",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 83,
+                "archived": false,
+                "duration": "3-6周",
+                "language": "TypeScript",
+                "mainRisks": "多平台 API 频繁变更；代理持续性设计复杂；可插拔后端需维护多个 SDK；项目较新，文档可能不足。",
+                "sourceRef": "career:259",
+                "techStack": "TypeScript,Playwright",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "Talon 是一个跨平台的 AI 代理框架，支持 Telegram、Discord、Teams 和终端，具有可插拔后端、MCP 工具访问和持久化后台智能体功能。",
+                "proofPoints": "证明能够开发跨平台聊天机器人/代理，集成多种 LLM 后端，实现上下文保持与目标管理。",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "构建多平台 AI 代理系统，掌握即时通讯与终端的 AI 集成，了解后台代理与异步任务调度。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "跨平台适配层设计、MCP 协议实现、后台代理持久化机制、对话流控制、插件系统等。",
+                "requiresSecrets": true,
+                "modificationPlan": "添加更多的 IM 平台支持（如 Slack），实现自定义代理行为（如代码审查代理），优化心跳和梦想功能的创意。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 234,
+                "url": "https://github.com/thedaviddias/Front-End-Checklist",
+                "name": "thedaviddias/Front-End-Checklist",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "versionId": 453,
+                "documentId": 234,
+                "importable": false,
+                "catalogText": "# 前端检查清单\n\n[![Open Collective 上的支持者](https://opencollective.com/front-end-checklist/backers/badge.svg)](#backers)\n[![通过 Open Collective 支持](https://opencollective.com/front-end-checklist/sponsors/badge.svg)](https://opencollective.com/front-end-checklist)\n\n前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流，你可以通过网页浏览、使用 MCP 兼容工具执行，或直接在此 README 中逐步完成。\n\n- 网站：[frontendchecklist.io](https://frontendchecklist.io)\n- 规则：[frontendchecklist.io/rules](https://frontendchecklist.io/rules)\n- MCP 服务器：[mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)\n\n配套项目：[UX Patterns for Devs](https://uxpatterns.dev/) 帮助开发者在利用前端检查清单验证实现质量之前，选择合适的 UI 模式。\n\n> [!IMPORTANT]\n> 使用网站进行浏览和过滤，使用 MCP 服务器进行智能体工作流，当需要将清单集中在一处时，使用此 README。\n\n## 你将获得\n\n- 涵盖 `11` 个活跃类别的 `385` 条英文规则\n- 托管服务器公开的 `11` 个 MCP 工具\n- 包含解释、修复指导和验证步骤的规则页面\n\n## 如何使用此检查清单\n\n1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n## 优先级图例\n\n- ![严重][critical_img] 意味着导致网站崩溃、合规性敏感或安全相关的问题，应优先修复。\n- ![高][high_img] 意味着对用户体验、可访问性、性能或可发现性有重大影响的问题。\n- ![中][medium_img] 意味着强烈建议的最佳实践，应作为常规前端质量审查的一部分。\n- ![低][low_img] 意味着有用的改进，但视情况而定或紧急程度较低。\n\n## 选择你的工作流\n\n### 在线浏览\n\n- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n### 为检查清单做贡献\n\n- 安装依赖项：`pnpm install`\n- 运行本地开发：`pnpm dev`\n- 验证结构：`pnpm validate:rule-structure`\n- 评分语料库：`pnpm score:rules`\n- 重新生成派生工件：`pnpm generate:skills` 和 `pnpm generate:readme`\n\n## 与 MCP 配合使用\n\n将支持 MCP 的智能体连接到前端检查清单，以进行面向 React、Next.js、HTML、CSS、JavaScript、可访问性、性能、SEO、安全性、图像、隐私、国际化（i18n）和测试的前端代码审查、结构化规则查询、审计和修复工作流。\n\n> [!TIP]\n> 最佳首次使用：让支持 MCP 的智能体指向一个真实的组件、页面或公开 URL，并明确要求它使用前端检查清单 MCP，优先获取可信度最高的前端发现。一些客户端发现已安装的 MCP 工具时比较迟缓，因此在提示中指定服务器名称会有所帮助。\n\n- 公共端点：[mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)\n- 公开文档：[frontendchecklist.io/mcp](https://frontendchecklist.io/mcp)\n- 本地/编辑器集成",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "前端检查清单",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 223,
+                "url": "https://github.com/openobserve/openobserve",
+                "name": "openobserve/openobserve",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 90,
+                "archived": false,
+                "duration": "20-35 天（含学习、贡献功能或构建集成示例）",
+                "language": "TypeScript",
+                "mainRisks": "项目活跃但 issues 极多，社区响应可能延迟；无自带数据库依赖外部存储，集成复杂度高；AGPL-3.0 协议可能限制商用闭源产品闭源衍生。",
+                "sourceRef": "career:223",
+                "techStack": "TypeScript",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "OpenObserve 是一个用 TypeScript 编写的开源可观测性平台，能处理 logs、metrics、traces 及 LLM 可观测性，号称比 Datadog 等成本低 140 倍并以单二进制部署。",
+                "proofPoints": "- 理解全栈可观测性 pipeline 的设计与实现\n- 具备基于 TypeScript 开发高性能数据处理系统的经验\n- 熟悉日志、指标、链路追踪和 LLM 监控的整合方案\n- 能独立完成从单节点到分布式部署和自动化测试",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "对 AI 应用与 Agent、AI 基础设施等方向很友好，可展现候选人处理海量流数据、构建高性价比监控平台的能力，适合应聘后端或基础设施工程师。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "- 如何实现 140x 成本节省的存储和索引设计\n- LLM 可观测性与传统应用监控的技术异同\n- 大量 open issues（599）中你如何选择入手点\n- 单二进制部署架构的优缺点和适用场景",
+                "requiresSecrets": true,
+                "modificationPlan": "为平台增加对国产 LLM（如百川、智谱）的可观测支持，或开发国内常用运维工具（如飞书、钉钉）的告警通道，制作中文仪表板模板；这样作品能突出本地化实践能力。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 56,
+                "url": "https://github.com/HKUDS/nanobot",
+                "name": "HKUDS/nanobot",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "HKUDS/nanobot",
+                "versionId": 275,
+                "documentId": 56,
+                "importable": false,
+                "catalogText": "<picture>\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"./images/readme-cover-dark.svg\">\n  <img alt=\"nanobot README cover\" src=\"./images/readme-cover-light.svg\">\n</picture>\n\n<div align=\"center\">\n  <p>\n    <a href=\"https://nanobot.wiki/docs/latest/getting-started/nanobot-overview\">English</a> |\n    <a href=\"https://nanobot.wiki/cn/docs/latest/getting-started/nanobot-overview\">简体中文</a> |\n    <a href=\"https://nanobot.wiki/zh-Hant/docs/latest/getting-started/nanobot-overview\">繁體中文</a> |\n    <a href=\"https://nanobot.wiki/es/docs/latest/getting-started/nanobot-overview\">Español</a> |\n    <a href=\"https://nanobot.wiki/fr/docs/latest/getting-started/nanobot-overview\">Français</a> |\n    <a href=\"https://nanobot.wiki/id/docs/latest/getting-started/nanobot-overview\">Bahasa Indonesia</a> |\n    <a href=\"https://nanobot.wiki/ja/docs/latest/getting-started/nanobot-overview\">日本語</a> |\n    <a href=\"https://nanobot.wiki/ko/docs/latest/getting-started/nanobot-overview\">한국어</a> |\n    <a href=\"https://nanobot.wiki/ru/docs/latest/getting-started/nanobot-overview\">Русский</a> |\n    <a href=\"https://nanobot.wiki/vi/docs/latest/getting-started/nanobot-overview\">Tiếng Việt</a>\n  </p>\n  <p>\n    <a href=\"https://github.com/HKUDS/nanobot\"><img src=\"https://img.shields.io/github/stars/HKUDS/nanobot?style=flat&logo=github\" alt=\"GitHub stars\"></a>\n    <a href=\"https://pypi.org/project/nanobot-ai/\"><img src=\"https://img.shields.io/pypi/v/nanobot-ai\" alt=\"PyPI version\"></a>\n    <a href=\"https://pepy.tech/project/nanobot-ai\"><img src=\"https://static.pepy.tech/badge/nanobot-ai\" alt=\"PyPI downloads\"></a>\n    <a href=\"https://github.com/HKUDS/nanobot/actions/workflows/ci.yml\"><img src=\"https://github.com/HKUDS/nanobot/actions/workflows/ci.yml/badge.svg?branch=main\" alt=\"Test Suite\"></a>\n    <a href=\"https://pypi.org/project/nanobot-ai/\"><img src=\"https://img.shields.io/badge/python-%3E%3D3.11-blue\" alt=\"Python 3.11 or newer\"></a>\n    <a href=\"./LICENSE\"><img src=\"https://img.shields.io/github/license/HKUDS/nanobot\" alt=\"MIT License\"></a>\n    <a href=\"https://nanobot.wiki/docs/latest/getting-started/nanobot-overview\"><img src=\"https://img.shields.io/badge/docs-nanobot.wiki-blue\" alt=\"nanobot documentation\"></a>\n  </p>\n  <p>\n    <a href=\"https://discord.gg/MnCvHqpUGB\">Discord</a> ·\n    <a href=\"https://x.com/nanobot_project\">X</a> ·\n    <a href=\"./COMMUNICATION.md\">WeChat / Feishu</a>\n  </p>\n</div>\n\n🐈 **nanobot** is an ultra-lightweight, open-source, self-hosted personal AI agent framework written in Python. It runs in a WebUI, terminal, or chat apps and combines tools, long-term memory, MCP integrations, model routing, multi-agent delegation, scheduled automation, and an OpenAI-compatible API in a small, readable core.\n\n## Start Here\n\n| You want to... | Go to |\n|---|---|\n| Install nanobot with no terminal/config background | [Start Without Technical Background](./docs/start-without-technical-background.md) |\n| Install quickly and get one CLI reply | [Install](#-install) and [Quick Start](#-quick-start) |\n| Open the bundled browser UI | [WebUI](#-webui) |\n| Connect Telegram, Discord, WeChat, Slack, Email, Mattermost, or another chat app | [Chat Apps](./docs/chat-apps.md) |\n| Configure providers, fallback models, Langfuse, MCP, web tools, or security | [Docs](./docs/README.md) and [Configuration](./docs/configuration.md) |\n| Understand or extend the internals | [Architecture](./docs/architecture.md) and [Development](./docs/development.md) |\n| Deploy to the cloud or keep nanobot running as a service | [Deployment](./docs/deployment.md), including [one-click Render setup](./docs/deployment.md#render) |\n\n## What can nanobot do?\n\nnanobot is a self-hosted personal AI agent runtime. It can:\n\n- run in a browser WebUI or terminal\n- connect to Telegram, Discord, Slack, WeChat, Email, Mattermost, and other chat apps\n- use tools such as files, shell, web search, web fetch, MCP, cron, image generation, and subagents\n- keep session history and long-term memory through Dream\n- run long-horizon goals and scheduled automations\n- expose a Python SDK and OpenAI-compatible API for integrations\n- deploy as a long-running local or server-side agent gateway\n\n## 💡 Why nanobot\n\n- **Persistent workflows**: goals, memory, tools, and chat context survive long-running work.\n- **Chat-native reach**: WebUI, API, Telegram, Feishu, Slack, Discord, Teams, email, and Mattermost.\n- **Model freedom**: OpenAI-compatible APIs, local LLMs, image generation, search, and fallbacks.\n- **Small core**: readable internals with MCP, memory, deployment, and automation built in.\n- **Own your stack**: inspect, customize, self-host, and extend without a giant platform.\n\n## 📦 Install\n\n> [!IMPORTANT]\n> If you want the newest features and experiments, install from source.\n>\n> If you want the most stable day-to-day experience, install from PyPI or with `uv`.\n\nPick **one** install method:\n\nPrerequisites: Python 3.11 or newer. Git is only needed for a source install. Published packages already include the WebUI; a current-source install needs `bun` or `npm` to build it.\n\nIf terminals, API keys, or config files are new to you, use the guided zero-background walkthrough in [Start Without Technical Background](./docs/start-without-technical-background.md) instead of this compact README path.\n\n**One-command setup**\n\nmacOS / Linux:\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh\n```\n\nWindows PowerShell:\n\n```powershell\nirm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1 | iex\n```\n\nThe default command installs or upgrades `nanobot-ai` from PyPI. On a fresh local desktop, it then starts `nanobot webui` so you can configure the first provider and model in **Settings → Models**. SSH, headless, existing-config, and older-release paths keep the terminal setup wizard. The installer avoids system-wide pip installs by using an active virtual environment, `uv`, `pipx`, or a managed venv under `~/.nanobot/venv`. It also prints the exact command it used to run nanobot; reuse that full command below if `nanobot` is not on `PATH`.\n\nTo preview the plan without changing your environment, pass `--dry-run`; combine it with `--dev` when you want to preview the main-branch install.\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh -s -- --dry-run\n```\n\n```powershell\n& ([scriptblock]::Create((irm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1))) --dry-run\n```\n\nTo install the current `main` branch instead, pass `--dev`:\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh -s -- --dev\n```\n\n```powershell\n& ([scriptblock]::Create((irm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1))) --dev\n```\n\nIf you prefer to inspect the script first, open [`scripts/install.sh`](./scripts/install.sh) or [`scripts/install.ps1`](./scripts/install.ps1).\n\n**Install with `uv`**\n\n```bash\nuv tool install nanobot-ai\n```\n\n**Install from PyPI with pip**\n\n```bash\npython -m pip install nanobot-ai\n```\n\nIf pip reports `externally-managed-environment` on macOS or Linux, use the one-command installer, `uv tool install nanobot-ai`, `pipx install nanobot-ai`, or install inside a virtual environment.\n\n**Install from source**\n\n`bun` or `npm` must be available. From an activated virtual environment:\n\n```bash\ngit clone https://github.com/HKUDS/nanobot.git\ncd nanobot\npython -m pip install .\n```\n\nOn Windows, if pip reports that it cannot launch `npm`, run `cd webui`, `npm.cmd install --package-lock=false`, `npm.cmd run build`, and `cd ..` in order, then retry the install. Contributors who need an editable checkout should follow [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`webui/README.md`](./webui/README.md).\n\nVerify the install:\n\n```bash\nnanobot --version\n```\n\nIf `nanobot` is not on `PATH`, invoke it through the method that installed it: reuse the recommended installer's command, use `uv tool run --from nanobot-ai nanobot ...` or `pipx run --spec nanobot-ai nanobot ...`, or use the Python executable from the environment where pip installed the package.\n\n## 🚀 Quick Start\n\n**Open nanobot in your browser**\n\n```bash\nnanobot webui\n```\n\nThis is the recommended first run. The launcher creates the config and workspace when needed, safely enables the local WebSocket channel after confirmation, starts the gateway, and opens [`http://127.0.0.1:8765`](http://127.0.0.1:8765). A fresh install can open before a model is configured, so setup continues in the browser instead of beginning in a JSON file. The first-run WebUI binds to localhost by default and is not exposed to your LAN.\n\n**Your first three steps**\n\n1. Open **Settings → Models** and choose a provider, credential, and model.\n2. Start a new topic and send `Hello!` to verify the connection.\n3. Before project work, choose the intended workspace and access mode from the composer.\n\nAny normal reply means the provider, model, workspace, and browser gateway are working together.\n\n**Keep nanobot running after you close the terminal**\n\n```bash\nnanobot webui --background\n```\n\nThis starts the same full gateway as `nanobot webui`, opens the browser, and leaves channels and automations running after the launcher exits. Complete first-time model setup with foreground `nanobot webui` before switching to background mode.\n\n```bash\nnanobot gateway status\nnanobot gateway logs\nnanobot gateway restart\nnanobot gateway stop\n```\n\n**Prefer a gateway-first workflow?**\n\n```bash\nnanobot gateway\n```\n\nThis skips WebUI setup and browser opening, then runs the same complete gateway in the current terminal. It is the familiar entry point if you are coming from OpenClaw or already operate agents as long-lived services. The WebUI remains available when its channel is configured; open it manually when needed.\n\nUse `nanobot gateway --background` for the same direct entry point without keeping the terminal attached. For automatic startup and supervision by the operating system, see [Deployment](./docs/deployment.md).\n\n**Prefer to work entirely in the terminal?**\n\n```bash\nnanobot agent\n```\n\nThis opens an interactive terminal chat with the same configured model, workspace, and tools while keeping its own CLI session history. It does not open a browser or keep chat channels and automations running after you exit. Type `exit` or press `Ctrl+C` when you are done.\n\nFor one request and an immediate exit, use:\n\n```bash\nnanobot agent -m \"Hello!\"\n```\n\nThe one-shot form is useful for a quick provider check, shell scripts, and local automation. If you have not configured a model yet, run `nanobot webui` and open **Settings → Models** first.\n\nNeed manual JSON, another device on your LAN, or help with provider/model matching? Continue with [Install and Quick Start](./docs/quick-start.md), [WebUI](./docs/webui.md), or [Troubleshooting](./docs/troubleshooting.md).\n\n- Want a pasteable provider setup? See [Provider Cookbook](./docs/provider-cookbook.md)\n- Want to understand provider/model matching? See [Providers and Models](./docs/providers.md)\n- Want web search, MCP, security settings, or more config options? See [Configuration](./docs/configuration.md)\n- Want to run locally? See [Ollama](./docs/providers.md#ollama), [vLLM or another local OpenAI-compatible server](./docs/providers.md#vllm-or-other-local-openai-compatible-server), and the full [provider reference](./docs/configuration.md#providers).\n- Want to run nanobot in chat apps like Telegram, Discord, WeChat or Feishu? See [Chat Apps](./docs/chat-apps.md)\n- Want Docker or Linux service deployment? See [Deployment](./docs/deployment.md)\n\n## 🌐 WebUI\n\nThe WebUI ships **inside the published wheel** with no separate frontend build. It is the browser workbench for persistent topics, visible agent activity, workspace controls, Apps, Skills, Automations, and settings.\n\n<p align=\"center\">\n  <img src=\"images/nanobot_webui.png\" alt=\"nanobot webui preview\" width=\"900\">\n</p>\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "HKUDS/nanobot",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 46,
+                "url": "https://github.com/zhensherlock/protocol-launcher",
+                "name": "zhensherlock/protocol-launcher",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"ai-tools\", \"api-configuration\", \"deep-link\", \"deeplink\", \"deeplinks\", \"esm\", \"launch-url\", \"llm-provider\", \"mcp\", \"mcp-installer\", \"modelcontextprotocol\", \"one-click\", \"protocol\", \"protocol-launcher\", \"quick-launcher\", \"tree-shaking\", \"typescript\", \"url-generator\", \"url-scheme\"]",
+                "archived": false,
+                "duration": "2-4天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:46",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+                "beginnerScore": 95,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 271,
+                "url": "https://github.com/pbakaus/impeccable",
+                "name": "pbakaus/impeccable",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 72,
+                "archived": false,
+                "duration": "兼职约 3～6 个月（基于高级难度和大型体积）",
+                "language": "JavaScript",
+                "mainRisks": "- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础",
+                "sourceRef": "career:271",
+                "techStack": "JavaScript,Playwright",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "一套面向 AI 辅助设计的设计语言规范与实现，结合 Playwright 自动化测试确保 UI 一致性。使用 JavaScript 构建，项目规模大，社区活跃。",
+                "proofPoints": "- 大型项目（LARGE），体现复杂工程驾驭能力\n- 带有完整的测试及 CI 流程，自动化程度高\n- 采用 Apache-2.0 开源协议，便于二次开发\n- 已积累大量社区关注，Issue 数量反映维护成熟度",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "完成本项目可证明你具备将设计规范工程化、用 Playwright 进行高覆盖 UI 自动化测试的能力，极强匹配 AI 创意与交互、前端质量岗位。高级难度作品具有显著区分度，面试中可作为深度技术案例展开。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "- 如何抽象和表达设计语言，使其可被机器执行？\n- Playwright 在 Visual Regression Testing 中如何落地？\n- 怎样与 AI 生成界面结合，实时校验设计一致性？\n- 面对 44 个开放 Issue，你会如何做优先级排序与改进？\n- 为该大型项目补充架构文档，你会怎么写？",
+                "requiresSecrets": true,
+                "modificationPlan": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 38,
+                "url": "https://github.com/Oxotka/Landscape1C",
+                "name": "Oxotka/Landscape1C",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"1c\", \"1c-enterprise\", \"bsl\", \"developer-tools\", \"landscape\", \"tech-radar\"]",
+                "archived": false,
+                "duration": "2-5天",
+                "language": "JavaScript",
+                "sourceRef": "beginner:38",
+                "techStack": "JavaScript",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "1C 技术生态的交互式地图，包含 200+ 工具、6 个过滤轴、关系图谱、示意图海报和按角色划分的学习路径。",
+                "beginnerScore": 87,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 277,
+                "url": "https://github.com/FreeCAD/FreeCAD",
+                "name": "FreeCAD/FreeCAD",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "FreeCAD/FreeCAD",
+                "versionId": 496,
+                "documentId": 277,
+                "importable": false,
+                "catalogText": "<a href=\"https://freecad.org\"><img src=\"/src/Gui/Icons/freecad.svg\" height=\"100px\" width=\"100px\"></a>\n\n### 属于你自己的三维参数化建模器\n\n[网站](https://www.freecad.org) •\n[文档](https://wiki.freecad.org) •\n[论坛](https://forum.freecad.org/) •\n[缺陷追踪](https://github.com/FreeCAD/FreeCAD/issues) •\n[Git 仓库](https://github.com/FreeCAD/FreeCAD) •\n[博客](https://blog.freecad.org)\n\n\n[![发布](https://img.shields.io/github/release/freecad/freecad.svg)](https://github.com/freecad/freecad/releases/latest) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/freecad/localized.svg)](https://crowdin.com/project/freecad)\n\n<img src=\"/.github/images/partdesign.png\" width=\"800\"/>\n\n概述\n--------\n\n* **自由构建所想**  FreeCAD 是一款开源参数化三维建模器，主要设计用于创建任何尺寸的真实物体。参数化建模允许你通过回溯模型历史并修改参数，轻松调整设计。\n\n* **从二维到三维，再从三维到二维**  FreeCAD 允许你绘制几何约束的二维草图，并以此为基础构建其他物体。它包含众多组件，用于调整尺寸或从三维模型中提取设计细节，以生成高质量的生产就绪图纸。\n\n* **为你的需求而设计**  FreeCAD 适用于广泛的应用场景，包括产品设计、机械工程和建筑领域，无论你是爱好者、程序员、资深 CAD 用户、学生还是教师。\n\n* **跨平台**  FreeCAD 可在 Windows、macOS 和 Linux 操作系统上运行。\n\n* **底层技术**\n    * **OpenCASCADE** 一个强大的几何内核，是 FreeCAD 最重要的组件\n    * **Coin3D 库** 兼容 Open Inventor 的三维场景表示模型\n    * **Python**  FreeCAD 提供广泛的 Python API\n    * **Qt** 使用 Qt 构建的图形用户界面\n\n\n安装\n----------\n\n稳定版的预编译软件包适用于 Windows、macOS 和 Linux，可在[最新发布页面](https://github.com/FreeCAD/FreeCAD/releases/latest)获取。\n\n在大多数 Linux 发行版中，FreeCAD 也可直接从软件中心应用安装。\n\n每周开发版请访问[发布页面](https://github.com/FreeCAD/FreeCAD/releases/)。\n\n其他选项详见 [wiki 下载页面](https://wiki.freecad.org/Download)。\n\n编译\n---------\n\n构建说明请参阅[开发者手册 – 入门指南](https://freecad.github.io/DevelopersHandbook/gettingstarted/)。\n\n\n报告问题\n---------\n\n报告问题时，请遵循以下步骤：\n\n- 考虑先在[论坛](https://forum.freecad.org)、[Discord](https://discord.com/invite/w2cTKGzccC) 频道或 [Reddit](https://www.reddit.com/r/FreeCAD) 上发言，以确认该问题；\n- 搜索现有的[问题列表](https://github.com/FreeCAD/FreeCAD/issues)，查看是否存在重复项；\n- 使用最新稳定版或[开发版](https://github.com/FreeCAD/FreeCAD/releases/)的 FreeCAD；\n- 从 `帮助 > 关于 FreeCAD > 复制到剪贴板` 粘贴版本信息；\n- 在安全模式下重启 FreeCAD（`帮助 > 在安全模式下重启`），并尝试重现问题。如果问题解决，可通过删除 FreeCAD 配置文件修复；\n- 开始录制宏（`宏 > 录制宏...`），重复所有步骤。问题出现后停止录制，并上传保存的宏，或将宏代码复制到问题报告中；\n- 提供逐步重现问题的说明；\n- 上传示例文件（将 FCStd 文件打包为 ZIP 格式）以演示问题；\n\n更多详情请参阅：\n\n- [缺陷追踪器](https://github.com/FreeCAD/FreeCAD/issues)\n- [报告问题与请求功能](https://github.com/FreeCAD/FreeCAD/issues/new/choose)\n- [贡献指南](https://github.com/FreeCAD/FreeCAD/blob/main/CONTRIBUTING.md)\n- [帮助论坛](https://forum.freecad.org/viewforum.php?f=3)\n\n> [!注意]\n[FPA](https://fpa.freecad.org) 为开发者提供申请资助的机会，以资助其从事项目开发工作。",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "FreeCAD/FreeCAD",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 257,
+                "url": "https://github.com/darkmatter2048/WindowsCleaner",
+                "name": "darkmatter2048/WindowsCleaner",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 68,
+                "archived": false,
+                "duration": "3-4 周",
+                "language": "TypeScript",
+                "mainRisks": "许可证为 NOASSERTION，可能影响复用和招聘方评估；缺少部署和快速启动指南，面试展示效果打折扣。",
+                "sourceRef": "career:257",
+                "techStack": "TypeScript,React,Next.js",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                "proofPoints": "具备自动化测试、持续集成和发布流程；项目规模大，结构复杂；但缺少快速启动指南和部署方案，许可证未明确。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。",
+                "requiresSecrets": false,
+                "modificationPlan": "添加 Docker 容器化支持，补充快速启动文档和在线部署演示；明确许可证（如 MIT）；集成简单的后端数据存储（如 SQLite）展示全栈能力。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 123,
+                "url": "https://github.com/CherryHQ/cherry-studio",
+                "name": "CherryHQ/cherry-studio",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 85,
+                "archived": false,
+                "duration": "3-6周",
+                "language": "TypeScript",
+                "mainRisks": "项目庞大，前端细节多；需处理多个 LLM 接口的差异；维护大量助手可能复杂。",
+                "sourceRef": "career:123",
+                "techStack": "TypeScript,React,Next.js,Playwright",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "Cherry Studio 是一个 AI 生产力工作室，提供智能聊天、自主 agent 和 300+ 助手，统一接入前沿大语言模型。",
+                "proofPoints": "证明能够开发功能丰富的 AI 应用，集成多种 LLM，实现多助手切换、对话管理等。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "展示构建高质量 AI 桌面或 Web 应用的能力，熟悉前端与大模型交互，了解 prompt 工程和助手管理。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "跨模型统一调用接口、助手市场设计、Electron/Next.js 架构、端到端测试、用户数据隐私等。",
+                "requiresSecrets": true,
+                "modificationPlan": "开发独特的助手插件或技能，优化主题和 UI 交互，增加本地模型集成或企业级功能（如 SSO）。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 24,
+                "url": "https://github.com/seek-oss/sku",
+                "name": "seek-oss/sku",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"babel\", \"build-tool\", \"eslint\", \"front-end\", \"owner-experience-platforms\", \"toolkit\", \"vanilla-extract\", \"vite\", \"webpack\"]",
+                "archived": false,
+                "duration": "3-5天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:24",
+                "techStack": "TypeScript,Playwright",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "前端开发工具包，集成构建与端到端测试能力。",
+                "beginnerScore": 95,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "使用 TypeScript 和 Playwright，架构清晰，适合学习现代前端工具链和自动化测试。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "前端界面 前端界面开发 前端UI设计 frontend interface",
+              "topic": [
+                "前端界面"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "前端界面",
+              "candidates": [
+                {
+                  "key": "EXTERNAL_PROJECT:257",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/de"
+                },
+                {
+                  "key": "CAREER_PROJECT:259",
+                  "purpose": "Talon 是一个跨平台的 AI 代理框架，支持 Telegram、Discord、Teams 和终端，具有可插拔后端、MCP 工具访问和持久化后台智能体功能。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:234",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 前端检查清单\n\n[![Open Collective 上的支持者](https://opencollective.com/front-end-checklist/backers/badge.svg)](#backers)\n[![通过 Open Collective 支持](https://opencollective.com/front-end-checklist/sponsors/badge.svg)](https://opencollective.com/front-end-checklist)\n\n前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流，你可以通过网页浏览、使用 MCP 兼容工具执行，或直接在此 README 中逐步完成。\n\n- 网站：[frontendchecklist.io](https://frontendchecklist.io)\n- 规则：[frontendchecklist.io/rules](https://frontendchecklist.io/rules)\n- MCP 服务器：[mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)\n\n配套项目：[UX "
+                },
+                {
+                  "key": "CAREER_PROJECT:223",
+                  "purpose": "OpenObserve 是一个用 TypeScript 编写的开源可观测性平台，能处理 logs、metrics、traces 及 LLM 可观测性，号称比 Datadog 等成本低 140 倍并以单二进制部署。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:56",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <picture>\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"./images/readme-cover-dark.svg\">\n  <img alt=\"nanobot README cover\" src=\"./images/readme-cover-light.svg\">\n</picture>\n\n<div align=\"center\">\n  <p>\n    <a href=\"https://nanobot.wiki/docs/latest/getting-started/nanobot-overview\">English</a> |\n    <a href=\"https://nanobot.wiki/cn/docs/latest/getting-started/nanobot-overview\">简体中文</a> |\n    <a href=\"https://nanobot.wiki/zh-Hant/docs/latest/getting-started/nanobot-overview\">繁體中文</a> |\n    <a href=\"https://nanobot.wiki/es/docs/latest/getting-started/"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:46",
+                  "purpose": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。"
+                },
+                {
+                  "key": "CAREER_PROJECT:271",
+                  "purpose": "一套面向 AI 辅助设计的设计语言规范与实现，结合 Playwright 自动化测试确保 UI 一致性。使用 JavaScript 构建，项目规模大，社区活跃。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:38",
+                  "purpose": "1C 技术生态的交互式地图，包含 200+ 工具、6 个过滤轴、关系图谱、示意图海报和按角色划分的学习路径。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:277",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <a href=\"https://freecad.org\"><img src=\"/src/Gui/Icons/freecad.svg\" height=\"100px\" width=\"100px\"></a>\n\n### 属于你自己的三维参数化建模器\n\n[网站](https://www.freecad.org) •\n[文档](https://wiki.freecad.org) •\n[论坛](https://forum.freecad.org/) •\n[缺陷追踪](https://github.com/FreeCAD/FreeCAD/issues) •\n[Git 仓库](https://github.com/FreeCAD/FreeCAD) •\n[博客](https://blog.freecad.org)\n\n\n[![发布](https://img.shields.io/github/release/freecad/freecad.svg)](https://github.com/freecad/freecad/releases/latest) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/freecad/localized.svg)](https://crowdi"
+                },
+                {
+                  "key": "CAREER_PROJECT:257",
+                  "purpose": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。"
+                },
+                {
+                  "key": "CAREER_PROJECT:123",
+                  "purpose": "Cherry Studio 是一个 AI 生产力工作室，提供智能聊天、自主 agent 和 300+ 助手，统一接入前沿大语言模型。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:24",
+                  "purpose": "前端开发工具包，集成构建与端到端测试能力。"
+                }
+              ]
+            },
+            "verdict": {
+              "matches": [
+                {
+                  "key": "EXTERNAL_PROJECT:257",
+                  "quote": "这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:234",
+                  "quote": "前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "CAREER_PROJECT:271",
+                  "quote": "一套面向 AI 辅助设计的设计语言规范与实现，结合 Playwright 自动化测试确保 UI 一致性。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "CAREER_PROJECT:257",
+                  "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:24",
+                  "quote": "前端开发工具包，集成构建与端到端测试能力。",
+                  "relation": "DIRECT"
+                }
+              ]
+            },
+            "accepted": {
+              "topic": "前端界面",
+              "proofs": {
+                "CAREER_PROJECT:257": {
+                  "rank": 4,
+                  "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                  "relation": "DIRECT",
+                  "fingerprint": "8531579073d40b281e7e4005ecde546a5f6518cfbfe13fbb8252b21f01bc5243"
+                },
+                "CAREER_PROJECT:271": {
+                  "rank": 3,
+                  "quote": "一套面向 AI 辅助设计的设计语言规范与实现，结合 Playwright 自动化测试确保 UI 一致性。",
+                  "relation": "DIRECT",
+                  "fingerprint": "1893b03c6ad6713a28e347530fce406c8176a2ef726445bc4214f2ee24494cf3"
+                },
+                "BEGINNER_PROJECT:24": {
+                  "rank": 5,
+                  "quote": "前端开发工具包，集成构建与端到端测试能力。",
+                  "relation": "DIRECT",
+                  "fingerprint": "3aeb3729887e328fbb52ae3cd4efffbfeeca9dbcfc9ac4f082070219f2e6f5dc"
+                },
+                "EXTERNAL_PROJECT:234": {
+                  "rank": 2,
+                  "quote": "前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流",
+                  "relation": "DIRECT",
+                  "fingerprint": "e1a699a3c07a9bc060f0ff5352fc5a4e9f0900c5279e619beeceee42c3b3cd81"
+                },
+                "EXTERNAL_PROJECT:257": {
+                  "rank": 1,
+                  "quote": "这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。",
+                  "relation": "DIRECT",
+                  "fingerprint": "4be3b14300107346d368cf3dba5258d503d4ab4f8ab521e09dd285439298d903"
+                }
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16082,
+                  "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                  "endOffset": 681,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 3,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                  "startOffset": 587,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "前端检查清单",
+                  "chunkId": 15935,
+                  "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                  "endOffset": 1629,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 6,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                  "startOffset": 1476,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10479,
+                  "content": "## 差异化改造方案\n差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+                  "endOffset": 755,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 7,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "pbakaus/impeccable > 差异化改造方案",
+                  "startOffset": 565,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16079,
+                  "content": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n",
+                  "endOffset": 398,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 0,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16081,
+                  "content": "## 前端开发\n\n",
+                  "endOffset": 587,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 2,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发",
+                  "startOffset": 578,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16080,
+                  "content": "## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                  "endOffset": 578,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 1,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 开发",
+                  "startOffset": 398,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "前端检查清单",
+                  "chunkId": 15934,
+                  "content": "### 在线浏览\n\n- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                  "endOffset": 1476,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 5,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流 > 在线浏览",
+                  "startOffset": 1278,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "前端检查清单",
+                  "chunkId": 15931,
+                  "content": "## 如何使用此检查清单\n\n1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+                  "endOffset": 1065,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 2,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 如何使用此检查清单",
+                  "startOffset": 803,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "前端检查清单",
+                  "chunkId": 15929,
+                  "content": "# 前端检查清单\n\n[![Open Collective 上的支持者](https://opencollective.com/front-end-checklist/backers/badge.svg)](#backers)\n[![通过 Open Collective 支持](https://opencollective.com/front-end-checklist/sponsors/badge.svg)](https://opencollective.com/front-end-checklist)\n\n前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流，你可以通过网页浏览、使用 MCP 兼容工具执行，或直接在此 README 中逐步完成。\n\n- 网站：[frontendchecklist.io](https://frontendchecklist.io)\n- 规则：[frontendchecklist.io/rules](https://frontendchecklist.io/rules)\n- MCP 服务器：[mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)\n\n配套项目：[UX Patterns for Devs](https://uxpatterns.dev/) 帮助开发者在利用前端检查清单验证实现质量之前，选择合适的 UI 模式。\n\n> [!IMPORTANT]\n> 使用网站进行浏览和过滤，使用 MCP 服务器进行智能体工作流，当需要将清单集中在一处时，使用此 README。\n\n",
+                  "endOffset": 717,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 0,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10490,
+                  "content": "# Impeccable\n\nDesign guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                  "endOffset": 1438,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 18,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Impeccable",
+                  "startOffset": 1082,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "前端检查清单",
+                  "chunkId": 15936,
+                  "content": "### 为检查清单做贡献\n\n- 安装依赖项：`pnpm install`\n- 运行本地开发：`pnpm dev`\n- 验证结构：`pnpm validate:rule-structure`\n- 评分语料库：`pnpm score:rules`\n- 重新生成派生工件：`pnpm generate:skills` 和 `pnpm generate:readme`\n\n",
+                  "endOffset": 1811,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 7,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流 > 为检查清单做贡献",
+                  "startOffset": 1629,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10480,
+                  "content": "## 主要风险\n- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+                  "endOffset": 887,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 8,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "pbakaus/impeccable > 主要风险",
+                  "startOffset": 755,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "前端检查清单",
+                  "chunkId": 15937,
+                  "content": "## 与 MCP 配合使用\n\n将支持 MCP 的智能体连接到前端检查清单，以进行面向 React、Next.js、HTML、CSS、JavaScript、可访问性、性能、SEO、安全性、图像、隐私、国际化（i18n）和测试的前端代码审查、结构化规则查询、审计和修复工作流。\n\n> [!TIP]\n> 最佳首次使用：让支持 MCP 的智能体指向一个真实的组件、页面或公开 URL，并明确要求它使用前端检查清单 MCP，优先获取可信度最高的前端发现。一些客户端发现已安装的 MCP 工具时比较迟缓，因此在提示中指定服务器名称会有所帮助。\n\n- 公共端点：[mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)\n- 公开文档：[frontendchecklist.io/mcp](https://frontendchecklist.io/mcp)\n- 本地/编辑器集成",
+                  "endOffset": 2224,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 8,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 与 MCP 配合使用",
+                  "startOffset": 1811,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "前端检查清单",
+                  "chunkId": 15932,
+                  "content": "## 优先级图例\n\n- ![严重][critical_img] 意味着导致网站崩溃、合规性敏感或安全相关的问题，应优先修复。\n- ![高][high_img] 意味着对用户体验、可访问性、性能或可发现性有重大影响的问题。\n- ![中][medium_img] 意味着强烈建议的最佳实践，应作为常规前端质量审查的一部分。\n- ![低][low_img] 意味着有用的改进，但视情况而定或紧急程度较低。\n\n",
+                  "endOffset": 1266,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 3,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 优先级图例",
+                  "startOffset": 1065,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16083,
+                  "content": "## 许可证\n\nHome Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                  "endOffset": 976,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 4,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 许可证",
+                  "startOffset": 681,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10475,
+                  "content": "## 项目摘要\n一套面向 AI 辅助设计的设计语言规范与实现，结合 Playwright 自动化测试确保 UI 一致性。使用 JavaScript 构建，项目规模大，社区活跃。\n\n",
+                  "endOffset": 175,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 3,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "pbakaus/impeccable > 项目摘要",
+                  "startOffset": 85,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10498,
+                  "content": "## See It In Action\n\nVisit [the Neo Mirai case study](https://impeccable.style/cases/neo-mirai) to see a before/after case study of a real project transformed with Impeccable commands.\n\n",
+                  "endOffset": 5489,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 26,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Impeccable > See It In Action",
+                  "startOffset": 5303,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10476,
+                  "content": "## 职业价值\n完成本项目可证明你具备将设计规范工程化、用 Playwright 进行高覆盖 UI 自动化测试的能力，极强匹配 AI 创意与交互、前端质量岗位。高级难度作品具有显著区分度，面试中可作为深度技术案例展开。\n\n",
+                  "endOffset": 286,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 4,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "pbakaus/impeccable > 职业价值",
+                  "startOffset": 175,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10477,
+                  "content": "## 可证明能力\n- 大型项目（LARGE），体现复杂工程驾驭能力\n- 带有完整的测试及 CI 流程，自动化程度高\n- 采用 Apache-2.0 开源协议，便于二次开发\n- 已积累大量社区关注，Issue 数量反映维护成熟度\n\n",
+                  "endOffset": 401,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 5,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "pbakaus/impeccable > 可证明能力",
+                  "startOffset": 286,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "pbakaus/impeccable",
+                  "chunkId": 10473,
+                  "content": "## 知识分类\n职业成长项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "career:271",
+                  "versionId": 249,
+                  "chunkIndex": 1,
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "pbakaus/impeccable > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 51,
+              "candidateCount": 51,
+              "evidenceGroups": [
+                {
+                  "title": "Home Assistant 前端",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16082,
+                      "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                      "endOffset": 681,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 3,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                      "startOffset": 587,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16079,
+                      "content": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n",
+                      "endOffset": 398,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 0,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端",
+                      "startOffset": 0,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015625,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16081,
+                      "content": "## 前端开发\n\n",
+                      "endOffset": 587,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 2,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发",
+                      "startOffset": 578,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:home-assistant/frontend",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "home-assistant/frontend",
+                  "documentId": 257,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "前端检查清单",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "前端检查清单",
+                      "chunkId": 15935,
+                      "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                      "endOffset": 1629,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 6,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                      "startOffset": 1476,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "前端检查清单",
+                      "chunkId": 15934,
+                      "content": "### 在线浏览\n\n- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                      "endOffset": 1476,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 5,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 选择你的工作流 > 在线浏览",
+                      "startOffset": 1278,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "前端检查清单",
+                      "chunkId": 15931,
+                      "content": "## 如何使用此检查清单\n\n1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+                      "endOffset": 1065,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 2,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 如何使用此检查清单",
+                      "startOffset": 803,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:thedaviddias/Front-End-Checklist",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "documentId": 234,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "pbakaus/impeccable",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "pbakaus/impeccable",
+                      "chunkId": 10479,
+                      "content": "## 差异化改造方案\n差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+                      "endOffset": 755,
+                      "sourceRef": "career:271",
+                      "versionId": 249,
+                      "chunkIndex": 7,
+                      "documentId": 30,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "pbakaus/impeccable > 差异化改造方案",
+                      "startOffset": 565,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "pbakaus/impeccable",
+                      "chunkId": 10490,
+                      "content": "# Impeccable\n\nDesign guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                      "endOffset": 1438,
+                      "sourceRef": "career:271",
+                      "versionId": 249,
+                      "chunkIndex": 18,
+                      "documentId": 30,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "Impeccable",
+                      "startOffset": 1082,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "pbakaus/impeccable",
+                      "chunkId": 10480,
+                      "content": "## 主要风险\n- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+                      "endOffset": 887,
+                      "sourceRef": "career:271",
+                      "versionId": 249,
+                      "chunkIndex": 8,
+                      "documentId": 30,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "pbakaus/impeccable > 主要风险",
+                      "startOffset": 755,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:271",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "career:271",
+                  "documentId": 30,
+                  "sourceType": "CAREER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "query": "前端界面 项目功能 用途 实践示例 安装部署 环境依赖 限制 请推荐真实项目，想做的方向或用途是：做一个网站的前端界面。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+              "projects": [
+                {
+                  "name": "home-assistant/frontend",
+                  "type": "EXTERNAL_PROJECT",
+                  "sourceRef": "home-assistant/frontend"
+                },
+                {
+                  "name": "thedaviddias/Front-End-Checklist",
+                  "type": "EXTERNAL_PROJECT",
+                  "sourceRef": "thedaviddias/Front-End-Checklist"
+                },
+                {
+                  "name": "pbakaus/impeccable",
+                  "type": "CAREER_PROJECT",
+                  "sourceRef": "career:271"
+                }
+              ],
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "buildPrompt",
+          "detail": {
+            "evidence": [
+              {
+                "spans": [
+                  {
+                    "text": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 94,
+                    "startInChunk": 10
+                  }
+                ],
+                "title": "Home Assistant 前端",
+                "chunkId": 16082,
+                "endOffset": 681,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "evidenceId": "E1",
+                "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                "startOffset": 597,
+                "contentStartInChunk": 10
+              },
+              {
+                "spans": [
+                  {
+                    "text": "前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 153,
+                    "startInChunk": 14
+                  }
+                ],
+                "title": "前端检查清单",
+                "chunkId": 15935,
+                "endOffset": 1629,
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "versionId": 453,
+                "documentId": 234,
+                "evidenceId": "E2",
+                "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                "startOffset": 1490,
+                "contentStartInChunk": 14
+              },
+              {
+                "spans": [
+                  {
+                    "text": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 190,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "pbakaus/impeccable",
+                "chunkId": 10479,
+                "endOffset": 755,
+                "sourceRef": "career:271",
+                "versionId": 249,
+                "documentId": 30,
+                "evidenceId": "E3",
+                "sectionPath": "pbakaus/impeccable > 差异化改造方案",
+                "startOffset": 576,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 180,
+                    "startInChunk": 7
+                  }
+                ],
+                "title": "Home Assistant 前端",
+                "chunkId": 16080,
+                "endOffset": 578,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "evidenceId": "E4",
+                "sectionPath": "Home Assistant 前端 > 开发",
+                "startOffset": 405,
+                "contentStartInChunk": 7
+              },
+              {
+                "spans": [
+                  {
+                    "text": "- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                    "spanId": "E5.S1",
+                    "endInChunk": 198,
+                    "startInChunk": 10
+                  }
+                ],
+                "title": "前端检查清单",
+                "chunkId": 15934,
+                "endOffset": 1476,
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "versionId": 453,
+                "documentId": 234,
+                "evidenceId": "E5",
+                "sectionPath": "前端检查清单 > 选择你的工作流 > 在线浏览",
+                "startOffset": 1288,
+                "contentStartInChunk": 10
+              },
+              {
+                "spans": [
+                  {
+                    "text": "Design guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                    "spanId": "E6.S1",
+                    "endInChunk": 356,
+                    "startInChunk": 14
+                  }
+                ],
+                "title": "pbakaus/impeccable",
+                "chunkId": 10490,
+                "endOffset": 1438,
+                "sourceRef": "career:271",
+                "versionId": 249,
+                "documentId": 30,
+                "evidenceId": "E6",
+                "sectionPath": "Impeccable",
+                "startOffset": 1096,
+                "contentStartInChunk": 14
+              },
+              {
+                "spans": [
+                  {
+                    "text": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                    "spanId": "E7.S1",
+                    "endInChunk": 295,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "Home Assistant 前端",
+                "chunkId": 16083,
+                "endOffset": 976,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "evidenceId": "E7",
+                "sectionPath": "Home Assistant 前端 > 许可证",
+                "startOffset": 689,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+                    "spanId": "E8.S1",
+                    "endInChunk": 262,
+                    "startInChunk": 14
+                  }
+                ],
+                "title": "前端检查清单",
+                "chunkId": 15931,
+                "endOffset": 1065,
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "versionId": 453,
+                "documentId": 234,
+                "evidenceId": "E8",
+                "sectionPath": "前端检查清单 > 如何使用此检查清单",
+                "startOffset": 817,
+                "contentStartInChunk": 14
+              },
+              {
+                "spans": [
+                  {
+                    "text": "- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+                    "spanId": "E9.S1",
+                    "endInChunk": 132,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "pbakaus/impeccable",
+                "chunkId": 10480,
+                "endOffset": 887,
+                "sourceRef": "career:271",
+                "versionId": 249,
+                "documentId": 30,
+                "evidenceId": "E9",
+                "sectionPath": "pbakaus/impeccable > 主要风险",
+                "startOffset": 763,
+                "contentStartInChunk": 8
+              }
+            ],
+            "question": "请推荐真实项目，想做的方向或用途是：做一个网站的前端界面。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。\n当前需求（只用于选择解释重点，不作为项目事实）：{\"goal\":\"学习\",\"experience\":\"1年编程基础\",\"topic\":[\"前端界面\"]}",
+            "promptVersion": "customer-v4.13-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "validateEvidence",
+          "detail": {
+            "accepted": 9,
+            "rejected": []
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "verifyFacts",
+          "detail": {
+            "claims": [
+              {
+                "text": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。",
+                "quote": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                "sourceRef": "home-assistant/frontend",
+                "sourceTitle": "Home Assistant 前端"
+              },
+              {
+                "text": "开发环境命令：初始设置 script/setup，生产构建 script/build_frontend，画廊 cd gallery && script/develop_gallery。",
+                "quote": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                "sourceRef": "home-assistant/frontend",
+                "sourceTitle": "Home Assistant 前端"
+              },
+              {
+                "text": "Home Assistant 是开源软件，采用 Apache 2 许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。",
+                "quote": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "sourceRef": "home-assistant/frontend",
+                "sourceTitle": "Home Assistant 前端"
+              },
+              {
+                "text": "前端检查清单有助于审查实现质量；若还在决定构建什么界面，可用 UX Patterns for Devs 比较常见 UI 模式。",
+                "quote": "前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "sourceTitle": "前端检查清单"
+              },
+              {
+                "text": "可在线浏览所有规则、精选检查清单，并打开类别页面进行专注的审计和实现指导。",
+                "quote": "- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n",
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "sourceTitle": "前端检查清单"
+              },
+              {
+                "text": "使用流程：从类别导航器开始，处理复选框项目，打开规则页面获取指导，或用 frontendchecklist.io 交互式浏览。",
+                "quote": "1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n",
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "sourceTitle": "前端检查清单"
+              },
+              {
+                "text": "Impeccable 为 AI 编码代理提供设计指导：1 个技能、23 个命令、实时浏览器迭代和 59 条确定性检测规则。",
+                "quote": "Design guidance for AI coding agents. 1 skill, 23 commands, live browser iteration, and 59 deterministic detector rules for AI-generated frontend design.\n\n> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).\n\n",
+                "sourceRef": "career:271",
+                "sourceTitle": "pbakaus/impeccable"
+              },
+              {
+                "text": "差异化方案包括输出全中文文档、提供 Docker 化开发环境、开发交互式 Playground 展示设计 Token 效果等。",
+                "quote": "差异化方案：1. 输出全中文文档并录制设计系统使用教程；2. 提供 Docker 化开发环境，降低上手成本；3. 开发一个交互式 Playground 展示设计 Token 效果；4. 针对国内常用 UI 库（如 Ant Design）做合规适配示例；5. 修复至少 10 个开放 Issue 并提交 PR；6. 为系统补充完整的架构决策记录（ADR）。\n\n",
+                "sourceRef": "career:271",
+                "sourceTitle": "pbakaus/impeccable"
+              },
+              {
+                "text": "主要风险：项目规模大缺少架构文档、Playwright 强依赖浏览器环境、设计语言更新缓慢、高级难度要求较高 JS 和测试基础。",
+                "quote": "- 项目规模大，缺少架构文档导致理解成本极高\n- Playwright 强依赖浏览器环境，本地复现可能遇到系统兼容问题\n- 设计语言本身更新缓慢，可能跟不上快速变化的 AI 界面趋势\n- 高级难度要求较高的 JavaScript 和测试工程基础\n\n",
+                "sourceRef": "career:271",
+                "sourceTitle": "pbakaus/impeccable"
+              }
+            ],
+            "verdict": {
+              "supportedIds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            },
+            "supported": 9
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "practiceAdvice",
+          "detail": {
+            "kind": "SUGGESTION",
+            "promptVersion": "customer-v4.13-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

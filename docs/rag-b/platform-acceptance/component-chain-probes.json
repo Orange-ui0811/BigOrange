@@ -1,0 +1,207 @@
+{
+  "findings": [
+    {
+      "id": "empty_evidence_forces_no_project_recommendation",
+      "observed": {
+        "learning": {
+          "timeline": "两周",
+          "steps": [
+            "运行示例"
+          ]
+        },
+        "recommendations": [
+          {
+            "vibeCodingReason": "测试辅助开发",
+            "difficultyReason": "测试基础",
+            "difficulty": "入门",
+            "candidateId": "E999",
+            "name": "Python 示例",
+            "prerequisites": "Python",
+            "description": "主要使用 Python 的 Spring 相关示例。",
+            "score": 80,
+            "recommendReason": "测试推荐理由",
+            "references": [],
+            "evidenceIds": [],
+            "evidenceStatus": "UNSUPPORTED",
+            "unsupportedReferenceCount": 0
+          }
+        ],
+        "analysis": {
+          "trend": "测试趋势",
+          "prospect": "测试前景",
+          "demand": "测试需求",
+          "summary": "测试总结"
+        },
+        "raw": "{\"learning\":{\"timeline\":\"两周\",\"steps\":[\"运行示例\"]},\"recommendations\":[{\"vibeCodingReason\":\"测试辅助开发\",\"difficultyReason\":\"测试基础\",\"difficulty\":\"入门\",\"candidateId\":\"E999\",\"name\":\"Python 示例\",\"prerequisites\":\"Python\",\"description\":\"主要使用 Python 的 Spring 相关示例。\",\"score\":80,\"recommendReason\":\"测试推荐理由\"}],\"analysis\":{\"trend\":\"测试趋势\",\"prospect\":\"测试前景\",\"demand\":\"测试需求\",\"summary\":\"测试总结\"}}",
+        "balance": 950,
+        "beginnerCases": [],
+        "careerCases": [],
+        "modelMetrics": {
+          "usageSource": "TEST"
+        },
+        "retrievalTrace": {
+          "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+          "status": "EMPTY",
+          "queries": [
+            "Spring Java",
+            "Spring Java  学习 必须只推荐 Java 项目 新手"
+          ],
+          "evidence": [],
+          "durationMs": 81.289186,
+          "candidateCount": 0,
+          "selectedCount": 0,
+          "confidence": "NONE",
+          "ragApplied": false,
+          "evidenceFormat": "CARD_V2_ADAPTIVE",
+          "evidenceOriginalChars": 0,
+          "evidencePromptChars": 0,
+          "evidenceBudgetChars": 1100,
+          "evidenceFallbackCount": 0,
+          "evidenceCompressionRatio": 0.0
+        },
+        "promptVersion": "trend-v2-evidence-1",
+        "graphDurationMs": 0.111758,
+        "analyzerAttemptDurationMs": 279.775258,
+        "historySaved": true,
+        "historyId": 900002
+      },
+      "criterionPassed": false
+    },
+    {
+      "id": "controller_to_history_and_candidate_binding",
+      "observed": {
+        "evidenceStatus": "VERIFIED_CANDIDATE",
+        "historySaved": true
+      },
+      "criterionPassed": true
+    },
+    {
+      "id": "explicit_java_constraint_enforced_after_generation",
+      "observed": "主要使用 Python 的 Spring 相关示例。",
+      "criterionPassed": false
+    },
+    {
+      "id": "b_used_in_final_platform_chain",
+      "observed": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "USED",
+        "queries": [
+          "Spring Java",
+          "Spring Java  学习 必须只推荐 Java 项目 新手"
+        ],
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "documentKey": "synthetic-1",
+            "source": "GITHUB",
+            "title": "acceptance/synthetic",
+            "sourceRef": "acceptance/synthetic",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": null,
+            "repositoryUrl": "https://github.com/acceptance/synthetic",
+            "text": "Spring 知识库示例，主要语言 Python。支持上传与语义检索。",
+            "card": "[candidateId=E1;evidenceId=E1;repo=acceptance/synthetic] facts=证据:Spring 知识库示例，主要语言 Python。; 支持上传与语义检索。",
+            "promptMode": "CARD"
+          }
+        ],
+        "durationMs": 37.977177,
+        "candidateCount": 1,
+        "selectedCount": 1,
+        "confidence": "MEDIUM",
+        "ragApplied": true,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 35,
+        "evidencePromptChars": 103,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": 0,
+        "evidenceCompressionRatio": -1.942857142857143
+      },
+      "criterionPassed": false
+    },
+    {
+      "id": "invalid_json_refunds_and_skips_history",
+      "observed": "refund called; no history insertion",
+      "criterionPassed": true
+    },
+    {
+      "id": "confirmed_persona_can_drive_retrieval_without_duplicate_form",
+      "observed": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "NO_TOPIC",
+        "queries": [],
+        "evidence": [],
+        "durationMs": 0.037454
+      },
+      "criterionPassed": false
+    },
+    {
+      "id": "retrieval_failure_does_not_return_unsupported_project",
+      "observed": {
+        "learning": {
+          "timeline": "两周",
+          "steps": [
+            "运行示例"
+          ]
+        },
+        "recommendations": [
+          {
+            "vibeCodingReason": "测试辅助开发",
+            "difficultyReason": "测试基础",
+            "difficulty": "入门",
+            "candidateId": "E999",
+            "name": "Python 示例",
+            "prerequisites": "Python",
+            "description": "主要使用 Python 的 Spring 相关示例。",
+            "score": 80,
+            "recommendReason": "测试推荐理由",
+            "references": [],
+            "evidenceIds": [],
+            "evidenceStatus": "UNSUPPORTED",
+            "unsupportedReferenceCount": 0
+          }
+        ],
+        "analysis": {
+          "trend": "测试趋势",
+          "prospect": "测试前景",
+          "demand": "测试需求",
+          "summary": "测试总结"
+        },
+        "raw": "{\"learning\":{\"timeline\":\"两周\",\"steps\":[\"运行示例\"]},\"recommendations\":[{\"vibeCodingReason\":\"测试辅助开发\",\"difficultyReason\":\"测试基础\",\"difficulty\":\"入门\",\"candidateId\":\"E999\",\"name\":\"Python 示例\",\"prerequisites\":\"Python\",\"description\":\"主要使用 Python 的 Spring 相关示例。\",\"score\":80,\"recommendReason\":\"测试推荐理由\"}],\"analysis\":{\"trend\":\"测试趋势\",\"prospect\":\"测试前景\",\"demand\":\"测试需求\",\"summary\":\"测试总结\"}}",
+        "balance": 950,
+        "beginnerCases": [],
+        "careerCases": [],
+        "modelMetrics": {
+          "usageSource": "TEST"
+        },
+        "retrievalTrace": {
+          "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+          "status": "PARTIAL_FAILURE",
+          "queries": [
+            "Spring Java",
+            "Spring Java  学习 必须只推荐 Java 项目 新手"
+          ],
+          "evidence": [],
+          "durationMs": 1.144973,
+          "candidateCount": 0,
+          "selectedCount": 0,
+          "confidence": "NONE",
+          "ragApplied": false,
+          "evidenceFormat": "CARD_V2_ADAPTIVE",
+          "evidenceOriginalChars": 0,
+          "evidencePromptChars": 0,
+          "evidenceBudgetChars": 1100,
+          "evidenceFallbackCount": 0,
+          "evidenceCompressionRatio": 0.0
+        },
+        "promptVersion": "trend-v2-evidence-1",
+        "graphDurationMs": 0.036111,
+        "analyzerAttemptDurationMs": 2.60436,
+        "historySaved": true,
+        "historyId": 900002
+      },
+      "criterionPassed": false
+    }
+  ],
+  "scope": "In-process real controller/profile facade/analyzer/context/prompt/parser/assembler/binder/history-service; mocked model, vector, graph, quota and DB. No outbound AI calls or real accounts."
+}

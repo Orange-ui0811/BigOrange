@@ -32,9 +32,20 @@ class CustomerStoreTest {
         when(db.run("r")).thenReturn(Map.of("account_id",7L)); assertThatThrownBy(()->store.run("r",8)).isInstanceOf(org.springframework.web.server.ResponseStatusException.class);
     }
     @Test void replayReturnsOriginalWithoutSecondMessageOrCall() {
+        props.setExecutionEngine(CustomerExecutionEngine.Kind.LANGGRAPH4J);
         when(db.replay(1,"request123")).thenReturn(Map.of("id","original","input_hash",CustomerStore.hash("Java")));
         assertThat(store.submit(1,7,"request123","Java")).containsEntry("id","original").containsEntry("replayed",true);
         verify(db,never()).insertRun(any()); verify(db,never()).message(anyLong(),anyString(),anyString(),anyString(),anyString());
+    }
+    @Test void engineChoiceIsFrozenWithRunCreation() {
+        props.setExecutionEngine(CustomerExecutionEngine.Kind.LANGGRAPH4J);
+        when(db.replay(1,"request123")).thenReturn(null);
+        when(db.run(anyString())).thenReturn(Map.of("id","r"));
+        store.submit(1,7,"request123","你好");
+        var row=org.mockito.ArgumentCaptor.forClass(Map.class);verify(db).insertRun(row.capture());
+        assertThat(row.getValue()).containsEntry("executionEngine","LANGGRAPH4J").containsEntry("graphVersion","customer-graph-v2");
+        props.setExecutionEngine(CustomerExecutionEngine.Kind.LEGACY);
+        assertThat(row.getValue()).containsEntry("executionEngine","LANGGRAPH4J");
     }
     @Test void differentMessageWithSameRequestIsConflict() {
         when(db.replay(1,"request123")).thenReturn(Map.of("input_hash",CustomerStore.hash("Java")));

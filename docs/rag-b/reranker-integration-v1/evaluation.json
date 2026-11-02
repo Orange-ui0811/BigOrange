@@ -1,0 +1,277 @@
+{
+  "metrics": {
+    "SEMANTIC": {
+      "cases": 4,
+      "before": {
+        "source": {
+          "hitAt1": 0,
+          "hitAt3": 0,
+          "hitAt5": 1,
+          "hitAt8": 1,
+          "mrr8": 0.05
+        },
+        "evidence": {
+          "hitAt1": 0,
+          "hitAt3": 0,
+          "hitAt5": 0,
+          "hitAt8": 1,
+          "mrr8": 0.041666666666666664
+        }
+      },
+      "after": {
+        "source": {
+          "hitAt1": 2,
+          "hitAt3": 2,
+          "hitAt5": 3,
+          "hitAt8": 3,
+          "mrr8": 0.5625
+        },
+        "evidence": {
+          "hitAt1": 2,
+          "hitAt3": 2,
+          "hitAt5": 3,
+          "hitAt8": 3,
+          "mrr8": 0.5625
+        }
+      }
+    },
+    "NAMED": {
+      "cases": 1,
+      "before": {
+        "source": {
+          "hitAt1": 0,
+          "hitAt3": 1,
+          "hitAt5": 1,
+          "hitAt8": 1,
+          "mrr8": 0.5
+        },
+        "evidence": {
+          "hitAt1": 0,
+          "hitAt3": 1,
+          "hitAt5": 1,
+          "hitAt8": 1,
+          "mrr8": 0.5
+        }
+      },
+      "after": {
+        "source": {
+          "hitAt1": 1,
+          "hitAt3": 1,
+          "hitAt5": 1,
+          "hitAt8": 1,
+          "mrr8": 1.0
+        },
+        "evidence": {
+          "hitAt1": 1,
+          "hitAt3": 1,
+          "hitAt5": 1,
+          "hitAt8": 1,
+          "mrr8": 1.0
+        }
+      }
+    },
+    "GUARD": {
+      "cases": 3,
+      "before": 3,
+      "after": 3
+    }
+  },
+  "cases": [
+    {
+      "key": "fact-00-zh",
+      "stratum": "SEMANTIC",
+      "rerank": {
+        "status": "APPLIED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 80,
+        "rerankedCount": 80,
+        "durationMs": 2686.952012,
+        "fallbackReason": "",
+        "requestCount": 4
+      },
+      "policyBefore": "ANSWER_WITH_CITATIONS",
+      "policyAfter": "ANSWER_WITH_CITATIONS",
+      "expectedPolicy": null,
+      "before": {
+        "sourceRank": 5,
+        "evidenceRank": 6
+      },
+      "after": {
+        "sourceRank": 1,
+        "evidenceRank": 1
+      }
+    },
+    {
+      "key": "fact-20-zh",
+      "stratum": "SEMANTIC",
+      "rerank": {
+        "status": "APPLIED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 78,
+        "rerankedCount": 78,
+        "durationMs": 2199.829248,
+        "fallbackReason": "",
+        "requestCount": 4
+      },
+      "policyBefore": "ANSWER_WITH_CITATIONS",
+      "policyAfter": "ANSWER_WITH_CITATIONS",
+      "expectedPolicy": null,
+      "before": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      },
+      "after": {
+        "sourceRank": 4,
+        "evidenceRank": 4
+      }
+    },
+    {
+      "key": "fact-21-zh",
+      "stratum": "SEMANTIC",
+      "rerank": {
+        "status": "APPLIED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 78,
+        "rerankedCount": 78,
+        "durationMs": 2084.501869,
+        "fallbackReason": "",
+        "requestCount": 4
+      },
+      "policyBefore": "ANSWER_WITH_CITATIONS",
+      "policyAfter": "ANSWER_WITH_CITATIONS",
+      "expectedPolicy": null,
+      "before": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      },
+      "after": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      }
+    },
+    {
+      "key": "fact-24-zh",
+      "stratum": "SEMANTIC",
+      "rerank": {
+        "status": "APPLIED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 80,
+        "rerankedCount": 80,
+        "durationMs": 2040.269451,
+        "fallbackReason": "",
+        "requestCount": 4
+      },
+      "policyBefore": "ANSWER_WITH_CITATIONS",
+      "policyAfter": "ANSWER_WITH_CITATIONS",
+      "expectedPolicy": null,
+      "before": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      },
+      "after": {
+        "sourceRank": 1,
+        "evidenceRank": 1
+      }
+    },
+    {
+      "key": "github-langgraph",
+      "stratum": "NAMED",
+      "rerank": {
+        "status": "APPLIED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 80,
+        "rerankedCount": 80,
+        "durationMs": 2018.759756,
+        "fallbackReason": "",
+        "requestCount": 4
+      },
+      "policyBefore": "ANSWER_WITH_CITATIONS",
+      "policyAfter": "ANSWER_WITH_CITATIONS",
+      "expectedPolicy": null,
+      "before": {
+        "sourceRank": 2,
+        "evidenceRank": 2
+      },
+      "after": {
+        "sourceRank": 1,
+        "evidenceRank": 1
+      }
+    },
+    {
+      "key": "vue-no-docker",
+      "stratum": "GUARD",
+      "rerank": {
+        "status": "APPLIED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 12,
+        "rerankedCount": 12,
+        "durationMs": 208.435043,
+        "fallbackReason": "",
+        "requestCount": 1
+      },
+      "policyBefore": "ANSWER_WITH_CITATIONS",
+      "policyAfter": "ANSWER_WITH_CITATIONS",
+      "expectedPolicy": "ANSWER_WITH_CITATIONS",
+      "before": {
+        "sourceRank": 1,
+        "evidenceRank": 1
+      },
+      "after": {
+        "sourceRank": 1,
+        "evidenceRank": 1
+      }
+    },
+    {
+      "key": "refuse-ruby-career",
+      "stratum": "GUARD",
+      "rerank": {
+        "status": "SKIPPED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 0,
+        "rerankedCount": 0,
+        "durationMs": 0.016933,
+        "fallbackReason": "EMPTY",
+        "requestCount": 0
+      },
+      "policyBefore": "REFUSE_NO_MATCH",
+      "policyAfter": "REFUSE_NO_MATCH",
+      "expectedPolicy": "REFUSE_NO_MATCH",
+      "before": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      },
+      "after": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      }
+    },
+    {
+      "key": "refuse-commercial-price",
+      "stratum": "GUARD",
+      "rerank": {
+        "status": "APPLIED",
+        "model": "bge-reranker-v2-m3",
+        "candidateCount": 80,
+        "rerankedCount": 80,
+        "durationMs": 1091.732201,
+        "fallbackReason": "",
+        "requestCount": 4
+      },
+      "policyBefore": "REFUSE_NO_MATCH",
+      "policyAfter": "REFUSE_NO_MATCH",
+      "expectedPolicy": "REFUSE_NO_MATCH",
+      "before": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      },
+      "after": {
+        "sourceRank": 0,
+        "evidenceRank": 0
+      }
+    }
+  ],
+  "requests": {
+    "OLLAMA_EMBEDDING": 10,
+    "GITEE_RERANK": 25
+  }
+}

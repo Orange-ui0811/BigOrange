@@ -1,0 +1,424 @@
+{
+  "releaseApproved": false,
+  "smoke": {
+    "LEGACY": {
+      "scenarios": 4,
+      "passedScenarios": 4,
+      "actualRequests": 4,
+      "terminalStatuses": {
+        "SUCCEEDED": 4
+      },
+      "p95RequestMs": 18332,
+      "maxRequestMs": 18332,
+      "modelAttempts": 12,
+      "failedAttempts": 1,
+      "retryAttempts": 1,
+      "reportedTotalTokens": 38993,
+      "callsWithoutUsage": 0,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [],
+      "multiTurn": []
+    },
+    "LANGGRAPH4J": {
+      "scenarios": 4,
+      "passedScenarios": 4,
+      "actualRequests": 4,
+      "terminalStatuses": {
+        "SUCCEEDED": 4
+      },
+      "p95RequestMs": 16329,
+      "maxRequestMs": 16329,
+      "modelAttempts": 12,
+      "failedAttempts": 1,
+      "retryAttempts": 1,
+      "reportedTotalTokens": 39127,
+      "callsWithoutUsage": 0,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [],
+      "multiTurn": []
+    }
+  },
+  "full": {
+    "LEGACY": {
+      "scenarios": 40,
+      "passedScenarios": 38,
+      "actualRequests": 44,
+      "terminalStatuses": {
+        "SUCCEEDED": 44
+      },
+      "p95RequestMs": 15111,
+      "maxRequestMs": 16302,
+      "modelAttempts": 102,
+      "failedAttempts": 6,
+      "retryAttempts": 4,
+      "reportedTotalTokens": 344048,
+      "callsWithoutUsage": 2,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [
+        {
+          "caseId": "N10",
+          "round": 1,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        },
+        {
+          "caseId": "N10",
+          "round": 2,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        }
+      ],
+      "multiTurn": [
+        {
+          "caseId": "N18",
+          "round": 1,
+          "passed": true,
+          "projectCount": 2,
+          "referenceCount": 6,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N19",
+          "round": 1,
+          "passed": true,
+          "projectCount": 1,
+          "referenceCount": 5,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N18",
+          "round": 2,
+          "passed": true,
+          "projectCount": 2,
+          "referenceCount": 1,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N19",
+          "round": 2,
+          "passed": true,
+          "projectCount": 1,
+          "referenceCount": 2,
+          "criticalErrors": 0
+        }
+      ]
+    },
+    "LANGGRAPH4J": {
+      "scenarios": 40,
+      "passedScenarios": 37,
+      "actualRequests": 44,
+      "terminalStatuses": {
+        "SUCCEEDED": 44
+      },
+      "p95RequestMs": 14799,
+      "maxRequestMs": 17200,
+      "modelAttempts": 96,
+      "failedAttempts": 6,
+      "retryAttempts": 3,
+      "reportedTotalTokens": 335802,
+      "callsWithoutUsage": 2,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [
+        {
+          "caseId": "N10",
+          "round": 1,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        },
+        {
+          "caseId": "N18",
+          "round": 1,
+          "intent": "COMPARE",
+          "status": "FOLLOW_UP",
+          "state": {
+            "goal": "求职",
+            "topic": [
+              "RAG",
+              "文档查询与出处标注"
+            ],
+            "language": "Python",
+            "maxDurationDays": 180
+          },
+          "error": null
+        },
+        {
+          "caseId": "N10",
+          "round": 2,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        }
+      ],
+      "multiTurn": [
+        {
+          "caseId": "N18",
+          "round": 1,
+          "passed": false,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N19",
+          "round": 1,
+          "passed": true,
+          "projectCount": 1,
+          "referenceCount": 5,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N18",
+          "round": 2,
+          "passed": true,
+          "projectCount": 2,
+          "referenceCount": 7,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N19",
+          "round": 2,
+          "passed": true,
+          "projectCount": 1,
+          "referenceCount": 7,
+          "criticalErrors": 0
+        }
+      ]
+    }
+  },
+  "repair": {
+    "LEGACY": {
+      "scenarios": 4,
+      "passedScenarios": 2,
+      "actualRequests": 6,
+      "terminalStatuses": {
+        "SUCCEEDED": 6
+      },
+      "p95RequestMs": 19150,
+      "maxRequestMs": 19150,
+      "modelAttempts": 22,
+      "failedAttempts": 2,
+      "retryAttempts": 2,
+      "reportedTotalTokens": 68139,
+      "callsWithoutUsage": 0,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [
+        {
+          "caseId": "N10",
+          "round": 1,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        },
+        {
+          "caseId": "N10",
+          "round": 2,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        }
+      ],
+      "multiTurn": [
+        {
+          "caseId": "N18",
+          "round": 1,
+          "passed": true,
+          "projectCount": 2,
+          "referenceCount": 5,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N18",
+          "round": 2,
+          "passed": true,
+          "projectCount": 2,
+          "referenceCount": 8,
+          "criticalErrors": 0
+        }
+      ]
+    },
+    "LANGGRAPH4J": {
+      "scenarios": 4,
+      "passedScenarios": 2,
+      "actualRequests": 6,
+      "terminalStatuses": {
+        "SUCCEEDED": 6
+      },
+      "p95RequestMs": 15441,
+      "maxRequestMs": 15441,
+      "modelAttempts": 22,
+      "failedAttempts": 2,
+      "retryAttempts": 2,
+      "reportedTotalTokens": 65936,
+      "callsWithoutUsage": 0,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [
+        {
+          "caseId": "N10",
+          "round": 1,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        },
+        {
+          "caseId": "N10",
+          "round": 2,
+          "intent": "CHAT",
+          "status": "CONVERSATION",
+          "state": {
+            "topic": [
+              "图书管理"
+            ]
+          },
+          "error": null
+        }
+      ],
+      "multiTurn": [
+        {
+          "caseId": "N18",
+          "round": 1,
+          "passed": true,
+          "projectCount": 2,
+          "referenceCount": 8,
+          "criticalErrors": 0
+        },
+        {
+          "caseId": "N18",
+          "round": 2,
+          "passed": true,
+          "projectCount": 2,
+          "referenceCount": 6,
+          "criticalErrors": 0
+        }
+      ]
+    }
+  },
+  "goalProvenance": {
+    "LEGACY": {
+      "scenarios": 4,
+      "passedScenarios": 4,
+      "actualRequests": 4,
+      "terminalStatuses": {
+        "SUCCEEDED": 4
+      },
+      "p95RequestMs": 7117,
+      "maxRequestMs": 7117,
+      "modelAttempts": 4,
+      "failedAttempts": 0,
+      "retryAttempts": 0,
+      "reportedTotalTokens": 24404,
+      "callsWithoutUsage": 0,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [],
+      "multiTurn": []
+    },
+    "LANGGRAPH4J": {
+      "scenarios": 4,
+      "passedScenarios": 4,
+      "actualRequests": 4,
+      "terminalStatuses": {
+        "SUCCEEDED": 4
+      },
+      "p95RequestMs": 7137,
+      "maxRequestMs": 7137,
+      "modelAttempts": 4,
+      "failedAttempts": 0,
+      "retryAttempts": 0,
+      "reportedTotalTokens": 24992,
+      "callsWithoutUsage": 0,
+      "retrievalFailures": 0,
+      "criticalErrors": 0,
+      "costUsd": "UNKNOWN",
+      "failures": [],
+      "multiTurn": []
+    }
+  },
+  "adminLiveUI": {
+    "normalAdminLogin": "PASSED",
+    "runId": "cb5e1163-bd4d-4565-ba6f-6bc052244c0f",
+    "engine": "LANGGRAPH4J",
+    "graphVersion": "customer-graph-v1",
+    "generation": "local-m3-1791424349362",
+    "nodesVisible": 16,
+    "modelAttemptsVisible": 6,
+    "checkpointsVisible": 18,
+    "tokenUsageVisible": 14500,
+    "rawAccess": "PASSED_NORMAL_ADMIN_UI",
+    "apiUsed": "Normal authenticated browser UI",
+    "externalModelCalls": 0,
+    "releaseApproved": false,
+    "rawPayloadPrefix": "9b431d0c",
+    "auditDatabaseVerified": true,
+    "rawActorRole": "ADMIN",
+    "localBackendRestarted": true,
+    "publicEngine": "LEGACY",
+    "embeddingProvider": "OLLAMA",
+    "screenshot": "admin-raw-audit.jpg",
+    "backendHealth": "UP",
+    "normalRoleAndAudit": "PASSED"
+  },
+  "remainingGates": [
+    "Final-code complete independent model acceptance",
+    "Deployment/rollback at confirmed target",
+    "24-hour post-release observation"
+  ],
+  "limitations": [
+    "Automatic criteria and identity/source checks are not complete manual semantic acceptance.",
+    "20 independent scenarios repeated twice are not 40 independent scenarios.",
+    "Request timings include up to 150 ms polling resolution; multi-turn scenarios are flattened.",
+    "Provider calls are stochastic; quality/cost differences are not framework causal estimates.",
+    "Unknown usage/pricing and local hardware cost are not zero.",
+    "Authenticated live UI, deployment/rollback and 24-hour server observation are separate gates."
+  ]
+}

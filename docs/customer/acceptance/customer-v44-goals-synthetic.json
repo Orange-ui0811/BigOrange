@@ -1,0 +1,302 @@
+{
+  "promptVersion" : "customer-v4.4-multi-goal-cards",
+  "scope" : "Synthetic text only; no account profile, platform documents or real history",
+  "costUsd" : "UNKNOWN",
+  "rows" : [ {
+    "id" : "G01",
+    "message" : "既想练手学习，也想准备找工作的作品",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，我记下了两个目标：既能练手学习，也能当作求职作品来积累。这两个目标其实很搭，很多项目既能打基础又能写进简历。\n\n要不要我现在就按这两个目标帮你找找合适的项目？如果想更精准，也可以告诉我你熟悉或想用的语言、技术方向，或者大概能投入多长时间。",
+      "changes" : {
+        "goal" : {
+          "operation" : "SET",
+          "value" : [ "学习", "求职" ],
+          "quote" : "既想练手学习，也想准备找工作的作品"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "goal" : [ "学习", "求职" ],
+      "provenance" : {
+        "goal" : {
+          "quote" : "既想练手学习，也想准备找工作的作品",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1883,
+        "completion_tokens" : 505,
+        "total_tokens" : 2388,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 0
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 315
+        },
+        "prompt_cache_hit_tokens" : 0,
+        "prompt_cache_miss_tokens" : 1883
+      },
+      "durationMs" : 3618,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 3698
+  }, {
+    "id" : "G02",
+    "message" : "还想挣点外快接些外包单，原来的目标也保留，只记录不用推荐",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "好的，记下了：在原来的「学习」目标之外，再加一个「赚钱/接单/创业」的目标，方便以后找些外包练手又能有点收入。本轮先不推荐项目，随时说一声我再帮你找合适的。",
+      "changes" : {
+        "goal" : {
+          "operation" : "ADD",
+          "value" : "赚钱/接单/创业",
+          "quote" : "还想挣点外快接些外包单"
+        }
+      },
+      "profileDefaults" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "goal" : [ "学习", "赚钱/接单/创业" ],
+      "language" : "Java",
+      "maxDurationDays" : 60,
+      "provenance" : {
+        "goal" : {
+          "quote" : "还想挣点外快接些外包单",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1904,
+        "completion_tokens" : 279,
+        "total_tokens" : 2183,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1664
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 94
+        },
+        "prompt_cache_hit_tokens" : 1664,
+        "prompt_cache_miss_tokens" : 240
+      },
+      "durationMs" : 1657,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1662
+  }, {
+    "id" : "G03",
+    "message" : "求职这个目标先不考虑，学习和给家里的店做库存管理这两个保留",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已把「求职」这个目标去掉，保留「学习」和「给家里的店做库存管理」这两个方向。接下来需要我按这两个目标去找适合的 Java 项目吗？还是想先补充点别的条件？",
+      "changes" : {
+        "goal" : {
+          "operation" : "REMOVE",
+          "value" : "求职",
+          "quote" : "求职这个目标先不考虑"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "goal" : [ "学习", "给家里的店做库存管理" ],
+      "language" : "Java",
+      "provenance" : {
+        "goal" : {
+          "quote" : "求职这个目标先不考虑",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1905,
+        "completion_tokens" : 419,
+        "total_tokens" : 2324,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1664
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 257
+        },
+        "prompt_cache_hit_tokens" : 1664,
+        "prompt_cache_miss_tokens" : 241
+      },
+      "durationMs" : 2093,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2097
+  }, {
+    "id" : "G04",
+    "message" : "我做这个项目是为了给家里的店做库存管理",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "明白，目标很具体：给家里的店做一套库存管理，这个我会原样记下来，不会硬套成学习或求职。\n\n方便的话再告诉我一点：你希望用什么语言来做？或者店里现在是怎么记库存的（纸质、Excel 还是已有软件）？我可以据此帮你找更贴合的项目。",
+      "changes" : {
+        "goal" : {
+          "operation" : "SET",
+          "value" : "给家里的店做库存管理",
+          "quote" : "给家里的店做库存管理"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "goal" : "给家里的店做库存管理",
+      "provenance" : {
+        "goal" : {
+          "quote" : "给家里的店做库存管理",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1882,
+        "completion_tokens" : 469,
+        "total_tokens" : 2351,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1664
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 286
+        },
+        "prompt_cache_hit_tokens" : 1664,
+        "prompt_cache_miss_tokens" : 218
+      },
+      "durationMs" : 3250,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 3253
+  }, {
+    "id" : "G05",
+    "message" : "我就想探索技术兴趣，同时为求职做准备，可以同时选这两个目标吗？",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "当然可以，目标支持多选，也可以写自定义目标。「探索技术兴趣」和「求职」这两项可以同时保留，推荐时会兼顾有趣、能学到东西，以及能拿得出手当作品的方向。\n\n顺便问一句：你目前比较想往哪个技术方向探索，或者已经会哪门语言？",
+      "changes" : {
+        "goal" : {
+          "operation" : "SET",
+          "value" : [ "探索技术兴趣", "求职" ],
+          "quote" : "我就想探索技术兴趣，同时为求职做准备"
+        }
+      },
+      "profileDefaults" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "goal" : [ "探索技术兴趣", "求职" ],
+      "provenance" : {
+        "goal" : {
+          "quote" : "我就想探索技术兴趣，同时为求职做准备",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1890,
+        "completion_tokens" : 710,
+        "total_tokens" : 2600,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1664
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 507
+        },
+        "prompt_cache_hit_tokens" : 1664,
+        "prompt_cache_miss_tokens" : 226
+      },
+      "durationMs" : 4096,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 4100
+  }, {
+    "id" : "G06",
+    "message" : "请将项目目标设置为：学习；求职；给家里的店做库存管理。其他条件保持不变，先记录目标，不用推荐。",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "好的，已按你的要求把项目目标记录为三项：**学习**、**求职**、**给家里的店做库存管理**，其他条件（Java、周期不超过 60 天）保持不变，这一轮不做推荐。\\n\\n如果之后想让我按这三个目标去找项目，随时说一声就行。",
+      "changes" : {
+        "goal" : {
+          "operation" : "SET",
+          "value" : [ "学习", "求职", "给家里的店做库存管理" ],
+          "quote" : "学习；求职；给家里的店做库存管理"
+        }
+      },
+      "profileDefaults" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "maxDurationDays" : 60,
+      "goal" : [ "学习", "求职", "给家里的店做库存管理" ],
+      "provenance" : {
+        "goal" : {
+          "quote" : "学习；求职；给家里的店做库存管理",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1909,
+        "completion_tokens" : 326,
+        "total_tokens" : 2235,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1664
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 117
+        },
+        "prompt_cache_hit_tokens" : 1664,
+        "prompt_cache_miss_tokens" : 245
+      },
+      "durationMs" : 1738,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1742
+  } ]
+}

@@ -1,0 +1,99 @@
+[
+  {
+    "id": "O01",
+    "message": "不再限定“刚学”对应的难度",
+    "prior": {
+      "language": "Java",
+      "experience": "刚学"
+    },
+    "expected": {
+      "absent": "difficulty",
+      "language": "Java",
+      "experience": "刚学",
+      "noPending": true
+    }
+  },
+  {
+    "id": "O02",
+    "message": "把周期放宽到半年",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 60
+    },
+    "expected": {
+      "language": "Java",
+      "maxDurationDays": 180,
+      "noPending": true
+    }
+  },
+  {
+    "id": "O03",
+    "message": "当前有什么条件",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "intent": "STATE",
+      "language": "Java",
+      "maxDurationDays": 180
+    }
+  },
+  {
+    "id": "O04",
+    "message": "为什么没有可以推荐的项目？放宽哪些条件才有？",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 7
+    },
+    "expected": {
+      "intent": "DIAGNOSE",
+      "language": "Java",
+      "maxDurationDays": 7
+    }
+  },
+  {
+    "id": "O05",
+    "message": "只看学习项目专区",
+    "expected": {
+      "sourceType": "BEGINNER_PROJECT",
+      "noPending": true
+    }
+  },
+  {
+    "id": "O06",
+    "message": "想通过项目学习Java，不限来自哪个分类",
+    "expected": {
+      "language": "Java",
+      "goal": "学习",
+      "absent": "sourceType",
+      "noPending": true
+    }
+  },
+  {
+    "id": "O07",
+    "message": "项目难度不限",
+    "prior": {
+      "difficulty": "初级",
+      "experience": "刚学"
+    },
+    "expected": {
+      "absent": "difficulty",
+      "experience": "刚学",
+      "noPending": true
+    }
+  },
+  {
+    "id": "O08",
+    "message": "不要取消Java语言限制，只去掉难度限制",
+    "prior": {
+      "language": "Java",
+      "difficulty": "初级"
+    },
+    "expected": {
+      "language": "Java",
+      "absent": "difficulty",
+      "noPending": true
+    }
+  }
+]

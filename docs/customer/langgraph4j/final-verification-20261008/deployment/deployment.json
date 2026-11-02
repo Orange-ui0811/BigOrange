@@ -1,0 +1,246 @@
+{
+  "target": "isolated local Docker, not production server",
+  "liveServicesModified": false,
+  "providerCredentialsForwarded": false,
+  "providerEgress": "Docker internal network",
+  "externalMailHealthEnabled": false,
+  "ragEnabled": false,
+  "steps": [
+    {
+      "step": "previous",
+      "artifact": "previous",
+      "artifactSha256": "445a8fae9eec253c15c8e9a9ee54ffa0b831fa8302be3eacdd6310aaf95ed2a4",
+      "engine": "LEGACY",
+      "exitCode": 0,
+      "elapsedSeconds": 35.265,
+      "expectedFailure": false,
+      "probe": {
+        "health": "UP",
+        "anonymousHttpStatus": 401,
+        "passed": true,
+        "sessionId": 1,
+        "engine": "LEGACY",
+        "oldRequestId": "2e63fdc5-f7dd-4a8c-a9b8-f1fdb1d293f6",
+        "runId": "2e63fdc5-f7dd-4a8c-a9b8-f1fdb1d293f6",
+        "schemaVersion": 43,
+        "checkpointCount": 0,
+        "step": "previous",
+        "externalModelCalls": 0,
+        "conditionsPreserved": true,
+        "assistantMessagesForRun": 1,
+        "replaySame": true
+      },
+      "web": {
+        "passed": true,
+        "checks": [
+          {
+            "route": "/customer",
+            "status": 200,
+            "assets": 2
+          },
+          {
+            "route": "/admin/",
+            "status": 200,
+            "assets": 2
+          }
+        ],
+        "missingAssetsReturn404": true,
+        "modelCalls": 0,
+        "scope": "HTTP smoke of immutable static bundles; not a production Nginx/TLS/SSE or authenticated-browser test"
+      }
+    },
+    {
+      "step": "graph",
+      "artifact": "candidate",
+      "artifactSha256": "9b7b900df118c94f2ddcd81be415d69b1930464d0fc004c6edc2312b8c00398f",
+      "engine": "LANGGRAPH4J",
+      "exitCode": 0,
+      "elapsedSeconds": 62.672,
+      "expectedFailure": false,
+      "probe": {
+        "health": "UP",
+        "anonymousHttpStatus": 401,
+        "engine": "LANGGRAPH4J",
+        "sessionId": 1,
+        "passed": true,
+        "step": "graph",
+        "checkpointCount": 8,
+        "schemaVersion": 45,
+        "runId": "f7684426-594c-4fff-abba-e0e790e8e612",
+        "oldRequestId": "2e63fdc5-f7dd-4a8c-a9b8-f1fdb1d293f6",
+        "conditionsPreserved": true,
+        "externalModelCalls": 0,
+        "replaySame": true,
+        "assistantMessagesForRun": 1
+      },
+      "web": {
+        "passed": true,
+        "checks": [
+          {
+            "route": "/customer",
+            "status": 200,
+            "assets": 2
+          },
+          {
+            "route": "/admin/",
+            "status": 200,
+            "assets": 2
+          }
+        ],
+        "missingAssetsReturn404": true,
+        "modelCalls": 0,
+        "scope": "HTTP smoke of immutable static bundles; not a production Nginx/TLS/SSE or authenticated-browser test"
+      }
+    },
+    {
+      "step": "config-rollback",
+      "artifact": "candidate",
+      "artifactSha256": "9b7b900df118c94f2ddcd81be415d69b1930464d0fc004c6edc2312b8c00398f",
+      "engine": "LEGACY",
+      "exitCode": 0,
+      "elapsedSeconds": 28.313,
+      "expectedFailure": false,
+      "probe": {
+        "health": "UP",
+        "anonymousHttpStatus": 401,
+        "checkpointCount": 8,
+        "schemaVersion": 45,
+        "runId": "3d9e79e3-c4d4-4aa1-9cb1-f96cf5ac6306",
+        "oldRequestId": "2e63fdc5-f7dd-4a8c-a9b8-f1fdb1d293f6",
+        "engine": "LEGACY",
+        "sessionId": 1,
+        "passed": true,
+        "step": "config-rollback",
+        "assistantMessagesForRun": 1,
+        "conditionsPreserved": true,
+        "externalModelCalls": 0,
+        "replaySame": true
+      },
+      "web": {
+        "passed": true,
+        "checks": [
+          {
+            "route": "/customer",
+            "status": 200,
+            "assets": 2
+          },
+          {
+            "route": "/admin/",
+            "status": 200,
+            "assets": 2
+          }
+        ],
+        "missingAssetsReturn404": true,
+        "modelCalls": 0,
+        "scope": "HTTP smoke of immutable static bundles; not a production Nginx/TLS/SSE or authenticated-browser test"
+      }
+    },
+    {
+      "step": "binary-rollback",
+      "artifact": "previous",
+      "artifactSha256": "445a8fae9eec253c15c8e9a9ee54ffa0b831fa8302be3eacdd6310aaf95ed2a4",
+      "engine": "LEGACY",
+      "exitCode": 0,
+      "elapsedSeconds": 28.016,
+      "expectedFailure": false,
+      "probe": {
+        "health": "UP",
+        "anonymousHttpStatus": 401,
+        "step": "binary-rollback",
+        "passed": true,
+        "sessionId": 1,
+        "engine": "LEGACY",
+        "oldRequestId": "2e63fdc5-f7dd-4a8c-a9b8-f1fdb1d293f6",
+        "runId": "cf19cacf-3821-418f-8d17-86c760c9f2c5",
+        "schemaVersion": 45,
+        "checkpointCount": 8,
+        "externalModelCalls": 0,
+        "conditionsPreserved": true,
+        "assistantMessagesForRun": 1,
+        "replaySame": true
+      },
+      "web": {
+        "passed": true,
+        "checks": [
+          {
+            "route": "/customer",
+            "status": 200,
+            "assets": 2
+          },
+          {
+            "route": "/admin/",
+            "status": 200,
+            "assets": 2
+          }
+        ],
+        "missingAssetsReturn404": true,
+        "modelCalls": 0,
+        "scope": "HTTP smoke of immutable static bundles; not a production Nginx/TLS/SSE or authenticated-browser test"
+      }
+    },
+    {
+      "step": "bad-release",
+      "artifact": "candidate",
+      "artifactSha256": "9b7b900df118c94f2ddcd81be415d69b1930464d0fc004c6edc2312b8c00398f",
+      "engine": "INVALID",
+      "exitCode": 1,
+      "elapsedSeconds": 14.188,
+      "expectedFailure": true,
+      "probe": {
+        "passed": false,
+        "errorType": "InvocationTargetException"
+      }
+    },
+    {
+      "step": "automatic-rollback",
+      "artifact": "previous",
+      "artifactSha256": "445a8fae9eec253c15c8e9a9ee54ffa0b831fa8302be3eacdd6310aaf95ed2a4",
+      "engine": "LEGACY",
+      "exitCode": 0,
+      "elapsedSeconds": 27.297,
+      "expectedFailure": false,
+      "probe": {
+        "health": "UP",
+        "anonymousHttpStatus": 401,
+        "passed": true,
+        "sessionId": 1,
+        "engine": "LEGACY",
+        "oldRequestId": "2e63fdc5-f7dd-4a8c-a9b8-f1fdb1d293f6",
+        "runId": "bfa2e45b-e0c3-4e3f-ae73-ddedeb3298a0",
+        "schemaVersion": 45,
+        "checkpointCount": 8,
+        "step": "automatic-rollback",
+        "conditionsPreserved": true,
+        "assistantMessagesForRun": 1,
+        "replaySame": true,
+        "externalModelCalls": 0
+      },
+      "web": {
+        "passed": true,
+        "checks": [
+          {
+            "route": "/customer",
+            "status": 200,
+            "assets": 2
+          },
+          {
+            "route": "/admin/",
+            "status": 200,
+            "assets": 2
+          }
+        ],
+        "missingAssetsReturn404": true,
+        "modelCalls": 0,
+        "scope": "HTTP smoke of immutable static bundles; not a production Nginx/TLS/SSE or authenticated-browser test"
+      }
+    }
+  ],
+  "releaseApproved": false,
+  "backup": {
+    "scope": "Synthetic isolated DB only",
+    "path": "experiment-staging/customer-final-20261008/synthetic-before-upgrade.sql",
+    "sha256": "46c941d636c3156a4e9e4f31d2b2c04ad36878027fcd78a3f2b6d1717bc02246",
+    "restoreDuringRollback": false
+  },
+  "passed": true
+}

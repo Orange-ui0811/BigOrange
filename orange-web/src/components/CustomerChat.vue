@@ -19,6 +19,7 @@
       <div v-if="!enabled" class="availability-screen" role="status"><el-icon><Connection /></el-icon><h2>{{ initializing ? '正在连接客服' : '客服暂不可用' }}</h2><p>{{ availabilityMessage || '正在确认账号与服务状态…' }}</p><button v-if="!initializing" @click="init">重新检查客服</button></div>
       <template v-else>
         <div v-if="conditionChips.length" class="conditions-strip" aria-label="当前会话条件"><span>当前条件</span><span v-for="chip in conditionChips" :key="chip.key" class="condition-chip" :title="chip.source">{{ chip.label }}：{{ chip.value }}<small v-if="chip.source==='账号画像'">画像</small></span></div>
+        <div v-if="workflowTask.id" class="conditions-strip" aria-label="当前推荐任务"><span>{{ taskStatus }}</span><span v-for="requirement in openRequirements" :key="requirement.id" class="condition-chip" :title="requirement.source?.quote">{{ requirement.strength==='HARD'?'必要':'偏好' }}：{{ requirement.text }}{{ requirement.status==='PENDING'?'（待确认）':'' }}</span></div>
         <div ref="transcript" class="transcript" aria-live="polite" @scroll="trackScroll">
           <div v-if="!messages.length" class="chat-hero"><div class="hero-symbol"><el-icon><ChatDotRound /></el-icon></div><h1>聊聊你想做的项目</h1><p>从一个想法开始。可以先推荐，再逐步确认你的偏好。</p><div class="starter-prompts"><button v-for="prompt in starters" :key="prompt.text" @click="input=prompt.text; composer?.focus()"><el-icon><component :is="prompt.icon" /></el-icon><span>{{ prompt.label }}</span><el-icon><Right /></el-icon></button></div></div>
           <div class="message-column">
@@ -30,7 +31,10 @@
                 <ul v-if="message.result.pendingConditions?.length" class="pending-question"><li v-for="condition in message.result.pendingConditions" :key="condition.field">待确认：{{ condition.quote }}</li></ul>
                 <CustomerRecommendationReport v-if="message.result.projects?.length" :report="message.result.recommendationReport"><ProjectRecommendationCard v-for="(project,index) in message.result.projects" :key="project.type+':'+project.id" :project="recommendationView(project)" :index="index" :importable="!!project.importable" score-label="资料评分" @import="importProject(message.run_id,project)" /></CustomerRecommendationReport>
                 <details v-if="message.result.references?.length" class="evidence-panel"><summary><el-icon><Document /></el-icon>查看证据与章节 <span>{{ message.result.references.length }}</span></summary><blockquote v-for="reference in message.result.references" :key="reference.evidenceId+':'+reference.quote"><p v-if="reference.text">{{ normalizeCustomerText(reference.text) }}</p><div class="source-quote">{{ reference.quote }}</div><footer>{{ reference.title }} · {{ reference.sectionPath || '正文' }} · {{ reference.evidenceId }}</footer></blockquote></details>
+                <div v-if="message.result.evidenceDecision?.projectFacts?.length && (message.result.projects?.length || message.result.verificationGaps?.length)" class="pending-question"><strong>项目资料仍待核实</strong><ul><li v-for="(fact,index) in message.result.evidenceDecision.projectFacts" :key="index">{{ fact.projectName ? `${fact.projectName}：` : '' }}{{ normalizeCustomerText(fact.text) }}</li></ul></div>
                 <p v-if="message.result.pendingQuestion" class="pending-question">{{ normalizeCustomerText(message.result.pendingQuestion) }}</p>
+                <div v-if="isCurrentQuestion(message.result.question)" class="workflow-options"><button v-for="option in message.result.question.options" :key="option" :disabled="!!running || loading" @click="answerQuestion(message.result.question,option)">{{ option }}</button><button v-if="message.result.question.kind!=='MIGRATION'" :disabled="!!running || loading" @click="answerQuestion(message.result.question,'先看看')">先看候选</button></div>
+                <div v-if="message.result.listId" class="workflow-matches"><details v-for="(project,index) in message.result.projects || []" :key="project.type+':'+project.id"><summary>{{ project.name }} · 逐项核对</summary><ul><li v-for="match in project.requirementMatches || []" :key="match.requirementId">{{ match.requirement }}：{{ verdictLabel[match.verdict] || match.verdict }} — {{ match.reason }}</li></ul><button :disabled="!!running || loading || message.result.task?.id!==workflowTask.id" @click="chooseFromList(message.result,index)">选定这个项目</button></details></div>
               </template></div></article>
             <div v-if="running" class="run-process" role="status"><span class="processing-dot"></span>{{ progress }}<small>完成校验后显示回答</small></div>
           </div>
@@ -62,6 +66,13 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 const router=useRouter()
 const { enabled,sessions,sessionId,messages,input,running,progress,error,state,loading,initializing,availabilityMessage,deleting,init,select,send,cancel,fresh,remove }=useCustomerChat()
 const transcript=ref(null),composer=ref(null),showHistory=ref(false)
+const workflowTask=computed(()=>state.value.workflowV2?.task || {})
+const openRequirements=computed(()=>(workflowTask.value.requirements || []).filter(r=>r.field==='open' && r.status!=='REMOVED'))
+const taskStatus=computed(()=>({DISCOVERING:'正在理清需求',WAITING_USER:'等待补充信息',READY_TO_SEARCH:'可以查找项目',EVALUATING:'正在核对候选',PRESENTED:'候选已展示',PAUSED:'任务已暂停',COMPLETED:'已选定项目',CANCELLED:'任务已取消'})[workflowTask.value.status] || '推荐任务')
+const verdictLabel={SATISFIED:'已满足',PARTIAL:'仅部分满足',CONFLICT:'不符合',UNKNOWN:'尚未核实'}
+function isCurrentQuestion(question){return question?.id && question.id===workflowTask.value.openQuestionId && !['PAUSED','CANCELLED','COMPLETED'].includes(workflowTask.value.status)}
+async function answerQuestion(question,answer){if(input.value.trim()){ElMessage.info('请先发送或清空输入框内容。');return}input.value=answer;await send({taskId:workflowTask.value.id,questionId:question.id})}
+async function chooseFromList(result,index){if(input.value.trim()){ElMessage.info('请先发送或清空输入框内容。');return}input.value=`就选第${index+1}个项目`;await send({taskId:result.task.id,listId:result.listId})}
 const showGoals=ref(false),selectedGoals=ref([]),customGoals=ref('')
 const goalOptions=['学习','求职','赚钱/接单/创业','探索技术兴趣']
 function openGoals(){
@@ -104,4 +115,11 @@ function failureText(message){return customerRunError({status:message.result.sta
 async function importProject(runId,project){try{const response=await customerImportDraft(runId,project);if(response.code!==1||typeof response.data?.draft!=='string')throw new Error('导入未通过');sessionStorage.setItem('plan_import',response.data.draft);router.push('/plan')}catch{ElMessage.error('项目已失效、条件已变化或证据不足，请重新推荐。')}}
 onMounted(init)
 </script>
-<style scoped src="../styles/customer-chat.css"></style>
+<style scoped>
+@import '../styles/customer-chat.css';
+.workflow-options,.workflow-matches { margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; }
+.workflow-options button,.workflow-matches button { padding:7px 12px; border:1px solid #d8dfda; border-radius:8px; background:white; color:inherit; cursor:pointer; }
+.workflow-matches { display:block; font-size:13px; line-height:1.7; }
+.workflow-matches details { margin:8px 0; }
+.workflow-options button:disabled,.workflow-matches button:disabled { opacity:.5; cursor:default; }
+</style>

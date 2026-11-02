@@ -10,6 +10,7 @@ import com.orangejd.server.ragb.retrieval.RagBSearchHit;
 import com.orangejd.server.ragb.retrieval.RagBVectorSearchResult;
 import com.orangejd.server.ragb.retrieval.RagBConstraintMatcher;
 import com.orangejd.server.ragb.retrieval.RagBRetrievalMetadataResolver;
+import com.orangejd.server.ragb.retrieval.RagBReranker;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -25,6 +26,32 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class RagBSearchServiceTest {
+    @Test void reranksBeforeTopKWithoutReplacingFusedScores(){
+        var f=fixture(List.of(hit(1,11,"GITHUB","acme/one",.9,"first"),hit(2,22,"GITHUB","acme/two",.1,"specific fact")));
+        var r=mock(RagBReranker.class);
+        when(r.rerank(anyString(),any())).thenAnswer(call->{List<RagBSearchHit> input=call.getArgument(1);assertThat(input).hasSize(2);
+            return new RagBReranker.Result(List.of(input.get(1).withRerankScore(.99),input.get(0).withRerankScore(.01)),new RagBReranker.Trace("APPLIED","model",2,2,1,""));});
+        var result=f.withReranker(r).retrieve("specific fact",1,.5,Set.of());
+        assertThat(result.hits()).extracting(RagBSearchHit::chunkId).containsExactly(200L);assertThat(result.hits().getFirst().score()).isEqualTo(.1);assertThat(result.rerank().status()).isEqualTo("APPLIED");
+    }
+    @Test void filtersInactiveAndWrongScopeBeforeSendingCandidates(){
+        var f=fixture(List.of(hit(1,11,"GITHUB","acme/one",.9,"inactive"),hit(2,22,"GITHUB","acme/two",.8,"allowed"),hit(3,33,"GITHUB","acme/three",.7,"wrong scope")));
+        when(f.mapper.selectDocument(1L)).thenReturn(null);var r=mock(RagBReranker.class);
+        when(r.rerank(anyString(),any())).thenAnswer(call->{List<RagBSearchHit> input=call.getArgument(1);assertThat(input).extracting(RagBSearchHit::documentId).containsExactly(2L);return new RagBReranker.Result(input,RagBReranker.Trace.disabled(input.size()));});
+        var result=f.withReranker(r).retrieve("q",8,.5,RagBSearchConstraints.sources(Set.of()).documents(Set.of(1L,2L)));
+        assertThat(result.excludedReasons()).containsEntry("DOCUMENT_MISSING",1).containsEntry("DOCUMENT_SCOPE_MISMATCH",1);
+    }
+    @Test void deduplicatesBeforeRerankAndKeepsDiversityAfterRerank(){
+        var one=hit(1,11,"GITHUB","acme/one",.9,"same");var two=hitWithChunk(1,11,102,"GITHUB","acme/one",.8,"other fact");var three=hit(2,22,"GITHUB","acme/two",.7,"different project");
+        var f=fixture(List.of(one,hit(3,33,"GITHUB","acme/one|week",.89,"same"),two,three));var r=mock(RagBReranker.class);
+        when(r.rerank(anyString(),any())).thenAnswer(call->{List<RagBSearchHit> input=call.getArgument(1);assertThat(input).hasSize(3);return new RagBReranker.Result(List.of(two.withRerankScore(.9),one.withRerankScore(.8),three.withRerankScore(.7)),new RagBReranker.Trace("APPLIED","model",3,3,1,""));});
+        assertThat(f.withReranker(r).retrieve("推荐项目",2,.5,Set.of()).hits()).extracting(RagBSearchHit::chunkId).containsExactly(102L,200L);
+    }
+    @Test void rerankingCannotBypassFinalPricingEvidenceGuard(){
+        var f=fixture(List.of(hit(1,11,"GITHUB","acme/one",.9,"Apache license"),hit(2,22,"GITHUB","acme/two",.8,"MIT license")));var r=mock(RagBReranker.class);
+        when(r.rerank(anyString(),any())).thenAnswer(call->new RagBReranker.Result(call.getArgument(1),new RagBReranker.Trace("APPLIED","model",2,2,1,"")));
+        assertThat(f.withReranker(r).retrieve("商业授权价格是多少？",8,.5,Set.of()).answerPolicy()).isEqualTo("REFUSE_NO_MATCH");
+    }
     @Test
     void marksThinEvidenceAsInsufficient() {
         Fixture fixture = fixture(List.of(hit(1, 11, "MANUAL", "manual:1", 0.8, "short evidence")));
@@ -153,5 +180,13 @@ class RagBSearchServiceTest {
                 sourceRef, "Overview", 0, content.length(), content, score, "VECTOR_EXACT");
     }
 
-    private record Fixture(RagBSearchService service, RagBMapper mapper,RagBIndexRouter indexes) {}
+    private record Fixture(RagBSearchService service, RagBMapper mapper,RagBIndexRouter indexes) {
+        RagBSearchService withReranker(RagBReranker reranker){
+            // Metadata fixtures are source-only; no additional constraints are inferred.
+            RagBRetrievalMetadataResolver metadata=mock(RagBRetrievalMetadataResolver.class);
+            when(metadata.resolve(any(),any())).thenAnswer(call->{RagBSearchHit h=call.getArgument(1);return Map.of("sourceType",h.sourceType(),"documentId",h.documentId());});
+            var properties=new RagBProperties();properties.setEnabled(true);
+            return new RagBSearchService(properties,mapper,indexes,new RagBRelevanceGuard(),new RagBConstraintMatcher(),metadata,reranker);
+        }
+    }
 }

@@ -1,0 +1,369 @@
+{
+  "promptVersion" : "customer-v4.2-counted-alternatives",
+  "scope" : "Synthetic text only; no account profile, platform documents or real history",
+  "costUsd" : "UNKNOWN",
+  "rows" : [ {
+    "id" : "O01",
+    "message" : "不再限定“刚学”对应的难度",
+    "action" : {
+      "intent" : "STATE",
+      "reply" : "明白～其实“刚学”目前是记录在你的基础信息（experience）里的，并没有被当成难度筛选条件，所以现在也没有“难度限制”这一项需要取消。我不会删除你的基础，只会保证推荐的时候不额外卡难度这一条。接下来想按什么方向找项目？比如技术主题或语言，我可以继续帮你筛。",
+      "changes" : {
+        "difficulty" : {
+          "value" : null,
+          "quote" : "不再限定“刚学”对应的难度"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "experience" : "刚学",
+      "clearedFields" : [ "difficulty" ]
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1740,
+        "completion_tokens" : 1123,
+        "total_tokens" : 2863,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 0
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 945
+        },
+        "prompt_cache_hit_tokens" : 0,
+        "prompt_cache_miss_tokens" : 1740
+      },
+      "durationMs" : 6976,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 7034
+  }, {
+    "id" : "O02",
+    "message" : "把周期放宽到半年",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已把完成周期上限放宽到半年（6 个月以内），比 60 天更宽松，会有更多项目可选。需要我按这个条件重新给你推荐几门 Java 项目吗？",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 6,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "放宽到半年"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "maxDurationDays" : 180,
+      "durationSemantics" : {
+        "quantity" : 6,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "放宽到半年"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1738,
+        "completion_tokens" : 282,
+        "total_tokens" : 2020,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1536
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 114
+        },
+        "prompt_cache_hit_tokens" : 1536,
+        "prompt_cache_miss_tokens" : 202
+      },
+      "durationMs" : 1603,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1608
+  }, {
+    "id" : "O03",
+    "message" : "当前有什么条件",
+    "action" : {
+      "intent" : "STATE",
+      "reply" : "目前记录的条件有两条：\n\n- **语言**：Java\n- **完成周期**：不超过 180 天（约 6 个月，允许更短的项目）\n\n其他方面（比如技术方向、学习还是求职、难度偏好等）暂时还没有设置。需要补充或调整哪一项吗？",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "maxDurationDays" : 180
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1736,
+        "completion_tokens" : 336,
+        "total_tokens" : 2072,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1536
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 249
+        },
+        "prompt_cache_hit_tokens" : 1536,
+        "prompt_cache_miss_tokens" : 200
+      },
+      "durationMs" : 2439,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2442
+  }, {
+    "id" : "O04",
+    "message" : "为什么没有可以推荐的项目？放宽哪些条件才有？",
+    "action" : {
+      "intent" : "DIAGNOSE",
+      "reply" : "目前筛选出的条件里，最可能卡住结果的是**完成周期**：只保留“7 天内能完成”的项目，同时语言限定为 Java，符合的候选就会非常少，甚至为空。\n\n想放开的话，按见效程度可以这样试：\n\n1. **放宽周期**（最有效）：把“7 天内”改成 14 天或 30 天内，或者干脆取消这条限制；很多 Java 练习项目完整做完在两周到一个月更常见。\n2. **放宽语言**：如果 Java 不是硬性要求，允许其他语言，候选会明显变多。\n3. **放宽其他限制**：目前没看到 Docker、数据库、密钥之类的限制，所以暂时不用动它们。\n\n你想先把周期放宽到多久？比如「30 天内完成」，或者直接说「不限定周期」，我马上重新筛一遍。",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "maxDurationDays" : 7
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1744,
+        "completion_tokens" : 423,
+        "total_tokens" : 2167,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1536
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 156
+        },
+        "prompt_cache_hit_tokens" : 1536,
+        "prompt_cache_miss_tokens" : 208
+      },
+      "durationMs" : 3178,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 3181
+  }, {
+    "id" : "O05",
+    "message" : "只看学习项目专区",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已记下「只看学习项目专区」，之后推荐时会把范围限定在学习类项目里。要不要顺便告诉我你想练的技术方向（比如 Java、Python 或某个框架）？",
+      "changes" : {
+        "sourceType" : {
+          "value" : "BEGINNER_PROJECT",
+          "quote" : "只看学习项目专区"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "sourceType" : "BEGINNER_PROJECT",
+      "provenance" : {
+        "sourceType" : {
+          "source" : "MESSAGE",
+          "quote" : "只看学习项目专区"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1728,
+        "completion_tokens" : 288,
+        "total_tokens" : 2016,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1536
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 139
+        },
+        "prompt_cache_hit_tokens" : 1536,
+        "prompt_cache_miss_tokens" : 192
+      },
+      "durationMs" : 1631,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1634
+  }, {
+    "id" : "O06",
+    "message" : "想通过项目学习Java，不限来自哪个分类",
+    "action" : {
+      "intent" : "RECOMMEND",
+      "reply" : "好的，目标是**通过项目学 Java**，来源分类不做限制，我会在全部项目里帮你找。可以再说一个偏好，比如更想练 Web/后端还是桌面小工具？不补充也可以，我直接开始找。",
+      "changes" : {
+        "goal" : {
+          "value" : "学习",
+          "quote" : "想通过项目学习Java"
+        },
+        "language" : {
+          "value" : "Java",
+          "quote" : "学习Java"
+        }
+      },
+      "positions" : [ ],
+      "profileDefaults" : { }
+    },
+    "state" : {
+      "goal" : "学习",
+      "provenance" : {
+        "goal" : {
+          "source" : "MESSAGE",
+          "quote" : "想通过项目学习Java"
+        },
+        "language" : {
+          "source" : "MESSAGE",
+          "quote" : "学习Java"
+        }
+      },
+      "language" : "Java"
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1734,
+        "completion_tokens" : 704,
+        "total_tokens" : 2438,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1536
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 517
+        },
+        "prompt_cache_hit_tokens" : 1536,
+        "prompt_cache_miss_tokens" : 198
+      },
+      "durationMs" : 3861,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 3864
+  }, {
+    "id" : "O07",
+    "message" : "项目难度不限",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已取消难度限制，项目难度不限；你「刚学」的基础画像仍保留。需要我按这个条件推荐项目吗？也可以再说说技术方向或语言，我帮你筛得更准。",
+      "changes" : {
+        "difficulty" : {
+          "value" : null,
+          "quote" : "项目难度不限"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "experience" : "刚学",
+      "clearedFields" : [ "difficulty" ]
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1736,
+        "completion_tokens" : 299,
+        "total_tokens" : 2035,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1536
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 152
+        },
+        "prompt_cache_hit_tokens" : 1536,
+        "prompt_cache_miss_tokens" : 200
+      },
+      "durationMs" : 1578,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1580
+  }, {
+    "id" : "O08",
+    "message" : "不要取消Java语言限制，只去掉难度限制",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，Java 语言限制保留不动，只把难度限制去掉，之后不再按初级难度筛选项目。需要我现在为你推荐一批 Java 项目吗？",
+      "changes" : {
+        "difficulty" : {
+          "value" : null,
+          "quote" : "只去掉难度限制"
+        }
+      },
+      "positions" : [ ],
+      "profileDefaults" : { }
+    },
+    "state" : {
+      "language" : "Java",
+      "clearedFields" : [ "difficulty" ]
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "costUsd" : "UNKNOWN",
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1742,
+        "completion_tokens" : 447,
+        "total_tokens" : 2189,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1536
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 293
+        },
+        "prompt_cache_hit_tokens" : 1536,
+        "prompt_cache_miss_tokens" : 206
+      },
+      "durationMs" : 2657,
+      "model" : "deepseek-flash",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2659
+  } ]
+}

@@ -1,0 +1,2773 @@
+{
+  "case": {
+    "id": "web_specific",
+    "family": "web",
+    "kind": "specific",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：Next.js。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "148",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：Next.js。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "0fa51d17-cd78-4763-a211-c719a6c0ae11",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 15422,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：Next.js"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "topic": [
+            "Next.js"
+          ],
+          "experience": "一年编程基础",
+          "verificationMode": "EXPLORE",
+          "clearedFields": [
+            "language",
+            "maxDurationDays"
+          ],
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；当前本来就没有“编程语言”限制，已保持不限；当前本来就没有“最长周期”限制，已保持不限；已记录项目主题：Next.js；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "Next.js",
+            "proofs": {
+              "CAREER_PROJECT:208": {
+                "fingerprint": "14ea477a3f1188164f2d34d1d9a6790af3fd9c18adfdd494d8fbf16c19edb1c8",
+                "quote": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验",
+                "relation": "DIRECT",
+                "rank": 1
+              },
+              "CAREER_PROJECT:257": {
+                "fingerprint": "8531579073d40b281e7e4005ecde546a5f6518cfbfe13fbb8252b21f01bc5243",
+                "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                "relation": "DIRECT",
+                "rank": 2
+              },
+              "CAREER_PROJECT:260": {
+                "fingerprint": "e37fbb157882abcb42cbe98929d0ada028158b3eea23efb6c0259015cd740451",
+                "quote": "Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建",
+                "relation": "DIRECT",
+                "rank": 3
+              }
+            }
+          },
+          "lastCandidates": [
+            {
+              "id": 208,
+              "name": "ValueCell-ai/ClawX",
+              "type": "CAREER_PROJECT"
+            },
+            {
+              "id": 257,
+              "name": "darkmatter2048/WindowsCleaner",
+              "type": "CAREER_PROJECT"
+            },
+            {
+              "id": 260,
+              "name": "elastic/kibana",
+              "type": "CAREER_PROJECT"
+            }
+          ]
+        },
+        "projects": [
+          {
+            "type": "CAREER_PROJECT",
+            "id": 208,
+            "sourceRef": "career:208",
+            "name": "ValueCell-ai/ClawX",
+            "url": "https://github.com/ValueCell-ai/ClawX",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,React,Next.js,Playwright",
+            "difficulty": "进阶",
+            "duration": "18-25 天（改造界面、增加场景模板）",
+            "description": "基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。 [E5]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": true,
+            "quality": 88,
+            "analysisReason": "在 AI 应用与 Agent、创意交互方向表现突出，能证明候选人具有构建桌面级 AI 工具、前端与 Electron/Tauri 集成、面向国内市场产品化的能力。",
+            "proofPoints": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代",
+            "interviewTopics": "- 如何设计图形化 AI Agent 的工作流编排界面\n- ClawX 与 OpenClaw 间的通信与状态同步\n- 面向中国市场的本地化（clawx.com.cn）做了哪些特殊设计\n- Playwright 在桌面环境中如何安全和稳定地运行",
+            "modificationPlan": "基于 ClawX 开发国内常用的 AI 场景模板（如自动化填写表格、智能客服辅助），并优化中文 UI/UX；将其打包为国产操作系统（UOS）安装包，展示全栈产品化思维。",
+            "mainRisks": "依赖 OpenClaw 后端，版本升级可能导致兼容问题；67 个 open issues 中部分可能涉及底层交互复杂；无数据库和 Docker 支持，扩展性受限。",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 15.909902576697318,
+              "goalPreference": 0.0,
+              "total": 29.109902576697316,
+              "semanticAvailable": true,
+              "quality": 13.2,
+              "semanticMatched": true
+            },
+            "recommendReason": "本轮目标：学习；资料涉及Next.js，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E5",
+                "title": "ValueCell-ai/ClawX",
+                "sourceRef": "career:208",
+                "spans": [
+                  {
+                    "spanId": "E5.S1",
+                    "text": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 110
+                  }
+                ],
+                "documentId": 111,
+                "versionId": 330,
+                "chunkId": 12475,
+                "sectionPath": "ValueCell-ai/ClawX > 项目摘要",
+                "startOffset": 93,
+                "endOffset": 195,
+                "contentStartInChunk": 8,
+                "quote": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+                "text": "基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E2",
+                "title": "ValueCell-ai/ClawX",
+                "sourceRef": "career:208",
+                "spans": [
+                  {
+                    "spanId": "E2.S1",
+                    "text": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+                    "startInChunk": 9,
+                    "endInChunk": 119
+                  }
+                ],
+                "documentId": 111,
+                "versionId": 330,
+                "chunkId": 12477,
+                "sectionPath": "ValueCell-ai/ClawX > 可证明能力",
+                "startOffset": 295,
+                "endOffset": 405,
+                "contentStartInChunk": 9,
+                "quote": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+                "text": "可掌握 React/Next.js 构建复杂桌面应用，具备将 CLI 工具产品化、提升用户体验的能力。",
+                "field": "vibeCodingReason"
+              },
+              {
+                "evidenceId": "E8",
+                "title": "ValueCell-ai/ClawX",
+                "sourceRef": "career:208",
+                "spans": [
+                  {
+                    "spanId": "E8.S1",
+                    "text": "TypeScript,React,Next.js,Playwright\n\n",
+                    "startInChunk": 7,
+                    "endInChunk": 44
+                  }
+                ],
+                "documentId": 111,
+                "versionId": 330,
+                "chunkId": 12482,
+                "sectionPath": "ValueCell-ai/ClawX > 技术栈",
+                "startOffset": 763,
+                "endOffset": 800,
+                "contentStartInChunk": 7,
+                "quote": "TypeScript,React,Next.js,Playwright\n\n",
+                "text": "技术栈为 TypeScript、React、Next.js、Playwright。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "whatIsIt": "基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。 [E5]",
+            "vibeCodingReason": "可掌握 React/Next.js 构建复杂桌面应用，具备将 CLI 工具产品化、提升用户体验的能力。 [E2]",
+            "supportedExplanation": "基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。 [E5]\n可掌握 React/Next.js 构建复杂桌面应用，具备将 CLI 工具产品化、提升用户体验的能力。 [E2]\n技术栈为 TypeScript、React、Next.js、Playwright。 [E8]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议以学习 Next.js 为目标，从 ClawX 的桌面界面入手，尝试理解 React/Next.js 如何组织页面与组件，并观察 CLI 工具产品化的交互设计。可先运行已有示例，再尝试修改一个界面元素，以巩固 Next.js 基础。",
+              "difficultyAdvice": "建议先核对 TypeScript、React、Next.js 的基础语法，并确认本地能否运行 Playwright 测试。若对桌面应用开发不熟悉，可先聚焦前端部分，暂不深入 CLI 编排逻辑。",
+              "vibeCodingAdvice": "可以尝试用 AI 辅助生成简单的 React 组件或 Next.js 页面，并让 AI 解释代码结构。验证时建议运行项目已有测试或手动检查界面变化，确保理解每一步。",
+              "steps": [
+                "先核对并运行 ClawX 的已有示例，观察界面与 CLI 的交互方式。",
+                "尝试修改一个界面组件（如按钮文字或布局），用 Next.js 热更新查看效果。",
+                "用 Playwright 或手动测试验证修改，并记录学习到的 Next.js 概念。"
+              ],
+              "evidenceIds": [
+                "E5",
+                "E2",
+                "E8"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "CAREER_PROJECT",
+            "id": 257,
+            "sourceRef": "career:257",
+            "name": "darkmatter2048/WindowsCleaner",
+            "url": "https://github.com/darkmatter2048/WindowsCleaner",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,React,Next.js",
+            "difficulty": "进阶",
+            "duration": "3-4 周",
+            "description": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足，提供交互式界面。 [E4]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "quality": 68,
+            "analysisReason": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。",
+            "proofPoints": "具备自动化测试、持续集成和发布流程；项目规模大，结构复杂；但缺少快速启动指南和部署方案，许可证未明确。",
+            "interviewTopics": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。",
+            "modificationPlan": "添加 Docker 容器化支持，补充快速启动文档和在线部署演示；明确许可证（如 MIT）；集成简单的后端数据存储（如 SQLite）展示全栈能力。",
+            "mainRisks": "许可证为 NOASSERTION，可能影响复用和招聘方评估；缺少部署和快速启动指南，面试展示效果打折扣。",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 20.124611797498105,
+              "goalPreference": 0.0,
+              "total": 30.324611797498104,
+              "semanticAvailable": true,
+              "quality": 10.2,
+              "semanticMatched": true
+            },
+            "recommendReason": "本轮目标：学习；资料涉及Next.js，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E4",
+                "title": "darkmatter2048/WindowsCleaner",
+                "sourceRef": "career:257",
+                "spans": [
+                  {
+                    "spanId": "E4.S1",
+                    "text": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 86
+                  }
+                ],
+                "documentId": 21,
+                "versionId": 240,
+                "chunkId": 10224,
+                "sectionPath": "darkmatter2048/WindowsCleaner > 项目摘要",
+                "startOffset": 115,
+                "endOffset": 193,
+                "contentStartInChunk": 8,
+                "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+                "text": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足，提供交互式界面。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E1",
+                "title": "darkmatter2048/WindowsCleaner",
+                "sourceRef": "career:257",
+                "spans": [
+                  {
+                    "spanId": "E1.S1",
+                    "text": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 106
+                  }
+                ],
+                "documentId": 21,
+                "versionId": 240,
+                "chunkId": 10225,
+                "sectionPath": "darkmatter2048/WindowsCleaner > 职业价值",
+                "startOffset": 201,
+                "endOffset": 299,
+                "contentStartInChunk": 8,
+                "quote": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                "text": "完成此项目能证明在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js，尤其在桌面级工具开发、交互设计和工程化实践方面有实战经验。",
+                "field": "vibeCodingReason"
+              },
+              {
+                "evidenceId": "E7",
+                "title": "darkmatter2048/WindowsCleaner",
+                "sourceRef": "career:257",
+                "spans": [
+                  {
+                    "spanId": "E7.S1",
+                    "text": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+                    "startInChunk": 9,
+                    "endInChunk": 91
+                  }
+                ],
+                "documentId": 21,
+                "versionId": 240,
+                "chunkId": 10227,
+                "sectionPath": "darkmatter2048/WindowsCleaner > 面试讨论点",
+                "startOffset": 370,
+                "endOffset": 452,
+                "contentStartInChunk": 9,
+                "quote": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+                "text": "可讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略及用户体验优化。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "whatIsIt": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足，提供交互式界面。 [E4]",
+            "vibeCodingReason": "完成此项目能证明在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js，尤其在桌面级工具开发、交互设计和工程化实践方面有实战经验。 [E1]",
+            "supportedExplanation": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足，提供交互式界面。 [E4]\n完成此项目能证明在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js，尤其在桌面级工具开发、交互设计和工程化实践方面有实战经验。 [E1]\n可讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略及用户体验优化。 [E7]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议以学习 Next.js 为目标，从 WindowsCleaner 的交互式界面入手，尝试理解 React 组件设计与状态管理。可先运行项目，再尝试添加一个简单的展示组件，以练习 Next.js 页面组织与 TypeScript 类型定义。",
+              "difficultyAdvice": "建议先核对 TypeScript、React、Next.js 的基础，并确认本地能否运行 Windows 清理相关功能。若对系统工具不熟悉，可先只关注前端界面部分，暂不深入清理逻辑。",
+              "vibeCodingAdvice": "可以尝试用 AI 辅助生成一个简单的 React 组件或 Next.js 页面，并让 AI 解释状态管理方式。验证时建议运行项目已有测试或手动检查界面交互，确保理解组件通信。",
+              "steps": [
+                "先核对并运行 WindowsCleaner 的已有示例，观察界面与清理功能的交互。",
+                "尝试添加一个展示 C 盘空间信息的简单组件，用 Next.js 页面呈现。",
+                "用现有测试或手动操作验证组件，并记录 React 状态管理的学习点。"
+              ],
+              "evidenceIds": [
+                "E4",
+                "E1",
+                "E7"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "CAREER_PROJECT",
+            "id": 260,
+            "sourceRef": "career:260",
+            "name": "elastic/kibana",
+            "url": "https://github.com/elastic/kibana",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,React,Next.js,Playwright,Storybook",
+            "difficulty": "进阶",
+            "duration": "3-4个月",
+            "description": "技术栈包含 TypeScript、React、Next.js、Playwright、Storybook。 [E6]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": true,
+            "requiresDatabase": false,
+            "requiresSecrets": true,
+            "quality": 82,
+            "analysisReason": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。",
+            "proofPoints": "- 具备大规模TypeScript/React项目协作经验，处理庞大代码库与Issue管理\n- 精通Playwright端到端测试与Storybook组件驱动开发\n- 持续集成与自动发布流程的实际操作能力\n- 通过快速启动脚本降低参与者门槛",
+            "interviewTopics": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献",
+            "modificationPlan": "由于项目无明确许可证，需先了解其贡献协议；重点添加部署指南（当前deployment=false），使用Docker简化本地环境；可修复若干文档缺陷或增加仪表板示例；为AI相关交互添加数据故事板功能，突出创意交互能力。",
+            "mainRisks": "项目极大（LARGE），Issue多达14491，代码库高度复杂；缺少许可证可能限制作品集展示范围；无架构文档导致上手困难；技术栈涉及多框架，学习曲线陡峭。",
+            "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 0.0,
+              "goalPreference": 0.0,
+              "total": 12.299999999999999,
+              "semanticAvailable": true,
+              "quality": 12.299999999999999,
+              "semanticMatched": false
+            },
+            "recommendReason": "本轮目标：学习；资料涉及Next.js，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E6",
+                "title": "elastic/kibana",
+                "sourceRef": "career:260",
+                "spans": [
+                  {
+                    "spanId": "E6.S1",
+                    "text": "TypeScript,React,Next.js,Playwright,Storybook\n\n",
+                    "startInChunk": 7,
+                    "endInChunk": 54
+                  }
+                ],
+                "documentId": 23,
+                "versionId": 242,
+                "chunkId": 10286,
+                "sectionPath": "elastic/kibana > 技术栈",
+                "startOffset": 850,
+                "endOffset": 897,
+                "contentStartInChunk": 7,
+                "quote": "TypeScript,React,Next.js,Playwright,Storybook\n\n",
+                "text": "技术栈包含 TypeScript、React、Next.js、Playwright、Storybook。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E3",
+                "title": "elastic/kibana",
+                "sourceRef": "career:260",
+                "spans": [
+                  {
+                    "spanId": "E3.S1",
+                    "text": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+                    "startInChunk": 9,
+                    "endInChunk": 146
+                  }
+                ],
+                "documentId": 23,
+                "versionId": 242,
+                "chunkId": 10282,
+                "sectionPath": "elastic/kibana > 面试讨论点",
+                "startOffset": 462,
+                "endOffset": 599,
+                "contentStartInChunk": 9,
+                "quote": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+                "text": "可接触大型 React+Next.js 项目的性能优化与代码组织、数据可视化架构、Playwright 自动化测试、Storybook 组件库等实践。",
+                "field": "vibeCodingReason"
+              },
+              {
+                "evidenceId": "E9",
+                "title": "elastic/kibana",
+                "sourceRef": "career:260",
+                "spans": [
+                  {
+                    "spanId": "E9.S1",
+                    "text": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 93
+                  }
+                ],
+                "documentId": 23,
+                "versionId": 242,
+                "chunkId": 10280,
+                "sectionPath": "elastic/kibana > 职业价值",
+                "startOffset": 237,
+                "endOffset": 322,
+                "contentStartInChunk": 8,
+                "quote": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+                "text": "面向 AI 创意与交互方向，也适用于前端架构师与全栈工程，可深入理解大规模数据可视化工具开发、React 生态与测试策略。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "whatIsIt": "技术栈包含 TypeScript、React、Next.js、Playwright、Storybook。 [E6]",
+            "vibeCodingReason": "可接触大型 React+Next.js 项目的性能优化与代码组织、数据可视化架构、Playwright 自动化测试、Storybook 组件库等实践。 [E3]",
+            "supportedExplanation": "技术栈包含 TypeScript、React、Next.js、Playwright、Storybook。 [E6]\n可接触大型 React+Next.js 项目的性能优化与代码组织、数据可视化架构、Playwright 自动化测试、Storybook 组件库等实践。 [E3]\n面向 AI 创意与交互方向，也适用于前端架构师与全栈工程，可深入理解大规模数据可视化工具开发、React 生态与测试策略。 [E9]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议以学习 Next.js 为目标，从 Kibana 的组件库或数据可视化界面入手，尝试理解大型 React+Next.js 项目的代码组织。可先运行 Storybook 查看组件，再尝试修改一个简单组件的样式，以练习 Next.js 与 React 生态。",
+              "difficultyAdvice": "建议先核对 TypeScript、React、Next.js 的基础，并确认本地能否运行 Storybook 或 Playwright。若对大型项目不熟悉，可先只关注单个组件的实现，暂不深入数据可视化架构。",
+              "vibeCodingAdvice": "可以尝试用 AI 辅助生成一个简单的 React 组件或 Storybook 故事，并让 AI 解释组件库的组织方式。验证时建议运行 Storybook 或 Playwright 测试，确保理解组件行为。",
+              "steps": [
+                "先核对并运行 Kibana 的 Storybook，浏览已有组件及其文档。",
+                "尝试修改一个简单组件的样式或属性，用 Storybook 实时查看变化。",
+                "用 Playwright 或手动测试验证修改，并记录 Next.js 项目代码组织的学习点。"
+              ],
+              "evidenceIds": [
+                "E6",
+                "E3",
+                "E9"
+              ],
+              "kind": "SUGGESTION"
+            }
+          }
+        ],
+        "references": [
+          {
+            "evidenceId": "E4",
+            "title": "darkmatter2048/WindowsCleaner",
+            "sourceRef": "career:257",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 86
+              }
+            ],
+            "documentId": 21,
+            "versionId": 240,
+            "chunkId": 10224,
+            "sectionPath": "darkmatter2048/WindowsCleaner > 项目摘要",
+            "startOffset": 115,
+            "endOffset": 193,
+            "contentStartInChunk": 8,
+            "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+            "text": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足，提供交互式界面。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E5",
+            "title": "ValueCell-ai/ClawX",
+            "sourceRef": "career:208",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 110
+              }
+            ],
+            "documentId": 111,
+            "versionId": 330,
+            "chunkId": 12475,
+            "sectionPath": "ValueCell-ai/ClawX > 项目摘要",
+            "startOffset": 93,
+            "endOffset": 195,
+            "contentStartInChunk": 8,
+            "quote": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+            "text": "基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E6",
+            "title": "elastic/kibana",
+            "sourceRef": "career:260",
+            "spans": [
+              {
+                "spanId": "E6.S1",
+                "text": "TypeScript,React,Next.js,Playwright,Storybook\n\n",
+                "startInChunk": 7,
+                "endInChunk": 54
+              }
+            ],
+            "documentId": 23,
+            "versionId": 242,
+            "chunkId": 10286,
+            "sectionPath": "elastic/kibana > 技术栈",
+            "startOffset": 850,
+            "endOffset": 897,
+            "contentStartInChunk": 7,
+            "quote": "TypeScript,React,Next.js,Playwright,Storybook\n\n",
+            "text": "技术栈包含 TypeScript、React、Next.js、Playwright、Storybook。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E1",
+            "title": "darkmatter2048/WindowsCleaner",
+            "sourceRef": "career:257",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "text": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 106
+              }
+            ],
+            "documentId": 21,
+            "versionId": 240,
+            "chunkId": 10225,
+            "sectionPath": "darkmatter2048/WindowsCleaner > 职业价值",
+            "startOffset": 201,
+            "endOffset": 299,
+            "contentStartInChunk": 8,
+            "quote": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+            "text": "完成此项目能证明在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js，尤其在桌面级工具开发、交互设计和工程化实践方面有实战经验。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E2",
+            "title": "ValueCell-ai/ClawX",
+            "sourceRef": "career:208",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+                "startInChunk": 9,
+                "endInChunk": 119
+              }
+            ],
+            "documentId": 111,
+            "versionId": 330,
+            "chunkId": 12477,
+            "sectionPath": "ValueCell-ai/ClawX > 可证明能力",
+            "startOffset": 295,
+            "endOffset": 405,
+            "contentStartInChunk": 9,
+            "quote": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+            "text": "可掌握 React/Next.js 构建复杂桌面应用，具备将 CLI 工具产品化、提升用户体验的能力。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "elastic/kibana",
+            "sourceRef": "career:260",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+                "startInChunk": 9,
+                "endInChunk": 146
+              }
+            ],
+            "documentId": 23,
+            "versionId": 242,
+            "chunkId": 10282,
+            "sectionPath": "elastic/kibana > 面试讨论点",
+            "startOffset": 462,
+            "endOffset": 599,
+            "contentStartInChunk": 9,
+            "quote": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+            "text": "可接触大型 React+Next.js 项目的性能优化与代码组织、数据可视化架构、Playwright 自动化测试、Storybook 组件库等实践。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E7",
+            "title": "darkmatter2048/WindowsCleaner",
+            "sourceRef": "career:257",
+            "spans": [
+              {
+                "spanId": "E7.S1",
+                "text": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+                "startInChunk": 9,
+                "endInChunk": 91
+              }
+            ],
+            "documentId": 21,
+            "versionId": 240,
+            "chunkId": 10227,
+            "sectionPath": "darkmatter2048/WindowsCleaner > 面试讨论点",
+            "startOffset": 370,
+            "endOffset": 452,
+            "contentStartInChunk": 9,
+            "quote": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+            "text": "可讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略及用户体验优化。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E8",
+            "title": "ValueCell-ai/ClawX",
+            "sourceRef": "career:208",
+            "spans": [
+              {
+                "spanId": "E8.S1",
+                "text": "TypeScript,React,Next.js,Playwright\n\n",
+                "startInChunk": 7,
+                "endInChunk": 44
+              }
+            ],
+            "documentId": 111,
+            "versionId": 330,
+            "chunkId": 12482,
+            "sectionPath": "ValueCell-ai/ClawX > 技术栈",
+            "startOffset": 763,
+            "endOffset": 800,
+            "contentStartInChunk": 7,
+            "quote": "TypeScript,React,Next.js,Playwright\n\n",
+            "text": "技术栈为 TypeScript、React、Next.js、Playwright。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E9",
+            "title": "elastic/kibana",
+            "sourceRef": "career:260",
+            "spans": [
+              {
+                "spanId": "E9.S1",
+                "text": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 93
+              }
+            ],
+            "documentId": 23,
+            "versionId": 242,
+            "chunkId": 10280,
+            "sectionPath": "elastic/kibana > 职业价值",
+            "startOffset": 237,
+            "endOffset": 322,
+            "contentStartInChunk": 8,
+            "quote": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+            "text": "面向 AI 创意与交互方向，也适用于前端架构师与全栈工程，可深入理解大规模数据可视化工具开发、React 生态与测试策略。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "profileLoaded": false,
+        "generation": "20261002164953-ec113424",
+        "status": "VERIFIED_PROJECTS",
+        "recommendationReport": {
+          "direction": "本轮围绕「Next.js」查找项目，下面区分资料事实与实践建议。",
+          "learning": [
+            {
+              "personalized": true,
+              "name": "ValueCell-ai/ClawX",
+              "key": "CAREER_PROJECT:208",
+              "steps": [
+                "先核对并运行 ClawX 的已有示例，观察界面与 CLI 的交互方式。",
+                "尝试修改一个界面组件（如按钮文字或布局），用 Next.js 热更新查看效果。",
+                "用 Playwright 或手动测试验证修改，并记录学习到的 Next.js 概念。"
+              ]
+            },
+            {
+              "personalized": true,
+              "name": "darkmatter2048/WindowsCleaner",
+              "key": "CAREER_PROJECT:257",
+              "steps": [
+                "先核对并运行 WindowsCleaner 的已有示例，观察界面与清理功能的交互。",
+                "尝试添加一个展示 C 盘空间信息的简单组件，用 Next.js 页面呈现。",
+                "用现有测试或手动操作验证组件，并记录 React 状态管理的学习点。"
+              ]
+            },
+            {
+              "personalized": true,
+              "name": "elastic/kibana",
+              "key": "CAREER_PROJECT:260",
+              "steps": [
+                "先核对并运行 Kibana 的 Storybook，浏览已有组件及其文档。",
+                "尝试修改一个简单组件的样式或属性，用 Storybook 实时查看变化。",
+                "用 Playwright 或手动测试验证修改，并记录 Next.js 项目代码组织的学习点。"
+              ]
+            }
+          ],
+          "approach": "结合「学习」目标，建议先运行已有示例，再完成一个小改造，通过输入输出与测试理解系统的工作过程。",
+          "timeline": "先运行示例并确认改造范围，再根据实际投入估算进度。",
+          "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。"
+        },
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；当前本来就没有“编程语言”限制，已保持不限；当前本来就没有“最长周期”限制，已保持不限；已记录项目主题：Next.js；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；当前本来就没有“编程语言”限制，已保持不限；当前本来就没有“最长周期”限制，已保持不限；已记录项目主题：Next.js；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "model": "deepseek-flash",
+            "durationMs": 5091,
+            "usage": {
+              "prompt_tokens": 5317,
+              "completion_tokens": 1076,
+              "total_tokens": 6393,
+              "prompt_tokens_details": {
+                "cached_tokens": 5120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 697
+              },
+              "prompt_cache_hit_tokens": 5120,
+              "prompt_cache_miss_tokens": 197
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 727,
+            "usage": {
+              "prompt_tokens": 159,
+              "completion_tokens": 26,
+              "total_tokens": 185,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 159
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 815,
+            "usage": {
+              "prompt_tokens": 1505,
+              "completion_tokens": 161,
+              "total_tokens": 1666,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1377
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 1690,
+            "usage": {
+              "prompt_tokens": 1771,
+              "completion_tokens": 464,
+              "total_tokens": 2235,
+              "prompt_tokens_details": {
+                "cached_tokens": 1536
+              },
+              "prompt_cache_hit_tokens": 1536,
+              "prompt_cache_miss_tokens": 235
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "EVIDENCE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 315,
+            "usage": {
+              "prompt_tokens": 1012,
+              "completion_tokens": 22,
+              "total_tokens": 1034,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 1012
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "VERIFY",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 4228,
+            "usage": {
+              "prompt_tokens": 846,
+              "completion_tokens": 871,
+              "total_tokens": 1717,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 590
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "ADVICE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.14-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 697,
+          "complete": true,
+          "cacheHitTokens": 7040,
+          "inputTokens": 10610,
+          "cacheMissTokens": 3570,
+          "totalTokens": 13230,
+          "outputTokens": 2620,
+          "callsWithoutUsage": 0,
+          "calls": 6,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "Next.js Next.js web framework Next.js React 服务端渲染 Next.js 全栈开发",
+            "topic": [
+              "Next.js"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.15921325051759835,
+                  "title": "react/react",
+                  "chunkId": 11798,
+                  "content": "# [React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request)\n\nReact is a JavaScript library for building user interfaces.\n\n* **Declarative:** React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.\n* **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep the state out of the DOM.\n* **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code. React can also render on the server using [Node](https://nodejs.org/en) and power mobile apps using [React Native](https://reactnative.dev/).\n\n",
+                  "endOffset": 1794,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 0,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request)",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=55,lexicalRank=9,nameRank=3,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.13943391130556906,
+                  "title": "react/react",
+                  "chunkId": 11799,
+                  "content": "[Learn how to use React in your project](https://react.dev/learn).\n\n",
+                  "endOffset": 1862,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 1,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request)",
+                  "startOffset": 1794,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=93,nameRank=61,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.12568894520114032,
+                  "title": "react/react",
+                  "chunkId": 11801,
+                  "content": "## Documentation\n\nYou can find the React documentation [on the website](https://react.dev/).\n\nCheck out the [Getting Started](https://react.dev/learn) page for a quick overview.\n\nThe documentation is divided into several sections:\n\n* [Quick Start](https://react.dev/learn)\n* [Tutorial](https://react.dev/learn/tutorial-tic-tac-toe)\n* [Thinking in React](https://react.dev/learn/thinking-in-react)\n* [Installation](https://react.dev/learn/installation)\n* [Describing the UI](https://react.dev/learn/describing-the-ui)\n* [Adding Interactivity](https://react.dev/learn/adding-interactivity)\n* [Managing State](https://react.dev/learn/managing-state)\n* [Advanced Guides](https://react.dev/learn/escape-hatches)\n* [API Reference](https://react.dev/reference/react)\n* [Where to Get Support](https://react.dev/community)\n* [Contributing Guide](https://legacy.reactjs.org/docs/how-to-contribute.html)\n\nYou can improve it by sending pull requests to [this repository](https://github.com/reactjs/react.dev).\n\n",
+                  "endOffset": 3346,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 3,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request) > Documentation",
+                  "startOffset": 2347,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=94,nameRank=63,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.1234375,
+                  "title": "react/react",
+                  "chunkId": 11807,
+                  "content": "### License\n\nReact is [MIT licensed](./LICENSE).\n",
+                  "endOffset": 5317,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 9,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request) > Contributing > License",
+                  "startOffset": 5268,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=68,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.1206896551724138,
+                  "title": "react/react",
+                  "chunkId": 11803,
+                  "content": "## Contributing\n\nThe main purpose of this repository is to continue evolving React core, making it faster and easier to use. Development of React happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving React.\n\n",
+                  "endOffset": 4319,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 5,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request) > Contributing",
+                  "startOffset": 3998,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=85,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.12054794520547946,
+                  "title": "react/react",
+                  "chunkId": 11802,
+                  "content": "## Examples\n\nWe have several examples [on the website](https://react.dev/). Here is the first one to get you started:\n\n```jsx\nimport { createRoot } from 'react-dom/client';\n\nfunction HelloMessage({ name }) {\n  return <div>Hello {name}</div>;\n}\n\nconst root = createRoot(document.getElementById('container'));\nroot.render(<HelloMessage name=\"Taylor\" />);\n```\n\nThis example will render \"Hello Taylor\" into a container on the page.\n\nYou'll notice that we used an HTML-like syntax; [we call it JSX](https://react.dev/learn#writing-markup-with-jsx). JSX is not required to use React, but it makes code more readable, and writing it feels like writing HTML.\n\n",
+                  "endOffset": 3998,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 4,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request) > Examples",
+                  "startOffset": 3346,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=86,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.11923076923076924,
+                  "title": "react/react",
+                  "chunkId": 11806,
+                  "content": "### [Good First Issues](https://github.com/facebook/react/labels/good%20first%20issue)\n\nTo help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issues](https://github.com/facebook/react/labels/good%20first%20issue) that contain bugs that have a relatively limited scope. This is a great place to get started.\n\n",
+                  "endOffset": 5268,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 8,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request) > Contributing > [Good First Issues](https://github.com/facebook/react/labels/good%20first%20issue)",
+                  "startOffset": 4902,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=96,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.11621621621621622,
+                  "title": "react/react",
+                  "chunkId": 11800,
+                  "content": "## Installation\n\nReact has been designed for gradual adoption from the start, and **you can use as little or as much React as you need**:\n\n* Use [Quick Start](https://react.dev/learn) to get a taste of React.\n* [Add React to an Existing Project](https://react.dev/learn/add-react-to-an-existing-project) to use as little or as much React as you need.\n* [Create a New React App](https://react.dev/learn/start-a-new-react-project) if you're looking for a powerful JavaScript toolchain.\n\n",
+                  "endOffset": 2347,
+                  "sourceRef": "react/react",
+                  "versionId": 295,
+                  "chunkIndex": 2,
+                  "documentId": 76,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request) > Installation",
+                  "startOffset": 1862,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=125,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.01832611832611833,
+                  "title": "SidhuK/Glyph",
+                  "chunkId": 9598,
+                  "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:55",
+                  "versionId": 220,
+                  "chunkIndex": 5,
+                  "documentId": 1,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "SidhuK/Glyph > 技术栈",
+                  "startOffset": 203,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017955942622950822,
+                  "title": "CatsJuice/sticker-forge",
+                  "chunkId": 9922,
+                  "content": "## 技术栈\nJavaScript,TypeScript,React,Next.js\n\n",
+                  "endOffset": 630,
+                  "sourceRef": "beginner:119",
+                  "versionId": 231,
+                  "chunkIndex": 9,
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "CatsJuice/sticker-forge > 技术栈",
+                  "startOffset": 586,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=68,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01767941985496374,
+                  "title": "SidhuK/Glyph",
+                  "chunkId": 9597,
+                  "content": "## 适合新手的原因\n基于 React 和 Next.js，现代 Web 技术栈，代码结构清晰，可借此学习全栈开发与 AI 集成。\n\n",
+                  "endOffset": 203,
+                  "sourceRef": "beginner:55",
+                  "versionId": 220,
+                  "chunkIndex": 4,
+                  "documentId": 1,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "SidhuK/Glyph > 适合新手的原因",
+                  "startOffset": 136,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=69,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01764520202020202,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9615,
+                  "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                  "endOffset": 566,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 9,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 技术栈",
+                  "startOffset": 533,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=39,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01764292737744065,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10231,
+                  "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                  "endOffset": 667,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 10,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 技术栈",
+                  "startOffset": 634,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=53,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017563025210084033,
+                  "title": "项目式学习",
+                  "chunkId": 11757,
+                  "content": "#### Next.js:\n\n- [App Router](https://nextjs.org/learn/dashboard-app)\n\n",
+                  "endOffset": 18048,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 24,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Next.js:",
+                  "startOffset": 17977,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=10,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017123745819397993,
+                  "title": "777genius/agent-teams-ai",
+                  "chunkId": 12398,
+                  "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                  "endOffset": 537,
+                  "sourceRef": "career:203",
+                  "versionId": 327,
+                  "chunkIndex": 10,
+                  "documentId": 108,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "777genius/agent-teams-ai > 技术栈",
+                  "startOffset": 504,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=55,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016247139588100687,
+                  "title": "ValueCell-ai/ClawX",
+                  "chunkId": 12482,
+                  "content": "## 技术栈\nTypeScript,React,Next.js,Playwright\n\n",
+                  "endOffset": 800,
+                  "sourceRef": "career:208",
+                  "versionId": 330,
+                  "chunkIndex": 10,
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ValueCell-ai/ClawX > 技术栈",
+                  "startOffset": 756,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=54,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016016548463356973,
+                  "title": "tandpfun/wardrobe",
+                  "chunkId": 9895,
+                  "content": "## 技术栈\nJavaScript,React\n\n",
+                  "endOffset": 535,
+                  "sourceRef": "beginner:108",
+                  "versionId": 230,
+                  "chunkIndex": 9,
+                  "documentId": 11,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "tandpfun/wardrobe > 技术栈",
+                  "startOffset": 510,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=34,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01600985221674877,
+                  "title": "CherryHQ/cherry-studio",
+                  "chunkId": 12218,
+                  "content": "## 技术栈\nTypeScript,React,Next.js,Playwright\n\n",
+                  "endOffset": 530,
+                  "sourceRef": "career:123",
+                  "versionId": 321,
+                  "chunkIndex": 10,
+                  "documentId": 102,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "CherryHQ/cherry-studio > 技术栈",
+                  "startOffset": 486,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=56,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01533450704225352,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10225,
+                  "content": "## 职业价值\n完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                  "endOffset": 299,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 4,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 职业价值",
+                  "startOffset": 193,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=100,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "Gurkirat-Singh-bit/ThatDay",
+                  "chunkId": 15157,
+                  "content": "## Tech Stack\n\n| Technology | Purpose |\n|---|---|\n| Next.js | React framework & routing |\n| Framer Motion | Animations |\n| Tailwind CSS | Styling |\n| Lenis | Smooth scrolling |\n\n",
+                  "endOffset": 3515,
+                  "sourceRef": "Gurkirat-Singh-bit/ThatDay",
+                  "versionId": 430,
+                  "chunkIndex": 13,
+                  "documentId": 211,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "ThatDay - A Romantic Timeline Template > Tech Stack",
+                  "startOffset": 3337,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 287,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "react/react",
+                  "evidence": [
+                    {
+                      "score": 0.15921325051759835,
+                      "title": "react/react",
+                      "chunkId": 11798,
+                      "content": "# [React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request)\n\nReact is a JavaScript library for building user interfaces.\n\n* **Declarative:** React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.\n* **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep the state out of the DOM.\n* **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code. React can also render on the server using [Node](https://nodejs.org/en) and power mobile apps using [React Native](https://reactnative.dev/).\n\n",
+                      "endOffset": 1794,
+                      "sourceRef": "react/react",
+                      "versionId": 295,
+                      "chunkIndex": 0,
+                      "documentId": 76,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request)",
+                      "startOffset": 0,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=55,lexicalRank=9,nameRank=3,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    },
+                    {
+                      "score": 0.13943391130556906,
+                      "title": "react/react",
+                      "chunkId": 11799,
+                      "content": "[Learn how to use React in your project](https://react.dev/learn).\n\n",
+                      "endOffset": 1862,
+                      "sourceRef": "react/react",
+                      "versionId": 295,
+                      "chunkIndex": 1,
+                      "documentId": 76,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request)",
+                      "startOffset": 1794,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=93,nameRank=61,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    },
+                    {
+                      "score": 0.12568894520114032,
+                      "title": "react/react",
+                      "chunkId": 11801,
+                      "content": "## Documentation\n\nYou can find the React documentation [on the website](https://react.dev/).\n\nCheck out the [Getting Started](https://react.dev/learn) page for a quick overview.\n\nThe documentation is divided into several sections:\n\n* [Quick Start](https://react.dev/learn)\n* [Tutorial](https://react.dev/learn/tutorial-tic-tac-toe)\n* [Thinking in React](https://react.dev/learn/thinking-in-react)\n* [Installation](https://react.dev/learn/installation)\n* [Describing the UI](https://react.dev/learn/describing-the-ui)\n* [Adding Interactivity](https://react.dev/learn/adding-interactivity)\n* [Managing State](https://react.dev/learn/managing-state)\n* [Advanced Guides](https://react.dev/learn/escape-hatches)\n* [API Reference](https://react.dev/reference/react)\n* [Where to Get Support](https://react.dev/community)\n* [Contributing Guide](https://legacy.reactjs.org/docs/how-to-contribute.html)\n\nYou can improve it by sending pull requests to [this repository](https://github.com/reactjs/react.dev).\n\n",
+                      "endOffset": 3346,
+                      "sourceRef": "react/react",
+                      "versionId": 295,
+                      "chunkIndex": 3,
+                      "documentId": 76,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request) > Documentation",
+                      "startOffset": 2347,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=94,nameRank=63,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    }
+                  ],
+                  "groupKey": "GITHUB:react/react",
+                  "bestScore": 0.15921325051759835,
+                  "sourceRef": "react/react",
+                  "documentId": 76,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "SidhuK/Glyph",
+                  "evidence": [
+                    {
+                      "score": 0.01832611832611833,
+                      "title": "SidhuK/Glyph",
+                      "chunkId": 9598,
+                      "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:55",
+                      "versionId": 220,
+                      "chunkIndex": 5,
+                      "documentId": 1,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "SidhuK/Glyph > 技术栈",
+                      "startOffset": 203,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01767941985496374,
+                      "title": "SidhuK/Glyph",
+                      "chunkId": 9597,
+                      "content": "## 适合新手的原因\n基于 React 和 Next.js，现代 Web 技术栈，代码结构清晰，可借此学习全栈开发与 AI 集成。\n\n",
+                      "endOffset": 203,
+                      "sourceRef": "beginner:55",
+                      "versionId": 220,
+                      "chunkIndex": 4,
+                      "documentId": 1,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "SidhuK/Glyph > 适合新手的原因",
+                      "startOffset": 136,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=69,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:55",
+                  "bestScore": 0.01832611832611833,
+                  "sourceRef": "beginner:55",
+                  "documentId": 1,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "CatsJuice/sticker-forge",
+                  "evidence": [
+                    {
+                      "score": 0.017955942622950822,
+                      "title": "CatsJuice/sticker-forge",
+                      "chunkId": 9922,
+                      "content": "## 技术栈\nJavaScript,TypeScript,React,Next.js\n\n",
+                      "endOffset": 630,
+                      "sourceRef": "beginner:119",
+                      "versionId": 231,
+                      "chunkIndex": 9,
+                      "documentId": 12,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "CatsJuice/sticker-forge > 技术栈",
+                      "startOffset": 586,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=68,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:119",
+                  "bestScore": 0.017955942622950822,
+                  "sourceRef": "beginner:119",
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "DavidHDev/canvas-ui",
+                  "evidence": [
+                    {
+                      "score": 0.01764520202020202,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9615,
+                      "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                      "endOffset": 566,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 9,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 技术栈",
+                      "startOffset": 533,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=39,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:77",
+                  "bestScore": 0.01764520202020202,
+                  "sourceRef": "beginner:77",
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "evidence": [
+                    {
+                      "score": 0.01764292737744065,
+                      "title": "darkmatter2048/WindowsCleaner",
+                      "chunkId": 10231,
+                      "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                      "endOffset": 667,
+                      "sourceRef": "career:257",
+                      "versionId": 240,
+                      "chunkIndex": 10,
+                      "documentId": 21,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "darkmatter2048/WindowsCleaner > 技术栈",
+                      "startOffset": 634,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=53,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01533450704225352,
+                      "title": "darkmatter2048/WindowsCleaner",
+                      "chunkId": 10225,
+                      "content": "## 职业价值\n完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                      "endOffset": 299,
+                      "sourceRef": "career:257",
+                      "versionId": 240,
+                      "chunkIndex": 4,
+                      "documentId": 21,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "darkmatter2048/WindowsCleaner > 职业价值",
+                      "startOffset": 193,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=100,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:257",
+                  "bestScore": 0.01764292737744065,
+                  "sourceRef": "career:257",
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.017563025210084033,
+                      "title": "项目式学习",
+                      "chunkId": 11757,
+                      "content": "#### Next.js:\n\n- [App Router](https://nextjs.org/learn/dashboard-app)\n\n",
+                      "endOffset": 18048,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 24,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Next.js:",
+                      "startOffset": 17977,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=10,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.017563025210084033,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "777genius/agent-teams-ai",
+                  "evidence": [
+                    {
+                      "score": 0.017123745819397993,
+                      "title": "777genius/agent-teams-ai",
+                      "chunkId": 12398,
+                      "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                      "endOffset": 537,
+                      "sourceRef": "career:203",
+                      "versionId": 327,
+                      "chunkIndex": 10,
+                      "documentId": 108,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "777genius/agent-teams-ai > 技术栈",
+                      "startOffset": 504,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=55,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:203",
+                  "bestScore": 0.017123745819397993,
+                  "sourceRef": "career:203",
+                  "documentId": 108,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "ValueCell-ai/ClawX",
+                  "evidence": [
+                    {
+                      "score": 0.016247139588100687,
+                      "title": "ValueCell-ai/ClawX",
+                      "chunkId": 12482,
+                      "content": "## 技术栈\nTypeScript,React,Next.js,Playwright\n\n",
+                      "endOffset": 800,
+                      "sourceRef": "career:208",
+                      "versionId": 330,
+                      "chunkIndex": 10,
+                      "documentId": 111,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "ValueCell-ai/ClawX > 技术栈",
+                      "startOffset": 756,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=54,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:208",
+                  "bestScore": 0.016247139588100687,
+                  "sourceRef": "career:208",
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "tandpfun/wardrobe",
+                  "evidence": [
+                    {
+                      "score": 0.016016548463356973,
+                      "title": "tandpfun/wardrobe",
+                      "chunkId": 9895,
+                      "content": "## 技术栈\nJavaScript,React\n\n",
+                      "endOffset": 535,
+                      "sourceRef": "beginner:108",
+                      "versionId": 230,
+                      "chunkIndex": 9,
+                      "documentId": 11,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "tandpfun/wardrobe > 技术栈",
+                      "startOffset": 510,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=34,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:108",
+                  "bestScore": 0.016016548463356973,
+                  "sourceRef": "beginner:108",
+                  "documentId": 11,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "CherryHQ/cherry-studio",
+                  "evidence": [
+                    {
+                      "score": 0.01600985221674877,
+                      "title": "CherryHQ/cherry-studio",
+                      "chunkId": 12218,
+                      "content": "## 技术栈\nTypeScript,React,Next.js,Playwright\n\n",
+                      "endOffset": 530,
+                      "sourceRef": "career:123",
+                      "versionId": 321,
+                      "chunkIndex": 10,
+                      "documentId": 102,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "CherryHQ/cherry-studio > 技术栈",
+                      "startOffset": 486,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=56,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:123",
+                  "bestScore": 0.01600985221674877,
+                  "sourceRef": "career:123",
+                  "documentId": 102,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "Gurkirat-Singh-bit/ThatDay",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "Gurkirat-Singh-bit/ThatDay",
+                      "chunkId": 15157,
+                      "content": "## Tech Stack\n\n| Technology | Purpose |\n|---|---|\n| Next.js | React framework & routing |\n| Framer Motion | Animations |\n| Tailwind CSS | Styling |\n| Lenis | Smooth scrolling |\n\n",
+                      "endOffset": 3515,
+                      "sourceRef": "Gurkirat-Singh-bit/ThatDay",
+                      "versionId": 430,
+                      "chunkIndex": 13,
+                      "documentId": 211,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "ThatDay - A Romantic Timeline Template > Tech Stack",
+                      "startOffset": 3337,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:Gurkirat-Singh-bit/ThatDay",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "Gurkirat-Singh-bit/ThatDay",
+                  "documentId": 211,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "Next.js Next.js web framework Next.js React 服务端渲染 Next.js 全栈开发",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "GITHUB",
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 76,
+                "url": "https://github.com/react/react",
+                "name": "react/react",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "react/react",
+                "versionId": 295,
+                "documentId": 76,
+                "importable": false,
+                "catalogText": "# [React](https://react.dev/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![(Runtime) Build and Test](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml/badge.svg)](https://github.com/facebook/react/actions/workflows/runtime_build_and_test.yml) [![(Compiler) TypeScript](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml/badge.svg?branch=main)](https://github.com/facebook/react/actions/workflows/compiler_typescript.yml) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://legacy.reactjs.org/docs/how-to-contribute.html#your-first-pull-request)\n\nReact is a JavaScript library for building user interfaces.\n\n* **Declarative:** React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.\n* **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep the state out of the DOM.\n* **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code. React can also render on the server using [Node](https://nodejs.org/en) and power mobile apps using [React Native](https://reactnative.dev/).\n\n[Learn how to use React in your project](https://react.dev/learn).\n\n## Installation\n\nReact has been designed for gradual adoption from the start, and **you can use as little or as much React as you need**:\n\n* Use [Quick Start](https://react.dev/learn) to get a taste of React.\n* [Add React to an Existing Project](https://react.dev/learn/add-react-to-an-existing-project) to use as little or as much React as you need.\n* [Create a New React App](https://react.dev/learn/start-a-new-react-project) if you're looking for a powerful JavaScript toolchain.\n\n## Documentation\n\nYou can find the React documentation [on the website](https://react.dev/).\n\nCheck out the [Getting Started](https://react.dev/learn) page for a quick overview.\n\nThe documentation is divided into several sections:\n\n* [Quick Start](https://react.dev/learn)\n* [Tutorial](https://react.dev/learn/tutorial-tic-tac-toe)\n* [Thinking in React](https://react.dev/learn/thinking-in-react)\n* [Installation](https://react.dev/learn/installation)\n* [Describing the UI](https://react.dev/learn/describing-the-ui)\n* [Adding Interactivity](https://react.dev/learn/adding-interactivity)\n* [Managing State](https://react.dev/learn/managing-state)\n* [Advanced Guides](https://react.dev/learn/escape-hatches)\n* [API Reference](https://react.dev/reference/react)\n* [Where to Get Support](https://react.dev/community)\n* [Contributing Guide](https://legacy.reactjs.org/docs/how-to-contribute.html)\n\nYou can improve it by sending pull requests to [this repository](https://github.com/reactjs/react.dev).\n\n## Examples\n\nWe have several examples [on the website](https://react.dev/). Here is the first one to get you started:\n\n```jsx\nimport { createRoot } from 'react-dom/client';\n\nfunction HelloMessage({ name }) {\n  return <div>Hello {name}</div>;\n}\n\nconst root = createRoot(document.getElementById('container'));\nroot.render(<HelloMessage name=\"Taylor\" />);\n```\n\nThis example will render \"Hello Taylor\" into a container on the page.\n\nYou'll notice that we used an HTML-like syntax; [we call it JSX](https://react.dev/learn#writing-markup-with-jsx). JSX is not required to use React, but it makes code more readable, and writing it feels like writing HTML.\n\n## Contributing\n\nThe main purpose of this repository is to continue evolving React core, making it faster and easier to use. Development of React happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving React.\n\n### [Code of Conduct](https://code.fb.com/codeofconduct)\n\nFacebook has adopted a Code of Conduct that we expect project participants to adhere to. Please read [the full text](https://code.fb.com/codeofconduct) so that you can understand what actions will and will not be tolerated.\n\n### [Contributing Guide](https://legacy.reactjs.org/docs/how-to-contribute.html)\n\nRead our [contributing guide](https://legacy.reactjs.org/docs/how-to-contribute.html) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to React.\n\n### [Good First Issues](https://github.com/facebook/react/labels/good%20first%20issue)\n\nTo help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issues](https://github.com/facebook/react/labels/good%20first%20issue) that contain bugs that have a relatively limited scope. This is a great place to get started.\n\n### License\n\nReact is [MIT licensed](./LICENSE).\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "react/react",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 526,
+                "url": "https://github.com/lubluniky/tre",
+                "name": "lubluniky/tre",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "lubluniky/tre",
+                "versionId": 745,
+                "documentId": 526,
+                "importable": false,
+                "catalogText": "# @borkiss/tre <sub>文字の絵</sub>\n\n**any graphic, as living ASCII on a CRT.**\n\n[![npm](https://img.shields.io/npm/v/%40borkiss%2Ftre?style=flat-square&color=52ff7a&label=npm)](https://www.npmjs.com/package/@borkiss/tre)\n[![license: MIT](https://img.shields.io/badge/license-MIT-c9a24f?style=flat-square)](LICENSE)\n[![live site](https://img.shields.io/badge/live-tre.borkiss.net-52ff7a?style=flat-square)](https://tre.borkiss.net)\n[![agent docs](https://img.shields.io/badge/agents-start.md-c9a24f?style=flat-square)](https://tre.borkiss.net/start.md)\n\nAn engine that renders **any graphic as living ASCII on a CRT** — a live\nthree.js scene, an image, a video, a webcam, a 2D canvas — and can dance to\nyour music. The framework-free core (`@borkiss/tre/core`) needs only\nthree.js; on top of it sit React/R3F bindings and a scroll-driven storytelling\nlayer (GSAP timeline + Lenis + WebAudio reactivity). Zero postprocessing\ndependencies — the ASCII/CRT pipeline is a few tiny hand-rolled fullscreen\npasses.\n\n```bash\nnpm i @borkiss/tre three        # bun add @borkiss/tre three\n```\n\nEverything below is live at **[tre.borkiss.net](https://tre.borkiss.net)** —\nevery glowing pixel there is drawn by this package. Agents start at\n[/start.md](https://tre.borkiss.net/start.md)\n([api](https://tre.borkiss.net/api.md) ·\n[recipes](https://tre.borkiss.net/recipes.md) ·\n[llms.txt](https://tre.borkiss.net/llms.txt)).\n\n[![the showcase site — a live ASCII galaxy boots like a CRT](docs/site-hero.png)](https://tre.borkiss.net)\n\n| eight live tubes, one engine | glyph sets & phosphor tints, swapped live |\n| --- | --- |\n| [![a three.js torus knot and a colour-ASCII sunset](docs/site-tubes.png)](https://tre.borkiss.net#cases) | [![katakana ramp and amber phosphor](docs/site-tubes-2.png)](https://tre.borkiss.net#cases) |\n\nAnd the stories the engine was born for — [DEEP FIELD](https://tre.borkiss.net/deep-field) and [ABOUT FABLE'S SOUL](https://tre.borkiss.net/soul):\n\n| THE EYE — follows your cursor | pulsar | supernova |\n| --- | --- | --- |\n| ![](docs/preview-eye.png) | ![](docs/preview-pulsar.png) | ![](docs/preview-supernova.png) |\n\n| event horizon | wormhole | nebula |\n| --- | --- | --- |\n| ![](docs/preview-blackhole.png) | ![](docs/preview-wormhole.png) | ![](docs/preview-nebula.png) |\n\n```bash\nbun install\nbun dev              # the demo story at http://localhost:5173\nbun run build:lib    # the library -> dist/ (ESM + d.ts, 23 kB / 8.6 kB gzip)\nbun run build        # the demo site -> dist-demo/\n```\n\nThe repo is **library + demo**: `src/` is the publishable engine\n(`@borkiss/tre`), `demo/` is a 9-act story built on it. The demo\nimports the library strictly by package name (aliased to `src/` in dev), so it\nexercises exactly what a consumer would install.\n\n---\n\n## The one idea: a single source of scroll truth\n\n```\nscroll  →  progress  →  timeline  →  state  →  render\n(Lenis)    [0,1]        one GSAP    your        R3F useFrame\n           +energy      timeline    params      READS only\n```\n\n- **Lenis owns the scroll.** Nothing else listens to wheel/touch/scroll events.\n- Lenis position normalizes to **one number, `progress ∈ [0,1]`**.\n- That number — and nothing else — drives **one paused master GSAP timeline**\n  (`ScrollStage` scrubs `timeline.progress(p)`; it never plays).\n- The timeline keyframes **your named params** (camera, hue, cell density…).\n- The R3F render loop **reads** that state every frame. It never sees scroll.\n\nAlongside `progress` there is **`energy`** — a smoothed, non-rewindable [0,1]\nmagnitude of \"how hard is the world being driven right now\": scroll velocity,\nmerged (max) with the audio reactor's level when music is connected.\n\n**State rules:** per-frame values (`progress`, `energy`, your params) are plain\nmutable objects, **not** React state — writing them never re-renders. Only\ndiscrete state (ready, isLowTier, activeSection) lives in zustand. **No\n`setState` inside `useFrame`. No per-frame allocations.**\n\n## The render pipeline (and why it is fast)\n\n```\n3D scene ──► grid buffer ──► ASCII pass ──► persistence ──► CRT pass ──► screen\n            (~cols × rows,   glyph stamp    phosphor        curvature, glow,\n             MSAA ×4)        by luminance   afterglow       scanlines, glitch\n```\n\nThe ASCII pass only ever reads **one sample per cell** — so rendering the scene\nat full resolution would shade ~50–200× more pixels than anyone can see. The\nengine renders the 3D scene into a **grid-sized buffer** (one texel per cell at\nthe densest zoom, MSAA-averaged), then stamps glyphs at full resolution. The\nwin is double: the expensive pass became ~two orders of magnitude smaller, and\nMSAA area-averaging replaces flickery point-sampling — calmer cells, better\nmotion.\n\nEverything else that guards the 16 ms budget:\n\n- **Frame cap + demand rendering** (`FrameCap`, `frameloop=\"demand\"`) — 60fps\n  cap; a 120 Hz screen does half the GPU work.\n- **Adaptive quality** (`AdaptiveQuality`) — dpr clamp (≤1.5), weak-GPU triage\n  (`isLowTier`), drei `PerformanceMonitor` feedback; `lowCost` mode switches the\n  CRT glow to a 4-tap path and drops scene-buffer MSAA.\n- **Idle costs nothing** — the timeline is scrubbed only when progress actually\n  changes; every readout DOM write is change-gated; per-frame uniform refs are\n  cached (no Map lookups, no allocations).\n- **Preloader gate + shader warmup** (`ShaderWarmup`, demo `WarmupRig`) —\n  `gl.compileAsync` before reveal; no compile hitch on first scroll.\n- **One draw call per subject** — instanced meshes with per-instance attributes;\n  all motion in vertex shaders, fed by uniforms (the black hole's disk, lensed\n  arcs, photon ring and infall are ONE `InstancedMesh`, populations split by\n  seed in the vertex stage).\n\n## Audio reactivity\n\n`audioReactor` (WebAudio `AnalyserNode`) turns music into the same hot-store\ncontract as scroll — `audio = { level, bass, mid, treble, beat, active }`,\nauto-gained to [0,1], with bass-onset beat detection:\n\n```ts\nimport { audioReactor, audio } from '@borkiss/tre'\n\nawait audioReactor.connectMic()           // live input (music in the room)\nawait audioReactor.connectDisplayAudio()  // tab/system audio (Chrome screen share)\naudioReactor.connectElement(audioEl)      // a playing <audio> file\naudioReactor.disconnect()\n\n// per frame, anywhere:\naudio.level   // overall drive — feed to <ScrollStage energySource>\naudio.bass    // kick body    audio.beat  // 1 on onset, exp decay\n```\n\nIn the demo (the SIGNAL block, bottom right): beats flare the CRT glow and\ndilate THE EYE's pupil, bass swells the nebula and feeds the accretion disks,\nthe wormhole runs at music speed, treble brightens the phosphor tint, loud\npassages smear the afterglow.\n\n## Graphics mode — any source, no framework\n\nThe pipeline is not tied to scrollytelling, React or even a 3D scene. The\n`core` subpath ships the engine alone (peer dependency: `three`, nothing\nelse), and `createAsciiArt` runs it on any graphic with its own frame-capped\nrAF loop that goes fully idle offscreen — safe to scatter a dozen per page:\n\n```ts\nimport { createAsciiArt, createWebcamSource, RAMPS } from '@borkiss/tre/core'\n\n// an image (colour ASCII: glyphs take the source's own chroma)\nconst art = createAsciiArt({ canvas, source: myImg, fit: 'cover' })\nart.frame.colorize = 1\n\n// a webcam — you, in phosphor glyphs\nconst cam = await createWebcamSource()\ncreateAsciiArt({ canvas, source: cam.video })\n\n// a 2D canvas being redrawn (plasma, generative art, a chart…)\ncreateAsciiArt({ canvas, source: my2dCanvas, ramp: RAMPS.blocks })\n\n// a live three.js scene with your own animation\ncreateAsciiArt({ canvas, source: { scene, camera, update: (t) => mesh.rotation.set(0, t, 0) } })\n\n// drive the look any time (same AsciiFrame contract as the React component)\nart.frame.persistence = 0.6   // phosphor trails\nart.frame.glitch = 0.4        // datamosh\nart.frame.power = 0           // CRT power-off collapse\nart.snapshot()                // -> PNG data URL\n```\n\nSources: `HTMLImageElement | HTMLVideoElement | HTMLCanvasElement |\nOffscreenCanvas | ImageBitmap | THREE.Texture | { scene, camera, update? }`.\nTexture sources are fit with CSS `object-fit` semantics (`cover | contain |\nfill`); glyph ramps are plain strings (`RAMPS.classic/dense/blocks/braille/\nkatakana/binary/lines` or your own), and the atlas takes any loaded font.\nAlready own a renderer and a loop? Use `AsciiPipeline` directly —\n`renderScene(gl, scene, camera, t, dt)` / `renderTexture(gl, texture, t, dt,\nfit)`; the React `<AsciiRenderer>` is exactly that on R3F's loop.\n\n## Library API (the demo is the reference consumer)\n\n```tsx\nimport {\n  ScrollStage, progress, energy, pointer, useEngineStore,   // scroll truth\n  defineActs, createActTimeline,                            // story + timeline\n  AsciiRenderer,                                            // the whole look\n  AdaptiveQuality, FrameCap, ShaderWarmup, coarseLowPower,  // perf scaffolding\n  SubjectMaterial,                                          // luminance shading\n  audioReactor, audio,                                      // music\n  createAssetResolver, GltfSlot,                            // asset pipeline\n} from '@borkiss/tre'\n```\n\n```tsx\n// 1. a story: weighted acts, extended with whatever your timeline keys\nconst story = defineActs([\n  { key: 'boot', weight: 0.6, cam: {...}, hue: 0.33 },\n  ...\n])\n// bounds/centres/actLocal/actIndex/spanGate all derive from the table\n\n// 2. the one timeline: what to key at each act's centre\nconst timeline = createActTimeline(story, (tl, act, at, duration) =>\n  duration === 0\n    ? tl.set(params, { hue: act.hue }, at)\n    : tl.to(params, { hue: act.hue, duration }, at),\n)\n\n// 3. composition — ScrollStage owns scroll; AsciiRenderer owns the look\n<ScrollStage timeline={timeline} energySource={() => audio.level}\n             onProgress={(p) => useEngineStore.getState().setActiveSection(story.actIndex(p))}>\n  <Canvas frameloop=\"demand\" dpr={[1, 1.5]} gl={{ antialias: false }}>\n    <AdaptiveQuality />\n    <FrameCap fps={60} />\n    {/* your scene: SubjectMaterial outputs luminance; the ASCII pass does the rest */}\n    <AsciiRenderer\n      lowCost={coarseLowPower()}\n      onFrame={(f) => {           // mutate per-frame controls, no allocations\n        f.cellPx = params.cell\n        f.tint.setHSL(params.hue, 0.72, 0.62)\n        f.glitch = ...            // power/jitter/scramble/persistence/glow too\n      }}\n    />\n  </Canvas>\n</ScrollStage>\n```\n\nSharp act-local envelopes (glitch humps, power on/off, shatter) do NOT go\nthrough GSAP — compute them from `progress` via `story.actLocal(p, i)` inside\n`onFrame`/`useFrame`: same boundary table, rewinds for free.\n\n**Two time bases, deliberately:** progress-driven state rewinds with the\nscroll; wall-clock/energy state (idle sway, dance phase, flow churn) does not.\n\n## Where each piece lives\n\n| Concern | File |\n| --- | --- |\n| Scroll loop + Lenis + timeline scrub | [`src/scroll/ScrollStage.tsx`](src/scroll/ScrollStage.tsx) |\n| Hot per-frame stores (progress/energy/pointer) | [`src/store/engineStore.ts`](src/store/engineStore.ts) |\n| Act system (bounds, local progress, gates) | [`src/acts/acts.ts`](src/acts/acts.ts) |\n| Timeline builder (centre-eased, weight axis) | [`src/timeline/createActTimeline.ts`](src/timeline/createActTimeline.ts) |\n| ASCII/CRT pipeline (framework-agnostic core) | [`src/ascii/AsciiPipeline.ts`](src/ascii/AsciiPipeline.ts) |\n| R3F shell over the pipeline | [`src/ascii/AsciiRenderer.tsx`](src/ascii/AsciiRenderer.tsx) |\n| Standalone engine (own rAF loop, any source) | [`src/art/createAsciiArt.ts`](src/art/createAsciiArt.ts) |\n| Source adapters (image/video/canvas/webcam) | [`src/art/sources.ts`](src/art/sources.ts) |\n| The fragment shaders | [`src/ascii/shaders.ts`](src/ascii/shaders.ts) |\n| Glyph atlas (runtime canvas, no asset) + ramps | [`src/ascii/glyphAtlas.ts`](src/ascii/glyphAtlas.ts), [`src/ascii/ramps.ts`](src/ascii/ramps.ts) |\n| Audio reactor (mic / tab / file → levels+beat) | [`src/audio/audioReactor.ts`](",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "@borkiss/tre <sub>文字の絵</sub>",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 55,
+                "url": "https://github.com/SidhuK/Glyph",
+                "name": "SidhuK/Glyph",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"ai-agents\", \"ai-assistant\", \"ai-tools\", \"knowledge-base\", \"knowledge-management\", \"mac\", \"macos\", \"note-taking\", \"notes-app\", \"rust\", \"rust-lang\", \"second-brain\", \"tauri-app\"]",
+                "archived": false,
+                "duration": "3-5天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:55",
+                "techStack": "TypeScript,React,Next.js",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "Glyph 是一个私密的桌面工作区，用于笔记、文档和创意记录，内置 Markdown 编辑和 AI 工具。",
+                "beginnerScore": 95,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "基于 React 和 Next.js，现代 Web 技术栈，代码结构清晰，可借此学习全栈开发与 AI 集成。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 306,
+                "url": "https://github.com/phaserjs/phaser",
+                "name": "phaserjs/phaser",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "phaserjs/phaser",
+                "versionId": 525,
+                "documentId": 306,
+                "importable": false,
+                "catalogText": "# Phaser - HTML5 游戏框架\n\n![Phaser 横幅](changelog/v4/assets/phaser4-logo.png \"Phaser 横幅\")\n\n[![Discord](https://img.shields.io/discord/244245946873937922?style=for-the-badge)](https://discord.gg/phaser)\n![JSDelivr](https://img.shields.io/jsdelivr/npm/hm/phaser?style=for-the-badge)\n![GitHub](https://img.shields.io/github/downloads/phaserjs/phaser/total?style=for-the-badge)\n\nPhaser 是一个快速、免费且有趣的开源 HTML5 游戏框架，支持在桌面和移动网页浏览器上使用 WebGL 和 Canvas 渲染，并已持续开发超过 13 年。\n\n游戏可以构建为网页游戏，也可以作为 YouTube Playables、Discord Activities、Reddit 游戏、Twitch Overlays，或使用第三方工具编译为 iOS、Android、Steam 和原生应用。您可以使用 JavaScript 或 TypeScript 进行开发。Phaser 支持超过 40 种不同的前端框架，包括 React 和 Vue。\n\nPhaser 由 **Phaser Studio Inc** 与我们优秀的开源社区共同进行商业开发和维护。得益于快速的支持和开发者友好的 API，Phaser 目前是 GitHub 上[最受关注](https://github.com/collections/javascript-game-engines)的游戏框架之一。\n\n想了解更多？点击下方图片观看我们的介绍视频。\n\n[![YouTube](https://i.ytimg.com/vi/XLhi9IW0rxg/maxresdefault.jpg)](https://www.youtube.com/watch?v=XLhi9IW0rxg)\n\n---\n\n## 从 NPM 安装 Phaser\n\n通过 [npm](https://www.npmjs.com/package/phaser) 安装：\n\n```bash\nnpm install phaser\n```\n\n然后在您的项目中导入：\n\n```js\nimport Phaser from 'phaser';\n```\n\n## 从 CDN 使用 Phaser\n\n[Phaser 已上架 jsDelivr](https://www.jsdelivr.com/package/npm/phaser)（一个面向开发者的超快 CDN）。在您的 HTML 中包含 _以下任一_ 代码：\n\n```html\n<script src=\"//cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.js\"></script>\n<script src=\"//cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js\"></script>\n```\n\n也可从 Cloudflare 的 [cdnjs](https://cdnjs.com/libraries/phaser) 获取：\n\n```html\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/phaser/4.2.1/phaser.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/phaser/4.2.1/phaser.min.js\"></script>\n```\n\n## 创建 Phaser 游戏应用\n\n快速入门 Phaser 的最简单方式是使用我们的 `create-phaser-game` 应用。这个 CLI 工具提供一个交互式选择界面，包含官方项目模板和示例游戏。运行命令，回答一些问题，应用就会为您下载并配置合适的包。\n\n```bash\nnpm create @phaserjs/game@latest\nnpx @phaserjs/create-game@latest\nyarn create @phaserjs/game\npnpm create @phaserjs/game@latest\nbun create @phaserjs/game@latest\n```\n\n我们支持 Vue.js、React、Angular、Next.js、SolidJS、Svelte 和 Remix，以及 Vite、Rollup、Parcel、Webpack、ESBuild、Import Map 和 Bun。大多数都提供 JavaScript 和 TypeScript 版本。\n\n[查看创建游戏应用教程](https://phaser.io/tutorials/create-game-app)。\n\n## Phaser 有多大？\n\n如果您查看 `phaser.js` 并看到一个超过 8 MB 的文件，请不要惊慌。其中超过 84% 是内联文档——JSDoc 注释、类型注解和详细的方法描述，这些为 TypeScript 定义和 API 文档提供支持。它是为您的 IDE 准备的，而不是为您的玩家。\n\n压缩后的构建版本 `phaser.min.js` 会去除所有这些内容，在标准 gzip Web 服务器压缩下大小为 **345 KB**。这是包含所有功能的完整版本，但仍比大多数纹理图片要小。您还可以通过调整构建设置排除游戏不需要的功能来进一步减小体积。\n\n| 构建版本 | 原始大小 | 压缩大小 (gzip) |\n| ----- | -------- | ------------------ |\n| `phaser.js`（含文档） | 8.23 MB | - |\n| `phaser.min.js`（完整） | 1.29 MB | 345 KB |\n| `phaser-arcade.min.js` | 1.18 MB | 313 KB |\n\n### 为什么选择 Phaser？\n\n- **久经考验** - 十多年的活跃开发。数万款游戏发布。一个庞大的开发者社区，他们",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Phaser - HTML5 游戏框架",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 119,
+                "url": "https://github.com/CatsJuice/sticker-forge",
+                "name": "CatsJuice/sticker-forge",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"sticker\", \"webgl\"]",
+                "quality": 85,
+                "archived": false,
+                "duration": "几小时体验，2～5 天做出定制版本",
+                "language": "JavaScript",
+                "whatIsIt": "一个基于 WebGL 的贴纸生成器，支持文字或图片输入，可模拟撕开贴纸看到背面的物理效果，并提供组件化嵌入方案。",
+                "mainRisks": "需基础前端知识，调整 WebGL 效果有一定学习曲线；复杂修改可能涉及底层着色器。",
+                "sourceRef": "beginner:119",
+                "techStack": "JavaScript,TypeScript,React,Next.js",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "制作可交互撕拉效果贴纸的 Web 应用，可嵌入个人网站",
+                "codebaseSize": "MEDIUM",
+                "beginnerScore": 100,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "1. 只需 `npm install && npm run dev` 即可本地体验，无需数据库或密钥；\n2. 可预览、修改贴纸样式（轮廓、材质、光影）并即时生效；\n3. 提供了即插即用的 Web Component 和 JS API，容易集成到其他项目；\n4. 学习现代前端交互（React、WebGL、事件系统）的实战案例。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "1. 设计独特贴纸主题包（节日、品牌、头像）并分享；\n2. 将贴纸组件嵌入个人博客或作品集页面作为趣味元素；\n3. 为贴纸添加音效或动画触发逻辑，增强互动感；\n4. 改造为头像或表情生成器，支持用户上传自定义素材。",
+                "requiresDatabase": false,
+                "vibeCodingReason": "门槛低、视觉冲击力强，非常适合新手制作一个炫酷的前端作品并展示。",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 208,
+                "url": "https://github.com/ValueCell-ai/ClawX",
+                "name": "ValueCell-ai/ClawX",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 88,
+                "archived": false,
+                "duration": "18-25 天（改造界面、增加场景模板）",
+                "language": "TypeScript",
+                "mainRisks": "依赖 OpenClaw 后端，版本升级可能导致兼容问题；67 个 open issues 中部分可能涉及底层交互复杂；无数据库和 Docker 支持，扩展性受限。",
+                "sourceRef": "career:208",
+                "techStack": "TypeScript,React,Next.js,Playwright",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。",
+                "proofPoints": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "在 AI 应用与 Agent、创意交互方向表现突出，能证明候选人具有构建桌面级 AI 工具、前端与 Electron/Tauri 集成、面向国内市场产品化的能力。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "- 如何设计图形化 AI Agent 的工作流编排界面\n- ClawX 与 OpenClaw 间的通信与状态同步\n- 面向中国市场的本地化（clawx.com.cn）做了哪些特殊设计\n- Playwright 在桌面环境中如何安全和稳定地运行",
+                "requiresSecrets": true,
+                "modificationPlan": "基于 ClawX 开发国内常用的 AI 场景模板（如自动化填写表格、智能客服辅助），并优化中文 UI/UX；将其打包为国产操作系统（UOS）安装包，展示全栈产品化思维。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 77,
+                "url": "https://github.com/DavidHDev/canvas-ui",
+                "name": "DavidHDev/canvas-ui",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"animation\", \"canvas\", \"component-library\", \"components\", \"creative-coding\", \"design-engineering\", \"frontend\", \"glsl\", \"nextjs\", \"react\", \"shadcn\", \"shaders\", \"svelte\", \"threejs\", \"typescript\", \"ui\", \"ui-library\", \"vue\", \"weggl\"]",
+                "quality": 88,
+                "archived": false,
+                "duration": "30分钟体验，1～3天制作定制页面",
+                "language": "TypeScript",
+                "whatIsIt": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。",
+                "mainRisks": "部分组件依赖实验性API（HTML-in-canvas），某些浏览器可能降级；视觉效果可能影响性能。",
+                "sourceRef": "beginner:77",
+                "techStack": "TypeScript,React,Next.js",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "快速为网页添加玻璃破碎、液体等创意Canvas效果",
+                "codebaseSize": "MEDIUM",
+                "beginnerScore": 87,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "安装简单，使用shadcn CLI即可添加到项目，只需基本的React/Vue知识。\n效果立竿见影，包裹内容即可获得视觉冲击力，非常适合做个人主页或作品集。\n组件源码复制到本地仓库，方便修改和学习WebGL/Canvas原理。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "组合多个组件制作一个全屏交互式体验页面。\n修改现有组件参数（颜色、速度）创造独特风格。\n创作一个全新的组件，如模拟云层或粒子系统。\n为组件编写教程和演示视频，建立中文社区。",
+                "requiresDatabase": false,
+                "vibeCodingReason": "极佳的新手项目，成果酷炫且高度可定制，完美融合创意与技术。",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 257,
+                "url": "https://github.com/darkmatter2048/WindowsCleaner",
+                "name": "darkmatter2048/WindowsCleaner",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 68,
+                "archived": false,
+                "duration": "3-4 周",
+                "language": "TypeScript",
+                "mainRisks": "许可证为 NOASSERTION，可能影响复用和招聘方评估；缺少部署和快速启动指南，面试展示效果打折扣。",
+                "sourceRef": "career:257",
+                "techStack": "TypeScript,React,Next.js",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                "proofPoints": "具备自动化测试、持续集成和发布流程；项目规模大，结构复杂；但缺少快速启动指南和部署方案，许可证未明确。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。",
+                "requiresSecrets": false,
+                "modificationPlan": "添加 Docker 容器化支持，补充快速启动文档和在线部署演示；明确许可证（如 MIT）；集成简单的后端数据存储（如 SQLite）展示全栈能力。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 260,
+                "url": "https://github.com/elastic/kibana",
+                "name": "elastic/kibana",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 82,
+                "archived": false,
+                "duration": "3-4个月",
+                "language": "TypeScript",
+                "mainRisks": "项目极大（LARGE），Issue多达14491，代码库高度复杂；缺少许可证可能限制作品集展示范围；无架构文档导致上手困难；技术栈涉及多框架，学习曲线陡峭。",
+                "sourceRef": "career:260",
+                "techStack": "TypeScript,React,Next.js,Playwright,Storybook",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。",
+                "proofPoints": "- 具备大规模TypeScript/React项目协作经验，处理庞大代码库与Issue管理\n- 精通Playwright端到端测试与Storybook组件驱动开发\n- 持续集成与自动发布流程的实际操作能力\n- 通过快速启动脚本降低参与者门槛",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献",
+                "requiresSecrets": true,
+                "modificationPlan": "由于项目无明确许可证，需先了解其贡献协议；重点添加部署指南（当前deployment=false），使用Docker简化本地环境；可修复若干文档缺陷或增加仪表板示例；为AI相关交互添加数据故事板功能，突出创意交互能力。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 75,
+                "url": "https://github.com/practical-tutorials/project-based-learning",
+                "name": "practical-tutorials/project-based-learning",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "practical-tutorials/project-based-learning",
+                "versionId": 294,
+                "documentId": 75,
+                "importable": false,
+                "catalogText": "# Project Based Learning\n\n[![Gitter](https://badges.gitter.im/practical-tutorials/community.svg)](https://gitter.im/practical-tutorials/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Link rot sweep](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml/badge.svg)](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml)\n\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are divided into different primary programming languages. Tutorials may involve multiple technologies and languages.\n\nTo get started, simply fork this repo. Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.\n\n## Table of Contents:\n\n- [C#](#c)\n- [C/C++](#cc)\n- [Clojure](#clojure)\n- [Dart](#dart)\n- [Elixir](#elixir)\n- [Erlang](#erlang)\n- [F#](#f)\n- [Go](#go)\n- [Haskell](#haskell)\n- [HTML/CSS](#html-and-css)\n- [Java](#java)\n- [JavaScript](#javascript)\n- [Kotlin](#kotlin)\n- [Lua](#lua)\n- [OCaml](#ocaml)\n- [PHP](#php)\n- [Python](#python)\n- [R](#r)\n- [Ruby](#ruby)\n- [Rust](#rust)\n- [Scala](#scala)\n- [Swift](#swift)\n- [Additional resources](#additional-resources)\n\n## C/C++:\n\n- [Build an Interpreter](http://www.craftinginterpreters.com/) (Chapter 14 on is written in C)\n- [Memory Allocators 101 - Write a simple memory allocator](https://arjunsreedharan.org/post/148675821737/memory-allocators-101-write-a-simple-memory)\n- [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)\n- [Write a FUSE Filesystem](https://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/)\n- [Build Your Own Text Editor](http://viewsourcecode.org/snaptoken/kilo/)\n- [Build Your Own Lisp](http://www.buildyourownlisp.com/)\n- [How to Program an NES Game in C](https://nesdoug.com/)\n- [Write an OS from scratch](https://github.com/tuhdo/os01)\n- [How to create an OS from scratch ](https://github.com/cfenollosa/os-tutorial)\n- [Building a CHIP-8 Emulator](https://austinmorlan.com/posts/chip8_emulator/)\n- [Beginning Game Programming with C++ and SDL](http://lazyfoo.net/tutorials/SDL/)\n- [Implementing a Key-Value Store](http://codecapsule.com/2012/11/07/ikvs-implementing-a-key-value-store-table-of-contents/)\n- Tiny 3D graphics projects\n  - [Tiny Renderer or how OpenGL works: software rendering in 500 lines of code](https://github.com/ssloy/tinyrenderer/wiki)\n  - [Understandable RayTracing in 256 lines of bare C++](https://github.com/ssloy/tinyraytracer/wiki)\n  - [KABOOM! in 180 lines of bare C++](https://github.com/ssloy/tinykaboom/wiki)\n  - [486 lines of C++: old-school FPS in a weekend](https://github.com/ssloy/tinyraycaster/wiki)\n- Writing a minimal x86-64 JIT compiler in C++\n  - [Part 1](https://solarianprogrammer.com/2018/01/10/writing-minimal-x86-64-jit-compiler-cpp/)\n  - [Part 2](https://solarianprogrammer.com/2018/01/12/writing-minimal-x86-64-jit-compiler-cpp-part-2/)\n- [Build a Live Code-reloader Library for C++](http://howistart.org/posts/cpp/1/index.html)\n- [Write a hash table in C](https://github.com/jamesroutley/write-a-hash-table)\n- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)\n- [Let's Write a Kernel](http://arjunsreedharan.org/post/82710718100/kernel-101-lets-write-a-kernel)\n- [Write a Bootloader in C](http://3zanders.co.uk/2017/10/13/writing-a-bootloader/)\n- [Linux Container in 500 Lines of Code](https://blog.lizzie.io/linux-containers-in-500-loc.html)\n- [Write Your Own Virtual Machine](https://justinmeiners.github.io/lc3-vm/)\n- [Learning KVM - Implement Your Own Linux Kernel](https://david942j.blogspot.com/2018/10/note-learning-kvm-implement-your-own.html)\n- [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)\n- Write a C compiler\n  - [Part 1: Integers, Lexing and Code Generation](https://norasandler.com/2017/11/29/Write-a-Compiler.html)\n  - [Part 2: Unary Operators](https://norasandler.com/2017/12/05/Write-a-Compiler-2.html)\n  - [Part 3: Binary Operators](https://norasandler.com/2017/12/15/Write-a-Compiler-3.html)\n  - [Part 4: Even More Binary Operators](https://norasandler.com/2017/12/28/Write-a-Compiler-4.html)\n  - [Part 5: Local Variables](https://norasandler.com/2018/01/08/Write-a-Compiler-5.html)\n  - [Part 6: Conditionals](https://norasandler.com/2018/02/25/Write-a-Compiler-6.html)\n  - [Part 7: Compound Statements](https://norasandler.com/2018/03/14/Write-a-Compiler-7.html)\n  - [Part 8: Loops](https://norasandler.com/2018/04/10/Write-a-Compiler-8.html)\n  - [Part 9: Functions](https://norasandler.com/2018/06/27/Write-a-Compiler-9.html)\n  - [Part 10: Global Variables](https://norasandler.com/2019/02/18/Write-a-Compiler-10.html)\n- [Implementing a Language with LLVM](https://llvm.org/docs/tutorial/#kaleidoscope-implementing-a-language-with-llvm)\n- [Meta Crush Saga: a C++17 compile-time game](https://jguegant.github.io//jguegant.github.io/blogs/tech/meta-crush-saga.html)\n- [High-Performance Matrix Multiplication](https://gist.github.com/nadavrot/5b35d44e8ba3dd718e595e40184d03f0)\n- Space Invaders from Scratch\n  - [Part 1](http://nicktasios.nl/posts/space-invaders-from-scratch-part-1.html)\n  - [Part 2](http://nicktasios.nl/posts/space-invaders-from-scratch-part-2.html)\n  - [Part 3](http://nicktasios.nl/posts/space-invaders-from-scratch-part-3.html)\n  - [Part 4](http://nicktasios.nl/posts/space-invaders-from-scratch-part-4.html)\n  - [Part 5](http://nicktasios.nl/posts/space-invaders-from-scratch-part-5.html)\n- [Tetris Tutorial in C++ Platform Independent](http://javilop.com/gamedev/tetris-tutorial-in-c-platform-independent-focused-in-game-logic-for-beginners/)\n- Writing a Linux Debugger\n  - [Part 1: Setup](https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/)\n  - [Part 2: Breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-breakpoints/)\n  - [Part 3: Registers and memory](https://blog.tartanllama.xyz/writing-a-linux-debugger-registers/)\n  - [Part 4: Elves and dwarves](https://blog.tartanllama.xyz/writing-a-linux-debugger-elf-dwarf/)\n  - [Part 5: Source and signals](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-signal/)\n  - [Part 6: Source-level stepping](https://blog.tartanllama.xyz/writing-a-linux-debugger-dwarf-step/)\n  - [Part 7: Source-level breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-break/)\n  - [Part 8: Stack unwinding](https://blog.tartanllama.xyz/writing-a-linux-debugger-unwinding/)\n  - [Part 9: Handling variables](https://blog.tartanllama.xyz/writing-a-linux-debugger-variables/)\n  - [Part 10: Advanced topics](https://blog.tartanllama.xyz/writing-a-linux-debugger-advanced-topics/)\n- Let's write a compiler\n  - [Part 1: Introduction, selecting a language, and doing some planning](https://briancallahan.net/blog/20210814.html)\n  - [Part 2: A lexer](https://briancallahan.net/blog/20210815.html)\n  - [Part 3: A parser](https://briancallahan.net/blog/20210816.html)\n  - [Part 4: Testing](https://briancallahan.net/blog/20210817.html)\n  - [Part 5: A code generator](https://briancallahan.net/blog/20210818.html)\n  - [Part 6: Input and output](https://briancallahan.net/blog/20210819.html)\n  - [Part 7: Arrays](https://briancallahan.net/blog/20210822.html)\n  - [Part 8: Strings, forward references, and conclusion](https://briancallahan.net/blog/20210826.html)\n\n### Network programming\n\n- Let's Code a TCP/IP Stack\n\n  - [Part 1: Ethernet & ARP](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)\n  - [Part 2: IPv4 & ICMPv4](http://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/)\n  - [Part 3: TCP Basics & Handshake](http://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/)\n  - [Part 4: TCP Data Flow & Socket API](http://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/)\n  - [Part 5: TCP Retransmission](http://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/)\n\n- Programming concurrent servers\n\n  - [Part 1 - Introduction](https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/)\n  - [Part 2 - Threads](https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/)\n  - [Part 3 - Event-driven](https://eli.thegreenplace.net/2017/concurrent-servers-part-3-event-driven/)\n  - [Part 4 - libuv](https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/)\n  - [Part 5 - Redis case study](https://eli.thegreenplace.net/2017/concurrent-servers-part-5-redis-case-study/)\n  - [Part 6 - Callbacks, Promises and async/await](https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/)\n\n- MQTT Broker from scratch\n  - [Part 1 - The protocol](https://codepr.github.io/posts/sol-mqtt-broker)\n  - [Part 2 - Networking](https://codepr.github.io/posts/sol-mqtt-broker-p2)\n  - [Part 3 - Server](https://codepr.github.io/posts/sol-mqtt-broker-p3)\n  - [Part 4 - Data structures](https://codepr.github.io/posts/sol-mqtt-broker-p4)\n  - [Part 5 - Topic abstraction](https://codepr.github.io/posts/sol-mqtt-broker-p5)\n  - [Part 6 - Handlers](https://codepr.github.io/posts/sol-mqtt-broker-p6)\n  - [Bonus - Multithreading](https://codepr.github.io/posts/sol-mqtt-broker-bonus)\n- [Networking from Scratch](https://github.com/TanayK07/networking-from-scratch)\n\n### OpenGL:\n\n- Creating 2D Breakout game clone in C++ with OpenGL\n  - [Breakout](https://learnopengl.com/In-Practice/2D-Game/Breakout)\n  - [Setting up](https://learnopengl.com/In-Practice/2D-Game/Setting-up)\n  - [Rendering Sprites](https://learnopengl.com/In-Practice/2D-Game/Rendering-Sprites)\n  - [Levels](https://learnopengl.com/In-Practice/2D-Game/Levels)\n  - Collisions\n    - [Ball](https://learnopengl.com/In-Practice/2D-Game/Collisions/Ball)\n    - [Collision detection](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection)\n    - [Collision resolution](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution)\n  - [Particles](https://learnopengl.com/In-Practice/2D-Game/Particles)\n  - [Postprocessing](https://learnopengl.com/In-Practice/2D-Game/Postprocessing)\n  - [Powerups](https://learnopengl.com/In-Practice/2D-Game/Powerups)\n  - [Audio](https://learnopengl.com/In-Practice/2D-Game/Audio)\n  - [Render text](https://learnopengl.com/In-Practice/2D-Game/Render-text)\n  - [Final thoughts](https://learnopengl.com/In-Practice/2D-Game/Final-thoughts)\n- [Handmade Hero](https://handmadehero.org)\n- [How to Make Minecraft in C++/OpenGL](https://www.youtube.com/playlist?list=PLMZ_9w2XRxiZq1vfw1lrpCMRDufe2MKV_) (video)\n\n## C#:\n\n- [Learn C# By Building a Simple RPG Game](http://scottlilly.com/learn-c-by-building-a-simple-rpg-index/)\n- [Create a Rogue-like game in C#](https://roguesharp.wordpress.com/)\n- [Create a Blank App with C# and Xamarin (work in progress)](https://www.intertech.com/Blog/xamarin-tutorial-part-1-create-a-blank-app/)\n- [Build iOS Photo Library App with Xamarin and Visual Studio](https://www.raywenderlich.com/134049/building-ios-apps-with-xamarin-and-visual-studio)\n- [Building the CoreWiki](https://www.youtube.com/playlist?list=PLVMqA0_8O85yC78I4Xj7z48ES48IQBa7p) This is a Wiki-style content management system that has been completely written in C# with ASP.NET Core and Razor Pages. You can find the source code [here](https://github.com/csharpfritz/CoreWiki).\n\n## Clojure:\n\n- [Build a Twitter Bot with Clojure](http://howistart.org/posts/clojure/1/index.html)\n- [Building a Spell-Checker](https://bernhardwenzel.com/articles/clojure-spellchecker/)\n- [Building a JIRA integration with Clojure & Atlassian Connect](https://hackernoon.com/building-a-jira-integration-with-clojure-atlassian-connect-506ebd112807)\n- [Prototyping with Clojure](https://github.com/aliaksandr-s/prototyping-with-clojure)\n- [Tetris in ClojureScript](https://shaunlebron.github.io/t3tr0s-slides)\n\n## Dart:\n\n### Flutter:\n\n- [Amazon Clone with Admin Panel](https://youtu.be/O3nmP-lZAdg)\n- [Food Delivery App](https://youtu.be/7dAt-JMSCVQ)\n- [Google Docs Clone](https://youtu.be/0_GJ1w_iG44)\n- [Instagram",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "项目式学习",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 203,
+                "url": "https://github.com/777genius/agent-teams-ai",
+                "name": "777genius/agent-teams-ai",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 86,
+                "archived": false,
+                "duration": "4-8周",
+                "language": "TypeScript",
+                "mainRisks": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。",
+                "sourceRef": "career:203",
+                "techStack": "TypeScript,React,Next.js",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "Agent Teams AI 是一个多智能体协作平台，允许用户像管理团队一样指挥多个 AI 智能体自主执行任务、相互通信和审查，支持 200+ 模型和 75+ LLM 提供商。",
+                "proofPoints": "能够设计并实现复杂的多智能体对话系统，集成多种大模型，管理任务看板与审查流程。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "多智能体通信协议、任务分配策略、模型路由、记忆与上下文管理、前端交互设计。",
+                "requiresSecrets": true,
+                "modificationPlan": "为平台添加自定义 agent 类型、特定的垂直领域工具插件，或优化团队协作的算法，实现更智能的负载均衡。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 517,
+                "url": "https://github.com/konvajs/konva",
+                "name": "konvajs/konva",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "konvajs/konva",
+                "versionId": 736,
+                "documentId": 517,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <img src=\"https://konvajs.org/img/icon.png\" alt=\"Konva logo\" height=\"60\" />\n</p>\n\n<h1 align=\"center\">Konva</h1>\n\n<p align=\"center\"><strong>Build interactive graphics, editors, and diagrams for the web.</strong></p>\n\n[![npm downloads](https://img.shields.io/npm/dw/konva.svg)](https://www.npmjs.com/package/konva)\n[![npm version](https://badge.fury.io/js/konva.svg)](http://badge.fury.io/js/konva)\n[![Financial Contributors on Open Collective](https://opencollective.com/konva/all/badge.svg?label=financial+contributors)](https://opencollective.com/konva)\n[![Build Status](https://github.com/konvajs/konva/actions/workflows/test-browser.yml/badge.svg)](https://github.com/konvajs/konva/actions/workflows/test-browser.yml)\n[![Build Status](https://github.com/konvajs/konva/actions/workflows/test-node.yml/badge.svg)](https://github.com/konvajs/konva/actions/workflows/test-node.yml)\n[![CDNJS version](https://img.shields.io/cdnjs/v/konva.svg)](https://cdnjs.com/libraries/konva)\n\nKonva is an HTML5 Canvas JavaScript framework that enables high performance animations, transitions, node nesting, layering, filtering, caching, event handling for desktop and mobile applications, and much more.\n\nYou can draw things onto the stage, add event listeners to them, move them, scale them, and rotate them independently from other shapes to support high performance animations, even if your application uses thousands of shapes. Served hot with a side of awesomeness.\n\nThis repository began as a GitHub fork of [ericdrowell/KineticJS](https://github.com/ericdrowell/KineticJS).\n\n- **Visit:** The [Home Page](https://konvajs.org/) and follow on [Twitter](https://twitter.com/lavrton)\n- **Discover:** [Tutorials](https://konvajs.org/docs/index.html), [API Documentation](https://konvajs.org/api/Konva.html)\n- **Try it:** [Canvas Editor](https://konvajs.org/docs/sandbox/Canvas_Editor.html), [Free Drawing](https://konvajs.org/docs/sandbox/Free_Drawing.html), [Image Crop](https://konvajs.org/docs/sandbox/Canvas_Crop_Image.html), [Window Frame Designer](https://konvajs.org/docs/sandbox/Window_Frame_Designer.html), and [more demos](https://konvajs.org/docs/sandbox.html)\n- **Used by:** [Polotno](https://polotno.com/?utm_source=konvajs) (design editor SDK) and many others — see the full showcase on the [home page](https://konvajs.org/)\n- **Help:** [StackOverflow](https://stackoverflow.com/questions/tagged/konvajs), [Discord Chat](https://discord.gg/8FqZwVT)\n\n# Quick Look\n\n```html\n<script src=\"https://unpkg.com/konva@10.0.0-1/konva.min.js\"></script>\n<div id=\"container\"></div>\n<script>\n  var stage = new Konva.Stage({\n    container: 'container',\n    width: window.innerWidth,\n    height: window.innerHeight,\n  });\n\n  // add canvas element\n  var layer = new Konva.Layer();\n  stage.add(layer);\n\n  // create shape\n  var box = new Konva.Rect({\n    x: 50,\n    y: 50,\n    width: 100,\n    height: 50,\n    fill: '#00D2FF',\n    stroke: 'black',\n    strokeWidth: 4,\n    draggable: true,\n  });\n  layer.add(box);\n\n  // add cursor styling\n  box.on('mouseover', function () {\n    document.body.style.cursor = 'pointer';\n  });\n  box.on('mouseout', function () {\n    document.body.style.cursor = 'default';\n  });\n</script>\n```\n\n# Browsers support\n\nKonva works in all modern mobile and desktop browsers. A browser need to be capable to run javascript code from ES2015 spec. For older browsers you may need polyfills for missing functions.\n\nAt the current moment `Konva` doesn't work in IE11 directly. To make it work you just need to provide some polyfills such as `Array.prototype.find`, `String.prototype.trimLeft`, `String.prototype.trimRight`, `Array.from`.\n\n# Debugging\n\nThe Chrome inspector simply shows the canvas element. To see the Konva objects and their details, install the konva-dev extension at https://github.com/konvajs/konva-devtool.\n\n# Loading and installing Konva\n\nKonva supports UMD loading. So you can use all possible variants to load the framework into your project:\n\n### Load Konva via classical `<script>` tag from CDN:\n\n```html\n<script src=\"https://unpkg.com/konva@10.0.0-1/konva.min.js\"></script>\n```\n\n### Install with npm:\n\n```bash\nnpm install konva --save\n```\n\n```javascript\n// The modern way (e.g. an ES6-style import for webpack, parcel)\nimport Konva from 'konva';\n```\n\n#### Typescript usage\n\nAdd DOM definitions into your `tsconfig.json`:\n\n```\n{\n  \"compilerOptions\": {\n    \"lib\": [\n        \"es6\",\n        \"dom\"\n    ]\n  }\n}\n```\n\n### 3 Minimal bundle\n\n```javascript\nimport Konva from 'konva/lib/Core';\n// Now you have a Konva object with Stage, Layer, FastLayer, Group, Shape and some additional utils function.\n// Also core currently already have support for drag&drop and animations.\n// BUT there are no shapes (rect, circle, etc), no filters.\n\n// but you can simply add anything you need:\nimport { Rect } from 'konva/lib/shapes/Rect';\n// importing a shape will automatically inject it into Konva object\n\nvar rect1 = new Rect();\n// or:\nvar shape = new Konva.Rect();\n\n// for filters you can use this:\nimport { Blur } from 'konva/lib/filters/Blur';\n```\n\n### 4 NodeJS env\n\nIn order to run `konva` in nodejs environment you also need to install `canvas` or `skia-canvas` package manually for rendering backend.\n\n```bash\n# node-canvas backend\nnpm install konva canvas\n# skia-canvas backend\nnpm install konva skia-canvas\n```\n\nThen you can use the same Konva API and all Konva demos will work just fine. You just don't need to use `container` attribute in your stage.\n\n```js\nimport Konva from 'konva';\nimport 'konva/canvas-backend'; // or import 'konva/skia-backend';\n\nconst stage = new Konva.Stage({\n  width: 500,\n  height: 500,\n});\n// then all regular Konva code will work\n```\n\n# Backers\n\n![https://simpleshow.com](https://avatars.githubusercontent.com/u/99720652?s=200&v=4 'https://simpleshow.com')\n![https://www.notably.ai/](https://avatars.githubusercontent.com/u/80046841?s=200&v=4 'https://www.notably.ai/')\n\n- [myposter GmbH](https://www.myposter.de/)\n- [queue.gg](https://queue.gg/)\n\n# Change log\n\nSee [CHANGELOG.md](https://github.com/konvajs/konva/blob/master/CHANGELOG.md).\n\n## Building the Konva Framework\n\nTo make a full build run `npm run build`. The command will compile all typescript files, combine then into one bundle and run minifier.\n\n## Testing\n\nKonva uses Mocha for testing.\n\n- If you need run test only one time run `npm run test`.\n- While developing it is easy to use `npm start`. Just run it and go to [http://localhost:1234/unit-tests.html](http://localhost:1234/unit-tests.html). The watcher will rebuild the bundle on any change.\n\nKonva is covered with hundreds of tests and well over a thousand assertions.\nKonva uses TDD (test driven development) which means that every new feature or bug fix is accompanied with at least one new test.\n\n## Generate documentation\n\nRun `npx gulp api` which will build the documentation files and place them in the `api` folder.\n\n# Pull Requests\n\nI'd be happy to review any pull requests that may better the Konva project,\nin particular if you have a bug fix, enhancement, or a new shape (see `src/shapes` for examples). Before doing so, please first make sure that all of the tests pass (`npm run test`).\n\n## Contributors\n\n### Financial Contributors\n\nBecome a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/konva/contribute)]\n\n#### Individuals\n\n<a href=\"https://opencollective.com/konva\"><img src=\"https://opencollective.com/konva/individuals.svg?width=890\"></a>\n\n#### Organizations\n\nSupport this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/konva/contribute)]\n\n<a href=\"https://opencollective.com/konva/organization/0/website\"><img src=\"https://opencollective.com/konva/organization/0/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/1/website\"><img src=\"https://opencollective.com/konva/organization/1/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/2/website\"><img src=\"https://opencollective.com/konva/organization/2/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/3/website\"><img src=\"https://opencollective.com/konva/organization/3/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/4/website\"><img src=\"https://opencollective.com/konva/organization/4/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/5/website\"><img src=\"https://opencollective.com/konva/organization/5/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/6/website\"><img src=\"https://opencollective.com/konva/organization/6/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/7/website\"><img src=\"https://opencollective.com/konva/organization/7/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/8/website\"><img src=\"https://opencollective.com/konva/organization/8/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/9/website\"><img src=\"https://opencollective.com/konva/organization/9/avatar.svg\"></a>\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Quick Look",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "Next.js Next.js web framework Next.js React 服务端渲染 Next.js 全栈开发",
+              "topic": [
+                "Next.js"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "Next.js",
+              "candidates": [
+                {
+                  "key": "EXTERNAL_PROJECT:76",
+                  "purpose": "React is a JavaScript library for building user interfaces.\n* **Declarative:** React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.\n* **Component-Based:** Build encapsulated components that manage"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:526",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # @borkiss/tre 文字の絵 \n**any graphic, as living ASCII on a CRT.**\nAn engine that renders **any graphic as living ASCII on a CRT** — a live\nthree.js scene, an image, a video, a webcam, a 2D canvas — and can dance to\nyour music. The framework-free core (`@borkiss/tre/core`) needs only\nthree.js; on top of it sit React/R3F bindings and a scroll-driven storytelling\nlayer (GSAP timeline + Lenis + WebAudio r"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:55",
+                  "purpose": "Glyph 是一个私密的桌面工作区，用于笔记、文档和创意记录，内置 Markdown 编辑和 AI 工具。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:306",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Phaser - HTML5 游戏框架\nPhaser 是一个快速、免费且有趣的开源 HTML5 游戏框架，支持在桌面和移动网页浏览器上使用 WebGL 和 Canvas 渲染，并已持续开发超过 13 年。\n游戏可以构建为网页游戏，也可以作为 YouTube Playables、Discord Activities、Reddit 游戏、Twitch Overlays，或使用第三方工具编译为 iOS、Android、Steam 和原生应用。您可以使用 JavaScript 或 TypeScript 进行开发。Phaser 支持超过 40 种不同的前端框架，包括 React 和 Vue。\nPhaser 由 **Phaser Studio Inc** 与我们优秀的开源社区共同进行商业开发和维护。得益于快速的支持和开发者友好的 API，Phaser 目前是 GitHub 上最受关注的游戏框架之一。\n"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:119",
+                  "purpose": "一个基于 WebGL 的贴纸生成器，支持文字或图片输入，可模拟撕开贴纸看到背面的物理效果，并提供组件化嵌入方案。 制作可交互撕拉效果贴纸的 Web 应用，可嵌入个人网站"
+                },
+                {
+                  "key": "CAREER_PROJECT:208",
+                  "purpose": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:77",
+                  "purpose": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。 快速为网页添加玻璃破碎、液体等创意Canvas效果"
+                },
+                {
+                  "key": "CAREER_PROJECT:257",
+                  "purpose": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。"
+                },
+                {
+                  "key": "CAREER_PROJECT:260",
+                  "purpose": "Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:75",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Project Based Learning\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are divided into different primary programming languages. Tutorials may involve multiple technologies and languages.\nTo get started, simply fork this repo. Please refer to CONTRIBUTING.md for contribution guidelines.\n## Table of Contents:\n- C#"
+                },
+                {
+                  "key": "CAREER_PROJECT:203",
+                  "purpose": "Agent Teams AI 是一个多智能体协作平台，允许用户像管理团队一样指挥多个 AI 智能体自主执行任务、相互通信和审查，支持 200+ 模型和 75+ LLM 提供商。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:517",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n Konva \n Build interactive graphics, editors, and diagrams for the web. \nKonva is an HTML5 Canvas JavaScript framework that enables high performance animations, transitions, node nesting, layering, filtering, caching, event handling for desktop and mobile applications, and much more.\nYou can draw things onto the stage, add event listeners to them, move them, scale them, and rotate them independentl"
+                }
+              ]
+            },
+            "verdict": {
+              "matches": [
+                {
+                  "key": "CAREER_PROJECT:208",
+                  "quote": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "CAREER_PROJECT:257",
+                  "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "CAREER_PROJECT:260",
+                  "quote": "Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建",
+                  "relation": "DIRECT"
+                }
+              ]
+            },
+            "accepted": {
+              "topic": "Next.js",
+              "proofs": {
+                "CAREER_PROJECT:208": {
+                  "rank": 1,
+                  "quote": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验",
+                  "relation": "DIRECT",
+                  "fingerprint": "14ea477a3f1188164f2d34d1d9a6790af3fd9c18adfdd494d8fbf16c19edb1c8"
+                },
+                "CAREER_PROJECT:257": {
+                  "rank": 2,
+                  "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。",
+                  "relation": "DIRECT",
+                  "fingerprint": "8531579073d40b281e7e4005ecde546a5f6518cfbfe13fbb8252b21f01bc5243"
+                },
+                "CAREER_PROJECT:260": {
+                  "rank": 3,
+                  "quote": "Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建",
+                  "relation": "DIRECT",
+                  "fingerprint": "e37fbb157882abcb42cbe98929d0ada028158b3eea23efb6c0259015cd740451"
+                }
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01951844262295082,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10225,
+                  "content": "## 职业价值\n完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                  "endOffset": 299,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 4,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 职业价值",
+                  "startOffset": 193,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.018850806451612905,
+                  "title": "ValueCell-ai/ClawX",
+                  "chunkId": 12477,
+                  "content": "## 可证明能力\n- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+                  "endOffset": 405,
+                  "sourceRef": "career:208",
+                  "versionId": 330,
+                  "chunkIndex": 5,
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ValueCell-ai/ClawX > 可证明能力",
+                  "startOffset": 286,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.018414918414918414,
+                  "title": "elastic/kibana",
+                  "chunkId": 10282,
+                  "content": "## 面试讨论点\n- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+                  "endOffset": 599,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 6,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 面试讨论点",
+                  "startOffset": 453,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01940772078265468,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10224,
+                  "content": "## 项目摘要\n一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+                  "endOffset": 193,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 3,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 项目摘要",
+                  "startOffset": 107,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01904761904761905,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10227,
+                  "content": "## 面试讨论点\n可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+                  "endOffset": 452,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 6,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 面试讨论点",
+                  "startOffset": 361,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.018136589778380823,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10231,
+                  "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                  "endOffset": 667,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 10,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 技术栈",
+                  "startOffset": 634,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01678743961352657,
+                  "title": "ValueCell-ai/ClawX",
+                  "chunkId": 12475,
+                  "content": "## 项目摘要\nClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+                  "endOffset": 195,
+                  "sourceRef": "career:208",
+                  "versionId": 330,
+                  "chunkIndex": 3,
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ValueCell-ai/ClawX > 项目摘要",
+                  "startOffset": 85,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016639806607574536,
+                  "title": "ValueCell-ai/ClawX",
+                  "chunkId": 12482,
+                  "content": "## 技术栈\nTypeScript,React,Next.js,Playwright\n\n",
+                  "endOffset": 800,
+                  "sourceRef": "career:208",
+                  "versionId": 330,
+                  "chunkIndex": 10,
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ValueCell-ai/ClawX > 技术栈",
+                  "startOffset": 756,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=8,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016234817813765182,
+                  "title": "elastic/kibana",
+                  "chunkId": 10286,
+                  "content": "## 技术栈\nTypeScript,React,Next.js,Playwright,Storybook\n\n",
+                  "endOffset": 897,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 10,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 技术栈",
+                  "startOffset": 843,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "elastic/kibana",
+                  "chunkId": 10280,
+                  "content": "## 职业价值\n面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+                  "endOffset": 322,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 4,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 职业价值",
+                  "startOffset": 229,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10226,
+                  "content": "## 可证明能力\n具备自动化测试、持续集成和发布流程；项目规模大，结构复杂；但缺少快速启动指南和部署方案，许可证未明确。\n\n",
+                  "endOffset": 361,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 5,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 可证明能力",
+                  "startOffset": 299,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "chunkId": 10222,
+                  "content": "## 知识分类\n职业成长项目\n\n",
+                  "endOffset": 49,
+                  "sourceRef": "career:257",
+                  "versionId": 240,
+                  "chunkIndex": 1,
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "darkmatter2048/WindowsCleaner > 知识分类",
+                  "startOffset": 33,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "elastic/kibana",
+                  "chunkId": 10277,
+                  "content": "## 知识分类\n职业成长项目\n\n",
+                  "endOffset": 34,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 1,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 知识分类",
+                  "startOffset": 18,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "ValueCell-ai/ClawX",
+                  "chunkId": 12473,
+                  "content": "## 知识分类\n职业成长项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "career:208",
+                  "versionId": 330,
+                  "chunkIndex": 1,
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ValueCell-ai/ClawX > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "elastic/kibana",
+                  "chunkId": 10284,
+                  "content": "## 主要风险\n项目极大（LARGE），Issue多达14491，代码库高度复杂；缺少许可证可能限制作品集展示范围；无架构文档导致上手困难；技术栈涉及多框架，学习曲线陡峭。\n\n",
+                  "endOffset": 809,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 8,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 主要风险",
+                  "startOffset": 721,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "elastic/kibana",
+                  "chunkId": 10283,
+                  "content": "## 差异化改造方案\n由于项目无明确许可证，需先了解其贡献协议；重点添加部署指南（当前deployment=false），使用Docker简化本地环境；可修复若干文档缺陷或增加仪表板示例；为AI相关交互添加数据故事板功能，突出创意交互能力。\n\n",
+                  "endOffset": 721,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 7,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 差异化改造方案",
+                  "startOffset": 599,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "ValueCell-ai/ClawX",
+                  "chunkId": 12480,
+                  "content": "## 主要风险\n依赖 OpenClaw 后端，版本升级可能导致兼容问题；67 个 open issues 中部分可能涉及底层交互复杂；无数据库和 Docker 支持，扩展性受限。\n\n",
+                  "endOffset": 725,
+                  "sourceRef": "career:208",
+                  "versionId": 330,
+                  "chunkIndex": 8,
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ValueCell-ai/ClawX > 主要风险",
+                  "startOffset": 634,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "elastic/kibana",
+                  "chunkId": 10281,
+                  "content": "## 可证明能力\n- 具备大规模TypeScript/React项目协作经验，处理庞大代码库与Issue管理\n- 精通Playwright端到端测试与Storybook组件驱动开发\n- 持续集成与自动发布流程的实际操作能力\n- 通过快速启动脚本降低参与者门槛\n\n",
+                  "endOffset": 453,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 5,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 可证明能力",
+                  "startOffset": 322,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "elastic/kibana",
+                  "chunkId": 10279,
+                  "content": "## 项目摘要\nKibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。\n\n",
+                  "endOffset": 229,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 3,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "elastic/kibana > 项目摘要",
+                  "startOffset": 77,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "elastic/kibana",
+                  "chunkId": 10297,
+                  "content": "### Building and Running Kibana, and/or Contributing Code\n\nYou might want to build Kibana locally to contribute some code, test out the latest features, or try\nout an open PR:\n\n- [CONTRIBUTING.md](CONTRIBUTING.md) will help you get Kibana up and running.\n- If you would like to contribute code, please follow our [STYLEGUIDE.mdx](STYLEGUIDE.mdx).\n- For all other questions, check out the [FAQ.md](FAQ.md).\n\n",
+                  "endOffset": 2752,
+                  "sourceRef": "career:260",
+                  "versionId": 242,
+                  "chunkIndex": 21,
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Kibana > Getting Started > Building and Running Kibana, and/or Contributing Code",
+                  "startOffset": 2345,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 84,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "darkmatter2048/WindowsCleaner",
+                  "evidence": [
+                    {
+                      "score": 0.01951844262295082,
+                      "title": "darkmatter2048/WindowsCleaner",
+                      "chunkId": 10225,
+                      "content": "## 职业价值\n完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                      "endOffset": 299,
+                      "sourceRef": "career:257",
+                      "versionId": 240,
+                      "chunkIndex": 4,
+                      "documentId": 21,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "darkmatter2048/WindowsCleaner > 职业价值",
+                      "startOffset": 193,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01940772078265468,
+                      "title": "darkmatter2048/WindowsCleaner",
+                      "chunkId": 10224,
+                      "content": "## 项目摘要\n一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+                      "endOffset": 193,
+                      "sourceRef": "career:257",
+                      "versionId": 240,
+                      "chunkIndex": 3,
+                      "documentId": 21,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "darkmatter2048/WindowsCleaner > 项目摘要",
+                      "startOffset": 107,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01904761904761905,
+                      "title": "darkmatter2048/WindowsCleaner",
+                      "chunkId": 10227,
+                      "content": "## 面试讨论点\n可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+                      "endOffset": 452,
+                      "sourceRef": "career:257",
+                      "versionId": 240,
+                      "chunkIndex": 6,
+                      "documentId": 21,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "darkmatter2048/WindowsCleaner > 面试讨论点",
+                      "startOffset": 361,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:257",
+                  "bestScore": 0.01951844262295082,
+                  "sourceRef": "career:257",
+                  "documentId": 21,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "ValueCell-ai/ClawX",
+                  "evidence": [
+                    {
+                      "score": 0.018850806451612905,
+                      "title": "ValueCell-ai/ClawX",
+                      "chunkId": 12477,
+                      "content": "## 可证明能力\n- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+                      "endOffset": 405,
+                      "sourceRef": "career:208",
+                      "versionId": 330,
+                      "chunkIndex": 5,
+                      "documentId": 111,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "ValueCell-ai/ClawX > 可证明能力",
+                      "startOffset": 286,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01678743961352657,
+                      "title": "ValueCell-ai/ClawX",
+                      "chunkId": 12475,
+                      "content": "## 项目摘要\nClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+                      "endOffset": 195,
+                      "sourceRef": "career:208",
+                      "versionId": 330,
+                      "chunkIndex": 3,
+                      "documentId": 111,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "ValueCell-ai/ClawX > 项目摘要",
+                      "startOffset": 85,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.016639806607574536,
+                      "title": "ValueCell-ai/ClawX",
+                      "chunkId": 12482,
+                      "content": "## 技术栈\nTypeScript,React,Next.js,Playwright\n\n",
+                      "endOffset": 800,
+                      "sourceRef": "career:208",
+                      "versionId": 330,
+                      "chunkIndex": 10,
+                      "documentId": 111,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "ValueCell-ai/ClawX > 技术栈",
+                      "startOffset": 756,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=8,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:208",
+                  "bestScore": 0.018850806451612905,
+                  "sourceRef": "career:208",
+                  "documentId": 111,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "elastic/kibana",
+                  "evidence": [
+                    {
+                      "score": 0.018414918414918414,
+                      "title": "elastic/kibana",
+                      "chunkId": 10282,
+                      "content": "## 面试讨论点\n- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+                      "endOffset": 599,
+                      "sourceRef": "career:260",
+                      "versionId": 242,
+                      "chunkIndex": 6,
+                      "documentId": 23,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "elastic/kibana > 面试讨论点",
+                      "startOffset": 453,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.016234817813765182,
+                      "title": "elastic/kibana",
+                      "chunkId": 10286,
+                      "content": "## 技术栈\nTypeScript,React,Next.js,Playwright,Storybook\n\n",
+                      "endOffset": 897,
+                      "sourceRef": "career:260",
+                      "versionId": 242,
+                      "chunkIndex": 10,
+                      "documentId": 23,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "elastic/kibana > 技术栈",
+                      "startOffset": 843,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "elastic/kibana",
+                      "chunkId": 10280,
+                      "content": "## 职业价值\n面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+                      "endOffset": 322,
+                      "sourceRef": "career:260",
+                      "versionId": 242,
+                      "chunkIndex": 4,
+                      "documentId": 23,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "elastic/kibana > 职业价值",
+                      "startOffset": 229,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:260",
+                  "bestScore": 0.018414918414918414,
+                  "sourceRef": "career:260",
+                  "documentId": 23,
+                  "sourceType": "CAREER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "query": "Next.js 项目功能 用途 实践示例 安装部署 环境依赖 限制 请推荐真实项目，想做的方向或用途是：Next.js。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+              "projects": [
+                {
+                  "name": "ValueCell-ai/ClawX",
+                  "type": "CAREER_PROJECT",
+                  "sourceRef": "career:208"
+                },
+                {
+                  "name": "darkmatter2048/WindowsCleaner",
+                  "type": "CAREER_PROJECT",
+                  "sourceRef": "career:257"
+                },
+                {
+                  "name": "elastic/kibana",
+                  "type": "CAREER_PROJECT",
+                  "sourceRef": "career:260"
+                }
+              ],
+              "sourceTypes": [
+                "GITHUB",
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "buildPrompt",
+          "detail": {
+            "evidence": [
+              {
+                "spans": [
+                  {
+                    "text": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 106,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "darkmatter2048/WindowsCleaner",
+                "chunkId": 10225,
+                "endOffset": 299,
+                "sourceRef": "career:257",
+                "versionId": 240,
+                "documentId": 21,
+                "evidenceId": "E1",
+                "sectionPath": "darkmatter2048/WindowsCleaner > 职业价值",
+                "startOffset": 201,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 119,
+                    "startInChunk": 9
+                  }
+                ],
+                "title": "ValueCell-ai/ClawX",
+                "chunkId": 12477,
+                "endOffset": 405,
+                "sourceRef": "career:208",
+                "versionId": 330,
+                "documentId": 111,
+                "evidenceId": "E2",
+                "sectionPath": "ValueCell-ai/ClawX > 可证明能力",
+                "startOffset": 295,
+                "contentStartInChunk": 9
+              },
+              {
+                "spans": [
+                  {
+                    "text": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 146,
+                    "startInChunk": 9
+                  }
+                ],
+                "title": "elastic/kibana",
+                "chunkId": 10282,
+                "endOffset": 599,
+                "sourceRef": "career:260",
+                "versionId": 242,
+                "documentId": 23,
+                "evidenceId": "E3",
+                "sectionPath": "elastic/kibana > 面试讨论点",
+                "startOffset": 462,
+                "contentStartInChunk": 9
+              },
+              {
+                "spans": [
+                  {
+                    "text": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 86,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "darkmatter2048/WindowsCleaner",
+                "chunkId": 10224,
+                "endOffset": 193,
+                "sourceRef": "career:257",
+                "versionId": 240,
+                "documentId": 21,
+                "evidenceId": "E4",
+                "sectionPath": "darkmatter2048/WindowsCleaner > 项目摘要",
+                "startOffset": 115,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+                    "spanId": "E5.S1",
+                    "endInChunk": 110,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "ValueCell-ai/ClawX",
+                "chunkId": 12475,
+                "endOffset": 195,
+                "sourceRef": "career:208",
+                "versionId": 330,
+                "documentId": 111,
+                "evidenceId": "E5",
+                "sectionPath": "ValueCell-ai/ClawX > 项目摘要",
+                "startOffset": 93,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "TypeScript,React,Next.js,Playwright,Storybook\n\n",
+                    "spanId": "E6.S1",
+                    "endInChunk": 54,
+                    "startInChunk": 7
+                  }
+                ],
+                "title": "elastic/kibana",
+                "chunkId": 10286,
+                "endOffset": 897,
+                "sourceRef": "career:260",
+                "versionId": 242,
+                "documentId": 23,
+                "evidenceId": "E6",
+                "sectionPath": "elastic/kibana > 技术栈",
+                "startOffset": 850,
+                "contentStartInChunk": 7
+              },
+              {
+                "spans": [
+                  {
+                    "text": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+                    "spanId": "E7.S1",
+                    "endInChunk": 91,
+                    "startInChunk": 9
+                  }
+                ],
+                "title": "darkmatter2048/WindowsCleaner",
+                "chunkId": 10227,
+                "endOffset": 452,
+                "sourceRef": "career:257",
+                "versionId": 240,
+                "documentId": 21,
+                "evidenceId": "E7",
+                "sectionPath": "darkmatter2048/WindowsCleaner > 面试讨论点",
+                "startOffset": 370,
+                "contentStartInChunk": 9
+              },
+              {
+                "spans": [
+                  {
+                    "text": "TypeScript,React,Next.js,Playwright\n\n",
+                    "spanId": "E8.S1",
+                    "endInChunk": 44,
+                    "startInChunk": 7
+                  }
+                ],
+                "title": "ValueCell-ai/ClawX",
+                "chunkId": 12482,
+                "endOffset": 800,
+                "sourceRef": "career:208",
+                "versionId": 330,
+                "documentId": 111,
+                "evidenceId": "E8",
+                "sectionPath": "ValueCell-ai/ClawX > 技术栈",
+                "startOffset": 763,
+                "contentStartInChunk": 7
+              },
+              {
+                "spans": [
+                  {
+                    "text": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+                    "spanId": "E9.S1",
+                    "endInChunk": 93,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "elastic/kibana",
+                "chunkId": 10280,
+                "endOffset": 322,
+                "sourceRef": "career:260",
+                "versionId": 242,
+                "documentId": 23,
+                "evidenceId": "E9",
+                "sectionPath": "elastic/kibana > 职业价值",
+                "startOffset": 237,
+                "contentStartInChunk": 8
+              }
+            ],
+            "question": "请推荐真实项目，想做的方向或用途是：Next.js。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。\n当前需求（只用于选择解释重点，不作为项目事实）：{\"goal\":\"学习\",\"experience\":\"一年编程基础\",\"topic\":[\"Next.js\"]}",
+            "promptVersion": "customer-v4.14-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "validateEvidence",
+          "detail": {
+            "accepted": 9,
+            "rejected": []
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "verifyFacts",
+          "detail": {
+            "claims": [
+              {
+                "text": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足，提供交互式界面。",
+                "quote": "一个基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注于解决 C 盘空间不足等问题，提供交互式界面。\n\n",
+                "sourceRef": "career:257",
+                "sourceTitle": "darkmatter2048/WindowsCleaner"
+              },
+              {
+                "text": "基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。",
+                "quote": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验，中国站为 clawx.com.cn。\n\n",
+                "sourceRef": "career:208",
+                "sourceTitle": "ValueCell-ai/ClawX"
+              },
+              {
+                "text": "技术栈包含 TypeScript、React、Next.js、Playwright、Storybook。",
+                "quote": "TypeScript,React,Next.js,Playwright,Storybook\n\n",
+                "sourceRef": "career:260",
+                "sourceTitle": "elastic/kibana"
+              },
+              {
+                "text": "完成此项目能证明在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js，尤其在桌面级工具开发、交互设计和工程化实践方面有实战经验。",
+                "quote": "完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\n\n",
+                "sourceRef": "career:257",
+                "sourceTitle": "darkmatter2048/WindowsCleaner"
+              },
+              {
+                "text": "可掌握 React/Next.js 构建复杂桌面应用，具备将 CLI 工具产品化、提升用户体验的能力。",
+                "quote": "- 掌握 React/Next.js 构建复杂桌面应用程序\n- 具备将 CLI 工具产品化、提升用户体验的能力\n- 理解 Playwright 等工具在代理自动化中的使用\n- 熟悉 MIT 许可下的开源项目维护与迭代\n\n",
+                "sourceRef": "career:208",
+                "sourceTitle": "ValueCell-ai/ClawX"
+              },
+              {
+                "text": "可接触大型 React+Next.js 项目的性能优化与代码组织、数据可视化架构、Playwright 自动化测试、Storybook 组件库等实践。",
+                "quote": "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+                "sourceRef": "career:260",
+                "sourceTitle": "elastic/kibana"
+              },
+              {
+                "text": "可讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略及用户体验优化。",
+                "quote": "可以讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。\n\n",
+                "sourceRef": "career:257",
+                "sourceTitle": "darkmatter2048/WindowsCleaner"
+              },
+              {
+                "text": "技术栈为 TypeScript、React、Next.js、Playwright。",
+                "quote": "TypeScript,React,Next.js,Playwright\n\n",
+                "sourceRef": "career:208",
+                "sourceTitle": "ValueCell-ai/ClawX"
+              },
+              {
+                "text": "面向 AI 创意与交互方向，也适用于前端架构师与全栈工程，可深入理解大规模数据可视化工具开发、React 生态与测试策略。",
+                "quote": "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n",
+                "sourceRef": "career:260",
+                "sourceTitle": "elastic/kibana"
+              }
+            ],
+            "verdict": {
+              "supportedIds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            },
+            "supported": 9
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "practiceAdvice",
+          "detail": {
+            "kind": "SUGGESTION",
+            "promptVersion": "customer-v4.14-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ],
+  "sessionDeleted": true
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "N10",
+    "message": "这个作品是给我自己的书店管理图书用的，先记住用途。",
+    "expected": {
+      "goalIncludes": [
+        "书店"
+      ]
+    }
+  },
+  {
+    "id": "N18",
+    "message": "请比较刚才列表的第一个和第二个项目。",
+    "expected": {
+      "intents": [
+        "COMPARE"
+      ],
+      "statuses": [
+        "FOLLOW_UP"
+      ]
+    },
+    "turns": [
+      {
+        "message": "想找能查询文档并给出处的Python RAG项目，给求职做作品，半年以内完成",
+        "expected": {
+          "intents": [
+            "RECOMMEND"
+          ],
+          "projectsRequired": true,
+          "topicIncludesAny": [
+            "RAG",
+            "检索增强生成"
+          ]
+        }
+      },
+      {
+        "message": "请比较刚才列表的第一个和第二个项目。",
+        "expected": {
+          "intents": [
+            "COMPARE"
+          ],
+          "projectsRequired": true,
+          "projectPositions": [
+            1,
+            2
+          ],
+          "referencesRequired": true
+        }
+      }
+    ]
+  }
+]

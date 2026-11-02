@@ -1,0 +1,28 @@
+{
+  "scope": "One fixed synthetic embedding request; optional read-only model catalogue; no redirects or retries",
+  "credentialSource": "Running backend AI_EMBEDDING_KEY",
+  "endpoint": "https://ai.gitee.com/v1",
+  "rows": [
+    {
+      "path": "/models",
+      "startedAt": "2026-10-07T12:59:43.645548+00:00",
+      "status": 200,
+      "modelCount": 196,
+      "bgeM3Listed": true,
+      "baselineListed": true,
+      "durationMs": 422
+    },
+    {
+      "path": "/embeddings",
+      "startedAt": "2026-10-07T12:59:44.064455+00:00",
+      "status": 429,
+      "headers": {},
+      "error": {
+        "code": "429",
+        "type": "server_error",
+        "message": "超出访问频率限制或请求过多。请求已因限流策略被拒绝。若需更高配额，请联系 gitee-ai@oschina.cn。"
+      },
+      "durationMs": 219
+    }
+  ]
+}

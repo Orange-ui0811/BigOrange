@@ -120,10 +120,14 @@ public class RagBRedisStackRepository implements RagBIndexBackend {
         String portableFilter = portablePreFilter(constraints);
         if (portableFilter != null) vectorRequest.filterExpression(portableFilter);
         List<Document> vector = com.orangejd.server.service.TrendLabObservation.measure("B.embeddingAndVector", () -> store.similaritySearch(vectorRequest.build()));
-        List<Document> lexical = com.orangejd.server.service.TrendLabObservation.measure("B.lexical", () -> lexical(store, generation, query, candidateLimit, constraints,
-                List.of("content")));
         List<Document> names = com.orangejd.server.service.TrendLabObservation.measure("B.names", () -> lexical(store, generation, query, candidateLimit, constraints,
                 List.of("title", "sourceRef")));
+        List<String> aliases = java.util.stream.Stream.concat(vector.stream(), names.stream())
+                .flatMap(d -> java.util.stream.Stream.of(string(d.getMetadata(), "title"), string(d.getMetadata(), "sourceRef")))
+                .distinct().toList();
+        List<String> contentTerms = RagBContentQuery.terms(query, aliases);
+        List<Document> lexical = com.orangejd.server.service.TrendLabObservation.measure("B.lexical", () -> lexical(store, generation, query, candidateLimit, constraints,
+                List.of("content"), contentTerms));
 
         long fusionStarted=System.nanoTime();
         Map<String, Ranked> merged = new LinkedHashMap<>();
@@ -199,7 +203,12 @@ public class RagBRedisStackRepository implements RagBIndexBackend {
     private List<Document> lexical(RedisVectorStore store, RagBIndexGeneration generation,
                                    String input, int limit, RagBSearchConstraints constraints,
                                    List<String> fields) {
-        List<String> terms = tokenize(input);
+        return lexical(store, generation, input, limit, constraints, fields, tokenize(input));
+    }
+
+    private List<Document> lexical(RedisVectorStore store, RagBIndexGeneration generation,
+                                   String input, int limit, RagBSearchConstraints constraints,
+                                   List<String> fields, List<String> terms) {
         if (terms.isEmpty()) return List.of();
         String sourceFilter = redisSourceFilter(constraints);
         String alternatives = terms.stream().map(RagBQueryTokenizer::escapeQueryTerm)
@@ -258,7 +267,8 @@ public class RagBRedisStackRepository implements RagBIndexBackend {
         boolean exactName = RagBFusionScorer.exactNameMatch(query, string(metadata, "title"), string(metadata, "sourceRef"));
         String route = "HYBRID_RRF(vectorRank=" + ranked.vectorRank() + ",lexicalRank=" + ranked.lexicalRank()
                 + ",nameRank=" + ranked.nameRank() + ",lexicalWeight=" + RagBFusionScorer.LEXICAL_WEIGHT
-                + ",nameGated=true)" + (exactName ? "+NAME_EXACT" : "");
+                + ",nameGated=true,rankPolicy=" + RagBProjectEvidenceScorer.POLICY
+                + ",contentQueryPolicy=" + RagBContentQuery.POLICY + ")" + (exactName ? "+NAME_EXACT" : "");
         return new RagBSearchHit(number(metadata, "documentId"), number(metadata, "versionId"),
                 number(metadata, "chunkId"), (int) number(metadata, "chunkIndex"), string(metadata, "title"),
                 string(metadata, "sourceType"), string(metadata, "sourceRef"), nullable(metadata, "sectionPath"),
@@ -268,8 +278,8 @@ public class RagBRedisStackRepository implements RagBIndexBackend {
 
     private double score(Ranked ranked, String query) {
         Map<String, Object> metadata = ranked.document().getMetadata();
-        return RagBFusionScorer.score(query, string(metadata, "title"), string(metadata, "sourceRef"),
-                ranked.vectorRank(), ranked.lexicalRank(), ranked.nameRank());
+        return RagBProjectEvidenceScorer.score(query, string(metadata, "title"), string(metadata, "sourceRef"),
+                ranked.vectorRank(), ranked.lexicalRank());
     }
 
     private String indexName(RagBIndexGeneration generation) {

@@ -48,6 +48,7 @@ public class RagBDocumentRetriever implements DocumentRetriever {
         metadata.put("startOffset", hit.startOffset());
         metadata.put("endOffset", hit.endOffset());
         metadata.put("score", hit.score());
+        if(hit.rerankScore()!=null)metadata.put("rerankScore",hit.rerankScore());
         metadata.put("retrievalRoute", hit.retrievalRoute());
         return new Document("rag-b-" + hit.chunkId(), hit.content(), metadata);
     }

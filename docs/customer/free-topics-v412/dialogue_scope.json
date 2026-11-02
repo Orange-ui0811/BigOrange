@@ -1,0 +1,3688 @@
+{
+  "case": {
+    "id": "dialogue_scope",
+    "family": "dialogue",
+    "kind": "multi_turn",
+    "messages": [
+      "先不要推荐，记录我的需求：我想做Web应用开发，目标是求职，有Vue基础，半年内完成，语言不限。",
+      "现在给我推荐项目吧。",
+      "改成Vue方向，时间缩短为两个月，其他条件保持不变，推荐项目。"
+    ]
+  },
+  "sessionId": "125",
+  "turns": [
+    {
+      "message": "先不要推荐，记录我的需求：我想做Web应用开发，目标是求职，有Vue基础，半年内完成，语言不限。",
+      "runId": "161ba8b6-1089-4f89-b250-28de1d473114",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 4859,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "CHAT",
+        "state": {
+          "goal": "求职",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是求职"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "我想做Web应用开发"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "有Vue基础"
+            },
+            "maxDurationDays": {
+              "source": "MESSAGE",
+              "quote": "半年内完成"
+            }
+          },
+          "topic": [
+            "Web应用开发"
+          ],
+          "experience": "Vue基础",
+          "durationSemantics": {
+            "quantity": 6,
+            "unit": "MONTH",
+            "relation": "AT_MOST"
+          },
+          "maxDurationDays": 180,
+          "clearedFields": [
+            "language"
+          ],
+          "lastChangeSummary": "已记录基础（排序偏好）：Vue基础；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。"
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "CONVERSATION",
+        "answer": "已记录基础（排序偏好）：Vue基础；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。\n\n好的，这次先只记录，不推荐项目。\n\n已记下：\\n- 方向：Web 应用开发\\n- 目标：求职\\n- 基础：有 Vue 基础\\n- 完成时间：半年内（6 个月以内都算符合）\\n- 语言：不限\n\n需要时你再跟我说“开始推荐”，我就按这些条件去筛。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：Vue基础；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5264,
+              "completion_tokens": 781,
+              "total_tokens": 6045,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 471
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 272
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 3451,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "promptVersion": "customer-v4.12-semantic-recommendations",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 471,
+          "complete": true,
+          "cacheHitTokens": 4992,
+          "inputTokens": 5264,
+          "cacheMissTokens": 272,
+          "totalTokens": 6045,
+          "outputTokens": 781,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    },
+    {
+      "message": "现在给我推荐项目吧。",
+      "runId": "63cd5139-5be6-4ec5-aedc-fd039750b946",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 4813,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "求职",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是求职"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "我想做Web应用开发"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "有Vue基础"
+            },
+            "maxDurationDays": {
+              "source": "MESSAGE",
+              "quote": "半年内完成"
+            }
+          },
+          "topic": [
+            "Web应用开发"
+          ],
+          "experience": "Vue基础",
+          "durationSemantics": {
+            "quantity": 6,
+            "unit": "MONTH",
+            "relation": "AT_MOST"
+          },
+          "maxDurationDays": 180,
+          "clearedFields": [
+            "language"
+          ],
+          "lastChangeSummary": "已记录基础（排序偏好）：Vue基础；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。",
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-04T02:52:16.165063904Z",
+          "conditions": {
+            "maxDurationDays": 180,
+            "topic": [
+              "Web应用开发"
+            ]
+          },
+          "current": {
+            "total": 0,
+            "confirmed": 0,
+            "uncertain": 0
+          },
+          "available": {
+            "total": 494,
+            "confirmed": 494,
+            "uncertain": 0
+          },
+          "alternatives": [
+            {
+              "total": 110,
+              "confirmed": 15,
+              "uncertain": 95,
+              "changes": {
+                "topic": [
+                  "智能体"
+                ]
+              },
+              "label": "项目主题改为智能体"
+            }
+          ],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "NO_MATCH",
+        "answer": "这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n根据现有资料，可以考虑以下调整；每个方案都保留其余条件：\n- 项目主题改为智能体，可以找到通过当前字段检查的项目，具体功能还需核对。\n尚未修改条件。你愿意先尝试哪一种调整？也可以告诉我哪项要求必须保留。",
+        "conditionChangeSummary": ""
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5550,
+              "completion_tokens": 129,
+              "total_tokens": 5679,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 59
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 558
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 1226,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "promptVersion": "customer-v4.12-semantic-recommendations",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 59,
+          "complete": true,
+          "cacheHitTokens": 4992,
+          "inputTokens": 5550,
+          "cacheMissTokens": 558,
+          "totalTokens": 5679,
+          "outputTokens": 129,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10783,
+                  "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                  "endOffset": 243,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 4,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                  "startOffset": 181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "项目式学习",
+                  "chunkId": 11760,
+                  "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                  "endOffset": 21252,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 27,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                  "startOffset": 20259,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "bashalarmistalt/decimen-optical-transfer",
+                  "chunkId": 9641,
+                  "content": "## 最终建议\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\n\n",
+                  "endOffset": 493,
+                  "sourceRef": "beginner:80",
+                  "versionId": 222,
+                  "chunkIndex": 7,
+                  "documentId": 3,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "bashalarmistalt/decimen-optical-transfer > 最终建议",
+                  "startOffset": 445,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9607,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 39,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 1,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                  "startOffset": 23,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "fastrepl/anarlog",
+                  "chunkId": 11809,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 36,
+                  "sourceRef": "beginner:2",
+                  "versionId": 296,
+                  "chunkIndex": 1,
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "fastrepl/anarlog > 知识分类",
+                  "startOffset": 20,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "is-a-dev/register",
+                  "chunkId": 12004,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 37,
+                  "sourceRef": "beginner:34",
+                  "versionId": 311,
+                  "chunkIndex": 1,
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "is-a-dev/register > 知识分类",
+                  "startOffset": 21,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "agent-of-empires/agent-of-empires",
+                  "chunkId": 9976,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 53,
+                  "sourceRef": "beginner:125",
+                  "versionId": 233,
+                  "chunkIndex": 1,
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                  "startOffset": 37,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "willsoto/ng-chartist",
+                  "chunkId": 11861,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 40,
+                  "sourceRef": "beginner:9",
+                  "versionId": 300,
+                  "chunkIndex": 1,
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "willsoto/ng-chartist > 知识分类",
+                  "startOffset": 24,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "chunkId": 11848,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 47,
+                  "sourceRef": "beginner:8",
+                  "versionId": 299,
+                  "chunkIndex": 1,
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                  "startOffset": 31,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "mikiarlo3/ai-copywriter",
+                  "chunkId": 9666,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:88",
+                  "versionId": 223,
+                  "chunkIndex": 1,
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "img2threejs/img2threejs",
+                  "chunkId": 9767,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:101",
+                  "versionId": 226,
+                  "chunkIndex": 1,
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "img2threejs/img2threejs > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "Baskerville42/outage-data-ua",
+                  "chunkId": 11965,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 48,
+                  "sourceRef": "beginner:30",
+                  "versionId": 308,
+                  "chunkIndex": 1,
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                  "startOffset": 32,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "web-infra-dev/rspress",
+                  "chunkId": 10016,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 41,
+                  "sourceRef": "beginner:191",
+                  "versionId": 234,
+                  "chunkIndex": 1,
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "web-infra-dev/rspress > 知识分类",
+                  "startOffset": 25,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "zhnt/loushang",
+                  "chunkId": 9944,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:121",
+                  "versionId": 232,
+                  "chunkIndex": 1,
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhnt/loushang > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "pireel/pireel",
+                  "chunkId": 9740,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:94",
+                  "versionId": 225,
+                  "chunkIndex": 1,
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pireel/pireel > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "johnny-shaman/Sign",
+                  "chunkId": 12017,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:35",
+                  "versionId": 312,
+                  "chunkIndex": 1,
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "johnny-shaman/Sign > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12069,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 1,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "conorbronsdon/avoid-ai-writing",
+                  "chunkId": 11991,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:33",
+                  "versionId": 310,
+                  "chunkIndex": 1,
+                  "documentId": 91,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "conorbronsdon/avoid-ai-writing > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012345679012345678,
+                  "title": "CatsJuice/sticker-forge",
+                  "chunkId": 9914,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:119",
+                  "versionId": 231,
+                  "chunkIndex": 1,
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "CatsJuice/sticker-forge > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012195121951219513,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12056,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 1,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 128,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10783,
+                      "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                      "endOffset": 243,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 4,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                      "startOffset": 181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "项目式学习",
+                      "chunkId": 11760,
+                      "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                      "endOffset": 21252,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 27,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                      "startOffset": 20259,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "bashalarmistalt/decimen-optical-transfer",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "bashalarmistalt/decimen-optical-transfer",
+                      "chunkId": 9641,
+                      "content": "## 最终建议\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\n\n",
+                      "endOffset": 493,
+                      "sourceRef": "beginner:80",
+                      "versionId": 222,
+                      "chunkIndex": 7,
+                      "documentId": 3,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "bashalarmistalt/decimen-optical-transfer > 最终建议",
+                      "startOffset": 445,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:80",
+                  "bestScore": 0.015625,
+                  "sourceRef": "beginner:80",
+                  "documentId": 3,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "DavidHDev/canvas-ui",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9607,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 39,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 1,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                      "startOffset": 23,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:77",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "beginner:77",
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "fastrepl/anarlog",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "fastrepl/anarlog",
+                      "chunkId": 11809,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 36,
+                      "sourceRef": "beginner:2",
+                      "versionId": 296,
+                      "chunkIndex": 1,
+                      "documentId": 77,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "fastrepl/anarlog > 知识分类",
+                      "startOffset": 20,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:2",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "beginner:2",
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "is-a-dev/register",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "is-a-dev/register",
+                      "chunkId": 12004,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 37,
+                      "sourceRef": "beginner:34",
+                      "versionId": 311,
+                      "chunkIndex": 1,
+                      "documentId": 92,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "is-a-dev/register > 知识分类",
+                      "startOffset": 21,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:34",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "beginner:34",
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "agent-of-empires/agent-of-empires",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "agent-of-empires/agent-of-empires",
+                      "chunkId": 9976,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 53,
+                      "sourceRef": "beginner:125",
+                      "versionId": 233,
+                      "chunkIndex": 1,
+                      "documentId": 14,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                      "startOffset": 37,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:125",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "beginner:125",
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "willsoto/ng-chartist",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "willsoto/ng-chartist",
+                      "chunkId": 11861,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 40,
+                      "sourceRef": "beginner:9",
+                      "versionId": 300,
+                      "chunkIndex": 1,
+                      "documentId": 81,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "willsoto/ng-chartist > 知识分类",
+                      "startOffset": 24,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:9",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "beginner:9",
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "qwen-code-dev-bot/oh-my-cli",
+                      "chunkId": 11848,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 47,
+                      "sourceRef": "beginner:8",
+                      "versionId": 299,
+                      "chunkIndex": 1,
+                      "documentId": 80,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                      "startOffset": 31,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:8",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "beginner:8",
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "mikiarlo3/ai-copywriter",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "mikiarlo3/ai-copywriter",
+                      "chunkId": 9666,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:88",
+                      "versionId": 223,
+                      "chunkIndex": 1,
+                      "documentId": 4,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:88",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "beginner:88",
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "img2threejs/img2threejs",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "img2threejs/img2threejs",
+                      "chunkId": 9767,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:101",
+                      "versionId": 226,
+                      "chunkIndex": 1,
+                      "documentId": 7,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "img2threejs/img2threejs > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:101",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "beginner:101",
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Baskerville42/outage-data-ua",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "Baskerville42/outage-data-ua",
+                      "chunkId": 11965,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 48,
+                      "sourceRef": "beginner:30",
+                      "versionId": 308,
+                      "chunkIndex": 1,
+                      "documentId": 89,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                      "startOffset": 32,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:30",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "beginner:30",
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "web-infra-dev/rspress",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "web-infra-dev/rspress",
+                      "chunkId": 10016,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 41,
+                      "sourceRef": "beginner:191",
+                      "versionId": 234,
+                      "chunkIndex": 1,
+                      "documentId": 15,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "web-infra-dev/rspress > 知识分类",
+                      "startOffset": 25,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:191",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "beginner:191",
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhnt/loushang",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "zhnt/loushang",
+                      "chunkId": 9944,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:121",
+                      "versionId": 232,
+                      "chunkIndex": 1,
+                      "documentId": 13,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhnt/loushang > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:121",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "beginner:121",
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pireel/pireel",
+                  "evidence": [
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "pireel/pireel",
+                      "chunkId": 9740,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:94",
+                      "versionId": 225,
+                      "chunkIndex": 1,
+                      "documentId": 6,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pireel/pireel > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:94",
+                  "bestScore": 0.013157894736842105,
+                  "sourceRef": "beginner:94",
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "johnny-shaman/Sign",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "johnny-shaman/Sign",
+                      "chunkId": 12017,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:35",
+                      "versionId": 312,
+                      "chunkIndex": 1,
+                      "documentId": 93,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "johnny-shaman/Sign > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:35",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "beginner:35",
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "olo-dot-io/Uni-CLI",
+                  "evidence": [
+                    {
+                      "score": 0.012658227848101266,
+                      "title": "olo-dot-io/Uni-CLI",
+                      "chunkId": 12069,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:53",
+                      "versionId": 316,
+                      "chunkIndex": 1,
+                      "documentId": 97,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "olo-dot-io/Uni-CLI > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:53",
+                  "bestScore": 0.012658227848101266,
+                  "sourceRef": "beginner:53",
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "conorbronsdon/avoid-ai-writing",
+                  "evidence": [
+                    {
+                      "score": 0.0125,
+                      "title": "conorbronsdon/avoid-ai-writing",
+                      "chunkId": 11991,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:33",
+                      "versionId": 310,
+                      "chunkIndex": 1,
+                      "documentId": 91,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "conorbronsdon/avoid-ai-writing > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:33",
+                  "bestScore": 0.0125,
+                  "sourceRef": "beginner:33",
+                  "documentId": 91,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "CatsJuice/sticker-forge",
+                  "evidence": [
+                    {
+                      "score": 0.012345679012345678,
+                      "title": "CatsJuice/sticker-forge",
+                      "chunkId": 9914,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:119",
+                      "versionId": 231,
+                      "chunkIndex": 1,
+                      "documentId": 12,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "CatsJuice/sticker-forge > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:119",
+                  "bestScore": 0.012345679012345678,
+                  "sourceRef": "beginner:119",
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "evidence": [
+                    {
+                      "score": 0.012195121951219513,
+                      "title": "flowsforapex/apex-flowsforapex",
+                      "chunkId": 12056,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:43",
+                      "versionId": 315,
+                      "chunkIndex": 1,
+                      "documentId": 96,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:43",
+                  "bestScore": 0.012195121951219513,
+                  "sourceRef": "beginner:43",
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "推荐项目  Web应用开发 求职 Vue基础",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [],
+            "parameters": {
+              "conditions": {
+                "goal": "求职",
+                "topic": [
+                  "Web应用开发"
+                ],
+                "experience": "Vue基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是求职",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "我想做Web应用开发",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "有Vue基础",
+                    "source": "MESSAGE"
+                  },
+                  "maxDurationDays": {
+                    "quote": "半年内完成",
+                    "source": "MESSAGE"
+                  }
+                },
+                "clearedFields": [
+                  "language"
+                ],
+                "maxDurationDays": 180,
+                "durationSemantics": {
+                  "unit": "MONTH",
+                  "quantity": 6,
+                  "relation": "AT_MOST"
+                },
+                "lastChangeSummary": "已记录基础（排序偏好）：Vue基础；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。"
+              },
+              "semanticChunks": [
+                10783,
+                11760,
+                9641,
+                9607,
+                11809,
+                12004,
+                9976,
+                11861,
+                11848,
+                9666,
+                9767,
+                11965,
+                10016,
+                9944,
+                9740,
+                12017,
+                12069,
+                11991,
+                9914,
+                12056
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "Web应用开发"
+                ],
+                "maxDurationDays": 180
+              },
+              "alternatives": [
+                {
+                  "label": "项目主题改为智能体",
+                  "total": 110,
+                  "changes": {
+                    "topic": [
+                      "智能体"
+                    ]
+                  },
+                  "confirmed": 15,
+                  "uncertain": 95
+                }
+              ],
+              "calculatedAt": "2026-10-04T02:52:16.165063904Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "goal": "求职",
+                "topic": [
+                  "Web应用开发"
+                ],
+                "experience": "Vue基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是求职",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "我想做Web应用开发",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "有Vue基础",
+                    "source": "MESSAGE"
+                  },
+                  "maxDurationDays": {
+                    "quote": "半年内完成",
+                    "source": "MESSAGE"
+                  }
+                },
+                "clearedFields": [
+                  "language"
+                ],
+                "lastCandidates": [],
+                "maxDurationDays": 180,
+                "durationSemantics": {
+                  "unit": "MONTH",
+                  "quantity": 6,
+                  "relation": "AT_MOST"
+                },
+                "lastChangeSummary": "已记录基础（排序偏好）：Vue基础；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    },
+    {
+      "message": "改成Vue方向，时间缩短为两个月，其他条件保持不变，推荐项目。",
+      "runId": "d06e94c1-f5a9-4ab9-8d9e-38aae90cca3b",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 10609,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "求职",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是求职"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "改成Vue方向"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "有Vue基础"
+            },
+            "maxDurationDays": {
+              "source": "MESSAGE",
+              "quote": "时间缩短为两个月"
+            }
+          },
+          "topic": [
+            "Vue"
+          ],
+          "experience": "Vue基础",
+          "durationSemantics": {
+            "quantity": 2,
+            "unit": "MONTH",
+            "relation": "AT_MOST"
+          },
+          "maxDurationDays": 60,
+          "clearedFields": [
+            "language"
+          ],
+          "lastChangeSummary": "已将最长周期从180天调整为60天；已将项目主题从Web应用开发调整为Vue。其他已确认条件保持不变。",
+          "lastCandidates": [
+            {
+              "name": "zhensherlock/protocol-launcher",
+              "type": "BEGINNER_PROJECT",
+              "id": 46
+            },
+            {
+              "name": "pocket-stack/pocketjs",
+              "type": "BEGINNER_PROJECT",
+              "id": 12
+            },
+            {
+              "name": "JustArchiNET/ASF-WebConfigGenerator",
+              "type": "BEGINNER_PROJECT",
+              "id": 36
+            }
+          ]
+        },
+        "projects": [
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 46,
+            "sourceRef": "beginner:46",
+            "name": "zhensherlock/protocol-launcher",
+            "url": "https://github.com/zhensherlock/protocol-launcher",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,Vue",
+            "difficulty": "入门",
+            "duration": "2-4天",
+            "description": "前端使用 Vue，聚焦类型安全和协议处理，适合学习 TypeScript 高级特性和跨应用通信。 [E2]\n类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。 [E5]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"ai-tools\", \"api-configuration\", \"deep-link\", \"deeplink\", \"deeplinks\", \"esm\", \"launch-url\", \"llm-provider\", \"mcp\", \"mcp-installer\", \"modelcontextprotocol\", \"one-click\", \"protocol\", \"protocol-launcher\", \"quick-launcher\", \"tree-shaking\", \"typescript\", \"url-generator\", \"url-scheme\"]",
+            "beginnerScore": 95,
+            "analysisReason": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "semantic": 45.0,
+              "goalPreference": 0.0,
+              "total": 45.0,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0
+            },
+            "recommendReason": "本轮目标：求职；资料涉及Vue，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为2-4天；你的上限为60天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E2",
+                "title": "zhensherlock/protocol-launcher",
+                "sourceRef": "beginner:46",
+                "spans": [
+                  {
+                    "spanId": "E2.S1",
+                    "text": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 62
+                  }
+                ],
+                "documentId": 63,
+                "versionId": 282,
+                "chunkId": 10783,
+                "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                "startOffset": 192,
+                "endOffset": 243,
+                "contentStartInChunk": 11,
+                "quote": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                "text": "前端使用 Vue，聚焦类型安全和协议处理，适合学习 TypeScript 高级特性和跨应用通信。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E5",
+                "title": "zhensherlock/protocol-launcher",
+                "sourceRef": "beginner:46",
+                "spans": [
+                  {
+                    "spanId": "E5.S1",
+                    "text": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 72
+                  }
+                ],
+                "documentId": 63,
+                "versionId": 282,
+                "chunkId": 10782,
+                "sectionPath": "zhensherlock/protocol-launcher > 中文简介",
+                "startOffset": 117,
+                "endOffset": 181,
+                "contentStartInChunk": 8,
+                "quote": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。\n\n",
+                "text": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+                "field": "description"
+              }
+            ],
+            "whatIsIt": "前端使用 Vue，聚焦类型安全和协议处理，适合学习 TypeScript 高级特性和跨应用通信。 [E2]\n类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。 [E5]",
+            "supportedExplanation": "前端使用 Vue，聚焦类型安全和协议处理，适合学习 TypeScript 高级特性和跨应用通信。 [E2]\n类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。 [E5]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议将类型安全的深度链接生成器作为求职作品，展示Vue与TypeScript结合能力。可尝试为现有工具增加一个协议配置表单，体现跨应用通信理解，但需先确认项目是否支持扩展。",
+              "difficultyAdvice": "建议先核对项目是否要求TypeScript高级特性，如泛型、条件类型。若Vue基础扎实但TS经验少，可先学习类型定义再动手。",
+              "vibeCodingAdvice": "建议用AI辅助生成类型定义和协议处理逻辑，但需人工验证类型安全。可让AI解释现有代码，再实现小改造。",
+              "steps": [
+                "先核对并运行已有示例，理解协议生成流程",
+                "实现一个具体小改造，如增加新工具配置项",
+                "测试并形成演示与复盘，记录类型安全实践"
+              ],
+              "evidenceIds": [
+                "E2",
+                "E5"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 12,
+            "sourceRef": "beginner:12",
+            "name": "pocket-stack/pocketjs",
+            "url": "https://github.com/pocket-stack/pocketjs",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,Vue",
+            "difficulty": "入门",
+            "duration": "4-6天",
+            "description": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。 [E7]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]",
+            "beginnerScore": 91,
+            "analysisReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "semantic": 0.0,
+              "goalPreference": 0.0,
+              "total": 0.0,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": false,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0
+            },
+            "recommendReason": "本轮目标：求职；资料涉及Vue，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为4-6天；你的上限为60天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E7",
+                "title": "pocket-stack/pocketjs",
+                "sourceRef": "beginner:12",
+                "spans": [
+                  {
+                    "spanId": "E7.S1",
+                    "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 94
+                  }
+                ],
+                "documentId": 62,
+                "versionId": 281,
+                "chunkId": 10769,
+                "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                "startOffset": 99,
+                "endOffset": 185,
+                "contentStartInChunk": 8,
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E4",
+                "title": "pocket-stack/pocketjs",
+                "sourceRef": "beginner:12",
+                "spans": [
+                  {
+                    "spanId": "E4.S1",
+                    "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 44
+                  }
+                ],
+                "documentId": 62,
+                "versionId": 281,
+                "chunkId": 10770,
+                "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                "startOffset": 196,
+                "endOffset": 229,
+                "contentStartInChunk": 11,
+                "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "whatIsIt": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。 [E7]",
+            "supportedExplanation": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。 [E7]\n清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。 [E4]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议将嵌入式UI框架作为求职亮点，展示Vue Vapor和性能优化理解。可尝试基于现有模块实现一个简单动画组件，但需先确认硬件渲染环境是否可模拟。",
+              "difficultyAdvice": "建议先核对项目是否要求嵌入式或图形学基础。若仅Vue基础，可先学习JSX和渲染原理，再尝试小模块。",
+              "vibeCodingAdvice": "建议用AI辅助理解模块划分和性能优化点，但需人工验证内存和帧率。可让AI生成测试用例，再实现小改造。",
+              "steps": [
+                "先核对并运行已有示例，观察60 FPS动画效果",
+                "实现一个具体小改造，如调整Tailwind样式引擎",
+                "测试并形成演示与复盘，记录性能优化过程"
+              ],
+              "evidenceIds": [
+                "E7",
+                "E4"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 36,
+            "sourceRef": "beginner:36",
+            "name": "JustArchiNET/ASF-WebConfigGenerator",
+            "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "JavaScript",
+            "techStack": "JavaScript,Vue",
+            "difficulty": "入门",
+            "duration": "2-5天",
+            "description": "以表单驱动的配置生成工具，可练习 Vue 组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于 Vue.js 的 ArchiSteamFarm 配置文件在线生成器。 [E8]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+            "beginnerScore": 91,
+            "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "semantic": 0.0,
+              "goalPreference": 0.0,
+              "total": 0.0,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": false,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0
+            },
+            "recommendReason": "本轮目标：求职；资料涉及Vue，具体实践范围见项目说明；资料记录主语言为JavaScript；资料中的实践周期为2-5天；你的上限为60天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E3",
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "sourceRef": "beginner:36",
+                "spans": [
+                  {
+                    "spanId": "E3.S1",
+                    "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 49
+                  }
+                ],
+                "documentId": 61,
+                "versionId": 280,
+                "chunkId": 10757,
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                "startOffset": 175,
+                "endOffset": 213,
+                "contentStartInChunk": 11,
+                "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "text": "以表单驱动的配置生成工具，可练习 Vue 组件开发和数据配置逻辑，门槛较低。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E8",
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "sourceRef": "beginner:36",
+                "spans": [
+                  {
+                    "spanId": "E8.S1",
+                    "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 45
+                  }
+                ],
+                "documentId": 61,
+                "versionId": 280,
+                "chunkId": 10756,
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                "startOffset": 127,
+                "endOffset": 164,
+                "contentStartInChunk": 8,
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "text": "一款基于 Vue.js 的 ArchiSteamFarm 配置文件在线生成器。",
+                "field": "description"
+              }
+            ],
+            "whatIsIt": "以表单驱动的配置生成工具，可练习 Vue 组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于 Vue.js 的 ArchiSteamFarm 配置文件在线生成器。 [E8]",
+            "supportedExplanation": "以表单驱动的配置生成工具，可练习 Vue 组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于 Vue.js 的 ArchiSteamFarm 配置文件在线生成器。 [E8]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议将表单驱动的配置生成器作为求职入门作品，展示Vue组件开发能力。可尝试为现有表单增加一个配置项，体现数据配置逻辑，但需先确认项目是否允许扩展。",
+              "difficultyAdvice": "建议先核对项目是否要求Vue组件通信和表单验证。若Vue基础扎实，可先阅读现有组件再动手。",
+              "vibeCodingAdvice": "建议用AI辅助生成表单组件和验证逻辑，但需人工测试数据配置。可让AI解释现有代码，再实现小改造。",
+              "steps": [
+                "先核对并运行已有示例，理解配置生成流程",
+                "实现一个具体小改造，如增加新配置字段",
+                "测试并形成演示与复盘，记录组件开发实践"
+              ],
+              "evidenceIds": [
+                "E3",
+                "E8"
+              ],
+              "kind": "SUGGESTION"
+            }
+          }
+        ],
+        "references": [
+          {
+            "evidenceId": "E2",
+            "title": "zhensherlock/protocol-launcher",
+            "sourceRef": "beginner:46",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 62
+              }
+            ],
+            "documentId": 63,
+            "versionId": 282,
+            "chunkId": 10783,
+            "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+            "startOffset": 192,
+            "endOffset": 243,
+            "contentStartInChunk": 11,
+            "quote": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+            "text": "前端使用 Vue，聚焦类型安全和协议处理，适合学习 TypeScript 高级特性和跨应用通信。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E5",
+            "title": "zhensherlock/protocol-launcher",
+            "sourceRef": "beginner:46",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 72
+              }
+            ],
+            "documentId": 63,
+            "versionId": 282,
+            "chunkId": 10782,
+            "sectionPath": "zhensherlock/protocol-launcher > 中文简介",
+            "startOffset": 117,
+            "endOffset": 181,
+            "contentStartInChunk": 8,
+            "quote": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。\n\n",
+            "text": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "JustArchiNET/ASF-WebConfigGenerator",
+            "sourceRef": "beginner:36",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 49
+              }
+            ],
+            "documentId": 61,
+            "versionId": 280,
+            "chunkId": 10757,
+            "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+            "startOffset": 175,
+            "endOffset": 213,
+            "contentStartInChunk": 11,
+            "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+            "text": "以表单驱动的配置生成工具，可练习 Vue 组件开发和数据配置逻辑，门槛较低。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E8",
+            "title": "JustArchiNET/ASF-WebConfigGenerator",
+            "sourceRef": "beginner:36",
+            "spans": [
+              {
+                "spanId": "E8.S1",
+                "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 45
+              }
+            ],
+            "documentId": 61,
+            "versionId": 280,
+            "chunkId": 10756,
+            "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+            "startOffset": 127,
+            "endOffset": 164,
+            "contentStartInChunk": 8,
+            "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+            "text": "一款基于 Vue.js 的 ArchiSteamFarm 配置文件在线生成器。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E7",
+            "title": "pocket-stack/pocketjs",
+            "sourceRef": "beginner:12",
+            "spans": [
+              {
+                "spanId": "E7.S1",
+                "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 94
+              }
+            ],
+            "documentId": 62,
+            "versionId": 281,
+            "chunkId": 10769,
+            "sectionPath": "pocket-stack/pocketjs > 中文简介",
+            "startOffset": 99,
+            "endOffset": 185,
+            "contentStartInChunk": 8,
+            "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+            "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "pocket-stack/pocketjs",
+            "sourceRef": "beginner:12",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 44
+              }
+            ],
+            "documentId": 62,
+            "versionId": 281,
+            "chunkId": 10770,
+            "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+            "startOffset": 196,
+            "endOffset": 229,
+            "contentStartInChunk": 11,
+            "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+            "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "profileLoaded": false,
+        "generation": "20261002164953-ec113424",
+        "status": "VERIFIED_PROJECTS",
+        "recommendationReport": {
+          "learning": [
+            {
+              "name": "zhensherlock/protocol-launcher",
+              "key": "BEGINNER_PROJECT:46",
+              "steps": [
+                "先核对并运行已有示例，理解协议生成流程",
+                "实现一个具体小改造，如增加新工具配置项",
+                "测试并形成演示与复盘，记录类型安全实践"
+              ],
+              "personalized": true
+            },
+            {
+              "name": "pocket-stack/pocketjs",
+              "key": "BEGINNER_PROJECT:12",
+              "steps": [
+                "先核对并运行已有示例，观察60 FPS动画效果",
+                "实现一个具体小改造，如调整Tailwind样式引擎",
+                "测试并形成演示与复盘，记录性能优化过程"
+              ],
+              "personalized": true
+            },
+            {
+              "name": "JustArchiNET/ASF-WebConfigGenerator",
+              "key": "BEGINNER_PROJECT:36",
+              "steps": [
+                "先核对并运行已有示例，理解配置生成流程",
+                "实现一个具体小改造，如增加新配置字段",
+                "测试并形成演示与复盘，记录组件开发实践"
+              ],
+              "personalized": true
+            }
+          ],
+          "approach": "结合「求职」目标，建议围绕一个可演示的小功能形成作品，保留需求、实现取舍、测试与复盘，用来展示解决问题的过程。",
+          "timeline": "你设定的时间上限为60天。建议先做最小可演示范围，运行示例后再估算工作量；这不是完成承诺。",
+          "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。",
+          "direction": "本轮围绕「Vue」查找项目，下面区分资料事实与实践建议。"
+        },
+        "answer": "已将最长周期从180天调整为60天；已将项目主题从Web应用开发调整为Vue。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+        "conditionChangeSummary": "已将最长周期从180天调整为60天；已将项目主题从Web应用开发调整为Vue。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5692,
+              "completion_tokens": 400,
+              "total_tokens": 6092,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 250
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 700
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 2381,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "usage": {
+              "prompt_tokens": 1567,
+              "completion_tokens": 282,
+              "total_tokens": 1849,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1439
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 1276,
+            "protocol": "JSON_OBJECT",
+            "phase": "EVIDENCE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 634,
+              "completion_tokens": 16,
+              "total_tokens": 650,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 634
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 494,
+            "protocol": "JSON_OBJECT",
+            "phase": "VERIFY",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 720,
+              "completion_tokens": 658,
+              "total_tokens": 1378,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 464
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 3619,
+            "protocol": "JSON_OBJECT",
+            "phase": "ADVICE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.12-semantic-recommendations",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 250,
+          "complete": true,
+          "cacheHitTokens": 5376,
+          "inputTokens": 8613,
+          "cacheMissTokens": 3237,
+          "totalTokens": 9969,
+          "outputTokens": 1356,
+          "callsWithoutUsage": 0,
+          "calls": 4,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10783,
+                  "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                  "endOffset": 243,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 4,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                  "startOffset": 181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9607,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 39,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 1,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                  "startOffset": 23,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "fastrepl/anarlog",
+                  "chunkId": 11809,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 36,
+                  "sourceRef": "beginner:2",
+                  "versionId": 296,
+                  "chunkIndex": 1,
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "fastrepl/anarlog > 知识分类",
+                  "startOffset": 20,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "is-a-dev/register",
+                  "chunkId": 12004,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 37,
+                  "sourceRef": "beginner:34",
+                  "versionId": 311,
+                  "chunkIndex": 1,
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "is-a-dev/register > 知识分类",
+                  "startOffset": 21,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "agent-of-empires/agent-of-empires",
+                  "chunkId": 9976,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 53,
+                  "sourceRef": "beginner:125",
+                  "versionId": 233,
+                  "chunkIndex": 1,
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                  "startOffset": 37,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "willsoto/ng-chartist",
+                  "chunkId": 11861,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 40,
+                  "sourceRef": "beginner:9",
+                  "versionId": 300,
+                  "chunkIndex": 1,
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "willsoto/ng-chartist > 知识分类",
+                  "startOffset": 24,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "chunkId": 11848,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 47,
+                  "sourceRef": "beginner:8",
+                  "versionId": 299,
+                  "chunkIndex": 1,
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                  "startOffset": 31,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "mikiarlo3/ai-copywriter",
+                  "chunkId": 9666,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:88",
+                  "versionId": 223,
+                  "chunkIndex": 1,
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "img2threejs/img2threejs",
+                  "chunkId": 9767,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:101",
+                  "versionId": 226,
+                  "chunkIndex": 1,
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "img2threejs/img2threejs > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "Baskerville42/outage-data-ua",
+                  "chunkId": 11965,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 48,
+                  "sourceRef": "beginner:30",
+                  "versionId": 308,
+                  "chunkIndex": 1,
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                  "startOffset": 32,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "web-infra-dev/rspress",
+                  "chunkId": 10016,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 41,
+                  "sourceRef": "beginner:191",
+                  "versionId": 234,
+                  "chunkIndex": 1,
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "web-infra-dev/rspress > 知识分类",
+                  "startOffset": 25,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "zhnt/loushang",
+                  "chunkId": 9944,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:121",
+                  "versionId": 232,
+                  "chunkIndex": 1,
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhnt/loushang > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "pireel/pireel",
+                  "chunkId": 9740,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:94",
+                  "versionId": 225,
+                  "chunkIndex": 1,
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pireel/pireel > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "johnny-shaman/Sign",
+                  "chunkId": 12017,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:35",
+                  "versionId": 312,
+                  "chunkIndex": 1,
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "johnny-shaman/Sign > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12069,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 1,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013082610093217616,
+                  "title": "项目式学习",
+                  "chunkId": 11760,
+                  "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                  "endOffset": 21252,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 27,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                  "startOffset": 20259,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=42,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "conorbronsdon/avoid-ai-writing",
+                  "chunkId": 11991,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:33",
+                  "versionId": 310,
+                  "chunkIndex": 1,
+                  "documentId": 91,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "conorbronsdon/avoid-ai-writing > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "CatsJuice/sticker-forge",
+                  "chunkId": 9914,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:119",
+                  "versionId": 231,
+                  "chunkIndex": 1,
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "CatsJuice/sticker-forge > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12056,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 1,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "Oxotka/Landscape1C",
+                  "chunkId": 12030,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:38",
+                  "versionId": 313,
+                  "chunkIndex": 1,
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Oxotka/Landscape1C > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 147,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10783,
+                      "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                      "endOffset": 243,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 4,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                      "startOffset": 181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "DavidHDev/canvas-ui",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9607,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 39,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 1,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                      "startOffset": 23,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:77",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "beginner:77",
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "fastrepl/anarlog",
+                  "evidence": [
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "fastrepl/anarlog",
+                      "chunkId": 11809,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 36,
+                      "sourceRef": "beginner:2",
+                      "versionId": 296,
+                      "chunkIndex": 1,
+                      "documentId": 77,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "fastrepl/anarlog > 知识分类",
+                      "startOffset": 20,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:2",
+                  "bestScore": 0.015873015873015872,
+                  "sourceRef": "beginner:2",
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "is-a-dev/register",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "is-a-dev/register",
+                      "chunkId": 12004,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 37,
+                      "sourceRef": "beginner:34",
+                      "versionId": 311,
+                      "chunkIndex": 1,
+                      "documentId": 92,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "is-a-dev/register > 知识分类",
+                      "startOffset": 21,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:34",
+                  "bestScore": 0.015625,
+                  "sourceRef": "beginner:34",
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "agent-of-empires/agent-of-empires",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "agent-of-empires/agent-of-empires",
+                      "chunkId": 9976,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 53,
+                      "sourceRef": "beginner:125",
+                      "versionId": 233,
+                      "chunkIndex": 1,
+                      "documentId": 14,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                      "startOffset": 37,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:125",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "beginner:125",
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "willsoto/ng-chartist",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "willsoto/ng-chartist",
+                      "chunkId": 11861,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 40,
+                      "sourceRef": "beginner:9",
+                      "versionId": 300,
+                      "chunkIndex": 1,
+                      "documentId": 81,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "willsoto/ng-chartist > 知识分类",
+                      "startOffset": 24,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:9",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "beginner:9",
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "qwen-code-dev-bot/oh-my-cli",
+                      "chunkId": 11848,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 47,
+                      "sourceRef": "beginner:8",
+                      "versionId": 299,
+                      "chunkIndex": 1,
+                      "documentId": 80,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                      "startOffset": 31,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:8",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "beginner:8",
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "mikiarlo3/ai-copywriter",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "mikiarlo3/ai-copywriter",
+                      "chunkId": 9666,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:88",
+                      "versionId": 223,
+                      "chunkIndex": 1,
+                      "documentId": 4,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:88",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "beginner:88",
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "img2threejs/img2threejs",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "img2threejs/img2threejs",
+                      "chunkId": 9767,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:101",
+                      "versionId": 226,
+                      "chunkIndex": 1,
+                      "documentId": 7,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "img2threejs/img2threejs > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:101",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "beginner:101",
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Baskerville42/outage-data-ua",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "Baskerville42/outage-data-ua",
+                      "chunkId": 11965,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 48,
+                      "sourceRef": "beginner:30",
+                      "versionId": 308,
+                      "chunkIndex": 1,
+                      "documentId": 89,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                      "startOffset": 32,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:30",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "beginner:30",
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "web-infra-dev/rspress",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "web-infra-dev/rspress",
+                      "chunkId": 10016,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 41,
+                      "sourceRef": "beginner:191",
+                      "versionId": 234,
+                      "chunkIndex": 1,
+                      "documentId": 15,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "web-infra-dev/rspress > 知识分类",
+                      "startOffset": 25,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:191",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "beginner:191",
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhnt/loushang",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "zhnt/loushang",
+                      "chunkId": 9944,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:121",
+                      "versionId": 232,
+                      "chunkIndex": 1,
+                      "documentId": 13,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhnt/loushang > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:121",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "beginner:121",
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pireel/pireel",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "pireel/pireel",
+                      "chunkId": 9740,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:94",
+                      "versionId": 225,
+                      "chunkIndex": 1,
+                      "documentId": 6,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pireel/pireel > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:94",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "beginner:94",
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "johnny-shaman/Sign",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "johnny-shaman/Sign",
+                      "chunkId": 12017,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:35",
+                      "versionId": 312,
+                      "chunkIndex": 1,
+                      "documentId": 93,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "johnny-shaman/Sign > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:35",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "beginner:35",
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "olo-dot-io/Uni-CLI",
+                  "evidence": [
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "olo-dot-io/Uni-CLI",
+                      "chunkId": 12069,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:53",
+                      "versionId": 316,
+                      "chunkIndex": 1,
+                      "documentId": 97,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "olo-dot-io/Uni-CLI > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:53",
+                  "bestScore": 0.013157894736842105,
+                  "sourceRef": "beginner:53",
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.013082610093217616,
+                      "title": "项目式学习",
+                      "chunkId": 11760,
+                      "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                      "endOffset": 21252,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 27,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                      "startOffset": 20259,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=42,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.013082610093217616,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "conorbronsdon/avoid-ai-writing",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "conorbronsdon/avoid-ai-writing",
+                      "chunkId": 11991,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:33",
+                      "versionId": 310,
+                      "chunkIndex": 1,
+                      "documentId": 91,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "conorbronsdon/avoid-ai-writing > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:33",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "beginner:33",
+                  "documentId": 91,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "CatsJuice/sticker-forge",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "CatsJuice/sticker-forge",
+                      "chunkId": 9914,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:119",
+                      "versionId": 231,
+                      "chunkIndex": 1,
+                      "documentId": 12,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "CatsJuice/sticker-forge > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:119",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "beginner:119",
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "evidence": [
+                    {
+                      "score": 0.012658227848101266,
+                      "title": "flowsforapex/apex-flowsforapex",
+                      "chunkId": 12056,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:43",
+                      "versionId": 315,
+                      "chunkIndex": 1,
+                      "documentId": 96,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:43",
+                  "bestScore": 0.012658227848101266,
+                  "sourceRef": "beginner:43",
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Oxotka/Landscape1C",
+                  "evidence": [
+                    {
+                      "score": 0.0125,
+                      "title": "Oxotka/Landscape1C",
+                      "chunkId": 12030,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:38",
+                      "versionId": 313,
+                      "chunkIndex": 1,
+                      "documentId": 94,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Oxotka/Landscape1C > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:38",
+                  "bestScore": 0.0125,
+                  "sourceRef": "beginner:38",
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "推荐项目  Vue 求职 Vue基础",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 46,
+                "url": "https://github.com/zhensherlock/protocol-launcher",
+                "name": "zhensherlock/protocol-launcher",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"ai-tools\", \"api-configuration\", \"deep-link\", \"deeplink\", \"deeplinks\", \"esm\", \"launch-url\", \"llm-provider\", \"mcp\", \"mcp-installer\", \"modelcontextprotocol\", \"one-click\", \"protocol\", \"protocol-launcher\", \"quick-launcher\", \"tree-shaking\", \"typescript\", \"url-generator\", \"url-scheme\"]",
+                "ranking": {
+                  "total": 45.0,
+                  "quality": 0.0,
+                  "version": "customer-rank-v3",
+                  "semantic": 45.0,
+                  "preference": 0.0,
+                  "goalPreference": 0.0,
+                  "semanticMatched": true,
+                  "semanticAvailable": true,
+                  "uncertaintyPenalty": 0.0
+                },
+                "archived": false,
+                "duration": "2-4天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:46",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+                "matchStatus": "CONFIRMED",
+                "beginnerScore": 95,
+                "conditionGaps": [],
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 12,
+                "url": "https://github.com/pocket-stack/pocketjs",
+                "name": "pocket-stack/pocketjs",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]",
+                "ranking": {
+                  "total": 0.0,
+                  "quality": 0.0,
+                  "version": "customer-rank-v3",
+                  "semantic": 0.0,
+                  "preference": 0.0,
+                  "goalPreference": 0.0,
+                  "semanticMatched": false,
+                  "semanticAvailable": true,
+                  "uncertaintyPenalty": 0.0
+                },
+                "archived": false,
+                "duration": "4-6天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:12",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "matchStatus": "CONFIRMED",
+                "beginnerScore": 91,
+                "conditionGaps": [],
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 36,
+                "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+                "name": "JustArchiNET/ASF-WebConfigGenerator",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+                "ranking": {
+                  "total": 0.0,
+                  "quality": 0.0,
+                  "version": "customer-rank-v3",
+                  "semantic": 0.0,
+                  "preference": 0.0,
+                  "goalPreference": 0.0,
+                  "semanticMatched": false,
+                  "semanticAvailable": true,
+                  "uncertaintyPenalty": 0.0
+                },
+                "archived": false,
+                "duration": "2-5天",
+                "language": "JavaScript",
+                "sourceRef": "beginner:36",
+                "techStack": "JavaScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "matchStatus": "CONFIRMED",
+                "beginnerScore": 91,
+                "conditionGaps": [],
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "conditions": {
+                "goal": "求职",
+                "topic": [
+                  "Vue"
+                ],
+                "experience": "Vue基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是求职",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "改成Vue方向",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "有Vue基础",
+                    "source": "MESSAGE"
+                  },
+                  "maxDurationDays": {
+                    "quote": "时间缩短为两个月",
+                    "source": "MESSAGE"
+                  }
+                },
+                "clearedFields": [
+                  "language"
+                ],
+                "lastCandidates": [],
+                "maxDurationDays": 60,
+                "durationSemantics": {
+                  "unit": "MONTH",
+                  "quantity": 2,
+                  "relation": "AT_MOST"
+                },
+                "lastChangeSummary": "已将最长周期从180天调整为60天；已将项目主题从Web应用开发调整为Vue。其他已确认条件保持不变。"
+              },
+              "semanticChunks": [
+                10783,
+                9607,
+                11809,
+                12004,
+                9976,
+                11861,
+                11848,
+                9666,
+                9767,
+                11965,
+                10016,
+                9944,
+                9740,
+                12017,
+                12069,
+                11760,
+                11991,
+                9914,
+                12056,
+                12030
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.018099976308931533,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10758,
+                  "content": "## 技术栈\nJavaScript,Vue\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 5,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                  "startOffset": 213,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017782805429864254,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10773,
+                  "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                  "endOffset": 425,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 7,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 主题",
+                  "startOffset": 272,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017363195566843685,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10784,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 266,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 5,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                  "startOffset": 243,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017114695340501793,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10771,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 252,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 5,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                  "startOffset": 229,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10783,
+                  "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                  "endOffset": 243,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 4,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                  "startOffset": 181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10757,
+                  "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                  "endOffset": 213,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 4,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                  "startOffset": 164,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10770,
+                  "content": "## 适合新手的原因\n清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                  "endOffset": 229,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 4,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                  "startOffset": 185,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10780,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 1,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10760,
+                  "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                  "endOffset": 365,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 7,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                  "startOffset": 256,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10767,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 41,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 1,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 知识分类",
+                  "startOffset": 25,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10754,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 55,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 1,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 知识分类",
+                  "startOffset": 39,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10756,
+                  "content": "## 中文简介\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                  "endOffset": 164,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 3,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                  "startOffset": 119,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10769,
+                  "content": "## 中文简介\n浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                  "endOffset": 185,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 3,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                  "startOffset": 91,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10778,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 498,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 12,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 环境要求",
+                  "startOffset": 481,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10791,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 648,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 12,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 环境要求",
+                  "startOffset": 631,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10765,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 437,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 12,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 环境要求",
+                  "startOffset": 420,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10768,
+                  "content": "## 仓库地址\nhttps://github.com/pocket-stack/pocketjs\n\n",
+                  "endOffset": 91,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 2,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 仓库地址",
+                  "startOffset": 41,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10762,
+                  "content": "## 预计周期\n2-5天\n\n",
+                  "endOffset": 395,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 9,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 预计周期",
+                  "startOffset": 381,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10755,
+                  "content": "## 仓库地址\nhttps://github.com/JustArchiNET/ASF-WebConfigGenerator\n\n",
+                  "endOffset": 119,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 2,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 仓库地址",
+                  "startOffset": 55,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10782,
+                  "content": "## 中文简介\n类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。\n\n",
+                  "endOffset": 181,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 3,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 中文简介",
+                  "startOffset": 109,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 39,
+              "candidateCount": 39,
+              "evidenceGroups": [
+                {
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "evidence": [
+                    {
+                      "score": 0.018099976308931533,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10758,
+                      "content": "## 技术栈\nJavaScript,Vue\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 5,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                      "startOffset": 213,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10757,
+                      "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                      "endOffset": 213,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 4,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                      "startOffset": 164,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015625,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10760,
+                      "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                      "endOffset": 365,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 7,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                      "startOffset": 256,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:36",
+                  "bestScore": 0.018099976308931533,
+                  "sourceRef": "beginner:36",
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pocket-stack/pocketjs",
+                  "evidence": [
+                    {
+                      "score": 0.017782805429864254,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10773,
+                      "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                      "endOffset": 425,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 7,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 主题",
+                      "startOffset": 272,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.017114695340501793,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10771,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 252,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 5,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                      "startOffset": 229,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10770,
+                      "content": "## 适合新手的原因\n清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                      "endOffset": 229,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 4,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                      "startOffset": 185,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:12",
+                  "bestScore": 0.017782805429864254,
+                  "sourceRef": "beginner:12",
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.017363195566843685,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10784,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 266,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 5,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                      "startOffset": 243,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10783,
+                      "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                      "endOffset": 243,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 4,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                      "startOffset": 181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015625,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10780,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 1,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.017363195566843685,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "query": "Vue 项目功能 用途 实践示例 安装部署 环境依赖 限制 改成Vue方向，时间缩短为两个月，其他条件保持不变，推荐项目。",
+              "projects": [
+                {
+                  "name": "zhensherlock/protocol-launcher",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:46"
+                },
+                {
+                  "name": "pocket-stack/pocketjs",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:12"
+                },
+                {
+                  "name": "JustArchiNET/ASF-WebConfigGenerator",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:36"
+                }
+              ],
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "buildPrompt",
+          "detail": {
+            "evidence": [
+              {
+                "spans": [
+                  {
+                    "text": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 153,
+                    "startInChunk": 6
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10773,
+                "endOffset": 425,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E1",
+                "sectionPath": "pocket-stack/pocketjs > 主题",
+                "startOffset": 278,
+                "contentStartInChunk": 6
+              },
+              {
+                "spans": [
+                  {
+                    "text": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 62,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "zhensherlock/protocol-launcher",
+                "chunkId": 10783,
+                "endOffset": 243,
+                "sourceRef": "beginner:46",
+                "versionId": 282,
+                "documentId": 63,
+                "evidenceId": "E2",
+                "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                "startOffset": 192,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 49,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10757,
+                "endOffset": 213,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E3",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                "startOffset": 175,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 44,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10770,
+                "endOffset": 229,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E4",
+                "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                "startOffset": 196,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。\n\n",
+                    "spanId": "E5.S1",
+                    "endInChunk": 72,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "zhensherlock/protocol-launcher",
+                "chunkId": 10782,
+                "endOffset": 181,
+                "sourceRef": "beginner:46",
+                "versionId": 282,
+                "documentId": 63,
+                "evidenceId": "E5",
+                "sectionPath": "zhensherlock/protocol-launcher > 中文简介",
+                "startOffset": 117,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                    "spanId": "E6.S1",
+                    "endInChunk": 109,
+                    "startInChunk": 6
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10760,
+                "endOffset": 365,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E6",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                "startOffset": 262,
+                "contentStartInChunk": 6
+              },
+              {
+                "spans": [
+                  {
+                    "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                    "spanId": "E7.S1",
+                    "endInChunk": 94,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10769,
+                "endOffset": 185,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E7",
+                "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                "startOffset": 99,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                    "spanId": "E8.S1",
+                    "endInChunk": 45,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10756,
+                "endOffset": 164,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E8",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                "startOffset": 127,
+                "contentStartInChunk": 8
+              }
+            ],
+            "question": "改成Vue方向，时间缩短为两个月，其他条件保持不变，推荐项目。\n当前需求（只用于选择解释重点，不作为项目事实）：{\"goal\":\"求职\",\"experience\":\"Vue基础\",\"topic\":[\"Vue\"],\"maxDurationDays\":60}",
+            "promptVersion": "customer-v4.12-semantic-recommendations"
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "validateEvidence",
+          "detail": {
+            "accepted": 6,
+            "rejected": []
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "verifyFacts",
+          "detail": {
+            "claims": [
+              {
+                "text": "前端使用 Vue，聚焦类型安全和协议处理，适合学习 TypeScript 高级特性和跨应用通信。",
+                "quote": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                "sourceRef": "beginner:46",
+                "sourceTitle": "zhensherlock/protocol-launcher"
+              },
+              {
+                "text": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+                "quote": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。\n\n",
+                "sourceRef": "beginner:46",
+                "sourceTitle": "zhensherlock/protocol-launcher"
+              },
+              {
+                "text": "以表单驱动的配置生成工具，可练习 Vue 组件开发和数据配置逻辑，门槛较低。",
+                "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "sourceRef": "beginner:36",
+                "sourceTitle": "JustArchiNET/ASF-WebConfigGenerator"
+              },
+              {
+                "text": "一款基于 Vue.js 的 ArchiSteamFarm 配置文件在线生成器。",
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "sourceRef": "beginner:36",
+                "sourceTitle": "JustArchiNET/ASF-WebConfigGenerator"
+              },
+              {
+                "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "sourceRef": "beginner:12",
+                "sourceTitle": "pocket-stack/pocketjs"
+              },
+              {
+                "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "sourceRef": "beginner:12",
+                "sourceTitle": "pocket-stack/pocketjs"
+              }
+            ],
+            "verdict": {
+              "supportedIds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            "supported": 6
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "practiceAdvice",
+          "detail": {
+            "kind": "SUGGESTION",
+            "promptVersion": "customer-v4.12-semantic-recommendations"
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ],
+  "sessionDeleted": true
+}

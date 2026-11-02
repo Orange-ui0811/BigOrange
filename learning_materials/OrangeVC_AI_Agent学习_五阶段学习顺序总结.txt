@@ -1,0 +1,186 @@
+OrangeVC AI Agent 岗位准备：五阶段学习顺序总结
+生成日期：2026-09-05
+
+总目标
+======
+
+用 OrangeVC 已有项目证明真实的 RAG 与 AI 工具执行治理能力；用独立学习补齐 Python 机器学习实验、LLM/向量检索理论和 LangGraph 框架实践。所有内容都要区分“项目已经实现”和“自己独立补充”，不虚构功能。
+
+
+阶段 1：OrangeVC V2 RAG 完整链路
+================================
+
+为什么最先学习：
+这是 OrangeVC 与岗位要求最直接的交集。先从真实业务请求出发，建立对数据入库、向量召回、融合、Prompt 和生成的整体认识。
+
+重点内容：
+1. 多源知识如何进入知识库。
+2. 文档清洗、切片、Overlap、Metadata 和内容哈希。
+3. Embedding 与 Redis VectorStore 如何完成向量入库。
+4. V2 如何构造主题、目的、经验、时间投入四路查询。
+5. 每路 TopK 6、阈值 0.55。
+6. docId/chunkIndex 去重。
+7. 倒数排名分与来源偏好加权。
+8. 最终 Top4 片段如何进入 Prompt。
+9. LLM 调用、JSON 解析、结果持久化和失败降级。
+
+完成产出：
+《OrangeVC_AI_Agent学习_阶段1_RAG完整链路.md》
+
+掌握标准：
+能不看资料完整讲出“知识入库生命周期”和“在线请求生命周期”，并准确回答 TopK、阈值、多查询、去重、融合、幻觉和 Redis VectorStore 等问题。
+
+
+阶段 2：AgentAction 与 AiToolRouter 执行治理
+==========================================
+
+为什么排第二：
+RAG 解决“找到什么知识并生成答案”，Agent 工具治理解决“模型提出动作后，系统是否允许、如何执行、失败怎样处理”。这是从 LLM 应用迈向工程化 Agent 的关键一步。
+
+重点内容：
+1. AgentAction 如何把模型意图变成结构化动作。
+2. 动作身份、工具名、参数、风险和执行状态。
+3. AiToolRouter 的注册、发现和统一分发。
+4. 权限、参数校验、配额、幂等和审计。
+5. Provider 异常分类、有限重试、退避与降级。
+6. 为什么写操作不能因为超时就盲目重试。
+7. 业务事务、补偿和可观测性。
+
+完成产出：
+《OrangeVC_AI_Agent学习_阶段2_AgentAction与AiToolRouter完整链路.md》
+
+掌握标准：
+能完整讲出一次动作从产生、校验、路由、执行、重试到审计的生命周期；能说明哪些失败可重试、幂等为什么重要，以及 Router 为什么不仅是一个 switch。
+
+
+阶段 3：Python 训练—验证—测试完整链路
+=======================================
+
+为什么排第三：
+这是岗位要求中的基础 Python 和独立模块开发能力补充。OrangeVC 没有机器学习训练模块，因此必须作为独立实践学习，不能包装成项目功能。
+
+重点内容：
+1. Train、Validation、Test 的职责边界。
+2. 参数、超参数与模型选择。
+3. IID、分层、Group 和时间序列切分。
+4. 数据泄漏与“先切分、再拟合预处理”。
+5. Pipeline、baseline、交叉验证和 Nested CV。
+6. 指标选择、类别不平衡和阈值选择。
+7. Train+Validation 重训与 Test 最终一次评估。
+8. 模型、预处理、阈值和版本的完整 Artifact。
+9. Python 模块化、类型标注、日志和单元测试。
+
+完成产出：
+《OrangeVC_AI_Agent学习_阶段3_Python训练验证测试完整链路.md》
+
+掌握标准：
+能写出可复现的完整训练代码；能指出常见泄漏；能针对随机样本、用户分组和时间数据选择不同切分；能解释为什么测试集不能参与调参。
+
+
+阶段 4：LLM 与向量检索理论完整链路
+==================================
+
+为什么排第四：
+前三阶段已经知道项目“做了什么”，这一阶段下钻“为什么这样做”。把面试中容易被追问的底层概念、公式、索引和评估系统补齐。
+
+重点内容：
+1. Tokenization、Token Embedding 和上下文窗口。
+2. Transformer、Q/K/V、Self-Attention、Causal Mask。
+3. Logits、Softmax、Temperature、top-k 和 top-p。
+4. Prompt 结构、Few-shot、Structured Output 和 Injection 防护。
+5. 文本 Embedding 与对比学习直觉。
+6. Cosine、Dot Product、L2 和向量归一化。
+7. Exact Search、ANN、HNSW、IVF 和 PQ。
+8. FAISS、Chroma、Milvus、Redis 的定位。
+9. Dense、BM25、Hybrid、RRF 和 Reranker。
+10. Recall@K、Precision@K、MRR、nDCG、Faithfulness。
+11. 从数据、切片、召回、排序到生成的分层错误归因。
+
+完成产出：
+《OrangeVC_AI_Agent学习_阶段4_LLM与向量检索理论完整链路.md》
+
+掌握标准：
+能写出并解释 Attention 公式；能手算三种向量度量；能说明更换 Embedding 模型为什么要重建索引；能设计 TopK/Threshold 实验；能区分召回失败、排序失败和生成幻觉。
+
+
+阶段 5：LangGraph Demo 完整链路
+================================
+
+为什么最后学习：
+先理解真实项目中的 RAG、工具治理、Python 和 LLM 理论，再接触 Agent 框架，才能理解框架每个抽象解决了什么，而不是只会照抄 Demo。
+
+重点内容：
+1. Workflow 与 Agent 的区别。
+2. State、Node、Edge、START、END。
+3. 默认覆盖、operator.add 和 add_messages Reducer。
+4. HumanMessage、AIMessage Tool Call、ToolMessage。
+5. ToolNode 与 bind_tools 的职责边界。
+6. 条件边和“Agent—Tool—Observation”循环。
+7. Step Limit 和 recursion_limit。
+8. Checkpointer、thread_id、Store 与 VectorStore 的区别。
+9. Streaming 的 updates、values 和 messages。
+10. interrupt 与 Command(resume) 的 Human-in-the-loop。
+11. Checkpoint 与业务幂等、事务、补偿的区别。
+12. LangGraph 与 OrangeVC AiToolRouter 的互补关系。
+
+实际完成的 Demo：
+位置：D:\Orangejd\learning_materials\langgraph_demo
+版本：Python 3.13.8、LangGraph 1.2.10
+第一轮：3 次决策、2 次工具调用、最终 completed
+第二轮：同 thread_id，只决策 1 次、不重复调用工具
+测试：4 项全部通过
+
+完成产出：
+《OrangeVC_AI_Agent学习_阶段5_LangGraph_Demo完整链路.md》
+独立 Demo 源码、测试、README 和验证记录
+
+掌握标准：
+能从初始 State 开始逐步讲出每个节点更新、每条边和每条消息；能解释 thread_id 如何延续状态；能说明 ToolNode 不替代权限、幂等、配额和审批治理；能准确承认当前 Demo 使用确定性模型替身，尚未接入真实 LLM。
+
+
+五阶段之间的依赖关系
+====================
+
+阶段 1 RAG：先知道项目怎样寻找和使用知识
+        ↓
+阶段 2 执行治理：再知道模型动作怎样安全落地
+        ↓
+阶段 3 Python 流程：补齐独立编码、实验和评估基本功
+        ↓
+阶段 4 底层理论：解释 Token、Attention、Embedding、索引与指标
+        ↓
+阶段 5 LangGraph：用框架把状态、工具、循环、记忆和治理串起来
+
+
+面试中的统一叙述
+================
+
+OrangeVC 是真实项目主线：
+- 我能讲清 V2 RAG 的多源入库、四路召回、去重融合和 Prompt 生成。
+- 我能讲清 AgentAction 与 AiToolRouter 的动作协议和执行治理。
+
+独立学习是能力补充：
+- 我用 Python 跑通规范训练—验证—测试流程。
+- 我系统掌握 LLM 和向量检索理论及评估方法。
+- 我独立跑通 LangGraph 有状态工具调用 Demo并编写测试。
+
+必须主动承认的边界：
+- OrangeVC 没有训练基础大模型。
+- OrangeVC 没有实现机器学习训练模块。
+- OrangeVC 没有集成 LangGraph。
+- LangGraph Demo 当前没有接入真实 LLM 和真实打印机。
+- 理论上理解 HNSW、FAISS、Milvus，不等于在 OrangeVC 中实际使用过。
+
+
+最终完成标准
+============
+
+1. 能分别用 5—10 分钟完整讲通五个阶段。
+2. 能从代码类、函数、State 字段和参数回答追问。
+3. 能说明每项技术的优点、局限、失败场景和评估方法。
+4. 能把“项目真实实现”和“独立补充学习”明确分开。
+5. 能在本机重新运行 Python 和 LangGraph 示例。
+6. 不背诵虚假术语，不把候选优化说成已经实现。
+7. 面试遇到错误答案时，能沿数据、检索、生成、工具、治理和状态链路定位原因。
+
+完成以上标准后，这五个阶段能够共同覆盖岗位要求中的 Python、LLM、Prompt Engineering、Agent 框架、向量数据库和 RAG 实践。

@@ -1,0 +1,2370 @@
+{
+  "case": {
+    "id": "frontend_specific",
+    "family": "frontend",
+    "kind": "specific",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "135",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "3d433857-9040-436c-9947-a2730d8a1210",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 12203,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "topic": [
+            "Vue"
+          ],
+          "provenance": {
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：Vue"
+            },
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "goal": "学习",
+          "experience": "一年编程基础",
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "Vue",
+            "proofs": {
+              "BEGINNER_PROJECT:36": {
+                "fingerprint": "68f7363790e9f94bc6a17da8894f18a4cc0b630d8eb081f6e9f6c7628fb869ad",
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "relation": "DIRECT",
+                "rank": 1
+              },
+              "BEGINNER_PROJECT:12": {
+                "fingerprint": "ff12b7a1d5050d7350300831eaae0f3b172e56d748100be59b8c7969a8d9d468",
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "relation": "SUBTOPIC",
+                "rank": 2
+              }
+            }
+          },
+          "lastCandidates": [
+            {
+              "name": "JustArchiNET/ASF-WebConfigGenerator",
+              "type": "BEGINNER_PROJECT",
+              "id": 36
+            },
+            {
+              "name": "pocket-stack/pocketjs",
+              "type": "BEGINNER_PROJECT",
+              "id": 12
+            }
+          ]
+        },
+        "projects": [
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 36,
+            "sourceRef": "beginner:36",
+            "name": "JustArchiNET/ASF-WebConfigGenerator",
+            "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "JavaScript",
+            "techStack": "JavaScript,Vue",
+            "difficulty": "入门",
+            "duration": "2-5天",
+            "description": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E6]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+            "beginnerScore": 91,
+            "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 15.0,
+              "total": 60.0,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 45.0
+            },
+            "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及Vue，具体实践范围见项目说明；资料记录主语言为JavaScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E6",
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "sourceRef": "beginner:36",
+                "spans": [
+                  {
+                    "spanId": "E6.S1",
+                    "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 45
+                  }
+                ],
+                "documentId": 61,
+                "versionId": 280,
+                "chunkId": 10756,
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                "startOffset": 127,
+                "endOffset": 164,
+                "contentStartInChunk": 8,
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E4",
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "sourceRef": "beginner:36",
+                "spans": [
+                  {
+                    "spanId": "E4.S1",
+                    "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 49
+                  }
+                ],
+                "documentId": 61,
+                "versionId": 280,
+                "chunkId": 10757,
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                "startOffset": 175,
+                "endOffset": 213,
+                "contentStartInChunk": 11,
+                "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "field": "vibeCodingReason"
+              }
+            ],
+            "whatIsIt": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E6]",
+            "vibeCodingReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。 [E4]",
+            "supportedExplanation": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E6]\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。 [E4]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议结合你一年编程基础与Vue学习目标，用这个表单驱动配置生成器练习Vue组件开发和数据配置逻辑。可以尝试先运行已有示例，再改造一个表单字段的校验或联动，形成可演示的小功能。",
+              "difficultyAdvice": "建议先核对本地Node与Vue开发环境是否就绪，再确认项目依赖安装方式。若时间预算有限，可只聚焦一个表单组件，避免铺开全部配置项。",
+              "vibeCodingAdvice": "建议用AI辅助阅读组件结构与数据流，让它解释表单字段如何映射到配置对象；改造后可用AI生成边界用例，再手动验证表单交互与输出结果。",
+              "steps": [
+                "先核对并运行已有示例，确认表单能正常生成配置",
+                "实现一个具体小改造，如给某字段增加校验或联动",
+                "测试该改造并形成演示与复盘，记录Vue组件学习点"
+              ],
+              "evidenceIds": [
+                "E6",
+                "E4"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 12,
+            "sourceRef": "beginner:12",
+            "name": "pocket-stack/pocketjs",
+            "url": "https://github.com/pocket-stack/pocketjs",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,Vue",
+            "difficulty": "入门",
+            "duration": "4-6天",
+            "description": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。 [E5]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]",
+            "beginnerScore": 91,
+            "analysisReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 15.0,
+              "total": 37.5,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 22.5
+            },
+            "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及Vue，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E5",
+                "title": "pocket-stack/pocketjs",
+                "sourceRef": "beginner:12",
+                "spans": [
+                  {
+                    "spanId": "E5.S1",
+                    "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 94
+                  }
+                ],
+                "documentId": 62,
+                "versionId": 281,
+                "chunkId": 10769,
+                "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                "startOffset": 99,
+                "endOffset": 185,
+                "contentStartInChunk": 8,
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E3",
+                "title": "pocket-stack/pocketjs",
+                "sourceRef": "beginner:12",
+                "spans": [
+                  {
+                    "spanId": "E3.S1",
+                    "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 44
+                  }
+                ],
+                "documentId": 62,
+                "versionId": 281,
+                "chunkId": 10770,
+                "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                "startOffset": 196,
+                "endOffset": 229,
+                "contentStartInChunk": 11,
+                "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "field": "vibeCodingReason"
+              }
+            ],
+            "whatIsIt": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。 [E5]",
+            "vibeCodingReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。 [E3]",
+            "supportedExplanation": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。 [E5]\n清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。 [E3]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议结合Vue学习目标，用这个JSX UI框架了解嵌入式UI原理与性能优化。可以尝试先跑通已有示例，再实现一个简单界面小改造，观察渲染表现，形成可演示的对比。",
+              "difficultyAdvice": "建议先核对硬件渲染与内存限制相关示例能否在本地运行，确认开发环境是否支持。若时间预算有限，可只聚焦一个模块，避免深入全部性能细节。",
+              "vibeCodingAdvice": "建议用AI辅助理解模块划分与JSX渲染流程，让它解释示例中动画如何达到目标帧率；改造后可用AI建议观测点，再手动验证界面与性能表现。",
+              "steps": [
+                "先核对并运行已有示例，确认硬件渲染环境可用",
+                "实现一个具体小改造，如调整某界面元素或动画参数",
+                "测试并形成演示与复盘，记录嵌入式UI与性能学习点"
+              ],
+              "evidenceIds": [
+                "E5",
+                "E3"
+              ],
+              "kind": "SUGGESTION"
+            }
+          }
+        ],
+        "references": [
+          {
+            "evidenceId": "E6",
+            "title": "JustArchiNET/ASF-WebConfigGenerator",
+            "sourceRef": "beginner:36",
+            "spans": [
+              {
+                "spanId": "E6.S1",
+                "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 45
+              }
+            ],
+            "documentId": 61,
+            "versionId": 280,
+            "chunkId": 10756,
+            "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+            "startOffset": 127,
+            "endOffset": 164,
+            "contentStartInChunk": 8,
+            "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+            "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "JustArchiNET/ASF-WebConfigGenerator",
+            "sourceRef": "beginner:36",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 49
+              }
+            ],
+            "documentId": 61,
+            "versionId": 280,
+            "chunkId": 10757,
+            "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+            "startOffset": 175,
+            "endOffset": 213,
+            "contentStartInChunk": 11,
+            "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+            "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E5",
+            "title": "pocket-stack/pocketjs",
+            "sourceRef": "beginner:12",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 94
+              }
+            ],
+            "documentId": 62,
+            "versionId": 281,
+            "chunkId": 10769,
+            "sectionPath": "pocket-stack/pocketjs > 中文简介",
+            "startOffset": 99,
+            "endOffset": 185,
+            "contentStartInChunk": 8,
+            "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+            "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "pocket-stack/pocketjs",
+            "sourceRef": "beginner:12",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 44
+              }
+            ],
+            "documentId": 62,
+            "versionId": 281,
+            "chunkId": 10770,
+            "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+            "startOffset": 196,
+            "endOffset": 229,
+            "contentStartInChunk": 11,
+            "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+            "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+            "field": "vibeCodingReason"
+          }
+        ],
+        "profileLoaded": false,
+        "generation": "20261002164953-ec113424",
+        "status": "VERIFIED_PROJECTS",
+        "recommendationReport": {
+          "approach": "结合「学习」目标，建议先运行已有示例，再完成一个小改造，通过输入输出与测试理解系统的工作过程。",
+          "timeline": "先运行示例并确认改造范围，再根据实际投入估算进度。",
+          "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。",
+          "direction": "本轮围绕「Vue」查找项目，下面区分资料事实与实践建议。",
+          "learning": [
+            {
+              "name": "JustArchiNET/ASF-WebConfigGenerator",
+              "key": "BEGINNER_PROJECT:36",
+              "steps": [
+                "先核对并运行已有示例，确认表单能正常生成配置",
+                "实现一个具体小改造，如给某字段增加校验或联动",
+                "测试该改造并形成演示与复盘，记录Vue组件学习点"
+              ],
+              "personalized": true
+            },
+            {
+              "name": "pocket-stack/pocketjs",
+              "key": "BEGINNER_PROJECT:12",
+              "steps": [
+                "先核对并运行已有示例，确认硬件渲染环境可用",
+                "实现一个具体小改造，如调整某界面元素或动画参数",
+                "测试并形成演示与复盘，记录嵌入式UI与性能学习点"
+              ],
+              "personalized": true
+            }
+          ]
+        },
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5284,
+              "completion_tokens": 588,
+              "total_tokens": 5872,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 311
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 292
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 2806,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "usage": {
+              "prompt_tokens": 140,
+              "completion_tokens": 25,
+              "total_tokens": 165,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 140
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 647,
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 2085,
+              "completion_tokens": 101,
+              "total_tokens": 2186,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1957
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 850,
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 1312,
+              "completion_tokens": 194,
+              "total_tokens": 1506,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 1056
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 1539,
+            "protocol": "JSON_OBJECT",
+            "phase": "EVIDENCE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 466,
+              "completion_tokens": 12,
+              "total_tokens": 478,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 466
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 645,
+            "protocol": "JSON_OBJECT",
+            "phase": "VERIFY",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 607,
+              "completion_tokens": 494,
+              "total_tokens": 1101,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 351
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 2964,
+            "protocol": "JSON_OBJECT",
+            "phase": "ADVICE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.13-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 311,
+          "complete": true,
+          "cacheHitTokens": 5632,
+          "inputTokens": 9894,
+          "cacheMissTokens": 4262,
+          "totalTokens": 11308,
+          "outputTokens": 1414,
+          "callsWithoutUsage": 0,
+          "calls": 6,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "Vue Vue 前端框架 Vue.js 开发 Vue 单页应用",
+            "topic": [
+              "Vue"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01865530303030303,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10758,
+                  "content": "## 技术栈\nJavaScript,Vue\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 5,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                  "startOffset": 213,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.018430203676105317,
+                  "title": "项目式学习",
+                  "chunkId": 11760,
+                  "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                  "endOffset": 21252,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 27,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                  "startOffset": 20259,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017830882352941176,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10784,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 266,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 5,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                  "startOffset": 243,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017569676700111482,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10771,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 252,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 5,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                  "startOffset": 229,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017077835150124305,
+                  "title": "dream-num/Luckysheet",
+                  "chunkId": 17035,
+                  "content": "## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n",
+                  "endOffset": 2415,
+                  "sourceRef": "dream-num/Luckysheet",
+                  "versionId": 624,
+                  "chunkIndex": 5,
+                  "documentId": 405,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。 > 生态系统",
+                  "startOffset": 1544,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=106,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01686712070714389,
+                  "title": "katspaugh/wavesurfer.js",
+                  "chunkId": 15866,
+                  "content": "## 文档\n\n请访问我们网站上的 [wavesurfer.js 指南](https://wavesurfer.xyz/docs/)，获取面向初学者的实用文档，涵盖常见用例、插件、框架集成和故障排除。\n\n",
+                  "endOffset": 1723,
+                  "sourceRef": "katspaugh/wavesurfer.js",
+                  "versionId": 444,
+                  "chunkIndex": 4,
+                  "documentId": 225,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "目录 > 文档",
+                  "startOffset": 1622,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=43,nameRank=31,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10783,
+                  "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                  "endOffset": 243,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 4,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                  "startOffset": 181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "visgl/deck.gl",
+                  "chunkId": 16995,
+                  "content": "#### 纯 JavaScript\n\n- [快速入门](/docs/get-started/using-standalone.md)\n- [完整示例](/examples/get-started/pure-js)\n\n",
+                  "endOffset": 1689,
+                  "sourceRef": "visgl/deck.gl",
+                  "versionId": 619,
+                  "chunkIndex": 5,
+                  "documentId": 400,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "版本 > NPM 模块 > 纯 JavaScript",
+                  "startOffset": 1581,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "nurmohammed840/extension.vsix",
+                  "chunkId": 16237,
+                  "content": "## [Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)  \n此扩展允许你运行 [Visual-Studio-Code API](https://code.visualstudio.com/api/references/vscode-api)。你也可以将其用作演练场。\n\n<img src=\"https://i.imgur.com/5PusvCK.gif\" alt=\"collaborate\" width=\"500\"/>\n\n",
+                  "endOffset": 482,
+                  "sourceRef": "nurmohammed840/extension.vsix",
+                  "versionId": 501,
+                  "chunkIndex": 1,
+                  "documentId": 282,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)",
+                  "startOffset": 225,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014612981603609855,
+                  "title": "vcync/modV",
+                  "chunkId": 16517,
+                  "content": "#### 'vue-cli-service' 未被识别\n\n请查看 issue 122 ([vcync/modv-3/issues/122#issuecomment-640100114](https://github.com/vcync/modv-3/issues/122#issuecomment-640100114)) 了解如何解决此问题。\n\n",
+                  "endOffset": 2095,
+                  "sourceRef": "vcync/modV",
+                  "versionId": 541,
+                  "chunkIndex": 11,
+                  "documentId": 322,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "针对不同平台的构建和开发说明 > Windows > 'vue-cli-service' 未被识别",
+                  "startOffset": 1922,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=26,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "pnpm（推荐）",
+                  "chunkId": 17823,
+                  "content": "## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n",
+                  "endOffset": 7390,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "versionId": 756,
+                  "chunkIndex": 20,
+                  "documentId": 537,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "路线图",
+                  "startOffset": 7104,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "🖌 egui: 纯 Rust 编写的易用 GUI 库",
+                  "chunkId": 16414,
+                  "content": "## 演示\n\n[点击运行 egui 网页演示](https://www.egui.rs/#demo)（适用于任何支持 Wasm 和 WebGL 的浏览器）。使用 [`eframe`](https://github.com/emilk/egui/tree/main/crates/eframe) 构建。\n\n要在本地测试演示应用，请运行 `cargo run --release -p egui_demo_app`。\n\n原生后端是 [`egui-wgpu`](https://github.",
+                  "endOffset": 3095,
+                  "sourceRef": "emilk/egui",
+                  "versionId": 526,
+                  "chunkIndex": 5,
+                  "documentId": 307,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "🖌 egui: 纯 Rust 编写的易用 GUI 库 > 演示",
+                  "startOffset": 2852,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013902621722846445,
+                  "title": "processing/p5.js",
+                  "chunkId": 10750,
+                  "content": "## 关于\n\np5.js 的构建和组织以[无障碍、包容、社区和乐趣](https://p5js.org/community)为优先。如同素描一样，p5.js 拥有一整套绘图工具。它还支持为网页创作视听、交互、实验和生成式作品。p5.js 让你把网页当作你的画布。p5.js 支持多种语言，并拥有丰富的[文档](https://p5js.org/reference/)和视觉示例。你可以在 p5.js 网站上找到[教程](https://p5js.org/tutorials/)，并立即在 [p5.js 网页编辑器](https://editor.p5js.org/)中开始编码。你可以通过社区创作的众多[库](https://p5js.org/libraries/)来扩展 p5.js 的功能。其社区为创作者提供了无尽的灵感和支持。\n\np5.js 鼓励迭代和探索式的代码，以进行创意表达。其友好、多元的社区分享艺术、代码和学习资源，帮助提升每一种声音。我们秉持开源和人人可及的理念，自由地学习、创作、想象、设计、分享和编码。\n\n",
+                  "endOffset": 1475,
+                  "sourceRef": "processing/p5.js",
+                  "versionId": 279,
+                  "chunkIndex": 2,
+                  "documentId": 60,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[p5.js](https://p5js.org) > 关于",
+                  "startOffset": 1011,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=29,lexicalRank=15,nameRank=8,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "前端检查清单",
+                  "chunkId": 15935,
+                  "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                  "endOffset": 1629,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 6,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                  "startOffset": 1476,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "Theodeus/tuna",
+                  "chunkId": 16835,
+                  "content": "使用\n====\n\n```\nnpm install tunajs\n```\n\n查阅 wiki：https://github.com/Theodeus/tuna/wiki/Getting-started\n\n或在线示例：http://codepen.io/Theodeus/pen/oxKjmy?editors=0010",
+                  "endOffset": 796,
+                  "sourceRef": "Theodeus/tuna",
+                  "versionId": 593,
+                  "chunkIndex": 2,
+                  "documentId": 374,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "使用",
+                  "startOffset": 640,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "TensorFlow.js",
+                  "chunkId": 16976,
+                  "content": "## 示例\n\n查看我们的[示例仓库](https://github.com/tensorflow/tfjs-examples)\n和我们的[教程](https://js.tensorflow.org/tutorials/)。\n\n",
+                  "endOffset": 1593,
+                  "sourceRef": "tensorflow/tfjs",
+                  "versionId": 617,
+                  "chunkIndex": 3,
+                  "documentId": 398,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "TensorFlow.js > 示例",
+                  "startOffset": 1480,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=82,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013474450893365198,
+                  "title": "jonobr1/two.js",
+                  "chunkId": 14008,
+                  "content": "## Build Documentation\nThe [Two.js](http://two.js.org/) website is bundled with this repository. Relying on [Vuepress](https://vuepress.vuejs.org/) the repository generates a website based on numerous `README.md` files housed in the `wiki` directory. Use the following the node commands as follows:\n\n```bash\nnpm run docs:generate   // Generate README.md files for documentation from source code comments\nnpm run docs:dev        // Creates a local server to generate all documentation\nnpm run docs:build      // Builds out static site and associated files to wiki/.vuepress/dist\n```\n\nThe documentation toolchain uses Node 24 LTS. Run `nvm use` before working on the docs site, or install the version listed in [.nvmrc](./.nvmrc) if you do not use [Node Version Manager](https://github.com/nvm-sh/nvm).\n\n",
+                  "endOffset": 6401,
+                  "sourceRef": "jonobr1/two.js|week",
+                  "versionId": 379,
+                  "chunkIndex": 5,
+                  "documentId": 160,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Two.js > Build Documentation",
+                  "startOffset": 5599,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=27,lexicalRank=41,nameRank=30,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "lvgl/lvgl",
+                  "chunkId": 10695,
+                  "content": "### In LVGL Pro\n\nIn LVGL Pro you can create ready-to-use UI-only, VSCode, Zephyr, and Linux projects with a single click.\n<img width=\"600\" alt=\"image\" src=\"https://github.com/user-attachments/assets/5aadb850-6b40-49d1-ba96-2296041c7e27\" />\n\n",
+                  "endOffset": 11255,
+                  "sourceRef": "lvgl/lvgl",
+                  "versionId": 274,
+                  "chunkIndex": 11,
+                  "documentId": 55,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Integration > In LVGL Pro",
+                  "startOffset": 11014,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013232795242141037,
+                  "title": "processing/p5.js",
+                  "chunkId": 10749,
+                  "content": "# [p5.js](https://p5js.org)\n\n欢迎！👋👋🏿👋🏽👋🏻👋🏾👋🏼\n\np5.js 是一个免费、开源的 JavaScript 库，用于[无障碍](https://p5js.org/contribute/access)创意编程。它是一个充满关爱的社区、一门平易近人的语言、一件探索工具、一个无障碍的环境、一个包容的平台，热情而有趣，面向艺术家、设计师、教育工作者、初学者以及所有其他人！\n\n<table>\n<tr>\n<td>\n\n```js\nfunction setup() {\n  createCanvas(400, 400);\n  background(255);\n}\n\nfunction draw() {\n  circle(mouseX, mouseY, 80);\n}\n```\n\n</td>\n<td>\n\n<img src=\"./contributor_docs/images/p5-readme-sketch.png\" width=\"200\" height=\"200\" />\n\n</td>\n</tr>\n</table>\n\n[快速入门](https://p5js.org/tutorials/get-started/) — [参考文档](https://p5js.org/reference) — [教程](https://p5js.org/tutorials) — [示例](https://p5js.org/examples/) — [库](https://p5js.org/libraries) — [论坛](https://discourse.processing.org/c/p5js) — [Discord](https://discord.p5js.org)\n\n",
+                  "endOffset": 1011,
+                  "sourceRef": "processing/p5.js",
+                  "versionId": 279,
+                  "chunkIndex": 1,
+                  "documentId": 60,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[p5.js](https://p5js.org)",
+                  "startOffset": 253,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=28,lexicalRank=47,nameRank=33,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013222506393861891,
+                  "title": "Rough.js",
+                  "chunkId": 17012,
+                  "content": "# Rough.js\n\n<b>Rough.js</b> 是一个轻量级的（<9 kB）图形库，可以让你以_草图_、_手绘风格_的方式绘制图形。\n该库提供了绘制线条、曲线、圆弧、多边形、圆形和椭圆的基本图形元素。同时也支持绘制 [SVG 路径](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)。\n\nRough.js 同时兼容 [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) 和 [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)。\n\n![Rough.js 示例](https://roughjs.com/images/cap_demo.png)\n\nTwitter 账号：[@RoughLib](https://twitter.com/RoughLib)\n\n",
+                  "endOffset": 443,
+                  "sourceRef": "rough-stuff/rough",
+                  "versionId": 622,
+                  "chunkIndex": 0,
+                  "documentId": 403,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Rough.js",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=32,lexicalRank=25,nameRank=17,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 284,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "evidence": [
+                    {
+                      "score": 0.01865530303030303,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10758,
+                      "content": "## 技术栈\nJavaScript,Vue\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 5,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                      "startOffset": 213,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:36",
+                  "bestScore": 0.01865530303030303,
+                  "sourceRef": "beginner:36",
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.018430203676105317,
+                      "title": "项目式学习",
+                      "chunkId": 11760,
+                      "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                      "endOffset": 21252,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 27,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                      "startOffset": 20259,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.018430203676105317,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.017830882352941176,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10784,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 266,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 5,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                      "startOffset": 243,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10783,
+                      "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                      "endOffset": 243,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 4,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                      "startOffset": 181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.017830882352941176,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pocket-stack/pocketjs",
+                  "evidence": [
+                    {
+                      "score": 0.017569676700111482,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10771,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 252,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 5,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                      "startOffset": 229,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:12",
+                  "bestScore": 0.017569676700111482,
+                  "sourceRef": "beginner:12",
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "dream-num/Luckysheet",
+                  "evidence": [
+                    {
+                      "score": 0.017077835150124305,
+                      "title": "dream-num/Luckysheet",
+                      "chunkId": 17035,
+                      "content": "## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n",
+                      "endOffset": 2415,
+                      "sourceRef": "dream-num/Luckysheet",
+                      "versionId": 624,
+                      "chunkIndex": 5,
+                      "documentId": 405,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。 > 生态系统",
+                      "startOffset": 1544,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=106,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:dream-num/Luckysheet",
+                  "bestScore": 0.017077835150124305,
+                  "sourceRef": "dream-num/Luckysheet",
+                  "documentId": 405,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "katspaugh/wavesurfer.js",
+                  "evidence": [
+                    {
+                      "score": 0.01686712070714389,
+                      "title": "katspaugh/wavesurfer.js",
+                      "chunkId": 15866,
+                      "content": "## 文档\n\n请访问我们网站上的 [wavesurfer.js 指南](https://wavesurfer.xyz/docs/)，获取面向初学者的实用文档，涵盖常见用例、插件、框架集成和故障排除。\n\n",
+                      "endOffset": 1723,
+                      "sourceRef": "katspaugh/wavesurfer.js",
+                      "versionId": 444,
+                      "chunkIndex": 4,
+                      "documentId": 225,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "目录 > 文档",
+                      "startOffset": 1622,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=43,nameRank=31,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:katspaugh/wavesurfer.js",
+                  "bestScore": 0.01686712070714389,
+                  "sourceRef": "katspaugh/wavesurfer.js",
+                  "documentId": 225,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "visgl/deck.gl",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "visgl/deck.gl",
+                      "chunkId": 16995,
+                      "content": "#### 纯 JavaScript\n\n- [快速入门](/docs/get-started/using-standalone.md)\n- [完整示例](/examples/get-started/pure-js)\n\n",
+                      "endOffset": 1689,
+                      "sourceRef": "visgl/deck.gl",
+                      "versionId": 619,
+                      "chunkIndex": 5,
+                      "documentId": 400,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "版本 > NPM 模块 > 纯 JavaScript",
+                      "startOffset": 1581,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:visgl/deck.gl",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "visgl/deck.gl",
+                  "documentId": 400,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "nurmohammed840/extension.vsix",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "nurmohammed840/extension.vsix",
+                      "chunkId": 16237,
+                      "content": "## [Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)  \n此扩展允许你运行 [Visual-Studio-Code API](https://code.visualstudio.com/api/references/vscode-api)。你也可以将其用作演练场。\n\n<img src=\"https://i.imgur.com/5PusvCK.gif\" alt=\"collaborate\" width=\"500\"/>\n\n",
+                      "endOffset": 482,
+                      "sourceRef": "nurmohammed840/extension.vsix",
+                      "versionId": 501,
+                      "chunkIndex": 1,
+                      "documentId": 282,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)",
+                      "startOffset": 225,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:nurmohammed840/extension.vsix",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "nurmohammed840/extension.vsix",
+                  "documentId": 282,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "vcync/modV",
+                  "evidence": [
+                    {
+                      "score": 0.014612981603609855,
+                      "title": "vcync/modV",
+                      "chunkId": 16517,
+                      "content": "#### 'vue-cli-service' 未被识别\n\n请查看 issue 122 ([vcync/modv-3/issues/122#issuecomment-640100114](https://github.com/vcync/modv-3/issues/122#issuecomment-640100114)) 了解如何解决此问题。\n\n",
+                      "endOffset": 2095,
+                      "sourceRef": "vcync/modV",
+                      "versionId": 541,
+                      "chunkIndex": 11,
+                      "documentId": 322,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "针对不同平台的构建和开发说明 > Windows > 'vue-cli-service' 未被识别",
+                      "startOffset": 1922,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=26,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:vcync/modV",
+                  "bestScore": 0.014612981603609855,
+                  "sourceRef": "vcync/modV",
+                  "documentId": 322,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "pnpm（推荐）",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "pnpm（推荐）",
+                      "chunkId": 17823,
+                      "content": "## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n",
+                      "endOffset": 7390,
+                      "sourceRef": "aidizhi/455555.xyz",
+                      "versionId": 756,
+                      "chunkIndex": 20,
+                      "documentId": 537,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "路线图",
+                      "startOffset": 7104,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:aidizhi/455555.xyz",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "documentId": 537,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "🖌 egui: 纯 Rust 编写的易用 GUI 库",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "🖌 egui: 纯 Rust 编写的易用 GUI 库",
+                      "chunkId": 16414,
+                      "content": "## 演示\n\n[点击运行 egui 网页演示](https://www.egui.rs/#demo)（适用于任何支持 Wasm 和 WebGL 的浏览器）。使用 [`eframe`](https://github.com/emilk/egui/tree/main/crates/eframe) 构建。\n\n要在本地测试演示应用，请运行 `cargo run --release -p egui_demo_app`。\n\n原生后端是 [`egui-wgpu`](https://github.",
+                      "endOffset": 3095,
+                      "sourceRef": "emilk/egui",
+                      "versionId": 526,
+                      "chunkIndex": 5,
+                      "documentId": 307,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "🖌 egui: 纯 Rust 编写的易用 GUI 库 > 演示",
+                      "startOffset": 2852,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:emilk/egui",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "emilk/egui",
+                  "documentId": 307,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "processing/p5.js",
+                  "evidence": [
+                    {
+                      "score": 0.013902621722846445,
+                      "title": "processing/p5.js",
+                      "chunkId": 10750,
+                      "content": "## 关于\n\np5.js 的构建和组织以[无障碍、包容、社区和乐趣](https://p5js.org/community)为优先。如同素描一样，p5.js 拥有一整套绘图工具。它还支持为网页创作视听、交互、实验和生成式作品。p5.js 让你把网页当作你的画布。p5.js 支持多种语言，并拥有丰富的[文档](https://p5js.org/reference/)和视觉示例。你可以在 p5.js 网站上找到[教程](https://p5js.org/tutorials/)，并立即在 [p5.js 网页编辑器](https://editor.p5js.org/)中开始编码。你可以通过社区创作的众多[库](https://p5js.org/libraries/)来扩展 p5.js 的功能。其社区为创作者提供了无尽的灵感和支持。\n\np5.js 鼓励迭代和探索式的代码，以进行创意表达。其友好、多元的社区分享艺术、代码和学习资源，帮助提升每一种声音。我们秉持开源和人人可及的理念，自由地学习、创作、想象、设计、分享和编码。\n\n",
+                      "endOffset": 1475,
+                      "sourceRef": "processing/p5.js",
+                      "versionId": 279,
+                      "chunkIndex": 2,
+                      "documentId": 60,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[p5.js](https://p5js.org) > 关于",
+                      "startOffset": 1011,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=29,lexicalRank=15,nameRank=8,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013232795242141037,
+                      "title": "processing/p5.js",
+                      "chunkId": 10749,
+                      "content": "# [p5.js](https://p5js.org)\n\n欢迎！👋👋🏿👋🏽👋🏻👋🏾👋🏼\n\np5.js 是一个免费、开源的 JavaScript 库，用于[无障碍](https://p5js.org/contribute/access)创意编程。它是一个充满关爱的社区、一门平易近人的语言、一件探索工具、一个无障碍的环境、一个包容的平台，热情而有趣，面向艺术家、设计师、教育工作者、初学者以及所有其他人！\n\n<table>\n<tr>\n<td>\n\n```js\nfunction setup() {\n  createCanvas(400, 400);\n  background(255);\n}\n\nfunction draw() {\n  circle(mouseX, mouseY, 80);\n}\n```\n\n</td>\n<td>\n\n<img src=\"./contributor_docs/images/p5-readme-sketch.png\" width=\"200\" height=\"200\" />\n\n</td>\n</tr>\n</table>\n\n[快速入门](https://p5js.org/tutorials/get-started/) — [参考文档](https://p5js.org/reference) — [教程](https://p5js.org/tutorials) — [示例](https://p5js.org/examples/) — [库](https://p5js.org/libraries) — [论坛](https://discourse.processing.org/c/p5js) — [Discord](https://discord.p5js.org)\n\n",
+                      "endOffset": 1011,
+                      "sourceRef": "processing/p5.js",
+                      "versionId": 279,
+                      "chunkIndex": 1,
+                      "documentId": 60,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[p5.js](https://p5js.org)",
+                      "startOffset": 253,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=28,lexicalRank=47,nameRank=33,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:processing/p5.js",
+                  "bestScore": 0.013902621722846445,
+                  "sourceRef": "processing/p5.js",
+                  "documentId": 60,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "前端检查清单",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "前端检查清单",
+                      "chunkId": 15935,
+                      "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                      "endOffset": 1629,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 6,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                      "startOffset": 1476,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:thedaviddias/Front-End-Checklist",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "documentId": 234,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Theodeus/tuna",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "Theodeus/tuna",
+                      "chunkId": 16835,
+                      "content": "使用\n====\n\n```\nnpm install tunajs\n```\n\n查阅 wiki：https://github.com/Theodeus/tuna/wiki/Getting-started\n\n或在线示例：http://codepen.io/Theodeus/pen/oxKjmy?editors=0010",
+                      "endOffset": 796,
+                      "sourceRef": "Theodeus/tuna",
+                      "versionId": 593,
+                      "chunkIndex": 2,
+                      "documentId": 374,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "使用",
+                      "startOffset": 640,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:Theodeus/tuna",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "Theodeus/tuna",
+                  "documentId": 374,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "TensorFlow.js",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "TensorFlow.js",
+                      "chunkId": 16976,
+                      "content": "## 示例\n\n查看我们的[示例仓库](https://github.com/tensorflow/tfjs-examples)\n和我们的[教程](https://js.tensorflow.org/tutorials/)。\n\n",
+                      "endOffset": 1593,
+                      "sourceRef": "tensorflow/tfjs",
+                      "versionId": 617,
+                      "chunkIndex": 3,
+                      "documentId": 398,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "TensorFlow.js > 示例",
+                      "startOffset": 1480,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=82,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:tensorflow/tfjs",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "tensorflow/tfjs",
+                  "documentId": 398,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "jonobr1/two.js",
+                  "evidence": [
+                    {
+                      "score": 0.013474450893365198,
+                      "title": "jonobr1/two.js",
+                      "chunkId": 14008,
+                      "content": "## Build Documentation\nThe [Two.js](http://two.js.org/) website is bundled with this repository. Relying on [Vuepress](https://vuepress.vuejs.org/) the repository generates a website based on numerous `README.md` files housed in the `wiki` directory. Use the following the node commands as follows:\n\n```bash\nnpm run docs:generate   // Generate README.md files for documentation from source code comments\nnpm run docs:dev        // Creates a local server to generate all documentation\nnpm run docs:build      // Builds out static site and associated files to wiki/.vuepress/dist\n```\n\nThe documentation toolchain uses Node 24 LTS. Run `nvm use` before working on the docs site, or install the version listed in [.nvmrc](./.nvmrc) if you do not use [Node Version Manager](https://github.com/nvm-sh/nvm).\n\n",
+                      "endOffset": 6401,
+                      "sourceRef": "jonobr1/two.js|week",
+                      "versionId": 379,
+                      "chunkIndex": 5,
+                      "documentId": 160,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Two.js > Build Documentation",
+                      "startOffset": 5599,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=27,lexicalRank=41,nameRank=30,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:jonobr1/two.js",
+                  "bestScore": 0.013474450893365198,
+                  "sourceRef": "jonobr1/two.js|week",
+                  "documentId": 160,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "lvgl/lvgl",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "lvgl/lvgl",
+                      "chunkId": 10695,
+                      "content": "### In LVGL Pro\n\nIn LVGL Pro you can create ready-to-use UI-only, VSCode, Zephyr, and Linux projects with a single click.\n<img width=\"600\" alt=\"image\" src=\"https://github.com/user-attachments/assets/5aadb850-6b40-49d1-ba96-2296041c7e27\" />\n\n",
+                      "endOffset": 11255,
+                      "sourceRef": "lvgl/lvgl",
+                      "versionId": 274,
+                      "chunkIndex": 11,
+                      "documentId": 55,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Integration > In LVGL Pro",
+                      "startOffset": 11014,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:lvgl/lvgl",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "lvgl/lvgl",
+                  "documentId": 55,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Rough.js",
+                  "evidence": [
+                    {
+                      "score": 0.013222506393861891,
+                      "title": "Rough.js",
+                      "chunkId": 17012,
+                      "content": "# Rough.js\n\n<b>Rough.js</b> 是一个轻量级的（<9 kB）图形库，可以让你以_草图_、_手绘风格_的方式绘制图形。\n该库提供了绘制线条、曲线、圆弧、多边形、圆形和椭圆的基本图形元素。同时也支持绘制 [SVG 路径](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)。\n\nRough.js 同时兼容 [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) 和 [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)。\n\n![Rough.js 示例](https://roughjs.com/images/cap_demo.png)\n\nTwitter 账号：[@RoughLib](https://twitter.com/RoughLib)\n\n",
+                      "endOffset": 443,
+                      "sourceRef": "rough-stuff/rough",
+                      "versionId": 622,
+                      "chunkIndex": 0,
+                      "documentId": 403,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Rough.js",
+                      "startOffset": 0,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=32,lexicalRank=25,nameRank=17,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:rough-stuff/rough",
+                  "bestScore": 0.013222506393861891,
+                  "sourceRef": "rough-stuff/rough",
+                  "documentId": 403,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "Vue Vue 前端框架 Vue.js 开发 Vue 单页应用",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 36,
+                "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+                "name": "JustArchiNET/ASF-WebConfigGenerator",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+                "archived": false,
+                "duration": "2-5天",
+                "language": "JavaScript",
+                "sourceRef": "beginner:36",
+                "techStack": "JavaScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 75,
+                "url": "https://github.com/practical-tutorials/project-based-learning",
+                "name": "practical-tutorials/project-based-learning",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "practical-tutorials/project-based-learning",
+                "versionId": 294,
+                "documentId": 75,
+                "importable": false,
+                "catalogText": "# Project Based Learning\n\n[![Gitter](https://badges.gitter.im/practical-tutorials/community.svg)](https://gitter.im/practical-tutorials/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Link rot sweep](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml/badge.svg)](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml)\n\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are divided into different primary programming languages. Tutorials may involve multiple technologies and languages.\n\nTo get started, simply fork this repo. Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.\n\n## Table of Contents:\n\n- [C#](#c)\n- [C/C++](#cc)\n- [Clojure](#clojure)\n- [Dart](#dart)\n- [Elixir](#elixir)\n- [Erlang](#erlang)\n- [F#](#f)\n- [Go](#go)\n- [Haskell](#haskell)\n- [HTML/CSS](#html-and-css)\n- [Java](#java)\n- [JavaScript](#javascript)\n- [Kotlin](#kotlin)\n- [Lua](#lua)\n- [OCaml](#ocaml)\n- [PHP](#php)\n- [Python](#python)\n- [R](#r)\n- [Ruby](#ruby)\n- [Rust](#rust)\n- [Scala](#scala)\n- [Swift](#swift)\n- [Additional resources](#additional-resources)\n\n## C/C++:\n\n- [Build an Interpreter](http://www.craftinginterpreters.com/) (Chapter 14 on is written in C)\n- [Memory Allocators 101 - Write a simple memory allocator](https://arjunsreedharan.org/post/148675821737/memory-allocators-101-write-a-simple-memory)\n- [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)\n- [Write a FUSE Filesystem](https://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/)\n- [Build Your Own Text Editor](http://viewsourcecode.org/snaptoken/kilo/)\n- [Build Your Own Lisp](http://www.buildyourownlisp.com/)\n- [How to Program an NES Game in C](https://nesdoug.com/)\n- [Write an OS from scratch](https://github.com/tuhdo/os01)\n- [How to create an OS from scratch ](https://github.com/cfenollosa/os-tutorial)\n- [Building a CHIP-8 Emulator](https://austinmorlan.com/posts/chip8_emulator/)\n- [Beginning Game Programming with C++ and SDL](http://lazyfoo.net/tutorials/SDL/)\n- [Implementing a Key-Value Store](http://codecapsule.com/2012/11/07/ikvs-implementing-a-key-value-store-table-of-contents/)\n- Tiny 3D graphics projects\n  - [Tiny Renderer or how OpenGL works: software rendering in 500 lines of code](https://github.com/ssloy/tinyrenderer/wiki)\n  - [Understandable RayTracing in 256 lines of bare C++](https://github.com/ssloy/tinyraytracer/wiki)\n  - [KABOOM! in 180 lines of bare C++](https://github.com/ssloy/tinykaboom/wiki)\n  - [486 lines of C++: old-school FPS in a weekend](https://github.com/ssloy/tinyraycaster/wiki)\n- Writing a minimal x86-64 JIT compiler in C++\n  - [Part 1](https://solarianprogrammer.com/2018/01/10/writing-minimal-x86-64-jit-compiler-cpp/)\n  - [Part 2](https://solarianprogrammer.com/2018/01/12/writing-minimal-x86-64-jit-compiler-cpp-part-2/)\n- [Build a Live Code-reloader Library for C++](http://howistart.org/posts/cpp/1/index.html)\n- [Write a hash table in C](https://github.com/jamesroutley/write-a-hash-table)\n- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)\n- [Let's Write a Kernel](http://arjunsreedharan.org/post/82710718100/kernel-101-lets-write-a-kernel)\n- [Write a Bootloader in C](http://3zanders.co.uk/2017/10/13/writing-a-bootloader/)\n- [Linux Container in 500 Lines of Code](https://blog.lizzie.io/linux-containers-in-500-loc.html)\n- [Write Your Own Virtual Machine](https://justinmeiners.github.io/lc3-vm/)\n- [Learning KVM - Implement Your Own Linux Kernel](https://david942j.blogspot.com/2018/10/note-learning-kvm-implement-your-own.html)\n- [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)\n- Write a C compiler\n  - [Part 1: Integers, Lexing and Code Generation](https://norasandler.com/2017/11/29/Write-a-Compiler.html)\n  - [Part 2: Unary Operators](https://norasandler.com/2017/12/05/Write-a-Compiler-2.html)\n  - [Part 3: Binary Operators](https://norasandler.com/2017/12/15/Write-a-Compiler-3.html)\n  - [Part 4: Even More Binary Operators](https://norasandler.com/2017/12/28/Write-a-Compiler-4.html)\n  - [Part 5: Local Variables](https://norasandler.com/2018/01/08/Write-a-Compiler-5.html)\n  - [Part 6: Conditionals](https://norasandler.com/2018/02/25/Write-a-Compiler-6.html)\n  - [Part 7: Compound Statements](https://norasandler.com/2018/03/14/Write-a-Compiler-7.html)\n  - [Part 8: Loops](https://norasandler.com/2018/04/10/Write-a-Compiler-8.html)\n  - [Part 9: Functions](https://norasandler.com/2018/06/27/Write-a-Compiler-9.html)\n  - [Part 10: Global Variables](https://norasandler.com/2019/02/18/Write-a-Compiler-10.html)\n- [Implementing a Language with LLVM](https://llvm.org/docs/tutorial/#kaleidoscope-implementing-a-language-with-llvm)\n- [Meta Crush Saga: a C++17 compile-time game](https://jguegant.github.io//jguegant.github.io/blogs/tech/meta-crush-saga.html)\n- [High-Performance Matrix Multiplication](https://gist.github.com/nadavrot/5b35d44e8ba3dd718e595e40184d03f0)\n- Space Invaders from Scratch\n  - [Part 1](http://nicktasios.nl/posts/space-invaders-from-scratch-part-1.html)\n  - [Part 2](http://nicktasios.nl/posts/space-invaders-from-scratch-part-2.html)\n  - [Part 3](http://nicktasios.nl/posts/space-invaders-from-scratch-part-3.html)\n  - [Part 4](http://nicktasios.nl/posts/space-invaders-from-scratch-part-4.html)\n  - [Part 5](http://nicktasios.nl/posts/space-invaders-from-scratch-part-5.html)\n- [Tetris Tutorial in C++ Platform Independent](http://javilop.com/gamedev/tetris-tutorial-in-c-platform-independent-focused-in-game-logic-for-beginners/)\n- Writing a Linux Debugger\n  - [Part 1: Setup](https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/)\n  - [Part 2: Breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-breakpoints/)\n  - [Part 3: Registers and memory](https://blog.tartanllama.xyz/writing-a-linux-debugger-registers/)\n  - [Part 4: Elves and dwarves](https://blog.tartanllama.xyz/writing-a-linux-debugger-elf-dwarf/)\n  - [Part 5: Source and signals](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-signal/)\n  - [Part 6: Source-level stepping](https://blog.tartanllama.xyz/writing-a-linux-debugger-dwarf-step/)\n  - [Part 7: Source-level breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-break/)\n  - [Part 8: Stack unwinding](https://blog.tartanllama.xyz/writing-a-linux-debugger-unwinding/)\n  - [Part 9: Handling variables](https://blog.tartanllama.xyz/writing-a-linux-debugger-variables/)\n  - [Part 10: Advanced topics](https://blog.tartanllama.xyz/writing-a-linux-debugger-advanced-topics/)\n- Let's write a compiler\n  - [Part 1: Introduction, selecting a language, and doing some planning](https://briancallahan.net/blog/20210814.html)\n  - [Part 2: A lexer](https://briancallahan.net/blog/20210815.html)\n  - [Part 3: A parser](https://briancallahan.net/blog/20210816.html)\n  - [Part 4: Testing](https://briancallahan.net/blog/20210817.html)\n  - [Part 5: A code generator](https://briancallahan.net/blog/20210818.html)\n  - [Part 6: Input and output](https://briancallahan.net/blog/20210819.html)\n  - [Part 7: Arrays](https://briancallahan.net/blog/20210822.html)\n  - [Part 8: Strings, forward references, and conclusion](https://briancallahan.net/blog/20210826.html)\n\n### Network programming\n\n- Let's Code a TCP/IP Stack\n\n  - [Part 1: Ethernet & ARP](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)\n  - [Part 2: IPv4 & ICMPv4](http://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/)\n  - [Part 3: TCP Basics & Handshake](http://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/)\n  - [Part 4: TCP Data Flow & Socket API](http://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/)\n  - [Part 5: TCP Retransmission](http://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/)\n\n- Programming concurrent servers\n\n  - [Part 1 - Introduction](https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/)\n  - [Part 2 - Threads](https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/)\n  - [Part 3 - Event-driven](https://eli.thegreenplace.net/2017/concurrent-servers-part-3-event-driven/)\n  - [Part 4 - libuv](https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/)\n  - [Part 5 - Redis case study](https://eli.thegreenplace.net/2017/concurrent-servers-part-5-redis-case-study/)\n  - [Part 6 - Callbacks, Promises and async/await](https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/)\n\n- MQTT Broker from scratch\n  - [Part 1 - The protocol](https://codepr.github.io/posts/sol-mqtt-broker)\n  - [Part 2 - Networking](https://codepr.github.io/posts/sol-mqtt-broker-p2)\n  - [Part 3 - Server](https://codepr.github.io/posts/sol-mqtt-broker-p3)\n  - [Part 4 - Data structures](https://codepr.github.io/posts/sol-mqtt-broker-p4)\n  - [Part 5 - Topic abstraction](https://codepr.github.io/posts/sol-mqtt-broker-p5)\n  - [Part 6 - Handlers](https://codepr.github.io/posts/sol-mqtt-broker-p6)\n  - [Bonus - Multithreading](https://codepr.github.io/posts/sol-mqtt-broker-bonus)\n- [Networking from Scratch](https://github.com/TanayK07/networking-from-scratch)\n\n### OpenGL:\n\n- Creating 2D Breakout game clone in C++ with OpenGL\n  - [Breakout](https://learnopengl.com/In-Practice/2D-Game/Breakout)\n  - [Setting up](https://learnopengl.com/In-Practice/2D-Game/Setting-up)\n  - [Rendering Sprites](https://learnopengl.com/In-Practice/2D-Game/Rendering-Sprites)\n  - [Levels](https://learnopengl.com/In-Practice/2D-Game/Levels)\n  - Collisions\n    - [Ball](https://learnopengl.com/In-Practice/2D-Game/Collisions/Ball)\n    - [Collision detection](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection)\n    - [Collision resolution](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution)\n  - [Particles](https://learnopengl.com/In-Practice/2D-Game/Particles)\n  - [Postprocessing](https://learnopengl.com/In-Practice/2D-Game/Postprocessing)\n  - [Powerups](https://learnopengl.com/In-Practice/2D-Game/Powerups)\n  - [Audio](https://learnopengl.com/In-Practice/2D-Game/Audio)\n  - [Render text](https://learnopengl.com/In-Practice/2D-Game/Render-text)\n  - [Final thoughts](https://learnopengl.com/In-Practice/2D-Game/Final-thoughts)\n- [Handmade Hero](https://handmadehero.org)\n- [How to Make Minecraft in C++/OpenGL](https://www.youtube.com/playlist?list=PLMZ_9w2XRxiZq1vfw1lrpCMRDufe2MKV_) (video)\n\n## C#:\n\n- [Learn C# By Building a Simple RPG Game](http://scottlilly.com/learn-c-by-building-a-simple-rpg-index/)\n- [Create a Rogue-like game in C#](https://roguesharp.wordpress.com/)\n- [Create a Blank App with C# and Xamarin (work in progress)](https://www.intertech.com/Blog/xamarin-tutorial-part-1-create-a-blank-app/)\n- [Build iOS Photo Library App with Xamarin and Visual Studio](https://www.raywenderlich.com/134049/building-ios-apps-with-xamarin-and-visual-studio)\n- [Building the CoreWiki](https://www.youtube.com/playlist?list=PLVMqA0_8O85yC78I4Xj7z48ES48IQBa7p) This is a Wiki-style content management system that has been completely written in C# with ASP.NET Core and Razor Pages. You can find the source code [here](https://github.com/csharpfritz/CoreWiki).\n\n## Clojure:\n\n- [Build a Twitter Bot with Clojure](http://howistart.org/posts/clojure/1/index.html)\n- [Building a Spell-Checker](https://bernhardwenzel.com/articles/clojure-spellchecker/)\n- [Building a JIRA integration with Clojure & Atlassian Connect](https://hackernoon.com/building-a-jira-integration-with-clojure-atlassian-connect-506ebd112807)\n- [Prototyping with Clojure](https://github.com/aliaksandr-s/prototyping-with-clojure)\n- [Tetris in ClojureScript](https://shaunlebron.github.io/t3tr0s-slides)\n\n## Dart:\n\n### Flutter:\n\n- [Amazon Clone with Admin Panel](https://youtu.be/O3nmP-lZAdg)\n- [Food Delivery App](https://youtu.be/7dAt-JMSCVQ)\n- [Google Docs Clone](https://youtu.be/0_GJ1w_iG44)\n- [Instagram",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "项目式学习",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 46,
+                "url": "https://github.com/zhensherlock/protocol-launcher",
+                "name": "zhensherlock/protocol-launcher",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"ai-tools\", \"api-configuration\", \"deep-link\", \"deeplink\", \"deeplinks\", \"esm\", \"launch-url\", \"llm-provider\", \"mcp\", \"mcp-installer\", \"modelcontextprotocol\", \"one-click\", \"protocol\", \"protocol-launcher\", \"quick-launcher\", \"tree-shaking\", \"typescript\", \"url-generator\", \"url-scheme\"]",
+                "archived": false,
+                "duration": "2-4天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:46",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+                "beginnerScore": 95,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 12,
+                "url": "https://github.com/pocket-stack/pocketjs",
+                "name": "pocket-stack/pocketjs",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]",
+                "archived": false,
+                "duration": "4-6天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:12",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 405,
+                "url": "https://github.com/dream-num/Luckysheet",
+                "name": "dream-num/Luckysheet",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "dream-num/Luckysheet",
+                "versionId": 624,
+                "documentId": 405,
+                "importable": false,
+                "catalogText": "<div align=\"center\">\n\n![logo](/docs/.vuepress/public/img/logo_text.png)\n\n[![Join the chat at https://gitter.im/mengshukeji/Luckysheet](https://badges.gitter.im/mengshukeji/Luckysheet.svg)](https://gitter.im/mengshukeji/Luckysheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n<a href=\"https://twitter.com/intent/follow?screen_name=luckysheet\">\n        <img src=\"https://img.shields.io/twitter/follow/luckysheet?style=social&logo=twitter\"\n            alt=\"follow on Twitter\"></a>\n\n</div>\n\n中文 | [English](./README.md)\n\n# Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。\n\n更多详情请关注 [#1454](https://github.com/dream-num/Luckysheet/issues/1454) 议题。\n\n## 介绍\n🚀Luckysheet 是一款功能强大、配置简单、完全开源的在线电子表格，类似于 Excel。\n\n## 链接\n | 源代码 | 文档 | 演示 | 论坛 |\n | ------ | -------- | ------ | ------ |\n | [Github](https://github.com/mengshukeji/Luckysheet)| [在线文档](https://dream-num.github.io/LuckysheetDocs/) | [在线演示](https://dream-num.github.io/LuckysheetDemo) / [协同编辑演示](http://luckysheet.lashuju.com/demo/) | [中文论坛](https://support.qq.com/product/288322)  |\n | [Gitee 镜像](https://gitee.com/mengshukeji/Luckysheet)| [Gitee 在线文档](https://mengshukeji.gitee.io/LuckysheetDocs/) | [Gitee 在线演示](https://mengshukeji.gitee.io/luckysheetdemo/) | [Google 群组](https://groups.google.com/g/luckysheet) |\n\n![Demo](/docs/.vuepress/public/img/LuckysheetDemo.gif)\n\n## 插件\n\n若需导入、导出、打印等高级功能，请使用 [Univer](https://github.com/dream-num/univer/)\n\n## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n## 功能特性\n\n- **格式化**：样式、条件格式、文本对齐与旋转、文本截断、溢出、自动换行、多种数据类型、单元格分割样式\n- **单元格**：拖放、填充柄、多选、查找和替换、定位、合并单元格、数据验证\n- **行与列**：隐藏、插入、删除行或列、冻结、以及拆分文本\n- **操作**：撤销、重做、复制、粘贴、剪切、快捷键、格式刷、拖放选择\n- **公式与函数**：内置、远程和自定义公式\n- **表格**：筛选、排序\n- **增强功能**：数据透视表、图表、评论、协同编辑、插入图片、矩阵计算、截图、复制到其他格式、EXCEL 导入导出等。\n\n更详细的功能列表，请参阅：[功能特性](https://dream-num.github.io/LuckysheetDocs/guide/features.html)",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "dream-num/Luckysheet",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 225,
+                "url": "https://github.com/katspaugh/wavesurfer.js",
+                "name": "katspaugh/wavesurfer.js",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "katspaugh/wavesurfer.js",
+                "versionId": 444,
+                "documentId": 225,
+                "importable": false,
+                "catalogText": "# <img src=\"https://user-images.githubusercontent.com/381895/226091100-f5567a28-7736-4d37-8f84-e08f297b7e1a.png\" alt=\"标志\" height=\"60\" valign=\"middle\" /> wavesurfer.js\n\n[![npm](https://img.shields.io/npm/v/wavesurfer.js)](https://www.npmjs.com/package/wavesurfer.js) [![赞助](https://img.shields.io/badge/赞助我们-🤍-%23B14586)](https://github.com/sponsors/katspaugh)\n\n**Wavesurfer.js** 是一个交互式波形渲染和音频播放库，非常适合 Web 应用。它利用现代 Web 技术，提供强大且视觉上引人入胜的音频体验。\n\n<img width=\"626\" alt=\"波形截图\" src=\"https://github.com/katspaugh/wavesurfer.js/assets/381895/05f03bed-800e-4fa1-b09a-82a39a1c62ce\">\n\n---\n### 金牌赞助商 💖 [Closed Caption Creator](https://www.closedcaptioncreator.com) – 专业字幕编辑器\n---\n\n# 目录\n\n1. [快速开始](#快速开始)\n2. [API 参考](#api-参考)\n3. [插件](#插件)\n4. [CSS 样式](#css-样式)\n5. [常见问题](#常见问题)\n6. [开发](#开发)\n7. [测试](#测试)\n8. [反馈](#反馈)\n\n## 快速开始\n\n安装并导入包：\n\n```bash\nnpm install --save wavesurfer.js\n```\n```js\nimport WaveSurfer from 'wavesurfer.js'\n```\n\n或者，插入一个 UMD 脚本标签，它会将库导出为全局变量 `WaveSurfer`：\n```html\n<script src=\"https://unpkg.com/wavesurfer.js@7\"></script>\n```\n\n创建一个 wavesurfer 实例，并传入各种[选项](https://wavesurfer.xyz/docs/api/options)：\n```js\nconst wavesurfer = WaveSurfer.create({\n  container: '#waveform',\n  waveColor: '#4F4A85',\n  progressColor: '#383351',\n  url: '/audio.mp3',\n})\n```\n\n导入一个插件，例如[区域插件](https://wavesurfer.xyz/examples/?regions.js)：\n```js\nimport Regions from 'wavesurfer.js/dist/plugins/regions.esm.js'\n```\n\n或者通过脚本标签导入，这将导出 `WaveSurfer.Regions`：\n```html\n<script src=\"https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.min.js\"></script>\n```\n\nTypeScript 类型已包含在包中，因此无需安装 `@types/wavesurfer.js`。\n\n查看更多[示例](https://wavesurfer.xyz/examples)。\n\n## 文档\n\n请访问我们网站上的 [wavesurfer.js 指南](https://wavesurfer.xyz/docs/)，获取面向初学者的实用文档，涵盖常见用例、插件、框架集成和故障排除。\n\n## API 参考\n\n完整的生成 API 参考位于 [wavesurfer.xyz/docs/api](https://wavesurfer.xyz/docs/api/)：\n\n * [方法](https://wavesurfer.xyz/docs/api/methods)\n * [选项](https://wavesurfer.xyz/docs/api/options)\n * [事件](https://wavesurfer.xyz/docs/api/events)\n\n## 插件\n\n我们维护了一系列官方插件，增加了各种额外功能：\n\n * [区域](https://wavesurfer.xyz/examples/?regions.js) – 音频区域的视觉叠加和标记\n * [时间轴](https://wavesurfer.xyz/examples/?timeline.js) – 在波形下方显示刻度线和时间标签\n * [缩略图](https://wavesurfer.xyz/examples/?minimap.js) – 一个小波形，作为主波形的滚动条\n * [包络](https://wavesurfer.xyz/examples/?envelope.js) – 用于添加淡入淡出效果和控制音量的图形界面\n * [录音](https://wavesurfer.xyz/examples/?record.js) – 从麦克风录制音频并渲染波形\n * [频谱图](https://wavesurfer.xyz/examples/?spectrogram.js) – 音频频谱的可视化（由 @akreal 编写）\n * [悬停](https://wavesurfer.xyz/examples/?hover.js) – 在波形悬停时显示一条竖线和时间戳\n\n## CSS 样式\n\nwavesurfer.js v7 渲染到 Shadow DOM 树中。这使其 CSS 与网页的其他部分隔离开。\n然而，仍然可以通过 `::part()` 伪选择器使用 CSS 来样式化各种 wavesurfer.js 元素。\n例如：\n\n```css\n#waveform ::part(cursor):before {\n  content: '🏄';\n}\n#waveform ::part(region) {\n  font-family: fantasy;\n}\n```\n\n你可以看到哪些元素",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "katspaugh/wavesurfer.js",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 400,
+                "url": "https://github.com/visgl/deck.gl",
+                "name": "visgl/deck.gl",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "visgl/deck.gl",
+                "versionId": 619,
+                "documentId": 400,
+                "importable": false,
+                "catalogText": "<p align=\"right\">\n  <a href=\"https://npmjs.org/package/deck.gl\">\n    <img src=\"https://img.shields.io/npm/v/deck.gl.svg?style=flat-square\" alt=\"version\" />\n  </a>\n  <a href=\"https://github.com/visgl/deck.gl/actions?query=workflow%3Atest+branch%3Amaster\">\n    <img src=\"https://github.com/visgl/deck.gl/workflows/test/badge.svg?branch=master\" alt=\"build\" />\n  </a>\n  <a href=\"https://npmjs.org/package/deck.gl\">\n    <img src=\"https://img.shields.io/npm/dm/@deck.gl/core.svg?style=flat-square\" alt=\"downloads\" />\n  </a>\n  <a href='https://coveralls.io/github/visgl/deck.gl?branch=master'>\n    <img src='https://img.shields.io/coveralls/visgl/deck.gl.svg?style=flat-square' alt='Coverage Status' />\n  </a>\n</p>\n\n<h1 align=\"center\">deck.gl | <a href=\"https://deck.gl\">官方网站</a></h1>\n\n<h5 align=\"center\"> GPU 驱动、高性能的大规模数据可视化</h5>\n\n[![docs](http://i.imgur.com/mvfvgf0.jpg)](https://visgl.github.io/deck.gl)\n\n\ndeck.gl 旨在简化基于 WebGL2/WebGPU 的大规模数据集的高性能可视化。用户可以通过组合现有图层，以最少的投入快速获得令人印象深刻的可视化效果，或利用 deck.gl 的可扩展架构来满足自定义需求。\n\ndeck.gl 将**数据**（通常为 JSON 对象数组）映射为一组可视化**图层**（例如图标、多边形、文本），并通过**视图**（例如地图、第一人称、正交）来观察它们。\n\ndeck.gl 开箱即用地处理了诸多挑战：\n\n* 大规模数据集的高性能渲染与更新\n* 交互式事件处理，如拾取、高亮和筛选\n* 地图投影及与主流底图提供商的集成\n* 一套经过验证、测试良好的图层目录\n\ndeck.gl 设计为高度可定制。所有图层都提供灵活的 API，允许对渲染的每个方面进行编程控制。所有核心类都易于用户扩展，以应对自定义用例。\n\n## 版本\n\n### Script 标签\n\n```html\n<script src=\"https://unpkg.com/deck.gl@latest/dist.min.js\"></script>\n```\n\n- [快速入门](/docs/get-started/using-standalone.md#using-the-scripting-api)\n- [完整示例](https://github.com/visgl/deck.gl/tree/master/examples/get-started/scripting)\n\n### NPM 模块\n\n```bash\nnpm install deck.gl\n```\n\n#### 纯 JavaScript\n\n- [快速入门](/docs/get-started/using-standalone.md)\n- [完整示例](/examples/get-started/pure-js)\n\n#### React\n\n- [快速入门](/docs/get-started/using-with-react.md)\n- [完整示例](/examples/get-started/react)\n\n### Python\n\n```bash\npip install pydeck\n```\n\n- [快速入门](https://deckgl.readthedocs.io/en/latest/installation.html)\n- [示例](https://deckgl.readthedocs.io/en/latest/layer.html)\n\n### 第三方扩展\n\n- [deckgl-typings](https://github.com/danmarshall/deckgl-typings) (TypeScript)\n- [mapdeck](https://symbolixau.github.io/mapdeck/articles/mapdeck.html) (R)\n- [vega-deck.gl](https://github.com/microsoft/SandDance/tree/master/packages/vega-deck.gl) ([Vega](https://vega.github.io/))\n- [earthengine-layers](https://earthengine-layers.com/) ([Google Earth Engine](https://earthengine.google.com/))\n- [deck.gl-native](https://github.com/UnfoldedInc/deck.gl-native) (C++)\n- [deck.gl-raster](https://github.com/kylebarron/deck.gl-raster/) (栅格计算)\n\n## 学习资源\n\n* [API 文档](https://deck.gl/docs)（最新版本）\n* [网站演示](https://deck.gl/examples)（附源代码链接）\n* [交互式演练场](https://deck.gl/playground)\n* [deck.gl Codepen 演示](https://codepen.io/vis-gl/)\n* [deck.gl Observable 演示](https://beta.observablehq.com/@pessimistress)\n* [vis.gl Medium 博客](https://medium.com/vis-gl)\n* [deck.gl Slack 工作区](https://slack-invite.openjsf.org/)\n\n## 参与贡献\n\ndeck.gl 是 vis.gl 的一部分，属于 [OpenJS 基金会](https://openjsf.org/) 项目。如有兴趣贡献，请阅读[贡献指南](/CONTRIBUTING.md)。\n\n## 致谢\n\n#### 数据来源\n\n数据来源在每个示例中列出。",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "visgl/deck.gl",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 282,
+                "url": "https://github.com/nurmohammed840/extension.vsix",
+                "name": "nurmohammed840/extension.vsix",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "nurmohammed840/extension.vsix",
+                "versionId": 501,
+                "documentId": 282,
+                "importable": false,
+                "catalogText": "## [Just Black for VS Code](https://github.com/nurmohammed840/extension.vsix/tree/Just-Black)  \n此深色主题专为语法高亮设计。\n\n<img src=\"https://raw.githubusercontent.com/nurmohammed840/extension.vsix/Just-Black/img/one.png\" width=\"500\"/>\n\n## [Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)  \n此扩展允许你运行 [Visual-Studio-Code API](https://code.visualstudio.com/api/references/vscode-api)。你也可以将其用作演练场。\n\n<img src=\"https://i.imgur.com/5PusvCK.gif\" alt=\"collaborate\" width=\"500\"/>\n\n### 协作\n\n<img src=\"https://miro.medium.com/max/6400/1*xe9kgx33a2DHVV3tCjFp2Q.jpeg\" alt=\"collaborate\" width=\"500\"/>\n\n你可以通过以下方式参与协作：\n- 报告错误\n- 提供反馈\n- 请求新功能\n- 重构部分代码 \n- 改进文档",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "nurmohammed840/extension.vsix",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 322,
+                "url": "https://github.com/vcync/modV",
+                "name": "vcync/modV",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "vcync/modV",
+                "versionId": 541,
+                "documentId": 322,
+                "importable": false,
+                "catalogText": "<h1 align=\"center\">modV</h1>\n<p align=\"center\"><img alt=\"modV logo\" src=\"https://github.com/vcync/modV/raw/main/build/icon.png\" width=\"256\" /></p>\n\n<p align=\"center\">\n  <a href=\"https://github.com/vcync/modV/releases/latest\">\n    <img alt=\"GitHub release (latest by date including pre-releases)\" src=\"https://img.shields.io/github/v/release/vcync/modV?color=blue&include_prereleases\" />\n  </a>\n  <a href=\"https://modv.vcync.io/\" target=\"_blank\">\n    <img alt=\"Documentation\" src=\"https://img.shields.io/badge/documentation-living-blue.svg\" />\n  </a>\n  <a href=\"https://github.com/vcync/modV/graphs/commit-activity\" target=\"_blank\">\n    <img alt=\"Maintenance\" src=\"https://img.shields.io/badge/Maintained%3F-yes-green.svg\" />\n  </a>\n  <a href=\"https://github.com/vcync/modV/blob/main/LICENSE\" target=\"_blank\">\n    <img alt=\"License: MIT\" src=\"https://img.shields.io/github/license/vcync/modV\" />\n  </a>\n  <a href=\"https://twitter.com/_modV_\" target=\"_blank\">\n    <img alt=\"Twitter: @_modV_\" src=\"https://img.shields.io/twitter/follow/_modV_.svg?style=social\" />\n  </a>\n</p>\n<p align=\"center\">\nmodV 是一个基于 Web 技术的模块化音频可视化环境。\n</p>\n\n\n## 下载\n\n在发布页面可以找到最新的 modV 二进制文件下载。\n\nhttps://github.com/vcync/modV/releases/latest\n\n\n\n## 项目开发环境搭建\n\n```\nyarn\n```\n\n### 编译和热重载（开发模式）\n\n```\nyarn electron:serve\n```\n\n### 构建用于发布\n\n```\nyarn electron:build\n```\n\n### 注意事项\n\n#### 移除一个包\n\n如果你想使用 `yarn remove` 移除一个包，请确保之后运行 `yarn`，因为我们使用了 `patch-package` 而没有使用 `postinstall-postinstall`，原因见 https://github.com/vcync/modV/issues/554 。\n\n\n\n## 针对不同平台的构建和开发说明\n\n### Windows\n\n#### 命令行\n\n需要使用 CMD 或 PowerShell，因为需要为 Windows 编译或获取原生二进制文件。不支持 WSL（适用于 Linux 的 Windows 子系统）或 WSL2，因为它们会尝试为 Ubuntu 编译这些二进制文件。\n\n#### 依赖\n\nnode-gyp 需要 Visual Studio 工具和 Python 来构建原生 Node 模块。\n从 Node.js 16 开始，官方的 Windows 安装程序可以安装它们。\n\n如果你使用 nvm-windows 或其他无界面的 Node.js 安装方式，可以使用 [Chocolatey](https://chocolatey.org/install) 轻松安装所需的包：\n\n```\nchoco install python visualstudio2022-workload-vctools\n```\n\n#### 'vue-cli-service' 未被识别\n\n请查看 issue 122 ([vcync/modv-3/issues/122#issuecomment-640100114](https://github.com/vcync/modv-3/issues/122#issuecomment-640100114)) 了解如何解决此问题。\n\n### Ubuntu/Debian\n\nNDI 源需要 libndi，必须安装才能构建 modV。你可以在这里找到下载：[Palakis/obs-ndi/releases](https://github.com/Palakis/obs-ndi/releases)\n\n最后成功构建的版本是 `libndi4_4.5.1-1_amd64.deb`。\n\n### 其他 Linux 发行版\n\n未测试。NDI 由 grandiose 提供，我们的分支在这里：[vcync/grandiose](https://github.com/vcync/grandiose/) 这个 grandiose 分支支持其他 libndi 平台，但即使在 Ubuntu 上我们也需要安装上述 libndi 包。\n\n请告诉我们你的进展（无论好坏），我们会相应更新仓库和文档。\n\n\n\n## 贡献\n\n欢迎贡献、反馈问题和提出功能请求！\n请随时查看 [issues 页面](https://github.com/vcync/modV/issues)。\n\n\n\n## 表达你的支持\n\n如果这个项目对你有帮助，请给一个 ⭐️ ！\n\n\n\n## 致谢\n\n感谢：\n\n- [Tim Pietrusky](https://nerddis.co/) 一直以来的支持、帮助、指导和善意\n- [Live:JS](http://livejs.network/) 提供的灵感、动力和建议\n- Hugh Rawlinson、Nevo Segal 和 Jakub Fiala 开发的出色的音频分析引擎 [meyda](https://github.com/hughrawlinson/meyda)\n- [Dario Villanueva](http://alolo.co/) 提供的建议和对实时视觉效果的介绍，这启发了整个项目\n\n\n\n## 许可证\n\n版权所有 © 2022 [vcync](https://g",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "vcync/modV",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 537,
+                "url": "https://github.com/aidizhi/455555.xyz",
+                "name": "aidizhi/455555.xyz",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "aidizhi/455555.xyz",
+                "versionId": 756,
+                "documentId": 537,
+                "importable": false,
+                "catalogText": "#爱爱大学最新地址 视频 官方 https://455555.xyz\n\n<p align=\"center\">\n  <img src=\"https://img.shields.io/npm/v/dataviz-canvas.svg?style=flat-square&color=1976d2\" alt=\"npm version\" />\n  <img src=\"https://img.shields.io/github/actions/workflow/status/aidizhi/455555.xyz/ci.yml?branch=main&style=flat-square&label=Build\" alt=\"Build Status\" />\n  <img src=\"https://img.shields.io/codecov/c/github/aidizhi/455555.xyz?style=flat-square&color=4caf50\" alt=\"Coverage\" />\n  <img src=\"https://img.shields.io/npm/l/dataviz-canvas.svg?style=flat-square&color=ff9800\" alt=\"License\" />\n  <img src=\"https://img.shields.io/badge/Material-Design-00bcd4.svg?style=flat-square\" alt=\"Material Design\" />\n</p>\n\n<h1 align=\"center\">DataViz Canvas</h1>\n\n<p align=\"center\">\n  <strong>高性能 Canvas 2D 数据可视化引擎</strong><br/>\n  基于 Material Design 规范，用 TypeScript 构建的轻量级图表渲染库\n</p>\n\n<p align=\"center\">\n  <a href=\"https://455555.xyz\" target=\"_blank\">官方演示站点</a> &nbsp;·&nbsp;\n  <a href=\"https://aidizhi.github.io/455555.xyz/\" target=\"_blank\">文档中心</a> &nbsp;·&nbsp;\n  <a href=\"#api-%E6%96%87%E6%A1%A3\">API 文档</a> &nbsp;·&nbsp;\n  <a href=\"#%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97\">贡献指南</a>\n</p>\n\n---\n\n## 特性\n\n- **纯 Canvas 2D 渲染** — 无 SVG 依赖，在万级数据点下依然保持 60fps 流畅动画\n- **Material Design 主题系统** — 内置 Light / Dark 双主题，颜色、圆角、阴影严格遵循 MD3 规范\n- **TypeScript 全量类型** — 100% TypeScript 编写，导出完整 `.d.ts` 声明文件，IDE 智能提示开箱即用\n- **插件化架构** — 通过 `use(plugin)` 注册自定义渲染器、交互行为和动画策略\n- **响应式 & 高清屏适配** — 自动感知 `devicePixelRatio`，支持容器尺寸热更新\n- **Tree-shakable** — 基于 ESM 打包，未使用的图表类型不会进入最终产物\n\n---\n\n## 安装\n\n```bash\n# npm\nnpm install dataviz-canvas\n\n# pnpm（推荐）\npnpm add dataviz-canvas\n\n# yarn\nyarn add dataviz-canvas\n```\n\n> 最低要求：Node.js >= 16 · 现代浏览器（Chrome 90+、Firefox 88+、Safari 15+）\n\n---\n\n## 快速开始\n\n### 1. 创建画布容器\n\n```html\n<canvas id=\"myChart\" width=\"800\" height=\"400\"></canvas>\n```\n\n### 2. 初始化图表实例\n\n```typescript\nimport { Chart, LinearScale, BarRenderer, MaterialTheme } from 'dataviz-canvas';\n\n// 创建图表实例，绑定 Canvas 元素\nconst chart = new Chart(document.getElementById('myChart')!, {\n  // 应用 Material Design 暗色主题\n  theme: MaterialTheme.dark,\n\n  // 坐标轴配置\n  scales: {\n    x: new LinearScale({ min: 0, max: 100, title: '时间 (ms)' }),\n    y: new LinearScale({ min: 0, max: 500, title: '请求数 (req/s)' }),\n  },\n\n  // 渲染器\n  renderers: [new BarRenderer()],\n});\n\n// 注入数据\nchart.setData({\n  labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],\n  datasets: [\n    {\n      label: 'API Gateway',\n      data: [120, 85, 340, 480, 390, 210],\n      color: '#1976D2', // Material Blue 700\n    },\n    {\n      label: 'Auth Service',\n      data: [60, 45, 190, 310, 260, 150],\n      color: '#7B1FA2', // Material Purple 700\n    },\n  ],\n});\n\n// 渲染并启动入场动画\nchart.render({ animation: { duration: 800, easing: 'easeOutCubic' } });\n```\n\n### 3. 响应容器尺寸变化\n\n```typescript\n// 图表自动跟随容器 resize，也可手动触发\nconst observer = new ResizeObserver(() => chart.resize());\nobserver.observe(document.getElementById('chart-wrapper')!);\n```\n\n### 4. 交互事件\n\n```typescript\nchart.on('hover', (point) => {\n  console.log(`悬停数据: ${point.dataset.label} = ${point.value}`);\n});\n\nchart.on('click', (point) => {\n  // 点击时弹出 Material 风格 Tooltip\n  chart.showTooltip(point, { elevation: 3 });\n});\n```\n\n---\n\n## 支持的图表类型\n\n| 图表类型 | 类名 | 说明 |\n|:--------:|:-----:|:-----|\n| 柱状图 | `BarRenderer` | 垂直/水平柱状图，支持堆叠与分组 |\n| 折线图 | `LineRenderer` | 平滑曲线/折线，支持面积填充与标记点 |\n| 饼图 | `PieRenderer` | 环形/饼图，支持交互式扇区分离 |\n| 散点图 | `ScatterRenderer` | 自由散点分布，支持聚类着色 |\n| 面积图 | `AreaRenderer` | 堆叠面积图，渐变透明填充 |\n| 雷达图 | `RadarRenderer` | 多维度雷达分析图 |\n| 热力图 | `HeatmapRenderer` | 二维色阶热力矩阵 |\n| 仪表盘 | `GaugeRenderer` | 弧形仪表盘，支持多指针 |\n\n---\n\n## API 文档\n\n### 核心：`Chart` 类\n\n| 方法 / 属性 | 签名 | 说明 |\n|:------------|:-----|:-----|\n| `new Chart()` | `(canvas: HTMLCanvasElement, options: ChartOptions) => Chart` | 构造图表实例 |\n| `setData()` | `(payload: ChartData) => void` | 设置或更新图表数据 |\n| `render()` | `(opts?: RenderOptions) => void` | 执行渲染（可选动画配置） |\n| `resize()` | `() => void` | 重新计算尺寸并重绘 |\n| `destroy()` | `() => void` | 销毁实例，释放 Canvas 上下文与事件监听 |\n| `on()` | `(event: string, handler: Function) => Chart` | 注册交互事件监听 |\n| `off()` | `(event: string, handler?: Function) => Chart` | 移除事件监听 |\n| `showTooltip()` | `(point: DataPoint, opts?: TooltipOptions) => void` | 在指定数据点弹出提示框 |\n| `use()` | `(plugin: ChartPlugin) => Chart` | 注册插件 |\n| `theme` | `ThemeConfig` (读写) | 运行时切换主题 |\n\n### 坐标轴：`LinearScale` / `CategoryScale`\n\n| 参数 | 类型 | 默认值 | 说明 |\n|:-----|:-----|:------:|:-----|\n| `min` | `number` | `auto` | 轴最小值 |\n| `max` | `number` | `auto` | 轴最大值 |\n| `title` | `string` | `''` | 轴标题文本 |\n| `ticks` | `number` | `5` | 刻度数量 |\n| `grid` | `boolean` | `true` | 是否显示网格线 |\n| `format` | `(v: number) => string` | `String` | 刻度值格式化函数 |\n\n### 渲染选项：`RenderOptions`\n\n| 参数 | 类型 | 默认值 | 说明 |\n|:-----|:-----|:------:|:-----|\n| `animation` | `object \\| false` | `{ duration: 600 }` | 入场动画配置，`false` 禁用 |\n| `animation.duration` | `number` | `600` | 动画时长 (ms) |\n| `animation.easing` | `string` | `'easeOutCubic'` | 缓动函数名 |\n| `pixelRatio` | `number` | `devicePixelRatio` | 手动指定像素比 |\n\n---\n\n## 性能基准\n\n在 `Chrome 120 / macOS 14 / M2 Pro` 环境下的测试结果：\n\n| 场景 | 数据量 | 首帧渲染 | 持续帧率 (fps) | 内存占用 |\n|:-----|-------:|---------:|:--------------:|---------:|\n| 柱状图 | 10,000 条 | 12ms | 60 | 3.2 MB |\n| 折线图 | 50,000 条 | 28ms | 58 | 5.8 MB |\n| 散点图 | 100,000 点 | 45ms | 55 | 8.4 MB |\n| 热力图 (100x100) | 10,000 格 | 18ms | 60 | 4.1 MB |\n| 多数据集叠加 | 5 x 10,000 | 35ms | 57 | 6.6 MB |\n\n> 性能测试脚本位于 `benchmarks/` 目录，可运行 `pnpm bench` 在本机复现。\n\n---\n\n## 浏览器兼容性\n\n| 浏览器 | 最低版本 | 支持状态 |\n|:-------|:-------:|:-------:|\n| Chrome | 90+ | ✅ 完全支持 |\n| Firefox | 88+ | ✅ 完全支持 |\n| Safari | 15+ | ✅ 完全支持 |\n| Edge | 90+ | ✅ 完全支持 |\n| IE 11 | — | ❌ 不支持 |\n| Node.js (SSR) | 16+ | ⚠️ 仅数据预处理 |\n\n> 底层依赖 Canvas 2D API，不依赖任何 Polyfill。服务端渲染时可使用 `node-canvas` 进行静态图片导出。\n\n---\n\n## 项目结构\n\n```\n455555.xyz/\n├── src/\n│   ├── core/            # 图表核心（Chart、Scale、Animation）\n│   ├── renderers/       # 各图表类型渲染器\n│   ├── themes/          # Material Design 主题定义\n│   ├── plugins/         # 内置插件（Tooltip、Legend、Zoom）\n│   ├── utils/           # 工具函数\n│   └── index.ts         # 入口导出\n├── benchmarks/          # 性能基准测试\n├── tests/               # Jest 单元测试 & 集成测试\n├── docs/                # API 文档与使用指南\n├── playground/          # Vite 交互式演示\n├── vite.config.ts\n├── tsconfig.json\n├── jest.config.ts\n└── package.json\n```\n\n---\n\n## 开发\n\n```bash\n# 克隆仓库\ngit clone https://github.com/aidizhi/455555.xyz.git\ncd 455555.xyz\n\n# 安装依赖\npnpm install\n\n# 启动本地开发服务器（Vite + HMR）\npnpm dev\n\n# 运行单元测试（Jest）\npnpm test\n\n# 运行测试并生成覆盖率报告\npnpm test:coverage\n\n# 构建生产产物\npnpm build\n\n# 运行性能基准测试\npnpm bench\n\n# 代码检查与格式化\npnpm lint && pnpm format\n```\n\n---\n\n## 贡献指南\n\n我们欢迎任何形式的贡献，包括但不限于提交 Bug 报告、改进文档或发起 Pull Request。\n\n在贡献前，请阅读完整的 [贡献指南 (CONTRIBUTING.md)](./CONTRIBUTING.md)，了解代码规范、提交信息格式和 PR 流程。\n\n提交流程概要：\n\n1. Fork 本仓库并创建特性分支 (`git checkout -b feature/my-feature`)\n2. 编写代码并确保通过所有测试 (`pnpm test`)\n3. 提交变更 (`git commit -m 'feat(renderer): add waterfall chart support'`)\n4. 推送到远程分支 (`git push origin feature/my-feature`)\n5. 创建 Pull Request，描述变更内容与动机\n\n---\n\n## 技术栈\n\n| 技术 | 用途 |\n|:----:|:-----|\n| TypeScript | 核心代码开发，类型安全 |\n| Vite | 开发服务器与生产构建 |\n| Jest | 单元测试 & 覆盖率 |\n| Canvas 2D API | 图表渲染引擎 |\n| Material Design 3 | 主题与视觉规范 |\n| npm / pnpm | 包管理与发布 |\n\n---\n\n## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n## 许可证\n\n本项目基于 [Apache-2.0 许可证](https://www.apache.org/licenses/LICENSE-2.0) 开源。\n\n```\nCopyright 2024 爱爱大学\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n```\n\n---\n\n<p align=\"center\">\n  <sub>Built with passion by <strong>爱爱大学</strong> · Hosted on GitHub</sub>\n</p>\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "pnpm（推荐）",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 307,
+                "url": "https://github.com/emilk/egui",
+                "name": "emilk/egui",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "emilk/egui",
+                "versionId": 526,
+                "documentId": 307,
+                "importable": false,
+                "catalogText": "# 🖌 egui: 纯 Rust 编写的易用 GUI 库\n\n[<img alt=\"github\" src=\"https://img.shields.io/badge/github-emilk/egui-8da0cb?logo=github\" height=\"20\">](https://github.com/emilk/egui)\n[![最新版本](https://img.shields.io/crates/v/egui.svg)](https://crates.io/crates/egui)\n[![文档](https://docs.rs/egui/badge.svg)](https://docs.rs/egui)\n[![禁止使用 unsafe](https://img.shields.io/badge/unsafe-forbidden-success.svg)](https://github.com/rust-secure-code/safety-dance/)\n[![构建状态](https://github.com/emilk/egui/workflows/Rust/badge.svg)](https://github.com/emilk/egui/actions/workflows/rust.yml)\n[![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/emilk/egui/blob/main/LICENSE-MIT)\n[![Apache](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/emilk/egui/blob/main/LICENSE-APACHE)\n[![Discord](https://img.shields.io/discord/900275882684477440?label=egui%20discord)](https://discord.gg/JFcEma9bJq)\n\n\n<br/>\n<div align=\"center\">\n<a href=\"https://www.egui.rs/\"><img src=\"https://github.com/user-attachments/assets/cfaf1d43-9338-490f-ae82-99b420baa1b0\" width=\"400\"></a>\n\n<br/>\n\n👉 [点击运行网页演示](https://www.egui.rs/#demo) 👈\n</div>\n\negui（发音为 \"e-gooey\"）是一个简单、快速、高度可移植的 Rust 即时模式 GUI 库。egui 可以运行在网页、原生平台以及[你喜爱的游戏引擎中](#integrations)。\n\negui 的目标是成为最易用的 Rust GUI 库，也是在 Rust 中制作网页应用的最简单方式。\n\negui 可以在任何能绘制纹理三角形的地方使用，这意味着你可以轻松将其集成到你选择的游戏引擎中。\n\n[`eframe`](https://github.com/emilk/egui/tree/main/crates/eframe) 是 egui 的官方框架，支持编写 Web、Linux、Mac、Windows 和 Android 应用。\n\n\n## 示例\n\n``` rust\nui.heading(\"My egui Application\");\nui.horizontal(|ui| {\n    ui.label(\"Your name: \");\n    ui.text_edit_singleline(&mut name);\n});\nui.add(egui::Slider::new(&mut age, 0..=120).text(\"age\"));\nif ui.button(\"Increment\").clicked() {\n    age += 1;\n}\nui.label(format!(\"Hello '{name}', age {age}\"));\nui.image(egui::include_image!(\"ferris.png\"));\n```\n\n<img alt=\"深色模式\" src=\"https://github.com/user-attachments/assets/3b446d29-99d8-4c82-86bb-4d8ef0516017\"> &nbsp; &nbsp; <img alt=\"浅色模式\" src=\"https://github.com/user-attachments/assets/a5e7da93-89a8-4ba0-86b8-0fa2228a4f62\" height=\"278\">\n\n## 目录：\n\n* [示例](#示例)\n* [快速上手](#快速上手)\n* [演示](#演示)\n* [目标](#目标)\n* [状态 / 功能](#状态)\n* [依赖](#依赖)\n* [egui 适合谁？](#who-is-egui-for)\n* [集成](#集成)\n* [为什么选择即时模式](#为什么选择即时模式)\n* [常见问题](#常见问题)\n* [其他](#其他)\n* [致谢](#致谢)\n\n([egui 的中文翻译文档](https://github.com/Re-Ch-Love/egui-doc-cn/blob/main/README_zh-hans.md))\n\n\n## 快速上手\n\n[`examples/` 文件夹](https://github.com/emilk/egui/blob/main/examples/)中有一些简单的示例。如果你想编写一个网页应用，请访问 <https://github.com/emilk/eframe_template/> 并按照说明操作。官方文档位于 <https://docs.rs/egui>。如需灵感和更多示例，请查看 [egui 网页演示](https://www.egui.rs/#demo) 并跟随其中的链接查看源代码。\n\n如果你想将 egui 集成到现有引擎中，请前往[集成](#集成)部分。\n\n如果你有问题，请使用 [GitHub Discussions](https://github.com/emilk/egui/discussions)。此外还有 [egui discord 服务器](https://discord.gg/JFcEma9bJq)。如果你想为 egui 做出贡献，请阅读[贡献指南](https://github.com/emilk/egui/blob/main/CONTRIBUTING.md)。\n\n## 演示\n\n[点击运行 egui 网页演示](https://www.egui.rs/#demo)（适用于任何支持 Wasm 和 WebGL 的浏览器）。使用 [`eframe`](https://github.com/emilk/egui/tree/main/crates/eframe) 构建。\n\n要在本地测试演示应用，请运行 `cargo run --release -p egui_demo_app`。\n\n原生后端是 [`egui-wgpu`](https://github.",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "🖌 egui: 纯 Rust 编写的易用 GUI 库",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 60,
+                "url": "https://github.com/processing/p5.js",
+                "name": "processing/p5.js",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "processing/p5.js",
+                "versionId": 279,
+                "documentId": 60,
+                "importable": false,
+                "catalogText": "[![npm 版本](https://badge.fury.io/js/p5.svg)](https://www.npmjs.com/package/p5)\n[![所有贡献者](https://img.shields.io/github/all-contributors/processing/p5.js?color=ee8449)](#贡献者)\n[![总下载量](https://img.shields.io/npm/dt/p5)](https://www.npmjs.com/package/p5)\n\n# [p5.js](https://p5js.org)\n\n欢迎！👋👋🏿👋🏽👋🏻👋🏾👋🏼\n\np5.js 是一个免费、开源的 JavaScript 库，用于[无障碍](https://p5js.org/contribute/access)创意编程。它是一个充满关爱的社区、一门平易近人的语言、一件探索工具、一个无障碍的环境、一个包容的平台，热情而有趣，面向艺术家、设计师、教育工作者、初学者以及所有其他人！\n\n<table>\n<tr>\n<td>\n\n```js\nfunction setup() {\n  createCanvas(400, 400);\n  background(255);\n}\n\nfunction draw() {\n  circle(mouseX, mouseY, 80);\n}\n```\n\n</td>\n<td>\n\n<img src=\"./contributor_docs/images/p5-readme-sketch.png\" width=\"200\" height=\"200\" />\n\n</td>\n</tr>\n</table>\n\n[快速入门](https://p5js.org/tutorials/get-started/) — [参考文档](https://p5js.org/reference) — [教程](https://p5js.org/tutorials) — [示例](https://p5js.org/examples/) — [库](https://p5js.org/libraries) — [论坛](https://discourse.processing.org/c/p5js) — [Discord](https://discord.p5js.org)\n\n## 关于\n\np5.js 的构建和组织以[无障碍、包容、社区和乐趣](https://p5js.org/community)为优先。如同素描一样，p5.js 拥有一整套绘图工具。它还支持为网页创作视听、交互、实验和生成式作品。p5.js 让你把网页当作你的画布。p5.js 支持多种语言，并拥有丰富的[文档](https://p5js.org/reference/)和视觉示例。你可以在 p5.js 网站上找到[教程](https://p5js.org/tutorials/)，并立即在 [p5.js 网页编辑器](https://editor.p5js.org/)中开始编码。你可以通过社区创作的众多[库](https://p5js.org/libraries/)来扩展 p5.js 的功能。其社区为创作者提供了无尽的灵感和支持。\n\np5.js 鼓励迭代和探索式的代码，以进行创意表达。其友好、多元的社区分享艺术、代码和学习资源，帮助提升每一种声音。我们秉持开源和人人可及的理念，自由地学习、创作、想象、设计、分享和编码。\n\n## 社区\n\np5.js 社区因共同探索用技术创作艺术与设计而凝聚在一起。我们是一个由各种性别认同与表达、性取向、种族、民族、语言、神经类型、体型、残障状况、阶级、种姓、宗教、文化、亚文化、移民身份、年龄、技能水平、职业和背景的人组成的社区，并与他们团结一致。我们声援正义与解放运动。我们致力于承认、消除并防止阻碍人们接触 p5.js 代码和 p5.js 社区的障碍。\n\n了解更多关于[我们的社区](https://p5js.org/community/)，并阅读我们的社区声明和[行为准则](https://github.com/processing/p5.js/blob/main/CODE_OF_CONDUCT.md)。你可以通过向[Processing 基金会](https://processingfoundation.org/support)捐款来直接支持我们的 p5.js 工作。\n\n## 问题\n\n如果你在 p5.js 库中发现了 bug，或者想请求新功能，欢迎提交 issue！请参阅我们的[贡献者指南](https://p5js.org/contribute/contributor_guidelines)以了解完整的贡献流程。我们提供了一套用于报告问题和请求功能的模板，以帮助你（和我们！）。p5.js 的不同部分位于不同的仓库中。你可以通过以下链接在对应的仓库中提交 issue：\n\n[p5.js](https://github.com/processing/p5.js/issues) — [p5.js 网站](https://github.com/processing/p5.js-website/issues) — [p5.js 网页编辑器](https://github.com/processing/p5.js-web-editor/issues)\n\np5.js 主要由志愿者维护，因此感谢你的耐心等待。",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "processing/p5.js",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "Vue Vue 前端框架 Vue.js 开发 Vue 单页应用",
+              "topic": [
+                "Vue"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "Vue",
+              "candidates": [
+                {
+                  "key": "BEGINNER_PROJECT:36",
+                  "purpose": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:75",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Project Based Learning\n\n[![Gitter](https://badges.gitter.im/practical-tutorials/community.svg)](https://gitter.im/practical-tutorials/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Link rot sweep](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml/badge.svg)](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml)\n\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are di"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:46",
+                  "purpose": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:12",
+                  "purpose": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:405",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <div align=\"center\">\n\n![logo](/docs/.vuepress/public/img/logo_text.png)\n\n[![Join the chat at https://gitter.im/mengshukeji/Luckysheet](https://badges.gitter.im/mengshukeji/Luckysheet.svg)](https://gitter.im/mengshukeji/Luckysheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n<a href=\"https://twitter.com/intent/follow?screen_name=luckysheet\">\n        <img src=\"https://img.shields.io/twitter/follow/luckysheet?style=social&logo=twitter\"\n            alt=\"follow on Twitter\"></a>\n\n</div>\n\n中文 | [English](./README.md)\n\n# Luckysheet 已停止"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:225",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # <img src=\"https://user-images.githubusercontent.com/381895/226091100-f5567a28-7736-4d37-8f84-e08f297b7e1a.png\" alt=\"标志\" height=\"60\" valign=\"middle\" /> wavesurfer.js\n\n[![npm](https://img.shields.io/npm/v/wavesurfer.js)](https://www.npmjs.com/package/wavesurfer.js) [![赞助](https://img.shields.io/badge/赞助我们-🤍-%23B14586)](https://github.com/sponsors/katspaugh)\n\n**Wavesurfer.js** 是一个交互式波形渲染和音频播放库，非常适合 Web 应用。它利用现代 Web 技术，提供强大且视觉上引人入胜的音频体验。\n\n<img width=\"626\" alt=\"波形截图\" src=\"https://github.com/katspaugh/wavesurfer.js/assets/381895/05f03bed-800e-4fa1-b09a-82a39a"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:400",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <p align=\"right\">\n  <a href=\"https://npmjs.org/package/deck.gl\">\n    <img src=\"https://img.shields.io/npm/v/deck.gl.svg?style=flat-square\" alt=\"version\" />\n  </a>\n  <a href=\"https://github.com/visgl/deck.gl/actions?query=workflow%3Atest+branch%3Amaster\">\n    <img src=\"https://github.com/visgl/deck.gl/workflows/test/badge.svg?branch=master\" alt=\"build\" />\n  </a>\n  <a href=\"https://npmjs.org/package/deck.gl\">\n    <img src=\"https://img.shields.io/npm/dm/@deck.gl/core.svg?style=flat-square\" alt=\"downloads\" />\n  </a>\n  <a href='https://coveralls.io/github/visgl"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:282",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 ## [Just Black for VS Code](https://github.com/nurmohammed840/extension.vsix/tree/Just-Black)  \n此深色主题专为语法高亮设计。\n\n<img src=\"https://raw.githubusercontent.com/nurmohammed840/extension.vsix/Just-Black/img/one.png\" width=\"500\"/>\n\n## [Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)  \n此扩展允许你运行 [Visual-Studio-Code API](https://code.visualstudio.com/api/references/vscode-api)。你也可以将其用作演练场。\n\n<img src=\"https://i.imgur.com/5PusvCK.gif\" alt=\"collaborate\" width=\"500\"/>\n\n### 协作\n\n<img src=\"https://miro.medium.com/max/6400/1*xe9kgx33a2DHVV3tCjFp2Q.jpeg"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:322",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <h1 align=\"center\">modV</h1>\n<p align=\"center\"><img alt=\"modV logo\" src=\"https://github.com/vcync/modV/raw/main/build/icon.png\" width=\"256\" /></p>\n\n<p align=\"center\">\n  <a href=\"https://github.com/vcync/modV/releases/latest\">\n    <img alt=\"GitHub release (latest by date including pre-releases)\" src=\"https://img.shields.io/github/v/release/vcync/modV?color=blue&include_prereleases\" />\n  </a>\n  <a href=\"https://modv.vcync.io/\" target=\"_blank\">\n    <img alt=\"Documentation\" src=\"https://img.shields.io/badge/documentation-living-blue.svg\" />\n  </a>\n  <a href=\"h"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:537",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 #爱爱大学最新地址 视频 官方 https://455555.xyz\n\n<p align=\"center\">\n  <img src=\"https://img.shields.io/npm/v/dataviz-canvas.svg?style=flat-square&color=1976d2\" alt=\"npm version\" />\n  <img src=\"https://img.shields.io/github/actions/workflow/status/aidizhi/455555.xyz/ci.yml?branch=main&style=flat-square&label=Build\" alt=\"Build Status\" />\n  <img src=\"https://img.shields.io/codecov/c/github/aidizhi/455555.xyz?style=flat-square&color=4caf50\" alt=\"Coverage\" />\n  <img src=\"https://img.shields.io/npm/l/dataviz-canvas.svg?style=flat-square&color=ff9800\" alt=\"License\" />\n  <img "
+                }
+              ]
+            },
+            "verdict": {
+              "matches": [
+                {
+                  "key": "BEGINNER_PROJECT:36",
+                  "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:12",
+                  "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                  "relation": "SUBTOPIC"
+                }
+              ]
+            },
+            "accepted": {
+              "topic": "Vue",
+              "proofs": {
+                "BEGINNER_PROJECT:12": {
+                  "rank": 2,
+                  "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                  "relation": "SUBTOPIC",
+                  "fingerprint": "ff12b7a1d5050d7350300831eaae0f3b172e56d748100be59b8c7969a8d9d468"
+                },
+                "BEGINNER_PROJECT:36": {
+                  "rank": 1,
+                  "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                  "relation": "DIRECT",
+                  "fingerprint": "68f7363790e9f94bc6a17da8894f18a4cc0b630d8eb081f6e9f6c7628fb869ad"
+                }
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01861042183622829,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10758,
+                  "content": "## 技术栈\nJavaScript,Vue\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 5,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                  "startOffset": 213,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.018430203676105317,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10771,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 252,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 5,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                  "startOffset": 229,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017830882352941176,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10773,
+                  "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                  "endOffset": 425,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 7,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 主题",
+                  "startOffset": 272,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017063492063492062,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10760,
+                  "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                  "endOffset": 365,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 7,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                  "startOffset": 256,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10757,
+                  "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                  "endOffset": 213,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 4,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                  "startOffset": 164,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10767,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 41,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 1,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 知识分类",
+                  "startOffset": 25,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10754,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 55,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 1,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 知识分类",
+                  "startOffset": 39,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10770,
+                  "content": "## 适合新手的原因\n清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                  "endOffset": 229,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 4,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                  "startOffset": 185,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10756,
+                  "content": "## 中文简介\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                  "endOffset": 164,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 3,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                  "startOffset": 119,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10769,
+                  "content": "## 中文简介\n浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                  "endOffset": 185,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 3,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                  "startOffset": 91,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10778,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 498,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 12,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 环境要求",
+                  "startOffset": 481,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10765,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 437,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 12,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 环境要求",
+                  "startOffset": 420,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10768,
+                  "content": "## 仓库地址\nhttps://github.com/pocket-stack/pocketjs\n\n",
+                  "endOffset": 91,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 2,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 仓库地址",
+                  "startOffset": 41,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10759,
+                  "content": "## 主要语言\nJavaScript\n\n",
+                  "endOffset": 256,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 6,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主要语言",
+                  "startOffset": 236,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10755,
+                  "content": "## 仓库地址\nhttps://github.com/JustArchiNET/ASF-WebConfigGenerator\n\n",
+                  "endOffset": 119,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 2,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 仓库地址",
+                  "startOffset": 55,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10772,
+                  "content": "## 主要语言\nTypeScript\n\n",
+                  "endOffset": 272,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 6,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 主要语言",
+                  "startOffset": 252,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10761,
+                  "content": "## 难度\nBEGINNER\n\n",
+                  "endOffset": 381,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 8,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 难度",
+                  "startOffset": 365,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10774,
+                  "content": "## 难度\nBEGINNER\n\n",
+                  "endOffset": 441,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 8,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 难度",
+                  "startOffset": 425,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10762,
+                  "content": "## 预计周期\n2-5天\n\n",
+                  "endOffset": 395,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 9,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 预计周期",
+                  "startOffset": 381,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10776,
+                  "content": "## 新手评分\n91\n\n",
+                  "endOffset": 467,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 10,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 新手评分",
+                  "startOffset": 455,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 26,
+              "candidateCount": 26,
+              "evidenceGroups": [
+                {
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "evidence": [
+                    {
+                      "score": 0.01861042183622829,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10758,
+                      "content": "## 技术栈\nJavaScript,Vue\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 5,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                      "startOffset": 213,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.017063492063492062,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10760,
+                      "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                      "endOffset": 365,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 7,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                      "startOffset": 256,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10757,
+                      "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                      "endOffset": 213,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 4,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                      "startOffset": 164,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:36",
+                  "bestScore": 0.01861042183622829,
+                  "sourceRef": "beginner:36",
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pocket-stack/pocketjs",
+                  "evidence": [
+                    {
+                      "score": 0.018430203676105317,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10771,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 252,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 5,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                      "startOffset": 229,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.017830882352941176,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10773,
+                      "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                      "endOffset": 425,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 7,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 主题",
+                      "startOffset": 272,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10767,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 41,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 1,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 知识分类",
+                      "startOffset": 25,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:12",
+                  "bestScore": 0.018430203676105317,
+                  "sourceRef": "beginner:12",
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "query": "Vue 项目功能 用途 实践示例 安装部署 环境依赖 限制 请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+              "projects": [
+                {
+                  "name": "JustArchiNET/ASF-WebConfigGenerator",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:36"
+                },
+                {
+                  "name": "pocket-stack/pocketjs",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:12"
+                }
+              ],
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "buildPrompt",
+          "detail": {
+            "evidence": [
+              {
+                "spans": [
+                  {
+                    "text": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 153,
+                    "startInChunk": 6
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10773,
+                "endOffset": 425,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E1",
+                "sectionPath": "pocket-stack/pocketjs > 主题",
+                "startOffset": 278,
+                "contentStartInChunk": 6
+              },
+              {
+                "spans": [
+                  {
+                    "text": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 109,
+                    "startInChunk": 6
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10760,
+                "endOffset": 365,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E2",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                "startOffset": 262,
+                "contentStartInChunk": 6
+              },
+              {
+                "spans": [
+                  {
+                    "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 44,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10770,
+                "endOffset": 229,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E3",
+                "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                "startOffset": 196,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 49,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10757,
+                "endOffset": 213,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E4",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                "startOffset": 175,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                    "spanId": "E5.S1",
+                    "endInChunk": 94,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10769,
+                "endOffset": 185,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E5",
+                "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                "startOffset": 99,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                    "spanId": "E6.S1",
+                    "endInChunk": 45,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10756,
+                "endOffset": 164,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E6",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                "startOffset": 127,
+                "contentStartInChunk": 8
+              }
+            ],
+            "question": "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。\n当前需求（只用于选择解释重点，不作为项目事实）：{\"goal\":\"学习\",\"experience\":\"一年编程基础\",\"topic\":[\"Vue\"]}",
+            "promptVersion": "customer-v4.13-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "validateEvidence",
+          "detail": {
+            "accepted": 4,
+            "rejected": []
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "verifyFacts",
+          "detail": {
+            "claims": [
+              {
+                "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "sourceRef": "beginner:36",
+                "sourceTitle": "JustArchiNET/ASF-WebConfigGenerator"
+              },
+              {
+                "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "sourceRef": "beginner:36",
+                "sourceTitle": "JustArchiNET/ASF-WebConfigGenerator"
+              },
+              {
+                "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "sourceRef": "beginner:12",
+                "sourceTitle": "pocket-stack/pocketjs"
+              },
+              {
+                "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "sourceRef": "beginner:12",
+                "sourceTitle": "pocket-stack/pocketjs"
+              }
+            ],
+            "verdict": {
+              "supportedIds": [
+                0,
+                1,
+                2,
+                3
+              ]
+            },
+            "supported": 4
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "practiceAdvice",
+          "detail": {
+            "kind": "SUGGESTION",
+            "promptVersion": "customer-v4.13-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

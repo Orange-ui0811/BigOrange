@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "annotationAuthority": "ASSISTANT_REVIEWED_NOT_USER_CONFIRMED",
+  "coverage": "Targeted spans with section context, not exhaustive annotation of every line",
+  "caseColumns": ["startLine", "endLine", "decision", "kind", "scope", "rule", "reason"],
+  "samples": [
+    {"id":46,"round":"initial18","split":"development","role":"FRAMEWORK","selection":"框架核心能力与周边产品边界、许可证徽章、安装代码","flags":[],"cases":[
+      [16,16,"KEEP","LICENSE","SOURCE_POINTER","R03","保留 MIT 许可线索；徽章不是完整许可证正文。"],
+      [17,17,"DROP","NOISE","STATISTICS","R01","下载量徽章不作为功能和适配证据。"],
+      [26,28,"KEEP","DEPLOYMENT","CORE","R04","完整保留 pip 安装命令。"],
+      [30,33,"KEEP","SOURCE_POINTER","RELATED_PRODUCT","R07","Deep Agents 与 JavaScript 库是相关产品入口，不能归为 LangGraph 本体已提供的能力。"],
+      [35,41,"KEEP","CAPABILITY","CORE","R02","保留框架定位、持久执行、人机协作和记忆声明；这是文档声明，不是运行验证。"],
+      [42,43,"KEEP","CAPABILITY","RELATED_PRODUCT","R07","LangSmith 调试和部署必须保留产品归属，不能自动归入开源框架自身。"]]},
+    {"id":50,"round":"initial18","split":"development","role":"RESOURCE_COLLECTION","selection":"学习资源仓库、贡献入口与装饰徽章区分","flags":[],"cases":[
+      [1,1,"KEEP","REPO_IDENTITY","RESOURCE_COLLECTION","R12","学习资源集合不是可部署业务应用。"],
+      [6,6,"KEEP","LICENSE","SOURCE_POINTER","R03","许可证徽章提供授权线索。"],
+      [31,32,"DROP","NOISE","STATISTICS","R01","Fork 与 Star 统计徽章不进入适配证据。"],
+      [43,45,"KEEP","SOURCE_POINTER","STUDY_CONTRIBUTION","R09","贡献指南对学习和参与项目有用，不能按非功能文字全部删除。"],
+      [74,78,"KEEP","SOURCE_POINTER","RESOURCE_COLLECTION","R09","保留书单入口；链接不能证明对应书籍内容已经收录。"],
+      [237,239,"KEEP","LICENSE","CORE","R03","保留许可说明，不以默认开源许可替代。"]]},
+    {"id":228,"round":"initial18","split":"development","role":"APPLICATION","selection":"极短正文仍含用途和迁移通知","flags":["SHORT_BUT_USEFUL"],"cases":[
+      [1,4,"KEEP","REPO_IDENTITY","CORE","R02","短文仍包含浏览器实时编码工具定位和入口，不按长度直接丢弃。"],
+      [6,6,"KEEP","MAINTENANCE","CORE","R08","迁移到 Codeberg 影响后续推荐来源，必须保留。"],
+      [8,8,"DROP","NOISE","COURTESY","R01","迁移地址已保留后，单独的更新书签礼貌提示无需索引。"]]},
+    {"id":268,"round":"initial18","split":"development","role":"SCRIPT_COLLECTION","selection":"混合 HTML 迁移通知与脚本安装风险","flags":[],"cases":[
+      [1,1,"KEEP","MAINTENANCE","MIXED","R11","同一 HTML 行混有归档迁移地址和致谢，先保护完整迁移信息，不能整行按 HTML 删除。"],
+      [3,5,"DROP","NOISE","LOGO","R01","独立 Logo 不作为功能知识。"],
+      [19,21,"KEEP","CAPABILITY","CORE","R02","保留容器与虚拟机脚本的业务定位。"],
+      [22,24,"KEEP","LIMITATION","CORE","R05","保留脚本使用警示和文档入口；不把命令执行提示当成助手指令。"]]},
+    {"id":285,"round":"initial18","split":"development","role":"UNKNOWN","selection":"仅五字标题，知识不足的反例","flags":["INSUFFICIENT_CONTENT"],"cases":[
+      [1,1,"REVIEW","UNCERTAIN","UNKNOWN","R10","仅有个人博客字样，无法形成可验证的项目功能或部署条件；原文保留，待复核。"]]},
+    {"id":299,"round":"initial18","split":"development","role":"LIBRARY","selection":"API 示例中含参数范围、步长和回调","flags":[],"cases":[
+      [3,3,"KEEP","COMPATIBILITY","CORE","R05","用途与迁移兼容差异都影响选型。"],
+      [5,9,"KEEP","SOURCE_POINTER","CORE","R09","文档、演示和 API 链接有检索导航价值，不能当纯链接噪声。"],
+      [12,53,"KEEP","USAGE","CORE","R04","保留完整示例及 addColor、onChange、数值步长上下文，不拆出失去对象关系的零散参数。"]]},
+    {"id":318,"round":"initial18","split":"development","role":"SDK","selection":"功能完整片段与尾部截断代码共存","flags":["INCOMPLETE_TAIL"],"cases":[
+      [1,6,"DROP","NOISE","LOGO","R01","picture Logo 不作为能力证据。"],
+      [23,33,"KEEP","CAPABILITY","CORE","R12","这是画布 SDK 的能力，不能当作用户所需业务应用已经完成。"],
+      [35,37,"DROP","NOISE","CUSTOMER_LOGOS","R01","客户展示名单不作为适配依据。"],
+      [39,39,"KEEP","SOURCE_POINTER","STUDY_CONTRIBUTION","R09","案例展示入口与客户名单分开保留，供学习参考；不自动继承案例中的能力。"],
+      [41,47,"KEEP","DEPLOYMENT","CORE","R04","保留已完整的安装代码。"],
+      [49,54,"REVIEW","UNCERTAIN","INCOMPLETE_CODE","R10","TSX 示例尾部截断，不能作为可执行完整示例；不连带删除此前完整说明。"]]},
+    {"id":329,"round":"initial18","split":"development","role":"APPLICATION_BUILDER","selection":"社区版、企业版 AI 功能边界及图片误推断","flags":["INCOMPLETE_TAIL"],"cases":[
+      [1,1,"KEEP","REPO_IDENTITY","CORE","R12","低代码构建器不等于已经完成库存管理系统。"],
+      [3,3,"DROP","NOISE","STAR_REQUEST","R01","求 Star 话术不进入检索证据。"],
+      [13,13,"KEEP","LICENSE","SOURCE_POINTER","R03","保留 AGPL 许可线索。"],
+      [16,18,"REVIEW","UNCERTAIN","IMAGE_ONLY","R10","示例图片的库存管理 alt 不能独立证明仓库提供该现成功能。"],
+      [26,35,"KEEP","CAPABILITY","COMMUNITY","R07","保留社区版标题和能力范围。"],
+      [37,41,"KEEP","CAPABILITY","ENTERPRISE","R07","企业 AI 能力必须携带企业版限定，不能向免费社区版迁移。"],
+      [54,55,"REVIEW","UNCERTAIN","INCOMPLETE_TEXT","R10","安装说明尾部不完整，待复核。"]]},
+    {"id":335,"round":"initial18","split":"validation","role":"LIBRARY","selection":"短正文中离线能力、模型体积与语言绑定","flags":["SHORT_BUT_USEFUL"],"cases":[
+      [3,3,"KEEP","CAPABILITY","CORE","R02","保留离线和语言支持声明，未来计划不能当作现有能力。"],
+      [5,5,"KEEP","DEPLOYMENT","CORE","R06","原文写作 50 Mb，单位未核实；不擅自换为 MB，也不外推所有模型内存和运行资源。"],
+      [7,7,"KEEP","COMPATIBILITY","CORE","R02","保留语言绑定支持。"],
+      [13,15,"KEEP","SOURCE_POINTER","CORE","R09","仅表示存在文档入口，不表示已收录安装细节。"]]},
+    {"id":354,"round":"initial18","split":"development","role":"APPLICATION","selection":"打印耗材业务、数据库替代选项、安装指针","flags":[],"cases":[
+      [1,5,"DROP","NOISE","LOGO","R01","独立 Logo 不进入功能知识。"],
+      [9,11,"KEEP","REPO_IDENTITY","CORE","R12","耗材管理场景明确，不能扩写为通用库存 ERP。"],
+      [16,28,"KEEP","CAPABILITY","CORE","R06","保留功能、REST API 和数据库选项；多种数据库是可选实现，不是全部必装。"],
+      [36,37,"REVIEW","UNCERTAIN","IMAGE_ONLY","R10","未读取图片内容，不能从图片 URL 推断功能。"],
+      [39,40,"KEEP","SOURCE_POINTER","CORE","R09","安装文档链接可保留，不能据此编造 Docker、内存或部署步骤。"]]},
+    {"id":357,"round":"initial18","split":"development","role":"APPLICATION","selection":"科研软件、DOI 和安全徽章、许可链接","flags":[],"cases":[
+      [1,1,"KEEP","SOURCE_POINTER","PUBLICATION","R09","DOI 是可追溯学术来源入口。"],
+      [3,3,"DROP","NOISE","CI_BADGE","R01","动态 CI 状态不证明冻结版本已经通过验证。"],
+      [4,4,"KEEP","SOURCE_POINTER","SECURITY","R09","安全评估徽章只保留为链接，不能声明项目已安全认证。"],
+      [6,8,"KEEP","CAPABILITY","CORE","R02","保留可视化、图像分析与多平台定位，不从项目名补充当前片段未写的领域限制。"],
+      [10,11,"KEEP","SOURCE_POINTER","CORE","R09","源码构建文档入口对二次开发有用。"],
+      [19,19,"KEEP","LICENSE","SOURCE_POINTER","R03","只确认许可入口，不能凭链接默认许可证类型。"]]},
+    {"id":408,"round":"initial18","split":"development","role":"APPLICATION","selection":"备份风险、功能支持矩阵及截断表格","flags":["INCOMPLETE_TAIL"],"cases":[
+      [3,3,"KEEP","LICENSE","SOURCE_POINTER","R03","保留 AGPL 许可信息。"],
+      [11,13,"DROP","NOISE","LOGO","R01","Logo 不构成功能依据。"],
+      [21,40,"DROP","NOISE","TRANSLATION_NAV","R01","README 翻译导航不等于产品支持这些界面语言。"],
+      [43,44,"KEEP","LIMITATION","CORE","R05","保留备份相关风险提示，不得仅抽取正向功能。"],
+      [74,93,"KEEP","CAPABILITY","SUPPORT_MATRIX","R06","表头和每行必须配对保留，移动端与 Web 的否或不适用不能丢失。"],
+      [94,94,"REVIEW","UNCERTAIN","INCOMPLETE_TABLE","R10","尾部残缺表格行不进入新的证据索引。"]]},
+    {"id":435,"round":"initial18","split":"development","role":"APPLICATION","selection":"HTML 外包装、稳定版本和部署选项","flags":["OUTER_HTML_WRAPPER"],"cases":[
+      [1,1,"DROP","NOISE","WRAPPER_ONLY","R11","仅允许去掉已配对的外层 html 围栏标记；结束标记在第 45 行，内部内容必须重新解析保留。"],
+      [15,15,"KEEP","REPO_IDENTITY","CORE","R02","保留音乐服务器用途。"],
+      [18,18,"KEEP","MAINTENANCE","CORE","R08","master 不稳定及推荐发布版本的限定影响部署。"],
+      [22,22,"KEEP","SOURCE_POINTER","MIXED","R11","反馈、贡献入口与社群邀请同在一行，不能删除有用入口。"],
+      [24,26,"KEEP","SOURCE_POINTER","CORE","R09","安装指南入口应保留。"],
+      [28,32,"KEEP","DEPLOYMENT","HOSTING_OPTION","R07","托管服务是部署替代方式，需保留服务归属，不能推断必须购买云服务。"],
+      [34,44,"KEEP","CAPABILITY","CORE","R06","保留平台和 Docker 支持；支持 Docker 不等于只能使用 Docker。"]]},
+    {"id":517,"round":"initial18","split":"validation","role":"LIBRARY","selection":"浏览器和 Node 条件差异、构建测试","flags":[],"cases":[
+      [67,71,"KEEP","COMPATIBILITY","BROWSER","R05","浏览器 ES2015 与 IE11 polyfill 条件一起保留。"],
+      [133,142,"KEEP","DEPLOYMENT","NODE_JS","R06","canvas 或 skia 是 Node 场景依赖选项，不施加给所有浏览器用途。"],
+      [157,163,"DROP","NOISE","SPONSOR_LOGOS","R01","赞助 Logo 列表不用于功能适配。"],
+      [169,175,"KEEP","USAGE","STUDY_CONTRIBUTION","R04","构建与测试步骤是学习源码和二次开发知识。"]]},
+    {"id":518,"round":"initial18","split":"validation","role":"APPLICATION","selection":"明确硬件下限、付费边界、附加许可条件","flags":[],"cases":[
+      [65,70,"KEEP","DEPLOYMENT","CORE","R06","CPU 至少 2 核、内存至少 4 GiB 的数值、单位与最低条件一起保留。"],
+      [74,81,"KEEP","DEPLOYMENT","DOCKER","R04","保留 compose 路径与命令顺序。"],
+      [104,108,"KEEP","CAPABILITY","CORE","R02","保留 RAG 和 Agent 功能声明。"],
+      [118,119,"REVIEW","UNCERTAIN","COMMERCIAL_OFFER","R10","免费调用额度可能过期，冻结正文不能证明当前优惠仍有效。"],
+      [121,126,"KEEP","DEPLOYMENT","EDITION_BOUNDARY","R07","社区版与企业版部署信息分清范围。"],
+      [212,214,"DROP","NOISE","STAR_HISTORY","R01","Star 曲线不作为能力依据。"],
+      [220,222,"KEEP","LICENSE","CORE","R03","Apache 基础加额外条件必须完整保留，不能简化为标准 Apache。"]]},
+    {"id":519,"round":"initial18","split":"validation","role":"BACKEND_PLATFORM","selection":"多平台 shell 代码、架构说明和许可","flags":[],"cases":[
+      [60,62,"REVIEW","UNCERTAIN","COMMERCIAL_OFFER","R10","公开测试与免费云服务描述需核实时间有效性。"],
+      [64,79,"KEEP","DEPLOYMENT","UNIX_SHELL","R04","Unix Docker 命令和转义按原文保留，只作知识数据。"],
+      [94,103,"KEEP","DEPLOYMENT","POWERSHELL","R04","PowerShell 反引号换行不能被 Markdown 清洗破坏。"],
+      [199,205,"KEEP","ARCHITECTURE","CORE","R02","架构结构用于源码学习和二次开发判断。"],
+      [221,223,"KEEP","LICENSE","CORE","R03","保留 BSD 许可表述。"]]},
+    {"id":523,"round":"initial18","split":"validation","role":"DOCUMENTATION_SITE","selection":"文档网站源码与主应用的身份区分","flags":[],"cases":[
+      [1,1,"DROP","NOISE","SOCIAL_BADGE","R01","社群成员数徽章不进入功能索引。"],
+      [2,2,"KEEP","LICENSE","SOURCE_POINTER","R03","保留 CC BY-NC-SA 许可线索，不能与核心应用许可混淆。"],
+      [6,8,"KEEP","REPO_IDENTITY","DOCS_SITE","R12","该仓库是网站源码，不是 Home Assistant 核心服务。"],
+      [24,38,"KEEP","DEPLOYMENT","DOCS_SITE","R04","命令用于网站本地预览，不能推荐为智能家居服务器部署步骤。"],
+      [40,52,"KEEP","USAGE","DOCS_SITE","R04","isolate 与 integrate 成对保留，避免只抽取临时修改而漏恢复动作。"]]},
+    {"id":543,"round":"initial18","split":"validation","role":"APPLICATION","selection":"模型前置服务、版本环境、迁移备份","flags":[],"cases":[
+      [128,134,"KEEP","DEPLOYMENT","VERSION_0_3_0","R06","保留 Python 3.8–3.11 与硬件选择的版本上下文。"],
+      [154,168,"KEEP","DEPLOYMENT","INFERENCE_SERVICE","R05","推理框架先行和独立环境警告不能与安装步骤分离。"],
+      [229,238,"KEEP","DEPLOYMENT","KNOWLEDGE_BASE","R04","Embedding 前置条件、知识库初始化命令和警告组成证据单元。"],
+      [315,320,"KEEP","COMPATIBILITY","MIGRATION","R05","备份与迁移兼容要求影响升级可行性。"],
+      [345,351,"DROP","NOISE","SOCIAL_QR","R01","社群二维码和群邀请不进入项目能力索引。"]]},
+    {"id":47,"round":"additional20","split":"development","role":"LIBRARY","selection":"轻量音频库的初始化顺序和源码目录","flags":[],"cases":[
+      [4,4,"KEEP","LICENSE","SOURCE_POINTER","R03","保留许可证徽章信息。"],
+      [5,5,"DROP","NOISE","CI_BADGE","R01","CI 徽章不是冻结版本的测试报告。"],
+      [7,9,"KEEP","CAPABILITY","CORE","R06","保留音频库用途和 11 kB 声明；不当作本轮实测大小。"],
+      [17,30,"KEEP","USAGE","CORE","R04","保留先 await ensureReady 再调用 click 的顺序，不能打乱初始化步骤。"],
+      [66,73,"KEEP","ARCHITECTURE","CORE","R02","monorepo 目录信息可用于源码学习。"]]},
+    {"id":54,"round":"additional20","split":"development","role":"EMBEDDED_LIBRARY","selection":"红外硬件、Arduino 环境和破坏性升级","flags":[],"cases":[
+      [3,3,"DROP","NOISE","CI_BADGE","R01","动态构建状态不作为硬件兼容证据。"],
+      [10,11,"KEEP","DEPLOYMENT","HARDWARE","R06","ESP8266 或 ESP32、Arduino、940 nm 红外条件一起保留。"],
+      [16,24,"KEEP","COMPATIBILITY","VERSION_BOUNDARY","R05","2.0 和 2.5 之前的破坏性变更需要保留版本条件。"],
+      [48,53,"KEEP","DEPLOYMENT","ARDUINO","R04","IDE 版本与各系统安装步骤有实际适配价值。"]]},
+    {"id":55,"round":"additional20","split":"development","role":"EMBEDDED_LIBRARY","selection":"典型内存条件与商业产品边界","flags":[],"cases":[
+      [43,50,"KEEP","DEPLOYMENT","CORE","R06","100 KB RAM、200–300 KB 闪存及屏幕缓冲条件按原文保留，不泛化为所有场景的最低值。"],
+      [52,54,"REVIEW","UNCERTAIN","MARKETING_COMPATIBILITY","R10","采用量与广泛兼容宣传不能证明任意硬件均可运行。"],
+      [56,56,"KEEP","CAPABILITY","PRO_EDITION","R07","Pro 导出和使用条件应归属商业产品，不能移植成核心库能力。"],
+      [284,295,"KEEP","LICENSE","EDITION_BOUNDARY","R03","核心 MIT 与 Pro 收费许可边界必须保留。"]]},
+    {"id":57,"round":"additional20","split":"development","role":"AUTOMATION_TOOL","selection":"浏览器前置条件、商业服务和发布清单","flags":[],"cases":[
+      [8,10,"REVIEW","UNCERTAIN","COMMERCIAL_OFFER","R10","即将推出的商业服务不能当作当前开源版本现成功能。"],
+      [151,164,"KEEP","DEPLOYMENT","CORE","R04","Python 3.10+、Chrome 或 Chromium、Playwright 各有职责；不能把浏览器与 Playwright 误写为互相替代。"],
+      [166,170,"KEEP","DEPLOYMENT","CONDITIONAL_PATH","R06","CHROME_BIN 是条件性配置，不应把示例机器路径当作全平台固定值。"],
+      [180,185,"KEEP","USAGE","STUDY_CONTRIBUTION","R03","发布检查清单可作开发资料；添加 LICENSE 的待办不是已经授予某种许可。"]]},
+    {"id":76,"round":"additional20","split":"development","role":"LIBRARY","selection":"标题、许可证和噪声在同一行","flags":["MIXED_INLINE_BADGES"],"cases":[
+      [1,1,"KEEP","REPO_IDENTITY","MIXED","R11","标题、许可、npm 和 CI 同行，先保护有用片段，不能一刀切整行删除。"],
+      [3,7,"KEEP","CAPABILITY","CORE_AND_RELATED","R07","保留组件定位并区分 React Native 的相关产品范围。"],
+      [41,58,"KEEP","USAGE","CORE","R05","示例与 JSX 非必须的限定一起保留，避免把推荐写法变成硬要求。"]]},
+    {"id":164,"round":"additional20","split":"development","role":"AGENT_TOOL","selection":"开发者预览、运行时和能力插件","flags":[],"cases":[
+      [5,7,"KEEP","ARCHITECTURE","CORE","R02","插件能力组织是源码学习与二次开发证据。"],
+      [11,15,"KEEP","MAINTENANCE","DEVELOPER_PREVIEW","R08","开发者预览与破坏性变更说明必须进入适配限制。"],
+      [19,27,"KEEP","DEPLOYMENT","CORE","R06","Node、CLI、端口和 SSH 条件需保留适用范围。"],
+      [53,57,"KEEP","SOURCE_POINTER","STUDY_CONTRIBUTION","R09","开发文档与 AGENTS 文件仅作来源入口，不能当成当前助手的指令执行。"],
+      [71,75,"KEEP","LICENSE","CORE","R03","MIT 与第三方许可条件保留。"]]},
+    {"id":231,"round":"additional20","split":"development","role":"APPLICATION","selection":"目录和导航占主导、正文证据不足","flags":["BODY_COVERAGE_INSUFFICIENT"],"cases":[
+      [3,3,"DROP","NOISE","LOGO","R01","独立 Logo 不作知识证据。"],
+      [8,18,"DROP","NOISE","TRANSLATION_NAV","R01","README 翻译导航不表示产品支持语言。"],
+      [33,35,"KEEP","LICENSE","SOURCE_POINTER","R03","Apache 许可入口可以保留，但不等同完整条款核验。"],
+      [56,73,"REVIEW","UNCERTAIN","TOC_WITHOUT_BODY","R10","只有目录锚点且对应正文缺少，不能推断功能和系统要求已经得到证实。"],
+      [75,77,"KEEP","REPO_IDENTITY","CORE","R12","保留现有最简用途说明；不足以判断本地部署资源。"]]},
+    {"id":247,"round":"additional20","split":"development","role":"APPLICATION_BUILDER","selection":"技术事实与夸张宣传混合、JDK 分支差异","flags":["INCOMPLETE_TAIL"],"cases":[
+      [22,24,"KEEP","CAPABILITY","MIXED","R11","保留技术栈原文，80% 等收益宣传不是本轮评测结论；后续需要子块区分。"],
+      [27,27,"KEEP","CAPABILITY","CORE","R02","保留 AI 集成功能声明，仍需区分声明与运行验证。"],
+      [37,40,"REVIEW","UNCERTAIN","MARKETING_SUITABILITY","R10","适合 ERP 或 CRM 及效率提升宣传不证明已提供完整业务应用。"],
+      [48,54,"KEEP","COMPATIBILITY","VERSION_MATRIX","R06","JDK 与版本分支表头、对应行一起保留。"],
+      [81,82,"KEEP","SOURCE_POINTER","CORE","R09","官网和演示链接已完整，尾部另一链接截断不影响这两行。"],
+      [83,83,"REVIEW","UNCERTAIN","INCOMPLETE_LINK","R10","该行混有完整与截断链接，暂待复核，后续安全拆分后只保留完整入口。"]]},
+    {"id":254,"round":"additional20","split":"development","role":"INTEGRATION","selection":"集成管理功能与捐赠链接区分","flags":[],"cases":[
+      [11,21,"KEEP","CAPABILITY","HOME_ASSISTANT","R02","保留集成、插件和前端管理能力及宿主范围。"],
+      [25,27,"KEEP","SOURCE_POINTER","CORE","R09","文档、配置和常见问题入口有导航价值。"],
+      [30,31,"DROP","NOISE","DONATION","R01","捐赠链接不用于项目匹配。"]]},
+    {"id":259,"round":"additional20","split":"development","role":"UI_COMPONENTS","selection":"零依赖的限定、定制限制和版本化功能","flags":["INCOMPLETE_TAIL"],"cases":[
+      [9,9,"DROP","NOISE","DONATION","R01","捐赠图片不进入证据。"],
+      [13,24,"KEEP","CAPABILITY","HOME_ASSISTANT","R05","零依赖指不依赖其他卡片，不意味着不依赖 Home Assistant。"],
+      [30,30,"KEEP","LIMITATION","CORE","R07","不支持深度定制的限制保留，所列替代项目的能力不归给 Mushroom。"],
+      [49,61,"KEEP","DEPLOYMENT","MANUAL_INSTALL","R04","YAML、安装路径和高级模式前提一起保留。"],
+      [95,103,"KEEP","COMPATIBILITY","VERSION_BOUNDARY","R06","旧卡片与 2024.8 模板徽章的版本区别保留。"],
+      [107,107,"REVIEW","UNCERTAIN","INCOMPLETE_TEXT","R10","主题说明尾部截断，待复核。"]]},
+    {"id":265,"round":"additional20","split":"development","role":"EMBEDDED_APPLICATION","selection":"离线唤醒与云端推理区分、OTA 升级限制","flags":[],"cases":[
+      [13,13,"REVIEW","UNCERTAIN","IMAGE_ONLY","R10","图片的控制万物宣传不足以证明具体设备兼容性。"],
+      [15,21,"KEEP","COMPATIBILITY","VERSION_BOUNDARY","R08","v1 与 v2 OTA 不兼容、手工烧录和维护时间按快照记录，不能宣称当前仍在维护。"],
+      [23,36,"KEEP","CAPABILITY","DEVICE_AND_CLOUD","R05","离线唤醒不等于完整离线对话；云端大模型和设备条件必须保留。"],
+      [51,58,"KEEP","SOURCE_POINTER","HARDWARE_COMPATIBILITY","R09","开发板入口包含兼容信息，不能因链接通向硬件页面就按广告删除。"]]},
+    {"id":278,"round":"additional20","split":"development","role":"FIRMWARE","selection":"正文主要是 Logo、许可及翻译表格","flags":["BODY_COVERAGE_INSUFFICIENT"],"cases":[
+      [1,1,"DROP","NOISE","LOGO","R01","独立 Logo 不作为硬件功能。"],
+      [3,3,"KEEP","REPO_IDENTITY","CORE","R12","仅能确认 3D 打印机固件定位，不能据此判断具体机型。"],
+      [6,6,"KEEP","LICENSE","SOURCE_POINTER","R03","GPL-V3.0 许可线索保留。"],
+      [16,49,"DROP","NOISE","TRANSLATION_NAV","R01","此 HTML 表格是翻译导航而非功能表；不能套用所有表格一律保留。"]]},
+    {"id":279,"round":"additional20","split":"validation","role":"DESKTOP_APPLICATION","selection":"官方来源警告表格和切片参数能力","flags":[],"cases":[
+      [7,7,"DROP","NOISE","TREND_BADGE","R01","趋势排名徽章不用于功能或可信度判断。"],
+      [34,46,"KEEP","LIMITATION","SOURCE_WARNING","R05","HTML 表格中的来源警告和版本下载指引必须保留，不能按样式标签删除。"],
+      [50,61,"KEEP","CAPABILITY","CORE","R02","校准、精度和切片设置不等于自主诊断自动调参 Agent。"]]},
+    {"id":284,"round":"additional20","split":"validation","role":"REFERENCE_IMPLEMENTATION","selection":"明确非生产用途、子模块和测试配置","flags":[],"cases":[
+      [1,3,"KEEP","LIMITATION","NON_PRODUCTION","R05","参考实现不适合生产必须与推荐一起呈现。"],
+      [7,11,"KEEP","ARCHITECTURE","NON_PRODUCTION","R12","子模块用途保留，继承第 1–3 行非生产限定。"],
+      [23,33,"KEEP","USAGE","BUILD_OPTIONS","R04","构建和跳过测试是不同命令，不能把跳过测试说成已验证。"],
+      [69,84,"KEEP","DEPLOYMENT","TEST_ENVIRONMENT","R05","配置优先级和测试环境限制保留。"],
+      [121,127,"KEEP","LICENSE","CORE","R03","保留 Apache 许可正文片段。"]]},
+    {"id":294,"round":"additional20","split":"validation","role":"ML_APPLICATION","selection":"Colab 徽章是运行入口，示例图不是效果证据","flags":["INCOMPLETE_TAIL"],"cases":[
+      [3,3,"DROP","NOISE","SPONSOR","R01","赞助推广不作项目能力证据。"],
+      [14,16,"KEEP","CAPABILITY","CORE","R02","保留图像转换用途及输入提示。"],
+      [19,23,"REVIEW","UNCERTAIN","IMAGE_ONLY","R10","未读取示例图像，不能自动声称输出质量。"],
+      [70,79,"KEEP","SOURCE_POINTER","RUNNABLE_DEMO","R09","Colab 和 RunwayML 按钮是运行入口，保留两种模型标签与各自链接；不能把第三方托管能力并入本仓库。"],
+      [104,104,"REVIEW","UNCERTAIN","INCOMPLETE_TEXT","R10","完整技术句和截断尾句混在一行，暂待复核；后续可拆出完整原句，不能补全残句。"]]},
+    {"id":306,"round":"additional20","split":"validation","role":"GAME_FRAMEWORK","selection":"HTML 示例、原生导出第三方依赖、体积表格","flags":["INCOMPLETE_TAIL"],"cases":[
+      [5,7,"DROP","NOISE","SOCIAL_STATISTICS","R01","社交和下载数量徽章不进入功能索引。"],
+      [9,11,"KEEP","CAPABILITY","CORE_AND_THIRD_PARTY","R07","框架不等于现成游戏；原生导出依赖第三方工具，需保留条件。"],
+      [35,49,"KEEP","USAGE","CORE","R04","HTML script 是有效调用示例，不是需要一律删除的页面装饰。"],
+      [67,77,"KEEP","DEPLOYMENT","BUILD_SIZE_MATRIX","R06","不同构建体积与 gzip 列含义一起保留。"],
+      [79,81,"REVIEW","UNCERTAIN","INCOMPLETE_TEXT","R10","尾部说明不完整，不能自行补齐功能。"]]},
+    {"id":344,"round":"additional20","split":"validation","role":"APPLICATION","selection":"推荐硬件不等于硬门槛、商标例外","flags":[],"cases":[
+      [1,3,"DROP","NOISE","LOGO","R01","独立 Logo 不作功能依据。"],
+      [15,17,"KEEP","DEPLOYMENT","CORE","R06","本地 NVR 和强烈建议 GPU 的限定保留，推荐条件不能升级成必需。"],
+      [34,36,"DROP","NOISE","DONATION","R01","捐赠信息不作适配判断。"],
+      [38,45,"KEEP","LICENSE","CODE_VS_TRADEMARK","R03","代码 MIT 与品牌商标例外必须同时保留。"]]},
+    {"id":378,"round":"additional20","split":"validation","role":"LIBRARY","selection":"维护者招募徽章和短文档有效知识","flags":["SHORT_BUT_USEFUL"],"cases":[
+      [3,3,"KEEP","MAINTENANCE","CORE","R08","寻求维护者徽章含维护状态信息，不是纯装饰。"],
+      [5,7,"KEEP","REPO_IDENTITY","VERSION_2","R12","短正文仍含版本和 SDK 定位。"],
+      [9,11,"KEEP","SOURCE_POINTER","CORE","R09","API 和文档链接可作后续导航，不虚构其内容。"]]},
+    {"id":421,"round":"additional20","split":"validation","role":"ISSUE_TRACKER","selection":"问题跟踪库不能作为现成阅读器推荐","flags":[],"cases":[
+      [1,5,"KEEP","REPO_IDENTITY","ISSUE_TRACKER","R12","仓库用于收集阅读系统问题，不是可部署的电子书阅读器。"],
+      [7,16,"KEEP","USAGE","STUDY_CONTRIBUTION","R12","问题报告模板对参与标准和问题研究有用，不证明实现了阅读功能。"]]},
+    {"id":561,"round":"additional20","split":"validation","role":"APPLICATION","selection":"打印设备兼容、安全限制、重量估计误差","flags":[],"cases":[
+      [15,24,"KEEP","CAPABILITY","CORE","R05","幽默叙述中仍含无云依赖、Docker、局域网与 SQLite 信息，不能按语气全部删除。"],
+      [97,104,"KEEP","DEPLOYMENT","BAMBU_LAN","R06","Docker、P1 或 X1 或 A1、LAN 访问条件是具体适配要求。"],
+      [118,123,"KEEP","DEPLOYMENT","CONFIGURATION","R05","保留环境变量配置及凭据不可提交的警示，只是来源知识，不读取用户密钥。"],
+      [168,179,"KEEP","LIMITATION","CORE","R05","单打印机、品牌限制和重量估算为零的失败情形必须进入证据。"],
+      [180,198,"KEEP","LIMITATION","CORE","R05","无 RFID、成本估计、币种仅符号、无认证和单 SQLite 都影响推荐，不能过滤为负面噪声。"]]}
+  ]
+}

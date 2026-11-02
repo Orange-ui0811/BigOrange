@@ -1,0 +1,788 @@
+{
+  "rows" : [ {
+    "id" : "S01",
+    "message" : "把这次项目的完成周期设为半年内，先记下就好",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已经记下：项目完成周期为半年内（不超过6个月）。后面有想补充的方向或语言偏好，随时告诉我。",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 6,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "半年内"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "durationSemantics" : {
+        "quantity" : 6,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 180,
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "半年内"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1346,
+        "completion_tokens" : 229,
+        "total_tokens" : 1575,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 128
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 78
+        },
+        "prompt_cache_hit_tokens" : 128,
+        "prompt_cache_miss_tokens" : 1218
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 2567,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2623
+  }, {
+    "id" : "S02",
+    "message" : "我最多能花一个半月做完，先记录这个条件",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已记录：项目时长最多一个半月（约6周），会优先给你推荐能在这个周期内完成的项目。还想补充技术方向或语言吗？",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 1.5,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "我最多能花一个半月做完"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "durationSemantics" : {
+        "quantity" : 1.5,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 45,
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "我最多能花一个半月做完"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1345,
+        "completion_tokens" : 236,
+        "total_tokens" : 1581,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 72
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 193
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1465,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1469
+  }, {
+    "id" : "S03",
+    "message" : "希望一个季度之内完成项目，先记下要求",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已记下：希望在一个季度（约3个月）之内完成项目，也就是项目周期不超过3个月。还想补充其他偏好吗？比如技术方向或语言。",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 3,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "一个季度之内完成项目"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "durationSemantics" : {
+        "quantity" : 3,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 90,
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "一个季度之内完成项目"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1344,
+        "completion_tokens" : 268,
+        "total_tokens" : 1612,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 106
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 192
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1809,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1811
+  }, {
+    "id" : "S04",
+    "message" : "I need to finish the project within a fortnight. Just note this condition.",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "收到～已经记下「两周内完成（fortnight = 2 周）」这个上限条件，也就是项目周期最好控制在 2 周以内，更短的项目也符合要求。等你准备好时，可以再告诉我技术方向或想练习的语言，我就能帮你筛合适的项目。",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 2,
+            "unit" : "WEEK",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "within a fortnight"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "durationSemantics" : {
+        "quantity" : 2,
+        "unit" : "WEEK",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 14,
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "within a fortnight"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1348,
+        "completion_tokens" : 316,
+        "total_tokens" : 1664,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 132
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 196
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1745,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1747
+  }, {
+    "id" : "S05",
+    "message" : "项目最多十二周完成，先记录",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已记录：项目周期最多 12 周（≤12 周内能完成的都可以）。接下来还想补充技术方向、语言或难度偏好吗？",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 12,
+            "unit" : "WEEK",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "项目最多十二周完成"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "durationSemantics" : {
+        "quantity" : 12,
+        "unit" : "WEEK",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 84,
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "项目最多十二周完成"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1341,
+        "completion_tokens" : 200,
+        "total_tokens" : 1541,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 40
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 189
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1346,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1348
+  }, {
+    "id" : "S06",
+    "message" : "希望三到四个月完成，短一些也可以，先记录",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已记录：希望项目能在四个月以内完成（三到四个月都可以，更短也没问题）。如果方便，也可以再告诉我你想学的技术方向或编程语言，我好帮你缩小范围。",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 4,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "希望三到四个月完成，短一些也可以"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "durationSemantics" : {
+        "quantity" : 4,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 120,
+      "provenance" : {
+        "maxDurationDays" : {
+          "source" : "MESSAGE",
+          "quote" : "希望三到四个月完成，短一些也可以"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1346,
+        "completion_tokens" : 342,
+        "total_tokens" : 1688,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 169
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 194
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1627,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1633
+  }, {
+    "id" : "S07",
+    "message" : "每天可以学两小时，暂时没有项目截止时间",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "了解～每天能投入两小时、暂时没有截止时间，节奏很灵活，可以从容一点选项目。方便说下你想练的技术方向或熟悉的语言吗？我好帮你缩小范围。",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : { },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1344,
+        "completion_tokens" : 633,
+        "total_tokens" : 1977,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 573
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 192
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 3869,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 3871
+  }, {
+    "id" : "S08",
+    "message" : "使用JS开发，Docker我并不排斥，先记录",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好嘞，我记下了：用 JavaScript 开发，同时不排斥 Docker。这两条已经存进你的条件里，接下来还想补充方向、难度或者时间上的偏好吗？",
+      "changes" : {
+        "language" : {
+          "value" : "JavaScript",
+          "quote" : "使用JS开发"
+        },
+        "allowDocker" : {
+          "value" : true,
+          "quote" : "Docker我并不排斥"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "JavaScript",
+      "provenance" : {
+        "language" : {
+          "source" : "MESSAGE",
+          "quote" : "使用JS开发"
+        },
+        "allowDocker" : {
+          "source" : "MESSAGE",
+          "quote" : "Docker我并不排斥"
+        }
+      },
+      "allowDocker" : true
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1344,
+        "completion_tokens" : 283,
+        "total_tokens" : 1627,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 121
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 192
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1713,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1716
+  }, {
+    "id" : "S09",
+    "message" : "我想用爪哇语言做作品来找份工作，先记下",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已记下：用 Java 做一个求职作品，目标是找工作。方便再告诉我你目前的 Java 基础（比如刚入门 / 有一些项目经验）和想做的方向吗？比如后端、Web、微服务或数据相关，这样我能更好帮你筛项目。",
+      "changes" : {
+        "goal" : {
+          "value" : "求职",
+          "quote" : "来找份工作"
+        },
+        "language" : {
+          "value" : "Java",
+          "quote" : "爪哇语言"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "goal" : "求职",
+      "provenance" : {
+        "goal" : {
+          "source" : "MESSAGE",
+          "quote" : "来找份工作"
+        },
+        "language" : {
+          "source" : "MESSAGE",
+          "quote" : "爪哇语言"
+        }
+      },
+      "language" : "Java"
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1347,
+        "completion_tokens" : 247,
+        "total_tokens" : 1594,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 69
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 195
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1505,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1507
+  }, {
+    "id" : "S10",
+    "message" : "需要二十个工作日做完，周末不做，先记录",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，我先把“二十个工作日完成、周末不安排”这条要求记下来。工作日和自然日不太好直接换算成项目周期，为了准确筛选项目，想确认一下：这二十个工作日大致想按多长的自然时长来看（例如约四周内完成）？",
+      "changes" : {
+        "allowDocker" : null
+      },
+      "positions" : [ ],
+      "pendingConditions" : [ {
+        "field" : "maxDurationDays",
+        "quote" : "需要二十个工作日做完，周末不做",
+        "question" : "这二十个工作日大致对应多长的自然日周期？例如是否相当于四周（约28天）内完成？"
+      } ]
+    },
+    "state" : {
+      "pendingConditions" : [ {
+        "question" : "关于“Docker要求”，请确认一下具体要求；其他已确认条件会保留。",
+        "field" : "allowDocker",
+        "quote" : "需要二十个工作日做完，周末不做，先记录"
+      }, {
+        "question" : "这二十个工作日大致对应多长的自然日周期？例如是否相当于四周（约28天）内完成？",
+        "field" : "maxDurationDays",
+        "quote" : "需要二十个工作日做完，周末不做"
+      } ]
+    },
+    "rejected" : [ {
+      "reason" : "INVALID_CONDITION",
+      "source" : "MESSAGE",
+      "field" : "allowDocker"
+    } ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1344,
+        "completion_tokens" : 470,
+        "total_tokens" : 1814,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 250
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 192
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 2894,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2896
+  }, {
+    "id" : "S11",
+    "message" : "至少半年才能体现项目规模，不能少于半年，先记录",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "明白，你希望项目周期至少半年，才足以体现项目规模，这个下限我先记下了。不过目前平台的周期筛选是按「上限（最多多少天完成）」来算的，所以想确认一下：这个项目你希望最晚多久完成，有没有可接受的最长周期上限？",
+      "changes" : { },
+      "pendingConditions" : [ {
+        "field" : "maxDurationDays",
+        "quote" : "至少半年才能体现项目规模，不能少于半年",
+        "question" : "你希望项目周期至少半年，那最多能接受多长的完成周期（上限）？"
+      } ],
+      "positions" : [ ]
+    },
+    "state" : {
+      "pendingConditions" : [ {
+        "question" : "你希望项目周期至少半年，那最多能接受多长的完成周期（上限）？",
+        "field" : "maxDurationDays",
+        "quote" : "至少半年才能体现项目规模，不能少于半年"
+      } ]
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1346,
+        "completion_tokens" : 394,
+        "total_tokens" : 1740,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 181
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 194
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 2120,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2122
+  }, {
+    "id" : "S12",
+    "message" : "只用Java，数据库和Docker都不想用，先记下",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，已记下：语言限定为 Java，不使用数据库，也不使用 Docker。要不要顺便告诉我你想找哪个技术方向（比如 Web、桌面、工具类），我好帮你缩小范围？",
+      "changes" : {
+        "language" : {
+          "value" : "Java",
+          "quote" : "只用Java"
+        },
+        "allowDatabase" : {
+          "value" : false,
+          "quote" : "数据库和Docker都不想用"
+        },
+        "allowDocker" : {
+          "value" : false,
+          "quote" : "数据库和Docker都不想用"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "provenance" : {
+        "language" : {
+          "source" : "MESSAGE",
+          "quote" : "只用Java"
+        },
+        "allowDatabase" : {
+          "source" : "MESSAGE",
+          "quote" : "数据库和Docker都不想用"
+        },
+        "allowDocker" : {
+          "source" : "MESSAGE",
+          "quote" : "数据库和Docker都不想用"
+        }
+      },
+      "allowDatabase" : false,
+      "allowDocker" : false
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1346,
+        "completion_tokens" : 378,
+        "total_tokens" : 1724,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 194
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 194
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 2157,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2159
+  }, {
+    "id" : "C01",
+    "message" : "你好",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "你好！我是项目推荐助手 \uD83D\uDE0A 告诉我你想练手或找灵感的方向，比如想学的语言、想做的主题，或者计划投入的时间，我来帮你挑合适的项目。",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : { },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1334,
+        "completion_tokens" : 144,
+        "total_tokens" : 1478,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 21
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 182
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1070,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1073
+  }, {
+    "id" : "C02",
+    "message" : "今天不想聊项目，我有点累，随便聊聊吧",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "当然可以，累了就先歇一歇，项目的事一点都不急。今天是忙了一整天，还是最近节奏一直比较紧？想吐槽两句、聊聊吃的、或者随便扯点别的都行，我陪你唠。",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : { },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1345,
+        "completion_tokens" : 210,
+        "total_tokens" : 1555,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 80
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 193
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1411,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1412
+  }, {
+    "id" : "C03",
+    "message" : "用一个简单例子解释一下Java依赖注入",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "简单说，依赖注入（DI）就是\"对象不去自己 new 依赖，而是由外部把依赖递进来\"。\n\n不用 DI 的写法：\nclass OrderService {\n    private PayService pay = new WechatPayService(); // 自己创建，写死了\n}\n\n用了 DI 的写法：\nclass OrderService {\n    private final PayService pay;\n    // 依赖由外部传进来，具体用微信还是支付宝，OrderService 不关心\n    OrderService(PayService pay) { this.pay = pay; }\n}\n\n好处是三件事：一是解耦，OrderService 只依赖接口；二是方便测试，测试时传一个假的 PayService 就行；三是替换实现只改装配处，业务代码不用动。\n\n而 Spring 这类框架做的，就是帮你自动完成上面那步\"传进来\"——扫描到 @Component/@Service 就创建好对象，看到构造器需要 PayService 就自动装配进去，你只写业务逻辑。常见的 @Autowired、构造器注入、@Configuration + @Bean 都是这个思路的不同表达方式。\n\n如果你后面想找一个能实际练手 DI / Spring 的项目，告诉我你偏好什么方向（比如后端接口、CRUD 业务系统），我可以帮你挑几个候选。",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : { },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1341,
+        "completion_tokens" : 459,
+        "total_tokens" : 1800,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 114
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 189
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 2686,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2688
+  }, {
+    "id" : "C04",
+    "message" : "哈哈哈\uD83D\uDE02",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "哈哈，看你心情不错\uD83D\uDE04 有什么想聊的，或者想找点项目练手，都可以跟我说～",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : { },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "usage" : {
+        "prompt_tokens" : 1335,
+        "completion_tokens" : 251,
+        "total_tokens" : 1586,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1152
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 141
+        },
+        "prompt_cache_hit_tokens" : 1152,
+        "prompt_cache_miss_tokens" : 183
+      },
+      "attempt" : 1,
+      "status" : "SUCCEEDED",
+      "costUsd" : "UNKNOWN",
+      "model" : "deepseek-flash",
+      "durationMs" : 1831,
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1834
+  } ],
+  "scope" : "Synthetic text only; no account profile, platform documents or real history",
+  "costUsd" : "UNKNOWN"
+}

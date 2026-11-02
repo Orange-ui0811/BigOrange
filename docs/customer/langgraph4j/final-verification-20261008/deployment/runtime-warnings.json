@@ -1,0 +1,40 @@
+{
+  "observations": [
+    {
+      "log": "automatic-rollback.log",
+      "flags": [
+        "SCHEDULED_TASK_AFTER_REDIS_STOP"
+      ]
+    },
+    {
+      "log": "binary-rollback.log",
+      "flags": [
+        "SCHEDULED_TASK_AFTER_REDIS_STOP"
+      ]
+    },
+    {
+      "log": "config-rollback.log",
+      "flags": [
+        "SCHEDULED_TASK_AFTER_REDIS_STOP"
+      ]
+    },
+    {
+      "log": "graph.log",
+      "flags": [
+        "BACKGROUND_NETWORK_ATTEMPT_BLOCKED",
+        "SCHEDULED_TASK_AFTER_REDIS_STOP",
+        "BACKGROUND_TASK_AFTER_DATABASE_CLOSE",
+        "BACKGROUND_EXECUTOR_SHUTDOWN_WAIT_EXPIRED"
+      ]
+    },
+    {
+      "log": "previous.log",
+      "flags": [
+        "SCHEDULED_TASK_AFTER_REDIS_STOP"
+      ]
+    }
+  ],
+  "cleanBackgroundShutdownAccepted": false,
+  "modelEgress": 0,
+  "scope": "Runtime logs of isolated rehearsal; background task shutdown must be reviewed before production release."
+}

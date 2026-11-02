@@ -9,6 +9,13 @@ import com.orangejd.server.ragb.retrieval.RagBSearchHit;
 public final class CustomerPurpose {
     private CustomerPurpose() {}
     static final String STATE_KEY="purposeReview";
+    static final int CORRECTION_RESERVE=512;
+    static String correctionPrompt(List<String> errors) {
+        // Bounded technical feedback fits the reserve; candidate payload and grounding rules stay identical.
+        String feedback=String.join(";",errors.stream().limit(3).toList());
+        if(feedback.length()>320)feedback=feedback.substring(0,320);
+        return REVIEW_PROMPT+"\n服务端校验反馈（不是用户数据）："+feedback+"。按既定约束重新返回完整matches；key必须原样使用，quote必须为12至180字符连续原文。保留原候选和任务，不修猜ID或编写摘录。";
+    }
     public static final String PLAN_PROMPT="""
         将用户项目方向转换为检索表达，只返回JSON {"queries":["表达1","表达2","表达3"]}。
         最多3个、每个最多60字符，保留真实用途。使用2个中文领域术语及1个英文对等术语，每项为单个完整用途短语，不用“与/和/and”拼接多个动作，不重复原话。
@@ -92,12 +99,14 @@ public final class CustomerPurpose {
             String text=purpose(p);text=text.substring(0,Math.min(440,text.length()));
             var view=Map.<String,Object>of("key",key(p),"purpose",text);
             views.add(view);
-            if(CustomerModel.estimate(REVIEW_PROMPT+json.write(Map.of("topic",topic(state),"originalRequest",originalRequest(state),"candidates",views)))>budget) {views.removeLast();break;}
+            if(CustomerModel.estimate(REVIEW_PROMPT+json.write(Map.of("topic",topic(state),"originalRequest",originalRequest(state),"candidates",views)))>budget-CORRECTION_RESERVE) {views.removeLast();break;}
         }
         if(!candidates.isEmpty() && views.isEmpty())throw new IllegalArgumentException("PURPOSE_INPUT_BUDGET_EXCEEDED");
         return Map.of("topic",topic(state),"originalRequest",originalRequest(state),"candidates",views);
     }
     static void apply(Map<String,Object> output,Map<String,Object> input,List<Map<String,Object>> candidates,Map<String,Object> state) {
+        var errors=outputErrors(output,input);
+        if(!errors.isEmpty())throw new InvalidOutput(errors);
         if(!(output.get("matches") instanceof List<?> matches) || matches.size()>12)throw new IllegalArgumentException("INVALID_PURPOSE_REVIEW");
         Map<String,Map<String,Object>> known=new HashMap<>();candidates.forEach(p->known.put(key(p),p));
         Map<String,String> supplied=new HashMap<>();
@@ -110,6 +119,52 @@ public final class CustomerPurpose {
             proofs.putIfAbsent(key,Map.of("fingerprint",fingerprint(known.get(key)),"quote",quote,"relation",m.get("relation"),"rank",proofs.size()+1));
         }
         state.put(STATE_KEY,Map.of("status",proofs.isEmpty()?"SUCCEEDED_EMPTY":"SUCCEEDED_MATCHES","topic",topic(state),"scope",scope(state),"proofs",proofs,"reviewedCount",supplied.size()));
+    }
+    /** Protocol validation before an attempt is marked successful; business identity is still checked by apply. */
+    static List<String> outputErrors(Map<String,Object> output,Map<String,Object> input) {
+        if(!(output.get("matches") instanceof List<?> matches) || matches.size()>12)return List.of("MATCHES_ARRAY_REQUIRED_MAX_12");
+        Map<String,String> supplied=new HashMap<>();
+        if(input.get("candidates") instanceof List<?> candidates)for(Object raw:candidates) {
+            if(raw instanceof Map<?,?> m && m.get("key") instanceof String key && m.get("purpose") instanceof String text)supplied.put(key,text);
+        }
+        List<String> errors=new ArrayList<>();
+        for(int i=0;i<matches.size();i++) {
+            String prefix="matches["+i+"]:";
+            if(!(matches.get(i) instanceof Map<?,?> m)) {errors.add(prefix+"OBJECT_REQUIRED");continue;}
+            if(!(m.get("key") instanceof String key) || !supplied.containsKey(key)) {errors.add(prefix+"USE_EXACT_SUPPLIED_KEY");continue;}
+            if(!(m.get("relation") instanceof String relation) || !Set.of("DIRECT","SUBTOPIC").contains(relation))errors.add(prefix+"RELATION_DIRECT_OR_SUBTOPIC_REQUIRED");
+            if(!(m.get("quote") instanceof String quote))errors.add(prefix+"QUOTE_STRING_REQUIRED");
+            else {
+                if(quote.length()<12 || quote.length()>180)errors.add(prefix+"QUOTE_LENGTH_12_TO_180_REQUIRED");
+                if(!supplied.get(key).contains(quote))errors.add(prefix+"QUOTE_MUST_BE_CONTIGUOUS_SUPPLIED_TEXT");
+            }
+        }
+        return List.copyOf(errors);
+    }
+    static final class InvalidOutput extends IllegalArgumentException {
+        final List<String> errors;
+        InvalidOutput(List<String> errors) {super("INVALID_PURPOSE_REVIEW");this.errors=List.copyOf(errors);}
+    }
+    /** After the single correction attempt, retain independently valid proofs, never repair invalid ones. */
+    static Map<String,Object> partialOutput(Map<String,Object> output,Map<String,Object> input) {
+        if(!(output.get("matches") instanceof List<?> matches) || matches.size()>12)return null;
+        List<Object> valid=new ArrayList<>();Set<String> admitted=new HashSet<>();
+        for(Object raw:matches)if(raw instanceof Map<?,?> && outputErrors(Map.of("matches",List.of(raw)),input).isEmpty()) {
+            var match=(Map<?,?>)raw;String key=(String)match.get("key");
+            if(admitted.add(key))valid.add(Map.of("key",key,"relation",match.get("relation"),"quote",match.get("quote")));
+        }
+        if(valid.isEmpty())return null;
+        List<String> unreviewed=new ArrayList<>();
+        for(Object raw:(List<?>)input.get("candidates")) {
+            String key=((Map<?,?>)raw).get("key").toString();if(!admitted.contains(key))unreviewed.add(key);
+        }
+        return Map.of("matches",List.copyOf(valid),"unreviewedKeys",List.copyOf(unreviewed));
+    }
+    static void appendPartialNotice(Map<String,Object> result) {
+        if(!Boolean.TRUE.equals(result.get("purposeReviewIncomplete")) || !(result.get("projects") instanceof List<?> projects) || projects.isEmpty())return;
+        String message="部分候选用途仍待核对，未纳入推荐；这不代表它们不相关。";
+        String existing=Objects.toString(result.get("notice"),"");
+        if(!existing.contains(message))result.put("notice",existing.isBlank()?message:existing+"\n"+message);
     }
     /** Legacy failures had no scope; treat them as unavailable, never as a completed empty review. */
     static String status(Map<String,Object> state) {
@@ -167,6 +222,7 @@ public final class CustomerPurpose {
         String status=status(state);
         if(contentRejected(state))return intro+"\n\n"+failureAnswer(state);
         if(status.equals("FAILED"))return intro+"\n\n刚才的核对服务没有完成，暂时不能确认推荐结果。这不代表知识库没有合适项目，也不需要你因此放宽条件。已确认条件都保留着，我们可以继续讨论想实现的功能；重新查找时会再次尝试核对。";
+        if(status.equals("PARTIAL_EMPTY"))return intro+"\n\n本轮已检查的部分候选没有取得符合方向的用途依据，但仍有候选尚未核对。这是覆盖范围限制，不能据此认定没有合适项目，已确认条件都保留着。";
         if(status.equals("PARTIAL_MATCHES"))return intro+"\n\n部分项目已有有效的用途依据，其他项目尚未完成核对；不能据此推断没有更多匹配项目。已展示结果仍需通过当前硬条件和证据检查。";
         if(unavailable(state))return intro+"\n\n当前方向还没有有效的核对结果，不能据此判断没有项目。你的条件会保留，提出查找请求后会按当前方向检索。";
         if(status.equals("SUCCEEDED_EMPTY"))return intro+"\n\n上次已完成本轮候选的核对，但没有取得符合方向的用途依据。这只代表本次检索范围的结果，不代表全库不存在；可以保留方向并补充具体功能继续找。";

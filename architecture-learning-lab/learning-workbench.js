@@ -1,0 +1,36 @@
+window.AgentLearningWorkbench = {
+  snapshot:{date:'2026-08-30',version:'learning-loop-v1'},
+  dailyTasks:[
+    {id:'runtime-state',title:'画出SystemTask状态机',minutes:35,lab:'runtime',proof:'状态图和合法转换',unlock:'理解任务生命周期'},
+    {id:'runtime-failure',title:'推演Worker宕机恢复',minutes:45,lab:'runtime',proof:'时间线、重复风险和幂等方案',unlock:'解释at-least-once'},
+    {id:'tool-schema',title:'验证一个MCP工具输入',minutes:30,lab:'mcp',proof:'3条合法样例和5条失败样例',unlock:'解释Schema与权限边界'},
+    {id:'trace-tree',title:'设计HTTP到模型调用的Span树',minutes:40,lab:'tracing',proof:'Span层级、低基数属性和错误事件',unlock:'区分RequestID与Tracing'},
+    {id:'context-budget',title:'完成上下文预算实验',minutes:40,lab:'context',proof:'两种裁剪策略对比',unlock:'上下文窗口C1证据'},
+    {id:'k8s-recovery',title:'设计Pod终止恢复验证',minutes:45,lab:'k8s',proof:'探针、优雅停机和租约恢复验收表',unlock:'本地K8s实验准备'},
+    {id:'dag-ready',title:'判断DAG节点就绪条件',minutes:35,lab:'dag',proof:'依赖、失败传播和补偿规则',unlock:'解释阶段流到DAG的演进'},
+  ],
+  labs:[
+    {id:'runtime',title:'Agent Runtime故障实验室',status:'implemented',level:'P0',summary:'用状态时间线理解claim、租约、心跳、宕机恢复和幂等。',knowledge:['任务生命周期','条件UPDATE原子claim','租约与心跳','at-least-once','幂等与fencing'],files:['orange-server/src/main/java/com/orangejd/server/foundation/task/SystemTaskService.java','orange-server/src/main/java/com/orangejd/server/foundation/task/SystemTaskMapper.java'],acceptance:['解释每个状态转换的前置条件','指出业务成功但状态未回写的窗口','给出副作用幂等键','说明旧Worker重叠风险']},
+    {id:'mcp',title:'MCP Tool安全实验室',status:'implemented',level:'P0',summary:'验证工具Schema、Scope、二阶段确认和失败类型。',knowledge:['Tool Schema','参数校验','Scope','prepare/confirm','审计与幂等'],files:['tools/OrangeVC-XiaoZhi-Connector/orangevc_xiaozhi_connector/mcp_server.py','orange-server/src/main/java/com/orangejd/server/service/AgentActionPreparationService.java'],acceptance:['合法输入通过检查','错误参数被拒绝','解释服务端重新鉴权','处理重复或过期confirm']},
+    {id:'tracing',title:'可观测性与Trace实验室',status:'planned',level:'P1',summary:'从RequestID、attempt和Metrics演进到跨异步边界的Span树。',knowledge:['Logs/Metrics/Traces','Trace与Span','上下文传播','错误事件','低基数标签'],files:['orange-server/src/main/java/com/orangejd/server/interceptor/RequestIdInterceptor.java','orange-server/src/main/java/com/orangejd/server/foundation/aitool/AiToolRouter.java'],acceptance:['区分RequestID与TraceID','设计HTTP→Task→Provider Span树','不使用requestId作为指标标签','用轨迹定位超时重试']},
+    {id:'context',title:'Context Window实验室',status:'planned',level:'P1',summary:'比较直接截断、最近消息优先和摘要保留策略。',knowledge:['Token预算','系统提示保留','最近消息','工具结果压缩','摘要记忆'],files:['orange-server/src/main/java/com/orangejd/server/foundation/external/ExternalAiClient.java'],acceptance:['系统提示不会被裁掉','预算内保留最近消息','说明信息损失','用边界测试证明策略']},
+    {id:'k8s',title:'Kubernetes恢复实验室',status:'planned',level:'P1',summary:'围绕容器化、探针、优雅停机和Pod终止后的任务恢复。',knowledge:['Docker镜像','Deployment/Service','ConfigMap/Secret','readiness/liveness','滚动更新'],files:['scripts/install-release.sh','deploy/systemd','compose.local.yml'],acceptance:['明确仅为本地研修','区分两类探针','状态全部外置','验证Pod终止后恢复且幂等']},
+    {id:'dag',title:'DAG与任务编排实验室',status:'planned',level:'P2',summary:'把抓取→清洗→AI审核→发布的阶段流建模为持久化DAG。',knowledge:['节点与边','依赖就绪','并行与分支','失败传播','重试与补偿'],files:['orange-server/src/main/java/com/orangejd/server/foundation/ingestion/IngestionCoordinatorService.java','orange-server/src/main/java/com/orangejd/server/foundation/ingestion/IngestionRunService.java'],acceptance:['定义节点、边和运行实例','写出就绪条件','解释失败传播','明确当前尚非通用DAG']},
+  ],
+  claims:[
+    {id:'claim-runtime',title:'实现可恢复的持久化任务机制',level:'C2',lab:'runtime',requires:['状态机说明','宕机恢复实验','幂等方案','代码或测试路径'],safe:'参与实现并验证持久化任务的抢占、租约、心跳与过期恢复。'},
+    {id:'claim-tool',title:'具备Agent工具调用与权限治理经验',level:'C2',lab:'mcp',requires:['Tool Schema','失败样例','权限矩阵','二阶段确认状态机'],safe:'参与MCP工具调用链路的参数校验、Scope控制和二阶段确认。'},
+    {id:'claim-trace',title:'完成Agent全链路Tracing实践',level:'C2',lab:'tracing',requires:['真实Trace截图','Span属性表','故障定位记录','提交记录'],safe:'当前仅能写日志、运行记录和Metrics基础。'},
+    {id:'claim-context',title:'实现上下文预算与裁剪策略',level:'C2',lab:'context',requires:['策略代码','边界测试','策略对比','信息损失说明'],safe:'完成实验前只写了解上下文窗口管理方法。'},
+    {id:'claim-k8s',title:'具备Kubernetes部署调试实践',level:'C2',lab:'k8s',requires:['Dockerfile','K8s清单','探针验证','Pod恢复记录'],safe:'只可表述本地研修实践，不写生产集群经验。'},
+    {id:'claim-dag',title:'实现持久化DAG调度实验',level:'C2',lab:'dag',requires:['表结构','就绪规则','失败传播测试','演示记录'],safe:'当前只能写阶段式工作流和Handler路由。'},
+  ],
+  interview:[
+    {id:'i1',question:'为什么不使用普通后台线程？',points:['进程生命周期','状态持久化','恢复','可观测']},
+    {id:'i2',question:'两个Worker如何避免同时拿到任务？',points:['条件UPDATE','状态前置条件','影响行数','事务边界']},
+    {id:'i3',question:'业务成功但SUCCEEDED没有写回会怎样？',points:['重复执行','at-least-once','业务幂等','恢复窗口']},
+    {id:'i4',question:'旧Worker和新Worker重叠执行怎么办？',points:['租约不是互斥保证','fencing','幂等键','副作用边界']},
+    {id:'i5',question:'为什么现在不直接使用消息队列？',points:['当前规模','事务一致性','运维成本','吞吐与轮询上限']},
+  ],
+  rubric:[['约束',20,'真实业务和系统约束'],['机制',20,'状态、数据和调用机制'],['失败',20,'超时、重复和部分失败'],['权衡',20,'替代方案与边界'],['证据',20,'代码、测试、日志或实验']],
+}

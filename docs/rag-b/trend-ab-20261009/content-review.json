@@ -1,0 +1,77 @@
+{
+  "method": "逐题检查实际入模证据、生成卡片、来源绑定和项目元数据；由代码与输出复核，不使用额外模型评分。不是盲测，不提供未经标注的Recall/MRR或事实正确率。",
+  "languageCaveat": "当前Prompt将languages表述为掌握语言；除明确写出只推荐某语言外，跨栈推荐按适配不足评价，不直接计作违反硬条件。",
+  "findings": [
+    {
+      "case": "spring_beginner",
+      "A": "第一轮推荐Nacos并提示进阶难度，第二轮返回空推荐；证据混入包含spring recoil的游戏README。",
+      "B": "两轮均选择project-based-learning的Java教程，比Nacos更贴近入门需求；首轮用同一E2生成两张卡，第二轮合并为教程合集。",
+      "assessment": "B在这一题的入门适配更好，但教程合集、教程条目与独立项目的身份需要区分。",
+      "evidence": ["spring_beginner-1-A.json", "spring_beginner-2-A.json", "spring_beginner-1-B.json", "spring_beginner-2-B.json"]
+    },
+    {
+      "case": "rag_career",
+      "A": "两轮均选择Dify，另一项分别为Headroom、Promptfoo，均来自职业业务候选。",
+      "B": "两轮均选择Dify与Pathway LLM App，后者直接提供RAG问答模板。",
+      "assessment": "B的RAG应用主题更直接；两版都需要用户从Java跨到其他技术栈，没有提供纯Java实现。时间建议不能等同于可验证完成承诺。",
+      "evidence": ["rag_career-1-A.json", "rag_career-2-A.json", "rag_career-1-B.json", "rag_career-2-B.json"]
+    },
+    {
+      "case": "rag_python",
+      "A": "两轮均为Quivr和Dify，能围绕文档RAG与部署展开。",
+      "B": "两轮均为Quivr与TypeScript的LLM-Hub，知识证据仅保留Quivr；另一张卡来自学习业务候选。",
+      "assessment": "A的两张卡都更直接对应RAG；B有一张是辅助接口工具。两版第二轮都有中文检索英文的实践建议，但不等于已验证项目跨语言检索效果。",
+      "evidence": ["rag_python-1-A.json", "rag_python-2-A.json", "rag_python-1-B.json", "rag_python-2-B.json"]
+    },
+    {
+      "case": "agent_business",
+      "A": "两轮均为Dify，另一项从LangChain变为MonkeyCode。",
+      "B": "两轮均为Dify与Agent Teams AI，后者更直接对应多智能体团队协作。",
+      "assessment": "B的项目选择在这两轮更稳定；两版均把商业改造作为建议并明确不承诺收益。第一轮A/B约90/60秒，第二轮约52/82秒，不能以单轮判断速度。",
+      "evidence": ["agent_business-1-A.json", "agent_business-2-A.json", "agent_business-1-B.json", "agent_business-2-B.json"]
+    },
+    {
+      "case": "vue_learning",
+      "A": "两轮都选择ASF配置生成器，另一项为PocketJS或Protocol Launcher。",
+      "B": "两轮都选择ASF配置生成器，另一项为Canvas UI或Protocol Launcher。",
+      "assessment": "主推荐接近，第二轮两版项目相同；不能因B更换了副卡就判定升级。Canvas UI的Vue支持与CLI说明在业务候选及原始简介有依据，不应仅因RAG段落缺失而误判为模型编造。",
+      "evidence": ["vue_learning-1-A.json", "vue_learning-2-A.json", "vue_learning-1-B.json", "vue_learning-2-B.json", "project-metadata.json"]
+    },
+    {
+      "case": "data_analysis",
+      "A": "两轮均推荐Doris与Kibana；有对应知识证据，但另混入招聘相关的Gupy CLI片段。",
+      "B": "两轮最终RAG证据均为空，仍从职业项目表推荐Doris与Kibana。原生检索有结果，后续主题过滤排除了所有项目证据。",
+      "assessment": "候选总体相同，两版都偏大型项目而非Python数据分析作品。B没有显示这一场景的知识检索收益。原生召回中TheAlgorithms/Python占多个名额，语言词与仓库名称相关性不能替代用途相关性。",
+      "evidence": ["data_analysis-1-A.json", "data_analysis-2-A.json", "data_analysis-1-B.json", "data_analysis-2-B.json"]
+    },
+    {
+      "case": "printing_explore",
+      "A": "两轮均为Slic3r切片器与Mainsail控制面板。",
+      "B": "两轮均为Mainsail与3D打印镜面阵列生成器，没有提供切片器。",
+      "assessment": "按切片或打印控制的具体目标，A覆盖更直接；B引入了相关但不同的模型制作方向。两版硬件说明都不应代替原项目完整部署要求。",
+      "evidence": ["printing_explore-1-A.json", "printing_explore-2-A.json", "printing_explore-1-B.json", "printing_explore-2-B.json"]
+    },
+    {
+      "case": "unavailable",
+      "A": "首轮model.http成功但解析器判定返回不完整，第二轮正常空推荐。首轮用量未保留。",
+      "B": "两轮均正常空推荐，并说明当前条件不适合完成流片项目。",
+      "assessment": "两版送入模型的请求完全相同，不能把这次失败归因A库召回。需要允许明确无结果的结果形态，并在后处理失败时保留实际模型用量。",
+      "evidence": ["unavailable-1-A.json", "unavailable-2-A.json", "unavailable-1-B.json", "unavailable-2-B.json"]
+    }
+  ],
+  "sharedPipelineIssues": [
+    {"issue":"证据压缩损伤", "example":"Spring Boot 3.3.5行进入Prompt后变成5 应用框架；独立标题也可能成为一份项目证据。", "code":"TrendEvidenceCardFormatter.java: informativeExcerpt按英文句号切分；每张220/360字符，总1100字符。"},
+    {"issue":"来源绑定不是事实核验", "example":"VERIFIED_CANDIDATE只表示候选ID与URL绑定。Nacos功能或Mainsail部署依赖可能来自模型知识，实际入模摘录没有完整支持，不能把正确项目链接当作逐条事实证明。", "code":"TrendEvidenceBinder.java: bind"},
+    {"issue":"语言主要是偏好", "example":"TrendCandidateMatcher为语言匹配加15分，不匹配不直接排除；显式限制与掌握技能需要不同字段。", "code":"TrendCandidateMatcher.java: score"},
+    {"issue":"失败用量丢失", "example":"unavailable-1-A的model.http成功，output.parseAndAssemble失败，结果中没有modelMetrics。实际消耗未知，不能记0。", "code":"TrendV2Analyzer.java: analyze"}
+  ],
+  "limits": [
+    "仅8个历史合成画像，两轮重复不等于16个独立场景。",
+    "同一请求模型名收到不同响应model标识；不能证明它们是不同底层模型，也不能排除供应商路由、默认思考及负载带来的差异。",
+    "字段完整、链接真实、回答有用和事实充分支持是不同维度。",
+    "32次实际模型请求全部执行；A15/16、B16/16返回完整结果，这是执行完整率，不是事实正确率。",
+    "15组双方成功的配对中B平均55.73秒、A61.92秒；进一步限定响应model标识相同的10组，B60.93秒、A59.55秒，平均总Token4557/4567基本持平。不能证明B稳定更快或更便宜。",
+    "Gitee人民币计价与实际账单未确认；已知31次用量加1次未知用量。Embedding API费用和本机计算成本不包含在生成Token里。",
+    "Maven测试返回成功，记录32份结果；退出时Surefire报告JVM在System.exit后30秒未退出并强制结束。该关闭阶段警告保留在run.log，不能据此宣称部署/资源回收验收通过。"
+  ]
+}

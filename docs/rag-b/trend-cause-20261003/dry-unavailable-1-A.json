@@ -1,0 +1,109 @@
+{
+  "case": "unavailable",
+  "variant": "A",
+  "phase": "retrieval",
+  "repeat": 1,
+  "startedAt": "2026-10-03T11:50:36.158838+00:00",
+  "response": {
+    "runtime": {
+      "model": "DeepSeek-V4-Pro",
+      "source": "REDIS",
+      "endpoint": "https://ai.gitee.com/v1",
+      "version": "1-1785206616703"
+    },
+    "variant": "A",
+    "retrieval": {
+      "text": "",
+      "trace": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "EMPTY",
+        "queries": [
+          "量子纠错芯片流片 Java",
+          "量子纠错芯片流片 Java  探索技术兴趣 只能推荐能核实符合条件的现有仓库，找不到请说明，不编造 刚学"
+        ],
+        "evidence": [],
+        "durationMs": 442.171173,
+        "candidateCount": 0,
+        "selectedCount": 0,
+        "confidence": "NONE",
+        "ragApplied": false,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 0,
+        "evidencePromptChars": 0,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": "0",
+        "evidenceCompressionRatio": 0.0
+      }
+    },
+    "wallMs": 443.073989,
+    "scope": "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages": [
+      {
+        "durationMs": 203.407394,
+        "stage": "embedding.http.bge-small-zh-v1.5",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 207.04834,
+        "stage": "A.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 6.631902,
+        "stage": "A.restoreMetadata",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.460986,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 217.337209,
+        "stage": "embedding.http.bge-small-zh-v1.5",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 220.996121,
+        "stage": "A.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 6.121459,
+        "stage": "A.restoreMetadata",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.265556,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.485184,
+        "stage": "A.lexical",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.001633,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.081208,
+        "stage": "A.selectProjects",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.005471,
+        "stage": "A.renderEvidence",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 442.193096,
+        "stage": "retrieval.total",
+        "status": "SUCCEEDED"
+      }
+    ]
+  },
+  "clientWallMs": 468.99339999072254
+}

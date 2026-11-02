@@ -138,6 +138,7 @@ public class AdminRagLabController {
             response.put("hits", found.hits());
             response.put("evidenceGroups", found.evidenceGroups());
             response.put("adapter", found.adapter());
+            response.put("rerank", found.rerank());
             return Result.success(response);
         } catch (IllegalArgumentException | IllegalStateException ex) {
             return Result.error(ex.getMessage());

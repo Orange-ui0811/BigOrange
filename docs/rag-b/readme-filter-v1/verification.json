@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": "_experiment_staging/readme-filter-v1-20261029/snapshot.json",
+  "snapshotSha256": "1edacde294596505856e85587a3ec2f8f152f54eef7b0aa15fbced3c6ce7e0c3",
+  "frozenAt": "2026-10-29T18:07:54.671104+08:00",
+  "specSha256": "6d49307bb8ce5aa3c6d11b46d4f49469716c2dc16060fca16959c7bcbb7666ed",
+  "frozenDocuments": 303,
+  "annotationAuthority": "ASSISTANT_REVIEWED_NOT_USER_CONFIRMED",
+  "status": "K1_FIXTURE_INTEGRITY_PASS_NOT_FILTER_QUALITY_PASS",
+  "sampleCount": 38,
+  "initialCount": 18,
+  "additionalCount": 20,
+  "uniqueRepositories": 38,
+  "developmentCount": 24,
+  "validationCount": 14,
+  "caseCount": 175,
+  "decisionCounts": {
+    "KEEP": 128,
+    "DROP": 29,
+    "REVIEW": 18
+  },
+  "sampleLabelCounts": {
+    "KEEP": 37,
+    "DROP": 24,
+    "REVIEW": 15
+  },
+  "sourceHashesVerified": 303,
+  "allSpansRoundtrip": true,
+  "allUtf16SpansRoundtrip": true,
+  "repositorySplitDisjoint": true,
+  "annotationCoverage": "TARGETED_SPANS",
+  "userConfirmedLabels": false,
+  "classifierImplemented": false,
+  "retrievalEvaluationRun": false,
+  "additionalExternalInferenceCalls": 0,
+  "productionIndexWrites": 0,
+  "ledgerChecks": [
+    {
+      "path": "docs/customer/workflow-v2/provider-calls.jsonl",
+      "before": {
+        "sha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+        "entries": 50
+      },
+      "after": {
+        "sha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+        "entries": 50
+      },
+      "unchanged": true
+    },
+    {
+      "path": "docs/customer/context-v3/live-provider-calls.jsonl",
+      "before": {
+        "sha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+        "entries": 38
+      },
+      "after": {
+        "sha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+        "entries": 38
+      },
+      "unchanged": true
+    }
+  ],
+  "limitations": [
+    "Labels are assistant judgments, not independent human gold labels",
+    "No semantic accuracy, retrieval benefit, or latency result is claimed",
+    "Validation documents were read for annotation; not blind evaluation",
+    "Zero-call claim applies to this offline script and inspected unchanged ledgers"
+  ]
+}

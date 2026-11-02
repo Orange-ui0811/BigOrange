@@ -1,8 +1,6 @@
 package com.orangejd.server.service;
-
 import org.springframework.stereotype.Component;
 import static com.orangejd.server.service.TrendRetrievalSupport.*;
-
 import com.orangejd.server.dto.BeginnerProjectView;
 import com.orangejd.server.dto.CareerProjectView;
 import org.slf4j.Logger;
@@ -11,20 +9,17 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.ObjectProvider;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Comparator;
-
 @Component
 public class TrendContextBuilder {
     private static final Logger log = LoggerFactory.getLogger(TrendContextBuilder.class);
     private final VectorStore vectorStore;
     private final PersonaPromptContextService personaContextService;
     private final String redisPrefix;
-
     public TrendContextBuilder(ObjectProvider<VectorStore> vectorStore,
                                ObjectProvider<PersonaPromptContextService> personaContextService) {
         this(vectorStore, personaContextService, null);

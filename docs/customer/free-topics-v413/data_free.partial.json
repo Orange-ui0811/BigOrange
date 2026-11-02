@@ -1,0 +1,1220 @@
+{
+  "case": {
+    "id": "data_free",
+    "family": "data",
+    "kind": "free",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：数据处理与可视化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "126",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：数据处理与可视化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "388fe718-8e2d-44b9-9796-abdf4422b649",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 9000,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "数据处理与可视化"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "topic": [
+            "数据处理与可视化"
+          ],
+          "experience": "一年编程基础",
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：数据处理与可视化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "数据处理与可视化",
+            "proofs": {}
+          },
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-04T03:17:23.740713712Z",
+          "conditions": {
+            "topic": [
+              "数据处理与可视化"
+            ]
+          },
+          "current": {
+            "total": 0,
+            "confirmed": 0,
+            "uncertain": 0
+          },
+          "available": {
+            "total": 494,
+            "confirmed": 494,
+            "uncertain": 0
+          },
+          "alternatives": [],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "NO_MATCH",
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：数据处理与可视化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n暂时还没有核对出有效的调整方案。我会保留你的方向，不自动换成其他领域。可以从原目标里选一个最重要的功能继续找，或补充一个参考项目；目前不能保证放宽时间或语言就有合适结果。你最想先实现哪部分？",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：数据处理与可视化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5285,
+              "completion_tokens": 894,
+              "total_tokens": 6179,
+              "prompt_tokens_details": {
+                "cached_tokens": 1664
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 704
+              },
+              "prompt_cache_hit_tokens": 1664,
+              "prompt_cache_miss_tokens": 3621
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 4413,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "usage": {
+              "prompt_tokens": 141,
+              "completion_tokens": 18,
+              "total_tokens": 159,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 141
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 886,
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 2072,
+              "completion_tokens": 5,
+              "total_tokens": 2077,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 2072
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 1112,
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.13-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 704,
+          "complete": true,
+          "cacheHitTokens": 1664,
+          "inputTokens": 7498,
+          "cacheMissTokens": 5834,
+          "totalTokens": 8415,
+          "outputTokens": 917,
+          "callsWithoutUsage": 0,
+          "calls": 3,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "数据处理与可视化 数据处理与可视化 数据清洗与分析 数据可视化图表",
+            "topic": [
+              "数据处理与可视化"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11643,
+                  "content": "## Categories\n\n**AI & ML**\n\n- [AI and Agents](#ai-and-agents)\n- [Deep Learning](#deep-learning)\n- [Machine Learning](#machine-learning)\n- [Natural Language Processing](#natural-language-processing)\n- [Computer Vision](#computer-vision)\n- [Recommender Systems](#recommender-systems)\n\n**Web Development**\n\n- [Web Frameworks](#web-frameworks)\n- [Web APIs](#web-apis)\n- [Web Servers](#web-servers)\n- [WebSocket](#websocket)\n- [Template Engines](#template-engines)\n- [Web Asset Management](#web-asset-management)\n- [Authentication](#authentication)\n- [Admin Panels](#admin-panels)\n- [CMS](#cms)\n- [Static Site Generators](#static-site-generators)\n\n**HTTP & Scraping**\n\n- [HTTP Clients](#http-clients)\n- [Web Scraping](#web-scraping)\n- [Email](#email)\n\n**Database & Storage**\n\n- [ORM](#orm)\n- [Database Drivers](#database-drivers)\n- [Database](#database)\n- [Caching](#caching)\n- [Search](#search)\n- [Serialization](#serialization)\n\n**Data & Science**\n\n- [Data Analysis](#data-analysis)\n- [Data Ingestion / ETL](#data-ingestion--etl)\n- [Data Validation](#data-validation)\n- [Data Visualization](#data-visualization)\n- [Geolocation](#geolocation)\n- [Science](#science)\n- [Quantum Computing](#quantum-computing)\n\n**Developer Tools**\n\n- [Algorithms and Design Patterns](#algorithms-and-design-patterns)\n- [Interactive Interpreter](#interactive-interpreter)\n- [Code Analysis](#code-analysis)\n- [Testing](#testing)\n- [Debugging Tools](#debugging-tools)\n- [Build Tools](#build-tools)\n- [Documentation](#documentation)\n\n",
+                  "endOffset": 1883,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 2,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                  "startOffset": 377,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "Gemini CLI",
+                  "chunkId": 16916,
+                  "content": "### 代码理解与生成\n\n- 查询和编辑大型代码库\n- 使用多模态功能，从 PDF、图像或草图生成新应用\n- 使用自然语言调试问题并排查故障\n\n",
+                  "endOffset": 2496,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "versionId": 605,
+                  "chunkIndex": 14,
+                  "documentId": 386,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Gemini CLI > 📋 主要特性 > 代码理解与生成",
+                  "startOffset": 2424,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "Stirling-Tools/Stirling-PDF",
+                  "chunkId": 14402,
+                  "content": "#### View & Edit\n- **OCR / Cleanup scans**: Optical Character Recognition\n- **Add Image**: Insert images into PDF\n- **Extract Images**: Extract embedded images\n- **Extract Attachments**: Retrieve embedded attachments\n- **Change Metadata**: Edit PDF metadata\n- **Get ALL Info on PDF**: Comprehensive PDF analysis\n- **Advanced Colour options**: Colour manipulation (various options for colour inversion, CMYK conversion)\n- **Compare**: Compare PDF documents\n- **Add Page Numbers**: Insert page numbering\n- **Flatten**: Flatten PDF layers, and interactive elements\n- **Remove Annotations**: Delete comments and markups\n- **Remove Blank pages**: Delete empty pages\n- **Remove Image**: Delete embedded images\n- **View/Edit PDF**: Interactive PDF editing\n- **Unlock PDF Forms**: Enable form editing\n- **Add Attachments**: Attach files to PDF\n\n",
+                  "endOffset": 6322,
+                  "sourceRef": "Stirling-Tools/Stirling-PDF|week",
+                  "versionId": 401,
+                  "chunkIndex": 8,
+                  "documentId": 182,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Features > 50+ PDF Operations > View & Edit",
+                  "startOffset": 5485,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "Stirling-Tools/Stirling-PDF",
+                  "chunkId": 17212,
+                  "content": "#### 整理\n- **PDF 多功能工具**：通过单一仪表板访问合并、旋转、重新排列、拆分和删除操作\n- **合并**：将多个 PDF 合并为一个\n- **拆分**：将 PDF 拆分为多个文件\n- **提取页面**：从 PDF 中提取特定页面\n- **删除**：删除 PDF 中的页面\n- **裁剪 PDF**：调整 PDF 页面边界\n- **旋转**：以 90 度增量旋转页面\n- **调整页面大小/缩放**：调整页面内容大小\n- **多页布局**：将多个页面添加到 PDF 中\n- **PDF 转单一大页面**：转换为单个连续页面\n- **整理**：重新排列 PDF 页面\n\n",
+                  "endOffset": 2484,
+                  "sourceRef": "Stirling-Tools/Stirling-PDF",
+                  "versionId": 648,
+                  "chunkIndex": 4,
+                  "documentId": 429,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "功能特性 > 50+ 项 PDF 操作 > 整理",
+                  "startOffset": 2193,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "ellisonleao/magictools",
+                  "chunkId": 16805,
+                  "content": "## 目录\n\n- [图形](#graphics)\n    - [资产/占位符](#assetsplaceholders)\n    - [精灵图集工具](#spritesheet-tools)\n    - [位图压缩](#bitmap-compression)\n    - [纹理工具](#texture-tools)\n    - [角色生成器](#character-generators)\n    - [瓷砖/关卡编辑器](#tilelevel-editors)\n    - [动画](#animation)\n    - [矢量/图像编辑器](#vectorimage-editor)\n    - [建模](#modeling)\n    - [地形生成器](#terrain-generators)\n    - [体素编辑器](#voxel-editors)\n- [代码](#code)\n    - [引擎与框架](#engines-and-frameworks)\n    - [人工智能](#ai)\n- [音频](#audio)\n    - [合集](#collections)\n    - [音乐与音频编辑器](#music-and-audio-editors)\n- [棋盘游戏](#board-games)\n- [必看内容](#must-see)\n    - [博客与门户](#blogs-and-portals)\n    - [书籍](#books)\n    - [杂志](#magazines)\n    - [视频/播客](#videospodcasts)\n    - [游戏创作节](#game-jams)\n    - [项目管理](#project-management)\n    - [完整游戏源码](#complete-game-sources)\n    - [社区](#communities)\n- [广告](#ads)\n- [学习](#learn)\n    - [游戏开发通识](#general-game-development)\n    - [计算机图形学](#computer-graphics)\n\n",
+                  "endOffset": 1512,
+                  "sourceRef": "ellisonleao/magictools",
+                  "versionId": 589,
+                  "chunkIndex": 2,
+                  "documentId": 370,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "目录",
+                  "startOffset": 597,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "Awesome-Selfhosted",
+                  "chunkId": 17189,
+                  "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                  "endOffset": 3047,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "versionId": 645,
+                  "chunkIndex": 2,
+                  "documentId": 426,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Awesome-Selfhosted > 目录",
+                  "startOffset": 1205,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "系统设计入门",
+                  "chunkId": 11449,
+                  "content": "#### Source(s) and further reading: NoSQL\n\n* [Explanation of base terminology](http://stackoverflow.com/questions/3342497/explanation-of-base-terminology)\n* [NoSQL databases a survey and decision guidance](https://medium.com/baqend-blog/nosql-databases-a-survey-and-decision-guidance-ea7823a822d#.wskogqenq)\n* [Scalability](https://web.archive.org/web/20220602114024/https://www.lecloud.net/post/7994751381/scalability-for-dummies-part-2-database)\n* [Introduction to NoSQL](https://www.youtube.com/watch?v=qI_g07C_Q5I)\n* [NoSQL patterns](http://horicky.blogspot.com/2009/11/nosql-patterns.html)\n\n",
+                  "endOffset": 60890,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "versionId": 291,
+                  "chunkIndex": 120,
+                  "documentId": 72,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "The System Design Primer > Database > NoSQL > Source(s) and further reading: NoSQL",
+                  "startOffset": 60294,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "编程面试大学",
+                  "chunkId": 11636,
+                  "content": "## Computer Science Courses\n\n- [Directory of Online CS Courses](https://github.com/open-source-society/computer-science)\n- [Directory of CS Courses (many with online lectures)](https://github.com/prakhar1989/awesome-courses)\n\n**[⬆ back to top](#table-of-contents)**\n\n",
+                  "endOffset": 133931,
+                  "sourceRef": "jwasham/coding-interview-university",
+                  "versionId": 292,
+                  "chunkIndex": 119,
+                  "documentId": 73,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Coding Interview University > Computer Science Courses",
+                  "startOffset": 133664,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "Oxotka/Landscape1C",
+                  "chunkId": 12033,
+                  "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                  "endOffset": 222,
+                  "sourceRef": "beginner:38",
+                  "versionId": 313,
+                  "chunkIndex": 4,
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                  "startOffset": 149,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "Stirling-Tools/Stirling-PDF",
+                  "chunkId": 17213,
+                  "content": "#### 转换为 PDF\n- **图像转 PDF**：将图像转换为 PDF 格式\n- **文件转 PDF**：将各种常见文件类型转换为 PDF\n- **URL/网站转 PDF**：将实时网页捕获为 PDF\n- **HTML 转 PDF**：将 HTML 文档转换为 PDF\n- **Markdown 转 PDF**：将 Markdown 文件转换为 PDF\n- **CBZ 转 PDF**：转换漫画书存档\n- **CBR 转 PDF**：转换漫画书 RAR 存档\n- **电子邮件转 PDF**：将电子邮件文件转换为 PDF\n- **电子书转 PDF**：转换电子书格式（EP",
+                  "endOffset": 2772,
+                  "sourceRef": "Stirling-Tools/Stirling-PDF",
+                  "versionId": 648,
+                  "chunkIndex": 5,
+                  "documentId": 429,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "功能特性 > 50+ 项 PDF 操作 > 转换为 PDF",
+                  "startOffset": 2484,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "系统设计入门",
+                  "chunkId": 11432,
+                  "content": "###### Source(s) and further reading: denormalization\n\n* [Denormalization](https://en.wikipedia.org/wiki/Denormalization)\n\n",
+                  "endOffset": 50427,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "versionId": 291,
+                  "chunkIndex": 103,
+                  "documentId": 72,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "The System Design Primer > Database > Relational database management system (RDBMS) > Denormalization > Disadvantage(s): denormalization > Source(s) and further reading: denormalization",
+                  "startOffset": 50304,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "yanglbme/reading",
+                  "chunkId": 16240,
+                  "content": "## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n",
+                  "endOffset": 474,
+                  "sourceRef": "yanglbme/reading",
+                  "versionId": 502,
+                  "chunkIndex": 1,
+                  "documentId": 283,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "阅读 > 目录",
+                  "startOffset": 397,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "编程面试大学",
+                  "chunkId": 11537,
+                  "content": "### C\n\n- [Algorithms in C, Parts 1-5 (Bundle), 3rd Edition](https://www.amazon.com/Algorithms-Parts-1-5-Bundle-Fundamentals/dp/0201756080)\n    - Fundamentals, Data Structures, Sorting, Searching, and Graph Algorithms\n\n",
+                  "endOffset": 16462,
+                  "sourceRef": "jwasham/coding-interview-university",
+                  "versionId": 292,
+                  "chunkIndex": 20,
+                  "documentId": 73,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Coding Interview University > Books for Data Structures and Algorithms > C",
+                  "startOffset": 16244,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11677,
+                  "content": "### Data Visualization\n\n_Libraries for visualizing data. Also see [awesome-javascript](https://github.com/sorrycc/awesome-javascript#data-visualization)._\n\n- Plotting\n  - [altair](https://github.com/vega/altair) - Declarative statistical visualization library for Python.\n  - [bokeh](https://github.com/bokeh/bokeh) - Interactive Web Plotting for Python.\n  - [bqplot](https://github.com/bqplot/bqplot) - Interactive Plotting Library for the Jupyter Notebook.\n  - [matplotlib](https://github.com/matplotlib/matplotlib) - A Python 2D plotting library.\n  - [plotly](https://github.com/plotly/plotly.py) - Interactive graphing library for Python.\n  - [plotnine](https://github.com/has2k1/plotnine) - A grammar of graphics for Python based on ggplot2.\n  - [pygal](https://github.com/Kozea/pygal) - A Python SVG Charts Creator.\n  - [pyqtgraph](https://github.com/pyqtgraph/pyqtgraph) - Interactive and realtime 2D/3D/Image plotting and science/engineering widgets.\n  - [seaborn](https://github.com/mwaskom/seaborn) - Statistical data visualization using Matplotlib.\n  - [ultraplot](https://github.com/ultraplot/UltraPlot) - Matplotlib wrapper for publication-ready scientific figures with minimal code. Includes advanced subplot management, panel layouts, and batteries-included geoscience plotting.\n  - [vispy](https://github.com/vispy/vispy) - High-performance scientific visualization based on OpenGL.\n- Specialized\n  - [cartopy](https://github.com/SciTools/cartopy) - A cartographic python library with matplotlib support.\n  - [pygraphviz](https://github.com/pygraphviz/pygraphviz/) - Python interface to [Graphviz](https://www.graphviz.org/).\n- Dashboards and Apps\n  - [gradio](https://github.com/gradio-app/gradio) - Build and share machine learning apps, all in Python.\n  - [streamlit](https://github.com/streamlit/streamlit) - A framework which lets you build dashboards, generate reports, or create chat apps in minutes.\n",
+                  "endOffset": 36500,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 36,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Data Visualization",
+                  "startOffset": 34576,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "编程面试大学",
+                  "chunkId": 11522,
+                  "content": "### Topics of Study\n\n- [Algorithmic complexity / Big-O / Asymptotic analysis](#algorithmic-complexity--big-o--asymptotic-analysis)\n- [Data Structures](#data-structures)\n    - [Arrays](#arrays)\n    - [Linked Lists](#linked-lists)\n    - [Stack](#stack)\n    - [Queue](#queue)\n    - [Hash table](#hash-table)\n- [More Knowledge](#more-knowledge)\n    - [Binary search](#binary-search)\n    - [Bitwise operations](#bitwise-operations)\n- [Trees](#trees)\n    - [Trees - Intro](#trees---intro)\n    - [Binary search trees: BSTs](#binary-search-trees-bsts)\n    - [Heap / Priority Queue / Binary Heap](#heap--priority-queue--binary-heap)\n    - balanced search trees (general concept, not details)\n    - traversals: preorder, inorder, postorder, BFS, DFS\n- [Sorting](#sorting)\n    - selection\n    - insertion\n    - heapsort\n    - quicksort\n    - mergesort\n- [Graphs](#graphs)\n    - directed\n    - undirected\n    - adjacency matrix\n    - adjacency list\n    - traversals: BFS, DFS\n- [Even More Knowledge](#even-more-knowledge)\n    - [Recursion](#recursion)\n    - [Dynamic Programming](#dynamic-programming)\n    - [Design Patterns](#design-patterns)\n    - [Combinatorics (n choose k) & Probability](#combinatorics-n-choose-k--probability)\n    - [NP, NP-Complete and Approximation Algorithms](#np-np-complete-and-approximation-algorithms)\n    - [How computers process a program](#how-computers-process-a-program)\n    - [Caches](#caches)\n    - [Processes and Threads](#processes-and-threads)\n    - [Testing](#testing)\n    - [String searching & manipulations](#string-searching--manipulations)\n    - [Tries](#tries)\n    - [Floating Point Numbers](#floating-point-numbers)\n    - [Unicode](#unicode)\n    - [Endianness](#endianness)\n    - [Networking](#networking)\n- [Final Review](#final-review)\n\n",
+                  "endOffset": 6411,
+                  "sourceRef": "jwasham/coding-interview-university",
+                  "versionId": 292,
+                  "chunkIndex": 5,
+                  "documentId": 73,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Coding Interview University > Table of Contents > Topics of Study",
+                  "startOffset": 4637,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "编程面试大学",
+                  "chunkId": 11574,
+                  "content": "As a summary, here is a visual representation of [15 sorting algorithms](https://www.youtube.com/watch?v=kPRA0W1kECg).\nIf you need more detail on this subject, see the \"Sorting\" section in [Additional Detail on Some Subjects](#additional-detail-on-some-subjects)\n\n**[⬆ back to top](#table-of-contents)**\n\n",
+                  "endOffset": 53520,
+                  "sourceRef": "jwasham/coding-interview-university",
+                  "versionId": 292,
+                  "chunkIndex": 57,
+                  "documentId": 73,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Coding Interview University > Sorting",
+                  "startOffset": 53215,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "项目式学习",
+                  "chunkId": 11774,
+                  "content": "### Data Science:\n\n- Learn Python For Data Science by Doing Several Projects (video):\n  - [Part 1: Introduction](https://www.youtube.com/watch?v=T5pRlIbr6gg)\n  - [Part 2: Twitter Sentiment Analysis](https://www.youtube.com/watch?v=o_OZdbCzHUA)\n  - [Part 3: Recommendation Systems](https://www.youtube.com/watch?v=9gBC9R-msAk&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU&index=3)\n  - [Part 4: Predicting Stock Prices](https://www.youtube.com/watch?v=SSu00IRRraY&index=4&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU)\n  - [Part 5: Deep Dream in TensorFlow](https://www.youtube.com/watch?v=MrBzgvUNr4w&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU&index=5)\n  - [Part 6: Genetic Algorithms](https://www.youtube.com/watch?v=dSofAXnnFrY&index=6&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU)\n\n",
+                  "endOffset": 28740,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 41,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > Python: > Data Science:",
+                  "startOffset": 27976,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "pnpm（推荐）",
+                  "chunkId": 17812,
+                  "content": "## 支持的图表类型\n\n| 图表类型 | 类名 | 说明 |\n|:--------:|:-----:|:-----|\n| 柱状图 | `BarRenderer` | 垂直/水平柱状图，支持堆叠与分组 |\n| 折线图 | `LineRenderer` | 平滑曲线/折线，支持面积填充与标记点 |\n| 饼图 | `PieRenderer` | 环形/饼图，支持交互式扇区分离 |\n| 散点图 | `ScatterRenderer` | 自由散点分布，支持聚类着色 |\n| 面积图 | `AreaRenderer` | 堆叠面积图，渐变透明填充 |\n| 雷达图 | `RadarRenderer` | 多维度雷达分析图 |\n| 热力图 | `HeatmapRenderer` | 二维色阶热力矩阵 |\n| 仪表盘 | `GaugeRenderer` | 弧形仪表盘，支持多指针 |\n\n---\n\n",
+                  "endOffset": 3548,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "versionId": 756,
+                  "chunkIndex": 9,
+                  "documentId": 537,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "支持的图表类型",
+                  "startOffset": 3153,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "Susanphi85/slc4-semantic-log-compression",
+                  "chunkId": 14687,
+                  "content": "## 📁 Supported File Types\n\n| File Format | Description |\n|-------------|-------------|\n| CSV | Comma-separated values from spreadsheets or databases |\n| JSON | JavaScript Object Notation, common for web data |\n| Text Logs | Server logs, application logs, system logs |\n| PostgreSQL Exports | Database export files |\n| Structured Text | Any tabular or hierarchical text data |\n\n",
+                  "endOffset": 4582,
+                  "sourceRef": "Susanphi85/slc4-semantic-log-compression|new",
+                  "versionId": 411,
+                  "chunkIndex": 14,
+                  "documentId": 192,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "📁 Supported File Types",
+                  "startOffset": 4204,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11644,
+                  "content": "**DevOps**\n\n- [DevOps Tools](#devops-tools)\n- [Distributed Computing](#distributed-computing)\n- [Task Queues](#task-queues)\n- [Messaging](#messaging)\n- [Job Schedulers](#job-schedulers)\n- [Logging](#logging)\n- [Network Virtualization](#network-virtualization)\n\n**CLI & GUI**\n\n- [CLI Development](#cli-development)\n- [CLI Tools](#cli-tools)\n- [GUI Development](#gui-development)\n\n**Text & Documents**\n\n- [Text Processing](#text-processing)\n- [HTML Manipulation](#html-manipulation)\n- [File Format Processing](#file-format-processing)\n- [File Manipulation](#file-manipulation)\n\n**Media**\n\n- [Image Processing](#image-processing)\n- [Audio & Video Processing](#audio--video-processing)\n- [Game Development](#game-development)\n\n**Python Language**\n\n- [Implementations](#implementations)\n- [Built-in Classes Enhancement](#built-in-classes-enhancement)\n- [Functional Programming](#functional-programming)\n- [Asynchronous Programming](#asynchronous-programming)\n- [Date and Time](#date-and-time)\n\n**Python Toolchain**\n\n- [Environment Management](#environment-management)\n- [Package Management](#package-management)\n- [Package Repositories](#package-repositories)\n- [Distribution](#distribution)\n- [Configuration Files](#configuration-files)\n\n**Security**\n\n- [Cryptography](#cryptography)\n- [Penetration Testing](#penetration-testing)\n- [Web Security](#web-security)\n\n**Other**\n\n- [Hardware](#hardware)\n- [Microsoft Windows](#microsoft-windows)\n- [Miscellaneous](#miscellaneous)\n\n",
+                  "endOffset": 3354,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 3,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                  "startOffset": 1883,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 128,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "vinta/awesome-python",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11643,
+                      "content": "## Categories\n\n**AI & ML**\n\n- [AI and Agents](#ai-and-agents)\n- [Deep Learning](#deep-learning)\n- [Machine Learning](#machine-learning)\n- [Natural Language Processing](#natural-language-processing)\n- [Computer Vision](#computer-vision)\n- [Recommender Systems](#recommender-systems)\n\n**Web Development**\n\n- [Web Frameworks](#web-frameworks)\n- [Web APIs](#web-apis)\n- [Web Servers](#web-servers)\n- [WebSocket](#websocket)\n- [Template Engines](#template-engines)\n- [Web Asset Management](#web-asset-management)\n- [Authentication](#authentication)\n- [Admin Panels](#admin-panels)\n- [CMS](#cms)\n- [Static Site Generators](#static-site-generators)\n\n**HTTP & Scraping**\n\n- [HTTP Clients](#http-clients)\n- [Web Scraping](#web-scraping)\n- [Email](#email)\n\n**Database & Storage**\n\n- [ORM](#orm)\n- [Database Drivers](#database-drivers)\n- [Database](#database)\n- [Caching](#caching)\n- [Search](#search)\n- [Serialization](#serialization)\n\n**Data & Science**\n\n- [Data Analysis](#data-analysis)\n- [Data Ingestion / ETL](#data-ingestion--etl)\n- [Data Validation](#data-validation)\n- [Data Visualization](#data-visualization)\n- [Geolocation](#geolocation)\n- [Science](#science)\n- [Quantum Computing](#quantum-computing)\n\n**Developer Tools**\n\n- [Algorithms and Design Patterns](#algorithms-and-design-patterns)\n- [Interactive Interpreter](#interactive-interpreter)\n- [Code Analysis](#code-analysis)\n- [Testing](#testing)\n- [Debugging Tools](#debugging-tools)\n- [Build Tools](#build-tools)\n- [Documentation](#documentation)\n\n",
+                      "endOffset": 1883,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 2,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                      "startOffset": 377,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11677,
+                      "content": "### Data Visualization\n\n_Libraries for visualizing data. Also see [awesome-javascript](https://github.com/sorrycc/awesome-javascript#data-visualization)._\n\n- Plotting\n  - [altair](https://github.com/vega/altair) - Declarative statistical visualization library for Python.\n  - [bokeh](https://github.com/bokeh/bokeh) - Interactive Web Plotting for Python.\n  - [bqplot](https://github.com/bqplot/bqplot) - Interactive Plotting Library for the Jupyter Notebook.\n  - [matplotlib](https://github.com/matplotlib/matplotlib) - A Python 2D plotting library.\n  - [plotly](https://github.com/plotly/plotly.py) - Interactive graphing library for Python.\n  - [plotnine](https://github.com/has2k1/plotnine) - A grammar of graphics for Python based on ggplot2.\n  - [pygal](https://github.com/Kozea/pygal) - A Python SVG Charts Creator.\n  - [pyqtgraph](https://github.com/pyqtgraph/pyqtgraph) - Interactive and realtime 2D/3D/Image plotting and science/engineering widgets.\n  - [seaborn](https://github.com/mwaskom/seaborn) - Statistical data visualization using Matplotlib.\n  - [ultraplot](https://github.com/ultraplot/UltraPlot) - Matplotlib wrapper for publication-ready scientific figures with minimal code. Includes advanced subplot management, panel layouts, and batteries-included geoscience plotting.\n  - [vispy](https://github.com/vispy/vispy) - High-performance scientific visualization based on OpenGL.\n- Specialized\n  - [cartopy](https://github.com/SciTools/cartopy) - A cartographic python library with matplotlib support.\n  - [pygraphviz](https://github.com/pygraphviz/pygraphviz/) - Python interface to [Graphviz](https://www.graphviz.org/).\n- Dashboards and Apps\n  - [gradio](https://github.com/gradio-app/gradio) - Build and share machine learning apps, all in Python.\n  - [streamlit](https://github.com/streamlit/streamlit) - A framework which lets you build dashboards, generate reports, or create chat apps in minutes.\n",
+                      "endOffset": 36500,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 36,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Data Visualization",
+                      "startOffset": 34576,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.0125,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11644,
+                      "content": "**DevOps**\n\n- [DevOps Tools](#devops-tools)\n- [Distributed Computing](#distributed-computing)\n- [Task Queues](#task-queues)\n- [Messaging](#messaging)\n- [Job Schedulers](#job-schedulers)\n- [Logging](#logging)\n- [Network Virtualization](#network-virtualization)\n\n**CLI & GUI**\n\n- [CLI Development](#cli-development)\n- [CLI Tools](#cli-tools)\n- [GUI Development](#gui-development)\n\n**Text & Documents**\n\n- [Text Processing](#text-processing)\n- [HTML Manipulation](#html-manipulation)\n- [File Format Processing](#file-format-processing)\n- [File Manipulation](#file-manipulation)\n\n**Media**\n\n- [Image Processing](#image-processing)\n- [Audio & Video Processing](#audio--video-processing)\n- [Game Development](#game-development)\n\n**Python Language**\n\n- [Implementations](#implementations)\n- [Built-in Classes Enhancement](#built-in-classes-enhancement)\n- [Functional Programming](#functional-programming)\n- [Asynchronous Programming](#asynchronous-programming)\n- [Date and Time](#date-and-time)\n\n**Python Toolchain**\n\n- [Environment Management](#environment-management)\n- [Package Management](#package-management)\n- [Package Repositories](#package-repositories)\n- [Distribution](#distribution)\n- [Configuration Files](#configuration-files)\n\n**Security**\n\n- [Cryptography](#cryptography)\n- [Penetration Testing](#penetration-testing)\n- [Web Security](#web-security)\n\n**Other**\n\n- [Hardware](#hardware)\n- [Microsoft Windows](#microsoft-windows)\n- [Miscellaneous](#miscellaneous)\n\n",
+                      "endOffset": 3354,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 3,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                      "startOffset": 1883,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:vinta/awesome-python",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "vinta/awesome-python",
+                  "documentId": 74,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Gemini CLI",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "Gemini CLI",
+                      "chunkId": 16916,
+                      "content": "### 代码理解与生成\n\n- 查询和编辑大型代码库\n- 使用多模态功能，从 PDF、图像或草图生成新应用\n- 使用自然语言调试问题并排查故障\n\n",
+                      "endOffset": 2496,
+                      "sourceRef": "google-gemini/gemini-cli",
+                      "versionId": 605,
+                      "chunkIndex": 14,
+                      "documentId": 386,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Gemini CLI > 📋 主要特性 > 代码理解与生成",
+                      "startOffset": 2424,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:google-gemini/gemini-cli",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "documentId": 386,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Stirling-Tools/Stirling-PDF",
+                  "evidence": [
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "Stirling-Tools/Stirling-PDF",
+                      "chunkId": 14402,
+                      "content": "#### View & Edit\n- **OCR / Cleanup scans**: Optical Character Recognition\n- **Add Image**: Insert images into PDF\n- **Extract Images**: Extract embedded images\n- **Extract Attachments**: Retrieve embedded attachments\n- **Change Metadata**: Edit PDF metadata\n- **Get ALL Info on PDF**: Comprehensive PDF analysis\n- **Advanced Colour options**: Colour manipulation (various options for colour inversion, CMYK conversion)\n- **Compare**: Compare PDF documents\n- **Add Page Numbers**: Insert page numbering\n- **Flatten**: Flatten PDF layers, and interactive elements\n- **Remove Annotations**: Delete comments and markups\n- **Remove Blank pages**: Delete empty pages\n- **Remove Image**: Delete embedded images\n- **View/Edit PDF**: Interactive PDF editing\n- **Unlock PDF Forms**: Enable form editing\n- **Add Attachments**: Attach files to PDF\n\n",
+                      "endOffset": 6322,
+                      "sourceRef": "Stirling-Tools/Stirling-PDF|week",
+                      "versionId": 401,
+                      "chunkIndex": 8,
+                      "documentId": 182,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Features > 50+ PDF Operations > View & Edit",
+                      "startOffset": 5485,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015625,
+                      "title": "Stirling-Tools/Stirling-PDF",
+                      "chunkId": 17212,
+                      "content": "#### 整理\n- **PDF 多功能工具**：通过单一仪表板访问合并、旋转、重新排列、拆分和删除操作\n- **合并**：将多个 PDF 合并为一个\n- **拆分**：将 PDF 拆分为多个文件\n- **提取页面**：从 PDF 中提取特定页面\n- **删除**：删除 PDF 中的页面\n- **裁剪 PDF**：调整 PDF 页面边界\n- **旋转**：以 90 度增量旋转页面\n- **调整页面大小/缩放**：调整页面内容大小\n- **多页布局**：将多个页面添加到 PDF 中\n- **PDF 转单一大页面**：转换为单个连续页面\n- **整理**：重新排列 PDF 页面\n\n",
+                      "endOffset": 2484,
+                      "sourceRef": "Stirling-Tools/Stirling-PDF",
+                      "versionId": 648,
+                      "chunkIndex": 4,
+                      "documentId": 429,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "功能特性 > 50+ 项 PDF 操作 > 整理",
+                      "startOffset": 2193,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "Stirling-Tools/Stirling-PDF",
+                      "chunkId": 17213,
+                      "content": "#### 转换为 PDF\n- **图像转 PDF**：将图像转换为 PDF 格式\n- **文件转 PDF**：将各种常见文件类型转换为 PDF\n- **URL/网站转 PDF**：将实时网页捕获为 PDF\n- **HTML 转 PDF**：将 HTML 文档转换为 PDF\n- **Markdown 转 PDF**：将 Markdown 文件转换为 PDF\n- **CBZ 转 PDF**：转换漫画书存档\n- **CBR 转 PDF**：转换漫画书 RAR 存档\n- **电子邮件转 PDF**：将电子邮件文件转换为 PDF\n- **电子书转 PDF**：转换电子书格式（EP",
+                      "endOffset": 2772,
+                      "sourceRef": "Stirling-Tools/Stirling-PDF",
+                      "versionId": 648,
+                      "chunkIndex": 5,
+                      "documentId": 429,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "功能特性 > 50+ 项 PDF 操作 > 转换为 PDF",
+                      "startOffset": 2484,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:Stirling-Tools/Stirling-PDF",
+                  "bestScore": 0.015873015873015872,
+                  "sourceRef": "Stirling-Tools/Stirling-PDF|week",
+                  "documentId": 182,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "ellisonleao/magictools",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "ellisonleao/magictools",
+                      "chunkId": 16805,
+                      "content": "## 目录\n\n- [图形](#graphics)\n    - [资产/占位符](#assetsplaceholders)\n    - [精灵图集工具](#spritesheet-tools)\n    - [位图压缩](#bitmap-compression)\n    - [纹理工具](#texture-tools)\n    - [角色生成器](#character-generators)\n    - [瓷砖/关卡编辑器](#tilelevel-editors)\n    - [动画](#animation)\n    - [矢量/图像编辑器](#vectorimage-editor)\n    - [建模](#modeling)\n    - [地形生成器](#terrain-generators)\n    - [体素编辑器](#voxel-editors)\n- [代码](#code)\n    - [引擎与框架](#engines-and-frameworks)\n    - [人工智能](#ai)\n- [音频](#audio)\n    - [合集](#collections)\n    - [音乐与音频编辑器](#music-and-audio-editors)\n- [棋盘游戏](#board-games)\n- [必看内容](#must-see)\n    - [博客与门户](#blogs-and-portals)\n    - [书籍](#books)\n    - [杂志](#magazines)\n    - [视频/播客](#videospodcasts)\n    - [游戏创作节](#game-jams)\n    - [项目管理](#project-management)\n    - [完整游戏源码](#complete-game-sources)\n    - [社区](#communities)\n- [广告](#ads)\n- [学习](#learn)\n    - [游戏开发通识](#general-game-development)\n    - [计算机图形学](#computer-graphics)\n\n",
+                      "endOffset": 1512,
+                      "sourceRef": "ellisonleao/magictools",
+                      "versionId": 589,
+                      "chunkIndex": 2,
+                      "documentId": 370,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "目录",
+                      "startOffset": 597,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:ellisonleao/magictools",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "ellisonleao/magictools",
+                  "documentId": 370,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Awesome-Selfhosted",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "Awesome-Selfhosted",
+                      "chunkId": 17189,
+                      "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                      "endOffset": 3047,
+                      "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                      "versionId": 645,
+                      "chunkIndex": 2,
+                      "documentId": 426,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Awesome-Selfhosted > 目录",
+                      "startOffset": 1205,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:awesome-selfhosted/awesome-selfhosted",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "documentId": 426,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "系统设计入门",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "系统设计入门",
+                      "chunkId": 11449,
+                      "content": "#### Source(s) and further reading: NoSQL\n\n* [Explanation of base terminology](http://stackoverflow.com/questions/3342497/explanation-of-base-terminology)\n* [NoSQL databases a survey and decision guidance](https://medium.com/baqend-blog/nosql-databases-a-survey-and-decision-guidance-ea7823a822d#.wskogqenq)\n* [Scalability](https://web.archive.org/web/20220602114024/https://www.lecloud.net/post/7994751381/scalability-for-dummies-part-2-database)\n* [Introduction to NoSQL](https://www.youtube.com/watch?v=qI_g07C_Q5I)\n* [NoSQL patterns](http://horicky.blogspot.com/2009/11/nosql-patterns.html)\n\n",
+                      "endOffset": 60890,
+                      "sourceRef": "donnemartin/system-design-primer",
+                      "versionId": 291,
+                      "chunkIndex": 120,
+                      "documentId": 72,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "The System Design Primer > Database > NoSQL > Source(s) and further reading: NoSQL",
+                      "startOffset": 60294,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "系统设计入门",
+                      "chunkId": 11432,
+                      "content": "###### Source(s) and further reading: denormalization\n\n* [Denormalization](https://en.wikipedia.org/wiki/Denormalization)\n\n",
+                      "endOffset": 50427,
+                      "sourceRef": "donnemartin/system-design-primer",
+                      "versionId": 291,
+                      "chunkIndex": 103,
+                      "documentId": 72,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "The System Design Primer > Database > Relational database management system (RDBMS) > Denormalization > Disadvantage(s): denormalization > Source(s) and further reading: denormalization",
+                      "startOffset": 50304,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:donnemartin/system-design-primer",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "documentId": 72,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "编程面试大学",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "编程面试大学",
+                      "chunkId": 11636,
+                      "content": "## Computer Science Courses\n\n- [Directory of Online CS Courses](https://github.com/open-source-society/computer-science)\n- [Directory of CS Courses (many with online lectures)](https://github.com/prakhar1989/awesome-courses)\n\n**[⬆ back to top](#table-of-contents)**\n\n",
+                      "endOffset": 133931,
+                      "sourceRef": "jwasham/coding-interview-university",
+                      "versionId": 292,
+                      "chunkIndex": 119,
+                      "documentId": 73,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Coding Interview University > Computer Science Courses",
+                      "startOffset": 133664,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "编程面试大学",
+                      "chunkId": 11537,
+                      "content": "### C\n\n- [Algorithms in C, Parts 1-5 (Bundle), 3rd Edition](https://www.amazon.com/Algorithms-Parts-1-5-Bundle-Fundamentals/dp/0201756080)\n    - Fundamentals, Data Structures, Sorting, Searching, and Graph Algorithms\n\n",
+                      "endOffset": 16462,
+                      "sourceRef": "jwasham/coding-interview-university",
+                      "versionId": 292,
+                      "chunkIndex": 20,
+                      "documentId": 73,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Coding Interview University > Books for Data Structures and Algorithms > C",
+                      "startOffset": 16244,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "编程面试大学",
+                      "chunkId": 11522,
+                      "content": "### Topics of Study\n\n- [Algorithmic complexity / Big-O / Asymptotic analysis](#algorithmic-complexity--big-o--asymptotic-analysis)\n- [Data Structures](#data-structures)\n    - [Arrays](#arrays)\n    - [Linked Lists](#linked-lists)\n    - [Stack](#stack)\n    - [Queue](#queue)\n    - [Hash table](#hash-table)\n- [More Knowledge](#more-knowledge)\n    - [Binary search](#binary-search)\n    - [Bitwise operations](#bitwise-operations)\n- [Trees](#trees)\n    - [Trees - Intro](#trees---intro)\n    - [Binary search trees: BSTs](#binary-search-trees-bsts)\n    - [Heap / Priority Queue / Binary Heap](#heap--priority-queue--binary-heap)\n    - balanced search trees (general concept, not details)\n    - traversals: preorder, inorder, postorder, BFS, DFS\n- [Sorting](#sorting)\n    - selection\n    - insertion\n    - heapsort\n    - quicksort\n    - mergesort\n- [Graphs](#graphs)\n    - directed\n    - undirected\n    - adjacency matrix\n    - adjacency list\n    - traversals: BFS, DFS\n- [Even More Knowledge](#even-more-knowledge)\n    - [Recursion](#recursion)\n    - [Dynamic Programming](#dynamic-programming)\n    - [Design Patterns](#design-patterns)\n    - [Combinatorics (n choose k) & Probability](#combinatorics-n-choose-k--probability)\n    - [NP, NP-Complete and Approximation Algorithms](#np-np-complete-and-approximation-algorithms)\n    - [How computers process a program](#how-computers-process-a-program)\n    - [Caches](#caches)\n    - [Processes and Threads](#processes-and-threads)\n    - [Testing](#testing)\n    - [String searching & manipulations](#string-searching--manipulations)\n    - [Tries](#tries)\n    - [Floating Point Numbers](#floating-point-numbers)\n    - [Unicode](#unicode)\n    - [Endianness](#endianness)\n    - [Networking](#networking)\n- [Final Review](#final-review)\n\n",
+                      "endOffset": 6411,
+                      "sourceRef": "jwasham/coding-interview-university",
+                      "versionId": 292,
+                      "chunkIndex": 5,
+                      "documentId": 73,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Coding Interview University > Table of Contents > Topics of Study",
+                      "startOffset": 4637,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:jwasham/coding-interview-university",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "jwasham/coding-interview-university",
+                  "documentId": 73,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Oxotka/Landscape1C",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "Oxotka/Landscape1C",
+                      "chunkId": 12033,
+                      "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                      "endOffset": 222,
+                      "sourceRef": "beginner:38",
+                      "versionId": 313,
+                      "chunkIndex": 4,
+                      "documentId": 94,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                      "startOffset": 149,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:38",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "beginner:38",
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "yanglbme/reading",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "yanglbme/reading",
+                      "chunkId": 16240,
+                      "content": "## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n",
+                      "endOffset": 474,
+                      "sourceRef": "yanglbme/reading",
+                      "versionId": 502,
+                      "chunkIndex": 1,
+                      "documentId": 283,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "阅读 > 目录",
+                      "startOffset": 397,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:yanglbme/reading",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "yanglbme/reading",
+                  "documentId": 283,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "项目式学习",
+                      "chunkId": 11774,
+                      "content": "### Data Science:\n\n- Learn Python For Data Science by Doing Several Projects (video):\n  - [Part 1: Introduction](https://www.youtube.com/watch?v=T5pRlIbr6gg)\n  - [Part 2: Twitter Sentiment Analysis](https://www.youtube.com/watch?v=o_OZdbCzHUA)\n  - [Part 3: Recommendation Systems](https://www.youtube.com/watch?v=9gBC9R-msAk&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU&index=3)\n  - [Part 4: Predicting Stock Prices](https://www.youtube.com/watch?v=SSu00IRRraY&index=4&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU)\n  - [Part 5: Deep Dream in TensorFlow](https://www.youtube.com/watch?v=MrBzgvUNr4w&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU&index=5)\n  - [Part 6: Genetic Algorithms](https://www.youtube.com/watch?v=dSofAXnnFrY&index=6&list=PL2-dafEMk2A6QKz1mrk1uIGfHkC1zZ6UU)\n\n",
+                      "endOffset": 28740,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 41,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > Python: > Data Science:",
+                      "startOffset": 27976,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "pnpm（推荐）",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "pnpm（推荐）",
+                      "chunkId": 17812,
+                      "content": "## 支持的图表类型\n\n| 图表类型 | 类名 | 说明 |\n|:--------:|:-----:|:-----|\n| 柱状图 | `BarRenderer` | 垂直/水平柱状图，支持堆叠与分组 |\n| 折线图 | `LineRenderer` | 平滑曲线/折线，支持面积填充与标记点 |\n| 饼图 | `PieRenderer` | 环形/饼图，支持交互式扇区分离 |\n| 散点图 | `ScatterRenderer` | 自由散点分布，支持聚类着色 |\n| 面积图 | `AreaRenderer` | 堆叠面积图，渐变透明填充 |\n| 雷达图 | `RadarRenderer` | 多维度雷达分析图 |\n| 热力图 | `HeatmapRenderer` | 二维色阶热力矩阵 |\n| 仪表盘 | `GaugeRenderer` | 弧形仪表盘，支持多指针 |\n\n---\n\n",
+                      "endOffset": 3548,
+                      "sourceRef": "aidizhi/455555.xyz",
+                      "versionId": 756,
+                      "chunkIndex": 9,
+                      "documentId": 537,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "支持的图表类型",
+                      "startOffset": 3153,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:aidizhi/455555.xyz",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "documentId": 537,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Susanphi85/slc4-semantic-log-compression",
+                  "evidence": [
+                    {
+                      "score": 0.012658227848101266,
+                      "title": "Susanphi85/slc4-semantic-log-compression",
+                      "chunkId": 14687,
+                      "content": "## 📁 Supported File Types\n\n| File Format | Description |\n|-------------|-------------|\n| CSV | Comma-separated values from spreadsheets or databases |\n| JSON | JavaScript Object Notation, common for web data |\n| Text Logs | Server logs, application logs, system logs |\n| PostgreSQL Exports | Database export files |\n| Structured Text | Any tabular or hierarchical text data |\n\n",
+                      "endOffset": 4582,
+                      "sourceRef": "Susanphi85/slc4-semantic-log-compression|new",
+                      "versionId": 411,
+                      "chunkIndex": 14,
+                      "documentId": 192,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "📁 Supported File Types",
+                      "startOffset": 4204,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:Susanphi85/slc4-semantic-log-compression",
+                  "bestScore": 0.012658227848101266,
+                  "sourceRef": "Susanphi85/slc4-semantic-log-compression|new",
+                  "documentId": 192,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "数据处理与可视化 数据处理与可视化 数据清洗与分析 数据可视化图表",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 386,
+                "url": "https://github.com/google-gemini/gemini-cli",
+                "name": "google-gemini/gemini-cli",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "google-gemini/gemini-cli",
+                "versionId": 605,
+                "documentId": 386,
+                "importable": false,
+                "catalogText": "# Gemini CLI\n\n[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)\n[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)\n[![版本](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)\n[![许可证](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)\n[![查看 Code Wiki](https://assets.codewiki.google/readme-badge/static.svg)](https://codewiki.google/github.com/google-gemini/gemini-cli?utm_source=badge&utm_medium=github&utm_campaign=github.com/google-gemini/gemini-cli)\n\n![Gemini CLI 截图](/docs/assets/gemini-screenshot.png)\n\nGemini CLI 是一个开源 AI 代理，将 Gemini 的强大功能直接带入您的终端。它提供对 Gemini 的轻量级访问，为您提供从提示到模型的最直接路径。\n\n在我们的[文档](https://geminicli.com/docs/)中了解有关 Gemini CLI 的所有信息。\n\n## 🚀 为什么选择 Gemini CLI？\n\n- **🎯 免费套餐**：使用个人 Google 账户，每分钟 60 个请求，每天 1,000 个请求。\n- **🧠 强大的 Gemini 3 模型**：可访问改进的推理能力和 100 万 Token 上下文窗口。\n- **🔧 内置工具**：Google 搜索基础、文件操作、Shell 命令、网页抓取。\n- **🔌 可扩展**：MCP（模型上下文协议）支持自定义集成。\n- **💻 终端优先**：专为生活在命令行中的开发者设计。\n- **🛡️ 开源**：Apache 2.0 许可。\n\n## 📦 安装\n\n有关推荐的系统规格和详细的安装指南，请参阅\n[Gemini CLI 安装、执行和发布](https://www.geminicli.com/docs/get-started/installation)。\n\n### 快速安装\n\n#### 使用 npx 立即运行\n\n```bash\n# 使用 npx（无需安装）\nnpx @google/gemini-cli\n```\n\n#### 使用 npm 全局安装\n\n```bash\nnpm install -g @google/gemini-cli\n```\n\n#### 使用 Homebrew 全局安装（macOS/Linux）\n\n```bash\nbrew install gemini-cli\n```\n\n#### 使用 MacPorts 全局安装（macOS）\n\n```bash\nsudo port install gemini-cli\n```\n\n#### 使用 Anaconda 安装（适用于受限环境）\n\n```bash\n# 创建并激活一个新环境\nconda create -y -n gemini_env -c conda-forge nodejs\nconda activate gemini_env\n\n# 在环境内通过 npm 全局安装 Gemini CLI\nnpm install -g @google/gemini-cli\n```\n\n## 发布渠道\n\n有关更多详细信息，请参阅[发布说明](https://www.geminicli.com/docs/changelogs)。\n\n### 预览版\n\n新的预览版将在每周二 UTC 23:59 发布。这些版本尚未经过全面审查，可能包含回归或其他未解决的问题。请帮助我们测试，并使用 `preview` 标签安装。\n\n```bash\nnpm install -g @google/gemini-cli@preview\n```\n\n### 稳定版\n\n- 新的稳定版将在每周二 UTC 20:00 发布，这是上周 `preview` 版本的完整提升，并包含所有错误修复和验证。使用 `latest` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@latest\n```\n\n### 每夜版\n\n- 每日 UTC 00:00 发布新版本。包含发布时主分支的所有更改。应假定存在待确认的验证和问题。使用 `nightly` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@nightly\n```\n\n## 📋 主要特性\n\n### 代码理解与生成\n\n- 查询和编辑大型代码库\n- 使用多模态功能，从 PDF、图像或草图生成新应用\n- 使用自然语言调试问题并排查故障\n\n### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Gemini CLI",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 429,
+                "url": "https://github.com/Stirling-Tools/Stirling-PDF",
+                "name": "Stirling-Tools/Stirling-PDF",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "Stirling-Tools/Stirling-PDF",
+                "versionId": 648,
+                "documentId": 429,
+                "importable": false,
+                "catalogText": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/main/docs/stirling.png\" width=\"80\"></p>\n<h1 align=\"center\">Stirling-PDF</h1>\n\n[![Docker Pulls](https://img.shields.io/docker/pulls/frooodle/s-pdf)](https://hub.docker.com/r/frooodle/s-pdf)\n[![Discord](https://img.shields.io/discord/1068636748814483718?label=Discord)](https://discord.gg/HYmhKj45pU)\n[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Stirling-Tools/Stirling-PDF/badge)](https://scorecard.dev/viewer/?uri=github.com/Stirling-Tools/Stirling-PDF)\n[![GitHub Repo stars](https://img.shields.io/github/stars/stirling-tools/stirling-pdf?style=social)](https://github.com/Stirling-Tools/stirling-pdf)\n\n<a href=\"https://www.producthunt.com/posts/stirling-pdf?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-stirling&#0045;pdf\" target=\"_blank\"><img src=\"https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=641239&theme=light\" alt=\"Stirling&#0032;PDF - Open&#0032;source&#0032;locally&#0032;hosted&#0032;web&#0032;PDF&#0032;editor | Product Hunt\" style=\"width: 250px; height: 54px;\" width=\"250\" height=\"54\" /></a>\n[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/Stirling-Tools/Stirling-PDF/tree/digitalOcean&refcode=c3210994b1af)\n\n[Stirling-PDF](https://www.stirlingpdf.com) 是一个强大的、本地托管的、基于 Web 的 PDF 操作工具，使用 Docker。它使您能够对 PDF 文件执行各种操作，包括拆分、合并、转换、重新组织、添加图像、旋转、压缩等。这个本地托管的 Web 应用程序已经发展成为一个功能全面的工具集，可满足您所有的 PDF 需求。\n\n所有文件和 PDF 要么仅存在于客户端，要么仅在任务执行期间驻留在服务器内存中，要么在执行任务时临时存储在文件中。用户下载的任何文件届时都将从服务器上删除。\n\n主页：[https://stirlingpdf.com](https://stirlingpdf.com)\n\n所有文档可在 [https://docs.stirlingpdf.com/](https://docs.stirlingpdf.com/) 获取。\n\n![stirling-home](images/stirling-home.jpg)\n\n## 功能特性\n\n- 并行文件处理和下载\n- 暗色模式支持\n- 自定义下载选项\n- 自定义“管道”以自动化队列运行多个功能\n- 提供 API 以便与外部脚本集成\n- 可选的登录和身份验证支持（参见[文档](https://docs.stirlingpdf.com/Advanced%20Configuration/System%20and%20Security)）\n- 企业特性如 SSO（参见[文档](https://docs.stirlingpdf.com/Advanced%20Configuration/Single%20Sign-On%20Configuration)）\n- 数据库备份和导入（参见[文档](https://docs.stirlingpdf.com/Advanced%20Configuration/DATABASE)）\n\n### 50+ 项 PDF 操作\n\n#### 整理\n- **PDF 多功能工具**：通过单一仪表板访问合并、旋转、重新排列、拆分和删除操作\n- **合并**：将多个 PDF 合并为一个\n- **拆分**：将 PDF 拆分为多个文件\n- **提取页面**：从 PDF 中提取特定页面\n- **删除**：删除 PDF 中的页面\n- **裁剪 PDF**：调整 PDF 页面边界\n- **旋转**：以 90 度增量旋转页面\n- **调整页面大小/缩放**：调整页面内容大小\n- **多页布局**：将多个页面添加到 PDF 中\n- **PDF 转单一大页面**：转换为单个连续页面\n- **整理**：重新排列 PDF 页面\n\n#### 转换为 PDF\n- **图像转 PDF**：将图像转换为 PDF 格式\n- **文件转 PDF**：将各种常见文件类型转换为 PDF\n- **URL/网站转 PDF**：将实时网页捕获为 PDF\n- **HTML 转 PDF**：将 HTML 文档转换为 PDF\n- **Markdown 转 PDF**：将 Markdown 文件转换为 PDF\n- **CBZ 转 PDF**：转换漫画书存档\n- **CBR 转 PDF**：转换漫画书 RAR 存档\n- **电子邮件转 PDF**：将电子邮件文件转换为 PDF\n- **电子书转 PDF**：转换电子书格式（EP",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Stirling-Tools/Stirling-PDF",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 72,
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "name": "donnemartin/system-design-primer",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "donnemartin/system-design-primer",
+                "versionId": 291,
+                "documentId": 72,
+                "importable": false,
+                "catalogText": "*[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues/272) ∙ [Italiano](https://github.com/donnemartin/system-design-primer/issues/104) ∙ [한국어](https://github.com/donnemartin/system-design-primer/issues/102) ∙ [فارسی](https://github.com/donnemartin/system-design-primer/issues/110) ∙ [Polski](https://github.com/donnemartin/system-design-primer/issues/68) ∙ [русский язык](https://github.com/donnemartin/system-design-primer/issues/87) ∙ [Español](https://github.com/donnemartin/system-design-primer/issues/136) ∙ [ภาษาไทย](https://github.com/donnemartin/system-design-primer/issues/187) ∙ [Türkçe](https://github.com/donnemartin/system-design-primer/issues/39) ∙ [tiếng Việt](https://github.com/donnemartin/system-design-primer/issues/127) ∙ [Français](https://github.com/donnemartin/system-design-primer/issues/250) | [Add Translation](https://github.com/donnemartin/system-design-primer/issues/28)*\n\n**Help [translate](TRANSLATIONS.md) this guide!**\n\n# The System Design Primer\n\n<p align=\"center\">\n  <img src=\"images/jj3A5N8.png\">\n  <br/>\n</p>\n\n## Motivation\n\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n\n### Learn how to design large-scale systems\n\nLearning how to design scalable systems will help you become a better engineer.\n\nSystem design is a broad topic.  There are a **vast number of resources scattered throughout the web** on system design principles.\n\nThis repo is an **organized collection** of resources to help you learn how to build systems at scale.\n\n### Learn from the open source community\n\nThis is a continually updated, open source project.\n\n[Contributions](#contributing) are welcome!\n\n### Prep for the system design interview\n\nIn addition to coding interviews, system design is a **required component** of the **technical interview process** at many tech companies.\n\n**Practice common system design interview questions** and **compare** your results with **sample solutions**: discussions, code, and diagrams.\n\nAdditional topics for interview prep:\n\n* [Study guide](#study-guide)\n* [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question)\n* [System design interview questions, **with solutions**](#system-design-interview-questions-with-solutions)\n* [Object-oriented design interview questions, **with solutions**](#object-oriented-design-interview-questions-with-solutions)\n* [Additional system design interview questions](#additional-system-design-interview-questions)\n\n## Anki flashcards\n\n<p align=\"center\">\n  <img src=\"images/zdCAkB3.png\">\n  <br/>\n</p>\n\nThe provided [Anki flashcard decks](https://apps.ankiweb.net/) use spaced repetition to help you retain key system design concepts.\n\n* [System design deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design.apkg)\n* [System design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design%20Exercises.apkg)\n* [Object oriented design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/OO%20Design.apkg)\n\nGreat for use while on-the-go.\n\n### Coding Resource: Interactive Coding Challenges\n\nLooking for resources to help you prep for the [**Coding Interview**](https://github.com/donnemartin/interactive-coding-challenges)?\n\n<p align=\"center\">\n  <img src=\"images/b4YtAEN.png\">\n  <br/>\n</p>\n\nCheck out the sister repo [**Interactive Coding Challenges**](https://github.com/donnemartin/interactive-coding-challenges), which contains an additional Anki deck:\n\n* [Coding deck](https://github.com/donnemartin/interactive-coding-challenges/tree/master/anki_cards/Coding.apkg)\n\n## Contributing\n\n> Learn from the community.\n\nFeel free to submit pull requests to help:\n\n* Fix errors\n* Improve sections\n* Add new sections\n* [Translate](https://github.com/donnemartin/system-design-primer/issues/28)\n\nContent that needs some polishing is placed [under development](#under-development).\n\nReview the [Contributing Guidelines](CONTRIBUTING.md).\n\n## Index of system design topics\n\n> Summaries of various system design topics, including pros and cons.  **Everything is a trade-off**.\n>\n> Each section contains links to more in-depth resources.\n\n<p align=\"center\">\n  <img src=\"images/jrUBAF7.png\">\n  <br/>\n</p>\n\n* [System design topics: start here](#system-design-topics-start-here)\n    * [Step 1: Review the scalability video lecture](#step-1-review-the-scalability-video-lecture)\n    * [Step 2: Review the scalability article](#step-2-review-the-scalability-article)\n    * [Next steps](#next-steps)\n* [Performance vs scalability](#performance-vs-scalability)\n* [Latency vs throughput](#latency-vs-throughput)\n* [Availability vs consistency](#availability-vs-consistency)\n    * [CAP theorem](#cap-theorem)\n        * [CP - consistency and partition tolerance](#cp---consistency-and-partition-tolerance)\n        * [AP - availability and partition tolerance](#ap---availability-and-partition-tolerance)\n* [Consistency patterns](#consistency-patterns)\n    * [Weak consistency](#weak-consistency)\n    * [Eventual consistency](#eventual-consistency)\n    * [Strong consistency](#strong-consistency)\n* [Availability patterns](#availability-patterns)\n    * [Fail-over](#fail-over)\n    * [Replication](#replication)\n    * [Availability in numbers](#availability-in-numbers)\n* [Domain name system](#domain-name-system)\n* [Content delivery network](#content-delivery-network)\n    * [Push CDNs](#push-cdns)\n    * [Pull CDNs](#pull-cdns)\n* [Load balancer](#load-balancer)\n    * [Active-passive](#active-passive)\n    * [Active-active](#active-active)\n    * [Layer 4 load balancing](#layer-4-load-balancing)\n    * [Layer 7 load balancing](#layer-7-load-balancing)\n    * [Horizontal scaling](#horizontal-scaling)\n* [Reverse proxy (web server)](#reverse-proxy-web-server)\n    * [Load balancer vs reverse proxy](#load-balancer-vs-reverse-proxy)\n* [Application layer](#application-layer)\n    * [Microservices](#microservices)\n    * [Service discovery](#service-discovery)\n* [Database](#database)\n    * [Relational database management system (RDBMS)](#relational-database-management-system-rdbms)\n        * [Master-slave replication](#master-slave-replication)\n        * [Master-master replication](#master-master-replication)\n        * [Federation](#federation)\n        * [Sharding](#sharding)\n        * [Denormalization](#denormalization)\n        * [SQL tuning](#sql-tuning)\n    * [NoSQL](#nosql)\n        * [Key-value store](#key-value-store)\n        * [Document store](#document-store)\n        * [Wide column store](#wide-column-store)\n        * [Graph Database](#graph-database)\n    * [SQL or NoSQL](#sql-or-nosql)\n* [Cache](#cache)\n    * [Client caching](#client-caching)\n    * [CDN caching](#cdn-caching)\n    * [Web server caching](#web-server-caching)\n    * [Database caching](#database-caching)\n    * [Application caching](#application-caching)\n    * [Caching at the database query level](#caching-at-the-database-query-level)\n    * [Caching at the object level](#caching-at-the-object-level)\n    * [When to update the cache](#when-to-update-the-cache)\n        * [Cache-aside](#cache-aside)\n        * [Write-through](#write-through)\n        * [Write-behind (write-back)](#write-behind-write-back)\n        * [Refresh-ahead](#refresh-ahead)\n* [Asynchronism](#asynchronism)\n    * [Message queues](#message-queues)\n    * [Task queues](#task-queues)\n    * [Back pressure](#back-pressure)\n* [Communication](#communication)\n    * [Transmission control protocol (TCP)](#transmission-control-protocol-tcp)\n    * [User datagram protocol (UDP)](#user-datagram-protocol-udp)\n    * [Remote procedure call (RPC)](#remote-procedure-call-rpc)\n    * [Representational state transfer (REST)](#representational-state-transfer-rest)\n* [Security](#security)\n* [Appendix](#appendix)\n    * [Powers of two table](#powers-of-two-table)\n    * [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)\n    * [Additional system design interview questions](#additional-system-design-interview-questions)\n    * [Real world architectures](#real-world-architectures)\n    * [Company architectures](#company-architectures)\n    * [Company engineering blogs](#company-engineering-blogs)\n* [Under development](#under-development)\n* [Credits](#credits)\n* [Contact info](#contact-info)\n* [License](#license)\n\n## Study guide\n\n> Suggested topics to review based on your interview timeline (short, medium, long).\n\n![Imgur](images/OfVllex.png)\n\n**Q: For interviews, do I need to know everything here?**\n\n**A: No, you don't need to know everything here to prepare for the interview**.\n\nWhat you are asked in an interview depends on variables such as:\n\n* How much experience you have\n* What your technical background is\n* What positions you are interviewing for\n* Which companies you are interviewing with\n* Luck\n\nMore experienced candidates are generally expected to know more about system design.  Architects or team leads might be expected to know more than individual contributors.  Top tech companies are likely to have one or more design interview rounds.\n\nStart broad and go deeper in a few areas.  It helps to know a little about various key system design topics.  Adjust the following guide based on your timeline, experience, what positions you are interviewing for, and which companies you are interviewing with.\n\n* **Short timeline** - Aim for **breadth** with system design topics.  Practice by solving **some** interview questions.\n* **Medium timeline** - Aim for **breadth** and **some depth** with system design topics.  Practice by solving **many** interview questions.\n* **Long timeline** - Aim for **breadth** and **more depth** with system design topics.  Practice by solving **most** interview questions.\n\n| | Short | Medium | Long |\n|---|---|---|---|\n| Read through the [System design topics](#index-of-system-design-topics) to get a broad understanding of how systems work | :+1: | :+1: | :+1: |\n| Read through a few articles in the [Company engineering blogs](#company-engineering-blogs) for the companies you are interviewing with | :+1: | :+1: | :+1: |\n| Read through a few [Real world architectures](#real-world-architectures) | :+1: | :+1: | :+1: |\n| Review [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question) | :+1: | :+1: | :+1: |\n| Work through [System design interview questions with solutions](#system-design-interview-questions-with-solutions) | Some | Many | Most |\n| Work through [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions) | Some | Many | Most |\n| Review [Additional system design interview questions](#additional-system-design-interview-questions) | Some | Many | Most |\n\n## How to approach a system design interview question\n\n> How to tackle a system design interview question.\n\nThe system design interview is an **open-ended conversation**.  You are expected to lead it.\n\nYou can use the following steps to guide the discussion.  To help solidify this process, work through the [System design interview questions with solutions](#system-design-interview-questions-with-solutions) section using the following steps.\n\n### Step 1: Outline use cases, constraints, and assumptions\n\nGather requirements and scope the problem.  Ask questions to clarify use cases and constraints.  Discuss assumptions.\n\n* Who is going to use it?\n* How ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "系统设计入门",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 73,
+                "url": "https://github.com/jwasham/coding-interview-university",
+                "name": "jwasham/coding-interview-university",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "jwasham/coding-interview-university",
+                "versionId": 292,
+                "documentId": 73,
+                "importable": false,
+                "catalogText": "# Coding Interview University\n\n> I originally created this as a short to-do list of study topics for becoming a software engineer,\n> but it grew to the large list you see today. After going through this study plan, [I got hired\n> as a Software Development Engineer at Amazon](https://startupnextdoor.com/ive-been-acquired-by-amazon/?src=ciu)!\n> You probably won't have to study as much as I did. Anyway, everything you need is here.\n>\n> I studied about 8-12 hours a day, for several months. This is my story: [Why I studied full-time for 8 months for a Google interview](https://medium.freecodecamp.org/why-i-studied-full-time-for-8-months-for-a-google-interview-cc662ce9bb13)\n>\n> **Please Note:** You won't need to study as much as I did. I wasted a lot of time on things I didn't need to know. More info about that is below. I'll help you get there without wasting your precious time.\n>\n> The items listed here will prepare you well for a technical interview at just about any software company,\n> including the giants: Amazon, Facebook, Google, and Microsoft.\n>\n> *Best of luck to you!*\n\n<details>\n<summary>Translations:</summary>\n\n- [Bahasa Indonesia](translations/README-id.md)\n- [Bulgarian](translations/README-bg.md)\n- [Español](translations/README-es.md)\n- [German](translations/README-de.md)\n- [Japanese (日本語)](translations/README-ja.md)\n- [Marathi](translations/README-mr.md)\n- [Polish](translations/README-pl.md)\n- [Português Brasileiro](translations/README-ptbr.md)\n- [Russian](translations/README-ru.md)\n- [Tiếng Việt - Vietnamese](translations/README-vi.md)\n- [Urdu - اردو](translations/README-ur.md)\n- [Uzbek](translations/README-uz.md)\n- [বাংলা - Bangla](translations/README-bn.md)\n- [ខ្មែរ - Khmer](translations/README-kh.md)\n- [简体中文](translations/README-cn.md)\n- [繁體中文](translations/README-tw.md)\n</details>\n\n<details>\n<summary>Translations in progress:</summary>\n\n- [Afrikaans](https://github.com/jwasham/coding-interview-university/issues/1164)\n- [Arabic](https://github.com/jwasham/coding-interview-university/issues/98)\n- [French](https://github.com/jwasham/coding-interview-university/issues/89)\n- [Greek](https://github.com/jwasham/coding-interview-university/issues/166)\n- [Italian](https://github.com/jwasham/coding-interview-university/issues/1030)\n- [Korean(한국어)](https://github.com/jwasham/coding-interview-university/issues/118)\n- [Malayalam](https://github.com/jwasham/coding-interview-university/issues/239)\n- [Persian - Farsi](https://github.com/jwasham/coding-interview-university/issues/186)\n- [Telugu](https://github.com/jwasham/coding-interview-university/issues/117)\n- [Thai](https://github.com/jwasham/coding-interview-university/issues/156)\n- [Turkish](https://github.com/jwasham/coding-interview-university/issues/90)\n- [Українська](https://github.com/jwasham/coding-interview-university/issues/106)\n- [עברית](https://github.com/jwasham/coding-interview-university/issues/82)\n- [हिन्दी](https://github.com/jwasham/coding-interview-university/issues/81)\n</details>\n\n\n## What is it?\n\n![Coding at the whiteboard - from HBO's Silicon Valley](https://d3j2pkmjtin6ou.cloudfront.net/coding-at-the-whiteboard-silicon-valley.png)\n\nThis is my multi-month study plan for becoming a software engineer for a large company.\n\n**Required:**\n* A little experience with coding (variables, loops, methods/functions, etc)\n* Patience\n* Time\n\nNote this is a study plan for **software engineering**, not frontend engineering or full-stack development. There are really\nsuper roadmaps and coursework for those career paths elsewhere (see https://roadmap.sh/ for more info).\n\nThere is a lot to learn in a university Computer Science program, but only knowing about 75% is good enough for an interview, so that's what I cover here.\nFor a complete CS self-taught program, the resources for my study plan have been included in Kamran Ahmed's Computer Science Roadmap: https://roadmap.sh/computer-science\n\n---\n\n## Table of Contents\n\n### The Study Plan\n\n- [What is it?](#what-is-it)\n- [Why use it?](#why-use-it)\n- [How to use it](#how-to-use-it)\n- [Don't feel you aren't smart enough](#dont-feel-you-arent-smart-enough)\n- [A Note About Video Resources](#a-note-about-video-resources)\n- [Choose a Programming Language](#choose-a-programming-language)\n- [Books for Data Structures and Algorithms](#books-for-data-structures-and-algorithms)\n- [Interview Prep Books](#interview-prep-books)\n- [Don't Make My Mistakes](#dont-make-my-mistakes)\n- [What you Won't See Covered](#what-you-wont-see-covered)\n- [The Daily Plan](#the-daily-plan)\n- [Coding Question Practice](#coding-question-practice)\n- [Coding Problems](#coding-problems)\n\n### Topics of Study\n\n- [Algorithmic complexity / Big-O / Asymptotic analysis](#algorithmic-complexity--big-o--asymptotic-analysis)\n- [Data Structures](#data-structures)\n    - [Arrays](#arrays)\n    - [Linked Lists](#linked-lists)\n    - [Stack](#stack)\n    - [Queue](#queue)\n    - [Hash table](#hash-table)\n- [More Knowledge](#more-knowledge)\n    - [Binary search](#binary-search)\n    - [Bitwise operations](#bitwise-operations)\n- [Trees](#trees)\n    - [Trees - Intro](#trees---intro)\n    - [Binary search trees: BSTs](#binary-search-trees-bsts)\n    - [Heap / Priority Queue / Binary Heap](#heap--priority-queue--binary-heap)\n    - balanced search trees (general concept, not details)\n    - traversals: preorder, inorder, postorder, BFS, DFS\n- [Sorting](#sorting)\n    - selection\n    - insertion\n    - heapsort\n    - quicksort\n    - mergesort\n- [Graphs](#graphs)\n    - directed\n    - undirected\n    - adjacency matrix\n    - adjacency list\n    - traversals: BFS, DFS\n- [Even More Knowledge](#even-more-knowledge)\n    - [Recursion](#recursion)\n    - [Dynamic Programming](#dynamic-programming)\n    - [Design Patterns](#design-patterns)\n    - [Combinatorics (n choose k) & Probability](#combinatorics-n-choose-k--probability)\n    - [NP, NP-Complete and Approximation Algorithms](#np-np-complete-and-approximation-algorithms)\n    - [How computers process a program](#how-computers-process-a-program)\n    - [Caches](#caches)\n    - [Processes and Threads](#processes-and-threads)\n    - [Testing](#testing)\n    - [String searching & manipulations](#string-searching--manipulations)\n    - [Tries](#tries)\n    - [Floating Point Numbers](#floating-point-numbers)\n    - [Unicode](#unicode)\n    - [Endianness](#endianness)\n    - [Networking](#networking)\n- [Final Review](#final-review)\n\n### Getting the Job\n\n- [Update Your Resume](#update-your-resume)\n- [Find a Job](#find-a-job)\n- [Interview Process & General Interview Prep](#interview-process--general-interview-prep)\n- [Be thinking of for when the interview comes](#be-thinking-of-for-when-the-interview-comes)\n- [Have questions for the interviewer](#have-questions-for-the-interviewer)\n- [Once You've Got The Job](#once-youve-got-the-job)\n\n**---------------- Everything below this point is optional ----------------**\n\n### Optional Extra Topics & Resources\n\n- [Additional Books](#additional-books)\n- [System Design, Scalability, Data Handling](#system-design-scalability-data-handling) (if you have 4+ years experience)\n- [Additional Learning](#additional-learning)\n    - [Compilers](#compilers)\n    - [Emacs and vi(m)](#emacs-and-vim)\n    - [Unix command line tools](#unix-command-line-tools)\n    - [Information theory](#information-theory-videos)\n    - [Parity & Hamming Code](#parity--hamming-code-videos)\n    - [Entropy](#entropy)\n    - [Cryptography](#cryptography)\n    - [Compression](#compression)\n    - [Computer Security](#computer-security)\n    - [Garbage collection](#garbage-collection)\n    - [Parallel Programming](#parallel-programming)\n    - [Messaging, Serialization, and Queueing Systems](#messaging-serialization-and-queueing-systems)\n    - [A*](#a)\n    - [Fast Fourier Transform](#fast-fourier-transform)\n    - [Bloom Filter](#bloom-filter)\n    - [HyperLogLog](#hyperloglog)\n    - [Locality-Sensitive Hashing](#locality-sensitive-hashing)\n    - [van Emde Boas Trees](#van-emde-boas-trees)\n    - [Augmented Data Structures](#augmented-data-structures)\n    - [Balanced search trees](#balanced-search-trees)\n        - AVL trees\n        - Splay trees\n        - Red/black trees\n        - 2-3 search trees\n        - 2-3-4 Trees (aka 2-4 trees)\n        - N-ary (K-ary, M-ary) trees\n        - B-Trees\n    - [k-D Trees](#k-d-trees)\n    - [Skip lists](#skip-lists)\n    - [Network Flows](#network-flows)\n    - [Disjoint Sets & Union Find](#disjoint-sets--union-find)\n    - [Math for Fast Processing](#math-for-fast-processing)\n    - [Treap](#treap)\n    - [Linear Programming](#linear-programming-videos)\n    - [Geometry, Convex hull](#geometry-convex-hull-videos)\n    - [Discrete math](#discrete-math)\n- [Additional Detail on Some Subjects](#additional-detail-on-some-subjects)\n- [Video Series](#video-series)\n- [Computer Science Courses](#computer-science-courses)\n- [Papers](#papers)\n\n---\n\n## Why use it?\n\nIf you want to work as a software engineer for a large company, these are the things you have to know.\n\nIf you missed out on getting a degree in computer science, like I did, this will catch you up and save four years of your life.\n\nWhen I started this project, I didn't know a stack from a heap, didn't know Big-O anything, or anything about trees, or how to\ntraverse a graph. If I had to code a sorting algorithm, I can tell ya it would have been terrible.\nEvery data structure I had ever used was built into the language, and I didn't know how they worked\nunder the hood at all. I never had to manage memory unless a process I was running would give an \"out of\nmemory\" error, and then I'd have to find a workaround. I used a few multidimensional arrays in my life and\nthousands of associative arrays, but I never created data structures from scratch.\n\nIt's a long plan. It may take you months. If you are familiar with a lot of this already it will take you a lot less time.\n\n**[⬆ back to top](#table-of-contents)**\n\n## How to use it\n\nEverything below is an outline, and you should tackle the items in order from top to bottom.\n\nI'm using GitHub's special markdown flavor, including tasks lists to track progress.\n  - [More about GitHub-flavored markdown](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown)\n\n### If you don't want to use git\n\nOn this page, click the Code button near the top, then click \"Download ZIP\". Unzip the file and you can work with the text files.\n\nIf you're open in a code editor that understands markdown, you'll see everything formatted nicely.\n\n![How to download the repo as a zip file](https://d3j2pkmjtin6ou.cloudfront.net/how-to-download-as-zip.png)\n\n### If you're comfortable with git\n\nCreate a new branch so you can check items like this, just put an x in the brackets: [x]\n\n1. ***Fork the GitHub repo:*** `https://github.com/jwasham/coding-interview-university` by clicking on the Fork button.\n\n    ![Fork the GitHub repo](https://d3j2pkmjtin6ou.cloudfront.net/fork-button.png)\n\n1. Clone to your local repo:\n\n    ```bash\n    git clone https://github.com/<YOUR_GITHUB_USERNAME>/coding-interview-university.git\n    cd coding-interview-university\n    git remote add upstream https://github.com/jwasham/coding-interview-university.git\n    git remote set-url --push upstream DISABLE  # so that you don't push your personal progress back to the original repo\n    ```\n\n1. Mark all boxes with X after you completed your changes:\n\n    ```bash\n    git commit -am \"Marked personal progress\"\n    git pull upstream main  # keep your fork up-to-date with changes from the original repo\n\n    git push # just pushes to your fork\n    ```\n\n**[⬆ back to top](#table-of-contents)**\n\n## Don't feel you aren't smart enough\n\n- Successful software engineers are smart, but many have an insecurity that they aren't smart enough.\n- The following videos may help you overcome this insecurity:\n    - [The myth of the Genius Programmer](https://www.youtube.com/watch?v=0SARbwvhupQ)\n    - [It's Dangerous to Go Alone: Battling the Invisible Monsters in Tech](https://w",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "编程面试大学",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 38,
+                "url": "https://github.com/Oxotka/Landscape1C",
+                "name": "Oxotka/Landscape1C",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"1c\", \"1c-enterprise\", \"bsl\", \"developer-tools\", \"landscape\", \"tech-radar\"]",
+                "archived": false,
+                "duration": "2-5天",
+                "language": "JavaScript",
+                "sourceRef": "beginner:38",
+                "techStack": "JavaScript",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "1C 技术生态的交互式地图，包含 200+ 工具、6 个过滤轴、关系图谱、示意图海报和按角色划分的学习路径。",
+                "beginnerScore": 87,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 283,
+                "url": "https://github.com/yanglbme/reading",
+                "name": "yanglbme/reading",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "yanglbme/reading",
+                "versionId": 502,
+                "documentId": 283,
+                "importable": false,
+                "catalogText": "# 阅读\n\n[![license](https://img.shields.io/github/license/yanglbme/reading?color=42b883&style=flat-square)](https://github.com/yanglbme/reading/blob/main/LICENSE)\n[![actions status](https://img.shields.io/github/workflow/status/yanglbme/reading/Sync?color=42b883&label=sync&logo=github&style=flat-square)](https://github.com/yanglbme/reading/actions?query=workflow%3ASync)\n\n本项目记录了我的阅读笔记，包括技术类和其他类。\n\n## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n### [技术类](docs/tech/README.md)\n\n| #   | 标题                                                                                 | 作者                               | 评分     |\n| --- | ------------------------------------------------------------------------------------- | --------------------------------------- | ---------- |\n| 1   | [Redis 设计与实现[2014]](docs/tech/2019-03-17.md)                                     | [黄健宏](https://github.com/huangz1990) | ⭐⭐⭐⭐⭐ |\n| 2   | [企业 IT 架构转型之道：阿里巴巴中台战略思想与架构实战[2017]](docs/tech/2019-03-31.md) | 钟华(花名:古谦)                         | ⭐⭐⭐⭐   |\n| 3   | [代码整洁之道[2010]](docs/tech/2019-04-07.md)                                         | [美]Robert C.Martin                     | ⭐⭐⭐⭐⭐ |\n\n### [其他类](docs/other/README.md)\n\n| #   | 标题                                                                       | 作者                                                                       | 评分     |\n| --- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ---------- |\n| 1   | [软技能：代码之外的生存指南[2016]](docs/other/2019-03-10.md)                | [[美]John Z. Sonmez](https://simpleprogrammer.com/about-simple-programmer/) | ⭐⭐⭐⭐⭐ |\n| 2   | [自学是门手艺[2019]](docs/other/2019-03-24.md)                              | [李笑来](https://github.com/xiaolai)                                        | ⭐⭐⭐⭐⭐ |\n| 3   | [枕边算法书[2018]](docs/other/2019-04-14.md)                                | [韩]林栢濬 著、崔盛一 译                                                    | ⭐⭐⭐⭐   |\n| 4   | [房思琪的初恋乐园[2017]](docs/other/2019-04-21.md)                          | [台]林奕含                                                                  | ⭐⭐⭐⭐⭐ |\n| 5   | [人性的弱点[2006]](docs/other/2019-04-28.md)                                | [美]戴尔·卡耐基                                                             | ⭐⭐⭐⭐⭐ |\n| 6   | [我的生活不可能那么坏[2018]](docs/other/2019-05-05.md)                      | [日]河尻圭吾                                                                | ⭐⭐⭐⭐⭐ |\n| 7   | [坚持，一种可以养成的习惯[2016]](docs/other/2019-05-12.md)                  | [日]古川武士                                                                | ⭐⭐⭐⭐   |\n| 8   | [如何阅读一本书[2014]](docs/other/2019-05-26.md)                            | [美] 莫提默·J 艾德勒、查尔斯·范多伦                                         | ⭐⭐⭐⭐   |\n| 9   | [黑客与画家：硅谷创业之父 Paul Graham 文集[2011]](docs/other/2019-05-27.md) | [美] 保罗·格雷厄姆 著、[阮一峰](https://github.com/ruanyf) 译               | ⭐⭐⭐⭐⭐ |\n| 10  | [未来世界的幸存者[2018]](docs/other/2019-06-01.md)                          | [阮一峰](https://github.com/ruanyf)                                         | ⭐⭐⭐⭐⭐ |\n| 11  | [韭菜的自我修养[2018]](docs/other/2019-06-09.md)                            | [李笑来](https://github.com/xiaolai)                                        | ⭐⭐⭐⭐   |\n| 12  | [稀缺：我们是如何陷入贫穷与忙碌的[2014]](docs/other/2019-06-16.md)          | [美] 塞德希尔· 穆来纳森 & 埃尔德·沙菲尔 著、魏薇 & 龙志勇 译                | ⭐⭐⭐⭐⭐ |\n| 13  | [认知尺度[2019]](docs/other/2019-06-24.md)                                  | 魏坤琳 等                                                                   | ⭐⭐⭐⭐⭐ |\n| 14  | [顺势而为：雷军传[2014]](docs/other/2019-07-14.md)                          | 采文                                                                        | ⭐⭐⭐⭐⭐ |\n| 15  | [MacTalk 跨越边界[2015]](docs/other/2019-07-22.md)                          | 池建强                                                                      | ⭐⭐⭐⭐⭐ |",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "yanglbme/reading",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 75,
+                "url": "https://github.com/practical-tutorials/project-based-learning",
+                "name": "practical-tutorials/project-based-learning",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "practical-tutorials/project-based-learning",
+                "versionId": 294,
+                "documentId": 75,
+                "importable": false,
+                "catalogText": "# Project Based Learning\n\n[![Gitter](https://badges.gitter.im/practical-tutorials/community.svg)](https://gitter.im/practical-tutorials/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Link rot sweep](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml/badge.svg)](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml)\n\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are divided into different primary programming languages. Tutorials may involve multiple technologies and languages.\n\nTo get started, simply fork this repo. Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.\n\n## Table of Contents:\n\n- [C#](#c)\n- [C/C++](#cc)\n- [Clojure](#clojure)\n- [Dart](#dart)\n- [Elixir](#elixir)\n- [Erlang](#erlang)\n- [F#](#f)\n- [Go](#go)\n- [Haskell](#haskell)\n- [HTML/CSS](#html-and-css)\n- [Java](#java)\n- [JavaScript](#javascript)\n- [Kotlin](#kotlin)\n- [Lua](#lua)\n- [OCaml](#ocaml)\n- [PHP](#php)\n- [Python](#python)\n- [R](#r)\n- [Ruby](#ruby)\n- [Rust](#rust)\n- [Scala](#scala)\n- [Swift](#swift)\n- [Additional resources](#additional-resources)\n\n## C/C++:\n\n- [Build an Interpreter](http://www.craftinginterpreters.com/) (Chapter 14 on is written in C)\n- [Memory Allocators 101 - Write a simple memory allocator](https://arjunsreedharan.org/post/148675821737/memory-allocators-101-write-a-simple-memory)\n- [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)\n- [Write a FUSE Filesystem](https://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/)\n- [Build Your Own Text Editor](http://viewsourcecode.org/snaptoken/kilo/)\n- [Build Your Own Lisp](http://www.buildyourownlisp.com/)\n- [How to Program an NES Game in C](https://nesdoug.com/)\n- [Write an OS from scratch](https://github.com/tuhdo/os01)\n- [How to create an OS from scratch ](https://github.com/cfenollosa/os-tutorial)\n- [Building a CHIP-8 Emulator](https://austinmorlan.com/posts/chip8_emulator/)\n- [Beginning Game Programming with C++ and SDL](http://lazyfoo.net/tutorials/SDL/)\n- [Implementing a Key-Value Store](http://codecapsule.com/2012/11/07/ikvs-implementing-a-key-value-store-table-of-contents/)\n- Tiny 3D graphics projects\n  - [Tiny Renderer or how OpenGL works: software rendering in 500 lines of code](https://github.com/ssloy/tinyrenderer/wiki)\n  - [Understandable RayTracing in 256 lines of bare C++](https://github.com/ssloy/tinyraytracer/wiki)\n  - [KABOOM! in 180 lines of bare C++](https://github.com/ssloy/tinykaboom/wiki)\n  - [486 lines of C++: old-school FPS in a weekend](https://github.com/ssloy/tinyraycaster/wiki)\n- Writing a minimal x86-64 JIT compiler in C++\n  - [Part 1](https://solarianprogrammer.com/2018/01/10/writing-minimal-x86-64-jit-compiler-cpp/)\n  - [Part 2](https://solarianprogrammer.com/2018/01/12/writing-minimal-x86-64-jit-compiler-cpp-part-2/)\n- [Build a Live Code-reloader Library for C++](http://howistart.org/posts/cpp/1/index.html)\n- [Write a hash table in C](https://github.com/jamesroutley/write-a-hash-table)\n- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)\n- [Let's Write a Kernel](http://arjunsreedharan.org/post/82710718100/kernel-101-lets-write-a-kernel)\n- [Write a Bootloader in C](http://3zanders.co.uk/2017/10/13/writing-a-bootloader/)\n- [Linux Container in 500 Lines of Code](https://blog.lizzie.io/linux-containers-in-500-loc.html)\n- [Write Your Own Virtual Machine](https://justinmeiners.github.io/lc3-vm/)\n- [Learning KVM - Implement Your Own Linux Kernel](https://david942j.blogspot.com/2018/10/note-learning-kvm-implement-your-own.html)\n- [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)\n- Write a C compiler\n  - [Part 1: Integers, Lexing and Code Generation](https://norasandler.com/2017/11/29/Write-a-Compiler.html)\n  - [Part 2: Unary Operators](https://norasandler.com/2017/12/05/Write-a-Compiler-2.html)\n  - [Part 3: Binary Operators](https://norasandler.com/2017/12/15/Write-a-Compiler-3.html)\n  - [Part 4: Even More Binary Operators](https://norasandler.com/2017/12/28/Write-a-Compiler-4.html)\n  - [Part 5: Local Variables](https://norasandler.com/2018/01/08/Write-a-Compiler-5.html)\n  - [Part 6: Conditionals](https://norasandler.com/2018/02/25/Write-a-Compiler-6.html)\n  - [Part 7: Compound Statements](https://norasandler.com/2018/03/14/Write-a-Compiler-7.html)\n  - [Part 8: Loops](https://norasandler.com/2018/04/10/Write-a-Compiler-8.html)\n  - [Part 9: Functions](https://norasandler.com/2018/06/27/Write-a-Compiler-9.html)\n  - [Part 10: Global Variables](https://norasandler.com/2019/02/18/Write-a-Compiler-10.html)\n- [Implementing a Language with LLVM](https://llvm.org/docs/tutorial/#kaleidoscope-implementing-a-language-with-llvm)\n- [Meta Crush Saga: a C++17 compile-time game](https://jguegant.github.io//jguegant.github.io/blogs/tech/meta-crush-saga.html)\n- [High-Performance Matrix Multiplication](https://gist.github.com/nadavrot/5b35d44e8ba3dd718e595e40184d03f0)\n- Space Invaders from Scratch\n  - [Part 1](http://nicktasios.nl/posts/space-invaders-from-scratch-part-1.html)\n  - [Part 2](http://nicktasios.nl/posts/space-invaders-from-scratch-part-2.html)\n  - [Part 3](http://nicktasios.nl/posts/space-invaders-from-scratch-part-3.html)\n  - [Part 4](http://nicktasios.nl/posts/space-invaders-from-scratch-part-4.html)\n  - [Part 5](http://nicktasios.nl/posts/space-invaders-from-scratch-part-5.html)\n- [Tetris Tutorial in C++ Platform Independent](http://javilop.com/gamedev/tetris-tutorial-in-c-platform-independent-focused-in-game-logic-for-beginners/)\n- Writing a Linux Debugger\n  - [Part 1: Setup](https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/)\n  - [Part 2: Breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-breakpoints/)\n  - [Part 3: Registers and memory](https://blog.tartanllama.xyz/writing-a-linux-debugger-registers/)\n  - [Part 4: Elves and dwarves](https://blog.tartanllama.xyz/writing-a-linux-debugger-elf-dwarf/)\n  - [Part 5: Source and signals](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-signal/)\n  - [Part 6: Source-level stepping](https://blog.tartanllama.xyz/writing-a-linux-debugger-dwarf-step/)\n  - [Part 7: Source-level breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-break/)\n  - [Part 8: Stack unwinding](https://blog.tartanllama.xyz/writing-a-linux-debugger-unwinding/)\n  - [Part 9: Handling variables](https://blog.tartanllama.xyz/writing-a-linux-debugger-variables/)\n  - [Part 10: Advanced topics](https://blog.tartanllama.xyz/writing-a-linux-debugger-advanced-topics/)\n- Let's write a compiler\n  - [Part 1: Introduction, selecting a language, and doing some planning](https://briancallahan.net/blog/20210814.html)\n  - [Part 2: A lexer](https://briancallahan.net/blog/20210815.html)\n  - [Part 3: A parser](https://briancallahan.net/blog/20210816.html)\n  - [Part 4: Testing](https://briancallahan.net/blog/20210817.html)\n  - [Part 5: A code generator](https://briancallahan.net/blog/20210818.html)\n  - [Part 6: Input and output](https://briancallahan.net/blog/20210819.html)\n  - [Part 7: Arrays](https://briancallahan.net/blog/20210822.html)\n  - [Part 8: Strings, forward references, and conclusion](https://briancallahan.net/blog/20210826.html)\n\n### Network programming\n\n- Let's Code a TCP/IP Stack\n\n  - [Part 1: Ethernet & ARP](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)\n  - [Part 2: IPv4 & ICMPv4](http://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/)\n  - [Part 3: TCP Basics & Handshake](http://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/)\n  - [Part 4: TCP Data Flow & Socket API](http://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/)\n  - [Part 5: TCP Retransmission](http://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/)\n\n- Programming concurrent servers\n\n  - [Part 1 - Introduction](https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/)\n  - [Part 2 - Threads](https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/)\n  - [Part 3 - Event-driven](https://eli.thegreenplace.net/2017/concurrent-servers-part-3-event-driven/)\n  - [Part 4 - libuv](https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/)\n  - [Part 5 - Redis case study](https://eli.thegreenplace.net/2017/concurrent-servers-part-5-redis-case-study/)\n  - [Part 6 - Callbacks, Promises and async/await](https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/)\n\n- MQTT Broker from scratch\n  - [Part 1 - The protocol](https://codepr.github.io/posts/sol-mqtt-broker)\n  - [Part 2 - Networking](https://codepr.github.io/posts/sol-mqtt-broker-p2)\n  - [Part 3 - Server](https://codepr.github.io/posts/sol-mqtt-broker-p3)\n  - [Part 4 - Data structures](https://codepr.github.io/posts/sol-mqtt-broker-p4)\n  - [Part 5 - Topic abstraction](https://codepr.github.io/posts/sol-mqtt-broker-p5)\n  - [Part 6 - Handlers](https://codepr.github.io/posts/sol-mqtt-broker-p6)\n  - [Bonus - Multithreading](https://codepr.github.io/posts/sol-mqtt-broker-bonus)\n- [Networking from Scratch](https://github.com/TanayK07/networking-from-scratch)\n\n### OpenGL:\n\n- Creating 2D Breakout game clone in C++ with OpenGL\n  - [Breakout](https://learnopengl.com/In-Practice/2D-Game/Breakout)\n  - [Setting up](https://learnopengl.com/In-Practice/2D-Game/Setting-up)\n  - [Rendering Sprites](https://learnopengl.com/In-Practice/2D-Game/Rendering-Sprites)\n  - [Levels](https://learnopengl.com/In-Practice/2D-Game/Levels)\n  - Collisions\n    - [Ball](https://learnopengl.com/In-Practice/2D-Game/Collisions/Ball)\n    - [Collision detection](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection)\n    - [Collision resolution](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution)\n  - [Particles](https://learnopengl.com/In-Practice/2D-Game/Particles)\n  - [Postprocessing](https://learnopengl.com/In-Practice/2D-Game/Postprocessing)\n  - [Powerups](https://learnopengl.com/In-Practice/2D-Game/Powerups)\n  - [Audio](https://learnopengl.com/In-Practice/2D-Game/Audio)\n  - [Render text](https://learnopengl.com/In-Practice/2D-Game/Render-text)\n  - [Final thoughts](https://learnopengl.com/In-Practice/2D-Game/Final-thoughts)\n- [Handmade Hero](https://handmadehero.org)\n- [How to Make Minecraft in C++/OpenGL](https://www.youtube.com/playlist?list=PLMZ_9w2XRxiZq1vfw1lrpCMRDufe2MKV_) (video)\n\n## C#:\n\n- [Learn C# By Building a Simple RPG Game](http://scottlilly.com/learn-c-by-building-a-simple-rpg-index/)\n- [Create a Rogue-like game in C#](https://roguesharp.wordpress.com/)\n- [Create a Blank App with C# and Xamarin (work in progress)](https://www.intertech.com/Blog/xamarin-tutorial-part-1-create-a-blank-app/)\n- [Build iOS Photo Library App with Xamarin and Visual Studio](https://www.raywenderlich.com/134049/building-ios-apps-with-xamarin-and-visual-studio)\n- [Building the CoreWiki](https://www.youtube.com/playlist?list=PLVMqA0_8O85yC78I4Xj7z48ES48IQBa7p) This is a Wiki-style content management system that has been completely written in C# with ASP.NET Core and Razor Pages. You can find the source code [here](https://github.com/csharpfritz/CoreWiki).\n\n## Clojure:\n\n- [Build a Twitter Bot with Clojure](http://howistart.org/posts/clojure/1/index.html)\n- [Building a Spell-Checker](https://bernhardwenzel.com/articles/clojure-spellchecker/)\n- [Building a JIRA integration with Clojure & Atlassian Connect](https://hackernoon.com/building-a-jira-integration-with-clojure-atlassian-connect-506ebd112807)\n- [Prototyping with Clojure](https://github.com/aliaksandr-s/prototyping-with-clojure)\n- [Tetris in ClojureScript](https://shaunlebron.github.io/t3tr0s-slides)\n\n## Dart:\n\n### Flutter:\n\n- [Amazon Clone with Admin Panel](https://youtu.be/O3nmP-lZAdg)\n- [Food Delivery App](https://youtu.be/7dAt-JMSCVQ)\n- [Google Docs Clone](https://youtu.be/0_GJ1w_iG44)\n- [Instagram",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "项目式学习",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 537,
+                "url": "https://github.com/aidizhi/455555.xyz",
+                "name": "aidizhi/455555.xyz",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "aidizhi/455555.xyz",
+                "versionId": 756,
+                "documentId": 537,
+                "importable": false,
+                "catalogText": "#爱爱大学最新地址 视频 官方 https://455555.xyz\n\n<p align=\"center\">\n  <img src=\"https://img.shields.io/npm/v/dataviz-canvas.svg?style=flat-square&color=1976d2\" alt=\"npm version\" />\n  <img src=\"https://img.shields.io/github/actions/workflow/status/aidizhi/455555.xyz/ci.yml?branch=main&style=flat-square&label=Build\" alt=\"Build Status\" />\n  <img src=\"https://img.shields.io/codecov/c/github/aidizhi/455555.xyz?style=flat-square&color=4caf50\" alt=\"Coverage\" />\n  <img src=\"https://img.shields.io/npm/l/dataviz-canvas.svg?style=flat-square&color=ff9800\" alt=\"License\" />\n  <img src=\"https://img.shields.io/badge/Material-Design-00bcd4.svg?style=flat-square\" alt=\"Material Design\" />\n</p>\n\n<h1 align=\"center\">DataViz Canvas</h1>\n\n<p align=\"center\">\n  <strong>高性能 Canvas 2D 数据可视化引擎</strong><br/>\n  基于 Material Design 规范，用 TypeScript 构建的轻量级图表渲染库\n</p>\n\n<p align=\"center\">\n  <a href=\"https://455555.xyz\" target=\"_blank\">官方演示站点</a> &nbsp;·&nbsp;\n  <a href=\"https://aidizhi.github.io/455555.xyz/\" target=\"_blank\">文档中心</a> &nbsp;·&nbsp;\n  <a href=\"#api-%E6%96%87%E6%A1%A3\">API 文档</a> &nbsp;·&nbsp;\n  <a href=\"#%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97\">贡献指南</a>\n</p>\n\n---\n\n## 特性\n\n- **纯 Canvas 2D 渲染** — 无 SVG 依赖，在万级数据点下依然保持 60fps 流畅动画\n- **Material Design 主题系统** — 内置 Light / Dark 双主题，颜色、圆角、阴影严格遵循 MD3 规范\n- **TypeScript 全量类型** — 100% TypeScript 编写，导出完整 `.d.ts` 声明文件，IDE 智能提示开箱即用\n- **插件化架构** — 通过 `use(plugin)` 注册自定义渲染器、交互行为和动画策略\n- **响应式 & 高清屏适配** — 自动感知 `devicePixelRatio`，支持容器尺寸热更新\n- **Tree-shakable** — 基于 ESM 打包，未使用的图表类型不会进入最终产物\n\n---\n\n## 安装\n\n```bash\n# npm\nnpm install dataviz-canvas\n\n# pnpm（推荐）\npnpm add dataviz-canvas\n\n# yarn\nyarn add dataviz-canvas\n```\n\n> 最低要求：Node.js >= 16 · 现代浏览器（Chrome 90+、Firefox 88+、Safari 15+）\n\n---\n\n## 快速开始\n\n### 1. 创建画布容器\n\n```html\n<canvas id=\"myChart\" width=\"800\" height=\"400\"></canvas>\n```\n\n### 2. 初始化图表实例\n\n```typescript\nimport { Chart, LinearScale, BarRenderer, MaterialTheme } from 'dataviz-canvas';\n\n// 创建图表实例，绑定 Canvas 元素\nconst chart = new Chart(document.getElementById('myChart')!, {\n  // 应用 Material Design 暗色主题\n  theme: MaterialTheme.dark,\n\n  // 坐标轴配置\n  scales: {\n    x: new LinearScale({ min: 0, max: 100, title: '时间 (ms)' }),\n    y: new LinearScale({ min: 0, max: 500, title: '请求数 (req/s)' }),\n  },\n\n  // 渲染器\n  renderers: [new BarRenderer()],\n});\n\n// 注入数据\nchart.setData({\n  labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],\n  datasets: [\n    {\n      label: 'API Gateway',\n      data: [120, 85, 340, 480, 390, 210],\n      color: '#1976D2', // Material Blue 700\n    },\n    {\n      label: 'Auth Service',\n      data: [60, 45, 190, 310, 260, 150],\n      color: '#7B1FA2', // Material Purple 700\n    },\n  ],\n});\n\n// 渲染并启动入场动画\nchart.render({ animation: { duration: 800, easing: 'easeOutCubic' } });\n```\n\n### 3. 响应容器尺寸变化\n\n```typescript\n// 图表自动跟随容器 resize，也可手动触发\nconst observer = new ResizeObserver(() => chart.resize());\nobserver.observe(document.getElementById('chart-wrapper')!);\n```\n\n### 4. 交互事件\n\n```typescript\nchart.on('hover', (point) => {\n  console.log(`悬停数据: ${point.dataset.label} = ${point.value}`);\n});\n\nchart.on('click', (point) => {\n  // 点击时弹出 Material 风格 Tooltip\n  chart.showTooltip(point, { elevation: 3 });\n});\n```\n\n---\n\n## 支持的图表类型\n\n| 图表类型 | 类名 | 说明 |\n|:--------:|:-----:|:-----|\n| 柱状图 | `BarRenderer` | 垂直/水平柱状图，支持堆叠与分组 |\n| 折线图 | `LineRenderer` | 平滑曲线/折线，支持面积填充与标记点 |\n| 饼图 | `PieRenderer` | 环形/饼图，支持交互式扇区分离 |\n| 散点图 | `ScatterRenderer` | 自由散点分布，支持聚类着色 |\n| 面积图 | `AreaRenderer` | 堆叠面积图，渐变透明填充 |\n| 雷达图 | `RadarRenderer` | 多维度雷达分析图 |\n| 热力图 | `HeatmapRenderer` | 二维色阶热力矩阵 |\n| 仪表盘 | `GaugeRenderer` | 弧形仪表盘，支持多指针 |\n\n---\n\n## API 文档\n\n### 核心：`Chart` 类\n\n| 方法 / 属性 | 签名 | 说明 |\n|:------------|:-----|:-----|\n| `new Chart()` | `(canvas: HTMLCanvasElement, options: ChartOptions) => Chart` | 构造图表实例 |\n| `setData()` | `(payload: ChartData) => void` | 设置或更新图表数据 |\n| `render()` | `(opts?: RenderOptions) => void` | 执行渲染（可选动画配置） |\n| `resize()` | `() => void` | 重新计算尺寸并重绘 |\n| `destroy()` | `() => void` | 销毁实例，释放 Canvas 上下文与事件监听 |\n| `on()` | `(event: string, handler: Function) => Chart` | 注册交互事件监听 |\n| `off()` | `(event: string, handler?: Function) => Chart` | 移除事件监听 |\n| `showTooltip()` | `(point: DataPoint, opts?: TooltipOptions) => void` | 在指定数据点弹出提示框 |\n| `use()` | `(plugin: ChartPlugin) => Chart` | 注册插件 |\n| `theme` | `ThemeConfig` (读写) | 运行时切换主题 |\n\n### 坐标轴：`LinearScale` / `CategoryScale`\n\n| 参数 | 类型 | 默认值 | 说明 |\n|:-----|:-----|:------:|:-----|\n| `min` | `number` | `auto` | 轴最小值 |\n| `max` | `number` | `auto` | 轴最大值 |\n| `title` | `string` | `''` | 轴标题文本 |\n| `ticks` | `number` | `5` | 刻度数量 |\n| `grid` | `boolean` | `true` | 是否显示网格线 |\n| `format` | `(v: number) => string` | `String` | 刻度值格式化函数 |\n\n### 渲染选项：`RenderOptions`\n\n| 参数 | 类型 | 默认值 | 说明 |\n|:-----|:-----|:------:|:-----|\n| `animation` | `object \\| false` | `{ duration: 600 }` | 入场动画配置，`false` 禁用 |\n| `animation.duration` | `number` | `600` | 动画时长 (ms) |\n| `animation.easing` | `string` | `'easeOutCubic'` | 缓动函数名 |\n| `pixelRatio` | `number` | `devicePixelRatio` | 手动指定像素比 |\n\n---\n\n## 性能基准\n\n在 `Chrome 120 / macOS 14 / M2 Pro` 环境下的测试结果：\n\n| 场景 | 数据量 | 首帧渲染 | 持续帧率 (fps) | 内存占用 |\n|:-----|-------:|---------:|:--------------:|---------:|\n| 柱状图 | 10,000 条 | 12ms | 60 | 3.2 MB |\n| 折线图 | 50,000 条 | 28ms | 58 | 5.8 MB |\n| 散点图 | 100,000 点 | 45ms | 55 | 8.4 MB |\n| 热力图 (100x100) | 10,000 格 | 18ms | 60 | 4.1 MB |\n| 多数据集叠加 | 5 x 10,000 | 35ms | 57 | 6.6 MB |\n\n> 性能测试脚本位于 `benchmarks/` 目录，可运行 `pnpm bench` 在本机复现。\n\n---\n\n## 浏览器兼容性\n\n| 浏览器 | 最低版本 | 支持状态 |\n|:-------|:-------:|:-------:|\n| Chrome | 90+ | ✅ 完全支持 |\n| Firefox | 88+ | ✅ 完全支持 |\n| Safari | 15+ | ✅ 完全支持 |\n| Edge | 90+ | ✅ 完全支持 |\n| IE 11 | — | ❌ 不支持 |\n| Node.js (SSR) | 16+ | ⚠️ 仅数据预处理 |\n\n> 底层依赖 Canvas 2D API，不依赖任何 Polyfill。服务端渲染时可使用 `node-canvas` 进行静态图片导出。\n\n---\n\n## 项目结构\n\n```\n455555.xyz/\n├── src/\n│   ├── core/            # 图表核心（Chart、Scale、Animation）\n│   ├── renderers/       # 各图表类型渲染器\n│   ├── themes/          # Material Design 主题定义\n│   ├── plugins/         # 内置插件（Tooltip、Legend、Zoom）\n│   ├── utils/           # 工具函数\n│   └── index.ts         # 入口导出\n├── benchmarks/          # 性能基准测试\n├── tests/               # Jest 单元测试 & 集成测试\n├── docs/                # API 文档与使用指南\n├── playground/          # Vite 交互式演示\n├── vite.config.ts\n├── tsconfig.json\n├── jest.config.ts\n└── package.json\n```\n\n---\n\n## 开发\n\n```bash\n# 克隆仓库\ngit clone https://github.com/aidizhi/455555.xyz.git\ncd 455555.xyz\n\n# 安装依赖\npnpm install\n\n# 启动本地开发服务器（Vite + HMR）\npnpm dev\n\n# 运行单元测试（Jest）\npnpm test\n\n# 运行测试并生成覆盖率报告\npnpm test:coverage\n\n# 构建生产产物\npnpm build\n\n# 运行性能基准测试\npnpm bench\n\n# 代码检查与格式化\npnpm lint && pnpm format\n```\n\n---\n\n## 贡献指南\n\n我们欢迎任何形式的贡献，包括但不限于提交 Bug 报告、改进文档或发起 Pull Request。\n\n在贡献前，请阅读完整的 [贡献指南 (CONTRIBUTING.md)](./CONTRIBUTING.md)，了解代码规范、提交信息格式和 PR 流程。\n\n提交流程概要：\n\n1. Fork 本仓库并创建特性分支 (`git checkout -b feature/my-feature`)\n2. 编写代码并确保通过所有测试 (`pnpm test`)\n3. 提交变更 (`git commit -m 'feat(renderer): add waterfall chart support'`)\n4. 推送到远程分支 (`git push origin feature/my-feature`)\n5. 创建 Pull Request，描述变更内容与动机\n\n---\n\n## 技术栈\n\n| 技术 | 用途 |\n|:----:|:-----|\n| TypeScript | 核心代码开发，类型安全 |\n| Vite | 开发服务器与生产构建 |\n| Jest | 单元测试 & 覆盖率 |\n| Canvas 2D API | 图表渲染引擎 |\n| Material Design 3 | 主题与视觉规范 |\n| npm / pnpm | 包管理与发布 |\n\n---\n\n## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n## 许可证\n\n本项目基于 [Apache-2.0 许可证](https://www.apache.org/licenses/LICENSE-2.0) 开源。\n\n```\nCopyright 2024 爱爱大学\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n```\n\n---\n\n<p align=\"center\">\n  <sub>Built with passion by <strong>爱爱大学</strong> · Hosted on GitHub</sub>\n</p>\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "pnpm（推荐）",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 192,
+                "url": "https://github.com/Susanphi85/slc4-semantic-log-compression",
+                "name": "Susanphi85/slc4-semantic-log-compression",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "Susanphi85/slc4-semantic-log-compression",
+                "versionId": 411,
+                "documentId": 192,
+                "importable": false,
+                "catalogText": "<h1>💾 slc4-semantic-log-compression - Shrink Logs, Keep Every Detail</h1>\n\n<p align=\"center\">\n  <a href=\"https://github.com/Susanphi85/slc4-semantic-log-compression/releases\" style=\"display:inline-block;padding:16px 32px;background-color:#2ecc71;color:#ffffff;font-size:20px;font-weight:bold;text-decoration:none;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.2);\">⬇️ DOWNLOAD NOW</a>\n</p>\n\n## 🌟 What Is This?\n\nslc4-semantic-log-compression is a free tool that shrinks your log files, CSV exports, and JSON data without losing anything. Think of it like a vacuum-sealed bag for your digital records — everything stays perfectly intact, but takes up much less space.\n\nThis program runs entirely in your web browser. No installation headaches, no complicated setup — just open it, load your files, and compress them instantly.\n\n## 🔍 Why You Need This\n\nIf you work with large text files — server logs, database exports, spreadsheet data — you know how quickly they eat up hard drive space. This tool solves that problem in three powerful ways:\n\n- **Lossless Compression** — Your data stays 100% identical after compression. Nothing gets cut or simplified.\n- **Smart Schema Detection** — It automatically recognizes patterns in your data, making compression much more effective than generic tools.\n- **Ultra-Fast Processing** — Built on advanced technology (Zstandard) that works at lightning speed.\n\n## 🚀 Getting Started\n\nGetting started takes less than a minute. Here's exactly what to do:\n\n1. Visit this link to download the application: [https://github.com/Susanphi85/slc4-semantic-log-compression/releases](https://github.com/Susanphi85/slc4-semantic-log-compression/releases)\n2. On that page, find the most recent version listed at the top.\n3. Look for the download file that matches your computer (Windows users should look for files ending in `.exe` or `.zip`).\n4. Your browser will download the file to your \"Downloads\" folder — this is normal.\n\nThat's it! You're ready to start compressing.\n\n## 📥 Download and Setup\n\n### Step 1: Get the File\n\nVisit this link to download the application: [https://github.com/Susanphi85/slc4-semantic-log-compression/releases](https://github.com/Susanphi85/slc4-semantic-log-compression/releases)\n\nYou'll see a list of releases. Choose the latest one (they're marked \"Latest\" with a green label). On that release page, you'll find the download options.\n\n### Step 2: Open the Program\n\n- **If you downloaded a `.exe` file** — Double-click it and the program opens immediately.\n- **If you downloaded a `.zip` file** — Right-click the file, select \"Extract All,\" then open the extracted folder and double-click the application inside.\n\n### Step 3: Start Compressing\n\nOnce the program opens in your browser tab, you're ready to go. The interface is clean and straightforward:\n\n- Click the **\"Choose Files\"** button to select your logs, CSVs, or JSON files\n- Or drag and drop files directly into the main window\n- Watch as the program analyzes your data structure\n- Click **\"Compress\"** and your shrunken file downloads automatically\n\n## ✨ Key Features\n\n### 📊 Schema Fingerprinting\nThe program studies your data's structure — column names, data types, patterns — and creates a unique \"fingerprint\" for it. This allows exceptionally smart compression that adapts to your specific file format.\n\n### 🗄️ Columnar Encoding\nInstead of processing data row by row, the tool groups similar values together. This is far more efficient and produces dramatically smaller files, especially for repetitive log data.\n\n### ⚡ Zstandard Backend\nThis is the engine under the hood. Zstandard is one of the fastest compression algorithms available today, developed by Facebook's engineering team. It balances incredible speed with excellent compression ratios.\n\n### 🌐 100% Browser-Based\nNo servers, no uploads, no privacy concerns. Your data never leaves your computer. The entire compression happens locally using WebAssembly technology, which allows desktop-level performance inside your browser.\n\n### 🔒 Lossless Guarantee\nEvery single byte of your original file is preserved. You can always decompress and get back exactly what you started with — nothing more, nothing less.\n\n## 📁 Supported File Types\n\n| File Format | Description |\n|-------------|-------------|\n| CSV | Comma-separated values from spreadsheets or databases |\n| JSON | JavaScript Object Notation, common for web data |\n| Text Logs | Server logs, application logs, system logs |\n| PostgreSQL Exports | Database export files |\n| Structured Text | Any tabular or hierarchical text data |\n\n## 🖥️ System Requirements\n\nSince this runs in your browser, requirements are minimal:\n\n- **Browser:** Any modern browser (Chrome, Edge, Firefox, Safari) updated within the last year\n- **Operating System:** Windows 10 or 11 recommended, but any OS works\n- **Memory:** 4GB RAM minimum, 8GB recommended for large files\n- **Hard Drive:** At least 500MB free space for temporary file processing\n\n## 🤔 Frequently Asked Questions\n\n**Q: Is this really lossless?**\nA: Yes. Your decompressed files are bit-for-bit identical to the originals. We never alter, truncate, or simplify your data.\n\n**Q: How much space will I save?**\nA: Typical results range from 50% to 80% reduction, depending on your data. Log files with repetitive patterns compress extremely well.\n\n**Q: Can I compress multiple files at once?**\nA: Yes! Select multiple files and compress them together. The program will process each file individually and save compressed versions.\n\n**Q: Does the program send my data anywhere?**\nA: Absolutely not. Everything stays in your browser. This is a key design feature for privacy-conscious users and businesses.\n\n**Q: What happens after compression?**\nA: You receive a file ending in `.slc4` format. This contains your compressed data plus all the metadata needed to decompress it perfectly.\n\n**Q: How do I decompress files?**\nA: Open the same application and select the `.slc4` file. Click \"Decompress\" and your original file is restored instantly.\n\n**Q: Will this work on Mac or Linux?**\nA: Yes! Because it runs in the browser, every operating system works equally well.\n\n## 📚 Real-World Use Cases\n\n### System Administrators\nArchive server logs efficiently. Keep months of activity data without consuming your entire disk array.\n\n### Data Analysts\nStore CSV exports more compactly. Transfer datasets between team members faster than ever.\n\n### Database Managers\nBack up PostgreSQL exports with maximum compression. Restore them perfectly when needed.\n\n### Web Developers\nCompress JSON API responses before saving them. Maintain format integrity while reducing storage costs.\n\n### Compliance Teams\nRetain audit logs longer. The lossless guarantee means you're always audit-ready.\n\n## 🛠️ Advanced Tips\n\n### Best Performance\nFor maximum speed, close unnecessary browser tabs. The compression engine uses available processing power efficiently.\n\n### Large Files\nFiles up to 2GB are supported. For extremely large files, ensure your computer has sufficient RAM and temporary disk space.\n\n### Batch Processing\nFor bulk operations, consider compressing files individually first, then moving them to your archive storage. This reduces memory pressure.\n\n## 📞 Getting Help\n\nIf you encounter any issues:\n\n1. **Check the FAQ section** above — most questions are answered here\n2. **Visit the Issues page** on GitHub for known problems and solutions\n3. **Read the documentation** included in the repository\n4. **Email the developer** via the contact link on their GitHub profile\n\n## 🆕 Version History\n\n- **v1.4.0** — Added drag-and-drop interface, improved memory efficiency\n- **v1.3.1** — Fixed schema detection for irregular CSV files\n- **v1.2.0** — Introduced columnar encoding for 30% better compression\n- **v1.0.0** — Initial release with core compression features\n\n## ⭐ Final Thoughts\n\nslc4-semantic-log-compression solves a real problem for anyone who works with data files. It's fast, reliable, free, and respects your privacy by working entirely offline in your browser. The compression ratios are impressive, and the lossless guarantee means you never have to worry about data corruption.\n\nDownload it today and reclaim your hard drive space while keeping every bit of your important data.\n\n<p align=\"center\">\n  <a href=\"https://github.com/Susanphi85/slc4-semantic-log-compression/releases\" style=\"display:inline-block;padding:14px 28px;background-color:#3498db;color:#ffffff;font-size:18px;font-weight:bold;text-decoration:none;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.2);\">📦 GET THE LATEST VERSION</a>\n</p>\n\n---\n\n© 2024 slc4-semantic-log-compression. Open source and free forever.",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Susanphi85/slc4-semantic-log-compression",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "数据处理与可视化 数据处理与可视化 数据清洗与分析 数据可视化图表",
+              "topic": [
+                "数据处理与可视化"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "数据处理与可视化",
+              "candidates": [
+                {
+                  "key": "EXTERNAL_PROJECT:386",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Gemini CLI\n\n[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)\n[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)\n[![版本](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)\n[![许可证](https://img.shields.io/github/license/google-gemini/gemini-cli)](h"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:429",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <p align=\"center\"><img src=\"https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/main/docs/stirling.png\" width=\"80\"></p>\n<h1 align=\"center\">Stirling-PDF</h1>\n\n[![Docker Pulls](https://img.shields.io/docker/pulls/frooodle/s-pdf)](https://hub.docker.com/r/frooodle/s-pdf)\n[![Discord](https://img.shields.io/discord/1068636748814483718?label=Discord)](https://discord.gg/HYmhKj45pU)\n[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Stirling-Tools/Stirling-PDF/badge)](https://scorecard.dev/viewer/?uri=github.com/Stirling-Tools/Stirling-"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:72",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 *[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:73",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Coding Interview University\n\n> I originally created this as a short to-do list of study topics for becoming a software engineer,\n> but it grew to the large list you see today. After going through this study plan, [I got hired\n> as a Software Development Engineer at Amazon](https://startupnextdoor.com/ive-been-acquired-by-amazon/?src=ciu)!\n> You probably won't have to study as much as I did. Anyway, everything you need is here.\n>\n> I studied about 8-12 hours a day, for several months. This is my story: [Why I studied full-time for 8 months for a Google in"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:38",
+                  "purpose": "1C 技术生态的交互式地图，包含 200+ 工具、6 个过滤轴、关系图谱、示意图海报和按角色划分的学习路径。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:283",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 阅读\n\n[![license](https://img.shields.io/github/license/yanglbme/reading?color=42b883&style=flat-square)](https://github.com/yanglbme/reading/blob/main/LICENSE)\n[![actions status](https://img.shields.io/github/workflow/status/yanglbme/reading/Sync?color=42b883&label=sync&logo=github&style=flat-square)](https://github.com/yanglbme/reading/actions?query=workflow%3ASync)\n\n本项目记录了我的阅读笔记，包括技术类和其他类。\n\n## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n### [技术类](docs/tech/README.md)\n\n| #   | 标题                                              "
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:75",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Project Based Learning\n\n[![Gitter](https://badges.gitter.im/practical-tutorials/community.svg)](https://gitter.im/practical-tutorials/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Link rot sweep](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml/badge.svg)](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml)\n\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are di"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:537",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 #爱爱大学最新地址 视频 官方 https://455555.xyz\n\n<p align=\"center\">\n  <img src=\"https://img.shields.io/npm/v/dataviz-canvas.svg?style=flat-square&color=1976d2\" alt=\"npm version\" />\n  <img src=\"https://img.shields.io/github/actions/workflow/status/aidizhi/455555.xyz/ci.yml?branch=main&style=flat-square&label=Build\" alt=\"Build Status\" />\n  <img src=\"https://img.shields.io/codecov/c/github/aidizhi/455555.xyz?style=flat-square&color=4caf50\" alt=\"Coverage\" />\n  <img src=\"https://img.shields.io/npm/l/dataviz-canvas.svg?style=flat-square&color=ff9800\" alt=\"License\" />\n  <img "
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:192",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <h1>💾 slc4-semantic-log-compression - Shrink Logs, Keep Every Detail</h1>\n\n<p align=\"center\">\n  <a href=\"https://github.com/Susanphi85/slc4-semantic-log-compression/releases\" style=\"display:inline-block;padding:16px 32px;background-color:#2ecc71;color:#ffffff;font-size:20px;font-weight:bold;text-decoration:none;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.2);\">⬇️ DOWNLOAD NOW</a>\n</p>\n\n## 🌟 What Is This?\n\nslc4-semantic-log-compression is a free tool that shrinks your log files, CSV exports, and JSON data without losing anything. Think of it like a"
+                }
+              ]
+            },
+            "verdict": {
+              "matches": []
+            },
+            "accepted": {
+              "topic": "数据处理与可视化",
+              "proofs": {}
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "数据处理与可视化"
+                ]
+              },
+              "alternatives": [],
+              "calculatedAt": "2026-10-04T03:17:23.740713712Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "数据处理与可视化"
+                ],
+                "experience": "一年编程基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "数据处理与可视化",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "purposeReview": {
+                  "topic": "数据处理与可视化",
+                  "proofs": {}
+                },
+                "lastCandidates": [],
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：数据处理与可视化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

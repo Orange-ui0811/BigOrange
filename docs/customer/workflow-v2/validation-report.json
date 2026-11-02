@@ -1,0 +1,3692 @@
+{
+  "checkedAtUtc": "2026-10-29T02:36:56.8226283Z",
+  "validationKind": "DESIGN_STRUCTURE_AND_EXPECTED_STATE_CONSISTENCY",
+  "scenarioCount": 23,
+  "turnCount": 35,
+  "checkCount": 735,
+  "passed": true,
+  "failureCount": 0,
+  "limitations": [
+    "No application implementation was executed",
+    "Expected-state replay is not observed business behavior",
+    "No model, database, GitHub or retrieval evaluation",
+    "Semantic cases require human review"
+  ],
+  "checks": [
+    {
+      "name": "file:01-routing-spec.md",
+      "passed": true,
+      "detail": "Required deliverable"
+    },
+    {
+      "name": "file:02-state-contract.md",
+      "passed": true,
+      "detail": "Required deliverable"
+    },
+    {
+      "name": "file:03-clarification-policy.md",
+      "passed": true,
+      "detail": "Required deliverable"
+    },
+    {
+      "name": "file:conversation-cases.json",
+      "passed": true,
+      "detail": "Required deliverable"
+    },
+    {
+      "name": "file:04-implementation-map.md",
+      "passed": true,
+      "detail": "Required deliverable"
+    },
+    {
+      "name": "file:acceptance.md",
+      "passed": true,
+      "detail": "Required deliverable"
+    },
+    {
+      "name": "fixture:design-status",
+      "passed": true,
+      "detail": "Must not claim observed runtime results"
+    },
+    {
+      "name": "case-id:JAVA-JOB",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:JAVA-JOB:AC-01",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:JAVA-JOB:AC-02",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:JAVA-JOB:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:JAVA-JOB:AC-04",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:JAVA-JOB:AC-08",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:JAVA-JOB",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:J1",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:J1:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:J1:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:J1:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J1:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J1:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J1:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:J1",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:J1",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:J1",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:J1",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:J1",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:J1",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:J1",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "question-state:J1",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "waiting-question:J1",
+      "passed": true,
+      "detail": "Waiting requires an open main question in this projection"
+    },
+    {
+      "name": "turn-id:J2",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:J2:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:J2:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:J2:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J2:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J2:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J2:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:J2",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:J2",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:J2",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:J2",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:J2",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:J2",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:J2",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:J2",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:J2",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "waiting-question:J2",
+      "passed": true,
+      "detail": "Waiting requires an open main question in this projection"
+    },
+    {
+      "name": "read-only:J2",
+      "passed": true,
+      "detail": "This read-only fixture must not mutate task state"
+    },
+    {
+      "name": "turn-id:J3",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:J3:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:J3:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:J3:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J3:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J3:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J3:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:J3",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:J3",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:J3",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:J3",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:J3",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:J3",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:J3",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:J3",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:J3",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "question-state:J3",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:J3",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:J3",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "turn-id:J4",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:J4:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:J4:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:J4:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J4:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J4:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J4:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:J4",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:J4",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:J4",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:J4",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:J4",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:J4",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:J4",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:J4",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:J4",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:J4",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:J4",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "turn-id:J5",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:J5:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:J5:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:J5:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J5:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J5:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J5:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:J5",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:J5",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:J5",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:J5",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:J5",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:J5",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:J5",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:J5",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:J5",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "question-state:J5",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:J5",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:J5",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "turn-id:J6",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:J6:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:J6:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:J6:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J6:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J6:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J6:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:J6",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:J6",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:J6",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:J6",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:J6",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:J6",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:J6",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:J6",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:J6",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:J6",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:J6",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "turn-id:J7",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:J7:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:J7:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:J7:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J7:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J7:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:J7:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:J7",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:J7",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:J7",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:J7",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:J7",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:J7",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:J7",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:J7",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:J7",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "case-id:SHOP-INVENTORY",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:SHOP-INVENTORY:AC-01",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:SHOP-INVENTORY:AC-02",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:SHOP-INVENTORY:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:SHOP-INVENTORY:AC-04",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:SHOP-INVENTORY:AC-05",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:SHOP-INVENTORY",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:S1",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:S1:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:S1:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:S1:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S1:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S1:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S1:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:S1",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:S1",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:S1",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:S1",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:S1",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:S1",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:S1",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "question-state:S1",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "waiting-question:S1",
+      "passed": true,
+      "detail": "Waiting requires an open main question in this projection"
+    },
+    {
+      "name": "turn-id:S2",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:S2:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:S2:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:S2:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S2:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S2:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S2:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:S2",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:S2",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:S2",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:S2",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:S2",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:S2",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:S2",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:S2",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:S2",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "question-state:S2",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:S2",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:S2",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "turn-id:S3",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:S3:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:S3:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:S3:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S3:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S3:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S3:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:S3",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:S3",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:S3",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:S3",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:S3",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:S3",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:S3",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:S3",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:S3",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "turn-id:S4",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:S4:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:S4:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:S4:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S4:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S4:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S4:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:S4",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:S4",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:S4",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:S4",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:S4",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:S4",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:S4",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:S4",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:S4",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:S4",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:S4",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "turn-id:S5",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:S5:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:S5:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:S5:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S5:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S5:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:S5:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:S5",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:S5",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:S5",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:S5",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:S5",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:S5",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:S5",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:S5",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:S5",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:S5",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:S5",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "case-id:SHORT-ANSWER",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:SHORT-ANSWER:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:SHORT-ANSWER:AC-08",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:SHORT-ANSWER",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X1",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X1:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X1:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X1:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X1:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X1:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X1:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X1",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X1",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X1",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X1",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X1",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X1",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X1",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X1",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:X1",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "question-state:X1",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "case-id:AMBIGUOUS-REFERENCE",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:AMBIGUOUS-REFERENCE:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:AMBIGUOUS-REFERENCE:AC-08",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:AMBIGUOUS-REFERENCE",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X2",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X2:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X2:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X2:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X2:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X2:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X2:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X2",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X2",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X2",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X2",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X2",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X2",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X2",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X2",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "case-id:REWRITE-NOT-REQUIREMENT",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:REWRITE-NOT-REQUIREMENT:AC-02",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:REWRITE-NOT-REQUIREMENT:AC-08",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:REWRITE-NOT-REQUIREMENT",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X3",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X3:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X3:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X3:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X3:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X3:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X3:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X3",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X3",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X3",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X3",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X3",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X3",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X3",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X3",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "list-version:X3",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:X3",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "case-id:RECORD-AND-PAUSE",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:RECORD-AND-PAUSE:AC-02",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:RECORD-AND-PAUSE:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:RECORD-AND-PAUSE",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X4",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X4:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X4:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X4:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X4:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X4:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X4:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X4",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X4",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X4",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X4",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X4",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X4",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X4",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X4",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:X4",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "turn-id:X5",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X5:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X5:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X5:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X5:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X5:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X5:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X5",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X5",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X5",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X5",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X5",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X5",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X5",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X5",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "case-id:SKIP-AND-PREVIEW",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:SKIP-AND-PREVIEW:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:SKIP-AND-PREVIEW:AC-04",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:SKIP-AND-PREVIEW",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X6",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X6:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X6:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X6:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X6:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X6:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X6:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X6",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X6",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X6",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X6",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X6",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X6",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X6",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X6",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:X6",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "list-version:X6",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:X6",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "case-id:CONFLICT",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:CONFLICT:AC-02",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:CONFLICT:AC-04",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:CONFLICT",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X7",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X7:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X7:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X7:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X7:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X7:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X7:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X7",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X7",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X7",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X7",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X7",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X7",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X7",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X7",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:X7",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "question-state:X7",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "waiting-question:X7",
+      "passed": true,
+      "detail": "Waiting requires an open main question in this projection"
+    },
+    {
+      "name": "case-id:EXPLAIN-AND-CHANGE",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:EXPLAIN-AND-CHANGE:AC-01",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:EXPLAIN-AND-CHANGE:AC-02",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:EXPLAIN-AND-CHANGE",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X8",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X8:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X8:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X8:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X8:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X8:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X8:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X8",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X8",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X8",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X8",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X8",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X8",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X8",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X8",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:X8",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "list-version:X8",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:X8",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "case-id:COVERAGE-EXPANSION",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:COVERAGE-EXPANSION:AC-04",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:COVERAGE-EXPANSION:AC-05",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:COVERAGE-EXPANSION",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X9",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X9:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X9:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X9:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X9:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X9:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X9:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X9",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X9",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X9",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X9",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X9",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X9",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X9",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X9",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "list-version:X9",
+      "passed": true,
+      "detail": "Presented list evaluated at current requirements version"
+    },
+    {
+      "name": "list-nonempty:X9",
+      "passed": true,
+      "detail": "Presented candidates are nonempty"
+    },
+    {
+      "name": "case-id:KNOWN-CONFLICT",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:KNOWN-CONFLICT:AC-05",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:KNOWN-CONFLICT",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X10",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X10:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X10:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X10:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X10:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X10:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X10:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X10",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X10",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X10",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X10",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X10",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X10",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X10",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X10",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "case-id:SERVICE-FAILURE",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:SERVICE-FAILURE:AC-05",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:SERVICE-FAILURE",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X11",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X11:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X11:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X11:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X11:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X11:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X11:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X11",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X11",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X11",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X11",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X11",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X11",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X11",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X11",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "case-id:TASK-SWITCH",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:TASK-SWITCH:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:TASK-SWITCH:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:TASK-SWITCH",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X12",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X12:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X12:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X12:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X12:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X12:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X12:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X12",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X12",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X12",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X12",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X12",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X12",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X12",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "question-state:X12",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "waiting-question:X12",
+      "passed": true,
+      "detail": "Waiting requires an open main question in this projection"
+    },
+    {
+      "name": "case-id:STALE-ANSWER",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:STALE-ANSWER:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:STALE-ANSWER:AC-08",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:STALE-ANSWER",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X13",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X13:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X13:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X13:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X13:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X13:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X13:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X13",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X13",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X13",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X13",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X13",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X13",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X13",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X13",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "question-state:X13",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "waiting-question:X13",
+      "passed": true,
+      "detail": "Waiting requires an open main question in this projection"
+    },
+    {
+      "name": "case-id:REPLAY",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:REPLAY:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:REPLAY",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X14",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X14:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X14:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X14:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X14:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X14:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X14:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X14",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X14",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X14",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X14",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "preflight:X14",
+      "passed": true,
+      "detail": "No model interpretation after a preflight exit"
+    },
+    {
+      "name": "task-state:X14",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X14",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "read-only:X14",
+      "passed": true,
+      "detail": "This read-only fixture must not mutate task state"
+    },
+    {
+      "name": "case-id:OWNERSHIP",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:OWNERSHIP:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:OWNERSHIP",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X15",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X15:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X15:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X15:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X15:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X15:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X15:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X15",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X15",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X15",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X15",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "preflight:X15",
+      "passed": true,
+      "detail": "No model interpretation after a preflight exit"
+    },
+    {
+      "name": "task-state:X15",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X15",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "read-only:X15",
+      "passed": true,
+      "detail": "This read-only fixture must not mutate task state"
+    },
+    {
+      "name": "case-id:KNOWLEDGE-ONLY",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:KNOWLEDGE-ONLY:AC-01",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:KNOWLEDGE-ONLY:AC-05",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:KNOWLEDGE-ONLY",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X16",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X16:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X16:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X16:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X16:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X16:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X16:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X16",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X16",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X16",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X16",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X16",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X16",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X16",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X16",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "case-id:INSPECT-ONLY",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:INSPECT-ONLY:AC-01",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:INSPECT-ONLY:AC-05",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:INSPECT-ONLY",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X17",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X17:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X17:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X17:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X17:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X17:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X17:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X17",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X17",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X17",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X17",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X17",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X17",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X17",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X17",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "read-only:X17",
+      "passed": true,
+      "detail": "This read-only fixture must not mutate task state"
+    },
+    {
+      "name": "case-id:CLEAR-REQUIREMENT",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:CLEAR-REQUIREMENT:AC-02",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:CLEAR-REQUIREMENT:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:CLEAR-REQUIREMENT",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X18",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X18:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X18:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X18:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X18:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X18:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X18:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X18",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X18",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X18",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X18",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X18",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X18",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X18",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X18",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:X18",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "turn-id:X19",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X19:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X19:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X19:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X19:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X19:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X19:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X19",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X19",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X19",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X19",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X19",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X19",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X19",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X19",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "read-only:X19",
+      "passed": true,
+      "detail": "This read-only fixture must not mutate task state"
+    },
+    {
+      "name": "case-id:CANCEL-TASK",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:CANCEL-TASK:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:CANCEL-TASK:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:CANCEL-TASK",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X21",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X21:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X21:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X21:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X21:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X21:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X21:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X21",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X21",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X21",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X21",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X21",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X21",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X21",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X21",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "case-id:REQUEST-ID-CONFLICT",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:REQUEST-ID-CONFLICT:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:REQUEST-ID-CONFLICT",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X22",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X22:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X22:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X22:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X22:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X22:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X22:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X22",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X22",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X22",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X22",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "preflight:X22",
+      "passed": true,
+      "detail": "No model interpretation after a preflight exit"
+    },
+    {
+      "name": "task-state:X22",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X22",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "read-only:X22",
+      "passed": true,
+      "detail": "This read-only fixture must not mutate task state"
+    },
+    {
+      "name": "case-id:QUESTION-STILL-VALID",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:QUESTION-STILL-VALID:AC-03",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:QUESTION-STILL-VALID:AC-06",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:QUESTION-STILL-VALID",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X23",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X23:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X23:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X23:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X23:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X23:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X23:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X23",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X23",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X23",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X23",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X23",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X23",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X23",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X23",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "version-change:X23",
+      "passed": true,
+      "detail": "Changed effective requirements advance version"
+    },
+    {
+      "name": "question-state:X23",
+      "passed": true,
+      "detail": "Known question lifecycle state"
+    },
+    {
+      "name": "case-id:NO-PROGRESS",
+      "passed": true,
+      "detail": "Unique scenario ID"
+    },
+    {
+      "name": "ac:NO-PROGRESS:AC-04",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "ac:NO-PROGRESS:AC-05",
+      "passed": true,
+      "detail": "Known acceptance ID"
+    },
+    {
+      "name": "case-turns:NO-PROGRESS",
+      "passed": true,
+      "detail": "Scenario has turns"
+    },
+    {
+      "name": "turn-id:X20",
+      "passed": true,
+      "detail": "Unique message ID"
+    },
+    {
+      "name": "field:X20:message",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "field:X20:serviceFixture",
+      "passed": true,
+      "detail": "Input and fixture must be explicit"
+    },
+    {
+      "name": "expected:X20:route",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X20:reference",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X20:nextAction",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "expected:X20:replyType",
+      "passed": true,
+      "detail": "Explicit expected behavior"
+    },
+    {
+      "name": "forbidden:X20",
+      "passed": true,
+      "detail": "Negative assertion required"
+    },
+    {
+      "name": "patch:X20",
+      "passed": true,
+      "detail": "Merge patch object required"
+    },
+    {
+      "name": "outcome:X20",
+      "passed": true,
+      "detail": "Known response type"
+    },
+    {
+      "name": "action:X20",
+      "passed": true,
+      "detail": "Known planned action"
+    },
+    {
+      "name": "intent:X20",
+      "passed": true,
+      "detail": "Known intent"
+    },
+    {
+      "name": "route:X20",
+      "passed": true,
+      "detail": "Intent route or documented preflight/control override"
+    },
+    {
+      "name": "task-state:X20",
+      "passed": true,
+      "detail": "Known task state"
+    },
+    {
+      "name": "version-order:X20",
+      "passed": true,
+      "detail": "Same-task version cannot decrease"
+    },
+    {
+      "name": "coverage:AC-01",
+      "passed": true,
+      "detail": "Covered by conversation fixtures; AC-07 uses implementation map"
+    },
+    {
+      "name": "coverage:AC-02",
+      "passed": true,
+      "detail": "Covered by conversation fixtures; AC-07 uses implementation map"
+    },
+    {
+      "name": "coverage:AC-03",
+      "passed": true,
+      "detail": "Covered by conversation fixtures; AC-07 uses implementation map"
+    },
+    {
+      "name": "coverage:AC-04",
+      "passed": true,
+      "detail": "Covered by conversation fixtures; AC-07 uses implementation map"
+    },
+    {
+      "name": "coverage:AC-05",
+      "passed": true,
+      "detail": "Covered by conversation fixtures; AC-07 uses implementation map"
+    },
+    {
+      "name": "coverage:AC-06",
+      "passed": true,
+      "detail": "Covered by conversation fixtures; AC-07 uses implementation map"
+    },
+    {
+      "name": "coverage:AC-08",
+      "passed": true,
+      "detail": "Covered by conversation fixtures; AC-07 uses implementation map"
+    },
+    {
+      "name": "route-coverage:DIRECT",
+      "passed": true,
+      "detail": "Six workflow routes represented"
+    },
+    {
+      "name": "route-coverage:KNOWLEDGE",
+      "passed": true,
+      "detail": "Six workflow routes represented"
+    },
+    {
+      "name": "route-coverage:RECOMMEND",
+      "passed": true,
+      "detail": "Six workflow routes represented"
+    },
+    {
+      "name": "route-coverage:PROJECT_REVIEW",
+      "passed": true,
+      "detail": "Six workflow routes represented"
+    },
+    {
+      "name": "route-coverage:INSPECT",
+      "passed": true,
+      "detail": "Six workflow routes represented"
+    },
+    {
+      "name": "route-coverage:ACTION",
+      "passed": true,
+      "detail": "Six workflow routes represented"
+    },
+    {
+      "name": "link:01-routing-spec.md:02-state-contract.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:01-routing-spec.md:03-clarification-policy.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:01-routing-spec.md:conversation-cases.json",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:01-routing-spec.md:04-implementation-map.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:01-routing-spec.md:acceptance.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:01-routing-spec.md:04-implementation-map.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:02-state-contract.md:01-routing-spec.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:03-clarification-policy.md:02-state-contract.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:acceptance.md:01-routing-spec.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:acceptance.md:02-state-contract.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:acceptance.md:03-clarification-policy.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:acceptance.md:conversation-cases.json",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "link:acceptance.md:04-implementation-map.md",
+      "passed": true,
+      "detail": "Local document link exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/controller/app/AppCustomerController.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerRuns.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerStore.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerState.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerTurnPlan.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerConversation.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerTaskProgress.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerProjectFeedback.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerTools.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerProjects.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerEvidenceSteps.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/LangGraphCustomerEngine.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/main/java/com/orangejd/server/customer/CustomerGraphState.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-web/src/components/CustomerChat.vue",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/test/java/com/orangejd/server/customer/CustomerStateTest.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/test/java/com/orangejd/server/customer/CustomerTurnPlanTest.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/test/java/com/orangejd/server/customer/CustomerDialogueTest.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/test/java/com/orangejd/server/customer/CustomerGraphTest.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/test/java/com/orangejd/server/customer/CustomerGraphPersistenceTest.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/test/java/com/orangejd/server/customer/CustomerGraphEvidenceRoutingTest.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "source:orange-server/src/test/java/com/orangejd/server/customer/CustomerGraphConversationRegressionTest.java",
+      "passed": true,
+      "detail": "Mapped existing source path exists"
+    },
+    {
+      "name": "matrix:AC-01",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    },
+    {
+      "name": "matrix:AC-02",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    },
+    {
+      "name": "matrix:AC-03",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    },
+    {
+      "name": "matrix:AC-04",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    },
+    {
+      "name": "matrix:AC-05",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    },
+    {
+      "name": "matrix:AC-06",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    },
+    {
+      "name": "matrix:AC-07",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    },
+    {
+      "name": "matrix:AC-08",
+      "passed": true,
+      "detail": "Acceptance matrix has stable ID"
+    }
+  ]
+}

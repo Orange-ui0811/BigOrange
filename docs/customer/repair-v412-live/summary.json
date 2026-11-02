@@ -1,0 +1,71 @@
+{
+  "cases": [
+    {
+      "phase": "after",
+      "case": "ai_application",
+      "projects": 3,
+      "personalized": 3,
+      "durationMs": 15360,
+      "calls": 4,
+      "inputTokens": 8861,
+      "outputTokens": 1830,
+      "references": 7
+    },
+    {
+      "phase": "after",
+      "case": "no_match",
+      "projects": 0,
+      "personalized": 0,
+      "durationMs": 7156,
+      "calls": 1,
+      "inputTokens": 5276,
+      "outputTokens": 824,
+      "references": 0
+    },
+    {
+      "phase": "after",
+      "case": "rag",
+      "projects": 3,
+      "personalized": 3,
+      "durationMs": 13266,
+      "calls": 4,
+      "inputTokens": 9236,
+      "outputTokens": 2120,
+      "references": 7
+    },
+    {
+      "phase": "before",
+      "case": "ai_application",
+      "projects": 0,
+      "personalized": 0,
+      "durationMs": 8218,
+      "calls": 1,
+      "inputTokens": 5223,
+      "outputTokens": 1241,
+      "references": 0
+    },
+    {
+      "phase": "before",
+      "case": "rag",
+      "projects": 3,
+      "personalized": 0,
+      "durationMs": 10235,
+      "calls": 3,
+      "inputTokens": 8094,
+      "outputTokens": 1605,
+      "references": 5
+    }
+  ],
+  "audit": {
+    "adviceEvidenceOwned": true,
+    "conditionsPreserved": true,
+    "noClarificationLoop": true,
+    "noMatchCountsHidden": true
+  },
+  "limitations": [
+    "每个场景仅一轮，非容量或全量语义验收",
+    "建议引用归属校验不等于建议中的所有语义均得到原文事实支持",
+    "AI应用父子关系为有限分类，其他自由主题仍有词面过滤边界",
+    "新增建议调用的用量已记录，货币成本未知"
+  ]
+}

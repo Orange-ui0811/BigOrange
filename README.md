@@ -91,7 +91,17 @@ OrangeVC
 
 ### 本地启动
 
-推荐使用 Docker Compose（无需在宿主机安装 JDK、Maven、MySQL 或 Redis）：
+推荐使用 Docker Compose（无需在宿主机安装 JDK、Maven、MySQL 或 Redis）。Windows 已配置本地 BGE-M3 时，双击根目录 `start-local.cmd`，或在项目目录运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start_local.ps1
+```
+
+统一入口按 `.env.local` 和 Compose 的实际配置，先启动、核查固定模型摘要并预热 Ollama，再启动数据库、Redis、后端和两个前端，最后等待页面和后端就绪。已运行的服务会复用，不下载模型、不重建索引。首次配置需要先复制 `.env.local.example` 为 `.env.local`；使用本地模型还需预先下载 D 盘模型运行程序及权重。Docker Desktop 必须已经启动。
+
+客服开关也必须保存在 `.env.local`：`CUSTOMER_ENABLED=true`。`CUSTOMER_ALL_AUTHENTICATED_USERS=true` 表示向所有已登录用户开放；模型、思考模式和编排类型分别使用 `CUSTOMER_MODEL`、`CUSTOMER_THINKING`、`CUSTOMER_EXECUTION_ENGINE` 固定。容器里临时设置的值不会自动成为下次启动配置。关闭客服时统一入口会明确提示。
+
+不使用统一入口时，也可单独启动 Compose：
 
 ```bash
 cp .env.local.example .env.local

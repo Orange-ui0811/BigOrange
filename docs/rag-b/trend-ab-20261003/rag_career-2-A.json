@@ -1,0 +1,586 @@
+{
+  "case": "rag_career",
+  "round": 2,
+  "variant": "A",
+  "profile": {
+    "topics": [
+      "RAG",
+      "知识库"
+    ],
+    "purpose": "求职",
+    "experience": "有一年基础",
+    "languages": [
+      "Java"
+    ],
+    "timeCommitment": "半年内",
+    "customPurpose": "希望做一个能写进简历的知识库问答项目",
+    "useRag": true,
+    "usePersona": false,
+    "preferBeginnerProjects": false,
+    "preferCareerProjects": true
+  },
+  "startedAt": "2026-10-03T11:03:30.637724+00:00",
+  "response": {
+    "runtime": {
+      "version": "1-1785206616703",
+      "endpoint": "https://ai.gitee.com/v1",
+      "source": "REDIS",
+      "model": "DeepSeek-V4-Pro"
+    },
+    "variant": "A",
+    "retrieval": {
+      "text": "[candidateId=E1;evidenceId=E1;repo=chatchat-space/langchain-chatchat;mode=RAW_FALLBACK] facts=Wolfram对话 ❌ ✅ 文生图 ❌ ✅ 本地知识库管理 ✅ ✅\n\n[candidateId=E2;evidenceId=E2;repo=langgenius/dify] facts=摘要:Dify 是一个用 TypeScript/React 构建的可协作 AI 应用开发平台，支持 Agentic 工作流、RAG 管道，可在云/VPC/私有化部署，帮助团队从原型快速走到生产。;能力:熟悉大型全栈项目中前后端解耦与 API 设计 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式 具备私有化部…\n\n[candidateId=E3;evidenceId=E3;repo=triliumnext/trilium] facts=证据:Trilium Notes 是一款免费开源、跨平台的层级式笔记应用，专注于构建大型个人知识库。",
+      "trace": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "USED",
+        "queries": [
+          "RAG 知识库 Java",
+          "RAG 知识库 Java  求职 希望做一个能写进简历的知识库问答项目 有一年基础"
+        ],
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "documentKey": "595:15",
+            "source": "GITHUB",
+            "title": "on linux or macos",
+            "sourceRef": "chatchat-space/Langchain-Chatchat",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/chatchat-space/langchain-chatchat",
+            "text": "||\n| Wolfram对话 | ❌                                | ✅                                                                   ||\n| 文生图       | ❌                                | ✅                                                                   ||\n| 本地知识库管理   | ✅                                | ✅                                                                   ||",
+            "card": "[candidateId=E1;evidenceId=E1;repo=chatchat-space/langchain-chatchat;mode=RAW_FALLBACK] facts=Wolfram对话 ❌ ✅ 文生图 ❌ ✅ 本地知识库管理 ✅ ✅",
+            "promptMode": "RAW_FALLBACK"
+          },
+          {
+            "evidenceId": "E2",
+            "documentKey": "879:0",
+            "source": "CAREER_PROJECT",
+            "title": "langgenius/dify",
+            "sourceRef": "career:218",
+            "projectId": "218",
+            "projectType": null,
+            "mappingStatus": null,
+            "repositoryUrl": "https://github.com/langgenius/dify",
+            "text": "# langgenius/dify\n\n## 知识分类\n职业成长项目\n\n## 仓库地址\nhttps://github.com/langgenius/dify\n\n## 项目摘要\nDify 是一个用 TypeScript/React 构建的可协作 AI 应用开发平台，支持 Agentic 工作流、RAG 管道，可在云/VPC/私有化部署，帮助团队从原型快速走到生产。\n\n## 职业价值\n为 AI 应用与 Agent、AI 全栈后端等方向提供了丰富的作品素材，能展现候选人理解复杂平台架构、前后端协作、多模型集成和私有化部署的能力。\n\n## 可证明能力\n- 熟悉大型全栈项目中前后端解耦与 API 设计\n- 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式\n- 具备私有化部署和云原生交付经验\n- 能参与高效协作的工程文化（tests, CI, release automation）",
+            "card": "[candidateId=E2;evidenceId=E2;repo=langgenius/dify] facts=摘要:Dify 是一个用 TypeScript/React 构建的可协作 AI 应用开发平台，支持 Agentic 工作流、RAG 管道，可在云/VPC/私有化部署，帮助团队从原型快速走到生产。;能力:熟悉大型全栈项目中前后端解耦与 API 设计 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式 具备私有化部…",
+            "promptMode": "CARD"
+          },
+          {
+            "evidenceId": "E3",
+            "documentKey": "196:4",
+            "source": "GITHUB",
+            "title": "Trilium Notes",
+            "sourceRef": "TriliumNext/Trilium",
+            "projectId": 27.0,
+            "projectType": "BEGINNER_PROJECT",
+            "mappingStatus": "AUTO_MATCHED",
+            "repositoryUrl": "https://github.com/triliumnext/trilium",
+            "text": "ghur](./docs/README-ug.md)\n<!-- translate:on -->\n\nTrilium Notes 是一款免费开源、跨平台的层级式笔记应用，专注于构建大型个人知识库。\n\n<img src=\"./docs/app.png\" alt=\"Trilium 截图\" width=\"1000\">\n\n## ⏬ 下载\n- [最新版本](https://github.com/TriliumNext/Trilium/releases/latest) – 稳定版，推荐大多数用户使用。\n- [每日构建版](https://github.com/TriliumNext/Trilium/releases/tag/nightly) – 不稳定开发版本，每日更新，包含最新功能与修复。",
+            "card": "[candidateId=E3;evidenceId=E3;repo=triliumnext/trilium] facts=证据:Trilium Notes 是一款免费开源、跨平台的层级式笔记应用，专注于构建大型个人知识库。",
+            "promptMode": "CARD"
+          }
+        ],
+        "durationMs": 441.637676,
+        "candidateCount": 31,
+        "selectedCount": 3,
+        "confidence": "HIGH",
+        "ragApplied": true,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 1100,
+        "evidencePromptChars": 463,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": "1",
+        "evidenceCompressionRatio": 0.5790909090909091
+      }
+    },
+    "result": {
+      "analysis": {
+        "trend": "RAG 检索增强方向仍保持高热度但头部项目竞争饱和，细分领域的可私有化部署与质量保障工具关注度上升。",
+        "prospect": "半年内构建可落地的知识库问答系统在求职市场具备强竞争力，尤其是能体现端到端工程化、可测试、可部署的完整方案。",
+        "demand": "企业需求从单纯的模型调用转向可协作、可评估、可私有化的 AI 应用平台，验证与测试能力成为新加分项。",
+        "summary": "聚焦可私有化部署的知识库问答平台与质量保障，打造扎实的项目经验。"
+      },
+      "recommendations": [
+        {
+          "candidateId": "C:218",
+          "name": "Dify AI 应用开发平台",
+          "description": "可协作的 AI 应用开发平台，内置 Agentic 工作流与 RAG 管道，支持私有化部署，快速构建知识库问答等应用。",
+          "difficulty": "进阶",
+          "difficultyReason": "项目涉及前后端解耦、多模型集成、工作流编排，需要同时理解 Python 后端与 TypeScript/React 前端，对架构设计和工程化要求较高。",
+          "vibeCodingReason": "Dify 提供可视化编排界面与清晰的 API 设计，配合 AI 辅助可快速生成 RAG 管道组件、测试用例和部署脚本，降低集成复杂度。",
+          "recommendReason": "直接命中 RAG 与知识库方向，可完整展示从知识库管理到问答应用搭建的全流程。在简历中能体现 AI 全栈能力、私有化部署经验及协作平台设计思维，对求职 AI 应用与 Agent 岗位极具说服力。",
+          "prerequisites": "Python 基础、React 或 Vue 前端概念、容器化部署知识",
+          "evidenceIds": [
+            "C:218"
+          ],
+          "score": 91,
+          "references": [
+            {
+              "evidenceIds": [
+                "C:218"
+              ],
+              "url": "https://github.com/langgenius/dify",
+              "name": "langgenius/dify"
+            }
+          ],
+          "evidenceStatus": "VERIFIED_CANDIDATE",
+          "unsupportedReferenceCount": 0
+        },
+        {
+          "candidateId": "C:224",
+          "name": "Promptfoo AI 测试框架",
+          "description": "专业的提示词测试与安全检测工具，支持 CI/CD 集成，可评估 RAG 应用的回答质量、事实一致性与安全性。",
+          "difficulty": "中等",
+          "difficultyReason": "项目核心是用 Node.js 编写测试用例与配置，逻辑直不涉及全栈开发，但需理解提示词工程和自动化测试原理。",
+          "vibeCodingReason": "AI 可自动生成针对 RAG 的测试用例模板、安全扫描规则并实时分析回归结果，轻松搭建可扩展的测试体系。",
+          "recommendReason": "作为知识库问答项目的质量保障补充，能够证明候选人具备 AI 应用测试、安全评估与 CI/CD 集成的工程思维，让简历中的项目更显专业与可信赖。",
+          "prerequisites": "JavaScript/Node.js 基础、提示词基础、CI 流程概念",
+          "evidenceIds": [
+            "C:224"
+          ],
+          "score": 87,
+          "references": [
+            {
+              "evidenceIds": [
+                "C:224"
+              ],
+              "url": "https://github.com/promptfoo/promptfoo",
+              "name": "promptfoo/promptfoo"
+            }
+          ],
+          "evidenceStatus": "VERIFIED_CANDIDATE",
+          "unsupportedReferenceCount": 0
+        }
+      ],
+      "learning": {
+        "steps": [
+          "第一步：基于 Dify 部署私有化环境，导入本地文档构建知识库，并开发一个 REST API 的问答服务，熟悉 RAG 管道配置。",
+          "第二步：使用 Dify 的工作流编排自定义 Agent，增加多轮对话、工具调用等功能，提升问答体验。",
+          "第三步：引入 Promptfoo 为知识库问答编写评估用例，设置事实一致性、毒性检测等测试，并集成到 GitHub Actions 实现持续测试。",
+          "第四步：优化私有化部署方案，编写部署文档与使用说明，完善项目 README 并录制演示视频。"
+        ],
+        "timeline": "预计 4-6 个月，前 3 个月专注 Dify 搭建与功能完善，后 2 个月加入测试体系与简历包装。",
+        "tips": "建议在项目 README 中突出‘私有化 RAG 知识库问答系统’的完整链路，面试时重点讲解 RAG 召回优化与测试驱动的质量保障流程。"
+      },
+      "raw": "{\n  \"analysis\": {\n    \"trend\": \"RAG 检索增强方向仍保持高热度但头部项目竞争饱和，细分领域的可私有化部署与质量保障工具关注度上升。\",\n    \"prospect\": \"半年内构建可落地的知识库问答系统在求职市场具备强竞争力，尤其是能体现端到端工程化、可测试、可部署的完整方案。\",\n    \"demand\": \"企业需求从单纯的模型调用转向可协作、可评估、可私有化的 AI 应用平台，验证与测试能力成为新加分项。\",\n    \"summary\": \"聚焦可私有化部署的知识库问答平台与质量保障，打造扎实的项目经验。\"\n  },\n  \"recommendations\": [\n    {\n      \"candidateId\": \"C:218\",\n      \"name\": \"Dify AI 应用开发平台\",\n      \"description\": \"可协作的 AI 应用开发平台，内置 Agentic 工作流与 RAG 管道，支持私有化部署，快速构建知识库问答等应用。\",\n      \"difficulty\": \"进阶\",\n      \"difficultyReason\": \"项目涉及前后端解耦、多模型集成、工作流编排，需要同时理解 Python 后端与 TypeScript/React 前端，对架构设计和工程化要求较高。\",\n      \"vibeCodingReason\": \"Dify 提供可视化编排界面与清晰的 API 设计，配合 AI 辅助可快速生成 RAG 管道组件、测试用例和部署脚本，降低集成复杂度。\",\n      \"recommendReason\": \"直接命中 RAG 与知识库方向，可完整展示从知识库管理到问答应用搭建的全流程。在简历中能体现 AI 全栈能力、私有化部署经验及协作平台设计思维，对求职 AI 应用与 Agent 岗位极具说服力。\",\n      \"prerequisites\": \"Python 基础、React 或 Vue 前端概念、容器化部署知识\",\n      \"evidenceIds\": [\"E2\"],\n      \"score\": 91\n    },\n    {\n      \"candidateId\": \"C:224\",\n      \"name\": \"Promptfoo AI 测试框架\",\n      \"description\": \"专业的提示词测试与安全检测工具，支持 CI/CD 集成，可评估 RAG 应用的回答质量、事实一致性与安全性。\",\n      \"difficulty\": \"中等\",\n      \"difficultyReason\": \"项目核心是用 Node.js 编写测试用例与配置，逻辑直不涉及全栈开发，但需理解提示词工程和自动化测试原理。\",\n      \"vibeCodingReason\": \"AI 可自动生成针对 RAG 的测试用例模板、安全扫描规则并实时分析回归结果，轻松搭建可扩展的测试体系。\",\n      \"recommendReason\": \"作为知识库问答项目的质量保障补充，能够证明候选人具备 AI 应用测试、安全评估与 CI/CD 集成的工程思维，让简历中的项目更显专业与可信赖。\",\n      \"prerequisites\": \"JavaScript/Node.js 基础、提示词基础、CI 流程概念\",\n      \"evidenceIds\": [],\n      \"score\": 87\n    }\n  ],\n  \"learning\": {\n    \"steps\": [\n      \"第一步：基于 Dify 部署私有化环境，导入本地文档构建知识库，并开发一个 REST API 的问答服务，熟悉 RAG 管道配置。\",\n      \"第二步：使用 Dify 的工作流编排自定义 Agent，增加多轮对话、工具调用等功能，提升问答体验。\",\n      \"第三步：引入 Promptfoo 为知识库问答编写评估用例，设置事实一致性、毒性检测等测试，并集成到 GitHub Actions 实现持续测试。\",\n      \"第四步：优化私有化部署方案，编写部署文档与使用说明，完善项目 README 并录制演示视频。\"\n    ],\n    \"timeline\": \"预计 4-6 个月，前 3 个月专注 Dify 搭建与功能完善，后 2 个月加入测试体系与简历包装。\",\n    \"tips\": \"建议在项目 README 中突出‘私有化 RAG 知识库问答系统’的完整链路，面试时重点讲解 RAG 召回优化与测试驱动的质量保障流程。\"\n  }\n}",
+      "balance": "0",
+      "beginnerCases": [],
+      "careerCases": [
+        {
+          "id": "218",
+          "fullName": "langgenius/dify",
+          "ownerName": "langgenius",
+          "repositoryName": "dify",
+          "htmlUrl": "https://github.com/langgenius/dify",
+          "descriptionOriginal": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+          "descriptionZh": null,
+          "primaryLanguage": "TypeScript",
+          "techStack": "TypeScript,React,Storybook",
+          "licenseSpdx": "NOASSERTION",
+          "stars": 151254,
+          "hasQuickStart": true,
+          "requiresDocker": true,
+          "requiresDatabase": true,
+          "requiresSecrets": true,
+          "requiresExternalService": true,
+          "codebaseSize": "LARGE",
+          "overallScore": 91,
+          "bestRoleCode": "AI_APPLICATION_AGENT",
+          "bestRoleName": "AI 应用与 Agent",
+          "difficulty": "ADVANCED",
+          "summaryZh": "Dify 是一个用 TypeScript/React 构建的可协作 AI 应用开发平台，支持 Agentic 工作流、RAG 管道，可在云/VPC/私有化部署，帮助团队从原型快速走到生产。",
+          "careerValue": "为 AI 应用与 Agent、AI 全栈后端等方向提供了丰富的作品素材，能展现候选人理解复杂平台架构、前后端协作、多模型集成和私有化部署的能力。",
+          "proofPoints": "- 熟悉大型全栈项目中前后端解耦与 API 设计\n- 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式\n- 具备私有化部署和云原生交付经验\n- 能参与高效协作的工程文化（tests, CI, release automation）",
+          "interviewTopics": "- 自建 Dify 插件或 workflow 节点的思路\n- 在团队里如何管理 prompt 和多模型切换\n- 私有化部署时如何保证数据安全与性能\n- 大型开源项目的贡献流程和 Code Review 实践",
+          "modificationPlan": "为 Dify 开发一个面向国内市场的知识库连接器（如飞书文档、语雀），实现一套符合国情的审批流模板；将前端 Storybook 文档汉化并补充可视化编排案例；以此展示你对开源产品和本地化需求的深度贡献。",
+          "mainRisks": "项目非常庞大（900+ open issues），参与门槛高；技术栈广（TypeScript/React/Storybook），上手需要时间；架构文档缺失，需要自行阅读代码。",
+          "estimatedDuration": "30-45 天（以贡献功能模块或插件为目标）",
+          "status": "PUBLISHED",
+          "githubUpdatedAt": "2026-08-04T03:15:41",
+          "lastVerifiedAt": "2026-08-04T11:16:56",
+          "roleScores": [
+            {
+              "roleCode": "AI_APPLICATION_AGENT",
+              "roleName": "AI 应用与 Agent",
+              "roleRelevance": 20,
+              "provableAbility": 20,
+              "knowledgeCoverage": 16,
+              "portfolioCompleteness": 18,
+              "interviewValue": 17,
+              "totalScore": 91,
+              "jobSampleCount": 18,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+            },
+            {
+              "roleCode": "AI_INFRA_QUALITY",
+              "roleName": "AI 基础设施与质量",
+              "roleRelevance": 20,
+              "provableAbility": 20,
+              "knowledgeCoverage": 16,
+              "portfolioCompleteness": 18,
+              "interviewValue": 17,
+              "totalScore": 91,
+              "jobSampleCount": 8,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+            },
+            {
+              "roleCode": "AI_FULLSTACK_BACKEND",
+              "roleName": "AI 全栈与后端工程",
+              "roleRelevance": 19,
+              "provableAbility": 20,
+              "knowledgeCoverage": 16,
+              "portfolioCompleteness": 18,
+              "interviewValue": 17,
+              "totalScore": 90,
+              "jobSampleCount": 6,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+            },
+            {
+              "roleCode": "AI_PRODUCT_OPERATIONS",
+              "roleName": "AI 产品与运营",
+              "roleRelevance": 19,
+              "provableAbility": 20,
+              "knowledgeCoverage": 16,
+              "portfolioCompleteness": 18,
+              "interviewValue": 17,
+              "totalScore": 90,
+              "jobSampleCount": 6,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+            },
+            {
+              "roleCode": "AI_CREATIVE_INTERACTION",
+              "roleName": "AI 创意与交互",
+              "roleRelevance": 16,
+              "provableAbility": 20,
+              "knowledgeCoverage": 16,
+              "portfolioCompleteness": 18,
+              "interviewValue": 17,
+              "totalScore": 87,
+              "jobSampleCount": 1,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+            },
+            {
+              "roleCode": "LLM_ALGORITHM_RESEARCH",
+              "roleName": "大模型算法与研究",
+              "roleRelevance": 14,
+              "provableAbility": 20,
+              "knowledgeCoverage": 16,
+              "portfolioCompleteness": 18,
+              "interviewValue": 17,
+              "totalScore": 85,
+              "jobSampleCount": 8,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+            }
+          ],
+          "matchExplanation": "可重点证明“AI 应用与 Agent”相关能力；与你关注的“RAG”方向相符；适合围绕作品证明和面试讨论点组织项目经历；可以按照“半年内”安排差异化改造，参考周期为30-45 天（以贡献功能模块或插件为目标）。"
+        },
+        {
+          "id": "215",
+          "fullName": "headroomlabs-ai/headroom",
+          "ownerName": "headroomlabs-ai",
+          "repositoryName": "headroom",
+          "htmlUrl": "https://github.com/headroomlabs-ai/headroom",
+          "descriptionOriginal": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
+          "descriptionZh": null,
+          "primaryLanguage": "Python",
+          "techStack": "Python",
+          "licenseSpdx": "Apache-2.0",
+          "stars": 64410,
+          "hasQuickStart": true,
+          "requiresDocker": true,
+          "requiresDatabase": false,
+          "requiresSecrets": true,
+          "requiresExternalService": false,
+          "codebaseSize": "LARGE",
+          "overallScore": 87,
+          "bestRoleCode": "AI_APPLICATION_AGENT",
+          "bestRoleName": "AI 应用与 Agent",
+          "difficulty": "ADVANCED",
+          "summaryZh": "headroom：压缩AI工具输出、日志、文件与RAG分块，为编码Agent节省20% token，为JSON节省60-95% token，不改变答案质量。以库、代理和MCP服务器形式提供。",
+          "careerValue": "展现你在大模型上下文优化、Token成本控制和AI基础设施中的Python工程能力，面试时可深入讨论Token压缩算法与工程折衷。",
+          "proofPoints": "- 测试覆盖：项目包含测试（tests=true）\n- CI/CD：集成持续集成（ci=true）\n- 发布自动化：具备release automation\n- 大型项目：LARGE规模，有620个开放issue\n- 易用性：提供快速入门指南和部署指南（quickStart=true, deployment=true）\n- 授权：Apache-2.0许可证",
+          "interviewTopics": "- 如何安全地压缩LLM上下文而不丢失信息\n- 在编码Agent中实现20% token节省的技术细节\n- MCP服务器的设计与集成经验\n- 管理大型开源社区（620个open issues）的工作方式",
+          "modificationPlan": "为其增加对不同语言（如中文）JSON的针对性压缩策略，或实现一个可视化的Token压缩效果对比工具；也可以贡献中文文档和示例。",
+          "mainRisks": "项目为ADVANCED级，需要较强的Python和LLM底层知识；Token压缩可能涉及模型行为微调。",
+          "estimatedDuration": "3-5周（研究+实现扩展功能）",
+          "status": "PUBLISHED",
+          "githubUpdatedAt": "2026-08-04T03:14:31",
+          "lastVerifiedAt": "2026-08-04T11:16:44",
+          "roleScores": [
+            {
+              "roleCode": "AI_APPLICATION_AGENT",
+              "roleName": "AI 应用与 Agent",
+              "roleRelevance": 20,
+              "provableAbility": 20,
+              "knowledgeCoverage": 10,
+              "portfolioCompleteness": 18,
+              "interviewValue": 20,
+              "totalScore": 88,
+              "jobSampleCount": 18,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+            },
+            {
+              "roleCode": "AI_FULLSTACK_BACKEND",
+              "roleName": "AI 全栈与后端工程",
+              "roleRelevance": 19,
+              "provableAbility": 20,
+              "knowledgeCoverage": 10,
+              "portfolioCompleteness": 18,
+              "interviewValue": 20,
+              "totalScore": 87,
+              "jobSampleCount": 6,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+            },
+            {
+              "roleCode": "LLM_ALGORITHM_RESEARCH",
+              "roleName": "大模型算法与研究",
+              "roleRelevance": 17,
+              "provableAbility": 20,
+              "knowledgeCoverage": 10,
+              "portfolioCompleteness": 18,
+              "interviewValue": 20,
+              "totalScore": 85,
+              "jobSampleCount": 8,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+            },
+            {
+              "roleCode": "AI_PRODUCT_OPERATIONS",
+              "roleName": "AI 产品与运营",
+              "roleRelevance": 13,
+              "provableAbility": 20,
+              "knowledgeCoverage": 10,
+              "portfolioCompleteness": 18,
+              "interviewValue": 20,
+              "totalScore": 81,
+              "jobSampleCount": 6,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+            },
+            {
+              "roleCode": "AI_INFRA_QUALITY",
+              "roleName": "AI 基础设施与质量",
+              "roleRelevance": 11,
+              "provableAbility": 20,
+              "knowledgeCoverage": 10,
+              "portfolioCompleteness": 18,
+              "interviewValue": 20,
+              "totalScore": 79,
+              "jobSampleCount": 8,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+            },
+            {
+              "roleCode": "AI_CREATIVE_INTERACTION",
+              "roleName": "AI 创意与交互",
+              "roleRelevance": 10,
+              "provableAbility": 20,
+              "knowledgeCoverage": 10,
+              "portfolioCompleteness": 18,
+              "interviewValue": 20,
+              "totalScore": 78,
+              "jobSampleCount": 1,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+            }
+          ],
+          "matchExplanation": "可重点证明“AI 应用与 Agent”相关能力；与你关注的“RAG”方向相符；适合围绕作品证明和面试讨论点组织项目经历；可以按照“半年内”安排差异化改造，参考周期为3-5周（研究+实现扩展功能）。"
+        },
+        {
+          "id": "224",
+          "fullName": "promptfoo/promptfoo",
+          "ownerName": "promptfoo",
+          "repositoryName": "promptfoo",
+          "htmlUrl": "https://github.com/promptfoo/promptfoo",
+          "descriptionOriginal": "Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI. Compare performance of GPT, Claude, Gemini, DeepSeek, and more. Simple declarative configs with command line and CI/CD integration.  Used by OpenAI and Anthropic.",
+          "descriptionZh": null,
+          "primaryLanguage": "TypeScript",
+          "techStack": "TypeScript,Playwright",
+          "licenseSpdx": "MIT",
+          "stars": 23889,
+          "hasQuickStart": true,
+          "requiresDocker": true,
+          "requiresDatabase": false,
+          "requiresSecrets": true,
+          "requiresExternalService": true,
+          "codebaseSize": "LARGE",
+          "overallScore": 87,
+          "bestRoleCode": "AI_APPLICATION_AGENT",
+          "bestRoleName": "AI 应用与 Agent",
+          "difficulty": "ADVANCED",
+          "summaryZh": "promptfoo：用于测试提示词、Agent与RAG的红队/渗透/漏洞扫描工具。支持GPT、Claude、Gemini、DeepSeek等模型性能对比，提供简单声明式配置，集成命令行与CI/CD。OpenAI与Anthropic也在使用。",
+          "careerValue": "证明你具备AI应用质量保障、安全测试和CI/CD集成的实际能力，在面试中可以展示如何在大型项目中构建可扩展的测试体系。",
+          "proofPoints": "- 自动化测试：项目包含测试（tests=true）\n- CI/CD集成：有持续集成（ci=true）\n- 发布自动化：具备release automation（releaseAutomation=true）\n- 大型项目：仓库规模为LARGE，开源议题475个\n- 行业认可：被OpenAI和Anthropic使用",
+          "interviewTopics": "- 如何设计LLM输出的安全测试和红队攻击\n- 在CI/CD流水线中集成AI测试的经验\n- 对比多个大模型性能与成本的工程方法\n- 处理475个开放issue的项目管理与协作",
+          "modificationPlan": "可以为此项目贡献中文文档或增加针对中文大模型（如GLM、文心一言）的测试模板；或为其开发可视化测试报告仪表板，增强可观察性。",
+          "mainRisks": "项目高级（ADVANCED），TypeScript与Playwright栈可能对部分求职者较新；贡献需要深入理解AI测试领域。",
+          "estimatedDuration": "4-6周（熟悉项目并实现差异化修改）",
+          "status": "PUBLISHED",
+          "githubUpdatedAt": "2026-08-04T02:58:11",
+          "lastVerifiedAt": "2026-08-04T11:17:16",
+          "roleScores": [
+            {
+              "roleCode": "AI_APPLICATION_AGENT",
+              "roleName": "AI 应用与 Agent",
+              "roleRelevance": 20,
+              "provableAbility": 20,
+              "knowledgeCoverage": 14,
+              "portfolioCompleteness": 14,
+              "interviewValue": 20,
+              "totalScore": 88,
+              "jobSampleCount": 18,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+            },
+            {
+              "roleCode": "AI_PRODUCT_OPERATIONS",
+              "roleName": "AI 产品与运营",
+              "roleRelevance": 19,
+              "provableAbility": 20,
+              "knowledgeCoverage": 14,
+              "portfolioCompleteness": 14,
+              "interviewValue": 20,
+              "totalScore": 87,
+              "jobSampleCount": 6,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+            },
+            {
+              "roleCode": "AI_INFRA_QUALITY",
+              "roleName": "AI 基础设施与质量",
+              "roleRelevance": 14,
+              "provableAbility": 20,
+              "knowledgeCoverage": 14,
+              "portfolioCompleteness": 14,
+              "interviewValue": 20,
+              "totalScore": 82,
+              "jobSampleCount": 8,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+            },
+            {
+              "roleCode": "LLM_ALGORITHM_RESEARCH",
+              "roleName": "大模型算法与研究",
+              "roleRelevance": 14,
+              "provableAbility": 20,
+              "knowledgeCoverage": 14,
+              "portfolioCompleteness": 14,
+              "interviewValue": 20,
+              "totalScore": 82,
+              "jobSampleCount": 8,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+            },
+            {
+              "roleCode": "AI_FULLSTACK_BACKEND",
+              "roleName": "AI 全栈与后端工程",
+              "roleRelevance": 13,
+              "provableAbility": 20,
+              "knowledgeCoverage": 14,
+              "portfolioCompleteness": 14,
+              "interviewValue": 20,
+              "totalScore": 81,
+              "jobSampleCount": 6,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+            },
+            {
+              "roleCode": "AI_CREATIVE_INTERACTION",
+              "roleName": "AI 创意与交互",
+              "roleRelevance": 7,
+              "provableAbility": 20,
+              "knowledgeCoverage": 14,
+              "portfolioCompleteness": 14,
+              "interviewValue": 20,
+              "totalScore": 75,
+              "jobSampleCount": 1,
+              "evidenceJson": "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+            }
+          ],
+          "matchExplanation": "可重点证明“AI 应用与 Agent”相关能力；与你关注的“RAG”方向相符；适合围绕作品证明和面试讨论点组织项目经历；可以按照“半年内”安排差异化改造，参考周期为4-6周（熟悉项目并实现差异化修改）。"
+        }
+      ],
+      "modelMetrics": {
+        "model": "deepseek-v4-pro",
+        "runtimeSource": "REDIS",
+        "providerHost": "ai.gitee.com",
+        "requestedModel": "DeepSeek-V4-Pro",
+        "durationMs": 34320.885788,
+        "finishReason": "stop",
+        "usageSource": "PROVIDER",
+        "usage": {
+          "prompt_tokens": "1122",
+          "completion_tokens": "1623",
+          "total_tokens": "2745",
+          "prompt_tokens_details": {
+            "cached_tokens": "0"
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": "728"
+          }
+        }
+      },
+      "retrievalTrace": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "USED",
+        "queries": [
+          "RAG 知识库 Java",
+          "RAG 知识库 Java  求职 希望做一个能写进简历的知识库问答项目 有一年基础"
+        ],
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "documentKey": "595:15",
+            "source": "GITHUB",
+            "title": "on linux or macos",
+            "sourceRef": "chatchat-space/Langchain-Chatchat",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/chatchat-space/langchain-chatchat",
+            "text": "||\n| Wolfram对话 | ❌                                | ✅                                                                   ||\n| 文生图       | ❌                                | ✅                                                                   ||\n| 本地知识库管理   | ✅                                | ✅                                                                   ||",
+            "card": "[candidateId=E1;evidenceId=E1;repo=chatchat-space/langchain-chatchat;mode=RAW_FALLBACK] facts=Wolfram对话 ❌ ✅ 文生图 ❌ ✅ 本地知识库管理 ✅ ✅",
+            "promptMode": "RAW_FALLBACK"
+          },
+          {
+            "evidenceId": "E2",
+            "documentKey": "879:0",
+            "source": "CAREER_PROJECT",
+            "title": "langgenius/dify",
+            "sourceRef": "career:218",
+            "projectId": "218",
+            "projectType": null,
+            "mappingStatus": null,
+            "repositoryUrl": "https://github.com/langgenius/dify",
+            "text": "# langgenius/dify\n\n## 知识分类\n职业成长项目\n\n## 仓库地址\nhttps://github.com/langgenius/dify\n\n## 项目摘要\nDify 是一个用 TypeScript/React 构建的可协作 AI 应用开发平台，支持 Agentic 工作流、RAG 管道，可在云/VPC/私有化部署，帮助团队从原型快速走到生产。\n\n## 职业价值\n为 AI 应用与 Agent、AI 全栈后端等方向提供了丰富的作品素材，能展现候选人理解复杂平台架构、前后端协作、多模型集成和私有化部署的能力。\n\n## 可证明能力\n- 熟悉大型全栈项目中前后端解耦与 API 设计\n- 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式\n- 具备私有化部署和云原生交付经验\n- 能参与高效协作的工程文化（tests, CI, release automation）",
+            "card": "[candidateId=E2;evidenceId=E2;repo=langgenius/dify] facts=摘要:Dify 是一个用 TypeScript/React 构建的可协作 AI 应用开发平台，支持 Agentic 工作流、RAG 管道，可在云/VPC/私有化部署，帮助团队从原型快速走到生产。;能力:熟悉大型全栈项目中前后端解耦与 API 设计 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式 具备私有化部…",
+            "promptMode": "CARD"
+          },
+          {
+            "evidenceId": "E3",
+            "documentKey": "196:4",
+            "source": "GITHUB",
+            "title": "Trilium Notes",
+            "sourceRef": "TriliumNext/Trilium",
+            "projectId": 27.0,
+            "projectType": "BEGINNER_PROJECT",
+            "mappingStatus": "AUTO_MATCHED",
+            "repositoryUrl": "https://github.com/triliumnext/trilium",
+            "text": "ghur](./docs/README-ug.md)\n<!-- translate:on -->\n\nTrilium Notes 是一款免费开源、跨平台的层级式笔记应用，专注于构建大型个人知识库。\n\n<img src=\"./docs/app.png\" alt=\"Trilium 截图\" width=\"1000\">\n\n## ⏬ 下载\n- [最新版本](https://github.com/TriliumNext/Trilium/releases/latest) – 稳定版，推荐大多数用户使用。\n- [每日构建版](https://github.com/TriliumNext/Trilium/releases/tag/nightly) – 不稳定开发版本，每日更新，包含最新功能与修复。",
+            "card": "[candidateId=E3;evidenceId=E3;repo=triliumnext/trilium] facts=证据:Trilium Notes 是一款免费开源、跨平台的层级式笔记应用，专注于构建大型个人知识库。",
+            "promptMode": "CARD"
+          }
+        ],
+        "durationMs": 441.637676,
+        "candidateCount": 31,
+        "selectedCount": 3,
+        "confidence": "HIGH",
+        "ragApplied": true,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 1100,
+        "evidencePromptChars": 463,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": "1",
+        "evidenceCompressionRatio": 0.5790909090909091
+      },
+      "promptVersion": "trend-v2-evidence-1",
+      "graphDurationMs": 107.835177,
+      "analyzerAttemptDurationMs": 34443.271152
+    },
+    "wallMs": 34885.734739,
+    "scope": "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change."
+  },
+  "clientWallMs": 34917.073799995705
+}

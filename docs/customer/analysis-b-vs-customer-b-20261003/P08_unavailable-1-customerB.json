@@ -1,0 +1,115 @@
+{
+  "case": "P08_unavailable",
+  "round": 1,
+  "product": "customerB",
+  "startedAt": "2026-10-03T12:49:55.957503+00:00",
+  "sessionId": "36",
+  "runId": "f8cd8788-61fa-4f74-a885-b067cc880049",
+  "run": {
+    "id": "f8cd8788-61fa-4f74-a885-b067cc880049",
+    "session_id": "36",
+    "status": "FAILED",
+    "stage": "FAILED",
+    "result_json": "{\"status\":\"FAILED\",\"projects\":[],\"errorCode\":\"INVALID_MODEL_JSON\",\"answer\":\"我还没能可靠地整理这句话中的要求，因此没有擅自更改条件。你可以继续解释最重要的一项，我会接着帮你；已有会话仍然保留。\",\"recoverable\":true,\"references\":[]}",
+    "metrics_json": "{\"costUsd\":\"UNKNOWN\",\"modelCalls\":[{\"model\":\"deepseek-flash\",\"durationMs\":8583,\"usage\":{\"prompt_tokens\":2001,\"completion_tokens\":1500,\"total_tokens\":3501,\"prompt_tokens_details\":{\"cached_tokens\":1664},\"completion_tokens_details\":{\"reasoning_tokens\":1500},\"prompt_cache_hit_tokens\":1664,\"prompt_cache_miss_tokens\":337},\"attempt\":1,\"status\":\"FAILED\",\"costUsd\":\"UNKNOWN\",\"protocol\":\"NATIVE_ACTION\",\"errorType\":\"IllegalArgumentException\"},{\"model\":\"deepseek-flash\",\"durationMs\":8352,\"usage\":{\"prompt_tokens\":1535,\"completion_tokens\":1501,\"total_tokens\":3036,\"prompt_tokens_details\":{\"cached_tokens\":1280},\"completion_tokens_details\":{\"reasoning_tokens\":1010},\"prompt_cache_hit_tokens\":1280,\"prompt_cache_miss_tokens\":255},\"attempt\":2,\"status\":\"FAILED\",\"costUsd\":\"UNKNOWN\",\"protocol\":\"JSON_OBJECT\",\"errorType\":\"IllegalArgumentException\"}],\"promptVersion\":\"customer-v4.4-multi-goal-cards\",\"embeddingUsage\":\"NOT_REPORTED\",\"protocol\":\"NATIVE_ACTION_V1\",\"tokenUsage\":{\"reasoningTokens\":2510,\"complete\":true,\"cacheHitTokens\":2944,\"inputTokens\":3536,\"cacheMissTokens\":592,\"totalTokens\":6537,\"outputTokens\":3001,\"callsWithoutUsage\":0,\"calls\":2,\"models\":[\"deepseek-flash\"]}}",
+    "error_code": "INVALID_MODEL_JSON",
+    "created_at": "2026-10-03 20:49",
+    "finished_at": "2026-10-03 20:50",
+    "prompt_version": "customer-v4.4-multi-goal-cards"
+  },
+  "result": {
+    "status": "FAILED",
+    "projects": [],
+    "errorCode": "INVALID_MODEL_JSON",
+    "answer": "我还没能可靠地整理这句话中的要求，因此没有擅自更改条件。你可以继续解释最重要的一项，我会接着帮你；已有会话仍然保留。",
+    "recoverable": true,
+    "references": []
+  },
+  "metrics": {
+    "costUsd": "UNKNOWN",
+    "modelCalls": [
+      {
+        "model": "deepseek-flash",
+        "durationMs": 8583,
+        "usage": {
+          "prompt_tokens": 2001,
+          "completion_tokens": 1500,
+          "total_tokens": 3501,
+          "prompt_tokens_details": {
+            "cached_tokens": 1664
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1500
+          },
+          "prompt_cache_hit_tokens": 1664,
+          "prompt_cache_miss_tokens": 337
+        },
+        "attempt": 1,
+        "status": "FAILED",
+        "costUsd": "UNKNOWN",
+        "protocol": "NATIVE_ACTION",
+        "errorType": "IllegalArgumentException"
+      },
+      {
+        "model": "deepseek-flash",
+        "durationMs": 8352,
+        "usage": {
+          "prompt_tokens": 1535,
+          "completion_tokens": 1501,
+          "total_tokens": 3036,
+          "prompt_tokens_details": {
+            "cached_tokens": 1280
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1010
+          },
+          "prompt_cache_hit_tokens": 1280,
+          "prompt_cache_miss_tokens": 255
+        },
+        "attempt": 2,
+        "status": "FAILED",
+        "costUsd": "UNKNOWN",
+        "protocol": "JSON_OBJECT",
+        "errorType": "IllegalArgumentException"
+      }
+    ],
+    "promptVersion": "customer-v4.4-multi-goal-cards",
+    "embeddingUsage": "NOT_REPORTED",
+    "protocol": "NATIVE_ACTION_V1",
+    "tokenUsage": {
+      "reasoningTokens": 2510,
+      "complete": true,
+      "cacheHitTokens": 2944,
+      "inputTokens": 3536,
+      "cacheMissTokens": 592,
+      "totalTokens": 6537,
+      "outputTokens": 3001,
+      "callsWithoutUsage": 0,
+      "calls": 2,
+      "models": [
+        "deepseek-flash"
+      ]
+    }
+  },
+  "events": [
+    {
+      "atMs": 639.5601999975042,
+      "status": "RUNNING",
+      "stage": "UNDERSTANDING"
+    },
+    {
+      "atMs": 17825.612499989802,
+      "status": "FAILED",
+      "stage": "FAILED"
+    }
+  ],
+  "steps": [
+    {
+      "tool": "getConfirmedProfile",
+      "detail": "{\"result\":\"\",\"parameters\":{}}",
+      "status": "SUCCEEDED"
+    }
+  ],
+  "clientWallMs": 18680.95519999042,
+  "sessionSoftDeleted": true
+}

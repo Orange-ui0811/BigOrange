@@ -36,7 +36,8 @@ final class CustomerPurposeMemory {
         var entries=entries(state,model);
         Set<String> supplied=new HashSet<>();for(Object raw:(List<?>)input.get("candidates"))supplied.add(((Map<?,?>)raw).get("key").toString());
         String batch=UUID.randomUUID().toString();
-        for(var p:candidates)if(supplied.contains(CustomerPurpose.key(p))) {
+        Set<?> unreviewed=output.get("unreviewedKeys") instanceof List<?> keys?new HashSet<>(keys):Set.of();
+        for(var p:candidates)if(supplied.contains(CustomerPurpose.key(p)) && !unreviewed.contains(CustomerPurpose.key(p))) {
             String key=CustomerPurpose.key(p);Map<String,Object> entry=new LinkedHashMap<>();
             entry.put("fingerprint",CustomerPurpose.fingerprint(p));entry.put("at",Instant.now().toString());
             if(proofs.get(key) instanceof Map<?,?> proof) {entry.put("quote",proof.get("quote"));entry.put("relation",proof.get("relation"));entry.put("rank",proof.get("rank"));entry.put("batch",batch);}

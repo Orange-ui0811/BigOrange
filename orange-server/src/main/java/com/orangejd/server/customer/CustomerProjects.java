@@ -31,8 +31,10 @@ public class CustomerProjects {
             List<String> gaps=gaps(p,state); p.put("conditionGaps",gaps);
             p.put("matchStatus",gaps.isEmpty()?"CONFIRMED":"NEEDS_VERIFICATION");
             p.put("ranking",ranking(p,state,related));
-        }).sorted(Comparator.<Map<String,Object>>comparingInt(p->"CONFIRMED".equals(p.get("matchStatus"))?0:1)
-            .thenComparingInt(p->CustomerPurpose.rank(p,state))
+            p.put("learningFit",CustomerLearningFit.assess(p,state));
+        }).sorted(Comparator.<Map<String,Object>>comparingInt(p->CustomerPurpose.rank(p,state))
+            .thenComparingInt(p->CustomerLearningFit.order(p,state))
+            .thenComparingInt(p->"CONFIRMED".equals(p.get("matchStatus"))?0:1)
             .thenComparingInt(p->Boolean.TRUE.equals(p.get("evidenceAvailable"))?0:1)
             .thenComparing(Comparator.comparingDouble((Map<String,Object> p)->((Number)((Map<?,?>)p.get("ranking")).get("total")).doubleValue()).reversed())
             .thenComparing(p->p.get("sourceRef").toString())).toList();
@@ -160,15 +162,16 @@ public class CustomerProjects {
         double relevance=matched?45/Math.sqrt(Math.max(1,position)):0;
         double quality=p.get("quality") instanceof Number n?Math.max(0,Math.min(100,n.doubleValue()))*.15:0;
         double preference=0;
-        boolean novice=Objects.toString(s.get("experience"),"").matches(".*(新手|入门|刚学|零基础).*" );
+        boolean novice=CustomerLearningFit.novice(s);
         String level=difficulty(Objects.toString(p.get("difficulty"),""));
         if(novice) preference=level.equals("入门")?30:level.equals("进阶")?-40:level.equals("中等")?-8:-10;
         if(novice && p.get("beginnerScore") instanceof Number score) preference+=Math.max(0,Math.min(100,score.doubleValue()))*.1;
         if(novice && "LARGE".equalsIgnoreCase(Objects.toString(p.get("codebaseSize"),""))) preference-=15;
+        if(novice && "SCOPE_UNVERIFIED".equals(CustomerLearningFit.assess(p,s).get("status"))) preference-=25;
         double goalPreference=(CustomerGoals.learning(s.get("goal")) && "BEGINNER_PROJECT".equals(p.get("type"))?15:0)
             +(CustomerGoals.career(s.get("goal")) && "CAREER_PROJECT".equals(p.get("type"))?15:0);
         double uncertainty=unknownFields(p,s).stream().mapToDouble(field->field.equals("language")?20:field.equals("topic")?12:8).sum();
-        return Map.of("version","customer-rank-v3","semantic",relevance,"quality",quality,"preference",preference,"goalPreference",goalPreference,"uncertaintyPenalty",uncertainty,"total",relevance+quality+preference+goalPreference-uncertainty,"semanticAvailable",!hits.isEmpty(),"semanticMatched",matched);
+        return Map.of("version","customer-rank-v4-learning-fit","semantic",relevance,"quality",quality,"preference",preference,"goalPreference",goalPreference,"uncertaintyPenalty",uncertainty,"total",relevance+quality+preference+goalPreference-uncertainty,"semanticAvailable",!hits.isEmpty(),"semanticMatched",matched);
     }
     public static String difficulty(String value) {
         return switch(value.toUpperCase(Locale.ROOT)) {
@@ -182,15 +185,14 @@ public class CustomerProjects {
         List<String> reasons=new ArrayList<>();
         if(CustomerGoals.learning(state.get("goal")) && "BEGINNER_PROJECT".equals(card.get("type"))) reasons.add("来自学习项目资料，优先结合练手与改造分析");
         if(CustomerGoals.career(state.get("goal")) && "CAREER_PROJECT".equals(card.get("type"))) reasons.add("来自职业项目资料，可结合能力证明与面试讨论点考察");
-        if(Objects.toString(state.get("experience"),"").matches(".*(新手|入门|刚学|零基础).*")) {
-            String level=difficulty(Objects.toString(card.get("difficulty"),""));
-            reasons.add(level.equals("入门")?"资料标记为入门，与当前基础更接近":level.equals("进阶")?"资料标记为进阶，对刚入门用户有明显门槛，建议先阅读或缩小实践范围":"当前基础与项目规模仍需结合具体任务判断");
-            if("LARGE".equalsIgnoreCase(Objects.toString(card.get("codebaseSize"),""))) reasons.add("仓库规模较大，不建议从重写整个系统开始；应先限定为运行示例或一个小改造任务");
+        if(CustomerLearningFit.novice(state)) {
+            reasons.add(Objects.toString(CustomerLearningFit.assess(card,state).get("message")));
         }
         if(state.containsKey("goal")) reasons.add("本轮目标："+CustomerGoals.display(state.get("goal")));
         if(state.containsKey("topic")) reasons.add("资料涉及"+CustomerTopics.display(state.get("topic"))+"，具体实践范围见项目说明");
         if(card.containsKey("language")) reasons.add("资料记录主语言为"+card.get("language"));
         if(card.containsKey("duration") && state.containsKey("maxDurationDays")) reasons.add("资料中的实践周期为"+card.get("duration")+"；你的上限为"+state.get("maxDurationDays")+"天");
+        if(card.get("purposeFit") instanceof Map<?,?> fit && !"NOT_REQUESTED".equals(fit.get("status")))reasons.add(Objects.toString(fit.get("message"),"用途仍需核对"));
         reasons.add("NEEDS_VERIFICATION".equals(card.get("matchStatus"))?"明确冲突已排除，仍有条件待核实":"已通过当前已知字段的条件检查，周期仅为资料估算");
         return String.join("；",reasons)+"。";
     }

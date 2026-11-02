@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "README_SELECTIONS_V2",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "selections"],
+  "properties": {
+    "schemaVersion": {"const": "README_SELECTIONS_V2"},
+    "selections": {
+      "type": "array", "minItems": 1, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["blockId", "decision", "kind", "scope", "reason", "applicability", "evidenceBlockIds"],
+        "properties": {
+          "blockId": {"type": "string", "minLength": 1},
+          "decision": {"enum": ["KEEP", "DROP", "REVIEW"]},
+          "kind": {"enum": ["PURPOSE", "TECHNICAL_TEXT", "USAGE", "ARCHITECTURE", "LICENSE", "LIMITATION", "MAINTENANCE", "SOURCE_POINTER", "OTHER"]},
+          "scope": {"enum": ["CORE", "RELATED_PRODUCT", "ENTERPRISE", "COMMUNITY", "VERSION_SPECIFIC", "PLATFORM_SPECIFIC", "NON_PRODUCTION", "UNKNOWN"]},
+          "reason": {"enum": ["KNOWLEDGE", "POINTER", "NOISE", "INSUFFICIENT", "CONFLICT", "UNCERTAIN"]},
+          "applicability": {"enum": ["IN_SCOPE", "OUT_OF_SCOPE", "UNKNOWN"]},
+          "evidenceBlockIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+        },
+        "allOf": [
+          {"if": {"properties": {"decision": {"const": "KEEP"}}},
+           "then": {"properties": {"kind": {"not": {"const": "OTHER"}}},
+             "if": {"properties": {"kind": {"const": "SOURCE_POINTER"}}},
+             "then": {"properties": {"reason": {"const": "POINTER"}}},
+             "else": {"properties": {"reason": {"const": "KNOWLEDGE"}},
+               "if": {"properties": {"applicability": {"not": {"const": "OUT_OF_SCOPE"}}}},
+               "then": {"properties": {"applicability": {"const": "IN_SCOPE"}, "scope": {"not": {"const": "UNKNOWN"}}}}}}},
+          {"if": {"properties": {"decision": {"const": "DROP"}}}, "then": {"properties": {"reason": {"const": "NOISE"}}}}
+        ]
+      }
+    }
+  }
+}

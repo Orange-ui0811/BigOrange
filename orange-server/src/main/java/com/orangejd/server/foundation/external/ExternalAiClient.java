@@ -10,6 +10,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.ai.chat.messages.SystemMessage;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.template.NoOpTemplateRenderer;
 
 import java.time.Duration;
 import java.util.LinkedHashMap;
@@ -24,6 +30,8 @@ public class ExternalAiClient {
     private final RestTemplate restTemplate;
     private final String customerModel;
     private final boolean customerThinking;
+    private final int customerInputTokens;
+    private final int customerWireInputCodePoints;
 
     public ExternalAiClient(AiRuntimeConfigService configService) {
         this(configService, "");
@@ -33,13 +41,28 @@ public class ExternalAiClient {
         this(configService,customerModel,false);
     }
 
+    public ExternalAiClient(AiRuntimeConfigService configService,
+                            String customerModel, boolean customerThinking) {
+        this(configService,customerModel,customerThinking,6000);
+    }
+
+    public ExternalAiClient(AiRuntimeConfigService configService,
+                            String customerModel, boolean customerThinking,int customerInputTokens) {
+        this(configService,customerModel,customerThinking,customerInputTokens,CustomerSpringAiChatModel.DEFAULT_WIRE_INPUT_CODE_POINTS);
+    }
+
     @org.springframework.beans.factory.annotation.Autowired
     public ExternalAiClient(AiRuntimeConfigService configService,
                             @org.springframework.beans.factory.annotation.Value("${orange.customer.model:deepseek-flash}") String customerModel,
-                            @org.springframework.beans.factory.annotation.Value("${orange.customer.thinking:false}") boolean customerThinking) {
+                            @org.springframework.beans.factory.annotation.Value("${orange.customer.thinking:false}") boolean customerThinking,
+                            @org.springframework.beans.factory.annotation.Value("${orange.customer.input-tokens:6000}") int customerInputTokens,
+                            @org.springframework.beans.factory.annotation.Value("${orange.customer.wire-input-code-points:20000}") int customerWireInputCodePoints) {
         this.configService = configService;
         this.customerModel = customerModel == null ? "" : customerModel.trim();
         this.customerThinking=customerThinking;
+        this.customerInputTokens=customerInputTokens;
+        if(customerWireInputCodePoints<512 || customerWireInputCodePoints>24000)throw new IllegalArgumentException("INVALID_CUSTOMER_WIRE_BUDGET");
+        this.customerWireInputCodePoints=customerWireInputCodePoints;
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(Duration.ofSeconds(10));
         factory.setReadTimeout(Duration.ofSeconds(120));
@@ -160,50 +183,42 @@ public class ExternalAiClient {
         return customerRequest(system,user,seconds,maxTokens,true,customerThinking);
     }
     private TextResult customerRequest(String system, String user, int seconds, int maxTokens, boolean nativeAction, boolean thinking) {
-        AiRuntimeConfig config = customerConfig();
-        if (!StringUtils.hasText(config.endpoint()) || !StringUtils.hasText(config.apiKey()))
-            throw new BaseException("AI 服务尚未配置");
-        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout(Duration.ofSeconds(Math.min(5, seconds)));
-        factory.setReadTimeout(Duration.ofSeconds(Math.max(1, seconds - Math.min(5, seconds))));
-        RestTemplate client = new RestTemplate(factory);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(config.apiKey());
-        Map<String,Object> body = new LinkedHashMap<>();
-        body.put("model", config.model()); body.put("temperature", 0.0); body.put("max_tokens", maxTokens);
-        body.put("messages", List.of(Map.of("role","system","content",system),Map.of("role","user","content",user)));
-        if(usesDeepSeekThinkingSwitch(config)) {
-            body.put("thinking",Map.of("type",thinking?"enabled":"disabled"));
-            if(!nativeAction) body.put("response_format",Map.of("type","json_object"));
-        }
-        if(nativeAction) {
-            body.putAll(customerActionFields(config,thinking));
-        }
-        String endpoint = config.endpoint().endsWith("/chat/completions") ? config.endpoint() : config.endpoint()+"/chat/completions";
-        long started = System.nanoTime();
-        try {
-            Map<?,?> response = client.postForObject(endpoint,new HttpEntity<>(body,headers),Map.class);
-            if(response == null || !(response.get("choices") instanceof List<?> choices) || choices.isEmpty())
-                throw new BaseException("AI 返回为空");
-            Map<?,?> choice=(Map<?,?>) choices.get(0);
-            Map<?,?> message=(Map<?,?>) choice.get("message");
-            Object rawContent=message==null?null:message.get("content");
-            if(nativeAction && message!=null && message.get("tool_calls") instanceof List<?> calls && calls.size()==1) {
-                Map<?,?> call=(Map<?,?>)calls.getFirst(); Map<?,?> function=(Map<?,?>)call.get("function");
-                if(function!=null && "customerAction".equals(function.get("name"))) rawContent=function.get("arguments");
-            }
-            Map<String,Object> usage=new LinkedHashMap<>();
-            if(response.get("usage") instanceof Map<?,?> raw) raw.forEach((k,v)->usage.put(String.valueOf(k),v));
-            return new TextResult(rawContent instanceof String content?stripFence(content):"",
-                Objects.toString(response.get("model"),config.model()),usage,elapsedMillis(started),Objects.toString(choice.get("finish_reason"),"unknown"));
-        } catch(HttpStatusCodeException ex) { throw AiToolProviderException.from(ex); }
+        return customerRequest(system,user,seconds,maxTokens,nativeAction,thinking,(kind,payload)->{});
+    }
+    public TextResult callCustomerObserved(String system,String user,int seconds,int maxTokens,boolean nativeAction,Boolean thinking,java.util.function.BiConsumer<String,Map<String,Object>> observer) {
+        return customerRequest(system,user,seconds,maxTokens,nativeAction,thinking==null?customerThinking:thinking,observer);
+    }
+    private TextResult customerRequest(String system,String user,int seconds,int maxTokens,boolean nativeAction,boolean thinking,java.util.function.BiConsumer<String,Map<String,Object>> observer) {
+        ChatResponse response=callCustomerPrompt(new Prompt(List.of(new SystemMessage(system),new UserMessage(user))),
+            seconds,maxTokens,nativeAction,thinking,observer);
+        Map<String,Object> usage=response.getMetadata().get(CustomerSpringAiChatModel.RAW_USAGE);
+        Number duration=response.getMetadata().get(CustomerSpringAiChatModel.DURATION_MS);
+        return new TextResult(response.getResult().getOutput().getText(),response.getMetadata().getModel(),usage,
+            duration.longValue(),response.getResult().getMetadata().getFinishReason());
+    }
+
+    /** Typed Spring AI boundary; no memory advisor, framework retry or automatic tool execution. */
+    public ChatResponse callCustomerPrompt(Prompt prompt,int seconds,int maxTokens,boolean nativeAction,boolean thinking,
+                                           java.util.function.BiConsumer<String,Map<String,Object>> observer) {
+        var driver=new CustomerSpringAiChatModel(customerConfig(),seconds,maxTokens,nativeAction,thinking,customerInputTokens,customerWireInputCodePoints,observer);
+        // Prompts already contain JSON and untrusted history; never interpret their braces as templates.
+        return ChatClient.create(driver).prompt(prompt).templateRenderer(new NoOpTemplateRenderer()).call().chatResponse();
     }
 
     static Map<String,Object> customerActionFields(AiRuntimeConfig config,boolean thinking) {
         Map<String,Object> fields=new LinkedHashMap<>();
         fields.put("tools",List.of(Map.of("type","function","function",Map.of("name","customerAction","description","提交经过校验的客服意图与条件变更",
             "parameters",Map.of("type","object","properties",Map.of("intent",Map.of("type","string","enum",List.of("CHAT","QUESTION","COLLECT","RECOMMEND","DETAIL","COMPARE","STATE","DIAGNOSE","EXPLAIN")),"reply",Map.of("type","string"),"changes",CustomerActionSchema.changes(),"profileDefaults",CustomerActionSchema.changes(),"projectFeedback",Map.of("type","array","maxItems",3,"items",Map.of("type","object","properties",Map.of("operation",Map.of("type","string","enum",List.of("DISMISS","RESTORE","RESET")),"position",Map.of("type","integer","minimum",0,"maximum",3),"quote",Map.of("type","string","maxLength",200)),"required",List.of("operation","position","quote"),"additionalProperties",false)),"beforeTask",Map.of("type","object","properties",Map.of("intent",Map.of("type","string","enum",List.of("STATE","EXPLAIN")),"quote",Map.of("type","string","maxLength",300)),"required",List.of("intent","quote"),"additionalProperties",false),"positions",Map.of("type","array","items",Map.of("type","integer")),"preferences",Map.of("type","array","maxItems",6,"items",Map.of("type","string","maxLength",200)),"pendingConditions",Map.of("type","array","items",Map.of("type","object","properties",Map.of("field",Map.of("type","string"),"quote",Map.of("type","string"),"question",Map.of("type","string")),"required",List.of("field","quote","question")))),"required",List.of("intent","reply","changes","positions"))))));
+        // Extend the native proposal schema; business services still validate IDs, quotes and lifecycle.
+        var tool=new LinkedHashMap<String,Object>((Map<String,Object>)((List<?>)fields.get("tools")).getFirst());
+        var function=new LinkedHashMap<String,Object>((Map<String,Object>)tool.get("function"));
+        var parameters=new LinkedHashMap<String,Object>((Map<String,Object>)function.get("parameters"));
+        var properties=new LinkedHashMap<String,Object>((Map<String,Object>)parameters.get("properties"));
+        for(String key:List.of("taskAction","questionAnswer","clarification"))properties.put(key,Map.of("type","object"));
+        properties.put("requirementProposals",Map.of("type","array","maxItems",32,"items",Map.of("type","object")));
+        properties.put("needsHistory",Map.of("type","boolean","description","当前上下文不足，需要在服务端受控范围内回查本会话原话"));
+        properties.put("historyQuery",Map.of("type","string","maxLength",300,"description","用于定位原话的对象或关键词，不包含身份参数"));
+        parameters.put("properties",properties);function.put("parameters",parameters);tool.put("function",function);fields.put("tools",List.of(tool));
         // DeepSeek thinking rejects named/required tool_choice. Omission selects auto.
         if(!(thinking && usesDeepSeekThinkingSwitch(config)))
             fields.put("tool_choice",Map.of("type","function","function",Map.of("name","customerAction")));

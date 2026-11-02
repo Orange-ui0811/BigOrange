@@ -1,0 +1,194 @@
+{
+  "status": "V5_AUDIT_AND_PILOT_INPUTS_PREPARED_OFFLINE",
+  "metrics": {
+    "unrecovered": 29,
+    "causeGroups": {
+      "BODY_CLASSIFIED_AS_POINTER": 2,
+      "OLD_MODEL_REVIEW": 10,
+      "DEPENDENCY_BLOCKED": 16,
+      "INSTRUCTION_LIKE_SOURCE": 1
+    },
+    "unrecoveredTargetCoverage": {
+      "max4": {
+        "MODEL_TARGET": 14,
+        "UNIT_TARGET_LIMIT": 6,
+        "HARD_DEPENDENCY_COMPONENT": 5,
+        "RULE_OR_PROJECTION_ONLY": 3,
+        "HARD_SOURCE_REVIEW": 1
+      },
+      "max8": {
+        "MODEL_TARGET": 20,
+        "HARD_DEPENDENCY_COMPONENT": 5,
+        "RULE_OR_PROJECTION_ONLY": 3,
+        "HARD_SOURCE_REVIEW": 1
+      }
+    },
+    "allNeedsModelCoverage": {
+      "max4": {
+        "MODEL_TARGET": 79,
+        "UNIT_TARGET_LIMIT": 11,
+        "HARD_DEPENDENCY_COMPONENT": 18
+      },
+      "max8": {
+        "MODEL_TARGET": 90,
+        "HARD_DEPENDENCY_COMPONENT": 18
+      }
+    }
+  },
+  "supplementalLabelMetrics": {
+    "bodyPrecision": {
+      "numerator": 53,
+      "denominator": 56,
+      "rate": 0.946429
+    },
+    "inScopeDecisionAgreement": {
+      "numerator": 55,
+      "denominator": 78,
+      "rate": 0.705128
+    },
+    "usableBodyRecovery": {
+      "numerator": 53,
+      "denominator": 82,
+      "rate": 0.646341
+    },
+    "allModelTargetDecisionAgreement": {
+      "numerator": 88,
+      "denominator": 123,
+      "rate": 0.715447
+    },
+    "allTargetProposalDecisionAgreement": {
+      "numerator": 88,
+      "denominator": 123,
+      "rate": 0.715447
+    },
+    "applicabilityAgreement": {
+      "numerator": 88,
+      "denominator": 123,
+      "rate": 0.715447
+    },
+    "dispositionAgreement": {
+      "numerator": 87,
+      "denominator": 123,
+      "rate": 0.707317
+    },
+    "requiredScopeRetention": {
+      "numerator": 76,
+      "denominator": 82,
+      "rate": 0.926829
+    },
+    "navigationComplete": {
+      "numerator": 26,
+      "denominator": 27,
+      "rate": 0.962963
+    },
+    "criticalCorrectlyUsable": 25,
+    "criticalStillReview": 32,
+    "criticalWrongDeletion": 0,
+    "missingConditionsInUsedEvidence": 1,
+    "scopeOverreach": 3,
+    "wrongSourceCitation": 0,
+    "unapprovedCandidateEvidence": 0,
+    "uncertainPromotion": 2,
+    "unjudgedBodyBlocks": 0,
+    "repositoriesPresent": 12,
+    "repositoriesExpected": 12,
+    "labelledCases": 149,
+    "modelTargets": 123,
+    "controls": 26,
+    "bodyRecoveryByRole": {
+      "MODEL_TARGET": {
+        "numerator": 52,
+        "denominator": 77,
+        "rate": 0.675325
+      },
+      "RULE_OR_SCOPE_CONTROL": {
+        "numerator": 1,
+        "denominator": 5,
+        "rate": 0.2
+      }
+    },
+    "usefulButBlocked": [
+      {
+        "caseId": "Q2-427-53",
+        "finalDecision": "REVIEW",
+        "inBody": false
+      },
+      {
+        "caseId": "S1-522-34",
+        "finalDecision": "KEEP",
+        "inBody": true
+      }
+    ],
+    "usefulKnowledgeCoverageIncludingBlocked": {
+      "numerator": 53,
+      "denominator": 84,
+      "rate": 0.630952
+    },
+    "finalDecisionCounts": {
+      "REVIEW": 56,
+      "KEEP": 88,
+      "DROP": 5
+    },
+    "qualityGatePassed": false
+  },
+  "originalCases": 147,
+  "revisedCases": 149,
+  "unrecoveredCases": 29,
+  "repositoriesPlanned": 12,
+  "planningTests": 1,
+  "newProviderCalls": 0,
+  "indexWrites": 0,
+  "oldR5Calls": 35,
+  "historicalFilesUnchanged": true,
+  "pilotProposal": {
+    "authorized": false,
+    "status": "BLOCKED_PENDING_DETERMINISTIC_RULE_REPAIR_AND_REPLAN",
+    "readyForExecution": false,
+    "requiresReplanBeforeAuthorization": true,
+    "blockingIssues": [
+      "FLOWISE_LAYOUT_AS_CODE_PREREQUISITE",
+      "N8N_LICENSE_NAVIGATION_AS_GLOBAL_GUARD",
+      "APPSMITH_NONBODY_RULE_PASSTHROUGH"
+    ],
+    "countsApplyOnlyTo": "Current V1.4/V5 planning snapshot; repair changes invalidate these exact inputs and counts.",
+    "scope": "V5 diagnostic pilot only, no production/index changes",
+    "documentIds": [
+      "240",
+      "244",
+      "427",
+      "522",
+      "546"
+    ],
+    "repositories": [
+      "Mintplex-Labs/anything-llm",
+      "FlowiseAI/Flowise",
+      "n8n-io/n8n",
+      "appsmithorg/appsmith",
+      "ByteBunny777/Docguard"
+    ],
+    "maxBlocks": 8,
+    "maxInputUpperBound": 12000,
+    "maxOutputTokens": 2048,
+    "primaryRequests": 13,
+    "reserveRequests": 2,
+    "maximumProposedAttempts": 15,
+    "automaticRetries": 0,
+    "firstPassReservedUpperBound": 149127,
+    "maximumReservedUpperBound": 210720,
+    "reservePolicy": "At most one same-input retry for each of the first two transport/protocol failures; no semantic-quality resampling.",
+    "newLedgerPath": "docs/rag-b/readme-filter-v1/k3/quality-v2/v5-pilot-v1/provider-calls.jsonl",
+    "oldR5BudgetTransferable": false,
+    "original29ObservationCasesInPilot": 22,
+    "original29ActuallyTargetedInPilot": 16,
+    "modelTargets": 62,
+    "labelledCases": 101,
+    "pilotPurpose": "Check reachable targets under V5 and observe projection blockers. Blocked/fixed-rule cases remain in scoped denominators; pilot is not the final quality gate."
+  },
+  "evidenceHashes": {
+    "_experiment_staging/readme-v5-audit-v1/all-plans.json": "fb2914bed139e2737bafc4f75c90338f0e152cc87b2e67a0f9304791436de08d",
+    "_experiment_staging/readme-v5-audit-v1/plan-inputs.json": "ed760662bcff09edba0d5e275c9e598437ae60f8d7bdec46421f5128ac510d6c",
+    "_experiment_staging/readme-v5-audit-v1/planning-tests.log": "d6218d219b90fd064d75979600c089a32e178694dbd585da981749afde337706",
+    "orange-server/src/test/java/com/orangejd/server/ragb/ingest/K3V5AuditPlanTest.java": "10291d56c2816032edfdd53660f8d0cd770b2abd529ad0aaf596eb98366e015f",
+    "scripts/prepare_readme_v5_audit.py": "07636a09b361669cc4eafa94cff52665c81a2a811c1b50ccc0ad4cc52d23efb7"
+  }
+}

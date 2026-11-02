@@ -1,0 +1,54 @@
+[
+  {
+    "id": "S01",
+    "message": "你好呀，先随便聊聊吧",
+    "expected": {
+      "intents": [
+        "CHAT"
+      ],
+      "statuses": [
+        "CONVERSATION"
+      ]
+    }
+  },
+  {
+    "id": "S02",
+    "message": "请解释知识库中RAG项目通常能实现什么功能",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "SUPPORTED_EXTRACTS"
+      ]
+    }
+  },
+  {
+    "id": "S03",
+    "message": "推荐Python的RAG项目，用来求职，半年内完成",
+    "prior": {
+      "language": "Python",
+      "goal": "求职",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "projectsRequired": true,
+      "topicIncludesAny": [
+        "RAG",
+        "检索增强生成"
+      ]
+    }
+  },
+  {
+    "id": "S04",
+    "message": "我想给家里的店做库存管理，先帮我记录这个用途",
+    "expected": {
+      "goalIncludes": [
+        "店"
+      ]
+    }
+  }
+]

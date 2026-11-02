@@ -1,0 +1,140 @@
+{
+  "case" : "unavailable",
+  "round" : 1,
+  "variant" : "A",
+  "profile" : {
+    "topics" : [ "量子纠错芯片流片" ],
+    "purpose" : "探索技术兴趣",
+    "experience" : "刚学",
+    "languages" : [ "Java" ],
+    "timeCommitment" : "两天内",
+    "customTopics" : null,
+    "customPurpose" : "只能推荐能核实符合条件的现有仓库，找不到请说明，不编造",
+    "customExp" : null,
+    "customLang" : null,
+    "customTime" : null,
+    "useRag" : true,
+    "usePersona" : false,
+    "preferBeginnerProjects" : false,
+    "preferCareerProjects" : false
+  },
+  "generation" : "local-m3-1791424349362",
+  "startedAt" : "2026-10-09T05:34:43.431572951Z",
+  "response" : {
+    "runtime" : {
+      "model" : "DeepSeek-V4-Pro",
+      "version" : "1-1785206616703",
+      "endpoint" : "https://ai.gitee.com/v1",
+      "source" : "REDIS"
+    },
+    "variant" : "A",
+    "retrieval" : {
+      "text" : "",
+      "trace" : {
+        "strategyVersion" : "hybrid-topic-project-v6-adaptive-card",
+        "status" : "EMPTY",
+        "queries" : [ "量子纠错芯片流片 Java", "量子纠错芯片流片 Java  探索技术兴趣 只能推荐能核实符合条件的现有仓库，找不到请说明，不编造 刚学" ],
+        "evidence" : [ ],
+        "durationMs" : 719.172426,
+        "candidateCount" : 0,
+        "selectedCount" : 0,
+        "confidence" : "NONE",
+        "ragApplied" : false,
+        "evidenceFormat" : "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars" : 0,
+        "evidencePromptChars" : 0,
+        "evidenceBudgetChars" : 1100,
+        "evidenceFallbackCount" : 0,
+        "evidenceCompressionRatio" : 0.0
+      }
+    },
+    "result" : {
+      "error" : "AI分析暂时失败，系统会自动重试"
+    },
+    "wallMs" : 16789.575217,
+    "scope" : "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages" : [ {
+      "status" : "SUCCEEDED",
+      "stage" : "embedding.http.bge-small-zh-v1.5",
+      "durationMs" : 375.635546
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.embeddingAndVector",
+      "durationMs" : 387.127384
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.restoreMetadata",
+      "durationMs" : 6.403466
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 0.220304
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "embedding.http.bge-small-zh-v1.5",
+      "durationMs" : 311.165213
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.embeddingAndVector",
+      "durationMs" : 319.205929
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.restoreMetadata",
+      "durationMs" : 5.578971
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 0.234031
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.lexical",
+      "durationMs" : 0.32506
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 6.31E-4
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.selectProjects",
+      "durationMs" : 0.017194
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.renderEvidence",
+      "durationMs" : 0.002825
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "retrieval.total",
+      "durationMs" : 719.188558
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "graph.database",
+      "durationMs" : 62.84805
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "business.beginner",
+      "durationMs" : 2.353397
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "business.career",
+      "durationMs" : 2.508572
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.compose",
+      "durationMs" : 0.116459
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.protocol",
+      "durationMs" : 0.006422
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "model.http",
+      "durationMs" : 15997.89823
+    }, {
+      "status" : "FAILED",
+      "stage" : "output.parseAndAssemble",
+      "durationMs" : 2.134536
+    } ],
+    "snapshotId" : "75e6c649-e990-459c-9217-3db5f9598196"
+  },
+  "clientWallMs" : 16794.644555
+}

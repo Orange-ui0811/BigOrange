@@ -1,0 +1,2777 @@
+{
+  "case": {
+    "id": "browser_free",
+    "family": "browser",
+    "kind": "free",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：让程序帮我打开网页、点击按钮和填写表单。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "130",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：让程序帮我打开网页、点击按钮和填写表单。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "c057eae5-8d01-4bd2-aaf6-4f38cf8e45ef",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 13828,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "让程序帮我打开网页、点击按钮和填写表单"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "topic": [
+            "浏览器自动化"
+          ],
+          "experience": "一年编程基础",
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：浏览器自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "浏览器自动化",
+            "proofs": {
+              "BEGINNER_PROJECT:53": {
+                "fingerprint": "3fcded93a1368764fed8b9f4ec568279fa75c360386c9013985abc1d1decadcb",
+                "quote": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。",
+                "relation": "DIRECT",
+                "rank": 1
+              },
+              "CAREER_PROJECT:228": {
+                "fingerprint": "c0e1af18847dc41307fbafb4636f83e802bf737c3d2ccc3f3de8390f776b3f91",
+                "quote": "AI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。",
+                "relation": "DIRECT",
+                "rank": 2
+              },
+              "BEGINNER_PROJECT:22": {
+                "fingerprint": "f053e8e5fd42882c79bd1e7e8c78625078acd29f65e986c0dbb554d2811938ff",
+                "quote": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。",
+                "relation": "DIRECT",
+                "rank": 3
+              },
+              "BEGINNER_PROJECT:11": {
+                "fingerprint": "7be75199b801032b1b467d4250302cf9b5ab8654434cdaa910241ed497f4a542",
+                "quote": "一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。",
+                "relation": "DIRECT",
+                "rank": 4
+              },
+              "EXTERNAL_PROJECT:387": {
+                "fingerprint": "2cd86fbe9cafc1f1b1d1cab5d584fc8340d0cb6c73b06454fffbb6f613c2288c",
+                "quote": "在浅色模式下显示黑色 Browser Use 标志，深色模式下显示白色。",
+                "relation": "DIRECT",
+                "rank": 5
+              }
+            }
+          },
+          "lastCandidates": [
+            {
+              "name": "olo-dot-io/Uni-CLI",
+              "type": "BEGINNER_PROJECT",
+              "id": 53
+            },
+            {
+              "name": "web-infra-dev/midscene",
+              "type": "CAREER_PROJECT",
+              "id": 228
+            },
+            {
+              "name": "browserless/browserless",
+              "type": "BEGINNER_PROJECT",
+              "id": 22
+            }
+          ]
+        },
+        "projects": [
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 53,
+            "sourceRef": "beginner:53",
+            "name": "olo-dot-io/Uni-CLI",
+            "url": "https://github.com/olo-dot-io/Uni-CLI",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript",
+            "difficulty": "入门",
+            "duration": "2-5天",
+            "description": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。 [E7]\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E2]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]",
+            "beginnerScore": 91,
+            "analysisReason": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 15.0,
+              "total": 46.81980515339464,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 31.819805153394636
+            },
+            "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及浏览器自动化，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E7",
+                "title": "olo-dot-io/Uni-CLI",
+                "sourceRef": "beginner:53",
+                "spans": [
+                  {
+                    "spanId": "E7.S1",
+                    "text": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 59
+                  }
+                ],
+                "documentId": 97,
+                "versionId": 316,
+                "chunkId": 12071,
+                "sectionPath": "olo-dot-io/Uni-CLI > 中文简介",
+                "startOffset": 93,
+                "endOffset": 144,
+                "contentStartInChunk": 8,
+                "quote": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+                "text": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E2",
+                "title": "olo-dot-io/Uni-CLI",
+                "sourceRef": "beginner:53",
+                "spans": [
+                  {
+                    "spanId": "E2.S1",
+                    "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 67
+                  }
+                ],
+                "documentId": 97,
+                "versionId": 316,
+                "chunkId": 12072,
+                "sectionPath": "olo-dot-io/Uni-CLI > 适合新手的原因",
+                "startOffset": 155,
+                "endOffset": 211,
+                "contentStartInChunk": 11,
+                "quote": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+                "field": "description"
+              }
+            ],
+            "whatIsIt": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。 [E7]\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E2]",
+            "supportedExplanation": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。 [E7]\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E2]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议结合浏览器自动化学习目标，利用其统一调用多种界面的特点，尝试用一条命令完成搜索并运行浏览器相关任务，观察命令行工具如何适配不同接口，作为理解自动化入口的练习。",
+              "difficultyAdvice": "先确认TypeScript基础是否足够阅读模块化代码，并核对本地环境能否运行已有示例；若对进程管理不熟，可先只关注浏览器相关模块。",
+              "vibeCodingAdvice": "可以尝试让AI解释命令到浏览器操作的调用链，并生成一个只涉及浏览器界面的小改造，再用已有示例验证行为是否一致。",
+              "steps": [
+                "先核对并运行仓库中与浏览器相关的已有示例",
+                "实现一个只调用浏览器界面的小命令改造",
+                "测试改造结果并记录与原有行为的差异"
+              ],
+              "evidenceIds": [
+                "E7",
+                "E2"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "CAREER_PROJECT",
+            "id": 228,
+            "sourceRef": "career:228",
+            "name": "web-infra-dev/midscene",
+            "url": "https://github.com/web-infra-dev/midscene",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript",
+            "difficulty": "进阶",
+            "duration": "1.5-2 个月",
+            "description": "开源、视觉驱动的 UI 测试——用自然语言编写测试，自动化任意平台。 [E6]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "quality": 73,
+            "analysisReason": "证明在 AI 驱动的 UI 自动化测试方面的能力，适合 AI 基础设施与质量或全栈后端岗位。",
+            "proofPoints": "测试充分 (tests=true)，持续集成 (ci=true)，自动化发布 (releaseAutomation=true)，大型项目规模 (size=LARGE)，79 个开放 issue。",
+            "interviewTopics": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。",
+            "modificationPlan": "增加对移动平台（如 React Native）的支持并编写集成测试；添加 Docker 镜像以快速部署测试环境；补充性能基准测试报告。",
+            "mainRisks": "仅依赖 TypeScript，缺少 Docker 和数据库集成，可能限制展示全栈能力；高阶视觉 AI 技术需要额外学习。",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 0.0,
+              "total": 36.93076211353316,
+              "semanticAvailable": true,
+              "quality": 10.95,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 25.98076211353316
+            },
+            "recommendReason": "本轮目标：学习；资料涉及浏览器自动化，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E6",
+                "title": "web-infra-dev/midscene",
+                "sourceRef": "career:228",
+                "spans": [
+                  {
+                    "spanId": "E6.S1",
+                    "text": "  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TA",
+                    "startInChunk": 27,
+                    "endInChunk": 427
+                  },
+                  {
+                    "spanId": "E6.S2",
+                    "text": "RS%20Models-yellow\" alt=\"hugging face model\" /></a>\n  <a href=\"htt",
+                    "startInChunk": 427,
+                    "endInChunk": 493
+                  }
+                ],
+                "documentId": 123,
+                "versionId": 342,
+                "chunkId": 12889,
+                "sectionPath": "web-infra-dev/midscene > README 摘要",
+                "startOffset": 1283,
+                "endOffset": 1749,
+                "contentStartInChunk": 27,
+                "quote": "  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TA",
+                "text": "开源、视觉驱动的 UI 测试——用自然语言编写测试，自动化任意平台。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E8",
+                "title": "web-infra-dev/midscene",
+                "sourceRef": "career:228",
+                "spans": [
+                  {
+                    "spanId": "E8.S1",
+                    "text": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+                    "startInChunk": 9,
+                    "endInChunk": 71
+                  }
+                ],
+                "documentId": 123,
+                "versionId": 342,
+                "chunkId": 12877,
+                "sectionPath": "web-infra-dev/midscene > 面试讨论点",
+                "startOffset": 309,
+                "endOffset": 371,
+                "contentStartInChunk": 9,
+                "quote": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+                "text": "涉及 AI 视觉驱动的自动化框架原理、跨平台 UI 测试方案设计、CI/CD 集成实践等学习点。",
+                "field": "supportedExplanation"
+              },
+              {
+                "evidenceId": "E3",
+                "title": "web-infra-dev/midscene",
+                "sourceRef": "career:228",
+                "spans": [
+                  {
+                    "spanId": "E3.S1",
+                    "text": "* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+                    "startInChunk": 17,
+                    "endInChunk": 276
+                  }
+                ],
+                "documentId": 123,
+                "versionId": 342,
+                "chunkId": 12896,
+                "sectionPath": "web-infra-dev/midscene > 📄 Resources",
+                "startOffset": 6168,
+                "endOffset": 6427,
+                "contentStartInChunk": 17,
+                "quote": "* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+                "text": "提供文档、示例项目和 API 参考，可作为学习与实践入口。",
+                "field": "vibeCodingReason"
+              }
+            ],
+            "whatIsIt": "开源、视觉驱动的 UI 测试——用自然语言编写测试，自动化任意平台。 [E6]",
+            "vibeCodingReason": "提供文档、示例项目和 API 参考，可作为学习与实践入口。 [E3]",
+            "supportedExplanation": "开源、视觉驱动的 UI 测试——用自然语言编写测试，自动化任意平台。 [E6]\n涉及 AI 视觉驱动的自动化框架原理、跨平台 UI 测试方案设计、CI/CD 集成实践等学习点。 [E8]\n提供文档、示例项目和 API 参考，可作为学习与实践入口。 [E3]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议以自然语言编写UI测试为切入点，结合浏览器自动化学习目标，先阅读文档和示例项目，尝试用自然语言描述一个简单页面操作并观察视觉驱动测试的执行过程。",
+              "difficultyAdvice": "先确认是否理解视觉驱动测试的基本原理，并核对示例项目能否在本地跑通；若对CI/CD不熟，可先跳过集成部分。",
+              "vibeCodingAdvice": "可以尝试让AI辅助把一条自然语言测试描述转成可运行示例，并解释视觉定位逻辑，再用文档中的API参考核对结果。",
+              "steps": [
+                "先阅读文档并运行一个已有示例项目",
+                "用自然语言写一条针对简单页面的测试并执行",
+                "检查执行结果并对照API参考理解视觉定位"
+              ],
+              "evidenceIds": [
+                "E6",
+                "E8",
+                "E3"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 22,
+            "sourceRef": "beginner:22",
+            "name": "browserless/browserless",
+            "url": "https://github.com/browserless/browserless",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,Playwright",
+            "difficulty": "入门",
+            "duration": "2-5天",
+            "description": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。 [E1]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": true,
+            "topics": "[\"browserless\", \"chrome\", \"docker\", \"firefox\", \"nodejs\", \"playwright\", \"puppeteer\", \"typescript\", \"webkit\", \"websocket\"]",
+            "beginnerScore": 83,
+            "analysisReason": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。",
+            "modificationPlan": "",
+            "prerequisites": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。 [E4]",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "goalPreference": 15.0,
+              "total": 32.008401285415225,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true,
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 17.008401285415225
+            },
+            "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及浏览器自动化，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E1",
+                "title": "browserless/browserless",
+                "sourceRef": "beginner:22",
+                "spans": [
+                  {
+                    "spanId": "E1.S1",
+                    "text": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 83
+                  }
+                ],
+                "documentId": 86,
+                "versionId": 305,
+                "chunkId": 11929,
+                "sectionPath": "browserless/browserless > 适合新手的原因",
+                "startOffset": 155,
+                "endOffset": 227,
+                "contentStartInChunk": 11,
+                "quote": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                "text": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E4",
+                "title": "browserless/browserless",
+                "sourceRef": "beginner:22",
+                "spans": [
+                  {
+                    "spanId": "E4.S1",
+                    "text": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 49
+                  }
+                ],
+                "documentId": 86,
+                "versionId": 305,
+                "chunkId": 11928,
+                "sectionPath": "browserless/browserless > 中文简介",
+                "startOffset": 103,
+                "endOffset": 144,
+                "contentStartInChunk": 8,
+                "quote": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+                "text": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。",
+                "field": "prerequisites"
+              }
+            ],
+            "whatIsIt": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。 [E1]",
+            "supportedExplanation": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。 [E1]\n在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。 [E4]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议结合浏览器自动化学习目标，利用其TypeScript与Playwright组合，先尝试在Docker中启动无头浏览器并调用一个简单API，观察容器化部署与浏览器自动化的基本流程。",
+              "difficultyAdvice": "先确认本地Docker环境可用，并核对非商业用途免费条件是否满足；若对Playwright不熟，可先只运行已有示例。",
+              "vibeCodingAdvice": "可以尝试让AI解释Docker启动到浏览器自动化的调用过程，并生成一个只调用现有API的小脚本，再用容器日志验证执行结果。",
+              "steps": [
+                "先核对Docker环境并运行仓库提供的启动示例",
+                "实现一个调用现有API的小脚本完成简单页面操作",
+                "查看容器日志并记录自动化执行结果"
+              ],
+              "evidenceIds": [
+                "E1",
+                "E4"
+              ],
+              "kind": "SUGGESTION"
+            }
+          }
+        ],
+        "references": [
+          {
+            "evidenceId": "E1",
+            "title": "browserless/browserless",
+            "sourceRef": "beginner:22",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "text": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 83
+              }
+            ],
+            "documentId": 86,
+            "versionId": 305,
+            "chunkId": 11929,
+            "sectionPath": "browserless/browserless > 适合新手的原因",
+            "startOffset": 155,
+            "endOffset": 227,
+            "contentStartInChunk": 11,
+            "quote": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+            "text": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "browserless/browserless",
+            "sourceRef": "beginner:22",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 49
+              }
+            ],
+            "documentId": 86,
+            "versionId": 305,
+            "chunkId": 11928,
+            "sectionPath": "browserless/browserless > 中文简介",
+            "startOffset": 103,
+            "endOffset": 144,
+            "contentStartInChunk": 8,
+            "quote": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+            "text": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。",
+            "field": "prerequisites"
+          },
+          {
+            "evidenceId": "E7",
+            "title": "olo-dot-io/Uni-CLI",
+            "sourceRef": "beginner:53",
+            "spans": [
+              {
+                "spanId": "E7.S1",
+                "text": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 59
+              }
+            ],
+            "documentId": 97,
+            "versionId": 316,
+            "chunkId": 12071,
+            "sectionPath": "olo-dot-io/Uni-CLI > 中文简介",
+            "startOffset": 93,
+            "endOffset": 144,
+            "contentStartInChunk": 8,
+            "quote": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+            "text": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E2",
+            "title": "olo-dot-io/Uni-CLI",
+            "sourceRef": "beginner:53",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 67
+              }
+            ],
+            "documentId": 97,
+            "versionId": 316,
+            "chunkId": 12072,
+            "sectionPath": "olo-dot-io/Uni-CLI > 适合新手的原因",
+            "startOffset": 155,
+            "endOffset": 211,
+            "contentStartInChunk": 11,
+            "quote": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+            "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E6",
+            "title": "web-infra-dev/midscene",
+            "sourceRef": "career:228",
+            "spans": [
+              {
+                "spanId": "E6.S1",
+                "text": "  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TA",
+                "startInChunk": 27,
+                "endInChunk": 427
+              },
+              {
+                "spanId": "E6.S2",
+                "text": "RS%20Models-yellow\" alt=\"hugging face model\" /></a>\n  <a href=\"htt",
+                "startInChunk": 427,
+                "endInChunk": 493
+              }
+            ],
+            "documentId": 123,
+            "versionId": 342,
+            "chunkId": 12889,
+            "sectionPath": "web-infra-dev/midscene > README 摘要",
+            "startOffset": 1283,
+            "endOffset": 1749,
+            "contentStartInChunk": 27,
+            "quote": "  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TA",
+            "text": "开源、视觉驱动的 UI 测试——用自然语言编写测试，自动化任意平台。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E8",
+            "title": "web-infra-dev/midscene",
+            "sourceRef": "career:228",
+            "spans": [
+              {
+                "spanId": "E8.S1",
+                "text": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+                "startInChunk": 9,
+                "endInChunk": 71
+              }
+            ],
+            "documentId": 123,
+            "versionId": 342,
+            "chunkId": 12877,
+            "sectionPath": "web-infra-dev/midscene > 面试讨论点",
+            "startOffset": 309,
+            "endOffset": 371,
+            "contentStartInChunk": 9,
+            "quote": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+            "text": "涉及 AI 视觉驱动的自动化框架原理、跨平台 UI 测试方案设计、CI/CD 集成实践等学习点。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "web-infra-dev/midscene",
+            "sourceRef": "career:228",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+                "startInChunk": 17,
+                "endInChunk": 276
+              }
+            ],
+            "documentId": 123,
+            "versionId": 342,
+            "chunkId": 12896,
+            "sectionPath": "web-infra-dev/midscene > 📄 Resources",
+            "startOffset": 6168,
+            "endOffset": 6427,
+            "contentStartInChunk": 17,
+            "quote": "* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+            "text": "提供文档、示例项目和 API 参考，可作为学习与实践入口。",
+            "field": "vibeCodingReason"
+          }
+        ],
+        "profileLoaded": false,
+        "generation": "20261002164953-ec113424",
+        "status": "VERIFIED_PROJECTS",
+        "recommendationReport": {
+          "approach": "结合「学习」目标，建议先运行已有示例，再完成一个小改造，通过输入输出与测试理解系统的工作过程。",
+          "timeline": "先运行示例并确认改造范围，再根据实际投入估算进度。",
+          "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。",
+          "direction": "本轮围绕「浏览器自动化」查找项目，下面区分资料事实与实践建议。",
+          "learning": [
+            {
+              "name": "olo-dot-io/Uni-CLI",
+              "key": "BEGINNER_PROJECT:53",
+              "steps": [
+                "先核对并运行仓库中与浏览器相关的已有示例",
+                "实现一个只调用浏览器界面的小命令改造",
+                "测试改造结果并记录与原有行为的差异"
+              ],
+              "personalized": true
+            },
+            {
+              "name": "web-infra-dev/midscene",
+              "key": "CAREER_PROJECT:228",
+              "steps": [
+                "先阅读文档并运行一个已有示例项目",
+                "用自然语言写一条针对简单页面的测试并执行",
+                "检查执行结果并对照API参考理解视觉定位"
+              ],
+              "personalized": true
+            },
+            {
+              "name": "browserless/browserless",
+              "key": "BEGINNER_PROJECT:22",
+              "steps": [
+                "先核对Docker环境并运行仓库提供的启动示例",
+                "实现一个调用现有API的小脚本完成简单页面操作",
+                "查看容器日志并记录自动化执行结果"
+              ],
+              "personalized": true
+            }
+          ]
+        },
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：浏览器自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：浏览器自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5293,
+              "completion_tokens": 813,
+              "total_tokens": 6106,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 627
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 301
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 3956,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "usage": {
+              "prompt_tokens": 140,
+              "completion_tokens": 16,
+              "total_tokens": 156,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 140
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 630,
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 2160,
+              "completion_tokens": 207,
+              "total_tokens": 2367,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 2032
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 998,
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 1821,
+              "completion_tokens": 364,
+              "total_tokens": 2185,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 1565
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 1581,
+            "protocol": "JSON_OBJECT",
+            "phase": "EVIDENCE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 999,
+              "completion_tokens": 18,
+              "total_tokens": 1017,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 999
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 613,
+            "protocol": "JSON_OBJECT",
+            "phase": "VERIFY",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 724,
+              "completion_tokens": 651,
+              "total_tokens": 1375,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 468
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 3413,
+            "protocol": "JSON_OBJECT",
+            "phase": "ADVICE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.13-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 627,
+          "complete": true,
+          "cacheHitTokens": 5632,
+          "inputTokens": 11137,
+          "cacheMissTokens": 5505,
+          "totalTokens": 13206,
+          "outputTokens": 2069,
+          "callsWithoutUsage": 0,
+          "calls": 6,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "浏览器自动化 浏览器自动化 browser automation web automation",
+            "topic": [
+              "浏览器自动化"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.018149234278266535,
+                  "title": "codecrafters-io/build-your-own-x",
+                  "chunkId": 11026,
+                  "content": "#### Build your own `Web Browser`\n\n* [**Rust**: _Let's build a browser engine_](https://limpet.net/mbrubeck/2014/08/08/toy-layout-engine-1.html)\n* [**Python**: _Browser Engineering_](https://browser.engineering)\n\n",
+                  "endOffset": 36807,
+                  "sourceRef": "codecrafters-io/build-your-own-x",
+                  "versionId": 288,
+                  "chunkIndex": 42,
+                  "documentId": 69,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Tutorials > Build your own `Web Browser`",
+                  "startOffset": 36594,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=39,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01734931734931735,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12075,
+                  "content": "## 主题\n[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+                  "endOffset": 514,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 7,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 主题",
+                  "startOffset": 250,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=31,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016472951642990386,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12893,
+                  "content": "## 💡 What you can automate\n\nMidscene works anywhere you can take a screenshot — web browsers, Android, iOS, HarmonyOS, desktop apps, and [any custom interface](https://midscenejs.com/integrate-with-any-interface) — all through one API. Write automation with the JavaScript SDK or in YAML, hand it to AI agents via [Skills](https://midscenejs.com/skills), and look up every method (`aiAct`, `aiQuery`, `aiAssert`, and more) in the [API reference](https://midscenejs.com/reference/#common).\n\n",
+                  "endOffset": 5157,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 22,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 💡 What you can automate",
+                  "startOffset": 4666,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=41,nameRank=50,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "Gemini CLI",
+                  "chunkId": 16917,
+                  "content": "### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                  "endOffset": 2595,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "versionId": 605,
+                  "chunkIndex": 15,
+                  "documentId": 386,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Gemini CLI > 📋 主要特性 > 自动化与集成",
+                  "startOffset": 2496,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016075745366639808,
+                  "title": "APILayer 统一套件现已上线！🎉 🥳",
+                  "chunkId": 11097,
+                  "content": "| [WebScraping.AI](https://webscraping.ai/) | Web Scraping API with built-in proxies and JS rendering | `apiKey` | Yes | Yes |\n| [ZenRows](https://www.zenrows.com/) | Web Scraping API that bypasses anti-bot solutions while offering JS rendering, and rotating proxies | `apiKey` | Yes | Unknown |\n\n\n\n**[⬆ Back to Index](#index)**\n<br >\n<br >\n",
+                  "endOffset": 67489,
+                  "sourceRef": "public-apis/public-apis",
+                  "versionId": 289,
+                  "chunkIndex": 60,
+                  "documentId": 70,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Try Public APIs for free > Index > Development",
+                  "startOffset": 67148,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=86,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15255,
+                  "content": "##### :black_small_square: Labs\n\n<p>\n&nbsp;&nbsp; <a href=\"https://labs.networkreliability.engineering/\"><b>NRE Labs</b></a> - learn automation by doing it. Right now, right here, in your browser.<br>\n</p>\n\n",
+                  "endOffset": 65228,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 80,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Networks &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Labs",
+                  "startOffset": 65021,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "browserless/browserless",
+                  "chunkId": 11929,
+                  "content": "## 适合新手的原因\nTypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                  "endOffset": 227,
+                  "sourceRef": "beginner:22",
+                  "versionId": 305,
+                  "chunkIndex": 4,
+                  "documentId": 86,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "browserless/browserless > 适合新手的原因",
+                  "startOffset": 144,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11666,
+                  "content": "### Web Scraping\n\n_Libraries to automate web scraping and extract web content._\n\n- Frameworks\n  - [browser-use](https://github.com/browser-use/browser-use) - Make websites accessible for AI agents with easy browser automation.\n  - [crawl4ai](https://github.com/unclecode/crawl4ai) - An open-source, LLM-friendly web crawler that provides lightning-fast, structured data extraction specifically designed for AI agents.\n  - [crawlberg](https://github.com/xberg-io/crawlberg) - A high-performance web crawling engine with a Rust core, headless-browser fallback, and built-in robots.txt and sitemap parsing.\n  - [mechanicalsoup](https://github.com/MechanicalSoup/MechanicalSoup) - A Python library for automating interaction with websites.\n  - [scrapy](https://github.com/scrapy/scrapy) - A fast high-level screen scraping and web crawling framework.\n  - [website-downloader](https://github.com/PKHarsimran/website-downloader) - A modern wget --mirror / HTTrack alternative that turns whole websites into browsable offline copies.\n- Content Extraction\n  - [feedparser](https://github.com/kurtmckee/feedparser) - Universal feed parser.\n  - [html2text](https://github.com/Alir3z4/html2text) - Convert HTML to Markdown-formatted text.\n  - [micawber](https://github.com/coleifer/micawber) - A small library for extracting rich content from URLs.\n  - [sumy](https://github.com/miso-belica/sumy) - A module for automatic summarization of text documents and HTML pages.\n  - [trafilatura](https://github.com/adbar/trafilatura) - A tool for gathering text and metadata from the web, with built-in content filtering.\n\n",
+                  "endOffset": 25482,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 25,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Web Scraping",
+                  "startOffset": 23878,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12891,
+                  "content": "## Showcases\n\n* [Web Automation - Automatically register the GitHub form in a web browser and pass all field validations](https://midscenejs.com/showcases#web)\n* [iOS Automation - Meituan coffee order](https://midscenejs.com/showcases#ios)\n* [iOS Automation - Auto-like the first @midscene_ai tweet](https://midscenejs.com/showcases#ios)\n* [Android Automation - DCar: Xiaomi SU7 specs](https://midscenejs.com/showcases#android)\n* [Android Automation - Booking a hotel for Christmas](https://midscenejs.com/showcases#android)\n* [robotic arm + vision + voice for in-vehicle testing](https://midscenejs.com/showcases#community-showcases)\n\n",
+                  "endOffset": 3459,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 20,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > Showcases",
+                  "startOffset": 2823,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=26,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "APILayer 统一套件现已上线！🎉 🥳",
+                  "chunkId": 11214,
+                  "content": "| [Tisane](https://tisane.ai/) | Text Analytics with focus on detection of abusive content and law enforcement applications | `OAuth` | Yes | Yes |\n| [Watson Natural Language Understanding](https://cloud.ibm.com/apidocs/natural-language-understanding/natural-language-understanding) | Natural language processing for advanced text analysis | `OAuth` | Yes | Unknown |\n\n**[⬆ Back to Index](#index)**\n<br >\n<br >\n",
+                  "endOffset": 199488,
+                  "sourceRef": "public-apis/public-apis",
+                  "versionId": 289,
+                  "chunkIndex": 177,
+                  "documentId": 70,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Try Public APIs for free > Index > Text Analysis",
+                  "startOffset": 199077,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "BetterWright/betterwright",
+                  "chunkId": 11890,
+                  "content": "## 适合新手的原因\n基于 Playwright 的工程化应用，适合学习浏览器自动化、安全存储和策略引擎，功能拆分清晰，可逐个攻破。\n\n",
+                  "endOffset": 240,
+                  "sourceRef": "beginner:11",
+                  "versionId": 302,
+                  "chunkIndex": 4,
+                  "documentId": 83,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "BetterWright/betterwright > 适合新手的原因",
+                  "startOffset": 172,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "GitHub 上的游戏 <img src=\"http://i.imgur.com/Cj4rMrS.gif\" height=\"40\" alt=\"游泳的章鱼猫\" title=\"GitHub 上的游戏\">",
+                  "chunkId": 16771,
+                  "content": "# 浏览器游戏\n\n",
+                  "endOffset": 1716,
+                  "sourceRef": "leereilly/games",
+                  "versionId": 583,
+                  "chunkIndex": 2,
+                  "documentId": 364,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "浏览器游戏",
+                  "startOffset": 1707,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "Stirling-Tools/Stirling-PDF",
+                  "chunkId": 14403,
+                  "content": "#### Advanced\n- **Compress**: Reduce file size\n- **Pipeline**: Automated workflow processing (OCR images pipeline, prepare PDFs for emailing pipeline)\n- **Adjust Colours/Contrast**: Colour and contrast adjustment\n- **Auto Rename PDF File**: Automatic file renaming\n- **Auto Split Pages**: Automatic page splitting\n- **Detect/Split Scanned photos**: Photo detection and splitting\n- **Overlay PDFs**: Layer PDFs over each other\n- **Repair**: Fix corrupted PDFs\n- **Show JavaScript**: Display embedded JavaScript\n- **Auto Split by Size/Count**: Split by file size or page count\n- **Split PDF by Chapters**: Chapter-based splitting\n- **Split PDF by Sections**: Section-based splitting\n- **Scanner Effect**: Apply scanner-like effects\n- **Edit Table of Contents**: Modify PDF bookmarks and TOC\n\n",
+                  "endOffset": 7112,
+                  "sourceRef": "Stirling-Tools/Stirling-PDF|week",
+                  "versionId": 401,
+                  "chunkIndex": 9,
+                  "documentId": 182,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Features > 50+ PDF Operations > Advanced",
+                  "startOffset": 6322,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "LearningCircuit/local-deep-research",
+                  "chunkId": 15050,
+                  "content": "#### Custom Sources\n- **Local Documents** - Search your files with AI\n- **LangChain Retrievers** - Any vector store or database\n- **Meta Search** - Combine multiple engines intelligently\n\nLDR respects `robots.txt` and identifies itself honestly when fetching web pages — no stealth or anti-detection techniques. In rare cases this means a page that blocks automated access won't be fetched, which we consider the right trade-off.\n\n[Full Search Engines Guide →](docs/search-engines.md)\n\n",
+                  "endOffset": 18487,
+                  "sourceRef": "LearningCircuit/local-deep-research|week",
+                  "versionId": 424,
+                  "chunkIndex": 22,
+                  "documentId": 205,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Local Deep Research > ✨ Key Features > 🌐 Search Sources > Custom Sources",
+                  "startOffset": 18001,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11643,
+                  "content": "## Categories\n\n**AI & ML**\n\n- [AI and Agents](#ai-and-agents)\n- [Deep Learning](#deep-learning)\n- [Machine Learning](#machine-learning)\n- [Natural Language Processing](#natural-language-processing)\n- [Computer Vision](#computer-vision)\n- [Recommender Systems](#recommender-systems)\n\n**Web Development**\n\n- [Web Frameworks](#web-frameworks)\n- [Web APIs](#web-apis)\n- [Web Servers](#web-servers)\n- [WebSocket](#websocket)\n- [Template Engines](#template-engines)\n- [Web Asset Management](#web-asset-management)\n- [Authentication](#authentication)\n- [Admin Panels](#admin-panels)\n- [CMS](#cms)\n- [Static Site Generators](#static-site-generators)\n\n**HTTP & Scraping**\n\n- [HTTP Clients](#http-clients)\n- [Web Scraping](#web-scraping)\n- [Email](#email)\n\n**Database & Storage**\n\n- [ORM](#orm)\n- [Database Drivers](#database-drivers)\n- [Database](#database)\n- [Caching](#caching)\n- [Search](#search)\n- [Serialization](#serialization)\n\n**Data & Science**\n\n- [Data Analysis](#data-analysis)\n- [Data Ingestion / ETL](#data-ingestion--etl)\n- [Data Validation](#data-validation)\n- [Data Visualization](#data-visualization)\n- [Geolocation](#geolocation)\n- [Science](#science)\n- [Quantum Computing](#quantum-computing)\n\n**Developer Tools**\n\n- [Algorithms and Design Patterns](#algorithms-and-design-patterns)\n- [Interactive Interpreter](#interactive-interpreter)\n- [Code Analysis](#code-analysis)\n- [Testing](#testing)\n- [Debugging Tools](#debugging-tools)\n- [Build Tools](#build-tools)\n- [Documentation](#documentation)\n\n",
+                  "endOffset": 1883,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 2,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                  "startOffset": 377,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12874,
+                  "content": "## 项目摘要\nAI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。\n\n",
+                  "endOffset": 136,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 3,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 项目摘要",
+                  "startOffset": 93,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=32,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "soulfiremc-com/SoulFire",
+                  "chunkId": 10906,
+                  "content": "## 项目摘要\n高级 Minecraft 机器人工具，可部署自动化机器人用于服务器测试、自动化和开发。使用 Java 构建。\n\n",
+                  "endOffset": 159,
+                  "sourceRef": "career:234",
+                  "versionId": 286,
+                  "chunkIndex": 3,
+                  "documentId": 67,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "soulfiremc-com/SoulFire > 项目摘要",
+                  "startOffset": 95,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012910381543921916,
+                  "title": "🤖 LLM 快速入门",
+                  "chunkId": 16920,
+                  "content": "</br>\n\n🌤️ 想跳过安装配置？使用我们的<b>[云服务](https://cloud.browser-use.com?utm_source=github&utm_medium=readme-skip-setup)</b>，获得更快速、可扩展且具有隐身能力的浏览器自动化！\n\n",
+                  "endOffset": 2532,
+                  "sourceRef": "browser-use/browser-use",
+                  "versionId": 606,
+                  "chunkIndex": 2,
+                  "documentId": 387,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 2391,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=32,lexicalRank=38,nameRank=30,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15233,
+                  "content": "##### :black_small_square: Performance\n\n<p>\n&nbsp;&nbsp; <a href=\"https://gtmetrix.com/\"><b>GTmetrix</b></a> - analyze your site’s speed and make it faster.<br>\n&nbsp;&nbsp; <a href=\"https://performance.sucuri.net/\"><b>Sucuri loadtimetester</b></a> - test here the\nperformance of any of your sites from across the globe.<br>\n&nbsp;&nbsp; <a href=\"https://tools.pingdom.com/\"><b>Pingdom Tools</b></a> - analyze your site’s speed around the world.<br>\n&nbsp;&nbsp; <a href=\"https://pingme.io/\"><b>PingMe.io</b></a> - run website latency tests across multiple geographic regions.<br>\n&nbsp;&nbsp; <a href=\"https://developers.google.com/speed/pagespeed/insights/\"><b>PageSpeed Insights</b></a> - analyze your site’s speed and make it faster.<br>\n&nbsp;&nbsp; <a href=\"https://web.dev/\"><b>web.dev</b></a> - helps developers like you learn and apply the web's modern capabilities to your own sites and apps.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/GoogleChrome/lighthouse\"><b>Lighthouse</b></a> - automated auditing, performance metrics, and best practices for the web.<br>\n</p>\n\n",
+                  "endOffset": 49538,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 58,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Web Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Performance",
+                  "startOffset": 48458,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01271551724137931,
+                  "title": "Clone the repo",
+                  "chunkId": 17700,
+                  "content": "## 📊 Browser Support\n\n| Chrome | Firefox | Safari | Edge | Opera |\n|--------|---------|--------|------|-------|\n| ✅ 90+ | ✅ 90+ | ✅ 15+ | ✅ 90+ | ✅ 80+ |\n\n---\n\n",
+                  "endOffset": 6700,
+                  "sourceRef": "Maddyrampant/MaddyPix",
+                  "versionId": 746,
+                  "chunkIndex": 18,
+                  "documentId": 527,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "📊 Browser Support",
+                  "startOffset": 6539,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=36,lexicalRank=27,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 303,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "codecrafters-io/build-your-own-x",
+                  "evidence": [
+                    {
+                      "score": 0.018149234278266535,
+                      "title": "codecrafters-io/build-your-own-x",
+                      "chunkId": 11026,
+                      "content": "#### Build your own `Web Browser`\n\n* [**Rust**: _Let's build a browser engine_](https://limpet.net/mbrubeck/2014/08/08/toy-layout-engine-1.html)\n* [**Python**: _Browser Engineering_](https://browser.engineering)\n\n",
+                      "endOffset": 36807,
+                      "sourceRef": "codecrafters-io/build-your-own-x",
+                      "versionId": 288,
+                      "chunkIndex": 42,
+                      "documentId": 69,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Tutorials > Build your own `Web Browser`",
+                      "startOffset": 36594,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=39,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:codecrafters-io/build-your-own-x",
+                  "bestScore": 0.018149234278266535,
+                  "sourceRef": "codecrafters-io/build-your-own-x",
+                  "documentId": 69,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "olo-dot-io/Uni-CLI",
+                  "evidence": [
+                    {
+                      "score": 0.01734931734931735,
+                      "title": "olo-dot-io/Uni-CLI",
+                      "chunkId": 12075,
+                      "content": "## 主题\n[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+                      "endOffset": 514,
+                      "sourceRef": "beginner:53",
+                      "versionId": 316,
+                      "chunkIndex": 7,
+                      "documentId": 97,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "olo-dot-io/Uni-CLI > 主题",
+                      "startOffset": 250,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=31,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:53",
+                  "bestScore": 0.01734931734931735,
+                  "sourceRef": "beginner:53",
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "web-infra-dev/midscene",
+                  "evidence": [
+                    {
+                      "score": 0.016472951642990386,
+                      "title": "web-infra-dev/midscene",
+                      "chunkId": 12893,
+                      "content": "## 💡 What you can automate\n\nMidscene works anywhere you can take a screenshot — web browsers, Android, iOS, HarmonyOS, desktop apps, and [any custom interface](https://midscenejs.com/integrate-with-any-interface) — all through one API. Write automation with the JavaScript SDK or in YAML, hand it to AI agents via [Skills](https://midscenejs.com/skills), and look up every method (`aiAct`, `aiQuery`, `aiAssert`, and more) in the [API reference](https://midscenejs.com/reference/#common).\n\n",
+                      "endOffset": 5157,
+                      "sourceRef": "career:228",
+                      "versionId": 342,
+                      "chunkIndex": 22,
+                      "documentId": 123,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "web-infra-dev/midscene > 💡 What you can automate",
+                      "startOffset": 4666,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=41,nameRank=50,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "web-infra-dev/midscene",
+                      "chunkId": 12891,
+                      "content": "## Showcases\n\n* [Web Automation - Automatically register the GitHub form in a web browser and pass all field validations](https://midscenejs.com/showcases#web)\n* [iOS Automation - Meituan coffee order](https://midscenejs.com/showcases#ios)\n* [iOS Automation - Auto-like the first @midscene_ai tweet](https://midscenejs.com/showcases#ios)\n* [Android Automation - DCar: Xiaomi SU7 specs](https://midscenejs.com/showcases#android)\n* [Android Automation - Booking a hotel for Christmas](https://midscenejs.com/showcases#android)\n* [robotic arm + vision + voice for in-vehicle testing](https://midscenejs.com/showcases#community-showcases)\n\n",
+                      "endOffset": 3459,
+                      "sourceRef": "career:228",
+                      "versionId": 342,
+                      "chunkIndex": 20,
+                      "documentId": 123,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "web-infra-dev/midscene > Showcases",
+                      "startOffset": 2823,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=26,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "web-infra-dev/midscene",
+                      "chunkId": 12874,
+                      "content": "## 项目摘要\nAI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。\n\n",
+                      "endOffset": 136,
+                      "sourceRef": "career:228",
+                      "versionId": 342,
+                      "chunkIndex": 3,
+                      "documentId": 123,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "web-infra-dev/midscene > 项目摘要",
+                      "startOffset": 93,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=32,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:228",
+                  "bestScore": 0.016472951642990386,
+                  "sourceRef": "career:228",
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "Gemini CLI",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "Gemini CLI",
+                      "chunkId": 16917,
+                      "content": "### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                      "endOffset": 2595,
+                      "sourceRef": "google-gemini/gemini-cli",
+                      "versionId": 605,
+                      "chunkIndex": 15,
+                      "documentId": 386,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Gemini CLI > 📋 主要特性 > 自动化与集成",
+                      "startOffset": 2496,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:google-gemini/gemini-cli",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "documentId": 386,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "APILayer 统一套件现已上线！🎉 🥳",
+                  "evidence": [
+                    {
+                      "score": 0.016075745366639808,
+                      "title": "APILayer 统一套件现已上线！🎉 🥳",
+                      "chunkId": 11097,
+                      "content": "| [WebScraping.AI](https://webscraping.ai/) | Web Scraping API with built-in proxies and JS rendering | `apiKey` | Yes | Yes |\n| [ZenRows](https://www.zenrows.com/) | Web Scraping API that bypasses anti-bot solutions while offering JS rendering, and rotating proxies | `apiKey` | Yes | Unknown |\n\n\n\n**[⬆ Back to Index](#index)**\n<br >\n<br >\n",
+                      "endOffset": 67489,
+                      "sourceRef": "public-apis/public-apis",
+                      "versionId": 289,
+                      "chunkIndex": 60,
+                      "documentId": 70,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Try Public APIs for free > Index > Development",
+                      "startOffset": 67148,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=86,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "APILayer 统一套件现已上线！🎉 🥳",
+                      "chunkId": 11214,
+                      "content": "| [Tisane](https://tisane.ai/) | Text Analytics with focus on detection of abusive content and law enforcement applications | `OAuth` | Yes | Yes |\n| [Watson Natural Language Understanding](https://cloud.ibm.com/apidocs/natural-language-understanding/natural-language-understanding) | Natural language processing for advanced text analysis | `OAuth` | Yes | Unknown |\n\n**[⬆ Back to Index](#index)**\n<br >\n<br >\n",
+                      "endOffset": 199488,
+                      "sourceRef": "public-apis/public-apis",
+                      "versionId": 289,
+                      "chunkIndex": 177,
+                      "documentId": 70,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Try Public APIs for free > Index > Text Analysis",
+                      "startOffset": 199077,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:public-apis/public-apis",
+                  "bestScore": 0.016075745366639808,
+                  "sourceRef": "public-apis/public-apis",
+                  "documentId": 70,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "evidence": [
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15255,
+                      "content": "##### :black_small_square: Labs\n\n<p>\n&nbsp;&nbsp; <a href=\"https://labs.networkreliability.engineering/\"><b>NRE Labs</b></a> - learn automation by doing it. Right now, right here, in your browser.<br>\n</p>\n\n",
+                      "endOffset": 65228,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 80,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Networks &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Labs",
+                      "startOffset": 65021,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15233,
+                      "content": "##### :black_small_square: Performance\n\n<p>\n&nbsp;&nbsp; <a href=\"https://gtmetrix.com/\"><b>GTmetrix</b></a> - analyze your site’s speed and make it faster.<br>\n&nbsp;&nbsp; <a href=\"https://performance.sucuri.net/\"><b>Sucuri loadtimetester</b></a> - test here the\nperformance of any of your sites from across the globe.<br>\n&nbsp;&nbsp; <a href=\"https://tools.pingdom.com/\"><b>Pingdom Tools</b></a> - analyze your site’s speed around the world.<br>\n&nbsp;&nbsp; <a href=\"https://pingme.io/\"><b>PingMe.io</b></a> - run website latency tests across multiple geographic regions.<br>\n&nbsp;&nbsp; <a href=\"https://developers.google.com/speed/pagespeed/insights/\"><b>PageSpeed Insights</b></a> - analyze your site’s speed and make it faster.<br>\n&nbsp;&nbsp; <a href=\"https://web.dev/\"><b>web.dev</b></a> - helps developers like you learn and apply the web's modern capabilities to your own sites and apps.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/GoogleChrome/lighthouse\"><b>Lighthouse</b></a> - automated auditing, performance metrics, and best practices for the web.<br>\n</p>\n\n",
+                      "endOffset": 49538,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 58,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Web Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Performance",
+                      "startOffset": 48458,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:trimstray/the-book-of-secret-knowledge",
+                  "bestScore": 0.015873015873015872,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "documentId": 213,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "browserless/browserless",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "browserless/browserless",
+                      "chunkId": 11929,
+                      "content": "## 适合新手的原因\nTypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                      "endOffset": 227,
+                      "sourceRef": "beginner:22",
+                      "versionId": 305,
+                      "chunkIndex": 4,
+                      "documentId": 86,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "browserless/browserless > 适合新手的原因",
+                      "startOffset": 144,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:22",
+                  "bestScore": 0.015625,
+                  "sourceRef": "beginner:22",
+                  "documentId": 86,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "vinta/awesome-python",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11666,
+                      "content": "### Web Scraping\n\n_Libraries to automate web scraping and extract web content._\n\n- Frameworks\n  - [browser-use](https://github.com/browser-use/browser-use) - Make websites accessible for AI agents with easy browser automation.\n  - [crawl4ai](https://github.com/unclecode/crawl4ai) - An open-source, LLM-friendly web crawler that provides lightning-fast, structured data extraction specifically designed for AI agents.\n  - [crawlberg](https://github.com/xberg-io/crawlberg) - A high-performance web crawling engine with a Rust core, headless-browser fallback, and built-in robots.txt and sitemap parsing.\n  - [mechanicalsoup](https://github.com/MechanicalSoup/MechanicalSoup) - A Python library for automating interaction with websites.\n  - [scrapy](https://github.com/scrapy/scrapy) - A fast high-level screen scraping and web crawling framework.\n  - [website-downloader](https://github.com/PKHarsimran/website-downloader) - A modern wget --mirror / HTTrack alternative that turns whole websites into browsable offline copies.\n- Content Extraction\n  - [feedparser](https://github.com/kurtmckee/feedparser) - Universal feed parser.\n  - [html2text](https://github.com/Alir3z4/html2text) - Convert HTML to Markdown-formatted text.\n  - [micawber](https://github.com/coleifer/micawber) - A small library for extracting rich content from URLs.\n  - [sumy](https://github.com/miso-belica/sumy) - A module for automatic summarization of text documents and HTML pages.\n  - [trafilatura](https://github.com/adbar/trafilatura) - A tool for gathering text and metadata from the web, with built-in content filtering.\n\n",
+                      "endOffset": 25482,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 25,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Web Scraping",
+                      "startOffset": 23878,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11643,
+                      "content": "## Categories\n\n**AI & ML**\n\n- [AI and Agents](#ai-and-agents)\n- [Deep Learning](#deep-learning)\n- [Machine Learning](#machine-learning)\n- [Natural Language Processing](#natural-language-processing)\n- [Computer Vision](#computer-vision)\n- [Recommender Systems](#recommender-systems)\n\n**Web Development**\n\n- [Web Frameworks](#web-frameworks)\n- [Web APIs](#web-apis)\n- [Web Servers](#web-servers)\n- [WebSocket](#websocket)\n- [Template Engines](#template-engines)\n- [Web Asset Management](#web-asset-management)\n- [Authentication](#authentication)\n- [Admin Panels](#admin-panels)\n- [CMS](#cms)\n- [Static Site Generators](#static-site-generators)\n\n**HTTP & Scraping**\n\n- [HTTP Clients](#http-clients)\n- [Web Scraping](#web-scraping)\n- [Email](#email)\n\n**Database & Storage**\n\n- [ORM](#orm)\n- [Database Drivers](#database-drivers)\n- [Database](#database)\n- [Caching](#caching)\n- [Search](#search)\n- [Serialization](#serialization)\n\n**Data & Science**\n\n- [Data Analysis](#data-analysis)\n- [Data Ingestion / ETL](#data-ingestion--etl)\n- [Data Validation](#data-validation)\n- [Data Visualization](#data-visualization)\n- [Geolocation](#geolocation)\n- [Science](#science)\n- [Quantum Computing](#quantum-computing)\n\n**Developer Tools**\n\n- [Algorithms and Design Patterns](#algorithms-and-design-patterns)\n- [Interactive Interpreter](#interactive-interpreter)\n- [Code Analysis](#code-analysis)\n- [Testing](#testing)\n- [Debugging Tools](#debugging-tools)\n- [Build Tools](#build-tools)\n- [Documentation](#documentation)\n\n",
+                      "endOffset": 1883,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 2,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                      "startOffset": 377,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:vinta/awesome-python",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "vinta/awesome-python",
+                  "documentId": 74,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "BetterWright/betterwright",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "BetterWright/betterwright",
+                      "chunkId": 11890,
+                      "content": "## 适合新手的原因\n基于 Playwright 的工程化应用，适合学习浏览器自动化、安全存储和策略引擎，功能拆分清晰，可逐个攻破。\n\n",
+                      "endOffset": 240,
+                      "sourceRef": "beginner:11",
+                      "versionId": 302,
+                      "chunkIndex": 4,
+                      "documentId": 83,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "BetterWright/betterwright > 适合新手的原因",
+                      "startOffset": 172,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:11",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "beginner:11",
+                  "documentId": 83,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "GitHub 上的游戏 <img src=\"http://i.imgur.com/Cj4rMrS.gif\" height=\"40\" alt=\"游泳的章鱼猫\" title=\"GitHub 上的游戏\">",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "GitHub 上的游戏 <img src=\"http://i.imgur.com/Cj4rMrS.gif\" height=\"40\" alt=\"游泳的章鱼猫\" title=\"GitHub 上的游戏\">",
+                      "chunkId": 16771,
+                      "content": "# 浏览器游戏\n\n",
+                      "endOffset": 1716,
+                      "sourceRef": "leereilly/games",
+                      "versionId": 583,
+                      "chunkIndex": 2,
+                      "documentId": 364,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "浏览器游戏",
+                      "startOffset": 1707,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:leereilly/games",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "leereilly/games",
+                  "documentId": 364,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Stirling-Tools/Stirling-PDF",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "Stirling-Tools/Stirling-PDF",
+                      "chunkId": 14403,
+                      "content": "#### Advanced\n- **Compress**: Reduce file size\n- **Pipeline**: Automated workflow processing (OCR images pipeline, prepare PDFs for emailing pipeline)\n- **Adjust Colours/Contrast**: Colour and contrast adjustment\n- **Auto Rename PDF File**: Automatic file renaming\n- **Auto Split Pages**: Automatic page splitting\n- **Detect/Split Scanned photos**: Photo detection and splitting\n- **Overlay PDFs**: Layer PDFs over each other\n- **Repair**: Fix corrupted PDFs\n- **Show JavaScript**: Display embedded JavaScript\n- **Auto Split by Size/Count**: Split by file size or page count\n- **Split PDF by Chapters**: Chapter-based splitting\n- **Split PDF by Sections**: Section-based splitting\n- **Scanner Effect**: Apply scanner-like effects\n- **Edit Table of Contents**: Modify PDF bookmarks and TOC\n\n",
+                      "endOffset": 7112,
+                      "sourceRef": "Stirling-Tools/Stirling-PDF|week",
+                      "versionId": 401,
+                      "chunkIndex": 9,
+                      "documentId": 182,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Features > 50+ PDF Operations > Advanced",
+                      "startOffset": 6322,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:Stirling-Tools/Stirling-PDF",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "Stirling-Tools/Stirling-PDF|week",
+                  "documentId": 182,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "LearningCircuit/local-deep-research",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "LearningCircuit/local-deep-research",
+                      "chunkId": 15050,
+                      "content": "#### Custom Sources\n- **Local Documents** - Search your files with AI\n- **LangChain Retrievers** - Any vector store or database\n- **Meta Search** - Combine multiple engines intelligently\n\nLDR respects `robots.txt` and identifies itself honestly when fetching web pages — no stealth or anti-detection techniques. In rare cases this means a page that blocks automated access won't be fetched, which we consider the right trade-off.\n\n[Full Search Engines Guide →](docs/search-engines.md)\n\n",
+                      "endOffset": 18487,
+                      "sourceRef": "LearningCircuit/local-deep-research|week",
+                      "versionId": 424,
+                      "chunkIndex": 22,
+                      "documentId": 205,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Local Deep Research > ✨ Key Features > 🌐 Search Sources > Custom Sources",
+                      "startOffset": 18001,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:LearningCircuit/local-deep-research",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "LearningCircuit/local-deep-research|week",
+                  "documentId": 205,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "soulfiremc-com/SoulFire",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "soulfiremc-com/SoulFire",
+                      "chunkId": 10906,
+                      "content": "## 项目摘要\n高级 Minecraft 机器人工具，可部署自动化机器人用于服务器测试、自动化和开发。使用 Java 构建。\n\n",
+                      "endOffset": 159,
+                      "sourceRef": "career:234",
+                      "versionId": 286,
+                      "chunkIndex": 3,
+                      "documentId": 67,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "soulfiremc-com/SoulFire > 项目摘要",
+                      "startOffset": 95,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:234",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "career:234",
+                  "documentId": 67,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "🤖 LLM 快速入门",
+                  "evidence": [
+                    {
+                      "score": 0.012910381543921916,
+                      "title": "🤖 LLM 快速入门",
+                      "chunkId": 16920,
+                      "content": "</br>\n\n🌤️ 想跳过安装配置？使用我们的<b>[云服务](https://cloud.browser-use.com?utm_source=github&utm_medium=readme-skip-setup)</b>，获得更快速、可扩展且具有隐身能力的浏览器自动化！\n\n",
+                      "endOffset": 2532,
+                      "sourceRef": "browser-use/browser-use",
+                      "versionId": 606,
+                      "chunkIndex": 2,
+                      "documentId": 387,
+                      "sourceType": "GITHUB",
+                      "sectionPath": null,
+                      "startOffset": 2391,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=32,lexicalRank=38,nameRank=30,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:browser-use/browser-use",
+                  "bestScore": 0.012910381543921916,
+                  "sourceRef": "browser-use/browser-use",
+                  "documentId": 387,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Clone the repo",
+                  "evidence": [
+                    {
+                      "score": 0.01271551724137931,
+                      "title": "Clone the repo",
+                      "chunkId": 17700,
+                      "content": "## 📊 Browser Support\n\n| Chrome | Firefox | Safari | Edge | Opera |\n|--------|---------|--------|------|-------|\n| ✅ 90+ | ✅ 90+ | ✅ 15+ | ✅ 90+ | ✅ 80+ |\n\n---\n\n",
+                      "endOffset": 6700,
+                      "sourceRef": "Maddyrampant/MaddyPix",
+                      "versionId": 746,
+                      "chunkIndex": 18,
+                      "documentId": 527,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "📊 Browser Support",
+                      "startOffset": 6539,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=36,lexicalRank=27,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:Maddyrampant/MaddyPix",
+                  "bestScore": 0.01271551724137931,
+                  "sourceRef": "Maddyrampant/MaddyPix",
+                  "documentId": 527,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "浏览器自动化 浏览器自动化 browser automation web automation",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 53,
+                "url": "https://github.com/olo-dot-io/Uni-CLI",
+                "name": "olo-dot-io/Uni-CLI",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]",
+                "archived": false,
+                "duration": "2-5天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:53",
+                "techStack": "TypeScript",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 228,
+                "url": "https://github.com/web-infra-dev/midscene",
+                "name": "web-infra-dev/midscene",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 73,
+                "archived": false,
+                "duration": "1.5-2 个月",
+                "language": "TypeScript",
+                "mainRisks": "仅依赖 TypeScript，缺少 Docker 和数据库集成，可能限制展示全栈能力；高阶视觉 AI 技术需要额外学习。",
+                "sourceRef": "career:228",
+                "techStack": "TypeScript",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "AI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。",
+                "proofPoints": "测试充分 (tests=true)，持续集成 (ci=true)，自动化发布 (releaseAutomation=true)，大型项目规模 (size=LARGE)，79 个开放 issue。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "证明在 AI 驱动的 UI 自动化测试方面的能力，适合 AI 基础设施与质量或全栈后端岗位。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。",
+                "requiresSecrets": false,
+                "modificationPlan": "增加对移动平台（如 React Native）的支持并编写集成测试；添加 Docker 镜像以快速部署测试环境；补充性能基准测试报告。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 386,
+                "url": "https://github.com/google-gemini/gemini-cli",
+                "name": "google-gemini/gemini-cli",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "google-gemini/gemini-cli",
+                "versionId": 605,
+                "documentId": 386,
+                "importable": false,
+                "catalogText": "# Gemini CLI\n\n[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)\n[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)\n[![版本](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)\n[![许可证](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)\n[![查看 Code Wiki](https://assets.codewiki.google/readme-badge/static.svg)](https://codewiki.google/github.com/google-gemini/gemini-cli?utm_source=badge&utm_medium=github&utm_campaign=github.com/google-gemini/gemini-cli)\n\n![Gemini CLI 截图](/docs/assets/gemini-screenshot.png)\n\nGemini CLI 是一个开源 AI 代理，将 Gemini 的强大功能直接带入您的终端。它提供对 Gemini 的轻量级访问，为您提供从提示到模型的最直接路径。\n\n在我们的[文档](https://geminicli.com/docs/)中了解有关 Gemini CLI 的所有信息。\n\n## 🚀 为什么选择 Gemini CLI？\n\n- **🎯 免费套餐**：使用个人 Google 账户，每分钟 60 个请求，每天 1,000 个请求。\n- **🧠 强大的 Gemini 3 模型**：可访问改进的推理能力和 100 万 Token 上下文窗口。\n- **🔧 内置工具**：Google 搜索基础、文件操作、Shell 命令、网页抓取。\n- **🔌 可扩展**：MCP（模型上下文协议）支持自定义集成。\n- **💻 终端优先**：专为生活在命令行中的开发者设计。\n- **🛡️ 开源**：Apache 2.0 许可。\n\n## 📦 安装\n\n有关推荐的系统规格和详细的安装指南，请参阅\n[Gemini CLI 安装、执行和发布](https://www.geminicli.com/docs/get-started/installation)。\n\n### 快速安装\n\n#### 使用 npx 立即运行\n\n```bash\n# 使用 npx（无需安装）\nnpx @google/gemini-cli\n```\n\n#### 使用 npm 全局安装\n\n```bash\nnpm install -g @google/gemini-cli\n```\n\n#### 使用 Homebrew 全局安装（macOS/Linux）\n\n```bash\nbrew install gemini-cli\n```\n\n#### 使用 MacPorts 全局安装（macOS）\n\n```bash\nsudo port install gemini-cli\n```\n\n#### 使用 Anaconda 安装（适用于受限环境）\n\n```bash\n# 创建并激活一个新环境\nconda create -y -n gemini_env -c conda-forge nodejs\nconda activate gemini_env\n\n# 在环境内通过 npm 全局安装 Gemini CLI\nnpm install -g @google/gemini-cli\n```\n\n## 发布渠道\n\n有关更多详细信息，请参阅[发布说明](https://www.geminicli.com/docs/changelogs)。\n\n### 预览版\n\n新的预览版将在每周二 UTC 23:59 发布。这些版本尚未经过全面审查，可能包含回归或其他未解决的问题。请帮助我们测试，并使用 `preview` 标签安装。\n\n```bash\nnpm install -g @google/gemini-cli@preview\n```\n\n### 稳定版\n\n- 新的稳定版将在每周二 UTC 20:00 发布，这是上周 `preview` 版本的完整提升，并包含所有错误修复和验证。使用 `latest` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@latest\n```\n\n### 每夜版\n\n- 每日 UTC 00:00 发布新版本。包含发布时主分支的所有更改。应假定存在待确认的验证和问题。使用 `nightly` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@nightly\n```\n\n## 📋 主要特性\n\n### 代码理解与生成\n\n- 查询和编辑大型代码库\n- 使用多模态功能，从 PDF、图像或草图生成新应用\n- 使用自然语言调试问题并排查故障\n\n### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Gemini CLI",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 70,
+                "url": "https://github.com/public-apis/public-apis",
+                "name": "public-apis/public-apis",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "public-apis/public-apis",
+                "versionId": 289,
+                "documentId": 70,
+                "importable": false,
+                "catalogText": "# APILayer Unified Suite in now Live! 🎉 🥳\n\n[APILayer unified suite](https://apilayer.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo) allows you to integrate production-grade REST APIs using **One Account, One Dashboard, and One API key.** Whether you need to geocode an address, validate an email, fetch a flight, pull stock market data, or scrape a search result.\n\n[Sign up](https://app.apilayer.com?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo) and start building today!\n\nFork our official [APILayer Postman Collection](https://www.postman.com/apilayer/apilayer/collection/2uo8qbu/apilayer-suite) and get started in under 60 seconds.\n\n![APILayer Banner](https://raw.githubusercontent.com/public-apis/public-apis/refs/heads/master/.github/assets/apilayer-banner.png)\n\n### APIs Covered Under APILayer Suite!\n\n- [IPstack](https://apilayer.com/products/ipstack?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Markestack](https://apilayer.com/products/mediastack?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Aviationstack](https://apilayer.com/products/aviationstack?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Positionstack](https://apilayer.com/products/positionstack?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Mediastack](https://apilayer.com/products/mediastack?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Mailboxlayer](https://apilayer.com/products/mailboxlayer?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Countrylayer](https://apilayer.com/products/countrylayer?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Serpstack](https://apilayer.com/products/serpstack?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n- [Scrapestack](https://apilayer.com/products/scrapestack?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo)\n\n# Try Public APIs for free\nThe Public APIs repository is manually curated by community members like you and folks working at [APILayer](https://apilayer.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo). It includes an extensive list of public APIs from many domains that you can use for your own products. Consider it a treasure trove of APIs well-managed by the community over the years.\n\n<br >\n\n<p>\n    <a href=\"https://apilayer.com\">\n        <div>\n            <img src=\".github/cs1586-APILayerLogoUpdate2022-LJ_v2-HighRes.png\" width=\"100%\" alt=\"APILayer Logo\" />\n        </div>\n    </a>\n  </p>\n\nAPILayer is the fastest way to integrate APIs into any product. Explore [APILayer APIs](https://apilayer.com/products/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo) here for your next project.\n\nJoin our [Discord server](https://discord.com/invite/hgjA78638n/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo) to get updates, ask questions, get answers, random community calls, and more.\n\n<br >\n\n## APILayer APIs\n| API | Description | Call this API |\n|:---|:---|:---|\n| [IPstack](https://ipstack.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Locate and Identify Website Visitors by IP Address | [<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](https://god.gw.postman.com/run-collection/10131015-55145132-244c-448c-8e6f-8780866e4862?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D10131015-55145132-244c-448c-8e6f-8780866e4862%26entityType%3Dcollection%26workspaceId%3D2b7498b6-6d91-4fa8-817f-608441fe42a8)|\n| [Marketstack](https://marketstack.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Free, easy-to-use REST API interface delivering worldwide stock market data in JSON format | [<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](https://god.gw.postman.com/run-collection/10131015-9cbac391-3611-4f50-9bfd-d24ae41c97c1?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D10131015-9cbac391-3611-4f50-9bfd-d24ae41c97c1%26entityType%3Dcollection%26workspaceId%3D2b7498b6-6d91-4fa8-817f-608441fe42a8)|\n| [Weatherstack](https://weatherstack.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Retrieve instant, accurate weather information for any location in the world in lightweight JSON format | [<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](https://god.gw.postman.com/run-collection/10131015-276c4312-f682-425d-b6b1-0f82c0a7f2b3?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D10131015-276c4312-f682-425d-b6b1-0f82c0a7f2b3%26entityType%3Dcollection%26workspaceId%3D2b7498b6-6d91-4fa8-817f-608441fe42a8)|\n| [Numverify](https://numverify.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers ) | Global Phone Number Validation & Lookup JSON API |[<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](https://god.gw.postman.com/run-collection/10131015-0760d25e-b802-412e-b0e4-26e5ca3b9ffa?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D10131015-0760d25e-b802-412e-b0e4-26e5ca3b9ffa%26entityType%3Dcollection%26workspaceId%3D2b7498b6-6d91-4fa8-817f-608441fe42a8)|\n| [Fixer](https://fixer.io/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Fixer is a simple and lightweight API for current and historical foreign exchange (forex) rates. |[<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](https://god.gw.postman.com/run-collection/10131015-0d9c66b3-5f1a-42ed-a5ca-379217bd629d?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D10131015-0d9c66b3-5f1a-42ed-a5ca-379217bd629d%26entityType%3Dcollection%26workspaceId%3D2b7498b6-6d91-4fa8-817f-608441fe42a8)|\n| [Aviationstack](https://aviationstack.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Free, real-time flight status and global Aviation data API |[<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](https://god.gw.postman.com/run-collection/10131015-72ee0d35-018e-4370-a2b6-a66d3ebd5b5a?action=collection/fork)|\n| [Zenserp](https://zenserp.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Fast, Accurate Google Search Data Built for Developers |[<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](https://god.gw.postman.com/run-collection/10131015-a3d63243-081e-4961-a2f0-39c7a9394b8d?action=collection/fork)|\n| [Filestack](https://www.filestack.com/signup-start/) | Powerful API to upload, transform & deliver any file into your app |[<img src=\"https://run.pstmn.io/button.svg\" alt=\"Run In Postman\" style=\"width: 128px; height: 32px;\">](www.postman.com/filestack-wolfpack/filestack/overview?sideView=agentMode)|\n| [Screenshotlayer](https://screenshotlayer.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Capture highly customizable screenshots of any website |[Documentation](https://docs.apilayer.com/screenshotlayer/docs/api-documentation?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers)|\n| [Exchangerate Host](https://exchangerate.host/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Real-time current and historical foreign exchange and crypto rates |[Documentation](https://docs.apilayer.com/Exchangerate/docs/api-documentation?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers)|\n| [Mailboxlayer](https://mailboxlayer.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers) | Email Validation & Verification JSON API for Developers |[Documentation](https://docs.apilayer.com/mailboxlayer/docs/api-documentation?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo-Best-sellers)|\n\n\n<br >\n\n## Learn more about Public APIs\n\n<strong>Get Involved</strong>\n\n* [Contributing Guide](CONTRIBUTING.md)\n* [API for this project](https://github.com/davemachado/public-api)\n* [Issues](https://github.com/public-apis/public-apis/issues)\n* [Pull Requests](https://github.com/public-apis/public-apis/pulls)\n* [LICENSE](LICENSE) \n\n<br />\n\n## Index\n\n* [Animals](#animals)\n* [Anime](#anime)\n* [Anti-Malware](#anti-malware)\n* [Art & Design](#art--design)\n* [Authentication & Authorization](#authentication--authorization)\n* [Blockchain](#blockchain)\n* [Books](#books)\n* [Business](#business)\n* [Calendar](#calendar)\n* [Cloud Storage & File Sharing](#cloud-storage--file-sharing)\n* [Continuous Integration](#continuous-integration)\n* [Cryptocurrency](#cryptocurrency)\n* [Currency Exchange](#currency-exchange)\n* [Data Validation](#data-validation)\n* [Development](#development)\n* [Dictionaries](#dictionaries)\n* [Documents & Productivity](#documents--productivity)\n* [Email](#email)\n* [Entertainment](#entertainment)\n* [Environment](#environment)\n* [Events](#events)\n* [Finance](#finance)\n* [Food & Drink](#food--drink)\n* [Games & Comics](#games--comics)\n* [Geocoding](#geocoding)\n* [Government](#government)\n* [Health](#health)\n* [Jobs](#jobs)\n* [Machine Learning](#machine-learning)\n* [Music](#music)\n* [News](#news)\n* [Open Data](#open-data)\n* [Open Source Projects](#open-source-projects)\n* [Patent](#patent)\n* [Personality](#personality)\n* [Phone](#phone)\n* [Photography](#photography)\n* [Programming](#programming)\n* [Science & Math](#science--math)\n* [Security](#security)\n* [Shopping](#shopping)\n* [Social](#social)\n* [Sports & Fitness](#sports--fitness)\n* [Test Data](#test-data)\n* [Text Analysis](#text-analysis)\n* [Tracking](#tracking)\n* [Transportation](#transportation)\n* [URL Shorteners](#url-shorteners)\n* [Vehicle](#vehicle)\n* [Video](#video)\n* [Weather](#weather)\n<br >\n\n### Animals\nAPI | Description | Auth | HTTPS | CORS \n|:---|:---|:---|:---|:---|\n| [AdoptAPet](https://www.adoptapet.com/public/apis/pet_list.html) | Resource to help get pets adopted | `apiKey` | Yes | Yes |\n| [Axolotl](https://theaxolotlapi.netlify.app/) | Collection of axolotl pictures and facts | No | Yes | No |\n| [Cat Facts](https://alexwohlbruck.github.io/cat-facts/) | Daily cat facts | No | Yes | No | |\n| [Cat Facts](https://catfact.ninja/) | Random cat facts | No | Yes | Yes |\n| [Cataas](https://cataas.com/) | Cat as a service (cats pictures and gifs) | No | Yes | No |\n| [Cats](https://docs.thecatapi.com/) | Pictures of cats from Tumblr | `apiKey` | Yes | No |\n| [Dog Facts](https://dukengn.github.io/Dog-facts-API/) | Random dog facts | No | Yes | Yes |\n| [Dog Facts](https://kinduff.github.io/dog-api/) | Random facts of Dogs | No | Yes | Yes |\n| [Dogs](https://dog.ceo/dog-api/) | Based on the Stanford Dogs Dataset | No | Yes | Yes |\n| [eBird](https://documenter.getpostman.com/view/664302/S1ENwy59) | Retrieve recent or notable birding observations within a region | `apiKey` | Yes | No |\n| [FishWatch](https://www.fishwatch.gov/developers) | Information and pictures about individual fish species | No | Yes | Yes |\n| [HTTP Cat](https://http.cat/) | Cat for every HTTP Status | No | Yes | Yes |\n| [HTTP Dog](https://http.dog/) | Dogs for every HTTP response status code | No | Yes | Yes |\n| [IUCN](http://apiv3.iucnredlist.org/api/v3/docs) | IUCN Red List of Threatened Species | `apiKey` | No | No |\n| [MeowFacts](https://github.com/wh-iterabb-it/meowfacts) | Get random cat facts | No | Yes | No |\n| [Movebank](https://github.com/movebank/movebank-api-doc) | Movement and Migration data of animals | No | Yes | Yes |\n| [Petfinder](https://www.petfinder.com/developers/) | Petfinder is dedicated to helping pets find homes, another resource to get pets ado",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "APILayer 统一套件现已上线！🎉 🥳",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 213,
+                "url": "https://github.com/trimstray/the-book-of-secret-knowledge",
+                "name": "trimstray/the-book-of-secret-knowledge",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                "versionId": 432,
+                "documentId": 213,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge\">\n    <img src=\"https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-secret-knowledge-preview.png\" alt=\"Master\">\n  </a>\n</p>\n\n<p align=\"center\">\"<i>Knowledge is powerful, be careful how you use it!</i>\"</p>\n\n<h4 align=\"center\">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more.</h4>\n\n<br>\n\n<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/pulls\">\n    <img src=\"https://img.shields.io/badge/PRs-welcome-brightgreen.svg?longCache=true\" alt=\"Pull Requests\">\n  </a>\n  <a href=\"LICENSE.md\">\n    <img src=\"https://img.shields.io/badge/License-MIT-lightgrey.svg?longCache=true\" alt=\"MIT License\">\n  </a>\n</p>\n\n<br>\n\n****\n\n## :notebook_with_decorative_cover: &nbsp;What is it?\n\nThis repository is a collection of various materials and tools that I use every day in my work. It contains a lot of useful information gathered in one piece. It is an invaluable source of knowledge for me that I often look back on.\n\n## :restroom: &nbsp;For whom?\n\nFor everyone, really. Here everyone can find their favourite tastes. But to be perfectly honest, it is aimed towards System and Network administrators, DevOps, Pentesters, and Security Researchers.\n\n## :information_source: &nbsp;Contributing\n\nIf you find something which doesn't make sense, or something doesn't seem right, please make a pull request and please add valid and well-reasoned explanations about your changes or comments.\n\nA few simple rules for this project:\n\n- inviting and clear\n- not tiring\n- useful\n\nThese below rules may be better:\n\n- easy to contribute to (Markdown + HTML ...)\n- easy to find (simple TOC, maybe it's worth extending them?)\n\nUrl marked **\\*** is temporary unavailable. Please don't delete it without confirming that it has permanently expired.\n\nBefore adding a pull request, please see the **[contributing guidelines](.github/CONTRIBUTING.md)**. You should also remember about this:\n\n```diff\n+ This repository is not meant to contain everything but only good quality stuff.\n```\n\nAll **suggestions/PR** are welcome!\n\n### Code Contributors\n\nThis project exists thanks to all the people who contribute.\n\n<a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/graphs/contributors\"><img src=\"https://opencollective.com/the-book-of-secret-knowledge/contributors.svg?width=890&button=false\"></a>\n\n### Financial Contributors\n\n<p align=\"left\">\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/backers/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/sponsors/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n</p>\n\n## :newspaper: &nbsp;RSS Feed & Updates\n\nGitHub exposes an [RSS/Atom](https://github.com/trimstray/the-book-of-secret-knowledge/commits.atom) feed of the commits, which may also be useful if you want to be kept informed about all changes.\n\n## :ballot_box_with_check: &nbsp;ToDo\n\n- [ ] Add new stuff...\n- [ ] Add useful shell functions\n- [ ] Add one-liners for collection tools (eg. CLI Tools)\n- [ ] Sort order in lists\n\nNew items are also added on a regular basis.\n\n## :anger: &nbsp;Table of Contents\n\nOnly main chapters:\n\n- **[CLI Tools](#cli-tools-toc)**\n- **[GUI Tools](#gui-tools-toc)**\n- **[Web Tools](#web-tools-toc)**\n- **[Systems/Services](#systemsservices-toc)**\n- **[Networks](#networks-toc)**\n- **[Containers/Orchestration](#containersorchestration-toc)**\n- **[Manuals/Howtos/Tutorials](#manualshowtostutorials-toc)**\n- **[Inspiring Lists](#inspiring-lists-toc)**\n- **[Blogs/Podcasts/Videos](#blogspodcastsvideos-toc)**\n- **[Hacking/Penetration Testing](#hackingpenetration-testing-toc)**\n- **[Your daily knowledge and news](#your-daily-knowledge-and-news-toc)**\n- **[Other Cheat Sheets](#other-cheat-sheets-toc)**\n- **[Shell One-liners](#shell-one-liners-toc)**\n- **[Shell Tricks](#shell-tricks-toc)**\n- **[Shell Functions](#shell-functions-toc)**\n\n## :trident: &nbsp;The Book of Secret Knowledge (Chapters)\n\n#### CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents)\n\n##### :black_small_square: Shells\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/bash/\"><b>GNU Bash</b></a> - is an sh-compatible shell that incorporates useful features from the Korn shell and C shell.<br>\n&nbsp;&nbsp; <a href=\"https://www.zsh.org/\"><b>Zsh</b></a> - is a shell designed for interactive use, although it is also a powerful scripting language.<br>\n&nbsp;&nbsp; <a href=\"https://tcl-lang.org/\"><b>tclsh</b></a> - is a very powerful cross-platform shell, suitable for a huge range of uses.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/Bash-it/bash-it\"><b>bash-it</b></a> - is a framework for using, developing and maintaining shell scripts and custom commands.<br>\n&nbsp;&nbsp; <a href=\"https://ohmyz.sh/\"><b>Oh My ZSH!</b></a> - is the best framework for managing your Zsh configuration.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/oh-my-fish/oh-my-fish\"><b>Oh My Fish</b></a> - the Fishshell framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/starship/starship\"><b>Starship</b></a> - the cross-shell prompt written in Rust.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/romkatv/powerlevel10k\"><b>powerlevel10k</b></a> - is a fast reimplementation of Powerlevel9k ZSH theme.<br>\n</p>\n\n##### :black_small_square: Shell plugins\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/rupa/z\"><b>z</b></a> - tracks the folder you use the most and allow you to jump, without having to type the whole path.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/junegunn/fzf\"><b>fzf</b></a> - is a general-purpose command-line fuzzy finder.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-autosuggestions\"><b>zsh-autosuggestions</b></a> - Fish-like autosuggestions for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-syntax-highlighting\"><b>zsh-syntax-highlighting</b></a> - Fish shell like syntax highlighting for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/unixorn/awesome-zsh-plugins\"><b>Awesome ZSH Plugins</b></a> - A list of frameworks, plugins, themes and tutorials for ZSH.<br>\n</p>\n\n##### :black_small_square: Managers\n\n<p>\n&nbsp;&nbsp; <a href=\"https://midnight-commander.org/\"><b>Midnight Commander</b></a> - is a visual file manager, licensed under GNU General Public License.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/ranger/ranger\"><b>ranger</b></a> - is a VIM-inspired filemanager for the console.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jarun/nnn\"><b>nnn</b></a> - is a tiny, lightning fast, feature-packed file manager.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/screen/\"><b>screen</b></a> - is a full-screen window manager that multiplexes a physical terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tmux/tmux/wiki\"><b>tmux</b></a> - is a terminal multiplexer, lets you switch easily between several programs in one terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/peikk0/tmux-cssh\"><b>tmux-cssh</b></a> - is a tool to set comfortable and easy to use functionality tmux-sessions.<br>\n</p>\n\n##### :black_small_square: Text editors\n\n<p>\n&nbsp;&nbsp; <a href=\"http://ex-vi.sourceforge.net/\"><b>vi</b></a> - is one of the most common text editors on Unix.<br>\n&nbsp;&nbsp; <a href=\"https://www.vim.org/\"><b>vim</b></a> - is a highly configurable text editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/emacs/\"><b>emacs</b></a> - is an extensible, customizable, free/libre text editor, and more.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zyedidia/micro\"><b>micro</b></a> - is a modern and intuitive terminal-based text editor.<br>\n&nbsp;&nbsp; <a href=\"https://neovim.io/\"><b>neovim</b></a> - is a free open source, powerful, extensible and usable code editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.spacemacs.org/\"><b>spacemacs</b></a> - a community-driven Emacs distribution.<br>\n&nbsp;&nbsp; <a href=\"https://spacevim.org/\"><b>spacevim</b></a> - a community-driven vim distribution.<br>\n</p>\n\n##### :black_small_square: Files and directories\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/sharkdp/fd\"><b>fd</b></a> - is a simple, fast and user-friendly alternative to find.<br>\n&nbsp;&nbsp; <a href=\"https://dev.yorhel.nl/ncdu\"><b>ncdu</b></a> - is an easy to use, fast disk usage analyzer.<br>\n</p>\n\n##### :black_small_square: Network\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.putty.org/\"><b>PuTTY</b></a> - is an SSH and telnet client, developed originally by Simon Tatham.<br>\n&nbsp;&nbsp; <a href=\"https://mosh.org/\"><b>Mosh</b></a> - is a SSH wrapper designed to keep a SSH session alive over a volatile connection.<br>\n&nbsp;&nbsp; <a href=\"https://eternalterminal.dev/\"><b>Eternal Terminal</b></a> - enables mouse-scrolling and tmux commands inside the SSH session.<br>\n&nbsp;&nbsp; <a href=\"https://nmap.org/\"><b>nmap</b></a> - is a free and open source (license) utility for network discovery and security auditing.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zmap/zmap\"><b>zmap</b></a> - is a fast single packet network scanner designed for Internet-wide network surveys.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/RustScan/RustScan\"><b>Rust Scan</b></a> - to find all open ports faster than Nmap.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/robertdavidgraham/masscan\"><b>masscan</b></a> - is the fastest Internet port scanner, spews SYN packets asynchronously.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/gvb84/pbscan\"><b>pbscan</b></a> - is a faster and more efficient stateless SYN scanner and banner grabber.<br>\n&nbsp;&nbsp; <a href=\"http://www.hping.org/\"><b>hping</b></a> - is a command-line oriented TCP/IP packet assembler/analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/traviscross/mtr\"><b>mtr</b></a> - is a tool that combines the functionality of the 'traceroute' and 'ping' programs in a single tool.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mehrdadrad/mylg\"><b>mylg</b></a> - utility which combines the functions of the different network probes in one diagnostic tool.<br>\n&nbsp;&nbsp; <a href=\"http://netcat.sourceforge.net/\"><b>netcat</b></a> - utility which reads and writes data across network connections, using the TCP/IP protocol.<br>\n&nbsp;&nbsp; <a href=\"http://www.dest-unreach.org/socat/\"><b>socat</b></a> - utility which transfers data between two objects.<br>\n&nbsp;&nbsp; <a href=\"https://www.tcpdump.org/\"><b>tcpdump</b></a> - is a powerful command-line packet analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://www.wireshark.org/docs/man-pages/tshark.html\"><b>tshark</b></a> - is a tool that allows us to dump and analyze network traffic (wireshark cli).<br>\n&nbsp;&nbsp; <a href=\"https://termshark.io/\"><b>Termshark</b></a> - is a simple terminal user-interface for tshark.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jpr5/ngrep\"><b>ngrep</b></a> - is like GNU grep applied to the network layer.<br>\n&nbsp;&nbsp; <a href=\"http://netsniff-ng.org/\"><b>netsniff-ng</b></a> - is a Swiss army knife for your daily Linux network plumbing if you will.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mechpen/sockdump\"><b>sockdump</b></a> - dump unix domain socket traffic.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/google/stenographer\"><b>stenographer</b></a> - is a packet capture solution which aims to quickly spool all packets to disk.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/sachaos/tcpterm\"><b>tcpterm</b></a> - visualize packets in TUI.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tgraf/bmon\"><b>bmon</b></a> - is a monitoring and debugging tool to capture networking related statistics and prepare them visually.<br>\n&nbsp;&nbsp; <a href=\"http://iptraf.seul.org/2.6/manual",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "trimstray/the-book-of-secret-knowledge",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 22,
+                "url": "https://github.com/browserless/browserless",
+                "name": "browserless/browserless",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"browserless\", \"chrome\", \"docker\", \"firefox\", \"nodejs\", \"playwright\", \"puppeteer\", \"typescript\", \"webkit\", \"websocket\"]",
+                "archived": false,
+                "duration": "2-5天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:22",
+                "techStack": "TypeScript,Playwright",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。",
+                "beginnerScore": 83,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": true,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 11,
+                "url": "https://github.com/BetterWright/betterwright",
+                "name": "BetterWright/betterwright",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[]",
+                "archived": false,
+                "duration": "4-8天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:11",
+                "techStack": "TypeScript,Playwright",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。",
+                "beginnerScore": 79,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "基于 Playwright 的工程化应用，适合学习浏览器自动化、安全存储和策略引擎，功能拆分清晰，可逐个攻破。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": true,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 364,
+                "url": "https://github.com/leereilly/games",
+                "name": "leereilly/games",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "leereilly/games",
+                "versionId": 583,
+                "documentId": 364,
+                "importable": false,
+                "catalogText": "# GitHub 上的游戏 <img src=\"http://i.imgur.com/Cj4rMrS.gif\" height=\"40\" alt=\"游泳的章鱼猫\" title=\"GitHub 上的游戏\">\n\n**📦 归档通知：**\n\n2012年，这个项目起源于一个 [收集酷炫开源游戏的 Hacker News 帖子](https://news.ycombinator.com/item?id=3438505)。那时候，GitHub 更像是游戏的“墓地”，而不是它们繁荣发展的地方。快进到今天，情况已经截然不同：我们现在拥有一个充满活力的游戏开发者社区，他们构建引擎、制作 Game Jam 作品，并与世界分享创意实验。\n\n多年来，这个仓库成为了 GitHub 上最受关注的开源游戏合集之一，吸引了超过 100 位开发者贡献，展示了数千个项目。看着一个简单的列表演变成一个社区资源，并成为开源游戏发展历程的一个缩影，这让我感到非常谦卑。\n\n我现在正式将这个仓库归档。非常感谢每一位提交了游戏、插件、地图、修改版和其他宝藏的朋友。你们让这一切变得真正特别 <3\n\n老实说：一个单独的 Markdown 文件从来都不是管理数百个游戏的最佳数据库。😉\n\n干杯，<br>\nLee 🍻\n\n-------\n\n# 目录\n\n- [浏览器游戏](#user-content-browser-based)\n  - [棋盘游戏](#user-content-boardgame)\n  - [街机游戏](#user-content-arcade)\n  - [FPS](#user-content-fps)\n  - [RPG](#user-content-rpg)\n  - [MMORPG](#user-content-mmorpg)\n  - [策略游戏](#user-content-strategy)\n  - [竞速游戏](#user-content-racing)\n  - [沙盒游戏](#user-content-sandbox)\n  - [益智游戏](#user-content-puzzle)\n  - [点击游戏](#user-content-clicker)\n  - [点击式冒险游戏](#user-content-point-and-click)\n  - [其他](#user-content-others)\n- [原生游戏](#user-content-native)\n  - [动作游戏](#user-content-action-1)\n  - [街机游戏](#user-content-arcade-1)\n  - [FPS](#user-content-fps-1)\n  - [MMORPG](#user-content-mmorpg-1)\n  - [RPG](#user-content-rpg-1)\n  - [平台游戏](#user-content-platform)\n  - [益智/卡牌/棋盘游戏](#user-content-puzzlecardboard)\n  - [编程游戏](#user-content-programming)\n  - [沙盒游戏](#user-content-sandbox-1)\n  - [策略游戏](#user-content-strategy-1)\n- [移动游戏](#user-content-mobile-games)\n  - [Android](#user-content-android)\n  - [IOS](#user-content-ios)\n- [聊天机器人](#chat-bots)\n- [仅源代码](#user-content-just-the-source)\n- [框架/引擎/库](#user-content-frameworksengineslibraries)\n- [地图/修改版/插件/工具/所有这一切™](#user-content-mapshackspluginsutilitiesall-of-the-things)\n\n-------\n\n# 浏览器游戏\n\n## 棋盘游戏\n\n* [3D Hartwing 国际象棋套装](https://github.com/juliangarnier/3D-Hartwig-chess-set) - 使用 HTML/CSS/JS 制作的 3D 国际象棋游戏。[立即游玩！](http://codepen.io/juliangarnier/full/BsIih)\n* [c4](https://github.com/kenrick95/c4) - 四子棋游戏，带有 AI，使用 HTML/CSS/JS 制作。[立即游玩！](https://kenrick95.github.io/c4/demo/)\n* [Desperate Gods](https://github.com/David20321/FTJ) - 免费的在线棋盘游戏，设计理念是像现实中的棋盘游戏一样游玩：电脑不强制执行任何规则。[立即游玩！](http://www.wolfire.com/desperate-gods)\n* [Green Mahjong](https://github.com/danbeck/green-mahjong) - 使用 HTML/CSS/JS 制作的纸牌麻将游戏。\n* [Kriegspiel](https://github.com/binarymax/kriegspiel) - 不完整信息游戏，Kriegspiel 国际象棋变体。\n* [Lichess](https://github.com/ornicar/lila) - 使用 HTML5 和 websockets 的免费国际象棋游戏，使用 Scala、Play 2.1、MongoDB 和 Elasticsearch 构建。[立即游玩！](http://lichess.org/)\n\n## 街机游戏\n\n* [Alge's Escapade](https://github.com/Dave-and-Mike/game-off-2012) - HTML5、JavaScript、GameJs 街机游戏，你控制一个藻类。[立即游玩！](http://dave-and-mike.github.io/game-off-2012/)\n* [Alien Invasion](https://github.com/cykod/AlienInvasion) - 移动 HTML5 游戏开发的演示游戏。[立即游玩！](http://cykod.github.io/AlienInvasion/)\n* [Arashi](https://github.com/stephank/arashi-js) - Arashi 是街机游戏 Tempest 的克隆版。[立即游玩！](h",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "GitHub 上的游戏 <img src=\"http://i.imgur.com/Cj4rMrS.gif\" height=\"40\" alt=\"游泳的章鱼猫\" title=\"GitHub 上的游戏\">",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 429,
+                "url": "https://github.com/Stirling-Tools/Stirling-PDF",
+                "name": "Stirling-Tools/Stirling-PDF",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "Stirling-Tools/Stirling-PDF",
+                "versionId": 648,
+                "documentId": 429,
+                "importable": false,
+                "catalogText": "<p align=\"center\"><img src=\"https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/main/docs/stirling.png\" width=\"80\"></p>\n<h1 align=\"center\">Stirling-PDF</h1>\n\n[![Docker Pulls](https://img.shields.io/docker/pulls/frooodle/s-pdf)](https://hub.docker.com/r/frooodle/s-pdf)\n[![Discord](https://img.shields.io/discord/1068636748814483718?label=Discord)](https://discord.gg/HYmhKj45pU)\n[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Stirling-Tools/Stirling-PDF/badge)](https://scorecard.dev/viewer/?uri=github.com/Stirling-Tools/Stirling-PDF)\n[![GitHub Repo stars](https://img.shields.io/github/stars/stirling-tools/stirling-pdf?style=social)](https://github.com/Stirling-Tools/stirling-pdf)\n\n<a href=\"https://www.producthunt.com/posts/stirling-pdf?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-stirling&#0045;pdf\" target=\"_blank\"><img src=\"https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=641239&theme=light\" alt=\"Stirling&#0032;PDF - Open&#0032;source&#0032;locally&#0032;hosted&#0032;web&#0032;PDF&#0032;editor | Product Hunt\" style=\"width: 250px; height: 54px;\" width=\"250\" height=\"54\" /></a>\n[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/Stirling-Tools/Stirling-PDF/tree/digitalOcean&refcode=c3210994b1af)\n\n[Stirling-PDF](https://www.stirlingpdf.com) 是一个强大的、本地托管的、基于 Web 的 PDF 操作工具，使用 Docker。它使您能够对 PDF 文件执行各种操作，包括拆分、合并、转换、重新组织、添加图像、旋转、压缩等。这个本地托管的 Web 应用程序已经发展成为一个功能全面的工具集，可满足您所有的 PDF 需求。\n\n所有文件和 PDF 要么仅存在于客户端，要么仅在任务执行期间驻留在服务器内存中，要么在执行任务时临时存储在文件中。用户下载的任何文件届时都将从服务器上删除。\n\n主页：[https://stirlingpdf.com](https://stirlingpdf.com)\n\n所有文档可在 [https://docs.stirlingpdf.com/](https://docs.stirlingpdf.com/) 获取。\n\n![stirling-home](images/stirling-home.jpg)\n\n## 功能特性\n\n- 并行文件处理和下载\n- 暗色模式支持\n- 自定义下载选项\n- 自定义“管道”以自动化队列运行多个功能\n- 提供 API 以便与外部脚本集成\n- 可选的登录和身份验证支持（参见[文档](https://docs.stirlingpdf.com/Advanced%20Configuration/System%20and%20Security)）\n- 企业特性如 SSO（参见[文档](https://docs.stirlingpdf.com/Advanced%20Configuration/Single%20Sign-On%20Configuration)）\n- 数据库备份和导入（参见[文档](https://docs.stirlingpdf.com/Advanced%20Configuration/DATABASE)）\n\n### 50+ 项 PDF 操作\n\n#### 整理\n- **PDF 多功能工具**：通过单一仪表板访问合并、旋转、重新排列、拆分和删除操作\n- **合并**：将多个 PDF 合并为一个\n- **拆分**：将 PDF 拆分为多个文件\n- **提取页面**：从 PDF 中提取特定页面\n- **删除**：删除 PDF 中的页面\n- **裁剪 PDF**：调整 PDF 页面边界\n- **旋转**：以 90 度增量旋转页面\n- **调整页面大小/缩放**：调整页面内容大小\n- **多页布局**：将多个页面添加到 PDF 中\n- **PDF 转单一大页面**：转换为单个连续页面\n- **整理**：重新排列 PDF 页面\n\n#### 转换为 PDF\n- **图像转 PDF**：将图像转换为 PDF 格式\n- **文件转 PDF**：将各种常见文件类型转换为 PDF\n- **URL/网站转 PDF**：将实时网页捕获为 PDF\n- **HTML 转 PDF**：将 HTML 文档转换为 PDF\n- **Markdown 转 PDF**：将 Markdown 文件转换为 PDF\n- **CBZ 转 PDF**：转换漫画书存档\n- **CBR 转 PDF**：转换漫画书 RAR 存档\n- **电子邮件转 PDF**：将电子邮件文件转换为 PDF\n- **电子书转 PDF**：转换电子书格式（EP",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Stirling-Tools/Stirling-PDF",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 271,
+                "url": "https://github.com/LearningCircuit/local-deep-research",
+                "name": "LearningCircuit/local-deep-research",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "LearningCircuit/local-deep-research",
+                "versionId": 490,
+                "documentId": 271,
+                "importable": false,
+                "catalogText": "# 本地深度研究\n\n<div align=\"center\">\n\n[![GitHub 星标](https://img.shields.io/github/stars/LearningCircuit/local-deep-research?style=for-the-badge)](https://github.com/LearningCircuit/local-deep-research/stargazers)\n[![Docker 拉取次数](https://img.shields.io/docker/pulls/localdeepresearch/local-deep-research?style=for-the-badge)](https://hub.docker.com/r/localdeepresearch/local-deep-research)\n[![PyPI 下载量](https://img.shields.io/pypi/dm/local-deep-research?style=for-the-badge)](https://pypi.org/project/local-deep-research/)\n\n[![Trendshift](https://trendshift.io/api/badge/repositories/14116)](https://trendshift.io/repositories/14116)\n\n[![提交](https://img.shields.io/github/commit-activity/m/LearningCircuit/local-deep-research?style=for-the-badge)](https://github.com/LearningCircuit/local-deep-research/commits/main)\n[![最后提交](https://img.shields.io/github/last-commit/LearningCircuit/local-deep-research?style=for-the-badge)](https://github.com/LearningCircuit/local-deep-research/commits/main)\n\n[![SimpleQA 准确率](https://img.shields.io/badge/SimpleQA-~95%25_准确率-gold?style=for-the-badge)](https://huggingface.co/datasets/local-deep-research/ldr-benchmarks)\n[![SQLCipher](https://img.shields.io/badge/数据库-SQLCipher_加密-red?style=for-the-badge&logo=sqlite&logoColor=white)](docs/SQLCIPHER_INSTALL.md)\n\n<!-- 访问者会认识到的知名安全扫描工具 -->\n[![OpenSSF 记分卡](https://api.securityscorecards.dev/projects/github.com/LearningCircuit/local-deep-research/badge)](https://securityscorecards.dev/viewer/?uri=github.com/LearningCircuit/local-deep-research)\n[![CodeQL](https://github.com/LearningCircuit/local-deep-research/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/LearningCircuit/local-deep-research/security/code-scanning)\n[![Semgrep](https://github.com/LearningCircuit/local-deep-research/actions/workflows/semgrep.yml/badge.svg?branch=main)](https://github.com/LearningCircuit/local-deep-research/actions/workflows/semgrep.yml)\n\n[![🔧 预提交](https://github.com/LearningCircuit/local-deep-research/actions/workflows/pre-commit.yml/badge.svg?branch=main)](https://github.com/LearningCircuit/local-deep-research/actions/workflows/pre-commit.yml)\n\n[![🐳 Docker 发布](https://github.com/LearningCircuit/local-deep-research/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/LearningCircuit/local-deep-research/actions/workflows/docker-publish.yml)\n[![📦 PyPI 发布](https://github.com/LearningCircuit/local-deep-research/actions/workflows/publish.yml/badge.svg)](https://github.com/LearningCircuit/local-deep-research/actions/workflows/publish.yml)\n\n[![Discord](https://img.shields.io/discord/1352043059562680370?style=for-the-badge&logo=discord)](https://discord.gg/ttcqQeFcJ3)\n[![Reddit](https://img.shields.io/badge/Reddit-r/LocalDeepResearch-FF4500?style=for-the-badge&logo=reddit)](https://www.reddit.com/r/LocalDeepResearch/)\n[![YouTube](https://img.shields.io/badge/YouTube-频道-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/@local-deep-research)\n\n**AI 驱动的研究助手，用于深度、智能体式研究**\n\n*使用多个大语言模型和搜索引擎进行深度智能体研究，并附有正确引用*\n\n🧪 **首个开源项目——在单张 RTX 3090 上完全本地运行（Qwen3.6-27B）——在本地硬件上报告了约 95% 的 SimpleQA（n=500）和 77% 的 xbench-DeepSearch（n=100）成绩。** 详情见 [r/LocalLLaMA 公告](https://www.reddit.com/r/LocalLLaMA/comments/1t1n6o8/we_are_finally_there_qwen3627b_agentic_search_957/) 和[基准数据集](https://huggingface.co/datasets/local-deep-research/ldr-benchmarks)。\n\n<a href=\"https://www.youtube.com/watch?v=pfxgLX-MxMY&t=1999\">\n  ▶️ 观看 The Art Of The Terminal 的评测\n</a>\n\n</div>\n\n## 🚀 什么是本地深度研究？\n\n由你掌控的 AI 研究助手。本地运行以保护隐私，使用任何大语言模型，构建你自己的可搜索知识库。你拥有你的数据，并清楚了解其工作方式。\n\n## ⚡ 快速开始",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "本地深度研究",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 234,
+                "url": "https://github.com/soulfiremc-com/SoulFire",
+                "name": "soulfiremc-com/SoulFire",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 75,
+                "archived": false,
+                "duration": "高级（约 110 小时）",
+                "language": "Java",
+                "mainRisks": "AGPL-3.0 强版权许可，可能限制衍生作品用途；项目缺乏快速入门，首次搭建可能会消耗较多时间；Minecraft 生态与通常的 AI 职位关联度较低，需要刻意包装其工程通用性。",
+                "sourceRef": "career:234",
+                "techStack": "Java",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "高级 Minecraft 机器人工具，可部署自动化机器人用于服务器测试、自动化和开发。使用 Java 构建。",
+                "proofPoints": "完备的测试、CI 与发布自动化；支持 Docker 和部署产物；AGPL-3.0 许可；open issues 较少（16），代码相对稳定。",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "展现你在大规模自动化机器人调度、Java 系统开发和游戏服务器生态中的实战能力。在 AI 全栈与后端工程方向上提供一个独特的分布式自动化案例。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "如何设计可扩展的机器人行为树与任务调度；Java 在高并发 Bot 管理中的内存模型和线程安全；AGPL 许可证对商业使用的限制；为什么选择 Minecraft 作为自动化测试平台；低延迟命令执行的设计。",
+                "requiresSecrets": false,
+                "modificationPlan": "1) 补充缺失的快速入门（Quick Start），降低初学者门槛；2) 编写一个基于 AI 的行为决策模块（如用强化学习让 Bot 自主寻路），使项目与 AI 方向更贴近；3) 添加可视化控制台或 Web 管理界面，增强作品集的展示效果；4) 录制自动化演示视频，在简历作品中直接呈现。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 387,
+                "url": "https://github.com/browser-use/browser-use",
+                "name": "browser-use/browser-use",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "browser-use/browser-use",
+                "versionId": 606,
+                "documentId": 387,
+                "importable": false,
+                "catalogText": "<picture>\n  <source media=\"(prefers-color-scheme: light)\" srcset=\"https://github.com/user-attachments/assets/2ccdb752-22fb-41c7-8948-857fc1ad7e24\">\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://github.com/user-attachments/assets/774a46d5-27a0-490c-b7d0-e65fcbbfa358\">\n  <img alt=\"在浅色模式下显示黑色 Browser Use 标志，深色模式下显示白色。\" src=\"https://github.com/user-attachments/assets/2ccdb752-22fb-41c7-8948-857fc1ad7e24\"  width=\"full\">\n</picture>\n\n<div align=\"center\">\n    <picture>\n    <source media=\"(prefers-color-scheme: light)\" srcset=\"https://github.com/user-attachments/assets/9955dda9-ede3-4971-8ee0-91cbc3850125\">\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://github.com/user-attachments/assets/6797d09b-8ac3-4cb9-ba07-b289e080765a\">\n    <img alt=\"AI 浏览器代理。\" src=\"https://github.com/user-attachments/assets/9955dda9-ede3-4971-8ee0-91cbc3850125\"  width=\"400\">\n    </picture>\n</div>\n\n<div align=\"center\">\n<a href=\"https://cloud.browser-use.com?utm_source=github&utm_medium=readme-badge-downloads\"><img src=\"https://media.browser-use.tools/badges/package\" height=\"48\" alt=\"Browser-Use 包下载统计\"></a>\n</div>\n\n---\n\n<div align=\"center\">\n<a href=\"#demos\"><img src=\"https://media.browser-use.tools/badges/demos\" alt=\"演示\"></a>\n<img width=\"16\" height=\"1\" alt=\"\">\n<a href=\"https://docs.browser-use.com\"><img src=\"https://media.browser-use.tools/badges/docs\" alt=\"文档\"></a>\n<img width=\"16\" height=\"1\" alt=\"\">\n<a href=\"https://browser-use.com/posts\"><img src=\"https://media.browser-use.tools/badges/blog\" alt=\"博客\"></a>\n<img width=\"16\" height=\"1\" alt=\"\">\n<a href=\"https://browsermerch.com\"><img src=\"https://media.browser-use.tools/badges/merch\" alt=\"周边\"></a>\n<img width=\"100\" height=\"1\" alt=\"\">\n<a href=\"https://github.com/browser-use/browser-use\"><img src=\"https://media.browser-use.tools/badges/github\" alt=\"Github 星标\"></a>\n<img width=\"4\" height=\"1\" alt=\"\">\n<a href=\"https://x.com/intent/user?screen_name=browser_use\"><img src=\"https://media.browser-use.tools/badges/twitter\" alt=\"Twitter\"></a>\n<img width=\"4\" height=\"1\" alt=\"\">\n<a href=\"https://link.browser-use.com/discord\"><img src=\"https://media.browser-use.tools/badges/discord\" alt=\"Discord\"></a>\n<img width=\"4\" height=\"1\" alt=\"\">\n<a href=\"https://cloud.browser-use.com?utm_source=github&utm_medium=readme-badge-cloud\"><img src=\"https://media.browser-use.tools/badges/cloud\" height=\"48\" alt=\"Browser-Use 云服务\"></a>\n</div>\n\n</br>\n\n🌤️ 想跳过安装配置？使用我们的<b>[云服务](https://cloud.browser-use.com?utm_source=github&utm_medium=readme-skip-setup)</b>，获得更快速、可扩展且具有隐身能力的浏览器自动化！\n\n# 🤖 LLM 快速入门\n\n1. 让你最喜欢的编程代理（Cursor、Claude Code 等）指向 [Agents.md](https://docs.browser-use.com/llms-full.txt)\n2. 然后即可开始提示！\n\n<br/>\n\n# 👋 面向人类的快速入门\n\nBrowser Use 0.13 引入了一个全新的 Beta 代理，其核心由 Rust 引擎驱动，并配备了一个专为当前前沿模型打造的浏览器运行环境。它为模型提供了真实的浏览器/计算机操作空间、持久化工具，以及受编程代理启发的恢复循环。\n\n```text\nPython API -> Rust 核心 -> 浏览器运行环境 -> Web 任务完成\n```\n\n**1. 安装带原生核心运行时的 Browser Use（Python>=3.11）：**\n```bash\nuv add \"browser-use[core]\"\n# 或: pip install \"browser-use[core]\"\nbrowser\n```\n\n`[core]` 附加项会为你的平台安装原生 Browser Use 运行时。\n\n**2. [可选] 从 [Browser Use 云服务](https://cloud.browser-use.com/new-api-key?utm_source=github&utm_medium=readme-quickstart-api-key) 获取你的 API 密钥：**\n```\n# .env\nBROWSER_USE_API_KEY=your-key\n# GOOGLE_API_KEY=your-key\n# ANTHROPIC_API_KEY=your-key\n```\n\n**3. 运行你的第一个代理：**\n\n**Browser Use 终端：** \n```bash\nuv add \"browser-use[core]\"\nbrowser\n```\n\n**Python 脚本：**\n```python\nfrom browser_use.beta import Agent, BrowserProfile, ChatBrowserUse\n# from browser_use.beta import ChatOpenAI  # ChatOpenAI(model='gpt-5.5')\n# from browser_use.beta import Cha",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "🤖 LLM 快速入门",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "浏览器自动化 浏览器自动化 browser automation web automation",
+              "topic": [
+                "浏览器自动化"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "浏览器自动化",
+              "candidates": [
+                {
+                  "key": "BEGINNER_PROJECT:53",
+                  "purpose": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。"
+                },
+                {
+                  "key": "CAREER_PROJECT:228",
+                  "purpose": "AI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:386",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Gemini CLI\n\n[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)\n[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)\n[![版本](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)\n[![许可证](https://img.shields.io/github/license/google-gemini/gemini-cli)](h"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:70",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # APILayer Unified Suite in now Live! 🎉 🥳\n\n[APILayer unified suite](https://apilayer.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo) allows you to integrate production-grade REST APIs using **One Account, One Dashboard, and One API key.** Whether you need to geocode an address, validate an email, fetch a flight, pull stock market data, or scrape a search result.\n\n[Sign up](https://app.apilayer.com?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo) and start building today!\n\nFork our official [APILayer Postman C"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:213",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge\">\n    <img src=\"https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-secret-knowledge-preview.png\" alt=\"Master\">\n  </a>\n</p>\n\n<p align=\"center\">\"<i>Knowledge is powerful, be careful how you use it!</i>\"</p>\n\n<h4 align=\"center\">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more.</h4>\n\n<br>\n\n<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/p"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:22",
+                  "purpose": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:11",
+                  "purpose": "一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:364",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # GitHub 上的游戏 <img src=\"http://i.imgur.com/Cj4rMrS.gif\" height=\"40\" alt=\"游泳的章鱼猫\" title=\"GitHub 上的游戏\">\n\n**📦 归档通知：**\n\n2012年，这个项目起源于一个 [收集酷炫开源游戏的 Hacker News 帖子](https://news.ycombinator.com/item?id=3438505)。那时候，GitHub 更像是游戏的“墓地”，而不是它们繁荣发展的地方。快进到今天，情况已经截然不同：我们现在拥有一个充满活力的游戏开发者社区，他们构建引擎、制作 Game Jam 作品，并与世界分享创意实验。\n\n多年来，这个仓库成为了 GitHub 上最受关注的开源游戏合集之一，吸引了超过 100 位开发者贡献，展示了数千个项目。看着一个简单的列表演变成一个社区资源，并成为开源游戏发展历程的一个缩影，这让我感到非常谦卑。\n\n我现在正式将这个仓库归档。非常感谢每一位提交了游戏、插件、地图、修改版和其他宝藏的朋友。你们让这一切变得真正特别 <3\n\n老实说：一个单独的 Markdown 文件从来都不是管理数百个游戏的最佳数据库。😉\n\n干杯，<br>\nLee 🍻\n\n-------\n\n# 目录\n\n- [浏览器"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:429",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <p align=\"center\"><img src=\"https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/main/docs/stirling.png\" width=\"80\"></p>\n<h1 align=\"center\">Stirling-PDF</h1>\n\n[![Docker Pulls](https://img.shields.io/docker/pulls/frooodle/s-pdf)](https://hub.docker.com/r/frooodle/s-pdf)\n[![Discord](https://img.shields.io/discord/1068636748814483718?label=Discord)](https://discord.gg/HYmhKj45pU)\n[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Stirling-Tools/Stirling-PDF/badge)](https://scorecard.dev/viewer/?uri=github.com/Stirling-Tools/Stirling-"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:271",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 本地深度研究\n\n<div align=\"center\">\n\n[![GitHub 星标](https://img.shields.io/github/stars/LearningCircuit/local-deep-research?style=for-the-badge)](https://github.com/LearningCircuit/local-deep-research/stargazers)\n[![Docker 拉取次数](https://img.shields.io/docker/pulls/localdeepresearch/local-deep-research?style=for-the-badge)](https://hub.docker.com/r/localdeepresearch/local-deep-research)\n[![PyPI 下载量](https://img.shields.io/pypi/dm/local-deep-research?style=for-the-badge)](https://pypi.org/project/local-deep-research/)\n\n[![Trendshift](https://trendshift.io/api/badg"
+                },
+                {
+                  "key": "CAREER_PROJECT:234",
+                  "purpose": "高级 Minecraft 机器人工具，可部署自动化机器人用于服务器测试、自动化和开发。使用 Java 构建。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:387",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <picture>\n  <source media=\"(prefers-color-scheme: light)\" srcset=\"https://github.com/user-attachments/assets/2ccdb752-22fb-41c7-8948-857fc1ad7e24\">\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://github.com/user-attachments/assets/774a46d5-27a0-490c-b7d0-e65fcbbfa358\">\n  <img alt=\"在浅色模式下显示黑色 Browser Use 标志，深色模式下显示白色。\" src=\"https://github.com/user-attachments/assets/2ccdb752-22fb-41c7-8948-857fc1ad7e24\"  width=\"full\">\n</picture>\n\n<div align=\"center\">\n    <picture>\n    <source media=\"(prefers-color-scheme: light)\" srcset=\"https://github.com/us"
+                }
+              ]
+            },
+            "verdict": {
+              "matches": [
+                {
+                  "key": "BEGINNER_PROJECT:53",
+                  "quote": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "CAREER_PROJECT:228",
+                  "quote": "AI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:22",
+                  "quote": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:11",
+                  "quote": "一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:387",
+                  "quote": "在浅色模式下显示黑色 Browser Use 标志，深色模式下显示白色。",
+                  "relation": "DIRECT"
+                }
+              ]
+            },
+            "accepted": {
+              "topic": "浏览器自动化",
+              "proofs": {
+                "CAREER_PROJECT:228": {
+                  "rank": 2,
+                  "quote": "AI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。",
+                  "relation": "DIRECT",
+                  "fingerprint": "c0e1af18847dc41307fbafb4636f83e802bf737c3d2ccc3f3de8390f776b3f91"
+                },
+                "BEGINNER_PROJECT:11": {
+                  "rank": 4,
+                  "quote": "一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。",
+                  "relation": "DIRECT",
+                  "fingerprint": "7be75199b801032b1b467d4250302cf9b5ab8654434cdaa910241ed497f4a542"
+                },
+                "BEGINNER_PROJECT:22": {
+                  "rank": 3,
+                  "quote": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。",
+                  "relation": "DIRECT",
+                  "fingerprint": "f053e8e5fd42882c79bd1e7e8c78625078acd29f65e986c0dbb554d2811938ff"
+                },
+                "BEGINNER_PROJECT:53": {
+                  "rank": 1,
+                  "quote": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。",
+                  "relation": "DIRECT",
+                  "fingerprint": "3fcded93a1368764fed8b9f4ec568279fa75c360386c9013985abc1d1decadcb"
+                },
+                "EXTERNAL_PROJECT:387": {
+                  "rank": 5,
+                  "quote": "在浅色模式下显示黑色 Browser Use 标志，深色模式下显示白色。",
+                  "relation": "DIRECT",
+                  "fingerprint": "2cd86fbe9cafc1f1b1d1cab5d584fc8340d0cb6c73b06454fffbb6f613c2288c"
+                }
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "browserless/browserless",
+                  "chunkId": 11929,
+                  "content": "## 适合新手的原因\nTypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                  "endOffset": 227,
+                  "sourceRef": "beginner:22",
+                  "versionId": 305,
+                  "chunkIndex": 4,
+                  "documentId": 86,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "browserless/browserless > 适合新手的原因",
+                  "startOffset": 144,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12072,
+                  "content": "## 适合新手的原因\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                  "endOffset": 211,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 4,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 适合新手的原因",
+                  "startOffset": 144,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12896,
+                  "content": "## 📄 Resources\n\n* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+                  "endOffset": 6427,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 25,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 📄 Resources",
+                  "startOffset": 6151,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12075,
+                  "content": "## 主题\n[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+                  "endOffset": 514,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 7,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 主题",
+                  "startOffset": 250,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12071,
+                  "content": "## 中文简介\n一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+                  "endOffset": 144,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 3,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 中文简介",
+                  "startOffset": 85,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12069,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 1,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "browserless/browserless",
+                  "chunkId": 11926,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:22",
+                  "versionId": 305,
+                  "chunkIndex": 1,
+                  "documentId": 86,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "browserless/browserless > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12889,
+                  "content": "</div>\n\n<p align=\"center\">\n  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TARS%20Models-yellow\" alt=\"hugging face model\" /></a>\n  <a href=\"https://npm-compare.com/@midscene/web/#timeRange=THREE_YEARS\"><img src=\"https://img.shields.io/npm/dm/@midscene/web.svg?style=flat-square&color=00a8f0\" alt=\"downloads\" /></a>\n  <a href=\"https://github.com/web-infra-dev/midscene/blob/main/LICENSE\"><img src=\"https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&color=00a8f0\" alt=\"License\" />\n  <a href=\"https://discord.gg/2JyBHxszE4\"><img src=\"https://img.shields.io/discord/1328277792730779648?style=flat-square&color=7289DA&label=Discord&logo=discord&logoColor=white\" alt=\"discord\" /></a>\n  <a href=\"https://x.com/midscene_ai\"><img src=\"https://img.shields.io/twitter/follow/midscene_ai?style=flat-square\" alt=\"twitter\" /></a>\n  <a href=\"https://deepwiki.com/web-infra-dev/midscene\">\n    <img alt=\"Ask DeepWiki.com\" src=\"https://devin.ai/assets/deepwiki-badge.png\" style=\"height: 18px; vertical-align: middle;\" />\n  </a>\n</p>\n\n",
+                  "endOffset": 2639,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 18,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > README 摘要",
+                  "startOffset": 1256,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12877,
+                  "content": "## 面试讨论点\nAI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+                  "endOffset": 371,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 6,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 面试讨论点",
+                  "startOffset": 300,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12899,
+                  "content": "## 📝 Credits\n\nWe would like to thank the following projects:\n\n- [Rsbuild](https://github.com/web-infra-dev/rsbuild) and [Rslib](https://github.com/web-infra-dev/rslib) for the build tool.\n- [UI-TARS](https://github.com/bytedance/ui-tars) for the open-source agent model UI-TARS.\n- [Qwen-VL](https://github.com/QwenLM/Qwen-VL) for the open-source multimodal model Qwen-VL.\n- [scrcpy](https://github.com/Genymobile/scrcpy) and [yume-chan](https://github.com/yume-chan) allow us to control Android devices with browser.\n- [appium-adb](https://github.com/appium/appium-adb) for the javascript bridge of adb.\n- [appium-webdriveragent](https://github.com/appium/WebDriverAgent) for the javascript operate XCTest。\n- [YADB](https://github.com/ysbing/YADB) for the yadb tool which improves the performance of text input.\n- [libnut-core](https://github.com/nut-tree/libnut-core) for the cross-platform native keyboard and mouse control.\n- [Puppeteer](https://github.com/puppeteer/puppeteer) for browser automation and control.\n- [Playwright](https://github.com/microsoft/playwright) for browser automation and control and testing.\n\n",
+                  "endOffset": 8546,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 28,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 📝 Credits",
+                  "startOffset": 7423,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "browserless/browserless",
+                  "chunkId": 11928,
+                  "content": "## 中文简介\n在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+                  "endOffset": 144,
+                  "sourceRef": "beginner:22",
+                  "versionId": 305,
+                  "chunkIndex": 3,
+                  "documentId": 86,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "browserless/browserless > 中文简介",
+                  "startOffset": 95,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12891,
+                  "content": "## Showcases\n\n* [Web Automation - Automatically register the GitHub form in a web browser and pass all field validations](https://midscenejs.com/showcases#web)\n* [iOS Automation - Meituan coffee order](https://midscenejs.com/showcases#ios)\n* [iOS Automation - Auto-like the first @midscene_ai tweet](https://midscenejs.com/showcases#ios)\n* [Android Automation - DCar: Xiaomi SU7 specs](https://midscenejs.com/showcases#android)\n* [Android Automation - Booking a hotel for Christmas](https://midscenejs.com/showcases#android)\n* [robotic arm + vision + voice for in-vehicle testing](https://midscenejs.com/showcases#community-showcases)\n\n",
+                  "endOffset": 3459,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 20,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > Showcases",
+                  "startOffset": 2823,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12874,
+                  "content": "## 项目摘要\nAI 驱动的视觉 UI 自动化工具 Midscene，支持多平台。\n\n",
+                  "endOffset": 136,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 3,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 项目摘要",
+                  "startOffset": 93,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12893,
+                  "content": "## 💡 What you can automate\n\nMidscene works anywhere you can take a screenshot — web browsers, Android, iOS, HarmonyOS, desktop apps, and [any custom interface](https://midscenejs.com/integrate-with-any-interface) — all through one API. Write automation with the JavaScript SDK or in YAML, hand it to AI agents via [Skills](https://midscenejs.com/skills), and look up every method (`aiAct`, `aiQuery`, `aiAssert`, and more) in the [API reference](https://midscenejs.com/reference/#common).\n\n",
+                  "endOffset": 5157,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 22,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 💡 What you can automate",
+                  "startOffset": 4666,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12898,
+                  "content": "## 🌟 Awesome Midscene\n\nCommunity projects that extend Midscene.js capabilities:\n\n* [midscene-ios](https://github.com/lhuanyu/midscene-ios) - iOS Mirror automation support for Midscene\n* [midscene-pc](https://github.com/Mofangbao/midscene-pc) - PC operation device for Windows, macOS, and Linux\n* [midscene-pc-docker](https://github.com/Mofangbao/midscene-pc-docker) - Docker image with Midscene-PC server pre-installed\n* [Midscene-Python](https://github.com/Python51888/Midscene-Python) - Python SDK for Midscene automation\n* [midscene-java](https://github.com/Master-Frank/midscene-java) by @Master-Frank - Java SDK for Midscene automation\n* [midscene-java](https://github.com/alstafeev/midscene-java) by @alstafeev - Java SDK for Midscene automation\n\n\n",
+                  "endOffset": 7423,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 27,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 🌟 Awesome Midscene",
+                  "startOffset": 6668,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12876,
+                  "content": "## 可证明能力\n测试充分 (tests=true)，持续集成 (ci=true)，自动化发布 (releaseAutomation=true)，大型项目规模 (size=LARGE)，79 个开放 issue。\n\n",
+                  "endOffset": 300,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 5,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 可证明能力",
+                  "startOffset": 192,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12875,
+                  "content": "## 职业价值\n证明在 AI 驱动的 UI 自动化测试方面的能力，适合 AI 基础设施与质量或全栈后端岗位。\n\n",
+                  "endOffset": 192,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 4,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 职业价值",
+                  "startOffset": 136,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12890,
+                  "content": "## 📣 Midscene Skills is here!\n\nUse [Midscene Skills](https://github.com/web-infra-dev/midscene-skills) to control any platform with [OpenClaw](https://github.com/OpenClaw/OpenClaw) \n\n",
+                  "endOffset": 2823,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 19,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 📣 Midscene Skills is here!",
+                  "startOffset": 2639,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12892,
+                  "content": "## 💡 Why Midscene\n\nMost UI automation — including AI tools that read the DOM or the accessibility tree — depends on page structure. That structure is fragile and incomplete: selectors break on every refactor, elements without semantic markup (icon-only buttons, custom controls, `<canvas>`) are invisible to it, native apps and cross-origin iframes are out of reach, and it cannot tell whether something actually looks right. Midscene works from the screenshot alone, and you describe each step in natural language:\n\n- **Less maintenance** — no selectors to chase when the UI changes.\n- **Reach every element and surface** — if a human can see it, Midscene can target it, even with no semantic annotations, on `<canvas>`, native apps, and cross-origin iframes.\n- **Assert what users actually see** — verify colors, highlights, layout, and rendered state, not just whether a DOM node exists.\n- **Two ways to test** — add Midscene to your [Playwright](https://midscenejs.com/integrate-with-playwright) / Vitest suite, or let an AI agent test autonomously via [Skills](https://midscenejs.com/skills).\n\nMidscene is built for UI testing first, but the same vision-driven engine handles any UI automation task.\n\n",
+                  "endOffset": 4666,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 21,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 💡 Why Midscene",
+                  "startOffset": 3459,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "web-infra-dev/midscene",
+                  "chunkId": 12894,
+                  "content": "## 🚀 Get started\n\n- **Write your first script** in a few minutes — [Quick start](https://midscenejs.com/quick-start).\n- **No code?** Try Midscene on any web page with the [Chrome extension](https://midscenejs.com/quick-experience).\n- **Other platforms** — getting-started guides for [Android](https://midscenejs.com/platforms/android), [iOS](https://midscenejs.com/platforms/ios), [HarmonyOS](https://midscenejs.com/platforms/harmonyos), and [desktop](https://midscenejs.com/platforms/desktop).\n\n",
+                  "endOffset": 5654,
+                  "sourceRef": "career:228",
+                  "versionId": 342,
+                  "chunkIndex": 23,
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "web-infra-dev/midscene > 🚀 Get started",
+                  "startOffset": 5157,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 58,
+              "candidateCount": 58,
+              "evidenceGroups": [
+                {
+                  "title": "browserless/browserless",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "browserless/browserless",
+                      "chunkId": 11929,
+                      "content": "## 适合新手的原因\nTypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                      "endOffset": 227,
+                      "sourceRef": "beginner:22",
+                      "versionId": 305,
+                      "chunkIndex": 4,
+                      "documentId": 86,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "browserless/browserless > 适合新手的原因",
+                      "startOffset": 144,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "browserless/browserless",
+                      "chunkId": 11926,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:22",
+                      "versionId": 305,
+                      "chunkIndex": 1,
+                      "documentId": 86,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "browserless/browserless > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "browserless/browserless",
+                      "chunkId": 11928,
+                      "content": "## 中文简介\n在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+                      "endOffset": 144,
+                      "sourceRef": "beginner:22",
+                      "versionId": 305,
+                      "chunkIndex": 3,
+                      "documentId": 86,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "browserless/browserless > 中文简介",
+                      "startOffset": 95,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:22",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "beginner:22",
+                  "documentId": 86,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "olo-dot-io/Uni-CLI",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "olo-dot-io/Uni-CLI",
+                      "chunkId": 12072,
+                      "content": "## 适合新手的原因\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                      "endOffset": 211,
+                      "sourceRef": "beginner:53",
+                      "versionId": 316,
+                      "chunkIndex": 4,
+                      "documentId": 97,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "olo-dot-io/Uni-CLI > 适合新手的原因",
+                      "startOffset": 144,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "olo-dot-io/Uni-CLI",
+                      "chunkId": 12075,
+                      "content": "## 主题\n[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+                      "endOffset": 514,
+                      "sourceRef": "beginner:53",
+                      "versionId": 316,
+                      "chunkIndex": 7,
+                      "documentId": 97,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "olo-dot-io/Uni-CLI > 主题",
+                      "startOffset": 250,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "olo-dot-io/Uni-CLI",
+                      "chunkId": 12071,
+                      "content": "## 中文简介\n一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+                      "endOffset": 144,
+                      "sourceRef": "beginner:53",
+                      "versionId": 316,
+                      "chunkIndex": 3,
+                      "documentId": 97,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "olo-dot-io/Uni-CLI > 中文简介",
+                      "startOffset": 85,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:53",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "beginner:53",
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "web-infra-dev/midscene",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "web-infra-dev/midscene",
+                      "chunkId": 12896,
+                      "content": "## 📄 Resources\n\n* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+                      "endOffset": 6427,
+                      "sourceRef": "career:228",
+                      "versionId": 342,
+                      "chunkIndex": 25,
+                      "documentId": 123,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "web-infra-dev/midscene > 📄 Resources",
+                      "startOffset": 6151,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "web-infra-dev/midscene",
+                      "chunkId": 12889,
+                      "content": "</div>\n\n<p align=\"center\">\n  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TARS%20Models-yellow\" alt=\"hugging face model\" /></a>\n  <a href=\"https://npm-compare.com/@midscene/web/#timeRange=THREE_YEARS\"><img src=\"https://img.shields.io/npm/dm/@midscene/web.svg?style=flat-square&color=00a8f0\" alt=\"downloads\" /></a>\n  <a href=\"https://github.com/web-infra-dev/midscene/blob/main/LICENSE\"><img src=\"https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&color=00a8f0\" alt=\"License\" />\n  <a href=\"https://discord.gg/2JyBHxszE4\"><img src=\"https://img.shields.io/discord/1328277792730779648?style=flat-square&color=7289DA&label=Discord&logo=discord&logoColor=white\" alt=\"discord\" /></a>\n  <a href=\"https://x.com/midscene_ai\"><img src=\"https://img.shields.io/twitter/follow/midscene_ai?style=flat-square\" alt=\"twitter\" /></a>\n  <a href=\"https://deepwiki.com/web-infra-dev/midscene\">\n    <img alt=\"Ask DeepWiki.com\" src=\"https://devin.ai/assets/deepwiki-badge.png\" style=\"height: 18px; vertical-align: middle;\" />\n  </a>\n</p>\n\n",
+                      "endOffset": 2639,
+                      "sourceRef": "career:228",
+                      "versionId": 342,
+                      "chunkIndex": 18,
+                      "documentId": 123,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "web-infra-dev/midscene > README 摘要",
+                      "startOffset": 1256,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "web-infra-dev/midscene",
+                      "chunkId": 12877,
+                      "content": "## 面试讨论点\nAI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+                      "endOffset": 371,
+                      "sourceRef": "career:228",
+                      "versionId": 342,
+                      "chunkIndex": 6,
+                      "documentId": 123,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "web-infra-dev/midscene > 面试讨论点",
+                      "startOffset": 300,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:228",
+                  "bestScore": 0.015625,
+                  "sourceRef": "career:228",
+                  "documentId": 123,
+                  "sourceType": "CAREER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "query": "浏览器自动化 项目功能 用途 实践示例 安装部署 环境依赖 限制 请推荐真实项目，想做的方向或用途是：让程序帮我打开网页、点击按钮和填写表单。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+              "projects": [
+                {
+                  "name": "olo-dot-io/Uni-CLI",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:53"
+                },
+                {
+                  "name": "web-infra-dev/midscene",
+                  "type": "CAREER_PROJECT",
+                  "sourceRef": "career:228"
+                },
+                {
+                  "name": "browserless/browserless",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:22"
+                }
+              ],
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "buildPrompt",
+          "detail": {
+            "evidence": [
+              {
+                "spans": [
+                  {
+                    "text": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 83,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "browserless/browserless",
+                "chunkId": 11929,
+                "endOffset": 227,
+                "sourceRef": "beginner:22",
+                "versionId": 305,
+                "documentId": 86,
+                "evidenceId": "E1",
+                "sectionPath": "browserless/browserless > 适合新手的原因",
+                "startOffset": 155,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 67,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "olo-dot-io/Uni-CLI",
+                "chunkId": 12072,
+                "endOffset": 211,
+                "sourceRef": "beginner:53",
+                "versionId": 316,
+                "documentId": 97,
+                "evidenceId": "E2",
+                "sectionPath": "olo-dot-io/Uni-CLI > 适合新手的原因",
+                "startOffset": 155,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 276,
+                    "startInChunk": 17
+                  }
+                ],
+                "title": "web-infra-dev/midscene",
+                "chunkId": 12896,
+                "endOffset": 6427,
+                "sourceRef": "career:228",
+                "versionId": 342,
+                "documentId": 123,
+                "evidenceId": "E3",
+                "sectionPath": "web-infra-dev/midscene > 📄 Resources",
+                "startOffset": 6168,
+                "contentStartInChunk": 17
+              },
+              {
+                "spans": [
+                  {
+                    "text": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 49,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "browserless/browserless",
+                "chunkId": 11928,
+                "endOffset": 144,
+                "sourceRef": "beginner:22",
+                "versionId": 305,
+                "documentId": 86,
+                "evidenceId": "E4",
+                "sectionPath": "browserless/browserless > 中文简介",
+                "startOffset": 103,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+                    "spanId": "E5.S1",
+                    "endInChunk": 264,
+                    "startInChunk": 6
+                  }
+                ],
+                "title": "olo-dot-io/Uni-CLI",
+                "chunkId": 12075,
+                "endOffset": 514,
+                "sourceRef": "beginner:53",
+                "versionId": 316,
+                "documentId": 97,
+                "evidenceId": "E5",
+                "sectionPath": "olo-dot-io/Uni-CLI > 主题",
+                "startOffset": 256,
+                "contentStartInChunk": 6
+              },
+              {
+                "spans": [
+                  {
+                    "text": "  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TA",
+                    "spanId": "E6.S1",
+                    "endInChunk": 427,
+                    "startInChunk": 27
+                  },
+                  {
+                    "text": "RS%20Models-yellow\" alt=\"hugging face model\" /></a>\n  <a href=\"htt",
+                    "spanId": "E6.S2",
+                    "endInChunk": 493,
+                    "startInChunk": 427
+                  }
+                ],
+                "title": "web-infra-dev/midscene",
+                "chunkId": 12889,
+                "endOffset": 1749,
+                "sourceRef": "career:228",
+                "versionId": 342,
+                "documentId": 123,
+                "evidenceId": "E6",
+                "sectionPath": "web-infra-dev/midscene > README 摘要",
+                "startOffset": 1283,
+                "contentStartInChunk": 27
+              },
+              {
+                "spans": [
+                  {
+                    "text": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+                    "spanId": "E7.S1",
+                    "endInChunk": 59,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "olo-dot-io/Uni-CLI",
+                "chunkId": 12071,
+                "endOffset": 144,
+                "sourceRef": "beginner:53",
+                "versionId": 316,
+                "documentId": 97,
+                "evidenceId": "E7",
+                "sectionPath": "olo-dot-io/Uni-CLI > 中文简介",
+                "startOffset": 93,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+                    "spanId": "E8.S1",
+                    "endInChunk": 71,
+                    "startInChunk": 9
+                  }
+                ],
+                "title": "web-infra-dev/midscene",
+                "chunkId": 12877,
+                "endOffset": 371,
+                "sourceRef": "career:228",
+                "versionId": 342,
+                "documentId": 123,
+                "evidenceId": "E8",
+                "sectionPath": "web-infra-dev/midscene > 面试讨论点",
+                "startOffset": 309,
+                "contentStartInChunk": 9
+              }
+            ],
+            "question": "请推荐真实项目，想做的方向或用途是：让程序帮我打开网页、点击按钮和填写表单。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。\n当前需求（只用于选择解释重点，不作为项目事实）：{\"goal\":\"学习\",\"experience\":\"一年编程基础\",\"topic\":[\"浏览器自动化\"]}",
+            "promptVersion": "customer-v4.13-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "validateEvidence",
+          "detail": {
+            "accepted": 8,
+            "rejected": []
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "verifyFacts",
+          "detail": {
+            "claims": [
+              {
+                "text": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。",
+                "quote": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\n\n",
+                "sourceRef": "beginner:22",
+                "sourceTitle": "browserless/browserless"
+              },
+              {
+                "text": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。",
+                "quote": "在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。\n\n",
+                "sourceRef": "beginner:22",
+                "sourceTitle": "browserless/browserless"
+              },
+              {
+                "text": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。",
+                "quote": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\n\n",
+                "sourceRef": "beginner:53",
+                "sourceTitle": "olo-dot-io/Uni-CLI"
+              },
+              {
+                "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+                "quote": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                "sourceRef": "beginner:53",
+                "sourceTitle": "olo-dot-io/Uni-CLI"
+              },
+              {
+                "text": "主题标签包含 browser-automation、cdp、chrome、automation 等，与浏览器自动化方向相关。",
+                "quote": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+                "sourceRef": "beginner:53",
+                "sourceTitle": "olo-dot-io/Uni-CLI"
+              },
+              {
+                "text": "开源、视觉驱动的 UI 测试——用自然语言编写测试，自动化任意平台。",
+                "quote": "  Open-source, vision-driven UI testing — write tests in natural language, automate any platform.\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@midscene/web\"><img src=\"https://img.shields.io/npm/v/@midscene/web?style=flat-square&color=00a8f0\" alt=\"npm version\" /></a>\n  <a href=\"https://huggingface.co/ByteDance-Seed/UI-TARS-1.5-7B\"><img src=\"https://img.shields.io/badge/UI%20TA",
+                "sourceRef": "career:228",
+                "sourceTitle": "web-infra-dev/midscene"
+              },
+              {
+                "text": "涉及 AI 视觉驱动的自动化框架原理、跨平台 UI 测试方案设计、CI/CD 集成实践等学习点。",
+                "quote": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。\n\n",
+                "sourceRef": "career:228",
+                "sourceTitle": "web-infra-dev/midscene"
+              },
+              {
+                "text": "提供文档、示例项目和 API 参考，可作为学习与实践入口。",
+                "quote": "* Documentation: [https://midscenejs.com](https://midscenejs.com/)\n* Sample projects: [midscene-example](https://github.com/web-infra-dev/midscene-example)\n* API reference: [https://midscenejs.com/reference/#common](https://midscenejs.com/reference/#common)\n\n",
+                "sourceRef": "career:228",
+                "sourceTitle": "web-infra-dev/midscene"
+              }
+            ],
+            "verdict": {
+              "supportedIds": [
+                0,
+                1,
+                2,
+                3,
+                5,
+                6,
+                7
+              ]
+            },
+            "supported": 7
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "practiceAdvice",
+          "detail": {
+            "kind": "SUGGESTION",
+            "promptVersion": "customer-v4.13-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

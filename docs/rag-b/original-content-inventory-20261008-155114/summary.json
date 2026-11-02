@@ -1,0 +1,1267 @@
+{
+  "started": "2026-10-08T15:51:14.138496+08:00",
+  "finished": "2026-10-08T15:51:19.841177+08:00",
+  "method": "All local project records scanned; local deterministic textual heuristics, no model scoring. No database mutation.",
+  "scope": {
+    "legacyAllRecords": 572,
+    "legacyProjectRecords": 476,
+    "bAllDocuments": 565,
+    "bActiveAllDocuments": 565,
+    "bActiveProjectDocuments": 469,
+    "bHistoricalVersions": {
+      "count": 1349,
+      "characters": 12932253
+    },
+    "uniqueRepositoriesAcrossProjectLayers": 533,
+    "bActiveUniqueProjectRepositories": 444,
+    "bActiveUniqueGithubRepositories": 351
+  },
+  "business": {
+    "projects": 190,
+    "uniqueRepositories": 190,
+    "status": {
+      "CANDIDATE": 136,
+      "PUBLISHED": 39,
+      "INVALID": 15
+    },
+    "readmeExcerptNonempty": 130,
+    "descriptionOriginalNonempty": 182,
+    "readmeExcerptLength": {
+      "min": 0,
+      "p50": 5947.0,
+      "p95": 12000.0,
+      "max": 12000,
+      "sum": 1128413
+    },
+    "readmeExcerptExactly6000": 0,
+    "careerProfiles": 69,
+    "careerStatus": {
+      "PUBLISHED": 62,
+      "CANDIDATE": 7
+    },
+    "eligibleBusinessProjects": 175,
+    "eligibleExternalDocuments": 363,
+    "eligibleUniqueRepositories": 511,
+    "businessLanguages": {
+      "TypeScript": 69,
+      "JavaScript": 36,
+      "Python": 31,
+      "Shell": 3,
+      "Ruby": 1,
+      "UNKNOWN": 2,
+      "Go": 6,
+      "Rust": 9,
+      "HTML": 1,
+      "Astro": 1,
+      "Clojure": 1,
+      "C++": 2,
+      "Kotlin": 1,
+      "Java": 9,
+      "C#": 1,
+      "CSS": 1,
+      "Jupyter Notebook": 1
+    },
+    "missingFieldsAmongEligible": {
+      "language": 2,
+      "duration": 86,
+      "difficulty": 0,
+      "docker": 0,
+      "database": 0,
+      "secrets": 0,
+      "gpu": 0,
+      "license": 65
+    },
+    "businessRepositoriesWithoutBProjectDocument": 82,
+    "eligibleRepositoriesWithoutBProjectDocument": 76,
+    "readmeExcerptExactly12000": 27,
+    "businessTemplateDocumentsWithEmbeddedReadme": {
+      "BEGINNER_PROJECT": 14,
+      "CAREER_PROJECT": 62
+    }
+  },
+  "groups": [
+    {
+      "layer": "A_EFFECTIVE",
+      "source": "BEGINNER_PROJECT",
+      "records": 39,
+      "nonempty": 39,
+      "characters": {
+        "min": 301,
+        "p50": 491.0,
+        "p95": 12909.6,
+        "max": 12949,
+        "sum": 145231
+      },
+      "languageHeuristic": {
+        "mixed": 25,
+        "en_dominant": 14
+      },
+      "flags": {
+        "low_noncode_explanatory_text": 7,
+        "directory_tree_present": 1
+      },
+      "withHeadings": 39,
+      "withFencedCode": 13,
+      "withTables": 9,
+      "generatedBusinessTemplate": 39,
+      "signals": {
+        "purpose_hint": 14,
+        "installation_hint": 15,
+        "usage_hint": 8,
+        "requirements_hint": 8,
+        "license_hint": 6,
+        "limitations_hint": 3,
+        "docker_mention": 2,
+        "gpu_mention": 1
+      },
+      "uniqueNonemptyNormalizedTexts": 39
+    },
+    {
+      "layer": "A_EFFECTIVE",
+      "source": "CAREER_PROJECT",
+      "records": 62,
+      "nonempty": 62,
+      "characters": {
+        "min": 1712,
+        "p50": 12598.0,
+        "p95": 12981.8,
+        "max": 13138,
+        "sum": 648577
+      },
+      "languageHeuristic": {
+        "en_dominant": 51,
+        "mixed": 11
+      },
+      "flags": {
+        "unclosed_fence": 8,
+        "directory_tree_present": 5,
+        "links_badges_html_dominant": 2
+      },
+      "withHeadings": 62,
+      "withFencedCode": 47,
+      "withTables": 34,
+      "generatedBusinessTemplate": 62,
+      "signals": {
+        "purpose_hint": 51,
+        "installation_hint": 61,
+        "usage_hint": 44,
+        "requirements_hint": 35,
+        "license_hint": 47,
+        "limitations_hint": 15,
+        "docker_mention": 31,
+        "gpu_mention": 7
+      },
+      "uniqueNonemptyNormalizedTexts": 62
+    },
+    {
+      "layer": "A_EFFECTIVE",
+      "source": "GITHUB",
+      "records": 375,
+      "nonempty": 368,
+      "characters": {
+        "min": 0,
+        "p50": 3196.0,
+        "p95": 37964.2,
+        "max": 385865,
+        "sum": 3866699
+      },
+      "languageHeuristic": {
+        "unknown": 15,
+        "mixed": 196,
+        "zh_dominant": 24,
+        "en_dominant": 140
+      },
+      "flags": {
+        "empty": 7,
+        "links_badges_html_dominant": 83,
+        "short_under_300_chars": 4,
+        "low_noncode_explanatory_text": 36,
+        "unclosed_fence": 8,
+        "no_markdown_heading": 10,
+        "fenced_code_dominant": 4,
+        "directory_tree_present": 21
+      },
+      "withHeadings": 358,
+      "withFencedCode": 199,
+      "withTables": 116,
+      "generatedBusinessTemplate": 0,
+      "signals": {
+        "purpose_hint": 225,
+        "installation_hint": 224,
+        "usage_hint": 102,
+        "requirements_hint": 108,
+        "license_hint": 108,
+        "limitations_hint": 45,
+        "docker_mention": 53,
+        "gpu_mention": 30
+      },
+      "uniqueNonemptyNormalizedTexts": 365
+    },
+    {
+      "layer": "A_EFFECTIVE",
+      "source": "JOB_POSTING",
+      "records": 95,
+      "nonempty": 95,
+      "characters": {
+        "min": 70,
+        "p50": 468.0,
+        "p95": 1119.8,
+        "max": 1546,
+        "sum": 48312
+      },
+      "languageHeuristic": {
+        "zh_dominant": 63,
+        "mixed": 32
+      },
+      "flags": {
+        "short_under_300_chars": 19,
+        "no_markdown_heading": 19,
+        "low_noncode_explanatory_text": 10
+      },
+      "withHeadings": 76,
+      "withFencedCode": 0,
+      "withTables": 4,
+      "generatedBusinessTemplate": 0,
+      "signals": {
+        "purpose_hint": 7,
+        "installation_hint": 14,
+        "usage_hint": 2,
+        "requirements_hint": 2,
+        "license_hint": 0,
+        "limitations_hint": 11,
+        "docker_mention": 0,
+        "gpu_mention": 2
+      },
+      "uniqueNonemptyNormalizedTexts": 95
+    },
+    {
+      "layer": "A_EFFECTIVE",
+      "source": "MANUAL",
+      "records": 1,
+      "nonempty": 1,
+      "characters": {
+        "min": 263,
+        "p50": 263.0,
+        "p95": 263.0,
+        "max": 263,
+        "sum": 263
+      },
+      "languageHeuristic": {
+        "mixed": 1
+      },
+      "flags": {
+        "short_under_300_chars": 1
+      },
+      "withHeadings": 1,
+      "withFencedCode": 0,
+      "withTables": 0,
+      "generatedBusinessTemplate": 0,
+      "signals": {
+        "purpose_hint": 0,
+        "installation_hint": 0,
+        "usage_hint": 0,
+        "requirements_hint": 0,
+        "license_hint": 0,
+        "limitations_hint": 0,
+        "docker_mention": 0,
+        "gpu_mention": 0
+      },
+      "uniqueNonemptyNormalizedTexts": 1
+    },
+    {
+      "layer": "BUSINESS_README_EXCERPT",
+      "source": "BEGINNER_PROJECT",
+      "records": 190,
+      "nonempty": 130,
+      "characters": {
+        "min": 0,
+        "p50": 5947.0,
+        "p95": 12000.0,
+        "max": 12000,
+        "sum": 1128413
+      },
+      "languageHeuristic": {
+        "unknown": 61,
+        "en_dominant": 117,
+        "mixed": 11,
+        "zh_dominant": 1
+      },
+      "flags": {
+        "empty": 60,
+        "directory_tree_present": 16,
+        "fenced_code_dominant": 1,
+        "unclosed_fence": 9,
+        "links_badges_html_dominant": 7,
+        "short_under_300_chars": 1,
+        "low_noncode_explanatory_text": 1
+      },
+      "withHeadings": 130,
+      "withFencedCode": 103,
+      "withTables": 72,
+      "generatedBusinessTemplate": 0,
+      "signals": {
+        "purpose_hint": 86,
+        "installation_hint": 106,
+        "usage_hint": 69,
+        "requirements_hint": 63,
+        "license_hint": 57,
+        "limitations_hint": 10,
+        "docker_mention": 20,
+        "gpu_mention": 15
+      },
+      "uniqueNonemptyNormalizedTexts": 129
+    },
+    {
+      "layer": "B_SELECTED_VERSION",
+      "source": "BEGINNER_PROJECT",
+      "records": 39,
+      "nonempty": 39,
+      "characters": {
+        "min": 301,
+        "p50": 491.0,
+        "p95": 12909.6,
+        "max": 12949,
+        "sum": 145231
+      },
+      "languageHeuristic": {
+        "mixed": 25,
+        "en_dominant": 14
+      },
+      "flags": {
+        "directory_tree_present": 1,
+        "low_noncode_explanatory_text": 7
+      },
+      "withHeadings": 39,
+      "withFencedCode": 13,
+      "withTables": 9,
+      "generatedBusinessTemplate": 39,
+      "signals": {
+        "purpose_hint": 14,
+        "installation_hint": 15,
+        "usage_hint": 8,
+        "requirements_hint": 8,
+        "license_hint": 6,
+        "limitations_hint": 3,
+        "docker_mention": 2,
+        "gpu_mention": 1
+      },
+      "uniqueNonemptyNormalizedTexts": 39
+    },
+    {
+      "layer": "B_SELECTED_VERSION",
+      "source": "CAREER_PROJECT",
+      "records": 62,
+      "nonempty": 62,
+      "characters": {
+        "min": 1712,
+        "p50": 12598.0,
+        "p95": 12981.8,
+        "max": 13138,
+        "sum": 648376
+      },
+      "languageHeuristic": {
+        "en_dominant": 51,
+        "mixed": 11
+      },
+      "flags": {
+        "directory_tree_present": 5,
+        "links_badges_html_dominant": 2,
+        "unclosed_fence": 8
+      },
+      "withHeadings": 62,
+      "withFencedCode": 47,
+      "withTables": 34,
+      "generatedBusinessTemplate": 62,
+      "signals": {
+        "purpose_hint": 51,
+        "installation_hint": 61,
+        "usage_hint": 44,
+        "requirements_hint": 35,
+        "license_hint": 47,
+        "limitations_hint": 15,
+        "docker_mention": 31,
+        "gpu_mention": 7
+      },
+      "uniqueNonemptyNormalizedTexts": 62
+    },
+    {
+      "layer": "B_SELECTED_VERSION",
+      "source": "GITHUB",
+      "records": 368,
+      "nonempty": 368,
+      "characters": {
+        "min": 5,
+        "p50": 3216.5,
+        "p95": 40121.6,
+        "max": 385865,
+        "sum": 3866699
+      },
+      "languageHeuristic": {
+        "en_dominant": 140,
+        "mixed": 196,
+        "zh_dominant": 24,
+        "unknown": 8
+      },
+      "flags": {
+        "directory_tree_present": 21,
+        "links_badges_html_dominant": 83,
+        "short_under_300_chars": 4,
+        "low_noncode_explanatory_text": 36,
+        "no_markdown_heading": 10,
+        "unclosed_fence": 8,
+        "fenced_code_dominant": 4
+      },
+      "withHeadings": 358,
+      "withFencedCode": 199,
+      "withTables": 116,
+      "generatedBusinessTemplate": 0,
+      "signals": {
+        "purpose_hint": 225,
+        "installation_hint": 224,
+        "usage_hint": 102,
+        "requirements_hint": 108,
+        "license_hint": 108,
+        "limitations_hint": 45,
+        "docker_mention": 53,
+        "gpu_mention": 30
+      },
+      "uniqueNonemptyNormalizedTexts": 365
+    },
+    {
+      "layer": "B_SELECTED_VERSION",
+      "source": "JOB_POSTING",
+      "records": 95,
+      "nonempty": 95,
+      "characters": {
+        "min": 70,
+        "p50": 468.0,
+        "p95": 1119.8,
+        "max": 1546,
+        "sum": 48312
+      },
+      "languageHeuristic": {
+        "zh_dominant": 63,
+        "mixed": 32
+      },
+      "flags": {
+        "no_markdown_heading": 19,
+        "short_under_300_chars": 19,
+        "low_noncode_explanatory_text": 10
+      },
+      "withHeadings": 76,
+      "withFencedCode": 0,
+      "withTables": 4,
+      "generatedBusinessTemplate": 0,
+      "signals": {
+        "purpose_hint": 7,
+        "installation_hint": 14,
+        "usage_hint": 2,
+        "requirements_hint": 2,
+        "license_hint": 0,
+        "limitations_hint": 11,
+        "docker_mention": 0,
+        "gpu_mention": 2
+      },
+      "uniqueNonemptyNormalizedTexts": 95
+    },
+    {
+      "layer": "B_SELECTED_VERSION",
+      "source": "MANUAL",
+      "records": 1,
+      "nonempty": 1,
+      "characters": {
+        "min": 263,
+        "p50": 263.0,
+        "p95": 263.0,
+        "max": 263,
+        "sum": 263
+      },
+      "languageHeuristic": {
+        "mixed": 1
+      },
+      "flags": {
+        "short_under_300_chars": 1
+      },
+      "withHeadings": 1,
+      "withFencedCode": 0,
+      "withTables": 0,
+      "generatedBusinessTemplate": 0,
+      "signals": {
+        "purpose_hint": 0,
+        "installation_hint": 0,
+        "usage_hint": 0,
+        "requirements_hint": 0,
+        "license_hint": 0,
+        "limitations_hint": 0,
+        "docker_mention": 0,
+        "gpu_mention": 0
+      },
+      "uniqueNonemptyNormalizedTexts": 1
+    }
+  ],
+  "activeProjectSummary": {
+    "records": 469,
+    "nonempty": 469,
+    "characters": {
+      "min": 5,
+      "p50": 3392.0,
+      "p95": 31180.6,
+      "max": 385865,
+      "sum": 4660306
+    },
+    "languageHeuristic": {
+      "mixed": 232,
+      "en_dominant": 205,
+      "zh_dominant": 24,
+      "unknown": 8
+    },
+    "flags": {
+      "directory_tree_present": 27,
+      "links_badges_html_dominant": 85,
+      "unclosed_fence": 16,
+      "low_noncode_explanatory_text": 43,
+      "short_under_300_chars": 4,
+      "no_markdown_heading": 10,
+      "fenced_code_dominant": 4
+    },
+    "withHeadings": 459,
+    "withFencedCode": 259,
+    "withTables": 159,
+    "generatedBusinessTemplate": 101,
+    "signals": {
+      "purpose_hint": 290,
+      "installation_hint": 300,
+      "usage_hint": 154,
+      "requirements_hint": 151,
+      "license_hint": 161,
+      "limitations_hint": 63,
+      "docker_mention": 86,
+      "gpu_mention": 38
+    },
+    "uniqueNonemptyNormalizedTexts": 466
+  },
+  "activeGithubSummary": {
+    "records": 368,
+    "nonempty": 368,
+    "characters": {
+      "min": 5,
+      "p50": 3216.5,
+      "p95": 40121.6,
+      "max": 385865,
+      "sum": 3866699
+    },
+    "languageHeuristic": {
+      "en_dominant": 140,
+      "mixed": 196,
+      "zh_dominant": 24,
+      "unknown": 8
+    },
+    "flags": {
+      "directory_tree_present": 21,
+      "links_badges_html_dominant": 83,
+      "short_under_300_chars": 4,
+      "low_noncode_explanatory_text": 36,
+      "no_markdown_heading": 10,
+      "unclosed_fence": 8,
+      "fenced_code_dominant": 4
+    },
+    "withHeadings": 358,
+    "withFencedCode": 199,
+    "withTables": 116,
+    "generatedBusinessTemplate": 0,
+    "signals": {
+      "purpose_hint": 225,
+      "installation_hint": 224,
+      "usage_hint": 102,
+      "requirements_hint": 108,
+      "license_hint": 108,
+      "limitations_hint": 45,
+      "docker_mention": 53,
+      "gpu_mention": 30
+    },
+    "uniqueNonemptyNormalizedTexts": 365
+  },
+  "activeIndex": [
+    {
+      "id": 4,
+      "model": "bge-m3",
+      "chunks": 8660,
+      "policy": "STRUCTURE_M3_512_768_64_V1",
+      "provider": "OLLAMA",
+      "documents": 565,
+      "dimensions": 1024,
+      "generation": "local-m3-1791424349362"
+    }
+  ],
+  "chunks": {
+    "activeAllChunks": 8660,
+    "activeProjectChunks": 8422,
+    "projectChunkCharacters": {
+      "min": 1,
+      "p50": 327.0,
+      "p95": 1622.0,
+      "max": 5415,
+      "sum": 4735286
+    },
+    "withSectionPath": 8113,
+    "indexStatus": {
+      "INDEXED": 8422
+    },
+    "tokenLength": {
+      "min": 1,
+      "p50": 116.0,
+      "p95": 601.0,
+      "max": 768,
+      "sum": 1758914
+    },
+    "under32Tokens": 1883,
+    "under64Tokens": 3024,
+    "over768Tokens": 0,
+    "byProjectSource": {
+      "BEGINNER_PROJECT": {
+        "chunks": 765,
+        "under32": 502,
+        "under64": 590
+      },
+      "CAREER_PROJECT": {
+        "chunks": 1967,
+        "under32": 811,
+        "under64": 1176
+      },
+      "GITHUB": {
+        "chunks": 5690,
+        "under32": 570,
+        "under64": 1258
+      }
+    }
+  },
+  "originComparison": {
+    "matches_legacy_original": 203,
+    "matches_legacy_content_only": 266
+  },
+  "flagExamples": {
+    "short_under_300_chars": [
+      {
+        "id": 285,
+        "repository": "abatchy17/abatchy17.github.io",
+        "characters": 5,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 162,
+        "repository": "graphif/project-graph",
+        "characters": 16,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 228,
+        "repository": "tidalcycles/strudel",
+        "characters": 98,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.6837,
+        "headings": 1
+      },
+      {
+        "id": 159,
+        "repository": "mr-bolton/billiards-engine",
+        "characters": 128,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 1
+      }
+    ],
+    "low_noncode_explanatory_text": [
+      {
+        "id": 285,
+        "repository": "abatchy17/abatchy17.github.io",
+        "characters": 5,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 162,
+        "repository": "graphif/project-graph",
+        "characters": 16,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 228,
+        "repository": "tidalcycles/strudel",
+        "characters": 98,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.6837,
+        "headings": 1
+      },
+      {
+        "id": 159,
+        "repository": "mr-bolton/billiards-engine",
+        "characters": 128,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 1
+      },
+      {
+        "id": 378,
+        "repository": "nexus-js/ui",
+        "characters": 341,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.4985,
+        "headings": 2
+      },
+      {
+        "id": 313,
+        "repository": "paveldogreat/webgl-fluid-simulation",
+        "characters": 376,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.8644,
+        "headings": 3
+      },
+      {
+        "id": 230,
+        "repository": "gridsound/daw",
+        "characters": 642,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.4393,
+        "headings": 2
+      },
+      {
+        "id": 282,
+        "repository": "nurmohammed840/extension.vsix",
+        "characters": 650,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.7246,
+        "headings": 3
+      }
+    ],
+    "fenced_code_dominant": [
+      {
+        "id": 299,
+        "repository": "georgealways/lil-gui",
+        "characters": 1473,
+        "codeRatio": 0.7115,
+        "decorationRatio": 0.2091,
+        "headings": 1
+      },
+      {
+        "id": 321,
+        "repository": "nbrosowsky/tonejs-instruments",
+        "characters": 2304,
+        "codeRatio": 0.6124,
+        "decorationRatio": 0.1024,
+        "headings": 8
+      },
+      {
+        "id": 435,
+        "repository": "navidrome/navidrome",
+        "characters": 3109,
+        "codeRatio": 1.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 372,
+        "repository": "szimek/signature_pad",
+        "characters": 3527,
+        "codeRatio": 0.6042,
+        "decorationRatio": 0.2098,
+        "headings": 7
+      }
+    ],
+    "links_badges_html_dominant": [
+      {
+        "id": 228,
+        "repository": "tidalcycles/strudel",
+        "characters": 98,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.6837,
+        "headings": 1
+      },
+      {
+        "id": 313,
+        "repository": "paveldogreat/webgl-fluid-simulation",
+        "characters": 376,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.8644,
+        "headings": 3
+      },
+      {
+        "id": 282,
+        "repository": "nurmohammed840/extension.vsix",
+        "characters": 650,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.7246,
+        "headings": 3
+      },
+      {
+        "id": 269,
+        "repository": "esphome/esphome",
+        "characters": 876,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.9909,
+        "headings": 1
+      },
+      {
+        "id": 257,
+        "repository": "home-assistant/frontend",
+        "characters": 976,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.709,
+        "headings": 5
+      },
+      {
+        "id": 357,
+        "repository": "slicer/slicer",
+        "characters": 1125,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.8302,
+        "headings": 0
+      },
+      {
+        "id": 254,
+        "repository": "hacs/integration",
+        "characters": 1234,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.7569,
+        "headings": 4
+      },
+      {
+        "id": 293,
+        "repository": "css-doodle/css-doodle",
+        "characters": 1346,
+        "codeRatio": 0.0892,
+        "decorationRatio": 0.7043,
+        "headings": 8
+      }
+    ],
+    "unclosed_fence": [
+      {
+        "id": 287,
+        "repository": "xunnamius/babel-plugin-explicit-exports-references",
+        "characters": 2548,
+        "codeRatio": 0.3081,
+        "decorationRatio": 0.2225,
+        "headings": 4
+      },
+      {
+        "id": 367,
+        "repository": "donchitos/claude-code-game-studios",
+        "characters": 2573,
+        "codeRatio": 0.1384,
+        "decorationRatio": 0.4431,
+        "headings": 4
+      },
+      {
+        "id": 398,
+        "repository": "tensorflow/tfjs",
+        "characters": 2700,
+        "codeRatio": 0.0222,
+        "decorationRatio": 0.3174,
+        "headings": 8
+      },
+      {
+        "id": 379,
+        "repository": "chrisguttandin/standardized-audio-context",
+        "characters": 2852,
+        "codeRatio": 0.4702,
+        "decorationRatio": 0.0964,
+        "headings": 4
+      },
+      {
+        "id": 401,
+        "repository": "excalidraw/excalidraw",
+        "characters": 3103,
+        "codeRatio": 0.0052,
+        "decorationRatio": 0.6752,
+        "headings": 3
+      },
+      {
+        "id": 245,
+        "repository": "headroomlabs-ai/headroom",
+        "characters": 3380,
+        "codeRatio": 0.0293,
+        "decorationRatio": 0.4654,
+        "headings": 2
+      },
+      {
+        "id": 387,
+        "repository": "browser-use/browser-use",
+        "characters": 3554,
+        "codeRatio": 0.1325,
+        "decorationRatio": 0.6787,
+        "headings": 2
+      },
+      {
+        "id": 300,
+        "repository": "aspjt/dungeontemplatelibrary",
+        "characters": 3579,
+        "codeRatio": 0.0461,
+        "decorationRatio": 0.5733,
+        "headings": 14
+      }
+    ],
+    "directory_tree_present": [
+      {
+        "id": 326,
+        "repository": "safishamsi/graphify",
+        "characters": 2813,
+        "codeRatio": 0.583,
+        "decorationRatio": 0.0931,
+        "headings": 3
+      },
+      {
+        "id": 557,
+        "repository": "spofastic/infoterm",
+        "characters": 2947,
+        "codeRatio": 0.1228,
+        "decorationRatio": 0.019,
+        "headings": 9
+      },
+      {
+        "id": 199,
+        "repository": "ttofalo/olivia",
+        "characters": 3655,
+        "codeRatio": 0.1956,
+        "decorationRatio": 0.0057,
+        "headings": 7
+      },
+      {
+        "id": 141,
+        "repository": "mengto/kage",
+        "characters": 3803,
+        "codeRatio": 0.0699,
+        "decorationRatio": 0.0337,
+        "headings": 9
+      },
+      {
+        "id": 172,
+        "repository": "ram-polisetti/rag-governance-demo",
+        "characters": 5323,
+        "codeRatio": 0.3821,
+        "decorationRatio": 0.0034,
+        "headings": 7
+      },
+      {
+        "id": 538,
+        "repository": "jargin-j/earthquake-warning",
+        "characters": 7574,
+        "codeRatio": 0.4527,
+        "decorationRatio": 0.0746,
+        "headings": 27
+      },
+      {
+        "id": 537,
+        "repository": "aidizhi/455555.xyz",
+        "characters": 8130,
+        "codeRatio": 0.3488,
+        "decorationRatio": 0.128,
+        "headings": 20
+      },
+      {
+        "id": 193,
+        "repository": "andrijamitrovicc/temperature-fan-control",
+        "characters": 8460,
+        "codeRatio": 0.19,
+        "decorationRatio": 0.0259,
+        "headings": 35
+      }
+    ],
+    "no_markdown_heading": [
+      {
+        "id": 285,
+        "repository": "abatchy17/abatchy17.github.io",
+        "characters": 5,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 162,
+        "repository": "graphif/project-graph",
+        "characters": 16,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 357,
+        "repository": "slicer/slicer",
+        "characters": 1125,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.8302,
+        "headings": 0
+      },
+      {
+        "id": 268,
+        "repository": "tteck/proxmox",
+        "characters": 1315,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.5049,
+        "headings": 0
+      },
+      {
+        "id": 208,
+        "repository": "slicer/slicer",
+        "characters": 1889,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.7967,
+        "headings": 0
+      },
+      {
+        "id": 362,
+        "repository": "duduxs/duduxs",
+        "characters": 2251,
+        "codeRatio": 0.1635,
+        "decorationRatio": 0.8365,
+        "headings": 0
+      },
+      {
+        "id": 435,
+        "repository": "navidrome/navidrome",
+        "characters": 3109,
+        "codeRatio": 1.0,
+        "decorationRatio": 0.0,
+        "headings": 0
+      },
+      {
+        "id": 382,
+        "repository": "affaan-m/ecc",
+        "characters": 3596,
+        "codeRatio": 0.0,
+        "decorationRatio": 0.6185,
+        "headings": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Heuristic flags identify review priorities, not proof of uselessness or factual accuracy.",
+    "Language is a Han/Latin visible non-fenced character heuristic, not a language model.",
+    "Topic and section keywords are hints, not proof that a requirement is mandatory or absent.",
+    "Current document version contents scanned; historical versions counted, not independently quality classified.",
+    "Unique repository identity from business IDs and GITHUB source refs; no external repository fetch.",
+    "Sequential read queries are time-bounded, not a transactional snapshot.",
+    "README excerpt presence is not proof of complete upstream README preservation.",
+    "Fifteen deliberately selected representative documents manually reviewed; not a random sample or exhaustive semantic adjudication."
+  ],
+  "artifacts": {
+    "inventory": "D:\\Orangejd\\docs\\rag-b\\original-content-inventory-20261008-155114\\document-inventory.json",
+    "localIgnoredSnapshot": "D:\\Orangejd\\_experiment_staging\\original-content-inventory-20261008-155114\\snapshot.json"
+  },
+  "originBySource": {
+    "BEGINNER_PROJECT": {
+      "originalMatches": 39,
+      "contentOnlyMatches": 0
+    },
+    "CAREER_PROJECT": {
+      "originalMatches": 62,
+      "contentOnlyMatches": 0
+    },
+    "GITHUB": {
+      "originalMatches": 102,
+      "contentOnlyMatches": 266
+    }
+  },
+  "leaderboardSchemaCheck": {
+    "recordKeysVariants": [
+      [
+        "id",
+        "name",
+        "forks",
+        "stars",
+        "htmlUrl",
+        "fullName",
+        "language",
+        "ownerName",
+        "description",
+        "ownerAvatar"
+      ],
+      [
+        "id",
+        "name",
+        "forks",
+        "stars",
+        "htmlUrl",
+        "fullName",
+        "language",
+        "ownerName",
+        "description",
+        "ownerAvatar",
+        "descriptionZh"
+      ]
+    ],
+    "readmeFieldFound": false,
+    "scope": "Distinct first-record schemas of stored snapshots; description metadata, no README field."
+  },
+  "longestGithubDocuments": [
+    {
+      "id": 152,
+      "repository": "gmh5225/awesome-game-security",
+      "characters": 385865,
+      "chunks": 304
+    },
+    {
+      "id": 70,
+      "repository": "public-apis/public-apis",
+      "characters": 225231,
+      "chunks": 202
+    },
+    {
+      "id": 213,
+      "repository": "trimstray/the-book-of-secret-knowledge",
+      "characters": 211640,
+      "chunks": 508
+    },
+    {
+      "id": 73,
+      "repository": "jwasham/coding-interview-university",
+      "characters": 136469,
+      "chunks": 124
+    },
+    {
+      "id": 71,
+      "repository": "openclaw/openclaw",
+      "characters": 118897,
+      "chunks": 90
+    },
+    {
+      "id": 217,
+      "repository": "openclaw/openclaw",
+      "characters": 113168,
+      "chunks": 79
+    },
+    {
+      "id": 72,
+      "repository": "donnemartin/system-design-primer",
+      "characters": 109682,
+      "chunks": 188
+    },
+    {
+      "id": 171,
+      "repository": "hkuds/deeptutor",
+      "characters": 85393,
+      "chunks": 59
+    },
+    {
+      "id": 74,
+      "repository": "vinta/awesome-python",
+      "characters": 82996,
+      "chunks": 92
+    },
+    {
+      "id": 191,
+      "repository": "fastled/fastled",
+      "characters": 74540,
+      "chunks": 127
+    }
+  ],
+  "manualReview": [
+    {
+      "id": 285,
+      "repository": "abatchy17/abatchy17.github.io",
+      "judgment": "INSUFFICIENT_DESCRIPTION",
+      "note": "Only five Chinese characters describing a personal blog; cannot substantiate features, setup or dependencies."
+    },
+    {
+      "id": 162,
+      "repository": "graphif/project-graph|week",
+      "judgment": "README_POINTER_ONLY",
+      "note": "Stored content is ./app/README.md. Target document has not been included in this text."
+    },
+    {
+      "id": 228,
+      "repository": "tidalcycles/strudel",
+      "judgment": "MOVED_REPOSITORY_NOTICE",
+      "note": "Stored text announces migration to Codeberg; not a current implementation guide."
+    },
+    {
+      "id": 159,
+      "repository": "mr-bolton/Billiards-Engine|new",
+      "judgment": "SHORT_BUT_PURPOSE_SUPPORTED",
+      "note": "128-character introduction explicitly describes a TypeScript billiards engine and its focus; insufficient setup detail, but useful purpose evidence."
+    },
+    {
+      "id": 269,
+      "repository": "esphome/esphome",
+      "judgment": "DECORATION_AND_EXTERNAL_DOCS",
+      "note": "Mostly badges/logo/documentation links; important information resides outside stored text."
+    },
+    {
+      "id": 357,
+      "repository": "Slicer/Slicer",
+      "judgment": "LINK_HEAVY_BUT_USEFUL",
+      "note": "Slicer has explicit visualization/image-analysis and platform statements; high link ratio does not make it useless. Build instructions remain external."
+    },
+    {
+      "id": 299,
+      "repository": "georgealways/lil-gui",
+      "judgment": "CODE_HEAVY_BUT_USEFUL",
+      "note": "lil-gui explicitly explains floating control panels and contains concrete API examples; code-dominant flag must not imply rejection."
+    },
+    {
+      "id": 321,
+      "repository": "nbrosowsky/tonejs-instruments",
+      "judgment": "CODE_HEAVY_BUT_USEFUL",
+      "note": "Tone.js instrument loader has usage, optional parameters, instrument list and distinct code/sample licensing."
+    },
+    {
+      "id": 435,
+      "repository": "navidrome/navidrome",
+      "judgment": "MARKDOWN_WRAPPED_AS_HTML_CODE",
+      "note": "The entire Navidrome stored document is wrapped in one html fence; includes meaningful Markdown feature descriptions, but heading parser treats them as code."
+    },
+    {
+      "id": 287,
+      "repository": "Xunnamius/babel-plugin-explicit-exports-references",
+      "judgment": "TRUNCATED_MID_FENCE",
+      "note": "Stored babel plugin text ends in ```typesc; installation/useful purpose are present, later example is incomplete."
+    },
+    {
+      "id": 398,
+      "repository": "tensorflow/tfjs",
+      "judgment": "TRUNCATED_MID_EXAMPLE",
+      "note": "Stored TensorFlow.js text ends during HTML script example; closing fence is absent."
+    },
+    {
+      "id": 372,
+      "repository": "szimek/signature_pad",
+      "judgment": "TRUNCATED_HTML_SECTION",
+      "note": "Signature Pad stored text ends in <dl> / <d; usage is present, later options documentation is cut off."
+    },
+    {
+      "id": 152,
+      "repository": "gmh5225/awesome-game-security|week",
+      "judgment": "RESOURCE_CATALOG_NOT_SINGLE_APP",
+      "note": "385865-character awesome-game-security resource catalog; linked projects are not features of the catalog repository."
+    },
+    {
+      "id": 70,
+      "repository": "public-apis/public-apis",
+      "judgment": "API_DIRECTORY_NOT_SINGLE_APP",
+      "note": "225231-character public-apis directory; many listed services, not one application implementing them all."
+    },
+    {
+      "id": 213,
+      "repository": "trimstray/the-book-of-secret-knowledge",
+      "judgment": "RESOURCE_CATALOG_NOT_SINGLE_APP",
+      "note": "211640-character secret-knowledge collection; avoid transferring linked tool features to this repository."
+    }
+  ],
+  "humanFindingsZh": [
+    "B项目文档469份对应444个仓库；GITHUB记录368份对应351个仓库，不等于368个独立项目。",
+    "101份业务项目文档为结构化业务报告，其中14份学习文档和62份求职文档附带README摘要；不能将这些报告都称为纯GitHub原文。",
+    "368份GITHUB文档中102份匹配旧库original_content，266份仅匹配content；这些字段有不同来源和加工状态。",
+    "业务仓库190个中130个有README摘要，60个为空，27个摘要恰好达到上游12000字符限制。",
+    "190个业务仓库中82个在B中无对应项目文档；其中76个仍处于候选或发布状态。",
+    "项目片段8422个，1883个不足32 Token，其中学习文档502个、求职文档811个、GITHUB文档570个；很多是孤立字段，不能一概视为垃圾。",
+    "Navidrome全文被html代码围栏包裹；project-graph只有相对README路径；部分旧内容在代码或HTML中途结束。",
+    "代码多或链接多并不等于无用：lil-gui、Tone.js乐器加载和Slicer仍有明确用途证据。",
+    "资源目录与应用项目混在同一库；最长三个资源目录占1014个项目片段，不能将目录链接项目的功能归到目录自身。",
+    "175个状态合格业务项目中86个缺周期、65个缺许可证；其他资源布尔字段完整也不代表有明确事实支持。"
+  ]
+}

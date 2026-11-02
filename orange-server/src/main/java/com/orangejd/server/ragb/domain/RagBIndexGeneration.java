@@ -11,6 +11,8 @@ public class RagBIndexGeneration {
     private String redisPrefix;
     private String adapterType;
     private String embeddingModel;
+    private String embeddingProvider;
+    private String embeddingRevision;
     private Integer embeddingDimensions;
     private String chunkPolicy;
     private String status;

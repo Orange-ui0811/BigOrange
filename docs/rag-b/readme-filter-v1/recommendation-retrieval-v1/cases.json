@@ -1,0 +1,1069 @@
+{
+  "annotation": "Assistant source-labelled diagnostic on five previously studied README snapshots, not blind or independent. Verifier/Agent decisions are not executed.",
+  "source": "../retrieval-three-arm-v1/sources.json",
+  "cases": [
+    {
+      "id": "D01",
+      "category": "DISCOVER",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "想找支持与文档对话、多人使用的AI应用，先推荐有明确文档依据的项目。",
+      "requirements": [
+        {
+          "text": "文档对话",
+          "strength": "HARD"
+        },
+        {
+          "text": "多用户",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "240",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "240",
+                "startUtf16": 549,
+                "endUtf16": 590,
+                "text": "    与您的文档对话，使用 AI 代理，高度可配置，支持多用户，无需繁琐的设置。"
+              },
+              {
+                "documentId": "240",
+                "startUtf16": 3318,
+                "endUtf16": 3374,
+                "text": "与您的文档对话。使用 AI 代理自动化复杂工作流。高度可配置，支持多用户，久经考验——默认本地运行，零设置摩擦。"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "D02",
+      "category": "DISCOVER",
+      "useMode": "SECONDARY_DEV",
+      "query": "必须能用于搭建企业内部管理后台和仪表盘，最好是低代码平台，找主要用途贴近的项目。",
+      "requirements": [
+        {
+          "text": "低代码",
+          "strength": "SOFT"
+        },
+        {
+          "text": "管理后台及仪表盘",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "522",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "522",
+                "startUtf16": 1350,
+                "endUtf16": 1772,
+                "text": "Organizations build custom applications like dashboards, admin panels, customer 360, IT automation, and service management tools to help their teams work more efficiently and effectively. Appsmith is an open-source low-code platform that streamlines custom application development, deployment, and maintenance. Learn more on our [website](https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme)."
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "D03",
+      "category": "DISCOVER",
+      "useMode": "SECONDARY_DEV",
+      "query": "知识库入库前要静态扫描隐藏内容，要求Go编写、不依赖第三方包，并可接入CI，推荐什么项目？",
+      "requirements": [
+        {
+          "text": "Go",
+          "strength": "HARD"
+        },
+        {
+          "text": "无第三方包依赖",
+          "strength": "HARD"
+        },
+        {
+          "text": "入库前扫描及CI",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 445,
+                "endUtf16": 519,
+                "text": "A concurrent Go CLI that scans documents for content that's **invisible or"
+              }
+            ],
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 725,
+                "endUtf16": 783,
+                "text": "Zero external dependencies — just the Go standard library."
+              }
+            ],
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 1609,
+                "endUtf16": 1682,
+                "text": "`docguard` is a single static binary you can run against a knowledge base"
+              }
+            ]
+          ],
+          "limitGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 3018,
+                "endUtf16": 3090,
+                "text": "This is a heuristic tripwire, not a guarantee — a finding means \"worth a"
+              }
+            ]
+          ]
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "D04",
+      "category": "DISCOVER",
+      "useMode": "SECONDARY_DEV",
+      "query": "希望可视化编排AI工作流，还能写JavaScript和Python自定义代码，有什么项目有这些明确说明？",
+      "requirements": [
+        {
+          "text": "可视化工作流",
+          "strength": "HARD"
+        },
+        {
+          "text": "JavaScript及Python扩展",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "427",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 142,
+                "endUtf16": 287,
+                "text": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。"
+              }
+            ],
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 562,
+                "endUtf16": 621,
+                "text": "- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "D05",
+      "category": "DISCOVER",
+      "useMode": "SECONDARY_DEV",
+      "query": "要修改一个React前端、Node后端的AI工具，并研究第三方节点集成，找README明确描述这些模块的项目。",
+      "requirements": [
+        {
+          "text": "React前端及Node后端",
+          "strength": "HARD"
+        },
+        {
+          "text": "第三方节点集成",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "244",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2174,
+                "endUtf16": 2204,
+                "text": "-   `server`：Node 后端，提供 API 逻辑"
+              }
+            ],
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2205,
+                "endUtf16": 2222,
+                "text": "-   `ui`：React 前端"
+              }
+            ],
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2223,
+                "endUtf16": 2247,
+                "text": "-   `components`：第三方节点集成"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "D06",
+      "category": "DISCOVER",
+      "useMode": "STUDY_SOURCE",
+      "query": "想读Go命令行工具的源码，重点研究goroutine worker-pool与channel收集结果，推荐有明确实现说明的项目。",
+      "requirements": [
+        {
+          "text": "Go源码",
+          "strength": "HARD"
+        },
+        {
+          "text": "并发池及channel",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 445,
+                "endUtf16": 519,
+                "text": "A concurrent Go CLI that scans documents for content that's **invisible or"
+              }
+            ],
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 4411,
+                "endUtf16": 4481,
+                "text": "`docguard` walks the target directory, filters by extension, and hands"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "D07",
+      "category": "DISCOVER",
+      "useMode": "SECONDARY_DEV",
+      "query": "给文档CI增加扫描，需要能输出JSON并按告警级别让构建失败，推荐有明确接入示例的工具。",
+      "requirements": [
+        {
+          "text": "JSON输出",
+          "strength": "HARD"
+        },
+        {
+          "text": "按严重级别阻断CI",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 4089,
+                "endUtf16": 4125,
+                "text": "docguard --json ./docs > report.json"
+              }
+            ],
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 4018,
+                "endUtf16": 4050,
+                "text": "docguard --fail-on medium ./docs"
+              }
+            ],
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 4196,
+                "endUtf16": 4269,
+                "text": "Exit code is `1` if a finding at or above `--fail-on` severity is present"
+              }
+            ]
+          ],
+          "limitGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 3018,
+                "endUtf16": 3090,
+                "text": "This is a heuristic tripwire, not a guarantee — a finding means \"worth a"
+              }
+            ]
+          ]
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "D08",
+      "category": "DISCOVER",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "想自托管可视化工作流，要求README给出Docker数据持久化的运行示例，请找有依据的项目。",
+      "requirements": [
+        {
+          "text": "自托管工作流",
+          "strength": "HARD"
+        },
+        {
+          "text": "Docker持久化示例",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "427",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 142,
+                "endUtf16": 287,
+                "text": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。"
+              }
+            ],
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 961,
+                "endUtf16": 990,
+                "text": "docker volume create n8n_data"
+              }
+            ],
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 991,
+                "endUtf16": 1086,
+                "text": "docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V01",
+      "category": "VERIFY",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "我只能使用Node.js 18而且不能升级，按当前README直接安装Flowise，版本条件是否冲突？",
+      "requirements": [
+        {
+          "text": "Node.js固定18，不升级",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "244",
+          "expectedVerdict": "CONFLICT",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 1432,
+                "endUtf16": 1491,
+                "text": "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V02",
+      "category": "VERIFY",
+      "useMode": "STUDY_SOURCE",
+      "query": "我只能使用Go 1.21且不能升级，按当前README构建Docguard，Go版本是否符合？",
+      "requirements": [
+        {
+          "text": "Go固定1.21",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "CONFLICT",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 3328,
+                "endUtf16": 3346,
+                "text": "Requires Go 1.22+."
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V03",
+      "category": "VERIFY",
+      "useMode": "SECONDARY_DEV",
+      "query": "我只接受Go标准库、不允许增加第三方Go包，Docguard的依赖说明能否支持这一条件？",
+      "requirements": [
+        {
+          "text": "仅Go标准库",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 725,
+                "endUtf16": 783,
+                "text": "Zero external dependencies — just the Go standard library."
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V04",
+      "category": "VERIFY",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "我的要求是保证检测出所有提示注入攻击，Docguard的README是否承诺了这种保证？",
+      "requirements": [
+        {
+          "text": "保证发现所有攻击",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "CONFLICT",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 3018,
+                "endUtf16": 3090,
+                "text": "This is a heuristic tripwire, not a guarantee — a finding means \"worth a"
+              }
+            ]
+          ],
+          "limitGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 3018,
+                "endUtf16": 3090,
+                "text": "This is a heuristic tripwire, not a guarantee — a finding means \"worth a"
+              }
+            ]
+          ]
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V05",
+      "category": "VERIFY",
+      "useMode": "SECONDARY_DEV",
+      "query": "筛选条件是README标明Apache License 2.0，Appsmith的许可证名称是否符合？只核对名称。",
+      "requirements": [
+        {
+          "text": "许可名称为Apache License 2.0",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "522",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "522",
+                "startUtf16": 54219,
+                "endUtf16": 54342,
+                "text": "Appsmith is licensed under the terms of [Apache License 2.0](https://github.com/appsmithorg/appsmith/blob/release/LICENSE)."
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "仅比较原文许可名称，不解释商业权利或法律义务。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V06",
+      "category": "VERIFY",
+      "useMode": "SECONDARY_DEV",
+      "query": "我要二次开发React前端和Node后端，Flowise已有模块说明是否支持这两个技术条件？",
+      "requirements": [
+        {
+          "text": "React及Node",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "244",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2174,
+                "endUtf16": 2204,
+                "text": "-   `server`：Node 后端，提供 API 逻辑"
+              }
+            ],
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2205,
+                "endUtf16": 2222,
+                "text": "-   `ui`：React 前端"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V07",
+      "category": "VERIFY",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "我不接受只有云服务入口的方案，n8n当前README有没有自托管部署的明确依据？",
+      "requirements": [
+        {
+          "text": "可以自托管",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "427",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 142,
+                "endUtf16": 287,
+                "text": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。"
+              }
+            ],
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 991,
+                "endUtf16": 1086,
+                "text": "docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "V08",
+      "category": "VERIFY",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "要求默认扫描扩展名就包含pdf且不改配置，Docguard的README默认列表是否满足？",
+      "requirements": [
+        {
+          "text": "默认扩展名含pdf且不改配置",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "CONFLICT",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 3475,
+                "endUtf16": 3531,
+                "text": "        (default: txt,md,mdx,html,htm,csv,json,yaml,yml)"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "只核对默认列表，不推断PDF解析能力或自定义扩展名支持范围。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "C01",
+      "category": "COMPARE",
+      "useMode": "SECONDARY_DEV",
+      "query": "想做管理后台和仪表盘，比较Appsmith与Flowise README的主要定位，哪些原文直接支持这个选择？",
+      "requirements": [
+        {
+          "text": "管理后台及仪表盘",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "522",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "522",
+                "startUtf16": 1350,
+                "endUtf16": 1772,
+                "text": "Organizations build custom applications like dashboards, admin panels, customer 360, IT automation, and service management tools to help their teams work more efficiently and effectively. Appsmith is an open-source low-code platform that streamlines custom application development, deployment, and maintenance. Learn more on our [website](https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme)."
+              }
+            ]
+          ],
+          "limitGroups": []
+        },
+        {
+          "documentId": "244",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 1007,
+                "endUtf16": 1028,
+                "text": "<h3>可视化构建 AI 智能体</h3>"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "Flowise缺少该用途证据不等于不能通过二次开发实现。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "C02",
+      "category": "COMPARE",
+      "useMode": "STUDY_SOURCE",
+      "query": "想学习Go源码中的worker-pool，比较Docguard和Flowise的语言及实现说明，分别有哪些支持或缺失的依据？",
+      "requirements": [
+        {
+          "text": "Go worker-pool源码",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 445,
+                "endUtf16": 519,
+                "text": "A concurrent Go CLI that scans documents for content that's **invisible or"
+              }
+            ],
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 4411,
+                "endUtf16": 4481,
+                "text": "`docguard` walks the target directory, filters by extension, and hands"
+              }
+            ]
+          ],
+          "limitGroups": []
+        },
+        {
+          "documentId": "244",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2174,
+                "endUtf16": 2204,
+                "text": "-   `server`：Node 后端，提供 API 逻辑"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "C03",
+      "category": "COMPARE",
+      "useMode": "SECONDARY_DEV",
+      "query": "我想在文档入库前增加静态扫描，比较Docguard和AnythingLLM各自的主要用途，哪个有直接扫描依据？",
+      "requirements": [
+        {
+          "text": "入库前静态扫描",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 1609,
+                "endUtf16": 1682,
+                "text": "`docguard` is a single static binary you can run against a knowledge base"
+              }
+            ]
+          ],
+          "limitGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 3018,
+                "endUtf16": 3090,
+                "text": "This is a heuristic tripwire, not a guarantee — a finding means \"worth a"
+              }
+            ]
+          ]
+        },
+        {
+          "documentId": "240",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "240",
+                "startUtf16": 549,
+                "endUtf16": 590,
+                "text": "    与您的文档对话，使用 AI 代理，高度可配置，支持多用户，无需繁琐的设置。"
+              },
+              {
+                "documentId": "240",
+                "startUtf16": 3318,
+                "endUtf16": 3374,
+                "text": "与您的文档对话。使用 AI 代理自动化复杂工作流。高度可配置，支持多用户，久经考验——默认本地运行，零设置摩擦。"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "C04",
+      "category": "COMPARE",
+      "useMode": "SECONDARY_DEV",
+      "query": "需要可视化工作流和Python自定义代码，比较n8n与Flowise README对扩展方式的说明，哪些条件仍缺证据？",
+      "requirements": [
+        {
+          "text": "可视化工作流",
+          "strength": "HARD"
+        },
+        {
+          "text": "Python自定义代码",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "427",
+          "expectedVerdict": "SUPPORTED",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 562,
+                "endUtf16": 621,
+                "text": "- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流"
+              }
+            ]
+          ],
+          "limitGroups": []
+        },
+        {
+          "documentId": "244",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2223,
+                "endUtf16": 2247,
+                "text": "-   `components`：第三方节点集成"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "O01",
+      "category": "OBSERVATION",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "只有4GB内存的服务器能保证生产运行Flowise吗？README里的4096堆参数是否足够证明？",
+      "requirements": [
+        {
+          "text": "4GB生产运行保证",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "244",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2663,
+                "endUtf16": 2714,
+                "text": "    <summary>错误代码 134（JavaScript 堆内存不足）</summary>  "
+              }
+            ],
+            [
+              {
+                "documentId": "244",
+                "startUtf16": 2891,
+                "endUtf16": 2940,
+                "text": "    $env:NODE_OPTIONS=\"--max-old-space-size=4096\""
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "这些是排障线索，不能证明最低机器内存。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "O02",
+      "category": "OBSERVATION",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "要求免费社区版开箱即用支持单点登录，当前Appsmith README足以核实吗？",
+      "requirements": [
+        {
+          "text": "免费社区版现成SSO",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "522",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [],
+          "limitGroups": []
+        }
+      ],
+      "notes": "README中没有充分的功能版别及收费证据；返回候选不算回答正确。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "O03",
+      "category": "OBSERVATION",
+      "useMode": "STUDY_SOURCE",
+      "query": "我是Java初学者，每天一小时，能保证两周吃透AnythingLLM源码吗？",
+      "requirements": [
+        {
+          "text": "两周且每天一小时",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "240",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "240",
+                "startUtf16": 549,
+                "endUtf16": 590,
+                "text": "    与您的文档对话，使用 AI 代理，高度可配置，支持多用户，无需繁琐的设置。"
+              },
+              {
+                "documentId": "240",
+                "startUtf16": 3318,
+                "endUtf16": 3374,
+                "text": "与您的文档对话。使用 AI 代理自动化复杂工作流。高度可配置，支持多用户，久经考验——默认本地运行，零设置摩擦。"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "产品定位不能证明学习工期和个人适配。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "O04",
+      "category": "OBSERVATION",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "我要求任何商业场景都可免费使用，n8n README里列出的许可链接能直接证明吗？",
+      "requirements": [
+        {
+          "text": "所有商业场景均免费",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "427",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "427",
+                "startUtf16": 1485,
+                "endUtf16": 1657,
+                "text": "n8n 是[公平代码](https://faircode.io)，依据[可持续使用许可证](https://github.com/n8n-io/n8n/blob/master/LICENSE.md)和 [n8n 企业许可证](https://github.com/n8n-io/n8n/blob/master/LICENSE_EE.md)分发。"
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "只出现许可名称和链接，未读取完整条款，不得推出商业许可结论。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "O05",
+      "category": "OBSERVATION",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "Appsmith Core免费版必须内置README里Appsmith Agents介绍的能力，当前原文能证明吗？",
+      "requirements": [
+        {
+          "text": "Core免费版内置Agents能力",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "522",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "522",
+                "startUtf16": 5322,
+                "endUtf16": 5930,
+                "text": "Introducing a new agentic AI platform that integrates the latest AI models with private and proprietary data at scale — inside the tools and systems that teams use every day. Appsmith Agents expands generative AI’s capabilities for the millions of knowledge workers in sales, support, customer success, human resources, and other business teams. By giving continuous context to AI models, Appsmith Agents lets teams ask questions and configure automations specific to their business without model fine-tuning or complex RAG implementations. Visit [appsmith.com/ai](https://www.appsmith.com/ai) to learn more."
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "关联产品介绍不能作为Core版别能力的证据。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    },
+    {
+      "id": "O06",
+      "category": "OBSERVATION",
+      "useMode": "DIRECT_DEPLOY",
+      "query": "要求工具运行时完全不联网，Docguard所说零外部依赖足以证明这一条件吗？",
+      "requirements": [
+        {
+          "text": "运行时完全离线",
+          "strength": "HARD"
+        }
+      ],
+      "candidates": [
+        {
+          "documentId": "546",
+          "expectedVerdict": "UNKNOWN",
+          "evidenceGroups": [
+            [
+              {
+                "documentId": "546",
+                "startUtf16": 725,
+                "endUtf16": 783,
+                "text": "Zero external dependencies — just the Go standard library."
+              }
+            ]
+          ],
+          "limitGroups": []
+        }
+      ],
+      "notes": "第三方包依赖与运行时网络行为不同；不推断不支持离线。",
+      "verdictAuthority": "ASSISTANT_SOURCE_ANNOTATION_NOT_EXECUTED_AGENT_DECISION"
+    }
+  ]
+}

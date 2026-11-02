@@ -1,0 +1,90 @@
+{
+  "at": "2026-10-03T11:16:25.118148+00:00",
+  "rag": {
+    "defaultRebuildAdapter": "HNSW_HYBRID",
+    "namespace": "orange:rag:b:",
+    "availableAdapters": [
+      "EXACT",
+      "HNSW_HYBRID"
+    ],
+    "enabled": true,
+    "defaultUserRoutesChanged": false,
+    "activeIndex": {
+      "generation": "20261002164953-ec113424",
+      "chunkPolicy": "STRUCTURE_M3_512_768_64_V1",
+      "dimensions": 1024,
+      "embeddingModel": "bge-m3"
+    }
+  },
+  "models": {
+    "project": {
+      "endpoint": "https://ai.gitee.com/v1",
+      "model": "DeepSeek-V4-Pro",
+      "version": "1-1785206616703",
+      "source": "REDIS"
+    },
+    "contribution": {
+      "endpoint": "https://ai.gitee.com/v1",
+      "model": "DeepSeek-V4-Pro",
+      "version": "1-1785206634781",
+      "source": "REDIS"
+    },
+    "trend": {
+      "endpoint": "https://api.deepseek.com",
+      "model": "deepseek-v4-pro",
+      "version": "env",
+      "source": "ENV"
+    },
+    "text": {
+      "endpoint": "https://api.deepseek.com",
+      "model": "deepseek-v4-pro",
+      "version": "env",
+      "source": "ENV"
+    },
+    "toolFallback": {
+      "endpoint": "https://api.deepseek.com",
+      "model": "deepseek-v4-pro",
+      "version": "env",
+      "source": "ENV"
+    },
+    "audit": {
+      "endpoint": "https://ai.gitee.com/v1",
+      "model": "DeepSeek-V4-Pro",
+      "version": "env",
+      "source": "ENV"
+    },
+    "embedding": {
+      "endpoint": "https://ai.gitee.com/v1",
+      "model": "bge-small-zh-v1.5",
+      "version": "env",
+      "source": "ENV"
+    },
+    "leaderboard": {
+      "endpoint": null,
+      "model": null,
+      "version": null,
+      "source": null
+    }
+  },
+  "indexes": {
+    "A": {
+      "index": "default-index",
+      "num_docs": 5647,
+      "vector_index_sz_mb": 13.984619140625,
+      "total_index_memory_sz_mb": 9.009740829467773,
+      "hash_indexing_failures": 0,
+      "indexing": 0
+    },
+    "B": {
+      "index": "orange-rag-b-20261002164953-ec113424",
+      "num_docs": 8660,
+      "vector_index_sz_mb": 39.052940368652344,
+      "total_index_memory_sz_mb": 17.067337036132812,
+      "hash_indexing_failures": 0,
+      "indexing": 0
+    }
+  },
+  "documentsA": "BEGINNER_PROJECT\tDONE\t39\nCAREER_PROJECT\tDONE\t62\nGITHUB\tDONE\t294\nGITHUB\tPENDING\t81\nJOB_POSTING\tDONE\t95\nMANUAL\tDONE\t1",
+  "documentsB": "BEGINNER_PROJECT\tREADY\t39\nCAREER_PROJECT\tREADY\t62\nJOB_POSTING\tREADY\t95\nGITHUB\tREADY\t368\nMANUAL\tREADY\t1",
+  "generation": "20261002164953-ec113424\t219\t6227\tbge-m3\tSTRUCTURE_M3_512_768_64_V1"
+}

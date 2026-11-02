@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+const screenshotDirectory = process.env.CUSTOMER_E2E_SCREENSHOTS || '../docs/customer/acceptance'
 
 // UI fixtures only: no real account, outbound model call or production mutation.
 async function setup(page, enabled) {
@@ -74,7 +75,7 @@ test('白名单客服提交、过程与证据展示，刷新恢复不重复运�
   expect(userBubble.x).toBeGreaterThan(assistant.x)
   expect(userBubble.x + userBubble.width).toBeGreaterThan(user.x + user.width - 70)
   await page.locator('.transcript').evaluate(el=>{el.scrollTop=0})
-  await page.screenshot({ path: '../docs/customer/acceptance/customer-v412-chat.png', fullPage: true })
+  await page.screenshot({ path: `${screenshotDirectory}/customer-v412-chat.png`, fullPage: true })
   expect(submissions()).toBe(1)
 })
 test('功能关闭明确显示客服不可用原因', async ({ page }) => {
@@ -93,13 +94,13 @@ test('手机客服输入和历史可访问，页面不横向溢出', async ({ pa
   await expect(page.getByRole('button', { name: '新建会话' })).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   await page.getByRole('button', { name: '关闭历史' }).click()
-  await page.screenshot({ path: '../docs/customer/acceptance/customer-v412-mobile.png', fullPage: true })
+  await page.screenshot({ path: `${screenshotDirectory}/customer-v412-mobile.png`, fullPage: true })
   await page.getByRole('textbox', {name:'发送给项目客服的消息'}).fill('推荐Java项目')
   await page.getByRole('button', {name:'发送',exact:true}).click()
   await expect(page.getByRole('link', {name:'acceptance/java-demo'})).toBeVisible()
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   await page.locator('.transcript').evaluate(el=>{el.scrollTop=0})
-  await page.screenshot({path:'../docs/customer/acceptance/customer-v412-mobile-chat.png',fullPage:true})
+  await page.screenshot({path:`${screenshotDirectory}/customer-v412-mobile-chat.png`,fullPage:true})
 })
 
 test('会话删除需确认，删除后刷新不恢复，取消保留', async ({ page }) => {

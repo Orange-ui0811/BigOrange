@@ -1,0 +1,6182 @@
+{
+  "summary": {
+    "split": "development",
+    "documents": 24,
+    "annotatedCases": 113,
+    "caseOutcomes": {
+      "KEPT": 55,
+      "DROPPED": 14,
+      "DEFERRED_REVIEW": 25,
+      "NOISE_DEFERRED": 6,
+      "REVIEWED": 13
+    },
+    "nonBlankBlockDecisions": {
+      "DROP": 138,
+      "REVIEW": 355,
+      "KEEP": 383
+    },
+    "criticalKeepCases": 33,
+    "criticalWrongDropCases": 0,
+    "criticalDeferredCases": 7,
+    "reviewApprovalCases": 0,
+    "sourceMappingErrors": 0,
+    "nonKeepCandidateLeaks": 0,
+    "indexWrites": 0,
+    "additionalProviderCalls": 0,
+    "ledgerChecks": [
+      {
+        "path": "docs\\customer\\workflow-v2\\provider-calls.jsonl",
+        "unchangedSinceK1": true,
+        "baseline": {
+          "sha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+          "entries": 50
+        },
+        "current": {
+          "sha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+          "entries": 50
+        }
+      },
+      {
+        "path": "docs\\customer\\context-v3\\live-provider-calls.jsonl",
+        "unchangedSinceK1": true,
+        "baseline": {
+          "sha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+          "entries": 38
+        },
+        "current": {
+          "sha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+          "entries": 38
+        }
+      }
+    ],
+    "predictionSha256": "cba1cb5d348a74e0ecf7a1191fab64f8fbf2094d76a4302fd40542ddb8ab2782",
+    "annotationSha256": "cd00f56866706421af6e9d79904239ce762b05ff65a955227395545133fce328",
+    "implementationHashes": {
+      "orange-server/src/main/java/com/orangejd/server/ragb/ingest/ReadmeKnowledgeFilter.java": "d88d48d8eeff1212d104fc9dc33f7a2247b75d410006ebee1edffeb8aa9ee3e4",
+      "orange-server/src/main/java/com/orangejd/server/ragb/ingest/ReadmeFilterOfflineCli.java": "3d7faa107d51ef91c94a66aa19b06305b6c101e96bad837da78c7283b9670e46"
+    },
+    "interpretation": "K1 assistant labels; KEEP loss ignores layout-only marks; REVIEW promotion ignores headings/layout; all raw coverage also reported; not blind or retrieval evaluation"
+  },
+  "cases": [
+    {
+      "caseId": "K1-046-01",
+      "documentId": 46,
+      "sourceRef": "langchain-ai/langgraph",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        16,
+        16
+      ],
+      "nonWhitespaceUtf16": 132,
+      "predictedCoverage": {
+        "KEEP": 132
+      },
+      "candidateEvidenceUnits": 132,
+      "substantiveCoverage": {
+        "KEEP": 132
+      },
+      "comparableCoverage": {
+        "KEEP": 132
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留 MIT 许可线索；徽章不是完整许可证正文。",
+      "predictedBlocks": [
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:501-642",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-046-02",
+      "documentId": 46,
+      "sourceRef": "langchain-ai/langgraph",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "STATISTICS",
+      "outcome": "DROPPED",
+      "lineRange": [
+        17,
+        17
+      ],
+      "nonWhitespaceUtf16": 140,
+      "predictedCoverage": {
+        "DROP": 140
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 140
+      },
+      "comparableCoverage": {
+        "DROP": 140
+      },
+      "mixedParentAnnotation": false,
+      "reason": "下载量徽章不作为功能和适配证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:642-791",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            17,
+            17
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-046-03",
+      "documentId": 46,
+      "sourceRef": "langchain-ai/langgraph",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        26,
+        28
+      ],
+      "nonWhitespaceUtf16": 31,
+      "predictedCoverage": {
+        "REVIEW": 31
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 31
+      },
+      "comparableCoverage": {
+        "REVIEW": 31
+      },
+      "mixedParentAnnotation": false,
+      "reason": "完整保留 pip 安装命令。",
+      "predictedBlocks": [
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1372-1409",
+          "decision": "REVIEW",
+          "reason": "DEPENDENCY_NOT_APPROVED",
+          "lines": [
+            26,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-046-04",
+      "documentId": 46,
+      "sourceRef": "langchain-ai/langgraph",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "RELATED_PRODUCT",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        30,
+        33
+      ],
+      "nonWhitespaceUtf16": 408,
+      "predictedCoverage": {
+        "REVIEW": 236,
+        "KEEP": 172
+      },
+      "candidateEvidenceUnits": 172,
+      "substantiveCoverage": {
+        "REVIEW": 236,
+        "KEEP": 172
+      },
+      "comparableCoverage": {
+        "REVIEW": 236,
+        "KEEP": 172
+      },
+      "mixedParentAnnotation": false,
+      "reason": "Deep Agents 与 JavaScript 库是相关产品入口，不能归为 LangGraph 本体已提供的能力。",
+      "predictedBlocks": [
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1410-1681",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            30,
+            31
+          ]
+        },
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1681-1682",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            32,
+            32
+          ]
+        },
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1682-1866",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            33,
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-046-05",
+      "documentId": 46,
+      "sourceRef": "langchain-ai/langgraph",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        35,
+        41
+      ],
+      "nonWhitespaceUtf16": 699,
+      "predictedCoverage": {
+        "KEEP": 113,
+        "REVIEW": 586
+      },
+      "candidateEvidenceUnits": 113,
+      "substantiveCoverage": {
+        "KEEP": 95,
+        "REVIEW": 586
+      },
+      "comparableCoverage": {
+        "KEEP": 113,
+        "REVIEW": 586
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留框架定位、持久执行、人机协作和记忆声明；这是文档声明，不是运行验证。",
+      "predictedBlocks": [
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1867-1889",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            35,
+            35
+          ]
+        },
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1889-1890",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            36,
+            36
+          ]
+        },
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1890-1997",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            37,
+            37
+          ]
+        },
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1997-1998",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            38,
+            38
+          ]
+        },
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1998-3129",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            39,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-046-06",
+      "documentId": 46,
+      "sourceRef": "langchain-ai/langgraph",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "RELATED_PRODUCT",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        42,
+        43
+      ],
+      "nonWhitespaceUtf16": 432,
+      "predictedCoverage": {
+        "REVIEW": 432
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 432
+      },
+      "comparableCoverage": {
+        "REVIEW": 432
+      },
+      "mixedParentAnnotation": false,
+      "reason": "LangSmith 调试和部署必须保留产品归属，不能自动归入开源框架自身。",
+      "predictedBlocks": [
+        {
+          "blockId": "3c3b5257ed9a4c1c244cce574044a8a6826c88d41a1f0d0c773e082516c5396a:1998-3129",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            39,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-050-01",
+      "documentId": 50,
+      "sourceRef": "EbookFoundation/free-programming-books",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "RESOURCE_COLLECTION",
+      "outcome": "KEPT",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 43,
+      "predictedCoverage": {
+        "KEEP": 43
+      },
+      "candidateEvidenceUnits": 43,
+      "substantiveCoverage": {},
+      "comparableCoverage": {
+        "KEEP": 43
+      },
+      "mixedParentAnnotation": false,
+      "reason": "学习资源集合不是可部署业务应用。",
+      "predictedBlocks": [
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:0-52",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-050-02",
+      "documentId": 50,
+      "sourceRef": "EbookFoundation/free-programming-books",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        6,
+        6
+      ],
+      "nonWhitespaceUtf16": 150,
+      "predictedCoverage": {
+        "KEEP": 150
+      },
+      "candidateEvidenceUnits": 150,
+      "substantiveCoverage": {
+        "KEEP": 150
+      },
+      "comparableCoverage": {
+        "KEEP": 150
+      },
+      "mixedParentAnnotation": false,
+      "reason": "许可证徽章提供授权线索。",
+      "predictedBlocks": [
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:250-404",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            6,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-050-03",
+      "documentId": 50,
+      "sourceRef": "EbookFoundation/free-programming-books",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "STATISTICS",
+      "outcome": "DROPPED",
+      "lineRange": [
+        31,
+        32
+      ],
+      "nonWhitespaceUtf16": 453,
+      "predictedCoverage": {
+        "DROP": 453
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 453
+      },
+      "comparableCoverage": {
+        "DROP": 453
+      },
+      "mixedParentAnnotation": false,
+      "reason": "Fork 与 Star 统计徽章不进入适配证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:2489-2717",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            31,
+            31
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:2717-2948",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-050-04",
+      "documentId": 50,
+      "sourceRef": "EbookFoundation/free-programming-books",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "STUDY_CONTRIBUTION",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        43,
+        45
+      ],
+      "nonWhitespaceUtf16": 321,
+      "predictedCoverage": {
+        "KEEP": 17,
+        "REVIEW": 304
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 304
+      },
+      "comparableCoverage": {
+        "KEEP": 17,
+        "REVIEW": 304
+      },
+      "mixedParentAnnotation": false,
+      "reason": "贡献指南对学习和参与项目有用，不能按非功能文字全部删除。",
+      "predictedBlocks": [
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:4230-4251",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            43,
+            43
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:4251-4252",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            44,
+            44
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:4252-4582",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            45,
+            45
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-050-05",
+      "documentId": 50,
+      "sourceRef": "EbookFoundation/free-programming-books",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "RESOURCE_COLLECTION",
+      "outcome": "KEPT",
+      "lineRange": [
+        74,
+        78
+      ],
+      "nonWhitespaceUtf16": 139,
+      "predictedCoverage": {
+        "KEEP": 139
+      },
+      "candidateEvidenceUnits": 139,
+      "substantiveCoverage": {
+        "KEEP": 131
+      },
+      "comparableCoverage": {
+        "KEEP": 139
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留书单入口；链接不能证明对应书籍内容已经收录。",
+      "predictedBlocks": [
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:7328-7338",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            74,
+            74
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:7338-7339",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            75,
+            75
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:7339-7413",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            76,
+            76
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:7413-7414",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            77,
+            77
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:7414-7478",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            78,
+            78
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-050-06",
+      "documentId": 50,
+      "sourceRef": "EbookFoundation/free-programming-books",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        237,
+        239
+      ],
+      "nonWhitespaceUtf16": 82,
+      "predictedCoverage": {
+        "KEEP": 82
+      },
+      "candidateEvidenceUnits": 82,
+      "substantiveCoverage": {
+        "KEEP": 73
+      },
+      "comparableCoverage": {
+        "KEEP": 82
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留许可说明，不以默认开源许可替代。",
+      "predictedBlocks": [
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:15231-15242",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            237,
+            237
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:15242-15243",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            238,
+            238
+          ]
+        },
+        {
+          "blockId": "bc981c3e46c6dce6e73d8c5124881a0065074ad01cd07c8d50fe412d7e1cb020:15243-15329",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            239,
+            239
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-228-01",
+      "documentId": 228,
+      "sourceRef": "tidalcycles/strudel",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        1,
+        4
+      ],
+      "nonWhitespaceUtf16": 38,
+      "predictedCoverage": {
+        "KEEP": 38
+      },
+      "candidateEvidenceUnits": 38,
+      "substantiveCoverage": {
+        "KEEP": 30
+      },
+      "comparableCoverage": {
+        "KEEP": 38
+      },
+      "mixedParentAnnotation": false,
+      "reason": "短文仍包含浏览器实时编码工具定位和入口，不按长度直接丢弃。",
+      "predictedBlocks": [
+        {
+          "blockId": "27441204db314b1f52d69ba77046873689a2669b66b76dc4c927cc95f1bcdc2d:0-10",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            1,
+            1
+          ]
+        },
+        {
+          "blockId": "27441204db314b1f52d69ba77046873689a2669b66b76dc4c927cc95f1bcdc2d:10-11",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            2,
+            2
+          ]
+        },
+        {
+          "blockId": "27441204db314b1f52d69ba77046873689a2669b66b76dc4c927cc95f1bcdc2d:11-44",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            3,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-228-02",
+      "documentId": 228,
+      "sourceRef": "tidalcycles/strudel",
+      "expected": "KEEP",
+      "kind": "MAINTENANCE",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        6,
+        6
+      ],
+      "nonWhitespaceUtf16": 42,
+      "predictedCoverage": {
+        "KEEP": 42
+      },
+      "candidateEvidenceUnits": 42,
+      "substantiveCoverage": {
+        "KEEP": 42
+      },
+      "comparableCoverage": {
+        "KEEP": 42
+      },
+      "mixedParentAnnotation": false,
+      "reason": "迁移到 Codeberg 影响后续推荐来源，必须保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "27441204db314b1f52d69ba77046873689a2669b66b76dc4c927cc95f1bcdc2d:45-89",
+          "decision": "KEEP",
+          "reason": "MAINTENANCE_CONDITION",
+          "lines": [
+            6,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-228-03",
+      "documentId": 228,
+      "sourceRef": "tidalcycles/strudel",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "COURTESY",
+      "outcome": "NOISE_DEFERRED",
+      "lineRange": [
+        8,
+        8
+      ],
+      "nonWhitespaceUtf16": 8,
+      "predictedCoverage": {
+        "REVIEW": 8
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 8
+      },
+      "comparableCoverage": {
+        "REVIEW": 8
+      },
+      "mixedParentAnnotation": false,
+      "reason": "迁移地址已保留后，单独的更新书签礼貌提示无需索引。",
+      "predictedBlocks": [
+        {
+          "blockId": "27441204db314b1f52d69ba77046873689a2669b66b76dc4c927cc95f1bcdc2d:90-98",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            8,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-268-01",
+      "documentId": 268,
+      "sourceRef": "tteck/Proxmox",
+      "expected": "KEEP",
+      "kind": "MAINTENANCE",
+      "scope": "MIXED",
+      "outcome": "KEPT",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 370,
+      "predictedCoverage": {
+        "KEEP": 370
+      },
+      "candidateEvidenceUnits": 370,
+      "substantiveCoverage": {
+        "KEEP": 370
+      },
+      "comparableCoverage": {
+        "KEEP": 370
+      },
+      "mixedParentAnnotation": true,
+      "reason": "同一 HTML 行混有归档迁移地址和致谢，先保护完整迁移信息，不能整行按 HTML 删除。",
+      "predictedBlocks": [
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:0-394",
+          "decision": "KEEP",
+          "reason": "MAINTENANCE_CONDITION",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-268-02",
+      "documentId": 268,
+      "sourceRef": "tteck/Proxmox",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "LOGO",
+      "outcome": "DROPPED",
+      "lineRange": [
+        3,
+        5
+      ],
+      "nonWhitespaceUtf16": 114,
+      "predictedCoverage": {
+        "DROP": 114
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 114
+      },
+      "comparableCoverage": {
+        "DROP": 114
+      },
+      "mixedParentAnnotation": false,
+      "reason": "独立 Logo 不作为功能知识。",
+      "predictedBlocks": [
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:415-543",
+          "decision": "DROP",
+          "reason": "LOGO_ONLY",
+          "lines": [
+            3,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-268-03",
+      "documentId": 268,
+      "sourceRef": "tteck/Proxmox",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        19,
+        21
+      ],
+      "nonWhitespaceUtf16": 123,
+      "predictedCoverage": {
+        "KEEP": 73,
+        "REVIEW": 50
+      },
+      "candidateEvidenceUnits": 73,
+      "substantiveCoverage": {
+        "KEEP": 73,
+        "REVIEW": 50
+      },
+      "comparableCoverage": {
+        "KEEP": 73,
+        "REVIEW": 50
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留容器与虚拟机脚本的业务定位。",
+      "predictedBlocks": [
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:1051-1052",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            20,
+            20
+          ]
+        },
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:1052-1103",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            21,
+            21
+          ]
+        },
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:975-1051",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            19,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-268-04",
+      "documentId": 268,
+      "sourceRef": "tteck/Proxmox",
+      "expected": "KEEP",
+      "kind": "LIMITATION",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        22,
+        24
+      ],
+      "nonWhitespaceUtf16": 121,
+      "predictedCoverage": {
+        "DROP": 21,
+        "KEEP": 100
+      },
+      "candidateEvidenceUnits": 100,
+      "substantiveCoverage": {
+        "KEEP": 100
+      },
+      "comparableCoverage": {
+        "KEEP": 100
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留脚本使用警示和文档入口；不把命令执行提示当成助手指令。",
+      "predictedBlocks": [
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:1103-1122",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            22,
+            22
+          ]
+        },
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:1122-1224",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            23,
+            23
+          ]
+        },
+        {
+          "blockId": "b1a31088e434a2d2136e53885d59c3f08de71c625f5f6b2d0708421885d3bab6:1224-1229",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            24,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-285-01",
+      "documentId": 285,
+      "sourceRef": "abatchy17/abatchy17.github.io",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "UNKNOWN",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 5,
+      "predictedCoverage": {
+        "REVIEW": 5
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 5
+      },
+      "comparableCoverage": {
+        "REVIEW": 5
+      },
+      "mixedParentAnnotation": false,
+      "reason": "仅有个人博客字样，无法形成可验证的项目功能或部署条件；原文保留，待复核。",
+      "predictedBlocks": [
+        {
+          "blockId": "0870ed75793a974797c085015b8ec4c61a6fbabf9f9bf465a1dbfcb5ef4a851d:0-5",
+          "decision": "REVIEW",
+          "reason": "INSUFFICIENT_CONTENT",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-299-01",
+      "documentId": 299,
+      "sourceRef": "georgealways/lil-gui",
+      "expected": "KEEP",
+      "kind": "COMPATIBILITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        3,
+        3
+      ],
+      "nonWhitespaceUtf16": 104,
+      "predictedCoverage": {
+        "KEEP": 104
+      },
+      "candidateEvidenceUnits": 104,
+      "substantiveCoverage": {
+        "KEEP": 104
+      },
+      "comparableCoverage": {
+        "KEEP": 104
+      },
+      "mixedParentAnnotation": false,
+      "reason": "用途与迁移兼容差异都影响选型。",
+      "predictedBlocks": [
+        {
+          "blockId": "5b9a22a67bb80975296b83153a554fd45da57bddf3a7f5f60ed01268a69843ee:11-118",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-299-02",
+      "documentId": 299,
+      "sourceRef": "georgealways/lil-gui",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        5,
+        9
+      ],
+      "nonWhitespaceUtf16": 245,
+      "predictedCoverage": {
+        "KEEP": 245
+      },
+      "candidateEvidenceUnits": 245,
+      "substantiveCoverage": {
+        "KEEP": 245
+      },
+      "comparableCoverage": {
+        "KEEP": 245
+      },
+      "mixedParentAnnotation": false,
+      "reason": "文档、演示和 API 链接有检索导航价值，不能当纯链接噪声。",
+      "predictedBlocks": [
+        {
+          "blockId": "5b9a22a67bb80975296b83153a554fd45da57bddf3a7f5f60ed01268a69843ee:119-374",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            5,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-299-03",
+      "documentId": 299,
+      "sourceRef": "georgealways/lil-gui",
+      "expected": "KEEP",
+      "kind": "USAGE",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        12,
+        53
+      ],
+      "nonWhitespaceUtf16": 851,
+      "predictedCoverage": {
+        "REVIEW": 851
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 851
+      },
+      "comparableCoverage": {
+        "REVIEW": 851
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留完整示例及 addColor、onChange、数值步长上下文，不拆出失去对象关系的零散参数。",
+      "predictedBlocks": [
+        {
+          "blockId": "5b9a22a67bb80975296b83153a554fd45da57bddf3a7f5f60ed01268a69843ee:425-1473",
+          "decision": "REVIEW",
+          "reason": "DEPENDENCY_NOT_APPROVED",
+          "lines": [
+            12,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-318-01",
+      "documentId": 318,
+      "sourceRef": "tldraw/tldraw",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "LOGO",
+      "outcome": "NOISE_DEFERRED",
+      "lineRange": [
+        1,
+        6
+      ],
+      "nonWhitespaceUtf16": 296,
+      "predictedCoverage": {
+        "DROP": 61,
+        "REVIEW": 235
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 235
+      },
+      "comparableCoverage": {
+        "REVIEW": 235
+      },
+      "mixedParentAnnotation": false,
+      "reason": "picture Logo 不作为能力证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:0-61",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            1,
+            1
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:313-320",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            6,
+            6
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:61-313",
+          "decision": "REVIEW",
+          "reason": "IMAGE_OR_MIXED_MARKUP",
+          "lines": [
+            2,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-318-02",
+      "documentId": 318,
+      "sourceRef": "tldraw/tldraw",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        23,
+        33
+      ],
+      "nonWhitespaceUtf16": 648,
+      "predictedCoverage": {
+        "KEEP": 648
+      },
+      "candidateEvidenceUnits": 648,
+      "substantiveCoverage": {
+        "KEEP": 642
+      },
+      "comparableCoverage": {
+        "KEEP": 648
+      },
+      "mixedParentAnnotation": false,
+      "reason": "这是画布 SDK 的能力，不能当作用户所需业务应用已经完成。",
+      "predictedBlocks": [
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1154-1162",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            23,
+            23
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1162-1163",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            24,
+            24
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1163-1271",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            25,
+            25
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1271-1272",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            26,
+            26
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1272-1854",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            27,
+            33
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-318-03",
+      "documentId": 318,
+      "sourceRef": "tldraw/tldraw",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "CUSTOMER_LOGOS",
+      "outcome": "DROPPED",
+      "lineRange": [
+        35,
+        37
+      ],
+      "nonWhitespaceUtf16": 1110,
+      "predictedCoverage": {
+        "DROP": 1110
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 1098
+      },
+      "comparableCoverage": {
+        "DROP": 1110
+      },
+      "mixedParentAnnotation": false,
+      "reason": "客户展示名单不作为适配依据。",
+      "predictedBlocks": [
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1855-1870",
+          "decision": "DROP",
+          "reason": "NOISE_SECTION_HEADING",
+          "lines": [
+            35,
+            35
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1870-1871",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            36,
+            36
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:1871-2975",
+          "decision": "DROP",
+          "reason": "EXPLICIT_NOISE_SECTION",
+          "lines": [
+            37,
+            37
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-318-04",
+      "documentId": 318,
+      "sourceRef": "tldraw/tldraw",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "STUDY_CONTRIBUTION",
+      "outcome": "KEPT",
+      "lineRange": [
+        39,
+        39
+      ],
+      "nonWhitespaceUtf16": 61,
+      "predictedCoverage": {
+        "KEEP": 61
+      },
+      "candidateEvidenceUnits": 61,
+      "substantiveCoverage": {
+        "KEEP": 61
+      },
+      "comparableCoverage": {
+        "KEEP": 61
+      },
+      "mixedParentAnnotation": false,
+      "reason": "案例展示入口与客户名单分开保留，供学习参考；不自动继承案例中的能力。",
+      "predictedBlocks": [
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:2976-3041",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            39,
+            39
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-318-05",
+      "documentId": 318,
+      "sourceRef": "tldraw/tldraw",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        41,
+        47
+      ],
+      "nonWhitespaceUtf16": 36,
+      "predictedCoverage": {
+        "KEEP": 36
+      },
+      "candidateEvidenceUnits": 36,
+      "substantiveCoverage": {
+        "KEEP": 30
+      },
+      "comparableCoverage": {
+        "KEEP": 36
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留已完整的安装代码。",
+      "predictedBlocks": [
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3042-3050",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            41,
+            41
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3050-3051",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            42,
+            42
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3051-3064",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            43,
+            43
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3064-3065",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            44,
+            44
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3065-3090",
+          "decision": "KEEP",
+          "reason": "CODE_WITH_SOURCE_CONTEXT",
+          "lines": [
+            45,
+            47
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-318-06",
+      "documentId": 318,
+      "sourceRef": "tldraw/tldraw",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "INCOMPLETE_CODE",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        49,
+        54
+      ],
+      "nonWhitespaceUtf16": 86,
+      "predictedCoverage": {
+        "REVIEW": 86
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 86
+      },
+      "comparableCoverage": {
+        "REVIEW": 86
+      },
+      "mixedParentAnnotation": false,
+      "reason": "TSX 示例尾部截断，不能作为可执行完整示例；不连带删除此前完整说明。",
+      "predictedBlocks": [
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3091-3127",
+          "decision": "REVIEW",
+          "reason": "INCOMPLETE_EXAMPLE_CONTEXT",
+          "lines": [
+            49,
+            49
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3127-3128",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            50,
+            50
+          ]
+        },
+        {
+          "blockId": "769fd0d0f4c246ffb9e455116b202a67a6d61f9dc935e276cc1841398fde89c6:3128-3193",
+          "decision": "REVIEW",
+          "reason": "INCOMPLETE_STRUCTURE",
+          "lines": [
+            51,
+            54
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-329-01",
+      "documentId": 329,
+      "sourceRef": "ToolJet/ToolJet",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 140,
+      "predictedCoverage": {
+        "REVIEW": 140
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 140
+      },
+      "comparableCoverage": {
+        "REVIEW": 140
+      },
+      "mixedParentAnnotation": false,
+      "reason": "低代码构建器不等于已经完成库存管理系统。",
+      "predictedBlocks": [
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:0-157",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-329-02",
+      "documentId": 329,
+      "sourceRef": "ToolJet/ToolJet",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "STAR_REQUEST",
+      "outcome": "NOISE_DEFERRED",
+      "lineRange": [
+        3,
+        3
+      ],
+      "nonWhitespaceUtf16": 66,
+      "predictedCoverage": {
+        "REVIEW": 66
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 66
+      },
+      "comparableCoverage": {
+        "REVIEW": 66
+      },
+      "mixedParentAnnotation": false,
+      "reason": "求 Star 话术不进入检索证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:158-231",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-329-03",
+      "documentId": 329,
+      "sourceRef": "ToolJet/ToolJet",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        13,
+        13
+      ],
+      "nonWhitespaceUtf16": 114,
+      "predictedCoverage": {
+        "KEEP": 114
+      },
+      "candidateEvidenceUnits": 114,
+      "substantiveCoverage": {
+        "KEEP": 114
+      },
+      "comparableCoverage": {
+        "KEEP": 114
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留 AGPL 许可线索。",
+      "predictedBlocks": [
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:948-1065",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            13,
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-329-04",
+      "documentId": 329,
+      "sourceRef": "ToolJet/ToolJet",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "IMAGE_ONLY",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        16,
+        18
+      ],
+      "nonWhitespaceUtf16": 89,
+      "predictedCoverage": {
+        "DROP": 21,
+        "REVIEW": 68
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 68
+      },
+      "comparableCoverage": {
+        "REVIEW": 68
+      },
+      "mixedParentAnnotation": false,
+      "reason": "示例图片的库存管理 alt 不能独立证明仓库提供该现成功能。",
+      "predictedBlocks": [
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:1180-1199",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:1199-1275",
+          "decision": "REVIEW",
+          "reason": "IMAGE_OR_MIXED_MARKUP",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:1275-1280",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            18,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-329-05",
+      "documentId": 329,
+      "sourceRef": "ToolJet/ToolJet",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "COMMUNITY",
+      "outcome": "KEPT",
+      "lineRange": [
+        26,
+        35
+      ],
+      "nonWhitespaceUtf16": 362,
+      "predictedCoverage": {
+        "KEEP": 362
+      },
+      "candidateEvidenceUnits": 362,
+      "substantiveCoverage": {
+        "KEEP": 352
+      },
+      "comparableCoverage": {
+        "KEEP": 362
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留社区版标题和能力范围。",
+      "predictedBlocks": [
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:1369-1382",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            26,
+            26
+          ]
+        },
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:1382-1776",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            27,
+            35
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-329-06",
+      "documentId": 329,
+      "sourceRef": "ToolJet/ToolJet",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "ENTERPRISE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        37,
+        41
+      ],
+      "nonWhitespaceUtf16": 102,
+      "predictedCoverage": {
+        "KEEP": 17,
+        "REVIEW": 85
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 85
+      },
+      "comparableCoverage": {
+        "KEEP": 17,
+        "REVIEW": 85
+      },
+      "mixedParentAnnotation": false,
+      "reason": "企业 AI 能力必须携带企业版限定，不能向免费社区版迁移。",
+      "predictedBlocks": [
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:1777-1797",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            37,
+            37
+          ]
+        },
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:1797-2247",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            38,
+            50
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-329-07",
+      "documentId": 329,
+      "sourceRef": "ToolJet/ToolJet",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "INCOMPLETE_TEXT",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        54,
+        55
+      ],
+      "nonWhitespaceUtf16": 97,
+      "predictedCoverage": {
+        "KEEP": 6,
+        "REVIEW": 91
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 91
+      },
+      "comparableCoverage": {
+        "KEEP": 6,
+        "REVIEW": 91
+      },
+      "mixedParentAnnotation": false,
+      "reason": "安装说明尾部不完整，待复核。",
+      "predictedBlocks": [
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:2254-2262",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            54,
+            54
+          ]
+        },
+        {
+          "blockId": "ee172ff51a83954c88054abfeb06de499f900902e952ec2632e919fb8186fe03:2262-2362",
+          "decision": "REVIEW",
+          "reason": "POSSIBLY_TRUNCATED_TEXT",
+          "lines": [
+            55,
+            55
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-354-01",
+      "documentId": 354,
+      "sourceRef": "Donkie/Spoolman",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "LOGO",
+      "outcome": "NOISE_DEFERRED",
+      "lineRange": [
+        1,
+        5
+      ],
+      "nonWhitespaceUtf16": 405,
+      "predictedCoverage": {
+        "REVIEW": 405
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 405
+      },
+      "comparableCoverage": {
+        "REVIEW": 405
+      },
+      "mixedParentAnnotation": false,
+      "reason": "独立 Logo 不进入功能知识。",
+      "predictedBlocks": [
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:0-424",
+          "decision": "REVIEW",
+          "reason": "IMAGE_OR_MIXED_MARKUP",
+          "lines": [
+            1,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-354-02",
+      "documentId": 354,
+      "sourceRef": "Donkie/Spoolman",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        9,
+        11
+      ],
+      "nonWhitespaceUtf16": 261,
+      "predictedCoverage": {
+        "REVIEW": 18,
+        "KEEP": 243
+      },
+      "candidateEvidenceUnits": 243,
+      "substantiveCoverage": {
+        "REVIEW": 18,
+        "KEEP": 243
+      },
+      "comparableCoverage": {
+        "REVIEW": 18,
+        "KEEP": 243
+      },
+      "mixedParentAnnotation": false,
+      "reason": "耗材管理场景明确，不能扩写为通用库存 ERP。",
+      "predictedBlocks": [
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:432-453",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            9,
+            9
+          ]
+        },
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:453-454",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            10,
+            10
+          ]
+        },
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:454-709",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            11,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-354-03",
+      "documentId": 354,
+      "sourceRef": "Donkie/Spoolman",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        16,
+        28
+      ],
+      "nonWhitespaceUtf16": 675,
+      "predictedCoverage": {
+        "KEEP": 675
+      },
+      "candidateEvidenceUnits": 675,
+      "substantiveCoverage": {
+        "KEEP": 670
+      },
+      "comparableCoverage": {
+        "KEEP": 675
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留功能、REST API 和数据库选项；多种数据库是可选实现，不是全部必装。",
+      "predictedBlocks": [
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:1000-1007",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:1007-1730",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            17,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-354-04",
+      "documentId": 354,
+      "sourceRef": "Donkie/Spoolman",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "IMAGE_ONLY",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        36,
+        37
+      ],
+      "nonWhitespaceUtf16": 109,
+      "predictedCoverage": {
+        "REVIEW": 109
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 109
+      },
+      "comparableCoverage": {
+        "REVIEW": 109
+      },
+      "mixedParentAnnotation": false,
+      "reason": "未读取图片内容，不能从图片 URL 推断功能。",
+      "predictedBlocks": [
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:2094-2206",
+          "decision": "REVIEW",
+          "reason": "CAPTION_AND_UNREAD_IMAGE",
+          "lines": [
+            36,
+            37
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-354-05",
+      "documentId": 354,
+      "sourceRef": "Donkie/Spoolman",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        39,
+        40
+      ],
+      "nonWhitespaceUtf16": 94,
+      "predictedCoverage": {
+        "KEEP": 94
+      },
+      "candidateEvidenceUnits": 94,
+      "substantiveCoverage": {
+        "KEEP": 90
+      },
+      "comparableCoverage": {
+        "KEEP": 94
+      },
+      "mixedParentAnnotation": false,
+      "reason": "安装文档链接可保留，不能据此编造 Docker、内存或部署步骤。",
+      "predictedBlocks": [
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:2207-2213",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            39,
+            39
+          ]
+        },
+        {
+          "blockId": "8de902a90ecfeeeb24ad60bddb68a506b62c4bc6e73ec1091a4459b0618b058f:2213-2307",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            40,
+            40
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-357-01",
+      "documentId": 357,
+      "sourceRef": "Slicer/Slicer",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "PUBLICATION",
+      "outcome": "KEPT",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 146,
+      "predictedCoverage": {
+        "KEEP": 146
+      },
+      "candidateEvidenceUnits": 146,
+      "substantiveCoverage": {
+        "KEEP": 146
+      },
+      "comparableCoverage": {
+        "KEEP": 146
+      },
+      "mixedParentAnnotation": false,
+      "reason": "DOI 是可追溯学术来源入口。",
+      "predictedBlocks": [
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:0-148",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-357-02",
+      "documentId": 357,
+      "sourceRef": "Slicer/Slicer",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "CI_BADGE",
+      "outcome": "DROPPED",
+      "lineRange": [
+        3,
+        3
+      ],
+      "nonWhitespaceUtf16": 139,
+      "predictedCoverage": {
+        "DROP": 139
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 139
+      },
+      "comparableCoverage": {
+        "DROP": 139
+      },
+      "mixedParentAnnotation": false,
+      "reason": "动态 CI 状态不证明冻结版本已经通过验证。",
+      "predictedBlocks": [
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:482-622",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-357-03",
+      "documentId": 357,
+      "sourceRef": "Slicer/Slicer",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "SECURITY",
+      "outcome": "KEPT",
+      "lineRange": [
+        4,
+        4
+      ],
+      "nonWhitespaceUtf16": 160,
+      "predictedCoverage": {
+        "KEEP": 160
+      },
+      "candidateEvidenceUnits": 160,
+      "substantiveCoverage": {
+        "KEEP": 160
+      },
+      "comparableCoverage": {
+        "KEEP": 160
+      },
+      "mixedParentAnnotation": false,
+      "reason": "安全评估徽章只保留为链接，不能声明项目已安全认证。",
+      "predictedBlocks": [
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:622-784",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            4,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-357-04",
+      "documentId": 357,
+      "sourceRef": "Slicer/Slicer",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        6,
+        8
+      ],
+      "nonWhitespaceUtf16": 82,
+      "predictedCoverage": {
+        "KEEP": 42,
+        "REVIEW": 40
+      },
+      "candidateEvidenceUnits": 42,
+      "substantiveCoverage": {
+        "KEEP": 42,
+        "REVIEW": 40
+      },
+      "comparableCoverage": {
+        "KEEP": 42,
+        "REVIEW": 40
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留可视化、图像分析与多平台定位，不从项目名补充当前片段未写的领域限制。",
+      "predictedBlocks": [
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:785-830",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            6,
+            6
+          ]
+        },
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:830-831",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            7,
+            7
+          ]
+        },
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:831-877",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            8,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-357-05",
+      "documentId": 357,
+      "sourceRef": "Slicer/Slicer",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        10,
+        11
+      ],
+      "nonWhitespaceUtf16": 110,
+      "predictedCoverage": {
+        "KEEP": 110
+      },
+      "candidateEvidenceUnits": 110,
+      "substantiveCoverage": {
+        "KEEP": 110
+      },
+      "comparableCoverage": {
+        "KEEP": 110
+      },
+      "mixedParentAnnotation": false,
+      "reason": "源码构建文档入口对二次开发有用。",
+      "predictedBlocks": [
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:878-993",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            10,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-357-06",
+      "documentId": 357,
+      "sourceRef": "Slicer/Slicer",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        19,
+        19
+      ],
+      "nonWhitespaceUtf16": 28,
+      "predictedCoverage": {
+        "KEEP": 28
+      },
+      "candidateEvidenceUnits": 28,
+      "substantiveCoverage": {
+        "KEEP": 28
+      },
+      "comparableCoverage": {
+        "KEEP": 28
+      },
+      "mixedParentAnnotation": false,
+      "reason": "只确认许可入口，不能凭链接默认许可证类型。",
+      "predictedBlocks": [
+        {
+          "blockId": "f3265d69e3d6bd1b5490ba90b7606a125b5b429e63bbf9787e34df5f66048f9b:1095-1125",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            19,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-408-01",
+      "documentId": 408,
+      "sourceRef": "immich-app/immich",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        3,
+        3
+      ],
+      "nonWhitespaceUtf16": 214,
+      "predictedCoverage": {
+        "KEEP": 214
+      },
+      "candidateEvidenceUnits": 214,
+      "substantiveCoverage": {
+        "KEEP": 214
+      },
+      "comparableCoverage": {
+        "KEEP": 214
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留 AGPL 许可信息。",
+      "predictedBlocks": [
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:28-248",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-408-02",
+      "documentId": 408,
+      "sourceRef": "immich-app/immich",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "LOGO",
+      "outcome": "DROPPED",
+      "lineRange": [
+        11,
+        13
+      ],
+      "nonWhitespaceUtf16": 105,
+      "predictedCoverage": {
+        "DROP": 105
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 84
+      },
+      "comparableCoverage": {
+        "DROP": 84
+      },
+      "mixedParentAnnotation": false,
+      "reason": "Logo 不构成功能依据。",
+      "predictedBlocks": [
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:484-503",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            11,
+            11
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:503-594",
+          "decision": "DROP",
+          "reason": "LOGO_ONLY",
+          "lines": [
+            12,
+            12
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:594-599",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            13,
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-408-03",
+      "documentId": 408,
+      "sourceRef": "immich-app/immich",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "TRANSLATION_NAV",
+      "outcome": "NOISE_DEFERRED",
+      "lineRange": [
+        21,
+        40
+      ],
+      "nonWhitespaceUtf16": 891,
+      "predictedCoverage": {
+        "DROP": 21,
+        "REVIEW": 870
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 870
+      },
+      "comparableCoverage": {
+        "REVIEW": 870
+      },
+      "mixedParentAnnotation": false,
+      "reason": "README 翻译导航不等于产品支持这些界面语言。",
+      "predictedBlocks": [
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1019-1067",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            27,
+            27
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1067-1119",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            28,
+            28
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1119-1174",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            29,
+            29
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1174-1225",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            30,
+            30
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1225-1274",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            31,
+            31
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1274-1323",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            32,
+            32
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1323-1378",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            33,
+            33
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1378-1430",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            34,
+            34
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1430-1495",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            35,
+            35
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1495-1547",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            36,
+            36
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1547-1599",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            37,
+            37
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1599-1654",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            38,
+            38
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1654-1706",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            39,
+            39
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1706-1711",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            40,
+            40
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:743-762",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            21,
+            21
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:762-813",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            22,
+            22
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:813-865",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            23,
+            23
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:865-918",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            24,
+            24
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:918-971",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            25,
+            25
+          ]
+        },
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:971-1019",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            26,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-408-04",
+      "documentId": 408,
+      "sourceRef": "immich-app/immich",
+      "expected": "KEEP",
+      "kind": "LIMITATION",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        43,
+        44
+      ],
+      "nonWhitespaceUtf16": 102,
+      "predictedCoverage": {
+        "KEEP": 102
+      },
+      "candidateEvidenceUnits": 102,
+      "substantiveCoverage": {
+        "KEEP": 102
+      },
+      "comparableCoverage": {
+        "KEEP": 102
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留备份相关风险提示，不得仅抽取正向功能。",
+      "predictedBlocks": [
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:1713-1825",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            43,
+            45
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-408-05",
+      "documentId": 408,
+      "sourceRef": "immich-app/immich",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "SUPPORT_MATRIX",
+      "outcome": "KEPT",
+      "lineRange": [
+        74,
+        93
+      ],
+      "nonWhitespaceUtf16": 342,
+      "predictedCoverage": {
+        "KEEP": 342
+      },
+      "candidateEvidenceUnits": 342,
+      "substantiveCoverage": {
+        "KEEP": 342
+      },
+      "comparableCoverage": {
+        "KEEP": 342
+      },
+      "mixedParentAnnotation": false,
+      "reason": "表头和每行必须配对保留，移动端与 Web 的否或不适用不能丢失。",
+      "predictedBlocks": [
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:2416-3475",
+          "decision": "KEEP",
+          "reason": "COMPLETE_TABLE_WITH_HEADER",
+          "lines": [
+            74,
+            93
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-408-06",
+      "documentId": 408,
+      "sourceRef": "immich-app/immich",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "INCOMPLETE_TABLE",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        94,
+        94
+      ],
+      "nonWhitespaceUtf16": 6,
+      "predictedCoverage": {
+        "REVIEW": 6
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 6
+      },
+      "comparableCoverage": {
+        "REVIEW": 6
+      },
+      "mixedParentAnnotation": false,
+      "reason": "尾部残缺表格行不进入新的证据索引。",
+      "predictedBlocks": [
+        {
+          "blockId": "6ee2c1caedc80ccdd1536d15de7832013f126de67df035209be12ff594babd38:3475-3482",
+          "decision": "REVIEW",
+          "reason": "INCOMPLETE_STRUCTURE",
+          "lines": [
+            94,
+            94
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-435-01",
+      "documentId": 435,
+      "sourceRef": "navidrome/navidrome",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "WRAPPER_ONLY",
+      "outcome": "DROPPED",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 7,
+      "predictedCoverage": {
+        "DROP": 7
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 7
+      },
+      "comparableCoverage": {
+        "DROP": 7
+      },
+      "mixedParentAnnotation": false,
+      "reason": "仅允许去掉已配对的外层 html 围栏标记；结束标记在第 45 行，内部内容必须重新解析保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:0-8",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-435-02",
+      "documentId": 435,
+      "sourceRef": "navidrome/navidrome",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        15,
+        15
+      ],
+      "nonWhitespaceUtf16": 80,
+      "predictedCoverage": {
+        "KEEP": 80
+      },
+      "candidateEvidenceUnits": 80,
+      "substantiveCoverage": {
+        "KEEP": 80
+      },
+      "comparableCoverage": {
+        "KEEP": 80
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留音乐服务器用途。",
+      "predictedBlocks": [
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:1768-1853",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-435-03",
+      "documentId": 435,
+      "sourceRef": "navidrome/navidrome",
+      "expected": "KEEP",
+      "kind": "MAINTENANCE",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        18,
+        18
+      ],
+      "nonWhitespaceUtf16": 127,
+      "predictedCoverage": {
+        "KEEP": 127
+      },
+      "candidateEvidenceUnits": 127,
+      "substantiveCoverage": {
+        "KEEP": 127
+      },
+      "comparableCoverage": {
+        "KEEP": 127
+      },
+      "mixedParentAnnotation": false,
+      "reason": "master 不稳定及推荐发布版本的限定影响部署。",
+      "predictedBlocks": [
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:1855-1988",
+          "decision": "KEEP",
+          "reason": "MAINTENANCE_CONDITION",
+          "lines": [
+            18,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-435-04",
+      "documentId": 435,
+      "sourceRef": "navidrome/navidrome",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "MIXED",
+      "outcome": "KEPT",
+      "lineRange": [
+        22,
+        22
+      ],
+      "nonWhitespaceUtf16": 423,
+      "predictedCoverage": {
+        "KEEP": 423
+      },
+      "candidateEvidenceUnits": 423,
+      "substantiveCoverage": {
+        "KEEP": 423
+      },
+      "comparableCoverage": {
+        "KEEP": 423
+      },
+      "mixedParentAnnotation": true,
+      "reason": "反馈、贡献入口与社群邀请同在一行，不能删除有用入口。",
+      "predictedBlocks": [
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2039-2475",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            22,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-435-05",
+      "documentId": 435,
+      "sourceRef": "navidrome/navidrome",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        24,
+        26
+      ],
+      "nonWhitespaceUtf16": 64,
+      "predictedCoverage": {
+        "KEEP": 64
+      },
+      "candidateEvidenceUnits": 64,
+      "substantiveCoverage": {
+        "KEEP": 60
+      },
+      "comparableCoverage": {
+        "KEEP": 64
+      },
+      "mixedParentAnnotation": false,
+      "reason": "安装指南入口应保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2476-2482",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            24,
+            24
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2482-2483",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            25,
+            25
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2483-2546",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            26,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-435-06",
+      "documentId": 435,
+      "sourceRef": "navidrome/navidrome",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "HOSTING_OPTION",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        28,
+        32
+      ],
+      "nonWhitespaceUtf16": 270,
+      "predictedCoverage": {
+        "KEEP": 5,
+        "REVIEW": 265
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 265
+      },
+      "comparableCoverage": {
+        "KEEP": 5,
+        "REVIEW": 265
+      },
+      "mixedParentAnnotation": false,
+      "reason": "托管服务是部署替代方式，需保留服务归属，不能推断必须购买云服务。",
+      "predictedBlocks": [
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2547-2554",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            28,
+            28
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2554-2555",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            29,
+            29
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2555-2719",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            30,
+            30
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2719-2720",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            31,
+            31
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2720-2827",
+          "decision": "REVIEW",
+          "reason": "IMAGE_OR_MIXED_MARKUP",
+          "lines": [
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-435-07",
+      "documentId": 435,
+      "sourceRef": "navidrome/navidrome",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        34,
+        44
+      ],
+      "nonWhitespaceUtf16": 240,
+      "predictedCoverage": {
+        "KEEP": 240
+      },
+      "candidateEvidenceUnits": 240,
+      "substantiveCoverage": {
+        "KEEP": 236
+      },
+      "comparableCoverage": {
+        "KEEP": 240
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留平台和 Docker 支持；支持 Docker 不等于只能使用 Docker。",
+      "predictedBlocks": [
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2828-2834",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            34,
+            34
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2834-2835",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            35,
+            35
+          ]
+        },
+        {
+          "blockId": "d4fcfc0869f2708946bf4e633302a259ce8f121a079d7c6e78c2e9fd09e53562:2835-3106",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            36,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-047-01",
+      "documentId": 47,
+      "sourceRef": "raphaelsalaja/audio",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        4,
+        4
+      ],
+      "nonWhitespaceUtf16": 80,
+      "predictedCoverage": {
+        "KEEP": 80
+      },
+      "candidateEvidenceUnits": 80,
+      "substantiveCoverage": {
+        "KEEP": 80
+      },
+      "comparableCoverage": {
+        "KEEP": 80
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留许可证徽章信息。",
+      "predictedBlocks": [
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:125-206",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            4,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-047-02",
+      "documentId": 47,
+      "sourceRef": "raphaelsalaja/audio",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "CI_BADGE",
+      "outcome": "DROPPED",
+      "lineRange": [
+        5,
+        5
+      ],
+      "nonWhitespaceUtf16": 147,
+      "predictedCoverage": {
+        "DROP": 147
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 147
+      },
+      "comparableCoverage": {
+        "DROP": 147
+      },
+      "mixedParentAnnotation": false,
+      "reason": "CI 徽章不是冻结版本的测试报告。",
+      "predictedBlocks": [
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:206-354",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            5,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-047-03",
+      "documentId": 47,
+      "sourceRef": "raphaelsalaja/audio",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        7,
+        9
+      ],
+      "nonWhitespaceUtf16": 147,
+      "predictedCoverage": {
+        "KEEP": 92,
+        "REVIEW": 55
+      },
+      "candidateEvidenceUnits": 92,
+      "substantiveCoverage": {
+        "KEEP": 92,
+        "REVIEW": 55
+      },
+      "comparableCoverage": {
+        "KEEP": 92,
+        "REVIEW": 55
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留音频库用途和 11 kB 声明；不当作本轮实测大小。",
+      "predictedBlocks": [
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:355-464",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            7,
+            7
+          ]
+        },
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:464-465",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            8,
+            8
+          ]
+        },
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:465-531",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            9,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-047-04",
+      "documentId": 47,
+      "sourceRef": "raphaelsalaja/audio",
+      "expected": "KEEP",
+      "kind": "USAGE",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        17,
+        30
+      ],
+      "nonWhitespaceUtf16": 246,
+      "predictedCoverage": {
+        "KEEP": 246
+      },
+      "candidateEvidenceUnits": 246,
+      "substantiveCoverage": {
+        "KEEP": 234
+      },
+      "comparableCoverage": {
+        "KEEP": 246
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留先 await ensureReady 再调用 click 的顺序，不能打乱初始化步骤。",
+      "predictedBlocks": [
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:585-600",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:600-601",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            18,
+            18
+          ]
+        },
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:601-885",
+          "decision": "KEEP",
+          "reason": "CODE_WITH_SOURCE_CONTEXT",
+          "lines": [
+            19,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-047-05",
+      "documentId": 47,
+      "sourceRef": "raphaelsalaja/audio",
+      "expected": "KEEP",
+      "kind": "ARCHITECTURE",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        66,
+        73
+      ],
+      "nonWhitespaceUtf16": 180,
+      "predictedCoverage": {
+        "KEEP": 180
+      },
+      "candidateEvidenceUnits": 180,
+      "substantiveCoverage": {
+        "KEEP": 161
+      },
+      "comparableCoverage": {
+        "KEEP": 180
+      },
+      "mixedParentAnnotation": false,
+      "reason": "monorepo 目录信息可用于源码学习。",
+      "predictedBlocks": [
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:1447-1469",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            66,
+            66
+          ]
+        },
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:1469-1470",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            67,
+            67
+          ]
+        },
+        {
+          "blockId": "e7d150032e14055054a72498bd88bdd9dec9a3bc46fcb51a510c1f2d32d057c7:1470-1702",
+          "decision": "KEEP",
+          "reason": "CODE_WITH_SOURCE_CONTEXT",
+          "lines": [
+            68,
+            73
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-054-01",
+      "documentId": 54,
+      "sourceRef": "crankyoldgit/IRremoteESP8266",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "CI_BADGE",
+      "outcome": "DROPPED",
+      "lineRange": [
+        3,
+        3
+      ],
+      "nonWhitespaceUtf16": 138,
+      "predictedCoverage": {
+        "DROP": 138
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 138
+      },
+      "comparableCoverage": {
+        "DROP": 138
+      },
+      "mixedParentAnnotation": false,
+      "reason": "动态构建状态不作为硬件兼容证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:56-196",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-054-02",
+      "documentId": 54,
+      "sourceRef": "crankyoldgit/IRremoteESP8266",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "HARDWARE",
+      "outcome": "KEPT",
+      "lineRange": [
+        10,
+        11
+      ],
+      "nonWhitespaceUtf16": 310,
+      "predictedCoverage": {
+        "KEEP": 310
+      },
+      "candidateEvidenceUnits": 310,
+      "substantiveCoverage": {
+        "KEEP": 310
+      },
+      "comparableCoverage": {
+        "KEEP": 310
+      },
+      "mixedParentAnnotation": false,
+      "reason": "ESP8266 或 ESP32、Arduino、940 nm 红外条件一起保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:902-1246",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            10,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-054-03",
+      "documentId": 54,
+      "sourceRef": "crankyoldgit/IRremoteESP8266",
+      "expected": "KEEP",
+      "kind": "COMPATIBILITY",
+      "scope": "VERSION_BOUNDARY",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        16,
+        24
+      ],
+      "nonWhitespaceUtf16": 558,
+      "predictedCoverage": {
+        "KEEP": 326,
+        "REVIEW": 232
+      },
+      "candidateEvidenceUnits": 301,
+      "substantiveCoverage": {
+        "REVIEW": 232,
+        "KEEP": 276
+      },
+      "comparableCoverage": {
+        "KEEP": 326,
+        "REVIEW": 232
+      },
+      "mixedParentAnnotation": false,
+      "reason": "2.0 和 2.5 之前的破坏性变更需要保留版本条件。",
+      "predictedBlocks": [
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:1469-1498",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:1498-1767",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:1767-1768",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            18,
+            18
+          ]
+        },
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:1768-1797",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            19,
+            19
+          ]
+        },
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:1797-2331",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            20,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-054-04",
+      "documentId": 54,
+      "sourceRef": "crankyoldgit/IRremoteESP8266",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "ARDUINO",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        48,
+        53
+      ],
+      "nonWhitespaceUtf16": 316,
+      "predictedCoverage": {
+        "KEEP": 71,
+        "REVIEW": 245
+      },
+      "candidateEvidenceUnits": 14,
+      "substantiveCoverage": {
+        "REVIEW": 245
+      },
+      "comparableCoverage": {
+        "KEEP": 71,
+        "REVIEW": 245
+      },
+      "mixedParentAnnotation": false,
+      "reason": "IDE 版本与各系统安装步骤有实际适配价值。",
+      "predictedBlocks": [
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:3632-3648",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            48,
+            48
+          ]
+        },
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:3648-3716",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            49,
+            49
+          ]
+        },
+        {
+          "blockId": "3a7cdd72b7e45419d09ddddce91904a640e7b4c0f1629264aa855b106d819c05:3716-4005",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            50,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-055-01",
+      "documentId": 55,
+      "sourceRef": "lvgl/lvgl",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        43,
+        50
+      ],
+      "nonWhitespaceUtf16": 379,
+      "predictedCoverage": {
+        "KEEP": 379
+      },
+      "candidateEvidenceUnits": 379,
+      "substantiveCoverage": {
+        "KEEP": 369
+      },
+      "comparableCoverage": {
+        "KEEP": 379
+      },
+      "mixedParentAnnotation": false,
+      "reason": "100 KB RAM、200–300 KB 闪存及屏幕缓冲条件按原文保留，不泛化为所有场景的最低值。",
+      "predictedBlocks": [
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:1696-1708",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            43,
+            43
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:1708-1709",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            44,
+            44
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:1709-1863",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            45,
+            46
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:1863-1864",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            47,
+            47
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:1864-2154",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            48,
+            50
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-055-02",
+      "documentId": 55,
+      "sourceRef": "lvgl/lvgl",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "MARKETING_COMPATIBILITY",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        52,
+        54
+      ],
+      "nonWhitespaceUtf16": 261,
+      "predictedCoverage": {
+        "REVIEW": 261
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 261
+      },
+      "comparableCoverage": {
+        "REVIEW": 261
+      },
+      "mixedParentAnnotation": false,
+      "reason": "采用量与广泛兼容宣传不能证明任意硬件均可运行。",
+      "predictedBlocks": [
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:2155-2462",
+          "decision": "REVIEW",
+          "reason": "TIME_SENSITIVE_OR_UNVERIFIED_CLAIM",
+          "lines": [
+            52,
+            54
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-055-03",
+      "documentId": 55,
+      "sourceRef": "lvgl/lvgl",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "PRO_EDITION",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        56,
+        56
+      ],
+      "nonWhitespaceUtf16": 283,
+      "predictedCoverage": {
+        "REVIEW": 283
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 283
+      },
+      "comparableCoverage": {
+        "REVIEW": 283
+      },
+      "mixedParentAnnotation": false,
+      "reason": "Pro 导出和使用条件应归属商业产品，不能移植成核心库能力。",
+      "predictedBlocks": [
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:2463-2799",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            56,
+            56
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-055-04",
+      "documentId": 55,
+      "sourceRef": "lvgl/lvgl",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "EDITION_BOUNDARY",
+      "outcome": "KEPT",
+      "lineRange": [
+        284,
+        295
+      ],
+      "nonWhitespaceUtf16": 572,
+      "predictedCoverage": {
+        "KEEP": 572
+      },
+      "candidateEvidenceUnits": 572,
+      "substantiveCoverage": {
+        "KEEP": 563
+      },
+      "comparableCoverage": {
+        "KEEP": 572
+      },
+      "mixedParentAnnotation": false,
+      "reason": "核心 MIT 与 Pro 收费许可边界必须保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:14375-14386",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            284,
+            284
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:14386-14387",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            285,
+            285
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:14387-14568",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            286,
+            287
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:14568-14569",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            288,
+            288
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:14569-14719",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            289,
+            290
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:14719-14720",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            291,
+            291
+          ]
+        },
+        {
+          "blockId": "41ccfbc81a7e4f18af103233abfd011833eb4d3e6449ff78a1618e3d5c1b9330:14720-15042",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            292,
+            295
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-057-01",
+      "documentId": 57,
+      "sourceRef": "nolangz/pixel2motion",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "COMMERCIAL_OFFER",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        8,
+        10
+      ],
+      "nonWhitespaceUtf16": 215,
+      "predictedCoverage": {
+        "REVIEW": 211,
+        "DROP": 4
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 211
+      },
+      "comparableCoverage": {
+        "REVIEW": 211
+      },
+      "mixedParentAnnotation": false,
+      "reason": "即将推出的商业服务不能当作当前开源版本现成功能。",
+      "predictedBlocks": [
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:289-462",
+          "decision": "REVIEW",
+          "reason": "TIME_SENSITIVE_OR_UNVERIFIED_CLAIM",
+          "lines": [
+            8,
+            8
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:462-469",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            9,
+            9
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:469-535",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            10,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-057-02",
+      "documentId": 57,
+      "sourceRef": "nolangz/pixel2motion",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        151,
+        164
+      ],
+      "nonWhitespaceUtf16": 306,
+      "predictedCoverage": {
+        "KEEP": 306
+      },
+      "candidateEvidenceUnits": 306,
+      "substantiveCoverage": {
+        "KEEP": 292
+      },
+      "comparableCoverage": {
+        "KEEP": 306
+      },
+      "mixedParentAnnotation": false,
+      "reason": "Python 3.10+、Chrome 或 Chromium、Playwright 各有职责；不能把浏览器与 Playwright 误写为互相替代。",
+      "predictedBlocks": [
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7199-7215",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            151,
+            151
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7215-7216",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            152,
+            152
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7216-7404",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            153,
+            156
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7404-7405",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            157,
+            157
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7405-7430",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            158,
+            158
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7430-7431",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            159,
+            159
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7431-7559",
+          "decision": "KEEP",
+          "reason": "CODE_WITH_SOURCE_CONTEXT",
+          "lines": [
+            160,
+            164
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-057-03",
+      "documentId": 57,
+      "sourceRef": "nolangz/pixel2motion",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "CONDITIONAL_PATH",
+      "outcome": "KEPT",
+      "lineRange": [
+        166,
+        170
+      ],
+      "nonWhitespaceUtf16": 158,
+      "predictedCoverage": {
+        "KEEP": 158
+      },
+      "candidateEvidenceUnits": 158,
+      "substantiveCoverage": {
+        "KEEP": 158
+      },
+      "comparableCoverage": {
+        "KEEP": 158
+      },
+      "mixedParentAnnotation": false,
+      "reason": "CHROME_BIN 是条件性配置，不应把示例机器路径当作全平台固定值。",
+      "predictedBlocks": [
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7560-7645",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            166,
+            166
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7645-7646",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            167,
+            167
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:7646-7739",
+          "decision": "KEEP",
+          "reason": "CODE_WITH_SOURCE_CONTEXT",
+          "lines": [
+            168,
+            170
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-057-04",
+      "documentId": 57,
+      "sourceRef": "nolangz/pixel2motion",
+      "expected": "KEEP",
+      "kind": "USAGE",
+      "scope": "STUDY_CONTRIBUTION",
+      "outcome": "KEPT",
+      "lineRange": [
+        180,
+        185
+      ],
+      "nonWhitespaceUtf16": 357,
+      "predictedCoverage": {
+        "KEEP": 357
+      },
+      "candidateEvidenceUnits": 357,
+      "substantiveCoverage": {
+        "KEEP": 336
+      },
+      "comparableCoverage": {
+        "KEEP": 357
+      },
+      "mixedParentAnnotation": false,
+      "reason": "发布检查清单可作开发资料；添加 LICENSE 的待办不是已经授予某种许可。",
+      "predictedBlocks": [
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:8240-8264",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            180,
+            180
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:8264-8265",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            181,
+            181
+          ]
+        },
+        {
+          "blockId": "dc7702f699ba85d14fca001fd0a90a150dbf18115561993e9e8709fc1a6e630a:8265-8720",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            182,
+            186
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-076-01",
+      "documentId": 76,
+      "sourceRef": "react/react",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "MIXED",
+      "outcome": "KEPT",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 811,
+      "predictedCoverage": {
+        "KEEP": 811
+      },
+      "candidateEvidenceUnits": 811,
+      "substantiveCoverage": {},
+      "comparableCoverage": {
+        "KEEP": 811
+      },
+      "mixedParentAnnotation": true,
+      "reason": "标题、许可、npm 和 CI 同行，先保护有用片段，不能一刀切整行删除。",
+      "predictedBlocks": [
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:0-826",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-076-02",
+      "documentId": 76,
+      "sourceRef": "react/react",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE_AND_RELATED",
+      "outcome": "KEPT",
+      "lineRange": [
+        3,
+        7
+      ],
+      "nonWhitespaceUtf16": 820,
+      "predictedCoverage": {
+        "KEEP": 820
+      },
+      "candidateEvidenceUnits": 820,
+      "substantiveCoverage": {
+        "KEEP": 820
+      },
+      "comparableCoverage": {
+        "KEEP": 820
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留组件定位并区分 React Native 的相关产品范围。",
+      "predictedBlocks": [
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:827-887",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            3,
+            3
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:887-888",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            4,
+            4
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:888-1793",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            5,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-076-03",
+      "documentId": 76,
+      "sourceRef": "react/react",
+      "expected": "KEEP",
+      "kind": "USAGE",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        41,
+        58
+      ],
+      "nonWhitespaceUtf16": 557,
+      "predictedCoverage": {
+        "KEEP": 557
+      },
+      "candidateEvidenceUnits": 557,
+      "substantiveCoverage": {
+        "KEEP": 547
+      },
+      "comparableCoverage": {
+        "KEEP": 557
+      },
+      "mixedParentAnnotation": false,
+      "reason": "示例与 JSX 非必须的限定一起保留，避免把推荐写法变成硬要求。",
+      "predictedBlocks": [
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3346-3358",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            41,
+            41
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3358-3359",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            42,
+            42
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3359-3464",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            43,
+            43
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3464-3465",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            44,
+            44
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3465-3703",
+          "decision": "KEEP",
+          "reason": "CODE_WITH_SOURCE_CONTEXT",
+          "lines": [
+            45,
+            54
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3703-3704",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            55,
+            55
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3704-3774",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            56,
+            56
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3774-3775",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            57,
+            57
+          ]
+        },
+        {
+          "blockId": "56787eefb718cf81bad7cf795635389cb9a86f742c475f1f43d7545e7b50ebdb:3775-3997",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            58,
+            58
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-164-01",
+      "documentId": 164,
+      "sourceRef": "deepseek-ai/deepseek-harness",
+      "expected": "KEEP",
+      "kind": "ARCHITECTURE",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        5,
+        7
+      ],
+      "nonWhitespaceUtf16": 318,
+      "predictedCoverage": {
+        "KEEP": 95,
+        "REVIEW": 223
+      },
+      "candidateEvidenceUnits": 95,
+      "substantiveCoverage": {
+        "KEEP": 95,
+        "REVIEW": 223
+      },
+      "comparableCoverage": {
+        "KEEP": 95,
+        "REVIEW": 223
+      },
+      "mixedParentAnnotation": false,
+      "reason": "插件能力组织是源码学习与二次开发证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:157-158",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            6,
+            6
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:158-403",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            7,
+            7
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:50-157",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            5,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-164-02",
+      "documentId": 164,
+      "sourceRef": "deepseek-ai/deepseek-harness",
+      "expected": "KEEP",
+      "kind": "MAINTENANCE",
+      "scope": "DEVELOPER_PREVIEW",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        11,
+        15
+      ],
+      "nonWhitespaceUtf16": 178,
+      "predictedCoverage": {
+        "KEEP": 120,
+        "REVIEW": 58
+      },
+      "candidateEvidenceUnits": 120,
+      "substantiveCoverage": {
+        "KEEP": 102,
+        "REVIEW": 58
+      },
+      "comparableCoverage": {
+        "KEEP": 120,
+        "REVIEW": 58
+      },
+      "mixedParentAnnotation": false,
+      "reason": "开发者预览与破坏性变更说明必须进入适配限制。",
+      "predictedBlocks": [
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:529-550",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            11,
+            11
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:550-551",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            12,
+            12
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:551-667",
+          "decision": "KEEP",
+          "reason": "MAINTENANCE_CONDITION",
+          "lines": [
+            13,
+            13
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:667-668",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            14,
+            14
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:668-734",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-164-03",
+      "documentId": 164,
+      "sourceRef": "deepseek-ai/deepseek-harness",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        19,
+        27
+      ],
+      "nonWhitespaceUtf16": 354,
+      "predictedCoverage": {
+        "KEEP": 299,
+        "REVIEW": 55
+      },
+      "candidateEvidenceUnits": 299,
+      "substantiveCoverage": {
+        "REVIEW": 55,
+        "KEEP": 284
+      },
+      "comparableCoverage": {
+        "KEEP": 299,
+        "REVIEW": 55
+      },
+      "mixedParentAnnotation": false,
+      "reason": "Node、CLI、端口和 SSH 条件需保留适用范围。",
+      "predictedBlocks": [
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:743-762",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            19,
+            19
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:762-763",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            20,
+            20
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:763-792",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            21,
+            21
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:792-793",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            22,
+            22
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:793-828",
+          "decision": "REVIEW",
+          "reason": "DEPENDENCY_NOT_APPROVED",
+          "lines": [
+            23,
+            25
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:828-829",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            26,
+            26
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:829-1167",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            27,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-164-04",
+      "documentId": 164,
+      "sourceRef": "deepseek-ai/deepseek-harness",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "STUDY_CONTRIBUTION",
+      "outcome": "KEPT",
+      "lineRange": [
+        53,
+        57
+      ],
+      "nonWhitespaceUtf16": 156,
+      "predictedCoverage": {
+        "KEEP": 156
+      },
+      "candidateEvidenceUnits": 156,
+      "substantiveCoverage": {
+        "KEEP": 143
+      },
+      "comparableCoverage": {
+        "KEEP": 156
+      },
+      "mixedParentAnnotation": false,
+      "reason": "开发文档与 AGENTS 文件仅作来源入口，不能当成当前助手的指令执行。",
+      "predictedBlocks": [
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:1885-1900",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            53,
+            53
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:1900-1901",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            54,
+            54
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:1901-2013",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            55,
+            55
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:2013-2014",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            56,
+            56
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:2014-2057",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            57,
+            57
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-164-05",
+      "documentId": 164,
+      "sourceRef": "deepseek-ai/deepseek-harness",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        71,
+        75
+      ],
+      "nonWhitespaceUtf16": 125,
+      "predictedCoverage": {
+        "KEEP": 125
+      },
+      "candidateEvidenceUnits": 125,
+      "substantiveCoverage": {
+        "KEEP": 116
+      },
+      "comparableCoverage": {
+        "KEEP": 125
+      },
+      "mixedParentAnnotation": false,
+      "reason": "MIT 与第三方许可条件保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:2301-2312",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            71,
+            71
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:2312-2313",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            72,
+            72
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:2313-2328",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            73,
+            73
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:2328-2329",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            74,
+            74
+          ]
+        },
+        {
+          "blockId": "baa353be1c829cca916cdbb7db0dd7eb831aaf9c202848add505722e7385fceb:2329-2440",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            75,
+            75
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-231-01",
+      "documentId": 231,
+      "sourceRef": "infiniflow/ragflow",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "LOGO",
+      "outcome": "DROPPED",
+      "lineRange": [
+        3,
+        3
+      ],
+      "nonWhitespaceUtf16": 72,
+      "predictedCoverage": {
+        "DROP": 72
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 72
+      },
+      "comparableCoverage": {
+        "DROP": 72
+      },
+      "mixedParentAnnotation": false,
+      "reason": "独立 Logo 不作知识证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:21-140",
+          "decision": "DROP",
+          "reason": "LOGO_ONLY",
+          "lines": [
+            2,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-231-02",
+      "documentId": 231,
+      "sourceRef": "infiniflow/ragflow",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "TRANSLATION_NAV",
+      "outcome": "NOISE_DEFERRED",
+      "lineRange": [
+        8,
+        18
+      ],
+      "nonWhitespaceUtf16": 984,
+      "predictedCoverage": {
+        "DROP": 869,
+        "REVIEW": 115
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 865,
+        "REVIEW": 115
+      },
+      "comparableCoverage": {
+        "DROP": 865,
+        "REVIEW": 115
+      },
+      "mixedParentAnnotation": false,
+      "reason": "README 翻译导航不表示产品支持语言。",
+      "predictedBlocks": [
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:1009-1113",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:1113-1217",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:1217-1222",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            18,
+            18
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:167-267",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            8,
+            8
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:267-367",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            9,
+            9
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:367-468",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            10,
+            10
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:468-567",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            11,
+            11
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:567-666",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            12,
+            12
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:666-770",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            13,
+            13
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:770-886",
+          "decision": "DROP",
+          "reason": "README_TRANSLATION_NAV",
+          "lines": [
+            14,
+            14
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:886-1009",
+          "decision": "REVIEW",
+          "reason": "IMAGE_OR_MIXED_MARKUP",
+          "lines": [
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-231-03",
+      "documentId": 231,
+      "sourceRef": "infiniflow/ragflow",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        33,
+        35
+      ],
+      "nonWhitespaceUtf16": 186,
+      "predictedCoverage": {
+        "KEEP": 186
+      },
+      "candidateEvidenceUnits": 186,
+      "substantiveCoverage": {
+        "KEEP": 186
+      },
+      "comparableCoverage": {
+        "KEEP": 186
+      },
+      "mixedParentAnnotation": false,
+      "reason": "Apache 许可入口可以保留，但不等同完整条款核验。",
+      "predictedBlocks": [
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:2083-2292",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            33,
+            35
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-231-04",
+      "documentId": 231,
+      "sourceRef": "infiniflow/ragflow",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "TOC_WITHOUT_BODY",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        56,
+        73
+      ],
+      "nonWhitespaceUtf16": 430,
+      "predictedCoverage": {
+        "REVIEW": 430
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 430
+      },
+      "comparableCoverage": {
+        "REVIEW": 430
+      },
+      "mixedParentAnnotation": false,
+      "reason": "只有目录锚点且对应正文缺少，不能推断功能和系统要求已经得到证实。",
+      "predictedBlocks": [
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3146-3193",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            56,
+            57
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3193-3194",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            58,
+            58
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3194-3233",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            59,
+            59
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3233-3260",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            60,
+            60
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3260-3290",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            61,
+            61
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3290-3318",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            62,
+            62
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3318-3353",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            63,
+            63
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3353-3380",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            64,
+            64
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3380-3408",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            65,
+            65
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3408-3452",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            66,
+            66
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3452-3515",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            67,
+            67
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3515-3542",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            68,
+            68
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3542-3564",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            69,
+            69
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3564-3587",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            70,
+            70
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3587-3613",
+          "decision": "REVIEW",
+          "reason": "INTERNAL_ANCHOR_REQUIRES_BODY_CHECK",
+          "lines": [
+            71,
+            71
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3613-3614",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            72,
+            72
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3614-3625",
+          "decision": "REVIEW",
+          "reason": "HTML_CONTEXT_REQUIRES_PARSE",
+          "lines": [
+            73,
+            73
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-231-05",
+      "documentId": 231,
+      "sourceRef": "infiniflow/ragflow",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        75,
+        77
+      ],
+      "nonWhitespaceUtf16": 107,
+      "predictedCoverage": {
+        "KEEP": 107
+      },
+      "candidateEvidenceUnits": 107,
+      "substantiveCoverage": {
+        "KEEP": 92
+      },
+      "comparableCoverage": {
+        "KEEP": 107
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留现有最简用途说明；不足以判断本地部署资源。",
+      "predictedBlocks": [
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3626-3645",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            75,
+            75
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3645-3646",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            76,
+            76
+          ]
+        },
+        {
+          "blockId": "f95345fe234e2cdccd241611d13c13a4845d7af4735fc9f5cca29fb095ad158e:3646-3741",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            77,
+            77
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-247-01",
+      "documentId": 247,
+      "sourceRef": "jeecgboot/JeecgBoot",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "MIXED",
+      "outcome": "KEPT",
+      "lineRange": [
+        22,
+        24
+      ],
+      "nonWhitespaceUtf16": 429,
+      "predictedCoverage": {
+        "KEEP": 429
+      },
+      "candidateEvidenceUnits": 429,
+      "substantiveCoverage": {
+        "KEEP": 429
+      },
+      "comparableCoverage": {
+        "KEEP": 429
+      },
+      "mixedParentAnnotation": true,
+      "reason": "保留技术栈原文，80% 等收益宣传不是本轮评测结论；后续需要子块区分。",
+      "predictedBlocks": [
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:940-1381",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            22,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-247-02",
+      "documentId": 247,
+      "sourceRef": "jeecgboot/JeecgBoot",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        27,
+        27
+      ],
+      "nonWhitespaceUtf16": 119,
+      "predictedCoverage": {
+        "KEEP": 119
+      },
+      "candidateEvidenceUnits": 119,
+      "substantiveCoverage": {
+        "KEEP": 119
+      },
+      "comparableCoverage": {
+        "KEEP": 119
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留 AI 集成功能声明，仍需区分声明与运行验证。",
+      "predictedBlocks": [
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:1383-1505",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            27,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-247-03",
+      "documentId": 247,
+      "sourceRef": "jeecgboot/JeecgBoot",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "MARKETING_SUITABILITY",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        37,
+        40
+      ],
+      "nonWhitespaceUtf16": 227,
+      "predictedCoverage": {
+        "KEEP": 39,
+        "REVIEW": 188
+      },
+      "candidateEvidenceUnits": 39,
+      "substantiveCoverage": {
+        "REVIEW": 188
+      },
+      "comparableCoverage": {
+        "KEEP": 39,
+        "REVIEW": 188
+      },
+      "mixedParentAnnotation": false,
+      "reason": "适合 ERP 或 CRM 及效率提升宣传不证明已提供完整业务应用。",
+      "predictedBlocks": [
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:1759-1800",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            37,
+            38
+          ]
+        },
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:1800-1994",
+          "decision": "REVIEW",
+          "reason": "TIME_SENSITIVE_OR_UNVERIFIED_CLAIM",
+          "lines": [
+            39,
+            40
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-247-04",
+      "documentId": 247,
+      "sourceRef": "jeecgboot/JeecgBoot",
+      "expected": "KEEP",
+      "kind": "COMPATIBILITY",
+      "scope": "VERSION_MATRIX",
+      "outcome": "KEPT",
+      "lineRange": [
+        48,
+        54
+      ],
+      "nonWhitespaceUtf16": 743,
+      "predictedCoverage": {
+        "KEEP": 743
+      },
+      "candidateEvidenceUnits": 743,
+      "substantiveCoverage": {
+        "KEEP": 704
+      },
+      "comparableCoverage": {
+        "KEEP": 743
+      },
+      "mixedParentAnnotation": false,
+      "reason": "JDK 与版本分支表头、对应行一起保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:2181-2222",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            48,
+            49
+          ]
+        },
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:2222-2223",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            50,
+            50
+          ]
+        },
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:2223-3055",
+          "decision": "KEEP",
+          "reason": "COMPLETE_TABLE_WITH_HEADER",
+          "lines": [
+            51,
+            54
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-247-05",
+      "documentId": 247,
+      "sourceRef": "jeecgboot/JeecgBoot",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        81,
+        82
+      ],
+      "nonWhitespaceUtf16": 123,
+      "predictedCoverage": {
+        "REVIEW": 123
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 123
+      },
+      "comparableCoverage": {
+        "REVIEW": 123
+      },
+      "mixedParentAnnotation": false,
+      "reason": "官网和演示链接已完整，尾部另一链接截断不影响这两行。",
+      "predictedBlocks": [
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:3768-3999",
+          "decision": "REVIEW",
+          "reason": "POSSIBLY_TRUNCATED_TEXT",
+          "lines": [
+            81,
+            83
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-247-06",
+      "documentId": 247,
+      "sourceRef": "jeecgboot/JeecgBoot",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "INCOMPLETE_LINK",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        83,
+        83
+      ],
+      "nonWhitespaceUtf16": 92,
+      "predictedCoverage": {
+        "REVIEW": 92
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 92
+      },
+      "comparableCoverage": {
+        "REVIEW": 92
+      },
+      "mixedParentAnnotation": false,
+      "reason": "该行混有完整与截断链接，暂待复核，后续安全拆分后只保留完整入口。",
+      "predictedBlocks": [
+        {
+          "blockId": "8063377115f84ca6809f2cc4dd993785f750a44468d5b5c6aa751800365002ce:3768-3999",
+          "decision": "REVIEW",
+          "reason": "POSSIBLY_TRUNCATED_TEXT",
+          "lines": [
+            81,
+            83
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-254-01",
+      "documentId": 254,
+      "sourceRef": "hacs/integration",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "HOME_ASSISTANT",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        11,
+        21
+      ],
+      "nonWhitespaceUtf16": 136,
+      "predictedCoverage": {
+        "KEEP": 47,
+        "REVIEW": 89
+      },
+      "candidateEvidenceUnits": 47,
+      "substantiveCoverage": {
+        "KEEP": 40,
+        "REVIEW": 89
+      },
+      "comparableCoverage": {
+        "KEEP": 47,
+        "REVIEW": 89
+      },
+      "mixedParentAnnotation": false,
+      "reason": "保留集成、插件和前端管理能力及宿主范围。",
+      "predictedBlocks": [
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:661-670",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            11,
+            11
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:670-671",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            12,
+            12
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:671-714",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            13,
+            13
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:714-715",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            14,
+            14
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:715-733",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            15,
+            15
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:733-734",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:734-821",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            17,
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-254-02",
+      "documentId": 254,
+      "sourceRef": "hacs/integration",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        25,
+        27
+      ],
+      "nonWhitespaceUtf16": 113,
+      "predictedCoverage": {
+        "KEEP": 26,
+        "REVIEW": 87
+      },
+      "candidateEvidenceUnits": 26,
+      "substantiveCoverage": {
+        "KEEP": 26,
+        "REVIEW": 87
+      },
+      "comparableCoverage": {
+        "KEEP": 26,
+        "REVIEW": 87
+      },
+      "mixedParentAnnotation": false,
+      "reason": "文档、配置和常见问题入口有导航价值。",
+      "predictedBlocks": [
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:831-859",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            25,
+            25
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:859-909",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            26,
+            26
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:909-950",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            27,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-254-03",
+      "documentId": 254,
+      "sourceRef": "hacs/integration",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "DONATION",
+      "outcome": "DROPPED",
+      "lineRange": [
+        30,
+        31
+      ],
+      "nonWhitespaceUtf16": 107,
+      "predictedCoverage": {
+        "DROP": 107
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 107
+      },
+      "comparableCoverage": {
+        "DROP": 107
+      },
+      "mixedParentAnnotation": false,
+      "reason": "捐赠链接不用于项目匹配。",
+      "predictedBlocks": [
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:1026-1085",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            30,
+            30
+          ]
+        },
+        {
+          "blockId": "43dc2a369992d587cf6cfcbf5b43020c7d8eb3538913dc896b5f8ba185fbf1fd:1085-1141",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            31,
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-259-01",
+      "documentId": 259,
+      "sourceRef": "piitaya/lovelace-mushroom",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "DONATION",
+      "outcome": "DROPPED",
+      "lineRange": [
+        9,
+        9
+      ],
+      "nonWhitespaceUtf16": 212,
+      "predictedCoverage": {
+        "DROP": 212
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 212
+      },
+      "comparableCoverage": {
+        "DROP": 212
+      },
+      "mixedParentAnnotation": false,
+      "reason": "捐赠图片不进入证据。",
+      "predictedBlocks": [
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:192-418",
+          "decision": "DROP",
+          "reason": "DECORATIVE_OR_PROMOTIONAL",
+          "lines": [
+            9,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-259-02",
+      "documentId": 259,
+      "sourceRef": "piitaya/lovelace-mushroom",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "HOME_ASSISTANT",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        13,
+        24
+      ],
+      "nonWhitespaceUtf16": 198,
+      "predictedCoverage": {
+        "KEEP": 136,
+        "REVIEW": 62
+      },
+      "candidateEvidenceUnits": 136,
+      "substantiveCoverage": {
+        "KEEP": 117,
+        "REVIEW": 62
+      },
+      "comparableCoverage": {
+        "KEEP": 136,
+        "REVIEW": 62
+      },
+      "mixedParentAnnotation": false,
+      "reason": "零依赖指不依赖其他卡片，不意味着不依赖 Home Assistant。",
+      "predictedBlocks": [
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:534-552",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            13,
+            13
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:552-553",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            14,
+            14
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:553-615",
+          "decision": "KEEP",
+          "reason": "EXPLICIT_PURPOSE_STATEMENT",
+          "lines": [
+            15,
+            15
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:615-616",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:616-683",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:683-684",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            18,
+            18
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:684-691",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            19,
+            19
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:691-692",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            20,
+            20
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:692-826",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            21,
+            28
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-259-03",
+      "documentId": 259,
+      "sourceRef": "piitaya/lovelace-mushroom",
+      "expected": "KEEP",
+      "kind": "LIMITATION",
+      "scope": "CORE",
+      "outcome": "KEPT",
+      "lineRange": [
+        30,
+        30
+      ],
+      "nonWhitespaceUtf16": 113,
+      "predictedCoverage": {
+        "KEEP": 113
+      },
+      "candidateEvidenceUnits": 113,
+      "substantiveCoverage": {
+        "KEEP": 113
+      },
+      "comparableCoverage": {
+        "KEEP": 113
+      },
+      "mixedParentAnnotation": false,
+      "reason": "不支持深度定制的限制保留，所列替代项目的能力不归给 Mushroom。",
+      "predictedBlocks": [
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:827-949",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            30,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-259-04",
+      "documentId": 259,
+      "sourceRef": "piitaya/lovelace-mushroom",
+      "expected": "KEEP",
+      "kind": "DEPLOYMENT",
+      "scope": "MANUAL_INSTALL",
+      "outcome": "KEPT",
+      "lineRange": [
+        49,
+        61
+      ],
+      "nonWhitespaceUtf16": 339,
+      "predictedCoverage": {
+        "KEEP": 339
+      },
+      "candidateEvidenceUnits": 339,
+      "substantiveCoverage": {
+        "KEEP": 332
+      },
+      "comparableCoverage": {
+        "KEEP": 339
+      },
+      "mixedParentAnnotation": false,
+      "reason": "YAML、安装路径和高级模式前提一起保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:1341-1350",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            49,
+            49
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:1350-1351",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            50,
+            50
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:1351-1783",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            51,
+            61
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-259-05",
+      "documentId": 259,
+      "sourceRef": "piitaya/lovelace-mushroom",
+      "expected": "KEEP",
+      "kind": "COMPATIBILITY",
+      "scope": "VERSION_BOUNDARY",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        95,
+        103
+      ],
+      "nonWhitespaceUtf16": 151,
+      "predictedCoverage": {
+        "KEEP": 119,
+        "REVIEW": 32
+      },
+      "candidateEvidenceUnits": 119,
+      "substantiveCoverage": {
+        "REVIEW": 32,
+        "KEEP": 107
+      },
+      "comparableCoverage": {
+        "KEEP": 119,
+        "REVIEW": 32
+      },
+      "mixedParentAnnotation": false,
+      "reason": "旧卡片与 2024.8 模板徽章的版本区别保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2571-2580",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            95,
+            95
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2580-2581",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            96,
+            96
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2581-2614",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            97,
+            97
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2614-2615",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            98,
+            98
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2615-2660",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            99,
+            99
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2660-2661",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            100,
+            100
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2661-2668",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            101,
+            101
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2668-2669",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            102,
+            102
+          ]
+        },
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2669-2740",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            103,
+            103
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-259-06",
+      "documentId": 259,
+      "sourceRef": "piitaya/lovelace-mushroom",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "INCOMPLETE_TEXT",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        107,
+        107
+      ],
+      "nonWhitespaceUtf16": 41,
+      "predictedCoverage": {
+        "REVIEW": 41
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 41
+      },
+      "comparableCoverage": {
+        "REVIEW": 41
+      },
+      "mixedParentAnnotation": false,
+      "reason": "主题说明尾部截断，待复核。",
+      "predictedBlocks": [
+        {
+          "blockId": "d58196d716bad4ddd5e538f35f7ab83d72f049a86ad0dc25c3e8af1d73207598:2751-2795",
+          "decision": "REVIEW",
+          "reason": "POSSIBLY_TRUNCATED_TEXT",
+          "lines": [
+            107,
+            107
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-265-01",
+      "documentId": 265,
+      "sourceRef": "78/xiaozhi-esp32",
+      "expected": "REVIEW",
+      "kind": "UNCERTAIN",
+      "scope": "IMAGE_ONLY",
+      "outcome": "REVIEWED",
+      "lineRange": [
+        13,
+        13
+      ],
+      "nonWhitespaceUtf16": 61,
+      "predictedCoverage": {
+        "REVIEW": 61
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 61
+      },
+      "comparableCoverage": {
+        "REVIEW": 61
+      },
+      "mixedParentAnnotation": false,
+      "reason": "图片的控制万物宣传不足以证明具体设备兼容性。",
+      "predictedBlocks": [
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:338-405",
+          "decision": "REVIEW",
+          "reason": "IMAGE_OR_MIXED_MARKUP",
+          "lines": [
+            13,
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-265-02",
+      "documentId": 265,
+      "sourceRef": "78/xiaozhi-esp32",
+      "expected": "KEEP",
+      "kind": "COMPATIBILITY",
+      "scope": "VERSION_BOUNDARY",
+      "outcome": "KEPT",
+      "lineRange": [
+        15,
+        21
+      ],
+      "nonWhitespaceUtf16": 186,
+      "predictedCoverage": {
+        "KEEP": 186
+      },
+      "candidateEvidenceUnits": 186,
+      "substantiveCoverage": {
+        "KEEP": 180
+      },
+      "comparableCoverage": {
+        "KEEP": 186
+      },
+      "mixedParentAnnotation": false,
+      "reason": "v1 与 v2 OTA 不兼容、手工烧录和维护时间按快照记录，不能宣称当前仍在维护。",
+      "predictedBlocks": [
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:406-414",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            15,
+            15
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:414-415",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:415-521",
+          "decision": "KEEP",
+          "reason": "CONDITION_OR_NEGATION",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:521-522",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            18,
+            18
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:522-553",
+          "decision": "KEEP",
+          "reason": "SCOPED_TECHNICAL_TEXT",
+          "lines": [
+            19,
+            19
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:553-554",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            20,
+            20
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:554-626",
+          "decision": "KEEP",
+          "reason": "MAINTENANCE_CONDITION",
+          "lines": [
+            21,
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-265-03",
+      "documentId": 265,
+      "sourceRef": "78/xiaozhi-esp32",
+      "expected": "KEEP",
+      "kind": "CAPABILITY",
+      "scope": "DEVICE_AND_CLOUD",
+      "outcome": "KEPT",
+      "lineRange": [
+        23,
+        36
+      ],
+      "nonWhitespaceUtf16": 378,
+      "predictedCoverage": {
+        "KEEP": 378
+      },
+      "candidateEvidenceUnits": 378,
+      "substantiveCoverage": {
+        "KEEP": 370
+      },
+      "comparableCoverage": {
+        "KEEP": 378
+      },
+      "mixedParentAnnotation": false,
+      "reason": "离线唤醒不等于完整离线对话；云端大模型和设备条件必须保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:627-637",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            23,
+            23
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:637-638",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            24,
+            24
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:638-1166",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            25,
+            37
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-265-04",
+      "documentId": 265,
+      "sourceRef": "78/xiaozhi-esp32",
+      "expected": "KEEP",
+      "kind": "SOURCE_POINTER",
+      "scope": "HARDWARE_COMPATIBILITY",
+      "outcome": "KEPT",
+      "lineRange": [
+        51,
+        58
+      ],
+      "nonWhitespaceUtf16": 767,
+      "predictedCoverage": {
+        "KEEP": 767
+      },
+      "candidateEvidenceUnits": 767,
+      "substantiveCoverage": {
+        "KEEP": 749
+      },
+      "comparableCoverage": {
+        "KEEP": 767
+      },
+      "mixedParentAnnotation": false,
+      "reason": "开发板入口包含兼容信息，不能因链接通向硬件页面就按广告删除。",
+      "predictedBlocks": [
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:1351-1373",
+          "decision": "KEEP",
+          "reason": "SCOPE_HEADING_ONLY",
+          "lines": [
+            51,
+            51
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:1373-1374",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            52,
+            52
+          ]
+        },
+        {
+          "blockId": "ceddb87083115426a17840fef618b524ef6094b32b2497c0854d7b83d48238bf:1374-2896",
+          "decision": "KEEP",
+          "reason": "LABELED_SOURCE_POINTER",
+          "lines": [
+            53,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-278-01",
+      "documentId": 278,
+      "sourceRef": "MarlinFirmware/Marlin",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "LOGO",
+      "outcome": "DROPPED",
+      "lineRange": [
+        1,
+        1
+      ],
+      "nonWhitespaceUtf16": 121,
+      "predictedCoverage": {
+        "DROP": 121
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 121
+      },
+      "comparableCoverage": {
+        "DROP": 121
+      },
+      "mixedParentAnnotation": false,
+      "reason": "独立 Logo 不作为硬件功能。",
+      "predictedBlocks": [
+        {
+          "blockId": "87faee4f3a0a1d8b0b331408824e3ecfa806dbb9c0056b7a2ba6d5ce31728aa0:0-128",
+          "decision": "DROP",
+          "reason": "LOGO_ONLY",
+          "lines": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-278-02",
+      "documentId": 278,
+      "sourceRef": "MarlinFirmware/Marlin",
+      "expected": "KEEP",
+      "kind": "REPO_IDENTITY",
+      "scope": "CORE",
+      "outcome": "DEFERRED_REVIEW",
+      "lineRange": [
+        3,
+        3
+      ],
+      "nonWhitespaceUtf16": 36,
+      "predictedCoverage": {
+        "REVIEW": 36
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "REVIEW": 36
+      },
+      "comparableCoverage": {
+        "REVIEW": 36
+      },
+      "mixedParentAnnotation": false,
+      "reason": "仅能确认 3D 打印机固件定位，不能据此判断具体机型。",
+      "predictedBlocks": [
+        {
+          "blockId": "87faee4f3a0a1d8b0b331408824e3ecfa806dbb9c0056b7a2ba6d5ce31728aa0:129-169",
+          "decision": "REVIEW",
+          "reason": "SEMANTIC_REVIEW_NEEDED",
+          "lines": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-278-03",
+      "documentId": 278,
+      "sourceRef": "MarlinFirmware/Marlin",
+      "expected": "KEEP",
+      "kind": "LICENSE",
+      "scope": "SOURCE_POINTER",
+      "outcome": "KEPT",
+      "lineRange": [
+        6,
+        6
+      ],
+      "nonWhitespaceUtf16": 113,
+      "predictedCoverage": {
+        "KEEP": 113
+      },
+      "candidateEvidenceUnits": 113,
+      "substantiveCoverage": {
+        "KEEP": 113
+      },
+      "comparableCoverage": {
+        "KEEP": 113
+      },
+      "mixedParentAnnotation": false,
+      "reason": "GPL-V3.0 许可线索保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "87faee4f3a0a1d8b0b331408824e3ecfa806dbb9c0056b7a2ba6d5ce31728aa0:189-311",
+          "decision": "KEEP",
+          "reason": "LICENSE_OR_EXCEPTION",
+          "lines": [
+            6,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "K1-278-04",
+      "documentId": 278,
+      "sourceRef": "MarlinFirmware/Marlin",
+      "expected": "DROP",
+      "kind": "NOISE",
+      "scope": "TRANSLATION_NAV",
+      "outcome": "DROPPED",
+      "lineRange": [
+        16,
+        49
+      ],
+      "nonWhitespaceUtf16": 2383,
+      "predictedCoverage": {
+        "DROP": 2383
+      },
+      "candidateEvidenceUnits": 0,
+      "substantiveCoverage": {
+        "DROP": 2376
+      },
+      "comparableCoverage": {
+        "DROP": 2383
+      },
+      "mixedParentAnnotation": false,
+      "reason": "此 HTML 表格是翻译导航而非功能表；不能套用所有表格一律保留。",
+      "predictedBlocks": [
+        {
+          "blockId": "87faee4f3a0a1d8b0b331408824e3ecfa806dbb9c0056b7a2ba6d5ce31728aa0:1393-1403",
+          "decision": "DROP",
+          "reason": "NOISE_SECTION_HEADING",
+          "lines": [
+            16,
+            16
+          ]
+        },
+        {
+          "blockId": "87faee4f3a0a1d8b0b331408824e3ecfa806dbb9c0056b7a2ba6d5ce31728aa0:1403-1404",
+          "decision": "DROP",
+          "reason": "LAYOUT_ONLY",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        {
+          "blockId": "87faee4f3a0a1d8b0b331408824e3ecfa806dbb9c0056b7a2ba6d5ce31728aa0:1404-3878",
+          "decision": "DROP",
+          "reason": "EXPLICIT_NOISE_SECTION",
+          "lines": [
+            18,
+            49
+          ]
+        }
+      ]
+    }
+  ]
+}

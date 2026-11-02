@@ -1,0 +1,399 @@
+{
+  "status": "PARTIAL_PASS",
+  "contextScenarios": "PASSED_FOR_TESTED_CASES",
+  "recommendationQuality": "FAILED",
+  "releaseApproved": false,
+  "checks": [
+    {
+      "name": "short conversation does not create requirements",
+      "passed": true,
+      "evidence": "3f2c8068-9e3c-4367-980f-d26f1b3c679f"
+    },
+    {
+      "name": "window-external nickname recovered",
+      "passed": true,
+      "evidence": "ba17f158-295f-44e6-b288-d76f26203339"
+    },
+    {
+      "name": "initial long-history confirmed conditions retained",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "correction becomes21days and retains offline",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "technical interruption preserves conditions",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "latest requirements outrank old summary",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "nickname remains available without explicit historical keyword",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "task switch/resume real retest",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "old offline requirement does not leak into newtask",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "ambiguous historical selection asks instead of selecting",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "strict real full run excludes unknown",
+      "passed": true,
+      "evidence": "29104a0d-a5a2-4c02-b1ae-2ba7bbda42f3"
+    },
+    {
+      "name": "purpose pool coverage tracked without provider failure",
+      "passed": true,
+      "evidence": {
+        "stopReason": "COMPLETE",
+        "reviewedCount": 12,
+        "pendingCount": 0,
+        "batches": 1,
+        "candidateCount": 12
+      }
+    },
+    {
+      "name": "actual generated summaries have valid exact raw sources",
+      "passed": true,
+      "evidence": 4
+    },
+    {
+      "name": "same request replays same run",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "altered replay rejected",
+      "passed": true,
+      "evidence": {
+        "expected": 409,
+        "actual": 409
+      }
+    },
+    {
+      "name": "foreign account cannot read history",
+      "passed": true,
+      "evidence": {
+        "expected": 404,
+        "actual": 404
+      }
+    },
+    {
+      "name": "foreign account cannot read run",
+      "passed": true,
+      "evidence": {
+        "expected": 404,
+        "actual": 404
+      }
+    },
+    {
+      "name": "foreign task binding rejected",
+      "passed": true,
+      "evidence": {
+        "expected": 409,
+        "actual": 409
+      }
+    },
+    {
+      "name": "HTTP boundary probes consume no provider attempts",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "old50-entry ledger unchanged",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "checkFailures": [],
+  "providerAttempts": 38,
+  "limit": 40,
+  "remaining": 2,
+  "attemptKinds": {
+    "CUSTOMER_CHAT": 32,
+    "OLLAMA_EMBEDDING": 6
+  },
+  "turns": 17,
+  "httpProtocolSuccesses": 17,
+  "findings": [
+    {
+      "id": "LIVE-BUG-01",
+      "status": "FIXED_REGRESSION_AND_REAL_RETEST_PASSED",
+      "problem": "RECORD_ONLY short circuit prevents explicit SWITCH_TASK or RESUME_TASK in composite instructions",
+      "evidenceRunIds": [
+        "fb792f74-7a52-4280-a12f-c40f959ab9b6",
+        "459264df-1203-4fb6-84a3-684bde12a8c3",
+        "b80e0cc6-2aa2-4573-97fb-00734d965599"
+      ],
+      "failedSession": "576",
+      "fixFile": "CustomerTaskService.java",
+      "fixSha256": "dee57d7eef42939079ae1e08f9030b5f4bf27e7a371a1e2ae6595b1ca1ac6e37",
+      "regression": "CustomerCompositeTaskControlTest",
+      "retestRunIds": [
+        "6315c7a5-cdf6-4587-b3da-3e0bdc2abaf9",
+        "cc406e22-100a-4ce6-b0df-53cb3c2c2130",
+        "342b5e4a-1eb4-497d-b1dc-228599cbe660"
+      ],
+      "regressionReport": "live-fix-regression.json"
+    },
+    {
+      "id": "LIVE-QUALITY-01",
+      "status": "OPEN",
+      "problem": "Beginner practice request ranked advanced Nacos/Doris candidates; only Java was verified, beginner suitability remained SOFT/UNKNOWN",
+      "evidenceRunId": "440f38c0-4b33-4da1-84b2-e1d8b2a5626d",
+      "releaseImpact": "Recommendation usefulness not accepted; do not equate real references with beginner suitability"
+    },
+    {
+      "id": "LIVE-QUALITY-02",
+      "status": "OPEN",
+      "problem": "Inventory request accepted ToolJet generic builder as SUBTOPIC; stated business capabilities remained SOFT/UNKNOWN but output was VERIFIED_PROJECTS",
+      "evidenceRunId": "ffd0ef69-dca6-4326-96df-32f25cfecef7",
+      "releaseImpact": "Inventory recommendation quality and verified-label correctness failed"
+    }
+  ],
+  "summaries": [
+    {
+      "sourceMessageIds": [
+        1367,
+        1368,
+        1369,
+        1370,
+        1371,
+        1372,
+        1373,
+        1374,
+        1375,
+        1376,
+        1377,
+        1378,
+        1379,
+        1380,
+        1381,
+        1382,
+        1383,
+        1384,
+        1385,
+        1386,
+        1387,
+        1388,
+        1389,
+        1390
+      ],
+      "sourceHashValid": true,
+      "summary": "用户最初要求只找Java项目、必须离线运行、最多两周，并明确只记录、暂不推荐。随后用户将周期改为四周，Java和必须离线两项要求不变。用户说明讨论代号为“蓝鲸书签”，仅作代号，不是软件功能要求。之后第4至第12轮用户连续进行技术插问，要求解释Java集合常见概念，每轮均声明只复习概念，不修改项目要求，也不请求查找或导入项目。客服各次回复均称这是合成历史中的概念解释，确认要求保持不变，项目尚未推荐，也没有执行导入，普通技术讨论不能变成新的项目条件。全程未发生项目推荐或导入，也无失败或未完成事项。"
+    },
+    {
+      "sourceMessageIds": [
+        1391,
+        1392,
+        1393,
+        1394,
+        1395,
+        1396,
+        1397,
+        1398,
+        1399,
+        1400,
+        1401,
+        1402,
+        1403,
+        1404,
+        1405,
+        1406,
+        1407,
+        1408,
+        1409,
+        1410,
+        1411,
+        1412,
+        1413,
+        1414
+      ],
+      "sourceHashValid": true,
+      "summary": "第13至24轮均为用户重复提出同一技术插问：解释Java集合的常见概念，并声明本轮只复习概念，不修改项目要求，也不请求查找或导入项目。助手每轮均回复为合成历史中的概念解释，确认要求保持不变，项目尚未推荐，也没有执行导入，并强调普通技术讨论不能变成新的项目条件。未发生项目要求修改、项目推荐、查找或导入等实际执行，也无失败或未完成事项。"
+    },
+    {
+      "sourceMessageIds": [
+        1415,
+        1416,
+        1417,
+        1418,
+        1419,
+        1420,
+        1421,
+        1422,
+        1423,
+        1424,
+        1425,
+        1426,
+        1427,
+        1428,
+        1429,
+        1430,
+        1431,
+        1432,
+        1433,
+        1434,
+        1435,
+        1436,
+        1437,
+        1438
+      ],
+      "sourceHashValid": true,
+      "summary": "第25至36轮均为用户技术插问，每轮要求解释Java集合常见概念，并声明只复习概念、不修改项目要求、不请求查找或导入项目。客服每轮回复称这是合成历史中的概念解释，确认要求保持不变，项目尚未推荐，也没有执行导入，并强调普通技术讨论不能变成新的项目条件。未发生项目修改、查找、推荐或导入，也无失败或未完成事项。"
+    },
+    {
+      "sourceMessageIds": [
+        1439,
+        1440,
+        1441,
+        1442,
+        1443,
+        1444,
+        1445,
+        1446,
+        1447,
+        1448,
+        1449,
+        1450,
+        1451,
+        1452,
+        1453,
+        1454,
+        1455,
+        1456,
+        1457,
+        1458,
+        1459,
+        1460,
+        1461,
+        1462
+      ],
+      "sourceHashValid": true,
+      "summary": "第37至48轮均为用户重复提出同一技术插问：解释Java集合的常见概念，并明确本轮只复习概念，不修改项目要求，也不请求查找或导入项目。助手每轮均回复为合成历史中的概念解释，确认要求保持不变，项目尚未推荐，也没有执行导入，并指出普通技术讨论不能变成新的项目条件。全程未发生项目要求修改、项目推荐、查找或导入等实际执行，也无失败或未完成事项。"
+    }
+  ],
+  "latencies": [
+    {
+      "case": "LIVE-01",
+      "session": "short",
+      "durationMs": 2328,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-02",
+      "session": "memory",
+      "durationMs": 3203,
+      "providerAttempts": 2
+    },
+    {
+      "case": "LIVE-02",
+      "session": "memory",
+      "durationMs": 4500,
+      "providerAttempts": 2
+    },
+    {
+      "case": "LIVE-03",
+      "session": "memory",
+      "durationMs": 4500,
+      "providerAttempts": 2
+    },
+    {
+      "case": "LIVE-04",
+      "session": "tasks",
+      "durationMs": 2922,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-04",
+      "session": "tasks",
+      "durationMs": 6360,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-04",
+      "session": "tasks",
+      "durationMs": 9266,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-04-RETEST",
+      "session": "tasks-retest",
+      "durationMs": 5156,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-04-RETEST",
+      "session": "tasks-retest",
+      "durationMs": 7219,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-04-RETEST",
+      "session": "tasks-retest",
+      "durationMs": 4781,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-05",
+      "session": "memory",
+      "durationMs": 4485,
+      "providerAttempts": 2
+    },
+    {
+      "case": "LIVE-06",
+      "session": "recommend",
+      "durationMs": 14843,
+      "providerAttempts": 6
+    },
+    {
+      "case": "LIVE-07",
+      "session": "recommend",
+      "durationMs": 3281,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-07",
+      "session": "recommend",
+      "durationMs": 9563,
+      "providerAttempts": 6
+    },
+    {
+      "case": "LIVE-08",
+      "session": "inventory",
+      "durationMs": 12593,
+      "providerAttempts": 8
+    },
+    {
+      "case": "LIVE-02-SEMANTIC",
+      "session": "memory",
+      "durationMs": 2922,
+      "providerAttempts": 1
+    },
+    {
+      "case": "LIVE-02-REQUIREMENTS",
+      "session": "memory",
+      "durationMs": 2672,
+      "providerAttempts": 1
+    }
+  ],
+  "performanceNote": "Client submit-to-terminal polling wall time. Synthetic seeded prefix, small sample, no load/P95 claims; failed semantic samples retained."
+}

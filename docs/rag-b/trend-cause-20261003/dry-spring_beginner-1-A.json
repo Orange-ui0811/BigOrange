@@ -1,0 +1,152 @@
+{
+  "case": "spring_beginner",
+  "variant": "A",
+  "phase": "retrieval",
+  "repeat": 1,
+  "startedAt": "2026-10-03T11:50:35.188630+00:00",
+  "response": {
+    "runtime": {
+      "model": "DeepSeek-V4-Pro",
+      "source": "REDIS",
+      "endpoint": "https://ai.gitee.com/v1",
+      "version": "1-1785206616703"
+    },
+    "variant": "A",
+    "retrieval": {
+      "text": "[candidateId=E1;evidenceId=E1;repo=mshumer/claude-of-duty;mode=RAW_FALLBACK] facts=D, PBD ragdolls, multi-layer bullet penetration player Movement state machine, slide/mantle/lean, camera feel weapons Procedural weapon geometry, viewmodel rig, ADS, spring recoil, procedural reloads, ballistics with travel time and drop fx GPU particles, decals, tracers, muz…\n\n[candidateId=E2;evidenceId=E2;repo=alibaba/nacos;mode=RAW_FALLBACK] facts=or Nacos, such as SDK, synchronization tool, etc. spring-cloud-alibaba provides the one-stop solution for application development over Alibaba middleware which includes Nacos. Contact\n\n[candidateId=E3;evidenceId=E3;repo=embabel/embabel-agent-examples;mode=RAW_FALLBACK] facts=elf-critique capabilities. What It Teaches: 🧠 Multi-model consensus (GPT-4 + Claude working together) 🔍 Self-improvement loops with critique and retry ⚙️ Configuration-driven behavior with Spring Boot properties 🌊 Parallel processing of research tasks 📝 Quality co…",
+      "trace": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "USED",
+        "queries": [
+          "Spring Boot Java",
+          "Spring Boot Java  学习 只推荐 Java 项目，从能运行的小功能开始 刚学"
+        ],
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "documentKey": "851:7",
+            "source": "BEGINNER_PROJECT",
+            "title": "mshumer/Claude-of-Duty",
+            "sourceRef": "beginner:104",
+            "projectId": "104",
+            "projectType": null,
+            "mappingStatus": null,
+            "repositoryUrl": "https://github.com/mshumer/claude-of-duty",
+            "text": "D, PBD ragdolls, multi-layer bullet penetration |\n| `player` | Movement state machine, slide/mantle/lean, camera feel |\n| `weapons` | Procedural weapon geometry, viewmodel rig, ADS, spring recoil, procedural reloads, ballistics with travel time and drop |\n| `fx` | GPU particles, decals, tracers, muzzle flash, explosions |\n| `ai` | Skinned soldiers, navmesh pathing, perception, cover behaviour, ragdoll death |\n| `ui` | DOM/CSS HUD: crosshair, hitmarkers, minimap, compass, killfeed |",
+            "card": "[candidateId=E1;evidenceId=E1;repo=mshumer/claude-of-duty;mode=RAW_FALLBACK] facts=D, PBD ragdolls, multi-layer bullet penetration player Movement state machine, slide/mantle/lean, camera feel weapons Procedural weapon geometry, viewmodel rig, ADS, spring recoil, procedural reloads, ballistics with travel time and drop fx GPU particles, decals, tracers, muz…",
+            "promptMode": "RAW_FALLBACK"
+          },
+          {
+            "evidenceId": "E2",
+            "documentKey": "872:19",
+            "source": "CAREER_PROJECT",
+            "title": "alibaba/nacos",
+            "sourceRef": "career:209",
+            "projectId": "209",
+            "projectType": null,
+            "mappingStatus": null,
+            "repositoryUrl": "https://github.com/alibaba/nacos",
+            "text": "or Nacos, such as SDK, synchronization tool, etc.\n* [spring-cloud-alibaba](https://github.com/spring-cloud-incubator/spring-cloud-alibaba) provides the one-stop solution for application development over Alibaba middleware which includes Nacos.\n\n## Contact",
+            "card": "[candidateId=E2;evidenceId=E2;repo=alibaba/nacos;mode=RAW_FALLBACK] facts=or Nacos, such as SDK, synchronization tool, etc. spring-cloud-alibaba provides the one-stop solution for application development over Alibaba middleware which includes Nacos. Contact",
+            "promptMode": "RAW_FALLBACK"
+          },
+          {
+            "evidenceId": "E3",
+            "documentKey": "902:35",
+            "source": "CAREER_PROJECT",
+            "title": "embabel/embabel-agent-examples",
+            "sourceRef": "career:245",
+            "projectId": "245",
+            "projectType": null,
+            "mappingStatus": null,
+            "repositoryUrl": "https://github.com/embabel/embabel-agent-examples",
+            "text": "elf-critique capabilities.\n\n**What It Teaches:**\n\n- 🧠 **Multi-model consensus** (GPT-4 + Claude working together)\n- 🔍 **Self-improvement loops** with critique and retry\n- ⚙️ **Configuration-driven behavior** with Spring Boot properties\n- 🌊 **Parallel processing** of research tasks\n- 📝 **Quality control** through automated review\n\n**Architecture:**",
+            "card": "[candidateId=E3;evidenceId=E3;repo=embabel/embabel-agent-examples;mode=RAW_FALLBACK] facts=elf-critique capabilities. What It Teaches: 🧠 Multi-model consensus (GPT-4 + Claude working together) 🔍 Self-improvement loops with critique and retry ⚙️ Configuration-driven behavior with Spring Boot properties 🌊 Parallel processing of research tasks 📝 Quality co…",
+            "promptMode": "RAW_FALLBACK"
+          }
+        ],
+        "durationMs": 417.93527,
+        "candidateCount": 11,
+        "selectedCount": 3,
+        "confidence": "HIGH",
+        "ragApplied": true,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 1094,
+        "evidencePromptChars": 981,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": "3",
+        "evidenceCompressionRatio": 0.103290676416819
+      }
+    },
+    "wallMs": 418.64507,
+    "scope": "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages": [
+      {
+        "durationMs": 200.898907,
+        "stage": "embedding.http.bge-small-zh-v1.5",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 204.844354,
+        "stage": "A.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 6.324715,
+        "stage": "A.restoreMetadata",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 1.989327,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 187.584916,
+        "stage": "embedding.http.bge-small-zh-v1.5",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 191.192539,
+        "stage": "A.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 6.699153,
+        "stage": "A.restoreMetadata",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 2.490321,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 2.707572,
+        "stage": "A.lexical",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.350961,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.165883,
+        "stage": "A.selectProjects",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 1.006276,
+        "stage": "A.renderEvidence",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 417.951132,
+        "stage": "retrieval.total",
+        "status": "SUCCEEDED"
+      }
+    ]
+  },
+  "clientWallMs": 447.2502999997232
+}

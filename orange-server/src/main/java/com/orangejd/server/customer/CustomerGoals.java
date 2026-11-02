@@ -5,6 +5,7 @@ import java.util.*;
 /** Goals are user preferences, not source categories or eligibility constraints. */
 public final class CustomerGoals {
     private CustomerGoals() {}
+    static boolean preset(String goal) { return Set.of("学习","求职","赚钱/接单/创业","探索技术兴趣").contains(goal); }
     public static List<String> values(Object raw) {
         if(raw==null) return List.of();
         List<?> input=raw instanceof List<?> list?list:List.of(raw);
@@ -25,7 +26,7 @@ public final class CustomerGoals {
         for(String goal:incoming) {
             // The model normalizes semantic presets. Repeating literal matching here would
             // reject paraphrases such as "挣点外快". Custom goals retain the user's wording.
-            boolean grounded=Set.of("学习","求职","赚钱/接单/创业","探索技术兴趣").contains(goal) || quote.contains(goal);
+            boolean grounded=preset(goal) || quote.contains(goal);
             if(!grounded) throw new IllegalArgumentException("UNSUPPORTED_GOAL");
         }
         Set<String> result=new LinkedHashSet<>(values(old));

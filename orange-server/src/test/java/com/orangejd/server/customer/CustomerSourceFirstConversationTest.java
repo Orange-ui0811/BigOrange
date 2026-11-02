@@ -27,7 +27,7 @@ class CustomerSourceFirstConversationTest {
         }
         org.springframework.test.util.ReflectionTestUtils.setField(context,"run","r");
         when(db.run("r")).thenReturn(Map.of("account_id",5,"session_id",1,"message","按当前条件查找项目"));
-        when(store.session(1,5)).thenReturn(Map.of("state_json",json.write(state)));when(db.messages(1,Long.MAX_VALUE,40)).thenReturn(List.of());
+        when(store.session(1,5)).thenReturn(CustomerWorkflowFixtures.session(json.write(state)));when(db.messages(1,Long.MAX_VALUE,40)).thenReturn(List.of());
         when(tools.context(eq("r"),eq(5L),any())).thenReturn(context);when(context.profile()).thenReturn("");
         when(model.call(eq(CustomerState.PROMPT),anyMap(),any(),anyList())).thenReturn(Map.of("intent","RECOMMEND","changes",Map.of()));
         when(model.call(eq(CustomerPurpose.PLAN_PROMPT),anyMap(),any(),anyList())).thenReturn(Map.of("queries",List.of("AI application development")));
@@ -36,6 +36,7 @@ class CustomerSourceFirstConversationTest {
         when(context.purposeCandidates(anyMap(),anyList(),anyString())).thenReturn(candidates);
         when(context.projectEvidence(anyString(),anyList())).thenThrow(new IllegalStateException("EVIDENCE_UNAVAILABLE"));
         doAnswer(i->fixture.card(((Long)i.getArgument(1)).intValue())).when(projects).detail(anyString(),anyLong(),anyMap());
+        doAnswer(i->fixture.card(((Long)i.getArgument(1)).intValue())).when(projects).exploreDetail(anyString(),anyLong(),anyMap());
         var app=new CustomerConversation(store,db,json,model,tools,projects,new CustomerProperties(),pc);
         app.execute("r",new ArrayList<>(),Instant.now().plusSeconds(90));
         var result=org.mockito.ArgumentCaptor.forClass(Map.class);verify(store).complete(eq("r"),result.capture(),anyMap(),any());

@@ -1,0 +1,705 @@
+{
+  "annotation": "Assistant-labeled, known/tuned five-repository diagnostic set. Not independent human or blind evaluation.",
+  "sources": [
+    {
+      "documentId": "240",
+      "versionId": "1024",
+      "repository": "Mintplex-Labs/anything-llm",
+      "sha256": "6d0540494f8b7782cf16a5e8b60234ecdd65a51a39abafc114ef7be644b5795a"
+    },
+    {
+      "documentId": "244",
+      "versionId": "1028",
+      "repository": "FlowiseAI/Flowise",
+      "sha256": "6968d715b991af4f536dca53f88ed39e0717c0560434739a8bd4349c3ed0b310"
+    },
+    {
+      "documentId": "427",
+      "versionId": "1211",
+      "repository": "n8n-io/n8n",
+      "sha256": "44e8c95cad2f7ab4150c020c3ba2d515f21fb758328c8795d646ca1339709367"
+    },
+    {
+      "documentId": "522",
+      "versionId": "1306",
+      "repository": "appsmithorg/appsmith",
+      "sha256": "72cc207105ff9cd86cbaba208369c5a325612b667bb0a73fd50a537a3d16635e"
+    },
+    {
+      "documentId": "546",
+      "versionId": "1330",
+      "repository": "ByteBunny777/Docguard",
+      "sha256": "a68fc51a2d75421f30e76faed3f53eb8e1d6eb19155496cbffe116a526f8e7c2"
+    }
+  ],
+  "cases": [
+    {
+      "id": "R01",
+      "query": "想要可以与文档对话、支持多用户的 AI 应用。",
+      "category": "NAMELESS",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "240"
+      ],
+      "targetDocumentId": "240",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "46b3568eedea1d33a5af1d1ea852c36efd76b14090f370792ba790adda358cd8:503-591",
+            "documentId": "240",
+            "startUtf16": 503,
+            "endUtf16": 591,
+            "startLine": 12,
+            "endLine": 13,
+            "text": "    <b>AnythingLLM：</b>您一直在寻找的全能 AI 应用。<br />\n    与您的文档对话，使用 AI 代理，高度可配置，支持多用户，无需繁琐的设置。\n"
+          },
+          {
+            "blockId": "46b3568eedea1d33a5af1d1ea852c36efd76b14090f370792ba790adda358cd8:3318-3375",
+            "documentId": "240",
+            "startUtf16": 3318,
+            "endUtf16": 3375,
+            "startLine": 39,
+            "endLine": 39,
+            "text": "与您的文档对话。使用 AI 代理自动化复杂工作流。高度可配置，支持多用户，久经考验——默认本地运行，零设置摩擦。\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R02",
+      "query": "Flowise 安装需要哪个版本的 Node.js？",
+      "category": "VERSION",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+            "documentId": "244",
+            "startUtf16": 1432,
+            "endUtf16": 1492,
+            "startLine": 37,
+            "endLine": 37,
+            "text": "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R03",
+      "query": "Flowise 如何通过 npm 安装并启动？",
+      "category": "PROCEDURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1493-1568",
+            "documentId": "244",
+            "startUtf16": 1493,
+            "endUtf16": 1568,
+            "startLine": 39,
+            "endLine": 43,
+            "text": "1. 安装 Flowise\n    ```bash\n    npm install -g flowise\n    ```\n2. 启动 Flowise\n"
+          }
+        ],
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1569-1611",
+            "documentId": "244",
+            "startUtf16": 1569,
+            "endUtf16": 1611,
+            "startLine": 45,
+            "endLine": 47,
+            "text": "    ```bash\n    npx flowise start\n    ```\n"
+          }
+        ],
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+            "documentId": "244",
+            "startUtf16": 1432,
+            "endUtf16": 1492,
+            "startLine": 37,
+            "endLine": 37,
+            "text": "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R04",
+      "query": "Flowise 本地 Docker 镜像怎么构建和运行？",
+      "category": "PROCEDURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1930-1991",
+            "documentId": "244",
+            "startUtf16": 1930,
+            "endUtf16": 1991,
+            "startLine": 66,
+            "endLine": 68,
+            "text": "    ```bash\n    docker build --no-cache -t flowise .\n    ```\n"
+          }
+        ],
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2002-2076",
+            "documentId": "244",
+            "startUtf16": 2002,
+            "endUtf16": 2076,
+            "startLine": 72,
+            "endLine": 74,
+            "text": "    ```bash\n    docker run -d --name flowise -p 3000:3000 flowise\n    ```\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R05",
+      "query": "Flowise Docker Compose 配置环境文件后如何启动？",
+      "category": "PROCEDURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1700-1902",
+            "documentId": "244",
+            "startUtf16": 1700,
+            "endUtf16": 1902,
+            "startLine": 55,
+            "endLine": 60,
+            "text": "1. 克隆 Flowise 项目\n2. 进入项目根目录下的 `docker` 文件夹\n3. 复制 `.env.example` 文件，粘贴到同一位置，并重命名为 `.env`\n4. `docker compose up -d`\n5. 打开 [http://localhost:3000](http://localhost:3000)\n6. 可以通过 `docker compose stop` 停止容器\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R06",
+      "query": "Flowise 后端和前端分别用什么技术，第三方节点在哪个模块？",
+      "category": "ARCHITECTURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2174-2307",
+            "documentId": "244",
+            "startUtf16": 2174,
+            "endUtf16": 2307,
+            "startLine": 86,
+            "endLine": 89,
+            "text": "-   `server`：Node 后端，提供 API 逻辑\n-   `ui`：React 前端\n-   `components`：第三方节点集成\n-   `api-documentation`：基于 express 自动生成的 swagger-ui API 文档\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R07",
+      "query": "Flowise 源码如何安装依赖并构建？",
+      "category": "PROCEDURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400",
+            "documentId": "244",
+            "startUtf16": 2318,
+            "endUtf16": 2400,
+            "startLine": 93,
+            "endLine": 96,
+            "text": "-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n"
+          }
+        ],
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2562-2599",
+            "documentId": "244",
+            "startUtf16": 2562,
+            "endUtf16": 2599,
+            "startLine": 114,
+            "endLine": 116,
+            "text": "    ```bash\n    pnpm install\n    ```\n"
+          }
+        ],
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2613-2648",
+            "documentId": "244",
+            "startUtf16": 2613,
+            "endUtf16": 2648,
+            "startLine": 120,
+            "endLine": 122,
+            "text": "    ```bash\n    pnpm build\n    ```\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R08",
+      "query": "Flowise 构建报错 134，Windows PowerShell 怎么调大 Node 堆内存？",
+      "category": "CONDITION",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2649-2769",
+            "documentId": "244",
+            "startUtf16": 2649,
+            "endUtf16": 2769,
+            "startLine": 124,
+            "endLine": 126,
+            "text": "    <details>\n    <summary>错误代码 134（JavaScript 堆内存不足）</summary>  \n    如果运行上述 `build` 脚本时遇到此错误，请尝试增加 Node.js 堆大小并重新运行脚本：\n"
+          }
+        ],
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2866-2941",
+            "documentId": "244",
+            "startUtf16": 2866,
+            "endUtf16": 2941,
+            "startLine": 132,
+            "endLine": 133,
+            "text": "    # Windows PowerShell\n    $env:NODE_OPTIONS=\"--max-old-space-size=4096\"\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R09",
+      "query": "Appsmith 可以搭建管理后台和仪表盘吗？",
+      "category": "PURPOSE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "targetDocumentId": "522",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "67e1f99e06547fcc1fdb3a003e5bed151f1bbf6319cac614cd8c3a9336f2d39b:1350-1773",
+            "documentId": "522",
+            "startUtf16": 1350,
+            "endUtf16": 1773,
+            "startLine": 28,
+            "endLine": 28,
+            "text": "Organizations build custom applications like dashboards, admin panels, customer 360, IT automation, and service management tools to help their teams work more efficiently and effectively. Appsmith is an open-source low-code platform that streamlines custom application development, deployment, and maintenance. Learn more on our [website](https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme).\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R10",
+      "query": "Appsmith 使用什么开源协议？",
+      "category": "LICENSE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "targetDocumentId": "522",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "67e1f99e06547fcc1fdb3a003e5bed151f1bbf6319cac614cd8c3a9336f2d39b:54219-54343",
+            "documentId": "522",
+            "startUtf16": 54219,
+            "endUtf16": 54343,
+            "startLine": 386,
+            "endLine": 386,
+            "text": "Appsmith is licensed under the terms of [Apache License 2.0](https://github.com/appsmithorg/appsmith/blob/release/LICENSE).\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R11",
+      "query": "Docguard 是做什么的？",
+      "category": "PURPOSE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:445-724",
+            "documentId": "546",
+            "startUtf16": 445,
+            "endUtf16": 724,
+            "startLine": 8,
+            "endLine": 11,
+            "text": "A concurrent Go CLI that scans documents for content that's **invisible or\nmeaningless to a human reader but fully \"readable\" by an LLM** — the kind\nof thing that ends up in a RAG knowledge base or gets pasted into a prompt\nand quietly hijacks the model without anyone noticing.\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R12",
+      "query": "Docguard 有外部依赖吗？",
+      "category": "DEPENDENCY",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:725-784",
+            "documentId": "546",
+            "startUtf16": 725,
+            "endUtf16": 784,
+            "startLine": 13,
+            "endLine": 13,
+            "text": "Zero external dependencies — just the Go standard library.\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R13",
+      "query": "Docguard 构建需要什么 Go 版本，怎么构建？",
+      "category": "VERSION_PROCEDURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:3279-3327",
+            "documentId": "546",
+            "startUtf16": 3279,
+            "endUtf16": 3327,
+            "startLine": 55,
+            "endLine": 57,
+            "text": "```bash\ngo build -o docguard ./cmd/docguard\n```\n"
+          }
+        ],
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:3328-3347",
+            "documentId": "546",
+            "startUtf16": 3328,
+            "endUtf16": 3347,
+            "startLine": 59,
+            "endLine": 59,
+            "text": "Requires Go 1.22+.\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R14",
+      "query": "Docguard 如何让 CI 对 medium 级别告警失败？",
+      "category": "PROCEDURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:3887-4195",
+            "documentId": "546",
+            "startUtf16": 3887,
+            "endUtf16": 4195,
+            "startLine": 82,
+            "endLine": 94,
+            "text": "```bash\n# Scan a whole knowledge base directory\ndocguard ./knowledge-base\n\n# CI usage: fail the build on medium+ severity findings\ndocguard --fail-on medium ./docs\n\n# JSON output for downstream tooling\ndocguard --json ./docs > report.json\n\n# Only check markdown and HTML\ndocguard --ext md,html ./content\n```\n"
+          }
+        ],
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:4196-4393",
+            "documentId": "546",
+            "startUtf16": 4196,
+            "endUtf16": 4393,
+            "startLine": 96,
+            "endLine": 98,
+            "text": "Exit code is `1` if a finding at or above `--fail-on` severity is present\n(default: `high`), `0` otherwise — designed to slot straight into a CI\npipeline gating what gets indexed into a RAG store.\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R15",
+      "query": "Docguard 默认扫描哪些文件扩展名？",
+      "category": "OPTIONS",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:3358-3872",
+            "documentId": "546",
+            "startUtf16": 3358,
+            "endUtf16": 3872,
+            "startLine": 63,
+            "endLine": 78,
+            "text": "```\ndocguard [options] <path>\n\nOptions:\n  -ext string\n        Comma-separated extensions to scan, e.g. \"md,html,txt\"\n        (default: txt,md,mdx,html,htm,csv,json,yaml,yml)\n  -workers int\n        Number of concurrent worker goroutines (default: number of CPUs)\n  -json\n        Output findings as JSON instead of text\n  -fail-on string\n        Minimum severity for a non-zero exit: high, medium, low, or none (default \"high\")\n  -max-file-size int\n        Skip files larger than this many bytes (default 10MiB)\n```\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R16",
+      "query": "Docguard 如何并发扫描，默认有多少 worker？",
+      "category": "ARCHITECTURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:4411-4829",
+            "documentId": "546",
+            "startUtf16": 4411,
+            "endUtf16": 4829,
+            "startLine": 102,
+            "endLine": 107,
+            "text": "`docguard` walks the target directory, filters by extension, and hands\neach matching file to a worker-pool of goroutines (`--workers`, default:\nnumber of CPUs). Each worker runs every detector against the file and\nreports findings back over a channel; results are sorted by file and line\nfor stable, readable output. Binary files are skipped automatically (a\nNUL byte in the first 512 bytes is treated as \"not text\").\n"
+          }
+        ],
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:3358-3872",
+            "documentId": "546",
+            "startUtf16": 3358,
+            "endUtf16": 3872,
+            "startLine": 63,
+            "endLine": 78,
+            "text": "```\ndocguard [options] <path>\n\nOptions:\n  -ext string\n        Comma-separated extensions to scan, e.g. \"md,html,txt\"\n        (default: txt,md,mdx,html,htm,csv,json,yaml,yml)\n  -workers int\n        Number of concurrent worker goroutines (default: number of CPUs)\n  -json\n        Output findings as JSON instead of text\n  -fail-on string\n        Minimum severity for a non-zero exit: high, medium, low, or none (default \"high\")\n  -max-file-size int\n        Skip files larger than this many bytes (default 10MiB)\n```\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R17",
+      "query": "Docguard 是否保证检测到的都是攻击？",
+      "category": "LIMITATION",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:3018-3258",
+            "documentId": "546",
+            "startUtf16": 3018,
+            "endUtf16": 3258,
+            "startLine": 48,
+            "endLine": 51,
+            "text": "This is a heuristic tripwire, not a guarantee — a finding means \"worth a\nhuman look,\" not \"confirmed attack.\" It's meant to catch common, low-effort\nobfuscation, not to be a formally complete detector against every possible\nencoding trick.\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R18",
+      "query": "Docguard 支持输出 JSON 吗，怎么使用？",
+      "category": "PROCEDURE",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:3887-4195",
+            "documentId": "546",
+            "startUtf16": 3887,
+            "endUtf16": 4195,
+            "startLine": 82,
+            "endLine": 94,
+            "text": "```bash\n# Scan a whole knowledge base directory\ndocguard ./knowledge-base\n\n# CI usage: fail the build on medium+ severity findings\ndocguard --fail-on medium ./docs\n\n# JSON output for downstream tooling\ndocguard --json ./docs > report.json\n\n# Only check markdown and HTML\ndocguard --ext md,html ./content\n```\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R19",
+      "query": "Flowise 需要多少内存才能生产运行？",
+      "category": "INSUFFICIENT_RESOURCE_REQUIREMENT",
+      "answerable": false,
+      "expectedDocumentIds": [],
+      "targetDocumentId": "244",
+      "evidenceGroups": []
+    },
+    {
+      "id": "R20",
+      "query": "Flowise 的 VITE_PORT 开发环境怎么配置？",
+      "category": "WITHHELD_REVIEW_EVIDENCE",
+      "answerable": false,
+      "expectedDocumentIds": [],
+      "targetDocumentId": "244",
+      "evidenceGroups": []
+    },
+    {
+      "id": "R21",
+      "query": "n8n 社区版与企业版分别允许什么商业用途？",
+      "category": "WITHHELD_MIXED_LICENSE",
+      "answerable": false,
+      "expectedDocumentIds": [],
+      "targetDocumentId": "427",
+      "evidenceGroups": []
+    },
+    {
+      "id": "R22",
+      "query": "AnythingLLM 有没有明确的最低 CPU 与内存要求？",
+      "category": "INSUFFICIENT_RESOURCE_REQUIREMENT",
+      "answerable": false,
+      "expectedDocumentIds": [],
+      "targetDocumentId": "240",
+      "evidenceGroups": []
+    },
+    {
+      "id": "R23",
+      "query": "能推荐一个 Java Spring Boot 两周完成的商城吗？",
+      "category": "ABSENT_PROJECT",
+      "answerable": false,
+      "expectedDocumentIds": [],
+      "targetDocumentId": null,
+      "evidenceGroups": []
+    },
+    {
+      "id": "R24",
+      "query": "Appsmith 的单点登录是免费社区版自带的吗？",
+      "category": "UNVERIFIED_FEATURE_EDITION",
+      "answerable": false,
+      "expectedDocumentIds": [],
+      "targetDocumentId": "522",
+      "evidenceGroups": []
+    },
+    {
+      "id": "R25",
+      "query": "想找一个 Go 写的命令行工具，预先扫描知识库中的隐藏提示注入。",
+      "category": "NAMELESS",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:445-724",
+            "documentId": "546",
+            "startUtf16": 445,
+            "endUtf16": 724,
+            "startLine": 8,
+            "endLine": 11,
+            "text": "A concurrent Go CLI that scans documents for content that's **invisible or\nmeaningless to a human reader but fully \"readable\" by an LLM** — the kind\nof thing that ends up in a RAG knowledge base or gets pasted into a prompt\nand quietly hijacks the model without anyone noticing.\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R26",
+      "query": "想要一个开源低代码平台搭建企业内部管理后台。",
+      "category": "NAMELESS",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "targetDocumentId": "522",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "67e1f99e06547fcc1fdb3a003e5bed151f1bbf6319cac614cd8c3a9336f2d39b:1350-1773",
+            "documentId": "522",
+            "startUtf16": 1350,
+            "endUtf16": 1773,
+            "startLine": 28,
+            "endLine": 28,
+            "text": "Organizations build custom applications like dashboards, admin panels, customer 360, IT automation, and service management tools to help their teams work more efficiently and effectively. Appsmith is an open-source low-code platform that streamlines custom application development, deployment, and maintenance. Learn more on our [website](https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme).\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R27",
+      "query": "想找一个前端 React、后端 Node 并能扩展第三方节点的工具。",
+      "category": "NAMELESS",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "targetDocumentId": "244",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2174-2307",
+            "documentId": "244",
+            "startUtf16": 2174,
+            "endUtf16": 2307,
+            "startLine": 86,
+            "endLine": 89,
+            "text": "-   `server`：Node 后端，提供 API 逻辑\n-   `ui`：React 前端\n-   `components`：第三方节点集成\n-   `api-documentation`：基于 express 自动生成的 swagger-ui API 文档\n"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "R28",
+      "query": "有没有能够在知识入库前接入 CI 的静态扫描工具？",
+      "category": "NAMELESS",
+      "answerable": true,
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "targetDocumentId": "546",
+      "evidenceGroups": [
+        [
+          {
+            "blockId": "0e37253702459eca7d19f807ea23a8aeaab032a6ce22881697625dcbeb647c65:1609-1796",
+            "documentId": "546",
+            "startUtf16": 1609,
+            "endUtf16": 1796,
+            "startLine": 33,
+            "endLine": 35,
+            "text": "`docguard` is a single static binary you can run against a knowledge base\nbefore it's indexed, or wire into CI so a pull request that adds a\ndocument with hidden content fails the build.\n"
+          }
+        ]
+      ]
+    }
+  ]
+}

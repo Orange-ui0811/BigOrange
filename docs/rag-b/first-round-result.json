@@ -1,0 +1,711 @@
+{
+  "runAt": "2026-09-29T12:11:46.529309+00:00",
+  "samplePlan": {
+    "BEGINNER_PROJECT": 15,
+    "CAREER_PROJECT": 15,
+    "JOB_POSTING": 15,
+    "GITHUB": 15
+  },
+  "requestedDocuments": 60,
+  "acceptedOperations": 0,
+  "readyDocuments": 60,
+  "failedDocuments": 0,
+  "failedDocumentDetails": [],
+  "importErrors": [],
+  "activeGeneration": {
+    "id": "2",
+    "generationKey": "20260929164702-873de849",
+    "redisPrefix": "orange:rag:b:g:20260929164702-873de849:",
+    "adapterType": "HNSW_HYBRID",
+    "status": "ACTIVE",
+    "active": true,
+    "documentCount": 60,
+    "chunkCount": 1146,
+    "lastError": null,
+    "activatedAt": "2026-09-29 16:47",
+    "createTime": "2026-09-29 16:47",
+    "updateTime": "2026-09-29 16:47"
+  },
+  "generations": [
+    {
+      "id": "2",
+      "generationKey": "20260929164702-873de849",
+      "redisPrefix": "orange:rag:b:g:20260929164702-873de849:",
+      "adapterType": "HNSW_HYBRID",
+      "status": "ACTIVE",
+      "active": true,
+      "documentCount": 60,
+      "chunkCount": 1146,
+      "lastError": null,
+      "activatedAt": "2026-09-29 16:47",
+      "createTime": "2026-09-29 16:47",
+      "updateTime": "2026-09-29 16:47"
+    },
+    {
+      "id": "1",
+      "generationKey": "bootstrap",
+      "redisPrefix": "orange:rag:b:g:bootstrap:",
+      "adapterType": "EXACT",
+      "status": "RETIRED",
+      "active": false,
+      "documentCount": 0,
+      "chunkCount": 0,
+      "lastError": null,
+      "activatedAt": "2026-09-29 15:17",
+      "createTime": "2026-09-29 15:17",
+      "updateTime": "2026-09-29 16:47"
+    }
+  ],
+  "evaluation": {
+    "runKey": "fixed-eval-fd1739e5-0cce-4d90-9198-38b044511239",
+    "datasetVersion": "rag-b-starter-v1",
+    "summary": {
+      "caseCount": 12,
+      "aPassRate": 0.9166666666666666,
+      "bPassRate": 0.5833333333333334,
+      "bTraceabilityRate": 0.6666666666666666,
+      "bCitationReadyRate": 0.6666666666666666,
+      "aP50Ms": "205",
+      "aP95Ms": "1034",
+      "bP50Ms": "229",
+      "bP95Ms": "366"
+    },
+    "cases": [
+      {
+        "key": "beginner-java-14d",
+        "question": "推荐一个适合新手、两周内能完成的 Java 项目",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "a": {
+          "durationMs": "1034",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "366",
+          "excludedReasons": {
+            "LANGUAGE_MISMATCH": 31,
+            "DURATION_UNKNOWN": 2,
+            "SOURCE_TYPE_MISMATCH": 86
+          },
+          "passed": true
+        }
+      },
+      {
+        "key": "beginner-vue",
+        "question": "推荐一个适合新手练习 Vue 的项目，并说明改造方向",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "a": {
+          "durationMs": "209",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 0,
+          "traceable": false,
+          "answerPolicy": "REFUSE_NO_MATCH",
+          "durationMs": "213",
+          "excludedReasons": {
+            "SOURCE_TYPE_MISMATCH": 85,
+            "LANGUAGE_MISMATCH": 43
+          },
+          "passed": false
+        }
+      },
+      {
+        "key": "career-java",
+        "question": "推荐一个能用于 Java 后端求职作品集的项目",
+        "expectedSourceTypes": [
+          "CAREER_PROJECT"
+        ],
+        "a": {
+          "durationMs": "202",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "252",
+          "excludedReasons": {
+            "LANGUAGE_MISMATCH": 34,
+            "SOURCE_TYPE_MISMATCH": 83,
+            "LANGUAGE_UNKNOWN": 3
+          },
+          "passed": true
+        }
+      },
+      {
+        "key": "career-interview",
+        "question": "哪些项目适合在后端面试中讨论架构和性能优化？",
+        "expectedSourceTypes": [
+          "CAREER_PROJECT"
+        ],
+        "a": {
+          "durationMs": "198",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "245",
+          "excludedReasons": {
+            "SOURCE_TYPE_MISMATCH": 31
+          },
+          "passed": true
+        }
+      },
+      {
+        "key": "job-java",
+        "question": "当前有效 Java 岗位要求哪些技能？",
+        "expectedSourceTypes": [
+          "JOB_POSTING"
+        ],
+        "a": {
+          "durationMs": "205",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 0,
+          "traceable": false,
+          "answerPolicy": "REFUSE_NO_MATCH",
+          "durationMs": "209",
+          "excludedReasons": {
+            "LANGUAGE_UNKNOWN": 25,
+            "SOURCE_TYPE_MISMATCH": 103
+          },
+          "passed": false
+        }
+      },
+      {
+        "key": "job-frontend",
+        "question": "当前有效前端岗位对 Vue 或 TypeScript 有什么要求？",
+        "expectedSourceTypes": [
+          "JOB_POSTING"
+        ],
+        "a": {
+          "durationMs": "209",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "251",
+          "excludedReasons": {
+            "SOURCE_TYPE_MISMATCH": 103
+          },
+          "passed": true
+        }
+      },
+      {
+        "key": "readme-deploy",
+        "question": "这个开源项目应该如何部署？",
+        "expectedSourceTypes": [
+          "GITHUB"
+        ],
+        "a": {
+          "durationMs": "205",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "221",
+          "excludedReasons": {
+            "SOURCE_TYPE_MISMATCH": 52
+          },
+          "passed": true
+        }
+      },
+      {
+        "key": "readme-dependencies",
+        "question": "项目运行需要哪些依赖、数据库或密钥？",
+        "expectedSourceTypes": [
+          "GITHUB"
+        ],
+        "a": {
+          "durationMs": "213",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "240",
+          "excludedReasons": {
+            "SOURCE_TYPE_MISMATCH": 78
+          },
+          "passed": true
+        }
+      },
+      {
+        "key": "no-docker",
+        "question": "推荐一个不依赖 Docker 的入门项目",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "a": {
+          "durationMs": "204",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 0,
+          "traceable": false,
+          "answerPolicy": "REFUSE_NO_MATCH",
+          "durationMs": "204",
+          "excludedReasons": {
+            "DOCKER_UNKNOWN": 40,
+            "SOURCE_TYPE_MISMATCH": 88
+          },
+          "passed": false
+        }
+      },
+      {
+        "key": "no-database",
+        "question": "推荐一个不需要数据库的短周期项目",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "a": {
+          "durationMs": "204",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 0,
+          "traceable": false,
+          "answerPolicy": "REFUSE_NO_MATCH",
+          "durationMs": "222",
+          "excludedReasons": {
+            "SOURCE_TYPE_MISMATCH": 94,
+            "DATABASE_UNKNOWN": 34
+          },
+          "passed": false
+        }
+      },
+      {
+        "key": "source-trace",
+        "question": "说明项目的主要功能、技术栈、难度和仓库来源",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT",
+          "CAREER_PROJECT",
+          "GITHUB"
+        ],
+        "a": {
+          "durationMs": "208",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "241",
+          "excludedReasons": {
+            "SOURCE_TYPE_MISMATCH": 1
+          },
+          "passed": true
+        }
+      },
+      {
+        "key": "insufficient-evidence",
+        "question": "资料没有说明的商业授权价格是多少？",
+        "expectedSourceTypes": [],
+        "a": {
+          "durationMs": "220",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "adapter": "HNSW_HYBRID",
+          "hitCount": 8,
+          "traceable": true,
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "durationMs": "229",
+          "excludedReasons": {},
+          "passed": false
+        }
+      }
+    ]
+  },
+  "answerPreviews": [
+    {
+      "query": "推荐一个适合新手、两周内能完成的 Java 项目",
+      "durationMs": 22728,
+      "result": {
+        "runKey": "answer-45d726e2-fb1e-4ec0-a6cd-5c7075fa58a3",
+        "question": "推荐一个适合新手、两周内能完成的 Java 项目",
+        "generation": "20260929164702-873de849",
+        "adapter": "HNSW_HYBRID",
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "evidence": [
+          {
+            "citation": "C1",
+            "documentId": "11",
+            "versionId": "11",
+            "chunkId": "275",
+            "title": "tandpfun/wardrobe",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:108",
+            "sectionPath": "tandpfun/wardrobe > 可改造方向",
+            "startOffset": 404,
+            "endOffset": 717
+          },
+          {
+            "citation": "C2",
+            "documentId": "10",
+            "versionId": "10",
+            "chunkId": "240",
+            "title": "penecho/penecho",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:106",
+            "sectionPath": "penecho/penecho",
+            "startOffset": 0,
+            "endOffset": 494
+          },
+          {
+            "citation": "C3",
+            "documentId": "11",
+            "versionId": "11",
+            "chunkId": "274",
+            "title": "tandpfun/wardrobe",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:108",
+            "sectionPath": "tandpfun/wardrobe",
+            "startOffset": 0,
+            "endOffset": 454
+          },
+          {
+            "citation": "C4",
+            "documentId": "12",
+            "versionId": "12",
+            "chunkId": "284",
+            "title": "CatsJuice/sticker-forge",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:119",
+            "sectionPath": "CatsJuice/sticker-forge > 可改造方向",
+            "startOffset": 443,
+            "endOffset": 799
+          },
+          {
+            "citation": "C5",
+            "documentId": "10",
+            "versionId": "10",
+            "chunkId": "241",
+            "title": "penecho/penecho",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:106",
+            "sectionPath": "penecho/penecho > 主要风险",
+            "startOffset": 444,
+            "endOffset": 733
+          },
+          {
+            "citation": "C6",
+            "documentId": "12",
+            "versionId": "12",
+            "chunkId": "283",
+            "title": "CatsJuice/sticker-forge",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:119",
+            "sectionPath": "CatsJuice/sticker-forge",
+            "startOffset": 0,
+            "endOffset": 493
+          },
+          {
+            "citation": "C7",
+            "documentId": "10",
+            "versionId": "10",
+            "chunkId": "252",
+            "title": "penecho/penecho",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:106",
+            "sectionPath": "penecho/penecho > A Kimi Open Source Friend",
+            "startOffset": 4091,
+            "endOffset": 4587
+          },
+          {
+            "citation": "C8",
+            "documentId": "10",
+            "versionId": "10",
+            "chunkId": "247",
+            "title": "penecho/penecho",
+            "sourceType": "BEGINNER_PROJECT",
+            "sourceRef": "beginner:106",
+            "sectionPath": "penecho/penecho > README 摘要",
+            "startOffset": 2362,
+            "endOffset": 2718
+          }
+        ],
+        "durationMs": "22413",
+        "answer": "无法推荐适合新手、两周内能完成的 Java 项目，因为给定证据中没有 Java 技术栈的项目。[C1][C4][C5] 证据中适合新手的项目 wardrobe、penecho、sticker-forge 分别使用 JavaScript、React、TypeScript、Next.js 等技术栈，均未出现 Java。[C1][C2][C3][C4][C5][C6] 因此，无法确认存在符合“Java 项目”这一要求的推荐项。[C1][C4][C5]",
+        "citationValidation": {
+          "valid": true,
+          "checkedSentences": 3,
+          "supportedSentences": 3,
+          "sentences": [
+            {
+              "sentence": "无法推荐适合新手、两周内能完成的 Java 项目，因为给定证据中没有 Java 技术栈的项目[C1][C4][C5]。",
+              "citations": [
+                1,
+                4,
+                5
+              ],
+              "supported": true,
+              "reason": "SUPPORTED",
+              "textualSupport": 0.23333333333333334
+            },
+            {
+              "sentence": "证据中适合新手的项目 wardrobe、penecho、sticker-forge 分别使用 JavaScript、React、TypeScript、Next.js 等技术栈，均未出现 Java[C1][C2][C3][C4][C5][C6]。",
+              "citations": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "supported": true,
+              "reason": "SUPPORTED",
+              "textualSupport": 0.41379310344827586
+            },
+            {
+              "sentence": "因此，无法确认存在符合“Java 项目”这一要求的推荐项[C1][C4][C5]。",
+              "citations": [
+                1,
+                4,
+                5
+              ],
+              "supported": true,
+              "reason": "SUPPORTED",
+              "textualSupport": 0.15
+            }
+          ]
+        },
+        "publishable": true,
+        "status": "SUPPORTED"
+      }
+    },
+    {
+      "query": "当前有效 Java 岗位要求哪些技能？",
+      "durationMs": 494,
+      "result": {
+        "runKey": "answer-3b71fbd0-5409-473c-ba72-d05dc3ca218b",
+        "question": "当前有效 Java 岗位要求哪些技能？",
+        "generation": "20260929164702-873de849",
+        "adapter": "HNSW_HYBRID",
+        "answerPolicy": "REFUSE_NO_MATCH",
+        "evidence": [],
+        "status": "NO_MATCH",
+        "publishable": false,
+        "answer": "没有找到满足条件的知识库资料。"
+      }
+    },
+    {
+      "query": "项目运行需要哪些依赖、数据库或密钥？",
+      "durationMs": 23916,
+      "result": {
+        "runKey": "answer-ce6501d7-59a4-498c-852b-3b5b1eac5503",
+        "question": "项目运行需要哪些依赖、数据库或密钥？",
+        "generation": "20260929164702-873de849",
+        "adapter": "HNSW_HYBRID",
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "evidence": [
+          {
+            "citation": "C1",
+            "documentId": "56",
+            "versionId": "56",
+            "chunkId": "1047",
+            "title": "HKUDS/nanobot",
+            "sourceType": "GITHUB",
+            "sourceRef": "HKUDS/nanobot",
+            "sectionPath": "What can nanobot do?",
+            "startOffset": 4072,
+            "endOffset": 4497
+          },
+          {
+            "citation": "C2",
+            "documentId": "46",
+            "versionId": "46",
+            "chunkId": "801",
+            "title": "langchain-ai/langgraph",
+            "sourceType": "GITHUB",
+            "sourceRef": "langchain-ai/langgraph",
+            "sectionPath": "Why use LangGraph?",
+            "startOffset": 2598,
+            "endOffset": 2887
+          },
+          {
+            "citation": "C3",
+            "documentId": "56",
+            "versionId": "56",
+            "chunkId": "1046",
+            "title": "HKUDS/nanobot",
+            "sourceType": "GITHUB",
+            "sourceRef": "HKUDS/nanobot",
+            "sectionPath": "What can nanobot do?",
+            "startOffset": 3675,
+            "endOffset": 4122
+          },
+          {
+            "citation": "C4",
+            "documentId": "46",
+            "versionId": "46",
+            "chunkId": "803",
+            "title": "langchain-ai/langgraph",
+            "sourceType": "GITHUB",
+            "sourceRef": "langchain-ai/langgraph",
+            "sectionPath": "Why use LangGraph?",
+            "startOffset": 3225,
+            "endOffset": 3526
+          },
+          {
+            "citation": "C5",
+            "documentId": "54",
+            "versionId": "54",
+            "chunkId": "986",
+            "title": "crankyoldgit/IRremoteESP8266",
+            "sourceType": "GITHUB",
+            "sourceRef": "crankyoldgit/IRremoteESP8266",
+            "sectionPath": "Frequently Asked Questions",
+            "startOffset": 3163,
+            "endOffset": 3648
+          },
+          {
+            "citation": "C6",
+            "documentId": "55",
+            "versionId": "55",
+            "chunkId": "1021",
+            "title": "lvgl/lvgl",
+            "sourceType": "GITHUB",
+            "sourceRef": "lvgl/lvgl",
+            "sectionPath": "Integration > Pre-integrated",
+            "startOffset": 9466,
+            "endOffset": 9848
+          },
+          {
+            "citation": "C7",
+            "documentId": "55",
+            "versionId": "55",
+            "chunkId": "1010",
+            "title": "lvgl/lvgl",
+            "sourceType": "GITHUB",
+            "sourceRef": "lvgl/lvgl",
+            "sectionPath": "LVGL Pro",
+            "startOffset": 5550,
+            "endOffset": 5862
+          },
+          {
+            "citation": "C8",
+            "documentId": "54",
+            "versionId": "54",
+            "chunkId": "990",
+            "title": "crankyoldgit/IRremoteESP8266",
+            "sourceType": "GITHUB",
+            "sourceRef": "crankyoldgit/IRremoteESP8266",
+            "sectionPath": "Installation > Using Git to install the library ( Linux ) > To update to the latest version of the library",
+            "startOffset": 4677,
+            "endOffset": 5123
+          }
+        ],
+        "durationMs": "23661",
+        "answer": "根据现有证据，无法完整确认项目运行所需的依赖、数据库或密钥。明确的信息是：LVGL Pro 导出普通 LVGL C 代码，没有额外运行时或依赖 [C7]。其他证据没有明确列出依赖、数据库或密钥 [C1][C2][C3][C4][C5][C6][C8]。\n\nnanobot 提到通过 Dream 保持会话历史和长期记忆，但未说明 Dream 属于何种数据库或存储 [C1][C3]。它也提到提供 Python SDK、OpenAI 兼容 API，并连接 Telegram、Discord、Slack、WeChat、Email、Mattermost 等，但未说明运行需要哪些密钥 [C1][C3]。因此，除 LVGL Pro 的“无额外运行时或依赖”外，依赖、数据库和密钥要求无法确认。",
+        "citationValidation": {
+          "valid": false,
+          "checkedSentences": 6,
+          "supportedSentences": 1,
+          "sentences": [
+            {
+              "sentence": "根据现有证据，无法完整确认项目运行所需的依赖、数据库或密钥。",
+              "citations": [],
+              "supported": false,
+              "reason": "MISSING_CITATION",
+              "textualSupport": 0.0
+            },
+            {
+              "sentence": "明确的信息是：LVGL Pro 导出普通 LVGL C 代码，没有额外运行时或依赖 [C7]。",
+              "citations": [
+                7
+              ],
+              "supported": false,
+              "reason": "LOW_TEXTUAL_SUPPORT",
+              "textualSupport": 0.08695652173913043
+            },
+            {
+              "sentence": "其他证据没有明确列出依赖、数据库或密钥 [C1][C2][C3][C4][C5][C6][C8]。",
+              "citations": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                8
+              ],
+              "supported": false,
+              "reason": "LOW_TEXTUAL_SUPPORT",
+              "textualSupport": 0.0
+            },
+            {
+              "sentence": "nanobot 提到通过 Dream 保持会话历史和长期记忆，但未说明 Dream 属于何种数据库或存储 [C1][C3]。",
+              "citations": [
+                1,
+                3
+              ],
+              "supported": false,
+              "reason": "LOW_TEXTUAL_SUPPORT",
+              "textualSupport": 0.06666666666666667
+            },
+            {
+              "sentence": "它也提到提供 Python SDK、OpenAI 兼容 API，并连接 Telegram、Discord、Slack、WeChat、Email、Mattermost 等，但未说明运行需要哪些密钥 [C1][C3]。",
+              "citations": [
+                1,
+                3
+              ],
+              "supported": true,
+              "reason": "SUPPORTED",
+              "textualSupport": 0.2727272727272727
+            },
+            {
+              "sentence": "因此，除 LVGL Pro 的“无额外运行时或依赖”外，依赖、数据库和密钥要求无法确认。",
+              "citations": [],
+              "supported": false,
+              "reason": "MISSING_CITATION",
+              "textualSupport": 0.0
+            }
+          ]
+        },
+        "publishable": false,
+        "status": "UNSUPPORTED_CITATIONS"
+      }
+    }
+  ],
+  "wallClockSeconds": 7.084,
+  "costBoundary": "Provider billing/usage is not returned by the current embedding and text client; enrich with chunk and request counts after the run."
+}

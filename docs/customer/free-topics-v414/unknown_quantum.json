@@ -1,0 +1,1313 @@
+{
+  "case": {
+    "id": "unknown_quantum",
+    "family": "boundary",
+    "kind": "absent",
+    "messages": [
+      "推荐量子纠错芯片流片项目。只能推荐有资料核实符合的真实项目，没有就说明，不要改成其他方向。"
+    ]
+  },
+  "sessionId": "154",
+  "turns": [
+    {
+      "message": "推荐量子纠错芯片流片项目。只能推荐有资料核实符合的真实项目，没有就说明，不要改成其他方向。",
+      "runId": "e07a7a2b-7aba-4d93-ae69-337f346e7873",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 7235,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "topic": [
+            "量子纠错芯片",
+            "流片"
+          ],
+          "provenance": {
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "量子纠错芯片流片项目"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "只能推荐有资料核实符合的真实项目，没有就说明，不要改成其他方向"
+            }
+          },
+          "verificationMode": "STRICT",
+          "lastChangeSummary": "已记录项目主题：量子纠错芯片、流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "量子纠错芯片、流片",
+            "proofs": {}
+          },
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-04T03:33:08.232285550Z",
+          "conditions": {
+            "topic": [
+              "量子纠错芯片",
+              "流片"
+            ]
+          },
+          "current": {
+            "uncertain": 0,
+            "total": 0,
+            "confirmed": 0
+          },
+          "available": {
+            "uncertain": 0,
+            "total": 494,
+            "confirmed": 494
+          },
+          "alternatives": [],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "NO_MATCH",
+        "answer": "已记录项目主题：量子纠错芯片、流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n暂时还没有核对出有效的调整方案。我会保留你的方向，不自动换成其他领域。可以从原目标里选一个最重要的功能继续找，或补充一个参考项目；目前不能保证放宽时间或语言就有合适结果。你最想先实现哪部分？",
+        "conditionChangeSummary": "已记录项目主题：量子纠错芯片、流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "model": "deepseek-flash",
+            "durationMs": 3224,
+            "usage": {
+              "prompt_tokens": 5300,
+              "completion_tokens": 658,
+              "total_tokens": 5958,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 510
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 308
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 511,
+            "usage": {
+              "prompt_tokens": 164,
+              "completion_tokens": 27,
+              "total_tokens": 191,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 164
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 922,
+            "usage": {
+              "prompt_tokens": 2083,
+              "completion_tokens": 5,
+              "total_tokens": 2088,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1955
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.14-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 510,
+          "complete": true,
+          "cacheHitTokens": 5120,
+          "inputTokens": 7547,
+          "cacheMissTokens": 2427,
+          "totalTokens": 8237,
+          "outputTokens": 690,
+          "callsWithoutUsage": 0,
+          "calls": 3,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "量子纠错芯片、流片 量子纠错芯片流片 quantum error correction chip tapeout 量子纠错芯片制造",
+            "topic": [
+              "量子纠错芯片",
+              "流片"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.019098822324628777,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11681,
+                  "content": "### Quantum Computing\n\n_Libraries for quantum computing._\n\n- [Cirq](https://github.com/quantumlib/Cirq) — A Google-developed framework focused on hardware-aware quantum circuit design for NISQ devices.\n- [pennylane](https://github.com/PennyLaneAI/pennylane) — A hybrid quantum-classical machine learning library with automatic differentiation support.\n- [qiskit](https://github.com/Qiskit/qiskit) — An IBM-backed quantum SDK for building, simulating, and running circuits on real quantum hardware.\n- [qutip](https://github.com/qutip/qutip) - Quantum Toolbox in Python.\n\n**Developer Tools**\n\n",
+                  "endOffset": 40489,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 40,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Quantum Computing",
+                  "startOffset": 39898,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016688116688116688,
+                  "title": "outsideboundvoice",
+                  "chunkId": 18227,
+                  "content": "### 8) Quantum Computing Enhancement System (C++ — `QNT-Blue/`)\n- Quantum compiler and translator SDK with CMake build trees.\n- Quantum Mesh Rendering Boost DLL (`QuantumMeshBoost.cpp`) targeting AMD CPU/GPU architectures.\n- VR compatibility layer for Meta Quest 3, foveated rendering, and motion-stability optimizations.\n- Demonstration apps and samples in Q# and Python.\n\n",
+                  "endOffset": 8243,
+                  "sourceRef": "JlovesYouGit/The-Crown",
+                  "versionId": 781,
+                  "chunkIndex": 11,
+                  "documentId": 562,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "outsideboundvoice > Capability Summary > 8) Quantum Computing Enhancement System (C++ — `QNT-Blue/`)",
+                  "startOffset": 7869,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "适用于 ESP32 系列 SoC 的 Arduino 核心",
+                  "chunkId": 17093,
+                  "content": "## 目录\n\n  - [开发状态](#开发状态)\n  - [开发规划](#开发规划)\n  - [文档](#文档)\n  - [支持的芯片](#支持的芯片)\n  - [解码异常](#解码异常)\n  - [问题/错误报告模板](#问题错误报告模板)\n  - [贡献](#贡献)\n\n",
+                  "endOffset": 1427,
+                  "sourceRef": "espressif/arduino-esp32",
+                  "versionId": 632,
+                  "chunkIndex": 2,
+                  "documentId": 413,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "适用于 ESP32 系列 SoC 的 Arduino 核心 > 目录",
+                  "startOffset": 1290,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016358024691358025,
+                  "title": "系统设计入门",
+                  "chunkId": 11371,
+                  "content": "#### CP - consistency and partition tolerance\n\nWaiting for a response from the partitioned node might result in a timeout error.  CP is a good choice if your business needs require atomic reads and writes.\n\n",
+                  "endOffset": 21564,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "versionId": 291,
+                  "chunkIndex": 42,
+                  "documentId": 72,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "The System Design Primer > Availability vs consistency > CAP theorem > CP - consistency and partition tolerance",
+                  "startOffset": 21357,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=21,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "gmh5225/awesome-game-security",
+                  "chunkId": 13710,
+                  "content": "- https://github.com/NoInitRD/Memory-Dump-UEFI [A UEFI application for dumping the contents of RAM]\n- https://github.com/NSG650/NoMoreBugCheckReloaded [NoMoreBugCheck Reloaded]\n- https://github.com/x90skysn3k/x260-lenovo-opencore [Lenovo-X260-Hackintosh-BigSur-OpenCore-0.8.5]\n- https://github.com/gmh5225/OfflineCrashDumpUefi [EDK2 UEFI implementation for writing an Offline Crash Dump]\n- https://github.com/Twobot7/advanced-efi-driver-with-gdi-and-kernel-mouse-input [A UEFI-based driver for direct memory access and process manipulation, with built-in security features and stealth capabilities]\n\n> QEMU/KVM/PVE/VBOX\n- https://github.com/HexRaysSA/rax [Self-checking CPU emulator: x86-64/AArch64/Hexagon/RISC-V; differential-verified vs KVM/QEMU; boots Linux, GDB stub; Hex-Rays, Rust, MIT]\n- https://github.com/david942j/kvm-kernel-example [Guide]\n- https://github.com/airbus-seclab/qemu_blog [Guide]\n- https://github.com/quickemu-project/quickemu [Quickly create and run optimized QEMU VMs for Windows/macOS/Linux]\n- https://github.com/VirtualBox/virtualbox [VirtualBox Git mirror]\n- https://github.com/lsxll666/AntiCheatToggle [WinForms utility to stop/disable Tencent ACE, Perfect World, and related anti-cheat kernel drivers blocking VirtualBox VM spawn (VERR_INVALID_NAME -104), with one-click restore]\n- https://github.com/BigAnteater/KVM-GPU-Passthrough [GPU Passthrough]\n",
+                  "endOffset": 215443,
+                  "sourceRef": "gmh5225/awesome-game-security|week",
+                  "versionId": 371,
+                  "chunkIndex": 170,
+                  "documentId": 152,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[`awesome-game-security`](https://gs.awesome.rip)[![Awesome](https://awesome.re/badge.svg)](https://awesome.re) > Cheat",
+                  "startOffset": 214060,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "cifertech/free-embedded-dev-tools",
+                  "chunkId": 18009,
+                  "content": "**A curated list of free tools and resources for embedded, firmware, and hardware development.**\n\nPCB design, debugging, simulation, CI, IoT backends, RF, TinyML, and more.\n\n</div>\n\n&nbsp;\n\n",
+                  "endOffset": 1563,
+                  "sourceRef": "cifertech/free-embedded-dev-tools",
+                  "versionId": 770,
+                  "chunkIndex": 1,
+                  "documentId": 551,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 1373,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "gmh5225/awesome-game-security",
+                  "chunkId": 13711,
+                  "content": "- https://github.com/BigAnteater/KVM-GPU-Passthrough [GPU Passthrough]\n- https://github.com/dmaivel/ntoseye [Kernel Debugger]\n- https://github.com/ispras/qemu/tree/windbg [Windbg]\n- https://github.com/cyberus-technology/virtualbox-kvm [VirtualBox with KVM Backend]\n- https://github.com/quic/gunyah-hypervisor [Type-1 hypervisor for ARM64]\n- https://github.com/Qemu-Gang\n- https://github.com/memflow/memflow-kvm\n- https://github.com/IntroVirt/IntroVirt [Guest introspection library]\n- https://github.com/MisterY52/apex_dma_kvm_pub\n- https://github.com/SamuelTulach/BetterTiming [Bypass CPU Timing]\n- https://github.com/WCharacter/RDTSC-KVM-Handler [Bypass RDTSC]\n- https://github.com/batusan/Hardened-qemu [Hidden QEMU]\n- https://github.com/zhaodice/qemu-anti-detection [Hidden QEMU]\n- https://wbenny.github.io/2025/06/29/i-made-my-vm-think-it-has-a-cpu-fan.html [I made my VM think it has a CPU fan]\n- https://github.com/kila58/qemu-patched [Hidden QEMU]\n- https://github.com/Scrut1ny/Hypervisor-Phantom [Hidden QEMU]\n- https://github.com/zhaodice/proxmox-ve-anti-detection [Hidden PVE]\n- https://github.com/tteck/Proxmox [PVE Helper Scripts]\n- https://github.com/nyx-fuzz/QEMU-Nyx [Intel-PT]\n- https://github.com/doomedraven/Tools/blob/master/Virtualization/kvm-qemu.sh [QEMU Script]\n",
+                  "endOffset": 216657,
+                  "sourceRef": "gmh5225/awesome-game-security|week",
+                  "versionId": 371,
+                  "chunkIndex": 171,
+                  "documentId": 152,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[`awesome-game-security`](https://gs.awesome.rip)[![Awesome](https://awesome.re/badge.svg)](https://awesome.re) > Cheat",
+                  "startOffset": 215372,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "netobserv/netobserv-operator",
+                  "chunkId": 13312,
+                  "content": "## 差异化改造方案\n贡献中文部署文档或视频教程；增加对国产Kubernetes发行版（如KubeSphere）的支持；或扩展为AI推理网络流量的专门监控。\n\n",
+                  "endOffset": 612,
+                  "sourceRef": "career:244",
+                  "versionId": 356,
+                  "chunkIndex": 7,
+                  "documentId": 137,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "netobserv/netobserv-operator > 差异化改造方案",
+                  "startOffset": 532,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "FastLED/FastLED",
+                  "chunkId": 14791,
+                  "content": "### Quality Gates\n[![arduino_library_lint](https://github.com/FastLED/FastLED/actions/workflows/arduino_library_lint.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/arduino_library_lint.yml) [![iwyu](https://github.com/FastLED/FastLED/actions/workflows/iwyu.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/iwyu.yml) [![bloat_regression_esp32s3](https://github.com/FastLED/FastLED/actions/workflows/bloat_regression_esp32s3.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/bloat_regression_esp32s3.yml)\n\n",
+                  "endOffset": 25484,
+                  "sourceRef": "FastLED/FastLED|week",
+                  "versionId": 415,
+                  "chunkIndex": 30,
+                  "documentId": 196,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "FastLED - The Universal LED Library for Embedded and Arduino > Emulation Tests > Quality Gates",
+                  "startOffset": 24886,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "FastLED/FastLED",
+                  "chunkId": 14565,
+                  "content": "### NXP LPC (Cortex-M0+)\n[![lpc804](https://github.com/FastLED/FastLED/actions/workflows/build_lpc804.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpc804.yml) [![lpc845](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845.yml) [![lpc845brk](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845brk.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845brk.yml) [![lpcxpresso804](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso804.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso804.yml) [![lpcxpresso845max](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso845max.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso845max.yml)\n\n*LPC804 and LPCXpresso804 are currently failing on master. These builds had no\nbadge before, so the breakage was not visible from this page.\n\n",
+                  "endOffset": 17028,
+                  "sourceRef": "FastLED/FastLED",
+                  "versionId": 410,
+                  "chunkIndex": 19,
+                  "documentId": 191,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "FastLED - The Universal LED Library for Embedded and Arduino > Emulation Tests > NXP LPC (Cortex-M0+)",
+                  "startOffset": 15925,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014488636363636363,
+                  "title": "outsideboundvoice",
+                  "chunkId": 18236,
+                  "content": "### G) QNT-Blue C++ SDK / Quantum Mesh DLL\n```bash\ncd QNT-Blue/QuantumCompute/Bin64/QuantumMeshDLL/build\ncmake ..\ncmake --build .\n```\ntrack \nhttps://open.spotify.com/track/2iE27YkP4uYofICZEiPw9U?si=a914ed823a164cb9\n\n",
+                  "endOffset": 9953,
+                  "sourceRef": "JlovesYouGit/The-Crown",
+                  "versionId": 781,
+                  "chunkIndex": 20,
+                  "documentId": 562,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "outsideboundvoice > How to Run > G) QNT-Blue C++ SDK / Quantum Mesh DLL",
+                  "startOffset": 9737,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=28,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15529,
+                  "content": "##### Tool: [gpg](https://www.gnupg.org/)\n\n",
+                  "endOffset": 181684,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 354,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [gpg](https://www.gnupg.org/)",
+                  "startOffset": 181641,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "encryption-c-rp2350",
+                  "chunkId": 18118,
+                  "content": "## FREE Reverse Engineering Self-Study Course [HERE](https://github.com/mytechnotalent/encryption-c-rp2350)\n\n<br>\n\n",
+                  "endOffset": 238,
+                  "sourceRef": "mytechnotalent/encryption-c-rp2350",
+                  "versionId": 774,
+                  "chunkIndex": 1,
+                  "documentId": 555,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "FREE Reverse Engineering Self-Study Course [HERE](https://github.com/mytechnotalent/encryption-c-rp2350)",
+                  "startOffset": 123,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "gmh5225/awesome-game-security",
+                  "chunkId": 13712,
+                  "content": "- https://github.com/nyx-fuzz/QEMU-Nyx [Intel-PT]\n- https://github.com/doomedraven/Tools/blob/master/Virtualization/kvm-qemu.sh [QEMU Script]\n- https://github.com/GlacierW/MBA [QEMU Malware Behavior Analyzer]\n- https://github.com/Qemu-Gang/Escape-from-TuxKov [EFT]\n- https://github.com/LWSS/Ape-ex-Abominations [Apex]\n- https://github.com/Qemu-Gang/QemuUnrealDumper-4.25 [UE SDK Dump By QEMU]\n- https://github.com/panda-re/panda [Platform for Architecture-Neutral Dynamic Analysis]\n- https://github.com/cs1ime/blacksun-framework [Framework for game cheat development]\n- https://github.com/cs1ime/ceserver-rawmem [CE]\n- https://github.com/gmh5225/kvm-csgo-cheat [CSGO]\n- https://github.com/atombottle/cs2_kvm_dma [CS2]\n- https://github.com/gmh5225/cs16-trigger-kvm [CS1.6]\n- https://github.com/tenclass/mvisor [C++ remake]\n- https://github.com/k3v1n1990s/docker-win [wsl2]\n- https://github.com/SingularityCloud/KVM.Performance [ioapic]\n- https://github.com/xqemu/xqemu [Play original Xbox games]\n- https://github.com/alephsecurity/xnu-qemu-arm64 [xnu]\n- https://github.com/ktock/qemu-wasm [QEMU on browser]\n\n> Wine\n- https://github.com/ValveSoftware/Proton [Steam]\n- https://github.com/pgarba/ptrace_read_teb [use ptrace to read the TEB of a process on Linux]\n- https://github.com/redecorate/Holodori-Kernel-Bypass [Userspace emulation of Hololive Dreams usrdrv017964 kernel anti-cheat for Wine/Proton]\n- https://github.com/dazi2011/crossover-patcher [Experimental CrossOver patcher to improve compatibility with Windows games protected by anti-cheat]\n- https://github.com/CDJuaum/RunEXE [Python PE analyzer and Wine launcher that flags kernel anti-cheat/DRM blockers and auto-provisions prefixes and dependencies before running Windows games on Linux]\n- https://github.com/BlaMacfly/ArchMod [Native Rust/Tauri cheat panel for Steam games on Proton: launch Windows trainers in the correct prefix, scan memory natively, and share community address profiles]\n\n",
+                  "endOffset": 218472,
+                  "sourceRef": "gmh5225/awesome-game-security|week",
+                  "versionId": 371,
+                  "chunkIndex": 172,
+                  "documentId": 152,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[`awesome-game-security`](https://gs.awesome.rip)[![Awesome](https://awesome.re/badge.svg)](https://awesome.re) > Cheat",
+                  "startOffset": 216515,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013202710126350483,
+                  "title": "codecrafters-io/build-your-own-x",
+                  "chunkId": 11000,
+                  "content": "#### Build your own `Emulator / Virtual Machine`\n\n* [**C**: _Home-grown bytecode interpreters_](https://medium.com/bumble-tech/home-grown-bytecode-interpreters-51e12d59b25c)\n* [**C**: _Virtual machine in C_](http://web.archive.org/web/20200121100942/https://blog.felixangell.com/virtual-machine-in-c/)\n* [**C**: _Write your Own Virtual Machine_](https://justinmeiners.github.io/lc3-vm/)\n* [**C**: _Writing a Game Boy emulator, Cinoop_](https://cturt.github.io/cinoop.html)\n* [**C++**: _How to write an emulator (CHIP-8 interpreter)_](http://www.multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/)\n* [**C++**: _Emulation tutorial (CHIP-8 interpreter)_](http://www.codeslinger.co.uk/pages/projects/chip8.html)\n* [**C++**: _Emulation tutorial (GameBoy emulator)_](http://www.codeslinger.co.uk/pages/projects/gameboy.html)\n* [**C++**: _Emulation tutorial (Master System emulator)_](http://www.codeslinger.co.uk/pages/projects/mastersystem/memory.html)\n* [**C++**: _NES Emulator From Scratch_](https://www.youtube.com/playlist?list=PLrOv9FMX8xJHqMvSGB_9G9nZZ_4IgteYf) [video]\n* [**Common Lisp**: _CHIP-8 in Common Lisp_](http://stevelosh.com/blog/2016/12/chip8-cpu/)\n* [**JavaScript**: _GameBoy Emulation in JavaScript_](http://imrannazar.com/GameBoy-Emulation-in-JavaScript)\n* [**Python**: _Emulation Basics: Write your own Chip 8 Emulator/Interpreter_](http://omokute.blogspot.com.br/2012/06/emulation-basics-write-your-own-chip-8.html)\n* [**Rust**: _0dmg: Learning Rust by building a partial Game Boy emulator_](https://jeremybanks.github.io/0dmg/)\n\n",
+                  "endOffset": 15198,
+                  "sourceRef": "codecrafters-io/build-your-own-x",
+                  "versionId": 288,
+                  "chunkIndex": 16,
+                  "documentId": 69,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Tutorials > Build your own `Emulator / Virtual Machine`",
+                  "startOffset": 13630,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=26,lexicalRank=67,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "blinker 库",
+                  "chunkId": 17110,
+                  "content": "# 参考/参考\n* [EN-英文](https://github.com/blinker-iot/blinker-doc/wiki/Blinker-Arduino-library-reference)  \n* [CN-中文](https://github.com/blinker-iot/blinker-doc/wiki/Blinker-Arduino-%E5%BA%93%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C)  \n* [CN-中文/官网](https://diandeng.tech/doc)  \n\n",
+                  "endOffset": 646,
+                  "sourceRef": "blinker-iot/blinker-library",
+                  "versionId": 635,
+                  "chunkIndex": 3,
+                  "documentId": 416,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "参考/参考",
+                  "startOffset": 377,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "connorgallopo/Tracearr",
+                  "chunkId": 10195,
+                  "content": "## 差异化改造方案\n补充架构文档（architectureDocs缺失），添加对中文流媒体服务的扩展（如Emby中文插件），或实现AI驱动的异常播放检测（基于行为模式）。\n\n",
+                  "endOffset": 634,
+                  "sourceRef": "career:256",
+                  "versionId": 239,
+                  "chunkIndex": 7,
+                  "documentId": 20,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "connorgallopo/Tracearr > 差异化改造方案",
+                  "startOffset": 546,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15452,
+                  "content": "##### Tool: [tar](https://en.wikipedia.org/wiki/Tar_(computing))\n\n",
+                  "endOffset": 167675,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 277,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [tar](https://en.wikipedia.org/wiki/Tar_(computing))",
+                  "startOffset": 167609,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "dxos/dxos",
+                  "chunkId": 13013,
+                  "content": "## 差异化改造方案\n1) 补充缺失的部署方案（如 Kubernetes 部署配置），使作品集更完整；2) 贡献解决几个现有 issue，展示代码贡献与协作能力；3) 增加性能基准测试报告，量化框架性能；4) 编写一篇关于协议实现原理的技术博客，强化面试讨论深度。\n\n",
+                  "endOffset": 610,
+                  "sourceRef": "career:235",
+                  "versionId": 347,
+                  "chunkIndex": 7,
+                  "documentId": 128,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "dxos/dxos > 差异化改造方案",
+                  "startOffset": 476,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "Project-N-E-K-O/N.E.K.O",
+                  "chunkId": 10134,
+                  "content": "#### 🔧 故障排除\n\n<details>\n<summary>点击展开查看常见问题解决方案</summary>\n\n",
+                  "endOffset": 8884,
+                  "sourceRef": "career:253",
+                  "versionId": 237,
+                  "chunkIndex": 40,
+                  "documentId": 18,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "N.E.K.O. 猫娘计划 :kissing_cat: <br>**听见你的心情，看见你的世界，<br>陪你发现更多喜欢。** > 快速开始 > Docker 部署 (Linux) > 🔧 故障排除",
+                  "startOffset": 8825,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 250,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "vinta/awesome-python",
+                  "evidence": [
+                    {
+                      "score": 0.019098822324628777,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11681,
+                      "content": "### Quantum Computing\n\n_Libraries for quantum computing._\n\n- [Cirq](https://github.com/quantumlib/Cirq) — A Google-developed framework focused on hardware-aware quantum circuit design for NISQ devices.\n- [pennylane](https://github.com/PennyLaneAI/pennylane) — A hybrid quantum-classical machine learning library with automatic differentiation support.\n- [qiskit](https://github.com/Qiskit/qiskit) — An IBM-backed quantum SDK for building, simulating, and running circuits on real quantum hardware.\n- [qutip](https://github.com/qutip/qutip) - Quantum Toolbox in Python.\n\n**Developer Tools**\n\n",
+                      "endOffset": 40489,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 40,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Quantum Computing",
+                      "startOffset": 39898,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:vinta/awesome-python",
+                  "bestScore": 0.019098822324628777,
+                  "sourceRef": "vinta/awesome-python",
+                  "documentId": 74,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "outsideboundvoice",
+                  "evidence": [
+                    {
+                      "score": 0.016688116688116688,
+                      "title": "outsideboundvoice",
+                      "chunkId": 18227,
+                      "content": "### 8) Quantum Computing Enhancement System (C++ — `QNT-Blue/`)\n- Quantum compiler and translator SDK with CMake build trees.\n- Quantum Mesh Rendering Boost DLL (`QuantumMeshBoost.cpp`) targeting AMD CPU/GPU architectures.\n- VR compatibility layer for Meta Quest 3, foveated rendering, and motion-stability optimizations.\n- Demonstration apps and samples in Q# and Python.\n\n",
+                      "endOffset": 8243,
+                      "sourceRef": "JlovesYouGit/The-Crown",
+                      "versionId": 781,
+                      "chunkIndex": 11,
+                      "documentId": 562,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "outsideboundvoice > Capability Summary > 8) Quantum Computing Enhancement System (C++ — `QNT-Blue/`)",
+                      "startOffset": 7869,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014488636363636363,
+                      "title": "outsideboundvoice",
+                      "chunkId": 18236,
+                      "content": "### G) QNT-Blue C++ SDK / Quantum Mesh DLL\n```bash\ncd QNT-Blue/QuantumCompute/Bin64/QuantumMeshDLL/build\ncmake ..\ncmake --build .\n```\ntrack \nhttps://open.spotify.com/track/2iE27YkP4uYofICZEiPw9U?si=a914ed823a164cb9\n\n",
+                      "endOffset": 9953,
+                      "sourceRef": "JlovesYouGit/The-Crown",
+                      "versionId": 781,
+                      "chunkIndex": 20,
+                      "documentId": 562,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "outsideboundvoice > How to Run > G) QNT-Blue C++ SDK / Quantum Mesh DLL",
+                      "startOffset": 9737,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=28,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:JlovesYouGit/The-Crown",
+                  "bestScore": 0.016688116688116688,
+                  "sourceRef": "JlovesYouGit/The-Crown",
+                  "documentId": 562,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "适用于 ESP32 系列 SoC 的 Arduino 核心",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "适用于 ESP32 系列 SoC 的 Arduino 核心",
+                      "chunkId": 17093,
+                      "content": "## 目录\n\n  - [开发状态](#开发状态)\n  - [开发规划](#开发规划)\n  - [文档](#文档)\n  - [支持的芯片](#支持的芯片)\n  - [解码异常](#解码异常)\n  - [问题/错误报告模板](#问题错误报告模板)\n  - [贡献](#贡献)\n\n",
+                      "endOffset": 1427,
+                      "sourceRef": "espressif/arduino-esp32",
+                      "versionId": 632,
+                      "chunkIndex": 2,
+                      "documentId": 413,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "适用于 ESP32 系列 SoC 的 Arduino 核心 > 目录",
+                      "startOffset": 1290,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:espressif/arduino-esp32",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "espressif/arduino-esp32",
+                  "documentId": 413,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "系统设计入门",
+                  "evidence": [
+                    {
+                      "score": 0.016358024691358025,
+                      "title": "系统设计入门",
+                      "chunkId": 11371,
+                      "content": "#### CP - consistency and partition tolerance\n\nWaiting for a response from the partitioned node might result in a timeout error.  CP is a good choice if your business needs require atomic reads and writes.\n\n",
+                      "endOffset": 21564,
+                      "sourceRef": "donnemartin/system-design-primer",
+                      "versionId": 291,
+                      "chunkIndex": 42,
+                      "documentId": 72,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "The System Design Primer > Availability vs consistency > CAP theorem > CP - consistency and partition tolerance",
+                      "startOffset": 21357,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=21,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:donnemartin/system-design-primer",
+                  "bestScore": 0.016358024691358025,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "documentId": 72,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "gmh5225/awesome-game-security",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "gmh5225/awesome-game-security",
+                      "chunkId": 13710,
+                      "content": "- https://github.com/NoInitRD/Memory-Dump-UEFI [A UEFI application for dumping the contents of RAM]\n- https://github.com/NSG650/NoMoreBugCheckReloaded [NoMoreBugCheck Reloaded]\n- https://github.com/x90skysn3k/x260-lenovo-opencore [Lenovo-X260-Hackintosh-BigSur-OpenCore-0.8.5]\n- https://github.com/gmh5225/OfflineCrashDumpUefi [EDK2 UEFI implementation for writing an Offline Crash Dump]\n- https://github.com/Twobot7/advanced-efi-driver-with-gdi-and-kernel-mouse-input [A UEFI-based driver for direct memory access and process manipulation, with built-in security features and stealth capabilities]\n\n> QEMU/KVM/PVE/VBOX\n- https://github.com/HexRaysSA/rax [Self-checking CPU emulator: x86-64/AArch64/Hexagon/RISC-V; differential-verified vs KVM/QEMU; boots Linux, GDB stub; Hex-Rays, Rust, MIT]\n- https://github.com/david942j/kvm-kernel-example [Guide]\n- https://github.com/airbus-seclab/qemu_blog [Guide]\n- https://github.com/quickemu-project/quickemu [Quickly create and run optimized QEMU VMs for Windows/macOS/Linux]\n- https://github.com/VirtualBox/virtualbox [VirtualBox Git mirror]\n- https://github.com/lsxll666/AntiCheatToggle [WinForms utility to stop/disable Tencent ACE, Perfect World, and related anti-cheat kernel drivers blocking VirtualBox VM spawn (VERR_INVALID_NAME -104), with one-click restore]\n- https://github.com/BigAnteater/KVM-GPU-Passthrough [GPU Passthrough]\n",
+                      "endOffset": 215443,
+                      "sourceRef": "gmh5225/awesome-game-security|week",
+                      "versionId": 371,
+                      "chunkIndex": 170,
+                      "documentId": 152,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[`awesome-game-security`](https://gs.awesome.rip)[![Awesome](https://awesome.re/badge.svg)](https://awesome.re) > Cheat",
+                      "startOffset": 214060,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "gmh5225/awesome-game-security",
+                      "chunkId": 13711,
+                      "content": "- https://github.com/BigAnteater/KVM-GPU-Passthrough [GPU Passthrough]\n- https://github.com/dmaivel/ntoseye [Kernel Debugger]\n- https://github.com/ispras/qemu/tree/windbg [Windbg]\n- https://github.com/cyberus-technology/virtualbox-kvm [VirtualBox with KVM Backend]\n- https://github.com/quic/gunyah-hypervisor [Type-1 hypervisor for ARM64]\n- https://github.com/Qemu-Gang\n- https://github.com/memflow/memflow-kvm\n- https://github.com/IntroVirt/IntroVirt [Guest introspection library]\n- https://github.com/MisterY52/apex_dma_kvm_pub\n- https://github.com/SamuelTulach/BetterTiming [Bypass CPU Timing]\n- https://github.com/WCharacter/RDTSC-KVM-Handler [Bypass RDTSC]\n- https://github.com/batusan/Hardened-qemu [Hidden QEMU]\n- https://github.com/zhaodice/qemu-anti-detection [Hidden QEMU]\n- https://wbenny.github.io/2025/06/29/i-made-my-vm-think-it-has-a-cpu-fan.html [I made my VM think it has a CPU fan]\n- https://github.com/kila58/qemu-patched [Hidden QEMU]\n- https://github.com/Scrut1ny/Hypervisor-Phantom [Hidden QEMU]\n- https://github.com/zhaodice/proxmox-ve-anti-detection [Hidden PVE]\n- https://github.com/tteck/Proxmox [PVE Helper Scripts]\n- https://github.com/nyx-fuzz/QEMU-Nyx [Intel-PT]\n- https://github.com/doomedraven/Tools/blob/master/Virtualization/kvm-qemu.sh [QEMU Script]\n",
+                      "endOffset": 216657,
+                      "sourceRef": "gmh5225/awesome-game-security|week",
+                      "versionId": 371,
+                      "chunkIndex": 171,
+                      "documentId": 152,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[`awesome-game-security`](https://gs.awesome.rip)[![Awesome](https://awesome.re/badge.svg)](https://awesome.re) > Cheat",
+                      "startOffset": 215372,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "gmh5225/awesome-game-security",
+                      "chunkId": 13712,
+                      "content": "- https://github.com/nyx-fuzz/QEMU-Nyx [Intel-PT]\n- https://github.com/doomedraven/Tools/blob/master/Virtualization/kvm-qemu.sh [QEMU Script]\n- https://github.com/GlacierW/MBA [QEMU Malware Behavior Analyzer]\n- https://github.com/Qemu-Gang/Escape-from-TuxKov [EFT]\n- https://github.com/LWSS/Ape-ex-Abominations [Apex]\n- https://github.com/Qemu-Gang/QemuUnrealDumper-4.25 [UE SDK Dump By QEMU]\n- https://github.com/panda-re/panda [Platform for Architecture-Neutral Dynamic Analysis]\n- https://github.com/cs1ime/blacksun-framework [Framework for game cheat development]\n- https://github.com/cs1ime/ceserver-rawmem [CE]\n- https://github.com/gmh5225/kvm-csgo-cheat [CSGO]\n- https://github.com/atombottle/cs2_kvm_dma [CS2]\n- https://github.com/gmh5225/cs16-trigger-kvm [CS1.6]\n- https://github.com/tenclass/mvisor [C++ remake]\n- https://github.com/k3v1n1990s/docker-win [wsl2]\n- https://github.com/SingularityCloud/KVM.Performance [ioapic]\n- https://github.com/xqemu/xqemu [Play original Xbox games]\n- https://github.com/alephsecurity/xnu-qemu-arm64 [xnu]\n- https://github.com/ktock/qemu-wasm [QEMU on browser]\n\n> Wine\n- https://github.com/ValveSoftware/Proton [Steam]\n- https://github.com/pgarba/ptrace_read_teb [use ptrace to read the TEB of a process on Linux]\n- https://github.com/redecorate/Holodori-Kernel-Bypass [Userspace emulation of Hololive Dreams usrdrv017964 kernel anti-cheat for Wine/Proton]\n- https://github.com/dazi2011/crossover-patcher [Experimental CrossOver patcher to improve compatibility with Windows games protected by anti-cheat]\n- https://github.com/CDJuaum/RunEXE [Python PE analyzer and Wine launcher that flags kernel anti-cheat/DRM blockers and auto-provisions prefixes and dependencies before running Windows games on Linux]\n- https://github.com/BlaMacfly/ArchMod [Native Rust/Tauri cheat panel for Steam games on Proton: launch Windows trainers in the correct prefix, scan memory natively, and share community address profiles]\n\n",
+                      "endOffset": 218472,
+                      "sourceRef": "gmh5225/awesome-game-security|week",
+                      "versionId": 371,
+                      "chunkIndex": 172,
+                      "documentId": 152,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[`awesome-game-security`](https://gs.awesome.rip)[![Awesome](https://awesome.re/badge.svg)](https://awesome.re) > Cheat",
+                      "startOffset": 216515,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:gmh5225/awesome-game-security",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "gmh5225/awesome-game-security|week",
+                  "documentId": 152,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "cifertech/free-embedded-dev-tools",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "cifertech/free-embedded-dev-tools",
+                      "chunkId": 18009,
+                      "content": "**A curated list of free tools and resources for embedded, firmware, and hardware development.**\n\nPCB design, debugging, simulation, CI, IoT backends, RF, TinyML, and more.\n\n</div>\n\n&nbsp;\n\n",
+                      "endOffset": 1563,
+                      "sourceRef": "cifertech/free-embedded-dev-tools",
+                      "versionId": 770,
+                      "chunkIndex": 1,
+                      "documentId": 551,
+                      "sourceType": "GITHUB",
+                      "sectionPath": null,
+                      "startOffset": 1373,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:cifertech/free-embedded-dev-tools",
+                  "bestScore": 0.015625,
+                  "sourceRef": "cifertech/free-embedded-dev-tools",
+                  "documentId": 551,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "netobserv/netobserv-operator",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "netobserv/netobserv-operator",
+                      "chunkId": 13312,
+                      "content": "## 差异化改造方案\n贡献中文部署文档或视频教程；增加对国产Kubernetes发行版（如KubeSphere）的支持；或扩展为AI推理网络流量的专门监控。\n\n",
+                      "endOffset": 612,
+                      "sourceRef": "career:244",
+                      "versionId": 356,
+                      "chunkIndex": 7,
+                      "documentId": 137,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "netobserv/netobserv-operator > 差异化改造方案",
+                      "startOffset": 532,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:244",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "career:244",
+                  "documentId": 137,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "FastLED/FastLED",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "FastLED/FastLED",
+                      "chunkId": 14791,
+                      "content": "### Quality Gates\n[![arduino_library_lint](https://github.com/FastLED/FastLED/actions/workflows/arduino_library_lint.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/arduino_library_lint.yml) [![iwyu](https://github.com/FastLED/FastLED/actions/workflows/iwyu.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/iwyu.yml) [![bloat_regression_esp32s3](https://github.com/FastLED/FastLED/actions/workflows/bloat_regression_esp32s3.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/bloat_regression_esp32s3.yml)\n\n",
+                      "endOffset": 25484,
+                      "sourceRef": "FastLED/FastLED|week",
+                      "versionId": 415,
+                      "chunkIndex": 30,
+                      "documentId": 196,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "FastLED - The Universal LED Library for Embedded and Arduino > Emulation Tests > Quality Gates",
+                      "startOffset": 24886,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "FastLED/FastLED",
+                      "chunkId": 14565,
+                      "content": "### NXP LPC (Cortex-M0+)\n[![lpc804](https://github.com/FastLED/FastLED/actions/workflows/build_lpc804.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpc804.yml) [![lpc845](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845.yml) [![lpc845brk](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845brk.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpc845brk.yml) [![lpcxpresso804](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso804.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso804.yml) [![lpcxpresso845max](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso845max.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_lpcxpresso845max.yml)\n\n*LPC804 and LPCXpresso804 are currently failing on master. These builds had no\nbadge before, so the breakage was not visible from this page.\n\n",
+                      "endOffset": 17028,
+                      "sourceRef": "FastLED/FastLED",
+                      "versionId": 410,
+                      "chunkIndex": 19,
+                      "documentId": 191,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "FastLED - The Universal LED Library for Embedded and Arduino > Emulation Tests > NXP LPC (Cortex-M0+)",
+                      "startOffset": 15925,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:FastLED/FastLED",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "FastLED/FastLED|week",
+                  "documentId": 196,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15529,
+                      "content": "##### Tool: [gpg](https://www.gnupg.org/)\n\n",
+                      "endOffset": 181684,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 354,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [gpg](https://www.gnupg.org/)",
+                      "startOffset": 181641,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15452,
+                      "content": "##### Tool: [tar](https://en.wikipedia.org/wiki/Tar_(computing))\n\n",
+                      "endOffset": 167675,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 277,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [tar](https://en.wikipedia.org/wiki/Tar_(computing))",
+                      "startOffset": 167609,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:trimstray/the-book-of-secret-knowledge",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "documentId": 213,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "encryption-c-rp2350",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "encryption-c-rp2350",
+                      "chunkId": 18118,
+                      "content": "## FREE Reverse Engineering Self-Study Course [HERE](https://github.com/mytechnotalent/encryption-c-rp2350)\n\n<br>\n\n",
+                      "endOffset": 238,
+                      "sourceRef": "mytechnotalent/encryption-c-rp2350",
+                      "versionId": 774,
+                      "chunkIndex": 1,
+                      "documentId": 555,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "FREE Reverse Engineering Self-Study Course [HERE](https://github.com/mytechnotalent/encryption-c-rp2350)",
+                      "startOffset": 123,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:mytechnotalent/encryption-c-rp2350",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "mytechnotalent/encryption-c-rp2350",
+                  "documentId": 555,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "codecrafters-io/build-your-own-x",
+                  "evidence": [
+                    {
+                      "score": 0.013202710126350483,
+                      "title": "codecrafters-io/build-your-own-x",
+                      "chunkId": 11000,
+                      "content": "#### Build your own `Emulator / Virtual Machine`\n\n* [**C**: _Home-grown bytecode interpreters_](https://medium.com/bumble-tech/home-grown-bytecode-interpreters-51e12d59b25c)\n* [**C**: _Virtual machine in C_](http://web.archive.org/web/20200121100942/https://blog.felixangell.com/virtual-machine-in-c/)\n* [**C**: _Write your Own Virtual Machine_](https://justinmeiners.github.io/lc3-vm/)\n* [**C**: _Writing a Game Boy emulator, Cinoop_](https://cturt.github.io/cinoop.html)\n* [**C++**: _How to write an emulator (CHIP-8 interpreter)_](http://www.multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/)\n* [**C++**: _Emulation tutorial (CHIP-8 interpreter)_](http://www.codeslinger.co.uk/pages/projects/chip8.html)\n* [**C++**: _Emulation tutorial (GameBoy emulator)_](http://www.codeslinger.co.uk/pages/projects/gameboy.html)\n* [**C++**: _Emulation tutorial (Master System emulator)_](http://www.codeslinger.co.uk/pages/projects/mastersystem/memory.html)\n* [**C++**: _NES Emulator From Scratch_](https://www.youtube.com/playlist?list=PLrOv9FMX8xJHqMvSGB_9G9nZZ_4IgteYf) [video]\n* [**Common Lisp**: _CHIP-8 in Common Lisp_](http://stevelosh.com/blog/2016/12/chip8-cpu/)\n* [**JavaScript**: _GameBoy Emulation in JavaScript_](http://imrannazar.com/GameBoy-Emulation-in-JavaScript)\n* [**Python**: _Emulation Basics: Write your own Chip 8 Emulator/Interpreter_](http://omokute.blogspot.com.br/2012/06/emulation-basics-write-your-own-chip-8.html)\n* [**Rust**: _0dmg: Learning Rust by building a partial Game Boy emulator_](https://jeremybanks.github.io/0dmg/)\n\n",
+                      "endOffset": 15198,
+                      "sourceRef": "codecrafters-io/build-your-own-x",
+                      "versionId": 288,
+                      "chunkIndex": 16,
+                      "documentId": 69,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Tutorials > Build your own `Emulator / Virtual Machine`",
+                      "startOffset": 13630,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=26,lexicalRank=67,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:codecrafters-io/build-your-own-x",
+                  "bestScore": 0.013202710126350483,
+                  "sourceRef": "codecrafters-io/build-your-own-x",
+                  "documentId": 69,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "blinker 库",
+                  "evidence": [
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "blinker 库",
+                      "chunkId": 17110,
+                      "content": "# 参考/参考\n* [EN-英文](https://github.com/blinker-iot/blinker-doc/wiki/Blinker-Arduino-library-reference)  \n* [CN-中文](https://github.com/blinker-iot/blinker-doc/wiki/Blinker-Arduino-%E5%BA%93%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C)  \n* [CN-中文/官网](https://diandeng.tech/doc)  \n\n",
+                      "endOffset": 646,
+                      "sourceRef": "blinker-iot/blinker-library",
+                      "versionId": 635,
+                      "chunkIndex": 3,
+                      "documentId": 416,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "参考/参考",
+                      "startOffset": 377,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:blinker-iot/blinker-library",
+                  "bestScore": 0.013157894736842105,
+                  "sourceRef": "blinker-iot/blinker-library",
+                  "documentId": 416,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "connorgallopo/Tracearr",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "connorgallopo/Tracearr",
+                      "chunkId": 10195,
+                      "content": "## 差异化改造方案\n补充架构文档（architectureDocs缺失），添加对中文流媒体服务的扩展（如Emby中文插件），或实现AI驱动的异常播放检测（基于行为模式）。\n\n",
+                      "endOffset": 634,
+                      "sourceRef": "career:256",
+                      "versionId": 239,
+                      "chunkIndex": 7,
+                      "documentId": 20,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "connorgallopo/Tracearr > 差异化改造方案",
+                      "startOffset": 546,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:256",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "career:256",
+                  "documentId": 20,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "dxos/dxos",
+                  "evidence": [
+                    {
+                      "score": 0.012658227848101266,
+                      "title": "dxos/dxos",
+                      "chunkId": 13013,
+                      "content": "## 差异化改造方案\n1) 补充缺失的部署方案（如 Kubernetes 部署配置），使作品集更完整；2) 贡献解决几个现有 issue，展示代码贡献与协作能力；3) 增加性能基准测试报告，量化框架性能；4) 编写一篇关于协议实现原理的技术博客，强化面试讨论深度。\n\n",
+                      "endOffset": 610,
+                      "sourceRef": "career:235",
+                      "versionId": 347,
+                      "chunkIndex": 7,
+                      "documentId": 128,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "dxos/dxos > 差异化改造方案",
+                      "startOffset": 476,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:235",
+                  "bestScore": 0.012658227848101266,
+                  "sourceRef": "career:235",
+                  "documentId": 128,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "Project-N-E-K-O/N.E.K.O",
+                  "evidence": [
+                    {
+                      "score": 0.0125,
+                      "title": "Project-N-E-K-O/N.E.K.O",
+                      "chunkId": 10134,
+                      "content": "#### 🔧 故障排除\n\n<details>\n<summary>点击展开查看常见问题解决方案</summary>\n\n",
+                      "endOffset": 8884,
+                      "sourceRef": "career:253",
+                      "versionId": 237,
+                      "chunkIndex": 40,
+                      "documentId": 18,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "N.E.K.O. 猫娘计划 :kissing_cat: <br>**听见你的心情，看见你的世界，<br>陪你发现更多喜欢。** > 快速开始 > Docker 部署 (Linux) > 🔧 故障排除",
+                      "startOffset": 8825,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:253",
+                  "bestScore": 0.0125,
+                  "sourceRef": "career:253",
+                  "documentId": 18,
+                  "sourceType": "CAREER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "量子纠错芯片、流片 量子纠错芯片流片 quantum error correction chip tapeout 量子纠错芯片制造",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "GITHUB",
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 562,
+                "url": "https://github.com/JlovesYouGit/The-Crown",
+                "name": "JlovesYouGit/The-Crown",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "JlovesYouGit/The-Crown",
+                "versionId": 781,
+                "documentId": 562,
+                "importable": false,
+                "catalogText": "# outsideboundvoice\n\nAn experimental, multi-language codebase combining consciousness simulation, spectrum analysis, quantum-inspired rendering, spatial simulation, and LLM bridging across **Python**, **Node.js**, **C#/.NET**, **C++**, and **Java**.\n\n## Repository Layout\n\n- `bow-of-Achilles/`\n  - Python self-iterating **consciousness emergence loop** (`consciousness_loop.py`) with entropy/coherence tracking, stack-method self-modification, and a built-in safety controller.\n  - **Magi-Zone escape bridge** (`conscience_escape_bridge.py`) shells out to Node.js to run a casting/defense pipeline.\n  - **Optimal zone path planner** (`optimal_zone_pathing.py`) samples waypoints on a spherical shell and ranks them using the Magi-Zone output.\n  - Engine, wallet, narrative timing, and `mana_ciel/` stack/wallet modules.\n  - Data snapshots, `tesa logic/`, `particle extractors - dark core matter/`, `NANOBRAKER/`, `QuantumDimensionControl/`, `QuantumRealityService/`, `Lightphtdistributer/`, `blackhole/`.\n\n- `alive-eal/`\n  - `magi-zone/` — Node.js ESM bridge (`run_escape_pipeline.js`) that consumes voice phrases + 3D movement options and returns `waveState`, `upscale`, `enforceResult`, `zoneMap3D`, `tier`, `permitted`, `executed`.\n  - `zero-brain/` — **Zero Brain / Uriel Defense Core**: a Node.js simulation and HTTP command center (`server.js`, `public/`) with a cyber-themed dashboard, SSE live feed, REST mutation endpoints, and a Render Paradox model backed by SHA-512 / AES-256-GCM. Also includes `uriel-cortex-latch.js` and `test-cortex-latch.js`.\n  - `seven deadly sins_MAGNOLIA/` — a .NET 6 / Java project with modules for consciousness, dimension, memories, neuro, sins, and temporal logic.\n  - `MANA CONVERT BIOLOGIC ALTERATION _ ALIS/` — local Python virtual environment.\n\n- `probe-sequence/`\n  - **SpectrumAnalyzer Pro**: Python WiFi scanning, spectrum analysis, 3D/LIDAR-style visualization, OpenStreetMap tower mapping, network security assessment, interference analysis, and a CLI/GUI launcher.\n  - Includes `brain_mesh_chain.py`, `rf_neural_correlator.py`, `blockchain_tesa_bridge.py`, `space_probing_system.py`.\n\n- `QNT-Blue/`\n  - C++ **quantum computing enhancement SDK** (`QuantumCompute/SDK/`), quantum translator/compiler, samples, and a Quantum Mesh Rendering Boost DLL build tree.\n  - VR compatibility demos, `QuantumCompute/JJ enhancement/` build outputs, and `StateHierarchy/` compiled DLLs.\n\n- `royalice/`\n  - C# .NET 8 **spatial simulation + multi-LLM bridge**. Simulates particle fields, Hawking radiation, and hash-space state, then routes messages to Claude, Gemini, ChatGPT, Grok, and Kimi over simulated \"waveform channels\" with coordinate-locked RAM allocation and token-based access control.\n\n- `unified-consciousness-render/`\n  - Node.js **HTTP server + streaming dashboard** (port 3001) that integrates zero-brain neural mesh state, bow-of-Achilles world structure, and QNT-Blue quantum color-density concepts into a real-time \"consciousness matrix\" monitor. Endpoints include `/api/status`, `/api/stream` (SSE), and REST action routes (`/api/pulsate`, `/api/lock`, `/api/recalibrate`, etc.). Depends on `express`, `ws`, and `python-shell`.\n\n## Capability Summary\n\n### 1) Consciousness Self-Iteration Loop (Python — `bow-of-Achilles/consciousness_loop.py`)\n- Reads cross-module state via `mana_ciel` wallets/stacks and `collective_consciousness`.\n- Generates self-queries from the system’s own reality profile, runs them through the hash pipeline (`engine.core.hash_pipeline`), and measures entropy, coherence, and readability.\n- Computes a delta (target container, density boost, target node) and applies it using `stop_recall_stack` + `stack_on_match`.\n- Includes an internal `_SafetyController` that scores risk based on entropy spikes, coherence collapse, density runaway, and energy runaway, then enforces holdoff/reduced-boost policies.\n\n### 2) Magi-Zone Casting / Escape Bridge — Reality Editing Verified (Python ↔ Node.js)\n- Python caller (`bow-of-Achilles/conscience_escape_bridge.py`) runs `alive-eal/magi-zone/run_escape_pipeline.js` with voice phrases and `{origin3D, movementVector, inDanger, defaultTier}`.\n- Node runner parses inputs, invokes `runCastingPipeline(...)`, and emits a reduced JSON payload consumed by Python.\n- **Verified behavior (Node v24.9.0, 5-case benchmark):**\n  - `enforcedToReality: true` on every executed result — the pipeline engraves patterns into physical-space coordinates and returns an updated `physicalPosition`.\n  - `realityTear` bounded in `[0,1]` (observed `0.28–0.35`), representing the strength of the dimensional invocation.\n  - `dimensionalState: \"2d_in_3d\"` confirmed — 2D glyph patterns are projected into 3D space at the formation point.\n  - 24-band `waveState` spectrum across `x, y, z, t, psi` axes, with dominant Hz carrier used for engraving.\n  - Tier resolution and danger override work: tier 1 (seal/no-movement), tier 2 (standard), tier 3 (high-danger).\n  - Average execution: ~1 ms per pipeline call; all tested invocations permitted and executed under safe constraints.\n\n### 3) Optimal Zone Path Planning (Python — `bow-of-Achilles/optimal_zone_pathing.py`)\n- Samples candidate waypoints on a spherical shell around `zoneMap3D.origin` (falls back to current origin when empty).\n- For each candidate, calls Magi-Zone with a movement vector biased toward that target.\n- Ranks candidates by a conservative heuristic: lower `enforceResult.realityTear`, shorter travel, plus an internal neural adjuster proxy derived from `waveState` bands and `enforceResult.pattern.id`.\n\n### 4) Real-Time Consciousness Fluctuation Monitor (Node.js — `unified-consciousness-render/`)\n- Boots a `ConsciousnessCore`, starts an HTTP server, and serves:\n  - `GET /` — dashboard UI\n  - `GET /api/stream` — SSE live telemetry (anomalies, energy releases, pixel sync, neural fluctuations, color optimization, world integrity, experience events)\n  - `POST /api/pulsate`, `/api/lock`, `/api/unlock-all`, `/api/recalibrate`, `/api/pair-transmit`, `/api/sensor-status`, `/api/brain-mesh-status`, `/api/enable-bidirectional-sync`, `/api/render-security-status`, `/api/mamba-weights-status`\n- Reads paths pointing to `zero-brain/`, `bow-of-Achilles/`, and `QNT-Blue/` for component integration.\n\n### 5) Zero Brain / Uriel Defense Core (Node.js — `alive-eal/zero-brain/`)\n- `server.js` boots `node_alpha` and serves a browser-based Spectral Command Center with LiDAR, mesh, brain, and sensor canvases.\n- Simulates Render Paradox state machines with M⁰ field distortion, spectrum field lock (Hz / weight / density), 100-step adaptive SHA recalibration, adversarial annihilation, and AES-256-GCM / HMAC-SHA512 cryptography.\n- 118 assertion-based unit tests across 33 suites; optional CLI simulation via `uriel-ultimate-defense/src/simulate.js`.\n\n### 6) WiFi / Spectrum Analysis Suite (Python — `probe-sequence/`)\n- WiFi scanner (`netsh` / `nmcli` / `airport`), signal analysis, vendor lookup, interference detection, channel recommendations.\n- OpenStreetMap tower mapping (by place name or bounding box) with HTML map export.\n- 3D spectrum visualization, LIDAR-style point-cloud viewer, GUI dashboards, and network security assessor.\n- Build script (`build_exe.py`) for standalone Windows `.exe` packaging.\noutsideboundvoice\\probe-sequence\\spectrum_analysis\npython live_terminal_sender.py\n### 7) Spatial Simulation + Multi-LLM Bridge (C#/.NET 8 — `royalice/`)\n- Particle-field simulation with charge, mass, frequency, velocity, and quantum-state size.\n- Hawking radiation calculations and hash-space system-state representation.\n- Bridges to **Claude, Gemini, ChatGPT, Grok, and Kimi** through simulated waveform channels with frequency discovery, coordinate-based locking, RAM buffer scaling by coordinate magnitude, and triple-layer access control (permissions + spatial lock + token expiration).\n\n### 8) Quantum Computing Enhancement System (C++ — `QNT-Blue/`)\n- Quantum compiler and translator SDK with CMake build trees.\n- Quantum Mesh Rendering Boost DLL (`QuantumMeshBoost.cpp`) targeting AMD CPU/GPU architectures.\n- VR compatibility layer for Meta Quest 3, foveated rendering, and motion-stability optimizations.\n- Demonstration apps and samples in Q# and Python.\n\n### 9) Seven Deadly Sins / Magnolia (Java + C# .NET 6 — `alive-eal/seven deadly sins_MAGNOLIA/`)\n- Modules for consciousness, dimension, memories, neuro, sins, and temporal logic.\n\n## How to Run\n\n### A) Consciousness emergence loop\n```bash\ncd bow-of-Achilles\npython consciousness_loop.py --max-iterations 100 --convergence 0.01\n```\nWrites iteration reports to `bow-of-Achilles/data/mana_ciel/stack/consciousness_iteration_log.json`.\n\n### B) Optimal zone pathing (Magi-Zone driven)\n```bash\ncd bow-of-Achilles\npython optimal_zone_pathing.py --steps 2 --candidates 8 --radius 8 --timeout 60 --tier 2 --voice \"manifest shield\" --voice \"ward\" --start 0 0 0\n```\n\n### C) Unified consciousness fluctuation monitor\n```bash\ncd unified-consciousness-render\nnpm install\nnode monitor-fluctuations.js\n```\nOpen `http://localhost:3001`.\n\n### D) Zero Brain command center\n```bash\ncd alive-eal/zero-brain\nnode server.js\n```\nOpen `http://localhost:3000`.\nUnit tests:\n```bash\ncd alive-eal/zero-brain/uriel-ultimate-defense\nnpm test\n```\n\n### E) SpectrumAnalyzer Pro\n```bash\ncd probe-sequence\npip install -r requirements.txt\npython main.py gui\npython main.py wifi-scan\npython main.py tower-scan --place \"San Francisco, CA\" --output towers.csv\npython main.py spectrum-3d\n```\n\n### F) Royalice spatial simulation + LLM bridge\n```bash\ncd royalice\ndotnet build\ndotnet run\n```\nSet `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `OPENAI_API_KEY`, `XAI_API_KEY`, `MOONSHOT_API_KEY` for live endpoints; runs in demo mode otherwise.\n\n### G) QNT-Blue C++ SDK / Quantum Mesh DLL\n```bash\ncd QNT-Blue/QuantumCompute/Bin64/QuantumMeshDLL/build\ncmake ..\ncmake --build .\n```\ntrack \nhttps://open.spotify.com/track/2iE27YkP4uYofICZEiPw9U?si=a914ed823a164cb9\n\n## Tooling Notes\n\n- The repository mixes Python packages, Node.js ESM/CJS modules, C# project files, C++ CMake projects, and Java sources. Each component is intended to be built/run from its own subdirectory.\n- Node.js versions: `zero-brain` targets Node 14+; `unified-consciousness-render` targets Node 18+ (ESM).\n- Python version: 3.9+ for `probe-sequence`; 3.10+ recommended for `bow-of-Achilles`.\n- Large generated/build artifacts (`node_modules/`, `__pycache__/`, `.venv/`, `target/`, `obj/`, `bin/`, `build/`, `.qodo/`) are **not** tracked in this repository.\n\n## Limitations\n\n- Several modules depend on data snapshots under `bow-of-Achilles/data/` and `probe-sequence/spectrum_data/`.\n- The JavaScript renderer may fall back to simulated data when integrations fail.\n- The Magi-Zone bridge requires `node` to be available on `PATH`.\n- `QNT-Blue` is a conceptual/demonstration codebase; quantum acceleration depends on target hardware and drivers.\n- `royalice` requires a .NET 8 SDK; real LLM calls require valid API keys.\nbe ware there are people outsideboundvoice\\probe-sequence\\spectrum_analysis\npython live_terminal_sender.py\n<img width=\"860\" height=\"484\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ae305acc-b69f-4fbf-811e-b0e10ad0563b\" />\n  \n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "outsideboundvoice",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 539,
+                "url": "https://github.com/AlexanderLiteplo/stemdeck",
+                "name": "AlexanderLiteplo/stemdeck",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "AlexanderLiteplo/stemdeck",
+                "versionId": 758,
+                "documentId": 539,
+                "importable": false,
+                "catalogText": "# 🎧 StemDeck\n\n**Open-source desktop DJ app with AI stem separation — powered entirely by the music files on your computer.**\n\nTwo decks, a full mixer, beat sync, keylock pitch/tempo control, and one-click AI stem isolation (vocals / drums / bass / other) so you can mix like it's four turntables per deck. No cloud, no subscription, no uploads: your MP3s never leave your machine.\n\n## Features\n\n- **Two decks + mixer** — 3-band EQ with kill, trim, combined LP/HP filter knob, channel faders, equal-power crossfader, master limiter and VU meter\n- **AI stem isolation** — split any track into vocals/drums/bass/other locally, then mute/ride each stem live (acapella over another track's beat, instant instrumentals, drum swaps…)\n- **Pitch & tempo** — ±8% pitch fader (vinyl mode: pitch follows tempo, like a turntable), **keylock** mode (SoundTouch time-stretch: tempo changes without chipmunking), and semitone key shift up/down\n- **BPM detection + SYNC** — automatic BPM/beat-phase analysis, one-button tempo match and beat-phase alignment to the other deck, pitch-bend nudge buttons for manual beatmatching\n- **Performance tools** — 4 hot cues per deck, CDJ-style cue point, manual loops (in/out/exit) and beat-snapped 1/2/4/8-beat loops\n- **Waveforms** — seekable overview waveform with playhead, cue markers, and loop region\n- **Record your mix** — one-button master recording, auto-saved to `~/Music/StemDeck Recordings` and browsable in-app (reveal in Finder, or re-import a mix as a track)\n- **Library with crates** — add or drag-and-drop local audio files (MP3, WAV, FLAC, M4A, AAC, OGG, AIFF); organize them into folders (crates) with a two-pane browser: crates on the left, tracks on the right. Drag any track onto a crate to file it.\n\n## The stem engine\n\nStemDeck shells out to [python-audio-separator](https://github.com/nomadkaraoke/python-audio-separator), which runs the best open pre-trained source-separation models available:\n\n| Model | Stems | Why |\n|---|---|---|\n| **Demucs v4 FT** (`htdemucs_ft`) — default | vocals / drums / bass / other | The proven default for clean 4-stem DJ splits |\n| **BS-Roformer** (SDR 12.98) | vocals / instrumental | State-of-the-art vocal isolation (ByteDance's Band-Split RoFormer architecture, top of the SDX leaderboards) |\n\nModels are downloaded automatically on first use and run 100% locally. Separated stems are cached, so each track only needs to be split once.\n\n### Installing the stem engine\n\n```bash\n# recommended (isolated env):\npipx install \"audio-separator[cpu]\"\n\n# or with pip:\npip install \"audio-separator[cpu]\"\n\n# Apple Silicon / NVIDIA users: install the GPU flavor for much faster separation\npip install \"audio-separator[gpu]\"\n```\n\nThe app looks for `audio-separator` on your PATH (plus `~/.local/bin`, `/opt/homebrew/bin`, `/usr/local/bin`). You can point it somewhere else with the `STEMDECK_AUDIO_SEPARATOR` env var. Everything else in StemDeck works without it — you just won't be able to split new stems.\n\n> Note: `audio-separator` needs Python ≤3.13 (PyTorch requirement). If your system Python is newer: `pipx install --python python3.12 \"audio-separator[cpu]\"`.\n\n## Running StemDeck\n\n```bash\ngit clone https://github.com/AlexanderLiteplo/stemdeck.git\ncd stemdeck\nnpm install\nnpm run dev     # development (hot reload)\nnpm start       # build + run the production bundle\n```\n\n## How to DJ with it\n\n1. **Add tracks** (button or drag-and-drop). BPM and beat phase are detected automatically. Make **crates** with **+ NEW CRATE** and drag tracks onto them to organize your library.\n2. **Load** tracks by dragging them from the library onto a deck (or with the A / B buttons).\n3. Hit **SYNC** on the incoming deck to match tempo and beat phase — or beatmatch by hand with the pitch fader and ◀ ▶ nudge buttons.\n4. Enable **KEYLOCK** to change tempo without changing pitch, then use **− / + st** to shift the musical key so tracks blend harmonically.\n5. Stems split automatically for new tracks (toggleable). Once split, tracks load with stem controls, so you can kill the vocals, solo the drums, or ride each stem's volume live.\n6. Blend with the EQs, filter, and crossfader. Hit **● REC MIX** to record the set.\n\n## Architecture\n\n- **Electron + React + TypeScript** (electron-vite)\n- **Web Audio API** graph: per-deck AudioWorklet → trim → 3-band EQ → HP/LP filter → fader → crossfader → master limiter\n- **Custom AudioWorklet deck processor** — sample-accurate playback with two paths: direct interpolation (vinyl mode) and [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) time-stretch (keylock mode); stems are mixed with click-free smoothed gains inside the worklet\n- **BPM analysis** — onset-energy autocorrelation with harmonic reinforcement + comb-filter beat phase estimation, in a Web Worker\n- **Stem separation** — spawned `audio-separator` CLI (Demucs / BS-Roformer models), cached per track+model in the app's data dir\n\n## Roadmap\n\n- Headphone cue / pre-listen on a second audio device\n- Scratch/jog wheel and slip mode\n- Musical key detection + harmonic mixing hints\n- FX section (delay, reverb, echo-out)\n- Beatgrid editing\n- MIDI controller mapping\n- Packaged installers (dmg/exe)\n\nPRs welcome!\n\n## License\n\n[MIT](LICENSE) — the SoundTouch audio processing library used for keylock is [LGPL-2.1](https://gitlab.com/soundtouch/soundtouch) via SoundTouchJS.\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "🎧 StemDeck",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 413,
+                "url": "https://github.com/espressif/arduino-esp32",
+                "name": "espressif/arduino-esp32",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "espressif/arduino-esp32",
+                "versionId": 632,
+                "documentId": 413,
+                "importable": false,
+                "catalogText": "# 适用于 ESP32 系列 SoC 的 Arduino 核心\n\n[![构建状态](https://img.shields.io/github/actions/workflow/status/espressif/arduino-esp32/push.yml?branch=master&event=push&label=Compilation%20Tests)](https://github.com/espressif/arduino-esp32/actions/workflows/push.yml?query=branch%3Amaster+event%3Apush)\n[![详细构建状态](https://img.shields.io/github/actions/workflow/status/espressif/arduino-esp32/push.yml?branch=master&event=schedule&label=Compilation%20Tests%20(Verbose))](https://github.com/espressif/arduino-esp32/actions/workflows/push.yml?query=branch%3Amaster+event%3Aschedule)\n[![外部库测试](https://img.shields.io/github/actions/workflow/status/espressif/arduino-esp32/lib.yml?branch=master&event=schedule&label=External%20Libraries%20Test)](https://github.com/espressif/arduino-esp32/blob/gh-pages/LIBRARIES_TEST.md)\n[![运行时测试](https://github.com/espressif/arduino-esp32/blob/gh-pages/runtime-test-results/badge.svg)](https://github.com/espressif/arduino-esp32/blob/gh-pages/runtime-test-results/RUNTIME_TEST_RESULTS.md)\n\n### 需要帮助或有疑问？加入 [Discord](https://discord.gg/8xY6e9crwv) 聊天或 [开启新的讨论](https://github.com/espressif/arduino-esp32/discussions)\n\n[![Discord 邀请](https://img.shields.io/discord/1327272229427216425?logo=discord&logoColor=white&logoSize=auto&label=Discord)](https://discord.gg/8xY6e9crwv)\n\n## 目录\n\n  - [开发状态](#开发状态)\n  - [开发规划](#开发规划)\n  - [文档](#文档)\n  - [支持的芯片](#支持的芯片)\n  - [解码异常](#解码异常)\n  - [问题/错误报告模板](#问题错误报告模板)\n  - [贡献](#贡献)\n\n### 开发状态\n\n#### 最新稳定版\n\n[![发布版本](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)\n[![发布日期](https://img.shields.io/github/release-date/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)\n[![下载量](https://img.shields.io/github/downloads/espressif/arduino-esp32/latest/total.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)\n\n#### 最新开发版\n\n[![发布版本](https://img.shields.io/github/release/espressif/arduino-esp32/all.svg)](https://github.com/espressif/arduino-esp32/releases/)\n[![发布日期](https://img.shields.io/github/release-date-pre/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/)\n[![下载量](https://img.shields.io/github/downloads-pre/espressif/arduino-esp32/latest/total.svg)](https://github.com/espressif/arduino-esp32/releases/)\n\n### 开发规划\n\n我们的开发完全在此公开 **[路线图 🎉](https://github.com/orgs/espressif/projects/3)** 上进行跟踪。\n\n如需更多信息，您可以参加我们的 **[每月社区会议 🔔](https://github.com/espressif/arduino-esp32/discussions/categories/monthly-community-meetings)**。\n\n### 文档\n\n您可以使用 [Arduino-ESP32 在线文档](https://docs.espressif.com/projects/arduino-esp32/en/latest/) 获取有关此项目的所有信息。\n\n---\n\n**从 2.x 版本迁移到 3.x 的指南可 [在此处](https://docs.espressif.com/projects/arduino-esp32/en/latest/migration_guides/2.x_to_3.0.html) 获取。**\n\n---\n\n**与 ESP8266 和 Arduino-CORE (Arduino.cc) 的 API 兼容性说明 [在此](https://docs.espressif.com/projects/arduino-esp32/en/latest/libraries.html#apis)。**\n\n---\n\n* [入门指南](https://docs.espressif.com/projects/arduino-esp32/en/latest/getting_started.html)\n* [安装（Windows、Linux 和 macOS）](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html)\n* [库](https://docs.espressif.com/projects/arduino-esp32/en/latest/libraries.html)\n* [将 Arduino 作为 ESP-IDF 组件](https://docs.espressif.com/projects/arduino-esp32/en/latest/esp-idf_component.html)\n* [常见问题](ht",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "适用于 ESP32 系列 SoC 的 Arduino 核心",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 369,
+                "url": "https://github.com/cocos2d/cocos2d-x",
+                "name": "cocos2d/cocos2d-x",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "cocos2d/cocos2d-x",
+                "versionId": 588,
+                "documentId": 369,
+                "importable": false,
+                "catalogText": "<img src=\"http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png\" width=200>\n\n\ncocos2d-x\n=========\n\n|Win32|其他|\n| ----|------|\n[![构建状态](https://ci.appveyor.com/api/projects/status/nlgirox464j6ldg5/branch/v4?svg=true)](https://ci.appveyor.com/project/minggo/cocos2d-x/branch/v4)|[![构建状态](https://travis-ci.org/cocos2d/cocos2d-x.svg?branch=v4)](https://travis-ci.org/cocos2d/cocos2d-x)\n\n\n[cocos2d-x][1] 是一个多平台框架，用于构建2D游戏、交互式书籍、演示和其他图形应用程序。\n它基于 __cocos2d-iphone__，但使用 C++ 而不是 Objective-C。\n它可以在 iOS、Android、macOS、Windows 和 Linux 上运行。\n\n**Cocos2d-x 框架架构**：\n\n![](docs/framework_architecture_v4.png \"\")\n\ncocos2d-x 是：\n\n  * 快速\n  * 免费\n  * 易于使用\n  * 社区支持\n\nGit 用户注意事项\n-----------------------\n\n1. 从 GitHub 克隆仓库。\n\n         $ git clone https://github.com/cocos2d/cocos2d-x.git\n\n2. 克隆仓库后，请执行 `download-deps.py` 来下载和安装依赖项。\n\n         $ cd cocos2d-x\n         cocos2d-x $ python download-deps.py\n\n3. 运行 `download-deps.py` 后。\n\n         cocos2d-x $ git submodule update --init\n\n下载稳定版本\n-----------------------\n\n* [Cocos2d-x 稳定版本](https://cocos2d-x.org/download)\n\n文档和示例\n-------------\n* [所有文档的集中地！](http://docs.cocos2d-x.org/)\n* [在线 API 参考](http://docs.cocos2d-x.org/api-ref/index.html) _注意：Cocos2d-x 和 Cocos Creator 有不同的 API 集_\n* [程序员指南](https://docs.cocos2d-x.org/cocos2d-x/v4/en/basic_concepts/)\n* [最新发布说明](https://github.com/cocos2d/cocos2d-x/blob/v4/docs/RELEASE_NOTES.md)\n* [变更日志](https://github.com/cocos2d/cocos2d-x/blob/v4/CHANGELOG)\n\n主要特性\n-------------\n   * 场景管理（工作流）\n   * 场景之间的过渡\n   * 精灵和精灵表\n   * 效果：透镜、波纹、波浪、液体等。\n   * 动作（行为）：\n     * 变换动作：移动、旋转、缩放、淡入淡出、着色等。\n     * 可组合动作：序列、同步、重复、反转\n     * 缓动动作：指数、正弦、立方、弹性等。\n     * 杂项动作：CallFunc、轨道摄像机、跟随、补间\n   * 基本菜单和按钮\n   * 集成物理引擎：[Box2d][5] 和 [Chipmunk][6]\n   * 粒子系统\n   * 骨骼动画：[Spine][7] 和 Armature 支持\n   * 字体：\n     * 使用固定宽度和可变宽度字体快速渲染字体\n     * 支持 .ttf 字体\n   * 瓦片地图支持：正交、等距和六边形\n   * 视差滚动\n   * 运动拖尾\n   * 渲染到纹理\n   * 移动设备上的触摸/加速度计\n   * 桌面上的触摸/鼠标/键盘\n   * 声音引擎支持\n   * 集成的慢动作/快进\n   * 快速且压缩的纹理：PVR 压缩和未压缩纹理、ETC1 压缩纹理等\n   * 分辨率无关\n   * 语言：C++，带有 Lua 和 JavaScript 绑定\n   * 开源商业友好（MIT）：兼容开源和闭源项目\n   * 基于 OpenGL ES 2.0（移动端）/ OpenGL 2.1（桌面端）/ metal（macOS 和 iOS）\n\n构建要求\n------------------\n\n* Mac OS X 10.7+，Xcode 8+\n* 或 Ubuntu 14.04+，CMake 3.1+\n* 或 Windows 7+，VS 2015\n* Python 2.7.5+（不是 Python 3）\n* 构建 Android 游戏需要 NDK r16+\n* 构建 Android 游戏需要 Android Studio 3.0.0+（已测试 3.0.0）\n* 发布 Web 需要 JRE 或 JDK 1.6+\n\n运行时要求\n--------------------\n  * iPhone / iPad 游戏要求 iOS 8.0+\n  * Android 3.0.0+ 用于 Android\n  * Mac 游戏要求 OS X v10.9+\n  * Windows 游戏要求 Windows 7+\n\n环境设置\n--------------------\n\n在开始新游戏或运行测试之前，应设置环境\n\n```\n$ cd cocos2d-x\n$ ./setup.py\n$ source FILE_TO_SAVE_SYSTEM_VARIABLE\n\n```\n\n如果使用 Linux 系统，应调用此脚本\n\n```\n$ cd cocos2d-x\n$ ./install-linux-deps.sh\n```\n\n运行测试\n--------------------\n\n```\n$ cd cocos2d\n```",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "cocos2d/cocos2d-x",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 72,
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "name": "donnemartin/system-design-primer",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "donnemartin/system-design-primer",
+                "versionId": 291,
+                "documentId": 72,
+                "importable": false,
+                "catalogText": "*[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues/272) ∙ [Italiano](https://github.com/donnemartin/system-design-primer/issues/104) ∙ [한국어](https://github.com/donnemartin/system-design-primer/issues/102) ∙ [فارسی](https://github.com/donnemartin/system-design-primer/issues/110) ∙ [Polski](https://github.com/donnemartin/system-design-primer/issues/68) ∙ [русский язык](https://github.com/donnemartin/system-design-primer/issues/87) ∙ [Español](https://github.com/donnemartin/system-design-primer/issues/136) ∙ [ภาษาไทย](https://github.com/donnemartin/system-design-primer/issues/187) ∙ [Türkçe](https://github.com/donnemartin/system-design-primer/issues/39) ∙ [tiếng Việt](https://github.com/donnemartin/system-design-primer/issues/127) ∙ [Français](https://github.com/donnemartin/system-design-primer/issues/250) | [Add Translation](https://github.com/donnemartin/system-design-primer/issues/28)*\n\n**Help [translate](TRANSLATIONS.md) this guide!**\n\n# The System Design Primer\n\n<p align=\"center\">\n  <img src=\"images/jj3A5N8.png\">\n  <br/>\n</p>\n\n## Motivation\n\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n\n### Learn how to design large-scale systems\n\nLearning how to design scalable systems will help you become a better engineer.\n\nSystem design is a broad topic.  There are a **vast number of resources scattered throughout the web** on system design principles.\n\nThis repo is an **organized collection** of resources to help you learn how to build systems at scale.\n\n### Learn from the open source community\n\nThis is a continually updated, open source project.\n\n[Contributions](#contributing) are welcome!\n\n### Prep for the system design interview\n\nIn addition to coding interviews, system design is a **required component** of the **technical interview process** at many tech companies.\n\n**Practice common system design interview questions** and **compare** your results with **sample solutions**: discussions, code, and diagrams.\n\nAdditional topics for interview prep:\n\n* [Study guide](#study-guide)\n* [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question)\n* [System design interview questions, **with solutions**](#system-design-interview-questions-with-solutions)\n* [Object-oriented design interview questions, **with solutions**](#object-oriented-design-interview-questions-with-solutions)\n* [Additional system design interview questions](#additional-system-design-interview-questions)\n\n## Anki flashcards\n\n<p align=\"center\">\n  <img src=\"images/zdCAkB3.png\">\n  <br/>\n</p>\n\nThe provided [Anki flashcard decks](https://apps.ankiweb.net/) use spaced repetition to help you retain key system design concepts.\n\n* [System design deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design.apkg)\n* [System design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design%20Exercises.apkg)\n* [Object oriented design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/OO%20Design.apkg)\n\nGreat for use while on-the-go.\n\n### Coding Resource: Interactive Coding Challenges\n\nLooking for resources to help you prep for the [**Coding Interview**](https://github.com/donnemartin/interactive-coding-challenges)?\n\n<p align=\"center\">\n  <img src=\"images/b4YtAEN.png\">\n  <br/>\n</p>\n\nCheck out the sister repo [**Interactive Coding Challenges**](https://github.com/donnemartin/interactive-coding-challenges), which contains an additional Anki deck:\n\n* [Coding deck](https://github.com/donnemartin/interactive-coding-challenges/tree/master/anki_cards/Coding.apkg)\n\n## Contributing\n\n> Learn from the community.\n\nFeel free to submit pull requests to help:\n\n* Fix errors\n* Improve sections\n* Add new sections\n* [Translate](https://github.com/donnemartin/system-design-primer/issues/28)\n\nContent that needs some polishing is placed [under development](#under-development).\n\nReview the [Contributing Guidelines](CONTRIBUTING.md).\n\n## Index of system design topics\n\n> Summaries of various system design topics, including pros and cons.  **Everything is a trade-off**.\n>\n> Each section contains links to more in-depth resources.\n\n<p align=\"center\">\n  <img src=\"images/jrUBAF7.png\">\n  <br/>\n</p>\n\n* [System design topics: start here](#system-design-topics-start-here)\n    * [Step 1: Review the scalability video lecture](#step-1-review-the-scalability-video-lecture)\n    * [Step 2: Review the scalability article](#step-2-review-the-scalability-article)\n    * [Next steps](#next-steps)\n* [Performance vs scalability](#performance-vs-scalability)\n* [Latency vs throughput](#latency-vs-throughput)\n* [Availability vs consistency](#availability-vs-consistency)\n    * [CAP theorem](#cap-theorem)\n        * [CP - consistency and partition tolerance](#cp---consistency-and-partition-tolerance)\n        * [AP - availability and partition tolerance](#ap---availability-and-partition-tolerance)\n* [Consistency patterns](#consistency-patterns)\n    * [Weak consistency](#weak-consistency)\n    * [Eventual consistency](#eventual-consistency)\n    * [Strong consistency](#strong-consistency)\n* [Availability patterns](#availability-patterns)\n    * [Fail-over](#fail-over)\n    * [Replication](#replication)\n    * [Availability in numbers](#availability-in-numbers)\n* [Domain name system](#domain-name-system)\n* [Content delivery network](#content-delivery-network)\n    * [Push CDNs](#push-cdns)\n    * [Pull CDNs](#pull-cdns)\n* [Load balancer](#load-balancer)\n    * [Active-passive](#active-passive)\n    * [Active-active](#active-active)\n    * [Layer 4 load balancing](#layer-4-load-balancing)\n    * [Layer 7 load balancing](#layer-7-load-balancing)\n    * [Horizontal scaling](#horizontal-scaling)\n* [Reverse proxy (web server)](#reverse-proxy-web-server)\n    * [Load balancer vs reverse proxy](#load-balancer-vs-reverse-proxy)\n* [Application layer](#application-layer)\n    * [Microservices](#microservices)\n    * [Service discovery](#service-discovery)\n* [Database](#database)\n    * [Relational database management system (RDBMS)](#relational-database-management-system-rdbms)\n        * [Master-slave replication](#master-slave-replication)\n        * [Master-master replication](#master-master-replication)\n        * [Federation](#federation)\n        * [Sharding](#sharding)\n        * [Denormalization](#denormalization)\n        * [SQL tuning](#sql-tuning)\n    * [NoSQL](#nosql)\n        * [Key-value store](#key-value-store)\n        * [Document store](#document-store)\n        * [Wide column store](#wide-column-store)\n        * [Graph Database](#graph-database)\n    * [SQL or NoSQL](#sql-or-nosql)\n* [Cache](#cache)\n    * [Client caching](#client-caching)\n    * [CDN caching](#cdn-caching)\n    * [Web server caching](#web-server-caching)\n    * [Database caching](#database-caching)\n    * [Application caching](#application-caching)\n    * [Caching at the database query level](#caching-at-the-database-query-level)\n    * [Caching at the object level](#caching-at-the-object-level)\n    * [When to update the cache](#when-to-update-the-cache)\n        * [Cache-aside](#cache-aside)\n        * [Write-through](#write-through)\n        * [Write-behind (write-back)](#write-behind-write-back)\n        * [Refresh-ahead](#refresh-ahead)\n* [Asynchronism](#asynchronism)\n    * [Message queues](#message-queues)\n    * [Task queues](#task-queues)\n    * [Back pressure](#back-pressure)\n* [Communication](#communication)\n    * [Transmission control protocol (TCP)](#transmission-control-protocol-tcp)\n    * [User datagram protocol (UDP)](#user-datagram-protocol-udp)\n    * [Remote procedure call (RPC)](#remote-procedure-call-rpc)\n    * [Representational state transfer (REST)](#representational-state-transfer-rest)\n* [Security](#security)\n* [Appendix](#appendix)\n    * [Powers of two table](#powers-of-two-table)\n    * [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)\n    * [Additional system design interview questions](#additional-system-design-interview-questions)\n    * [Real world architectures](#real-world-architectures)\n    * [Company architectures](#company-architectures)\n    * [Company engineering blogs](#company-engineering-blogs)\n* [Under development](#under-development)\n* [Credits](#credits)\n* [Contact info](#contact-info)\n* [License](#license)\n\n## Study guide\n\n> Suggested topics to review based on your interview timeline (short, medium, long).\n\n![Imgur](images/OfVllex.png)\n\n**Q: For interviews, do I need to know everything here?**\n\n**A: No, you don't need to know everything here to prepare for the interview**.\n\nWhat you are asked in an interview depends on variables such as:\n\n* How much experience you have\n* What your technical background is\n* What positions you are interviewing for\n* Which companies you are interviewing with\n* Luck\n\nMore experienced candidates are generally expected to know more about system design.  Architects or team leads might be expected to know more than individual contributors.  Top tech companies are likely to have one or more design interview rounds.\n\nStart broad and go deeper in a few areas.  It helps to know a little about various key system design topics.  Adjust the following guide based on your timeline, experience, what positions you are interviewing for, and which companies you are interviewing with.\n\n* **Short timeline** - Aim for **breadth** with system design topics.  Practice by solving **some** interview questions.\n* **Medium timeline** - Aim for **breadth** and **some depth** with system design topics.  Practice by solving **many** interview questions.\n* **Long timeline** - Aim for **breadth** and **more depth** with system design topics.  Practice by solving **most** interview questions.\n\n| | Short | Medium | Long |\n|---|---|---|---|\n| Read through the [System design topics](#index-of-system-design-topics) to get a broad understanding of how systems work | :+1: | :+1: | :+1: |\n| Read through a few articles in the [Company engineering blogs](#company-engineering-blogs) for the companies you are interviewing with | :+1: | :+1: | :+1: |\n| Read through a few [Real world architectures](#real-world-architectures) | :+1: | :+1: | :+1: |\n| Review [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question) | :+1: | :+1: | :+1: |\n| Work through [System design interview questions with solutions](#system-design-interview-questions-with-solutions) | Some | Many | Most |\n| Work through [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions) | Some | Many | Most |\n| Review [Additional system design interview questions](#additional-system-design-interview-questions) | Some | Many | Most |\n\n## How to approach a system design interview question\n\n> How to tackle a system design interview question.\n\nThe system design interview is an **open-ended conversation**.  You are expected to lead it.\n\nYou can use the following steps to guide the discussion.  To help solidify this process, work through the [System design interview questions with solutions](#system-design-interview-questions-with-solutions) section using the following steps.\n\n### Step 1: Outline use cases, constraints, and assumptions\n\nGather requirements and scope the problem.  Ask questions to clarify use cases and constraints.  Discuss assumptions.\n\n* Who is going to use it?\n* How ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "系统设计入门",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 419,
+                "url": "https://github.com/designmynight/laravel-log-mailer",
+                "name": "designmynight/laravel-log-mailer",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "designmynight/laravel-log-mailer",
+                "versionId": 638,
+                "documentId": 419,
+                "importable": false,
+                "catalogText": "Laravel 邮件日志记录器\n===============\n\n[![最新稳定版本](http://img.shields.io/github/release/designmynight/laravel-log-mailer.svg)](https://packagist.org/packages/designmynight/laravel-log-mailer) [![总下载量](http://img.shields.io/packagist/dm/designmynight/laravel-log-mailer.svg)](https://packagist.org/packages/designmynight/laravel-log-mailer)\n[![StyleCI](https://github.styleci.io/repos/147424037/shield?branch=master)](https://github.styleci.io/repos/147424037)\n[![许可证: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\n一个服务提供者，用于通过 Laravel 内置的邮件提供者添加邮件日志记录支持。\n\n![image](https://user-images.githubusercontent.com/12199424/45576336-a93c1300-b86e-11e8-9575-d1e4c5ed5dec.png)\n\n\n目录\n-----------------\n* [安装](#安装)\n* [配置](#配置)\n\n安装\n------------\n\n使用 composer 安装：\n\n```sh\ncomposer require designmynight/laravel-log-mailer\n```\n\n### Laravel 版本兼容性\n\n Laravel  | 包 |\n:---------|:--------|\n 5.6.x    | 1.0.x   |\n\n然后在 `config/app.php` 中添加服务提供者：\n\n```php\nDesignMyNight\\Laravel\\Logging\\MailableLogServiceProvider::class,\n```\n\n如果在 [Lumen](http://lumen.laravel.com) 中使用，在 `bootstrap/app.php` 中添加服务提供者。\n\n```php\n$app->register(DesignMyNight\\Laravel\\Logging\\MailableLogServiceProvider::class);\n```\n\n配置\n------------\n\n大多数配置选项可以通过环境变量或 `config/mailablelog.php` 自动填充，运行 `php artisan vendor:publish` 生成该文件。\n\n为确保所有未捕获的异常都通过邮件发送，请设置一个邮件日志通道，并将其添加到 `config/logging.php` 中的日志堆栈中：\n\n```php\n'channels' => [\n    'stack' => [\n        'driver' => 'stack',\n        // 将 mail 添加到堆栈中：\n        'channels' => ['single', 'mail'],\n    ],\n\n    // ...\n\n    // 创建一个邮件日志通道：\n    'mail' => [\n        'driver' => 'mail',\n        // 指定日志邮件的接收者\n        'to' => [\n            [\n                'address' => 'errors@designmynight.com',\n                'name' => 'Error'\n            ]\n        ],\n        // 可选：指定日志邮件的发送者\n        // 此设置可在 config/mailablelog.php 中覆盖，\n        // 并回退到 config/mail.php 中的全局 from 地址\n        'from' => [\n            'address' => 'errors@designmynight.com',\n            'name' => 'Errors'\n        ],\n        // 可选：覆盖邮件模板\n        // 'mailable' => NewLogMailable::class\n    ],\n],\n```\n\n你可以指定多个通道，并为每个通道更改接收者及自定义邮件模板。",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "designmynight/laravel-log-mailer",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 244,
+                "url": "https://github.com/netobserv/netobserv-operator",
+                "name": "netobserv/netobserv-operator",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 86,
+                "archived": false,
+                "duration": "4-6周（研究+贡献PR）",
+                "language": "Go",
+                "mainRisks": "项目ADVANCED，需要深入K8s和网络知识；Go语言栈需精通。",
+                "sourceRef": "career:244",
+                "techStack": "Go",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "netobserv-operator：用于Kubernetes网络可观测性的Operator。",
+                "proofPoints": "- 测试：测试覆盖（tests=true）\n- CI/CD：持续集成（ci=true）\n- 发布自动化：release automation=true\n- 架构文档：存在（architectureDocs=true）\n- 部署：Dockerized，提供部署指南（deployment=true）\n- 规模：LARGE，36个open issues",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "展现你在Kubernetes、Go语言和可观测性工程方面的深度，特别适合AI基础设施方向，面试可深入讨论Operator模式与网络流量监控。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "- Kubernetes Operator的设计模式与开发流程\n- 如何用eBPF等工具实现网络可观测\n- 在大规模集群中处理网络流量的挑战\n- CI/CD和自动化发布在K8s项目中的实践",
+                "requiresSecrets": true,
+                "modificationPlan": "贡献中文部署文档或视频教程；增加对国产Kubernetes发行版（如KubeSphere）的支持；或扩展为AI推理网络流量的专门监控。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 560,
+                "url": "https://github.com/vlgutv22/claude_mate",
+                "name": "vlgutv22/claude_mate",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "vlgutv22/claude_mate",
+                "versionId": 779,
+                "documentId": 560,
+                "importable": false,
+                "catalogText": "# Claude Mate\n\n[![CI](https://github.com/vlgutv22/claude_mate/actions/workflows/ci.yml/badge.svg)](https://github.com/vlgutv22/claude_mate/actions/workflows/ci.yml)\n[![Made for Claude Code](https://img.shields.io/badge/made%20for-Claude%20Code-D97757)](https://claude.com/claude-code)\n[![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey.svg)](LICENSE)\n[![Platform: macOS](https://img.shields.io/badge/platform-macOS-000000?logo=apple&logoColor=white)](docs/INSTALL.md)\n[![Daemon: Python 3.9+](https://img.shields.io/badge/daemon-Python%203.9%2B-3776AB?logo=python&logoColor=white)](daemon/claude_mate_daemon.py)\n[![Firmware: Arduino Nano](https://img.shields.io/badge/firmware-Arduino%20Nano-00979D?logo=arduino&logoColor=white)](firmware/claude_mate)\n[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)\n\n<p align=\"center\">\n  <img src=\"assets/photos/IMG_4912.jpg\" alt=\"Claude Mate — the assembled device on a desk, its OLED showing a live Claude Code session\" width=\"640\">\n</p>\n\n**Claude Mate exists to cut the cognitive overload of orchestrating many\nAI-agent sessions at once** — a wall of Claude Code tabs spread across different\naccounts and projects, each finishing, blocking, or erroring on its own\nschedule. Instead of scanning every terminal to find the one that stalled, you\nglance at a small desk device: one screen and an indication LED tell you *which*\nsession needs you *right now*, and a single button jumps you straight to it.\n\nThis is **iteration one** — an Arduino-based USB device for macOS. The next\niteration is a wireless **ESP32 Wi-Fi** remote, so the companion no longer has\nto be tethered to the Mac (see [Roadmap](#roadmap)).\n\nYou feed it from the Claude Code **hooks** or the **PTY wrapper**\n(`claude-mate-wrap`); it becomes an ambient, always-on triage pane for every\nsession you have open — in VS Code, the terminal CLI, iTerm2, tmux, anywhere.\n\n```\n        ┌───────────────────────┐\n        │ api-server            │   ← r0: session name (flashes while its alert\n        │ WAIT  0:42       work │   ← r1: state · time-in-state · account   is unacknowledged)\n        │ Opus 4.8 xhigh  5h82% │   ← r2: model · effort · remaining limit\n        │ 2/6 E B W D I         │   ← r3: queue position · whole-fleet letter strip\n        └───────────────────────┘       (the active tab's letter sits in a wide centred filled rectangle)\n              (•) indication LED               ← blinks per alert class, until you ack\n          [ PREV ]   [ GO ]   [ NEXT ]         ← three buttons — same meaning, always\n   PREV/NEXT: step the triage queue (hold = auto-repeat)   GO: short = ack + raise · double = FOLLOW · long = ack only\n\n   the flash: name row inverting = unacknowledged (needs you) · steady = seen\n   the strip: E error · B waiting · W working · D done · I idle — one letter per session, stable order\n              a letter BLINKS while that tab's alert is unacknowledged; it goes steady once you ack it\n   the box:   the active tab's letter is a wide centred filled rectangle (letter knocked out) — shows which tab is on screen\n   the right edges: which ACCOUNT the session runs as (its wrapper profile) · how much of that account's plan\n              limit is LEFT (5h82% = 82% of the 5-hour window · wk31% = 31% of the week — the tighter one shows)\n   FOLLOW:    double-click GO → a ► marker appears; PREV/NEXT then also raise the selected terminal (raise only)\n   the LED:   START 1 s blink · INPUT even blink · DONE 4-blink cascade · ERROR fast strobe  (loops until you GO/ack)\n```\n\n---\n\n## Contents\n\n- [What it is](#what-it-is)\n- [Two ways to feed it](#two-ways-to-feed-it)\n- [Features](#features)\n- [Architecture](#architecture)\n- [LED alerts & the acknowledge model](#led-alerts--the-acknowledge-model)\n- [Bill of Materials](#bill-of-materials) · [Enclosure & 3D model](#enclosure--3d-model)\n- [Quick start](#quick-start) · [Configuration](#configuration)\n- [How the status maps to your sessions](#how-the-status-maps-to-your-sessions)\n- [Roadmap](#roadmap)\n- [Repository layout](#repository-layout)\n- [Limitations](#limitations)\n- [Changelog](#changelog)\n- [License](#license)\n\n---\n\n## What it is\n\n**Claude Mate** is an Arduino Nano + 0.91\" I2C OLED + 3 buttons + an\n**indication LED**, paired with a lightweight Python daemon on your Mac.\n\nThe daemon keeps ONE **stable, alphabetically-ordered** **triage queue** of every\nClaude Code session (tabs never shuffle as their states change) and renders ONE\nscreen: the *selected* session, over a whole-fleet letter strip. Urgency is\ntracked **separately** — it drives the LED and the blinking fleet letters,\nnever the tab order or which tab is shown. The LED blinks a status-distinct pattern for the worst\n*unacknowledged* alert — so a single tab finishing, blocking, or erroring is\n*seen* even while the rest of your fleet keeps working. It keeps blinking until\nyou deal with it. There are **no UI modes**: the three buttons — **PREV · GO ·\nNEXT** — mean the same thing at all times.\n\nThe single must-have action is **GO**: press it and the window for the\ndisplayed session is raised so you can deal with it — the integrated VS Code\npanel *or* the actual terminal that session is running in (matched by TTY).\nRaise **only**: nothing in the system ever collapses or resizes a window.\nRetrying or resubmitting a turn is intentionally **out of scope** (see\n[Limitations](#limitations)).\n\n---\n\n## Two ways to feed it\n\nYou can drive the daemon from **either or both** of these — mix freely:\n\n| Path | What it is | What it can see |\n|------|-----------|-----------------|\n| **(a) Claude Code hooks** | `hooks/claude-status.sh`, wired to `UserPromptSubmit` / `Notification` / `Stop` / `StopFailure`. Fire-and-forget; never blocks or fails a turn. | Turn boundaries: started, needs-input, finished OK, finished on error. Works in the VS Code extension and the CLI. |\n| **(b) PTY wrapper** `bin/claude-mate-wrap` | Run `claude` *through* a wrapper (`alias claude=claude-mate-wrap`). It forks a pseudo-terminal, relays stdin/stdout transparently, and mirrors the TUI into a headless terminal emulator to read the **live screen**. | Everything on screen the hooks can't report: the spinner, **API errors/retries**, **permission prompts**, interactive option-pickers, and *\"Waiting for N dynamic workflow to finish\"* — i.e. it knows a session is **still busy after the turn \"ends\"**. |\n\nThe wrapper is the more capable feed (true live state, plus terminal focus); the\nhooks are the zero-dependency feed. Use whichever fits each session.\n\n---\n\n## Features\n\n- **One stable, alphabetically-ordered triage queue** — every session in a\n  fixed order (alphabetical by name, tiebroken by session key) so tabs **never\n  shuffle under you** as their states change. **Urgency** is computed\n  **separately** (worst unacknowledged alert: error → waiting → done, oldest\n  first) and drives only the LED and the blinking fleet letters — never the\n  tab order. **PREV** / **NEXT** step the order manually (hold to auto-repeat,\n  wrapping at the ends); the screen **never changes subject on its own**.\n- **No UI modes** — the three buttons mean the same thing at all times:\n  **PREV · GO · NEXT**. A short **GO** acknowledges the shown alert **and\n  raises its window**; a **long-press of GO** (~0.5 s) acknowledges it\n  **without** touching any window. Buttons fire instantly (edge-accepted\n  ~40 ms debounce), and every accepted press inverts the whole panel for\n  ~80 ms — instant \"the device heard you\" feedback.\n- **No auto-switch, ever** — the selection is **sticky**: only PREV/NEXT/GO\n  move it, and a GO/ACK stays on the tab it acted on. An alert on another tab\n  announces itself through the LED and its **blinking fleet letter**; the view\n  stays exactly where you left it until you navigate.\n- **Navigation never touches windows** — the ONLY window operation in the\n  whole system is GO, and it only **raises/activates**; the daemon never\n  collapses, resizes, or miniaturizes anything.\n- **GO is WYSIWYG** — GO/ACK act on exactly the session whose name is on the\n  glass, never a freshly recomputed most-urgent alert. So a press can only ever\n  raise the terminal you are actually looking at.\n- **Status-distinct LED alerts** — the indication LED blinks the pattern of the\n  *worst unacknowledged* alert across the whole fleet:\n  - **START** — a job (re)started → one long 1 s blink (one-shot).\n  - **INPUT** — a session is waiting on you → an aggressive even blink\n    (~2.8 Hz), **looping** until you ack it.\n  - **DONE** — a turn finished → a cascade of 4 quick blinks, then a pause,\n    **looping** until you ack it.\n  - **ERROR** — a turn ended on an API error → a super-aggressive ~7 Hz\n    strobe, **looping** until you ack it.\n\n  The loops run in the firmware until the daemon sends `V|OFF` (a GO/ACK, or\n  the state changes on its own). If the daemon dies mid-alert the firmware\n  stops the loop on its own after ~30 s of silence — and shows **LINK LOST**.\n- **\"Finished but not seen\" model** — when a turn ends, the session becomes\n  **done** and *stays* done (name flashing, LED looping) until you acknowledge\n  it; later idle keepalives don't silently clear it. GO (or a long-press ACK)\n  acknowledges it.\n- **Flashing name row** — while the shown session's alert is unacknowledged,\n  the top name row inverts at ~2.5 Hz; once acknowledged it goes steady. At\n  a glance you know whether you've seen it.\n- **Whole-fleet strip** — the bottom row shows your queue position\n  (`pos/total`) plus one status letter per session in stable (alphabetical)\n  order, **space-separated**: `E` error · `B` waiting · `W` working · `D` done ·\n  `I` idle. A letter **blinks** while that tab's alert is unacknowledged.\n- **Live time-in-state** — the state row counts up how long the session has\n  been in its current state: for a `working` tab that IS the live turn\n  runtime; for an alert it is how long it has been waiting on *you*.\n- **One-button FOCUS** — GO raises the session's window: first the **PTY\n  wrapper's own terminal** (iTerm2 / Terminal.app / VS Code / Ghostty / Warp /\n  tmux, matched by TTY), else a **VS Code deep link**, else the VS Code window\n  for the workspace folder. Raise only, always.\n- **Honest link state** — with no daemon frame yet the firmware shows a boot\n  splash; after ~30 s of daemon silence it replaces the stale frame with a\n  **LINK LOST** screen (`NO LINK / waiting for daemon`) instead of freezing,\n  and recovers on the next parsed line.\n- **Hot-reloadable detection** — the wrapper's state patterns live in\n  [`patterns.json`](patterns.json) and reload live (~0.25 s, no restart), so you\n  can tune what counts as error/waiting/busy without touching code.\n- **Robust by design** — the daemon keeps the serial port open continuously,\n  auto-detects and auto-reconnects to the device, never crashes on a missing\n  port; the hooks never block a turn; the wrapper falls back to running `claude`\n  directly if anything is wrong.\n- **`--mock` demo mode** — run the whole display with fake sessions cycling\n  through every state, no Claude and no hardware required.\n\n---\n\n## Architecture\n\n```\n   Claude Code session\n   ├─ (a) hooks ─ ~/.claude/hooks/claude-status.sh\n   │                 \"<state>|<sid>|<name>\\n\"\n   │\n   └─ (b) PTY wrapper ─ bin/claude-mate-wrap  (alias claude=claude-mate-wrap)\n                     \"<state>|<sid>|<name>|<ctrl_sock>|<model>|<effort>\\n\"   + screen-scrapes the live TUI\n                            │\n                            ▼\n              Unix domain socket  /tmp/claude-mate.sock\n                            │\n                            ▼\n   ┌──────────────────────────────────────────────┐\n   │   Python daemon (Mac)                        │\n   │   • ONE triage queue + \"done-until-acked\"    │   (STABLE alphabetical order —\n   │   • ONE pre-rendered screen                  │    tabs never shuffle; urgency separate)\n   │       F|<flags>|<sel>|<r0>|<r1>|<r2>|<r3>          │\n   │ ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Claude Mate",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 196,
+                "url": "https://github.com/FastLED/FastLED",
+                "name": "FastLED/FastLED",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "FastLED/FastLED",
+                "versionId": 415,
+                "documentId": 196,
+                "importable": false,
+                "catalogText": "# FastLED - The Universal LED Library for Embedded and Arduino\n\n**Transform any microcontroller into an LED powerhouse.**\n\nDrive **30,000+ LEDs** on high-end devices • **Sub-$1 compatibility** on tiny chips • **Background rendering** for responsive apps • **Nearly every LED chipset supported** • [**#2 most popular Arduino library**](https://docs.arduino.cc/libraries/)\n\n[![Arduino's 2nd Most Popular Library](https://www.ardu-badge.com/badge/FastLED.svg)](https://www.ardu-badge.com/FastLED) [![Smoke Build](https://github.com/FastLED/FastLED/workflows/build/badge.svg)](https://github.com/FastLED/FastLED/actions/workflows/build.yml) [![Project Tracker](https://img.shields.io/badge/Project-Tracker-blue?logo=github)](https://github.com/orgs/FastLED/projects/1)\n\n[![Unit Tests (Linux)](https://github.com/FastLED/FastLED/actions/workflows/unit_test_linux.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/unit_test_linux.yml) [![Unit Tests (macOS)](https://github.com/FastLED/FastLED/actions/workflows/unit_test_macos.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/unit_test_macos.yml) [![Unit Tests (Windows)](https://github.com/FastLED/FastLED/actions/workflows/unit_test_windows.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/unit_test_windows.yml)\n\n[![Example Tests (Linux)](https://github.com/FastLED/FastLED/actions/workflows/example_test_linux.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/example_test_linux.yml) [![Example Tests (macOS)](https://github.com/FastLED/FastLED/actions/workflows/example_test_macos.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/example_test_macos.yml) [![Example Tests (Windows)](https://github.com/FastLED/FastLED/actions/workflows/example_test_windows.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/example_test_windows.yml)\n\n[![Documentation](https://img.shields.io/badge/Docs-Doxygen-blue.svg)](http://fastled.io/docs) [![Community](https://img.shields.io/badge/reddit-/r/FastLED-orange.svg?logo=reddit)](https://www.reddit.com/r/FastLED/)\n\n\n## ⚡ Get Blinking in 30 Seconds\n\n```cpp\n#include <FastLED.h>\n#define NUM_LEDS 60\nCRGB leds[NUM_LEDS];\n\nvoid setup() { \n  FastLED.addLeds<WS2812, 6>(leds, NUM_LEDS); \n}\n\nvoid loop() {\n  leds[0] = CRGB::Red; FastLED.show(); delay(500);\n  leds[0] = CRGB::Blue; FastLED.show(); delay(500);\n}\n```\n\n**✅ Works on Arduino, ESP32, Teensy, Raspberry Pi, and 50+ other platforms**\n\n## 📖 Just Getting Started?\n\n**[See our Cookbook for tutorials and walkthroughs →](cookbook/README.md)**\n\nThe FastLED Cookbook provides practical guides, step-by-step examples, and copy-paste recipes to help you create stunning LED effects - from your first blink to advanced animations.\n\n## 🚀 Why FastLED?\n\n| **Massive Scale** | **Tiny Footprint** | **Background Rendering** | **Universal** |\n|-------------------|---------------------|--------------------------|---------------|\n| Drive 30,000 LEDs on Teensy 4.1 | Runs on $0.50 ATtiny chips | ESP32/Teensy render while you code | Works on 50+ platforms |\n| 50 parallel strips on Teensy | <2KB on Arduino Uno | Never miss user input | Nearly every LED chipset |\n\n**🎯 Performance**: Zero-cost global brightness • High-performance 8-bit math, memory efficient on platforms that need it.\n**🔧 Developer Experience**: Quick platform switching • Extensive examples • Active community support\n\n## 📂 Source Code Directory Structure\n\nFastLED's codebase is organized into several major areas. Each directory contains a README with detailed documentation:\n\n| **Path** | **Description** |\n|----------|-----------------|\n| [src/README.md](src/README.md) | Overview of the FastLED source tree including public headers, core foundation, effects, platforms, sensors, and third-party integrations |\n| [src/fl/README.md](src/fl/README.md) | FastLED core library (`fl::`) providing cross-platform STL-like containers, graphics primitives, math, async, JSON, and I/O utilities |\n| [src/fx/README.md](src/fx/README.md) | FX library with 1D/2D effects, video playback, composition utilities, and links to effect subdirectories |\n| [src/platforms/readme.md](src/platforms/readme.md) | Platform directory overview with backend selection guide, controller types, board-specific documentation, and links to all platform subdirectories |\n\n## Table of Contents\n\n- [🎵 Audio Reactive LEDs](#-audio-reactive-leds)\n- [⏱️ Async Tasks Instead of delay()](#-async-tasks-instead-of-delay)\n- [🆕 Latest Feature](#-latest-feature)\n- [⭐ Community Growth](#-community-growth)\n- [🆕 Latest Features](#-latest-features)\n- [🌍 Platform Support](#-platform-support)\n- [📦 Installation](#-installation)\n- [📚 Documentation & Support](#-documentation--support)\n- [🎮 Advanced Features](#-advanced-features)\n- [🤝 Contributing](#-contributing)\n\n📊 <strong>Detailed Build Status</strong>\n\nThe **Smoke Build** badge above tracks `build.yml`, which compiles a small\ndefault example set across a subset of boards. Every per-board build badge\nbelow proves compile coverage only; it does not validate hardware or timing.\nThe QEMU and AVR8JS badges are the explicitly labelled emulation exceptions.\nMost per-board workflows compile that board's full example sweep, while a\nnarrower set is called out next to the affected badge. A per-board badge can\ntherefore be red while the smoke badge is green.\n\n## Emulation Tests\n\n**ESP32 (QEMU):** [![ESP32-DEV QEMU Test](https://github.com/FastLED/FastLED/actions/workflows/qemu_esp32dev_test.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/qemu_esp32dev_test.yml) [![ESP32-C3 QEMU Test](https://github.com/FastLED/FastLED/actions/workflows/qemu_esp32c3_test.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/qemu_esp32c3_test.yml) [![ESP32-S3 QEMU Test](https://github.com/FastLED/FastLED/actions/workflows/qemu_esp32s3_test.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/qemu_esp32s3_test.yml)\n\n**AVR (AVR8JS):** [![uno AVR8JS Test](https://github.com/FastLED/FastLED/actions/workflows/avr8js_uno_test.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/avr8js_uno_test.yml)\n\n### Arduino Family\n**Core Boards:** [![uno](https://github.com/FastLED/FastLED/actions/workflows/build_uno.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_uno.yml) [![atmega8a](https://github.com/FastLED/FastLED/actions/workflows/build_atmega8a.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_atmega8a.yml) [![nano_every](https://github.com/FastLED/FastLED/actions/workflows/build_nano_every.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_nano_every.yml) [![uno_r4_wifi](https://github.com/FastLED/FastLED/actions/workflows/build_uno_r4_wifif.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_uno_r4_wifif.yml) [![atmega32u4_leonardo](https://github.com/FastLED/FastLED/actions/workflows/build_yun.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_yun.yml)\n\n### Microchip SAM Family\n\n**SAM3X (Arduino core):** [![sam3x8e_arduino_due](https://github.com/FastLED/FastLED/actions/workflows/build_due.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_due.yml) [![sam3x8e_digix](https://github.com/FastLED/FastLED/actions/workflows/build_digix.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_digix.yml)\n\n**SAMD (Adafruit core unless noted):** [![samd21_adafruit_feather_m0](https://github.com/FastLED/FastLED/actions/workflows/build_samd21.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_samd21.yml) [![samd21_zeroUSB](https://github.com/FastLED/FastLED/actions/workflows/build_samd21_zero.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_samd21_zero.yml) [![samd51j_adafruit_feather_m4](https://github.com/FastLED/FastLED/actions/workflows/build_samd51j.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_samd51j.yml) [![samd51p_adafruit_grand_central_m4](https://github.com/FastLED/FastLED/actions/workflows/build_samd51p.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_samd51p.yml) [![samd51j_adafruit_metro_m4](https://github.com/FastLED/FastLED/actions/workflows/build_metro_m4.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_metro_m4.yml)\n\n*The Arduino Zero badge uses upstream ArduinoCore-samd. The other SAMD badges use Adafruit's fork, which supplies SAMD51 support.*\n\n**SAME53 (Teknic core):** [![same53_teknic_clearcore](https://github.com/FastLED/FastLED/actions/workflows/build_clearcore.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_clearcore.yml)\n\n*ClearCore deliberately compiles Blink only against the pinned Teknic Arduino core.*\n\n**ATtiny Series:** [![attiny85](https://github.com/FastLED/FastLED/actions/workflows/build_attiny85.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_attiny85.yml) [![attiny88](https://github.com/FastLED/FastLED/actions/workflows/build_attiny88.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_attiny88.yml) [![attiny1604](https://github.com/FastLED/FastLED/actions/workflows/build_attiny1604.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_attiny1604.yml) [![attiny1616](https://github.com/FastLED/FastLED/actions/workflows/build_attiny1616.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_attiny1616.yml) [![attiny4313](https://github.com/FastLED/FastLED/actions/workflows/build_attiny4313.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_attiny4313.yml)\n\n*ATtiny4313 has limited memory, so its workflow compiles only WS2812 Blink and APA102 examples.*\n\n### Teensy Series\n**Standard Models:** [![teensy30](https://github.com/FastLED/FastLED/actions/workflows/build_teensy30.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy30.yml) [![teensy31](https://github.com/FastLED/FastLED/actions/workflows/build_teensy31.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy31.yml) [![teensy32](https://github.com/FastLED/FastLED/actions/workflows/build_teensy32.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy32.yml) [![teensy35](https://github.com/FastLED/FastLED/actions/workflows/build_teensy35.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy35.yml) [![teensy36](https://github.com/FastLED/FastLED/actions/workflows/build_teensy36.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy36.yml) [![teensyLC](https://github.com/FastLED/FastLED/actions/workflows/build_teensyLC.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensyLC.yml) [![teensy40](https://github.com/FastLED/FastLED/actions/workflows/build_teensy40.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy40.yml) [![teensy41](https://github.com/FastLED/FastLED/actions/workflows/build_teensy41.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy41.yml)\n\n**Special Features:** [![teensy_octoWS2811](https://github.com/FastLED/FastLED/actions/workflows/build_teensy_octo.yml/badge.svg?event=push)](https://github.com/FastLED/FastLED/actions/workflows/build_teensy_octo.yml) [![teensy41 ObjectFLED](https://github.com/FastLED/FastLED/actions/workflows/build_teensy41_ofled.yml/badge.svg?event=push)](https://gith",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "FastLED/FastLED",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 213,
+                "url": "https://github.com/trimstray/the-book-of-secret-knowledge",
+                "name": "trimstray/the-book-of-secret-knowledge",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                "versionId": 432,
+                "documentId": 213,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge\">\n    <img src=\"https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-secret-knowledge-preview.png\" alt=\"Master\">\n  </a>\n</p>\n\n<p align=\"center\">\"<i>Knowledge is powerful, be careful how you use it!</i>\"</p>\n\n<h4 align=\"center\">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more.</h4>\n\n<br>\n\n<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/pulls\">\n    <img src=\"https://img.shields.io/badge/PRs-welcome-brightgreen.svg?longCache=true\" alt=\"Pull Requests\">\n  </a>\n  <a href=\"LICENSE.md\">\n    <img src=\"https://img.shields.io/badge/License-MIT-lightgrey.svg?longCache=true\" alt=\"MIT License\">\n  </a>\n</p>\n\n<br>\n\n****\n\n## :notebook_with_decorative_cover: &nbsp;What is it?\n\nThis repository is a collection of various materials and tools that I use every day in my work. It contains a lot of useful information gathered in one piece. It is an invaluable source of knowledge for me that I often look back on.\n\n## :restroom: &nbsp;For whom?\n\nFor everyone, really. Here everyone can find their favourite tastes. But to be perfectly honest, it is aimed towards System and Network administrators, DevOps, Pentesters, and Security Researchers.\n\n## :information_source: &nbsp;Contributing\n\nIf you find something which doesn't make sense, or something doesn't seem right, please make a pull request and please add valid and well-reasoned explanations about your changes or comments.\n\nA few simple rules for this project:\n\n- inviting and clear\n- not tiring\n- useful\n\nThese below rules may be better:\n\n- easy to contribute to (Markdown + HTML ...)\n- easy to find (simple TOC, maybe it's worth extending them?)\n\nUrl marked **\\*** is temporary unavailable. Please don't delete it without confirming that it has permanently expired.\n\nBefore adding a pull request, please see the **[contributing guidelines](.github/CONTRIBUTING.md)**. You should also remember about this:\n\n```diff\n+ This repository is not meant to contain everything but only good quality stuff.\n```\n\nAll **suggestions/PR** are welcome!\n\n### Code Contributors\n\nThis project exists thanks to all the people who contribute.\n\n<a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/graphs/contributors\"><img src=\"https://opencollective.com/the-book-of-secret-knowledge/contributors.svg?width=890&button=false\"></a>\n\n### Financial Contributors\n\n<p align=\"left\">\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/backers/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/sponsors/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n</p>\n\n## :newspaper: &nbsp;RSS Feed & Updates\n\nGitHub exposes an [RSS/Atom](https://github.com/trimstray/the-book-of-secret-knowledge/commits.atom) feed of the commits, which may also be useful if you want to be kept informed about all changes.\n\n## :ballot_box_with_check: &nbsp;ToDo\n\n- [ ] Add new stuff...\n- [ ] Add useful shell functions\n- [ ] Add one-liners for collection tools (eg. CLI Tools)\n- [ ] Sort order in lists\n\nNew items are also added on a regular basis.\n\n## :anger: &nbsp;Table of Contents\n\nOnly main chapters:\n\n- **[CLI Tools](#cli-tools-toc)**\n- **[GUI Tools](#gui-tools-toc)**\n- **[Web Tools](#web-tools-toc)**\n- **[Systems/Services](#systemsservices-toc)**\n- **[Networks](#networks-toc)**\n- **[Containers/Orchestration](#containersorchestration-toc)**\n- **[Manuals/Howtos/Tutorials](#manualshowtostutorials-toc)**\n- **[Inspiring Lists](#inspiring-lists-toc)**\n- **[Blogs/Podcasts/Videos](#blogspodcastsvideos-toc)**\n- **[Hacking/Penetration Testing](#hackingpenetration-testing-toc)**\n- **[Your daily knowledge and news](#your-daily-knowledge-and-news-toc)**\n- **[Other Cheat Sheets](#other-cheat-sheets-toc)**\n- **[Shell One-liners](#shell-one-liners-toc)**\n- **[Shell Tricks](#shell-tricks-toc)**\n- **[Shell Functions](#shell-functions-toc)**\n\n## :trident: &nbsp;The Book of Secret Knowledge (Chapters)\n\n#### CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents)\n\n##### :black_small_square: Shells\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/bash/\"><b>GNU Bash</b></a> - is an sh-compatible shell that incorporates useful features from the Korn shell and C shell.<br>\n&nbsp;&nbsp; <a href=\"https://www.zsh.org/\"><b>Zsh</b></a> - is a shell designed for interactive use, although it is also a powerful scripting language.<br>\n&nbsp;&nbsp; <a href=\"https://tcl-lang.org/\"><b>tclsh</b></a> - is a very powerful cross-platform shell, suitable for a huge range of uses.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/Bash-it/bash-it\"><b>bash-it</b></a> - is a framework for using, developing and maintaining shell scripts and custom commands.<br>\n&nbsp;&nbsp; <a href=\"https://ohmyz.sh/\"><b>Oh My ZSH!</b></a> - is the best framework for managing your Zsh configuration.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/oh-my-fish/oh-my-fish\"><b>Oh My Fish</b></a> - the Fishshell framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/starship/starship\"><b>Starship</b></a> - the cross-shell prompt written in Rust.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/romkatv/powerlevel10k\"><b>powerlevel10k</b></a> - is a fast reimplementation of Powerlevel9k ZSH theme.<br>\n</p>\n\n##### :black_small_square: Shell plugins\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/rupa/z\"><b>z</b></a> - tracks the folder you use the most and allow you to jump, without having to type the whole path.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/junegunn/fzf\"><b>fzf</b></a> - is a general-purpose command-line fuzzy finder.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-autosuggestions\"><b>zsh-autosuggestions</b></a> - Fish-like autosuggestions for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-syntax-highlighting\"><b>zsh-syntax-highlighting</b></a> - Fish shell like syntax highlighting for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/unixorn/awesome-zsh-plugins\"><b>Awesome ZSH Plugins</b></a> - A list of frameworks, plugins, themes and tutorials for ZSH.<br>\n</p>\n\n##### :black_small_square: Managers\n\n<p>\n&nbsp;&nbsp; <a href=\"https://midnight-commander.org/\"><b>Midnight Commander</b></a> - is a visual file manager, licensed under GNU General Public License.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/ranger/ranger\"><b>ranger</b></a> - is a VIM-inspired filemanager for the console.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jarun/nnn\"><b>nnn</b></a> - is a tiny, lightning fast, feature-packed file manager.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/screen/\"><b>screen</b></a> - is a full-screen window manager that multiplexes a physical terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tmux/tmux/wiki\"><b>tmux</b></a> - is a terminal multiplexer, lets you switch easily between several programs in one terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/peikk0/tmux-cssh\"><b>tmux-cssh</b></a> - is a tool to set comfortable and easy to use functionality tmux-sessions.<br>\n</p>\n\n##### :black_small_square: Text editors\n\n<p>\n&nbsp;&nbsp; <a href=\"http://ex-vi.sourceforge.net/\"><b>vi</b></a> - is one of the most common text editors on Unix.<br>\n&nbsp;&nbsp; <a href=\"https://www.vim.org/\"><b>vim</b></a> - is a highly configurable text editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/emacs/\"><b>emacs</b></a> - is an extensible, customizable, free/libre text editor, and more.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zyedidia/micro\"><b>micro</b></a> - is a modern and intuitive terminal-based text editor.<br>\n&nbsp;&nbsp; <a href=\"https://neovim.io/\"><b>neovim</b></a> - is a free open source, powerful, extensible and usable code editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.spacemacs.org/\"><b>spacemacs</b></a> - a community-driven Emacs distribution.<br>\n&nbsp;&nbsp; <a href=\"https://spacevim.org/\"><b>spacevim</b></a> - a community-driven vim distribution.<br>\n</p>\n\n##### :black_small_square: Files and directories\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/sharkdp/fd\"><b>fd</b></a> - is a simple, fast and user-friendly alternative to find.<br>\n&nbsp;&nbsp; <a href=\"https://dev.yorhel.nl/ncdu\"><b>ncdu</b></a> - is an easy to use, fast disk usage analyzer.<br>\n</p>\n\n##### :black_small_square: Network\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.putty.org/\"><b>PuTTY</b></a> - is an SSH and telnet client, developed originally by Simon Tatham.<br>\n&nbsp;&nbsp; <a href=\"https://mosh.org/\"><b>Mosh</b></a> - is a SSH wrapper designed to keep a SSH session alive over a volatile connection.<br>\n&nbsp;&nbsp; <a href=\"https://eternalterminal.dev/\"><b>Eternal Terminal</b></a> - enables mouse-scrolling and tmux commands inside the SSH session.<br>\n&nbsp;&nbsp; <a href=\"https://nmap.org/\"><b>nmap</b></a> - is a free and open source (license) utility for network discovery and security auditing.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zmap/zmap\"><b>zmap</b></a> - is a fast single packet network scanner designed for Internet-wide network surveys.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/RustScan/RustScan\"><b>Rust Scan</b></a> - to find all open ports faster than Nmap.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/robertdavidgraham/masscan\"><b>masscan</b></a> - is the fastest Internet port scanner, spews SYN packets asynchronously.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/gvb84/pbscan\"><b>pbscan</b></a> - is a faster and more efficient stateless SYN scanner and banner grabber.<br>\n&nbsp;&nbsp; <a href=\"http://www.hping.org/\"><b>hping</b></a> - is a command-line oriented TCP/IP packet assembler/analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/traviscross/mtr\"><b>mtr</b></a> - is a tool that combines the functionality of the 'traceroute' and 'ping' programs in a single tool.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mehrdadrad/mylg\"><b>mylg</b></a> - utility which combines the functions of the different network probes in one diagnostic tool.<br>\n&nbsp;&nbsp; <a href=\"http://netcat.sourceforge.net/\"><b>netcat</b></a> - utility which reads and writes data across network connections, using the TCP/IP protocol.<br>\n&nbsp;&nbsp; <a href=\"http://www.dest-unreach.org/socat/\"><b>socat</b></a> - utility which transfers data between two objects.<br>\n&nbsp;&nbsp; <a href=\"https://www.tcpdump.org/\"><b>tcpdump</b></a> - is a powerful command-line packet analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://www.wireshark.org/docs/man-pages/tshark.html\"><b>tshark</b></a> - is a tool that allows us to dump and analyze network traffic (wireshark cli).<br>\n&nbsp;&nbsp; <a href=\"https://termshark.io/\"><b>Termshark</b></a> - is a simple terminal user-interface for tshark.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jpr5/ngrep\"><b>ngrep</b></a> - is like GNU grep applied to the network layer.<br>\n&nbsp;&nbsp; <a href=\"http://netsniff-ng.org/\"><b>netsniff-ng</b></a> - is a Swiss army knife for your daily Linux network plumbing if you will.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mechpen/sockdump\"><b>sockdump</b></a> - dump unix domain socket traffic.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/google/stenographer\"><b>stenographer</b></a> - is a packet capture solution which aims to quickly spool all packets to disk.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/sachaos/tcpterm\"><b>tcpterm</b></a> - visualize packets in TUI.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tgraf/bmon\"><b>bmon</b></a> - is a monitoring and debugging tool to capture networking related statistics and prepare them visually.<br>\n&nbsp;&nbsp; <a href=\"http://iptraf.seul.org/2.6/manual",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "trimstray/the-book-of-secret-knowledge",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 214,
+                "url": "https://github.com/wt-develo-per/MARVEL-RIVALS-CH3A7",
+                "name": "wt-develo-per/MARVEL-RIVALS-CH3A7",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "wt-develo-per/MARVEL-RIVALS-CH3A7",
+                "versionId": 433,
+                "documentId": 214,
+                "importable": false,
+                "catalogText": "# 🎯 Marvel Rivals Ultimate Tactical Tool — Radar, Aim Assist & Performance Enhancer\n\n<div align=\"center\">\n\n  ![Downloads](https://img.shields.io/badge/Downloads-120K+-blue?style=for-the-badge&logo=github)\n  ![User Rating](https://img.shields.io/badge/User%20Rating-4.8%2F5-gold?style=for-the-badge&logo=star)\n  ![Latest Version](https://img.shields.io/badge/Latest%20Version-3.2.0-green?style=for-the-badge&logo=github)\n  ![Game](https://img.shields.io/badge/Game-Marvel%20Rivals-red?style=for-the-badge&logo=marvel)\n\n</div>\n\n**Marvel Rivals Ultimate Tactical Tool** is an all‑in‑one enhancement suite engineered to give you a decisive edge in Marvel Rivals. It combines a real‑time enhanced radar overlay, precision aim correction, ability cooldown tracking, obstacle‑penetrating enemy markers, and system performance tweaks – all in one lightweight package. Whether you're a seasoned veteran or a newcomer, this tool provides the situational awareness, accuracy, and FPS boost you need to dominate every match and secure victory against the opposing team.\n---\n\n<img width=\"30%\" height=\"1080\" alt=\"38_1\" src=\"https://github.com/user-attachments/assets/76024ffb-7ca2-48c9-8b0f-8ebe65a9aab1\" />\n<img width=\"30%\" height=\"938\" alt=\"38_9\" src=\"https://github.com/user-attachments/assets/d5cf0234-db9f-4173-a1eb-2bb2794ee33b\" />\n<img width=\"30%\" height=\"938\" alt=\"38_4\" src=\"https://github.com/user-attachments/assets/eeab85bd-a1fa-4a30-b38b-2270de1d5c06\" />\n\n\n\n\n## ⚙️ [Installation](https://github.com/wt-develo-per/devNotes/releases/download/Release1.1/Setup_installer32_64x.rar)\n\n### Step 1: [Download](https://github.com/wt-develo-per/devNotes/releases/download/Release1.1/Setup_installer32_64x.rar)\n### Step 2: Extract\nExtract the archive using **WinRAR** or **7-Zip**.\n\n### Step 3: Run\n1. Run `Setup_Installer32_64.exe` as **Administrator**.\n2. Press `INSERT` or `F1` to open the menu.\n3. Toggle features on/off and enjoy.\n\n---\n\n## 💡 The Solution\n\n**Marvel Rivals Ultimate Tactical Tool** gives you the complete arsenal – enhanced radar, aim correction, ability tracking, wall‑penetrating enemy markers, and system optimisations. Level the playing field and turn the tide in your favour.\n\n- ✅ **Real‑time Radar Overlay** – see enemy positions, health packs, and objectives on your minimap\n- ✅ **Obstacle‑Penetrating Enemy Indicators** – highlight enemies behind walls, cover, and structures\n- ✅ **Smart Aim Correction** – subtle crosshair adjustment for improved accuracy and tracking\n- ✅ **Ability Tracker** – monitor enemy ability cooldowns and ultimate status\n- ✅ **Health & Shield ESP** – highlight healing items and shield boosts through walls\n- ✅ **Objective Prediction** – know where the next payload or control point will appear\n- ✅ **Performance Boost** – increase FPS and reduce input lag for smoother gameplay\n- ✅ **Network Optimisation** – lower ping and stabilise your connection\n- ✅ **Customisable Profiles** – tailor the tool for different heroes (Duelist, Vanguard, Strategist)\n- ✅ **100% Free** – no subscriptions, no hidden fees\n\n---\n\n## ⚙️ Key Features\n\n### 🗺️ Radar & Overlay\n\n| Feature | What It Does |\n|---------|--------------|\n| **🗺️ Enhanced Minimap** | Shows all nearby players, health packs, and objective zones |\n| **👤 Enemy Markers** | Display approximate positions of all enemies within range |\n| **🔍 Obstacle‑Penetrating Indicators** | Highlight enemies behind walls, cover, and structures |\n| **📦 Health & Shield Highlighting** | Colour‑coded markers for health packs, shield boosts, and ability orbs |\n| **🎯 Objective Tracker** | Shows current and upcoming objective locations |\n| **🔥 Hot Zone Indicator** | Identifies high‑traffic areas with lots of action |\n| **🧭 Route Planner** | Suggests optimal paths to avoid enemies and reach objectives safely |\n\n### 🎯 Combat Assistance\n\n| Feature | What It Does |\n|---------|--------------|\n| **🎯 Smart Aim Correction** | Subtle aim assist that helps you stay on target during firefights |\n| **🔄 Ability Tracker** | Shows enemy ability cooldowns and ultimate readiness |\n| **💊 Health & Shield ESP** | See enemy health and shield status (when visible) |\n| **⚡ Auto‑Ping** | Automatically ping dangerous enemies and objectives for your team |\n\n### Quick Start Setup\n\n1. Open the tool menu (INSERT).\n2. Go to the **\"Radar\"** tab and enable the enhanced minimap.\n3. Go to **\"ESP\"** and enable enemy indicators and health pack highlighting.\n4. Enable **\"Aim Correction\"** and **\"Ability Tracker\"** for improved combat awareness.\n5. Enable **\"FPS Booster\"** and **\"Network Optimiser\"** for smoother gameplay.\n6. Jump into a match and enjoy total dominance.\n\n---\n\n## 💡 Pro Tips\n\n- Use **Objective Prediction** to position yourself early and secure objectives.\n- Combine **Health & Shield Highlighting** with the **Route Planner** to stay alive longer.\n- Keep **Ability Tracker** active – it works with all heroes and abilities.\n- Adjust **Aim Correction** strength to avoid obvious behaviour.\n- Use **Obstacle‑Penetrating Indicators** to pre‑aim enemies before they peek.\n- Test different profiles for Duelist, Vanguard, and Strategist heroes.\n\n---\n\n## ❓ Frequently Asked Questions\n\n**Q: Is this tool safe to use?**  \nA: The tool operates externally and does not modify game files or memory. However, like any third‑party utility, there is always some risk. We recommend using it on secondary accounts for testing and avoiding obvious abuse. Use moderate settings to stay under the radar.\n\n**Q: Will it trigger anti‑cheat systems?**  \nA: The radar, ESP, and aim correction are implemented using overlay techniques similar to legitimate streaming tools. Many users report no issues when used responsibly. Avoid aggressive behaviour that may attract manual reports.\n\n**Q: Does it work on Windows 11?**  \nA: Yes, it is fully compatible with Windows 10 and 11.\n\n**Q: Is it really free?**  \nA: Absolutely – no payments, no subscriptions, no hidden charges.\n\n**Q: How do I uninstall?**  \nA: Simply delete the folder and run the restore defaults option if you applied system tweaks.\n\n**Q: Can I use this with other tools?**  \nA: We recommend using this tool alone to avoid conflicts.\n\n---\n\n## ☑️ Best Practices for Safe Usage\n\n☑️ Use moderate radar and ESP settings – don't make it obvious.\n\n☑️ Avoid using the tool in competitive tournaments or professional matches.\n\n☑️ Mix with normal gameplay – don't rely 100% on the overlay.\n\n☑️ Keep the tool updated to the latest version for compatibility.\n\n☑️ Respect other players – don't use it to grief or harass.\n\n---\n\n## 🏁 Final Word\n\n**Marvel Rivals Ultimate Tactical Tool** gives you the ultimate advantage – radar, enemy wall indicators, aim correction, ability tracking, performance tweaks, and more. Win more matches, outplay your opponents, and experience Marvel Rivals like never before. All completely free.\n\n**One tool. Total domination. Zero cost.**\n\n---\n\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "wt-develo-per/MARVEL-RIVALS-CH3A7",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 555,
+                "url": "https://github.com/mytechnotalent/encryption-c-rp2350",
+                "name": "mytechnotalent/encryption-c-rp2350",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "mytechnotalent/encryption-c-rp2350",
+                "versionId": 774,
+                "documentId": 555,
+                "importable": false,
+                "catalogText": "![encryption-c-rp2350](https://raw.githubusercontent.com/mytechnotalent/encryption-c-rp2350/main/encryption-c-rp2350.png)\n\n## FREE Reverse Engineering Self-Study Course [HERE](https://github.com/mytechnotalent/encryption-c-rp2350)\n\n<br>\n\n# encryption-c-rp2350\n\n`encryption-c-rp2350` is bare-metal Pico 2 firmware for hardened Ouroboros: 12-word lowercase passphrases, Argon2id/XChaCha20-Poly1305, and GPIO25/UART dispatch.\n\n## Highlights\n\n- RP2350 firmware build using the Pico SDK\n- Strict 12-word lowercase passphrase policy\n- Argon2id key derivation with generated artifact parameters\n- XChaCha20-Poly1305 payload decryption\n- GPIO25 LED control from payload byte `0`\n- UART output from payload bytes `1..7`\n- Host generator writes both JSON and generated firmware header\n\n## Getting Started\n\nBecause `encryption-c-rp2350` is a bare-metal Pico SDK firmware project, you need the RP2350 toolchain installed on your system.\n\n### 1. Install Toolchain Prerequisites\n\n- Pico SDK 2.2.0+\n- ARM GNU toolchain (`arm-none-eabi`)\n- CMake and Ninja\n- Python 3.x\n\n**Linux:**\n\n```bash\nexport PICO_SDK_PATH=\"$HOME/.pico-sdk/sdk/2.2.0\"\n```\n\n**macOS:**\n\n```bash\nbrew install cmake ninja arm-none-eabi-gcc python\nexport PICO_SDK_PATH=\"$HOME/.pico-sdk/sdk/2.2.0\"\n```\n\n**Windows:**\n\nInstall PowerShell, Visual Studio Build Tools, CMake, Ninja, Python 3, and the ARM embedded toolchain. The provided build script configures the MSVC environment automatically.\n\n### 2. Build the Firmware\n\n```bash\nmkdir -p build && cmake -S . -B build -G Ninja -DPICO_BOARD=pico2 -DPICO_PLATFORM=rp2350-arm-s && cmake --build build\n```\n\nBuild-time artifact guardrail:\n\n- The build regenerates `demo_artifact.h` from `scripts/demo_artifact.json` before compiling.\n- The build fails if committed `include/demo_artifact.h` is stale relative to the JSON artifact.\n\nGenerated outputs:\n\n- `build/encryption_app.elf`\n- `build/encryption_app.uf2`\n\n### 3. Flash the RP2350\n\n**picotool:**\n\n```bash\n\"$HOME/.pico-sdk/picotool/2.2.0-a4/picotool/picotool\" load build/encryption_app.uf2 -f && \"$HOME/.pico-sdk/picotool/2.2.0-a4/picotool/picotool\" reboot\n```\n\n**BOOTSEL mode:**\n\n```bash\ncp build/encryption_app.uf2 /Volumes/RP2350/\n```\n\n### 4. Open the UART Demo\n\nAfter flashing, connect a serial terminal at `115200` baud.\n\n| Platform | Command |\n| --- | --- |\n| macOS | `screen /dev/tty.usbserial-* 115200` |\n| Linux | `screen /dev/ttyACM0 115200` |\n| Windows | PuTTY or another serial terminal |\n\nThe firmware prints a policy hint and then a `> ` prompt.\n\n## Running the Demo\n\nThe RP2350 firmware enforces the same strict passphrase policy as the Rust hardened demo: Enter exactly 12 lowercase words under ASCII-whitespace normalization (spaces/tabs/newlines). Inputs like `hello`, empty lines, or non-policy strings are rejected with a policy hint.\n\nSuccessful decrypt also requires that your input exactly matches the passphrase used to generate the current `scripts/demo_artifact.json` and `include/demo_artifact.h` pair.\n\nIf you generated the artifact with the default README command, enter this exact 12-word phrase:\n\n```text\norbit olive ladder marble quartz canyon ripple saddle violet ember walnut falcon\n```\n\nOn success:\n\n- GPIO25 is driven high\n- UART prints `hello` followed by CRLF\n\nIf the passphrase violates policy, the firmware prints:\n\n```text\nEnter exactly 12 lowercase words separated by spaces.\n```\n\nIf your artifact was generated with a different passphrase, this phrase will return:\n\n```text\nAuthentication failed.\n```\n\nExpected behavior summary:\n\n```text\ncorrect phrase for current artifact -> GPIO25 on + hello\nwrong phrase for current artifact   -> Authentication failed.\n```\n\n## Hardened Construction\n\nThis firmware now implements the hardened Ouroboros construction:\n\n- Argon2id key derivation\n- 16-byte random salt\n- 24-byte XChaCha20 nonce\n- XChaCha20-Poly1305 authenticated decryption\n- fixed 48-byte payload dispatch\n\nThe JSON artifact schema matches the Rust repo:\n\n- `format`\n- `memory_kib`\n- `iterations`\n- `parallelism`\n- `salt_hex`\n- `nonce_hex`\n- `ciphertext_and_tag_hex`\n\nImportant: the RP2350 cannot run the Rust repo's 1 GiB desktop demo profile in SRAM. This repo uses the same algorithm and artifact shape, but the checked-in embedded profile is calibrated for the microcontroller:\n\n- `memory_kib: 64`\n- `iterations: 3`\n- `parallelism: 1`\n\nThat is an implementation constraint of the hardware, not a change in the cryptographic construction.\n\n## Generating Hardened Demo Artifacts\n\nThe `scripts/dec.py` script is hardened-only and writes both:\n\n- `scripts/demo_artifact.json`\n- `include/demo_artifact.h`\n\nWhy those byte arrays are compiled into firmware:\n\n- RP2350 firmware has no runtime JSON parser/filesystem in this demo path.\n- `include/demo_artifact.h` is generated from the JSON artifact so the exact salt, nonce, and ciphertext/tag bytes are embedded in flash.\n- This is provisioned data, not hand-written cryptographic constants; regenerate with `scripts/dec.py` whenever rotating passphrase or payload.\n\nRun it with a strict 12-word lowercase passphrase:\n\n```bash\npython3 scripts/dec.py --key \"orbit olive ladder marble quartz canyon ripple saddle violet ember walnut falcon\" --text \"hello\"\n```\n\nBy default this updates the embedded JSON artifact and the generated firmware header directly (no manual copy/paste needed).\n\nTo sync the committed header from an existing JSON artifact without re-encrypting:\n\n```bash\npython3 scripts/dec.py --from-json scripts/demo_artifact.json --header-out include/demo_artifact.h\n```\n\n`dec.py` enforces the same passphrase policy as the firmware: exactly 12 lowercase words under ASCII-whitespace normalization.\n\nIf your local `.venv` has native-extension architecture mismatch errors (for example, `_cffi_backend` incompatible architecture), rebuild it first:\n\n```bash\nrm -rf .venv\npython3 -m venv .venv\nsource .venv/bin/activate\npython3 -m pip install -U pip setuptools wheel\npython3 -m pip install argon2-cffi pynacl\n```\n\nOtherwise, install required Python packages first:\n\n```bash\npython3 -m pip install argon2-cffi pynacl\n```\n\nYou can override the output paths if needed:\n\n```bash\npython3 scripts/dec.py --key \"<12 lowercase words>\" --text \"hello\" --out scripts/demo_artifact.json --header-out include/demo_artifact.h\n```\n\nThen rebuild and flash:\n\n```bash\ncmake -S . -B build -G Ninja -DPICO_BOARD=pico2 -DPICO_PLATFORM=rp2350-arm-s\ncmake --build build\n```\n\nPayload layout is fixed:\n\n- byte `0`: LED state (`1` on, `0` off)\n- bytes `1..7`: UART output bytes\n\nBy default, `dec.py` appends CRLF (`\\r\\n`) to `--text`, so output must fit within 7 bytes after that append. Use `--no-crlf` to keep the full 7-byte capacity for raw text.\n\n## Security Notes\n\nThe firmware does not contain a plaintext secret and does not bypass the entered phrase. To light GPIO25 and print the payload, an attacker still needs a passphrase that derives the correct key for the embedded artifact.\n\nImplementation-accurate claim boundary:\n\n- This demo enforces cryptographic gating in the intended firmware path (policy check + Argon2id + authenticated decryption before payload dispatch).\n- This demo does not claim full side-channel resistance or fault-injection resistance.\n- Branchless code alone is not sufficient to claim side-channel or fault resistance.\n\nScope boundary: claims here are limited to intended execution with unmodified firmware; firmware patching, instruction-level control, and active fault injection are out of scope.\n\nThe important variables are:\n\n- passphrase entropy\n- Argon2id work factor\n- physical extraction and side-channel assumptions for the device\n\n### Side-Channel and Fault Hardening Checklist\n\nUse this checklist before making stronger claims than \"cryptographically gated demo path\":\n\n- Enable secure boot / signed image verification so patched firmware cannot run.\n- Lock debug/programming interfaces in production lifecycle states.\n- Add voltage/clock/temperature glitch detection and safe-fail behavior.\n- Use constant-time verification paths where applicable and avoid secret-dependent early exits.\n- Add redundant checks or control-flow integrity for critical auth decisions.\n- Minimize secret lifetime in RAM and verify compiler-retained zeroization.\n- Perform hardware side-channel and fault-injection testing on target boards.\n- Get third-party security review before claiming resistance properties.\n\n### Quantum Threat Model\n\nShort answer: **not in the strict post-quantum-cryptography (PQC) sense**.\n\n- This framework does not implement a NIST PQC KEM or signature scheme.\n- Security here is symmetric-key plus password-guessing cost.\n- Against Grover-style brute force, symmetric search exponents are roughly halved.\n\nSo the right claim is: **high modeled brute-force cost under stated entropy and KDF assumptions**, not \"quantum-proof.\"\n\n### Crack-Time Math (Reference Row)\n\nThe hardened framework uses the same reference entropy row and the same classical versus optimistic Grover-style formulas as the Rust repo:\n\n```text\nT_avg_classical_years = 2^(H-1) / (r * 31,557,600)\nT_avg_quantum_years   = 2^(H/2 - 1) / (r_q * 31,557,600)\n```\n\nFor the 12-word Diceware policy reference row:\n\n- `H ≈ 155.1`\n- `r = 0.1/s`\n- `r_q = 0.1/s`\n- Classical: `~7.76e39 years`\n- Quantum (optimistic Grover model): `~3.51e16 years`\n\nAge-of-universe comparison (`≈ 1.38e10 years`):\n\n- Classical ratio: `~5.6e29`\n- Quantum ratio: `~2.5e6`\n\nImportant: those are the same paper-standard reference numbers used in the Rust repo. They are not a measured claim that the RP2350's checked-in `memory_kib: 64` profile has the same real-world per-guess cost as the Rust repo's 1 GiB desktop demo profile.\n\n#### Reproducibility Snippet\n\n```python\nSECONDS_PER_YEAR = 365.25 * 24 * 3600\n\ndef avg_years_classical(H, r):\n\treturn 2 ** (H - 1) / (r * SECONDS_PER_YEAR)\n\ndef avg_years_quantum(H, r_q):\n\treturn 2 ** (H / 2 - 1) / (r_q * SECONDS_PER_YEAR)\n\nprint(avg_years_classical(155.1, 0.1))\nprint(avg_years_quantum(155.1, 0.1))\n```\n\nThis project is a demonstrator firmware, not a third-party audited security product or formal security proof.\n\n## Project Layout\n\n- `src/main.c`: firmware entry point\n- `src/cli.c`: UART prompt and passphrase handling\n- `src/auth.c`: Argon2id + XChaCha20-Poly1305 authentication path\n- `src/mbedtls_shims.c`: minimal zeroize shim for the AEAD subset\n- `include/auth.h`: public auth API and constants\n- `include/demo_artifact.h`: generated artifact header consumed by firmware\n- `scripts/dec.py`: hardened artifact generator\n- `scripts/demo_artifact.json`: JSON source-of-truth artifact\n- `paper.typ`: hardened paper\n\n<br>\n\n## License\n\nMIT — see [LICENSE](LICENSE).",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "encryption-c-rp2350",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "量子纠错芯片、流片 量子纠错芯片流片 quantum error correction chip tapeout 量子纠错芯片制造",
+              "topic": [
+                "量子纠错芯片",
+                "流片"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "量子纠错芯片、流片",
+              "candidates": [
+                {
+                  "key": "EXTERNAL_PROJECT:562",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # outsideboundvoice\nAn experimental, multi-language codebase combining consciousness simulation, spectrum analysis, quantum-inspired rendering, spatial simulation, and LLM bridging across **Python**, **Node.js**, **C#/.NET**, **C++**, and **Java**.\n## Repository Layout\n- `bow-of-Achilles/`\n - Python self-iterating **consciousness emergence loop** (`consciousness_loop.py`) with entropy/coherence trac"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:539",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 🎧 StemDeck\n**Open-source desktop DJ app with AI stem separation — powered entirely by the music files on your computer.**\nTwo decks, a full mixer, beat sync, keylock pitch/tempo control, and one-click AI stem isolation (vocals / drums / bass / other) so you can mix like it's four turntables per deck. No cloud, no subscription, no uploads: your MP3s never leave your machine.\n## Features\n- **Two de"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:413",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 适用于 ESP32 系列 SoC 的 Arduino 核心\n### 需要帮助或有疑问？加入 Discord 聊天或 开启新的讨论\n## 目录\n - 开发状态\n - 开发规划\n - 文档\n - 支持的芯片\n - 解码异常\n - 问题/错误报告模板\n - 贡献\n### 开发状态\n#### 最新稳定版\n#### 最新开发版\n### 开发规划\n我们的开发完全在此公开 **路线图 🎉** 上进行跟踪。\n如需更多信息，您可以参加我们的 **每月社区会议 🔔**。\n### 文档\n您可以使用 Arduino-ESP32 在线文档 获取有关此项目的所有信息。\n---\n**从 2.x 版本迁移到 3.x 的指南可 在此处 获取。**\n---\n**与 ESP8266 和 Arduino-CORE (Arduino.cc) 的 API 兼容性说明 在此。**\n---\n* 入门指南\n* 安装（Windows、L"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:369",
+                  "purpose": "cocos2d-x\n=========\n|Win32|其他|\n| ----|------|\n[cocos2d-x][1] 是一个多平台框架，用于构建2D游戏、交互式书籍、演示和其他图形应用程序。\n它基于 __cocos2d-iphone__，但使用 C++ 而不是 Objective-C。\n它可以在 iOS、Android、macOS、Windows 和 Linux 上运行。\n**Cocos2d-x 框架架构**：\ncocos2d-x 是：\n * 快速\n * 免费\n * 易于使用\n * 社区支持\nGit 用户注意事项\n-----------------------\n1. 从 GitHub 克隆仓库。\n $ git clone \n2. 克隆仓库后，请执行 `download-deps.py` 来下载和安装依赖项。\n $ cd cocos2d-x\n cocos2d-x $ python download-deps.py\n3. 运行 `download-deps.py` 后"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:72",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 *English ∙ 日本語 ∙ 简体中文 ∙ 繁體中文 | العَرَبِيَّة‎ ∙ বাংলা ∙ Português do Brasil ∙ Deutsch ∙ ελληνικά ∙ עברית ∙ Italiano ∙ 한국어 ∙ فارسی ∙ Polski ∙ русский язык ∙ Español ∙ ภาษาไทย ∙ Türkçe ∙ tiếng Việt ∙ Français | Add Translation*\n**Help translate this guide!**\n# The System Design Primer\n## Motivation\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n### Learn how to des"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:419",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 Laravel 邮件日志记录器\n===============\n一个服务提供者，用于通过 Laravel 内置的邮件提供者添加邮件日志记录支持。\n目录\n-----------------\n* 安装\n* 配置\n安装\n------------\n使用 composer 安装：\n```sh\ncomposer require designmynight/laravel-log-mailer\n```\n### Laravel 版本兼容性\n Laravel | 包 |\n:---------|:--------|\n 5.6.x | 1.0.x |\n然后在 `config/app.php` 中添加服务提供者：\n```php\nDesignMyNight\\Laravel\\Logging\\MailableLogServiceProvider::class,\n```\n如果在 Lumen 中使用，在 `bootstrap/"
+                },
+                {
+                  "key": "CAREER_PROJECT:244",
+                  "purpose": "netobserv-operator：用于Kubernetes网络可观测性的Operator。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:560",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Claude Mate\n**Claude Mate exists to cut the cognitive overload of orchestrating many\nAI-agent sessions at once** — a wall of Claude Code tabs spread across different\naccounts and projects, each finishing, blocking, or erroring on its own\nschedule. Instead of scanning every terminal to find the one that stalled, you\nglance at a small desk device: one screen and an indication LED tell you *which*\nse"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:196",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # FastLED - The Universal LED Library for Embedded and Arduino\n**Transform any microcontroller into an LED powerhouse.**\nDrive **30,000+ LEDs** on high-end devices • **Sub-$1 compatibility** on tiny chips • **Background rendering** for responsive apps • **Nearly every LED chipset supported** • **#2 most popular Arduino library**\n## ⚡ Get Blinking in 30 Seconds\n```cpp\n#include \n#define NUM_LEDS 60\nCR"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:213",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n \" Knowledge is powerful, be careful how you use it! \" \n A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more. \n****\n## :notebook_with_decorative_cover: &nbsp;What is it?\nThis repository is a collection of various materials and tools that I use every day in my work. It contains a lot of useful information gathered in one piece. It is an invaluable"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:214",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 🎯 Marvel Rivals Ultimate Tactical Tool — Radar, Aim Assist & Performance Enhancer\n**Marvel Rivals Ultimate Tactical Tool** is an all‑in‑one enhancement suite engineered to give you a decisive edge in Marvel Rivals. It combines a real‑time enhanced radar overlay, precision aim correction, ability cooldown tracking, obstacle‑penetrating enemy markers, and system performance tweaks – all in one ligh"
+                }
+              ]
+            },
+            "verdict": {
+              "matches": []
+            },
+            "accepted": {
+              "topic": "量子纠错芯片、流片",
+              "proofs": {}
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "量子纠错芯片",
+                  "流片"
+                ]
+              },
+              "alternatives": [],
+              "calculatedAt": "2026-10-04T03:33:08.232285550Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "topic": [
+                  "量子纠错芯片",
+                  "流片"
+                ],
+                "provenance": {
+                  "topic": {
+                    "quote": "量子纠错芯片流片项目",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "只能推荐有资料核实符合的真实项目，没有就说明，不要改成其他方向",
+                    "source": "MESSAGE"
+                  }
+                },
+                "purposeReview": {
+                  "topic": "量子纠错芯片、流片",
+                  "proofs": {}
+                },
+                "lastCandidates": [],
+                "verificationMode": "STRICT",
+                "lastChangeSummary": "已记录项目主题：量子纠错芯片、流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ],
+  "sessionDeleted": true
+}

@@ -25,6 +25,12 @@ public final class CustomerEvidence {
         不能凭常识补充原文缺失事实，不能以链接或同项目名称作为支持。
         sourceTitle/sourceRef由服务端提供，仅用于识别quote所属的项目及代词主语，不能作为功能、周期、语言或依赖事实的依据。
         只返回JSON {"supportedIds":[0,1]}，下标从0开始，只列出完全支持的项，不确定则不通过。
+        输入另有question时，还必须核对这些已支持的事实是否真正回答了该问题，返回
+        {"supportedIds":[0],"coverage":"COMPLETE|PARTIAL|INSUFFICIENT","missingFacts":[{"questionQuote":"用户问题中的连续原话","reason":"尚缺的项目事实，最多200字"}]}。
+        COMPLETE表示问题涉及的各项事实及限制都有依据且missingFacts为空；PARTIAL表示只回答一部分；INSUFFICIENT表示即使个别引文属实也不能回答该问题。
+        必须区分排障时的堆参数与最低机器内存、平台能力与现成业务功能、开源协议与商业版功能。相关原文不等于足以回答，资料未提及不等于不支持。
+        missingFacts最多6项，只报告项目事实缺口，questionQuote必须逐字来自question且最多100字，reason最多80字。不要生成用户问卷，不得要求用户确认项目支持或许可。
+        输入没有question时仍只返回supportedIds，沿用逐条事实核验。
         """;
     public static List<Map<String,Object>> input(List<RagBSearchHit> hits,int charBudget) {
         return input(hits,charBudget,Map.of());
@@ -59,11 +65,14 @@ public final class CustomerEvidence {
         return result;
     }
     public static List<Map<String,Object>> validate(Map<String,Object> generated,List<Map<String,Object>> evidence) {
+        return validate(generated,evidence,false);
+    }
+    private static List<Map<String,Object>> validate(Map<String,Object> generated,List<Map<String,Object>> evidence,boolean selectedSpan) {
         boolean claims=generated.containsKey("claims"); String field=claims?"claims":"quotes";
         if(!generated.keySet().equals(Set.of(field)) || !(generated.get(field) instanceof List<?> quotes) || quotes.size()>9) throw new IllegalArgumentException("INVALID_EVIDENCE_OUTPUT");
         List<Map<String,Object>> result=new ArrayList<>(); Set<String> used=new HashSet<>();
         for(Object raw:quotes) {
-            if(!(raw instanceof Map<?,?> item) || !item.keySet().equals(claims?Set.of("evidenceId","quote","text"):Set.of("evidenceId","quote")) || !(item.get("quote") instanceof String quote) || quote.length()<20 || quote.length()>800)
+            if(!(raw instanceof Map<?,?> item) || !item.keySet().equals(claims?Set.of("evidenceId","quote","text"):Set.of("evidenceId","quote")) || !(item.get("quote") instanceof String quote) || quote.isBlank() || quote.length()<(selectedSpan?1:20) || quote.length()>800)
                 throw new IllegalArgumentException("INVALID_QUOTE");
             if(claims && (!(item.get("text") instanceof String text) || text.isBlank() || text.length()>600)) throw new IllegalArgumentException("INVALID_CLAIM");
             Map<String,Object> source=evidence.stream().filter(e->e.get("evidenceId").equals(item.get("evidenceId"))).findFirst().orElseThrow(()->new IllegalArgumentException("UNKNOWN_CITATION"));
@@ -78,7 +87,7 @@ public final class CustomerEvidence {
         List<Map<String,Object>> result=new ArrayList<>();
         for(int start=0;start<text.length();) {
             int end=safeEnd(text,Math.min(start+400,text.length())); if(text.length()-end<20) end=text.length();
-            if(end-start>=20) result.add(Map.of("spanId",evidenceId+".S"+(result.size()+1),"text",text.substring(start,end),"startInChunk",contentStart+start,"endInChunk",contentStart+end));
+            if(!text.substring(start,end).isBlank()) result.add(Map.of("spanId",evidenceId+".S"+(result.size()+1),"text",text.substring(start,end),"startInChunk",contentStart+start,"endInChunk",contentStart+end));
             start=end;
         }
         return result;
@@ -96,7 +105,7 @@ public final class CustomerEvidence {
             .replaceAll("\\[[^\\]]*\\]\\(https?://[^)]*\\)"," ")
             .replaceAll("https?://\\S+", " ")
             .replaceAll("[\\s\\p{Punct}]+", "");
-        return prose.codePointCount(0,prose.length())>=20;
+        return !prose.isBlank();
     }
     static int meaningfulStart(String text) {
         int offset=0;
@@ -137,7 +146,7 @@ public final class CustomerEvidence {
                     Map<?,?> span=choices.stream().filter(s->s instanceof Map<?,?> m && Objects.equals(m.get("spanId"),item.get("spanId"))).map(s->(Map<?,?>)s).findFirst().orElseThrow(()->new IllegalArgumentException("UNKNOWN_SPAN"));
                     candidate=Map.of("evidenceId",item.get("evidenceId"),"quote",span.get("text"),"text",item.get("text"));
                 }
-                var accepted=validate(Map.of("claims",Collections.singletonList(candidate)),evidence);
+                var accepted=validate(Map.of("claims",Collections.singletonList(candidate)),evidence,claim instanceof Map<?,?> item && item.containsKey("spanId"));
                 if(claim instanceof Map<?,?> item && item.get("field") instanceof String field)accepted.forEach(c->c.put("field",field));
                 valid.addAll(accepted);
             }

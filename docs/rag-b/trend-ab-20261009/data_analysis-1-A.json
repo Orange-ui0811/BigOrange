@@ -1,0 +1,609 @@
+{
+  "case" : "data_analysis",
+  "round" : 1,
+  "variant" : "A",
+  "profile" : {
+    "topics" : [ "数据分析" ],
+    "purpose" : "求职",
+    "experience" : "有基础",
+    "languages" : [ "Python" ],
+    "timeCommitment" : "两个月内",
+    "customTopics" : null,
+    "customPurpose" : "想展示数据处理和可视化能力",
+    "customExp" : null,
+    "customLang" : null,
+    "customTime" : null,
+    "useRag" : true,
+    "usePersona" : false,
+    "preferBeginnerProjects" : false,
+    "preferCareerProjects" : true
+  },
+  "generation" : "local-m3-1791424349362",
+  "startedAt" : "2026-10-09T05:31:48.070643714Z",
+  "response" : {
+    "runtime" : {
+      "model" : "DeepSeek-V4-Pro",
+      "version" : "1-1785206616703",
+      "endpoint" : "https://ai.gitee.com/v1",
+      "source" : "REDIS"
+    },
+    "variant" : "A",
+    "retrieval" : {
+      "text" : "[candidateId=E1;evidenceId=E1;repo=apache/doris] facts=摘要:Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。;能力:证明能够理解并修改分布式数据库核心模块，掌握 Java 性能调优、实时查询优化、混合搜索引擎设计。;技术:Java;证据:职业成长项目; Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。; 证明能够理解并修…\n\n[candidateId=E2;evidenceId=E2;repo=elastic/kibana] facts=摘要:Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。;能力:具备大规模TypeScri…\n\n[candidateId=E3;evidenceId=E3;repo=gupy-io/gupy-skills-candidato] facts=证据:最简单的方式是使用 Skills CLI （ npx skills ），它会将技能安装到每个工具的正确目录中。; js 18+ （用于 npx ）。",
+      "trace" : {
+        "strategyVersion" : "hybrid-topic-project-v6-adaptive-card",
+        "status" : "USED",
+        "queries" : [ "数据分析 Python", "数据分析 Python  求职 想展示数据处理和可视化能力 有基础" ],
+        "evidence" : [ {
+          "evidenceId" : "E1",
+          "documentKey" : "873:0",
+          "source" : "CAREER_PROJECT",
+          "title" : "apache/doris",
+          "sourceRef" : "career:210",
+          "projectId" : "210",
+          "projectType" : null,
+          "mappingStatus" : null,
+          "repositoryUrl" : "https://github.com/apache/doris",
+          "text" : "# apache/doris\n\n## 知识分类\n职业成长项目\n\n## 仓库地址\nhttps://github.com/apache/doris\n\n## 项目摘要\nApache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。\n\n## 职业价值\n掌握大规模实时数据分析引擎的设计与优化，熟悉混合搜索在 AI 场景的应用，提升大数据与 AI 基础设施的架构能力。\n\n## 可证明能力\n证明能够理解并修改分布式数据库核心模块，掌握 Java 性能调优、实时查询优化、混合搜索引擎设计。\n\n## 面试讨论点\n可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。\n\n## 差异化改造方案\n为 Doris 扩展特定的 AI agent 集成插件，或优化某个查询场景的性能，添加自定义索引类型，或编写完整的中文文档和案例。\n\n## 主要风险\n项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。\n\n## 最匹配岗位\nAI_PRODUCT_OPERATIONS\n\n## 技术栈\nJava\n\n## 主要语言\nJava",
+          "card" : "[candidateId=E1;evidenceId=E1;repo=apache/doris] facts=摘要:Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。;能力:证明能够理解并修改分布式数据库核心模块，掌握 Java 性能调优、实时查询优化、混合搜索引擎设计。;技术:Java;证据:职业成长项目; Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。; 证明能够理解并修…",
+          "promptMode" : "CARD"
+        }, {
+          "evidenceId" : "E2",
+          "documentKey" : "912:0",
+          "source" : "CAREER_PROJECT",
+          "title" : "elastic/kibana",
+          "sourceRef" : "career:260",
+          "projectId" : "260",
+          "projectType" : null,
+          "mappingStatus" : null,
+          "repositoryUrl" : "https://github.com/elastic/kibana",
+          "text" : "# elastic/kibana\n\n## 知识分类\n职业成长项目\n\n## 仓库地址\nhttps://github.com/elastic/kibana\n\n## 项目摘要\nKibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。\n\n## 职业价值\n面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n## 可证明能力\n- 具备大规模TypeScript/React项目协作经验，处理庞大代码库与Issue管理\n- 精通Playwright端到端测试与Storybook组件驱动开发\n- 持续集成与自动发布流程的实际操作能力\n- 通过快速启动脚本降低参与者门槛",
+          "card" : "[candidateId=E2;evidenceId=E2;repo=elastic/kibana] facts=摘要:Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。;能力:具备大规模TypeScri…",
+          "promptMode" : "CARD"
+        }, {
+          "evidenceId" : "E3",
+          "documentKey" : "759:3",
+          "source" : "GITHUB",
+          "title" : "Gupy 技能——面向求职者",
+          "sourceRef" : "gupy-io/gupy-skills-candidato",
+          "projectId" : null,
+          "projectType" : null,
+          "mappingStatus" : "UNMAPPED",
+          "repositoryUrl" : "https://github.com/gupy-io/gupy-skills-candidato",
+          "text" : "远程高级数据分析师的职位”*\n\n代理应能识别上下文并自动应用技能。若未应用，可手动调用技能名称：\n\n- *“使用 analise-de-curriculo 技能来审查我的资料”*\n- *“使用 guia-de-triagem 技能来解释筛选机制”*\n- *“使用 radar-de-vagas 技能来比较这些公司”*\n\n---\n\n## 快速安装（推荐）\n\n最简单的方式是使用 [Skills CLI](https://github.com/vercel-labs/skills)（`npx skills`），它会将技能安装到每个工具的正确目录中。\n\n**前提条件：** [Node.js 18+](https://nodejs.org/)（用于 `npx`）。\n\n```bash\n# 查看本仓库中可用的技能\nnpx skills add gupy-io/gupy-skills-candidato --list\n\n# 安装所有技能（交互模式）\nnpx skills add gupy-io/gupy-skills-candidato",
+          "card" : "[candidateId=E3;evidenceId=E3;repo=gupy-io/gupy-skills-candidato] facts=证据:最简单的方式是使用 Skills CLI （ npx skills ），它会将技能安装到每个工具的正确目录中。; js 18+ （用于 npx ）。",
+          "promptMode" : "CARD"
+        } ],
+        "durationMs" : 458.22109,
+        "candidateCount" : 26,
+        "selectedCount" : 3,
+        "confidence" : "HIGH",
+        "ragApplied" : true,
+        "evidenceFormat" : "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars" : 1409,
+        "evidencePromptChars" : 593,
+        "evidenceBudgetChars" : 1100,
+        "evidenceFallbackCount" : 0,
+        "evidenceCompressionRatio" : 0.5791341376863024
+      }
+    },
+    "result" : {
+      "analysis" : {
+        "trend" : "实时数据分析与可视化在 AI 应用中需求持续上升，企业越来越依赖高性能数据引擎与直观展示工具。",
+        "prospect" : "掌握大规模数据处理引擎或数据可视化平台开发经验，对数据分析与数据工程岗位有长期就业价值。",
+        "demand" : "企业需要既能理解底层数据处理逻辑，又能将结果清晰可视化呈现的复合型人才。",
+        "summary" : "数据分析方向建议兼顾底层实时分析能力与可视化呈现能力，推荐参与 Doris 和 Kibana 两个真实项目。"
+      },
+      "recommendations" : [ {
+        "candidateId" : "C:210",
+        "name" : "Apache Doris 实时分析数据库",
+        "description" : "Apache Doris 是面向 AI 智能体的实时分析与混合搜索数据库，支持大规模数据的高性能查询与检索，适合构建企业级数据基础设施。",
+        "difficulty" : "进阶",
+        "difficultyReason" : "项目以 Java 为主，涉及分布式数据库内核、查询优化与混合搜索等复杂模块；你有 Python 基础但缺乏 Java 和大数据系统经验，需要额外学习成本。",
+        "vibeCodingReason" : "AI 辅助可快速解析分布式查询计划、生成性能测试脚本与代码注释，降低阅读大型 Java 代码库的门槛。",
+        "recommendReason" : "该方向能直接强化数据分析底层能力，求职时可展示对实时数据处理引擎的理解与改造经验，符合数据开发与分析工程师岗位对大数据的硬性要求。虽然需要补 Java 和分布式知识，但项目价值高，能在两个月内通过 AI 辅助完成局部优化或测试贡献。",
+        "prerequisites" : "Python、SQL、基本 Linux 操作；建议了解 Java 语法与分布式系统概念",
+        "evidenceIds" : [ "C:210" ],
+        "score" : 87,
+        "references" : [ {
+          "evidenceIds" : [ "C:210" ],
+          "url" : "https://github.com/apache/doris",
+          "name" : "apache/doris"
+        } ],
+        "evidenceStatus" : "VERIFIED_CANDIDATE",
+        "unsupportedReferenceCount" : 0
+      }, {
+        "candidateId" : "C:260",
+        "name" : "Kibana 数据可视化平台",
+        "description" : "Kibana 是 Elastic Stack 的可视化窗口，用于探索、分析和展示数据，基于 TypeScript、React 构建，拥有完善测试与 CI/CD 体系。",
+        "difficulty" : "进阶",
+        "difficultyReason" : "项目采用 TypeScript、React、Next.js，代码规模极大且依赖前端工程化体系；你有 Python 基础但需新学前端技术栈，入门成本较高。",
+        "vibeCodingReason" : "AI 可帮助阅读 React 组件、生成 Playwright 测试、解释前端架构，降低大型 TypeScript 项目的上手难度。",
+        "recommendReason" : "参与 Kibana 能直接产出数据可视化相关贡献，与你的数据分析求职目标高度契合，可展示从数据处理到可视化呈现的完整能力。通过修复可视化面板或测试用例，既能积累大规模项目协作经验，也能为简历增加真实的数据产品案例。",
+        "prerequisites" : "Python 基础、SQL、了解 Web 基础；建议先熟悉 TypeScript、React 基本语法",
+        "evidenceIds" : [ "C:260" ],
+        "score" : 88,
+        "references" : [ {
+          "evidenceIds" : [ "C:260" ],
+          "url" : "https://github.com/elastic/kibana",
+          "name" : "elastic/kibana"
+        } ],
+        "evidenceStatus" : "VERIFIED_CANDIDATE",
+        "unsupportedReferenceCount" : 0
+      } ],
+      "learning" : {
+        "steps" : [ "第一步：补齐必要语言基础，克隆目标仓库并成功跑通开发环境与基础测试。", "第二步：选择一个 beginner-friendly issue，在 AI 辅助下理解相关模块并实现局部修复或测试补充。", "第三步：提交 PR 并完成代码评审，总结数据处理或可视化实现方案，形成可展示的贡献记录。" ],
+        "timeline" : "预计两个月：第1周补齐必要语言与项目环境；第2-4周完成首个简单 issue；第5-8周推进一个中等复杂度功能并合入。",
+        "tips" : "优先选择 good first issue，保持每周10小时以上投入；利用 AI 解释代码但独立完成关键逻辑，避免只复制生成结果。"
+      },
+      "raw" : "{\n  \"analysis\": {\n    \"trend\": \"实时数据分析与可视化在 AI 应用中需求持续上升，企业越来越依赖高性能数据引擎与直观展示工具。\",\n    \"prospect\": \"掌握大规模数据处理引擎或数据可视化平台开发经验，对数据分析与数据工程岗位有长期就业价值。\",\n    \"demand\": \"企业需要既能理解底层数据处理逻辑，又能将结果清晰可视化呈现的复合型人才。\",\n    \"summary\": \"数据分析方向建议兼顾底层实时分析能力与可视化呈现能力，推荐参与 Doris 和 Kibana 两个真实项目。\"\n  },\n  \"recommendations\": [\n    {\n      \"candidateId\": \"C:210\",\n      \"name\": \"Apache Doris 实时分析数据库\",\n      \"description\": \"Apache Doris 是面向 AI 智能体的实时分析与混合搜索数据库，支持大规模数据的高性能查询与检索，适合构建企业级数据基础设施。\",\n      \"difficulty\": \"进阶\",\n      \"difficultyReason\": \"项目以 Java 为主，涉及分布式数据库内核、查询优化与混合搜索等复杂模块；你有 Python 基础但缺乏 Java 和大数据系统经验，需要额外学习成本。\",\n      \"vibeCodingReason\": \"AI 辅助可快速解析分布式查询计划、生成性能测试脚本与代码注释，降低阅读大型 Java 代码库的门槛。\",\n      \"recommendReason\": \"该方向能直接强化数据分析底层能力，求职时可展示对实时数据处理引擎的理解与改造经验，符合数据开发与分析工程师岗位对大数据的硬性要求。虽然需要补 Java 和分布式知识，但项目价值高，能在两个月内通过 AI 辅助完成局部优化或测试贡献。\",\n      \"prerequisites\": \"Python、SQL、基本 Linux 操作；建议了解 Java 语法与分布式系统概念\",\n      \"evidenceIds\": [\"E1\"],\n      \"score\": 87\n    },\n    {\n      \"candidateId\": \"C:260\",\n      \"name\": \"Kibana 数据可视化平台\",\n      \"description\": \"Kibana 是 Elastic Stack 的可视化窗口，用于探索、分析和展示数据，基于 TypeScript、React 构建，拥有完善测试与 CI/CD 体系。\",\n      \"difficulty\": \"进阶\",\n      \"difficultyReason\": \"项目采用 TypeScript、React、Next.js，代码规模极大且依赖前端工程化体系；你有 Python 基础但需新学前端技术栈，入门成本较高。\",\n      \"vibeCodingReason\": \"AI 可帮助阅读 React 组件、生成 Playwright 测试、解释前端架构，降低大型 TypeScript 项目的上手难度。\",\n      \"recommendReason\": \"参与 Kibana 能直接产出数据可视化相关贡献，与你的数据分析求职目标高度契合，可展示从数据处理到可视化呈现的完整能力。通过修复可视化面板或测试用例，既能积累大规模项目协作经验，也能为简历增加真实的数据产品案例。\",\n      \"prerequisites\": \"Python 基础、SQL、了解 Web 基础；建议先熟悉 TypeScript、React 基本语法\",\n      \"evidenceIds\": [\"E2\"],\n      \"score\": 88\n    }\n  ],\n  \"learning\": {\n    \"steps\": [\n      \"第一步：补齐必要语言基础，克隆目标仓库并成功跑通开发环境与基础测试。\",\n      \"第二步：选择一个 beginner-friendly issue，在 AI 辅助下理解相关模块并实现局部修复或测试补充。\",\n      \"第三步：提交 PR 并完成代码评审，总结数据处理或可视化实现方案，形成可展示的贡献记录。\"\n    ],\n    \"timeline\": \"预计两个月：第1周补齐必要语言与项目环境；第2-4周完成首个简单 issue；第5-8周推进一个中等复杂度功能并合入。\",\n    \"tips\": \"优先选择 good first issue，保持每周10小时以上投入；利用 AI 解释代码但独立完成关键逻辑，避免只复制生成结果。\"\n  }\n}",
+      "balance" : 0,
+      "beginnerCases" : [ ],
+      "careerCases" : [ {
+        "id" : 262,
+        "fullName" : "repowise-dev/repowise",
+        "ownerName" : "repowise-dev",
+        "repositoryName" : "repowise",
+        "htmlUrl" : "https://github.com/repowise-dev/repowise",
+        "descriptionOriginal" : "Codebase intelligence for AI and humans: code health scores, auto-generated docs, git analytics, dead code detection, and architectural decisions via MCP.",
+        "descriptionZh" : null,
+        "primaryLanguage" : "Python",
+        "techStack" : "Python",
+        "licenseSpdx" : "AGPL-3.0",
+        "stars" : 4647,
+        "hasQuickStart" : true,
+        "requiresDocker" : true,
+        "requiresDatabase" : true,
+        "requiresSecrets" : true,
+        "requiresExternalService" : false,
+        "codebaseSize" : "LARGE",
+        "overallScore" : 85,
+        "bestRoleCode" : "AI_APPLICATION_AGENT",
+        "bestRoleName" : "AI 应用与 Agent",
+        "difficulty" : "ADVANCED",
+        "summaryZh" : "Repowise 提供代码仓库智能分析：代码健康评分、自动文档生成、Git 分析、死代码检测，并通过 MCP 进行架构决策。",
+        "careerValue" : "深入代码智能与静态分析领域，掌握机器学习或规则引擎在软件工程中的应用，提升开发效能工具构建能力。",
+        "proofPoints" : "证明能够开发复杂的代码分析工具，包括 AST 解析、数据可视化、自动化文档流水线和 AI 辅助决策。",
+        "interviewTopics" : "代码健康指标设计、静态分析技术、MCP 协议应用、与 IDE 集成、大模型辅助代码审查等。",
+        "modificationPlan" : "扩展对新的编程语言支持，改进代码健康评分的算法，集成更多的 AI 模型进行智能推荐，完善前端仪表盘。",
+        "mainRisks" : "需要广泛的编程语言解析知识；性能优化挑战大；项目 AGPL 许可可能限制商业用途。",
+        "estimatedDuration" : "4-6周",
+        "status" : "PUBLISHED",
+        "githubUpdatedAt" : "2026-08-04T03:08:22",
+        "lastVerifiedAt" : "2026-08-04T11:19:31",
+        "roleScores" : [ {
+          "roleCode" : "AI_APPLICATION_AGENT",
+          "roleName" : "AI 应用与 Agent",
+          "roleRelevance" : 20,
+          "provableAbility" : 17,
+          "knowledgeCoverage" : 12,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 87,
+          "jobSampleCount" : 18,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=97\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=false\", \"knowledgeCoverage\": \"stack=Python, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=AGPL-3.0\"}"
+        }, {
+          "roleCode" : "AI_PRODUCT_OPERATIONS",
+          "roleName" : "AI 产品与运营",
+          "roleRelevance" : 16,
+          "provableAbility" : 17,
+          "knowledgeCoverage" : 12,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 83,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=97\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=false\", \"knowledgeCoverage\": \"stack=Python, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=AGPL-3.0\"}"
+        }, {
+          "roleCode" : "AI_INFRA_QUALITY",
+          "roleName" : "AI 基础设施与质量",
+          "roleRelevance" : 14,
+          "provableAbility" : 17,
+          "knowledgeCoverage" : 12,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 81,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=97\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=false\", \"knowledgeCoverage\": \"stack=Python, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=AGPL-3.0\"}"
+        }, {
+          "roleCode" : "LLM_ALGORITHM_RESEARCH",
+          "roleName" : "大模型算法与研究",
+          "roleRelevance" : 14,
+          "provableAbility" : 17,
+          "knowledgeCoverage" : 12,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 81,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=97\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=false\", \"knowledgeCoverage\": \"stack=Python, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=AGPL-3.0\"}"
+        }, {
+          "roleCode" : "AI_FULLSTACK_BACKEND",
+          "roleName" : "AI 全栈与后端工程",
+          "roleRelevance" : 13,
+          "provableAbility" : 17,
+          "knowledgeCoverage" : 12,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 80,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=97\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=false\", \"knowledgeCoverage\": \"stack=Python, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=AGPL-3.0\"}"
+        }, {
+          "roleCode" : "AI_CREATIVE_INTERACTION",
+          "roleName" : "AI 创意与交互",
+          "roleRelevance" : 7,
+          "provableAbility" : 17,
+          "knowledgeCoverage" : 12,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 74,
+          "jobSampleCount" : 1,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=97\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=false\", \"knowledgeCoverage\": \"stack=Python, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=AGPL-3.0\"}"
+        } ],
+        "matchExplanation" : "可重点证明“AI 应用与 Agent”相关能力；技术栈包含“Python”，便于形成可展示的代码证据；适合围绕作品证明和面试讨论点组织项目经历；可以按照“两个月内”安排差异化改造，参考周期为4-6周。"
+      }, {
+        "id" : 210,
+        "fullName" : "apache/doris",
+        "ownerName" : "apache",
+        "repositoryName" : "doris",
+        "htmlUrl" : "https://github.com/apache/doris",
+        "descriptionOriginal" : "Apache Doris is a real-time analytics and hybrid search database for AI agents.",
+        "descriptionZh" : null,
+        "primaryLanguage" : "Java",
+        "techStack" : "Java",
+        "licenseSpdx" : "Apache-2.0",
+        "stars" : 15713,
+        "hasQuickStart" : true,
+        "requiresDocker" : true,
+        "requiresDatabase" : false,
+        "requiresSecrets" : false,
+        "requiresExternalService" : false,
+        "codebaseSize" : "LARGE",
+        "overallScore" : 86,
+        "bestRoleCode" : "AI_PRODUCT_OPERATIONS",
+        "bestRoleName" : "AI 产品与运营",
+        "difficulty" : "ADVANCED",
+        "summaryZh" : "Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。",
+        "careerValue" : "掌握大规模实时数据分析引擎的设计与优化，熟悉混合搜索在 AI 场景的应用，提升大数据与 AI 基础设施的架构能力。",
+        "proofPoints" : "证明能够理解并修改分布式数据库核心模块，掌握 Java 性能调优、实时查询优化、混合搜索引擎设计。",
+        "interviewTopics" : "可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。",
+        "modificationPlan" : "为 Doris 扩展特定的 AI agent 集成插件，或优化某个查询场景的性能，添加自定义索引类型，或编写完整的中文文档和案例。",
+        "mainRisks" : "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。",
+        "estimatedDuration" : "4-8周",
+        "status" : "PUBLISHED",
+        "githubUpdatedAt" : "2026-08-04T03:15:12",
+        "lastVerifiedAt" : "2026-08-04T11:16:21",
+        "roleScores" : [ {
+          "roleCode" : "AI_PRODUCT_OPERATIONS",
+          "roleName" : "AI 产品与运营",
+          "roleRelevance" : 19,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 87,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=1201\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Java, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_APPLICATION_AGENT",
+          "roleName" : "AI 应用与 Agent",
+          "roleRelevance" : 17,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 85,
+          "jobSampleCount" : 18,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=1201\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Java, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_FULLSTACK_BACKEND",
+          "roleName" : "AI 全栈与后端工程",
+          "roleRelevance" : 16,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 84,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=1201\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Java, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_INFRA_QUALITY",
+          "roleName" : "AI 基础设施与质量",
+          "roleRelevance" : 11,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 79,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=1201\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Java, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_CREATIVE_INTERACTION",
+          "roleName" : "AI 创意与交互",
+          "roleRelevance" : 10,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 78,
+          "jobSampleCount" : 1,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=1201\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Java, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "LLM_ALGORITHM_RESEARCH",
+          "roleName" : "大模型算法与研究",
+          "roleRelevance" : 8,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 76,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=1201\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Java, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        } ],
+        "matchExplanation" : "可重点证明“AI 产品与运营”相关能力；与你关注的“数据分析”方向相符；适合围绕作品证明和面试讨论点组织项目经历；可以按照“两个月内”安排差异化改造，参考周期为4-8周。"
+      }, {
+        "id" : 260,
+        "fullName" : "elastic/kibana",
+        "ownerName" : "elastic",
+        "repositoryName" : "kibana",
+        "htmlUrl" : "https://github.com/elastic/kibana",
+        "descriptionOriginal" : "Your window into all of your data",
+        "descriptionZh" : null,
+        "primaryLanguage" : "TypeScript",
+        "techStack" : "TypeScript,React,Next.js,Playwright,Storybook",
+        "licenseSpdx" : "NOASSERTION",
+        "stars" : 21226,
+        "hasQuickStart" : true,
+        "requiresDocker" : true,
+        "requiresDatabase" : false,
+        "requiresSecrets" : true,
+        "requiresExternalService" : true,
+        "codebaseSize" : "LARGE",
+        "overallScore" : 82,
+        "bestRoleCode" : "AI_CREATIVE_INTERACTION",
+        "bestRoleName" : "AI 创意与交互",
+        "difficulty" : "ADVANCED",
+        "summaryZh" : "Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。",
+        "careerValue" : "面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。",
+        "proofPoints" : "- 具备大规模TypeScript/React项目协作经验，处理庞大代码库与Issue管理\n- 精通Playwright端到端测试与Storybook组件驱动开发\n- 持续集成与自动发布流程的实际操作能力\n- 通过快速启动脚本降低参与者门槛",
+        "interviewTopics" : "- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献",
+        "modificationPlan" : "由于项目无明确许可证，需先了解其贡献协议；重点添加部署指南（当前deployment=false），使用Docker简化本地环境；可修复若干文档缺陷或增加仪表板示例；为AI相关交互添加数据故事板功能，突出创意交互能力。",
+        "mainRisks" : "项目极大（LARGE），Issue多达14491，代码库高度复杂；缺少许可证可能限制作品集展示范围；无架构文档导致上手困难；技术栈涉及多框架，学习曲线陡峭。",
+        "estimatedDuration" : "3-4个月",
+        "status" : "PUBLISHED",
+        "githubUpdatedAt" : "2026-08-04T02:59:00",
+        "lastVerifiedAt" : "2026-08-04T11:19:24",
+        "roleScores" : [ {
+          "roleCode" : "AI_CREATIVE_INTERACTION",
+          "roleName" : "AI 创意与交互",
+          "roleRelevance" : 16,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 17,
+          "totalScore" : 83,
+          "jobSampleCount" : 1,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=14491\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Next.js,Playwright,Storybook, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_PRODUCT_OPERATIONS",
+          "roleName" : "AI 产品与运营",
+          "roleRelevance" : 16,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 17,
+          "totalScore" : 83,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=14491\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Next.js,Playwright,Storybook, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_FULLSTACK_BACKEND",
+          "roleName" : "AI 全栈与后端工程",
+          "roleRelevance" : 13,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 17,
+          "totalScore" : 80,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=14491\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Next.js,Playwright,Storybook, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_INFRA_QUALITY",
+          "roleName" : "AI 基础设施与质量",
+          "roleRelevance" : 11,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 17,
+          "totalScore" : 78,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=14491\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Next.js,Playwright,Storybook, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_APPLICATION_AGENT",
+          "roleName" : "AI 应用与 Agent",
+          "roleRelevance" : 8,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 17,
+          "totalScore" : 75,
+          "jobSampleCount" : 18,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=14491\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Next.js,Playwright,Storybook, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "LLM_ALGORITHM_RESEARCH",
+          "roleName" : "大模型算法与研究",
+          "roleRelevance" : 8,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 17,
+          "totalScore" : 75,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=14491\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Next.js,Playwright,Storybook, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=NOASSERTION\"}"
+        } ],
+        "matchExplanation" : "可重点证明“AI 创意与交互”相关能力；适合围绕作品证明和面试讨论点组织项目经历；可以按照“两个月内”安排差异化改造，参考周期为3-4个月。"
+      } ],
+      "modelMetrics" : {
+        "model" : "deepseek-v4-pro-ga-260813",
+        "runtimeSource" : "REDIS",
+        "providerHost" : "ai.gitee.com",
+        "requestedModel" : "DeepSeek-V4-Pro",
+        "durationMs" : 53188.910371,
+        "finishReason" : "stop",
+        "usageSource" : "PROVIDER",
+        "usage" : {
+          "prompt_tokens" : 1016,
+          "completion_tokens" : 3198,
+          "total_tokens" : 4214,
+          "prompt_tokens_details" : {
+            "cached_tokens" : 0
+          },
+          "completion_tokens_details" : {
+            "reasoning_tokens" : 2359
+          }
+        }
+      },
+      "retrievalTrace" : {
+        "strategyVersion" : "hybrid-topic-project-v6-adaptive-card",
+        "status" : "USED",
+        "queries" : [ "数据分析 Python", "数据分析 Python  求职 想展示数据处理和可视化能力 有基础" ],
+        "evidence" : [ {
+          "evidenceId" : "E1",
+          "documentKey" : "873:0",
+          "source" : "CAREER_PROJECT",
+          "title" : "apache/doris",
+          "sourceRef" : "career:210",
+          "projectId" : "210",
+          "projectType" : null,
+          "mappingStatus" : null,
+          "repositoryUrl" : "https://github.com/apache/doris",
+          "text" : "# apache/doris\n\n## 知识分类\n职业成长项目\n\n## 仓库地址\nhttps://github.com/apache/doris\n\n## 项目摘要\nApache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。\n\n## 职业价值\n掌握大规模实时数据分析引擎的设计与优化，熟悉混合搜索在 AI 场景的应用，提升大数据与 AI 基础设施的架构能力。\n\n## 可证明能力\n证明能够理解并修改分布式数据库核心模块，掌握 Java 性能调优、实时查询优化、混合搜索引擎设计。\n\n## 面试讨论点\n可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。\n\n## 差异化改造方案\n为 Doris 扩展特定的 AI agent 集成插件，或优化某个查询场景的性能，添加自定义索引类型，或编写完整的中文文档和案例。\n\n## 主要风险\n项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。\n\n## 最匹配岗位\nAI_PRODUCT_OPERATIONS\n\n## 技术栈\nJava\n\n## 主要语言\nJava",
+          "card" : "[candidateId=E1;evidenceId=E1;repo=apache/doris] facts=摘要:Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。;能力:证明能够理解并修改分布式数据库核心模块，掌握 Java 性能调优、实时查询优化、混合搜索引擎设计。;技术:Java;证据:职业成长项目; Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。; 证明能够理解并修…",
+          "promptMode" : "CARD"
+        }, {
+          "evidenceId" : "E2",
+          "documentKey" : "912:0",
+          "source" : "CAREER_PROJECT",
+          "title" : "elastic/kibana",
+          "sourceRef" : "career:260",
+          "projectId" : "260",
+          "projectType" : null,
+          "mappingStatus" : null,
+          "repositoryUrl" : "https://github.com/elastic/kibana",
+          "text" : "# elastic/kibana\n\n## 知识分类\n职业成长项目\n\n## 仓库地址\nhttps://github.com/elastic/kibana\n\n## 项目摘要\nKibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。\n\n## 职业价值\n面向AI创意与交互方向，但广泛适用于前端架构师与全栈工程。通过参与可深入理解大规模数据可视化工具的开发、React生态与测试策略，是展示复杂系统驾驭能力的绝佳履历项。\n\n## 可证明能力\n- 具备大规模TypeScript/React项目协作经验，处理庞大代码库与Issue管理\n- 精通Playwright端到端测试与Storybook组件驱动开发\n- 持续集成与自动发布流程的实际操作能力\n- 通过快速启动脚本降低参与者门槛",
+          "card" : "[candidateId=E2;evidenceId=E2;repo=elastic/kibana] facts=摘要:Kibana 是Elastic Stack的可视化窗口，用于探索、分析和展示所有数据。基于TypeScript、React、Next.js构建，拥有完善的测试体系（Playwright、Storybook）和CI/CD。项目规模极大，Issue数量高达14491，无统一非断言许可证。;能力:具备大规模TypeScri…",
+          "promptMode" : "CARD"
+        }, {
+          "evidenceId" : "E3",
+          "documentKey" : "759:3",
+          "source" : "GITHUB",
+          "title" : "Gupy 技能——面向求职者",
+          "sourceRef" : "gupy-io/gupy-skills-candidato",
+          "projectId" : null,
+          "projectType" : null,
+          "mappingStatus" : "UNMAPPED",
+          "repositoryUrl" : "https://github.com/gupy-io/gupy-skills-candidato",
+          "text" : "远程高级数据分析师的职位”*\n\n代理应能识别上下文并自动应用技能。若未应用，可手动调用技能名称：\n\n- *“使用 analise-de-curriculo 技能来审查我的资料”*\n- *“使用 guia-de-triagem 技能来解释筛选机制”*\n- *“使用 radar-de-vagas 技能来比较这些公司”*\n\n---\n\n## 快速安装（推荐）\n\n最简单的方式是使用 [Skills CLI](https://github.com/vercel-labs/skills)（`npx skills`），它会将技能安装到每个工具的正确目录中。\n\n**前提条件：** [Node.js 18+](https://nodejs.org/)（用于 `npx`）。\n\n```bash\n# 查看本仓库中可用的技能\nnpx skills add gupy-io/gupy-skills-candidato --list\n\n# 安装所有技能（交互模式）\nnpx skills add gupy-io/gupy-skills-candidato",
+          "card" : "[candidateId=E3;evidenceId=E3;repo=gupy-io/gupy-skills-candidato] facts=证据:最简单的方式是使用 Skills CLI （ npx skills ），它会将技能安装到每个工具的正确目录中。; js 18+ （用于 npx ）。",
+          "promptMode" : "CARD"
+        } ],
+        "durationMs" : 458.22109,
+        "candidateCount" : 26,
+        "selectedCount" : 3,
+        "confidence" : "HIGH",
+        "ragApplied" : true,
+        "evidenceFormat" : "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars" : 1409,
+        "evidencePromptChars" : 593,
+        "evidenceBudgetChars" : 1100,
+        "evidenceFallbackCount" : 0,
+        "evidenceCompressionRatio" : 0.5791341376863024
+      },
+      "promptVersion" : "trend-v2-evidence-1",
+      "graphDurationMs" : 63.734568,
+      "analyzerAttemptDurationMs" : 53259.62414
+    },
+    "wallMs" : 53718.627232,
+    "scope" : "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages" : [ {
+      "status" : "SUCCEEDED",
+      "stage" : "embedding.http.bge-small-zh-v1.5",
+      "durationMs" : 231.011234
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.embeddingAndVector",
+      "durationMs" : 239.755773
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.restoreMetadata",
+      "durationMs" : 5.652177
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 1.452642
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "embedding.http.bge-small-zh-v1.5",
+      "durationMs" : 192.464949
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.embeddingAndVector",
+      "durationMs" : 198.581229
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.restoreMetadata",
+      "durationMs" : 5.701693
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 1.285623
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.lexical",
+      "durationMs" : 4.732826
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 0.251205
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.selectProjects",
+      "durationMs" : 0.178762
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.renderEvidence",
+      "durationMs" : 0.552839
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "retrieval.total",
+      "durationMs" : 458.234026
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "graph.database",
+      "durationMs" : 63.729679
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "business.career",
+      "durationMs" : 5.399308
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.compose",
+      "durationMs" : 0.098935
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.protocol",
+      "durationMs" : 0.006312
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "model.http",
+      "durationMs" : 53188.934629
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "output.parseAndAssemble",
+      "durationMs" : 1.282678
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "output.bindSources",
+      "durationMs" : 0.092642
+    } ],
+    "snapshotId" : "e1dae609-9617-48a7-bc3e-f51f07c10c20"
+  },
+  "clientWallMs" : 53724.23685
+}

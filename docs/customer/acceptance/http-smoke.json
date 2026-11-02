@@ -1,0 +1,183 @@
+[
+  {
+    "caseId": "LOCAL_CHAIN_01",
+    "round": 1,
+    "variant": "B",
+    "category": "MULTI_TURN",
+    "sessionId": "2",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "我刚学Java，目标是学习，想找项目",
+        "runId": "155cc5a7-64c1-4c48-a742-1a4342a74d0a",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 2921,
+        "generation": null,
+        "result": {
+          "skill": "PROJECT_RECOMMENDATION_V1",
+          "intent": "RECOMMEND",
+          "state": {
+            "language": "Java",
+            "provenance": {
+              "language": {
+                "source": "MESSAGE",
+                "quote": "我刚学Java"
+              },
+              "goal": {
+                "source": "MESSAGE",
+                "quote": "目标是学习"
+              },
+              "experience": {
+                "source": "MESSAGE",
+                "quote": "我刚学Java"
+              }
+            },
+            "goal": "学习",
+            "experience": "刚学",
+            "lastCandidates": []
+          },
+          "projects": [],
+          "references": [],
+          "status": "NO_MATCH",
+          "answer": "没有找到能够核实满足当前条件的项目。条件未放宽；你希望调整哪一项要求？"
+        }
+      },
+      {
+        "message": "第二个怎么部署",
+        "runId": "d789249f-b510-476b-9181-b07e58515cc8",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 1829,
+        "generation": null,
+        "result": {
+          "skill": "PROJECT_RECOMMENDATION_V1",
+          "intent": "DETAIL",
+          "state": {
+            "language": "Java",
+            "provenance": {
+              "language": {
+                "source": "MESSAGE",
+                "quote": "我刚学Java"
+              },
+              "goal": {
+                "source": "MESSAGE",
+                "quote": "目标是学习"
+              },
+              "experience": {
+                "source": "MESSAGE",
+                "quote": "我刚学Java"
+              }
+            },
+            "goal": "学习",
+            "experience": "刚学",
+            "lastCandidates": []
+          },
+          "projects": [],
+          "references": [],
+          "status": "FOLLOW_UP",
+          "answer": "当前会话还没有项目列表，请先说明想找什么项目。"
+        }
+      },
+      {
+        "message": "不要Docker",
+        "runId": "715d63a8-f3e4-45eb-896c-6128e3ade9fc",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 1828,
+        "generation": null,
+        "result": {
+          "skill": "REQUIREMENTS_V1",
+          "intent": "COLLECT",
+          "state": {
+            "language": "Java",
+            "provenance": {
+              "language": {
+                "source": "MESSAGE",
+                "quote": "我刚学Java"
+              },
+              "goal": {
+                "source": "MESSAGE",
+                "quote": "目标是学习"
+              },
+              "experience": {
+                "source": "MESSAGE",
+                "quote": "我刚学Java"
+              },
+              "allowDocker": {
+                "source": "MESSAGE",
+                "quote": "不要Docker"
+              }
+            },
+            "goal": "学习",
+            "experience": "刚学",
+            "lastCandidates": [],
+            "allowDocker": false
+          },
+          "projects": [],
+          "references": [],
+          "status": "NO_MATCH",
+          "answer": "没有找到能够核实满足当前条件的项目。条件未放宽；你希望调整哪一项要求？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 683,
+            "completion_tokens": 122,
+            "total_tokens": 805,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 683
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 2367
+        },
+        {
+          "usage": {
+            "prompt_tokens": 928,
+            "completion_tokens": 71,
+            "total_tokens": 999,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 288
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1056
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1102,
+            "completion_tokens": 88,
+            "total_tokens": 1190,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 462
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1155
+        }
+      ]
+    },
+    "durationMs": 6578,
+    "expected": "Authenticates account 5, persists state, resolves candidates safely, never relaxes Docker constraint"
+  }
+]

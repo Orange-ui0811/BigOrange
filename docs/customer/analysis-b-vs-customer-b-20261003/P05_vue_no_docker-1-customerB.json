@@ -1,0 +1,328 @@
+{
+  "case": "P05_vue_no_docker",
+  "round": 1,
+  "product": "customerB",
+  "startedAt": "2026-10-03T12:52:10.317745+00:00",
+  "sessionId": "37",
+  "runId": "42585331-e2c6-4e5f-aca4-a53232bd2b8f",
+  "run": {
+    "id": "42585331-e2c6-4e5f-aca4-a53232bd2b8f",
+    "session_id": "37",
+    "status": "SUCCEEDED",
+    "stage": "SUCCEEDED",
+    "result_json": "{\"skill\":\"PROJECT_RECOMMENDATION_V1\",\"intent\":\"RECOMMEND\",\"state\":{\"goal\":\"学习\",\"provenance\":{\"goal\":{\"source\":\"MESSAGE\",\"quote\":\"目标是学习\"},\"topic\":{\"source\":\"MESSAGE\",\"quote\":\"技术方向是Vue\"},\"experience\":{\"source\":\"MESSAGE\",\"quote\":\"基础是刚学\"},\"language\":{\"source\":\"MESSAGE\",\"quote\":\"语言是JavaScript\"},\"maxDurationDays\":{\"source\":\"MESSAGE\",\"quote\":\"完成周期是一个月内\"},\"allowDocker\":{\"source\":\"MESSAGE\",\"quote\":\"不使用 Docker\"}},\"topic\":\"Vue\",\"experience\":\"刚学\",\"language\":\"JavaScript\",\"durationSemantics\":{\"quantity\":1,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":30,\"allowDocker\":false,\"lastChangeSummary\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：学习；已记录编程语言：JavaScript；已记录最长周期：30天；已记录项目主题：Vue。其他已确认条件保持不变。\",\"lastCandidates\":[{\"id\":36,\"name\":\"JustArchiNET/ASF-WebConfigGenerator\",\"type\":\"BEGINNER_PROJECT\"},{\"id\":37,\"name\":\"VeteranBoLuo/light-note\",\"type\":\"BEGINNER_PROJECT\"},{\"id\":400,\"name\":\"visgl/deck.gl\",\"type\":\"EXTERNAL_PROJECT\"}]},\"projects\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":36,\"sourceRef\":\"beginner:36\",\"name\":\"JustArchiNET/ASF-WebConfigGenerator\",\"url\":\"https://github.com/JustArchiNET/ASF-WebConfigGenerator\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"JavaScript\",\"techStack\":\"JavaScript,Vue\",\"difficulty\":\"入门\",\"duration\":\"2-5天\",\"description\":\"一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\",\"evidenceStatus\":\"UNAVAILABLE\",\"importable\":false,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":false,\"topics\":\"[\\\"archisteamfarm\\\", \\\"css\\\", \\\"hacktoberfest\\\", \\\"html\\\", \\\"javascript\\\", \\\"nodejs\\\", \\\"vue\\\", \\\"vuejs\\\", \\\"webpack\\\"]\",\"beginnerScore\":91,\"analysisReason\":\"以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\",\"modificationPlan\":\"\",\"prerequisites\":\"Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"preference\":39.1,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":11.25,\"goalPreference\":15.0,\"total\":65.35,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true},\"references\":[],\"recommendReason\":\"来自学习项目资料，优先结合练手与改造分析；资料标记为入门，与当前基础更接近；本轮目标：学习；自定义目标的实际契合度需结合下面的说明与证据判断；已通过当前已知字段的条件检查，周期仅为资料估算。补充资料核对暂未完成，部署、功能等细节仍需确认。\"},{\"type\":\"BEGINNER_PROJECT\",\"id\":37,\"sourceRef\":\"beginner:37\",\"name\":\"VeteranBoLuo/light-note\",\"url\":\"https://github.com/VeteranBoLuo/light-note\",\"status\":\"CANDIDATE\",\"archived\":false,\"language\":\"JavaScript\",\"techStack\":\"JavaScript\",\"difficulty\":\"入门\",\"duration\":\"3～6小时环境搭建，2～4天做出定制版\",\"description\":\"搭建带AI标签和云同步的个人书签与笔记网站\",\"evidenceStatus\":\"UNAVAILABLE\",\"importable\":false,\"requiresDocker\":false,\"requiresDatabase\":true,\"requiresSecrets\":false,\"quality\":78,\"topics\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-assistant\\\", \\\"bookmark-manager\\\", \\\"bookmarking\\\", \\\"cloud-storage\\\", \\\"express\\\", \\\"knowledge-management\\\", \\\"lightnote\\\", \\\"nodejs\\\", \\\"note-taking\\\", \\\"notes\\\", \\\"open-source\\\", \\\"personal-knowledge-management\\\", \\\"productivity\\\", \\\"second-brain\\\", \\\"typescript\\\", \\\"vue\\\", \\\"vue3\\\"]\",\"beginnerScore\":76,\"whatIsIt\":\"一个集书签管理、笔记编辑、文件存储于一体的在线工具，内置AI辅助功能，数据可跨设备同步。\",\"analysisReason\":\"• 本项目是一个完整的全栈应用，需要Node.js和数据库（如MySQL），但代码结构清晰。\\n• 新手通过部署一次，就能理解前后端配合和数据库操作的实际流程。\\n• 内置AI助手已经打通，可以直接体验AI驱动的内容搜索和摘要，很有成就感。\\n• 界面功能完善，适合拿来即用，边用边改，学习价值高。\",\"modificationPlan\":\"• 改造前端配色和布局，做成特定主题的“程序员专用收藏夹”。\\n• 为笔记增加手写画图功能，并将其同步到云端。\\n• 扩展AI助手，让它能自动为每篇笔记生成配图或语音朗读。\",\"mainRisks\":\"初始化数据库可能卡住新手，需要提前掌握简单的数据库创建和连接配置。\",\"vibeCodingReason\":\"非常推荐给愿意花半天时间搞定数据库的新手，改造成个人作品集或实用工具的效果极佳。\",\"prerequisites\":\"Docker：资料标记不需要；数据库：需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"conditionGaps\":[\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"preference\":37.6,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":8.0,\"semantic\":0.0,\"goalPreference\":15.0,\"total\":56.3,\"semanticAvailable\":true,\"quality\":11.7,\"semanticMatched\":false},\"references\":[],\"recommendReason\":\"来自学习项目资料，优先结合练手与改造分析；资料标记为入门，与当前基础更接近；本轮目标：学习；自定义目标的实际契合度需结合下面的说明与证据判断；明确冲突已排除，仍有条件待核实。补充资料核对暂未完成，部署、功能等细节仍需确认。\"},{\"type\":\"EXTERNAL_PROJECT\",\"id\":400,\"sourceRef\":\"visgl/deck.gl\",\"name\":\"visgl/deck.gl\",\"url\":\"https://github.com/visgl/deck.gl\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。\",\"evidenceStatus\":\"UNAVAILABLE\",\"importable\":false,\"documentId\":400,\"versionId\":619,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"项目主题尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\",\"Docker要求尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"preference\":-10.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":48.0,\"semantic\":10.062305898749052,\"goalPreference\":0.0,\"total\":-47.93769410125095,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true},\"references\":[],\"recommendReason\":\"当前基础与项目规模仍需结合具体任务判断；本轮目标：学习；自定义目标的实际契合度需结合下面的说明与证据判断；明确冲突已排除，仍有条件待核实。补充资料核对暂未完成，部署、功能等细节仍需确认。\"}],\"references\":[],\"profileLoaded\":false,\"status\":\"PROJECTS_WITH_LIMITATIONS\",\"notice\":\"资料核对暂未完成，当前仅展示业务库已记录的事实，不能带入正式方案。\",\"answer\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：学习；已记录编程语言：JavaScript；已记录最长周期：30天；已记录项目主题：Vue。其他已确认条件保持不变。\\n\\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。\",\"conditionChangeSummary\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：学习；已记录编程语言：JavaScript；已记录最长周期：30天；已记录项目主题：Vue。其他已确认条件保持不变。\"}",
+    "metrics_json": "{\"costUsd\":\"UNKNOWN\",\"modelCalls\":[{\"model\":\"deepseek-flash\",\"durationMs\":4812,\"usage\":{\"prompt_tokens\":1981,\"completion_tokens\":856,\"total_tokens\":2837,\"prompt_tokens_details\":{\"cached_tokens\":1664},\"completion_tokens_details\":{\"reasoning_tokens\":460},\"prompt_cache_hit_tokens\":1664,\"prompt_cache_miss_tokens\":317},\"attempt\":1,\"status\":\"SUCCEEDED\",\"costUsd\":\"UNKNOWN\",\"protocol\":\"NATIVE_ACTION\"},{\"model\":\"deepseek-flash\",\"durationMs\":7315,\"usage\":{\"prompt_tokens\":697,\"completion_tokens\":1500,\"total_tokens\":2197,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":1500},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":697},\"attempt\":1,\"status\":\"FAILED\",\"costUsd\":\"UNKNOWN\",\"protocol\":\"JSON_OBJECT\",\"errorType\":\"IllegalArgumentException\"}],\"promptVersion\":\"customer-v4.4-multi-goal-cards\",\"embeddingUsage\":\"NOT_REPORTED\",\"protocol\":\"NATIVE_ACTION_V1\",\"tokenUsage\":{\"reasoningTokens\":1960,\"complete\":true,\"cacheHitTokens\":1664,\"inputTokens\":2678,\"cacheMissTokens\":1014,\"totalTokens\":5034,\"outputTokens\":2356,\"callsWithoutUsage\":0,\"calls\":2,\"models\":[\"deepseek-flash\"]}}",
+    "created_at": "2026-10-03 20:52",
+    "finished_at": "2026-10-03 20:52",
+    "generation_key": "20261002164953-ec113424",
+    "prompt_version": "customer-v4.4-multi-goal-cards"
+  },
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "goal": "学习",
+      "provenance": {
+        "goal": {
+          "source": "MESSAGE",
+          "quote": "目标是学习"
+        },
+        "topic": {
+          "source": "MESSAGE",
+          "quote": "技术方向是Vue"
+        },
+        "experience": {
+          "source": "MESSAGE",
+          "quote": "基础是刚学"
+        },
+        "language": {
+          "source": "MESSAGE",
+          "quote": "语言是JavaScript"
+        },
+        "maxDurationDays": {
+          "source": "MESSAGE",
+          "quote": "完成周期是一个月内"
+        },
+        "allowDocker": {
+          "source": "MESSAGE",
+          "quote": "不使用 Docker"
+        }
+      },
+      "topic": "Vue",
+      "experience": "刚学",
+      "language": "JavaScript",
+      "durationSemantics": {
+        "quantity": 1,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 30,
+      "allowDocker": false,
+      "lastChangeSummary": "已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：学习；已记录编程语言：JavaScript；已记录最长周期：30天；已记录项目主题：Vue。其他已确认条件保持不变。",
+      "lastCandidates": [
+        {
+          "id": 36,
+          "name": "JustArchiNET/ASF-WebConfigGenerator",
+          "type": "BEGINNER_PROJECT"
+        },
+        {
+          "id": 37,
+          "name": "VeteranBoLuo/light-note",
+          "type": "BEGINNER_PROJECT"
+        },
+        {
+          "id": 400,
+          "name": "visgl/deck.gl",
+          "type": "EXTERNAL_PROJECT"
+        }
+      ]
+    },
+    "projects": [
+      {
+        "type": "BEGINNER_PROJECT",
+        "id": 36,
+        "sourceRef": "beginner:36",
+        "name": "JustArchiNET/ASF-WebConfigGenerator",
+        "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "JavaScript",
+        "techStack": "JavaScript,Vue",
+        "difficulty": "入门",
+        "duration": "2-5天",
+        "description": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+        "evidenceStatus": "UNAVAILABLE",
+        "importable": false,
+        "requiresDocker": false,
+        "requiresDatabase": false,
+        "requiresSecrets": false,
+        "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+        "beginnerScore": 91,
+        "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+        "modificationPlan": "",
+        "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "preference": 39.1,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0,
+          "semantic": 11.25,
+          "goalPreference": 15.0,
+          "total": 65.35,
+          "semanticAvailable": true,
+          "quality": 0.0,
+          "semanticMatched": true
+        },
+        "references": [],
+        "recommendReason": "来自学习项目资料，优先结合练手与改造分析；资料标记为入门，与当前基础更接近；本轮目标：学习；自定义目标的实际契合度需结合下面的说明与证据判断；已通过当前已知字段的条件检查，周期仅为资料估算。补充资料核对暂未完成，部署、功能等细节仍需确认。"
+      },
+      {
+        "type": "BEGINNER_PROJECT",
+        "id": 37,
+        "sourceRef": "beginner:37",
+        "name": "VeteranBoLuo/light-note",
+        "url": "https://github.com/VeteranBoLuo/light-note",
+        "status": "CANDIDATE",
+        "archived": false,
+        "language": "JavaScript",
+        "techStack": "JavaScript",
+        "difficulty": "入门",
+        "duration": "3～6小时环境搭建，2～4天做出定制版",
+        "description": "搭建带AI标签和云同步的个人书签与笔记网站",
+        "evidenceStatus": "UNAVAILABLE",
+        "importable": false,
+        "requiresDocker": false,
+        "requiresDatabase": true,
+        "requiresSecrets": false,
+        "quality": 78,
+        "topics": "[\"ai\", \"ai-agent\", \"ai-assistant\", \"bookmark-manager\", \"bookmarking\", \"cloud-storage\", \"express\", \"knowledge-management\", \"lightnote\", \"nodejs\", \"note-taking\", \"notes\", \"open-source\", \"personal-knowledge-management\", \"productivity\", \"second-brain\", \"typescript\", \"vue\", \"vue3\"]",
+        "beginnerScore": 76,
+        "whatIsIt": "一个集书签管理、笔记编辑、文件存储于一体的在线工具，内置AI辅助功能，数据可跨设备同步。",
+        "analysisReason": "• 本项目是一个完整的全栈应用，需要Node.js和数据库（如MySQL），但代码结构清晰。\n• 新手通过部署一次，就能理解前后端配合和数据库操作的实际流程。\n• 内置AI助手已经打通，可以直接体验AI驱动的内容搜索和摘要，很有成就感。\n• 界面功能完善，适合拿来即用，边用边改，学习价值高。",
+        "modificationPlan": "• 改造前端配色和布局，做成特定主题的“程序员专用收藏夹”。\n• 为笔记增加手写画图功能，并将其同步到云端。\n• 扩展AI助手，让它能自动为每篇笔记生成配图或语音朗读。",
+        "mainRisks": "初始化数据库可能卡住新手，需要提前掌握简单的数据库创建和连接配置。",
+        "vibeCodingReason": "非常推荐给愿意花半天时间搞定数据库的新手，改造成个人作品集或实用工具的效果极佳。",
+        "prerequisites": "Docker：资料标记不需要；数据库：需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+        "conditionGaps": [
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "preference": 37.6,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 8.0,
+          "semantic": 0.0,
+          "goalPreference": 15.0,
+          "total": 56.3,
+          "semanticAvailable": true,
+          "quality": 11.7,
+          "semanticMatched": false
+        },
+        "references": [],
+        "recommendReason": "来自学习项目资料，优先结合练手与改造分析；资料标记为入门，与当前基础更接近；本轮目标：学习；自定义目标的实际契合度需结合下面的说明与证据判断；明确冲突已排除，仍有条件待核实。补充资料核对暂未完成，部署、功能等细节仍需确认。"
+      },
+      {
+        "type": "EXTERNAL_PROJECT",
+        "id": 400,
+        "sourceRef": "visgl/deck.gl",
+        "name": "visgl/deck.gl",
+        "url": "https://github.com/visgl/deck.gl",
+        "status": "DOCUMENTED",
+        "archived": false,
+        "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+        "evidenceStatus": "UNAVAILABLE",
+        "importable": false,
+        "documentId": 400,
+        "versionId": 619,
+        "conditionGaps": [
+          "编程语言尚未核实，不能确认满足你的要求",
+          "项目主题尚未核实，不能确认满足你的要求",
+          "最长周期尚未核实，不能确认满足你的要求",
+          "Docker要求尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "preference": -10.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 48.0,
+          "semantic": 10.062305898749052,
+          "goalPreference": 0.0,
+          "total": -47.93769410125095,
+          "semanticAvailable": true,
+          "quality": 0.0,
+          "semanticMatched": true
+        },
+        "references": [],
+        "recommendReason": "当前基础与项目规模仍需结合具体任务判断；本轮目标：学习；自定义目标的实际契合度需结合下面的说明与证据判断；明确冲突已排除，仍有条件待核实。补充资料核对暂未完成，部署、功能等细节仍需确认。"
+      }
+    ],
+    "references": [],
+    "profileLoaded": false,
+    "status": "PROJECTS_WITH_LIMITATIONS",
+    "notice": "资料核对暂未完成，当前仅展示业务库已记录的事实，不能带入正式方案。",
+    "answer": "已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：学习；已记录编程语言：JavaScript；已记录最长周期：30天；已记录项目主题：Vue。其他已确认条件保持不变。\n\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。",
+    "conditionChangeSummary": "已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：学习；已记录编程语言：JavaScript；已记录最长周期：30天；已记录项目主题：Vue。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "costUsd": "UNKNOWN",
+    "modelCalls": [
+      {
+        "model": "deepseek-flash",
+        "durationMs": 4812,
+        "usage": {
+          "prompt_tokens": 1981,
+          "completion_tokens": 856,
+          "total_tokens": 2837,
+          "prompt_tokens_details": {
+            "cached_tokens": 1664
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 460
+          },
+          "prompt_cache_hit_tokens": 1664,
+          "prompt_cache_miss_tokens": 317
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "protocol": "NATIVE_ACTION"
+      },
+      {
+        "model": "deepseek-flash",
+        "durationMs": 7315,
+        "usage": {
+          "prompt_tokens": 697,
+          "completion_tokens": 1500,
+          "total_tokens": 2197,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1500
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 697
+        },
+        "attempt": 1,
+        "status": "FAILED",
+        "costUsd": "UNKNOWN",
+        "protocol": "JSON_OBJECT",
+        "errorType": "IllegalArgumentException"
+      }
+    ],
+    "promptVersion": "customer-v4.4-multi-goal-cards",
+    "embeddingUsage": "NOT_REPORTED",
+    "protocol": "NATIVE_ACTION_V1",
+    "tokenUsage": {
+      "reasoningTokens": 1960,
+      "complete": true,
+      "cacheHitTokens": 1664,
+      "inputTokens": 2678,
+      "cacheMissTokens": 1014,
+      "totalTokens": 5034,
+      "outputTokens": 2356,
+      "callsWithoutUsage": 0,
+      "calls": 2,
+      "models": [
+        "deepseek-flash"
+      ]
+    }
+  },
+  "events": [
+    {
+      "atMs": 610.6332000053953,
+      "status": "RUNNING",
+      "stage": "UNDERSTANDING"
+    },
+    {
+      "atMs": 5811.332600002061,
+      "status": "RUNNING",
+      "stage": "SEARCHING"
+    },
+    {
+      "atMs": 6319.194399999105,
+      "status": "RUNNING",
+      "stage": "FILTERING_PROJECTS"
+    },
+    {
+      "atMs": 14628.63720000314,
+      "status": "SUCCEEDED",
+      "stage": "SUCCEEDED"
+    }
+  ],
+  "steps": [
+    {
+      "tool": "getConfirmedProfile",
+      "detail": "{\"result\":\"\",\"parameters\":{}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":238,\"candidateCount\":80,\"excludedReasons\":{},\"hits\":[{\"documentId\":94,\"versionId\":313,\"chunkId\":12033,\"chunkIndex\":4,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 适合新手的原因\",\"startOffset\":149,\"endOffset\":222,\"content\":\"## 适合新手的原因\\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\\n\\n\",\"score\":0.019423745653253853,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":63,\"versionId\":282,\"chunkId\":10783,\"chunkIndex\":4,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 适合新手的原因\",\"startOffset\":181,\"endOffset\":243,\"content\":\"## 适合新手的原因\\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":90,\"versionId\":309,\"chunkId\":11978,\"chunkIndex\":1,\"title\":\"efekrbas/discord-badge-manager\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:31\",\"sectionPath\":\"efekrbas/discord-badge-manager > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":9,\"versionId\":228,\"chunkId\":9831,\"chunkIndex\":1,\"title\":\"mshumer/Claude-of-Duty\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:104\",\"sectionPath\":\"mshumer/Claude-of-Duty > 知识分类\",\"startOffset\":26,\"endOffset\":42,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":11,\"versionId\":230,\"chunkId\":9887,\"chunkIndex\":1,\"title\":\"tandpfun/wardrobe\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:108\",\"sectionPath\":\"tandpfun/wardrobe > 知识分类\",\"startOffset\":21,\"endOffset\":37,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015384615384615385,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":1,\"versionId\":220,\"chunkId\":9594,\"chunkIndex\":1,\"title\":\"SidhuK/Glyph\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:55\",\"sectionPath\":\"SidhuK/Glyph > 知识分类\",\"startOffset\":16,\"endOffset\":32,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":8,\"versionId\":227,\"chunkId\":9800,\"chunkIndex\":1,\"title\":\"nyblnet/bento\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:102\",\"sectionPath\":\"nyblnet/bento > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":10,\"versionId\":229,\"chunkId\":9858,\"chunkIndex\":1,\"title\":\"penecho/penecho\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:106\",\"sectionPath\":\"penecho/penecho > 知识分类\",\"startOffset\":19,\"endOffset\":35,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013513513513513514,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":89,\"versionId\":308,\"chunkId\":11965,\"chunkIndex\":1,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10758,\"chunkIndex\":5,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 技术栈\",\"startOffset\":213,\"endOffset\":236,\"content\":\"## 技术栈\\nJavaScript,Vue\\n\\n\",\"score\":0.012883341038680843,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=43,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":80,\"versionId\":299,\"chunkId\":11848,\"chunkIndex\":1,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"sectionPath\":\"qwen-code-dev-bot/oh-my-cli > 知识分类\",\"startOffset\":31,\"endOffset\":47,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":91,\"versionId\":310,\"chunkId\":11991,\"chunkIndex\":1,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"sectionPath\":\"conorbronsdon/avoid-ai-writing > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":85,\"versionId\":304,\"chunkId\":11913,\"chunkIndex\":1,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":400,\"versionId\":619,\"chunkId\":16995,\"chunkIndex\":5,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"版本 > NPM 模块 > 纯 JavaScript\",\"startOffset\":1581,\"endOffset\":1689,\"content\":\"#### 纯 JavaScript\\n\\n- [快速入门](/docs/get-started/using-standalone.md)\\n- [完整示例](/examples/get-started/pure-js)\\n\\n\",\"score\":0.012380952380952381,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=45,lexicalRank=10,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"BEGINNER_PROJECT:beginner:38\",\"documentId\":94,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"bestScore\":0.019423745653253853,\"evidence\":[{\"documentId\":94,\"versionId\":313,\"chunkId\":12033,\"chunkIndex\":4,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 适合新手的原因\",\"startOffset\":149,\"endOffset\":222,\"content\":\"## 适合新手的原因\\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\\n\\n\",\"score\":0.019423745653253853,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:46\",\"documentId\":63,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"bestScore\":0.016129032258064516,\"evidence\":[{\"documentId\":63,\"versionId\":282,\"chunkId\":10783,\"chunkIndex\":4,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 适合新手的原因\",\"startOffset\":181,\"endOffset\":243,\"content\":\"## 适合新手的原因\\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:31\",\"documentId\":90,\"title\":\"efekrbas/discord-badge-manager\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:31\",\"bestScore\":0.015873015873015872,\"evidence\":[{\"documentId\":90,\"versionId\":309,\"chunkId\":11978,\"chunkIndex\":1,\"title\":\"efekrbas/discord-badge-manager\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:31\",\"sectionPath\":\"efekrbas/discord-badge-manager > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:104\",\"documentId\":9,\"title\":\"mshumer/Claude-of-Duty\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:104\",\"bestScore\":0.015625,\"evidence\":[{\"documentId\":9,\"versionId\":228,\"chunkId\":9831,\"chunkIndex\":1,\"title\":\"mshumer/Claude-of-Duty\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:104\",\"sectionPath\":\"mshumer/Claude-of-Duty > 知识分类\",\"startOffset\":26,\"endOffset\":42,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:108\",\"documentId\":11,\"title\":\"tandpfun/wardrobe\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:108\",\"bestScore\":0.015384615384615385,\"evidence\":[{\"documentId\":11,\"versionId\":230,\"chunkId\":9887,\"chunkIndex\":1,\"title\":\"tandpfun/wardrobe\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:108\",\"sectionPath\":\"tandpfun/wardrobe > 知识分类\",\"startOffset\":21,\"endOffset\":37,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015384615384615385,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:55\",\"documentId\":1,\"title\":\"SidhuK/Glyph\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:55\",\"bestScore\":0.015151515151515152,\"evidence\":[{\"documentId\":1,\"versionId\":220,\"chunkId\":9594,\"chunkIndex\":1,\"title\":\"SidhuK/Glyph\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:55\",\"sectionPath\":\"SidhuK/Glyph > 知识分类\",\"startOffset\":16,\"endOffset\":32,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:102\",\"documentId\":8,\"title\":\"nyblnet/bento\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:102\",\"bestScore\":0.014925373134328358,\"evidence\":[{\"documentId\":8,\"versionId\":227,\"chunkId\":9800,\"chunkIndex\":1,\"title\":\"nyblnet/bento\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:102\",\"sectionPath\":\"nyblnet/bento > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:106\",\"documentId\":10,\"title\":\"penecho/penecho\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:106\",\"bestScore\":0.014705882352941176,\"evidence\":[{\"documentId\":10,\"versionId\":229,\"chunkId\":9858,\"chunkIndex\":1,\"title\":\"penecho/penecho\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:106\",\"sectionPath\":\"penecho/penecho > 知识分类\",\"startOffset\":19,\"endOffset\":35,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:125\",\"documentId\":14,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"bestScore\":0.014492753623188406,\"evidence\":[{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:119\",\"documentId\":12,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"bestScore\":0.014285714285714285,\"evidence\":[{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:94\",\"documentId\":6,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"bestScore\":0.013888888888888888,\"evidence\":[{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:5\",\"documentId\":78,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"bestScore\":0.013513513513513514,\"evidence\":[{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013513513513513514,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:10\",\"documentId\":82,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"bestScore\":0.013333333333333334,\"evidence\":[{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:35\",\"documentId\":93,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"bestScore\":0.013157894736842105,\"evidence\":[{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:30\",\"documentId\":89,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"bestScore\":0.012987012987012988,\"evidence\":[{\"documentId\":89,\"versionId\":308,\"chunkId\":11965,\"chunkIndex\":1,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:36\",\"documentId\":61,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"bestScore\":0.012883341038680843,\"evidence\":[{\"documentId\":61,\"versionId\":280,\"chunkId\":10758,\"chunkIndex\":5,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 技术栈\",\"startOffset\":213,\"endOffset\":236,\"content\":\"## 技术栈\\nJavaScript,Vue\\n\\n\",\"score\":0.012883341038680843,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=43,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:8\",\"documentId\":80,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"bestScore\":0.01282051282051282,\"evidence\":[{\"documentId\":80,\"versionId\":299,\"chunkId\":11848,\"chunkIndex\":1,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"sectionPath\":\"qwen-code-dev-bot/oh-my-cli > 知识分类\",\"startOffset\":31,\"endOffset\":47,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:33\",\"documentId\":91,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"bestScore\":0.012658227848101266,\"evidence\":[{\"documentId\":91,\"versionId\":310,\"chunkId\":11991,\"chunkIndex\":1,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"sectionPath\":\"conorbronsdon/avoid-ai-writing > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:17\",\"documentId\":85,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"bestScore\":0.0125,\"evidence\":[{\"documentId\":85,\"versionId\":304,\"chunkId\":11913,\"chunkIndex\":1,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:visgl/deck.gl\",\"documentId\":400,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"bestScore\":0.012380952380952381,\"evidence\":[{\"documentId\":400,\"versionId\":619,\"chunkId\":16995,\"chunkIndex\":5,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"版本 > NPM 模块 > 纯 JavaScript\",\"startOffset\":1581,\"endOffset\":1689,\"content\":\"#### 纯 JavaScript\\n\\n- [快速入门](/docs/get-started/using-standalone.md)\\n- [完整示例](/examples/get-started/pure-js)\\n\\n\",\"score\":0.012380952380952381,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=45,lexicalRank=10,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"},\"parameters\":{\"purpose\":\"PROJECT_RANKING\",\"topK\":20,\"query\":\"推荐项目 JavaScript Vue 学习 刚学\",\"sourceTypes\":[\"GITHUB\",\"CAREER_PROJECT\",\"BEGINNER_PROJECT\"]}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"result\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":36,\"sourceRef\":\"beginner:36\",\"name\":\"JustArchiNET/ASF-WebConfigGenerator\",\"url\":\"https://github.com/JustArchiNET/ASF-WebConfigGenerator\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"JavaScript\",\"techStack\":\"JavaScript,Vue\",\"difficulty\":\"入门\",\"duration\":\"2-5天\",\"description\":\"一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":false,\"topics\":\"[\\\"archisteamfarm\\\", \\\"css\\\", \\\"hacktoberfest\\\", \\\"html\\\", \\\"javascript\\\", \\\"nodejs\\\", \\\"vue\\\", \\\"vuejs\\\", \\\"webpack\\\"]\",\"beginnerScore\":91,\"analysisReason\":\"以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\",\"modificationPlan\":\"\",\"prerequisites\":\"Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"preference\":39.1,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":11.25,\"goalPreference\":15.0,\"total\":65.35,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true}},{\"type\":\"BEGINNER_PROJECT\",\"id\":37,\"sourceRef\":\"beginner:37\",\"name\":\"VeteranBoLuo/light-note\",\"url\":\"https://github.com/VeteranBoLuo/light-note\",\"status\":\"CANDIDATE\",\"archived\":false,\"language\":\"JavaScript\",\"techStack\":\"JavaScript\",\"difficulty\":\"入门\",\"duration\":\"3～6小时环境搭建，2～4天做出定制版\",\"description\":\"搭建带AI标签和云同步的个人书签与笔记网站\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":false,\"requiresDatabase\":true,\"requiresSecrets\":false,\"quality\":78,\"topics\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-assistant\\\", \\\"bookmark-manager\\\", \\\"bookmarking\\\", \\\"cloud-storage\\\", \\\"express\\\", \\\"knowledge-management\\\", \\\"lightnote\\\", \\\"nodejs\\\", \\\"note-taking\\\", \\\"notes\\\", \\\"open-source\\\", \\\"personal-knowledge-management\\\", \\\"productivity\\\", \\\"second-brain\\\", \\\"typescript\\\", \\\"vue\\\", \\\"vue3\\\"]\",\"beginnerScore\":76,\"whatIsIt\":\"一个集书签管理、笔记编辑、文件存储于一体的在线工具，内置AI辅助功能，数据可跨设备同步。\",\"analysisReason\":\"• 本项目是一个完整的全栈应用，需要Node.js和数据库（如MySQL），但代码结构清晰。\\n• 新手通过部署一次，就能理解前后端配合和数据库操作的实际流程。\\n• 内置AI助手已经打通，可以直接体验AI驱动的内容搜索和摘要，很有成就感。\\n• 界面功能完善，适合拿来即用，边用边改，学习价值高。\",\"modificationPlan\":\"• 改造前端配色和布局，做成特定主题的“程序员专用收藏夹”。\\n• 为笔记增加手写画图功能，并将其同步到云端。\\n• 扩展AI助手，让它能自动为每篇笔记生成配图或语音朗读。\",\"mainRisks\":\"初始化数据库可能卡住新手，需要提前掌握简单的数据库创建和连接配置。\",\"vibeCodingReason\":\"非常推荐给愿意花半天时间搞定数据库的新手，改造成个人作品集或实用工具的效果极佳。\",\"prerequisites\":\"Docker：资料标记不需要；数据库：需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"conditionGaps\":[\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"preference\":37.6,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":8.0,\"semantic\":0.0,\"goalPreference\":15.0,\"total\":56.3,\"semanticAvailable\":true,\"quality\":11.7,\"semanticMatched\":false}},{\"type\":\"EXTERNAL_PROJECT\",\"id\":400,\"sourceRef\":\"visgl/deck.gl\",\"name\":\"visgl/deck.gl\",\"url\":\"https://github.com/visgl/deck.gl\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":400,\"versionId\":619,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"项目主题尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\",\"Docker要求尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"preference\":-10.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":48.0,\"semantic\":10.062305898749052,\"goalPreference\":0.0,\"total\":-47.93769410125095,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true}}],\"parameters\":{\"semanticChunks\":[12033,10783,11978,9831,9887,9594,9800,9858,9976,9914,9740,11822,11874,12017,11965,10758,11848,11991,11913,16995],\"conditions\":{\"goal\":\"学习\",\"provenance\":{\"goal\":{\"source\":\"MESSAGE\",\"quote\":\"目标是学习\"},\"topic\":{\"source\":\"MESSAGE\",\"quote\":\"技术方向是Vue\"},\"experience\":{\"source\":\"MESSAGE\",\"quote\":\"基础是刚学\"},\"language\":{\"source\":\"MESSAGE\",\"quote\":\"语言是JavaScript\"},\"maxDurationDays\":{\"source\":\"MESSAGE\",\"quote\":\"完成周期是一个月内\"},\"allowDocker\":{\"source\":\"MESSAGE\",\"quote\":\"不使用 Docker\"}},\"topic\":\"Vue\",\"experience\":\"刚学\",\"language\":\"JavaScript\",\"durationSemantics\":{\"quantity\":1,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":30,\"allowDocker\":false,\"lastChangeSummary\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：学习；已记录编程语言：JavaScript；已记录最长周期：30天；已记录项目主题：Vue。其他已确认条件保持不变。\"}}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":26,\"candidateCount\":26,\"excludedReasons\":{},\"hits\":[{\"documentId\":61,\"versionId\":280,\"chunkId\":10753,\"chunkIndex\":0,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator\",\"startOffset\":0,\"endOffset\":39,\"content\":\"# JustArchiNET/ASF-WebConfigGenerator\\n\\n\",\"score\":0.16733150745479372,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=2,nameRank=1,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":400,\"versionId\":619,\"chunkId\":17001,\"chunkIndex\":11,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"致谢\",\"startOffset\":2978,\"endOffset\":2985,\"content\":\"## 致谢\\n\\n\",\"score\":0.15524296675191818,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=9,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10757,\"chunkIndex\":4,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因\",\"startOffset\":164,\"endOffset\":213,\"content\":\"## 适合新手的原因\\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\\n\\n\",\"score\":0.16254728877679697,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=5,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10765,\"chunkIndex\":12,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 环境要求\",\"startOffset\":420,\"endOffset\":437,\"content\":\"## 环境要求\\n无明显额外要求\\n\\n\",\"score\":0.16104532462229482,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=2,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10761,\"chunkIndex\":8,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 难度\",\"startOffset\":365,\"endOffset\":381,\"content\":\"## 难度\\nBEGINNER\\n\\n\",\"score\":0.15969551282051284,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=4,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10754,\"chunkIndex\":1,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 知识分类\",\"startOffset\":39,\"endOffset\":55,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.1595022624434389,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=8,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10764,\"chunkIndex\":11,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > Stars\",\"startOffset\":407,\"endOffset\":420,\"content\":\"## Stars\\n32\\n\\n\",\"score\":0.1592469545957918,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=26,lexicalRank=0,nameRank=3,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10755,\"chunkIndex\":2,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 仓库地址\",\"startOffset\":55,\"endOffset\":119,\"content\":\"## 仓库地址\\nhttps://github.com/JustArchiNET/ASF-WebConfigGenerator\\n\\n\",\"score\":0.15915933528836756,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=6,nameRank=15,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"}],\"evidenceGroups\":[{\"groupKey\":\"BEGINNER_PROJECT:beginner:36\",\"documentId\":61,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"bestScore\":0.16733150745479372,\"evidence\":[{\"documentId\":61,\"versionId\":280,\"chunkId\":10753,\"chunkIndex\":0,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator\",\"startOffset\":0,\"endOffset\":39,\"content\":\"# JustArchiNET/ASF-WebConfigGenerator\\n\\n\",\"score\":0.16733150745479372,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=2,nameRank=1,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10757,\"chunkIndex\":4,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因\",\"startOffset\":164,\"endOffset\":213,\"content\":\"## 适合新手的原因\\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\\n\\n\",\"score\":0.16254728877679697,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=5,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":61,\"versionId\":280,\"chunkId\":10765,\"chunkIndex\":12,\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:36\",\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 环境要求\",\"startOffset\":420,\"endOffset\":437,\"content\":\"## 环境要求\\n无明显额外要求\\n\\n\",\"score\":0.16104532462229482,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=2,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"}]},{\"groupKey\":\"GITHUB:visgl/deck.gl\",\"documentId\":400,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"bestScore\":0.15524296675191818,\"evidence\":[{\"documentId\":400,\"versionId\":619,\"chunkId\":17001,\"chunkIndex\":11,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"致谢\",\"startOffset\":2978,\"endOffset\":2985,\"content\":\"## 致谢\\n\\n\",\"score\":0.15524296675191818,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=9,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"},\"parameters\":{\"projects\":[{\"name\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceRef\":\"beginner:36\",\"type\":\"BEGINNER_PROJECT\"},{\"name\":\"VeteranBoLuo/light-note\",\"sourceRef\":\"beginner:37\",\"type\":\"BEGINNER_PROJECT\"},{\"name\":\"visgl/deck.gl\",\"sourceRef\":\"visgl/deck.gl\",\"type\":\"EXTERNAL_PROJECT\"}],\"query\":\"JustArchiNET/ASF-WebConfigGenerator VeteranBoLuo/light-note visgl/deck.gl 请按以下本轮画像直接推荐项目：技术方向是Vue；目标是学习；基础是刚学；语言是JavaScript；完成周期是一个月内。只推荐 JavaScript 项目，不使用 Docker，优先能演示的前端小作品。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\",\"sourceTypes\":[\"GITHUB\",\"CAREER_PROJECT\",\"BEGINNER_PROJECT\"]}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "buildPrompt",
+      "detail": "{\"evidence\":[{\"evidenceId\":\"E1\",\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceRef\":\"beginner:36\",\"spans\":[{\"spanId\":\"E1.S1\",\"text\":\"# JustArchiNET/ASF-WebConfigGenerator\\n\\n\",\"startInChunk\":0,\"endInChunk\":39}],\"documentId\":61,\"versionId\":280,\"chunkId\":10753,\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator\",\"startOffset\":0,\"endOffset\":39},{\"evidenceId\":\"E2\",\"title\":\"visgl/deck.gl\",\"sourceRef\":\"visgl/deck.gl\",\"spans\":[],\"documentId\":400,\"versionId\":619,\"chunkId\":17001,\"sectionPath\":\"致谢\",\"startOffset\":2978,\"endOffset\":2985},{\"evidenceId\":\"E3\",\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceRef\":\"beginner:36\",\"spans\":[{\"spanId\":\"E3.S1\",\"text\":\"## 适合新手的原因\\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\\n\\n\",\"startInChunk\":0,\"endInChunk\":49}],\"documentId\":61,\"versionId\":280,\"chunkId\":10757,\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因\",\"startOffset\":164,\"endOffset\":213},{\"evidenceId\":\"E4\",\"title\":\"JustArchiNET/ASF-WebConfigGenerator\",\"sourceRef\":\"beginner:36\",\"spans\":[],\"documentId\":61,\"versionId\":280,\"chunkId\":10765,\"sectionPath\":\"JustArchiNET/ASF-WebConfigGenerator > 环境要求\",\"startOffset\":420,\"endOffset\":437}],\"promptVersion\":\"customer-v4.4-multi-goal-cards\",\"question\":\"请按以下本轮画像直接推荐项目：技术方向是Vue；目标是学习；基础是刚学；语言是JavaScript；完成周期是一个月内。只推荐 JavaScript 项目，不使用 Docker，优先能演示的前端小作品。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\"}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "projectEvidence",
+      "detail": "{\"errorCode\":\"EMPTY_MODEL_OUTPUT\"}",
+      "status": "DEGRADED"
+    }
+  ],
+  "clientWallMs": 15474.745500003337,
+  "sessionSoftDeleted": true
+}

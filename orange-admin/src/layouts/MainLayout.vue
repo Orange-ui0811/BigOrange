@@ -55,6 +55,7 @@ const navItems = [
   { path: '/orders', label: '订单管理', icon: 'Tickets', tradeOnly: true },
   { path: '/knowledge', label: '知识库', icon: 'Collection' },
   { path: '/rag-lab', label: 'RAG 实验室', icon: 'Search' },
+  { path: '/customer-runs', label: '客服运行', icon: 'ChatDotRound' },
   { path: '/redemption', label: '充值码管理', icon: 'Ticket' },
   { path: '/ai-config', label: 'AI 调用设置', icon: 'Setting' },
   { path: '/pricing', label: '配额定价', icon: 'Coin' },

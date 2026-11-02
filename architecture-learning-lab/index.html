@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="基于 OrangeVC 真实代码、配置和数据库迁移制作的个人架构学习工作台">
+  <title>OrangeVC 项目深挖研修台</title>
+  <link rel="stylesheet" href="./styles.css?v=11">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <header class="topbar">
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true">O</span><div><strong>OrangeVC 项目深挖研修台</strong><span id="page-context" aria-live="polite">学习总览</span></div></div>
+    <nav aria-label="研修模块">
+      <button data-jump="study-home" data-page-target="study-home">总览</button>
+      <button data-jump="learning-workbench" data-page-target="learning-workbench">研修中心</button>
+      <button data-jump="career-track" data-page-target="career-track">岗位训练</button>
+      <button data-jump="study-sources" data-page-target="study-sources">学习路径</button>
+      <button data-jump="question-bank" data-page-target="question-bank">题库</button>
+      <button data-jump="atlas" data-page-target="atlas">架构图</button>
+      <button data-jump="chains" data-page-target="chains">调用链</button>
+      <button data-jump="code-map" data-page-target="code-map">代码地图</button>
+      <button data-jump="reliability" data-page-target="reliability">故障推演</button>
+      <button data-jump="practice" data-page-target="practice">练习</button>
+      <button data-jump="interview" data-page-target="interview">面试</button>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero page-panel" data-page="study-home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">从真实仓库建立系统心智模型</p>
+        <h1 id="hero-title">先看全貌，再沿关系进入代码。</h1>
+        <p class="hero-lead">这不是四道架构问题的答案集合。它展示 OrangeVC 的运行单元、业务域、代码依赖、数据事实、异步任务、外部系统、发布运维和故障恢复。</p>
+        <div class="hero-actions">
+          <button class="primary" data-jump="atlas">进入平台总图</button>
+          <button class="secondary" data-jump="chains">沿调用链读代码</button>
+        </div>
+      </div>
+      <aside class="hero-facts" aria-label="代码基线">
+        <div class="baseline"><span>架构基线</span><strong id="snapshot-date"></strong></div>
+        <div id="metric-grid" class="metric-grid"></div>
+        <p id="positioning"></p>
+      </aside>
+    </section>
+
+    <section id="learning-workbench" class="section workbench page-panel" data-page="learning-workbench" aria-labelledby="workbench-title">
+      <header class="section-head compact">
+        <div><p>证据驱动学习闭环</p><h2 id="workbench-title">从今天学什么，到哪条简历表述可以解锁</h2></div>
+        <p>完成任务不等于掌握。实验必须留下代码、日志、截图或复盘，才能升级能力声明。</p>
+      </header>
+      <div id="workbench-metrics" class="workbench-metrics"></div>
+
+      <section class="workbench-block">
+        <header><div><span>01</span><h3>今日研修</h3></div><p>根据未完成任务自动选择三项，先完成P0运行时和工具安全。</p></header>
+        <div id="daily-study" class="daily-study"></div>
+      </section>
+
+      <section class="workbench-block">
+        <header><div><span>02</span><h3>六个专题实验室</h3></div><p>切换专题后完成模拟、验收清单和实验记录。</p></header>
+        <div class="lab-shell">
+          <nav id="lab-list" class="lab-list" aria-label="专题实验室"></nav>
+          <article id="lab-detail" class="lab-detail"></article>
+        </div>
+      </section>
+
+      <section class="workbench-block">
+        <header><div><span>03</span><h3>能力声明解锁</h3></div><p>只有证据项全部完成，声明才从“暂不可写”升级为“可以写”。</p></header>
+        <div id="claim-gates" class="claim-gates"></div>
+      </section>
+
+      <section class="workbench-block">
+        <header><div><span>04</span><h3>递进式面试</h3></div><p>回答必须覆盖约束、机制、失败、权衡和证据，不能只背概念。</p></header>
+        <div id="ladder-interview" class="ladder-interview"></div>
+      </section>
+    </section>
+
+    <section class="learning-route page-panel" data-page="study-home" aria-labelledby="route-title">
+      <header><h2 id="route-title">建议学习顺序</h2><p>点击任一步会打开对应知识图谱。</p></header>
+      <ol id="learning-path"></ol>
+    </section>
+
+    <section id="study-home" class="section study-home page-panel" data-page="study-home" aria-labelledby="study-home-title">
+      <header class="section-head compact">
+        <div><p>学习控制台</p><h2 id="study-home-title">知道下一步学什么，也知道自己是否真的会讲</h2></div>
+        <p>进度按四级掌握度计算。搜索可以直接跳到架构节点、代表链路、故障场景和源码入口。</p>
+      </header>
+      <div class="study-dashboard">
+        <article class="resume-card">
+          <span>继续学习</span>
+          <h3 id="resume-title">从运行拓扑开始</h3>
+          <p id="resume-description"></p>
+          <button id="resume-learning" class="primary small">继续上次位置</button>
+        </article>
+        <div id="mastery-summary" class="mastery-summary" aria-label="学习掌握度"></div>
+        <article class="search-card">
+          <label for="global-search">搜索架构、代码、表或故障</label>
+          <div class="search-box"><input id="global-search" type="search" autocomplete="off" placeholder="例如：requestId、Redis、SystemTask"><kbd>Ctrl K</kbd></div>
+          <div id="search-results" class="search-results" aria-live="polite"><p>输入关键词后，从完整研修内容中定位。</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="career-track" class="section career-track page-panel" data-page="career-track" aria-labelledby="career-title">
+      <header class="section-head compact">
+        <div><p>目标岗位训练轨道</p><h2 id="career-title">用真实工程证据应对AI Agent系统平台面试</h2></div>
+        <p>这里不按职位关键词硬包装项目，而是区分强证据、部分对应和需要补课。每项能力都能回到知识图、调用链、源码和动手实验。</p>
+      </header>
+      <div class="career-summary">
+        <article><span>项目定位</span><strong>模块化单体中的Agent平台能力</strong><p>重点讲运行时语义、工具安全、状态持久化和可观测基础。</p></article>
+        <article><span>最强证据</span><strong>任务运行时 + AI调用治理</strong><p>能够讨论租约、幂等、重试、结果回放和故障恢复。</p></article>
+        <article><span>表达原则</span><strong>讲清边界，不冒充分布式经验</strong><p>未实现的DAG、沙箱、Tracing和Kubernetes作为学习与演进方向。</p></article>
+      </div>
+
+      <section class="career-block"><header><h3>当前适配结论与包装主线</h3><p>先给结论，再决定主讲证据、风险边界和最短补强路径。</p></header><div id="career-fit" class="career-fit"></div><div id="career-positioning" class="career-positioning"></div></section>
+      <section class="career-block"><header><h3>简历表述分级</h3><p>“现在可写”和“补证据后写”严格分开，个人贡献仍需提交记录确认。</p></header><div id="career-resume-bullets" class="career-resume-bullets"></div></section>
+      <section class="career-block"><header><h3>能力声明证据合同</h3><p>C0只有关键词，C1有代码，C2有运行或测试证据，C3还需要生产结果与指标。</p></header><div id="career-evidence-contracts" class="career-evidence-contracts"></div></section>
+
+      <section class="career-block" aria-labelledby="capability-title">
+        <header><h3 id="capability-title">岗位能力证据矩阵</h3><p>先判断证据强度，再决定面试时讲到什么程度。</p></header>
+        <div id="career-capabilities" class="career-capabilities"></div>
+      </section>
+
+      <section class="career-block" aria-labelledby="deep-dive-title">
+        <header><h3 id="deep-dive-title">五个必须吃透的专题</h3><p>选择专题后，沿学习目标、追问和动手任务逐项攻克。</p></header>
+        <div class="career-reader">
+          <nav id="deep-dive-list" class="career-side-list" aria-label="岗位专题"></nav>
+          <article id="deep-dive-detail" class="career-detail"></article>
+        </div>
+      </section>
+
+      <section class="career-block" aria-labelledby="story-title">
+        <header><h3 id="story-title">四个可以拿出来讲的项目故事</h3><p>每个故事都按问题、选择、机制、权衡和代码证据组织。</p></header>
+        <div id="career-stories" class="career-stories"></div>
+      </section>
+
+      <section class="career-block" aria-labelledby="gap-title">
+        <header><h3 id="gap-title">不能夸大的能力与补课路径</h3><p>面试官通常会继续追问。主动说明边界比把关键词全部贴在项目上更可信。</p></header>
+        <div id="career-gaps" class="career-gaps"></div>
+      </section>
+
+      <section class="career-block" aria-labelledby="drill-title">
+        <header><h3 id="drill-title">高频追问训练</h3><p>先口头回答，再展开提示。不要直接背提示文本。</p></header>
+        <div class="career-reader question-reader">
+          <nav id="career-question-list" class="career-side-list" aria-label="面试追问"></nav>
+          <article class="career-detail question-detail">
+            <span id="career-question-index"></span><h4 id="career-question"></h4>
+            <textarea id="career-question-draft" rows="7" placeholder="用自己的话回答，至少包含当前约束、设计选择、失败语义和演进方向"></textarea>
+            <div class="career-actions"><button id="save-career-answer" class="secondary small">保存回答</button><button id="show-career-hint" class="primary small">查看回答提示</button></div>
+            <div id="career-question-hint" class="career-hint" hidden></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="career-block" aria-labelledby="lab-title">
+        <header><h3 id="lab-title">岗位能力动手实验</h3><p>完成实验并留下证据，才能把“了解”升级成“做过和验证过”。</p></header>
+        <div id="career-labs" class="career-labs"></div>
+      </section>
+      <section class="career-block"><header><h3>高风险面试回答卡</h3><p>对照危险回答和强回答，避免在追问中越过事实边界。</p></header><div id="career-answer-cards" class="career-answer-cards"></div></section>
+      <section class="career-block"><header><h3>证据升级路线</h3><p>完成可运行、可截图、可复现的产物后，再升级简历措辞。</p></header><div id="career-upgrade-plan" class="career-upgrade-plan"></div></section>
+    </section>
+
+    <section id="study-sources" class="section source-guide page-panel" data-page="study-sources" aria-labelledby="source-guide-title">
+      <header class="section-head source-guide-head">
+        <div><p>两份学习文档合并导航</p><h2 id="source-guide-title">OrangeVC 项目深挖学习路径</h2></div>
+        <p>每个知识点都同时给出：为什么与 OrangeVC 有关、网页直达地址、页面内章节名、真实代码入口和掌握进度。</p>
+      </header>
+      <div class="source-guide-notice">
+        <article><span>公开文章</span><strong>点击“直达章节”</strong><p>小林 Coding / 小林面试笔记的链接带有章节锚点或独立题目路径。</p></article>
+        <article><span>飞书手册</span><strong>打开后按 Ctrl+F</strong><p>飞书标题没有稳定公开锚点，卡片会给出精确章节名；密码仍只保存在你的原始文件中。</p></article>
+        <article><span>项目代码</span><strong>点击代码路径</strong><p>能映射到现有代表链路时直接进入代码阅读器，否则复制真实仓库路径。</p></article>
+      </div>
+      <div class="source-toolbar">
+        <label>搜索知识点<input id="source-search" type="search" placeholder="例如：RAG、MVCC、AiToolRouter、LangGraph"></label>
+        <label>主题<select id="source-category"></select></label>
+        <label>优先级<select id="source-priority"><option value="all">全部优先级</option><option value="P0">P0 必学</option><option value="P1">P1 深挖</option><option value="P2">P2 扩展</option></select></label>
+        <button id="source-reset" class="secondary small">清除筛选</button>
+      </div>
+      <div id="source-summary" class="source-summary" aria-live="polite"></div>
+      <div id="source-topic-grid" class="source-topic-grid"></div>
+    </section>
+    <section id="question-bank" class="section question-bank page-panel" data-page="question-bank" aria-labelledby="question-bank-title">
+      <header class="section-head question-bank-head">
+        <div><p>面试题库与知识点入口</p><h2 id="question-bank-title">先按主题做题，再回到 OrangeVC 代码验证</h2></div>
+        <p>这里集中放与项目最相关的公开题库和面试知识入口。点击后在新标签页学习；飞书页面只提供入口，不在 HTML 中保存密码。</p>
+      </header>
+      <div class="question-bank-notice">
+        <strong>使用方法</strong><span>① 先做公开题库中的概念题　② 回到学习路径看项目映射　③ 在架构图、调用链和练习中心验证</span>
+      </div>
+      <div class="question-bank-grid">
+        <article class="question-bank-card"><span>AI Agent / RAG</span><h3>小林 Coding：Agent</h3><p>理解 Agent 定义、规划、工具调用、记忆和执行循环。</p><a href="https://xiaolinnote.com/ai/agent/agent_info.html" target="_blank" rel="noreferrer">打开 Agent 知识页 ↗</a></article>
+        <article class="question-bank-card"><span>AI Agent / RAG</span><h3>小林 Coding：RAG</h3><p>学习 Embedding、向量检索、召回、重排、上下文增强和评测。</p><a href="https://xiaolinnote.com/ai/rag/rag_info.html" target="_blank" rel="noreferrer">打开 RAG 知识页 ↗</a></article>
+        <article class="question-bank-card"><span>AI Agent / 工具</span><h3>小林 Coding：AI 工具调用</h3><p>对应 OrangeVC 的 AiToolRouter、工具参数校验、幂等和结果回放。</p><a href="https://xiaolinnote.com/ai/tools/tools_info.html" target="_blank" rel="noreferrer">打开工具调用知识页 ↗</a></article>
+        <article class="question-bank-card"><span>Java 基础</span><h3>Java 面试题集合</h3><p>复习集合、异常、泛型、反射和并发基础，支撑 Spring Boot 代码阅读。</p><a href="https://www.xiaolincoding.com/interview/java.html" target="_blank" rel="noreferrer">打开 Java 题库 ↗</a></article>
+        <article class="question-bank-card"><span>Spring 生态</span><h3>Spring 面试题集合</h3><p>重点看 IoC、AOP、事务、Bean 生命周期和 Spring Boot 自动配置。</p><a href="https://www.xiaolincoding.com/interview/spring.html" target="_blank" rel="noreferrer">打开 Spring 题库 ↗</a></article>
+        <article class="question-bank-card"><span>数据库</span><h3>MySQL 面试题集合</h3><p>对应 OrangeVC 的事务、索引、状态流转、条件 SQL 和并发幂等。</p><a href="https://www.xiaolincoding.com/interview/mysql.html" target="_blank" rel="noreferrer">打开 MySQL 题库 ↗</a></article>
+        <article class="question-bank-card"><span>缓存与分布式</span><h3>Redis 面试题集合</h3><p>对应向量检索、缓存、限流、租约、ZSET 信号量和 Lua 原子操作。</p><a href="https://www.xiaolincoding.com/interview/redis.html" target="_blank" rel="noreferrer">打开 Redis 题库 ↗</a></article>
+        <article class="question-bank-card"><span>并发与 JVM</span><h3>并发 / JUC 面试题集合</h3><p>复习线程池、锁、CAS、可见性和并发控制，理解 AI 任务执行治理。</p><a href="https://www.xiaolincoding.com/interview/juc.html" target="_blank" rel="noreferrer">打开 JUC 题库 ↗</a></article>
+        <article class="question-bank-card"><span>并发与 JVM</span><h3>JVM 面试题集合</h3><p>用于回答线程、堆内存、GC、类加载和长任务稳定性问题。</p><a href="https://www.xiaolincoding.com/interview/jvm.html" target="_blank" rel="noreferrer">打开 JVM 题库 ↗</a></article>
+        <article class="question-bank-card"><span>网络与部署</span><h3>计算机网络面试题集合</h3><p>对应浏览器、Nginx、HTTPS、WebSocket、超时与重试。</p><a href="https://www.xiaolincoding.com/interview/network.html" target="_blank" rel="noreferrer">打开网络题库 ↗</a></article>
+        <article class="question-bank-card"><span>网络与部署</span><h3>Docker 面试题集合</h3><p>补充镜像、容器、网络、部署和运行环境隔离概念。</p><a href="https://www.xiaolincoding.com/interview/docker.html" target="_blank" rel="noreferrer">打开 Docker 题库 ↗</a></article>
+        <article class="question-bank-card"><span>飞书专题手册</span><h3>LLM / Agent 面试题</h3><p>项目专属面试资料入口。打开后使用你原始授权文件中的密码。</p><a href="https://dqej47nflyz.feishu.cn/wiki/O8KGwvToki7vbwkqKBbckhI1ngd" target="_blank" rel="noreferrer">打开飞书 LLM 题库 ↗</a></article>
+        <article class="question-bank-card"><span>飞书专题手册</span><h3>AI / Agent 工程面试题</h3><p>适合准备 AgentAction、AiToolRouter、RAG 和 LangGraph 追问。</p><a href="https://dqej47nflyz.feishu.cn/wiki/ZSBJw2ZqjiNOgVkAAPMc6ShRnYb" target="_blank" rel="noreferrer">打开飞书 AI 题库 ↗</a></article>
+      </div>
+    </section>    <section id="atlas" class="section atlas-section page-panel" data-page="atlas" aria-labelledby="atlas-title">
+      <header class="section-head">
+        <div><p>平台知识图谱</p><h2 id="atlas-title">四张图覆盖完整架构层次</h2></div>
+        <p>节点代表真实组件、业务域或运行能力。连线描述调用、读写、租约、回调和发布关系。点击节点查看上下游、故障边界、扩展方向和源码。</p>
+      </header>
+      <div id="graph-tabs" class="graph-tabs" role="tablist" aria-label="架构图选择"></div>
+      <div class="atlas-layout">
+        <div class="graph-panel">
+          <header><div><h3 id="graph-title"></h3><p id="graph-subtitle"></p></div><span id="graph-node-count"></span></header>
+          <div class="graph-toolbar" aria-label="图谱操作">
+            <button id="graph-back" disabled>返回上一节点</button>
+            <div class="graph-view-switch" role="group" aria-label="图谱呈现方式">
+              <button id="graph-free-mode" class="active" aria-pressed="true">自由图谱</button>
+              <button id="graph-lane-mode" aria-pressed="false">分层泳道</button>
+            </div>
+            <label>节点类型<select id="graph-kind-filter"><option value="all">全部</option></select></label>
+            <button id="graph-focus">只看直接关系</button>
+            <button id="graph-zoom-out" aria-label="缩小图谱">缩小</button>
+            <button id="graph-zoom-in" aria-label="放大图谱">放大</button>
+            <button id="graph-list-mode">列表模式</button>
+            <button id="graph-restore-layout" hidden>恢复排布</button>
+            <button id="graph-reset">清除筛选</button>
+          </div>
+          <div id="graph-canvas" class="graph-canvas" aria-label="可点击知识图谱">
+            <svg id="graph-edges" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div id="graph-nodes"></div>
+          </div>
+          <div id="edge-list" class="edge-list" aria-label="关系说明"></div>
+        </div>
+        <aside id="node-detail" class="node-detail" aria-live="polite">
+          <div class="detail-heading"><span id="node-kind"></span><h3 id="detail-title"></h3><p id="detail-summary"></p></div>
+          <div class="detail-actions">
+            <label>我的掌握度<select id="node-mastery"><option value="0">待学习</option><option value="1">看过</option><option value="2">理解</option><option value="3">串联</option><option value="4">掌握</option></select></label>
+            <button id="practice-node">用这个模块练习</button>
+          </div>
+          <div class="module-basics">
+            <section><h4>它是什么</h4><p id="detail-what"></p></section>
+            <section><h4>负责什么</h4><ul id="detail-responsibilities"></ul></section>
+            <section><h4>有什么价值</h4><p id="detail-value"></p></section>
+          </div>
+          <section class="interview-pitch"><h4>面试时可以这样概括</h4><p id="detail-interview"></p></section>
+          <details class="detail-layer" open><summary><span>深入设计</span><small>设计原因、数据流与边界</small></summary>
+            <section><h4>为什么这样设计</h4><p id="detail-decision"></p></section>
+            <section><h4>一次典型请求或数据流</h4><p id="detail-flow"></p></section>
+            <section><h4>关键事实</h4><ul id="detail-facts"></ul></section>
+            <section><h4>必须守住的不变量</h4><ul id="detail-invariants"></ul></section>
+          </details>
+          <details class="detail-layer"><summary><span>工程推演</span><small>故障、容量与排障</small></summary>
+            <div class="detail-two-col">
+              <section><h4>失败时</h4><p id="detail-failure"></p></section>
+              <section><h4>规模扩大</h4><p id="detail-scale"></p></section>
+            </div>
+            <section><h4>排障时先看什么</h4><ul id="detail-diagnostics"></ul></section>
+          </details>
+          <details class="detail-layer"><summary><span>代码与关系</span><small>数据、源码和直接依赖</small></summary>
+            <section id="table-section"><h4>拥有或关联的数据</h4><div id="detail-tables" class="token-list"></div></section>
+            <section><h4>相关调用链</h4><div id="detail-chains" class="relation-list"></div></section>
+            <section><h4>真实源码入口</h4><div id="detail-files" class="file-link-list"></div></section>
+            <section><h4>直接关系</h4><div id="detail-relations" class="relation-list"></div></section>
+          </details>
+          <details class="detail-layer"><summary><span>面试追问</span><small>把理解转成表达</small></summary>
+            <section class="interview-questions"><h4>面试官可能继续追问</h4><ol id="detail-questions"></ol></section>
+            <button class="primary small" id="start-node-interview">开始这个模块的面试演练</button>
+          </details>
+          <section class="study-note"><label for="node-note">我的理解笔记</label><textarea id="node-note" rows="4" placeholder="用自己的话记录设计选择、失败语义或尚未想通的问题"></textarea><small id="note-status">自动保存在本机浏览器</small></section>
+        </aside>
+      </div>
+    </section>
+
+    <section id="domain-catalog" class="section domain-section page-panel" data-page="atlas" aria-labelledby="domain-title">
+      <header class="section-head compact">
+        <div><p>业务所有权</p><h2 id="domain-title">十一块业务与平台能力</h2></div>
+        <p>从“谁拥有规则和状态”理解系统，避免只按 Controller、Service、Mapper 文件夹背目录。</p>
+      </header>
+      <div id="domain-grid" class="domain-grid"></div>
+    </section>
+
+    <section id="chains" class="section chain-section page-panel" data-page="chains" aria-labelledby="chains-title">
+      <header class="section-head">
+        <div><p>代表性请求</p><h2 id="chains-title">六条端到端链路</h2></div>
+        <p>每条链路都从入口追到数据库、Redis 或外部系统，并展示关键文件、代码片段、失败点和掌握标准。</p>
+      </header>
+      <div class="chain-shell">
+        <nav id="chain-list" class="chain-list" aria-label="链路选择"></nav>
+        <article class="chain-reader">
+          <header class="chain-titlebar">
+            <div><code id="chain-route"></code><h3 id="chain-title"></h3><p id="chain-goal"></p></div>
+            <button id="chain-complete" class="outline-button">标记掌握</button>
+          </header>
+          <div id="chain-graph" class="chain-graph" aria-label="代码调用关系图"></div>
+          <div class="code-reader">
+            <div id="file-tabs" class="file-tabs" role="tablist" aria-label="关键代码文件"></div>
+            <div class="code-meta"><div><code id="file-path"></code><p id="file-role"></p></div><button id="copy-path">复制路径</button></div>
+            <div class="code-provenance"><span id="code-location"></span><span id="code-context"></span></div>
+            <pre tabindex="0"><code id="code-content"></code></pre>
+          </div>
+          <div class="mastery-layout">
+            <section><h4>你必须能讲清</h4><ul id="mastery-list"></ul></section>
+            <section><h4>动手验证</h4><p id="investigation"></p></section>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="code-map" class="section code-map-section page-panel" data-page="code-map" aria-labelledby="code-title">
+      <header class="section-head compact">
+        <div><p>源码索引</p><h2 id="code-title">按架构主题读关键文件</h2></div>
+        <p>不要从几百个 Java 和 Vue 文件中随机选择。先读这些边界文件，再沿六条链路深入。</p>
+      </header>
+      <article class="module-explainer" aria-labelledby="module-title">
+        <header><p>Maven 模块边界</p><h3 id="module-title">为什么 server、common、pojo 不放在同一个目录</h3></header>
+        <div class="module-graph">
+          <section><strong>orange-common</strong><span>Result、JWT、上下文、公共工具</span><code>普通 jar</code></section>
+          <section><strong>orange-pojo</strong><span>Entity、DTO、VO、校验模型</span><code>普通 jar</code></section>
+          <div class="module-arrow">编译依赖进入</div>
+          <section class="server-module"><strong>orange-server</strong><span>Controller、Service、Mapper、Redis、AI、任务与启动类</span><code>Spring Boot 可执行 jar</code></section>
+        </div>
+        <div class="module-reasons">
+          <section><h4>它不是微服务</h4><p>根 pom 同时构建三个模块，server 依赖 common 和 pojo。部署时仍然只有一个 Spring Boot 进程。</p></section>
+          <section><h4>为什么值得分开</h4><p>编译依赖只能从 server 指向通用模块，避免模型和公共契约反向依赖 Web、数据库和 AI 基础设施。</p></section>
+          <section><h4>当前真实边界</h4><p>common 仍依赖 Spring、JWT、POI 和 Jackson，因此它是项目公共模块，不是完全无框架的纯领域核心。</p></section>
+        </div>
+      </article>
+      <div id="code-catalog" class="code-catalog"></div>
+    </section>
+
+    <section id="reliability" class="section reliability-section page-panel" data-page="reliability" aria-labelledby="reliability-title">
+      <header class="section-head">
+        <div><p>故障与容量推演</p><h2 id="reliability-title">组件坏掉后，系统到底怎样</h2></div>
+        <p>选择一个事故场景，区分受影响能力、仍能工作的部分、第一排查入口和真正值得做的扩展。</p>
+      </header>
+      <div class="scenario-layout">
+        <nav id="scenario-list" class="scenario-list" aria-label="故障场景"></nav>
+        <article id="scenario-detail" class="scenario-detail" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section id="practice" class="section practice-section page-panel" data-page="practice" aria-labelledby="practice-title">
+      <header class="section-head compact">
+        <div><p>理解自检</p><h2 id="practice-title">把概念落回代码和状态</h2></div>
+        <p>答题后阅读解释。真正的完成标准是能从问题指出对应组件、表、失败路径和源码。</p>
+      </header>
+      <div class="practice-layout">
+        <nav id="quiz-index" class="quiz-index" aria-label="练习题"></nav>
+        <article class="quiz-card" aria-live="polite">
+          <span id="quiz-topic"></span><h3 id="quiz-question"></h3>
+          <div id="quiz-options" class="quiz-options" role="radiogroup"></div>
+          <button id="submit-answer" class="primary small" disabled>提交答案</button>
+          <div id="answer-feedback" class="answer-feedback" hidden></div>
+        </article>
+      </div>
+      <article class="open-practice">
+        <header><span>开放推演</span><h3 id="open-question">请先选择一个架构节点</h3></header>
+        <textarea id="open-answer" rows="7" placeholder="先不看答案，写出你的判断、依据和排查顺序"></textarea>
+        <div class="open-practice-actions"><button id="save-open-answer" class="secondary small">保存回答</button><button id="reveal-rubric" class="primary small">查看评分要点</button></div>
+        <div id="open-rubric" class="open-rubric" hidden></div>
+      </article>
+    </section>
+
+    <section id="interview" class="section interview-section page-panel" data-page="interview" aria-labelledby="interview-title">
+      <header class="section-head compact">
+        <div><p>求职表达训练</p><h2 id="interview-title">把架构理解变成能经得住追问的项目表达</h2></div>
+        <p>围绕当前节点依次回答定位、设计、失败和演进问题。先自己作答，再对照结构化要点。</p>
+      </header>
+      <div class="interview-lab">
+        <nav id="interview-prompts" class="interview-prompts" aria-label="面试问题"></nav>
+        <article class="interview-answer">
+          <span id="interview-context"></span>
+          <h3 id="interview-question"></h3>
+          <textarea id="interview-draft" rows="9" placeholder="建议按背景与约束、设计选择、实现机制、缺陷与演进四部分回答"></textarea>
+          <div class="interview-actions"><button id="save-interview" class="secondary small">保存回答</button><button id="show-interview-guide" class="primary small">查看回答骨架</button></div>
+          <div id="interview-guide" class="interview-guide" hidden></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer><strong>学习原则</strong><span>先边界，后链路；先失败语义，后扩展方案；所有结论回到真实代码与数据。</span></footer>
+
+  <script src="./platform-architecture.js?v=3"></script>
+  <script src="./study-sources.js?v=1"></script>
+  <script src="./content.js?v=3"></script>
+  <script src="./career-track.js?v=1"></script>
+  <script src="./learning-workbench.js?v=1"></script>
+  <script src="./app.js?v=16"></script>
+</body>
+</html>
+
+
+
+
+
+

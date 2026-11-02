@@ -1,0 +1,50 @@
+{
+  "status": "K3_R4_FROZEN_OFFLINE_VERIFIED",
+  "repositories": 12,
+  "oldRepositoryOverlap": 0,
+  "modelTargets": 123,
+  "controls": 24,
+  "cases": 147,
+  "criticalCases": 61,
+  "categories": {
+    "D": 17,
+    "B": 82,
+    "R": 19,
+    "N": 26,
+    "A": 2,
+    "H": 1
+  },
+  "manualDependencyCases": 43,
+  "primaryRequests": 34,
+  "reserveRequestsProposed": 6,
+  "maximumAttemptsProposed": 40,
+  "primaryReservedTokenUpperBound": 350396,
+  "checks": [
+    "source/version/hash/UTF16 original mapping",
+    "no overlap with 46 prior repositories",
+    "complete annotations for every target",
+    "all executable batches included, no outcome-based selection",
+    "manual gold dependency consistency",
+    "byte-identical Java requests and recomputed cache keys",
+    "protected historical files and ledgers unchanged",
+    "no credentials in frozen configuration",
+    "one Docker network-disabled Java preparation test passed"
+  ],
+  "additionalProviderCalls": 0,
+  "indexWrites": 0,
+  "qualityGate": "NOT_RUN",
+  "r5Authorized": false,
+  "datasetSha256": "3830d7ce9e20a9951c87794e3fc90abab56164ec3c804735bf05c468bceb53a0",
+  "manifestSha256": "f1fb0ef160de30d0502fc334597024fbac6d4963cad4054b35eaaf72e5bf4119",
+  "verifierSha256": "998b9bd11a421f624eeecb773bbc9dc9ab31d639bc5608b6101d7c5efb7d3372",
+  "evidenceHashes": {
+    "orange-server/target/surefire-reports/TEST-com.orangejd.server.ragb.ingest.K3R4FrozenPlanTest.xml": "31cdd29e0908eedc50aac7f2d3de4ffe4575a5956d8c12e667e84638661eded9",
+    "_experiment_staging/readme-quality-v2/plan-tests.log": "dee4b3661230335849f42aac52c5599b2754b923391732326484f24b824400f2",
+    "_experiment_staging/readme-quality-v2/all-plans.json": "10910a07de212f9156ce42d33ac1acd2f43af4443028be920a1c0436f138c275"
+  },
+  "limitations": [
+    "Assistant-labeled, purposively selected, source-reviewed; not independent human gold or a blind/random test.",
+    "No provider quality scores, embedding/retrieval metrics or production integration claims.",
+    "Initial annotation draft had one dependency contradiction; archived and corrected before any provider call."
+  ]
+}

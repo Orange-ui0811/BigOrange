@@ -1,0 +1,97 @@
+{
+  "releaseApproved": false,
+  "fullBatchStarted": false,
+  "automaticCriteriaFrozen": true,
+  "embeddingProvider": "OLLAMA",
+  "results": {
+    "LEGACY": {
+      "runs": 4,
+      "automaticPasses": 3,
+      "terminalStatuses": {
+        "SUCCEEDED": 4
+      },
+      "maxMs": 36703,
+      "medianMs": 6224,
+      "modelAttempts": 9,
+      "failedAttempts": 2,
+      "retryAttempts": 1,
+      "reportedTotalTokens": 34269,
+      "attemptsWithoutUsage": 1,
+      "runsWithRetrievalFailures": 0,
+      "referenceCounts": [
+        0,
+        6,
+        0,
+        0
+      ],
+      "costUsd": "UNKNOWN",
+      "checkpointCounts": []
+    },
+    "LANGGRAPH4J": {
+      "runs": 4,
+      "automaticPasses": 4,
+      "terminalStatuses": {
+        "SUCCEEDED": 4
+      },
+      "maxMs": 19037,
+      "medianMs": 4921,
+      "modelAttempts": 11,
+      "failedAttempts": 0,
+      "retryAttempts": 0,
+      "reportedTotalTokens": 37194,
+      "attemptsWithoutUsage": 0,
+      "runsWithRetrievalFailures": 0,
+      "referenceCounts": [
+        0,
+        6,
+        0,
+        7
+      ],
+      "costUsd": "UNKNOWN",
+      "checkpointCounts": [
+        8,
+        18,
+        13,
+        8
+      ]
+    }
+  },
+  "failures": [
+    {
+      "caseId": "S03",
+      "engine": "LEGACY",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "RELEVANCE_UNAVAILABLE",
+      "durationMs": 36703,
+      "retrievalFailures": 0
+    }
+  ],
+  "scope": "8 real governed runs; synthetic owners/profile/history; no public engine switch.",
+  "limitations": [
+    "Four cases per engine are a smoke test, not a stability or quality pass rate.",
+    "Legacy S03 purpose review truncated once then failed with ResourceAccessException; graph completed its own provider call. No causal framework quality inference.",
+    "Small-batch gate requires both engines 4/4, so no 80-run batch was started.",
+    "Cost amounts remain unknown; local embedding has no provider per-call bill, hardware costs are not measured.",
+    "No authenticated HTTP graph/browser test, continuous load, restart/cancel live fault injection, server rollout or 24h observation in this batch."
+  ],
+  "projectLimitations": {
+    "projects": [
+      "infiniflow/ragflow",
+      "QuivrHQ/quivr",
+      "chatchat-space/Langchain-Chatchat"
+    ],
+    "languageAndDurationVerified": false,
+    "allImportable": false,
+    "stateMaxDurationDays": 180
+  },
+  "offlineChecks": {
+    "total": 82,
+    "passed": 82,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "network": "none",
+    "report": "../checks/execution.json"
+  },
+  "currentPublicEngine": "LEGACY"
+}

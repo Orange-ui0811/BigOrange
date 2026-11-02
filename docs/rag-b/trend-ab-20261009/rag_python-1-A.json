@@ -1,0 +1,356 @@
+{
+  "case" : "rag_python",
+  "round" : 1,
+  "variant" : "A",
+  "profile" : {
+    "topics" : [ "RAG" ],
+    "purpose" : "学习",
+    "experience" : "有基础",
+    "languages" : [ "Python" ],
+    "timeCommitment" : "两个月内",
+    "customTopics" : null,
+    "customPurpose" : "中文提问，检索英文技术文档，说明部署依赖",
+    "customExp" : null,
+    "customLang" : null,
+    "customTime" : null,
+    "useRag" : true,
+    "usePersona" : false,
+    "preferBeginnerProjects" : true,
+    "preferCareerProjects" : false
+  },
+  "generation" : "local-m3-1791424349362",
+  "startedAt" : "2026-10-09T05:25:02.484457313Z",
+  "response" : {
+    "runtime" : {
+      "model" : "DeepSeek-V4-Pro",
+      "version" : "1-1785206616703",
+      "endpoint" : "https://ai.gitee.com/v1",
+      "source" : "REDIS"
+    },
+    "variant" : "A",
+    "retrieval" : {
+      "text" : "[candidateId=E1;evidenceId=E1;repo=langgenius/dify;mode=RAW_FALLBACK] facts=ures such as text-to-speech to a chat-based app. 4. RAG Pipeline : Extensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.\n\n[candidateId=E2;evidenceId=E2;repo=xinhuangcs/agentmaker;mode=RAW_FALLBACK] facts=and remember I'm vegetarian.\").final output) Every argument past llm is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another sources= entry, MCP servers and sub-agents ( AgentTool ) as tools= , a Smar…\n\n[candidateId=E3;evidenceId=E3;repo=quivrhq/quivr;mode=RAW_FALLBACK] facts=print(\"answer:\", answer) 配置 工作流 基础 RAG 创建如上所示的基础 RAG 工作流很简单，步骤如下： 1. 将 API 密钥添加到环境变量中 python import os os.environ[\"OPENAI API KEY\"] = \"myopenai apikey\" Quivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。 2. 创建 YAML 文件 basic rag workflow.yaml 并将以下内容复制进去 yaml workflow config:…",
+      "trace" : {
+        "strategyVersion" : "hybrid-topic-project-v6-adaptive-card",
+        "status" : "USED",
+        "queries" : [ "RAG Python", "RAG Python  学习 中文提问，检索英文技术文档，说明部署依赖 有基础" ],
+        "evidence" : [ {
+          "evidenceId" : "E1",
+          "documentKey" : "508:20",
+          "source" : "GITHUB",
+          "title" : "langgenius/dify",
+          "sourceRef" : "langgenius/dify",
+          "projectId" : 218.0,
+          "projectType" : "CAREER_PROJECT",
+          "mappingStatus" : "AUTO_MATCHED",
+          "repositoryUrl" : "https://github.com/langgenius/dify",
+          "text" : "ures such as text-to-speech to a chat-based app.\n\n**4. RAG Pipeline**:\nExtensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.",
+          "card" : "[candidateId=E1;evidenceId=E1;repo=langgenius/dify;mode=RAW_FALLBACK] facts=ures such as text-to-speech to a chat-based app. 4. RAG Pipeline : Extensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.",
+          "promptMode" : "RAW_FALLBACK"
+        }, {
+          "evidenceId" : "E2",
+          "documentKey" : "596:15",
+          "source" : "GITHUB",
+          "title" : "agentmaker",
+          "sourceRef" : "xinhuangcs/agentmaker",
+          "projectId" : null,
+          "projectType" : null,
+          "mappingStatus" : "UNMAPPED",
+          "repositoryUrl" : "https://github.com/xinhuangcs/agentmaker",
+          "text" : "and remember I'm vegetarian.\").final_output)\n```\n\nEvery argument past `llm` is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another `sources=` entry, MCP servers and sub-agents (`AgentTool`) as `tools=`, a `SmartWriter` that extracts and diffs memories instead of storing raw text, structured output and streaming, the `PlanAgent` / `ReflectionAgent` workflow recipes, plus sessions, checkpoints (human-in-the-loop), permis",
+          "card" : "[candidateId=E2;evidenceId=E2;repo=xinhuangcs/agentmaker;mode=RAW_FALLBACK] facts=and remember I'm vegetarian.\").final output) Every argument past llm is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another sources= entry, MCP servers and sub-agents ( AgentTool ) as tools= , a Smar…",
+          "promptMode" : "RAW_FALLBACK"
+        }, {
+          "evidenceId" : "E3",
+          "documentKey" : "101:5",
+          "source" : "GITHUB",
+          "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+          "sourceRef" : "QuivrHQ/quivr",
+          "projectId" : null,
+          "projectType" : null,
+          "mappingStatus" : "UNMAPPED",
+          "repositoryUrl" : "https://github.com/quivrhq/quivr",
+          "text" : "print(\"answer:\", answer)\n  ```\n\n## 配置\n\n### 工作流\n\n#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]",
+          "card" : "[candidateId=E3;evidenceId=E3;repo=quivrhq/quivr;mode=RAW_FALLBACK] facts=print(\"answer:\", answer) 配置 工作流 基础 RAG 创建如上所示的基础 RAG 工作流很简单，步骤如下： 1. 将 API 密钥添加到环境变量中 python import os os.environ[\"OPENAI API KEY\"] = \"myopenai apikey\" Quivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。 2. 创建 YAML 文件 basic rag workflow.yaml 并将以下内容复制进去 yaml workflow config:…",
+          "promptMode" : "RAW_FALLBACK"
+        } ],
+        "durationMs" : 579.667812,
+        "candidateCount" : 15,
+        "selectedCount" : 3,
+        "confidence" : "HIGH",
+        "ragApplied" : true,
+        "evidenceFormat" : "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars" : 1220,
+        "evidencePromptChars" : 1049,
+        "evidenceBudgetChars" : 1100,
+        "evidenceFallbackCount" : 3,
+        "evidenceCompressionRatio" : 0.14016393442622954
+      }
+    },
+    "result" : {
+      "analysis" : {
+        "trend" : "RAG检索增强仍高热度但竞争拥挤，85%热门仓库与AI辅助编程结合，头部项目集中，建议从细分或垂直场景切入。",
+        "prospect" : "企业知识库与文档问答需求持续，轻量RAG工作流和本地部署方案受个人开发者与中小企业青睐，具备落地潜力。",
+        "demand" : "掌握Python及RAG核心链路，能配置文档摄取、向量检索并说明部署依赖的开发者，在AI应用岗位中更具竞争力。",
+        "summary" : "RAG热门但拥挤，建议从基础工作流切入，借Python跑通文档问答并理清部署依赖。"
+      },
+      "recommendations" : [ {
+        "candidateId" : "E3",
+        "name" : "Quivr 基础RAG工作流",
+        "description" : "开源RAG工作流项目，支持通过YAML定义基础RAG流程，可配置OpenAI、Anthropic、Mistral或Ollama本地模型，适合快速搭建文档问答应用。",
+        "difficulty" : "入门",
+        "difficultyReason" : "用户已有Python基础，该项目用YAML配置基础RAG流程，所需编码量少，可快速验证，故定为入门。",
+        "vibeCodingReason" : "YAML配置驱动，便于让AI辅助生成或调试工作流配置，Python示例简洁，适合AI辅助修改检索参数与部署脚本。",
+        "recommendReason" : "Quivr以YAML定义基础RAG工作流，示例直接展示环境变量与本地Ollama配置，适合有Python基础者快速跑通文档问答。两个月内可借助中文提问检索英文文档、沉淀部署依赖清单，完成可展示的RAG Demo，为求职打下基础。",
+        "prerequisites" : "Python基础、了解环境变量与API密钥、了解RAG基本概念",
+        "evidenceIds" : [ "E3" ],
+        "score" : 90,
+        "references" : [ {
+          "evidenceIds" : [ "E3" ],
+          "url" : "https://github.com/quivrhq/quivr",
+          "name" : "quivrhq/quivr"
+        } ],
+        "evidenceStatus" : "VERIFIED_CANDIDATE",
+        "unsupportedReferenceCount" : 0
+      }, {
+        "candidateId" : "E1",
+        "name" : "Dify 全流程RAG平台",
+        "description" : "开源AI应用平台，提供从文档摄取到检索的完整RAG流水线，开箱即用支持PDF、PPT等格式文本提取，便于构建知识库问答系统。",
+        "difficulty" : "中等",
+        "difficultyReason" : "用户有Python基础，但该平台涉及文档解析、向量存储、Docker部署，需理解完整RAG链路，故定为中等。",
+        "vibeCodingReason" : "平台化配置，AI助手可辅助生成Docker部署命令、知识库配置或API调用脚本，降低部署依赖说明成本。",
+        "recommendReason" : "Dify覆盖从文档摄取到检索的完整RAG流水线，支持PDF/PPT文本提取，有助于理解企业级RAG各环节与部署依赖。通过平台化配置可快速搭建知识库问答，结合Python脚本调用API，两个月内产出完整项目案例，提升求职竞争力。",
+        "prerequisites" : "Python基础、Docker基础、了解向量数据库与RAG流程",
+        "evidenceIds" : [ "E1" ],
+        "score" : 85,
+        "references" : [ {
+          "evidenceIds" : [ "E1" ],
+          "url" : "https://github.com/langgenius/dify",
+          "name" : "langgenius/dify"
+        } ],
+        "evidenceStatus" : "VERIFIED_CANDIDATE",
+        "unsupportedReferenceCount" : 0
+      } ],
+      "learning" : {
+        "steps" : [ "安装Python、Ollama/Docker环境，阅读Quivr英文README，记录API密钥与本地模型配置等部署依赖。", "运行Quivr基础RAG工作流，准备中文/英文测试文档，理解文档分块、嵌入和检索输出。", "部署Dify并上传PDF/PPT，配置知识库与RAG pipeline，对比Quivr差异并完成一个文档问答Demo。" ],
+        "timeline" : "第1-2周环境与Quivr跑通；第3-5周Dify部署与调优；第6-8周整理文档与项目展示。",
+        "tips" : "用中文提问让AI协助翻译英文技术文档；记录每个组件的版本与部署命令；从技术文档问答等细分场景切入，避免与大而全项目直接竞争。"
+      },
+      "raw" : "{\"analysis\":{\"trend\":\"RAG检索增强仍高热度但竞争拥挤，85%热门仓库与AI辅助编程结合，头部项目集中，建议从细分或垂直场景切入。\",\"prospect\":\"企业知识库与文档问答需求持续，轻量RAG工作流和本地部署方案受个人开发者与中小企业青睐，具备落地潜力。\",\"demand\":\"掌握Python及RAG核心链路，能配置文档摄取、向量检索并说明部署依赖的开发者，在AI应用岗位中更具竞争力。\",\"summary\":\"RAG热门但拥挤，建议从基础工作流切入，借Python跑通文档问答并理清部署依赖。\"},\"recommendations\":[{\"candidateId\":\"E3\",\"name\":\"Quivr 基础RAG工作流\",\"description\":\"开源RAG工作流项目，支持通过YAML定义基础RAG流程，可配置OpenAI、Anthropic、Mistral或Ollama本地模型，适合快速搭建文档问答应用。\",\"difficulty\":\"入门\",\"difficultyReason\":\"用户已有Python基础，该项目用YAML配置基础RAG流程，所需编码量少，可快速验证，故定为入门。\",\"vibeCodingReason\":\"YAML配置驱动，便于让AI辅助生成或调试工作流配置，Python示例简洁，适合AI辅助修改检索参数与部署脚本。\",\"recommendReason\":\"Quivr以YAML定义基础RAG工作流，示例直接展示环境变量与本地Ollama配置，适合有Python基础者快速跑通文档问答。两个月内可借助中文提问检索英文文档、沉淀部署依赖清单，完成可展示的RAG Demo，为求职打下基础。\",\"prerequisites\":\"Python基础、了解环境变量与API密钥、了解RAG基本概念\",\"evidenceIds\":[\"E3\"],\"score\":90},{\"candidateId\":\"E1\",\"name\":\"Dify 全流程RAG平台\",\"description\":\"开源AI应用平台，提供从文档摄取到检索的完整RAG流水线，开箱即用支持PDF、PPT等格式文本提取，便于构建知识库问答系统。\",\"difficulty\":\"中等\",\"difficultyReason\":\"用户有Python基础，但该平台涉及文档解析、向量存储、Docker部署，需理解完整RAG链路，故定为中等。\",\"vibeCodingReason\":\"平台化配置，AI助手可辅助生成Docker部署命令、知识库配置或API调用脚本，降低部署依赖说明成本。\",\"recommendReason\":\"Dify覆盖从文档摄取到检索的完整RAG流水线，支持PDF/PPT文本提取，有助于理解企业级RAG各环节与部署依赖。通过平台化配置可快速搭建知识库问答，结合Python脚本调用API，两个月内产出完整项目案例，提升求职竞争力。\",\"prerequisites\":\"Python基础、Docker基础、了解向量数据库与RAG流程\",\"evidenceIds\":[\"E1\"],\"score\":85}],\"learning\":{\"steps\":[\"安装Python、Ollama/Docker环境，阅读Quivr英文README，记录API密钥与本地模型配置等部署依赖。\",\"运行Quivr基础RAG工作流，准备中文/英文测试文档，理解文档分块、嵌入和检索输出。\",\"部署Dify并上传PDF/PPT，配置知识库与RAG pipeline，对比Quivr差异并完成一个文档问答Demo。\"],\"timeline\":\"第1-2周环境与Quivr跑通；第3-5周Dify部署与调优；第6-8周整理文档与项目展示。\",\"tips\":\"用中文提问让AI协助翻译英文技术文档；记录每个组件的版本与部署命令；从技术文档问答等细分场景切入，避免与大而全项目直接竞争。\"}}",
+      "balance" : 0,
+      "beginnerCases" : [ {
+        "id" : 26,
+        "fullName" : "timmyy123/LLM-Hub",
+        "repositoryName" : "LLM-Hub",
+        "ownerName" : "timmyy123",
+        "htmlUrl" : "https://github.com/timmyy123/LLM-Hub",
+        "descriptionZh" : "集成多种大模型的本地AI助手。",
+        "descriptionOriginal" : "Local AI Assistant",
+        "weeklyPerformance" : "近期更新较少，当前 529 Star；最后更新于 2026-08-03",
+        "whatIsIt" : null,
+        "beginnerReason" : "通过调用不同LLM的接口构建统一工具，适合锻炼TypeScript开发与API集成能力。",
+        "modificationIdeas" : "",
+        "mainRisks" : null,
+        "finalRecommendation" : null,
+        "primaryLanguage" : "TypeScript",
+        "topics" : [ "ai", "gemma3", "gemma3n", "gemma4", "gemma4-agent-skills", "gptoss", "granite", "lfm25", "llama", "llm", "llm-inference", "mistral", "phi4", "rag", "stable-diffusion", "whisper" ],
+        "techStack" : "TypeScript",
+        "packageManager" : null,
+        "nodeVersion" : null,
+        "licenseSpdx" : null,
+        "stars" : 529,
+        "forks" : 113,
+        "openIssues" : 34,
+        "requiresDocker" : false,
+        "requiresDatabase" : false,
+        "requiresSecrets" : false,
+        "requiresExternalService" : false,
+        "requiresGpu" : false,
+        "requiresNativeBuild" : false,
+        "hasQuickStart" : false,
+        "setupSteps" : 0,
+        "codebaseSize" : null,
+        "difficulty" : "BEGINNER",
+        "estimatedDuration" : "5-10天",
+        "beginnerScore" : 91,
+        "editorialScore" : 0,
+        "vibeCodingFit" : 0,
+        "showcaseValue" : 0,
+        "extensionPotential" : 0,
+        "scopeClarity" : 0,
+        "contentPotential" : 0,
+        "scoreVersion" : "beginner-v1",
+        "status" : "PUBLISHED",
+        "hiddenReason" : null,
+        "githubUpdatedAt" : "2026-08-03T05:48:45",
+        "lastVerifiedAt" : "2026-08-03T13:50:48",
+        "matchExplanation" : "项目难度为BEGINNER，适合先做出可运行成果再逐步改造；可按“两个月内”拆分推进，参考周期为5-10天。"
+      } ],
+      "careerCases" : [ ],
+      "modelMetrics" : {
+        "model" : "deepseek-v4-pro-ga-260813",
+        "runtimeSource" : "REDIS",
+        "providerHost" : "ai.gitee.com",
+        "requestedModel" : "DeepSeek-V4-Pro",
+        "durationMs" : 78292.643346,
+        "finishReason" : "stop",
+        "usageSource" : "PROVIDER",
+        "usage" : {
+          "prompt_tokens" : 1101,
+          "completion_tokens" : 4718,
+          "total_tokens" : 5819,
+          "prompt_tokens_details" : {
+            "cached_tokens" : 0
+          },
+          "completion_tokens_details" : {
+            "reasoning_tokens" : 3931
+          }
+        }
+      },
+      "retrievalTrace" : {
+        "strategyVersion" : "hybrid-topic-project-v6-adaptive-card",
+        "status" : "USED",
+        "queries" : [ "RAG Python", "RAG Python  学习 中文提问，检索英文技术文档，说明部署依赖 有基础" ],
+        "evidence" : [ {
+          "evidenceId" : "E1",
+          "documentKey" : "508:20",
+          "source" : "GITHUB",
+          "title" : "langgenius/dify",
+          "sourceRef" : "langgenius/dify",
+          "projectId" : 218.0,
+          "projectType" : "CAREER_PROJECT",
+          "mappingStatus" : "AUTO_MATCHED",
+          "repositoryUrl" : "https://github.com/langgenius/dify",
+          "text" : "ures such as text-to-speech to a chat-based app.\n\n**4. RAG Pipeline**:\nExtensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.",
+          "card" : "[candidateId=E1;evidenceId=E1;repo=langgenius/dify;mode=RAW_FALLBACK] facts=ures such as text-to-speech to a chat-based app. 4. RAG Pipeline : Extensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.",
+          "promptMode" : "RAW_FALLBACK"
+        }, {
+          "evidenceId" : "E2",
+          "documentKey" : "596:15",
+          "source" : "GITHUB",
+          "title" : "agentmaker",
+          "sourceRef" : "xinhuangcs/agentmaker",
+          "projectId" : null,
+          "projectType" : null,
+          "mappingStatus" : "UNMAPPED",
+          "repositoryUrl" : "https://github.com/xinhuangcs/agentmaker",
+          "text" : "and remember I'm vegetarian.\").final_output)\n```\n\nEvery argument past `llm` is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another `sources=` entry, MCP servers and sub-agents (`AgentTool`) as `tools=`, a `SmartWriter` that extracts and diffs memories instead of storing raw text, structured output and streaming, the `PlanAgent` / `ReflectionAgent` workflow recipes, plus sessions, checkpoints (human-in-the-loop), permis",
+          "card" : "[candidateId=E2;evidenceId=E2;repo=xinhuangcs/agentmaker;mode=RAW_FALLBACK] facts=and remember I'm vegetarian.\").final output) Every argument past llm is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another sources= entry, MCP servers and sub-agents ( AgentTool ) as tools= , a Smar…",
+          "promptMode" : "RAW_FALLBACK"
+        }, {
+          "evidenceId" : "E3",
+          "documentKey" : "101:5",
+          "source" : "GITHUB",
+          "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+          "sourceRef" : "QuivrHQ/quivr",
+          "projectId" : null,
+          "projectType" : null,
+          "mappingStatus" : "UNMAPPED",
+          "repositoryUrl" : "https://github.com/quivrhq/quivr",
+          "text" : "print(\"answer:\", answer)\n  ```\n\n## 配置\n\n### 工作流\n\n#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]",
+          "card" : "[candidateId=E3;evidenceId=E3;repo=quivrhq/quivr;mode=RAW_FALLBACK] facts=print(\"answer:\", answer) 配置 工作流 基础 RAG 创建如上所示的基础 RAG 工作流很简单，步骤如下： 1. 将 API 密钥添加到环境变量中 python import os os.environ[\"OPENAI API KEY\"] = \"myopenai apikey\" Quivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。 2. 创建 YAML 文件 basic rag workflow.yaml 并将以下内容复制进去 yaml workflow config:…",
+          "promptMode" : "RAW_FALLBACK"
+        } ],
+        "durationMs" : 579.667812,
+        "candidateCount" : 15,
+        "selectedCount" : 3,
+        "confidence" : "HIGH",
+        "ragApplied" : true,
+        "evidenceFormat" : "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars" : 1220,
+        "evidencePromptChars" : 1049,
+        "evidenceBudgetChars" : 1100,
+        "evidenceFallbackCount" : 3,
+        "evidenceCompressionRatio" : 0.14016393442622954
+      },
+      "promptVersion" : "trend-v2-evidence-1",
+      "graphDurationMs" : 77.971626,
+      "analyzerAttemptDurationMs" : 78379.701724
+    },
+    "wallMs" : 78960.481956,
+    "scope" : "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages" : [ {
+      "status" : "SUCCEEDED",
+      "stage" : "embedding.http.bge-small-zh-v1.5",
+      "durationMs" : 323.062903
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.embeddingAndVector",
+      "durationMs" : 335.946604
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.restoreMetadata",
+      "durationMs" : 7.458229
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 0.971371
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "embedding.http.bge-small-zh-v1.5",
+      "durationMs" : 188.75638
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.embeddingAndVector",
+      "durationMs" : 223.705595
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.restoreMetadata",
+      "durationMs" : 7.092735
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 0.831365
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.lexical",
+      "durationMs" : 2.297756
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.topicGateAndFusion",
+      "durationMs" : 0.190797
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.selectProjects",
+      "durationMs" : 0.328891
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "A.renderEvidence",
+      "durationMs" : 0.712029
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "retrieval.total",
+      "durationMs" : 579.683183
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "graph.database",
+      "durationMs" : 77.96346
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "business.beginner",
+      "durationMs" : 4.186453
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.compose",
+      "durationMs" : 0.226187
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.protocol",
+      "durationMs" : 0.0051
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "model.http",
+      "durationMs" : 78292.658075
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "output.parseAndAssemble",
+      "durationMs" : 4.488726
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "output.bindSources",
+      "durationMs" : 0.103705
+    } ],
+    "snapshotId" : "074563aa-3a2c-4646-bfd8-b57c1e8f5c79"
+  },
+  "clientWallMs" : 78966.189777
+}

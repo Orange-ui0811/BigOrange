@@ -1,0 +1,550 @@
+{
+  "phase": "before",
+  "case": "rag",
+  "message": "请直接推荐项目。方向是RAG；目标是求职；我有Vue前端和Linux部署经验；语言不限；完成周期半年内。可以先展示真实的待核实探索项目，说明功能、推荐理由和学习路径。",
+  "runId": "54c1bb6c-e4c8-4cdd-87f5-cd3382417847",
+  "status": "SUCCEEDED",
+  "durationMs": 10235,
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "goal": "求职",
+      "provenance": {
+        "goal": {
+          "source": "MESSAGE",
+          "quote": "目标是求职"
+        },
+        "topic": {
+          "source": "MESSAGE",
+          "quote": "方向是RAG"
+        },
+        "experience": {
+          "source": "MESSAGE",
+          "quote": "我有Vue前端和Linux部署经验"
+        },
+        "maxDurationDays": {
+          "source": "MESSAGE",
+          "quote": "完成周期半年内"
+        },
+        "verificationMode": {
+          "source": "MESSAGE",
+          "quote": "可以先展示真实的待核实探索项目"
+        }
+      },
+      "topic": [
+        "RAG"
+      ],
+      "experience": "Vue前端和Linux部署经验",
+      "durationSemantics": {
+        "quantity": 6,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 180,
+      "verificationMode": "EXPLORE",
+      "lastChangeSummary": "已记录基础（排序偏好）：Vue前端和Linux部署经验；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+      "lastCandidates": [
+        {
+          "name": "timmyy123/LLM-Hub",
+          "type": "BEGINNER_PROJECT",
+          "id": 26
+        },
+        {
+          "name": "pathwaycom/llm-app",
+          "type": "EXTERNAL_PROJECT",
+          "id": 243
+        },
+        {
+          "name": "langgenius/dify",
+          "type": "CAREER_PROJECT",
+          "id": 218
+        }
+      ]
+    },
+    "projects": [
+      {
+        "type": "BEGINNER_PROJECT",
+        "id": 26,
+        "sourceRef": "beginner:26",
+        "name": "timmyy123/LLM-Hub",
+        "url": "https://github.com/timmyy123/LLM-Hub",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "TypeScript",
+        "techStack": "TypeScript",
+        "difficulty": "入门",
+        "duration": "5-10天",
+        "description": "集成多种大模型的本地AI助手。",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": true,
+        "requiresDocker": false,
+        "requiresDatabase": false,
+        "requiresSecrets": false,
+        "topics": "[\"ai\", \"gemma3\", \"gemma3n\", \"gemma4\", \"gemma4-agent-skills\", \"gptoss\", \"granite\", \"lfm25\", \"llama\", \"llm\", \"llm-inference\", \"mistral\", \"phi4\", \"rag\", \"stable-diffusion\", \"whisper\"]",
+        "beginnerScore": 91,
+        "analysisReason": "通过调用不同LLM的接口构建统一工具，适合锻炼TypeScript开发与API集成能力。",
+        "modificationPlan": "",
+        "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "total": 0.0,
+          "semanticAvailable": true,
+          "quality": 0.0,
+          "semanticMatched": false,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0,
+          "semantic": 0.0,
+          "goalPreference": 0.0
+        },
+        "recommendReason": "本轮目标：求职；资料涉及RAG，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为5-10天；你的上限为180天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+        "references": [
+          {
+            "evidenceId": "E5",
+            "title": "timmyy123/LLM-Hub",
+            "sourceRef": "beginner:26",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "通过调用不同LLM的接口构建统一工具，适合锻炼TypeScript开发与API集成能力。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 57
+              }
+            ],
+            "documentId": 88,
+            "versionId": 307,
+            "chunkId": 11955,
+            "sectionPath": "timmyy123/LLM-Hub > 适合新手的原因",
+            "startOffset": 119,
+            "endOffset": 165,
+            "contentStartInChunk": 11,
+            "quote": "通过调用不同LLM的接口构建统一工具，适合锻炼TypeScript开发与API集成能力。\n\n",
+            "text": "LLM-Hub 通过调用不同 LLM 的接口构建统一工具，适合锻炼 TypeScript 开发与 API 集成能力。",
+            "field": "vibeCodingReason"
+          }
+        ],
+        "vibeCodingReason": "LLM-Hub 通过调用不同 LLM 的接口构建统一工具，适合锻炼 TypeScript 开发与 API 集成能力。 [E5]",
+        "supportedExplanation": "LLM-Hub 通过调用不同 LLM 的接口构建统一工具，适合锻炼 TypeScript 开发与 API 集成能力。 [E5]"
+      },
+      {
+        "type": "EXTERNAL_PROJECT",
+        "id": 243,
+        "sourceRef": "pathwaycom/llm-app",
+        "name": "pathwaycom/llm-app",
+        "url": "https://github.com/pathwaycom/llm-app",
+        "status": "DOCUMENTED",
+        "archived": false,
+        "description": "Pathway 的 AI 流水线可快速将高精度 RAG 和大规模 AI 企业搜索应用投入生产，利用数据源最新知识，提供开箱即用的 LLM 应用模板，可在本地或云端部署。 [E4]",
+        "evidenceStatus": "DOCUMENT_IDENTITY",
+        "importable": false,
+        "documentId": 243,
+        "versionId": 462,
+        "catalogTitle": "Pathway 实时数据框架 AI 流水线",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "total": 37.0,
+          "semanticAvailable": true,
+          "quality": 0.0,
+          "semanticMatched": true,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 8.0,
+          "semantic": 45.0,
+          "goalPreference": 0.0
+        },
+        "recommendReason": "本轮目标：求职；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。",
+        "references": [
+          {
+            "evidenceId": "E4",
+            "title": "Pathway 实时数据框架 AI 流水线",
+            "sourceRef": "pathwaycom/llm-app",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+                "startInChunk": 757,
+                "endInChunk": 1087
+              }
+            ],
+            "documentId": 243,
+            "versionId": 462,
+            "chunkId": 15990,
+            "sectionPath": "Pathway 实时数据框架 AI 流水线",
+            "startOffset": 779,
+            "endOffset": 1109,
+            "contentStartInChunk": 757,
+            "quote": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+            "text": "Pathway 的 AI 流水线可快速将高精度 RAG 和大规模 AI 企业搜索应用投入生产，利用数据源最新知识，提供开箱即用的 LLM 应用模板，可在本地或云端部署。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "Pathway 实时数据框架 AI 流水线",
+            "sourceRef": "pathwaycom/llm-app",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+                "startInChunk": 757,
+                "endInChunk": 1087
+              }
+            ],
+            "documentId": 243,
+            "versionId": 462,
+            "chunkId": 15990,
+            "sectionPath": "Pathway 实时数据框架 AI 流水线",
+            "startOffset": 779,
+            "endOffset": 1109,
+            "contentStartInChunk": 757,
+            "quote": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+            "text": "连接并同步文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API 等数据源，内置向量搜索、混合搜索和全文搜索，全部在内存中完成并带缓存。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E1",
+            "title": "Pathway 实时数据框架 AI 流水线",
+            "sourceRef": "pathwaycom/llm-app",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "text": "本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                       ",
+                "startInChunk": 9,
+                "endInChunk": 409
+              },
+              {
+                "spanId": "E1.S2",
+                "text": "                                                                                                                                                                  |\n| --------------------------------------------------------------------------------------------- | --------------------------------------",
+                "startInChunk": 409,
+                "endInChunk": 709
+              }
+            ],
+            "documentId": 243,
+            "versionId": 462,
+            "chunkId": 15991,
+            "sectionPath": "Pathway 实时数据框架 AI 流水线 > 应用模板",
+            "startOffset": 1118,
+            "endOffset": 1818,
+            "contentStartInChunk": 9,
+            "quote": "本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                       ",
+            "text": "应用模板可扩展至数百万页文档，有的注重简洁性，有的注重准确性；可直接使用或修改流水线步骤，如添加数据源或改向量索引为混合索引只需改一行代码。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "whatIsIt": "Pathway 的 AI 流水线可快速将高精度 RAG 和大规模 AI 企业搜索应用投入生产，利用数据源最新知识，提供开箱即用的 LLM 应用模板，可在本地或云端部署。 [E4]",
+        "supportedExplanation": "Pathway 的 AI 流水线可快速将高精度 RAG 和大规模 AI 企业搜索应用投入生产，利用数据源最新知识，提供开箱即用的 LLM 应用模板，可在本地或云端部署。 [E4]\n连接并同步文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API 等数据源，内置向量搜索、混合搜索和全文搜索，全部在内存中完成并带缓存。 [E4]\n应用模板可扩展至数百万页文档，有的注重简洁性，有的注重准确性；可直接使用或修改流水线步骤，如添加数据源或改向量索引为混合索引只需改一行代码。 [E1]"
+      },
+      {
+        "type": "CAREER_PROJECT",
+        "id": 218,
+        "sourceRef": "career:218",
+        "name": "langgenius/dify",
+        "url": "https://github.com/langgenius/dify",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "TypeScript",
+        "techStack": "TypeScript,React,Storybook",
+        "difficulty": "进阶",
+        "duration": "30-45 天（以贡献功能模块或插件为目标）",
+        "description": "Dify 支持在可视化画布上构建和测试强大的 AI 工作流，并无缝集成数百个专有/开源 LLM，覆盖 GPT、Mistral、Llama3 及任何 OpenAI API 兼容模型。 [E2]",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": false,
+        "requiresDocker": true,
+        "requiresDatabase": true,
+        "requiresSecrets": true,
+        "quality": 91,
+        "analysisReason": "为 AI 应用与 Agent、AI 全栈后端等方向提供了丰富的作品素材，能展现候选人理解复杂平台架构、前后端协作、多模型集成和私有化部署的能力。",
+        "proofPoints": "- 熟悉大型全栈项目中前后端解耦与 API 设计\n- 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式\n- 具备私有化部署和云原生交付经验\n- 能参与高效协作的工程文化（tests, CI, release automation）",
+        "interviewTopics": "- 自建 Dify 插件或 workflow 节点的思路\n- 在团队里如何管理 prompt 和多模型切换\n- 私有化部署时如何保证数据安全与性能\n- 大型开源项目的贡献流程和 Code Review 实践",
+        "modificationPlan": "为 Dify 开发一个面向国内市场的知识库连接器（如飞书文档、语雀），实现一套符合国情的审批流模板；将前端 Storybook 文档汉化并补充可视化编排案例；以此展示你对开源产品和本地化需求的深度贡献。",
+        "mainRisks": "项目非常庞大（900+ open issues），参与门槛高；技术栈广（TypeScript/React/Storybook），上手需要时间；架构文档缺失，需要自行阅读代码。",
+        "prerequisites": "Docker：需要；数据库：需要；密钥：需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "total": 20.65,
+          "semanticAvailable": true,
+          "quality": 13.65,
+          "semanticMatched": false,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 8.0,
+          "semantic": 0.0,
+          "goalPreference": 15.0
+        },
+        "recommendReason": "来自职业项目资料，可结合能力证明与面试讨论点考察；本轮目标：求职；资料涉及RAG，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为30-45 天（以贡献功能模块或插件为目标）；你的上限为180天；明确冲突已排除，仍有条件待核实。",
+        "references": [
+          {
+            "evidenceId": "E2",
+            "title": "langgenius/dify",
+            "sourceRef": "langgenius/dify",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "**1. Workflow**:\nBuild and test powerful AI workflows on a visual canvas, leveraging all the following features and beyond.\n\n**2. Comprehensive model support**:\nSeamless integration with hundreds of proprietary / open-source LLMs from dozens of inference providers and self-hosted solutions, covering GPT, Mistral, Llama3, and any OpenAI API-compatible models. A full list of supported model provider",
+                "startInChunk": 17,
+                "endInChunk": 417
+              },
+              {
+                "spanId": "E2.S2",
+                "text": "s can be found [here](https://docs.dify.ai/getting-started/readme/",
+                "startInChunk": 417,
+                "endInChunk": 483
+              }
+            ],
+            "documentId": 518,
+            "versionId": 737,
+            "chunkId": 17502,
+            "sectionPath": "Key features",
+            "startOffset": 6899,
+            "endOffset": 7365,
+            "contentStartInChunk": 17,
+            "quote": "**1. Workflow**:\nBuild and test powerful AI workflows on a visual canvas, leveraging all the following features and beyond.\n\n**2. Comprehensive model support**:\nSeamless integration with hundreds of proprietary / open-source LLMs from dozens of inference providers and self-hosted solutions, covering GPT, Mistral, Llama3, and any OpenAI API-compatible models. A full list of supported model provider",
+            "text": "Dify 支持在可视化画布上构建和测试强大的 AI 工作流，并无缝集成数百个专有/开源 LLM，覆盖 GPT、Mistral、Llama3 及任何 OpenAI API 兼容模型。",
+            "field": "description"
+          }
+        ],
+        "whatIsIt": "Dify 支持在可视化画布上构建和测试强大的 AI 工作流，并无缝集成数百个专有/开源 LLM，覆盖 GPT、Mistral、Llama3 及任何 OpenAI API 兼容模型。 [E2]",
+        "supportedExplanation": "Dify 支持在可视化画布上构建和测试强大的 AI 工作流，并无缝集成数百个专有/开源 LLM，覆盖 GPT、Mistral、Llama3 及任何 OpenAI API 兼容模型。 [E2]"
+      }
+    ],
+    "references": [
+      {
+        "evidenceId": "E4",
+        "title": "Pathway 实时数据框架 AI 流水线",
+        "sourceRef": "pathwaycom/llm-app",
+        "spans": [
+          {
+            "spanId": "E4.S1",
+            "text": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+            "startInChunk": 757,
+            "endInChunk": 1087
+          }
+        ],
+        "documentId": 243,
+        "versionId": 462,
+        "chunkId": 15990,
+        "sectionPath": "Pathway 实时数据框架 AI 流水线",
+        "startOffset": 779,
+        "endOffset": 1109,
+        "contentStartInChunk": 757,
+        "quote": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+        "text": "Pathway 的 AI 流水线可快速将高精度 RAG 和大规模 AI 企业搜索应用投入生产，利用数据源最新知识，提供开箱即用的 LLM 应用模板，可在本地或云端部署。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E4",
+        "title": "Pathway 实时数据框架 AI 流水线",
+        "sourceRef": "pathwaycom/llm-app",
+        "spans": [
+          {
+            "spanId": "E4.S1",
+            "text": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+            "startInChunk": 757,
+            "endInChunk": 1087
+          }
+        ],
+        "documentId": 243,
+        "versionId": 462,
+        "chunkId": 15990,
+        "sectionPath": "Pathway 实时数据框架 AI 流水线",
+        "startOffset": 779,
+        "endOffset": 1109,
+        "contentStartInChunk": 757,
+        "quote": "Pathway 实时数据框架的 **AI 流水线** 让您能够快速将提供 **高精度 RAG 和大规模 AI 企业搜索** 的 AI 应用投入生产，并利用数据源中 **最新的知识**。它为您提供开箱即用的 **LLM（大语言模型）应用模板**。您可以在自己的机器上测试，并在云端（GCP、AWS、Azure、Render...）或本地部署。\n\n这些应用会连接并同步（所有新增、删除、更新）来自 **文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API** 的数据源。它们无需单独设置基础设施依赖。它们包含 **内置数据索引**，支持向量搜索、混合搜索和全文搜索——全部在内存中完成，并带有缓存。\n\n",
+        "text": "连接并同步文件系统、Google Drive、Sharepoint、S3、Kafka、PostgreSQL、实时数据 API 等数据源，内置向量搜索、混合搜索和全文搜索，全部在内存中完成并带缓存。",
+        "field": "supportedExplanation"
+      },
+      {
+        "evidenceId": "E1",
+        "title": "Pathway 实时数据框架 AI 流水线",
+        "sourceRef": "pathwaycom/llm-app",
+        "spans": [
+          {
+            "spanId": "E1.S1",
+            "text": "本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                       ",
+            "startInChunk": 9,
+            "endInChunk": 409
+          },
+          {
+            "spanId": "E1.S2",
+            "text": "                                                                                                                                                                  |\n| --------------------------------------------------------------------------------------------- | --------------------------------------",
+            "startInChunk": 409,
+            "endInChunk": 709
+          }
+        ],
+        "documentId": 243,
+        "versionId": 462,
+        "chunkId": 15991,
+        "sectionPath": "Pathway 实时数据框架 AI 流水线 > 应用模板",
+        "startOffset": 1118,
+        "endOffset": 1818,
+        "contentStartInChunk": 9,
+        "quote": "本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                       ",
+        "text": "应用模板可扩展至数百万页文档，有的注重简洁性，有的注重准确性；可直接使用或修改流水线步骤，如添加数据源或改向量索引为混合索引只需改一行代码。",
+        "field": "supportedExplanation"
+      },
+      {
+        "evidenceId": "E2",
+        "title": "langgenius/dify",
+        "sourceRef": "langgenius/dify",
+        "spans": [
+          {
+            "spanId": "E2.S1",
+            "text": "**1. Workflow**:\nBuild and test powerful AI workflows on a visual canvas, leveraging all the following features and beyond.\n\n**2. Comprehensive model support**:\nSeamless integration with hundreds of proprietary / open-source LLMs from dozens of inference providers and self-hosted solutions, covering GPT, Mistral, Llama3, and any OpenAI API-compatible models. A full list of supported model provider",
+            "startInChunk": 17,
+            "endInChunk": 417
+          },
+          {
+            "spanId": "E2.S2",
+            "text": "s can be found [here](https://docs.dify.ai/getting-started/readme/",
+            "startInChunk": 417,
+            "endInChunk": 483
+          }
+        ],
+        "documentId": 518,
+        "versionId": 737,
+        "chunkId": 17502,
+        "sectionPath": "Key features",
+        "startOffset": 6899,
+        "endOffset": 7365,
+        "contentStartInChunk": 17,
+        "quote": "**1. Workflow**:\nBuild and test powerful AI workflows on a visual canvas, leveraging all the following features and beyond.\n\n**2. Comprehensive model support**:\nSeamless integration with hundreds of proprietary / open-source LLMs from dozens of inference providers and self-hosted solutions, covering GPT, Mistral, Llama3, and any OpenAI API-compatible models. A full list of supported model provider",
+        "text": "Dify 支持在可视化画布上构建和测试强大的 AI 工作流，并无缝集成数百个专有/开源 LLM，覆盖 GPT、Mistral、Llama3 及任何 OpenAI API 兼容模型。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E5",
+        "title": "timmyy123/LLM-Hub",
+        "sourceRef": "beginner:26",
+        "spans": [
+          {
+            "spanId": "E5.S1",
+            "text": "通过调用不同LLM的接口构建统一工具，适合锻炼TypeScript开发与API集成能力。\n\n",
+            "startInChunk": 11,
+            "endInChunk": 57
+          }
+        ],
+        "documentId": 88,
+        "versionId": 307,
+        "chunkId": 11955,
+        "sectionPath": "timmyy123/LLM-Hub > 适合新手的原因",
+        "startOffset": 119,
+        "endOffset": 165,
+        "contentStartInChunk": 11,
+        "quote": "通过调用不同LLM的接口构建统一工具，适合锻炼TypeScript开发与API集成能力。\n\n",
+        "text": "LLM-Hub 通过调用不同 LLM 的接口构建统一工具，适合锻炼 TypeScript 开发与 API 集成能力。",
+        "field": "vibeCodingReason"
+      }
+    ],
+    "profileLoaded": false,
+    "generation": "20261002164953-ec113424",
+    "status": "PROJECTS_WITH_LIMITATIONS",
+    "notice": "部分项目仍有待核实条件或缺少本轮支持证据，相关项目暂不能导入正式方案；有引用仅表示所引用事实得到支持。",
+    "answer": "已记录基础（排序偏好）：Vue前端和Linux部署经验；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。",
+    "conditionChangeSummary": "已记录基础（排序偏好）：Vue前端和Linux部署经验；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "costUsd": "UNKNOWN",
+    "modelCalls": [
+      {
+        "usage": {
+          "prompt_tokens": 5222,
+          "completion_tokens": 1184,
+          "total_tokens": 6406,
+          "prompt_tokens_details": {
+            "cached_tokens": 4992
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 851
+          },
+          "prompt_cache_hit_tokens": 4992,
+          "prompt_cache_miss_tokens": 230
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 5323,
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "tool_calls",
+        "outputBudget": 4096,
+        "thinking": true
+      },
+      {
+        "usage": {
+          "prompt_tokens": 1672,
+          "completion_tokens": 407,
+          "total_tokens": 2079,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 1544
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 1835,
+        "protocol": "JSON_OBJECT",
+        "phase": "EVIDENCE",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      },
+      {
+        "usage": {
+          "prompt_tokens": 1200,
+          "completion_tokens": 14,
+          "total_tokens": 1214,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 1072
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 726,
+        "protocol": "JSON_OBJECT",
+        "phase": "VERIFY",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      }
+    ],
+    "promptVersion": "customer-v4.11-grounded-recommendations",
+    "embeddingUsage": "NOT_REPORTED",
+    "protocol": "NATIVE_ACTION_V1",
+    "tokenUsage": {
+      "reasoningTokens": 851,
+      "complete": true,
+      "cacheHitTokens": 5248,
+      "inputTokens": 8094,
+      "cacheMissTokens": 2846,
+      "totalTokens": 9699,
+      "outputTokens": 1605,
+      "callsWithoutUsage": 0,
+      "calls": 3,
+      "models": [
+        "deepseek-flash"
+      ]
+    }
+  }
+}

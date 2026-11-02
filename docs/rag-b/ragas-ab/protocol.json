@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-02T07:19:16.668175+00:00",
+  "questions": 18,
+  "samples": 36,
+  "stage": "CONTEXTS_FROZEN_NO_LLM_SCORING",
+  "topK": 8,
+  "threshold": 0.55,
+  "explicitSourceFilters": false,
+  "generationControl": "Same model, temperature, evidence template and refusal instruction for A/B.",
+  "plannedMetrics": [
+    "ContextPrecision",
+    "ContextRecall",
+    "Faithfulness",
+    "FactualCorrectness"
+  ],
+  "limits": [
+    "A is live VectorStore retrieval baseline, not the full production recommendation pipeline.",
+    "B keeps its inherent validity filtering; both have no explicit source/technology/preference constraint.",
+    "Different live corpora compare current knowledge services, not an isolated ranking algorithm.",
+    "Reference answers must be reviewed against source excerpts before scoring; anchor strings are not reference answers.",
+    "18 reused questions are diagnostic, not a blind held-out test; no tuning on their RAGAS scores.",
+    "Faithfulness considers all contexts; per-citation support needs a separate claim/pointer audit.",
+    "Refusal can score as faithful while failing to answer. Track answer/refusal and reference coverage separately."
+  ],
+  "externalModelCallsMadeByThisPreparation": 0
+}

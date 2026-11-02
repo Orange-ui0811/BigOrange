@@ -1,0 +1,596 @@
+{
+  "failures": [
+    {
+      "tool": "reviewProjectPurpose",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "ResourceAccessException",
+      "httpStatus": null
+    }
+  ],
+  "nodes": [
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 180
+    },
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "7d627cd0-92d6-4160-bf85-44f7ce401189",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 180
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "7d627cd0-92d6-4160-bf85-44f7ce401189",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 2201
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 2073
+    },
+    {
+      "next": "retrieve_knowledge",
+      "node": "reconcile_conditions",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 30
+    },
+    {
+      "next": "prepare_evidence",
+      "node": "retrieve_knowledge",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 692
+    },
+    {
+      "next": "direct_response",
+      "node": "reconcile_conditions",
+      "runId": "7d627cd0-92d6-4160-bf85-44f7ce401189",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 21
+    },
+    {
+      "next": "finalize_response",
+      "node": "direct_response",
+      "runId": "7d627cd0-92d6-4160-bf85-44f7ce401189",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 17
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "7d627cd0-92d6-4160-bf85-44f7ce401189",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 11
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "7d627cd0-92d6-4160-bf85-44f7ce401189",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 17
+    },
+    {
+      "next": "generate_claims",
+      "node": "prepare_evidence",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 39
+    },
+    {
+      "next": "validate_citations",
+      "node": "generate_claims",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 2274
+    },
+    {
+      "next": "verify_claims",
+      "node": "validate_citations",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 23
+    },
+    {
+      "next": "assemble_project_cards",
+      "node": "verify_claims",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 808
+    },
+    {
+      "next": "finalize_response",
+      "node": "assemble_project_cards",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 10
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 11
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "e22c41d1-0862-4599-b37c-75220f9c1455",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 4
+    },
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "1d622700-3122-422e-a124-30e545f62b47",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 46
+    },
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 49
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "1d622700-3122-422e-a124-30e545f62b47",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 5798
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 3151
+    },
+    {
+      "next": "plan_recommendation",
+      "node": "reconcile_conditions",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 42
+    },
+    {
+      "next": "recall_candidates",
+      "node": "plan_recommendation",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 399
+    },
+    {
+      "next": "review_purpose",
+      "node": "recall_candidates",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 1034
+    },
+    {
+      "next": "finalize_response",
+      "node": "review_purpose",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 31799
+    },
+    {
+      "next": "direct_response",
+      "node": "reconcile_conditions",
+      "runId": "1d622700-3122-422e-a124-30e545f62b47",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 30
+    },
+    {
+      "next": "finalize_response",
+      "node": "direct_response",
+      "runId": "1d622700-3122-422e-a124-30e545f62b47",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 3
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "1d622700-3122-422e-a124-30e545f62b47",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 9
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "1d622700-3122-422e-a124-30e545f62b47",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 8
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 13
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "d5f95080-c538-4a60-bc72-2ccebef91449",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 7
+    },
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "c2476c2f-aef0-4257-8a2f-9331c1fdcc76",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 42
+    },
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 45
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 2255
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "c2476c2f-aef0-4257-8a2f-9331c1fdcc76",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 1365
+    },
+    {
+      "next": "direct_response",
+      "node": "reconcile_conditions",
+      "runId": "c2476c2f-aef0-4257-8a2f-9331c1fdcc76",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 20
+    },
+    {
+      "next": "finalize_response",
+      "node": "direct_response",
+      "runId": "c2476c2f-aef0-4257-8a2f-9331c1fdcc76",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 8
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "c2476c2f-aef0-4257-8a2f-9331c1fdcc76",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 14
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "c2476c2f-aef0-4257-8a2f-9331c1fdcc76",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 6
+    },
+    {
+      "next": "retrieve_knowledge",
+      "node": "reconcile_conditions",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 22
+    },
+    {
+      "next": "prepare_evidence",
+      "node": "retrieve_knowledge",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 247
+    },
+    {
+      "next": "generate_claims",
+      "node": "prepare_evidence",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 26
+    },
+    {
+      "next": "validate_citations",
+      "node": "generate_claims",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 2005
+    },
+    {
+      "next": "verify_claims",
+      "node": "validate_citations",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 12
+    },
+    {
+      "next": "assemble_project_cards",
+      "node": "verify_claims",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 619
+    },
+    {
+      "next": "finalize_response",
+      "node": "assemble_project_cards",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 7
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 14
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 10
+    },
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "35200193-8b9c-4767-91c6-cfc23ab6c12e",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 47
+    },
+    {
+      "next": "understand_turn",
+      "node": "load_context",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 43
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "35200193-8b9c-4767-91c6-cfc23ab6c12e",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 3769
+    },
+    {
+      "next": "reconcile_conditions",
+      "node": "understand_turn",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 1866
+    },
+    {
+      "next": "plan_recommendation",
+      "node": "reconcile_conditions",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 24
+    },
+    {
+      "next": "recall_candidates",
+      "node": "plan_recommendation",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 1107
+    },
+    {
+      "next": "review_purpose",
+      "node": "recall_candidates",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 268
+    },
+    {
+      "next": "select_projects",
+      "node": "review_purpose",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 7496
+    },
+    {
+      "next": "direct_response",
+      "node": "reconcile_conditions",
+      "runId": "35200193-8b9c-4767-91c6-cfc23ab6c12e",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 21
+    },
+    {
+      "next": "finalize_response",
+      "node": "direct_response",
+      "runId": "35200193-8b9c-4767-91c6-cfc23ab6c12e",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 7
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "35200193-8b9c-4767-91c6-cfc23ab6c12e",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 15
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "35200193-8b9c-4767-91c6-cfc23ab6c12e",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 5
+    },
+    {
+      "next": "retrieve_project_evidence",
+      "node": "select_projects",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 33
+    },
+    {
+      "next": "prepare_evidence",
+      "node": "retrieve_project_evidence",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 243
+    },
+    {
+      "next": "generate_claims",
+      "node": "prepare_evidence",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 18
+    },
+    {
+      "next": "validate_citations",
+      "node": "generate_claims",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 2347
+    },
+    {
+      "next": "verify_claims",
+      "node": "validate_citations",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 13
+    },
+    {
+      "next": "assemble_project_cards",
+      "node": "verify_claims",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 561
+    },
+    {
+      "next": "generate_advice",
+      "node": "assemble_project_cards",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 6
+    },
+    {
+      "next": "finalize_response",
+      "node": "generate_advice",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 4689
+    },
+    {
+      "next": "validate_response",
+      "node": "finalize_response",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 10
+    },
+    {
+      "next": "END",
+      "node": "validate_response",
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 20
+    }
+  ],
+  "checkpoints": [
+    {
+      "count": 8,
+      "runId": "35200193-8b9c-4767-91c6-cfc23ab6c12e",
+      "maxBytes": 495
+    },
+    {
+      "count": 18,
+      "runId": "5aa9cfbf-4bf8-471f-ad0d-ccfe4bbcda2d",
+      "maxBytes": 1012
+    },
+    {
+      "count": 13,
+      "runId": "7afc18f5-8930-4e2d-b865-1ff0078f50d4",
+      "maxBytes": 510
+    },
+    {
+      "count": 8,
+      "runId": "c2476c2f-aef0-4257-8a2f-9331c1fdcc76",
+      "maxBytes": 433
+    }
+  ]
+}

@@ -38,6 +38,7 @@ public class CustomerStore {
         if(row.get("deleted_at")!=null) return;
         if(active(db.activeSession(id))) fail(HttpStatus.CONFLICT,"请先停止当前回答，再删除会话");
         db.deleteSession(id,owner);
+        db.deleteSessionCheckpoints(id);db.deleteSessionPayloads(id);
     }
     public List<Map<String,Object>> sessions(long owner) { access(owner); return db.sessions(owner); }
     public Map<String,Object> create(long owner,String title) {
@@ -54,37 +55,58 @@ public class CustomerStore {
     }
     @Transactional
     public Map<String,Object> submit(long session,long owner,String request,String message) {
+        return submit(session,owner,request,message,Map.of());
+    }
+    @Transactional
+    public Map<String,Object> submit(long session,long owner,String request,String message,Map<String,Object> binding) {
         access(owner);
         if(request==null || !request.matches("[a-zA-Z0-9_-]{8,80}")) fail(HttpStatus.BAD_REQUEST,"请求标识无效");
         if(message==null || message.isBlank() || message.length()>2000) fail(HttpStatus.BAD_REQUEST,"消息长度须为1至2000字符");
-        String hash=hash(message); db.lock(); session(session,owner);
+        Objects.requireNonNull(binding,"binding");
+        if(!Set.of("taskId","questionId","listId").containsAll(binding.keySet()) || binding.values().stream().anyMatch(v->!(v instanceof String s)||s.length()>100))fail(HttpStatus.BAD_REQUEST,"消息关联无效");
+        String hash=hash(binding.isEmpty()?message:message+"\n"+json.write(new TreeMap<>(binding))); db.lock();var current=session(session,owner);
         Map<String,Object> old=db.replay(session,request);
         if(old!=null) {
             if(!hash.equals(old.get("input_hash"))) fail(HttpStatus.CONFLICT,"相同请求标识的内容不一致");
             Map<String,Object> replay=new LinkedHashMap<>(old); replay.put("replayed",true); return replay;
         }
+        var state=json.read(current.get("state_json"));var task=CustomerWorkflow.task(state);
+        if(binding.containsKey("taskId")&&!Objects.equals(task.get("id"),binding.get("taskId")))fail(HttpStatus.CONFLICT,"任务已切换，请刷新会话");
+        if(binding.containsKey("questionId")&&!Objects.equals(CustomerWorkflow.question(state).get("id"),binding.get("questionId")))fail(HttpStatus.CONFLICT,"该问题已结束，请回答当前问题");
+        if(binding.containsKey("listId")&&CustomerWorkflow.rows(task.get("lists")).stream().noneMatch(l->Objects.equals(l.get("id"),binding.get("listId"))))fail(HttpStatus.CONFLICT,"候选列表不属于当前任务");
         if(db.activeOwner(owner)>0) fail(HttpStatus.CONFLICT,"请等待当前账号的回答结束");
         if(db.active()>=config.getMaxConcurrent()+config.getMaxQueued()) fail(HttpStatus.CONFLICT,"客服等待队列已满，请稍后再试");
         Map<String,Object> row=new LinkedHashMap<>(); row.put("id",UUID.randomUUID().toString()); row.put("session",session);
         row.put("owner",owner); row.put("request",request); row.put("hash",hash); row.put("message",message);
         row.put("promptVersion",CustomerConversation.PROMPT_VERSION);
+        row.put("executionEngine",config.getExecutionEngine().name());
+        row.put("graphVersion",config.getExecutionEngine()==CustomerExecutionEngine.Kind.LANGGRAPH4J?"customer-graph-v2":null);
+        row.put("traceId",UUID.randomUUID().toString());
         row.put("deadline",LocalDateTime.now().plusSeconds(config.getRunSeconds()));
         db.insertRun(row); db.message(session,row.get("id").toString(),"user",message,"COMPLETED");
+        if(!binding.isEmpty())db.step(row.get("id").toString(),"inputContext","ACCEPTED",json.write(binding));
         return new LinkedHashMap<>(db.run(row.get("id").toString()));
     }
     @Transactional
     public void checkpoint(String id,Map<String,Object> state) {
         db.lock(); Map<String,Object> run=db.run(id);
-        if(active(run)) db.state(number(run,"session_id"),json.write(state));
+        if(active(run)) saveState(number(run,"session_id"),state);
     }
     @Transactional
     public void complete(String id,Map<String,Object> result,Map<String,Object> state,Object metrics) {
         db.lock(); Map<String,Object> run=db.run(id);
         if(!active(run)) return;
+        long session=number(run,"session_id");saveState(session,state);
         if(db.finish(id,"SUCCEEDED",json.write(result),json.write(metrics),null)==1) {
-            long session=number(run,"session_id"); db.state(session,json.write(state));
             db.message(session,id,"assistant",json.write(result),"COMPLETED");
         }
+    }
+    private void saveState(long session,Map<String,Object> state) {
+        if(state.get("_expectedStateVersion") instanceof Number expected) {
+            var saved=new LinkedHashMap<>(state);saved.remove("_expectedStateVersion");
+            if(db.stateCas(session,json.write(saved),expected.longValue())!=1)throw new IllegalStateException("STALE_SESSION_REVISION");
+            state.put("_expectedStateVersion",expected.longValue()+1);
+        } else db.state(session,json.write(state));
     }
     @Transactional
     public void terminal(String id,String status,String error,Object metrics) {

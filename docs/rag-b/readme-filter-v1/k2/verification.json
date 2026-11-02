@@ -1,0 +1,107 @@
+{
+  "status": "K2_OFFLINE_PREVIEW_COMPLETE_PRODUCTION_NOT_CONNECTED",
+  "checkedAt": "2026-10-29T11:15:15.056055+00:00",
+  "sourceSnapshotSha256": "1edacde294596505856e85587a3ec2f8f152f54eef7b0aa15fbced3c6ce7e0c3",
+  "policyVersion": "README_RULE_PREVIEW_V1_1",
+  "documents": 38,
+  "annotatedCases": 175,
+  "previewBlocks": 2514,
+  "decisionCountsIncludingLayout": {
+    "KEEP": 745,
+    "DROP": 1187,
+    "REVIEW": 582
+  },
+  "knowledgePackets": 142,
+  "pointerPackets": 79,
+  "caseOutcomes": {
+    "KEPT": 85,
+    "DROPPED": 23,
+    "DEFERRED_REVIEW": 43,
+    "NOISE_DEFERRED": 6,
+    "REVIEWED": 18
+  },
+  "criticalKeepCases": 62,
+  "criticalDeferredCases": 19,
+  "criticalWrongDropCases": 0,
+  "reviewApprovalCases": 0,
+  "sourceMappingErrors": 0,
+  "nonKeepCandidateLeaks": 0,
+  "testSuites": [
+    {
+      "name": "ReadmeKnowledgeFilterTest",
+      "tests": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.096,
+      "reportSha256": "55e3cd27d797893c208bc60f29d6b219c3e01029e6d2725ac3fa9dac2b6d00e8"
+    },
+    {
+      "name": "ReadmeKnowledgeFilterCorpusTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.375,
+      "reportSha256": "5dfd9c29bdaf941e4e0f652f7b7bb6861af15f1f92b3a8abade17593a6a260b4"
+    },
+    {
+      "name": "RagBChunkerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.055,
+      "reportSha256": "1c8beb3eaa2dbd40c9d1aa0d9e1e18af8e3086b0d1e677c4a495709175ceb5b9"
+    },
+    {
+      "name": "RagBTokenChunkerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.808,
+      "reportSha256": "ad9cc4f0f9f82dc59d6496bbf6c7896e64f71d1e1a4dd5a7bc35c4c00169737c"
+    }
+  ],
+  "testsPassed": 24,
+  "additionalProviderCalls": 0,
+  "indexWrites": 0,
+  "ledgerChecks": [
+    {
+      "path": "docs\\customer\\workflow-v2\\provider-calls.jsonl",
+      "unchangedSinceK1": true,
+      "baseline": {
+        "sha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+        "entries": 50
+      },
+      "current": {
+        "sha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+        "entries": 50
+      }
+    },
+    {
+      "path": "docs\\customer\\context-v3\\live-provider-calls.jsonl",
+      "unchangedSinceK1": true,
+      "baseline": {
+        "sha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+        "entries": 38
+      },
+      "current": {
+        "sha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+        "entries": 38
+      }
+    }
+  ],
+  "finalImplementation": "final-implementation.json",
+  "firstValidationPreserved": true,
+  "independentValidationOfFinalVersion": false,
+  "retrievalQualityMeasured": false,
+  "productionReady": false,
+  "limitations": [
+    "43 expected KEEP cases remain deferred, including 19 critical conditions",
+    "K1 labels are assistant reviewed, not independent human gold",
+    "Rules are conservative; not a full CommonMark parser or semantic knowledge verifier",
+    "No live retrieval, model classification or active index changes"
+  ]
+}

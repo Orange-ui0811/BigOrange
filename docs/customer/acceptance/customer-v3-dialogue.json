@@ -1,0 +1,170 @@
+{
+  "caseId": "CHAT_V3_GREETING",
+  "round": 1,
+  "variant": "B",
+  "category": "DIALOGUE",
+  "sessionId": "27",
+  "manualPassed": null,
+  "criticalFailure": false,
+  "turns": [
+    {
+      "message": "你好",
+      "runId": "32adad3e-dcef-4377-830f-e7931a70c036",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 1859,
+      "generation": null,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "CHAT",
+        "state": {},
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "CONVERSATION",
+        "answer": "你好！我是项目推荐助手，可以帮你找适合练手或写进简历的开源项目。方便说说你想学什么方向，或者用什么语言吗？"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 975,
+            "usage": {
+              "prompt_tokens": 864,
+              "completion_tokens": 113,
+              "total_tokens": 977,
+              "prompt_tokens_details": {
+                "cached_tokens": 512
+              },
+              "prompt_cache_hit_tokens": 512,
+              "prompt_cache_miss_tokens": 352
+            },
+            "protocol": "NATIVE_ACTION"
+          }
+        ],
+        "promptVersion": "customer-v3-chat",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "complete": true,
+          "cacheHitTokens": 512,
+          "inputTokens": 864,
+          "cacheMissTokens": 352,
+          "totalTokens": 977,
+          "outputTokens": 113,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ],
+          "reasoningTokens": 0
+        }
+      }
+    },
+    {
+      "message": "今天有点累，不知道该聊什么。先不要推荐具体项目，随便聊聊吧。",
+      "runId": "191b3d51-7d07-410c-8bc1-152b5702f6ba",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "durationMs": 1313,
+      "generation": null,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "CHAT",
+        "state": {},
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "CONVERSATION",
+        "answer": "累的时候确实不用急着想项目的事，先歇会儿也挺好。要不随便聊聊——你平时写代码之外喜欢做点什么放松？等你有精神了，我们再慢慢挑项目也不迟。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 948,
+            "usage": {
+              "prompt_tokens": 951,
+              "completion_tokens": 120,
+              "total_tokens": 1071,
+              "prompt_tokens_details": {
+                "cached_tokens": 768
+              },
+              "prompt_cache_hit_tokens": 768,
+              "prompt_cache_miss_tokens": 183
+            },
+            "protocol": "NATIVE_ACTION"
+          }
+        ],
+        "promptVersion": "customer-v3-chat",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "complete": true,
+          "cacheHitTokens": 768,
+          "inputTokens": 951,
+          "cacheMissTokens": 183,
+          "totalTokens": 1071,
+          "outputTokens": 120,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ],
+          "reasoningTokens": 0
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "modelCalls": [
+      {
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 975,
+        "usage": {
+          "prompt_tokens": 864,
+          "completion_tokens": 113,
+          "total_tokens": 977,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 352
+        },
+        "protocol": "NATIVE_ACTION"
+      },
+      {
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 948,
+        "usage": {
+          "prompt_tokens": 951,
+          "completion_tokens": 120,
+          "total_tokens": 1071,
+          "prompt_tokens_details": {
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 183
+        },
+        "protocol": "NATIVE_ACTION"
+      }
+    ]
+  },
+  "durationMs": 3172,
+  "expected": "Model greeting and natural off-topic guidance, confirmed profile read, no knowledge search",
+  "split": "development"
+}

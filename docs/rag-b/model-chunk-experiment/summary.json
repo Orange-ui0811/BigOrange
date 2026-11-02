@@ -1,0 +1,1183 @@
+{
+  "rankingMetric": "60 semantic questions evidence MRR@8",
+  "completedPlans": 18,
+  "plans": [
+    {
+      "plan": "bge-m3--native512",
+      "model": "bge-m3",
+      "chunks": 1391,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 1.0,
+        "evidenceMRR8": 0.8284920634920635,
+        "evidenceNDCG8": 0.8469387661148373
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.7391666666666666,
+          "evidenceNDCG8": 0.7810926744487245
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8338095238095239,
+          "evidenceNDCG8": 0.8418392127652516
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.8620059528704125
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.925,
+          "evidenceNDCG8": 0.9196037195062015
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9,
+          "evidenceNDCG8": 0.9161651027548701
+        }
+      },
+      "vectorBytes": 5697536,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.3625198412698412,
+        "pairedBootstrap95": [
+          0.25346974206349204,
+          0.47125
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "bge-m3--common256",
+      "model": "bge-m3",
+      "chunks": 1627,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.9666666666666667,
+        "evidenceMRR8": 0.795436507936508,
+        "evidenceNDCG8": 0.8141474985791185
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.7071428571428571,
+          "evidenceNDCG8": 0.7689604934997891
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.8208333333333334,
+          "evidenceNDCG8": 0.8184715782578558
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.8600521825917974
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.7833333333333333,
+          "evidenceNDCG8": 0.7896290390560079
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9333333333333332,
+          "evidenceNDCG8": 0.9203918089034134
+        }
+      },
+      "vectorBytes": 6664192,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.3294642857142857,
+        "pairedBootstrap95": [
+          0.22083333333333333,
+          0.4405828373015872
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-4B--native768--query-instruct",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1336,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.9166666666666666,
+        "evidenceMRR8": 0.7165476190476191,
+        "evidenceNDCG8": 0.7443889293294755
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.85,
+          "evidenceMRR8": 0.5891666666666666,
+          "evidenceNDCG8": 0.6267007847923443
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6354761904761904,
+          "evidenceNDCG8": 0.6816410596883676
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.8938876468785412
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9,
+          "evidenceNDCG8": 0.9161651027548701
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.95,
+          "evidenceNDCG8": 0.9334847842605593
+        }
+      },
+      "vectorBytes": 5472256,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.2505753968253968,
+        "pairedBootstrap95": [
+          0.12043303571428572,
+          0.376547619047619
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-4B--native512--query-instruct",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1364,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.9333333333333333,
+        "evidenceMRR8": 0.7111309523809524,
+        "evidenceNDCG8": 0.7442259023494094
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.5704166666666667,
+          "evidenceNDCG8": 0.6240205163102036
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6379761904761905,
+          "evidenceNDCG8": 0.6838322472303102
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.8991280808419074
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9,
+          "evidenceNDCG8": 0.9161651027548701
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.95,
+          "evidenceNDCG8": 0.9334847842605593
+        }
+      },
+      "vectorBytes": 5586944,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.2451587301587302,
+        "pairedBootstrap95": [
+          0.11432291666666666,
+          0.37124999999999997
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-0.6B--native512--query-instruct",
+      "model": "Qwen3-Embedding-0.6B",
+      "chunks": 1364,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.95,
+        "evidenceMRR8": 0.7096031746031746,
+        "evidenceNDCG8": 0.7537245569758281
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.5766666666666667,
+          "evidenceNDCG8": 0.6443743959010776
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6754761904761906,
+          "evidenceNDCG8": 0.7291781788355381
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.9271896678227882
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8033333333333333,
+          "evidenceNDCG8": 0.8417574081211786
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.95,
+          "evidenceNDCG8": 0.9334847842605593
+        }
+      },
+      "vectorBytes": 5586944,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.2436309523809524,
+        "pairedBootstrap95": [
+          0.11116914682539682,
+          0.37710962301587286
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "bge-large-zh-v1.5--common256--query-instruct",
+      "model": "bge-large-zh-v1.5",
+      "chunks": 1627,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 0.9666666666666667,
+        "evidenceRecall8": 0.9,
+        "evidenceMRR8": 0.6987500000000001,
+        "evidenceNDCG8": 0.7376376623559475
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.5800000000000001,
+          "evidenceNDCG8": 0.6520372467324784
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.8416666666666668,
+          "evidenceNDCG8": 0.8676773047569155
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9066666666666668,
+          "evidenceNDCG8": 0.7284232043690214
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 0.9,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6158333333333333,
+          "evidenceNDCG8": 0.659860807458035
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 0.9,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.7333333333333333,
+          "evidenceNDCG8": 0.7265360636988621
+        }
+      },
+      "vectorBytes": 6664192,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "为这个句子生成表示以用于检索相关文章：{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.23277777777777775,
+        "pairedBootstrap95": [
+          0.11638888888888888,
+          0.3461111111111111
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-0.6B--common256--query-instruct",
+      "model": "Qwen3-Embedding-0.6B",
+      "chunks": 1627,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.95,
+        "evidenceMRR8": 0.6782142857142858,
+        "evidenceNDCG8": 0.7347390777862967
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.5658333333333333,
+          "evidenceNDCG8": 0.6505313533555348
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6063095238095239,
+          "evidenceNDCG8": 0.674537597195991
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.9386321274904036
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8,
+          "evidenceNDCG8": 0.8386928461085266
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.925,
+          "evidenceNDCG8": 0.9196037195062015
+        }
+      },
+      "vectorBytes": 6664192,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.21224206349206348,
+        "pairedBootstrap95": [
+          0.071547123015873,
+          0.3541875
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-0.6B--native512",
+      "model": "Qwen3-Embedding-0.6B",
+      "chunks": 1364,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.95,
+        "evidenceMRR8": 0.6700396825396825,
+        "evidenceNDCG8": 0.7159010621770707
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.485952380952381,
+          "evidenceNDCG8": 0.5584505173577105
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6641666666666668,
+          "evidenceNDCG8": 0.7249040764224493
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.9015779924358687
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.845,
+          "evidenceNDCG8": 0.852144745434207
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.875,
+          "evidenceNDCG8": 0.8765524400678985
+        }
+      },
+      "vectorBytes": 5586944,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.20406746031746031,
+        "pairedBootstrap95": [
+          0.07545634920634921,
+          0.3345094246031745
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-4B--common256--query-instruct",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1627,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.9166666666666666,
+        "evidenceMRR8": 0.6698809523809524,
+        "evidenceNDCG8": 0.7153742613703858
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.85,
+          "evidenceMRR8": 0.5366666666666667,
+          "evidenceNDCG8": 0.6008706044569786
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.5979761904761904,
+          "evidenceNDCG8": 0.665627612188556
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.9135628294889178
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.875,
+          "evidenceNDCG8": 0.8765524400678985
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.875,
+          "evidenceNDCG8": 0.8826966948633472
+        }
+      },
+      "vectorBytes": 6664192,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.20390873015873015,
+        "pairedBootstrap95": [
+          0.08015823412698414,
+          0.3250233134920635
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-4B--native768",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1336,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.9,
+        "evidenceMRR8": 0.6533333333333334,
+        "evidenceNDCG8": 0.6874489815342202
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.4416666666666666,
+          "evidenceNDCG8": 0.48716942171443556
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6308333333333332,
+          "evidenceNDCG8": 0.6928939023946656
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.8920759136892866
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.95,
+          "evidenceNDCG8": 0.9302315826094762
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.825,
+          "evidenceNDCG8": 0.8343356583776418
+        }
+      },
+      "vectorBytes": 5472256,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.18736111111111112,
+        "pairedBootstrap95": [
+          0.058333333333333334,
+          0.31319444444444444
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-4B--native512",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1364,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.9,
+        "evidenceMRR8": 0.6521031746031746,
+        "evidenceNDCG8": 0.686337354790661
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.43916666666666676,
+          "evidenceNDCG8": 0.48497823417249303
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6296428571428571,
+          "evidenceNDCG8": 0.6917502097059314
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.899338017351143
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.95,
+          "evidenceNDCG8": 0.9302315826094762
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.825,
+          "evidenceNDCG8": 0.8343356583776418
+        }
+      },
+      "vectorBytes": 5586944,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.18613095238095237,
+        "pairedBootstrap95": [
+          0.05805753968253971,
+          0.3111344246031746
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-0.6B--common256",
+      "model": "Qwen3-Embedding-0.6B",
+      "chunks": 1627,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.9166666666666666,
+        "evidenceMRR8": 0.6217063492063492,
+        "evidenceNDCG8": 0.6804236268772207
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.85,
+          "evidenceMRR8": 0.3817261904761905,
+          "evidenceNDCG8": 0.47601012599570486
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6521428571428572,
+          "evidenceNDCG8": 0.7100692717624651
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.9131823770577401
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.7875,
+          "evidenceNDCG8": 0.8276862708836366
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.875,
+          "evidenceNDCG8": 0.8826966948633472
+        }
+      },
+      "vectorBytes": 6664192,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.15573412698412697,
+        "pairedBootstrap95": [
+          0.026208333333333316,
+          0.290000992063492
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "bge-large-zh-v1.5--common256",
+      "model": "bge-large-zh-v1.5",
+      "chunks": 1627,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 0.9833333333333333,
+        "evidenceRecall8": 0.8833333333333333,
+        "evidenceMRR8": 0.6126388888888887,
+        "evidenceNDCG8": 0.6692142256068645
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.85,
+          "evidenceMRR8": 0.4445833333333334,
+          "evidenceNDCG8": 0.5333510961355984
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.8,
+          "evidenceNDCG8": 0.8407057577813472
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9191666666666667,
+          "evidenceNDCG8": 0.7065369194597215
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.5533333333333333,
+          "evidenceNDCG8": 0.6144496313941408
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 0.9,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.6333333333333334,
+          "evidenceNDCG8": 0.6527220144131537
+        }
+      },
+      "vectorBytes": 6664192,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.14666666666666664,
+        "pairedBootstrap95": [
+          0.028326388888888897,
+          0.2604201388888889
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "Qwen3-Embedding-4B--common256",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1627,
+      "dimensions": 1024,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 1.0,
+        "evidenceRecall8": 0.8833333333333333,
+        "evidenceMRR8": 0.6037499999999999,
+        "evidenceNDCG8": 0.6480260899212669
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.40125,
+          "evidenceNDCG8": 0.4703788100378622
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.5933333333333333,
+          "evidenceNDCG8": 0.6539953253411469
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "evidenceNDCG8": 0.9086750302450948
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.925,
+          "evidenceNDCG8": 0.9196037195062015
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.7083333333333334,
+          "evidenceNDCG8": 0.719804549263381
+        }
+      },
+      "vectorBytes": 6664192,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.13777777777777775,
+        "pairedBootstrap95": [
+          0.012222222222222216,
+          0.25875
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "current-small-char500",
+      "model": "bge-small-zh-v1.5",
+      "chunks": 1307,
+      "dimensions": 512,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 0.8833333333333333,
+        "evidenceRecall8": 0.5833333333333334,
+        "evidenceMRR8": 0.4659722222222222,
+        "evidenceNDCG8": 0.4661122221166298
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 0.75,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "evidenceNDCG8": 0.0
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 0.95,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.925,
+          "evidenceNDCG8": 0.9050104239797108
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 0.76,
+          "evidenceRecall8": 0.76,
+          "evidenceMRR8": 0.6663333333333332,
+          "evidenceNDCG8": 0.4315495469811662
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 0.9,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.33333333333333337,
+          "evidenceNDCG8": 0.3361059042995559
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.6125,
+          "evidenceNDCG8": 0.6505465804408017
+        }
+      },
+      "vectorBytes": 2676736,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": 0.0,
+        "pairedBootstrap95": [
+          0.0,
+          0.0
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "current-small-char500--query-instruct",
+      "model": "bge-small-zh-v1.5",
+      "chunks": 1307,
+      "dimensions": 512,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 0.8833333333333333,
+        "evidenceRecall8": 0.5333333333333333,
+        "evidenceMRR8": 0.44126984126984126,
+        "evidenceNDCG8": 0.43574563074390205
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 0.75,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "evidenceNDCG8": 0.0
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 0.95,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.9,
+          "evidenceNDCG8": 0.8865569116582837
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 0.72,
+          "evidenceRecall8": 0.72,
+          "evidenceMRR8": 0.6391666666666667,
+          "evidenceNDCG8": 0.4286617140812507
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 0.9,
+          "evidenceRecall8": 0.4,
+          "evidenceMRR8": 0.2833333333333333,
+          "evidenceNDCG8": 0.2521195104084289
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.5642857142857143,
+          "evidenceNDCG8": 0.5892404507384164
+        }
+      },
+      "vectorBytes": 2676736,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "为这个句子生成表示以用于检索相关文章：{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": -0.02470238095238095,
+        "pairedBootstrap95": [
+          -0.0691468253968254,
+          0.01944444444444444
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "bge-small-zh-v1.5--common256--query-instruct",
+      "model": "bge-small-zh-v1.5",
+      "chunks": 1627,
+      "dimensions": 512,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 0.9,
+        "evidenceRecall8": 0.5833333333333334,
+        "evidenceMRR8": 0.42492063492063487,
+        "evidenceNDCG8": 0.443423737503509
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 0.8,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "evidenceNDCG8": 0.0
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9083333333333334,
+          "evidenceNDCG8": 0.888579727605876
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 0.74,
+          "evidenceRecall8": 0.74,
+          "evidenceMRR8": 0.6203571428571428,
+          "evidenceNDCG8": 0.4175471677713743
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 0.8,
+          "evidenceRecall8": 0.7,
+          "evidenceMRR8": 0.2735714285714286,
+          "evidenceNDCG8": 0.35691484477917684
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.45928571428571424,
+          "evidenceNDCG8": 0.5264681250301251
+        }
+      },
+      "vectorBytes": 3332096,
+      "queryInstruction": "model-card example",
+      "instructionTemplate": "为这个句子生成表示以用于检索相关文章：{query}",
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": -0.0410515873015873,
+        "pairedBootstrap95": [
+          -0.1135530753968254,
+          0.03293700396825397
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    },
+    {
+      "plan": "bge-small-zh-v1.5--common256",
+      "model": "bge-small-zh-v1.5",
+      "chunks": 1627,
+      "dimensions": 512,
+      "semantic": {
+        "n": 60,
+        "sourceRecall8": 0.8833333333333333,
+        "evidenceRecall8": 0.5666666666666667,
+        "evidenceMRR8": 0.40890873015873014,
+        "evidenceNDCG8": 0.4287270938258686
+      },
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "sourceRecall8": 0.75,
+          "evidenceRecall8": 0.05,
+          "evidenceMRR8": 0.00625,
+          "evidenceNDCG8": 0.007402047774146631
+        },
+        "business_zh": {
+          "n": 20,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8916666666666668,
+          "evidenceNDCG8": 0.8822099598387527
+        },
+        "named_regression": {
+          "n": 50,
+          "sourceRecall8": 0.72,
+          "evidenceRecall8": 0.72,
+          "evidenceMRR8": 0.6260238095238094,
+          "evidenceNDCG8": 0.42015221333204017
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "sourceRecall8": 0.8,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.22333333333333333,
+          "evidenceNDCG8": 0.3129912801577105
+        },
+        "readme_english": {
+          "n": 10,
+          "sourceRecall8": 1.0,
+          "evidenceRecall8": 0.7,
+          "evidenceMRR8": 0.43428571428571433,
+          "evidenceNDCG8": 0.4801472675717027
+        }
+      },
+      "vectorBytes": 3332096,
+      "queryInstruction": null,
+      "instructionTemplate": null,
+      "versusCurrent": {
+        "factGroups": 30,
+        "mrrDelta": -0.05706349206349206,
+        "pairedBootstrap95": [
+          -0.1444469246031746,
+          0.02349206349206349
+        ],
+        "note": "Exploratory paired-fact bootstrap; does not correct selection across configurations."
+      }
+    }
+  ],
+  "providerAudit": {
+    "Qwen3-Embedding-0.6B": {
+      "successfulBatches": 194,
+      "items": 3083,
+      "inputCharacters": 933446,
+      "positiveReportedTokens": 283686,
+      "missingOrZeroUsageBatches": 0,
+      "batchP50Ms": 412.08,
+      "batchP95Ms": 684.1584999999999,
+      "note": "Batch timings mix document/query sizes; not online query latency or bill."
+    },
+    "Qwen3-Embedding-4B": {
+      "successfulBatches": 269,
+      "items": 4275,
+      "inputCharacters": 1359513,
+      "positiveReportedTokens": 0,
+      "missingOrZeroUsageBatches": 269,
+      "batchP50Ms": 657.92,
+      "batchP95Ms": 1166.214,
+      "note": "Batch timings mix document/query sizes; not online query latency or bill."
+    },
+    "bge-large-zh-v1.5": {
+      "successfulBatches": 116,
+      "items": 1847,
+      "inputCharacters": 475891,
+      "positiveReportedTokens": 215168,
+      "missingOrZeroUsageBatches": 0,
+      "batchP50Ms": 620.2850000000001,
+      "batchP95Ms": 4779.07,
+      "note": "Batch timings mix document/query sizes; not online query latency or bill."
+    },
+    "bge-m3": {
+      "successfulBatches": 193,
+      "items": 3080,
+      "inputCharacters": 928807,
+      "positiveReportedTokens": 268145,
+      "missingOrZeroUsageBatches": 45,
+      "batchP50Ms": 663.34,
+      "batchP95Ms": 1794.881999999998,
+      "note": "Batch timings mix document/query sizes; not online query latency or bill."
+    },
+    "bge-small-zh-v1.5": {
+      "successfulBatches": 198,
+      "items": 3154,
+      "inputCharacters": 998406,
+      "positiveReportedTokens": 418810,
+      "missingOrZeroUsageBatches": 0,
+      "batchP50Ms": 290.385,
+      "batchP95Ms": 427.2985,
+      "note": "Batch timings mix document/query sizes; not online query latency or bill."
+    }
+  },
+  "errorAttempts": 0,
+  "textGenerationCalls": 0,
+  "limitations": [
+    "assistant-authored source-scoped gold, not independent human blind test",
+    "base plans use raw queries; supplementary plans use model-card query instructions",
+    "exact normalized anchor containment is an evidence proxy, not semantic entailment",
+    "no RRF, business hard filters, ANN, rerank, refusal or final generation measured",
+    "vectorBytes excludes Redis/HNSW metadata and graph memory"
+  ]
+}

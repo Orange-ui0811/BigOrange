@@ -1,0 +1,1103 @@
+{
+  "case": {
+    "id": "office_free",
+    "family": "office",
+    "kind": "free",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：办公自动化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "113",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：办公自动化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "129e4027-3e7a-47d7-a776-689314dd5e7e",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 6500,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：办公自动化"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "experience": "一年编程基础",
+          "topic": [
+            "办公自动化"
+          ],
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：办公自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-04T02:50:22.961064374Z",
+          "conditions": {
+            "topic": [
+              "办公自动化"
+            ]
+          },
+          "current": {
+            "total": 0,
+            "confirmed": 0,
+            "uncertain": 0
+          },
+          "available": {
+            "total": 494,
+            "confirmed": 494,
+            "uncertain": 0
+          },
+          "alternatives": [
+            {
+              "total": 110,
+              "confirmed": 110,
+              "uncertain": 0,
+              "changes": {
+                "topic": [
+                  "智能体"
+                ]
+              },
+              "label": "项目主题改为智能体"
+            }
+          ],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "NO_MATCH",
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：办公自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n根据现有资料，可以考虑以下调整；每个方案都保留其余条件：\n- 项目主题改为智能体，可以找到通过当前字段检查的项目，具体功能还需核对。\n尚未修改条件。你愿意先尝试哪一种调整？也可以告诉我哪项要求必须保留。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：办公自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5279,
+              "completion_tokens": 590,
+              "total_tokens": 5869,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 285
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 287
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 3061,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "promptVersion": "customer-v4.12-semantic-recommendations",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 285,
+          "complete": true,
+          "cacheHitTokens": 4992,
+          "inputTokens": 5279,
+          "cacheMissTokens": 287,
+          "totalTokens": 5869,
+          "outputTokens": 590,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "esengine/DeepSeek-Reasonix",
+                  "chunkId": 12246,
+                  "content": "## 可证明能力\n包含架构文档（architectureDocs=true）、自动化测试、CI 和发布自动化；快速入门指南齐全；MIT 许可。\n\n",
+                  "endOffset": 336,
+                  "sourceRef": "career:128",
+                  "versionId": 322,
+                  "chunkIndex": 5,
+                  "documentId": 103,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "esengine/DeepSeek-Reasonix > 可证明能力",
+                  "startOffset": 263,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "stablyai/orca",
+                  "chunkId": 14046,
+                  "content": "<p align=\"center\">\n  <strong>The AI Orchestrator for 100x builders.</strong><br/>\n  Run Codex, ClaudeCode, OpenCode or Pi side-by-side — each in its own worktree, tracked in one place.\n</p>\n\n<h3 align=\"center\"><a href=\"https://onorca.dev/download\"><ins>Download Orca</ins></a></h3>\n\n<p align=\"center\">\n  <img src=\"docs/assets/readme-hero.jpg\" alt=\"Orca desktop app running agents in parallel worktrees, with the Orca mobile companion app in the corner\" width=\"960\" />\n</p>\n\n",
+                  "endOffset": 1840,
+                  "sourceRef": "stablyai/orca",
+                  "versionId": 384,
+                  "chunkIndex": 1,
+                  "documentId": 165,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 1366,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "bashalarmistalt/decimen-optical-transfer",
+                  "chunkId": 9641,
+                  "content": "## 最终建议\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\n\n",
+                  "endOffset": 493,
+                  "sourceRef": "beginner:80",
+                  "versionId": 222,
+                  "chunkIndex": 7,
+                  "documentId": 3,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "bashalarmistalt/decimen-optical-transfer > 最终建议",
+                  "startOffset": 445,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "virgiliojr94/book-to-skill",
+                  "chunkId": 10456,
+                  "content": "## 预计周期\n兼职约 2～4 周（包括学习、修改和文档完善）\n\n",
+                  "endOffset": 949,
+                  "sourceRef": "career:270",
+                  "versionId": 248,
+                  "chunkIndex": 13,
+                  "documentId": 29,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "virgiliojr94/book-to-skill > 预计周期",
+                  "startOffset": 916,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15255,
+                  "content": "##### :black_small_square: Labs\n\n<p>\n&nbsp;&nbsp; <a href=\"https://labs.networkreliability.engineering/\"><b>NRE Labs</b></a> - learn automation by doing it. Right now, right here, in your browser.<br>\n</p>\n\n",
+                  "endOffset": 65228,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 80,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Networks &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Labs",
+                  "startOffset": 65021,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "chaitin/MonkeyCode",
+                  "chunkId": 11838,
+                  "content": "## 适合新手的原因\n项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\n\n",
+                  "endOffset": 188,
+                  "sourceRef": "beginner:6",
+                  "versionId": 298,
+                  "chunkIndex": 4,
+                  "documentId": 79,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "chaitin/MonkeyCode > 适合新手的原因",
+                  "startOffset": 122,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9607,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 39,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 1,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                  "startOffset": 23,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "fastrepl/anarlog",
+                  "chunkId": 11809,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 36,
+                  "sourceRef": "beginner:2",
+                  "versionId": 296,
+                  "chunkIndex": 1,
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "fastrepl/anarlog > 知识分类",
+                  "startOffset": 20,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "is-a-dev/register",
+                  "chunkId": 12004,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 37,
+                  "sourceRef": "beginner:34",
+                  "versionId": 311,
+                  "chunkIndex": 1,
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "is-a-dev/register > 知识分类",
+                  "startOffset": 21,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "agent-of-empires/agent-of-empires",
+                  "chunkId": 9976,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 53,
+                  "sourceRef": "beginner:125",
+                  "versionId": 233,
+                  "chunkIndex": 1,
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                  "startOffset": 37,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "willsoto/ng-chartist",
+                  "chunkId": 11861,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 40,
+                  "sourceRef": "beginner:9",
+                  "versionId": 300,
+                  "chunkIndex": 1,
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "willsoto/ng-chartist > 知识分类",
+                  "startOffset": 24,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "chunkId": 11848,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 47,
+                  "sourceRef": "beginner:8",
+                  "versionId": 299,
+                  "chunkIndex": 1,
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                  "startOffset": 31,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "mikiarlo3/ai-copywriter",
+                  "chunkId": 9666,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:88",
+                  "versionId": 223,
+                  "chunkIndex": 1,
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "img2threejs/img2threejs",
+                  "chunkId": 9767,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:101",
+                  "versionId": 226,
+                  "chunkIndex": 1,
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "img2threejs/img2threejs > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "Baskerville42/outage-data-ua",
+                  "chunkId": 11965,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 48,
+                  "sourceRef": "beginner:30",
+                  "versionId": 308,
+                  "chunkIndex": 1,
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                  "startOffset": 32,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "web-infra-dev/rspress",
+                  "chunkId": 10016,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 41,
+                  "sourceRef": "beginner:191",
+                  "versionId": 234,
+                  "chunkIndex": 1,
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "web-infra-dev/rspress > 知识分类",
+                  "startOffset": 25,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "zhnt/loushang",
+                  "chunkId": 9944,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:121",
+                  "versionId": 232,
+                  "chunkIndex": 1,
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhnt/loushang > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "pireel/pireel",
+                  "chunkId": 9740,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:94",
+                  "versionId": 225,
+                  "chunkIndex": 1,
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pireel/pireel > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10780,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 1,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "johnny-shaman/Sign",
+                  "chunkId": 12017,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:35",
+                  "versionId": 312,
+                  "chunkIndex": 1,
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "johnny-shaman/Sign > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 129,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "esengine/DeepSeek-Reasonix",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "esengine/DeepSeek-Reasonix",
+                      "chunkId": 12246,
+                      "content": "## 可证明能力\n包含架构文档（architectureDocs=true）、自动化测试、CI 和发布自动化；快速入门指南齐全；MIT 许可。\n\n",
+                      "endOffset": 336,
+                      "sourceRef": "career:128",
+                      "versionId": 322,
+                      "chunkIndex": 5,
+                      "documentId": 103,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "esengine/DeepSeek-Reasonix > 可证明能力",
+                      "startOffset": 263,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:128",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "career:128",
+                  "documentId": 103,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "stablyai/orca",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "stablyai/orca",
+                      "chunkId": 14046,
+                      "content": "<p align=\"center\">\n  <strong>The AI Orchestrator for 100x builders.</strong><br/>\n  Run Codex, ClaudeCode, OpenCode or Pi side-by-side — each in its own worktree, tracked in one place.\n</p>\n\n<h3 align=\"center\"><a href=\"https://onorca.dev/download\"><ins>Download Orca</ins></a></h3>\n\n<p align=\"center\">\n  <img src=\"docs/assets/readme-hero.jpg\" alt=\"Orca desktop app running agents in parallel worktrees, with the Orca mobile companion app in the corner\" width=\"960\" />\n</p>\n\n",
+                      "endOffset": 1840,
+                      "sourceRef": "stablyai/orca",
+                      "versionId": 384,
+                      "chunkIndex": 1,
+                      "documentId": 165,
+                      "sourceType": "GITHUB",
+                      "sectionPath": null,
+                      "startOffset": 1366,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:stablyai/orca",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "stablyai/orca",
+                  "documentId": 165,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "bashalarmistalt/decimen-optical-transfer",
+                  "evidence": [
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "bashalarmistalt/decimen-optical-transfer",
+                      "chunkId": 9641,
+                      "content": "## 最终建议\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\n\n",
+                      "endOffset": 493,
+                      "sourceRef": "beginner:80",
+                      "versionId": 222,
+                      "chunkIndex": 7,
+                      "documentId": 3,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "bashalarmistalt/decimen-optical-transfer > 最终建议",
+                      "startOffset": 445,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:80",
+                  "bestScore": 0.015873015873015872,
+                  "sourceRef": "beginner:80",
+                  "documentId": 3,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "virgiliojr94/book-to-skill",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "virgiliojr94/book-to-skill",
+                      "chunkId": 10456,
+                      "content": "## 预计周期\n兼职约 2～4 周（包括学习、修改和文档完善）\n\n",
+                      "endOffset": 949,
+                      "sourceRef": "career:270",
+                      "versionId": 248,
+                      "chunkIndex": 13,
+                      "documentId": 29,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "virgiliojr94/book-to-skill > 预计周期",
+                      "startOffset": 916,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:270",
+                  "bestScore": 0.015625,
+                  "sourceRef": "career:270",
+                  "documentId": 29,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15255,
+                      "content": "##### :black_small_square: Labs\n\n<p>\n&nbsp;&nbsp; <a href=\"https://labs.networkreliability.engineering/\"><b>NRE Labs</b></a> - learn automation by doing it. Right now, right here, in your browser.<br>\n</p>\n\n",
+                      "endOffset": 65228,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 80,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Networks &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Labs",
+                      "startOffset": 65021,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:trimstray/the-book-of-secret-knowledge",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "documentId": 213,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "chaitin/MonkeyCode",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "chaitin/MonkeyCode",
+                      "chunkId": 11838,
+                      "content": "## 适合新手的原因\n项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\n\n",
+                      "endOffset": 188,
+                      "sourceRef": "beginner:6",
+                      "versionId": 298,
+                      "chunkIndex": 4,
+                      "documentId": 79,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "chaitin/MonkeyCode > 适合新手的原因",
+                      "startOffset": 122,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:6",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "beginner:6",
+                  "documentId": 79,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "DavidHDev/canvas-ui",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9607,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 39,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 1,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                      "startOffset": 23,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:77",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "beginner:77",
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "fastrepl/anarlog",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "fastrepl/anarlog",
+                      "chunkId": 11809,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 36,
+                      "sourceRef": "beginner:2",
+                      "versionId": 296,
+                      "chunkIndex": 1,
+                      "documentId": 77,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "fastrepl/anarlog > 知识分类",
+                      "startOffset": 20,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:2",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "beginner:2",
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "is-a-dev/register",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "is-a-dev/register",
+                      "chunkId": 12004,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 37,
+                      "sourceRef": "beginner:34",
+                      "versionId": 311,
+                      "chunkIndex": 1,
+                      "documentId": 92,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "is-a-dev/register > 知识分类",
+                      "startOffset": 21,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:34",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "beginner:34",
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "agent-of-empires/agent-of-empires",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "agent-of-empires/agent-of-empires",
+                      "chunkId": 9976,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 53,
+                      "sourceRef": "beginner:125",
+                      "versionId": 233,
+                      "chunkIndex": 1,
+                      "documentId": 14,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                      "startOffset": 37,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:125",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "beginner:125",
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "willsoto/ng-chartist",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "willsoto/ng-chartist",
+                      "chunkId": 11861,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 40,
+                      "sourceRef": "beginner:9",
+                      "versionId": 300,
+                      "chunkIndex": 1,
+                      "documentId": 81,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "willsoto/ng-chartist > 知识分类",
+                      "startOffset": 24,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:9",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "beginner:9",
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "qwen-code-dev-bot/oh-my-cli",
+                      "chunkId": 11848,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 47,
+                      "sourceRef": "beginner:8",
+                      "versionId": 299,
+                      "chunkIndex": 1,
+                      "documentId": 80,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                      "startOffset": 31,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:8",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "beginner:8",
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "mikiarlo3/ai-copywriter",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "mikiarlo3/ai-copywriter",
+                      "chunkId": 9666,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:88",
+                      "versionId": 223,
+                      "chunkIndex": 1,
+                      "documentId": 4,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:88",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "beginner:88",
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "img2threejs/img2threejs",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "img2threejs/img2threejs",
+                      "chunkId": 9767,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:101",
+                      "versionId": 226,
+                      "chunkIndex": 1,
+                      "documentId": 7,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "img2threejs/img2threejs > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:101",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "beginner:101",
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Baskerville42/outage-data-ua",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "Baskerville42/outage-data-ua",
+                      "chunkId": 11965,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 48,
+                      "sourceRef": "beginner:30",
+                      "versionId": 308,
+                      "chunkIndex": 1,
+                      "documentId": 89,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                      "startOffset": 32,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:30",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "beginner:30",
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "web-infra-dev/rspress",
+                  "evidence": [
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "web-infra-dev/rspress",
+                      "chunkId": 10016,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 41,
+                      "sourceRef": "beginner:191",
+                      "versionId": 234,
+                      "chunkIndex": 1,
+                      "documentId": 15,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "web-infra-dev/rspress > 知识分类",
+                      "startOffset": 25,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:191",
+                  "bestScore": 0.013157894736842105,
+                  "sourceRef": "beginner:191",
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhnt/loushang",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "zhnt/loushang",
+                      "chunkId": 9944,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:121",
+                      "versionId": 232,
+                      "chunkIndex": 1,
+                      "documentId": 13,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhnt/loushang > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:121",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "beginner:121",
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pireel/pireel",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "pireel/pireel",
+                      "chunkId": 9740,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:94",
+                      "versionId": 225,
+                      "chunkIndex": 1,
+                      "documentId": 6,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pireel/pireel > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:94",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "beginner:94",
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.012658227848101266,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10780,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 1,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.012658227848101266,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "johnny-shaman/Sign",
+                  "evidence": [
+                    {
+                      "score": 0.0125,
+                      "title": "johnny-shaman/Sign",
+                      "chunkId": 12017,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:35",
+                      "versionId": 312,
+                      "chunkIndex": 1,
+                      "documentId": 93,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "johnny-shaman/Sign > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:35",
+                  "bestScore": 0.0125,
+                  "sourceRef": "beginner:35",
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "推荐项目  办公自动化 学习 一年编程基础",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [],
+            "parameters": {
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "办公自动化"
+                ],
+                "experience": "一年编程基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "想做的方向或用途是：办公自动化",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：办公自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              },
+              "semanticChunks": [
+                12246,
+                14046,
+                9641,
+                10456,
+                15255,
+                11838,
+                9607,
+                11809,
+                12004,
+                9976,
+                11861,
+                11848,
+                9666,
+                9767,
+                11965,
+                10016,
+                9944,
+                9740,
+                10780,
+                12017
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "办公自动化"
+                ]
+              },
+              "alternatives": [
+                {
+                  "label": "项目主题改为智能体",
+                  "total": 110,
+                  "changes": {
+                    "topic": [
+                      "智能体"
+                    ]
+                  },
+                  "confirmed": 110,
+                  "uncertain": 0
+                }
+              ],
+              "calculatedAt": "2026-10-04T02:50:22.961064374Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "办公自动化"
+                ],
+                "experience": "一年编程基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "想做的方向或用途是：办公自动化",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "lastCandidates": [],
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：办公自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

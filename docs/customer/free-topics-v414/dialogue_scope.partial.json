@@ -1,0 +1,122 @@
+{
+  "case": {
+    "id": "dialogue_scope",
+    "family": "dialogue",
+    "kind": "multi_turn",
+    "messages": [
+      "先不要推荐，记录我的需求：我想做Web应用开发，目标是求职，有Vue基础，半年内完成，语言不限。",
+      "现在给我推荐项目吧。",
+      "改成Vue方向，时间缩短为两个月，其他条件保持不变，推荐项目。"
+    ]
+  },
+  "sessionId": "155",
+  "turns": [
+    {
+      "message": "先不要推荐，记录我的需求：我想做Web应用开发，目标是求职，有Vue基础，半年内完成，语言不限。",
+      "runId": "9ad132bc-7148-4af6-9c40-1704d7be4285",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 3203,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "CHAT",
+        "state": {
+          "goal": "求职",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是求职"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "有Vue基础"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "我想做Web应用开发"
+            },
+            "maxDurationDays": {
+              "source": "MESSAGE",
+              "quote": "半年内完成"
+            }
+          },
+          "experience": "有Vue基础",
+          "topic": [
+            "Web应用开发"
+          ],
+          "durationSemantics": {
+            "quantity": 6,
+            "unit": "MONTH",
+            "relation": "AT_MOST"
+          },
+          "maxDurationDays": 180,
+          "lastChangeSummary": "已记录基础（排序偏好）：有Vue基础；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。"
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "CONVERSATION",
+        "answer": "已记录基础（排序偏好）：有Vue基础；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。\n\n好的，我先记下来，本轮不推荐项目。\n\n已记录的条件：\n- 目标：求职\n- 技术方向：Web应用开发\n- 基础：有Vue基础\n- 完成周期：半年内\n- 语言：不限\n\n需要开始推荐时告诉我，我可以直接按这套条件去筛。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：有Vue基础；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "model": "deepseek-flash",
+            "durationMs": 1792,
+            "usage": {
+              "prompt_tokens": 5302,
+              "completion_tokens": 345,
+              "total_tokens": 5647,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 156
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 310
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "promptVersion": "customer-v4.14-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 156,
+          "complete": true,
+          "cacheHitTokens": 4992,
+          "inputTokens": 5302,
+          "cacheMissTokens": 310,
+          "totalTokens": 5647,
+          "outputTokens": 345,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

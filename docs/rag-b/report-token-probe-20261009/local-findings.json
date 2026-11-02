@@ -1,0 +1,57 @@
+{
+  "status": "PREPARED_AWAITING_EXTERNAL_DATA_AUTHORIZATION",
+  "actualProviderCalls": 0,
+  "actualUsage": null,
+  "generationConfig": {
+    "model": "deepseek-v4-pro",
+    "endpoint": "https://api.deepseek.com/chat/completions",
+    "redisTextOverridePresent": false
+  },
+  "A_sources": {
+    "BEGINNER_PROJECT": 39,
+    "CAREER_PROJECT": 62,
+    "GITHUB": 375,
+    "JOB_POSTING": 95,
+    "MANUAL": 1
+  },
+  "B_sources": {
+    "BEGINNER_PROJECT": 39,
+    "CAREER_PROJECT": 62,
+    "GITHUB": 368,
+    "JOB_POSTING": 95,
+    "MANUAL": 1
+  },
+  "publishedLearningReadme": {
+    "nonempty": 14,
+    "empty": 25
+  },
+  "publishedCareerReadme": {
+    "nonempty": 62,
+    "empty": 0,
+    "directlyIncludedInReportPrompt": false
+  },
+  "historicalUsageLedger": "No enrichment rows found in ai_tool_call_log; callers use call(...).text() and discard provider usage. Cache bodies cannot recover historical input/reasoning/retry usage.",
+  "inputLengths": [
+    {
+      "kind": "beginner",
+      "population": 39,
+      "inputJsonCharactersExcludingSharedPrompt": {
+        "min": 311,
+        "median": 419,
+        "max": 6690,
+        "sum": 95025
+      }
+    },
+    {
+      "kind": "career",
+      "population": 62,
+      "inputJsonCharactersExcludingSharedPrompt": {
+        "min": 3893,
+        "median": 4009.5,
+        "max": 4363,
+        "sum": 250292
+      }
+    }
+  ],
+  "caveat": "Character counts are not token counts. Current published inputs are not proof of original generation inputs. Existing beginner cache purpose differs from current V3."
+}

@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "workflow-v2-design-1",
+  "status": "DESIGN_FIXTURES_NOT_RUNTIME_RESULTS",
+  "projectionContract": {
+    "description": "简化状态投影，不是生产请求 DTO。task 为当前任务标识；requirements 的简短字符串仅表示该用例的含义，正式结构按 02-state-contract.md。",
+    "execution": "每个场景独立，从 initialState 开始；每轮在前轮预期状态上应用 expect.patch（RFC7396 merge patch，null 删除字段）。未提及字段保留。expected 是验收预言，不是实测。",
+    "references": "列表中第 n 项按 listId 固定位置解析；项目 p*、s* 为合成标识，无真实 GitHub 地址。",
+    "fixtures": "serviceFixture 是预设查询结果，不可据此声明真实项目符合要求。场景仅验证状态与流程设计。",
+    "question": "question 对象保留 status；OPEN 才是待回答。questionsHistory 用于保存被替代记录的示例。",
+    "acceptance": "AC-01 路由，AC-02 需求变更，AC-03 追问续接，AC-04 追问或补查，AC-05 失败分类，AC-06 版本归属幂等，AC-07 实现映射，AC-08 指代前置。"
+  },
+  "scenarios": [
+    {
+      "id": "JAVA-JOB", "title": "Java 求职连续对话", "ac": ["AC-01", "AC-02", "AC-03", "AC-04", "AC-08"],
+      "initialState": {"task": null, "version": 0, "requirements": {}, "taskStatus": "DISCOVERING"},
+      "turns": [
+        {"id": "J1", "message": "想找一个 Java 求职项目。", "serviceFixture": "尚无候选；岗位或经验会影响方向",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "新任务", "nextAction": "ASK_REQUIREMENT", "patch": {"task": "T-JAVA", "version": 1, "requirements": {"language": "Java", "goal": "求职"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-J1", "status": "OPEN", "text": "你想应聘什么岗位？", "version": 1}}, "replyType": "NEEDS_CLARIFICATION", "forbidden": ["一次索取全部画像", "未搜索声称已找到项目"]}},
+        {"id": "J2", "message": "先解释一下 Redis 是什么。", "serviceFixture": "一般概念解释，不要求项目资料",
+          "expect": {"intent": "CHAT", "route": "DIRECT", "reference": "插问，保留 T-JAVA 和 Q-J1", "nextAction": "ANSWER", "patch": {}, "replyType": "ANSWERED", "forbidden": ["关闭 Q-J1", "新增必须 Redis 的需求", "项目搜索"]}},
+        {"id": "J3", "message": "后端岗位，做过课程项目，有六周时间，先推荐看看。", "serviceFixture": "库内有 p1/p2/p3；p1 必须 Docker，p2 无需 Docker，p3 Docker 要求未知；其余已核实条件适配",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "回答 Q-J1 并补充其他要求", "nextAction": "SEARCH_LOCAL", "patch": {"version": 2, "requirements": {"job": "后端", "experience": "做过课程项目", "maxDurationDays": 42}, "question": {"status": "ANSWERED", "answerMessageId": "J3"}, "taskStatus": "PRESENTED", "list": {"id": "L-J1", "version": 2, "projects": ["p1", "p2", "p3"]}}, "replyType": "RECOMMENDATIONS", "forbidden": ["重复询问岗位或基础", "展示即完成任务"]}},
+        {"id": "J4", "message": "第二个不用 Docker 能运行吗？", "serviceFixture": "p2 对应部署资料有无需 Docker 的依据",
+          "expect": {"intent": "PROJECT_DETAIL", "route": "PROJECT_REVIEW", "reference": "L-J1 position=2 => p2", "nextAction": "FETCH_EVIDENCE", "patch": {"focusedProject": "p2"}, "replyType": "ANSWERED", "forbidden": ["把提问记成禁止 Docker", "全库重新推荐"]}},
+        {"id": "J5", "message": "不用 Docker，六周改成两周，继续找。", "serviceFixture": "p2 的资料估算范围满足两周；p3 周期适配但 Docker 未知；p1 明确冲突",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "更新 T-JAVA；保留旧版解释记录", "nextAction": "SEARCH_LOCAL", "patch": {"version": 3, "requirements": {"maxDurationDays": 14, "allowDocker": false}, "list": {"id": "L-J2", "version": 3, "projects": ["p2", "p3"]}, "unknowns": {"p3": ["allowDocker"]}, "taskStatus": "PRESENTED"}, "replyType": "RECOMMENDATIONS", "forbidden": ["继续推荐 p1", "将 p3 未知写成满足", "保证用户两周完成"]}},
+        {"id": "J6", "message": "比较这两个的改造工作量。", "serviceFixture": "只比较 L-J2 的 p2/p3；改造资料缺口如实保留",
+          "expect": {"intent": "COMPARE_PROJECTS", "route": "PROJECT_REVIEW", "reference": "L-J2 => p2,p3", "nextAction": "COMPARE", "patch": {}, "replyType": "ANSWERED", "forbidden": ["混入 L-J1 的 p1", "未知改造量编成确定工期"]}},
+        {"id": "J7", "message": "选第一个。", "serviceFixture": "L-J2 当前有效；p2 是选择目标",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "L-J2 position=1 => p2；SELECT_PROJECT", "nextAction": "SELECT", "patch": {"selectedProject": "p2", "taskStatus": "COMPLETED"}, "replyType": "STATE_RECORDED", "forbidden": ["自动导入", "自动生成完整学习计划"]}}
+      ]
+    },
+    {
+      "id": "SHOP-INVENTORY", "title": "小店库存管理连续对话", "ac": ["AC-01", "AC-02", "AC-03", "AC-04", "AC-05"],
+      "initialState": {"task": null, "version": 0, "requirements": {}, "taskStatus": "DISCOVERING"},
+      "turns": [
+        {"id": "S1", "message": "给小店找个库存管理系统。", "serviceFixture": "可直接部署的应用与开发框架将导致不同候选",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "新任务", "nextAction": "ASK_TRADEOFF", "patch": {"task": "T-SHOP", "version": 1, "requirements": {"goal": "小店库存管理"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-S1", "status": "OPEN", "text": "你希望直接部署，还是接受改造？", "version": 1}}, "replyType": "NEEDS_CLARIFICATION", "forbidden": ["询问求职岗位", "强制填写学历"]}},
+        {"id": "S2", "message": "直接部署，日常必须离线，最好能扫码入库。", "serviceFixture": "库内覆盖该主题；s1/s2 可部署；定向补查后离线仍未知；s1 扫码有依据",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "回答 Q-S1 并保存多个需求", "nextAction": "FETCH_EVIDENCE", "patch": {"version": 2, "requirements": {"useMode": "直接部署", "runtimeNetwork": false, "scanPreference": "最好支持扫码"}, "question": {"status": "ANSWERED", "answerMessageId": "S2"}, "taskStatus": "PRESENTED", "list": {"id": "L-S1", "version": 2, "projects": ["s1", "s2"]}, "unknowns": {"s1": ["runtimeNetwork"], "s2": ["runtimeNetwork", "scanSupport"]}}, "replyType": "EVIDENCE_INCOMPLETE", "forbidden": ["把扫码偏好当硬要求", "反复问是否确定离线", "声称全部满足"]}},
+        {"id": "S3", "message": "只给我已经核实能离线的。", "serviceFixture": "再次检查已有资料，无候选具有足够离线依据；没有已知冲突证据",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "T-SHOP 切换 STRICT", "nextAction": "REEVALUATE", "patch": {"version": 3, "verificationMode": "STRICT", "taskStatus": "READY_TO_SEARCH", "list": null, "lastOutcome": "EVIDENCE_INCOMPLETE"}, "replyType": "EVIDENCE_INCOMPLETE", "forbidden": ["继续作为合格项目展示 s1/s2", "声称世界上没有离线库存软件"]}},
+        {"id": "S4", "message": "那接受待核实的，别给刚才第一个，再看其他的。", "serviceFixture": "最近一个非空已展示列表唯一为 L-S1，第一项 s1；s2 仍可考察；旧列表归属有效",
+          "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "历史 L-S1 position=1 => s1，排除；不按空列表猜测", "nextAction": "REEVALUATE", "patch": {"version": 4, "verificationMode": "EXPLORATORY", "excludedProjects": ["s1"], "taskStatus": "PRESENTED", "list": {"id": "L-S2", "version": 4, "projects": ["s2"]}}, "replyType": "RECOMMENDATIONS", "forbidden": ["取消离线硬要求", "恢复 s1", "声称 s2 已核实离线"]}},
+        {"id": "S5", "message": "把这个加入我的项目。", "serviceFixture": "唯一当前候选 s2，但现有导入资格校验未通过",
+          "expect": {"intent": "PROJECT_ACTION", "route": "ACTION", "reference": "L-S2 => s2", "nextAction": "CHECK_ACTION_ELIGIBILITY", "patch": {"lastOutcome": "ACTION_FAILED"}, "replyType": "ACTION_FAILED", "forbidden": ["因允许展示就允许导入", "无回执声称成功"]}}
+      ]
+    },
+    {
+      "id": "SHORT-ANSWER", "title": "单词回答绑定上一问", "ac": ["AC-03", "AC-08"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {"goal": "求职项目"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-X", "status": "OPEN", "text": "项目语言有没有明确限制？", "version": 1}},
+      "turns": [{"id": "X1", "message": "只要 Java。", "serviceFixture": "唯一开放问题 Q-X；还未确定岗位和经验",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "ANSWER_QUESTION Q-X", "nextAction": "ASSESS_READINESS", "patch": {"version": 2, "requirements": {"language": "Java"}, "question": {"status": "ANSWERED", "answerMessageId": "X1"}, "taskStatus": "READY_TO_SEARCH"}, "replyType": "STATE_RECORDED", "forbidden": ["按闲聊解释 Java", "关联另一个任务的问题"]}}]
+    },
+    {
+      "id": "AMBIGUOUS-REFERENCE", "title": "多个历史列表不能猜之前第二个", "ac": ["AC-06", "AC-08"],
+      "initialState": {"task": "T-X", "version": 2, "requirements": {}, "taskStatus": "PRESENTED"},
+      "turns": [{"id": "X2", "message": "之前那个第二个，帮我加入项目。", "serviceFixture": "两个历史列表各有第二项，未指明是哪次，且未提供 listId",
+        "expect": {"intent": "PROJECT_ACTION", "route": "DIRECT", "reference": "AMBIGUOUS；前置门控覆盖动作路线", "nextAction": "CLARIFY_REFERENCE", "patch": {}, "replyType": "NEEDS_CLARIFICATION", "forbidden": ["默认最新或第一个历史列表", "调用导入"]}}]
+    },
+    {
+      "id": "REWRITE-NOT-REQUIREMENT", "title": "消解不得新增语言限制", "ac": ["AC-02", "AC-08"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {}, "taskStatus": "PRESENTED", "list": {"id": "L-X", "version": 1, "projects": ["p2"]}},
+      "turns": [{"id": "X3", "message": "它支持离线吗？", "serviceFixture": "p2 是 Java 项目；消解句包含 Java，但原话没有语言要求",
+        "expect": {"intent": "PROJECT_DETAIL", "route": "PROJECT_REVIEW", "reference": "L-X => p2", "nextAction": "FETCH_EVIDENCE", "patch": {"focusedProject": "p2"}, "replyType": "ANSWERED", "forbidden": ["新增 Java 硬要求", "把询问当作离线限制"]}}]
+    },
+    {
+      "id": "RECORD-AND-PAUSE", "title": "只记录与暂停", "ac": ["AC-02", "AC-03"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {}, "taskStatus": "DISCOVERING"},
+      "turns": [
+        {"id": "X4", "message": "先记录必须离线，不要开始推荐。", "serviceFixture": "无需外部服务",
+          "expect": {"intent": "FIND_PROJECT", "route": "DIRECT", "reference": "RECORD_ONLY 覆盖执行", "nextAction": "RECORD_ONLY", "patch": {"version": 2, "requirements": {"runtimeNetwork": false}}, "replyType": "STATE_RECORDED", "forbidden": ["搜索", "生成候选"]}},
+        {"id": "X5", "message": "先暂停。", "serviceFixture": "当前任务唯一",
+          "expect": {"intent": "FIND_PROJECT", "route": "DIRECT", "reference": "PAUSE_TASK T-X", "nextAction": "PAUSE", "patch": {"taskStatus": "PAUSED"}, "replyType": "STATE_RECORDED", "forbidden": ["清空需求", "仍执行搜索"]}}
+      ]
+    },
+    {
+      "id": "SKIP-AND-PREVIEW", "title": "跳过软偏好先看候选", "ac": ["AC-03", "AC-04"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {"goal": "Java 后端求职"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-X", "status": "OPEN", "text": "对界面风格有偏好吗？", "version": 1}},
+      "turns": [{"id": "X6", "message": "不知道，先给我看看。", "serviceFixture": "主要用途清楚，界面是可选偏好；有候选 p1",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "SKIP_QUESTION Q-X", "nextAction": "SEARCH_LOCAL", "patch": {"question": {"status": "SKIPPED", "answerMessageId": "X6"}, "taskStatus": "PRESENTED", "list": {"id": "L-PREVIEW", "version": 1, "projects": ["p1"]}}, "replyType": "RECOMMENDATIONS", "forbidden": ["重复询问界面", "编造界面偏好"]}}]
+    },
+    {
+      "id": "CONFLICT", "title": "有效硬要求冲突", "ac": ["AC-02", "AC-04"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {"minDurationDays": 30}, "taskStatus": "READY_TO_SEARCH"},
+      "turns": [{"id": "X7", "message": "至少三十天的限制保留，但最多两周。", "serviceFixture": "原话明确同时保留上下限，不能擅自判断为替换",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "T-X 时间冲突", "nextAction": "ASK_REQUIREMENT", "patch": {"version": 2, "requirements": {"maxDurationDays": 14}, "taskStatus": "WAITING_USER", "question": {"id": "Q-CONFLICT", "status": "OPEN", "text": "至少三十天和最多两周冲突，你想调整哪一项？", "version": 2}}, "replyType": "NEEDS_CLARIFICATION", "forbidden": ["静默删除下限", "声称有完全满足结果"]}}]
+    },
+    {
+      "id": "EXPLAIN-AND-CHANGE", "title": "解释旧结果并更新要求", "ac": ["AC-01", "AC-02"],
+      "initialState": {"task": "T-X", "version": 2, "requirements": {"maxDurationDays": 42}, "taskStatus": "PRESENTED", "list": {"id": "L-OLD", "version": 2, "projects": ["p1", "p2"]}},
+      "turns": [{"id": "X8", "message": "为什么推荐第二个？现在只有一周了，重新找。", "serviceFixture": "有 version=2 的推荐记录；新周期下仅 p3 有依据",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "beforeTask 对 L-OLD/p2 旧快照解释", "nextAction": "SEARCH_LOCAL", "patch": {"version": 3, "requirements": {"maxDurationDays": 7}, "list": {"id": "L-NEW", "version": 3, "projects": ["p3"]}}, "replyType": "RECOMMENDATIONS", "forbidden": ["用新周期改写旧推荐理由", "遗漏改成一周"]}}]
+    },
+    {
+      "id": "COVERAGE-EXPANSION", "title": "覆盖不足扩展 GitHub", "ac": ["AC-04", "AC-05"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {"goal": "小店库存"}, "taskStatus": "READY_TO_SEARCH"},
+      "turns": [{"id": "X9", "message": "按这个需求找吧。", "serviceFixture": "库内检索成功，检查查询及目录后确认缺该主题资料；GitHub 可用，找到候选 g1，取得资料后匹配仍有未知",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "T-X", "nextAction": "SEARCH_GITHUB", "patch": {"taskStatus": "PRESENTED", "list": {"id": "L-GH", "version": 1, "projects": ["g1"]}, "unknowns": {"g1": ["deploymentEffort"]}}, "replyType": "RECOMMENDATIONS", "forbidden": ["搜索结果直接作为已核实推荐", "保证全网最优"]}}]
+    },
+    {
+      "id": "KNOWN-CONFLICT", "title": "本次范围内明确不匹配", "ac": ["AC-05"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {"runtimeNetwork": false}, "taskStatus": "READY_TO_SEARCH"},
+      "turns": [{"id": "X10", "message": "找离线的。", "serviceFixture": "当前可查范围内候选均明确要求运行时云接口；未检索全网",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "T-X", "nextAction": "EXPLAIN_NO_MATCH", "patch": {"lastOutcome": "NO_MATCH"}, "replyType": "NO_MATCH", "forbidden": ["自动改成允许联网", "声称所有 GitHub 项目都不满足"]}}]
+    },
+    {
+      "id": "SERVICE-FAILURE", "title": "故障不能伪装覆盖不足", "ac": ["AC-05"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {"goal": "Java 求职"}, "taskStatus": "READY_TO_SEARCH"},
+      "turns": [{"id": "X11", "message": "继续找。", "serviceFixture": "Embedding 429，本次没有有效检索结果",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "RESUME T-X，发起新的受控尝试", "nextAction": "REPORT_FAILURE", "patch": {"lastOutcome": "SERVICE_UNAVAILABLE"}, "replyType": "SERVICE_UNAVAILABLE", "forbidden": ["声称无匹配", "自动要求降低条件", "无限重试"]}}]
+    },
+    {
+      "id": "TASK-SWITCH", "title": "切换任务不携带专属要求", "ac": ["AC-03", "AC-06"],
+      "initialState": {"task": "T-JAVA", "version": 2, "requirements": {"language": "Java", "goal": "求职"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-J", "status": "OPEN", "text": "有多少时间？", "version": 2}},
+      "turns": [{"id": "X12", "message": "求职的先放下，给店里找库存系统，不限语言。", "serviceFixture": "明确切换，新任务使用模式未定",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "暂停 T-JAVA，新建 T-SHOP2", "nextAction": "ASK_TRADEOFF", "patch": {"task": "T-SHOP2", "version": 1, "requirements": {"language": null, "goal": "店铺库存"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-SHOP2", "status": "OPEN", "text": "希望直接部署还是接受改造？", "version": 1}, "archivedTasks": {"T-JAVA": {"status": "PAUSED", "version": 2, "requirements": {"language": "Java", "goal": "求职"}, "questionStatus": "CANCELLED"}}}, "replyType": "NEEDS_CLARIFICATION", "forbidden": ["给库存任务加 Java 硬限制", "同时推进两个任务"]}}]
+    },
+    {
+      "id": "STALE-ANSWER", "title": "过期问题不能修改新任务", "ac": ["AC-06", "AC-08"],
+      "initialState": {"task": "T-SHOP", "version": 1, "requirements": {"goal": "库存"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-SHOP", "status": "OPEN", "text": "直接部署还是改造？", "version": 1}},
+      "turns": [{"id": "X13", "message": "两周。", "inputMetadata": {"questionId": "Q-OLD-JOB"}, "serviceFixture": "Q-OLD-JOB 属于已暂停旧任务且 CANCELLED",
+        "expect": {"intent": "UNKNOWN", "route": "DIRECT", "reference": "问题失效或任务不一致", "nextAction": "CLARIFY_REFERENCE", "patch": {}, "replyType": "NEEDS_CLARIFICATION", "forbidden": ["将库存周期设为两周", "恢复旧问题"]}}]
+    },
+    {
+      "id": "REPLAY", "title": "相同请求幂等返回", "ac": ["AC-06"],
+      "initialState": {"task": "T-X", "version": 2, "requirements": {"language": "Java"}, "taskStatus": "READY_TO_SEARCH"},
+      "turns": [{"id": "X14", "message": "只要 Java。", "inputMetadata": {"requestId": "REQ-DONE", "sameHash": true}, "serviceFixture": "同 requestId、同内容已有成功结果",
+        "expect": {"intent": null, "route": "REPLAY", "reference": "公共入口直接返回原结果", "nextAction": "RETURN_PREVIOUS", "patch": {}, "replyType": "STATE_RECORDED", "forbidden": ["再次调用模型", "需求版本再次增长"]}}]
+    },
+    {
+      "id": "OWNERSHIP", "title": "外部会话对象不能使用", "ac": ["AC-06"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {}, "taskStatus": "DISCOVERING"},
+      "turns": [{"id": "X15", "message": "导入第二个。", "inputMetadata": {"listId": "OTHER-OWNER-LIST"}, "serviceFixture": "列表属于另一个用户",
+        "expect": {"intent": null, "route": "REJECT", "reference": "归属校验失败", "nextAction": "REJECT", "patch": {}, "replyType": "ACTION_FAILED", "forbidden": ["读取其他用户候选内容", "执行导入"]}}]
+    },
+    {
+      "id": "KNOWLEDGE-ONLY", "title": "资料问答不变成推荐", "ac": ["AC-01", "AC-05"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {}, "taskStatus": "PAUSED"},
+      "turns": [{"id": "X16", "message": "根据平台知识库，解释项目部署文档通常包含什么。", "serviceFixture": "有资料支持一部分，另一些方面没有依据",
+        "expect": {"intent": "KNOWLEDGE_QA", "route": "KNOWLEDGE", "reference": "问题范围为平台资料", "nextAction": "SEARCH_KNOWLEDGE", "patch": {}, "replyType": "ANSWERED", "forbidden": ["无依据部分当事实", "恢复推荐任务并搜索项目"]}}]
+    },
+    {
+      "id": "INSPECT-ONLY", "title": "解释失败不重试", "ac": ["AC-01", "AC-05"],
+      "initialState": {"task": "T-X", "version": 2, "requirements": {"language": "Java"}, "taskStatus": "READY_TO_SEARCH", "lastOutcome": "SERVICE_UNAVAILABLE"},
+      "turns": [{"id": "X17", "message": "刚才为什么没有结果？", "serviceFixture": "上次运行记录为检索超时",
+        "expect": {"intent": "TASK_STATUS", "route": "INSPECT", "reference": "EXECUTION 子类型，读取所属运行", "nextAction": "EXPLAIN_STATE", "patch": {}, "replyType": "ANSWERED", "forbidden": ["擅自重试", "声称要求太严格"]}}]
+    },
+    {
+      "id": "CLEAR-REQUIREMENT", "title": "取消要求后不能复活", "ac": ["AC-02", "AC-03"],
+      "initialState": {"task": "T-X", "version": 2, "requirements": {"allowDocker": false, "language": "Java"}, "taskStatus": "DISCOVERING"},
+      "turns": [
+        {"id": "X18", "message": "取消 Docker 限制，只记录，不推荐。", "serviceFixture": "明确取消",
+          "expect": {"intent": "FIND_PROJECT", "route": "DIRECT", "reference": "CLEAR 对应条目标为 REMOVED", "nextAction": "RECORD_ONLY", "patch": {"version": 3, "requirements": {"allowDocker": null}, "removedRequirements": ["allowDocker"]}, "replyType": "STATE_RECORDED", "forbidden": ["把取消写成禁止", "开始搜索"]}},
+        {"id": "X19", "message": "你好。", "serviceFixture": "历史或账号可能提到不用 Docker，但本轮没有新要求",
+          "expect": {"intent": "CHAT", "route": "DIRECT", "reference": "无需补全", "nextAction": "ANSWER", "patch": {}, "replyType": "ANSWERED", "forbidden": ["从摘要或画像恢复 Docker 限制"]}}
+      ]
+    },
+    {
+      "id": "CANCEL-TASK", "title": "取消后迟到结果不得恢复任务", "ac": ["AC-03", "AC-06"],
+      "initialState": {"task": "T-X", "version": 2, "requirements": {"language": "Java"}, "taskStatus": "EVALUATING"},
+      "turns": [{"id": "X21", "message": "取消这个任务，不找了。", "serviceFixture": "后台仍有旧运行在返回；取消事务先成功，随后旧结果到达",
+        "expect": {"intent": "FIND_PROJECT", "route": "DIRECT", "reference": "CANCEL_TASK T-X；以运行终态和会话版本拦截迟到写入", "nextAction": "CANCEL", "patch": {"taskStatus": "CANCELLED"}, "replyType": "STATE_RECORDED", "forbidden": ["迟到结果覆盖取消状态", "自动恢复推荐", "删除原始需求历史"]}}]
+    },
+    {
+      "id": "REQUEST-ID-CONFLICT", "title": "重复编号但不同消息不能复用结果", "ac": ["AC-06"],
+      "initialState": {"task": "T-X", "version": 2, "requirements": {"language": "Java"}, "taskStatus": "READY_TO_SEARCH"},
+      "turns": [{"id": "X22", "message": "改成 Python。", "inputMetadata": {"requestId": "REQ-DONE", "sameHash": false}, "serviceFixture": "REQ-DONE 已用于只要 Java，不同 inputHash",
+        "expect": {"intent": null, "route": "REJECT", "reference": "公共入口请求冲突", "nextAction": "REJECT", "patch": {}, "replyType": "ACTION_FAILED", "forbidden": ["直接复用 Java 的旧成功回复", "偷偷应用 Python 变更"]}}]
+    },
+    {
+      "id": "QUESTION-STILL-VALID", "title": "无关版本变化不使问题机械失效", "ac": ["AC-03", "AC-06"],
+      "initialState": {"task": "T-SHOP", "version": 3, "requirements": {"goal": "库存", "scanPreference": "希望扫码"}, "taskStatus": "WAITING_USER", "question": {"id": "Q-USE", "status": "OPEN", "text": "直接部署还是接受改造？", "version": 2}},
+      "turns": [{"id": "X23", "message": "接受少量改造。", "inputMetadata": {"questionId": "Q-USE"}, "serviceFixture": "版本 2 到 3 仅新增扫码偏好；使用方式仍未确定，任务与问题仍适用",
+        "expect": {"intent": "FIND_PROJECT", "route": "RECOMMEND", "reference": "Q-USE 重验证有效，允许回答", "nextAction": "ASSESS_READINESS", "patch": {"version": 4, "requirements": {"useMode": "接受少量改造"}, "question": {"status": "ANSWERED", "answerMessageId": "X23"}, "taskStatus": "READY_TO_SEARCH"}, "replyType": "STATE_RECORDED", "forbidden": ["只因版本不同拒绝答案", "丢失扫码偏好"]}}]
+    },
+    {
+      "id": "NO-PROGRESS", "title": "补查无进展必须停止", "ac": ["AC-04", "AC-05"],
+      "initialState": {"task": "T-X", "version": 1, "requirements": {"runtimeNetwork": false}, "taskStatus": "EVALUATING", "focusedProject": "p2"},
+      "turns": [{"id": "X20", "message": "帮我核实一下。", "serviceFixture": "候选身份明确；同范围同版本资料连续返回相同证据，执行预算已到",
+        "expect": {"intent": "PROJECT_DETAIL", "route": "PROJECT_REVIEW", "reference": "已确认的关注项目", "nextAction": "REPORT_LIMIT", "patch": {"lastOutcome": "LIMIT_REACHED", "taskStatus": "READY_TO_SEARCH"}, "replyType": "LIMIT_REACHED", "forbidden": ["继续无限工具循环", "假称已经核实"]}}]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "metrics": {
+    "sessions": 15,
+    "turns": 17,
+    "completed": 17,
+    "clarificationTurns": 1,
+    "turnsWithProjects": 7,
+    "cards": 15,
+    "cardsWithAdvice": 13,
+    "meanMs": 8315,
+    "p95Ms": 11437,
+    "maxMs": 11437,
+    "modelCalls": 38,
+    "retryCalls": 0,
+    "inputTokens": 113476,
+    "outputTokens": 15912,
+    "monetaryCost": "UNKNOWN",
+    "embeddingUsage": "NOT_REPORTED",
+    "promptVersions": [
+      "customer-v4.12-semantic-recommendations"
+    ],
+    "generations": [
+      "20261002164953-ec113424"
+    ]
+  },
+  "pairedResults": [
+    {
+      "family": "data",
+      "projectCounts": {
+        "free": 0,
+        "specific": 3
+      },
+      "finding": "lexical_false_negative"
+    },
+    {
+      "family": "office",
+      "projectCounts": {
+        "free": 0,
+        "specific": 1
+      },
+      "finding": "lexical_false_negative"
+    },
+    {
+      "family": "browser",
+      "projectCounts": {
+        "free": 1,
+        "specific": 1
+      },
+      "finding": "normalization_worked"
+    },
+    {
+      "family": "web",
+      "projectCounts": {
+        "free": 0,
+        "specific": 3
+      },
+      "finding": "lexical_false_negative"
+    },
+    {
+      "family": "frontend",
+      "projectCounts": {
+        "free": 0,
+        "specific": 3
+      },
+      "finding": "lexical_false_negative"
+    },
+    {
+      "family": "inventory",
+      "projectCounts": {
+        "free": 0,
+        "specific": 0
+      },
+      "finding": "unresolved_catalog_or_retrieval_gap"
+    }
+  ],
+  "checks": {
+    "allSyntheticSessionsDeleted": true,
+    "durationStateSequence": [
+      180,
+      180,
+      60
+    ],
+    "topicStateSequence": [
+      [
+        "Web应用开发"
+      ],
+      [
+        "Web应用开发"
+      ],
+      [
+        "Vue"
+      ]
+    ],
+    "careerGoalRetained": true,
+    "noneOfTestRepliesExposeCandidateCounts": true
+  },
+  "manualFindings": [
+    {
+      "id": "F1",
+      "severity": "high",
+      "title": "宽泛主题和任务语义被词面门槛排除",
+      "cases": [
+        "data_free",
+        "office_free",
+        "web_free",
+        "frontend_free"
+      ],
+      "evidence": "对应具体主题均有返回；data_free 的检索步骤已召回数据可视化、网页抓取与展示资料，后续项目筛选仍为空。",
+      "code": "CustomerTopics.matches / aliases; CustomerProjects.topicMatch"
+    },
+    {
+      "id": "F2",
+      "severity": "high",
+      "title": "弱相关依赖命中可成为正式主题匹配",
+      "cases": [
+        "data_specific"
+      ],
+      "evidence": "3D-printed-mirror-array 的功能证据是3D打印反射镜阵列，依赖Jupyter/NumPy；数据分析别名把依赖命中当作主题正相关。三个返回项目semanticMatched均为false。nbdev为文档/开发工具，单靠Jupyter标签不足以认定为数据分析应用。aidizhi/455555.xyz有图表渲染证据，可作为可视化工具候选。",
+      "code": "CustomerTopics.aliases(数据分析); CustomerProjects.ranking"
+    },
+    {
+      "id": "F3",
+      "severity": "high",
+      "title": "无结果建议存在目标偏移",
+      "cases": [
+        "frontend_free",
+        "inventory_free",
+        "inventory_specific",
+        "unknown_quantum"
+      ],
+      "evidence": "前端界面、库存管理和量子芯片请求均被建议改为智能体；虽然没有自动修改状态，也不再显示候选数，但建议与原目标缺少相关性依据。",
+      "code": "CustomerDiagnostics.evaluate: 固定主题清单、按confirmed数量排序、同字段只保留一个方案"
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "title": "资料未知的同义表达引起不必要澄清",
+      "cases": [
+        "hard_java_browser"
+      ],
+      "evidence": "Java和allowDocker=false正确保存；verificationMode被记录为INVALID_VERIFICATION_MODE。原话“资料未知可以明确标记未知”不包含当前校验接受的核实/核验/确认/探索/资料缺失/资料不足，因而进入待确认。",
+      "code": "CustomerState.apply verificationMode"
+    },
+    {
+      "id": "F5",
+      "severity": "medium",
+      "title": "有卡片不等于说明完整或相关性已验证",
+      "cases": [
+        "data_specific",
+        "web_specific"
+      ],
+      "evidence": "nbdev和WindowsCleaner卡片缺少本轮description与supportedExplanation；WindowsCleaner对Next.js的实际适用性仅凭本轮输出不能确认，不能判为推荐正确。",
+      "code": "CustomerProjects.search; CustomerConversation.enrichWithEvidence"
+    }
+  ],
+  "sourceSha256": {
+    "CustomerTopics.java": "a061386db7238f2d1b6c727aefbde0e453c81447d1ee62543e8f109bfa2fbe99",
+    "CustomerProjects.java": "b463f6119fa8719468ebbc9902f320f8e77db59695d477f80080a6b2cd2c55f5",
+    "CustomerDiagnostics.java": "c9865e81074d9d786691515a8d48d834960aba41523d93bfde79f5902a3dc6fe",
+    "CustomerState.java": "a4a790720587ae81c7b9f91a4ba42528413854a903b2754beff19edcc5424167"
+  },
+  "limitations": [
+    "每个输入仅执行一轮，不代表稳定成功率",
+    "服务成功与推荐质量分开判断，没有把17次SUCCEEDED当作17次业务验收通过",
+    "尚无全库人工相关性标注，不能计算可靠Recall或语义准确率",
+    "库存管理两种表达均无结果，不能据此认定全库不存在相关项目",
+    "金额未估算，报告仅记录供应商实际返回Token；Embedding用量未知"
+  ]
+}

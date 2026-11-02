@@ -1,0 +1,144 @@
+{
+  "case": {
+    "id": "hard_java_browser",
+    "family": "boundary",
+    "kind": "hard",
+    "messages": [
+      "推荐浏览器自动化项目，只能使用Java，不能使用Docker。没有符合的就提出调整建议，必须等我同意才能修改条件；资料未知可以明确标记未知。"
+    ]
+  },
+  "sessionId": "123",
+  "turns": [
+    {
+      "message": "推荐浏览器自动化项目，只能使用Java，不能使用Docker。没有符合的就提出调整建议，必须等我同意才能修改条件；资料未知可以明确标记未知。",
+      "runId": "aa19f758-7b92-4ae0-8858-fb47a8bd122d",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 4063,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "topic": [
+            "浏览器自动化"
+          ],
+          "provenance": {
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "浏览器自动化"
+            },
+            "language": {
+              "source": "MESSAGE",
+              "quote": "只能使用Java"
+            },
+            "allowDocker": {
+              "source": "MESSAGE",
+              "quote": "不能使用Docker"
+            }
+          },
+          "language": "Java",
+          "allowDocker": false,
+          "pendingConditions": [
+            {
+              "question": "关于“核实要求”，请确认一下具体要求；其他已确认条件会保留。",
+              "field": "verificationMode",
+              "quote": "推荐浏览器自动化项目，只能使用Java，不能使用Docker。没有符合的就提出调整建议，必须等我同意才能修改条件；资料未知可以明确标记未知。"
+            }
+          ],
+          "lastChangeSummary": "已记录Docker要求：不使用；已记录编程语言：Java；已记录项目主题：浏览器自动化。其他已确认条件保持不变。",
+          "lastQuestion": {
+            "text": "关于“核实要求”，请确认一下具体要求；其他已确认条件会保留。",
+            "runId": "aa19f758-7b92-4ae0-8858-fb47a8bd122d"
+          }
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "NEEDS_CLARIFICATION",
+        "answer": "已记录Docker要求：不使用；已记录编程语言：Java；已记录项目主题：浏览器自动化。其他已确认条件保持不变。\n\n能理解的条件已经记下，还有一项需要确认，避免给你不符合要求的项目。",
+        "pendingQuestion": "关于“核实要求”，请确认一下具体要求；其他已确认条件会保留。",
+        "pendingConditions": [
+          {
+            "question": "关于“核实要求”，请确认一下具体要求；其他已确认条件会保留。",
+            "field": "verificationMode",
+            "quote": "推荐浏览器自动化项目，只能使用Java，不能使用Docker。没有符合的就提出调整建议，必须等我同意才能修改条件；资料未知可以明确标记未知。"
+          }
+        ],
+        "conditionChangeSummary": "已记录Docker要求：不使用；已记录编程语言：Java；已记录项目主题：浏览器自动化。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5270,
+              "completion_tokens": 553,
+              "total_tokens": 5823,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 387
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 278
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 2677,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "promptVersion": "customer-v4.12-semantic-recommendations",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 387,
+          "complete": true,
+          "cacheHitTokens": 4992,
+          "inputTokens": 5270,
+          "cacheMissTokens": 278,
+          "totalTokens": 5823,
+          "outputTokens": 553,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "conditionValidation",
+          "detail": {
+            "rejected": [
+              {
+                "field": "verificationMode",
+                "reason": "INVALID_VERIFICATION_MODE",
+                "source": "MESSAGE",
+                "valueType": "String"
+              }
+            ]
+          },
+          "status": "REJECTED_PROPOSALS"
+        }
+      ]
+    }
+  ],
+  "sessionDeleted": true
+}

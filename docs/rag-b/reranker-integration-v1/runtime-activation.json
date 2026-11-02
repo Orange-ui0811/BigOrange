@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "scope": "Real local backend HTTP search after enabling the feature; one query, not another quality benchmark.",
+  "endpoint": "http://127.0.0.1:18080/admin/rag-lab/search",
+  "health": {
+    "db": "UP",
+    "redis": "UP",
+    "rag_vector_store": "UP",
+    "timestamp": "1793588341431"
+  },
+  "generation": "local-m3-1791424349362",
+  "rerank": {
+    "status": "APPLIED",
+    "model": "bge-reranker-v2-m3",
+    "candidateCount": 80,
+    "rerankedCount": 80,
+    "durationMs": 1984.660248,
+    "fallbackReason": "",
+    "requestCount": 4
+  },
+  "returnedHits": 8,
+  "fusedScoresPreservedChecks": 0,
+  "httpSearchRequests": 1,
+  "additionalRerankRequests": 4,
+  "apiKeysChanged": false,
+  "modelRuntime": "GITEE",
+  "localFeatureEnabled": true
+}

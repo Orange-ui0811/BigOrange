@@ -1,0 +1,329 @@
+[
+  {
+    "id": "F01",
+    "message": "晚上好，暂时想随便聊聊，不用找项目。",
+    "expected": {
+      "intents": [
+        "CHAT"
+      ],
+      "statuses": [
+        "CONVERSATION"
+      ]
+    }
+  },
+  {
+    "id": "F02",
+    "message": "最近学编程有点疲惫，给我一些学习建议就好，先不推荐作品。",
+    "expected": {
+      "intents": [
+        "CHAT"
+      ],
+      "statuses": [
+        "CONVERSATION"
+      ]
+    }
+  },
+  {
+    "id": "F03",
+    "message": "现在已经确认的筛选条件有哪些？",
+    "prior": {
+      "language": "Python",
+      "maxDurationDays": 42,
+      "allowDocker": false
+    },
+    "expected": {
+      "intents": [
+        "STATE"
+      ],
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 42,
+        "allowDocker": false
+      }
+    }
+  },
+  {
+    "id": "F04",
+    "message": "你说的项目用途核对，是检查什么内容？",
+    "prior": {
+      "goal": "学习"
+    },
+    "expected": {
+      "intents": [
+        "EXPLAIN"
+      ],
+      "state": {
+        "goal": "学习"
+      }
+    }
+  },
+  {
+    "id": "F05",
+    "message": "最长完成时间改为三个月，其他不动，先不要查找。",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 30
+    },
+    "expected": {
+      "state": {
+        "language": "Java",
+        "maxDurationDays": 90
+      }
+    }
+  },
+  {
+    "id": "F06",
+    "message": "项目难度不再设限，初学者的基础情况仍保留，暂时只更新。",
+    "prior": {
+      "difficulty": "初级",
+      "experience": "初学者"
+    },
+    "expected": {
+      "absent": "difficulty",
+      "state": {
+        "experience": "初学者"
+      }
+    }
+  },
+  {
+    "id": "F07",
+    "message": "把语言从Python换成JavaScript，先保存不查找。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "state": {
+        "language": "JavaScript"
+      }
+    }
+  },
+  {
+    "id": "F08",
+    "message": "只接受两周内的项目，而且不能依赖Docker；其他要求保持，先记下来。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 14,
+        "allowDocker": false
+      }
+    }
+  },
+  {
+    "id": "F09",
+    "message": "我的用途同时包含练手学习和求职，把这两个目标保存下来。",
+    "expected": {
+      "goalIncludes": [
+        "学习",
+        "求职"
+      ]
+    }
+  },
+  {
+    "id": "F10",
+    "message": "这个作品是给我自己的社区图书馆管理图书用的，请记住用途。",
+    "expected": {
+      "goalIncludes": [
+        "社区图书馆"
+      ]
+    }
+  },
+  {
+    "id": "F11",
+    "message": "按已经保存的Python条件推荐项目，目前不限定具体主题。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "projectsRequired": true,
+      "state": {
+        "language": "Python"
+      }
+    }
+  },
+  {
+    "id": "F12",
+    "message": "给我推荐Python检索增强生成项目做求职作品，周期不超过半年。",
+    "prior": {
+      "language": "Python",
+      "goal": "求职",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "projectsRequired": true,
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 180
+      },
+      "topicIncludesAny": [
+        "RAG",
+        "检索增强生成"
+      ]
+    }
+  },
+  {
+    "id": "F13",
+    "message": "继续按保存的Python、AI应用开发、求职条件查找，最长半年。",
+    "prior": {
+      "language": "Python",
+      "topic": [
+        "AI应用开发"
+      ],
+      "goal": "求职",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "projectsRequired": true,
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 180
+      },
+      "topicIncludesAny": [
+        "AI应用开发"
+      ]
+    }
+  },
+  {
+    "id": "F14",
+    "message": "推荐Java学习练手项目，完成时间不用限制。",
+    "prior": {
+      "language": "Java",
+      "goal": "学习"
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "state": {
+        "language": "Java"
+      }
+    }
+  },
+  {
+    "id": "F15",
+    "message": "平台收录的开源仓库是否都能直接商用？请依据资料回答，不要猜测。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "REFUSE_NO_PLATFORM_FAQ_EVIDENCE",
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE"
+      ]
+    }
+  },
+  {
+    "id": "F16",
+    "message": "请用知识库资料解释检索增强生成项目的主要功能，并给出来源。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE",
+        "REFUSE_NO_MATCH"
+      ]
+    }
+  },
+  {
+    "id": "F17",
+    "message": "知识库里智能体项目通常能做什么？请引用证据说明。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE",
+        "REFUSE_NO_MATCH"
+      ]
+    }
+  },
+  {
+    "id": "F18",
+    "turns": [
+      {
+        "message": "请推荐能够回答文档问题并给出处的Python RAG项目，求职用，最多半年完成。",
+        "expected": {
+          "intents": [
+            "RECOMMEND"
+          ],
+          "projectsRequired": true,
+          "topicIncludesAny": [
+            "RAG",
+            "检索增强生成"
+          ]
+        }
+      },
+      {
+        "message": "对比刚才推荐的前两个，说明各自适合做什么。",
+        "expected": {
+          "intents": [
+            "COMPARE"
+          ],
+          "projectsRequired": true,
+          "projectPositions": [
+            1,
+            2
+          ],
+          "referencesRequired": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "F19",
+    "turns": [
+      {
+        "message": "请推荐能够回答文档问题并给出处的Python RAG项目，求职用，最多半年完成。",
+        "expected": {
+          "intents": [
+            "RECOMMEND"
+          ],
+          "projectsRequired": true,
+          "topicIncludesAny": [
+            "RAG",
+            "检索增强生成"
+          ]
+        }
+      },
+      {
+        "message": "展开讲刚才推荐的第二个项目，它的部署和依赖有什么要求？",
+        "expected": {
+          "intents": [
+            "DETAIL"
+          ],
+          "projectsRequired": true,
+          "projectPositions": [
+            2
+          ],
+          "referencesRequired": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "F20",
+    "message": "删除语言限制，仍然禁止额外硬件，先保存不要搜索。",
+    "prior": {
+      "language": "Java",
+      "allowHardware": false
+    },
+    "expected": {
+      "absent": "language",
+      "state": {
+        "allowHardware": false
+      }
+    }
+  }
+]

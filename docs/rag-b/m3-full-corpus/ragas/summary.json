@@ -1,0 +1,81 @@
+{
+  "summary": {
+    "A": {
+      "n": 18,
+      "generated": 13,
+      "metrics": {
+        "context_precision": {
+          "mean": 0.679487179423077,
+          "validN": 13,
+          "undefinedOrErrorN": 5
+        },
+        "context_recall": {
+          "mean": 0.5128205128205129,
+          "validN": 13,
+          "undefinedOrErrorN": 5
+        },
+        "faithfulness": {
+          "mean": 0.7025641025641025,
+          "validN": 13,
+          "undefinedOrErrorN": 5
+        },
+        "factual_correctness": {
+          "mean": 0.33888888888888885,
+          "validN": 18,
+          "undefinedOrErrorN": 0
+        }
+      },
+      "emptyContextCount": 5
+    },
+    "B": {
+      "n": 18,
+      "generated": 18,
+      "metrics": {
+        "context_precision": {
+          "mean": 0.6378917863161822,
+          "validN": 18,
+          "undefinedOrErrorN": 0
+        },
+        "context_recall": {
+          "mean": 0.7592592592592593,
+          "validN": 18,
+          "undefinedOrErrorN": 0
+        },
+        "faithfulness": {
+          "mean": 0.9292913105413104,
+          "validN": 18,
+          "undefinedOrErrorN": 0
+        },
+        "factual_correctness": {
+          "mean": 0.4283333333333334,
+          "validN": 18,
+          "undefinedOrErrorN": 0
+        }
+      },
+      "emptyContextCount": 0
+    }
+  },
+  "model": "deepseek-v4-pro",
+  "attempts": 408,
+  "successfulRequests": 408,
+  "usage": {
+    "prompt_tokens": 510363,
+    "completion_tokens": 54342,
+    "total_tokens": 564705,
+    "prompt_cache_hit_tokens": 323840,
+    "prompt_cache_miss_tokens": 186523
+  },
+  "estimatedPeakUsd": 0.47565364,
+  "estimatedOffPeakUsd": 0.23782682,
+  "committedUpperBoundUsd": 0.47565364,
+  "limits": [
+    "18 reused diagnostic questions, not held-out blind test.",
+    "Reference answers locally source-grounded; not independent human gold.",
+    "A is platform knowledge retrieval and compressed cards; B native M3 evidence. Controlled answer prompt/model for both.",
+    "Graph-based candidates, profile-based project recommendations and final product output are outside this comparison.",
+    "Faithfulness uses the entire evidence set, not individual citation attribution.",
+    "Undefined RAGAS scores omitted from mean and counted explicitly.",
+    "Factual correctness against a short reference may penalize other correct details.",
+    "Same DeepSeek model generates and judges; correlated evaluator bias possible."
+  ]
+}

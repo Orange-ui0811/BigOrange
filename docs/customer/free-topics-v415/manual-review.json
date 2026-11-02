@@ -1,0 +1,69 @@
+{
+  "scope": "Development regression; frozen 15 synthetic sessions / 17 turns, one run per input. Not independent production acceptance.",
+  "checks": {
+    "durationSequence": [
+      180,
+      180,
+      60
+    ],
+    "goalRetained": true,
+    "noCandidateCountsInReplies": true,
+    "noLiteralNewlineEscapes": true,
+    "noIrrelevantAgentSuggestion": true,
+    "indexVectorsAfterRecovery": 8660,
+    "activeRunsAfterTest": 0
+  },
+  "findings": [
+    {
+      "severity": "improved",
+      "cases": [
+        "data_free",
+        "office_free",
+        "web_free",
+        "frontend_free"
+      ],
+      "finding": "Former lexical false negatives now return purpose-related projects, including Plotly/deck.gl, n8n/PDF automation, web applications, and actual frontends."
+    },
+    {
+      "severity": "improved",
+      "cases": [
+        "data_specific",
+        "frontend_free"
+      ],
+      "finding": "Mirror-array dependency false positive and frontend-checklist-as-app no longer appear in these final cases."
+    },
+    {
+      "severity": "improved",
+      "cases": [
+        "hard_java_browser"
+      ],
+      "finding": "No redundant clarification; Java and no-Docker retained. Two candidates have unknown language/resource facts, explicitly marked NEEDS_VERIFICATION and non-importable; they are NOT verified Java matches."
+    },
+    {
+      "severity": "unresolved",
+      "cases": [
+        "frontend_specific"
+      ],
+      "finding": "Provider rejected purpose-review request. One reconstructed same-content diagnostic reproduced HTTP 400 Content Exists Risk. Exact triggering document is not established. Original failure retained, not overwritten by a rerun."
+    },
+    {
+      "severity": "unresolved",
+      "cases": [
+        "data_free"
+      ],
+      "finding": "aidizhi/455555.xyz has a repository heading inconsistent with its data-visualization prose. Grounding in stored content does not establish external truth or source trust. Source review required; no unverified DB deletion or reclassification performed."
+    },
+    {
+      "severity": "limitation",
+      "cases": [
+        "inventory_free",
+        "inventory_specific"
+      ],
+      "finding": "No suitable match in this bounded candidate window; not proof that the complete catalog has none."
+    },
+    {
+      "severity": "performance",
+      "finding": "Purpose thinking used 280184ms cumulative call time and 66901 output tokens. Five length-truncation retries are included. Mean overall 26.686s, sample p95/max 58.515s; not concurrent load testing."
+    }
+  ]
+}

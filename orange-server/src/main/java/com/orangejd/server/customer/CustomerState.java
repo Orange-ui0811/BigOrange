@@ -7,11 +7,13 @@ public final class CustomerState {
     private CustomerState() {}
     public static final Set<String> FIELDS=Set.of("goal","experience","topic","language","minDurationDays","maxDurationDays","difficulty","sourceType","allowDocker","allowDatabase","allowSecrets","allowHardware","verificationMode");
     public static final Set<String> INTENTS=Set.of("CHAT","QUESTION","COLLECT","RECOMMEND","DETAIL","COMPARE","STATE","DIAGNOSE","EXPLAIN");
-    public static final String PROMPT="""
+    public static final String PROMPT=CustomerTurnInterpreter.PROMPT;
+    public static final String LEGACY_PROMPT="""
         你是友好的项目推荐客服：理解用户、自然聊天，提出有原文依据的条件变更；不执行工具。只返回JSON。
         输入message是本轮原话，state是服务端确认状态，profile是账号确认画像，history/summary是历史参考，referenceDate为今天。
         输出 {"intent":"CHAT|QUESTION|COLLECT|RECOMMEND|DETAIL|COMPARE|STATE|DIAGNOSE|EXPLAIN","reply":"中文回复","changes":{},"profileDefaults":{},"positions":[]}。
         intent规则：问候/闲聊/一般技术解释CHAT；具体项目或平台事实QUESTION；补充条件COLLECT；明确要项目RECOMMEND；项目详情DETAIL；比较COMPARE；问当前条件STATE；问无结果原因/调整建议DIAGNOSE；仅问核对过程或失败原因EXPLAIN。
+        用户明确要求根据知识库、项目资料或README解释、归纳功能、核对事实或给出处时，用QUESTION，即使问的是一类项目而非单个项目。一般概念讲解且未要求资料依据才用CHAT。QUESTION的reply不能代替检索证据直接断言库中事实。
         同轮问原因或原条件，又要修改/继续找：主intent用业务动作，同时beforeTask={"intent":"EXPLAIN或STATE","quote":"本轮说明请求原话"}。最多一段只读说明加一次业务动作。仅EXPLAIN时changes/profileDefaults={}，不重新推荐。服务端解释执行事实，reply不能编造原因、候选数或已执行结果。
         用户要求推荐立即处理，画像不全不阻断；只说记录/先聊/不用推荐用CHAT。每轮最多问一个有帮助的问题，已确认的不反复问。
         CHAT直接自然回应，用Markdown真实换行，不能输出可见的反斜杠n；不捏造当前天气、平台政策、项目身份、仓库事实或链接。dialogueOnly=true必须CHAT并填reply，changes={}，不从历史提取条件。
@@ -19,6 +21,7 @@ public final class CustomerState {
         changes只引用message，profileDefaults只引用profile且不能覆盖现有条件或clearedFields；历史不作为本轮新要求。用户未提及则不修改。
         字段：goal、experience、topic、language、minDurationDays、maxDurationDays、difficulty、sourceType、allowDocker、allowDatabase、allowSecrets、allowHardware、verificationMode。
         goal为排序偏好，可多选、自定义，value字符串或最多6项数组。支持学习、求职、赚钱/接单/创业、探索兴趣；自定义目的保留原话。既学习又求职用SET数组；还想/增加用ADD；不再求职用REMOVE；只要/改成用SET。不宣称只有学习求职两项，不自动限制来源分类。
+        区分为什么做（goal，用途或受益对象）和做什么（topic，功能或技术主题）。用户要求记录自用、服务店铺等实际用途时保留为自定义goal；同一句中的库存管理等功能也可同时记录为topic，各字段必须有原文quote。不把用户的实际用途仅替换为学习或求职。
         experience是基础偏好；新手/刚学不自动设difficulty。sourceType仅在明确只看学习/新手专区或求职专区时设置BEGINNER_PROJECT或CAREER_PROJECT。
         topic.value为1至6项短字符串数组，保留明确主题，不把项目/学习/求职当主题。AI应用开发是有效宽泛方向，包含RAG/智能体/聊天机器人，不要求再次确认；由检索层展开，不能擅自缩为只要RAG或把RAG扩大成全部AI。
         language归一化编程语言别名（爪哇Java、JS JavaScript、派森Python、Golang Go），兴趣或用户基础不自动变成语言硬限制。
@@ -69,6 +72,10 @@ public final class CustomerState {
                 String field=r.get("field").toString();
                 // A null property is a malformed no-op, not evidence that the user mentioned that field.
                 if(action.get("changes") instanceof Map<?,?> changes && changes.get(field)==null) continue;
+                // Invalid model paraphrases of ranking preferences must not block grounded project needs.
+                if(Set.of("goal","experience").contains(field)) continue;
+                // A hallucinated category is not a user ambiguity. Keep the rejection in the trace only.
+                if("sourceType".equals(field) && !mentionsSourceCategory(message)) continue;
                 pending.put(field,Map.of("field",field,"quote",message,"question","关于“"+label(field)+"”，请确认一下具体要求；其他已确认条件会保留。"));
             }
             if(action.get("pendingConditions") instanceof List<?> values) for(Object raw:values) {
@@ -79,6 +86,7 @@ public final class CustomerState {
                 if(raw instanceof Map<?,?> p && p.get("quote") instanceof String quote && !quote.isBlank() && message.contains(quote)
                     && p.get("question") instanceof String question && !question.isBlank() && question.length()<=250) {
                     String field=Objects.toString(p.get("field"),"other");
+                    if("sourceType".equals(field) && !mentionsSourceCategory(quote)) continue;
                     if(FIELDS.contains(field) || field.equals("other")) pending.put(field,Map.of("field",field,"quote",quote,"question",question));
                 }
             }
@@ -89,6 +97,9 @@ public final class CustomerState {
             pending.put("maxDurationDays",Map.of("field","maxDurationDays","quote",message,"reason","DURATION_RANGE_CONFLICT","question","当前最短周期为"+min.intValue()+"天，最长周期为"+max.intValue()+"天，两项冲突。你希望调整哪一个？"));
         if(pending.isEmpty()) next.remove("pendingConditions"); else next.put("pendingConditions",new ArrayList<>(pending.values()));
         return next;
+    }
+    private static boolean mentionsSourceCategory(String text) {
+        return text.matches("(?s).*(来源|分类|专区|项目库|类项目).*");
     }
     public static boolean isConfirmation(String message) { return message.strip().matches("(确认|确认修改|确认取消|是的|确定|同意)[。！!]*"); }
     private static boolean clearIsQuestion(String message,Map<?,?> change) {

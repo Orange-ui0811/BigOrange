@@ -1,0 +1,24 @@
+{
+  "phase": "repair",
+  "caseSha256": "7ac4f99eb1f326de960b0551e048aeb42fbf21aa27a9c082cbb8723559febc7d",
+  "runs": 8,
+  "model": "deepseek-flash",
+  "scope": "ACTION prompt and frozen synthetic messages only; no profile/history/evidence",
+  "embeddingProvider": "OLLAMA",
+  "environmentTextEndpoint": "https://api.deepseek.com",
+  "endpointResolution": "Platform text configuration; active runtime settings can override environment.",
+  "purposePolicy": {
+    "thinking": "false",
+    "outputTokens": "2048",
+    "stageSeconds": "30",
+    "retryReserveSeconds": "10",
+    "maxAttempts": 2,
+    "truncatedThinkingFallback": "same input/schema with thinking disabled"
+  },
+  "sourceSha256": {
+    "orange-server\\src\\main\\java\\com\\orangejd\\server\\customer\\CustomerModel.java": "75263c034c39cb11006c98b71030e176c8f6ec66f874345d5eed9c3adc2f0794",
+    "orange-server\\src\\main\\java\\com\\orangejd\\server\\customer\\CustomerProperties.java": "62850ffa136b1f9e1a8426138efab5b7d7e084672a7831c8a26c4ea4752da139",
+    "orange-server\\src\\main\\java\\com\\orangejd\\server\\customer\\CustomerPurpose.java": "f75878998b81eee4ebdd514389783e9a39a4475d5e0edc1ee695a206b601f0b5"
+  },
+  "releaseApproved": false
+}

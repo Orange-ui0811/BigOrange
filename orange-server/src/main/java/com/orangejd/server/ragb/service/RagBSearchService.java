@@ -10,6 +10,8 @@ import com.orangejd.server.ragb.retrieval.RagBSearchConstraints;
 import com.orangejd.server.ragb.retrieval.RagBVectorSearchResult;
 import com.orangejd.server.ragb.retrieval.RagBConstraintMatcher;
 import com.orangejd.server.ragb.retrieval.RagBRetrievalMetadataResolver;
+import com.orangejd.server.ragb.retrieval.RagBReranker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,16 +28,25 @@ public class RagBSearchService {
     private final RagBRelevanceGuard relevanceGuard;
     private final RagBConstraintMatcher constraintMatcher;
     private final RagBRetrievalMetadataResolver metadataResolver;
+    private final RagBReranker reranker;
 
     public RagBSearchService(RagBProperties properties, RagBMapper mapper, RagBIndexRouter indexes,
                              RagBRelevanceGuard relevanceGuard, RagBConstraintMatcher constraintMatcher,
                              RagBRetrievalMetadataResolver metadataResolver) {
+        this(properties,mapper,indexes,relevanceGuard,constraintMatcher,metadataResolver,null);
+    }
+
+    @Autowired
+    public RagBSearchService(RagBProperties properties, RagBMapper mapper, RagBIndexRouter indexes,
+                             RagBRelevanceGuard relevanceGuard, RagBConstraintMatcher constraintMatcher,
+                             RagBRetrievalMetadataResolver metadataResolver,RagBReranker reranker) {
         this.properties = properties;
         this.mapper = mapper;
         this.indexes = indexes;
         this.relevanceGuard = relevanceGuard;
         this.constraintMatcher = constraintMatcher;
         this.metadataResolver = metadataResolver;
+        this.reranker = reranker;
     }
 
     public Map<String, Object> search(String query, int topK, double threshold, Set<String> sourceTypes) {
@@ -52,6 +63,7 @@ public class RagBSearchService {
         result.put("hits", searchResult.hits());
         result.put("evidenceGroups", searchResult.evidenceGroups());
         result.put("adapter", searchResult.adapter());
+        result.put("rerank", searchResult.rerank());
         return result;
     }
 
@@ -91,7 +103,10 @@ public class RagBSearchService {
         }
         com.orangejd.server.service.TrendLabObservation.elapsed("B.databaseMetadataAndFilters",filterStarted);
         boolean diversify=constraints.diversifyProjects() || !constraints.documentIds().isEmpty() || recommendationQuery(query);
-        List<RagBSearchHit> immutableHits = com.orangejd.server.service.TrendLabObservation.measure("B.dedupAndSelect", () -> selectEvidence(diversify, eligible, Math.max(1, Math.min(topK, 20))));
+        List<RagBSearchHit> deduplicated = com.orangejd.server.service.TrendLabObservation.measure("B.dedup", () -> deduplicate(eligible));
+        RagBReranker.Result ranked = reranker==null ? new RagBReranker.Result(deduplicated,RagBReranker.Trace.disabled(deduplicated.size()))
+                : com.orangejd.server.service.TrendLabObservation.measure("B.rerank", () -> reranker.rerank(query,deduplicated));
+        List<RagBSearchHit> immutableHits = com.orangejd.server.service.TrendLabObservation.measure("B.select", () -> selectEvidence(diversify, ranked.hits(), Math.max(1, Math.min(topK, 20))));
         long relevanceStarted=System.nanoTime();
         RagBRelevanceGuard.Decision relevance = relevanceGuard.assess(query, immutableHits);
         if (!relevance.relevant() && !immutableHits.isEmpty()) {
@@ -102,12 +117,16 @@ public class RagBSearchService {
         com.orangejd.server.service.TrendLabObservation.elapsed("B.relevanceAndPolicy",relevanceStarted);
         return new SearchResult(generation.getGenerationKey(), indexes.adapterType(generation),
                 vectorResult.scannedCount(), candidates.size(), Map.copyOf(excluded), immutableHits,
-                groupEvidence(immutableHits), answerPolicy);
+                groupEvidence(immutableHits), answerPolicy,ranked.trace());
     }
 
     public record SearchResult(String generation, String adapter, int scannedCount, int candidateCount,
                                Map<String, Integer> excludedReasons, List<RagBSearchHit> hits,
-                               List<EvidenceGroup> evidenceGroups, String answerPolicy) {
+                               List<EvidenceGroup> evidenceGroups, String answerPolicy,RagBReranker.Trace rerank) {
+        public SearchResult(String generation,String adapter,int scannedCount,int candidateCount,Map<String,Integer> excludedReasons,
+                            List<RagBSearchHit> hits,List<EvidenceGroup> evidenceGroups,String answerPolicy){
+            this(generation,adapter,scannedCount,candidateCount,excludedReasons,hits,evidenceGroups,answerPolicy,RagBReranker.Trace.disabled(hits.size()));
+        }
         public SearchResult(String generation, int scannedCount, int candidateCount,
                             Map<String, Integer> excludedReasons, List<RagBSearchHit> hits) {
             this(generation, "EXACT", scannedCount, candidateCount, excludedReasons, hits, List.of(),
@@ -136,7 +155,7 @@ public class RagBSearchService {
         }).toList();
     }
 
-    private List<RagBSearchHit> selectEvidence(boolean diversify, List<RagBSearchHit> candidates, int limit) {
+    private List<RagBSearchHit> deduplicate(List<RagBSearchHit> candidates) {
         List<RagBSearchHit> ranked = candidates.stream()
                 .sorted(java.util.Comparator.comparingDouble(RagBSearchHit::score).reversed()).toList();
         // Remove repeated snapshots/identical passages, not distinct facts from one repository.
@@ -144,6 +163,10 @@ public class RagBSearchService {
         ranked = ranked.stream().filter(hit -> fingerprints.add(sourceKey(hit) + "\n"
                 + (hit.content() == null ? "" : hit.content().replace("\r\n", "\n").trim()))).toList();
         ranked = com.orangejd.server.ragb.retrieval.RagBNearDuplicates.distinct(ranked);
+        return ranked;
+    }
+
+    private List<RagBSearchHit> selectEvidence(boolean diversify, List<RagBSearchHit> ranked, int limit) {
         if (!diversify) return ranked.stream().limit(limit).toList();
         List<RagBSearchHit> selected = new ArrayList<>();
         Set<String> represented = new java.util.LinkedHashSet<>();

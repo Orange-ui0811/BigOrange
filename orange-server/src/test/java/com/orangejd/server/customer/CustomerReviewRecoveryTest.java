@@ -23,7 +23,7 @@ class CustomerReviewRecoveryTest {
     final List<Map<String,Object>> results=new ArrayList<>();
     CustomerReviewRecoveryTest() {
         org.springframework.test.util.ReflectionTestUtils.setField(context,"run","r");
-        when(store.session(1,5)).thenAnswer(i->Map.of("state_json",json.write(state)));
+        when(store.session(1,5)).thenAnswer(i->CustomerWorkflowFixtures.session(json.write(state)));
         when(db.messages(1,Long.MAX_VALUE,40)).thenReturn(List.of());
         when(tools.context(eq("r"),eq(5L),any())).thenReturn(context);
         when(context.profile()).thenReturn("");
@@ -110,7 +110,7 @@ class CustomerReviewRecoveryTest {
         run("帮我推荐项目");run("再推荐一次");
         verify(model,times(1)).call(eq(CustomerPurpose.PLAN_PROMPT),anyMap(),any(),anyList());
         verify(model,times(1)).call(eq(CustomerPurpose.REVIEW_PROMPT),anyMap(),any(),anyList());
-        verify(context,times(2)).projectRecall(anyString());verify(projects,times(2)).detail(eq("EXTERNAL_PROJECT"),eq(1L),anyMap());
+        verify(context,times(2)).projectRecall(anyString());verify(projects,times(2)).exploreDetail(eq("EXTERNAL_PROJECT"),eq(1L),anyMap());
         assertThat(CustomerTaskProgress.visible(state)).containsEntry("phase","ENRICHING").containsEntry("status","PROJECTS_WITH_LIMITATIONS");
         assertThat(card).containsEntry("importable",false);
     }

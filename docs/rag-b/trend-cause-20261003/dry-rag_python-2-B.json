@@ -1,0 +1,457 @@
+{
+  "case": "rag_python",
+  "variant": "B",
+  "phase": "retrieval",
+  "repeat": 2,
+  "startedAt": "2026-10-03T11:50:49.998682+00:00",
+  "response": {
+    "runtime": {
+      "model": "DeepSeek-V4-Pro",
+      "source": "REDIS",
+      "endpoint": "https://ai.gitee.com/v1",
+      "version": "1-1785206616703"
+    },
+    "variant": "B",
+    "retrieval": {
+      "text": "[candidateId=E1;evidenceId=E1;repo=quivrhq/quivr;mode=RAW_FALLBACK] facts=基础 RAG 创建如上所示的基础 RAG 工作流很简单，步骤如下： 1. 将 API 密钥添加到环境变量中 python import os os.environ[\"OPENAI API KEY\"] = \"myopenai apikey\" Quivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。 2. 创建 YAML 文件 basic rag workflow.yaml 并将以下内容复制进去 yaml workflow config: name: \"standard RAG\" nodes: nam…",
+      "trace": {
+        "strategyVersion": "b-trend-adapter-v1-equal-budget",
+        "status": "USED",
+        "queries": [
+          "RAG Python",
+          "RAG Python  学习 中文提问，检索英文技术文档，说明部署依赖 有基础"
+        ],
+        "routes": [
+          {
+            "excludedReasons": {},
+            "answerPolicy": "ANSWER_WITH_CITATIONS",
+            "status": "USED",
+            "query": "RAG Python",
+            "hits": [
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15809",
+                "chunkIndex": 3,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": "🌐 Community Channels",
+                "startOffset": 2246,
+                "endOffset": 2420,
+                "content": "## 🌐 Community Channels\n\nWe are on [Discord](https://the-algorithms.com/discord)! Community channels are a great way for you to ask questions and get help. Please join us!\n\n",
+                "score": 0.13529411764705884,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=25,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15807",
+                "chunkIndex": 1,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": null,
+                "startOffset": 1871,
+                "endOffset": 2136,
+                "content": "<!-- Short description: -->\n  <h3>All algorithms implemented in Python - for education 📚</h3>\n</div>\n\nImplementations are for learning purposes only. They may be less efficient than the implementations in the Python standard library. Use them at your discretion.\n\n",
+                "score": 0.13215488215488216,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=48,nameRank=39,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15810",
+                "chunkIndex": 4,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": "📜 List of Algorithms",
+                "startOffset": 2420,
+                "endOffset": 2540,
+                "content": "## 📜 List of Algorithms\n\nSee our [directory](DIRECTORY.md) for easier navigation and a better overview of the project.\n",
+                "score": 0.13125,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=36,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15808",
+                "chunkIndex": 2,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": "🚀 Getting Started",
+                "startOffset": 2136,
+                "endOffset": 2246,
+                "content": "## 🚀 Getting Started\n\n📋 Read through our [Contribution Guidelines](CONTRIBUTING.md) before you contribute.\n\n",
+                "score": 0.1309278350515464,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=37,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15806",
+                "chunkIndex": 0,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": null,
+                "startOffset": 0,
+                "endOffset": 1871,
+                "content": "<div align=\"center\">\n<!-- Title: -->\n  <a href=\"https://github.com/TheAlgorithms/\">\n    <img src=\"https://raw.githubusercontent.com/TheAlgorithms/website/1cd824df116b27029f17c2d1b42d81731f28a920/public/logo.svg\" height=\"100\">\n  </a>\n  <h1><a href=\"https://github.com/TheAlgorithms/\">The Algorithms</a> - Python</h1>\n\n<!-- Labels: -->\n  <!-- First row: -->\n  <a href=\"https://gitpod.io/#https://github.com/TheAlgorithms/Python\">\n    <img src=\"https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod&style=flat-square\" height=\"20\" alt=\"Gitpod Ready-to-Code\">\n  </a>\n  <a href=\"https://github.com/TheAlgorithms/Python/blob/master/CONTRIBUTING.md\">\n    <img src=\"https://img.shields.io/static/v1.svg?label=Contributions&message=Welcome&color=0059b3&style=flat-square\" height=\"20\" alt=\"Contributions Welcome\">\n  </a>\n  <img src=\"https://img.shields.io/github/repo-size/TheAlgorithms/Python.svg?label=Repo%20size&style=flat-square\" height=\"20\">\n  <a href=\"https://the-algorithms.com/discord\">\n    <img src=\"https://img.shields.io/discord/808045925556682782.svg?logo=discord&colorB=7289DA&style=flat-square\" height=\"20\" alt=\"Discord chat\">\n  </a>\n\n  <!-- Second row: -->\n  <br>\n  <a href=\"https://github.com/TheAlgorithms/Python/actions\">\n    <img src=\"https://img.shields.io/github/actions/workflow/status/TheAlgorithms/Python/build.yml?branch=master&label=CI&logo=github&style=flat-square\" height=\"20\" alt=\"GitHub Workflow Status\">\n  </a>\n  <a href=\"https://github.com/pre-commit/pre-commit\">\n    <img src=\"https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square\" height=\"20\" alt=\"pre-commit\">\n  </a>\n  <a href=\"https://docs.astral.sh/ruff/formatter/\">\n    <img src=\"https://img.shields.io/static/v1?label=code%20style&message=ruff&color=black&style=flat-square\" height=\"20\" alt=\"code style: black\">\n  </a>\n\n",
+                "score": 0.11744186046511629,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=112,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "250",
+                "versionId": "469",
+                "chunkId": "16037",
+                "chunkIndex": 7,
+                "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+                "sourceType": "GITHUB",
+                "sourceRef": "QuivrHQ/quivr",
+                "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+                "startOffset": 1932,
+                "endOffset": 3145,
+                "content": "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+                "score": 0.019378517249816492,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+              },
+              {
+                "documentId": "75",
+                "versionId": "294",
+                "chunkId": "11769",
+                "chunkIndex": 36,
+                "title": "项目式学习",
+                "sourceType": "GITHUB",
+                "sourceRef": "practical-tutorials/project-based-learning",
+                "sectionPath": "Project Based Learning > Python:",
+                "startOffset": 24515,
+                "endOffset": 24527,
+                "content": "## Python:\n\n",
+                "score": 0.016129032258064516,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+              },
+              {
+                "documentId": "115",
+                "versionId": "334",
+                "chunkId": "12612",
+                "chunkIndex": 11,
+                "title": "headroomlabs-ai/headroom",
+                "sourceType": "CAREER_PROJECT",
+                "sourceRef": "career:215",
+                "sectionPath": "headroomlabs-ai/headroom > 主要语言",
+                "startOffset": 762,
+                "endOffset": 778,
+                "content": "## 主要语言\nPython\n\n",
+                "score": 0.015873015873015872,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+              }
+            ],
+            "generation": "20261002164953-ec113424"
+          },
+          {
+            "excludedReasons": {},
+            "answerPolicy": "ANSWER_WITH_CITATIONS",
+            "status": "USED",
+            "query": "RAG Python  学习 中文提问，检索英文技术文档，说明部署依赖 有基础",
+            "hits": [
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15809",
+                "chunkIndex": 3,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": "🌐 Community Channels",
+                "startOffset": 2246,
+                "endOffset": 2420,
+                "content": "## 🌐 Community Channels\n\nWe are on [Discord](https://the-algorithms.com/discord)! Community channels are a great way for you to ask questions and get help. Please join us!\n\n",
+                "score": 0.13529411764705884,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=25,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15807",
+                "chunkIndex": 1,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": null,
+                "startOffset": 1871,
+                "endOffset": 2136,
+                "content": "<!-- Short description: -->\n  <h3>All algorithms implemented in Python - for education 📚</h3>\n</div>\n\nImplementations are for learning purposes only. They may be less efficient than the implementations in the Python standard library. Use them at your discretion.\n\n",
+                "score": 0.1321378926883514,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=49,nameRank=39,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15810",
+                "chunkIndex": 4,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": "📜 List of Algorithms",
+                "startOffset": 2420,
+                "endOffset": 2540,
+                "content": "## 📜 List of Algorithms\n\nSee our [directory](DIRECTORY.md) for easier navigation and a better overview of the project.\n",
+                "score": 0.13125,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=36,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15808",
+                "chunkIndex": 2,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": "🚀 Getting Started",
+                "startOffset": 2136,
+                "endOffset": 2246,
+                "content": "## 🚀 Getting Started\n\n📋 Read through our [Contribution Guidelines](CONTRIBUTING.md) before you contribute.\n\n",
+                "score": 0.1309278350515464,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=37,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "218",
+                "versionId": "437",
+                "chunkId": "15806",
+                "chunkIndex": 0,
+                "title": "TheAlgorithms/Python",
+                "sourceType": "GITHUB",
+                "sourceRef": "TheAlgorithms/Python|week",
+                "sectionPath": null,
+                "startOffset": 0,
+                "endOffset": 1871,
+                "content": "<div align=\"center\">\n<!-- Title: -->\n  <a href=\"https://github.com/TheAlgorithms/\">\n    <img src=\"https://raw.githubusercontent.com/TheAlgorithms/website/1cd824df116b27029f17c2d1b42d81731f28a920/public/logo.svg\" height=\"100\">\n  </a>\n  <h1><a href=\"https://github.com/TheAlgorithms/\">The Algorithms</a> - Python</h1>\n\n<!-- Labels: -->\n  <!-- First row: -->\n  <a href=\"https://gitpod.io/#https://github.com/TheAlgorithms/Python\">\n    <img src=\"https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod&style=flat-square\" height=\"20\" alt=\"Gitpod Ready-to-Code\">\n  </a>\n  <a href=\"https://github.com/TheAlgorithms/Python/blob/master/CONTRIBUTING.md\">\n    <img src=\"https://img.shields.io/static/v1.svg?label=Contributions&message=Welcome&color=0059b3&style=flat-square\" height=\"20\" alt=\"Contributions Welcome\">\n  </a>\n  <img src=\"https://img.shields.io/github/repo-size/TheAlgorithms/Python.svg?label=Repo%20size&style=flat-square\" height=\"20\">\n  <a href=\"https://the-algorithms.com/discord\">\n    <img src=\"https://img.shields.io/discord/808045925556682782.svg?logo=discord&colorB=7289DA&style=flat-square\" height=\"20\" alt=\"Discord chat\">\n  </a>\n\n  <!-- Second row: -->\n  <br>\n  <a href=\"https://github.com/TheAlgorithms/Python/actions\">\n    <img src=\"https://img.shields.io/github/actions/workflow/status/TheAlgorithms/Python/build.yml?branch=master&label=CI&logo=github&style=flat-square\" height=\"20\" alt=\"GitHub Workflow Status\">\n  </a>\n  <a href=\"https://github.com/pre-commit/pre-commit\">\n    <img src=\"https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square\" height=\"20\" alt=\"pre-commit\">\n  </a>\n  <a href=\"https://docs.astral.sh/ruff/formatter/\">\n    <img src=\"https://img.shields.io/static/v1?label=code%20style&message=ruff&color=black&style=flat-square\" height=\"20\" alt=\"code style: black\">\n  </a>\n\n",
+                "score": 0.11744186046511629,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=112,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+              },
+              {
+                "documentId": "565",
+                "versionId": "784",
+                "chunkId": "18252",
+                "chunkIndex": 0,
+                "title": "rag-verification-fixture.md",
+                "sourceType": "MANUAL",
+                "sourceRef": "legacy-document:1001",
+                "sectionPath": "RAG 验证固定知识",
+                "startOffset": 0,
+                "endOffset": 263,
+                "content": "# RAG 验证固定知识\n\n项目标题：Java 入门任务看板\n项目 ID：RAG-DEMO-JAVA-001\n项目目录：初级项目\n难度：初级\n预计周期：两周\n技术栈：Java、Spring Boot、MySQL\n适合人群：Java 初学者\n项目描述：实现任务创建、查询、状态更新和简单统计，练习 Spring Boot 分层、REST 接口、MySQL 持久化和基础测试。\n验收要求：能够完成用户登录、任务 CRUD、任务状态流转和一个统计接口。\n关键词：Java 初学者、两周、Spring Boot、任务管理、初级项目。\n",
+                "score": 0.019672131147540985,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=1,nameRank=24,lexicalWeight=0.2,nameGated=true)"
+              },
+              {
+                "documentId": "250",
+                "versionId": "469",
+                "chunkId": "16037",
+                "chunkIndex": 7,
+                "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+                "sourceType": "GITHUB",
+                "sourceRef": "QuivrHQ/quivr",
+                "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+                "startOffset": 1932,
+                "endOffset": 3145,
+                "content": "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+                "score": 0.018814192343604107,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=8,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+              },
+              {
+                "documentId": "512",
+                "versionId": "731",
+                "chunkId": "17462",
+                "chunkIndex": 3,
+                "title": "AI Agent算法工程师",
+                "sourceType": "JOB_POSTING",
+                "sourceRef": "job_66",
+                "sectionPath": "职位要求 > 基础技术能力",
+                "startOffset": 665,
+                "endOffset": 854,
+                "content": "### 基础技术能力\n\n1. 熟悉Python编程，代码规范、逻辑清晰，有独立完成功能模块开发的能力\n2. 了解大语言模型（LLM）基本原理，有Prompt Engineering实践经验\n3. 了解至少一种AI Agent开发框架，有跑通Demo或课程项目经验者优先\n4. 了解向量数据库基本概念（FAISS/ChromaDB/Milvus等），有RAG相关实践经验者优先\n\n",
+                "score": 0.016129032258064516,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+              }
+            ],
+            "generation": "20261002164953-ec113424"
+          }
+        ],
+        "evidence": [
+          {
+            "docTitle": "Quivr - 你的第二大脑，由生成式AI赋能",
+            "source": "GITHUB",
+            "sourceRef": "QuivrHQ/quivr",
+            "chunkIndex": 7,
+            "docId": "250",
+            "evidenceId": "E1",
+            "repositoryUrl": "https://github.com/quivrhq/quivr",
+            "text": "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+            "card": "[candidateId=E1;evidenceId=E1;repo=quivrhq/quivr;mode=RAW_FALLBACK] facts=基础 RAG 创建如上所示的基础 RAG 工作流很简单，步骤如下： 1. 将 API 密钥添加到环境变量中 python import os os.environ[\"OPENAI API KEY\"] = \"myopenai apikey\" Quivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。 2. 创建 YAML 文件 basic rag workflow.yaml 并将以下内容复制进去 yaml workflow config: name: \"standard RAG\" nodes: nam…",
+            "chunks": [
+              {
+                "documentId": "250",
+                "versionId": "469",
+                "chunkId": "16037",
+                "chunkIndex": 7,
+                "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+                "sourceType": "GITHUB",
+                "sourceRef": "QuivrHQ/quivr",
+                "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+                "startOffset": 1932,
+                "endOffset": 3145,
+                "content": "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+                "score": 0.019378517249816492,
+                "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+              }
+            ]
+          }
+        ],
+        "selectedCount": 1,
+        "candidateCount": 1,
+        "durationMs": 1360.199499,
+        "evidencePromptChars": 360,
+        "evidenceBudgetChars": 1100
+      }
+    },
+    "wallMs": 1360.796571,
+    "scope": "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages": [
+      {
+        "durationMs": 0.735872,
+        "stage": "B.activeGeneration",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.006252,
+        "stage": "B.indexStore",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 560.29737,
+        "stage": "embedding.http.bge-m3",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 572.612416,
+        "stage": "B.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 3.576689,
+        "stage": "B.lexical",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 4.415281,
+        "stage": "B.names",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 7.578439,
+        "stage": "B.nativeFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 97.449283,
+        "stage": "B.databaseMetadataAndFilters",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 3.116202,
+        "stage": "B.dedupAndSelect",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.073203,
+        "stage": "B.relevanceAndPolicy",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 689.740278,
+        "stage": "B.native.total",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.296557,
+        "stage": "B.adapterTopicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.770899,
+        "stage": "B.activeGeneration",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.00541,
+        "stage": "B.indexStore",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 523.128588,
+        "stage": "embedding.http.bge-m3",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 537.747094,
+        "stage": "B.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 3.476313,
+        "stage": "B.lexical",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 3.755276,
+        "stage": "B.names",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 14.575854,
+        "stage": "B.nativeFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 106.644919,
+        "stage": "B.databaseMetadataAndFilters",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 1.638337,
+        "stage": "B.dedupAndSelect",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.055138,
+        "stage": "B.relevanceAndPolicy",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 668.826335,
+        "stage": "B.native.total",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.429305,
+        "stage": "B.adapterTopicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.82802,
+        "stage": "B.renderEvidence",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 1360.202434,
+        "stage": "retrieval.total",
+        "status": "SUCCEEDED"
+      }
+    ]
+  },
+  "clientWallMs": 1370.066899995436
+}

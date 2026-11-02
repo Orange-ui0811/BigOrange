@@ -1,0 +1,310 @@
+{
+  "runAt": "2026-09-29T14:12:43.621555+00:00",
+  "purpose": "Post-fix retrieval comparison; no text-generation calls.",
+  "metadataRefresh": {
+    "chunks": 1307,
+    "documents": 68,
+    "requiresIndexRebuild": true
+  },
+  "evaluation": {
+    "runKey": "fixed-eval-bb7e3880-91d3-45ee-bb86-50c9ceef3d47",
+    "datasetVersion": "rag-b-quality-v2",
+    "summary": {
+      "caseCount": 12,
+      "aPassRate": 0.4166666666666667,
+      "bPassRate": 1.0,
+      "answerExpectedCount": 10,
+      "refusalExpectedCount": 2,
+      "bTraceabilityRate": 1.0,
+      "bCitationReadyRate": 1.0,
+      "bRefusalAccuracy": 1.0,
+      "sourceGoldCaseCount": 0,
+      "aSourceRecallAtK": 0.0,
+      "bSourceRecallAtK": 0.0,
+      "aP50Ms": "207",
+      "aP95Ms": "399",
+      "bP50Ms": "261",
+      "bP95Ms": "410"
+    },
+    "cases": [
+      {
+        "key": "beginner-java-14d",
+        "question": "推荐一个适合新手、两周内能完成的 Java 项目",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "399",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "excludedReasons": {
+            "LANGUAGE_MISMATCH": 32
+          },
+          "durationMs": "280",
+          "answerPolicy": "REFUSE_NO_MATCH",
+          "traceable": false,
+          "hitCount": 0,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "beginner-vue",
+        "question": "推荐一个适合新手练习 Vue 的项目，并说明改造方向",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "195",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "excludedReasons": {
+            "LANGUAGE_MISMATCH": 28
+          },
+          "durationMs": "261",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 4,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "career-java",
+        "question": "推荐一个能用于 Java 后端求职作品集的项目",
+        "expectedSourceTypes": [
+          "CAREER_PROJECT"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "197",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "excludedReasons": {
+            "LANGUAGE_MISMATCH": 14
+          },
+          "durationMs": "261",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "career-interview",
+        "question": "哪些项目适合在后端面试中讨论架构和性能优化？",
+        "expectedSourceTypes": [
+          "CAREER_PROJECT"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "192",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "excludedReasons": {},
+          "durationMs": "410",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "job-java",
+        "question": "当前有效 Java 岗位要求哪些技能？",
+        "expectedSourceTypes": [
+          "JOB_POSTING"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "315",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "excludedReasons": {
+            "LANGUAGE_UNKNOWN": 5,
+            "LANGUAGE_MISMATCH": 11
+          },
+          "durationMs": "247",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "job-frontend",
+        "question": "当前有效前端岗位对 Vue 或 TypeScript 有什么要求？",
+        "expectedSourceTypes": [
+          "JOB_POSTING"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "201",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "excludedReasons": {},
+          "durationMs": "271",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "readme-deploy",
+        "question": "这个开源项目应该如何部署？",
+        "expectedSourceTypes": [
+          "GITHUB"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "269",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "excludedReasons": {},
+          "durationMs": "238",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "readme-dependencies",
+        "question": "项目运行需要哪些依赖、数据库或密钥？",
+        "expectedSourceTypes": [
+          "GITHUB"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "236",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "excludedReasons": {},
+          "durationMs": "241",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "no-docker",
+        "question": "推荐一个不依赖 Docker 的入门项目",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "214",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "excludedReasons": {},
+          "durationMs": "265",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "no-database",
+        "question": "推荐一个不需要数据库的短周期项目",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "190",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "excludedReasons": {
+            "DATABASE_NOT_ALLOWED": 3
+          },
+          "durationMs": "267",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "source-trace",
+        "question": "说明项目的主要功能、技术栈、难度和仓库来源",
+        "expectedSourceTypes": [
+          "BEGINNER_PROJECT",
+          "GITHUB",
+          "CAREER_PROJECT"
+        ],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "215",
+          "hitCount": 8,
+          "passed": true
+        },
+        "b": {
+          "excludedReasons": {},
+          "durationMs": "402",
+          "answerPolicy": "ANSWER_WITH_CITATIONS",
+          "traceable": true,
+          "hitCount": 8,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      },
+      {
+        "key": "insufficient-evidence",
+        "question": "资料没有说明的商业授权价格是多少？",
+        "expectedSourceTypes": [],
+        "expectedSourceRefs": [],
+        "a": {
+          "durationMs": "207",
+          "hitCount": 8,
+          "passed": false
+        },
+        "b": {
+          "excludedReasons": {
+            "PRICING_EVIDENCE_MISSING": 8
+          },
+          "durationMs": "258",
+          "answerPolicy": "REFUSE_NO_MATCH",
+          "traceable": false,
+          "hitCount": 0,
+          "adapter": "HNSW_HYBRID",
+          "passed": true
+        }
+      }
+    ]
+  },
+  "externalCalls": "Evaluation performs query embeddings only; no document re-embedding or answer generation."
+}

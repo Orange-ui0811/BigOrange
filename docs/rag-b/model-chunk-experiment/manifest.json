@@ -1,0 +1,69 @@
+{
+  "corpusHash": "7b79504fcc7a0a3cb428037ef55d66822caaf5d7c0fd996ec8ee0198c3b3b902",
+  "datasetHash": "1f2bee3965679351c186dc244ad39ec4455c15466bdb12b99a20a1c04057c6cb",
+  "documents": 68,
+  "cases": 110,
+  "semanticCases": 60,
+  "plans": [
+    {
+      "name": "current-small-char500",
+      "model": "bge-small-zh-v1.5",
+      "chunks": 1307,
+      "description": "existing stored chunks, raw text"
+    },
+    {
+      "name": "bge-small-zh-v1.5--common256",
+      "model": "bge-small-zh-v1.5",
+      "chunks": 1627,
+      "description": "identical boundaries, max across all three tokenizers"
+    },
+    {
+      "name": "bge-large-zh-v1.5--common256",
+      "model": "bge-large-zh-v1.5",
+      "chunks": 1627,
+      "description": "identical boundaries, max across all three tokenizers"
+    },
+    {
+      "name": "bge-m3--common256",
+      "model": "bge-m3",
+      "chunks": 1627,
+      "description": "identical boundaries, max across all three tokenizers"
+    },
+    {
+      "name": "Qwen3-Embedding-0.6B--common256",
+      "model": "Qwen3-Embedding-0.6B",
+      "chunks": 1627,
+      "description": "identical boundaries, max across all three tokenizers"
+    },
+    {
+      "name": "Qwen3-Embedding-4B--common256",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1627,
+      "description": "identical boundaries, max across all three tokenizers"
+    },
+    {
+      "name": "bge-m3--native512",
+      "model": "bge-m3",
+      "chunks": 1391,
+      "description": "model tokenizer, target512 cap768 overlap<=64"
+    },
+    {
+      "name": "Qwen3-Embedding-0.6B--native512",
+      "model": "Qwen3-Embedding-0.6B",
+      "chunks": 1364,
+      "description": "model tokenizer, target512 cap768 overlap<=64"
+    },
+    {
+      "name": "Qwen3-Embedding-4B--native512",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1364,
+      "description": "model tokenizer, target512 cap768 overlap<=64"
+    },
+    {
+      "name": "Qwen3-Embedding-4B--native768",
+      "model": "Qwen3-Embedding-4B",
+      "chunks": 1336,
+      "description": "Qwen tokenizer, target768 cap1024 overlap<=64"
+    }
+  ]
+}

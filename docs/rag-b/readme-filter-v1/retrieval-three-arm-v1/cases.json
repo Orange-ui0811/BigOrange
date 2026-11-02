@@ -1,0 +1,1352 @@
+{
+  "annotation": "Assistant-labelled, known sources, not independent or blind. Gold from full source, not READY chunks. Synthetic reported separately.",
+  "auditChanges": [
+    "R20 reclassified as source-answerable, even though admission withholds it.",
+    "Gold uses complete factual source lines, not arbitrary entire code blocks. R06/R08 explicitly include all requested components/platform context.",
+    "R21 remains unanswerable: README names licences but does not contain their full commercial-use terms."
+  ],
+  "cases": [
+    {
+      "id": "R01",
+      "query": "想要可以与文档对话、支持多用户的 AI 应用。",
+      "scope": "REAL",
+      "targetDocumentId": "240",
+      "sourceAnswerable": true,
+      "category": "NAMELESS",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "240",
+            "startUtf16": 549,
+            "endUtf16": 590,
+            "text": "    与您的文档对话，使用 AI 代理，高度可配置，支持多用户，无需繁琐的设置。"
+          },
+          {
+            "documentId": "240",
+            "startUtf16": 3318,
+            "endUtf16": 3374,
+            "text": "与您的文档对话。使用 AI 代理自动化复杂工作流。高度可配置，支持多用户，久经考验——默认本地运行，零设置摩擦。"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "240"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R02",
+      "query": "Flowise 安装需要哪个版本的 Node.js？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "VERSION",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1432,
+            "endUtf16": 1491,
+            "text": "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "R03",
+      "query": "Flowise 如何通过 npm 安装并启动？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1519,
+            "endUtf16": 1545,
+            "text": "    npm install -g flowise"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1581,
+            "endUtf16": 1602,
+            "text": "    npx flowise start"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1432,
+            "endUtf16": 1491,
+            "text": "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R04",
+      "query": "Flowise 本地 Docker 镜像怎么构建和运行？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1942,
+            "endUtf16": 1982,
+            "text": "    docker build --no-cache -t flowise ."
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2014,
+            "endUtf16": 2067,
+            "text": "    docker run -d --name flowise -p 3000:3000 flowise"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R05",
+      "query": "Flowise Docker Compose 配置环境文件后如何启动？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1788,
+            "endUtf16": 1813,
+            "text": "4. `docker compose up -d`"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R06",
+      "query": "Flowise 后端和前端分别用什么技术，第三方节点在哪个模块？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "ARCHITECTURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2174,
+            "endUtf16": 2204,
+            "text": "-   `server`：Node 后端，提供 API 逻辑"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2205,
+            "endUtf16": 2222,
+            "text": "-   `ui`：React 前端"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2223,
+            "endUtf16": 2247,
+            "text": "-   `components`：第三方节点集成"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R07",
+      "query": "Flowise 源码如何安装依赖并构建？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2374,
+            "endUtf16": 2391,
+            "text": "    npm i -g pnpm"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2574,
+            "endUtf16": 2590,
+            "text": "    pnpm install"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2625,
+            "endUtf16": 2639,
+            "text": "    pnpm build"
+          },
+          {
+            "documentId": "244",
+            "startUtf16": 3039,
+            "endUtf16": 3053,
+            "text": "    pnpm build"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R08",
+      "query": "Flowise 构建报错 134，Windows PowerShell 怎么调大 Node 堆内存？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "CONDITION",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2663,
+            "endUtf16": 2714,
+            "text": "    <summary>错误代码 134（JavaScript 堆内存不足）</summary>  "
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2866,
+            "endUtf16": 2890,
+            "text": "    # Windows PowerShell"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2891,
+            "endUtf16": 2940,
+            "text": "    $env:NODE_OPTIONS=\"--max-old-space-size=4096\""
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "R09",
+      "query": "Appsmith 可以搭建管理后台和仪表盘吗？",
+      "scope": "REAL",
+      "targetDocumentId": "522",
+      "sourceAnswerable": true,
+      "category": "PURPOSE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "522",
+            "startUtf16": 1350,
+            "endUtf16": 1772,
+            "text": "Organizations build custom applications like dashboards, admin panels, customer 360, IT automation, and service management tools to help their teams work more efficiently and effectively. Appsmith is an open-source low-code platform that streamlines custom application development, deployment, and maintenance. Learn more on our [website](https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme)."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R10",
+      "query": "Appsmith 使用什么开源协议？",
+      "scope": "REAL",
+      "targetDocumentId": "522",
+      "sourceAnswerable": true,
+      "category": "LICENSE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "522",
+            "startUtf16": 54219,
+            "endUtf16": 54342,
+            "text": "Appsmith is licensed under the terms of [Apache License 2.0](https://github.com/appsmithorg/appsmith/blob/release/LICENSE)."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "R11",
+      "query": "Docguard 是做什么的？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "PURPOSE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 445,
+            "endUtf16": 519,
+            "text": "A concurrent Go CLI that scans documents for content that's **invisible or"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R12",
+      "query": "Docguard 有外部依赖吗？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "DEPENDENCY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 725,
+            "endUtf16": 783,
+            "text": "Zero external dependencies — just the Go standard library."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R13",
+      "query": "Docguard 构建需要什么 Go 版本，怎么构建？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "VERSION_PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 3287,
+            "endUtf16": 3322,
+            "text": "go build -o docguard ./cmd/docguard"
+          }
+        ],
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 3328,
+            "endUtf16": 3346,
+            "text": "Requires Go 1.22+."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "R14",
+      "query": "Docguard 如何让 CI 对 medium 级别告警失败？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 4018,
+            "endUtf16": 4050,
+            "text": "docguard --fail-on medium ./docs"
+          }
+        ],
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 4196,
+            "endUtf16": 4269,
+            "text": "Exit code is `1` if a finding at or above `--fail-on` severity is present"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R15",
+      "query": "Docguard 默认扫描哪些文件扩展名？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "OPTIONS",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 3475,
+            "endUtf16": 3531,
+            "text": "        (default: txt,md,mdx,html,htm,csv,json,yaml,yml)"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R16",
+      "query": "Docguard 如何并发扫描，默认有多少 worker？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "ARCHITECTURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 4411,
+            "endUtf16": 4481,
+            "text": "`docguard` walks the target directory, filters by extension, and hands"
+          }
+        ],
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 3547,
+            "endUtf16": 3619,
+            "text": "        Number of concurrent worker goroutines (default: number of CPUs)"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R17",
+      "query": "Docguard 是否保证检测到的都是攻击？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "LIMITATION",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 3018,
+            "endUtf16": 3090,
+            "text": "This is a heuristic tripwire, not a guarantee — a finding means \"worth a"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R18",
+      "query": "Docguard 支持输出 JSON 吗，怎么使用？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 4089,
+            "endUtf16": 4125,
+            "text": "docguard --json ./docs > report.json"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R19",
+      "query": "Flowise 需要多少内存才能生产运行？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": false,
+      "category": "INSUFFICIENT_RESOURCE_REQUIREMENT",
+      "evidenceGroups": [],
+      "expectedDocumentIds": [],
+      "constraintGroups": []
+    },
+    {
+      "id": "R20",
+      "query": "Flowise 的 VITE_PORT 开发环境怎么配置？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "SOURCE_PRESENT_WITHHELD",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 3201,
+            "endUtf16": 3272,
+            "text": "    -   在 `packages/ui` 中创建 `.env` 文件并指定 `VITE_PORT`（参考 `.env.example`）"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R21",
+      "query": "n8n 社区版与企业版分别允许什么商业用途？",
+      "scope": "REAL",
+      "targetDocumentId": "427",
+      "sourceAnswerable": false,
+      "category": "WITHHELD_MIXED_LICENSE",
+      "evidenceGroups": [],
+      "expectedDocumentIds": [],
+      "constraintGroups": []
+    },
+    {
+      "id": "R22",
+      "query": "AnythingLLM 有没有明确的最低 CPU 与内存要求？",
+      "scope": "REAL",
+      "targetDocumentId": "240",
+      "sourceAnswerable": false,
+      "category": "INSUFFICIENT_RESOURCE_REQUIREMENT",
+      "evidenceGroups": [],
+      "expectedDocumentIds": [],
+      "constraintGroups": []
+    },
+    {
+      "id": "R23",
+      "query": "能推荐一个 Java Spring Boot 两周完成的商城吗？",
+      "scope": "REAL",
+      "targetDocumentId": null,
+      "sourceAnswerable": false,
+      "category": "ABSENT_PROJECT",
+      "evidenceGroups": [],
+      "expectedDocumentIds": [],
+      "constraintGroups": []
+    },
+    {
+      "id": "R24",
+      "query": "Appsmith 的单点登录是免费社区版自带的吗？",
+      "scope": "REAL",
+      "targetDocumentId": "522",
+      "sourceAnswerable": false,
+      "category": "UNVERIFIED_FEATURE_EDITION",
+      "evidenceGroups": [],
+      "expectedDocumentIds": [],
+      "constraintGroups": []
+    },
+    {
+      "id": "R25",
+      "query": "想找一个 Go 写的命令行工具，预先扫描知识库中的隐藏提示注入。",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "NAMELESS",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 445,
+            "endUtf16": 519,
+            "text": "A concurrent Go CLI that scans documents for content that's **invisible or"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R26",
+      "query": "想要一个开源低代码平台搭建企业内部管理后台。",
+      "scope": "REAL",
+      "targetDocumentId": "522",
+      "sourceAnswerable": true,
+      "category": "NAMELESS",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "522",
+            "startUtf16": 1350,
+            "endUtf16": 1772,
+            "text": "Organizations build custom applications like dashboards, admin panels, customer 360, IT automation, and service management tools to help their teams work more efficiently and effectively. Appsmith is an open-source low-code platform that streamlines custom application development, deployment, and maintenance. Learn more on our [website](https://www.appsmith.com?utm_source=github&utm_medium=organic&utm_campaign=readme)."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R27",
+      "query": "想找一个前端 React、后端 Node 并能扩展第三方节点的工具。",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "NAMELESS",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2174,
+            "endUtf16": 2204,
+            "text": "-   `server`：Node 后端，提供 API 逻辑"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R28",
+      "query": "有没有能够在知识入库前接入 CI 的静态扫描工具？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "NAMELESS",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 1609,
+            "endUtf16": 1682,
+            "text": "`docguard` is a single static binary you can run against a knowledge base"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R29",
+      "query": "n8n用npx试运行的命令和前置依赖是什么？",
+      "scope": "REAL",
+      "targetDocumentId": "427",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "427",
+            "startUtf16": 767,
+            "endUtf16": 870,
+            "text": "使用 [npx](https://docs.n8n.io/hosting/installation/npm/) 立即试用 n8n（需要 [Node.js](https://nodejs.org/en/)）："
+          }
+        ],
+        [
+          {
+            "documentId": "427",
+            "startUtf16": 876,
+            "endUtf16": 883,
+            "text": "npx n8n"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "427"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R30",
+      "query": "n8n的Docker运行如何保存数据卷？",
+      "scope": "REAL",
+      "targetDocumentId": "427",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "427",
+            "startUtf16": 961,
+            "endUtf16": 990,
+            "text": "docker volume create n8n_data"
+          }
+        ],
+        [
+          {
+            "documentId": "427",
+            "startUtf16": 991,
+            "endUtf16": 1086,
+            "text": "docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "427"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R31",
+      "query": "n8n本地编辑器使用哪个地址和端口？",
+      "scope": "REAL",
+      "targetDocumentId": "427",
+      "sourceAnswerable": true,
+      "category": "VERSION",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "427",
+            "startUtf16": 1092,
+            "endUtf16": 1119,
+            "text": "访问编辑器：http://localhost:5678"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "427"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "R32",
+      "query": "Flowise的Docker Compose启动前如何准备环境文件？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1743,
+            "endUtf16": 1787,
+            "text": "3. 复制 `.env.example` 文件，粘贴到同一位置，并重命名为 `.env`"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 1788,
+            "endUtf16": 1813,
+            "text": "4. `docker compose up -d`"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R33",
+      "query": "如何停止Flowise本地Docker镜像？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2099,
+            "endUtf16": 2122,
+            "text": "    docker stop flowise"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R34",
+      "query": "Flowise源码构建后用什么命令启动？",
+      "scope": "REAL",
+      "targetDocumentId": "244",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 2625,
+            "endUtf16": 2639,
+            "text": "    pnpm build"
+          },
+          {
+            "documentId": "244",
+            "startUtf16": 3039,
+            "endUtf16": 3053,
+            "text": "    pnpm build"
+          }
+        ],
+        [
+          {
+            "documentId": "244",
+            "startUtf16": 3102,
+            "endUtf16": 3116,
+            "text": "    pnpm start"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "244"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R35",
+      "query": "Appsmith README列出了哪两种开始使用的方式？",
+      "scope": "REAL",
+      "targetDocumentId": "522",
+      "sourceAnswerable": true,
+      "category": "DEPLOYMENT",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "522",
+            "startUtf16": 2051,
+            "endUtf16": 2166,
+            "text": "- Signup on [Appsmith Cloud](https://login.appsmith.com/?utm_source=github&utm_medium=organic&utm_campaign=readme)."
+          }
+        ],
+        [
+          {
+            "documentId": "522",
+            "startUtf16": 2167,
+            "endUtf16": 2238,
+            "text": "- Install Appsmith on your machine. See the installation guides below. "
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R36",
+      "query": "README中单独介绍的Appsmith Agents是什么产品？",
+      "scope": "REAL",
+      "targetDocumentId": "522",
+      "sourceAnswerable": true,
+      "category": "RELATED_PRODUCT",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "522",
+            "startUtf16": 5322,
+            "endUtf16": 5930,
+            "text": "Introducing a new agentic AI platform that integrates the latest AI models with private and proprietary data at scale — inside the tools and systems that teams use every day. Appsmith Agents expands generative AI’s capabilities for the millions of knowledge workers in sales, support, customer success, human resources, and other business teams. By giving continuous context to AI models, Appsmith Agents lets teams ask questions and configure automations specific to their business without model fine-tuning or complex RAG implementations. Visit [appsmith.com/ai](https://www.appsmith.com/ai) to learn more."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "522"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R37",
+      "query": "AnythingLLM的介绍明确提到了哪些定制和多用户能力？",
+      "scope": "REAL",
+      "targetDocumentId": "240",
+      "sourceAnswerable": true,
+      "category": "FEATURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "240",
+            "startUtf16": 549,
+            "endUtf16": 590,
+            "text": "    与您的文档对话，使用 AI 代理，高度可配置，支持多用户，无需繁琐的设置。"
+          },
+          {
+            "documentId": "240",
+            "startUtf16": 3318,
+            "endUtf16": 3374,
+            "text": "与您的文档对话。使用 AI 代理自动化复杂工作流。高度可配置，支持多用户，久经考验——默认本地运行，零设置摩擦。"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "240"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R38",
+      "query": "Docguard列出了哪些Go静态检查和并发测试命令？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "TESTS",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 5429,
+            "endUtf16": 5502,
+            "text": "`go vet`, `gofmt -l` (clean), `go test -race ./...` (no data races across"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R39",
+      "query": "Docguard如何只检查Markdown和HTML文件？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "PROCEDURE",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 4158,
+            "endUtf16": 4190,
+            "text": "docguard --ext md,html ./content"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": []
+    },
+    {
+      "id": "R40",
+      "query": "Docguard默认什么级别告警会导致退出码1，其他情况是什么退出码？",
+      "scope": "REAL",
+      "targetDocumentId": "546",
+      "sourceAnswerable": true,
+      "category": "CONDITION",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "546",
+            "startUtf16": 4196,
+            "endUtf16": 4269,
+            "text": "Exit code is `1` if a finding at or above `--fail-on` severity is present"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "546"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "S1-Q1",
+      "query": "导出仓库记录需要什么权限？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S1",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S1",
+            "startUtf16": 81,
+            "endUtf16": 4820,
+            "text": "Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Export requires an administrator. Windows is not supported."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S1"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "S1-Q2",
+      "query": "该应用支持Windows吗？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S1",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S1",
+            "startUtf16": 81,
+            "endUtf16": 4820,
+            "text": "Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Export requires an administrator. Windows is not supported."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S1"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "S2-Q1",
+      "query": "部署前要设置什么隔离变量，启动命令是什么？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S2",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S2",
+            "startUtf16": 166,
+            "endUtf16": 3726,
+            "text": "    - Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Inventory entries retain their owner, warehouse, revision and export history. Set INVENTORY_MODE=isolated before starting."
+          }
+        ],
+        [
+          {
+            "documentId": "S2",
+            "startUtf16": 3738,
+            "endUtf16": 3770,
+            "text": "    ./inventory start --isolated"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S2"
+      ],
+      "constraintGroups": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "S2-Q2",
+      "query": "隔离服务的Java版本和操作系统要求是什么？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S2",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S2",
+            "startUtf16": 95,
+            "endUtf16": 148,
+            "text": "Requires Java 21 and Linux. Windows is not supported."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S2"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "S3-Q1",
+      "query": "region-02所需内存和适用版别是什么？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S3",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S3",
+            "startUtf16": 105,
+            "endUtf16": 149,
+            "text": "| Region | OS | Runtime | Memory | Edition |"
+          }
+        ],
+        [
+          {
+            "documentId": "S3",
+            "startUtf16": 286,
+            "endUtf16": 342,
+            "text": "| region-02 | Linux | Java 21 | 4 GB | Enterprise only |"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S3"
+      ],
+      "constraintGroups": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "S3-Q2",
+      "query": "region-60所需内存、系统与运行时是什么？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S3",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S3",
+            "startUtf16": 105,
+            "endUtf16": 149,
+            "text": "| Region | OS | Runtime | Memory | Edition |"
+          }
+        ],
+        [
+          {
+            "documentId": "S3",
+            "startUtf16": 3644,
+            "endUtf16": 3701,
+            "text": "| region-60 | Linux | Java 21 | 62 GB | Enterprise only |"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S3"
+      ],
+      "constraintGroups": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "S4-Q1",
+      "query": "社区版包含审计导出吗？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S4",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S4",
+            "startUtf16": 90,
+            "endUtf16": 158,
+            "text": "Community supports local exports only. Audit export is not included."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S4"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "S4-Q2",
+      "query": "region-30的运行要求属于哪个版别？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S4",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S4",
+            "startUtf16": 174,
+            "endUtf16": 218,
+            "text": "| Region | OS | Runtime | Memory | Edition |"
+          }
+        ],
+        [
+          {
+            "documentId": "S4",
+            "startUtf16": 1973,
+            "endUtf16": 2030,
+            "text": "| region-30 | Linux | Java 21 | 32 GB | Enterprise only |"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S4"
+      ],
+      "constraintGroups": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "S5-Q1",
+      "query": "如何只演练迁移而不实际修改数据？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S5",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S5",
+            "startUtf16": 1768,
+            "endUtf16": 1797,
+            "text": "./inventory migrate --dry-run"
+          }
+        ],
+        [
+          {
+            "documentId": "S5",
+            "startUtf16": 87,
+            "endUtf16": 145,
+            "text": "Requires Linux and Java 21. Use an isolated test database."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S5"
+      ],
+      "constraintGroups": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "S5-Q2",
+      "query": "启动只读服务的命令及前置环境是什么？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S5",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S5",
+            "startUtf16": 1798,
+            "endUtf16": 1827,
+            "text": "./inventory start --read-only"
+          }
+        ],
+        [
+          {
+            "documentId": "S5",
+            "startUtf16": 87,
+            "endUtf16": 145,
+            "text": "Requires Linux and Java 21. Use an isolated test database."
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S5"
+      ],
+      "constraintGroups": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "S6-Q1",
+      "query": "完整脚本最后如何执行严格校验？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S6",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S6",
+            "startUtf16": 5972,
+            "endUtf16": 6001,
+            "text": "./inventory validate --strict"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S6"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    },
+    {
+      "id": "S6-Q2",
+      "query": "该脚本最终发布到哪里，用什么命令？",
+      "scope": "SYNTHETIC",
+      "targetDocumentId": "S6",
+      "sourceAnswerable": true,
+      "category": "STRUCTURAL_BOUNDARY",
+      "evidenceGroups": [
+        [
+          {
+            "documentId": "S6",
+            "startUtf16": 6002,
+            "endUtf16": 6036,
+            "text": "./inventory publish --staging-only"
+          }
+        ]
+      ],
+      "expectedDocumentIds": [
+        "S6"
+      ],
+      "constraintGroups": [
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "status": "CODE_OFFLINE_HTTP_AND_CATALOG_CHECKS_PASSED_REAL_RECOMMENDATION_PENDING",
+  "tests": {
+    "tests": 535,
+    "passed": 512,
+    "skipped": 23,
+    "failures": 0,
+    "errors": 0
+  },
+  "regression": "recommendation-fit-regression.json",
+  "frontend": {
+    "tests": 23,
+    "passed": 23,
+    "build": "PASSED",
+    "testsLog": "_staging/recommendation-fit-frontend-tests-final.log",
+    "buildLog": "_staging/recommendation-fit-frontend-build-final.log"
+  },
+  "runtime": {
+    "status": "RUNNING",
+    "health": {
+      "db": "UP",
+      "redis": "UP",
+      "rag_vector_store": "UP",
+      "timestamp": "1793264690562"
+    },
+    "acceptanceGuard": "ENABLED_38_OF_40_NEW_ROUND"
+  },
+  "providerAttempts": 38,
+  "providerLimit": 40,
+  "newProviderAttempts": 0,
+  "ledgerUnchanged": true,
+  "newLedgerSha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+  "realRecommendationRetest": "NOT_RUN_REQUIRES_MORE_THAN_REMAINING2_ATTEMPTS",
+  "releaseApproved": false,
+  "backup": "_staging/recommendation-fit-20261029-161401",
+  "checkedAtUtc": "2026-10-29T09:04:50.846508+00:00",
+  "oldLedgerEntries": 50,
+  "oldLedgerSha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+  "oldLedgerUnchanged": true,
+  "remaining": 2,
+  "httpImportProtection": {
+    "report": "recommendation-fit-http-check.json",
+    "status": 409,
+    "passed": true,
+    "newModelRequests": 0
+  },
+  "catalogProbe": {
+    "report": "recommendation-fit-catalog-probe.json",
+    "scope": "Actual catalog and selection; no semantic recall/model invocation",
+    "largeEntryLabelsNotPromoted": true,
+    "selectedLargeEntryLabels": 0,
+    "newModelRequests": 0
+  },
+  "scriptSyntax": "PASSED",
+  "diffCheck": "PASSED_FOR_CHANGED_CODE_SCOPE",
+  "report": "recommendation-fit-correction.md"
+}

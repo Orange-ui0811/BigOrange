@@ -1,0 +1,62 @@
+{
+  "scope": "Live public API data/readiness and unauthorized boundary only. No authenticated generation, no user quota/history writes, no outbound AI.",
+  "cases": [
+    {
+      "id": "public_graph",
+      "httpStatus": 200,
+      "expectedHttpStatus": 200,
+      "passed": true,
+      "wallMs": 240.51500000496162,
+      "code": 1,
+      "message": null,
+      "graphNodes": {
+        "thisWeek": 14,
+        "lastWeek": 14
+      }
+    },
+    {
+      "id": "public_pricing",
+      "httpStatus": 200,
+      "expectedHttpStatus": 200,
+      "passed": true,
+      "wallMs": 20.0503000014578,
+      "code": 1,
+      "message": null
+    },
+    {
+      "id": "anonymous_analysis_blocked",
+      "httpStatus": 401,
+      "expectedHttpStatus": 401,
+      "passed": true,
+      "wallMs": 5.272400005196687
+    },
+    {
+      "id": "anonymous_history_blocked",
+      "httpStatus": 401,
+      "expectedHttpStatus": 401,
+      "passed": true,
+      "wallMs": 4.006499999377411
+    },
+    {
+      "id": "invalid_app_token_blocked",
+      "httpStatus": 401,
+      "expectedHttpStatus": 401,
+      "passed": true,
+      "wallMs": 4.160899996350054
+    },
+    {
+      "id": "admin_token_is_not_app_token",
+      "httpStatus": 401,
+      "expectedHttpStatus": 401,
+      "passed": true,
+      "wallMs": 4.4893999947817065
+    }
+  ],
+  "bActiveIndex": {
+    "dimensions": 1024,
+    "chunkPolicy": "STRUCTURE_M3_512_768_64_V1",
+    "generation": "20261002164953-ec113424",
+    "embeddingModel": "bge-m3"
+  },
+  "aiGenerationRequests": 0
+}

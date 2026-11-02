@@ -21,7 +21,7 @@ class CustomerContinuousRepairTest {
         var projects=new CustomerProjects(beginner,career,new RagBConstraintMatcher());
         var current=new HashMap<String,Object>(Map.of("language","Java","goal","学习","experience","刚学","maxDurationDays",60));
         var outputs=new ArrayList<Map<String,Object>>();
-        when(store.session(1,5)).thenAnswer(inv->Map.of("state_json",json.write(current)));
+        when(store.session(1,5)).thenAnswer(inv->CustomerWorkflowFixtures.session(json.write(current)));
         when(tools.context(eq("run"),eq(5L),any())).thenReturn(context);when(context.profile()).thenReturn("");
         when(context.projects(anyMap())).thenAnswer(inv->projects.search(inv.getArgument(0)));
         when(context.diagnose(anyMap())).thenAnswer(inv->projects.diagnose(inv.getArgument(0)));

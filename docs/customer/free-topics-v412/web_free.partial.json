@@ -1,0 +1,1103 @@
+{
+  "case": {
+    "id": "web_free",
+    "family": "web",
+    "kind": "free",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：Web应用开发。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "117",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：Web应用开发。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "bfa6a433-1919-48f2-b61e-5b34b7de2083",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 7219,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "topic": [
+            "Web应用开发"
+          ],
+          "provenance": {
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "Web应用开发"
+            },
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "goal": "学习",
+          "experience": "1年",
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：1年；已记录项目目标：学习；已记录项目主题：Web应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-04T02:51:04.743534715Z",
+          "conditions": {
+            "topic": [
+              "Web应用开发"
+            ]
+          },
+          "current": {
+            "total": 0,
+            "confirmed": 0,
+            "uncertain": 0
+          },
+          "available": {
+            "total": 494,
+            "confirmed": 494,
+            "uncertain": 0
+          },
+          "alternatives": [
+            {
+              "total": 110,
+              "confirmed": 110,
+              "uncertain": 0,
+              "changes": {
+                "topic": [
+                  "智能体"
+                ]
+              },
+              "label": "项目主题改为智能体"
+            }
+          ],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "NO_MATCH",
+        "answer": "已记录基础（排序偏好）：1年；已记录项目目标：学习；已记录项目主题：Web应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n根据现有资料，可以考虑以下调整；每个方案都保留其余条件：\n- 项目主题改为智能体，可以找到通过当前字段检查的项目，具体功能还需核对。\n尚未修改条件。你愿意先尝试哪一种调整？也可以告诉我哪项要求必须保留。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：1年；已记录项目目标：学习；已记录项目主题：Web应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5280,
+              "completion_tokens": 698,
+              "total_tokens": 5978,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 532
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 288
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 3412,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "promptVersion": "customer-v4.12-semantic-recommendations",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 532,
+          "complete": true,
+          "cacheHitTokens": 4992,
+          "inputTokens": 5280,
+          "cacheMissTokens": 288,
+          "totalTokens": 5978,
+          "outputTokens": 698,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "项目式学习",
+                  "chunkId": 11753,
+                  "content": "### Web Applications:\n\n",
+                  "endOffset": 14878,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 20,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications:",
+                  "startOffset": 14855,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "bashalarmistalt/decimen-optical-transfer",
+                  "chunkId": 9641,
+                  "content": "## 最终建议\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\n\n",
+                  "endOffset": 493,
+                  "sourceRef": "beginner:80",
+                  "versionId": 222,
+                  "chunkIndex": 7,
+                  "documentId": 3,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "bashalarmistalt/decimen-optical-transfer > 最终建议",
+                  "startOffset": 445,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "mshumer/Claude-of-Duty",
+                  "chunkId": 9837,
+                  "content": "## 最终建议\n适合已经具备一定 Web 游戏开发基础的新手作为案例研究，简单跑通后直接展示可获高分，但不推荐深度定制。\n\n",
+                  "endOffset": 455,
+                  "sourceRef": "beginner:104",
+                  "versionId": 228,
+                  "chunkIndex": 7,
+                  "documentId": 9,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "mshumer/Claude-of-Duty > 最终建议",
+                  "startOffset": 393,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16081,
+                  "content": "## 前端开发\n\n",
+                  "endOffset": 587,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 2,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发",
+                  "startOffset": 578,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "zhnt/loushang",
+                  "chunkId": 9956,
+                  "content": "## 预计周期\n半天环境搭建，2～5 天开发一个简单扩展\n\n",
+                  "endOffset": 908,
+                  "sourceRef": "beginner:121",
+                  "versionId": 232,
+                  "chunkIndex": 13,
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhnt/loushang > 预计周期",
+                  "startOffset": 878,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "Oxotka/Landscape1C",
+                  "chunkId": 12033,
+                  "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                  "endOffset": 222,
+                  "sourceRef": "beginner:38",
+                  "versionId": 313,
+                  "chunkIndex": 4,
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                  "startOffset": 149,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "virgiliojr94/book-to-skill",
+                  "chunkId": 10456,
+                  "content": "## 预计周期\n兼职约 2～4 周（包括学习、修改和文档完善）\n\n",
+                  "endOffset": 949,
+                  "sourceRef": "career:270",
+                  "versionId": 248,
+                  "chunkIndex": 13,
+                  "documentId": 29,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "virgiliojr94/book-to-skill > 预计周期",
+                  "startOffset": 916,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "Baskerville42/outage-data-ua",
+                  "chunkId": 11968,
+                  "content": "## 适合新手的原因\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\n\n",
+                  "endOffset": 206,
+                  "sourceRef": "beginner:30",
+                  "versionId": 308,
+                  "chunkIndex": 4,
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Baskerville42/outage-data-ua > 适合新手的原因",
+                  "startOffset": 150,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "BuilderIO/agent-native",
+                  "chunkId": 10365,
+                  "content": "## 预计周期\n4-6周（高级项目，含源码理解、功能扩展与贡献）\n\n",
+                  "endOffset": 821,
+                  "sourceRef": "career:263",
+                  "versionId": 245,
+                  "chunkIndex": 13,
+                  "documentId": 26,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "BuilderIO/agent-native > 预计周期",
+                  "startOffset": 787,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "BlackMixture/Mix-Studio",
+                  "chunkId": 13237,
+                  "content": "## 职业价值\n通过此项目可以展示你在 AI 工作流集成、前端/后端混合架构（基于 JavaScript）以及自动化部署方面的能力，特别适合 AI 应用开发岗位。\n\n",
+                  "endOffset": 251,
+                  "sourceRef": "career:242",
+                  "versionId": 354,
+                  "chunkIndex": 4,
+                  "documentId": 135,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "BlackMixture/Mix-Studio > 职业价值",
+                  "startOffset": 168,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "embabel/embabel-agent-examples",
+                  "chunkId": 10951,
+                  "content": "## 预计周期\n2-3周（增加一个完整端到端示例）\n\n",
+                  "endOffset": 786,
+                  "sourceRef": "career:245",
+                  "versionId": 287,
+                  "chunkIndex": 13,
+                  "documentId": 68,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "embabel/embabel-agent-examples > 预计周期",
+                  "startOffset": 759,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "🦌 DeerFlow - 2.0",
+                  "chunkId": 15907,
+                  "content": "### 运行应用\n\n",
+                  "endOffset": 4261,
+                  "sourceRef": "bytedance/deer-flow",
+                  "versionId": 452,
+                  "chunkIndex": 8,
+                  "documentId": 233,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "🦌 DeerFlow - 2.0 > 快速开始 > 运行应用",
+                  "startOffset": 4251,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15275,
+                  "content": "##### :black_small_square: Web Apps\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/Main_Page\"><b>OWASP</b></a> - worldwide not-for-profit charitable organization focused on improving the security of software.<br>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/Category:OWASP_Application_Security_Verification_Standard_Project\"><b>OWASP ASVS 3.0.1</b></a> - OWASP Application Security Verification Standard Project.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/Santandersecurityresearch/asvs\"><b>OWASP ASVS 3.0.1 Web App</b></a> - simple web app that helps developers understand the ASVS requirements.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/OWASP/ASVS/tree/master/4.0\"><b>OWASP ASVS 4.0</b></a> - is a list of application security requirements or tests.<br>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/OWASP_Testing_Project\"><b>OWASP Testing Guide v4</b></a> - includes a \"best practice\" penetration testing framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/OWASP/DevGuide\"><b>OWASP Dev Guide</b></a> - this is the development version of the OWASP Developer Guide.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/OWASP/wstg\"><b>OWASP WSTG</b></a> - is a comprehensive open source guide to testing the security of web apps.<br>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/OWASP_API_Security_Project\"><b>OWASP API Security Project</b></a> - focuses specifically on the top ten vulnerabilities in API security.<br>\n&nbsp;&nbsp; <a href=\"https://infosec.mozilla.org/guidelines/web_security.html\"><b>Mozilla Web Security</b></a> - help operational teams with creating secure web applications.<br>\n",
+                  "endOffset": 80489,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 100,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Manuals/Howtos/Tutorials &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Web Apps",
+                  "startOffset": 78850,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "web-infra-dev/rspress",
+                  "chunkId": 10022,
+                  "content": "## 最终建议\n强烈推荐给希望快速拥有可展示的个人网站的新手，学习成本低且成果明显。\n\n",
+                  "endOffset": 466,
+                  "sourceRef": "beginner:191",
+                  "versionId": 234,
+                  "chunkIndex": 7,
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "web-infra-dev/rspress > 最终建议",
+                  "startOffset": 422,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "efekrbas/discord-badge-manager",
+                  "chunkId": 11978,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:31",
+                  "versionId": 309,
+                  "chunkIndex": 1,
+                  "documentId": 90,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "efekrbas/discord-badge-manager > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012345679012345678,
+                  "title": "tandpfun/wardrobe",
+                  "chunkId": 9887,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 37,
+                  "sourceRef": "beginner:108",
+                  "versionId": 230,
+                  "chunkIndex": 1,
+                  "documentId": 11,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "tandpfun/wardrobe > 知识分类",
+                  "startOffset": 21,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012195121951219513,
+                  "title": "SidhuK/Glyph",
+                  "chunkId": 9594,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 32,
+                  "sourceRef": "beginner:55",
+                  "versionId": 220,
+                  "chunkIndex": 1,
+                  "documentId": 1,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "SidhuK/Glyph > 知识分类",
+                  "startOffset": 16,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012048192771084338,
+                  "title": "penecho/penecho",
+                  "chunkId": 9858,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 35,
+                  "sourceRef": "beginner:106",
+                  "versionId": 229,
+                  "chunkIndex": 1,
+                  "documentId": 10,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "penecho/penecho > 知识分类",
+                  "startOffset": 19,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.011904761904761904,
+                  "title": "nyblnet/bento",
+                  "chunkId": 9800,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:102",
+                  "versionId": 227,
+                  "chunkIndex": 1,
+                  "documentId": 8,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "nyblnet/bento > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=24,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01176470588235294,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9607,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 39,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 1,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                  "startOffset": 23,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 129,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "项目式学习",
+                      "chunkId": 11753,
+                      "content": "### Web Applications:\n\n",
+                      "endOffset": 14878,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 20,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications:",
+                      "startOffset": 14855,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "bashalarmistalt/decimen-optical-transfer",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "bashalarmistalt/decimen-optical-transfer",
+                      "chunkId": 9641,
+                      "content": "## 最终建议\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\n\n",
+                      "endOffset": 493,
+                      "sourceRef": "beginner:80",
+                      "versionId": 222,
+                      "chunkIndex": 7,
+                      "documentId": 3,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "bashalarmistalt/decimen-optical-transfer > 最终建议",
+                      "startOffset": 445,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:80",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "beginner:80",
+                  "documentId": 3,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "mshumer/Claude-of-Duty",
+                  "evidence": [
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "mshumer/Claude-of-Duty",
+                      "chunkId": 9837,
+                      "content": "## 最终建议\n适合已经具备一定 Web 游戏开发基础的新手作为案例研究，简单跑通后直接展示可获高分，但不推荐深度定制。\n\n",
+                      "endOffset": 455,
+                      "sourceRef": "beginner:104",
+                      "versionId": 228,
+                      "chunkIndex": 7,
+                      "documentId": 9,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "mshumer/Claude-of-Duty > 最终建议",
+                      "startOffset": 393,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:104",
+                  "bestScore": 0.015873015873015872,
+                  "sourceRef": "beginner:104",
+                  "documentId": 9,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Home Assistant 前端",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16081,
+                      "content": "## 前端开发\n\n",
+                      "endOffset": 587,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 2,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发",
+                      "startOffset": 578,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:home-assistant/frontend",
+                  "bestScore": 0.015625,
+                  "sourceRef": "home-assistant/frontend",
+                  "documentId": 257,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "zhnt/loushang",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "zhnt/loushang",
+                      "chunkId": 9956,
+                      "content": "## 预计周期\n半天环境搭建，2～5 天开发一个简单扩展\n\n",
+                      "endOffset": 908,
+                      "sourceRef": "beginner:121",
+                      "versionId": 232,
+                      "chunkIndex": 13,
+                      "documentId": 13,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhnt/loushang > 预计周期",
+                      "startOffset": 878,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:121",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "beginner:121",
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Oxotka/Landscape1C",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "Oxotka/Landscape1C",
+                      "chunkId": 12033,
+                      "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                      "endOffset": 222,
+                      "sourceRef": "beginner:38",
+                      "versionId": 313,
+                      "chunkIndex": 4,
+                      "documentId": 94,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                      "startOffset": 149,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:38",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "beginner:38",
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "virgiliojr94/book-to-skill",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "virgiliojr94/book-to-skill",
+                      "chunkId": 10456,
+                      "content": "## 预计周期\n兼职约 2～4 周（包括学习、修改和文档完善）\n\n",
+                      "endOffset": 949,
+                      "sourceRef": "career:270",
+                      "versionId": 248,
+                      "chunkIndex": 13,
+                      "documentId": 29,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "virgiliojr94/book-to-skill > 预计周期",
+                      "startOffset": 916,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:270",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "career:270",
+                  "documentId": 29,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "Baskerville42/outage-data-ua",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "Baskerville42/outage-data-ua",
+                      "chunkId": 11968,
+                      "content": "## 适合新手的原因\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\n\n",
+                      "endOffset": 206,
+                      "sourceRef": "beginner:30",
+                      "versionId": 308,
+                      "chunkIndex": 4,
+                      "documentId": 89,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Baskerville42/outage-data-ua > 适合新手的原因",
+                      "startOffset": 150,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:30",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "beginner:30",
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "BuilderIO/agent-native",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "BuilderIO/agent-native",
+                      "chunkId": 10365,
+                      "content": "## 预计周期\n4-6周（高级项目，含源码理解、功能扩展与贡献）\n\n",
+                      "endOffset": 821,
+                      "sourceRef": "career:263",
+                      "versionId": 245,
+                      "chunkIndex": 13,
+                      "documentId": 26,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "BuilderIO/agent-native > 预计周期",
+                      "startOffset": 787,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:263",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "career:263",
+                  "documentId": 26,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "BlackMixture/Mix-Studio",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "BlackMixture/Mix-Studio",
+                      "chunkId": 13237,
+                      "content": "## 职业价值\n通过此项目可以展示你在 AI 工作流集成、前端/后端混合架构（基于 JavaScript）以及自动化部署方面的能力，特别适合 AI 应用开发岗位。\n\n",
+                      "endOffset": 251,
+                      "sourceRef": "career:242",
+                      "versionId": 354,
+                      "chunkIndex": 4,
+                      "documentId": 135,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "BlackMixture/Mix-Studio > 职业价值",
+                      "startOffset": 168,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:242",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "career:242",
+                  "documentId": 135,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "embabel/embabel-agent-examples",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "embabel/embabel-agent-examples",
+                      "chunkId": 10951,
+                      "content": "## 预计周期\n2-3周（增加一个完整端到端示例）\n\n",
+                      "endOffset": 786,
+                      "sourceRef": "career:245",
+                      "versionId": 287,
+                      "chunkIndex": 13,
+                      "documentId": 68,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "embabel/embabel-agent-examples > 预计周期",
+                      "startOffset": 759,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:245",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "career:245",
+                  "documentId": 68,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "🦌 DeerFlow - 2.0",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "🦌 DeerFlow - 2.0",
+                      "chunkId": 15907,
+                      "content": "### 运行应用\n\n",
+                      "endOffset": 4261,
+                      "sourceRef": "bytedance/deer-flow",
+                      "versionId": 452,
+                      "chunkIndex": 8,
+                      "documentId": 233,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "🦌 DeerFlow - 2.0 > 快速开始 > 运行应用",
+                      "startOffset": 4251,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:bytedance/deer-flow",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "bytedance/deer-flow",
+                  "documentId": 233,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15275,
+                      "content": "##### :black_small_square: Web Apps\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/Main_Page\"><b>OWASP</b></a> - worldwide not-for-profit charitable organization focused on improving the security of software.<br>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/Category:OWASP_Application_Security_Verification_Standard_Project\"><b>OWASP ASVS 3.0.1</b></a> - OWASP Application Security Verification Standard Project.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/Santandersecurityresearch/asvs\"><b>OWASP ASVS 3.0.1 Web App</b></a> - simple web app that helps developers understand the ASVS requirements.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/OWASP/ASVS/tree/master/4.0\"><b>OWASP ASVS 4.0</b></a> - is a list of application security requirements or tests.<br>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/OWASP_Testing_Project\"><b>OWASP Testing Guide v4</b></a> - includes a \"best practice\" penetration testing framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/OWASP/DevGuide\"><b>OWASP Dev Guide</b></a> - this is the development version of the OWASP Developer Guide.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/OWASP/wstg\"><b>OWASP WSTG</b></a> - is a comprehensive open source guide to testing the security of web apps.<br>\n&nbsp;&nbsp; <a href=\"https://www.owasp.org/index.php/OWASP_API_Security_Project\"><b>OWASP API Security Project</b></a> - focuses specifically on the top ten vulnerabilities in API security.<br>\n&nbsp;&nbsp; <a href=\"https://infosec.mozilla.org/guidelines/web_security.html\"><b>Mozilla Web Security</b></a> - help operational teams with creating secure web applications.<br>\n",
+                      "endOffset": 80489,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 100,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Manuals/Howtos/Tutorials &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Web Apps",
+                      "startOffset": 78850,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:trimstray/the-book-of-secret-knowledge",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "documentId": 213,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "web-infra-dev/rspress",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "web-infra-dev/rspress",
+                      "chunkId": 10022,
+                      "content": "## 最终建议\n强烈推荐给希望快速拥有可展示的个人网站的新手，学习成本低且成果明显。\n\n",
+                      "endOffset": 466,
+                      "sourceRef": "beginner:191",
+                      "versionId": 234,
+                      "chunkIndex": 7,
+                      "documentId": 15,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "web-infra-dev/rspress > 最终建议",
+                      "startOffset": 422,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:191",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "beginner:191",
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "efekrbas/discord-badge-manager",
+                  "evidence": [
+                    {
+                      "score": 0.0125,
+                      "title": "efekrbas/discord-badge-manager",
+                      "chunkId": 11978,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:31",
+                      "versionId": 309,
+                      "chunkIndex": 1,
+                      "documentId": 90,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "efekrbas/discord-badge-manager > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:31",
+                  "bestScore": 0.0125,
+                  "sourceRef": "beginner:31",
+                  "documentId": 90,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "tandpfun/wardrobe",
+                  "evidence": [
+                    {
+                      "score": 0.012345679012345678,
+                      "title": "tandpfun/wardrobe",
+                      "chunkId": 9887,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 37,
+                      "sourceRef": "beginner:108",
+                      "versionId": 230,
+                      "chunkIndex": 1,
+                      "documentId": 11,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "tandpfun/wardrobe > 知识分类",
+                      "startOffset": 21,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:108",
+                  "bestScore": 0.012345679012345678,
+                  "sourceRef": "beginner:108",
+                  "documentId": 11,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "SidhuK/Glyph",
+                  "evidence": [
+                    {
+                      "score": 0.012195121951219513,
+                      "title": "SidhuK/Glyph",
+                      "chunkId": 9594,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 32,
+                      "sourceRef": "beginner:55",
+                      "versionId": 220,
+                      "chunkIndex": 1,
+                      "documentId": 1,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "SidhuK/Glyph > 知识分类",
+                      "startOffset": 16,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:55",
+                  "bestScore": 0.012195121951219513,
+                  "sourceRef": "beginner:55",
+                  "documentId": 1,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "penecho/penecho",
+                  "evidence": [
+                    {
+                      "score": 0.012048192771084338,
+                      "title": "penecho/penecho",
+                      "chunkId": 9858,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 35,
+                      "sourceRef": "beginner:106",
+                      "versionId": 229,
+                      "chunkIndex": 1,
+                      "documentId": 10,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "penecho/penecho > 知识分类",
+                      "startOffset": 19,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:106",
+                  "bestScore": 0.012048192771084338,
+                  "sourceRef": "beginner:106",
+                  "documentId": 10,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "nyblnet/bento",
+                  "evidence": [
+                    {
+                      "score": 0.011904761904761904,
+                      "title": "nyblnet/bento",
+                      "chunkId": 9800,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:102",
+                      "versionId": 227,
+                      "chunkIndex": 1,
+                      "documentId": 8,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "nyblnet/bento > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=24,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:102",
+                  "bestScore": 0.011904761904761904,
+                  "sourceRef": "beginner:102",
+                  "documentId": 8,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "DavidHDev/canvas-ui",
+                  "evidence": [
+                    {
+                      "score": 0.01176470588235294,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9607,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 39,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 1,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                      "startOffset": 23,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:77",
+                  "bestScore": 0.01176470588235294,
+                  "sourceRef": "beginner:77",
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "推荐项目  Web应用开发 学习 1年",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [],
+            "parameters": {
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "Web应用开发"
+                ],
+                "experience": "1年",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "Web应用开发",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：1年；已记录项目目标：学习；已记录项目主题：Web应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              },
+              "semanticChunks": [
+                11753,
+                9641,
+                9837,
+                16081,
+                9956,
+                12033,
+                10456,
+                11968,
+                10365,
+                13237,
+                10951,
+                15907,
+                15275,
+                10022,
+                11978,
+                9887,
+                9594,
+                9858,
+                9800,
+                9607
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "Web应用开发"
+                ]
+              },
+              "alternatives": [
+                {
+                  "label": "项目主题改为智能体",
+                  "total": 110,
+                  "changes": {
+                    "topic": [
+                      "智能体"
+                    ]
+                  },
+                  "confirmed": 110,
+                  "uncertain": 0
+                }
+              ],
+              "calculatedAt": "2026-10-04T02:51:04.743534715Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "Web应用开发"
+                ],
+                "experience": "1年",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "Web应用开发",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "lastCandidates": [],
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：1年；已记录项目目标：学习；已记录项目主题：Web应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

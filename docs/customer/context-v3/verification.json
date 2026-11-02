@@ -1,0 +1,138 @@
+{
+  "phase": "P3",
+  "decisions": [
+    "1A",
+    "2A",
+    "3A",
+    "4A",
+    "5A"
+  ],
+  "code": "IMPLEMENTED",
+  "offline": {
+    "tests": 507,
+    "passed": 484,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 23
+  },
+  "offlineReport": "offline-regression.json",
+  "mysql": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 4,
+    "scope": "Disposable separate MySQL database; original archive, task binding, watermark, lease, source hash, cancelled writes",
+    "log": "_staging/context-p3-mysql.log",
+    "temporaryDatabaseDropped": true
+  },
+  "runtime": {
+    "status": "RUNNING",
+    "health": {
+      "db": "UP",
+      "redis": "UP",
+      "rag_vector_store": "UP",
+      "timestamp": "1793264690562"
+    },
+    "engine": "LANGGRAPH4J",
+    "acceptanceGuard": "ENABLED_38_OF_40_NEW_ROUND",
+    "V46Migration": "APPLIED_BY_STARTUP_AND_VERIFIED_BY_REAL_WRITES"
+  },
+  "realProviderAcceptance": "PARTIAL_PASS_CONTEXT_SCENARIOS_PASSED_RECOMMENDATION_QUALITY_FAILED",
+  "providerLedgerEntries": 50,
+  "providerLedgerSha256": "7d9f44cb5a1fb7e210dec11add09aaf2e360f02c0f64b1f765f3a09d48301f97",
+  "newRealProviderRequests": 38,
+  "releaseApproved": false,
+  "backup": "_staging/context-p3-20261029-143422",
+  "checkedAtUtc": "2026-10-29T09:04:50.846508+00:00",
+  "scriptSyntax": "PASSED",
+  "diffCheck": "PASSED_FOR_CHANGED_CODE_SCOPE",
+  "httpSmoke": {
+    "scope": "Real HTTP, MySQL, LangGraph4j; deterministic STATE routes; synthetic fixture authentication, not login testing",
+    "sessionId": "573",
+    "turns": [
+      {
+        "runId": "84319e79-d2bf-47b0-9902-d3a347235b90",
+        "protocolStatus": "SUCCEEDED",
+        "errorCode": null,
+        "businessStatus": "CONFIRMED_CONDITIONS"
+      },
+      {
+        "runId": "35162aa5-3f6c-413f-9b6c-877842c1437d",
+        "protocolStatus": "SUCCEEDED",
+        "errorCode": null,
+        "businessStatus": "CONFIRMED_CONDITIONS"
+      }
+    ],
+    "modelRequests": 0,
+    "passed": true,
+    "taskBindings": 2,
+    "contextManifests": 2,
+    "historyReads": 1,
+    "ledgerUnchanged": true
+  },
+  "ledgerUnchanged": true,
+  "distinctExecutedPassed": 488,
+  "remainingConditionalSkips": 19,
+  "acceptance": "PARTIAL_PASS",
+  "liveAcceptance": {
+    "report": "live-acceptance-review.md",
+    "details": "live-review.json",
+    "authorizedAttempts": 40,
+    "used": 38,
+    "remaining": 2,
+    "attemptKinds": {
+      "CUSTOMER_CHAT": 32,
+      "OLLAMA_EMBEDDING": 6
+    },
+    "httpTurns": 17,
+    "invariantChecksPassed": 20,
+    "generatedSummarySegments": 4,
+    "taskControlFix": "REGRESSION_AND_REAL_RETEST_PASSED",
+    "openFindings": [
+      "LIVE-QUALITY-01",
+      "LIVE-QUALITY-02"
+    ],
+    "ledgerSha256": "583ed99a9182697824d68490a8d3260569c89de1829f74b4ebe4b384d9c97987",
+    "findingRemediation": {
+      "LIVE-QUALITY-01": "CODE_AND_OFFLINE_FIX_PASSED_REAL_RETEST_PENDING",
+      "LIVE-QUALITY-02": "CODE_AND_OFFLINE_FIX_PASSED_REAL_RETEST_PENDING"
+    }
+  },
+  "liveFixRegression": {
+    "tests": 510,
+    "passed": 487,
+    "skipped": 23,
+    "failures": 0,
+    "errors": 0,
+    "report": "live-fix-regression.json"
+  },
+  "oldLedgerUnchanged": true,
+  "recommendationFitCorrection": {
+    "status": "CODE_OFFLINE_HTTP_AND_CATALOG_CHECKS_PASSED_REAL_RECOMMENDATION_PENDING",
+    "report": "recommendation-fit-correction.md",
+    "verification": "recommendation-fit-verification.json",
+    "offline": {
+      "tests": 535,
+      "passed": 512,
+      "skipped": 23,
+      "failures": 0,
+      "errors": 0
+    },
+    "frontend": {
+      "tests": 23,
+      "passed": 23,
+      "build": "PASSED",
+      "testsLog": "_staging/recommendation-fit-frontend-tests-final.log",
+      "buildLog": "_staging/recommendation-fit-frontend-build-final.log"
+    },
+    "httpImportProtection": {
+      "report": "recommendation-fit-http-check.json",
+      "status": 409,
+      "passed": true,
+      "newModelRequests": 0
+    },
+    "realRecommendationRetest": "NOT_RUN_REQUIRES_MORE_THAN_REMAINING2_ATTEMPTS",
+    "newProviderAttempts": 0
+  }
+}

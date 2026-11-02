@@ -1,0 +1,1638 @@
+{
+  "scope": "Actual full product generator pipeline with lab-injected evidence. Synthetic profiles; 8 scenarios repeated, not 16 independent scenarios.",
+  "pricing": {
+    "requestedModel": "DeepSeek-V4-Pro",
+    "inputCnyPerMillion": 12,
+    "outputCnyPerMillion": 24,
+    "source": "https://ai.gitee.com/serverless-api?model=DeepSeek-V4-Pro",
+    "verifiedAt": "2026-10-03",
+    "type": "Public list-price estimate, not invoiced debit. Actual returned GA alias differs from requested SKU; alternative 0813 rates retained per row. No reasoning double-count."
+  },
+  "aggregate": {
+    "A": {
+      "attempts": 16,
+      "successes": 16,
+      "failures": 0,
+      "meanWallSeconds": 39.890166974997555,
+      "medianWallSeconds": 36.6318009500028,
+      "maxWallSeconds": 86.64181109999481,
+      "meanRetrievalSeconds": 0.584821809875,
+      "meanModelSeconds": 39.1523579540625,
+      "meanInputTokens": 944.0,
+      "meanOutputTokens": 2107.3125,
+      "meanReasoningTokens": 1465.4375,
+      "meanBasePriceCny": 0.0619035,
+      "totalBasePriceCny": 0.9904560000000001,
+      "unknownUsageAttempts": 0,
+      "cacheHitTokens": 1024.0,
+      "recommendations": 25,
+      "boundRecommendations": 25,
+      "ragRecommendations": 14,
+      "businessRecommendations": 11,
+      "actualModels": {
+        "deepseek-v4-pro": 10,
+        "deepseek-v4-pro-ga-260813": 6
+      },
+      "distinctRepositories": 14,
+      "noRecommendationRuns": 3
+    },
+    "B": {
+      "attempts": 16,
+      "successes": 16,
+      "failures": 0,
+      "meanWallSeconds": 62.435981062498286,
+      "medianWallSeconds": 64.72599454999727,
+      "maxWallSeconds": 99.3083895000018,
+      "meanRetrievalSeconds": 1.471925687,
+      "meanModelSeconds": 60.8188667429375,
+      "meanInputTokens": 917.5,
+      "meanOutputTokens": 3498.0,
+      "meanReasoningTokens": 2776.8125,
+      "meanBasePriceCny": 0.094962,
+      "totalBasePriceCny": 1.519392,
+      "unknownUsageAttempts": 0,
+      "cacheHitTokens": 1024.0,
+      "recommendations": 28,
+      "boundRecommendations": 28,
+      "ragRecommendations": 15,
+      "businessRecommendations": 13,
+      "actualModels": {
+        "deepseek-v4-pro": 4,
+        "deepseek-v4-pro-ga-260813": 12
+      },
+      "distinctRepositories": 13,
+      "noRecommendationRuns": 2
+    }
+  },
+  "pairs": [
+    {
+      "case": "agent_business",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 47.433718349995615,
+        "meanBasePriceCny": 0.068928,
+        "projects": [
+          [
+            "https://github.com/chaitin/monkeycode",
+            "https://github.com/datawhalechina/hello-agents"
+          ],
+          [
+            "https://github.com/chaitin/monkeycode",
+            "https://github.com/langgenius/dify"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 0.3333333333333333
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 63.84540544999618,
+        "meanBasePriceCny": 0.091932,
+        "projects": [
+          [
+            "https://github.com/777genius/agent-teams-ai",
+            "https://github.com/langgenius/dify"
+          ],
+          [
+            "https://github.com/777genius/agent-teams-ai",
+            "https://github.com/langgenius/dify"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      }
+    },
+    {
+      "case": "data_analysis",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 40.50554805000138,
+        "meanBasePriceCny": 0.065634,
+        "projects": [
+          [],
+          [
+            "https://github.com/apache/doris",
+            "https://github.com/elastic/kibana"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 0.0
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 66.56462864999776,
+        "meanBasePriceCny": 0.090864,
+        "projects": [
+          [
+            "https://github.com/apache/doris",
+            "https://github.com/elastic/kibana"
+          ],
+          [
+            "https://github.com/apache/doris",
+            "https://github.com/elastic/kibana"
+          ]
+        ],
+        "retrievalRepeatJaccard": null,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      }
+    },
+    {
+      "case": "printing_explore",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 37.190638050000416,
+        "meanBasePriceCny": 0.053892,
+        "projects": [
+          [
+            "https://github.com/mainsail-crew/mainsail",
+            "https://github.com/slic3r/slic3r"
+          ],
+          [
+            "https://github.com/mainsail-crew/mainsail",
+            "https://github.com/slic3r/slic3r"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 62.6129074499986,
+        "meanBasePriceCny": 0.098724,
+        "projects": [
+          [
+            "https://github.com/bencbartlett/3d-printed-mirror-array",
+            "https://github.com/mainsail-crew/mainsail"
+          ],
+          [
+            "https://github.com/bencbartlett/3d-printed-mirror-array",
+            "https://github.com/mainsail-crew/mainsail"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      }
+    },
+    {
+      "case": "rag_career",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 44.974608349992195,
+        "meanBasePriceCny": 0.070398,
+        "projects": [
+          [
+            "https://github.com/chatchat-space/langchain-chatchat",
+            "https://github.com/langgenius/dify"
+          ],
+          [
+            "https://github.com/langgenius/dify",
+            "https://github.com/promptfoo/promptfoo"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 0.3333333333333333
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 91.53594405000331,
+        "meanBasePriceCny": 0.150816,
+        "projects": [
+          [
+            "https://github.com/pathwaycom/llm-app",
+            "https://github.com/quivrhq/quivr"
+          ],
+          [
+            "https://github.com/langgenius/dify",
+            "https://github.com/pathwaycom/llm-app"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 0.3333333333333333
+      }
+    },
+    {
+      "case": "rag_python",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 61.637500450000516,
+        "meanBasePriceCny": 0.101046,
+        "projects": [
+          [
+            "https://github.com/langgenius/dify",
+            "https://github.com/pathwaycom/llm-app"
+          ],
+          [
+            "https://github.com/langgenius/dify",
+            "https://github.com/pathwaycom/llm-app"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 91.94910810000147,
+        "meanBasePriceCny": 0.14605200000000002,
+        "projects": [
+          [
+            "https://github.com/quivrhq/quivr",
+            "https://github.com/timmyy123/llm-hub"
+          ],
+          [
+            "https://github.com/quivrhq/quivr",
+            "https://github.com/timmyy123/llm-hub"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      }
+    },
+    {
+      "case": "spring_beginner",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 33.795916499999294,
+        "meanBasePriceCny": 0.051882,
+        "projects": [
+          [
+            "https://github.com/alibaba/nacos",
+            "https://github.com/embabel/embabel-agent-examples"
+          ],
+          [
+            "https://github.com/alibaba/nacos",
+            "https://github.com/embabel/embabel-agent-examples"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 49.92091689999506,
+        "meanBasePriceCny": 0.07311,
+        "projects": [
+          [
+            "https://github.com/embabel/embabel-agent-examples",
+            "https://github.com/practical-tutorials/project-based-learning"
+          ],
+          [
+            "https://github.com/embabel/embabel-agent-examples",
+            "https://github.com/practical-tutorials/project-based-learning"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      }
+    },
+    {
+      "case": "unavailable",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 11.193739449998247,
+        "meanBasePriceCny": 0.01731,
+        "projects": [
+          [],
+          []
+        ],
+        "retrievalRepeatJaccard": null,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": null
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 18.138440000002447,
+        "meanBasePriceCny": 0.02568,
+        "projects": [
+          [],
+          []
+        ],
+        "retrievalRepeatJaccard": null,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": null
+      }
+    },
+    {
+      "case": "vue_learning",
+      "A": {
+        "rounds": 2,
+        "meanSeconds": 42.38966659999278,
+        "meanBasePriceCny": 0.066138,
+        "projects": [
+          [
+            "https://github.com/justarchinet/asf-webconfiggenerator",
+            "https://github.com/zhensherlock/protocol-launcher"
+          ],
+          [
+            "https://github.com/justarchinet/asf-webconfiggenerator"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 0.5
+      },
+      "B": {
+        "rounds": 2,
+        "meanSeconds": 54.92049789999146,
+        "meanBasePriceCny": 0.08251800000000001,
+        "projects": [
+          [
+            "https://github.com/justarchinet/asf-webconfiggenerator",
+            "https://github.com/zhensherlock/protocol-launcher"
+          ],
+          [
+            "https://github.com/justarchinet/asf-webconfiggenerator",
+            "https://github.com/zhensherlock/protocol-launcher"
+          ]
+        ],
+        "retrievalRepeatJaccard": 1.0,
+        "sameEvidenceAcrossRounds": true,
+        "repeatJaccard": 1.0
+      }
+    }
+  ],
+  "sameReturnedModelPairedSubset": {
+    "pairs": 10,
+    "details": [
+      {
+        "case": "agent_business",
+        "round": 1,
+        "model": "deepseek-v4-pro",
+        "aSeconds": 58.93172959999356,
+        "bSeconds": 60.7046577000001,
+        "aCost": 0.082848,
+        "bCost": 0.092304
+      },
+      {
+        "case": "agent_business",
+        "round": 2,
+        "model": "deepseek-v4-pro",
+        "aSeconds": 35.93570709999767,
+        "bSeconds": 66.98615319999226,
+        "aCost": 0.055008,
+        "bCost": 0.09156
+      },
+      {
+        "case": "data_analysis",
+        "round": 2,
+        "model": "deepseek-v4-pro-ga-260813",
+        "aSeconds": 50.14080829999875,
+        "bSeconds": 62.465835900002276,
+        "aCost": 0.088176,
+        "bCost": 0.095184
+      },
+      {
+        "case": "rag_career",
+        "round": 1,
+        "model": "deepseek-v4-pro-ga-260813",
+        "aSeconds": 55.032142899988685,
+        "bSeconds": 83.76349860000482,
+        "aCost": 0.08838,
+        "bCost": 0.129924
+      },
+      {
+        "case": "rag_python",
+        "round": 2,
+        "model": "deepseek-v4-pro-ga-260813",
+        "aSeconds": 86.64181109999481,
+        "bSeconds": 87.47649919999822,
+        "aCost": 0.147264,
+        "bCost": 0.1377
+      },
+      {
+        "case": "spring_beginner",
+        "round": 1,
+        "model": "deepseek-v4-pro-ga-260813",
+        "aSeconds": 36.630412099999376,
+        "bSeconds": 69.73964529999648,
+        "aCost": 0.060576,
+        "bCost": 0.10782
+      },
+      {
+        "case": "spring_beginner",
+        "round": 2,
+        "model": "deepseek-v4-pro",
+        "aSeconds": 30.96142089999921,
+        "bSeconds": 30.102188499993645,
+        "aCost": 0.043188,
+        "bCost": 0.0384
+      },
+      {
+        "case": "unavailable",
+        "round": 2,
+        "model": "deepseek-v4-pro-ga-260813",
+        "aSeconds": 15.05175880000752,
+        "bSeconds": 22.258796299996902,
+        "aCost": 0.023976,
+        "bCost": 0.031824
+      },
+      {
+        "case": "vue_learning",
+        "round": 1,
+        "model": "deepseek-v4-pro",
+        "aSeconds": 41.997826399994665,
+        "bSeconds": 48.88141819999146,
+        "aCost": 0.059412,
+        "bCost": 0.06522
+      },
+      {
+        "case": "vue_learning",
+        "round": 2,
+        "model": "deepseek-v4-pro-ga-260813",
+        "aSeconds": 42.78150679999089,
+        "bSeconds": 60.95957759999146,
+        "aCost": 0.072864,
+        "bCost": 0.099816
+      }
+    ],
+    "aSeconds": 45.41051239999651,
+    "bSeconds": 59.33382704999676,
+    "aCost": 0.0721692,
+    "bCost": 0.0889752
+  },
+  "rows": [
+    {
+      "case": "agent_business",
+      "round": 1,
+      "variant": "A",
+      "file": "agent_business-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 58.93172959999356,
+      "retrievalSeconds": 0.454128483,
+      "modelSeconds": 58.331432486,
+      "inputTokens": 1470.0,
+      "outputTokens": 2717.0,
+      "reasoningTokens": 1944.0,
+      "visibleOutputTokens": 773.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.082848,
+      "alternate0813PriceCny": 0.086589,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/chaitin/monkeycode",
+        "https://github.com/datawhalechina/hello-agents"
+      ],
+      "ragRecommendations": 1,
+      "businessRecommendations": 1,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 488,
+      "retrievedProjects": [
+        "https://github.com/datawhalechina/hello-agents",
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/microsoft/ai-agents-for-beginners"
+      ],
+      "evidenceHash": "766f1bc0ab5c9cd784efdc1ce709d04f4c2314e5262a0fc9c43aaa3969f314c2",
+      "retrievalStatus": "USED",
+      "businessCases": 6
+    },
+    {
+      "case": "agent_business",
+      "round": 1,
+      "variant": "B",
+      "file": "agent_business-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 60.7046577000001,
+      "retrievalSeconds": 1.220654377,
+      "modelSeconds": 59.342220797,
+      "inputTokens": 1566.0,
+      "outputTokens": 3063.0,
+      "reasoningTokens": 2273.0,
+      "visibleOutputTokens": 790.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.092304,
+      "alternate0813PriceCny": 0.096795,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/langgenius/dify"
+      ],
+      "ragRecommendations": 1,
+      "businessRecommendations": 1,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 658,
+      "retrievedProjects": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/agent-analytics/awesome-multi-agent-orchestrators",
+        "https://github.com/datawhalechina/hello-agents"
+      ],
+      "evidenceHash": "e1b6fb6204dbe35febda74e7c75890e15a03f11935a14bfc32f8d481701e72ec",
+      "retrievalStatus": "USED",
+      "businessCases": 6
+    },
+    {
+      "case": "agent_business",
+      "round": 2,
+      "variant": "A",
+      "file": "agent_business-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 35.93570709999767,
+      "retrievalSeconds": 0.663398472,
+      "modelSeconds": 35.107337361,
+      "inputTokens": 1470.0,
+      "outputTokens": 1557.0,
+      "reasoningTokens": 782.0,
+      "visibleOutputTokens": 775.0,
+      "cacheHitTokens": 1024.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.055008,
+      "alternate0813PriceCny": 0.055269,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/chaitin/monkeycode",
+        "https://github.com/langgenius/dify"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 488,
+      "retrievedProjects": [
+        "https://github.com/datawhalechina/hello-agents",
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/microsoft/ai-agents-for-beginners"
+      ],
+      "evidenceHash": "766f1bc0ab5c9cd784efdc1ce709d04f4c2314e5262a0fc9c43aaa3969f314c2",
+      "retrievalStatus": "USED",
+      "businessCases": 6
+    },
+    {
+      "case": "agent_business",
+      "round": 2,
+      "variant": "B",
+      "file": "agent_business-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 66.98615319999226,
+      "retrievalSeconds": 1.195341072,
+      "modelSeconds": 65.65031067000001,
+      "inputTokens": 1566.0,
+      "outputTokens": 3032.0,
+      "reasoningTokens": 2197.0,
+      "visibleOutputTokens": 835.0,
+      "cacheHitTokens": 1024.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.09156,
+      "alternate0813PriceCny": 0.095958,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/langgenius/dify"
+      ],
+      "ragRecommendations": 1,
+      "businessRecommendations": 1,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 658,
+      "retrievedProjects": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/agent-analytics/awesome-multi-agent-orchestrators",
+        "https://github.com/datawhalechina/hello-agents"
+      ],
+      "evidenceHash": "e1b6fb6204dbe35febda74e7c75890e15a03f11935a14bfc32f8d481701e72ec",
+      "retrievalStatus": "USED",
+      "businessCases": 6
+    },
+    {
+      "case": "data_analysis",
+      "round": 1,
+      "variant": "A",
+      "file": "data_analysis-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 30.870287800004007,
+      "retrievalSeconds": 0.5848469199999999,
+      "modelSeconds": 30.138016076,
+      "inputTokens": 937.0,
+      "outputTokens": 1327.0,
+      "reasoningTokens": 1007.0,
+      "visibleOutputTokens": 320.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.043092,
+      "alternate0813PriceCny": 0.044262,
+      "recommendationCount": 0,
+      "boundRecommendations": 0,
+      "projects": [],
+      "ragRecommendations": 0,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 593,
+      "retrievedProjects": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana",
+        "https://github.com/gupy-io/gupy-skills-candidato"
+      ],
+      "evidenceHash": "088f8419c822b08ef2040bffba312c97cfd9be989d5603c02e4d35c9904548ff",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "data_analysis",
+      "round": 1,
+      "variant": "B",
+      "file": "data_analysis-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 70.66342139999324,
+      "retrievalSeconds": 3.606752261,
+      "modelSeconds": 66.931303961,
+      "inputTokens": 758.0,
+      "outputTokens": 3227.0,
+      "reasoningTokens": 2453.0,
+      "visibleOutputTokens": 774.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.086544,
+      "alternate0813PriceCny": 0.093951,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 0,
+      "promptEvidenceChars": 0,
+      "retrievedProjects": [],
+      "evidenceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrievalStatus": "EMPTY",
+      "businessCases": 3
+    },
+    {
+      "case": "data_analysis",
+      "round": 2,
+      "variant": "A",
+      "file": "data_analysis-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 50.14080829999875,
+      "retrievalSeconds": 0.57399918,
+      "modelSeconds": 49.419427594,
+      "inputTokens": 1016.0,
+      "outputTokens": 3166.0,
+      "reasoningTokens": 2282.0,
+      "visibleOutputTokens": 884.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.088176,
+      "alternate0813PriceCny": 0.094626,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 593,
+      "retrievedProjects": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana",
+        "https://github.com/gupy-io/gupy-skills-candidato"
+      ],
+      "evidenceHash": "088f8419c822b08ef2040bffba312c97cfd9be989d5603c02e4d35c9904548ff",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "data_analysis",
+      "round": 2,
+      "variant": "B",
+      "file": "data_analysis-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 62.465835900002276,
+      "retrievalSeconds": 1.0920532379999999,
+      "modelSeconds": 61.232393469,
+      "inputTokens": 758.0,
+      "outputTokens": 3587.0,
+      "reasoningTokens": 2927.0,
+      "visibleOutputTokens": 660.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.095184,
+      "alternate0813PriceCny": 0.103671,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 0,
+      "promptEvidenceChars": 0,
+      "retrievedProjects": [],
+      "evidenceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrievalStatus": "EMPTY",
+      "businessCases": 3
+    },
+    {
+      "case": "printing_explore",
+      "round": 1,
+      "variant": "A",
+      "file": "printing_explore-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 33.116076700011035,
+      "retrievalSeconds": 0.601427998,
+      "modelSeconds": 32.38252782,
+      "inputTokens": 826.0,
+      "outputTokens": 1498.0,
+      "reasoningTokens": 623.0,
+      "visibleOutputTokens": 875.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.045864,
+      "alternate0813PriceCny": 0.04788,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 586,
+      "retrievedProjects": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "evidenceHash": "944e398a7ffc9261fa3bdc259d784f3dba427018a152aea008a338d6edaa2dc5",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "printing_explore",
+      "round": 1,
+      "variant": "B",
+      "file": "printing_explore-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 57.44756149999739,
+      "retrievalSeconds": 1.022616887,
+      "modelSeconds": 56.298277897,
+      "inputTokens": 894.0,
+      "outputTokens": 3371.0,
+      "reasoningTokens": 2553.0,
+      "visibleOutputTokens": 818.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.091632,
+      "alternate0813PriceCny": 0.099063,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 648,
+      "retrievedProjects": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/iroslink/iblowy",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "evidenceHash": "bd3b077ba75f18737b38db99ca63f5669c9829b4fe8f5aaab0aea902546abdd1",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "printing_explore",
+      "round": 2,
+      "variant": "A",
+      "file": "printing_explore-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 41.2651993999898,
+      "retrievalSeconds": 0.49100310999999996,
+      "modelSeconds": 40.638414424000004,
+      "inputTokens": 826.0,
+      "outputTokens": 2167.0,
+      "reasoningTokens": 1480.0,
+      "visibleOutputTokens": 687.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.06192,
+      "alternate0813PriceCny": 0.065943,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 586,
+      "retrievedProjects": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "evidenceHash": "944e398a7ffc9261fa3bdc259d784f3dba427018a152aea008a338d6edaa2dc5",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "printing_explore",
+      "round": 2,
+      "variant": "B",
+      "file": "printing_explore-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 67.77825339999981,
+      "retrievalSeconds": 1.133562639,
+      "modelSeconds": 66.479528124,
+      "inputTokens": 894.0,
+      "outputTokens": 3962.0,
+      "reasoningTokens": 3256.0,
+      "visibleOutputTokens": 706.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.105816,
+      "alternate0813PriceCny": 0.11502,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 648,
+      "retrievedProjects": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/iroslink/iblowy",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "evidenceHash": "bd3b077ba75f18737b38db99ca63f5669c9829b4fe8f5aaab0aea902546abdd1",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "rag_career",
+      "round": 1,
+      "variant": "A",
+      "file": "rag_career-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 55.032142899988685,
+      "retrievalSeconds": 0.623903996,
+      "modelSeconds": 54.279882881,
+      "inputTokens": 1201.0,
+      "outputTokens": 3082.0,
+      "reasoningTokens": 2324.0,
+      "visibleOutputTokens": 758.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.08838,
+      "alternate0813PriceCny": 0.094023,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/chatchat-space/langchain-chatchat",
+        "https://github.com/langgenius/dify"
+      ],
+      "ragRecommendations": 1,
+      "businessRecommendations": 1,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 463,
+      "retrievedProjects": [
+        "https://github.com/chatchat-space/langchain-chatchat",
+        "https://github.com/langgenius/dify",
+        "https://github.com/triliumnext/trilium"
+      ],
+      "evidenceHash": "2f3ffcec604d493702830ddbdae4386d0292a147695d3a51dba08ce815c578a2",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "rag_career",
+      "round": 1,
+      "variant": "B",
+      "file": "rag_career-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 83.76349860000482,
+      "retrievalSeconds": 1.450000041,
+      "modelSeconds": 82.12556443899999,
+      "inputTokens": 1249.0,
+      "outputTokens": 4789.0,
+      "reasoningTokens": 3896.0,
+      "visibleOutputTokens": 893.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.129924,
+      "alternate0813PriceCny": 0.140544,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/pathwaycom/llm-app",
+        "https://github.com/quivrhq/quivr"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 698,
+      "retrievedProjects": [
+        "https://github.com/hkuds/deeptutor",
+        "https://github.com/pathwaycom/llm-app",
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceHash": "1a82b128ead0234c2988f847046552888aeb7d4583b77377a9dc7012a916823e",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "rag_career",
+      "round": 2,
+      "variant": "A",
+      "file": "rag_career-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 34.917073799995705,
+      "retrievalSeconds": 0.441637676,
+      "modelSeconds": 34.320885788,
+      "inputTokens": 1122.0,
+      "outputTokens": 1623.0,
+      "reasoningTokens": 728.0,
+      "visibleOutputTokens": 895.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.052416,
+      "alternate0813PriceCny": 0.053919,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/promptfoo/promptfoo"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 463,
+      "retrievedProjects": [
+        "https://github.com/chatchat-space/langchain-chatchat",
+        "https://github.com/langgenius/dify",
+        "https://github.com/triliumnext/trilium"
+      ],
+      "evidenceHash": "2f3ffcec604d493702830ddbdae4386d0292a147695d3a51dba08ce815c578a2",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "rag_career",
+      "round": 2,
+      "variant": "B",
+      "file": "rag_career-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 99.3083895000018,
+      "retrievalSeconds": 1.36908474,
+      "modelSeconds": 97.78585176,
+      "inputTokens": 1249.0,
+      "outputTokens": 6530.0,
+      "reasoningTokens": 5727.0,
+      "visibleOutputTokens": 803.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.171708,
+      "alternate0813PriceCny": 0.187551,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/pathwaycom/llm-app"
+      ],
+      "ragRecommendations": 1,
+      "businessRecommendations": 1,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 698,
+      "retrievedProjects": [
+        "https://github.com/hkuds/deeptutor",
+        "https://github.com/pathwaycom/llm-app",
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceHash": "1a82b128ead0234c2988f847046552888aeb7d4583b77377a9dc7012a916823e",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "rag_python",
+      "round": 1,
+      "variant": "A",
+      "file": "rag_python-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 36.63318980000622,
+      "retrievalSeconds": 0.49915244599999997,
+      "modelSeconds": 35.98888814,
+      "inputTokens": 963.0,
+      "outputTokens": 1803.0,
+      "reasoningTokens": 1036.0,
+      "visibleOutputTokens": 767.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.054828,
+      "alternate0813PriceCny": 0.057348,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/pathwaycom/llm-app"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 863,
+      "retrievedProjects": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/pathwaycom/llm-app",
+        "https://github.com/xinhuangcs/agentmaker"
+      ],
+      "evidenceHash": "df715806b5c6531d4636c82a7954af7e019df6e9aca883d0f06d601b43a67278",
+      "retrievalStatus": "USED",
+      "businessCases": 1
+    },
+    {
+      "case": "rag_python",
+      "round": 1,
+      "variant": "B",
+      "file": "rag_python-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 96.42171700000472,
+      "retrievalSeconds": 1.121045913,
+      "modelSeconds": 95.164682445,
+      "inputTokens": 921.0,
+      "outputTokens": 5973.0,
+      "reasoningTokens": 5094.0,
+      "visibleOutputTokens": 879.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.154404,
+      "alternate0813PriceCny": 0.16956,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/quivrhq/quivr",
+        "https://github.com/timmyy123/llm-hub"
+      ],
+      "ragRecommendations": 1,
+      "businessRecommendations": 1,
+      "evidenceCount": 1,
+      "promptEvidenceChars": 360,
+      "retrievedProjects": [
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceHash": "a0343266aede3f40e6dc5e7be2defd6594abe6df3714c461192cfd95a5d293ab",
+      "retrievalStatus": "USED",
+      "businessCases": 1
+    },
+    {
+      "case": "rag_python",
+      "round": 2,
+      "variant": "A",
+      "file": "rag_python-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 86.64181109999481,
+      "retrievalSeconds": 0.480355329,
+      "modelSeconds": 86.029276466,
+      "inputTokens": 1042.0,
+      "outputTokens": 5615.0,
+      "reasoningTokens": 4908.0,
+      "visibleOutputTokens": 707.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.147264,
+      "alternate0813PriceCny": 0.160983,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/pathwaycom/llm-app"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 863,
+      "retrievedProjects": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/pathwaycom/llm-app",
+        "https://github.com/xinhuangcs/agentmaker"
+      ],
+      "evidenceHash": "df715806b5c6531d4636c82a7954af7e019df6e9aca883d0f06d601b43a67278",
+      "retrievalStatus": "USED",
+      "businessCases": 1
+    },
+    {
+      "case": "rag_python",
+      "round": 2,
+      "variant": "B",
+      "file": "rag_python-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 87.47649919999822,
+      "retrievalSeconds": 1.387474757,
+      "modelSeconds": 85.93900619499999,
+      "inputTokens": 921.0,
+      "outputTokens": 5277.0,
+      "reasoningTokens": 4471.0,
+      "visibleOutputTokens": 806.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.1377,
+      "alternate0813PriceCny": 0.150768,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/quivrhq/quivr",
+        "https://github.com/timmyy123/llm-hub"
+      ],
+      "ragRecommendations": 1,
+      "businessRecommendations": 1,
+      "evidenceCount": 1,
+      "promptEvidenceChars": 360,
+      "retrievedProjects": [
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceHash": "a0343266aede3f40e6dc5e7be2defd6594abe6df3714c461192cfd95a5d293ab",
+      "retrievalStatus": "USED",
+      "businessCases": 1
+    },
+    {
+      "case": "spring_beginner",
+      "round": 1,
+      "variant": "A",
+      "file": "spring_beginner-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 36.630412099999376,
+      "retrievalSeconds": 1.133997531,
+      "modelSeconds": 35.200541377,
+      "inputTokens": 714.0,
+      "outputTokens": 2167.0,
+      "reasoningTokens": 1573.0,
+      "visibleOutputTokens": 594.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.060576,
+      "alternate0813PriceCny": 0.064935,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/alibaba/nacos",
+        "https://github.com/embabel/embabel-agent-examples"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 977,
+      "retrievedProjects": [
+        "https://github.com/alibaba/nacos",
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/mshumer/claude-of-duty"
+      ],
+      "evidenceHash": "46fc97fc6570cc5a556585b8984d3d49e2e919be4f2258f7c1c1bdc58e02b2ed",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "spring_beginner",
+      "round": 1,
+      "variant": "B",
+      "file": "spring_beginner-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 69.73964529999648,
+      "retrievalSeconds": 2.824340011,
+      "modelSeconds": 66.76117964000001,
+      "inputTokens": 623.0,
+      "outputTokens": 4181.0,
+      "reasoningTokens": 3336.0,
+      "visibleOutputTokens": 845.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.10782,
+      "alternate0813PriceCny": 0.118494,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 535,
+      "retrievedProjects": [
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/jargin-j/earthquake-warning",
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "evidenceHash": "ca48a130b9dd05e3c21419fb3cbe548d9202749d5955d74ed2bdabd289602d90",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "spring_beginner",
+      "round": 2,
+      "variant": "A",
+      "file": "spring_beginner-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 30.96142089999921,
+      "retrievalSeconds": 0.55347014,
+      "modelSeconds": 30.260784783,
+      "inputTokens": 635.0,
+      "outputTokens": 1482.0,
+      "reasoningTokens": 807.0,
+      "visibleOutputTokens": 675.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.043188,
+      "alternate0813PriceCny": 0.045729,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/alibaba/nacos",
+        "https://github.com/embabel/embabel-agent-examples"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 977,
+      "retrievedProjects": [
+        "https://github.com/alibaba/nacos",
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/mshumer/claude-of-duty"
+      ],
+      "evidenceHash": "46fc97fc6570cc5a556585b8984d3d49e2e919be4f2258f7c1c1bdc58e02b2ed",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "spring_beginner",
+      "round": 2,
+      "variant": "B",
+      "file": "spring_beginner-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 30.102188499993645,
+      "retrievalSeconds": 1.1295561889999999,
+      "modelSeconds": 28.838706891,
+      "inputTokens": 544.0,
+      "outputTokens": 1328.0,
+      "reasoningTokens": 518.0,
+      "visibleOutputTokens": 810.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.0384,
+      "alternate0813PriceCny": 0.040752,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "ragRecommendations": 2,
+      "businessRecommendations": 0,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 535,
+      "retrievedProjects": [
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/jargin-j/earthquake-warning",
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "evidenceHash": "ca48a130b9dd05e3c21419fb3cbe548d9202749d5955d74ed2bdabd289602d90",
+      "retrievalStatus": "USED",
+      "businessCases": 0
+    },
+    {
+      "case": "unavailable",
+      "round": 1,
+      "variant": "A",
+      "file": "unavailable-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 7.335720099988976,
+      "retrievalSeconds": 0.5852716370000001,
+      "modelSeconds": 6.580632383999999,
+      "inputTokens": 391.0,
+      "outputTokens": 248.0,
+      "reasoningTokens": 52.0,
+      "visibleOutputTokens": 196.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.010644,
+      "alternate0813PriceCny": 0.010215,
+      "recommendationCount": 0,
+      "boundRecommendations": 0,
+      "projects": [],
+      "ragRecommendations": 0,
+      "businessRecommendations": 0,
+      "evidenceCount": 0,
+      "promptEvidenceChars": 0,
+      "retrievedProjects": [],
+      "evidenceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrievalStatus": "EMPTY",
+      "businessCases": 0
+    },
+    {
+      "case": "unavailable",
+      "round": 1,
+      "variant": "B",
+      "file": "unavailable-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 14.018083700007992,
+      "retrievalSeconds": 1.295653549,
+      "modelSeconds": 12.586923221,
+      "inputTokens": 470.0,
+      "outputTokens": 579.0,
+      "reasoningTokens": 387.0,
+      "visibleOutputTokens": 192.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.019536,
+      "alternate0813PriceCny": 0.019863,
+      "recommendationCount": 0,
+      "boundRecommendations": 0,
+      "projects": [],
+      "ragRecommendations": 0,
+      "businessRecommendations": 0,
+      "evidenceCount": 0,
+      "promptEvidenceChars": 0,
+      "retrievedProjects": [],
+      "evidenceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrievalStatus": "EMPTY",
+      "businessCases": 0
+    },
+    {
+      "case": "unavailable",
+      "round": 2,
+      "variant": "A",
+      "file": "unavailable-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 15.05175880000752,
+      "retrievalSeconds": 0.671248296,
+      "modelSeconds": 14.246345406,
+      "inputTokens": 470.0,
+      "outputTokens": 764.0,
+      "reasoningTokens": 571.0,
+      "visibleOutputTokens": 193.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.023976,
+      "alternate0813PriceCny": 0.024858,
+      "recommendationCount": 0,
+      "boundRecommendations": 0,
+      "projects": [],
+      "ragRecommendations": 0,
+      "businessRecommendations": 0,
+      "evidenceCount": 0,
+      "promptEvidenceChars": 0,
+      "retrievedProjects": [],
+      "evidenceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrievalStatus": "EMPTY",
+      "businessCases": 0
+    },
+    {
+      "case": "unavailable",
+      "round": 2,
+      "variant": "B",
+      "file": "unavailable-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 22.258796299996902,
+      "retrievalSeconds": 1.2132825989999998,
+      "modelSeconds": 20.89106962,
+      "inputTokens": 470.0,
+      "outputTokens": 1091.0,
+      "reasoningTokens": 900.0,
+      "visibleOutputTokens": 191.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.031824,
+      "alternate0813PriceCny": 0.033687,
+      "recommendationCount": 0,
+      "boundRecommendations": 0,
+      "projects": [],
+      "ragRecommendations": 0,
+      "businessRecommendations": 0,
+      "evidenceCount": 0,
+      "promptEvidenceChars": 0,
+      "retrievedProjects": [],
+      "evidenceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrievalStatus": "EMPTY",
+      "businessCases": 0
+    },
+    {
+      "case": "vue_learning",
+      "round": 1,
+      "variant": "A",
+      "file": "vue_learning-1-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 41.997826399994665,
+      "retrievalSeconds": 0.501851438,
+      "modelSeconds": 41.356921979999996,
+      "inputTokens": 971.0,
+      "outputTokens": 1990.0,
+      "reasoningTokens": 1205.0,
+      "visibleOutputTokens": 785.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.059412,
+      "alternate0813PriceCny": 0.062469,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 663,
+      "retrievedProjects": [
+        "https://github.com/davidhdev/canvas-ui",
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs"
+      ],
+      "evidenceHash": "cfac9be02864525b66c585b4d5d59ec7b98ab77df9198868e126770986d996e1",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "vue_learning",
+      "round": 1,
+      "variant": "B",
+      "file": "vue_learning-1-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 48.88141819999146,
+      "retrievalSeconds": 1.1561469070000001,
+      "modelSeconds": 47.591082611,
+      "inputTokens": 859.0,
+      "outputTokens": 2288.0,
+      "reasoningTokens": 1578.0,
+      "visibleOutputTokens": 710.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro",
+      "basePriceCny": 0.06522,
+      "alternate0813PriceCny": 0.069507,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 422,
+      "retrievedProjects": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "evidenceHash": "a901733a125fa54e855de682730cc6c1d57d9a1a6a60508ecf7c23a75d601904",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "vue_learning",
+      "round": 2,
+      "variant": "A",
+      "file": "vue_learning-2-A.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 42.78150679999089,
+      "retrievalSeconds": 0.49745630599999996,
+      "modelSeconds": 42.156412299,
+      "inputTokens": 1050.0,
+      "outputTokens": 2511.0,
+      "reasoningTokens": 2125.0,
+      "visibleOutputTokens": 386.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.072864,
+      "alternate0813PriceCny": 0.077247,
+      "recommendationCount": 1,
+      "boundRecommendations": 1,
+      "projects": [
+        "https://github.com/justarchinet/asf-webconfiggenerator"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 1,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 663,
+      "retrievedProjects": [
+        "https://github.com/davidhdev/canvas-ui",
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs"
+      ],
+      "evidenceHash": "cfac9be02864525b66c585b4d5d59ec7b98ab77df9198868e126770986d996e1",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    },
+    {
+      "case": "vue_learning",
+      "round": 2,
+      "variant": "B",
+      "file": "vue_learning-2-B.json",
+      "successful": true,
+      "error": null,
+      "wallSeconds": 60.95957759999146,
+      "retrievalSeconds": 1.333245812,
+      "modelSeconds": 59.483766147000004,
+      "inputTokens": 938.0,
+      "outputTokens": 3690.0,
+      "reasoningTokens": 2863.0,
+      "visibleOutputTokens": 827.0,
+      "cacheHitTokens": 0.0,
+      "usageAvailable": true,
+      "model": "deepseek-v4-pro-ga-260813",
+      "basePriceCny": 0.099816,
+      "alternate0813PriceCny": 0.108072,
+      "recommendationCount": 2,
+      "boundRecommendations": 2,
+      "projects": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "ragRecommendations": 0,
+      "businessRecommendations": 2,
+      "evidenceCount": 3,
+      "promptEvidenceChars": 422,
+      "retrievedProjects": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "evidenceHash": "a901733a125fa54e855de682730cc6c1d57d9a1a6a60508ecf7c23a75d601904",
+      "retrievalStatus": "USED",
+      "businessCases": 3
+    }
+  ]
+}

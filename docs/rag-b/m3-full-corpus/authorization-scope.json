@@ -1,0 +1,29 @@
+{
+  "recordedDate": "2026-10-02",
+  "deepseekRagas": {
+    "authorized": true,
+    "userStatement": "允许RAGAS 的评分调用需要的扩展授权",
+    "destination": "https://api.deepseek.com",
+    "scope": "18道诊断题的A/B证据、参考答案、生成答案，用于回答生成和RAGAS评分",
+    "maxOutboundAttempts": 600,
+    "maxAnswerGenerationAttempts": 36,
+    "maxEstimatedPeakUsd": 5,
+    "executionStarted": true,
+    "executionCompleted": true,
+    "actualOutboundAttempts": 408,
+    "actualAnswerGenerationAttempts": 31
+  },
+  "giteeFullCorpusEmbedding": {
+    "authorized": true,
+    "status": "AUTHORIZED_TO_START",
+    "userStatement": "允许",
+    "context": "用户明确同意约572篇旧库全部可用文档分块向https://ai.gitee.com/v1/embeddings外发，使用bge-m3重建并评测",
+    "destination": "https://ai.gitee.com/v1/embeddings",
+    "model": "bge-m3",
+    "scope": "全部可用旧库文档分块，优先original_content，为空时content",
+    "autoReviewReason": "全量文档向Gitee Embedding外发尚未获得明确授权",
+    "executionStarted": true,
+    "executionCompleted": true,
+    "auditedUsableDocuments": 565
+  }
+}

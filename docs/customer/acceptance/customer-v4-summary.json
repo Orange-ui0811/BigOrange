@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-03",
+  "version": "customer-v4-semantic-continuation",
+  "syntheticRounds": [
+    {
+      "file": "customer-v4-synthetic-round1.json",
+      "cases": 16,
+      "assertionsPassed": 16,
+      "attempts": 16,
+      "reportedTokens": 26556,
+      "p95Ms": 3871
+    },
+    {
+      "file": "customer-v4-synthetic.json",
+      "cases": 24,
+      "assertionsPassed": 24,
+      "attempts": 24,
+      "reportedTokens": 43989,
+      "p95Ms": 5338
+    }
+  ],
+  "totalReportedTokens": 70545,
+  "costUsd": "UNKNOWN",
+  "fullPlatformTest": "PENDING_EXPLICIT_DATA_EGRESS_APPROVAL",
+  "sourceSha256": {
+    "CustomerState.java": "333dc364efc9629e3507dd1ff1131b4a9e5911b2d74381e8bbaaf9a092835d40",
+    "CustomerConversation.java": "147e1b40bc950ad8e6ec7d3478f461fc1a402667f35f212624ea6f14657a3d93",
+    "CustomerDuration.java": "8b61c10948e3c024239f1cee75f84cf9e33ad5ed3b08935af464af8ef42dd764",
+    "CustomerProjects.java": "af611c022d2797fc7635569b570b67e39a16d6af5ee75625b93b17de8c9a1a82",
+    "CustomerRecovery.java": "3da739f28902edc704bd74276ff9d5e576fb1b56090a728100703b65a9286de5"
+  },
+  "limits": [
+    "Development regression only; not proof of arbitrary language understanding",
+    "First round audit found and fixed unrelated null-proposal clarification despite all broad assertions passing",
+    "Source snapshot includes later deterministic guard fixes; synthetic reports precede those final guard-only changes",
+    "No real account context or RAG evidence sent in this round"
+  ]
+}

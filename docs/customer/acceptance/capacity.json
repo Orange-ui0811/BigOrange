@@ -1,0 +1,18 @@
+{
+  "scope": "20 real customer runs, 2 concurrent authorized accounts; authenticated HTTP, not interactive login",
+  "runs": 20,
+  "p95Ms": 7563,
+  "failedRuns": 5,
+  "allWithin90Seconds": true,
+  "qualityApproved": false,
+  "boundaryChecks": {
+    "foreignSession404": true,
+    "sameRequestSameRun": true,
+    "differentContent409": true,
+    "foreignRun404": true,
+    "sseFirstEventWithinOneSecond": true,
+    "cancelTerminal": true,
+    "lateResultCannotResurrect": true
+  },
+  "capacityGatePassed": false
+}

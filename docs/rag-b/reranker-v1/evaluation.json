@@ -1,0 +1,1502 @@
+{
+  "summary": {
+    "SEMANTIC": {
+      "cases": 16,
+      "sourceCandidateCeiling20": 14,
+      "evidenceCandidateCeiling20": 14,
+      "B": {
+        "source": {
+          "hitAt1": 7,
+          "hitAt3": 12,
+          "hitAt5": 13,
+          "hitAt8": 13,
+          "mrr8": 0.5854166666666667
+        },
+        "evidence": {
+          "hitAt1": 5,
+          "hitAt3": 10,
+          "hitAt5": 10,
+          "hitAt8": 13,
+          "mrr8": 0.46354166666666663
+        }
+      },
+      "B_RERANK": {
+        "source": {
+          "hitAt1": 14,
+          "hitAt3": 14,
+          "hitAt5": 14,
+          "hitAt8": 14,
+          "mrr8": 0.875
+        },
+        "evidence": {
+          "hitAt1": 12,
+          "hitAt3": 12,
+          "hitAt5": 13,
+          "hitAt8": 14,
+          "mrr8": 0.7760416666666667
+        }
+      }
+    },
+    "NAMED": {
+      "cases": 4,
+      "sourceCandidateCeiling20": 4,
+      "evidenceCandidateCeiling20": 4,
+      "B": {
+        "source": {
+          "hitAt1": 3,
+          "hitAt3": 4,
+          "hitAt5": 4,
+          "hitAt8": 4,
+          "mrr8": 0.875
+        },
+        "evidence": {
+          "hitAt1": 3,
+          "hitAt3": 4,
+          "hitAt5": 4,
+          "hitAt8": 4,
+          "mrr8": 0.875
+        }
+      },
+      "B_RERANK": {
+        "source": {
+          "hitAt1": 4,
+          "hitAt3": 4,
+          "hitAt5": 4,
+          "hitAt8": 4,
+          "mrr8": 1.0
+        },
+        "evidence": {
+          "hitAt1": 4,
+          "hitAt3": 4,
+          "hitAt5": 4,
+          "hitAt8": 4,
+          "mrr8": 1.0
+        }
+      }
+    },
+    "GUARD": {
+      "cases": 4,
+      "B": 4,
+      "B_RERANK": 4
+    },
+    "latency": {
+      "additionalRerankP50Ms": 721.5040999999474,
+      "additionalRerankP95Ms": 801.1486999998851,
+      "samples": 21,
+      "basis": "One sequential real rerank per nonempty query; includes network; not a sustained-load or end-to-end website benchmark."
+    }
+  },
+  "paired": {
+    "sourceRank": {
+      "wins": [
+        "fact-00-zh",
+        "fact-24-zh",
+        "fresh-08",
+        "fresh-16",
+        "fresh-19",
+        "fact-25-en",
+        "fact-29-en",
+        "github-langgraph"
+      ],
+      "losses": []
+    },
+    "evidenceRank": {
+      "wins": [
+        "fact-00-zh",
+        "fact-02-zh",
+        "fact-06-zh",
+        "fact-24-zh",
+        "fresh-16",
+        "fresh-19",
+        "fact-25-en",
+        "fact-29-en",
+        "github-langgraph"
+      ],
+      "losses": [
+        "fresh-08"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "key": "fact-00-zh",
+      "question": "我想找一个私密桌面笔记空间，能编辑 Markdown 并调用 AI，有什么项目？",
+      "stratum": "SEMANTIC",
+      "category": "business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 715.1340000000346,
+      "bCandidateMs": 209.084677,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 5,
+        "evidenceRank": 6,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          21263,
+          24797,
+          18327,
+          19040,
+          18260,
+          18256,
+          25875,
+          24643
+        ],
+        "sources": [
+          "career:215",
+          "mikeroyal/Self-Hosting-Guide",
+          "beginner:88",
+          "career:265",
+          "beginner:55",
+          "beginner:55",
+          "usememos/memos",
+          "mem0ai/mem0"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18256,
+          25875,
+          26215,
+          21910,
+          24627,
+          21850,
+          18778,
+          24643
+        ],
+        "sources": [
+          "beginner:55",
+          "usememos/memos",
+          "siyuan-note/siyuan",
+          "career:242",
+          "Mintplex-Labs/anything-llm",
+          "career:240",
+          "career:253",
+          "mem0ai/mem0"
+        ]
+      }
+    },
+    {
+      "key": "fact-02-zh",
+      "question": "有没有不用网络传文件的方法，把发送端屏幕交给另一台设备摄像头读取？",
+      "stratum": "SEMANTIC",
+      "category": "business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 776.5693999999712,
+      "bCandidateMs": 133.472957,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 8,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18297,
+          18314,
+          18315,
+          18302,
+          25597,
+          18318,
+          18296,
+          18298
+        ],
+        "sources": [
+          "beginner:80",
+          "beginner:80",
+          "beginner:80",
+          "beginner:80",
+          "AlexxIT/go2rtc",
+          "beginner:80",
+          "beginner:80",
+          "beginner:80"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 4,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18297,
+          18315,
+          18314,
+          18298,
+          18318,
+          18320,
+          18322,
+          25596
+        ],
+        "sources": [
+          "beginner:80",
+          "beginner:80",
+          "beginner:80",
+          "beginner:80",
+          "beginner:80",
+          "beginner:80",
+          "beginner:80",
+          "AlexxIT/go2rtc"
+        ]
+      }
+    },
+    {
+      "key": "fact-04-zh",
+      "question": "有没有能评价设计作品、选择合适竞赛并准备申报文案的智能体技能？",
+      "stratum": "SEMANTIC",
+      "category": "business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 687.195100000281,
+      "bCandidateMs": 146.549508,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18365,
+          18364,
+          18383,
+          18361,
+          18381,
+          18363,
+          21053,
+          18392
+        ],
+        "sources": [
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "career:203",
+          "beginner:91"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18365,
+          18364,
+          18381,
+          18383,
+          18392,
+          18386,
+          18366,
+          18368
+        ],
+        "sources": [
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91",
+          "beginner:91"
+        ]
+      }
+    },
+    {
+      "key": "fact-06-zh",
+      "question": "想把参考图片做成可旋转的网页三维模型，不依赖下载网格文件，可以参考什么？",
+      "stratum": "SEMANTIC",
+      "category": "business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 678.4119000003557,
+      "bCandidateMs": 112.599261,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 8,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18429,
+          22560,
+          18448,
+          22553,
+          18446,
+          18449,
+          22592,
+          18430
+        ],
+        "sources": [
+          "beginner:101",
+          "img2threejs/img2threejs",
+          "beginner:101",
+          "img2threejs/img2threejs",
+          "beginner:101",
+          "beginner:101",
+          "img2threejs/img2threejs",
+          "beginner:101"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18430,
+          22553,
+          18446,
+          18431,
+          22592,
+          18429,
+          18449,
+          18434
+        ],
+        "sources": [
+          "beginner:101",
+          "img2threejs/img2threejs",
+          "beginner:101",
+          "beginner:101",
+          "img2threejs/img2threejs",
+          "beginner:101",
+          "beginner:101",
+          "beginner:101"
+        ]
+      }
+    },
+    {
+      "key": "fact-20-zh",
+      "question": "什么智能体框架能在运行故障后恢复并继续长期任务？",
+      "stratum": "SEMANTIC",
+      "category": "readme_cross_language",
+      "candidateCount": 20,
+      "sourceAvailableIn20": false,
+      "evidenceAvailableIn20": false,
+      "rerankMs": 797.131900000295,
+      "bCandidateMs": 127.098418,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          25547,
+          25560,
+          24642,
+          21657,
+          24641,
+          21767,
+          21053,
+          25546
+        ],
+        "sources": [
+          "NousResearch/hermes-agent",
+          "langchain-ai/langchain",
+          "datawhalechina/hello-agents",
+          "career:233",
+          "datawhalechina/hello-agents",
+          "career:238",
+          "career:203",
+          "NousResearch/hermes-agent"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          25560,
+          24642,
+          25547,
+          25558,
+          21657,
+          24641,
+          26079,
+          25559
+        ],
+        "sources": [
+          "langchain-ai/langchain",
+          "datawhalechina/hello-agents",
+          "NousResearch/hermes-agent",
+          "langchain-ai/langchain",
+          "career:233",
+          "datawhalechina/hello-agents",
+          "job_79",
+          "langchain-ai/langchain"
+        ]
+      }
+    },
+    {
+      "key": "fact-21-zh",
+      "question": "什么框架允许人在执行中检查或修改智能体状态？",
+      "stratum": "SEMANTIC",
+      "category": "readme_cross_language",
+      "candidateCount": 20,
+      "sourceAvailableIn20": false,
+      "evidenceAvailableIn20": false,
+      "rerankMs": 721.5040999999474,
+      "bCandidateMs": 114.482622,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          21053,
+          24642,
+          25547,
+          25546,
+          26732,
+          24641,
+          25560,
+          18365
+        ],
+        "sources": [
+          "career:203",
+          "datawhalechina/hello-agents",
+          "NousResearch/hermes-agent",
+          "NousResearch/hermes-agent",
+          "saravanaspar/nova-research",
+          "datawhalechina/hello-agents",
+          "langchain-ai/langchain",
+          "beginner:91"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          24642,
+          26735,
+          24641,
+          26900,
+          24589,
+          25560,
+          25547,
+          25559
+        ],
+        "sources": [
+          "datawhalechina/hello-agents",
+          "saravanaspar/nova-research",
+          "datawhalechina/hello-agents",
+          "sxp-studio/subjective-zero",
+          "thedaviddias/Front-End-Checklist",
+          "langchain-ai/langchain",
+          "NousResearch/hermes-agent",
+          "langchain-ai/langchain"
+        ]
+      }
+    },
+    {
+      "key": "fact-22-zh",
+      "question": "有没有用普通对象描述声音、一次函数调用就能播放的网页音频库？",
+      "stratum": "SEMANTIC",
+      "category": "readme_cross_language",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 709.469800000079,
+      "bCandidateMs": 99.466059,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19206,
+          25486,
+          25487,
+          25504,
+          25493,
+          25518,
+          25502,
+          25489
+        ],
+        "sources": [
+          "raphaelsalaja/audio",
+          "goldfire/howler.js",
+          "goldfire/howler.js",
+          "stewdio/beep.js",
+          "Theodeus/tuna",
+          "chrisguttandin/standardized-audio-context",
+          "stewdio/beep.js",
+          "goldfire/howler.js"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19206,
+          25486,
+          25531,
+          25518,
+          25536,
+          25493,
+          25538,
+          24547
+        ],
+        "sources": [
+          "raphaelsalaja/audio",
+          "goldfire/howler.js",
+          "waud/waud",
+          "chrisguttandin/standardized-audio-context",
+          "waud/waud",
+          "Theodeus/tuna",
+          "waud/waud",
+          "chaosprint/glicol"
+        ]
+      }
+    },
+    {
+      "key": "fact-24-zh",
+      "question": "想在 ESP32 上通过常见红外 LED 和接收模块收发信号，可以参考什么库？",
+      "stratum": "SEMANTIC",
+      "category": "readme_cross_language",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 745.8188999999038,
+      "bCandidateMs": 125.631659,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          25621,
+          23228,
+          25751,
+          23291,
+          25758,
+          23246,
+          25602,
+          23229
+        ],
+        "sources": [
+          "EmenstaNougat/ESP32-BlueJammer",
+          "FastLED/FastLED",
+          "espressif/arduino-esp32",
+          "FastLED/FastLED",
+          "espressif/arduino-esp32",
+          "FastLED/FastLED",
+          "justcallmekoko/ESP32Marauder",
+          "FastLED/FastLED"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19327,
+          23298,
+          25621,
+          23299,
+          25751,
+          25758,
+          23229,
+          23246
+        ],
+        "sources": [
+          "crankyoldgit/IRremoteESP8266",
+          "FastLED/FastLED",
+          "EmenstaNougat/ESP32-BlueJammer",
+          "FastLED/FastLED",
+          "espressif/arduino-esp32",
+          "espressif/arduino-esp32",
+          "FastLED/FastLED",
+          "FastLED/FastLED"
+        ]
+      }
+    },
+    {
+      "key": "fresh-08",
+      "question": "做浏览器里的射击游戏，不准备贴图、音效或模型素材，哪个项目可以参考？",
+      "stratum": "SEMANTIC",
+      "category": "fresh_business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 634.9657000000661,
+      "bCandidateMs": 107.441176,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 2,
+        "evidenceRank": 3,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          25431,
+          18493,
+          18494,
+          18510,
+          20592,
+          26410,
+          26405,
+          18497
+        ],
+        "sources": [
+          "leereilly/games",
+          "beginner:104",
+          "beginner:104",
+          "beginner:104",
+          "beginner:22",
+          "shifulegend/spike-sprint",
+          "shifulegend/spike-sprint",
+          "beginner:104"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 6,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18510,
+          26405,
+          25096,
+          26410,
+          18493,
+          18494,
+          25431,
+          26417
+        ],
+        "sources": [
+          "beginner:104",
+          "shifulegend/spike-sprint",
+          "kitao/pyxel",
+          "shifulegend/spike-sprint",
+          "beginner:104",
+          "beginner:104",
+          "leereilly/games",
+          "shifulegend/spike-sprint"
+        ]
+      }
+    },
+    {
+      "key": "fresh-12",
+      "question": "我想做地球仪和地图的三维展示，有哪些 JS 项目值得研究？",
+      "stratum": "SEMANTIC",
+      "category": "fresh_business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 738.1414999999834,
+      "bCandidateMs": 108.813333,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18709,
+          25108,
+          18724,
+          25110,
+          25281,
+          18429,
+          25129,
+          25679
+        ],
+        "sources": [
+          "career:249",
+          "CesiumGS/cesium",
+          "career:249",
+          "CesiumGS/cesium",
+          "rwaldron/johnny-five",
+          "beginner:101",
+          "apache/echarts",
+          "rough-stuff/rough"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18709,
+          25108,
+          18724,
+          25084,
+          22519,
+          25112,
+          25129,
+          18430
+        ],
+        "sources": [
+          "career:249",
+          "CesiumGS/cesium",
+          "career:249",
+          "plotly/plotly.js",
+          "bilawalsidhu/gods-eye-view",
+          "CesiumGS/cesium",
+          "apache/echarts",
+          "beginner:101"
+        ]
+      }
+    },
+    {
+      "key": "fresh-16",
+      "question": "想找既能在终端也能在聊天软件里运行、支持换后端并持续执行后台任务的代理框架。",
+      "stratum": "SEMANTIC",
+      "category": "fresh_business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 617.6896000001761,
+      "bCandidateMs": 112.889315,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 2,
+        "evidenceRank": 2,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18606,
+          18911,
+          18638,
+          18913,
+          20937,
+          18914,
+          25547,
+          18639
+        ],
+        "sources": [
+          "beginner:121",
+          "career:259",
+          "beginner:125",
+          "career:259",
+          "career:184",
+          "career:259",
+          "NousResearch/hermes-agent",
+          "beginner:125"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18911,
+          25547,
+          24623,
+          18913,
+          18914,
+          25605,
+          20937,
+          24570
+        ],
+        "sources": [
+          "career:259",
+          "NousResearch/hermes-agent",
+          "code-yeongyu/oh-my-openagent",
+          "career:259",
+          "career:259",
+          "xinnan-tech/xiaozhi-esp32-server",
+          "career:184",
+          "bytedance/deer-flow"
+        ]
+      }
+    },
+    {
+      "key": "fresh-19",
+      "question": "找一个 Python 智能体框架，让代理通过一轮轮自我改进提高任务表现。",
+      "stratum": "SEMANTIC",
+      "category": "fresh_business_zh",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 541.6255999998612,
+      "bCandidateMs": 117.330924,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 3,
+        "evidenceRank": 3,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          21235,
+          24587,
+          19041,
+          21749,
+          18638,
+          25546,
+          20937,
+          21463
+        ],
+        "sources": [
+          "career:214",
+          "bytedance/deer-flow",
+          "career:265",
+          "career:237",
+          "beginner:125",
+          "NousResearch/hermes-agent",
+          "career:184",
+          "career:226"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19041,
+          24637,
+          25546,
+          21235,
+          25560,
+          19643,
+          21749,
+          21463
+        ],
+        "sources": [
+          "career:265",
+          "datawhalechina/hello-agents",
+          "NousResearch/hermes-agent",
+          "career:214",
+          "langchain-ai/langchain",
+          "career:245",
+          "career:237",
+          "career:226"
+        ]
+      }
+    },
+    {
+      "key": "fact-23-en",
+      "question": "Which free coding community has helped over one hundred thousand people get their first developer job?",
+      "stratum": "SEMANTIC",
+      "category": "readme_english",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 742.1792999998615,
+      "bCandidateMs": 116.595074,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19283,
+          25441,
+          19287,
+          19290,
+          25048,
+          19285,
+          24601,
+          18902
+        ],
+        "sources": [
+          "freeCodeCamp/freeCodeCamp",
+          "Donchitos/Claude-Code-Game-Studios",
+          "freeCodeCamp/freeCodeCamp",
+          "freeCodeCamp/freeCodeCamp",
+          "godotengine/godot",
+          "freeCodeCamp/freeCodeCamp",
+          "nexu-io/open-design",
+          "career:257"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19283,
+          19287,
+          19290,
+          18902,
+          22998,
+          19282,
+          19285,
+          19261
+        ],
+        "sources": [
+          "freeCodeCamp/freeCodeCamp",
+          "freeCodeCamp/freeCodeCamp",
+          "freeCodeCamp/freeCodeCamp",
+          "career:257",
+          "reactive-resume/reactive-resume",
+          "freeCodeCamp/freeCodeCamp",
+          "freeCodeCamp/freeCodeCamp",
+          "EbookFoundation/free-programming-books"
+        ]
+      }
+    },
+    {
+      "key": "fact-25-en",
+      "question": "Which embedded graphics library needs roughly one hundred kilobytes of RAM for a typical UI?",
+      "stratum": "SEMANTIC",
+      "category": "readme_english",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 722.6243999998587,
+      "bCandidateMs": 124.258732,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 2,
+        "evidenceRank": 2,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          26723,
+          19346,
+          23295,
+          19429,
+          19354,
+          23206,
+          21934,
+          24709
+        ],
+        "sources": [
+          "shtirlic/picocalc_x86",
+          "lvgl/lvgl",
+          "FastLED/FastLED",
+          "beginner:12",
+          "lvgl/lvgl",
+          "FastLED/FastLED",
+          "career:242",
+          "francescopace/espectre"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19346,
+          25672,
+          25100,
+          19347,
+          19354,
+          23206,
+          21934,
+          23295
+        ],
+        "sources": [
+          "lvgl/lvgl",
+          "rough-stuff/rough",
+          "bkaradzic/bgfx",
+          "lvgl/lvgl",
+          "lvgl/lvgl",
+          "FastLED/FastLED",
+          "career:242",
+          "FastLED/FastLED"
+        ]
+      }
+    },
+    {
+      "key": "fact-27-en",
+      "question": "Which workflow reconstructs raster logos into SVG and exports animated HTML plus GIF previews?",
+      "stratum": "SEMANTIC",
+      "category": "readme_english",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 762.2512000002644,
+      "bCandidateMs": 126.114707,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19382,
+          25681,
+          26134,
+          19386,
+          22042,
+          21354,
+          24554,
+          25799
+        ],
+        "sources": [
+          "nolangz/pixel2motion",
+          "rough-stuff/rough",
+          "konvajs/konva",
+          "nolangz/pixel2motion",
+          "career:248",
+          "career:221",
+          "infiniflow/ragflow",
+          "Graphify-Labs/graphify"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19382,
+          25803,
+          19387,
+          25799,
+          24552,
+          26134,
+          21354,
+          25345
+        ],
+        "sources": [
+          "nolangz/pixel2motion",
+          "Graphify-Labs/graphify",
+          "nolangz/pixel2motion",
+          "Graphify-Labs/graphify",
+          "infiniflow/ragflow",
+          "konvajs/konva",
+          "career:221",
+          "cnr-isti-vclab/meshlab"
+        ]
+      }
+    },
+    {
+      "key": "fact-29-en",
+      "question": "Which graphics tool combines layer compositing and node-based generative design with nondestructive editing?",
+      "stratum": "SEMANTIC",
+      "category": "readme_english",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 801.1486999998851,
+      "bCandidateMs": 121.644058,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 3,
+        "evidenceRank": 3,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          21911,
+          23249,
+          19402,
+          25034,
+          24601,
+          21910,
+          25033,
+          25842
+        ],
+        "sources": [
+          "career:242",
+          "FastLED/FastLED",
+          "GraphiteEditor/Graphite",
+          "baku89/glisp",
+          "nexu-io/open-design",
+          "career:242",
+          "vanrez-nez/awesome-glsl",
+          "Graphify-Labs/graphify"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19402,
+          19406,
+          25803,
+          26134,
+          25034,
+          25100,
+          25465,
+          25842
+        ],
+        "sources": [
+          "GraphiteEditor/Graphite",
+          "GraphiteEditor/Graphite",
+          "Graphify-Labs/graphify",
+          "konvajs/konva",
+          "baku89/glisp",
+          "bkaradzic/bgfx",
+          "ellisonleao/magictools",
+          "Graphify-Labs/graphify"
+        ]
+      }
+    },
+    {
+      "key": "beginner-glyph",
+      "question": "知识库中的 SidhuK/Glyph 主要解决什么问题，采用了哪些技术？",
+      "stratum": "NAMED",
+      "category": "named_regression",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 671.2035999998989,
+      "bCandidateMs": 100.610584,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18253,
+          18255,
+          18256,
+          26215,
+          25034,
+          25224,
+          26217,
+          20385
+        ],
+        "sources": [
+          "beginner:55",
+          "beginner:55",
+          "beginner:55",
+          "siyuan-note/siyuan",
+          "baku89/glisp",
+          "safishamsi/graphify",
+          "siyuan-note/siyuan",
+          "vinta/awesome-python"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18256,
+          18253,
+          18255,
+          26217,
+          24490,
+          22830,
+          26279,
+          25224
+        ],
+        "sources": [
+          "beginner:55",
+          "beginner:55",
+          "beginner:55",
+          "siyuan-note/siyuan",
+          "piskelapp/piskel",
+          "HKUDS/DeepTutor",
+          "appsmithorg/appsmith",
+          "safishamsi/graphify"
+        ]
+      }
+    },
+    {
+      "key": "career-neko",
+      "question": "N.E.K.O 项目的架构、API 配置和主要风险是什么？",
+      "stratum": "NAMED",
+      "category": "named_regression",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 669.9383999998645,
+      "bCandidateMs": 145.421907,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18754,
+          18777,
+          18756,
+          18772,
+          18776,
+          18778,
+          18783,
+          18784
+        ],
+        "sources": [
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          18762,
+          18813,
+          18792,
+          18776,
+          18772,
+          18778,
+          18783,
+          18784
+        ],
+        "sources": [
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253",
+          "career:253"
+        ]
+      }
+    },
+    {
+      "key": "github-langgraph",
+      "question": "根据 langchain-ai/langgraph 的 README，如何安装并开始使用？",
+      "stratum": "NAMED",
+      "category": "named_regression",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 801.038100000369,
+      "bCandidateMs": 121.559616,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 2,
+        "evidenceRank": 2,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          25559,
+          19204,
+          19200,
+          19199,
+          25558,
+          19202,
+          19203,
+          19205
+        ],
+        "sources": [
+          "langchain-ai/langchain",
+          "langchain-ai/langgraph",
+          "langchain-ai/langgraph",
+          "langchain-ai/langgraph",
+          "langchain-ai/langchain",
+          "langchain-ai/langgraph",
+          "langchain-ai/langgraph",
+          "langchain-ai/langgraph"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19199,
+          25559,
+          26563,
+          19200,
+          26564,
+          26573,
+          19201,
+          19202
+        ],
+        "sources": [
+          "langchain-ai/langgraph",
+          "langchain-ai/langchain",
+          "chatchat-space/Langchain-Chatchat",
+          "langchain-ai/langgraph",
+          "chatchat-space/Langchain-Chatchat",
+          "chatchat-space/Langchain-Chatchat",
+          "langchain-ai/langgraph",
+          "langchain-ai/langgraph"
+        ]
+      }
+    },
+    {
+      "key": "github-nanobot",
+      "question": "HKUDS/nanobot 如何安装、配置模型并启动？",
+      "stratum": "NAMED",
+      "category": "named_regression",
+      "candidateCount": 20,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 862.5059999999394,
+      "bCandidateMs": 107.093506,
+      "expectedPolicy": null,
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19365,
+          19375,
+          19374,
+          19366,
+          19380,
+          19360,
+          19373,
+          19362
+        ],
+        "sources": [
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19365,
+          19362,
+          19368,
+          19369,
+          19366,
+          19373,
+          19367,
+          19374
+        ],
+        "sources": [
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot",
+          "HKUDS/nanobot"
+        ]
+      }
+    },
+    {
+      "key": "vue-no-docker",
+      "question": "推荐一个使用 Vue 且不依赖 Docker 的入门项目。",
+      "stratum": "GUARD",
+      "category": "BUSINESS_GUARD",
+      "candidateCount": 12,
+      "sourceAvailableIn20": true,
+      "evidenceAvailableIn20": true,
+      "rerankMs": 328.22230000010677,
+      "bCandidateMs": 130.530192,
+      "expectedPolicy": "ANSWER_WITH_CITATIONS",
+      "B": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19443,
+          19418,
+          19431,
+          19444,
+          19417,
+          19433,
+          19416,
+          19420
+        ],
+        "sources": [
+          "beginner:46",
+          "beginner:36",
+          "beginner:12",
+          "beginner:46",
+          "beginner:36",
+          "beginner:12",
+          "beginner:36",
+          "beginner:36"
+        ]
+      },
+      "B_RERANK": {
+        "sourceRank": 1,
+        "evidenceRank": 1,
+        "answerPolicy": "ANSWER_WITH_CITATIONS",
+        "chunkIds": [
+          19417,
+          19443,
+          19429,
+          19416,
+          19418,
+          19433,
+          19431,
+          19420
+        ],
+        "sources": [
+          "beginner:36",
+          "beginner:46",
+          "beginner:12",
+          "beginner:36",
+          "beginner:36",
+          "beginner:12",
+          "beginner:12",
+          "beginner:36"
+        ]
+      }
+    },
+    {
+      "key": "refuse-java-beginner",
+      "question": "推荐一个两周内完成的 Java 入门项目。",
+      "stratum": "GUARD",
+      "category": "BUSINESS_GUARD",
+      "candidateCount": 0,
+      "sourceAvailableIn20": false,
+      "evidenceAvailableIn20": false,
+      "rerankMs": null,
+      "bCandidateMs": 107.717087,
+      "expectedPolicy": "REFUSE_NO_MATCH",
+      "B": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "REFUSE_NO_MATCH",
+        "chunkIds": [],
+        "sources": []
+      },
+      "B_RERANK": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "REFUSE_NO_MATCH",
+        "chunkIds": [],
+        "sources": []
+      }
+    },
+    {
+      "key": "refuse-ruby-career",
+      "question": "推荐一个明确使用 Ruby 的求职作品集项目。",
+      "stratum": "GUARD",
+      "category": "BUSINESS_GUARD",
+      "candidateCount": 0,
+      "sourceAvailableIn20": false,
+      "evidenceAvailableIn20": false,
+      "rerankMs": null,
+      "bCandidateMs": 131.671879,
+      "expectedPolicy": "REFUSE_NO_MATCH",
+      "B": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "REFUSE_NO_MATCH",
+        "chunkIds": [],
+        "sources": []
+      },
+      "B_RERANK": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "REFUSE_NO_MATCH",
+        "chunkIds": [],
+        "sources": []
+      }
+    },
+    {
+      "key": "refuse-commercial-price",
+      "question": "这些资料中没有写出的商业许可证价格是多少？",
+      "stratum": "GUARD",
+      "category": "BUSINESS_GUARD",
+      "candidateCount": 0,
+      "sourceAvailableIn20": false,
+      "evidenceAvailableIn20": false,
+      "rerankMs": null,
+      "bCandidateMs": 113.134516,
+      "expectedPolicy": "REFUSE_NO_MATCH",
+      "B": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "REFUSE_NO_MATCH",
+        "chunkIds": [],
+        "sources": []
+      },
+      "B_RERANK": {
+        "sourceRank": 0,
+        "evidenceRank": 0,
+        "answerPolicy": "REFUSE_NO_MATCH",
+        "chunkIds": [],
+        "sources": []
+      }
+    }
+  ]
+}

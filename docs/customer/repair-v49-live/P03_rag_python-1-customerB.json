@@ -1,0 +1,725 @@
+{
+  "case": "P03_rag_python",
+  "round": 1,
+  "product": "customerB",
+  "startedAt": "2026-10-03T14:50:59.011821+00:00",
+  "sessionId": "81",
+  "runId": "59f69d31-9ffd-42bd-927e-e4f2bfbb2e39",
+  "run": {
+    "id": "59f69d31-9ffd-42bd-927e-e4f2bfbb2e39",
+    "session_id": "81",
+    "status": "SUCCEEDED",
+    "stage": "SUCCEEDED",
+    "result_json": "{\"skill\":\"PROJECT_RECOMMENDATION_V1\",\"intent\":\"RECOMMEND\",\"state\":{\"topic\":[\"RAG\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是RAG\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是学习\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"基础是有基础\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Python\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是两个月内\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"学习\",\"experience\":\"有基础\",\"language\":\"Python\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":60,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"希望中文提问检索英文技术文档\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[{\"name\":\"headroomlabs-ai/headroom\",\"id\":215,\"type\":\"BEGINNER_PROJECT\"},{\"name\":\"QuivrHQ/quivr\",\"id\":250,\"type\":\"EXTERNAL_PROJECT\"},{\"name\":\"codecrafters-io/build-your-own-x\",\"id\":69,\"type\":\"EXTERNAL_PROJECT\"}]},\"projects\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":215,\"sourceRef\":\"beginner:215\",\"name\":\"headroomlabs-ai/headroom\",\"url\":\"https://github.com/headroomlabs-ai/headroom\",\"status\":\"CANDIDATE\",\"archived\":false,\"language\":\"Python\",\"techStack\":\"Python\",\"difficulty\":\"入门\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":true,\"requiresDatabase\":false,\"requiresSecrets\":true,\"topics\":\"[\\\"agent\\\", \\\"ai\\\", \\\"anthropic\\\", \\\"claude-code\\\", \\\"compression\\\", \\\"context-engineering\\\", \\\"context-window\\\", \\\"cursor\\\", \\\"fastapi\\\", \\\"langchain\\\", \\\"llm\\\", \\\"mcp\\\", \\\"openai\\\", \\\"prompt-engineering\\\", \\\"proxy\\\", \\\"python\\\", \\\"rag\\\", \\\"token-optimization\\\", \\\"tokens\\\", \\\"typescript\\\"]\",\"beginnerScore\":74,\"codebaseSize\":\"LARGE\",\"prerequisites\":\"headroom-ai 可通过 pip install \\\"headroom-ai[all]\\\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。 [E2]\",\"evidenceAvailable\":true,\"conditionGaps\":[\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"semanticAvailable\":true,\"total\":7.0,\"goalPreference\":15.0,\"semantic\":0.0,\"uncertaintyPenalty\":8.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":false,\"quality\":0.0},\"recommendReason\":\"来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；资料记录主语言为Python；明确冲突已排除，仍有条件待核实。\",\"references\":[{\"evidenceId\":\"E2\",\"title\":\"headroomlabs-ai/headroom\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"spans\":[{\"spanId\":\"E2.S1\",\"endInChunk\":412,\"startInChunk\":12,\"text\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\"},{\"spanId\":\"E2.S2\",\"endInChunk\":812,\"startInChunk\":412,\"text\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\"},{\"spanId\":\"E2.S3\",\"endInChunk\":1012,\"startInChunk\":812,\"text\":\"kewise `[agno]`,\\n> `[strands]`, `[anyllm]`, `[bedrock]`.\\n\\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\\ntags, persistent service, PowerShell, devcontainers.\\n\\n<details\"}],\"documentId\":175,\"versionId\":394,\"chunkId\":14262,\"sectionPath\":\"Install\",\"startOffset\":19896,\"endOffset\":20896,\"contentStartInChunk\":12,\"quote\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\",\"text\":\"headroom-ai 可通过 pip install \\\"headroom-ai[all]\\\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。\",\"field\":\"prerequisites\"},{\"evidenceId\":\"E2\",\"title\":\"headroomlabs-ai/headroom\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"spans\":[{\"spanId\":\"E2.S1\",\"endInChunk\":412,\"startInChunk\":12,\"text\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\"},{\"spanId\":\"E2.S2\",\"endInChunk\":812,\"startInChunk\":412,\"text\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\"},{\"spanId\":\"E2.S3\",\"endInChunk\":1012,\"startInChunk\":812,\"text\":\"kewise `[agno]`,\\n> `[strands]`, `[anyllm]`, `[bedrock]`.\\n\\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\\ntags, persistent service, PowerShell, devcontainers.\\n\\n<details\"}],\"documentId\":175,\"versionId\":394,\"chunkId\":14262,\"sectionPath\":\"Install\",\"startOffset\":19896,\"endOffset\":20896,\"contentStartInChunk\":12,\"quote\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\",\"text\":\"headroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。\",\"field\":\"mainRisks\"}],\"mainRisks\":\"headroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。 [E2]\",\"supportedExplanation\":\"headroom-ai 可通过 pip install \\\"headroom-ai[all]\\\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。 [E2]\\nheadroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。 [E2]\"},{\"type\":\"EXTERNAL_PROJECT\",\"id\":250,\"sourceRef\":\"QuivrHQ/quivr\",\"name\":\"QuivrHQ/quivr\",\"url\":\"https://github.com/QuivrHQ/quivr\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":250,\"versionId\":469,\"catalogTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"semanticAvailable\":true,\"total\":3.819805153394636,\"goalPreference\":0.0,\"semantic\":31.819805153394636,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0},\"recommendReason\":\"本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。\",\"references\":[{\"evidenceId\":\"E4\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"spanId\":\"E4.S1\",\"endInChunk\":345,\"startInChunk\":12,\"text\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":564,\"endOffset\":897,\"contentStartInChunk\":12,\"quote\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件\",\"text\":\"Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。\",\"field\":\"description\"},{\"evidenceId\":\"E1\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"spanId\":\"E1.S1\",\"endInChunk\":406,\"startInChunk\":73,\"text\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"fil\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":2005,\"endOffset\":2338,\"contentStartInChunk\":73,\"quote\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"fil\",\"text\":\"需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。\",\"field\":\"prerequisites\"}],\"whatIsIt\":\"Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\",\"prerequisites\":\"需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。 [E1]\",\"supportedExplanation\":\"Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\\n需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。 [E1]\"},{\"type\":\"EXTERNAL_PROJECT\",\"id\":69,\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"name\":\"codecrafters-io/build-your-own-x\",\"url\":\"https://github.com/codecrafters-io/build-your-own-x\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。 [E3]\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":69,\"versionId\":288,\"catalogTitle\":\"codecrafters-io/build-your-own-x\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"semanticAvailable\":true,\"total\":-7.875388202501895,\"goalPreference\":0.0,\"semantic\":20.124611797498105,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0},\"recommendReason\":\"本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。\",\"references\":[{\"evidenceId\":\"E3\",\"title\":\"codecrafters-io/build-your-own-x\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"spans\":[{\"spanId\":\"E3.S1\",\"endInChunk\":450,\"startInChunk\":50,\"text\":\"This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \\n\\n> *What I cannot create, I do not understand — Richard Feynman.*\\n\\nIt's a great way to learn.\\n\\n* [3D Renderer](#build-your-own-3d-renderer)\\n* [AI Model](#build-your-own-ai-model)\\n* [Augmented Reality](#build-your-own-augmented-reality)\\n* [BitTorrent Client](#build-your-own\"},{\"spanId\":\"E3.S2\",\"endInChunk\":850,\"startInChunk\":450,\"text\":\"-bittorrent-client)\\n* [Blockchain / Cryptocurrency](#build-your-own-blockchain--cryptocurrency)\\n* [Bot](#build-your-own-bot)\\n* [Command-Line Tool](#build-your-own-command-line-tool)\\n* [Database](#build-your-own-database)\\n* [Docker](#build-your-own-docker)\\n* [Emulator / Virtual Machine](#build-your-own-emulator--virtual-machine)\\n* [Front-end Framework / Library](#build-your-own-front-end-framework-\"},{\"spanId\":\"E3.S3\",\"endInChunk\":1050,\"startInChunk\":850,\"text\":\"-library)\\n* [Game](#build-your-own-game)\\n* [Git](#build-your-own-git)\\n* [Memory Allocator](#build-your-own-memory-allocator)\\n* [Network Stack](#build-your-own-network-stack)\\n* [Neural Network](#build-\"}],\"documentId\":69,\"versionId\":288,\"chunkId\":10985,\"sectionPath\":\"Build your own &lt;insert-technology-here&gt;\",\"startOffset\":158,\"endOffset\":1158,\"contentStartInChunk\":50,\"quote\":\"This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \\n\\n> *What I cannot create, I do not understand — Richard Feynman.*\\n\\nIt's a great way to learn.\\n\\n* [3D Renderer](#build-your-own-3d-renderer)\\n* [AI Model](#build-your-own-ai-model)\\n* [Augmented Reality](#build-your-own-augmented-reality)\\n* [BitTorrent Client](#build-your-own\",\"text\":\"build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。\",\"field\":\"description\"}],\"whatIsIt\":\"build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。 [E3]\",\"supportedExplanation\":\"build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。 [E3]\"}],\"references\":[{\"evidenceId\":\"E4\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"spanId\":\"E4.S1\",\"endInChunk\":345,\"startInChunk\":12,\"text\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":564,\"endOffset\":897,\"contentStartInChunk\":12,\"quote\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件\",\"text\":\"Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。\",\"field\":\"description\"},{\"evidenceId\":\"E1\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"spanId\":\"E1.S1\",\"endInChunk\":406,\"startInChunk\":73,\"text\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"fil\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":2005,\"endOffset\":2338,\"contentStartInChunk\":73,\"quote\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"fil\",\"text\":\"需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。\",\"field\":\"prerequisites\"},{\"evidenceId\":\"E2\",\"title\":\"headroomlabs-ai/headroom\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"spans\":[{\"spanId\":\"E2.S1\",\"endInChunk\":412,\"startInChunk\":12,\"text\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\"},{\"spanId\":\"E2.S2\",\"endInChunk\":812,\"startInChunk\":412,\"text\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\"},{\"spanId\":\"E2.S3\",\"endInChunk\":1012,\"startInChunk\":812,\"text\":\"kewise `[agno]`,\\n> `[strands]`, `[anyllm]`, `[bedrock]`.\\n\\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\\ntags, persistent service, PowerShell, devcontainers.\\n\\n<details\"}],\"documentId\":175,\"versionId\":394,\"chunkId\":14262,\"sectionPath\":\"Install\",\"startOffset\":19896,\"endOffset\":20896,\"contentStartInChunk\":12,\"quote\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\",\"text\":\"headroom-ai 可通过 pip install \\\"headroom-ai[all]\\\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。\",\"field\":\"prerequisites\"},{\"evidenceId\":\"E2\",\"title\":\"headroomlabs-ai/headroom\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"spans\":[{\"spanId\":\"E2.S1\",\"endInChunk\":412,\"startInChunk\":12,\"text\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\"},{\"spanId\":\"E2.S2\",\"endInChunk\":812,\"startInChunk\":412,\"text\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\"},{\"spanId\":\"E2.S3\",\"endInChunk\":1012,\"startInChunk\":812,\"text\":\"kewise `[agno]`,\\n> `[strands]`, `[anyllm]`, `[bedrock]`.\\n\\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\\ntags, persistent service, PowerShell, devcontainers.\\n\\n<details\"}],\"documentId\":175,\"versionId\":394,\"chunkId\":14262,\"sectionPath\":\"Install\",\"startOffset\":19896,\"endOffset\":20896,\"contentStartInChunk\":12,\"quote\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\",\"text\":\"headroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。\",\"field\":\"mainRisks\"},{\"evidenceId\":\"E3\",\"title\":\"codecrafters-io/build-your-own-x\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"spans\":[{\"spanId\":\"E3.S1\",\"endInChunk\":450,\"startInChunk\":50,\"text\":\"This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \\n\\n> *What I cannot create, I do not understand — Richard Feynman.*\\n\\nIt's a great way to learn.\\n\\n* [3D Renderer](#build-your-own-3d-renderer)\\n* [AI Model](#build-your-own-ai-model)\\n* [Augmented Reality](#build-your-own-augmented-reality)\\n* [BitTorrent Client](#build-your-own\"},{\"spanId\":\"E3.S2\",\"endInChunk\":850,\"startInChunk\":450,\"text\":\"-bittorrent-client)\\n* [Blockchain / Cryptocurrency](#build-your-own-blockchain--cryptocurrency)\\n* [Bot](#build-your-own-bot)\\n* [Command-Line Tool](#build-your-own-command-line-tool)\\n* [Database](#build-your-own-database)\\n* [Docker](#build-your-own-docker)\\n* [Emulator / Virtual Machine](#build-your-own-emulator--virtual-machine)\\n* [Front-end Framework / Library](#build-your-own-front-end-framework-\"},{\"spanId\":\"E3.S3\",\"endInChunk\":1050,\"startInChunk\":850,\"text\":\"-library)\\n* [Game](#build-your-own-game)\\n* [Git](#build-your-own-git)\\n* [Memory Allocator](#build-your-own-memory-allocator)\\n* [Network Stack](#build-your-own-network-stack)\\n* [Neural Network](#build-\"}],\"documentId\":69,\"versionId\":288,\"chunkId\":10985,\"sectionPath\":\"Build your own &lt;insert-technology-here&gt;\",\"startOffset\":158,\"endOffset\":1158,\"contentStartInChunk\":50,\"quote\":\"This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \\n\\n> *What I cannot create, I do not understand — Richard Feynman.*\\n\\nIt's a great way to learn.\\n\\n* [3D Renderer](#build-your-own-3d-renderer)\\n* [AI Model](#build-your-own-ai-model)\\n* [Augmented Reality](#build-your-own-augmented-reality)\\n* [BitTorrent Client](#build-your-own\",\"text\":\"build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。\",\"field\":\"description\"}],\"profileLoaded\":false,\"generation\":\"20261002164953-ec113424\",\"status\":\"PROJECTS_WITH_LIMITATIONS\",\"notice\":\"部分项目仍有待核实条件或缺少本轮支持证据，相关项目暂不能导入正式方案；有引用仅表示所引用事实得到支持。\",\"answer\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\\n\\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。\\n\\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 16 个资料待核实候选（仓库去重，引用仍需核对）。\\n保持其余条件不变，可以考虑：\\n- 编程语言改为TypeScript：可推荐候选共 1 个，另有 17 个待核实。\\n- 项目主题不限：可推荐候选共 4 个，另有 350 个待核实。\\n- 最长周期不限：可推荐候选共 1 个，另有 15 个待核实。\\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。\",\"diagnostics\":{\"current\":{\"confirmed\":0,\"total\":16,\"uncertain\":16},\"conditions\":{\"language\":\"Python\",\"maxDurationDays\":60,\"topic\":[\"RAG\"]},\"calculatedAt\":\"2026-10-03T14:51:12.296280990Z\",\"countUnit\":\"DISTINCT_REPOSITORY\",\"alternatives\":[{\"confirmed\":1,\"total\":18,\"uncertain\":17,\"changes\":{\"language\":\"TypeScript\"},\"label\":\"编程语言改为TypeScript\"},{\"confirmed\":4,\"total\":354,\"uncertain\":350,\"changes\":{\"topic\":null},\"label\":\"项目主题不限\"},{\"confirmed\":1,\"total\":16,\"uncertain\":15,\"changes\":{\"maxDurationDays\":null},\"label\":\"最长周期不限\"}],\"available\":{\"confirmed\":495,\"total\":495,\"uncertain\":0}},\"conditionChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"}",
+    "metrics_json": "{\"promptVersion\":\"customer-v4.9-grounded-recommendations\",\"modelCalls\":[{\"costUsd\":\"UNKNOWN\",\"status\":\"SUCCEEDED\",\"attempt\":1,\"usage\":{\"prompt_tokens\":5287,\"completion_tokens\":1010,\"total_tokens\":6297,\"prompt_tokens_details\":{\"cached_tokens\":4992},\"completion_tokens_details\":{\"reasoning_tokens\":621},\"prompt_cache_hit_tokens\":4992,\"prompt_cache_miss_tokens\":295},\"durationMs\":4546,\"model\":\"deepseek-flash\",\"protocol\":\"NATIVE_ACTION\",\"phase\":\"ACTION\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"tool_calls\",\"outputBudget\":4096,\"thinking\":true},{\"costUsd\":\"UNKNOWN\",\"status\":\"SUCCEEDED\",\"attempt\":1,\"usage\":{\"prompt_tokens\":2296,\"completion_tokens\":358,\"total_tokens\":2654,\"prompt_tokens_details\":{\"cached_tokens\":128},\"prompt_cache_hit_tokens\":128,\"prompt_cache_miss_tokens\":2168},\"durationMs\":1860,\"model\":\"deepseek-flash\",\"protocol\":\"JSON_OBJECT\",\"phase\":\"EVIDENCE\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"stop\",\"outputBudget\":2048,\"thinking\":false},{\"costUsd\":\"UNKNOWN\",\"status\":\"SUCCEEDED\",\"attempt\":1,\"usage\":{\"prompt_tokens\":1421,\"completion_tokens\":14,\"total_tokens\":1435,\"prompt_tokens_details\":{\"cached_tokens\":0},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":1421},\"durationMs\":713,\"model\":\"deepseek-flash\",\"protocol\":\"JSON_OBJECT\",\"phase\":\"VERIFY\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"stop\",\"outputBudget\":2048,\"thinking\":false}],\"costUsd\":\"UNKNOWN\",\"protocol\":\"NATIVE_ACTION_V1\",\"embeddingUsage\":\"NOT_REPORTED\",\"tokenUsage\":{\"outputTokens\":1382,\"totalTokens\":10386,\"cacheMissTokens\":3884,\"inputTokens\":9004,\"cacheHitTokens\":5120,\"complete\":true,\"reasoningTokens\":621,\"models\":[\"deepseek-flash\"],\"calls\":3,\"callsWithoutUsage\":0}}",
+    "created_at": "2026-10-03 22:50",
+    "finished_at": "2026-10-03 22:51",
+    "generation_key": "20261002164953-ec113424",
+    "prompt_version": "customer-v4.9-grounded-recommendations"
+  },
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "topic": [
+        "RAG"
+      ],
+      "provenance": {
+        "topic": {
+          "quote": "技术方向是RAG",
+          "source": "MESSAGE"
+        },
+        "goal": {
+          "quote": "目标是学习",
+          "source": "MESSAGE"
+        },
+        "experience": {
+          "quote": "基础是有基础",
+          "source": "MESSAGE"
+        },
+        "language": {
+          "quote": "语言是Python",
+          "source": "MESSAGE"
+        },
+        "maxDurationDays": {
+          "quote": "完成周期是两个月内",
+          "source": "MESSAGE"
+        },
+        "verificationMode": {
+          "quote": "资料缺失可以展示真实探索候选，但必须标明尚未核实",
+          "source": "MESSAGE"
+        }
+      },
+      "goal": "学习",
+      "experience": "有基础",
+      "language": "Python",
+      "durationSemantics": {
+        "quantity": 2,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 60,
+      "verificationMode": "EXPLORE",
+      "preferences": [
+        "希望中文提问检索英文技术文档"
+      ],
+      "lastChangeSummary": "已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+      "lastCandidates": [
+        {
+          "name": "headroomlabs-ai/headroom",
+          "id": 215,
+          "type": "BEGINNER_PROJECT"
+        },
+        {
+          "name": "QuivrHQ/quivr",
+          "id": 250,
+          "type": "EXTERNAL_PROJECT"
+        },
+        {
+          "name": "codecrafters-io/build-your-own-x",
+          "id": 69,
+          "type": "EXTERNAL_PROJECT"
+        }
+      ]
+    },
+    "projects": [
+      {
+        "type": "BEGINNER_PROJECT",
+        "id": 215,
+        "sourceRef": "beginner:215",
+        "name": "headroomlabs-ai/headroom",
+        "url": "https://github.com/headroomlabs-ai/headroom",
+        "status": "CANDIDATE",
+        "archived": false,
+        "language": "Python",
+        "techStack": "Python",
+        "difficulty": "入门",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": false,
+        "requiresDocker": true,
+        "requiresDatabase": false,
+        "requiresSecrets": true,
+        "topics": "[\"agent\", \"ai\", \"anthropic\", \"claude-code\", \"compression\", \"context-engineering\", \"context-window\", \"cursor\", \"fastapi\", \"langchain\", \"llm\", \"mcp\", \"openai\", \"prompt-engineering\", \"proxy\", \"python\", \"rag\", \"token-optimization\", \"tokens\", \"typescript\"]",
+        "beginnerScore": 74,
+        "codebaseSize": "LARGE",
+        "prerequisites": "headroom-ai 可通过 pip install \"headroom-ai[all]\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。 [E2]",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "semanticAvailable": true,
+          "total": 7.0,
+          "goalPreference": 15.0,
+          "semantic": 0.0,
+          "uncertaintyPenalty": 8.0,
+          "version": "customer-rank-v3",
+          "preference": 0.0,
+          "semanticMatched": false,
+          "quality": 0.0
+        },
+        "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；资料记录主语言为Python；明确冲突已排除，仍有条件待核实。",
+        "references": [
+          {
+            "evidenceId": "E2",
+            "title": "headroomlabs-ai/headroom",
+            "sourceRef": "headroomlabs-ai/headroom|week",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "endInChunk": 412,
+                "startInChunk": 12,
+                "text": "```bash\nuv tool install --python 3.13 \"headroom-ai[all]\"  # CLI, isolated app env\npip install \"headroom-ai[all]\"                    # Python, everything — includes the CLI\nnpm install headroom-ai                           # TypeScript SDK (library only)\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\n```\n\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\n`[memory]`, `[v"
+              },
+              {
+                "spanId": "E2.S2",
+                "endInChunk": 812,
+                "startInChunk": 412,
+                "text": "ector]` (optional HNSW backend — needs a C++ toolchain, not in\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\n\n> `[all]` covers the core stack but not the framework adapters. Install those\n> separately: `pip install \"headroom-ai[langchain]\"`, and li"
+              },
+              {
+                "spanId": "E2.S3",
+                "endInChunk": 1012,
+                "startInChunk": 812,
+                "text": "kewise `[agno]`,\n> `[strands]`, `[anyllm]`, `[bedrock]`.\n\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\ntags, persistent service, PowerShell, devcontainers.\n\n<details"
+              }
+            ],
+            "documentId": 175,
+            "versionId": 394,
+            "chunkId": 14262,
+            "sectionPath": "Install",
+            "startOffset": 19896,
+            "endOffset": 20896,
+            "contentStartInChunk": 12,
+            "quote": "```bash\nuv tool install --python 3.13 \"headroom-ai[all]\"  # CLI, isolated app env\npip install \"headroom-ai[all]\"                    # Python, everything — includes the CLI\nnpm install headroom-ai                           # TypeScript SDK (library only)\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\n```\n\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\n`[memory]`, `[v",
+            "text": "headroom-ai 可通过 pip install \"headroom-ai[all]\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。",
+            "field": "prerequisites"
+          },
+          {
+            "evidenceId": "E2",
+            "title": "headroomlabs-ai/headroom",
+            "sourceRef": "headroomlabs-ai/headroom|week",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "endInChunk": 412,
+                "startInChunk": 12,
+                "text": "```bash\nuv tool install --python 3.13 \"headroom-ai[all]\"  # CLI, isolated app env\npip install \"headroom-ai[all]\"                    # Python, everything — includes the CLI\nnpm install headroom-ai                           # TypeScript SDK (library only)\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\n```\n\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\n`[memory]`, `[v"
+              },
+              {
+                "spanId": "E2.S2",
+                "endInChunk": 812,
+                "startInChunk": 412,
+                "text": "ector]` (optional HNSW backend — needs a C++ toolchain, not in\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\n\n> `[all]` covers the core stack but not the framework adapters. Install those\n> separately: `pip install \"headroom-ai[langchain]\"`, and li"
+              },
+              {
+                "spanId": "E2.S3",
+                "endInChunk": 1012,
+                "startInChunk": 812,
+                "text": "kewise `[agno]`,\n> `[strands]`, `[anyllm]`, `[bedrock]`.\n\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\ntags, persistent service, PowerShell, devcontainers.\n\n<details"
+              }
+            ],
+            "documentId": 175,
+            "versionId": 394,
+            "chunkId": 14262,
+            "sectionPath": "Install",
+            "startOffset": 19896,
+            "endOffset": 20896,
+            "contentStartInChunk": 12,
+            "quote": "ector]` (optional HNSW backend — needs a C++ toolchain, not in\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\n\n> `[all]` covers the core stack but not the framework adapters. Install those\n> separately: `pip install \"headroom-ai[langchain]\"`, and li",
+            "text": "headroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。",
+            "field": "mainRisks"
+          }
+        ],
+        "mainRisks": "headroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。 [E2]",
+        "supportedExplanation": "headroom-ai 可通过 pip install \"headroom-ai[all]\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。 [E2]\nheadroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。 [E2]"
+      },
+      {
+        "type": "EXTERNAL_PROJECT",
+        "id": 250,
+        "sourceRef": "QuivrHQ/quivr",
+        "name": "QuivrHQ/quivr",
+        "url": "https://github.com/QuivrHQ/quivr",
+        "status": "DOCUMENTED",
+        "archived": false,
+        "description": "Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]",
+        "evidenceStatus": "DOCUMENT_IDENTITY",
+        "importable": false,
+        "documentId": 250,
+        "versionId": 469,
+        "catalogTitle": "Quivr - 你的第二大脑，由生成式AI赋能",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "编程语言尚未核实，不能确认满足你的要求",
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "semanticAvailable": true,
+          "total": 3.819805153394636,
+          "goalPreference": 0.0,
+          "semantic": 31.819805153394636,
+          "uncertaintyPenalty": 28.0,
+          "version": "customer-rank-v3",
+          "preference": 0.0,
+          "semanticMatched": true,
+          "quality": 0.0
+        },
+        "recommendReason": "本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。",
+        "references": [
+          {
+            "evidenceId": "E4",
+            "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceRef": "QuivrHQ/quivr",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "endInChunk": 345,
+                "startInChunk": 12,
+                "text": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件"
+              }
+            ],
+            "documentId": 250,
+            "versionId": 469,
+            "chunkId": 16031,
+            "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset": 564,
+            "endOffset": 897,
+            "contentStartInChunk": 12,
+            "quote": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件",
+            "text": "Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E1",
+            "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceRef": "QuivrHQ/quivr",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "endInChunk": 406,
+                "startInChunk": 73,
+                "text": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"fil"
+              }
+            ],
+            "documentId": 250,
+            "versionId": 469,
+            "chunkId": 16037,
+            "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset": 2005,
+            "endOffset": 2338,
+            "contentStartInChunk": 73,
+            "quote": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"fil",
+            "text": "需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。",
+            "field": "prerequisites"
+          }
+        ],
+        "whatIsIt": "Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]",
+        "prerequisites": "需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。 [E1]",
+        "supportedExplanation": "Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\n需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。 [E1]"
+      },
+      {
+        "type": "EXTERNAL_PROJECT",
+        "id": 69,
+        "sourceRef": "codecrafters-io/build-your-own-x",
+        "name": "codecrafters-io/build-your-own-x",
+        "url": "https://github.com/codecrafters-io/build-your-own-x",
+        "status": "DOCUMENTED",
+        "archived": false,
+        "description": "build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。 [E3]",
+        "evidenceStatus": "DOCUMENT_IDENTITY",
+        "importable": false,
+        "documentId": 69,
+        "versionId": 288,
+        "catalogTitle": "codecrafters-io/build-your-own-x",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "编程语言尚未核实，不能确认满足你的要求",
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "semanticAvailable": true,
+          "total": -7.875388202501895,
+          "goalPreference": 0.0,
+          "semantic": 20.124611797498105,
+          "uncertaintyPenalty": 28.0,
+          "version": "customer-rank-v3",
+          "preference": 0.0,
+          "semanticMatched": true,
+          "quality": 0.0
+        },
+        "recommendReason": "本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。",
+        "references": [
+          {
+            "evidenceId": "E3",
+            "title": "codecrafters-io/build-your-own-x",
+            "sourceRef": "codecrafters-io/build-your-own-x",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "endInChunk": 450,
+                "startInChunk": 50,
+                "text": "This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \n\n> *What I cannot create, I do not understand — Richard Feynman.*\n\nIt's a great way to learn.\n\n* [3D Renderer](#build-your-own-3d-renderer)\n* [AI Model](#build-your-own-ai-model)\n* [Augmented Reality](#build-your-own-augmented-reality)\n* [BitTorrent Client](#build-your-own"
+              },
+              {
+                "spanId": "E3.S2",
+                "endInChunk": 850,
+                "startInChunk": 450,
+                "text": "-bittorrent-client)\n* [Blockchain / Cryptocurrency](#build-your-own-blockchain--cryptocurrency)\n* [Bot](#build-your-own-bot)\n* [Command-Line Tool](#build-your-own-command-line-tool)\n* [Database](#build-your-own-database)\n* [Docker](#build-your-own-docker)\n* [Emulator / Virtual Machine](#build-your-own-emulator--virtual-machine)\n* [Front-end Framework / Library](#build-your-own-front-end-framework-"
+              },
+              {
+                "spanId": "E3.S3",
+                "endInChunk": 1050,
+                "startInChunk": 850,
+                "text": "-library)\n* [Game](#build-your-own-game)\n* [Git](#build-your-own-git)\n* [Memory Allocator](#build-your-own-memory-allocator)\n* [Network Stack](#build-your-own-network-stack)\n* [Neural Network](#build-"
+              }
+            ],
+            "documentId": 69,
+            "versionId": 288,
+            "chunkId": 10985,
+            "sectionPath": "Build your own &lt;insert-technology-here&gt;",
+            "startOffset": 158,
+            "endOffset": 1158,
+            "contentStartInChunk": 50,
+            "quote": "This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \n\n> *What I cannot create, I do not understand — Richard Feynman.*\n\nIt's a great way to learn.\n\n* [3D Renderer](#build-your-own-3d-renderer)\n* [AI Model](#build-your-own-ai-model)\n* [Augmented Reality](#build-your-own-augmented-reality)\n* [BitTorrent Client](#build-your-own",
+            "text": "build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。",
+            "field": "description"
+          }
+        ],
+        "whatIsIt": "build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。 [E3]",
+        "supportedExplanation": "build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。 [E3]"
+      }
+    ],
+    "references": [
+      {
+        "evidenceId": "E4",
+        "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+        "sourceRef": "QuivrHQ/quivr",
+        "spans": [
+          {
+            "spanId": "E4.S1",
+            "endInChunk": 345,
+            "startInChunk": 12,
+            "text": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件"
+          }
+        ],
+        "documentId": 250,
+        "versionId": 469,
+        "chunkId": 16031,
+        "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+        "startOffset": 564,
+        "endOffset": 897,
+        "contentStartInChunk": 12,
+        "quote": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件",
+        "text": "Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E1",
+        "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+        "sourceRef": "QuivrHQ/quivr",
+        "spans": [
+          {
+            "spanId": "E1.S1",
+            "endInChunk": 406,
+            "startInChunk": 73,
+            "text": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"fil"
+          }
+        ],
+        "documentId": 250,
+        "versionId": 469,
+        "chunkId": 16037,
+        "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+        "startOffset": 2005,
+        "endOffset": 2338,
+        "contentStartInChunk": 73,
+        "quote": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"fil",
+        "text": "需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。",
+        "field": "prerequisites"
+      },
+      {
+        "evidenceId": "E2",
+        "title": "headroomlabs-ai/headroom",
+        "sourceRef": "headroomlabs-ai/headroom|week",
+        "spans": [
+          {
+            "spanId": "E2.S1",
+            "endInChunk": 412,
+            "startInChunk": 12,
+            "text": "```bash\nuv tool install --python 3.13 \"headroom-ai[all]\"  # CLI, isolated app env\npip install \"headroom-ai[all]\"                    # Python, everything — includes the CLI\nnpm install headroom-ai                           # TypeScript SDK (library only)\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\n```\n\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\n`[memory]`, `[v"
+          },
+          {
+            "spanId": "E2.S2",
+            "endInChunk": 812,
+            "startInChunk": 412,
+            "text": "ector]` (optional HNSW backend — needs a C++ toolchain, not in\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\n\n> `[all]` covers the core stack but not the framework adapters. Install those\n> separately: `pip install \"headroom-ai[langchain]\"`, and li"
+          },
+          {
+            "spanId": "E2.S3",
+            "endInChunk": 1012,
+            "startInChunk": 812,
+            "text": "kewise `[agno]`,\n> `[strands]`, `[anyllm]`, `[bedrock]`.\n\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\ntags, persistent service, PowerShell, devcontainers.\n\n<details"
+          }
+        ],
+        "documentId": 175,
+        "versionId": 394,
+        "chunkId": 14262,
+        "sectionPath": "Install",
+        "startOffset": 19896,
+        "endOffset": 20896,
+        "contentStartInChunk": 12,
+        "quote": "```bash\nuv tool install --python 3.13 \"headroom-ai[all]\"  # CLI, isolated app env\npip install \"headroom-ai[all]\"                    # Python, everything — includes the CLI\nnpm install headroom-ai                           # TypeScript SDK (library only)\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\n```\n\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\n`[memory]`, `[v",
+        "text": "headroom-ai 可通过 pip install \"headroom-ai[all]\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。",
+        "field": "prerequisites"
+      },
+      {
+        "evidenceId": "E2",
+        "title": "headroomlabs-ai/headroom",
+        "sourceRef": "headroomlabs-ai/headroom|week",
+        "spans": [
+          {
+            "spanId": "E2.S1",
+            "endInChunk": 412,
+            "startInChunk": 12,
+            "text": "```bash\nuv tool install --python 3.13 \"headroom-ai[all]\"  # CLI, isolated app env\npip install \"headroom-ai[all]\"                    # Python, everything — includes the CLI\nnpm install headroom-ai                           # TypeScript SDK (library only)\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\n```\n\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\n`[memory]`, `[v"
+          },
+          {
+            "spanId": "E2.S2",
+            "endInChunk": 812,
+            "startInChunk": 412,
+            "text": "ector]` (optional HNSW backend — needs a C++ toolchain, not in\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\n\n> `[all]` covers the core stack but not the framework adapters. Install those\n> separately: `pip install \"headroom-ai[langchain]\"`, and li"
+          },
+          {
+            "spanId": "E2.S3",
+            "endInChunk": 1012,
+            "startInChunk": 812,
+            "text": "kewise `[agno]`,\n> `[strands]`, `[anyllm]`, `[bedrock]`.\n\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\ntags, persistent service, PowerShell, devcontainers.\n\n<details"
+          }
+        ],
+        "documentId": 175,
+        "versionId": 394,
+        "chunkId": 14262,
+        "sectionPath": "Install",
+        "startOffset": 19896,
+        "endOffset": 20896,
+        "contentStartInChunk": 12,
+        "quote": "ector]` (optional HNSW backend — needs a C++ toolchain, not in\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\n\n> `[all]` covers the core stack but not the framework adapters. Install those\n> separately: `pip install \"headroom-ai[langchain]\"`, and li",
+        "text": "headroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。",
+        "field": "mainRisks"
+      },
+      {
+        "evidenceId": "E3",
+        "title": "codecrafters-io/build-your-own-x",
+        "sourceRef": "codecrafters-io/build-your-own-x",
+        "spans": [
+          {
+            "spanId": "E3.S1",
+            "endInChunk": 450,
+            "startInChunk": 50,
+            "text": "This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \n\n> *What I cannot create, I do not understand — Richard Feynman.*\n\nIt's a great way to learn.\n\n* [3D Renderer](#build-your-own-3d-renderer)\n* [AI Model](#build-your-own-ai-model)\n* [Augmented Reality](#build-your-own-augmented-reality)\n* [BitTorrent Client](#build-your-own"
+          },
+          {
+            "spanId": "E3.S2",
+            "endInChunk": 850,
+            "startInChunk": 450,
+            "text": "-bittorrent-client)\n* [Blockchain / Cryptocurrency](#build-your-own-blockchain--cryptocurrency)\n* [Bot](#build-your-own-bot)\n* [Command-Line Tool](#build-your-own-command-line-tool)\n* [Database](#build-your-own-database)\n* [Docker](#build-your-own-docker)\n* [Emulator / Virtual Machine](#build-your-own-emulator--virtual-machine)\n* [Front-end Framework / Library](#build-your-own-front-end-framework-"
+          },
+          {
+            "spanId": "E3.S3",
+            "endInChunk": 1050,
+            "startInChunk": 850,
+            "text": "-library)\n* [Game](#build-your-own-game)\n* [Git](#build-your-own-git)\n* [Memory Allocator](#build-your-own-memory-allocator)\n* [Network Stack](#build-your-own-network-stack)\n* [Neural Network](#build-"
+          }
+        ],
+        "documentId": 69,
+        "versionId": 288,
+        "chunkId": 10985,
+        "sectionPath": "Build your own &lt;insert-technology-here&gt;",
+        "startOffset": 158,
+        "endOffset": 1158,
+        "contentStartInChunk": 50,
+        "quote": "This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \n\n> *What I cannot create, I do not understand — Richard Feynman.*\n\nIt's a great way to learn.\n\n* [3D Renderer](#build-your-own-3d-renderer)\n* [AI Model](#build-your-own-ai-model)\n* [Augmented Reality](#build-your-own-augmented-reality)\n* [BitTorrent Client](#build-your-own",
+        "text": "build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。",
+        "field": "description"
+      }
+    ],
+    "profileLoaded": false,
+    "generation": "20261002164953-ec113424",
+    "status": "PROJECTS_WITH_LIMITATIONS",
+    "notice": "部分项目仍有待核实条件或缺少本轮支持证据，相关项目暂不能导入正式方案；有引用仅表示所引用事实得到支持。",
+    "answer": "已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。\n\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 16 个资料待核实候选（仓库去重，引用仍需核对）。\n保持其余条件不变，可以考虑：\n- 编程语言改为TypeScript：可推荐候选共 1 个，另有 17 个待核实。\n- 项目主题不限：可推荐候选共 4 个，另有 350 个待核实。\n- 最长周期不限：可推荐候选共 1 个，另有 15 个待核实。\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。",
+    "diagnostics": {
+      "current": {
+        "confirmed": 0,
+        "total": 16,
+        "uncertain": 16
+      },
+      "conditions": {
+        "language": "Python",
+        "maxDurationDays": 60,
+        "topic": [
+          "RAG"
+        ]
+      },
+      "calculatedAt": "2026-10-03T14:51:12.296280990Z",
+      "countUnit": "DISTINCT_REPOSITORY",
+      "alternatives": [
+        {
+          "confirmed": 1,
+          "total": 18,
+          "uncertain": 17,
+          "changes": {
+            "language": "TypeScript"
+          },
+          "label": "编程语言改为TypeScript"
+        },
+        {
+          "confirmed": 4,
+          "total": 354,
+          "uncertain": 350,
+          "changes": {
+            "topic": null
+          },
+          "label": "项目主题不限"
+        },
+        {
+          "confirmed": 1,
+          "total": 16,
+          "uncertain": 15,
+          "changes": {
+            "maxDurationDays": null
+          },
+          "label": "最长周期不限"
+        }
+      ],
+      "available": {
+        "confirmed": 495,
+        "total": 495,
+        "uncertain": 0
+      }
+    },
+    "conditionChangeSummary": "已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "promptVersion": "customer-v4.9-grounded-recommendations",
+    "modelCalls": [
+      {
+        "costUsd": "UNKNOWN",
+        "status": "SUCCEEDED",
+        "attempt": 1,
+        "usage": {
+          "prompt_tokens": 5287,
+          "completion_tokens": 1010,
+          "total_tokens": 6297,
+          "prompt_tokens_details": {
+            "cached_tokens": 4992
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 621
+          },
+          "prompt_cache_hit_tokens": 4992,
+          "prompt_cache_miss_tokens": 295
+        },
+        "durationMs": 4546,
+        "model": "deepseek-flash",
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "tool_calls",
+        "outputBudget": 4096,
+        "thinking": true
+      },
+      {
+        "costUsd": "UNKNOWN",
+        "status": "SUCCEEDED",
+        "attempt": 1,
+        "usage": {
+          "prompt_tokens": 2296,
+          "completion_tokens": 358,
+          "total_tokens": 2654,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 2168
+        },
+        "durationMs": 1860,
+        "model": "deepseek-flash",
+        "protocol": "JSON_OBJECT",
+        "phase": "EVIDENCE",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      },
+      {
+        "costUsd": "UNKNOWN",
+        "status": "SUCCEEDED",
+        "attempt": 1,
+        "usage": {
+          "prompt_tokens": 1421,
+          "completion_tokens": 14,
+          "total_tokens": 1435,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1421
+        },
+        "durationMs": 713,
+        "model": "deepseek-flash",
+        "protocol": "JSON_OBJECT",
+        "phase": "VERIFY",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      }
+    ],
+    "costUsd": "UNKNOWN",
+    "protocol": "NATIVE_ACTION_V1",
+    "embeddingUsage": "NOT_REPORTED",
+    "tokenUsage": {
+      "outputTokens": 1382,
+      "totalTokens": 10386,
+      "cacheMissTokens": 3884,
+      "inputTokens": 9004,
+      "cacheHitTokens": 5120,
+      "complete": true,
+      "reasoningTokens": 621,
+      "models": [
+        "deepseek-flash"
+      ],
+      "calls": 3,
+      "callsWithoutUsage": 0
+    }
+  },
+  "events": [
+    {
+      "atMs": 652.0507999812253,
+      "status": "RUNNING",
+      "stage": "UNDERSTANDING"
+    },
+    {
+      "atMs": 5317.566699988674,
+      "status": "RUNNING",
+      "stage": "SEARCHING"
+    },
+    {
+      "atMs": 6352.303099993151,
+      "status": "RUNNING",
+      "stage": "FILTERING_PROJECTS"
+    },
+    {
+      "atMs": 13663.26420000405,
+      "status": "SUCCEEDED",
+      "stage": "SUCCEEDED"
+    }
+  ],
+  "steps": [
+    {
+      "tool": "getConfirmedProfile",
+      "detail": "{\"parameters\":{},\"result\":\"\"}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"parameters\":{\"purpose\":\"PROJECT_RANKING\",\"topK\":20,\"query\":\"推荐项目 Python RAG 学习 有基础\",\"sourceTypes\":[\"BEGINNER_PROJECT\",\"CAREER_PROJECT\",\"GITHUB\"]},\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":318,\"candidateCount\":80,\"excludedReasons\":{},\"hits\":[{\"documentId\":218,\"versionId\":437,\"chunkId\":15807,\"chunkIndex\":1,\"title\":\"TheAlgorithms/Python\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"TheAlgorithms/Python|week\",\"sectionPath\":null,\"startOffset\":1871,\"endOffset\":2136,\"content\":\"<!-- Short description: -->\\n  <h3>All algorithms implemented in Python - for education 📚</h3>\\n</div>\\n\\nImplementations are for learning purposes only. They may be less efficient than the implementations in the Python standard library. Use them at your discretion.\\n\\n\",\"score\":0.13191593352883677,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=0,lexicalRank=64,nameRank=39,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.0192919933475885,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":213,\"versionId\":432,\"chunkId\":15627,\"chunkIndex\":452,\"title\":\"trimstray/the-book-of-secret-knowledge\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"trimstray/the-book-of-secret-knowledge\",\"sectionPath\":\":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [python](https://www.python.org/)\",\"startOffset\":203370,\"endOffset\":203417,\"content\":\"##### Tool: [python](https://www.python.org/)\\n\\n\",\"score\":0.01808731808731809,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=14,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":400,\"versionId\":619,\"chunkId\":16997,\"chunkIndex\":7,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"版本 > Python\",\"startOffset\":1788,\"endOffset\":1960,\"content\":\"### Python\\n\\n```bash\\npip install pydeck\\n```\\n\\n- [快速入门](https://deckgl.readthedocs.io/en/latest/installation.html)\\n- [示例](https://deckgl.readthedocs.io/en/latest/layer.html)\\n\\n\",\"score\":0.01752278376139188,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=11,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":10989,\"chunkIndex\":5,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `AI Model`\",\"startOffset\":3638,\"endOffset\":3967,\"content\":\"#### Build your own `AI Model`\\n* [**Python**: _A Large Language Model (LLM)_](https://github.com/rasbt/LLMs-from-scratch)\\n* [**Python**: _Diffusion Models for Image Generation_](https://huggingface.co/learn/diffusion-course/en/unit1/3)\\n* [**Python**: _RAG for Document Search_](https://github.com/langchain-ai/rag-from-scratch)\\n\\n\",\"score\":0.016295236148026988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=86,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":75,\"versionId\":294,\"chunkId\":11783,\"chunkIndex\":50,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"sectionPath\":\"Project Based Learning > Python: > Miscellaneous:\",\"startOffset\":39253,\"endOffset\":41209,\"content\":\"### Miscellaneous:\\n\\n- [Build a Simple Interpreter](https://ruslanspivak.com/lsbasi-part1/)\\n- [Build a Simple Blockchain in Python](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)\\n- [Building a Gas Pump Scanner with OpenCV/Python/iOS](https://hackernoon.com/building-a-gas-pump-scanner-with-opencv-python-ios-116fe6c9ae8b)\\n- [Build a Distributed Streaming System with Python and Kafka](https://codequs.com/p/S14jQ5UyG/build-a-distributed-streaming-system-with-apache-kafka-and-python)\\n- [Writing a basic x86-64 JIT compiler from scratch in stock Python](https://csl.name/post/python-jit/)\\n- Making a low level (Linux) debugger\\n  - [Part 1](https://blog.asrpo.com/making_a_low_level_debugger)\\n  - [Part 2: C](https://blog.asrpo.com/making_a_low_level_debugger_part_2)\\n- Implementing a Search Engine\\n  - [Part 1](http://www.ardendertat.com/2011/05/30/how-to-implement-a-search-engine-part-1-create-index/)\\n  - [Part 2](http://www.ardendertat.com/2011/05/31/how-to-implement-a-search-engine-part-2-query-index/)\\n  - [Part 3](http://www.ardendertat.com/2011/07/17/how-to-implement-a-search-engine-part-3-ranking-tf-idf/)\\n- [Build the Game of Life](https://robertheaton.com/2018/07/20/project-2-game-of-life/)\\n- [Create terminal ASCII art](https://robertheaton.com/2018/06/12/programming-projects-for-advanced-beginners-ascii-art/)\\n- [Write a Tic-Tac-Toe AI](https://robertheaton.com/2018/10/09/programming-projects-for-advanced-beginners-3-a/)\\n- [Create photomosaic art](https://robertheaton.com/2018/11/03/programming-project-4-photomosaics/)\\n- [Build the game \\\"Snake\\\" in the terminal](https://robertheaton.com/2018/12/02/programming-project-5-snake/)\\n- [Write yourself a Git](https://wyag.thb.lt/)\\n- [A Python implementation of a Python bytecode runner](https://www.aosabook.org/en/500L/a-python-interpreter-written-in-python.html)\\n- [Create a Voice assistant using Python](https://www.geeksforgeeks.org/voice-assistant-using-python/)\\n\\n\",\"score\":0.016256487527205758,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=121,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":231,\"versionId\":450,\"chunkId\":15895,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"sectionPath\":\"💡 什么是 RAGFlow？\",\"startOffset\":3626,\"endOffset\":3741,\"content\":\"## 💡 什么是 RAGFlow？\\n\\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎\",\"score\":0.01567618557585113,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=109,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":89,\"versionId\":308,\"chunkId\":11968,\"chunkIndex\":4,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 适合新手的原因\",\"startOffset\":150,\"endOffset\":206,\"content\":\"## 适合新手的原因\\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":77,\"versionId\":296,\"chunkId\":11810,\"chunkIndex\":2,\"title\":\"fastrepl/anarlog\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:2\",\"sectionPath\":\"fastrepl/anarlog > 仓库地址\",\"startOffset\":36,\"endOffset\":81,\"content\":\"## 仓库地址\\nhttps://github.com/fastrepl/anarlog\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":308,\"versionId\":527,\"chunkId\":16416,\"chunkIndex\":1,\"title\":\"plotly.py\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"plotly/plotly.py\",\"sectionPath\":\"plotly.py > 快速入门\",\"startOffset\":1022,\"endOffset\":1202,\"content\":\"## 快速入门\\n\\n`pip install plotly`\\n\\n```python\\nimport plotly.express as px\\nfig = px.bar(x=[\\\"a\\\", \\\"b\\\", \\\"c\\\"], y=[1, 3, 2])\\nfig.show()\\n```\\n\\n更多示例请参阅 [Python 文档](https://plotly.com/python/)。\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":96,\"versionId\":315,\"chunkId\":12059,\"chunkIndex\":4,\"title\":\"flowsforapex/apex-flowsforapex\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:43\",\"sectionPath\":\"flowsforapex/apex-flowsforapex > 适合新手的原因\",\"startOffset\":158,\"endOffset\":216,\"content\":\"## 适合新手的原因\\n作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":94,\"versionId\":313,\"chunkId\":12030,\"chunkIndex\":1,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012195121951219513,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012048192771084338,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011904761904761904,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=24,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011764705882352941,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"GITHUB:TheAlgorithms/Python\",\"documentId\":218,\"title\":\"TheAlgorithms/Python\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"TheAlgorithms/Python|week\",\"bestScore\":0.13191593352883677,\"evidence\":[{\"documentId\":218,\"versionId\":437,\"chunkId\":15807,\"chunkIndex\":1,\"title\":\"TheAlgorithms/Python\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"TheAlgorithms/Python|week\",\"sectionPath\":null,\"startOffset\":1871,\"endOffset\":2136,\"content\":\"<!-- Short description: -->\\n  <h3>All algorithms implemented in Python - for education 📚</h3>\\n</div>\\n\\nImplementations are for learning purposes only. They may be less efficient than the implementations in the Python standard library. Use them at your discretion.\\n\\n\",\"score\":0.13191593352883677,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=0,lexicalRank=64,nameRank=39,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"}]},{\"groupKey\":\"GITHUB:QuivrHQ/quivr\",\"documentId\":250,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"bestScore\":0.0192919933475885,\"evidence\":[{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.0192919933475885,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:trimstray/the-book-of-secret-knowledge\",\"documentId\":213,\"title\":\"trimstray/the-book-of-secret-knowledge\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"trimstray/the-book-of-secret-knowledge\",\"bestScore\":0.01808731808731809,\"evidence\":[{\"documentId\":213,\"versionId\":432,\"chunkId\":15627,\"chunkIndex\":452,\"title\":\"trimstray/the-book-of-secret-knowledge\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"trimstray/the-book-of-secret-knowledge\",\"sectionPath\":\":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [python](https://www.python.org/)\",\"startOffset\":203370,\"endOffset\":203417,\"content\":\"##### Tool: [python](https://www.python.org/)\\n\\n\",\"score\":0.01808731808731809,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=14,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:visgl/deck.gl\",\"documentId\":400,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"bestScore\":0.01752278376139188,\"evidence\":[{\"documentId\":400,\"versionId\":619,\"chunkId\":16997,\"chunkIndex\":7,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"版本 > Python\",\"startOffset\":1788,\"endOffset\":1960,\"content\":\"### Python\\n\\n```bash\\npip install pydeck\\n```\\n\\n- [快速入门](https://deckgl.readthedocs.io/en/latest/installation.html)\\n- [示例](https://deckgl.readthedocs.io/en/latest/layer.html)\\n\\n\",\"score\":0.01752278376139188,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=11,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:codecrafters-io/build-your-own-x\",\"documentId\":69,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"bestScore\":0.016295236148026988,\"evidence\":[{\"documentId\":69,\"versionId\":288,\"chunkId\":10989,\"chunkIndex\":5,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `AI Model`\",\"startOffset\":3638,\"endOffset\":3967,\"content\":\"#### Build your own `AI Model`\\n* [**Python**: _A Large Language Model (LLM)_](https://github.com/rasbt/LLMs-from-scratch)\\n* [**Python**: _Diffusion Models for Image Generation_](https://huggingface.co/learn/diffusion-course/en/unit1/3)\\n* [**Python**: _RAG for Document Search_](https://github.com/langchain-ai/rag-from-scratch)\\n\\n\",\"score\":0.016295236148026988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=86,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:practical-tutorials/project-based-learning\",\"documentId\":75,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"bestScore\":0.016256487527205758,\"evidence\":[{\"documentId\":75,\"versionId\":294,\"chunkId\":11783,\"chunkIndex\":50,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"sectionPath\":\"Project Based Learning > Python: > Miscellaneous:\",\"startOffset\":39253,\"endOffset\":41209,\"content\":\"### Miscellaneous:\\n\\n- [Build a Simple Interpreter](https://ruslanspivak.com/lsbasi-part1/)\\n- [Build a Simple Blockchain in Python](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)\\n- [Building a Gas Pump Scanner with OpenCV/Python/iOS](https://hackernoon.com/building-a-gas-pump-scanner-with-opencv-python-ios-116fe6c9ae8b)\\n- [Build a Distributed Streaming System with Python and Kafka](https://codequs.com/p/S14jQ5UyG/build-a-distributed-streaming-system-with-apache-kafka-and-python)\\n- [Writing a basic x86-64 JIT compiler from scratch in stock Python](https://csl.name/post/python-jit/)\\n- Making a low level (Linux) debugger\\n  - [Part 1](https://blog.asrpo.com/making_a_low_level_debugger)\\n  - [Part 2: C](https://blog.asrpo.com/making_a_low_level_debugger_part_2)\\n- Implementing a Search Engine\\n  - [Part 1](http://www.ardendertat.com/2011/05/30/how-to-implement-a-search-engine-part-1-create-index/)\\n  - [Part 2](http://www.ardendertat.com/2011/05/31/how-to-implement-a-search-engine-part-2-query-index/)\\n  - [Part 3](http://www.ardendertat.com/2011/07/17/how-to-implement-a-search-engine-part-3-ranking-tf-idf/)\\n- [Build the Game of Life](https://robertheaton.com/2018/07/20/project-2-game-of-life/)\\n- [Create terminal ASCII art](https://robertheaton.com/2018/06/12/programming-projects-for-advanced-beginners-ascii-art/)\\n- [Write a Tic-Tac-Toe AI](https://robertheaton.com/2018/10/09/programming-projects-for-advanced-beginners-3-a/)\\n- [Create photomosaic art](https://robertheaton.com/2018/11/03/programming-project-4-photomosaics/)\\n- [Build the game \\\"Snake\\\" in the terminal](https://robertheaton.com/2018/12/02/programming-project-5-snake/)\\n- [Write yourself a Git](https://wyag.thb.lt/)\\n- [A Python implementation of a Python bytecode runner](https://www.aosabook.org/en/500L/a-python-interpreter-written-in-python.html)\\n- [Create a Voice assistant using Python](https://www.geeksforgeeks.org/voice-assistant-using-python/)\\n\\n\",\"score\":0.016256487527205758,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=121,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:80\",\"documentId\":3,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"bestScore\":0.016129032258064516,\"evidence\":[{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:infiniflow/ragflow\",\"documentId\":231,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"bestScore\":0.01567618557585113,\"evidence\":[{\"documentId\":231,\"versionId\":450,\"chunkId\":15895,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"sectionPath\":\"💡 什么是 RAGFlow？\",\"startOffset\":3626,\"endOffset\":3741,\"content\":\"## 💡 什么是 RAGFlow？\\n\\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎\",\"score\":0.01567618557585113,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=109,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:30\",\"documentId\":89,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"bestScore\":0.015625,\"evidence\":[{\"documentId\":89,\"versionId\":308,\"chunkId\":11968,\"chunkIndex\":4,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 适合新手的原因\",\"startOffset\":150,\"endOffset\":206,\"content\":\"## 适合新手的原因\\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:2\",\"documentId\":77,\"title\":\"fastrepl/anarlog\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:2\",\"bestScore\":0.014084507042253521,\"evidence\":[{\"documentId\":77,\"versionId\":296,\"chunkId\":11810,\"chunkIndex\":2,\"title\":\"fastrepl/anarlog\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:2\",\"sectionPath\":\"fastrepl/anarlog > 仓库地址\",\"startOffset\":36,\"endOffset\":81,\"content\":\"## 仓库地址\\nhttps://github.com/fastrepl/anarlog\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:plotly/plotly.py\",\"documentId\":308,\"title\":\"plotly.py\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"plotly/plotly.py\",\"bestScore\":0.013333333333333334,\"evidence\":[{\"documentId\":308,\"versionId\":527,\"chunkId\":16416,\"chunkIndex\":1,\"title\":\"plotly.py\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"plotly/plotly.py\",\"sectionPath\":\"plotly.py > 快速入门\",\"startOffset\":1022,\"endOffset\":1202,\"content\":\"## 快速入门\\n\\n`pip install plotly`\\n\\n```python\\nimport plotly.express as px\\nfig = px.bar(x=[\\\"a\\\", \\\"b\\\", \\\"c\\\"], y=[1, 3, 2])\\nfig.show()\\n```\\n\\n更多示例请参阅 [Python 文档](https://plotly.com/python/)。\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:43\",\"documentId\":96,\"title\":\"flowsforapex/apex-flowsforapex\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:43\",\"bestScore\":0.012987012987012988,\"evidence\":[{\"documentId\":96,\"versionId\":315,\"chunkId\":12059,\"chunkIndex\":4,\"title\":\"flowsforapex/apex-flowsforapex\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:43\",\"sectionPath\":\"flowsforapex/apex-flowsforapex > 适合新手的原因\",\"startOffset\":158,\"endOffset\":216,\"content\":\"## 适合新手的原因\\n作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:125\",\"documentId\":14,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"bestScore\":0.01282051282051282,\"evidence\":[{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:119\",\"documentId\":12,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"bestScore\":0.012658227848101266,\"evidence\":[{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:38\",\"documentId\":94,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"bestScore\":0.0125,\"evidence\":[{\"documentId\":94,\"versionId\":313,\"chunkId\":12030,\"chunkIndex\":1,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:94\",\"documentId\":6,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"bestScore\":0.012345679012345678,\"evidence\":[{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:46\",\"documentId\":63,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"bestScore\":0.012195121951219513,\"evidence\":[{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012195121951219513,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:5\",\"documentId\":78,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"bestScore\":0.012048192771084338,\"evidence\":[{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012048192771084338,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:10\",\"documentId\":82,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"bestScore\":0.011904761904761904,\"evidence\":[{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011904761904761904,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=24,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:35\",\"documentId\":93,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"bestScore\":0.011764705882352941,\"evidence\":[{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011764705882352941,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"parameters\":{\"semanticChunks\":[15807,16037,15627,16997,10989,11783,9641,15895,11968,11810,16416,12059,9976,9914,12030,9740,10780,11822,11874,12017],\"conditions\":{\"topic\":[\"RAG\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是RAG\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是学习\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"基础是有基础\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Python\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是两个月内\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"学习\",\"experience\":\"有基础\",\"language\":\"Python\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":60,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"希望中文提问检索英文技术文档\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"}},\"result\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":215,\"sourceRef\":\"beginner:215\",\"name\":\"headroomlabs-ai/headroom\",\"url\":\"https://github.com/headroomlabs-ai/headroom\",\"status\":\"CANDIDATE\",\"archived\":false,\"language\":\"Python\",\"techStack\":\"Python\",\"difficulty\":\"入门\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":true,\"requiresDatabase\":false,\"requiresSecrets\":true,\"topics\":\"[\\\"agent\\\", \\\"ai\\\", \\\"anthropic\\\", \\\"claude-code\\\", \\\"compression\\\", \\\"context-engineering\\\", \\\"context-window\\\", \\\"cursor\\\", \\\"fastapi\\\", \\\"langchain\\\", \\\"llm\\\", \\\"mcp\\\", \\\"openai\\\", \\\"prompt-engineering\\\", \\\"proxy\\\", \\\"python\\\", \\\"rag\\\", \\\"token-optimization\\\", \\\"tokens\\\", \\\"typescript\\\"]\",\"beginnerScore\":74,\"codebaseSize\":\"LARGE\",\"prerequisites\":\"Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"semanticAvailable\":true,\"total\":7.0,\"goalPreference\":15.0,\"semantic\":0.0,\"uncertaintyPenalty\":8.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":false,\"quality\":0.0}},{\"type\":\"EXTERNAL_PROJECT\",\"id\":250,\"sourceRef\":\"QuivrHQ/quivr\",\"name\":\"QuivrHQ/quivr\",\"url\":\"https://github.com/QuivrHQ/quivr\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":250,\"versionId\":469,\"catalogTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"semanticAvailable\":true,\"total\":3.819805153394636,\"goalPreference\":0.0,\"semantic\":31.819805153394636,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0}},{\"type\":\"EXTERNAL_PROJECT\",\"id\":69,\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"name\":\"codecrafters-io/build-your-own-x\",\"url\":\"https://github.com/codecrafters-io/build-your-own-x\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":69,\"versionId\":288,\"catalogTitle\":\"codecrafters-io/build-your-own-x\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"semanticAvailable\":true,\"total\":-7.875388202501895,\"goalPreference\":0.0,\"semantic\":20.124611797498105,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0}}]}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"parameters\":{\"projects\":[{\"sourceRef\":\"beginner:215\",\"name\":\"headroomlabs-ai/headroom\",\"type\":\"BEGINNER_PROJECT\"},{\"sourceRef\":\"QuivrHQ/quivr\",\"name\":\"QuivrHQ/quivr\",\"type\":\"EXTERNAL_PROJECT\"},{\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"name\":\"codecrafters-io/build-your-own-x\",\"type\":\"EXTERNAL_PROJECT\"}],\"query\":\"RAG 项目功能 用途 实践示例 安装部署 环境依赖 限制 请按以下本轮画像直接推荐项目：技术方向是RAG；目标是学习；基础是有基础；语言是Python；完成周期是两个月内。只推荐 Python 项目，希望中文提问检索英文技术文档，并说明部署依赖。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\",\"sourceTypes\":[\"BEGINNER_PROJECT\",\"CAREER_PROJECT\",\"GITHUB\"]},\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":93,\"candidateCount\":80,\"excludedReasons\":{},\"hits\":[{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.019672131147540985,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":10989,\"chunkIndex\":5,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `AI Model`\",\"startOffset\":3638,\"endOffset\":3967,\"content\":\"#### Build your own `AI Model`\\n* [**Python**: _A Large Language Model (LLM)_](https://github.com/rasbt/LLMs-from-scratch)\\n* [**Python**: _Diffusion Models for Image Generation_](https://huggingface.co/learn/diffusion-course/en/unit1/3)\\n* [**Python**: _RAG for Document Search_](https://github.com/langchain-ai/rag-from-scratch)\\n\\n\",\"score\":0.01894993894993895,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":175,\"versionId\":394,\"chunkId\":14262,\"chunkIndex\":14,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"sectionPath\":\"Install\",\"startOffset\":19884,\"endOffset\":21365,\"content\":\"## Install\\n\\n```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[vector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and likewise `[agno]`,\\n> `[strands]`, `[anyllm]`, `[bedrock]`.\\n\\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\\ntags, persistent service, PowerShell, devcontainers.\\n\\n<details>\\n<summary><b>uv, pipx, and MCP clients that don't inherit your PATH</b></summary>\\n\\nPrefer `uv tool install` for the CLI so the command lives in an isolated app\\nenvironment. On macOS, pass `--python 3.13` if your default `python3` is newer\\nthan the current wheel set:\\n\\n```bash\\nbrew install python@3.13  # if 3.13 is not already available\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"\\nuv tool update-shell      # if ~/.local/bin is not on PATH\\nheadroom --version\\n```\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"chunkIndex\":1,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":552,\"endOffset\":1155,\"content\":\"## 核心特性 🎯\\n\\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\\n\\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\\n\\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\\n\\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\\n\\n<!-- ## 演示亮点 🎥\\n\\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\\n\\n\",\"score\":0.018850806451612905,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"chunkIndex\":4,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1259,\"endOffset\":1916,\"content\":\"### 30秒安装 💽\\n\\n- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_file:\\n          temp_file.write(\\\"Gold is a liquid of blue-like colour.\\\")\\n          temp_file.flush()\\n\\n          brain = Brain.from_files(\\n              name=\\\"test_brain\\\",\\n              file_paths=[temp_file.name],\\n          )\\n\\n          answer = brain.ask(\\n              \\\"what is gold? asnwer in french\\\"\\n          )\\n          print(\\\"answer:\\\", answer)\\n  ```\\n\\n\",\"score\":0.01855921855921856,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16033,\"chunkIndex\":3,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 先决条件 📋\",\"startOffset\":1212,\"endOffset\":1259,\"content\":\"### 先决条件 📋\\n\\n请确保已安装以下软件：\\n\\n- Python 3.10 或更高版本\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11026,\"chunkIndex\":42,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Web Browser`\",\"startOffset\":36594,\"endOffset\":36807,\"content\":\"#### Build your own `Web Browser`\\n\\n* [**Rust**: _Let's build a browser engine_](https://limpet.net/mbrubeck/2014/08/08/toy-layout-engine-1.html)\\n* [**Python**: _Browser Engineering_](https://browser.engineering)\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11006,\"chunkIndex\":22,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Git`\",\"startOffset\":20854,\"endOffset\":21596,\"content\":\"#### Build your own `Git`\\n\\n* [**Haskell**: _Reimplementing “git clone” in Haskell from the bottom up_](http://stefan.saasen.me/articles/git-clone-in-haskell-from-the-bottom-up/)\\n* [**JavaScript**: _Gitlet_](http://gitlet.maryrosecook.com/docs/gitlet.html)\\n* [**JavaScript**: _Build GIT - Learn GIT_](https://kushagra.dev/blog/build-git-learn-git/)\\n* [**Python**: _Just enough of a Git client to create a repo, commit, and push itself to GitHub_](https://benhoyt.com/writings/pygit/)\\n* [**Python**: _Write yourself a Git!_](https://wyag.thb.lt/)\\n* [**Python**: _ugit: Learn Git Internals by Building Git Yourself_](https://www.leshenko.net/p/ugit/)\\n* [**Ruby**: _Rebuilding Git in Ruby_](https://robots.thoughtbot.com/rebuilding-git-in-ruby)\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11005,\"chunkIndex\":21,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Game`\",\"startOffset\":20641,\"endOffset\":20854,\"content\":\"* [**Rust**: _Adventures in Rust: A Basic 2D Game_](https://a5huynh.github.io/posts/2018/adventures-in-rust/)\\n* [**Rust**: _Roguelike Tutorial in Rust + tcod_](https://tomassedovic.github.io/roguelike-tutorial/)\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11022,\"chunkIndex\":38,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Template Engine`\",\"startOffset\":34682,\"endOffset\":35361,\"content\":\"#### Build your own `Template Engine`\\n\\n* [**JavaScript**: _JavaScript template engine in just 20 lines_](http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line)\\n* [**JavaScript**: _Understanding JavaScript Micro-Templating_](https://medium.com/wdstack/understanding-javascript-micro-templating-f37a37b3b40e)\\n* [**Python**: _Approach: Building a toy template engine in Python_](http://alexmic.net/building-a-template-engine/)\\n* [**Python**: _A Template Engine_](http://aosabook.org/en/500L/a-template-engine.html)\\n* [**Ruby**: _How to write a template engine in less than 30 lines of code_](http://bits.citrusbyte.com/how-to-write-a-template-library/)\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11018,\"chunkIndex\":34,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Programming Language`\",\"startOffset\":31345,\"endOffset\":32185,\"content\":\"* [**Python**: _From Source Code To Machine Code: Build Your Own Compiler From Scratch_](https://build-your-own.org/compiler/)\\n* [**Racket**: _Beautiful Racket: How to make your own programming languages with Racket_](https://beautifulracket.com/)\\n* [**Ruby**: _A Compiler From Scratch_](https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch)\\n* [**Ruby**: _Markdown compiler from scratch in Ruby_](https://blog.beezwax.net/2017/07/07/writing-a-markdown-compiler/)\\n* [**Rust**: _Learning Parser Combinators With Rust_](https://bodil.lol/parser-combinators/)\\n* [**Swift**: _Building a LISP from scratch with Swift_](https://www.uraimo.com/2017/02/05/building-a-lisp-from-scratch-with-swift/)\\n* [**TypeScript**: _Build your own WebAssembly Compiler_](https://blog.scottlogic.com/2019/05/17/webassembly-compiler.html)\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11033,\"chunkIndex\":49,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Uncategorized\",\"startOffset\":44419,\"endOffset\":45784,\"content\":\"* [**Python**: _Stock Market Predictions with LSTM in Python_](https://www.datacamp.com/community/tutorials/lstm-python-stock-market)\\n* [**Python**: _Building a simple Generative Adversarial Network (GAN) using Tensorflow_](https://blog.paperspace.com/implementing-gans-in-tensorflow/)\\n* [**Python**: _Learn ML Algorithms by coding: Decision Trees_](https://lethalbrains.com/learn-ml-algorithms-by-coding-decision-trees-439ac503c9a4)\\n* [**Python**: _JSON Decoding Algorithm_](https://github.com/cheery/json-algorithm)\\n* [**Python**: _Build your own Git plugin with python_](https://joshburns-xyz.vercel.app/posts/build-your-own-git-plugin)\\n* [**Ruby**: _A Pedometer in the Real World_](http://aosabook.org/en/500L/a-pedometer-in-the-real-world.html)\\n* [**Ruby**: _Creating a Linux Desktop application with Ruby_](https://iridakos.com/tutorials/2018/01/25/creating-a-gtk-todo-application-with-ruby)\\n* [**Rust**: _Building a DNS server in Rust_](https://github.com/EmilHernvall/dnsguide/blob/master/README.md)\\n* [**Rust**: _Writing Scalable Chat Service from Scratch_](https://nbaksalyar.github.io/2015/07/10/writing-chat-in-rust.html)\\n* [**Rust**: _WebGL + Rust: Basic Water Tutorial_](https://www.chinedufn.com/3d-webgl-basic-water-tutorial/)\\n* [**TypeScript**: _Tiny Package Manager: Learns how npm or Yarn works_](https://github.com/g-plane/tiny-package-manager)\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11034,\"chunkIndex\":50,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Uncategorized\",\"startOffset\":45662,\"endOffset\":45785,\"content\":\"* [**TypeScript**: _Tiny Package Manager: Learns how npm or Yarn works_](https://github.com/g-plane/tiny-package-manager)\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11024,\"chunkIndex\":40,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Visual Recognition System`\",\"startOffset\":35993,\"endOffset\":36459,\"content\":\"#### Build your own `Visual Recognition System`\\n\\n* [**Python**: _Developing a License Plate Recognition System with Machine Learning in Python_](https://medium.com/devcenter/developing-a-license-plate-recognition-system-with-machine-learning-in-python-787833569ccd)\\n* [**Python**: _Building a Facial Recognition Pipeline with Deep Learning in Tensorflow_](https://hackernoon.com/building-a-facial-recognition-pipeline-with-deep-learning-in-tensorflow-66e7645015b8)\\n\\n\",\"score\":0.0136986301369863,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":10985,\"chunkIndex\":1,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Build your own &lt;insert-technology-here&gt;\",\"startOffset\":108,\"endOffset\":1863,\"content\":\"## Build your own &lt;insert-technology-here&gt;\\n\\nThis repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \\n\\n> *What I cannot create, I do not understand — Richard Feynman.*\\n\\nIt's a great way to learn.\\n\\n* [3D Renderer](#build-your-own-3d-renderer)\\n* [AI Model](#build-your-own-ai-model)\\n* [Augmented Reality](#build-your-own-augmented-reality)\\n* [BitTorrent Client](#build-your-own-bittorrent-client)\\n* [Blockchain / Cryptocurrency](#build-your-own-blockchain--cryptocurrency)\\n* [Bot](#build-your-own-bot)\\n* [Command-Line Tool](#build-your-own-command-line-tool)\\n* [Database](#build-your-own-database)\\n* [Docker](#build-your-own-docker)\\n* [Emulator / Virtual Machine](#build-your-own-emulator--virtual-machine)\\n* [Front-end Framework / Library](#build-your-own-front-end-framework--library)\\n* [Game](#build-your-own-game)\\n* [Git](#build-your-own-git)\\n* [Memory Allocator](#build-your-own-memory-allocator)\\n* [Network Stack](#build-your-own-network-stack)\\n* [Neural Network](#build-your-own-neural-network)\\n* [Operating System](#build-your-own-operating-system)\\n* [Physics Engine](#build-your-own-physics-engine)\\n* [Processor](#build-your-own-processor)\\n* [Programming Language](#build-your-own-programming-language)\\n* [Regex Engine](#build-your-own-regex-engine)\\n* [Search Engine](#build-your-own-search-engine)\\n* [Shell](#build-your-own-shell)\\n* [Template Engine](#build-your-own-template-engine)\\n* [Text Editor](#build-your-own-text-editor)\\n* [Visual Recognition System](#build-your-own-visual-recognition-system)\\n* [Voxel Engine](#build-your-own-voxel-engine)\\n* [Web Browser](#build-your-own-web-browser)\\n* [Web Server](#build-your-own-web-server)\\n* [Uncategorized](#uncategorized)\\n\\n\",\"score\":0.013513513513513514,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11014,\"chunkIndex\":30,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Processor`\",\"startOffset\":27585,\"endOffset\":27754,\"content\":\"#### Build your own `Processor`\\n\\n* [**Verilog**: _From Blinker to RISC-V_](https://github.com/BrunoLevy/learn-fpga/tree/master/FemtoRV/TUTORIALS/FROM_BLINKER_TO_RISCV)\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11008,\"chunkIndex\":24,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Network Stack`\",\"startOffset\":21747,\"endOffset\":22225,\"content\":\"#### Build your own `Network Stack`\\n\\n* [**C**: _Beej's Guide to Network Programming_](http://beej.us/guide/bgnet/)\\n* [**C**: _Let's code a TCP/IP stack_](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)\\n* [**C / Python**: _Build your own VPN/Virtual Switch_](https://github.com/peiyuanix/build-your-own-zerotier)\\n* [**Ruby**: _How to build a network stack in Ruby_](https://medium.com/geckoboard-under-the-hood/how-to-build-a-network-stack-in-ruby-f73aeb1b661b)\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":10987,\"chunkIndex\":3,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Distributed Systems`\",\"startOffset\":1877,\"endOffset\":2066,\"content\":\"#### Build your own `Distributed Systems`\\n* [**Java**: _Building Your Own Kafka-like System From Scratch: A Step-by-Step Guide_](https://github.com/buildthingsuseful/build-your-own-kafka)\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":10988,\"chunkIndex\":4,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `3D Renderer`\",\"startOffset\":2066,\"endOffset\":3638,\"content\":\"#### Build your own `3D Renderer`\\n\\n* [**C++**: _Introduction to Ray Tracing: a Simple Method for Creating 3D Images_](https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/how-does-it-work)\\n* [**C++**: _How OpenGL works: software rendering in 500 lines of code_](https://github.com/ssloy/tinyrenderer/wiki)\\n* [**C++**: _Raycasting engine of Wolfenstein 3D_](http://lodev.org/cgtutor/raycasting.html)\\n* [**C++**: _Physically Based Rendering:From Theory To Implementation_](http://www.pbr-book.org/)\\n* [**C++**: _Ray Tracing in One Weekend_](https://raytracing.github.io/books/RayTracingInOneWeekend.html)\\n* [**C++**: _Rasterization: a Practical Implementation_](https://www.scratchapixel.com/lessons/3d-basic-rendering/rasterization-practical-implementation/overview-rasterization-algorithm)\\n* [**C# / TypeScript / JavaScript**: _Learning how to write a 3D soft engine from scratch in C#, TypeScript or JavaScript_](https://www.davrous.com/2013/06/13/tutorial-series-learning-how-to-write-a-3d-soft-engine-from-scratch-in-c-typescript-or-javascript/)\\n* [**Java / JavaScript**: _Build your own 3D renderer_](https://avik-das.github.io/build-your-own-raytracer/)\\n* [**Java**: _How to create your own simple 3D render engine in pure Java_](http://blog.rogach.org/2015/08/how-to-create-your-own-simple-3d-render.html)\\n* [**JavaScript / Pseudocode**: _Computer Graphics from scratch_](http://www.gabrielgambetta.com/computer-graphics-from-scratch/introduction.html)\\n* [**Python**: _A 3D Modeller_](http://aosabook.org/en/500L/a-3d-modeller.html)\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":10997,\"chunkIndex\":13,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Command-Line Tool`\",\"startOffset\":10444,\"endOffset\":11413,\"content\":\"#### Build your own `Command-Line Tool`\\n\\n* [**Go**: _Visualize your local git contributions with Go_](https://flaviocopes.com/go-git-contributions/)\\n* [**Go**: _Build a command line app with Go: lolcat_](https://flaviocopes.com/go-tutorial-lolcat/)\\n* [**Go**: _Building a cli command with Go: cowsay_](https://flaviocopes.com/go-tutorial-cowsay/)\\n* [**Go**: _Go CLI tutorial: fortune clone_](https://flaviocopes.com/go-tutorial-fortune/)\\n* [**Nim**: _Writing a stow alternative to manage dotfiles_](https://xmonader.github.io/nimdays/day06_nistow.html)\\n* [**Node.js**: _Create a CLI tool in Javascript_](https://citw.dev/tutorial/create-your-own-cli-tool)\\n* [**Rust**: _Command line apps in Rust_](https://rust-cli.github.io/book/index.html)\\n* [**Rust**: _Writing a Command Line Tool in Rust_](https://mattgathu.dev/2017/08/29/writing-cli-app-rust.html)\\n* [**Zig**: _Build Your Own CLI App in Zig from Scratch_](https://rebuild-x.github.io/docs/#/./zig/terminal/cli)\\n\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"GITHUB:QuivrHQ/quivr\",\"documentId\":250,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"bestScore\":0.019672131147540985,\"evidence\":[{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.019672131147540985,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"chunkIndex\":1,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":552,\"endOffset\":1155,\"content\":\"## 核心特性 🎯\\n\\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\\n\\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\\n\\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\\n\\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\\n\\n<!-- ## 演示亮点 🎥\\n\\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\\n\\n\",\"score\":0.018850806451612905,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"chunkIndex\":4,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1259,\"endOffset\":1916,\"content\":\"### 30秒安装 💽\\n\\n- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_file:\\n          temp_file.write(\\\"Gold is a liquid of blue-like colour.\\\")\\n          temp_file.flush()\\n\\n          brain = Brain.from_files(\\n              name=\\\"test_brain\\\",\\n              file_paths=[temp_file.name],\\n          )\\n\\n          answer = brain.ask(\\n              \\\"what is gold? asnwer in french\\\"\\n          )\\n          print(\\\"answer:\\\", answer)\\n  ```\\n\\n\",\"score\":0.01855921855921856,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:codecrafters-io/build-your-own-x\",\"documentId\":69,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"bestScore\":0.01894993894993895,\"evidence\":[{\"documentId\":69,\"versionId\":288,\"chunkId\":10989,\"chunkIndex\":5,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `AI Model`\",\"startOffset\":3638,\"endOffset\":3967,\"content\":\"#### Build your own `AI Model`\\n* [**Python**: _A Large Language Model (LLM)_](https://github.com/rasbt/LLMs-from-scratch)\\n* [**Python**: _Diffusion Models for Image Generation_](https://huggingface.co/learn/diffusion-course/en/unit1/3)\\n* [**Python**: _RAG for Document Search_](https://github.com/langchain-ai/rag-from-scratch)\\n\\n\",\"score\":0.01894993894993895,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11026,\"chunkIndex\":42,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Web Browser`\",\"startOffset\":36594,\"endOffset\":36807,\"content\":\"#### Build your own `Web Browser`\\n\\n* [**Rust**: _Let's build a browser engine_](https://limpet.net/mbrubeck/2014/08/08/toy-layout-engine-1.html)\\n* [**Python**: _Browser Engineering_](https://browser.engineering)\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":11006,\"chunkIndex\":22,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Git`\",\"startOffset\":20854,\"endOffset\":21596,\"content\":\"#### Build your own `Git`\\n\\n* [**Haskell**: _Reimplementing “git clone” in Haskell from the bottom up_](http://stefan.saasen.me/articles/git-clone-in-haskell-from-the-bottom-up/)\\n* [**JavaScript**: _Gitlet_](http://gitlet.maryrosecook.com/docs/gitlet.html)\\n* [**JavaScript**: _Build GIT - Learn GIT_](https://kushagra.dev/blog/build-git-learn-git/)\\n* [**Python**: _Just enough of a Git client to create a repo, commit, and push itself to GitHub_](https://benhoyt.com/writings/pygit/)\\n* [**Python**: _Write yourself a Git!_](https://wyag.thb.lt/)\\n* [**Python**: _ugit: Learn Git Internals by Building Git Yourself_](https://www.leshenko.net/p/ugit/)\\n* [**Ruby**: _Rebuilding Git in Ruby_](https://robots.thoughtbot.com/rebuilding-git-in-ruby)\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:headroomlabs-ai/headroom\",\"documentId\":175,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"bestScore\":0.012345679012345678,\"evidence\":[{\"documentId\":175,\"versionId\":394,\"chunkId\":14262,\"chunkIndex\":14,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"sectionPath\":\"Install\",\"startOffset\":19884,\"endOffset\":21365,\"content\":\"## Install\\n\\n```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[vector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and likewise `[agno]`,\\n> `[strands]`, `[anyllm]`, `[bedrock]`.\\n\\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\\ntags, persistent service, PowerShell, devcontainers.\\n\\n<details>\\n<summary><b>uv, pipx, and MCP clients that don't inherit your PATH</b></summary>\\n\\nPrefer `uv tool install` for the CLI so the command lives in an isolated app\\nenvironment. On macOS, pass `--python 3.13` if your default `python3` is newer\\nthan the current wheel set:\\n\\n```bash\\nbrew install python@3.13  # if 3.13 is not already available\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"\\nuv tool update-shell      # if ~/.local/bin is not on PATH\\nheadroom --version\\n```\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "buildPrompt",
+      "detail": "{\"promptVersion\":\"customer-v4.9-grounded-recommendations\",\"evidence\":[{\"evidenceId\":\"E1\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"spanId\":\"E1.S1\",\"endInChunk\":406,\"startInChunk\":73,\"text\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"fil\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":2005,\"endOffset\":2338,\"contentStartInChunk\":73},{\"evidenceId\":\"E2\",\"title\":\"headroomlabs-ai/headroom\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"spans\":[{\"spanId\":\"E2.S1\",\"endInChunk\":412,\"startInChunk\":12,\"text\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\"},{\"spanId\":\"E2.S2\",\"endInChunk\":812,\"startInChunk\":412,\"text\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\"},{\"spanId\":\"E2.S3\",\"endInChunk\":1012,\"startInChunk\":812,\"text\":\"kewise `[agno]`,\\n> `[strands]`, `[anyllm]`, `[bedrock]`.\\n\\n→ [Installation guide](https://docs.headroomlabs.ai/docs/installation) — Docker\\ntags, persistent service, PowerShell, devcontainers.\\n\\n<details\"}],\"documentId\":175,\"versionId\":394,\"chunkId\":14262,\"sectionPath\":\"Install\",\"startOffset\":19896,\"endOffset\":20896,\"contentStartInChunk\":12},{\"evidenceId\":\"E3\",\"title\":\"codecrafters-io/build-your-own-x\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"spans\":[{\"spanId\":\"E3.S1\",\"endInChunk\":450,\"startInChunk\":50,\"text\":\"This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \\n\\n> *What I cannot create, I do not understand — Richard Feynman.*\\n\\nIt's a great way to learn.\\n\\n* [3D Renderer](#build-your-own-3d-renderer)\\n* [AI Model](#build-your-own-ai-model)\\n* [Augmented Reality](#build-your-own-augmented-reality)\\n* [BitTorrent Client](#build-your-own\"},{\"spanId\":\"E3.S2\",\"endInChunk\":850,\"startInChunk\":450,\"text\":\"-bittorrent-client)\\n* [Blockchain / Cryptocurrency](#build-your-own-blockchain--cryptocurrency)\\n* [Bot](#build-your-own-bot)\\n* [Command-Line Tool](#build-your-own-command-line-tool)\\n* [Database](#build-your-own-database)\\n* [Docker](#build-your-own-docker)\\n* [Emulator / Virtual Machine](#build-your-own-emulator--virtual-machine)\\n* [Front-end Framework / Library](#build-your-own-front-end-framework-\"},{\"spanId\":\"E3.S3\",\"endInChunk\":1050,\"startInChunk\":850,\"text\":\"-library)\\n* [Game](#build-your-own-game)\\n* [Git](#build-your-own-git)\\n* [Memory Allocator](#build-your-own-memory-allocator)\\n* [Network Stack](#build-your-own-network-stack)\\n* [Neural Network](#build-\"}],\"documentId\":69,\"versionId\":288,\"chunkId\":10985,\"sectionPath\":\"Build your own &lt;insert-technology-here&gt;\",\"startOffset\":158,\"endOffset\":1158,\"contentStartInChunk\":50},{\"evidenceId\":\"E4\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"spanId\":\"E4.S1\",\"endInChunk\":345,\"startInChunk\":12,\"text\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":564,\"endOffset\":897,\"contentStartInChunk\":12},{\"evidenceId\":\"E5\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"spanId\":\"E5.S1\",\"endInChunk\":347,\"startInChunk\":14,\"text\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_file:\\n          temp_file.write(\\\"Gold is a liqui\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1273,\"endOffset\":1606,\"contentStartInChunk\":14}],\"question\":\"请按以下本轮画像直接推荐项目：技术方向是RAG；目标是学习；基础是有基础；语言是Python；完成周期是两个月内。只推荐 Python 项目，希望中文提问检索英文技术文档，并说明部署依赖。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\\n已记录实践偏好（不宣称已经满足）：[\\\"希望中文提问检索英文技术文档\\\"]\"}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "validateEvidence",
+      "detail": "{\"rejected\":[],\"accepted\":6}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "verifyFacts",
+      "detail": "{\"supported\":5,\"verdict\":{\"supportedIds\":[0,2,3,4,5]},\"claims\":[{\"text\":\"Quivr 提供自有的 RAG，可与任何 LLM 配合使用，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。\",\"quote\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件\",\"sourceRef\":\"QuivrHQ/quivr\",\"sourceTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\"},{\"text\":\"安装 quivr-core 后，可用5行代码创建一个 RAG，适合有基础的学习者快速上手实践。\",\"quote\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_file:\\n          temp_file.write(\\\"Gold is a liqui\",\"sourceRef\":\"QuivrHQ/quivr\",\"sourceTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\"},{\"text\":\"需将 API 密钥添加到环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型。\",\"quote\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"fil\",\"sourceRef\":\"QuivrHQ/quivr\",\"sourceTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\"},{\"text\":\"headroom-ai 可通过 pip install \\\"headroom-ai[all]\\\" 安装，也提供 Docker 镜像 ghcr.io/headroomlabs-ai/headroom:latest。\",\"quote\":\"```bash\\nuv tool install --python 3.13 \\\"headroom-ai[all]\\\"  # CLI, isolated app env\\npip install \\\"headroom-ai[all]\\\"                    # Python, everything — includes the CLI\\nnpm install headroom-ai                           # TypeScript SDK (library only)\\ndocker pull ghcr.io/headroomlabs-ai/headroom:latest\\n```\\n\\nGranular extras: `[proxy]`, `[mcp]`, `[ml]` (Kompress-v2-base), `[code]`,\\n`[memory]`, `[v\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"sourceTitle\":\"headroomlabs-ai/headroom\"},{\"text\":\"headroom-ai 要求 Python 3.10+；[all] 不包含框架适配器，需单独安装如 [langchain]；[vector] 需 C++ 工具链且不在 [all] 中。\",\"quote\":\"ector]` (optional HNSW backend — needs a C++ toolchain, not in\\n`[all]`), `[relevance]`, `[image]`, `[agno]`, `[langchain]`, `[evals]`,\\n`[pytorch-mps]` (Apple-GPU memory-embedder offload — set\\n`HEADROOM_EMBEDDER_RUNTIME=pytorch_mps`). Requires **Python 3.10+**.\\n\\n> `[all]` covers the core stack but not the framework adapters. Install those\\n> separately: `pip install \\\"headroom-ai[langchain]\\\"`, and li\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"sourceTitle\":\"headroomlabs-ai/headroom\"},{\"text\":\"build-your-own-x 是逐步指南合集，用于从零重建各种技术，作者称这是很好的学习方式。\",\"quote\":\"This repository is a compilation of well-written, step-by-step guides for re-creating our favorite technologies from scratch. \\n\\n> *What I cannot create, I do not understand — Richard Feynman.*\\n\\nIt's a great way to learn.\\n\\n* [3D Renderer](#build-your-own-3d-renderer)\\n* [AI Model](#build-your-own-ai-model)\\n* [Augmented Reality](#build-your-own-augmented-reality)\\n* [BitTorrent Client](#build-your-own\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sourceTitle\":\"codecrafters-io/build-your-own-x\"}]}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"parameters\":{\"purpose\":\"COUNTERFACTUAL_COUNTS\",\"conditions\":{\"topic\":[\"RAG\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是RAG\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是学习\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"基础是有基础\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Python\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是两个月内\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"学习\",\"experience\":\"有基础\",\"language\":\"Python\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":60,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"希望中文提问检索英文技术文档\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[{\"name\":\"headroomlabs-ai/headroom\",\"id\":215,\"type\":\"BEGINNER_PROJECT\"},{\"name\":\"QuivrHQ/quivr\",\"id\":250,\"type\":\"EXTERNAL_PROJECT\"},{\"name\":\"codecrafters-io/build-your-own-x\",\"id\":69,\"type\":\"EXTERNAL_PROJECT\"}]}},\"result\":{\"current\":{\"confirmed\":0,\"total\":16,\"uncertain\":16},\"conditions\":{\"language\":\"Python\",\"maxDurationDays\":60,\"topic\":[\"RAG\"]},\"calculatedAt\":\"2026-10-03T14:51:12.296280990Z\",\"countUnit\":\"DISTINCT_REPOSITORY\",\"alternatives\":[{\"confirmed\":1,\"total\":18,\"uncertain\":17,\"changes\":{\"language\":\"TypeScript\"},\"label\":\"编程语言改为TypeScript\"},{\"confirmed\":4,\"total\":354,\"uncertain\":350,\"changes\":{\"topic\":null},\"label\":\"项目主题不限\"},{\"confirmed\":1,\"total\":16,\"uncertain\":15,\"changes\":{\"maxDurationDays\":null},\"label\":\"最长周期不限\"}],\"available\":{\"confirmed\":495,\"total\":495,\"uncertain\":0}}}",
+      "status": "SUCCEEDED"
+    }
+  ],
+  "clientWallMs": 14503.68189997971,
+  "sessionSoftDeleted": true
+}

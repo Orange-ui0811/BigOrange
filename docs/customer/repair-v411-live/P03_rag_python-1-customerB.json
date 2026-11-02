@@ -1,0 +1,651 @@
+{
+  "case": "P03_rag_python",
+  "round": 1,
+  "product": "customerB",
+  "startedAt": "2026-10-03T15:23:13.040723+00:00",
+  "sessionId": "98",
+  "runId": "1a91b928-8903-4a31-ab79-850684665ac5",
+  "run": {
+    "id": "1a91b928-8903-4a31-ab79-850684665ac5",
+    "session_id": "98",
+    "status": "SUCCEEDED",
+    "stage": "SUCCEEDED",
+    "result_json": "{\"skill\":\"PROJECT_RECOMMENDATION_V1\",\"intent\":\"RECOMMEND\",\"state\":{\"topic\":[\"RAG\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是RAG\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是学习\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"有基础\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Python\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是两个月内\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"学习\",\"experience\":\"有基础\",\"language\":\"Python\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":60,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"希望中文提问检索英文技术文档\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[{\"id\":215,\"type\":\"BEGINNER_PROJECT\",\"name\":\"headroomlabs-ai/headroom\"},{\"id\":250,\"type\":\"EXTERNAL_PROJECT\",\"name\":\"QuivrHQ/quivr\"},{\"id\":231,\"type\":\"EXTERNAL_PROJECT\",\"name\":\"infiniflow/ragflow\"}]},\"projects\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":215,\"sourceRef\":\"beginner:215\",\"name\":\"headroomlabs-ai/headroom\",\"url\":\"https://github.com/headroomlabs-ai/headroom\",\"status\":\"CANDIDATE\",\"archived\":false,\"language\":\"Python\",\"techStack\":\"Python\",\"difficulty\":\"入门\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":true,\"requiresDatabase\":false,\"requiresSecrets\":true,\"topics\":\"[\\\"agent\\\", \\\"ai\\\", \\\"anthropic\\\", \\\"claude-code\\\", \\\"compression\\\", \\\"context-engineering\\\", \\\"context-window\\\", \\\"cursor\\\", \\\"fastapi\\\", \\\"langchain\\\", \\\"llm\\\", \\\"mcp\\\", \\\"openai\\\", \\\"prompt-engineering\\\", \\\"proxy\\\", \\\"python\\\", \\\"rag\\\", \\\"token-optimization\\\", \\\"tokens\\\", \\\"typescript\\\"]\",\"beginnerScore\":74,\"codebaseSize\":\"LARGE\",\"prerequisites\":\"Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"total\":7.0,\"goalPreference\":15.0,\"semantic\":0.0,\"uncertaintyPenalty\":8.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":false,\"quality\":0.0,\"semanticAvailable\":true},\"recommendReason\":\"来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；资料记录主语言为Python；明确冲突已排除，仍有条件待核实。\",\"references\":[],\"supportedExplanation\":\"\"},{\"type\":\"EXTERNAL_PROJECT\",\"id\":250,\"sourceRef\":\"QuivrHQ/quivr\",\"name\":\"QuivrHQ/quivr\",\"url\":\"https://github.com/QuivrHQ/quivr\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":250,\"versionId\":469,\"catalogTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"total\":3.819805153394636,\"goalPreference\":0.0,\"semantic\":31.819805153394636,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0,\"semanticAvailable\":true},\"recommendReason\":\"本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。\",\"references\":[{\"evidenceId\":\"E4\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":300,\"startInChunk\":12,\"text\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.\",\"spanId\":\"E4.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":564,\"endOffset\":852,\"contentStartInChunk\":12,\"quote\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.\",\"text\":\"Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。\",\"field\":\"description\"},{\"evidenceId\":\"E1\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":361,\"startInChunk\":73,\"text\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  \",\"spanId\":\"E1.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":2005,\"endOffset\":2293,\"contentStartInChunk\":73,\"quote\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  \",\"text\":\"Quivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。\",\"field\":\"vibeCodingReason\"},{\"evidenceId\":\"E6\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":302,\"startInChunk\":14,\"text\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_fil\",\"spanId\":\"E6.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1273,\"endOffset\":1561,\"contentStartInChunk\":14,\"quote\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_fil\",\"text\":\"Quivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。\",\"field\":\"vibeCodingReason\"}],\"whatIsIt\":\"Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\",\"vibeCodingReason\":\"Quivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。 [E1]\\nQuivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。 [E6]\",\"supportedExplanation\":\"Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\\nQuivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。 [E1]\\nQuivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。 [E6]\"},{\"type\":\"EXTERNAL_PROJECT\",\"id\":231,\"sourceRef\":\"infiniflow/ragflow\",\"name\":\"infiniflow/ragflow\",\"url\":\"https://github.com/infiniflow/ragflow\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。 [E3]\\nRAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。 [E5]\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":231,\"versionId\":450,\"catalogTitle\":\"infiniflow/ragflow\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"total\":-12.090097423302682,\"goalPreference\":0.0,\"semantic\":15.909902576697318,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0,\"semanticAvailable\":true},\"recommendReason\":\"本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。\",\"references\":[{\"evidenceId\":\"E3\",\"title\":\"infiniflow/ragflow\",\"sourceRef\":\"infiniflow/ragflow|week\",\"spans\":[{\"endInChunk\":284,\"startInChunk\":50,\"text\":\"- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\",\"spanId\":\"E3.S1\"}],\"documentId\":169,\"versionId\":388,\"chunkId\":14113,\"sectionPath\":\"🌟 Key Features > 🛀 **Automated and effortless RAG workflow**\",\"startOffset\":7217,\"endOffset\":7451,\"contentStartInChunk\":50,\"quote\":\"- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\",\"text\":\"RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。\",\"field\":\"description\"},{\"evidenceId\":\"E5\",\"title\":\"infiniflow/ragflow\",\"sourceRef\":\"infiniflow/ragflow|week\",\"spans\":[{\"endInChunk\":312,\"startInChunk\":24,\"text\":\"[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to \",\"spanId\":\"E5.S1\"}],\"documentId\":169,\"versionId\":388,\"chunkId\":14104,\"sectionPath\":\"💡 What is RAGFlow?\",\"startOffset\":4117,\"endOffset\":4405,\"contentStartInChunk\":24,\"quote\":\"[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to \",\"text\":\"RAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。\",\"field\":\"description\"}],\"whatIsIt\":\"RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。 [E3]\\nRAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。 [E5]\",\"supportedExplanation\":\"RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。 [E3]\\nRAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。 [E5]\"}],\"references\":[{\"evidenceId\":\"E4\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":300,\"startInChunk\":12,\"text\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.\",\"spanId\":\"E4.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":564,\"endOffset\":852,\"contentStartInChunk\":12,\"quote\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.\",\"text\":\"Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。\",\"field\":\"description\"},{\"evidenceId\":\"E3\",\"title\":\"infiniflow/ragflow\",\"sourceRef\":\"infiniflow/ragflow|week\",\"spans\":[{\"endInChunk\":284,\"startInChunk\":50,\"text\":\"- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\",\"spanId\":\"E3.S1\"}],\"documentId\":169,\"versionId\":388,\"chunkId\":14113,\"sectionPath\":\"🌟 Key Features > 🛀 **Automated and effortless RAG workflow**\",\"startOffset\":7217,\"endOffset\":7451,\"contentStartInChunk\":50,\"quote\":\"- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\",\"text\":\"RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。\",\"field\":\"description\"},{\"evidenceId\":\"E5\",\"title\":\"infiniflow/ragflow\",\"sourceRef\":\"infiniflow/ragflow|week\",\"spans\":[{\"endInChunk\":312,\"startInChunk\":24,\"text\":\"[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to \",\"spanId\":\"E5.S1\"}],\"documentId\":169,\"versionId\":388,\"chunkId\":14104,\"sectionPath\":\"💡 What is RAGFlow?\",\"startOffset\":4117,\"endOffset\":4405,\"contentStartInChunk\":24,\"quote\":\"[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to \",\"text\":\"RAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。\",\"field\":\"description\"},{\"evidenceId\":\"E1\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":361,\"startInChunk\":73,\"text\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  \",\"spanId\":\"E1.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":2005,\"endOffset\":2293,\"contentStartInChunk\":73,\"quote\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  \",\"text\":\"Quivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。\",\"field\":\"vibeCodingReason\"},{\"evidenceId\":\"E6\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":302,\"startInChunk\":14,\"text\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_fil\",\"spanId\":\"E6.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1273,\"endOffset\":1561,\"contentStartInChunk\":14,\"quote\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_fil\",\"text\":\"Quivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。\",\"field\":\"vibeCodingReason\"}],\"profileLoaded\":false,\"generation\":\"20261002164953-ec113424\",\"status\":\"PROJECTS_WITH_LIMITATIONS\",\"notice\":\"部分项目仍有待核实条件或缺少本轮支持证据，相关项目暂不能导入正式方案；有引用仅表示所引用事实得到支持。\",\"answer\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\\n\\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。\\n\\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 14 个资料待核实候选（仓库去重，引用仍需核对）。\\n保持其余条件不变，可以考虑：\\n- 编程语言改为TypeScript：可推荐候选共 1 个，另有 15 个待核实。\\n- 项目主题不限：可推荐候选共 4 个，另有 347 个待核实。\\n- 最长周期不限：可推荐候选共 1 个，另有 13 个待核实。\\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。\",\"diagnostics\":{\"countUnit\":\"DISTINCT_REPOSITORY\",\"alternatives\":[{\"uncertain\":15,\"confirmed\":1,\"total\":16,\"changes\":{\"language\":\"TypeScript\"},\"label\":\"编程语言改为TypeScript\"},{\"uncertain\":347,\"confirmed\":4,\"total\":351,\"changes\":{\"topic\":null},\"label\":\"项目主题不限\"},{\"uncertain\":13,\"confirmed\":1,\"total\":14,\"changes\":{\"maxDurationDays\":null},\"label\":\"最长周期不限\"}],\"available\":{\"uncertain\":0,\"confirmed\":494,\"total\":494},\"current\":{\"uncertain\":14,\"confirmed\":0,\"total\":14},\"conditions\":{\"language\":\"Python\",\"maxDurationDays\":60,\"topic\":[\"RAG\"]},\"calculatedAt\":\"2026-10-03T15:23:27.473089056Z\"},\"conditionChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"}",
+    "metrics_json": "{\"protocol\":\"NATIVE_ACTION_V1\",\"embeddingUsage\":\"NOT_REPORTED\",\"promptVersion\":\"customer-v4.11-grounded-recommendations\",\"modelCalls\":[{\"durationMs\":6002,\"model\":\"deepseek-flash\",\"costUsd\":\"UNKNOWN\",\"status\":\"SUCCEEDED\",\"attempt\":1,\"usage\":{\"prompt_tokens\":5285,\"completion_tokens\":1306,\"total_tokens\":6591,\"prompt_tokens_details\":{\"cached_tokens\":4992},\"completion_tokens_details\":{\"reasoning_tokens\":874},\"prompt_cache_hit_tokens\":4992,\"prompt_cache_miss_tokens\":293},\"protocol\":\"NATIVE_ACTION\",\"phase\":\"ACTION\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"tool_calls\",\"outputBudget\":4096,\"thinking\":true},{\"durationMs\":1736,\"model\":\"deepseek-flash\",\"costUsd\":\"UNKNOWN\",\"status\":\"SUCCEEDED\",\"attempt\":1,\"usage\":{\"prompt_tokens\":2220,\"completion_tokens\":416,\"total_tokens\":2636,\"prompt_tokens_details\":{\"cached_tokens\":128},\"prompt_cache_hit_tokens\":128,\"prompt_cache_miss_tokens\":2092},\"protocol\":\"JSON_OBJECT\",\"phase\":\"EVIDENCE\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"stop\",\"outputBudget\":2048,\"thinking\":false},{\"durationMs\":751,\"model\":\"deepseek-flash\",\"costUsd\":\"UNKNOWN\",\"status\":\"SUCCEEDED\",\"attempt\":1,\"usage\":{\"prompt_tokens\":1242,\"completion_tokens\":14,\"total_tokens\":1256,\"prompt_tokens_details\":{\"cached_tokens\":0},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":1242},\"protocol\":\"JSON_OBJECT\",\"phase\":\"VERIFY\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"stop\",\"outputBudget\":2048,\"thinking\":false}],\"costUsd\":\"UNKNOWN\",\"tokenUsage\":{\"reasoningTokens\":874,\"models\":[\"deepseek-flash\"],\"calls\":3,\"callsWithoutUsage\":0,\"outputTokens\":1736,\"totalTokens\":10483,\"cacheMissTokens\":3627,\"inputTokens\":8747,\"cacheHitTokens\":5120,\"complete\":true}}",
+    "created_at": "2026-10-03 23:23",
+    "finished_at": "2026-10-03 23:23",
+    "generation_key": "20261002164953-ec113424",
+    "prompt_version": "customer-v4.11-grounded-recommendations"
+  },
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "topic": [
+        "RAG"
+      ],
+      "provenance": {
+        "topic": {
+          "quote": "技术方向是RAG",
+          "source": "MESSAGE"
+        },
+        "goal": {
+          "quote": "目标是学习",
+          "source": "MESSAGE"
+        },
+        "experience": {
+          "quote": "有基础",
+          "source": "MESSAGE"
+        },
+        "language": {
+          "quote": "语言是Python",
+          "source": "MESSAGE"
+        },
+        "maxDurationDays": {
+          "quote": "完成周期是两个月内",
+          "source": "MESSAGE"
+        },
+        "verificationMode": {
+          "quote": "资料缺失可以展示真实探索候选，但必须标明尚未核实",
+          "source": "MESSAGE"
+        }
+      },
+      "goal": "学习",
+      "experience": "有基础",
+      "language": "Python",
+      "durationSemantics": {
+        "quantity": 2,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 60,
+      "verificationMode": "EXPLORE",
+      "preferences": [
+        "希望中文提问检索英文技术文档"
+      ],
+      "lastChangeSummary": "已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+      "lastCandidates": [
+        {
+          "id": 215,
+          "type": "BEGINNER_PROJECT",
+          "name": "headroomlabs-ai/headroom"
+        },
+        {
+          "id": 250,
+          "type": "EXTERNAL_PROJECT",
+          "name": "QuivrHQ/quivr"
+        },
+        {
+          "id": 231,
+          "type": "EXTERNAL_PROJECT",
+          "name": "infiniflow/ragflow"
+        }
+      ]
+    },
+    "projects": [
+      {
+        "type": "BEGINNER_PROJECT",
+        "id": 215,
+        "sourceRef": "beginner:215",
+        "name": "headroomlabs-ai/headroom",
+        "url": "https://github.com/headroomlabs-ai/headroom",
+        "status": "CANDIDATE",
+        "archived": false,
+        "language": "Python",
+        "techStack": "Python",
+        "difficulty": "入门",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": false,
+        "requiresDocker": true,
+        "requiresDatabase": false,
+        "requiresSecrets": true,
+        "topics": "[\"agent\", \"ai\", \"anthropic\", \"claude-code\", \"compression\", \"context-engineering\", \"context-window\", \"cursor\", \"fastapi\", \"langchain\", \"llm\", \"mcp\", \"openai\", \"prompt-engineering\", \"proxy\", \"python\", \"rag\", \"token-optimization\", \"tokens\", \"typescript\"]",
+        "beginnerScore": 74,
+        "codebaseSize": "LARGE",
+        "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "total": 7.0,
+          "goalPreference": 15.0,
+          "semantic": 0.0,
+          "uncertaintyPenalty": 8.0,
+          "version": "customer-rank-v3",
+          "preference": 0.0,
+          "semanticMatched": false,
+          "quality": 0.0,
+          "semanticAvailable": true
+        },
+        "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；资料记录主语言为Python；明确冲突已排除，仍有条件待核实。",
+        "references": [],
+        "supportedExplanation": ""
+      },
+      {
+        "type": "EXTERNAL_PROJECT",
+        "id": 250,
+        "sourceRef": "QuivrHQ/quivr",
+        "name": "QuivrHQ/quivr",
+        "url": "https://github.com/QuivrHQ/quivr",
+        "status": "DOCUMENTED",
+        "archived": false,
+        "description": "Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]",
+        "evidenceStatus": "DOCUMENT_IDENTITY",
+        "importable": false,
+        "documentId": 250,
+        "versionId": 469,
+        "catalogTitle": "Quivr - 你的第二大脑，由生成式AI赋能",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "编程语言尚未核实，不能确认满足你的要求",
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "total": 3.819805153394636,
+          "goalPreference": 0.0,
+          "semantic": 31.819805153394636,
+          "uncertaintyPenalty": 28.0,
+          "version": "customer-rank-v3",
+          "preference": 0.0,
+          "semanticMatched": true,
+          "quality": 0.0,
+          "semanticAvailable": true
+        },
+        "recommendReason": "本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。",
+        "references": [
+          {
+            "evidenceId": "E4",
+            "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceRef": "QuivrHQ/quivr",
+            "spans": [
+              {
+                "endInChunk": 300,
+                "startInChunk": 12,
+                "text": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.",
+                "spanId": "E4.S1"
+              }
+            ],
+            "documentId": 250,
+            "versionId": 469,
+            "chunkId": 16031,
+            "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset": 564,
+            "endOffset": 852,
+            "contentStartInChunk": 12,
+            "quote": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.",
+            "text": "Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E1",
+            "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceRef": "QuivrHQ/quivr",
+            "spans": [
+              {
+                "endInChunk": 361,
+                "startInChunk": 73,
+                "text": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  ",
+                "spanId": "E1.S1"
+              }
+            ],
+            "documentId": 250,
+            "versionId": 469,
+            "chunkId": 16037,
+            "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset": 2005,
+            "endOffset": 2293,
+            "contentStartInChunk": 73,
+            "quote": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  ",
+            "text": "Quivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E6",
+            "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceRef": "QuivrHQ/quivr",
+            "spans": [
+              {
+                "endInChunk": 302,
+                "startInChunk": 14,
+                "text": "- **步骤1**：安装软件包\n\n  ```bash\n  pip install quivr-core # Check that the installation worked\n  ```\n\n- **步骤2**：用5行代码创建一个 RAG\n\n  ```python\n  import tempfile\n\n  from quivr_core import Brain\n\n  if __name__ == \"__main__\":\n      with tempfile.NamedTemporaryFile(mode=\"w\", suffix=\".txt\") as temp_fil",
+                "spanId": "E6.S1"
+              }
+            ],
+            "documentId": 250,
+            "versionId": 469,
+            "chunkId": 16034,
+            "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽",
+            "startOffset": 1273,
+            "endOffset": 1561,
+            "contentStartInChunk": 14,
+            "quote": "- **步骤1**：安装软件包\n\n  ```bash\n  pip install quivr-core # Check that the installation worked\n  ```\n\n- **步骤2**：用5行代码创建一个 RAG\n\n  ```python\n  import tempfile\n\n  from quivr_core import Brain\n\n  if __name__ == \"__main__\":\n      with tempfile.NamedTemporaryFile(mode=\"w\", suffix=\".txt\") as temp_fil",
+            "text": "Quivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。",
+            "field": "vibeCodingReason"
+          }
+        ],
+        "whatIsIt": "Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]",
+        "vibeCodingReason": "Quivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。 [E1]\nQuivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。 [E6]",
+        "supportedExplanation": "Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。 [E4]\nQuivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。 [E1]\nQuivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。 [E6]"
+      },
+      {
+        "type": "EXTERNAL_PROJECT",
+        "id": 231,
+        "sourceRef": "infiniflow/ragflow",
+        "name": "infiniflow/ragflow",
+        "url": "https://github.com/infiniflow/ragflow",
+        "status": "DOCUMENTED",
+        "archived": false,
+        "description": "RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。 [E3]\nRAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。 [E5]",
+        "evidenceStatus": "DOCUMENT_IDENTITY",
+        "importable": false,
+        "documentId": 231,
+        "versionId": 450,
+        "catalogTitle": "infiniflow/ragflow",
+        "evidenceAvailable": true,
+        "conditionGaps": [
+          "编程语言尚未核实，不能确认满足你的要求",
+          "最长周期尚未核实，不能确认满足你的要求"
+        ],
+        "matchStatus": "NEEDS_VERIFICATION",
+        "ranking": {
+          "total": -12.090097423302682,
+          "goalPreference": 0.0,
+          "semantic": 15.909902576697318,
+          "uncertaintyPenalty": 28.0,
+          "version": "customer-rank-v3",
+          "preference": 0.0,
+          "semanticMatched": true,
+          "quality": 0.0,
+          "semanticAvailable": true
+        },
+        "recommendReason": "本轮目标：学习；资料涉及RAG，具体实践范围见项目说明；明确冲突已排除，仍有条件待核实。",
+        "references": [
+          {
+            "evidenceId": "E3",
+            "title": "infiniflow/ragflow",
+            "sourceRef": "infiniflow/ragflow|week",
+            "spans": [
+              {
+                "endInChunk": 284,
+                "startInChunk": 50,
+                "text": "- Streamlined RAG orchestration catered to both personal and large businesses.\n- Configurable LLMs as well as embedding models.\n- Multiple recall paired with fused re-ranking.\n- Intuitive APIs for seamless integration with business.\n\n",
+                "spanId": "E3.S1"
+              }
+            ],
+            "documentId": 169,
+            "versionId": 388,
+            "chunkId": 14113,
+            "sectionPath": "🌟 Key Features > 🛀 **Automated and effortless RAG workflow**",
+            "startOffset": 7217,
+            "endOffset": 7451,
+            "contentStartInChunk": 50,
+            "quote": "- Streamlined RAG orchestration catered to both personal and large businesses.\n- Configurable LLMs as well as embedding models.\n- Multiple recall paired with fused re-ranking.\n- Intuitive APIs for seamless integration with business.\n\n",
+            "text": "RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E5",
+            "title": "infiniflow/ragflow",
+            "sourceRef": "infiniflow/ragflow|week",
+            "spans": [
+              {
+                "endInChunk": 312,
+                "startInChunk": 24,
+                "text": "[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to ",
+                "spanId": "E5.S1"
+              }
+            ],
+            "documentId": 169,
+            "versionId": 388,
+            "chunkId": 14104,
+            "sectionPath": "💡 What is RAGFlow?",
+            "startOffset": 4117,
+            "endOffset": 4405,
+            "contentStartInChunk": 24,
+            "quote": "[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to ",
+            "text": "RAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。",
+            "field": "description"
+          }
+        ],
+        "whatIsIt": "RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。 [E3]\nRAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。 [E5]",
+        "supportedExplanation": "RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。 [E3]\nRAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。 [E5]"
+      }
+    ],
+    "references": [
+      {
+        "evidenceId": "E4",
+        "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+        "sourceRef": "QuivrHQ/quivr",
+        "spans": [
+          {
+            "endInChunk": 300,
+            "startInChunk": 12,
+            "text": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.",
+            "spanId": "E4.S1"
+          }
+        ],
+        "documentId": 250,
+        "versionId": 469,
+        "chunkId": 16031,
+        "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+        "startOffset": 564,
+        "endOffset": 852,
+        "contentStartInChunk": 12,
+        "quote": "- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.",
+        "text": "Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E3",
+        "title": "infiniflow/ragflow",
+        "sourceRef": "infiniflow/ragflow|week",
+        "spans": [
+          {
+            "endInChunk": 284,
+            "startInChunk": 50,
+            "text": "- Streamlined RAG orchestration catered to both personal and large businesses.\n- Configurable LLMs as well as embedding models.\n- Multiple recall paired with fused re-ranking.\n- Intuitive APIs for seamless integration with business.\n\n",
+            "spanId": "E3.S1"
+          }
+        ],
+        "documentId": 169,
+        "versionId": 388,
+        "chunkId": 14113,
+        "sectionPath": "🌟 Key Features > 🛀 **Automated and effortless RAG workflow**",
+        "startOffset": 7217,
+        "endOffset": 7451,
+        "contentStartInChunk": 50,
+        "quote": "- Streamlined RAG orchestration catered to both personal and large businesses.\n- Configurable LLMs as well as embedding models.\n- Multiple recall paired with fused re-ranking.\n- Intuitive APIs for seamless integration with business.\n\n",
+        "text": "RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E5",
+        "title": "infiniflow/ragflow",
+        "sourceRef": "infiniflow/ragflow|week",
+        "spans": [
+          {
+            "endInChunk": 312,
+            "startInChunk": 24,
+            "text": "[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to ",
+            "spanId": "E5.S1"
+          }
+        ],
+        "documentId": 169,
+        "versionId": 388,
+        "chunkId": 14104,
+        "sectionPath": "💡 What is RAGFlow?",
+        "startOffset": 4117,
+        "endOffset": 4405,
+        "contentStartInChunk": 24,
+        "quote": "[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to ",
+        "text": "RAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E1",
+        "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+        "sourceRef": "QuivrHQ/quivr",
+        "spans": [
+          {
+            "endInChunk": 361,
+            "startInChunk": 73,
+            "text": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  ",
+            "spanId": "E1.S1"
+          }
+        ],
+        "documentId": 250,
+        "versionId": 469,
+        "chunkId": 16037,
+        "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+        "startOffset": 2005,
+        "endOffset": 2293,
+        "contentStartInChunk": 73,
+        "quote": "创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  ",
+        "text": "Quivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。",
+        "field": "vibeCodingReason"
+      },
+      {
+        "evidenceId": "E6",
+        "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+        "sourceRef": "QuivrHQ/quivr",
+        "spans": [
+          {
+            "endInChunk": 302,
+            "startInChunk": 14,
+            "text": "- **步骤1**：安装软件包\n\n  ```bash\n  pip install quivr-core # Check that the installation worked\n  ```\n\n- **步骤2**：用5行代码创建一个 RAG\n\n  ```python\n  import tempfile\n\n  from quivr_core import Brain\n\n  if __name__ == \"__main__\":\n      with tempfile.NamedTemporaryFile(mode=\"w\", suffix=\".txt\") as temp_fil",
+            "spanId": "E6.S1"
+          }
+        ],
+        "documentId": 250,
+        "versionId": 469,
+        "chunkId": 16034,
+        "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽",
+        "startOffset": 1273,
+        "endOffset": 1561,
+        "contentStartInChunk": 14,
+        "quote": "- **步骤1**：安装软件包\n\n  ```bash\n  pip install quivr-core # Check that the installation worked\n  ```\n\n- **步骤2**：用5行代码创建一个 RAG\n\n  ```python\n  import tempfile\n\n  from quivr_core import Brain\n\n  if __name__ == \"__main__\":\n      with tempfile.NamedTemporaryFile(mode=\"w\", suffix=\".txt\") as temp_fil",
+        "text": "Quivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。",
+        "field": "vibeCodingReason"
+      }
+    ],
+    "profileLoaded": false,
+    "generation": "20261002164953-ec113424",
+    "status": "PROJECTS_WITH_LIMITATIONS",
+    "notice": "部分项目仍有待核实条件或缺少本轮支持证据，相关项目暂不能导入正式方案；有引用仅表示所引用事实得到支持。",
+    "answer": "已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。\n\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 14 个资料待核实候选（仓库去重，引用仍需核对）。\n保持其余条件不变，可以考虑：\n- 编程语言改为TypeScript：可推荐候选共 1 个，另有 15 个待核实。\n- 项目主题不限：可推荐候选共 4 个，另有 347 个待核实。\n- 最长周期不限：可推荐候选共 1 个，另有 13 个待核实。\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。",
+    "diagnostics": {
+      "countUnit": "DISTINCT_REPOSITORY",
+      "alternatives": [
+        {
+          "uncertain": 15,
+          "confirmed": 1,
+          "total": 16,
+          "changes": {
+            "language": "TypeScript"
+          },
+          "label": "编程语言改为TypeScript"
+        },
+        {
+          "uncertain": 347,
+          "confirmed": 4,
+          "total": 351,
+          "changes": {
+            "topic": null
+          },
+          "label": "项目主题不限"
+        },
+        {
+          "uncertain": 13,
+          "confirmed": 1,
+          "total": 14,
+          "changes": {
+            "maxDurationDays": null
+          },
+          "label": "最长周期不限"
+        }
+      ],
+      "available": {
+        "uncertain": 0,
+        "confirmed": 494,
+        "total": 494
+      },
+      "current": {
+        "uncertain": 14,
+        "confirmed": 0,
+        "total": 14
+      },
+      "conditions": {
+        "language": "Python",
+        "maxDurationDays": 60,
+        "topic": [
+          "RAG"
+        ]
+      },
+      "calculatedAt": "2026-10-03T15:23:27.473089056Z"
+    },
+    "conditionChangeSummary": "已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "protocol": "NATIVE_ACTION_V1",
+    "embeddingUsage": "NOT_REPORTED",
+    "promptVersion": "customer-v4.11-grounded-recommendations",
+    "modelCalls": [
+      {
+        "durationMs": 6002,
+        "model": "deepseek-flash",
+        "costUsd": "UNKNOWN",
+        "status": "SUCCEEDED",
+        "attempt": 1,
+        "usage": {
+          "prompt_tokens": 5285,
+          "completion_tokens": 1306,
+          "total_tokens": 6591,
+          "prompt_tokens_details": {
+            "cached_tokens": 4992
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 874
+          },
+          "prompt_cache_hit_tokens": 4992,
+          "prompt_cache_miss_tokens": 293
+        },
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "tool_calls",
+        "outputBudget": 4096,
+        "thinking": true
+      },
+      {
+        "durationMs": 1736,
+        "model": "deepseek-flash",
+        "costUsd": "UNKNOWN",
+        "status": "SUCCEEDED",
+        "attempt": 1,
+        "usage": {
+          "prompt_tokens": 2220,
+          "completion_tokens": 416,
+          "total_tokens": 2636,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 2092
+        },
+        "protocol": "JSON_OBJECT",
+        "phase": "EVIDENCE",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      },
+      {
+        "durationMs": 751,
+        "model": "deepseek-flash",
+        "costUsd": "UNKNOWN",
+        "status": "SUCCEEDED",
+        "attempt": 1,
+        "usage": {
+          "prompt_tokens": 1242,
+          "completion_tokens": 14,
+          "total_tokens": 1256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1242
+        },
+        "protocol": "JSON_OBJECT",
+        "phase": "VERIFY",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      }
+    ],
+    "costUsd": "UNKNOWN",
+    "tokenUsage": {
+      "reasoningTokens": 874,
+      "models": [
+        "deepseek-flash"
+      ],
+      "calls": 3,
+      "callsWithoutUsage": 0,
+      "outputTokens": 1736,
+      "totalTokens": 10483,
+      "cacheMissTokens": 3627,
+      "inputTokens": 8747,
+      "cacheHitTokens": 5120,
+      "complete": true
+    }
+  },
+  "events": [
+    {
+      "atMs": 585.742700000992,
+      "status": "RUNNING",
+      "stage": "UNDERSTANDING"
+    },
+    {
+      "atMs": 6825.937899993733,
+      "status": "RUNNING",
+      "stage": "SEARCHING"
+    },
+    {
+      "atMs": 7334.010299993679,
+      "status": "RUNNING",
+      "stage": "FILTERING_PROJECTS"
+    },
+    {
+      "atMs": 14664.784199994756,
+      "status": "SUCCEEDED",
+      "stage": "SUCCEEDED"
+    }
+  ],
+  "steps": [
+    {
+      "tool": "getConfirmedProfile",
+      "detail": "{\"parameters\":{},\"result\":\"\"}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"parameters\":{\"topK\":20,\"purpose\":\"PROJECT_RANKING\",\"query\":\"推荐项目 Python RAG 学习 有基础\",\"sourceTypes\":[\"GITHUB\",\"BEGINNER_PROJECT\",\"CAREER_PROJECT\"]},\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":318,\"candidateCount\":80,\"excludedReasons\":{},\"hits\":[{\"documentId\":218,\"versionId\":437,\"chunkId\":15807,\"chunkIndex\":1,\"title\":\"TheAlgorithms/Python\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"TheAlgorithms/Python|week\",\"sectionPath\":null,\"startOffset\":1871,\"endOffset\":2136,\"content\":\"<!-- Short description: -->\\n  <h3>All algorithms implemented in Python - for education 📚</h3>\\n</div>\\n\\nImplementations are for learning purposes only. They may be less efficient than the implementations in the Python standard library. Use them at your discretion.\\n\\n\",\"score\":0.13191593352883677,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=0,lexicalRank=64,nameRank=39,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.0192919933475885,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":213,\"versionId\":432,\"chunkId\":15627,\"chunkIndex\":452,\"title\":\"trimstray/the-book-of-secret-knowledge\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"trimstray/the-book-of-secret-knowledge\",\"sectionPath\":\":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [python](https://www.python.org/)\",\"startOffset\":203370,\"endOffset\":203417,\"content\":\"##### Tool: [python](https://www.python.org/)\\n\\n\",\"score\":0.01808731808731809,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=14,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":400,\"versionId\":619,\"chunkId\":16997,\"chunkIndex\":7,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"版本 > Python\",\"startOffset\":1788,\"endOffset\":1960,\"content\":\"### Python\\n\\n```bash\\npip install pydeck\\n```\\n\\n- [快速入门](https://deckgl.readthedocs.io/en/latest/installation.html)\\n- [示例](https://deckgl.readthedocs.io/en/latest/layer.html)\\n\\n\",\"score\":0.01752278376139188,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=11,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":69,\"versionId\":288,\"chunkId\":10989,\"chunkIndex\":5,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `AI Model`\",\"startOffset\":3638,\"endOffset\":3967,\"content\":\"#### Build your own `AI Model`\\n* [**Python**: _A Large Language Model (LLM)_](https://github.com/rasbt/LLMs-from-scratch)\\n* [**Python**: _Diffusion Models for Image Generation_](https://huggingface.co/learn/diffusion-course/en/unit1/3)\\n* [**Python**: _RAG for Document Search_](https://github.com/langchain-ai/rag-from-scratch)\\n\\n\",\"score\":0.016295236148026988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=86,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":75,\"versionId\":294,\"chunkId\":11783,\"chunkIndex\":50,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"sectionPath\":\"Project Based Learning > Python: > Miscellaneous:\",\"startOffset\":39253,\"endOffset\":41209,\"content\":\"### Miscellaneous:\\n\\n- [Build a Simple Interpreter](https://ruslanspivak.com/lsbasi-part1/)\\n- [Build a Simple Blockchain in Python](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)\\n- [Building a Gas Pump Scanner with OpenCV/Python/iOS](https://hackernoon.com/building-a-gas-pump-scanner-with-opencv-python-ios-116fe6c9ae8b)\\n- [Build a Distributed Streaming System with Python and Kafka](https://codequs.com/p/S14jQ5UyG/build-a-distributed-streaming-system-with-apache-kafka-and-python)\\n- [Writing a basic x86-64 JIT compiler from scratch in stock Python](https://csl.name/post/python-jit/)\\n- Making a low level (Linux) debugger\\n  - [Part 1](https://blog.asrpo.com/making_a_low_level_debugger)\\n  - [Part 2: C](https://blog.asrpo.com/making_a_low_level_debugger_part_2)\\n- Implementing a Search Engine\\n  - [Part 1](http://www.ardendertat.com/2011/05/30/how-to-implement-a-search-engine-part-1-create-index/)\\n  - [Part 2](http://www.ardendertat.com/2011/05/31/how-to-implement-a-search-engine-part-2-query-index/)\\n  - [Part 3](http://www.ardendertat.com/2011/07/17/how-to-implement-a-search-engine-part-3-ranking-tf-idf/)\\n- [Build the Game of Life](https://robertheaton.com/2018/07/20/project-2-game-of-life/)\\n- [Create terminal ASCII art](https://robertheaton.com/2018/06/12/programming-projects-for-advanced-beginners-ascii-art/)\\n- [Write a Tic-Tac-Toe AI](https://robertheaton.com/2018/10/09/programming-projects-for-advanced-beginners-3-a/)\\n- [Create photomosaic art](https://robertheaton.com/2018/11/03/programming-project-4-photomosaics/)\\n- [Build the game \\\"Snake\\\" in the terminal](https://robertheaton.com/2018/12/02/programming-project-5-snake/)\\n- [Write yourself a Git](https://wyag.thb.lt/)\\n- [A Python implementation of a Python bytecode runner](https://www.aosabook.org/en/500L/a-python-interpreter-written-in-python.html)\\n- [Create a Voice assistant using Python](https://www.geeksforgeeks.org/voice-assistant-using-python/)\\n\\n\",\"score\":0.016256487527205758,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=121,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":231,\"versionId\":450,\"chunkId\":15895,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"sectionPath\":\"💡 什么是 RAGFlow？\",\"startOffset\":3626,\"endOffset\":3741,\"content\":\"## 💡 什么是 RAGFlow？\\n\\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎\",\"score\":0.01567618557585113,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=109,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":89,\"versionId\":308,\"chunkId\":11968,\"chunkIndex\":4,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 适合新手的原因\",\"startOffset\":150,\"endOffset\":206,\"content\":\"## 适合新手的原因\\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":77,\"versionId\":296,\"chunkId\":11810,\"chunkIndex\":2,\"title\":\"fastrepl/anarlog\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:2\",\"sectionPath\":\"fastrepl/anarlog > 仓库地址\",\"startOffset\":36,\"endOffset\":81,\"content\":\"## 仓库地址\\nhttps://github.com/fastrepl/anarlog\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":308,\"versionId\":527,\"chunkId\":16416,\"chunkIndex\":1,\"title\":\"plotly.py\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"plotly/plotly.py\",\"sectionPath\":\"plotly.py > 快速入门\",\"startOffset\":1022,\"endOffset\":1202,\"content\":\"## 快速入门\\n\\n`pip install plotly`\\n\\n```python\\nimport plotly.express as px\\nfig = px.bar(x=[\\\"a\\\", \\\"b\\\", \\\"c\\\"], y=[1, 3, 2])\\nfig.show()\\n```\\n\\n更多示例请参阅 [Python 文档](https://plotly.com/python/)。\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":96,\"versionId\":315,\"chunkId\":12059,\"chunkIndex\":4,\"title\":\"flowsforapex/apex-flowsforapex\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:43\",\"sectionPath\":\"flowsforapex/apex-flowsforapex > 适合新手的原因\",\"startOffset\":158,\"endOffset\":216,\"content\":\"## 适合新手的原因\\n作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":94,\"versionId\":313,\"chunkId\":12030,\"chunkIndex\":1,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012195121951219513,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012048192771084338,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011904761904761904,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=24,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011764705882352941,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"GITHUB:TheAlgorithms/Python\",\"documentId\":218,\"title\":\"TheAlgorithms/Python\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"TheAlgorithms/Python|week\",\"bestScore\":0.13191593352883677,\"evidence\":[{\"documentId\":218,\"versionId\":437,\"chunkId\":15807,\"chunkIndex\":1,\"title\":\"TheAlgorithms/Python\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"TheAlgorithms/Python|week\",\"sectionPath\":null,\"startOffset\":1871,\"endOffset\":2136,\"content\":\"<!-- Short description: -->\\n  <h3>All algorithms implemented in Python - for education 📚</h3>\\n</div>\\n\\nImplementations are for learning purposes only. They may be less efficient than the implementations in the Python standard library. Use them at your discretion.\\n\\n\",\"score\":0.13191593352883677,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=0,lexicalRank=64,nameRank=39,lexicalWeight=0.2,nameGated=true)+NAME_EXACT\"}]},{\"groupKey\":\"GITHUB:QuivrHQ/quivr\",\"documentId\":250,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"bestScore\":0.0192919933475885,\"evidence\":[{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.0192919933475885,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:trimstray/the-book-of-secret-knowledge\",\"documentId\":213,\"title\":\"trimstray/the-book-of-secret-knowledge\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"trimstray/the-book-of-secret-knowledge\",\"bestScore\":0.01808731808731809,\"evidence\":[{\"documentId\":213,\"versionId\":432,\"chunkId\":15627,\"chunkIndex\":452,\"title\":\"trimstray/the-book-of-secret-knowledge\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"trimstray/the-book-of-secret-knowledge\",\"sectionPath\":\":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Shell One-liners &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > Tool: [python](https://www.python.org/)\",\"startOffset\":203370,\"endOffset\":203417,\"content\":\"##### Tool: [python](https://www.python.org/)\\n\\n\",\"score\":0.01808731808731809,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=14,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:visgl/deck.gl\",\"documentId\":400,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"bestScore\":0.01752278376139188,\"evidence\":[{\"documentId\":400,\"versionId\":619,\"chunkId\":16997,\"chunkIndex\":7,\"title\":\"visgl/deck.gl\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"visgl/deck.gl\",\"sectionPath\":\"版本 > Python\",\"startOffset\":1788,\"endOffset\":1960,\"content\":\"### Python\\n\\n```bash\\npip install pydeck\\n```\\n\\n- [快速入门](https://deckgl.readthedocs.io/en/latest/installation.html)\\n- [示例](https://deckgl.readthedocs.io/en/latest/layer.html)\\n\\n\",\"score\":0.01752278376139188,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=11,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:codecrafters-io/build-your-own-x\",\"documentId\":69,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"bestScore\":0.016295236148026988,\"evidence\":[{\"documentId\":69,\"versionId\":288,\"chunkId\":10989,\"chunkIndex\":5,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `AI Model`\",\"startOffset\":3638,\"endOffset\":3967,\"content\":\"#### Build your own `AI Model`\\n* [**Python**: _A Large Language Model (LLM)_](https://github.com/rasbt/LLMs-from-scratch)\\n* [**Python**: _Diffusion Models for Image Generation_](https://huggingface.co/learn/diffusion-course/en/unit1/3)\\n* [**Python**: _RAG for Document Search_](https://github.com/langchain-ai/rag-from-scratch)\\n\\n\",\"score\":0.016295236148026988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=86,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:practical-tutorials/project-based-learning\",\"documentId\":75,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"bestScore\":0.016256487527205758,\"evidence\":[{\"documentId\":75,\"versionId\":294,\"chunkId\":11783,\"chunkIndex\":50,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"sectionPath\":\"Project Based Learning > Python: > Miscellaneous:\",\"startOffset\":39253,\"endOffset\":41209,\"content\":\"### Miscellaneous:\\n\\n- [Build a Simple Interpreter](https://ruslanspivak.com/lsbasi-part1/)\\n- [Build a Simple Blockchain in Python](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)\\n- [Building a Gas Pump Scanner with OpenCV/Python/iOS](https://hackernoon.com/building-a-gas-pump-scanner-with-opencv-python-ios-116fe6c9ae8b)\\n- [Build a Distributed Streaming System with Python and Kafka](https://codequs.com/p/S14jQ5UyG/build-a-distributed-streaming-system-with-apache-kafka-and-python)\\n- [Writing a basic x86-64 JIT compiler from scratch in stock Python](https://csl.name/post/python-jit/)\\n- Making a low level (Linux) debugger\\n  - [Part 1](https://blog.asrpo.com/making_a_low_level_debugger)\\n  - [Part 2: C](https://blog.asrpo.com/making_a_low_level_debugger_part_2)\\n- Implementing a Search Engine\\n  - [Part 1](http://www.ardendertat.com/2011/05/30/how-to-implement-a-search-engine-part-1-create-index/)\\n  - [Part 2](http://www.ardendertat.com/2011/05/31/how-to-implement-a-search-engine-part-2-query-index/)\\n  - [Part 3](http://www.ardendertat.com/2011/07/17/how-to-implement-a-search-engine-part-3-ranking-tf-idf/)\\n- [Build the Game of Life](https://robertheaton.com/2018/07/20/project-2-game-of-life/)\\n- [Create terminal ASCII art](https://robertheaton.com/2018/06/12/programming-projects-for-advanced-beginners-ascii-art/)\\n- [Write a Tic-Tac-Toe AI](https://robertheaton.com/2018/10/09/programming-projects-for-advanced-beginners-3-a/)\\n- [Create photomosaic art](https://robertheaton.com/2018/11/03/programming-project-4-photomosaics/)\\n- [Build the game \\\"Snake\\\" in the terminal](https://robertheaton.com/2018/12/02/programming-project-5-snake/)\\n- [Write yourself a Git](https://wyag.thb.lt/)\\n- [A Python implementation of a Python bytecode runner](https://www.aosabook.org/en/500L/a-python-interpreter-written-in-python.html)\\n- [Create a Voice assistant using Python](https://www.geeksforgeeks.org/voice-assistant-using-python/)\\n\\n\",\"score\":0.016256487527205758,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=121,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:80\",\"documentId\":3,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"bestScore\":0.016129032258064516,\"evidence\":[{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:infiniflow/ragflow\",\"documentId\":231,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"bestScore\":0.01567618557585113,\"evidence\":[{\"documentId\":231,\"versionId\":450,\"chunkId\":15895,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"sectionPath\":\"💡 什么是 RAGFlow？\",\"startOffset\":3626,\"endOffset\":3741,\"content\":\"## 💡 什么是 RAGFlow？\\n\\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎\",\"score\":0.01567618557585113,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=109,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:30\",\"documentId\":89,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"bestScore\":0.015625,\"evidence\":[{\"documentId\":89,\"versionId\":308,\"chunkId\":11968,\"chunkIndex\":4,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 适合新手的原因\",\"startOffset\":150,\"endOffset\":206,\"content\":\"## 适合新手的原因\\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:2\",\"documentId\":77,\"title\":\"fastrepl/anarlog\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:2\",\"bestScore\":0.014084507042253521,\"evidence\":[{\"documentId\":77,\"versionId\":296,\"chunkId\":11810,\"chunkIndex\":2,\"title\":\"fastrepl/anarlog\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:2\",\"sectionPath\":\"fastrepl/anarlog > 仓库地址\",\"startOffset\":36,\"endOffset\":81,\"content\":\"## 仓库地址\\nhttps://github.com/fastrepl/anarlog\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:plotly/plotly.py\",\"documentId\":308,\"title\":\"plotly.py\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"plotly/plotly.py\",\"bestScore\":0.013333333333333334,\"evidence\":[{\"documentId\":308,\"versionId\":527,\"chunkId\":16416,\"chunkIndex\":1,\"title\":\"plotly.py\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"plotly/plotly.py\",\"sectionPath\":\"plotly.py > 快速入门\",\"startOffset\":1022,\"endOffset\":1202,\"content\":\"## 快速入门\\n\\n`pip install plotly`\\n\\n```python\\nimport plotly.express as px\\nfig = px.bar(x=[\\\"a\\\", \\\"b\\\", \\\"c\\\"], y=[1, 3, 2])\\nfig.show()\\n```\\n\\n更多示例请参阅 [Python 文档](https://plotly.com/python/)。\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:43\",\"documentId\":96,\"title\":\"flowsforapex/apex-flowsforapex\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:43\",\"bestScore\":0.012987012987012988,\"evidence\":[{\"documentId\":96,\"versionId\":315,\"chunkId\":12059,\"chunkIndex\":4,\"title\":\"flowsforapex/apex-flowsforapex\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:43\",\"sectionPath\":\"flowsforapex/apex-flowsforapex > 适合新手的原因\",\"startOffset\":158,\"endOffset\":216,\"content\":\"## 适合新手的原因\\n作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:125\",\"documentId\":14,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"bestScore\":0.01282051282051282,\"evidence\":[{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:119\",\"documentId\":12,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"bestScore\":0.012658227848101266,\"evidence\":[{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:38\",\"documentId\":94,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"bestScore\":0.0125,\"evidence\":[{\"documentId\":94,\"versionId\":313,\"chunkId\":12030,\"chunkIndex\":1,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:94\",\"documentId\":6,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"bestScore\":0.012345679012345678,\"evidence\":[{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:46\",\"documentId\":63,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"bestScore\":0.012195121951219513,\"evidence\":[{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012195121951219513,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:5\",\"documentId\":78,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"bestScore\":0.012048192771084338,\"evidence\":[{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012048192771084338,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:10\",\"documentId\":82,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"bestScore\":0.011904761904761904,\"evidence\":[{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011904761904761904,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=24,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:35\",\"documentId\":93,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"bestScore\":0.011764705882352941,\"evidence\":[{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.011764705882352941,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"parameters\":{\"conditions\":{\"topic\":[\"RAG\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是RAG\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是学习\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"有基础\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Python\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是两个月内\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"学习\",\"experience\":\"有基础\",\"language\":\"Python\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":60,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"希望中文提问检索英文技术文档\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"},\"semanticChunks\":[15807,16037,15627,16997,10989,11783,9641,15895,11968,11810,16416,12059,9976,9914,12030,9740,10780,11822,11874,12017]},\"result\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":215,\"sourceRef\":\"beginner:215\",\"name\":\"headroomlabs-ai/headroom\",\"url\":\"https://github.com/headroomlabs-ai/headroom\",\"status\":\"CANDIDATE\",\"archived\":false,\"language\":\"Python\",\"techStack\":\"Python\",\"difficulty\":\"入门\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":true,\"requiresDatabase\":false,\"requiresSecrets\":true,\"topics\":\"[\\\"agent\\\", \\\"ai\\\", \\\"anthropic\\\", \\\"claude-code\\\", \\\"compression\\\", \\\"context-engineering\\\", \\\"context-window\\\", \\\"cursor\\\", \\\"fastapi\\\", \\\"langchain\\\", \\\"llm\\\", \\\"mcp\\\", \\\"openai\\\", \\\"prompt-engineering\\\", \\\"proxy\\\", \\\"python\\\", \\\"rag\\\", \\\"token-optimization\\\", \\\"tokens\\\", \\\"typescript\\\"]\",\"beginnerScore\":74,\"codebaseSize\":\"LARGE\",\"prerequisites\":\"Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"total\":7.0,\"goalPreference\":15.0,\"semantic\":0.0,\"uncertaintyPenalty\":8.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":false,\"quality\":0.0,\"semanticAvailable\":true}},{\"type\":\"EXTERNAL_PROJECT\",\"id\":250,\"sourceRef\":\"QuivrHQ/quivr\",\"name\":\"QuivrHQ/quivr\",\"url\":\"https://github.com/QuivrHQ/quivr\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":250,\"versionId\":469,\"catalogTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"total\":3.819805153394636,\"goalPreference\":0.0,\"semantic\":31.819805153394636,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0,\"semanticAvailable\":true}},{\"type\":\"EXTERNAL_PROJECT\",\"id\":231,\"sourceRef\":\"infiniflow/ragflow\",\"name\":\"infiniflow/ragflow\",\"url\":\"https://github.com/infiniflow/ragflow\",\"status\":\"DOCUMENTED\",\"archived\":false,\"description\":\"已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。\",\"evidenceStatus\":\"DOCUMENT_IDENTITY\",\"importable\":false,\"documentId\":231,\"versionId\":450,\"catalogTitle\":\"infiniflow/ragflow\",\"evidenceAvailable\":true,\"conditionGaps\":[\"编程语言尚未核实，不能确认满足你的要求\",\"最长周期尚未核实，不能确认满足你的要求\"],\"matchStatus\":\"NEEDS_VERIFICATION\",\"ranking\":{\"total\":-12.090097423302682,\"goalPreference\":0.0,\"semantic\":15.909902576697318,\"uncertaintyPenalty\":28.0,\"version\":\"customer-rank-v3\",\"preference\":0.0,\"semanticMatched\":true,\"quality\":0.0,\"semanticAvailable\":true}}]}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"parameters\":{\"projects\":[{\"type\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:215\",\"name\":\"headroomlabs-ai/headroom\"},{\"type\":\"EXTERNAL_PROJECT\",\"sourceRef\":\"QuivrHQ/quivr\",\"name\":\"QuivrHQ/quivr\"},{\"type\":\"EXTERNAL_PROJECT\",\"sourceRef\":\"infiniflow/ragflow\",\"name\":\"infiniflow/ragflow\"}],\"query\":\"RAG 项目功能 用途 实践示例 安装部署 环境依赖 限制 请按以下本轮画像直接推荐项目：技术方向是RAG；目标是学习；基础是有基础；语言是Python；完成周期是两个月内。只推荐 Python 项目，希望中文提问检索英文技术文档，并说明部署依赖。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\",\"sourceTypes\":[\"GITHUB\",\"BEGINNER_PROJECT\",\"CAREER_PROJECT\"]},\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":72,\"candidateCount\":72,\"excludedReasons\":{},\"hits\":[{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.019619249074563725,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":231,\"versionId\":450,\"chunkId\":15895,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"sectionPath\":\"💡 什么是 RAGFlow？\",\"startOffset\":3626,\"endOffset\":3741,\"content\":\"## 💡 什么是 RAGFlow？\\n\\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎\",\"score\":0.01805037313432836,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":175,\"versionId\":394,\"chunkId\":14271,\"chunkIndex\":23,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"sectionPath\":\"Compared to\",\"startOffset\":29484,\"endOffset\":30439,\"content\":\"## Compared to\\n\\nHeadroom runs locally, covers every content type, works with every major\\nframework, and is reversible.\\n\\n| | Scope | Deploy | Local | Reversible |\\n|---|---|---|:---:|:---:|\\n| **Headroom** | All context — tools, RAG, logs, files, history | Proxy · library · middleware · MCP | Yes | Yes |\\n| [Compresr](https://compresr.ai), [Token Co.](https://thetokencompany.ai) | Text sent to their API | Hosted API call | No | No |\\n| OpenAI Compaction | Conversation history | Provider-native | No | No |\\n\\nHeadroom is the proxy, and it compresses everything flowing through it whatever\\nsits upstream. Our recommended companion is\\n**[Serena](https://github.com/oraios/serena)** for semantic code navigation,\\ninstalled by default when you wrap an agent, plus **Ponytail** if you want leaner\\nmodel output. Everything else is your call — attach a code-memory MCP, Graphify,\\nCaveman, or any other MCP server, and Headroom compresses downstream of all of it.\\n\\n\",\"score\":0.012788996195493122,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=42,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"chunkIndex\":1,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":552,\"endOffset\":1155,\"content\":\"## 核心特性 🎯\\n\\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\\n\\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\\n\\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\\n\\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\\n\\n<!-- ## 演示亮点 🎥\\n\\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\\n\\n\",\"score\":0.018326118326118326,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"chunkIndex\":4,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1259,\"endOffset\":1916,\"content\":\"### 30秒安装 💽\\n\\n- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_file:\\n          temp_file.write(\\\"Gold is a liquid of blue-like colour.\\\")\\n          temp_file.flush()\\n\\n          brain = Brain.from_files(\\n              name=\\\"test_brain\\\",\\n              file_paths=[temp_file.name],\\n          )\\n\\n          answer = brain.ask(\\n              \\\"what is gold? asnwer in french\\\"\\n          )\\n          print(\\\"answer:\\\", answer)\\n  ```\\n\\n\",\"score\":0.01773618538324421,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14113,\"chunkIndex\":12,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🌟 Key Features > 🛀 **Automated and effortless RAG workflow**\",\"startOffset\":7167,\"endOffset\":7451,\"content\":\"### 🛀 **Automated and effortless RAG workflow**\\n\\n- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\",\"score\":0.016977318661576465,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=13,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14104,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"💡 What is RAGFlow?\",\"startOffset\":4093,\"endOffset\":4703,\"content\":\"## 💡 What is RAGFlow?\\n\\n[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to enterprises of any scale. Powered by a converged [context engine](https://ragflow.io/basics/what-is-agent-context-engine) and pre-built agent templates, RAGFlow enables developers to transform complex data into high-fidelity, production-ready AI systems with exceptional efficiency and precision.\\n\\n\",\"score\":0.01641025641025641,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14116,\"chunkIndex\":15,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🎬 Self-Hosting > 📝 Prerequisites\",\"startOffset\":7711,\"endOffset\":8149,\"content\":\"### 📝 Prerequisites\\n\\n- CPU >= 4 cores\\n- RAM >= 16 GB\\n- Disk >= 50 GB\\n- Docker >= 24.0.0 & Docker Compose >= v2.26.1\\n- Python >= 3.13\\n- [gVisor](https://gvisor.dev/docs/user_guide/install/): Required only if you intend to use the code executor (sandbox) feature of RAGFlow.\\n\\n> [!TIP]\\n> If you have not installed Docker on your local machine (Windows, Mac, or Linux), see [Install Docker Engine](https://docs.docker.com/engine/install/).\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16033,\"chunkIndex\":3,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 先决条件 📋\",\"startOffset\":1212,\"endOffset\":1259,\"content\":\"### 先决条件 📋\\n\\n请确保已安装以下软件：\\n\\n- Python 3.10 或更高版本\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14126,\"chunkIndex\":25,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"📜 Roadmap\",\"startOffset\":16970,\"endOffset\":17069,\"content\":\"## 📜 Roadmap\\n\\nSee the [RAGFlow Roadmap 2026](https://github.com/infiniflow/ragflow/issues/12241)\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14124,\"chunkIndex\":23,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🔨 Launch Service from Source for Development\",\"startOffset\":16072,\"endOffset\":16540,\"content\":\"7. Install frontend dependencies:\\n\\n   ```bash\\n   cd web\\n   npm install\\n   ```\\n8. Launch frontend service:\\n\\n   ```bash\\n   npm run dev\\n   ```\\n\\n   _The following output confirms a successful launch of the system:_\\n\\n   ![RAGFlow web interface](https://github.com/user-attachments/assets/0daf462c-a24d-4496-a66f-92533534e187)\\n9. Stop RAGFlow front-end and back-end service after development is complete:\\n\\n   ```bash\\n   pkill -f \\\"ragflow_server.py|task_executor.py\\\"\\n   ```\\n\\n\",\"score\":0.015384615384615385,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14125,\"chunkIndex\":24,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"📚 Documentation\",\"startOffset\":16540,\"endOffset\":16970,\"content\":\"## 📚 Documentation\\n\\n- [Quickstart](https://ragflow.io/docs/dev/)\\n- [Configuration](https://ragflow.io/docs/dev/configurations)\\n- [Release notes](https://ragflow.io/docs/dev/release_notes)\\n- [User guides](https://ragflow.io/docs/category/user-guides)\\n- [Developer guides](https://ragflow.io/docs/category/developer-guides)\\n- [References](https://ragflow.io/docs/dev/category/references)\\n- [FAQs](https://ragflow.io/docs/dev/faq)\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14114,\"chunkIndex\":13,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🔎 System Architecture\",\"startOffset\":7451,\"endOffset\":7691,\"content\":\"## 🔎 System Architecture\\n\\n<div align=\\\"center\\\" style=\\\"margin-top:20px;margin-bottom:20px;\\\">\\n<img alt=\\\"RAGFlow system architecture\\\" src=\\\"https://github.com/user-attachments/assets/31b0dd6f-ca4f-445a-9457-70cb44a381b2\\\" width=\\\"1000\\\"/>\\n</div>\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14105,\"chunkIndex\":4,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🎮 Get Started\",\"startOffset\":4703,\"endOffset\":5185,\"content\":\"## 🎮 Get Started\\n\\nTry our cloud service at [https://cloud.ragflow.io](https://cloud.ragflow.io).\\n\\n<div align=\\\"center\\\" style=\\\"margin-top:20px;margin-bottom:20px;\\\">\\n<img alt=\\\"Chunking demonstration\\\" src=\\\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/chunking.gif\\\" width=\\\"1200\\\"/>\\n<img alt=\\\"Agentic workflow demonstration\\\" src=\\\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/agentic-dark.gif\\\" width=\\\"1200\\\"/>\\n</div>\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":231,\"versionId\":450,\"chunkId\":15894,\"chunkIndex\":2,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"sectionPath\":null,\"startOffset\":2682,\"endOffset\":3626,\"content\":\"<div align=\\\"center\\\" style=\\\"margin-top:20px;margin-bottom:20px;\\\">\\n<img src=\\\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/ragflow-octoverse.png\\\" width=\\\"1200\\\"/>\\n</div>\\n\\n<div align=\\\"center\\\">\\n<a href=\\\"https://trendshift.io/repositories/9064\\\" target=\\\"_blank\\\"><img src=\\\"https://trendshift.io/api/badge/repositories/9064\\\" alt=\\\"infiniflow%2Fragflow | Trendshift\\\" style=\\\"width: 250px; height: 55px;\\\" width=\\\"250\\\" height=\\\"55\\\"/></a>\\n</div>\\n\\n<details open>\\n<summary><b>📕 目录</b></summary>\\n\\n- 💡 [什么是 RAGFlow？](#-what-is-ragflow)\\n- 🎮 [开始使用](#-get-started)\\n- 📌 [最新更新](#-latest-updates)\\n- 🌟 [主要特性](#-key-features)\\n- 🔎 [系统架构](#-system-architecture)\\n- 🎬 [自托管](#-self-hosting)\\n- 🔧 [配置](#-configurations)\\n- 🔧 [构建 Docker 镜像](#-build-a-docker-image)\\n- 🔨 [从源码启动开发服务](#-launch-service-from-source-for-development)\\n- 📚 [文档](#-documentation)\\n- 📜 [路线图](#-roadmap)\\n- 🏄 [社区](#-community)\\n- 🙌 [贡献](#-contributing)\\n\\n</details>\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14128,\"chunkIndex\":27,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🙌 Contributing\",\"startOffset\":17235,\"endOffset\":17492,\"content\":\"## 🙌 Contributing\\n\\nRAGFlow flourishes via open-source collaboration. In this spirit, we embrace diverse contributions from the community.\\nIf you would like to be a part, review our [Contribution Guidelines](https://ragflow.io/docs/dev/contributing) first.\\n\",\"score\":0.013513513513513514,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14107,\"chunkIndex\":6,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🎉 Stay Tuned\",\"startOffset\":6067,\"endOffset\":6429,\"content\":\"## 🎉 Stay Tuned\\n\\n⭐️ Star our repository to stay up-to-date with exciting new features and improvements! Get instant notifications for new\\nreleases! 🌟\\n\\n<div align=\\\"center\\\" style=\\\"margin-top:20px;margin-bottom:20px;\\\">\\n<img alt=\\\"RAGFlow feature updates\\\" src=\\\"https://github.com/user-attachments/assets/18c9707e-b8aa-4caf-a154-037089c105ba\\\" width=\\\"1200\\\"/>\\n</div>\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14103,\"chunkIndex\":2,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":null,\"startOffset\":2958,\"endOffset\":4093,\"content\":\"<div align=\\\"center\\\" style=\\\"margin-top:20px;margin-bottom:20px;\\\">\\n<img alt=\\\"RAGFlow in the GitHub Octoverse\\\" src=\\\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/ragflow-octoverse.png\\\" width=\\\"1200\\\"/>\\n</div>\\n\\n<div align=\\\"center\\\">\\n<a href=\\\"https://trendshift.io/repositories/9064\\\" target=\\\"_blank\\\"><img src=\\\"https://trendshift.io/api/badge/repositories/9064\\\" alt=\\\"infiniflow%2Fragflow | Trendshift\\\" style=\\\"width: 250px; height: 55px;\\\" width=\\\"250\\\" height=\\\"55\\\"/></a>\\n</div>\\n\\n<details open>\\n<summary><b>📕 Table of Contents</b></summary>\\n\\n- 💡 [What is RAGFlow?](#-what-is-ragflow)\\n- 🎮 [Get Started](#-get-started)\\n- 🔥 [Latest Updates](#-latest-updates)\\n- 🌟 [Key Features](#-key-features)\\n- 🔎 [System Architecture](#-system-architecture)\\n- 🎬 [Self-Hosting](#-self-hosting)\\n- 🔧 [Configurations](#-configurations)\\n- 🔧 [Build a Docker Image](#-build-a-docker-image)\\n- 🔨 [Launch Service from Source for Development](#-launch-service-from-source-for-development)\\n- 📚 [Documentation](#-documentation)\\n- 📜 [Roadmap](#-roadmap)\\n- 🏄 [Community](#-community)\\n- 🙌 [Contributing](#-contributing)\\n\\n</details>\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14118,\"chunkIndex\":17,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🎬 Self-Hosting > 🚀 Start up the server\",\"startOffset\":9955,\"endOffset\":11738,\"content\":\"\\n> Note: Prior to `v0.22.0`, we provided both images with embedding models and slim images without embedding models. Details as follows:\\n\\n| RAGFlow image tag | Image size (GB) | Has embedding models? | Stable?        |\\n|-------------------|-----------------|-----------------------|----------------|\\n| v0.21.1           | &approx;9       | ✔️                    | Stable release |\\n| v0.21.1-slim      | &approx;2       | ❌                     | Stable release |\\n\\n> Starting with `v0.22.0`, we ship only the slim edition and no longer append the **-slim** suffix to the image tag.\\n\\n4. Check the server status after having the server up and running:\\n\\n   ```bash\\n   docker logs -f docker-ragflow-cpu-1\\n   ```\\n\\n   _The following output confirms a successful launch of the system:_\\n\\n   ```bash\\n\\n         ____   ___    ______ ______ __\\n        / __ \\\\ /   |  / ____// ____// /____  _      __\\n       / /_/ // /| | / / __ / /_   / // __ \\\\| | /| / /\\n      / _, _// ___ |/ /_/ // __/  / // /_/ /| |/ |/ /\\n     /_/ |_|/_/  |_|\\\\____//_/    /_/ \\\\____/ |__/|__/\\n\\n    * Running on all addresses (0.0.0.0)\\n   ```\\n\\n   > If you skip this confirmation step and directly log in to RAGFlow, your browser may prompt a `network abnormal`\\n   > error because, at that moment, your RAGFlow may not be fully initialized.\\n   >\\n5. In your web browser, enter the IP address of your server and log in to RAGFlow.\\n\\n   > With the default settings, you only need to enter `http://IP_OF_YOUR_MACHINE` (**sans** port number) as the default\\n   > HTTP serving port `80` can be omitted when using the default configurations.\\n   >\\n6. In [service_conf.yaml.template](./docker/service_conf.yaml.template), select the desired LLM factory in `user_default_llm` and update\\n   the `API_KEY` field with the corresponding API key.\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14123,\"chunkIndex\":22,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🔨 Launch Service from Source for Development\",\"startOffset\":14386,\"endOffset\":16212,\"content\":\"## 🔨 Launch Service from Source for Development\\n\\n> [!IMPORTANT]\\n> After cloning the repository for the first time, run `git config --local --unset core.hooksPath`, `uv tool install lefthook` and `lefthook install` once from the repo root to enable local Git hooks.\\n\\n1. Install `uv`, or skip this step if it is already installed:\\n\\n   ```bash\\n   pipx install uv\\n   ```\\n2. Clone the source code and install Python dependencies:\\n\\n   ```bash\\n   git clone https://github.com/infiniflow/ragflow.git\\n   cd ragflow/\\n   uv sync --python 3.13 # install RAGFlow dependent python modules\\n   uv run python3 ragflow_deps/download_deps.py\\n   git config --local --unset core.hooksPath\\n   uv tool install lefthook\\n   lefthook install\\n   ```\\n3. Launch the dependent services (MinIO, Elasticsearch, Redis, and MySQL) using Docker Compose:\\n\\n   ```bash\\n   docker compose -f docker/docker-compose-base.yml up -d\\n   ```\\n\\n   Add the following line to `/etc/hosts` to resolve all hosts specified in **docker/.env** to `127.0.0.1`:\\n\\n   ```text\\n   127.0.0.1       es01 infinity mysql minio redis sandbox-executor-manager\\n   ```\\n4. If you cannot access HuggingFace, set the `HF_ENDPOINT` environment variable to use a mirror site:\\n\\n   ```bash\\n   export HF_ENDPOINT=https://hf-mirror.com\\n   ```\\n5. If your operating system does not have jemalloc, please install it as follows:\\n\\n   ```bash\\n   # Ubuntu\\n   sudo apt-get install libjemalloc-dev\\n   # CentOS\\n   sudo yum install jemalloc\\n   # OpenSUSE\\n   sudo zypper install jemalloc\\n   # macOS\\n   brew install jemalloc\\n   ```\\n6. Launch backend service:\\n\\n   ```bash\\n   source .venv/bin/activate\\n   export PYTHONPATH=$(pwd)\\n   bash docker/launch_backend_service.sh\\n   ```\\n7. Install frontend dependencies:\\n\\n   ```bash\\n   cd web\\n   npm install\\n   ```\\n8. Launch frontend service:\\n\\n   ```bash\\n   npm run dev\\n   ```\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"GITHUB:QuivrHQ/quivr\",\"documentId\":250,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"bestScore\":0.019619249074563725,\"evidence\":[{\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"chunkIndex\":7,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":1932,\"endOffset\":3145,\"content\":\"#### 基础 RAG\\n\\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\\n\\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  nodes:\\n    - name: \\\"START\\\"\\n      edges: [\\\"filter_history\\\"]\\n\\n    - name: \\\"filter_history\\\"\\n      edges: [\\\"rewrite\\\"]\\n\\n    - name: \\\"rewrite\\\"\\n      edges: [\\\"retrieve\\\"]\\n\\n    - name: \\\"retrieve\\\"\\n      edges: [\\\"generate_rag\\\"]\\n\\n    - name: \\\"generate_rag\\\" # the name of the last node, from which we want to stream the answer to the user\\n      edges: [\\\"END\\\"]\\n\\n# Maximum number of previous conversation iterations\\n# to include in the context of the answer\\nmax_history: 10\\n\\n# Reranker configuration\\nreranker_config:\\n  # The reranker supplier to use\\n  supplier: \\\"cohere\\\"\\n\\n  # The model to use for the reranker for the given supplier\\n  model: \\\"rerank-multilingual-v3.0\\\"\\n\\n  # Number of chunks returned by the reranker\\n  top_n: 5\\n\\n# Configuration for the LLM\\nllm_config:\\n\\n  # maximum number of tokens passed to the LLM to generate the answer\\n  max_input_tokens: 4000\\n```\",\"score\":0.019619249074563725,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"chunkIndex\":1,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":552,\"endOffset\":1155,\"content\":\"## 核心特性 🎯\\n\\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\\n\\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\\n\\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\\n\\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\\n\\n<!-- ## 演示亮点 🎥\\n\\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\\n\\n\",\"score\":0.018326118326118326,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"chunkIndex\":4,\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"QuivrHQ/quivr\",\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1259,\"endOffset\":1916,\"content\":\"### 30秒安装 💽\\n\\n- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_file:\\n          temp_file.write(\\\"Gold is a liquid of blue-like colour.\\\")\\n          temp_file.flush()\\n\\n          brain = Brain.from_files(\\n              name=\\\"test_brain\\\",\\n              file_paths=[temp_file.name],\\n          )\\n\\n          answer = brain.ask(\\n              \\\"what is gold? asnwer in french\\\"\\n          )\\n          print(\\\"answer:\\\", answer)\\n  ```\\n\\n\",\"score\":0.01773618538324421,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:infiniflow/ragflow\",\"documentId\":231,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"bestScore\":0.01805037313432836,\"evidence\":[{\"documentId\":231,\"versionId\":450,\"chunkId\":15895,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow\",\"sectionPath\":\"💡 什么是 RAGFlow？\",\"startOffset\":3626,\"endOffset\":3741,\"content\":\"## 💡 什么是 RAGFlow？\\n\\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎\",\"score\":0.01805037313432836,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14113,\"chunkIndex\":12,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"🌟 Key Features > 🛀 **Automated and effortless RAG workflow**\",\"startOffset\":7167,\"endOffset\":7451,\"content\":\"### 🛀 **Automated and effortless RAG workflow**\\n\\n- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\",\"score\":0.016977318661576465,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=13,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":169,\"versionId\":388,\"chunkId\":14104,\"chunkIndex\":3,\"title\":\"infiniflow/ragflow\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"infiniflow/ragflow|week\",\"sectionPath\":\"💡 What is RAGFlow?\",\"startOffset\":4093,\"endOffset\":4703,\"content\":\"## 💡 What is RAGFlow?\\n\\n[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to enterprises of any scale. Powered by a converged [context engine](https://ragflow.io/basics/what-is-agent-context-engine) and pre-built agent templates, RAGFlow enables developers to transform complex data into high-fidelity, production-ready AI systems with exceptional efficiency and precision.\\n\\n\",\"score\":0.01641025641025641,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:headroomlabs-ai/headroom\",\"documentId\":175,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"bestScore\":0.012788996195493122,\"evidence\":[{\"documentId\":175,\"versionId\":394,\"chunkId\":14271,\"chunkIndex\":23,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"sectionPath\":\"Compared to\",\"startOffset\":29484,\"endOffset\":30439,\"content\":\"## Compared to\\n\\nHeadroom runs locally, covers every content type, works with every major\\nframework, and is reversible.\\n\\n| | Scope | Deploy | Local | Reversible |\\n|---|---|---|:---:|:---:|\\n| **Headroom** | All context — tools, RAG, logs, files, history | Proxy · library · middleware · MCP | Yes | Yes |\\n| [Compresr](https://compresr.ai), [Token Co.](https://thetokencompany.ai) | Text sent to their API | Hosted API call | No | No |\\n| OpenAI Compaction | Conversation history | Provider-native | No | No |\\n\\nHeadroom is the proxy, and it compresses everything flowing through it whatever\\nsits upstream. Our recommended companion is\\n**[Serena](https://github.com/oraios/serena)** for semantic code navigation,\\ninstalled by default when you wrap an agent, plus **Ponytail** if you want leaner\\nmodel output. Everything else is your call — attach a code-memory MCP, Graphify,\\nCaveman, or any other MCP server, and Headroom compresses downstream of all of it.\\n\\n\",\"score\":0.012788996195493122,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=42,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "buildPrompt",
+      "detail": "{\"evidence\":[{\"evidenceId\":\"E1\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":361,\"startInChunk\":73,\"text\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  \",\"spanId\":\"E1.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16037,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG\",\"startOffset\":2005,\"endOffset\":2293,\"contentStartInChunk\":73},{\"evidenceId\":\"E2\",\"title\":\"headroomlabs-ai/headroom\",\"sourceRef\":\"headroomlabs-ai/headroom|week\",\"spans\":[{\"endInChunk\":416,\"startInChunk\":16,\"text\":\"Headroom runs locally, covers every content type, works with every major\\nframework, and is reversible.\\n\\n| | Scope | Deploy | Local | Reversible |\\n|---|---|---|:---:|:---:|\\n| **Headroom** | All context — tools, RAG, logs, files, history | Proxy · library · middleware · MCP | Yes | Yes |\\n| [Compresr](https://compresr.ai), [Token Co.](https://thetokencompany.ai) | Text sent to their API | Hosted API \",\"spanId\":\"E2.S1\"},{\"endInChunk\":816,\"startInChunk\":416,\"text\":\"call | No | No |\\n| OpenAI Compaction | Conversation history | Provider-native | No | No |\\n\\nHeadroom is the proxy, and it compresses everything flowing through it whatever\\nsits upstream. Our recommended companion is\\n**[Serena](https://github.com/oraios/serena)** for semantic code navigation,\\ninstalled by default when you wrap an agent, plus **Ponytail** if you want leaner\\nmodel output. Everything e\",\"spanId\":\"E2.S2\"},{\"endInChunk\":882,\"startInChunk\":816,\"text\":\"lse is your call — attach a code-memory MCP, Graphify,\\nCaveman, or\",\"spanId\":\"E2.S3\"}],\"documentId\":175,\"versionId\":394,\"chunkId\":14271,\"sectionPath\":\"Compared to\",\"startOffset\":29500,\"endOffset\":30366,\"contentStartInChunk\":16},{\"evidenceId\":\"E3\",\"title\":\"infiniflow/ragflow\",\"sourceRef\":\"infiniflow/ragflow|week\",\"spans\":[{\"endInChunk\":284,\"startInChunk\":50,\"text\":\"- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\",\"spanId\":\"E3.S1\"}],\"documentId\":169,\"versionId\":388,\"chunkId\":14113,\"sectionPath\":\"🌟 Key Features > 🛀 **Automated and effortless RAG workflow**\",\"startOffset\":7217,\"endOffset\":7451,\"contentStartInChunk\":50},{\"evidenceId\":\"E4\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":300,\"startInChunk\":12,\"text\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.\",\"spanId\":\"E4.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16031,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯\",\"startOffset\":564,\"endOffset\":852,\"contentStartInChunk\":12},{\"evidenceId\":\"E5\",\"title\":\"infiniflow/ragflow\",\"sourceRef\":\"infiniflow/ragflow|week\",\"spans\":[{\"endInChunk\":312,\"startInChunk\":24,\"text\":\"[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to \",\"spanId\":\"E5.S1\"}],\"documentId\":169,\"versionId\":388,\"chunkId\":14104,\"sectionPath\":\"💡 What is RAGFlow?\",\"startOffset\":4117,\"endOffset\":4405,\"contentStartInChunk\":24},{\"evidenceId\":\"E6\",\"title\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"sourceRef\":\"QuivrHQ/quivr\",\"spans\":[{\"endInChunk\":302,\"startInChunk\":14,\"text\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_fil\",\"spanId\":\"E6.S1\"}],\"documentId\":250,\"versionId\":469,\"chunkId\":16034,\"sectionPath\":\"Quivr - 你的第二大脑，由生成式AI赋能 > 快速开始 🚀 > 30秒安装 💽\",\"startOffset\":1273,\"endOffset\":1561,\"contentStartInChunk\":14},{\"evidenceId\":\"E7\",\"title\":\"infiniflow/ragflow\",\"sourceRef\":\"infiniflow/ragflow|week\",\"spans\":[{\"endInChunk\":310,\"startInChunk\":22,\"text\":\"- CPU >= 4 cores\\n- RAM >= 16 GB\\n- Disk >= 50 GB\\n- Docker >= 24.0.0 & Docker Compose >= v2.26.1\\n- Python >= 3.13\\n- [gVisor](https://gvisor.dev/docs/user_guide/install/): Required only if you intend to use the code executor (sandbox) feature of RAGFlow.\\n\\n> [!TIP]\\n> If you have not installe\",\"spanId\":\"E7.S1\"}],\"documentId\":169,\"versionId\":388,\"chunkId\":14116,\"sectionPath\":\"🎬 Self-Hosting > 📝 Prerequisites\",\"startOffset\":7733,\"endOffset\":8021,\"contentStartInChunk\":22}],\"question\":\"请按以下本轮画像直接推荐项目：技术方向是RAG；目标是学习；基础是有基础；语言是Python；完成周期是两个月内。只推荐 Python 项目，希望中文提问检索英文技术文档，并说明部署依赖。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\\n已记录实践偏好（不宣称已经满足）：[\\\"希望中文提问检索英文技术文档\\\"]\",\"promptVersion\":\"customer-v4.11-grounded-recommendations\"}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "validateEvidence",
+      "detail": "{\"accepted\":6,\"rejected\":[]}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "verifyFacts",
+      "detail": "{\"verdict\":{\"supportedIds\":[0,1,2,3,4]},\"claims\":[{\"sourceRef\":\"QuivrHQ/quivr\",\"sourceTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"text\":\"Quivr 提供自有 RAG，可与任何 LLM 配合，支持所有文件类型如 PDF、TXT、Markdown，并允许自定义 RAG、添加互联网搜索和集成工具。\",\"quote\":\"- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.\"},{\"sourceRef\":\"infiniflow/ragflow|week\",\"sourceTitle\":\"infiniflow/ragflow\",\"text\":\"RAGFlow 提供面向个人和大型企业的精简 RAG 编排，可配置 LLM 与嵌入模型，支持多路召回与融合重排，并提供直观 API 便于业务集成。\",\"quote\":\"- Streamlined RAG orchestration catered to both personal and large businesses.\\n- Configurable LLMs as well as embedding models.\\n- Multiple recall paired with fused re-ranking.\\n- Intuitive APIs for seamless integration with business.\\n\\n\"},{\"sourceRef\":\"infiniflow/ragflow|week\",\"sourceTitle\":\"infiniflow/ragflow\",\"text\":\"RAGFlow 是领先的开源 RAG 引擎，将前沿 RAG 与 Agent 能力融合，为 LLM 构建更优的上下文层，提供精简的 RAG 工作流。\",\"quote\":\"[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to \"},{\"sourceRef\":\"QuivrHQ/quivr\",\"sourceTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"text\":\"Quivr 基础 RAG 工作流：将 API 密钥加入环境变量，支持 Anthropic、OpenAI、Mistral 的 API，也支持通过 Ollama 使用本地模型，然后创建 YAML 工作流文件。\",\"quote\":\"创建如上所示的基础 RAG 工作流很简单，步骤如下：\\n\\n1. 将 API 密钥添加到环境变量中\\n```python\\nimport os\\nos.environ[\\\"OPENAI_API_KEY\\\"] = \\\"myopenai_apikey\\\"\\n```\\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\\n\\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\\n```yaml\\nworkflow_config:\\n  name: \\\"standard RAG\\\"\\n  \"},{\"sourceRef\":\"QuivrHQ/quivr\",\"sourceTitle\":\"Quivr - 你的第二大脑，由生成式AI赋能\",\"text\":\"Quivr 快速开始：pip install quivr-core 安装包，然后用 5 行代码创建一个 RAG。\",\"quote\":\"- **步骤1**：安装软件包\\n\\n  ```bash\\n  pip install quivr-core # Check that the installation worked\\n  ```\\n\\n- **步骤2**：用5行代码创建一个 RAG\\n\\n  ```python\\n  import tempfile\\n\\n  from quivr_core import Brain\\n\\n  if __name__ == \\\"__main__\\\":\\n      with tempfile.NamedTemporaryFile(mode=\\\"w\\\", suffix=\\\".txt\\\") as temp_fil\"},{\"sourceRef\":\"infiniflow/ragflow|week\",\"sourceTitle\":\"infiniflow/ragflow\",\"text\":\"RAGFlow 自托管依赖：CPU >= 4 核、RAM >= 16 GB、磁盘 >= 50 GB、Docker >= 24.0.0 与 Docker Compose >= v2.26.1、Python >= 3.13；仅在使用代码执行器沙箱功能时需要 gVisor。\",\"quote\":\"- CPU >= 4 cores\\n- RAM >= 16 GB\\n- Disk >= 50 GB\\n- Docker >= 24.0.0 & Docker Compose >= v2.26.1\\n- Python >= 3.13\\n- [gVisor](https://gvisor.dev/docs/user_guide/install/): Required only if you intend to use the code executor (sandbox) feature of RAGFlow.\\n\\n> [!TIP]\\n> If you have not installe\"}],\"supported\":5}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"parameters\":{\"conditions\":{\"topic\":[\"RAG\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是RAG\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是学习\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"有基础\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Python\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是两个月内\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"学习\",\"experience\":\"有基础\",\"language\":\"Python\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":60,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"希望中文提问检索英文技术文档\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有基础；已记录项目目标：学习；已记录编程语言：Python；已记录最长周期：60天；已记录项目主题：RAG；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[{\"id\":215,\"type\":\"BEGINNER_PROJECT\",\"name\":\"headroomlabs-ai/headroom\"},{\"id\":250,\"type\":\"EXTERNAL_PROJECT\",\"name\":\"QuivrHQ/quivr\"},{\"id\":231,\"type\":\"EXTERNAL_PROJECT\",\"name\":\"infiniflow/ragflow\"}]},\"purpose\":\"COUNTERFACTUAL_COUNTS\"},\"result\":{\"countUnit\":\"DISTINCT_REPOSITORY\",\"alternatives\":[{\"uncertain\":15,\"confirmed\":1,\"total\":16,\"changes\":{\"language\":\"TypeScript\"},\"label\":\"编程语言改为TypeScript\"},{\"uncertain\":347,\"confirmed\":4,\"total\":351,\"changes\":{\"topic\":null},\"label\":\"项目主题不限\"},{\"uncertain\":13,\"confirmed\":1,\"total\":14,\"changes\":{\"maxDurationDays\":null},\"label\":\"最长周期不限\"}],\"available\":{\"uncertain\":0,\"confirmed\":494,\"total\":494},\"current\":{\"uncertain\":14,\"confirmed\":0,\"total\":14},\"conditions\":{\"language\":\"Python\",\"maxDurationDays\":60,\"topic\":[\"RAG\"]},\"calculatedAt\":\"2026-10-03T15:23:27.473089056Z\"}}",
+      "status": "SUCCEEDED"
+    }
+  ],
+  "clientWallMs": 15519.843499991111,
+  "sessionSoftDeleted": true
+}

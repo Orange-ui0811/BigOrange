@@ -20,6 +20,23 @@ beforeEach(() => {
 })
 afterEach(() => { wrapper.unmount(); vi.useRealTimers() })
 describe('客服运行与恢复', () => {
+  it('追问按钮携带问题和任务关联，网络重试保留原关联', async () => {
+    await chat.init(); chat.input.value='求职'
+    api.submitCustomerRun.mockRejectedValue(new Error('连接断开'))
+    await chat.send({taskId:'task-1',questionId:'q-1'})
+    const first=api.submitCustomerRun.mock.calls[0][1]
+    await chat.send()
+    expect(api.submitCustomerRun.mock.calls[1][1]).toEqual(first)
+    expect(first.context).toEqual({taskId:'task-1',questionId:'q-1'})
+  })
+  it('相同文字关联到另一列表时使用新的请求标识', async () => {
+    await chat.init(); chat.input.value='就选第二个项目'
+    api.submitCustomerRun.mockRejectedValue(new Error('连接断开'))
+    await chat.send({taskId:'task-1',listId:'list-1'}); const first=api.submitCustomerRun.mock.calls[0][1]
+    await chat.send({taskId:'task-1',listId:'list-2'})
+    expect(api.submitCustomerRun.mock.calls[1][1].requestId).not.toBe(first.requestId)
+    expect(api.submitCustomerRun.mock.calls[1][1].context.listId).toBe('list-2')
+  })
   it('刷新后保留提交未确认消息的请求标识', async () => {
     await chat.init(); chat.input.value = '推荐Java项目'
     api.submitCustomerRun.mockRejectedValue(new Error('连接断开')); await chat.send()

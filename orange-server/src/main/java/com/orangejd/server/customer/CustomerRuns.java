@@ -16,31 +16,48 @@ public class CustomerRuns {
     private final CustomerConversation conversation;
     private final CustomerProperties config;
     private final CustomerJson json;
+    private final Map<CustomerExecutionEngine.Kind,CustomerExecutionEngine> engines;
+    private final CustomerExecutionTrace trace;
     private final ThreadPoolExecutor workers;
     private final ScheduledExecutorService timer=Executors.newSingleThreadScheduledExecutor(r->{ Thread t=new Thread(r,"customer-events"); t.setDaemon(true); return t; });
     private final ScheduledExecutorService deadlines=Executors.newSingleThreadScheduledExecutor(r->{ Thread t=new Thread(r,"customer-deadline"); t.setDaemon(true); return t; });
     private final Map<String,Future<?>> futures=new ConcurrentHashMap<>();
     public CustomerRuns(CustomerStore s,CustomerMapper db,CustomerConversation c,CustomerProperties p,CustomerJson json) {
+        this(s,db,c,p,json,List.of(new CustomerExecutionEngine(){public Kind kind(){return Kind.LEGACY;}public CustomerExecutionResult execute(CustomerRunContext context){return c.prepare(context);}}),null);
+    }
+    @org.springframework.beans.factory.annotation.Autowired
+    public CustomerRuns(CustomerStore s,CustomerMapper db,CustomerConversation c,CustomerProperties p,CustomerJson json,List<CustomerExecutionEngine> implementations,CustomerExecutionTrace trace) {
         store=s; this.db=db; conversation=c; config=p; this.json=json;
+        this.trace=trace;engines=new EnumMap<>(CustomerExecutionEngine.Kind.class);
+        implementations.forEach(engine->{if(engines.put(engine.kind(),engine)!=null)throw new IllegalStateException("DUPLICATE_EXECUTION_ENGINE");});
         BlockingQueue<Runnable> queue=p.getMaxQueued()==0?new SynchronousQueue<>():new ArrayBlockingQueue<>(p.getMaxQueued());
         workers=new ThreadPoolExecutor(p.getMaxConcurrent(),p.getMaxConcurrent(),0,TimeUnit.SECONDS,queue,r->{Thread t=new Thread(r,"customer-run");t.setDaemon(true);return t;});
     }
     @EventListener(ApplicationReadyEvent.class)
     public void recover() { if(config.isEnabled()) for(String id:db.unfinished()) store.terminal(id,"INTERRUPTED","SERVER_RESTARTED",Map.of("costUsd","UNKNOWN")); }
     public Map<String,Object> submit(long session,long owner,String request,String message) {
-        Map<String,Object> row=store.submit(session,owner,request,message);
+        return submit(session,owner,request,message,Map.of());
+    }
+    public Map<String,Object> submit(long session,long owner,String request,String message,Map<String,Object> binding) {
+        Map<String,Object> row=binding==null||binding.isEmpty()?store.submit(session,owner,request,message):store.submit(session,owner,request,message,binding);
         if(Boolean.TRUE.equals(row.get("replayed"))) return publicRun(row);
         String id=row.get("id").toString(); Instant deadline=acceptedDeadline(row);
         FutureTask<Void> task=new FutureTask<>(()->{
-            List<Map<String,Object>> usage=new ArrayList<>();
+            List<Map<String,Object>> usage=trace==null?new java.util.concurrent.CopyOnWriteArrayList<>():new CustomerUsageLedger(id,trace);
             try {
                 if(!CustomerStore.active(db.run(id)))return null;
                 if(!Instant.now().isBefore(deadline)) { store.terminal(id,"TIMED_OUT","DEADLINE_EXCEEDED",Map.of("costUsd","UNKNOWN"));return null; }
-                conversation.execute(id,usage,deadline);
+                var kind=CustomerExecutionEngine.Kind.valueOf(Objects.toString(row.get("execution_engine"),"LEGACY"));
+                var engine=engines.get(kind);if(engine==null)throw new IllegalStateException("EXECUTION_ENGINE_UNAVAILABLE");
+                var out=engine.execute(new CustomerRunContext(id,deadline,usage));
+                if(Thread.currentThread().isInterrupted() || !CustomerStore.active(db.run(id)))return null;
+                if(!Instant.now().isBefore(deadline))throw new IllegalStateException("DEADLINE_EXCEEDED");
+                store.complete(id,out.result(),out.state(),conversation.metrics(usage));
             }
-            catch(Exception ex) { store.terminal(id,"FAILED",errorCode(ex),conversation.metrics(usage)); }
+            catch(Exception ex) { String code=errorCode(ex);store.terminal(id,"DEADLINE_EXCEEDED".equals(code)?"TIMED_OUT":"FAILED",code,conversation.metrics(usage)); }
             finally {
                 var finished=db.run(id);
+                if(trace!=null && finished!=null)trace.archive(id,Objects.toString(finished.get("status"),"UNKNOWN"),Objects.toString(finished.get("error_code"),null));
                 // Preserve terminal accounting and include late usage reported by the worker.
                 if(!usage.isEmpty() || finished==null || finished.get("metrics_json")==null) db.metrics(id,json.write(conversation.metrics(usage)));
                 futures.remove(id);
@@ -83,6 +100,11 @@ public class CustomerRuns {
         return safe;
     }
     private String errorCode(Exception ex) {
+        Throwable cause=ex;
+        for(int i=0;i<8 && cause!=null;i++,cause=cause.getCause()) {
+            String code=cause.getMessage();
+            if(code!=null && code.matches("[A-Z][A-Z0-9_]{2,70}"))return code;
+        }
         String message=ex.getMessage();
         if(message!=null && message.matches("[A-Z][A-Z0-9_]{2,70}")) return message;
         return ex instanceof IllegalArgumentException?"INVALID_MODEL_OUTPUT":"DEPENDENCY_FAILED";

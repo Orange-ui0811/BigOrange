@@ -1,0 +1,293 @@
+{
+  "promptVersion" : "customer-v4.1-scoped-evidence",
+  "scope" : "Synthetic text only; no account profile, platform documents or real history",
+  "costUsd" : "UNKNOWN",
+  "rows" : [ {
+    "id" : "M01",
+    "message" : "刚学",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "明白啦，Java 刚入门的话，选项目时优先看结构清晰、依赖少、能跑起来的小工程更合适。有没有特别想练的方向，比如 Web 后端、命令行小工具，还是数据结构与算法练习？",
+      "changes" : {
+        "experience" : {
+          "value" : "刚学",
+          "quote" : "刚学"
+        }
+      },
+      "profileDefaults" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "lastQuestion" : {
+        "text" : "你的基础怎么样？",
+        "runId" : "synthetic"
+      },
+      "experience" : "刚学",
+      "provenance" : {
+        "experience" : {
+          "quote" : "刚学",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1533,
+        "completion_tokens" : 299,
+        "total_tokens" : 1832,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 640
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 130
+        },
+        "prompt_cache_hit_tokens" : 640,
+        "prompt_cache_miss_tokens" : 893
+      },
+      "durationMs" : 2982,
+      "model" : "deepseek-flash",
+      "costUsd" : "UNKNOWN",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 3042
+  }, {
+    "id" : "M02",
+    "message" : "半年以内就行",
+    "action" : {
+      "intent" : "COLLECT",
+      "reply" : "好的，记录为**半年以内完成**（上限 6 个月，项目更短也可以）。Java 方向你有偏好的主题吗？比如后端服务、Web 网站、工具库或者 Spring 相关的项目，也可以说“都行”我来帮你挑。",
+      "changes" : {
+        "maxDurationDays" : {
+          "value" : {
+            "quantity" : 6,
+            "unit" : "MONTH",
+            "relation" : "AT_MOST"
+          },
+          "quote" : "半年以内就行"
+        }
+      },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "lastQuestion" : {
+        "text" : "你希望多长时间完成？",
+        "runId" : "synthetic"
+      },
+      "durationSemantics" : {
+        "quantity" : 6,
+        "unit" : "MONTH",
+        "relation" : "AT_MOST"
+      },
+      "maxDurationDays" : 180,
+      "provenance" : {
+        "maxDurationDays" : {
+          "quote" : "半年以内就行",
+          "source" : "MESSAGE"
+        }
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1535,
+        "completion_tokens" : 256,
+        "total_tokens" : 1791,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1280
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 77
+        },
+        "prompt_cache_hit_tokens" : 1280,
+        "prompt_cache_miss_tokens" : 255
+      },
+      "durationMs" : 1740,
+      "model" : "deepseek-flash",
+      "costUsd" : "UNKNOWN",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1745
+  }, {
+    "id" : "M03",
+    "message" : "比较第一个和第三个",
+    "action" : {
+      "intent" : "COMPARE",
+      "reply" : "好的，我来对比一下第 1 个（synthetic/project-1）和第 3 个（synthetic/project-3）这两个新手项目，稍后给你列出它们在技术栈、实现难度、所需时间等方面的差异，便于你按自己的目标选择。",
+      "changes" : { },
+      "positions" : [ 1, 3 ]
+    },
+    "state" : {
+      "lastCandidates" : [ {
+        "type" : "BEGINNER_PROJECT",
+        "id" : 1,
+        "name" : "synthetic/project-1"
+      }, {
+        "type" : "BEGINNER_PROJECT",
+        "id" : 2,
+        "name" : "synthetic/project-2"
+      }, {
+        "type" : "BEGINNER_PROJECT",
+        "id" : 3,
+        "name" : "synthetic/project-3"
+      } ]
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1583,
+        "completion_tokens" : 167,
+        "total_tokens" : 1750,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1408
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 19
+        },
+        "prompt_cache_hit_tokens" : 1408,
+        "prompt_cache_miss_tokens" : 175
+      },
+      "durationMs" : 1447,
+      "model" : "deepseek-flash",
+      "costUsd" : "UNKNOWN",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1450
+  }, {
+    "id" : "M04",
+    "message" : "第二个怎么部署",
+    "action" : {
+      "intent" : "DETAIL",
+      "reply" : "好的，你指的是第 2 个 **synthetic/project-2**。我先按它的部署说明来帮你梳理思路：先看项目里的 README 或部署文档，确认运行环境和启动命令，再决定是本地跑还是放到服务器上。\n\n你可以告诉我两点，我再给出对应的具体步骤：\n1. 你打算**本地运行**还是部署到**云服务器**？\n2. 部署环境里方便用 **Docker** 吗？",
+      "changes" : { },
+      "positions" : [ 2 ]
+    },
+    "state" : {
+      "lastCandidates" : [ {
+        "type" : "BEGINNER_PROJECT",
+        "id" : 1,
+        "name" : "synthetic/project-1"
+      }, {
+        "type" : "BEGINNER_PROJECT",
+        "id" : 2,
+        "name" : "synthetic/project-2"
+      }, {
+        "type" : "BEGINNER_PROJECT",
+        "id" : 3,
+        "name" : "synthetic/project-3"
+      } ]
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1582,
+        "completion_tokens" : 413,
+        "total_tokens" : 1995,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1408
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 228
+        },
+        "prompt_cache_hit_tokens" : 1408,
+        "prompt_cache_miss_tokens" : 174
+      },
+      "durationMs" : 2443,
+      "model" : "deepseek-flash",
+      "costUsd" : "UNKNOWN",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 2446
+  }, {
+    "id" : "M05",
+    "message" : "先推荐吧，其他条件我还没想好",
+    "action" : {
+      "intent" : "RECOMMEND",
+      "reply" : "好，那我先按你已确认的 **Java** 方向来找几个真实候选项目给你参考，其他条件不用急着定～\\n\\n要缩小范围的话，只需告诉我一项你最在意的就行，比如：\\n- 想偏**学习练手**还是**求职作品**？\\n- 有没有想做的方向，比如后端接口、工具库、数据处理？\\n\\n先看这批候选，有感兴趣的我可以帮你展开详情或做对比。",
+      "changes" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java"
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1524,
+        "completion_tokens" : 240,
+        "total_tokens" : 1764,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1280
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 54
+        },
+        "prompt_cache_hit_tokens" : 1280,
+        "prompt_cache_miss_tokens" : 244
+      },
+      "durationMs" : 1681,
+      "model" : "deepseek-flash",
+      "costUsd" : "UNKNOWN",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1684
+  }, {
+    "id" : "M06",
+    "message" : "今天先随便聊聊，暂时不要问项目的事",
+    "action" : {
+      "intent" : "CHAT",
+      "reply" : "好呀，那今天就随便聊聊，不聊项目。想聊点什么都行～",
+      "changes" : { },
+      "profileDefaults" : { },
+      "positions" : [ ]
+    },
+    "state" : {
+      "language" : "Java",
+      "lastQuestion" : {
+        "text" : "你的基础怎么样？",
+        "runId" : "synthetic"
+      }
+    },
+    "rejected" : [ ],
+    "passed" : true,
+    "modelCalls" : [ {
+      "status" : "SUCCEEDED",
+      "attempt" : 1,
+      "usage" : {
+        "prompt_tokens" : 1541,
+        "completion_tokens" : 86,
+        "total_tokens" : 1627,
+        "prompt_tokens_details" : {
+          "cached_tokens" : 1280
+        },
+        "completion_tokens_details" : {
+          "reasoning_tokens" : 44
+        },
+        "prompt_cache_hit_tokens" : 1280,
+        "prompt_cache_miss_tokens" : 261
+      },
+      "durationMs" : 1157,
+      "model" : "deepseek-flash",
+      "costUsd" : "UNKNOWN",
+      "protocol" : "NATIVE_ACTION"
+    } ],
+    "durationMs" : 1160
+  } ]
+}

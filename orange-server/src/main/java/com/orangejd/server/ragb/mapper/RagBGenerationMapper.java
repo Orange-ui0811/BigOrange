@@ -17,7 +17,7 @@ public interface RagBGenerationMapper {
             """)
     int publishGenerationVersions(@Param("generationId") Long generationId);
     @Select("""
-            SELECT id, generation_key, redis_prefix, adapter_type, embedding_model, embedding_dimensions, chunk_policy, status, active, document_count, chunk_count,
+            SELECT id, generation_key, redis_prefix, adapter_type, embedding_model, embedding_provider, embedding_revision, embedding_dimensions, chunk_policy, status, active, document_count, chunk_count,
                    last_error, activated_at, create_time, update_time
             FROM rag_b_index_generation
             WHERE active = 1 AND status = 'ACTIVE'
@@ -28,22 +28,22 @@ public interface RagBGenerationMapper {
 
     @Insert("""
             INSERT INTO rag_b_index_generation
-                (generation_key, redis_prefix, adapter_type, status, active, embedding_model, embedding_dimensions, chunk_policy)
+                (generation_key, redis_prefix, adapter_type, status, active, embedding_model, embedding_provider, embedding_revision, embedding_dimensions, chunk_policy)
             VALUES
-                (#{generationKey}, #{redisPrefix}, #{adapterType}, #{status}, 0, #{embeddingModel}, #{embeddingDimensions}, #{chunkPolicy})
+                (#{generationKey}, #{redisPrefix}, #{adapterType}, #{status}, 0, #{embeddingModel}, COALESCE(#{embeddingProvider}, 'GITEE'), #{embeddingRevision}, #{embeddingDimensions}, #{chunkPolicy})
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertGeneration(RagBIndexGeneration generation);
 
     @Select("""
-            SELECT id, generation_key, redis_prefix, adapter_type, embedding_model, embedding_dimensions, chunk_policy, status, active, document_count, chunk_count,
+            SELECT id, generation_key, redis_prefix, adapter_type, embedding_model, embedding_provider, embedding_revision, embedding_dimensions, chunk_policy, status, active, document_count, chunk_count,
                    last_error, activated_at, create_time, update_time
             FROM rag_b_index_generation WHERE id = #{id}
             """)
     RagBIndexGeneration selectGeneration(@Param("id") Long id);
 
     @Select("""
-            SELECT id, generation_key, redis_prefix, adapter_type, embedding_model, embedding_dimensions, chunk_policy, status, active, document_count, chunk_count,
+            SELECT id, generation_key, redis_prefix, adapter_type, embedding_model, embedding_provider, embedding_revision, embedding_dimensions, chunk_policy, status, active, document_count, chunk_count,
                    last_error, activated_at, create_time, update_time
             FROM rag_b_index_generation ORDER BY id DESC LIMIT #{limit}
             """)

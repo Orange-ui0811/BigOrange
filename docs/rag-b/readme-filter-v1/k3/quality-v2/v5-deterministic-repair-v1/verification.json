@@ -1,0 +1,199 @@
+{
+  "status": "V5_DETERMINISTIC_REPAIRS_OFFLINE_VERIFIED",
+  "versions": {
+    "parser": "CONTIGUOUS_MARKDOWN_BLOCKS_V1",
+    "rulePolicy": "README_RULE_PREVIEW_V1_5",
+    "selectionPolicy": "README_MODEL_REVIEW_V1_5",
+    "prompt": "README_SELECTOR_ZH_V5_SOURCE_ADMISSION",
+    "schema": "README_SELECTIONS_V2",
+    "projectionPolicy": "README_RECOMMENDATION_V3"
+  },
+  "tests": 104,
+  "suites": [
+    {
+      "class": "ReadmeKnowledgeFilterTest",
+      "tests": 19
+    },
+    {
+      "class": "ReadmeRecommendationProjectionTest",
+      "tests": 17
+    },
+    {
+      "class": "ReadmeDependencyClosureTest",
+      "tests": 8
+    },
+    {
+      "class": "ReadmeModelReviewTest",
+      "tests": 17
+    },
+    {
+      "class": "ReadmeSpringAiReviewTransportTest",
+      "tests": 2
+    },
+    {
+      "class": "RagBTokenChunkerTest",
+      "tests": 2
+    },
+    {
+      "class": "ReadmeR3RepairTest",
+      "tests": 25
+    },
+    {
+      "class": "K3V5DeterministicRepairTest",
+      "tests": 12
+    },
+    {
+      "class": "K3V5RepairEvidenceTest",
+      "tests": 2
+    }
+  ],
+  "scorerTests": 5,
+  "redRegressions": {
+    "tests": 3,
+    "failedBeforeRepair": 3
+  },
+  "corpus": {
+    "bodyPackets": 189,
+    "dispositionLeaks": 0,
+    "documents": 303,
+    "idempotenceErrors": 0,
+    "indexWrites": 0,
+    "navigationLinks": 3381,
+    "providerCalls": 0,
+    "sourceMappingErrors": 0
+  },
+  "regressionMetrics149": {
+    "bodyPrecision": {
+      "numerator": 53,
+      "denominator": 54,
+      "rate": 0.981481
+    },
+    "inScopeDecisionAgreement": {
+      "numerator": 55,
+      "denominator": 78,
+      "rate": 0.705128
+    },
+    "usableBodyRecovery": {
+      "numerator": 53,
+      "denominator": 82,
+      "rate": 0.646341
+    },
+    "allModelTargetDecisionAgreement": {
+      "numerator": 88,
+      "denominator": 123,
+      "rate": 0.715447
+    },
+    "allTargetProposalDecisionAgreement": {
+      "numerator": 88,
+      "denominator": 123,
+      "rate": 0.715447
+    },
+    "applicabilityAgreement": {
+      "numerator": 89,
+      "denominator": 123,
+      "rate": 0.723577
+    },
+    "dispositionAgreement": {
+      "numerator": 87,
+      "denominator": 123,
+      "rate": 0.707317
+    },
+    "requiredScopeRetention": {
+      "numerator": 76,
+      "denominator": 82,
+      "rate": 0.926829
+    },
+    "navigationComplete": {
+      "numerator": 27,
+      "denominator": 27,
+      "rate": 1.0
+    },
+    "criticalCorrectlyUsable": 25,
+    "criticalStillReview": 32,
+    "criticalWrongDeletion": 0,
+    "missingConditionsInUsedEvidence": 0,
+    "scopeOverreach": 1,
+    "wrongSourceCitation": 0,
+    "unapprovedCandidateEvidence": 0,
+    "uncertainPromotion": 1,
+    "unjudgedBodyBlocks": 0,
+    "repositoriesPresent": 12,
+    "repositoriesExpected": 12,
+    "labelledCases": 149,
+    "modelTargets": 123,
+    "controls": 26,
+    "bodyRecoveryByRole": {
+      "MODEL_TARGET": {
+        "numerator": 52,
+        "denominator": 77,
+        "rate": 0.675325
+      },
+      "RULE_OR_SCOPE_CONTROL": {
+        "numerator": 1,
+        "denominator": 5,
+        "rate": 0.2
+      }
+    },
+    "usefulButBlocked": [
+      {
+        "caseId": "Q2-427-53",
+        "finalDecision": "REVIEW",
+        "inBody": false
+      },
+      {
+        "caseId": "S1-522-34",
+        "finalDecision": "REVIEW",
+        "inBody": false
+      }
+    ],
+    "usefulKnowledgeCoverageIncludingBlocked": {
+      "numerator": 53,
+      "denominator": 84,
+      "rate": 0.630952
+    },
+    "finalDecisionCounts": {
+      "REVIEW": 57,
+      "KEEP": 87,
+      "DROP": 5
+    },
+    "qualityGatePassed": false
+  },
+  "historicalFilesUnchanged": true,
+  "newProviderCalls": 0,
+  "indexWrites": 0,
+  "newPromptQuality": "NOT_RUN",
+  "pilotProposal": {
+    "authorized": false,
+    "technicalInputsVerified": true,
+    "readyForExecution": false,
+    "requiresNewBudgetAuthorization": true,
+    "repositories": [
+      "Mintplex-Labs/anything-llm",
+      "FlowiseAI/Flowise",
+      "n8n-io/n8n",
+      "appsmithorg/appsmith",
+      "ByteBunny777/Docguard"
+    ],
+    "primaryRequests": 16,
+    "reserveRequests": 2,
+    "maximumProposedAttempts": 18,
+    "modelTargets": 78,
+    "labelledCases": 101,
+    "maxBlocks": 8,
+    "maxInputUpperBound": 12000,
+    "maxOutputTokens": 2048,
+    "timeoutSeconds": 35,
+    "automaticRetries": 0,
+    "firstPassReservedUpperBound": 191967,
+    "maximumReservedUpperBound": 252864,
+    "newLedgerPath": "docs/rag-b/readme-filter-v1/k3/quality-v2/v5-pilot-v2/provider-calls.jsonl",
+    "reservePolicy": "Same request only; one retry each for first two transport/protocol failures; preserve first-pass scores; no semantic resampling.",
+    "oldBudgetTransferable": false,
+    "purpose": "Check reachable V5 targets and final admission after deterministic repairs. Existing rule/uncertainty holds remain in denominators."
+  },
+  "testInputsSha256": "05bf11a05890275534a1f0d082a7e51bfa87946e31f4e509c397f11677529700",
+  "testLogSha256": "3f1160d3a4abcd488e72fa9bb6287fd5e98e05509914382ca86a9c39b4d271ea",
+  "plansSha256": "6f93c460d3b00fbe3a7677efae74d81e93e56358927bedd30b913e231d2bcd93",
+  "requestsSha256": "9db81f915bfb732fb4e96e5587f893657f5b5a607333aa1e5a45d62311c11806",
+  "labelsSha256": "039ef896210225843d3fad3482100902976f138ddd99e427830a1516bc3e4aab"
+}

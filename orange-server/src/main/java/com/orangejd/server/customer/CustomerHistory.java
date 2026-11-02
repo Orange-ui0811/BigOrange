@@ -34,7 +34,7 @@ public final class CustomerHistory {
         String summary=excerpts.isEmpty()?"":json.write(Map.of("kind","USER_EXCERPTS_NOT_CONFIRMED_CONDITIONS","sources",excerpts));
         return new View(List.copyOf(recent),summary,through);
     }
-    private static Map<String,Object> view(Map<String,Object> row,CustomerJson json) {
+    static Map<String,Object> view(Map<String,Object> row,CustomerJson json) {
         String content=Objects.toString(row.get("content"),"");
         if("assistant".equals(row.get("role"))) {
             Map<String,Object> answer;

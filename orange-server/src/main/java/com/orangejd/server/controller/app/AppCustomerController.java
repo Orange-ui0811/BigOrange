@@ -24,13 +24,13 @@ public class AppCustomerController {
     @GetMapping("/sessions") public Result<?> sessions() { return Result.success(store.sessions(owner())); }
     @DeleteMapping("/sessions/{id}") public Result<?> deleteSession(@PathVariable long id) { store.deleteSession(id,owner()); return Result.success(); }
     @GetMapping("/sessions/{id}/messages") public Result<?> history(@PathVariable long id,@RequestParam(defaultValue="9223372036854775807") long before,@RequestParam(defaultValue="50") int limit) { return Result.success(store.history(id,owner(),before,limit)); }
-    @PostMapping("/sessions/{id}/runs") public Result<?> submit(@PathVariable long id,@RequestBody RunInput input) { return Result.success(runs.submit(id,owner(),input.requestId(),input.message())); }
+    @PostMapping("/sessions/{id}/runs") public Result<?> submit(@PathVariable long id,@RequestBody RunInput input) { return Result.success(input.context()==null?runs.submit(id,owner(),input.requestId(),input.message()):runs.submit(id,owner(),input.requestId(),input.message(),input.context())); }
     @GetMapping("/runs/{id}") public Result<?> run(@PathVariable String id) { return Result.success(runs.get(id,owner())); }
     @GetMapping(value="/runs/{id}/events",produces="text/event-stream") public SseEmitter events(@PathVariable String id) { return runs.events(id,owner()); }
     @PostMapping("/runs/{id}/cancel") public Result<?> cancel(@PathVariable String id) { return Result.success(runs.cancel(id,owner())); }
     @PostMapping("/runs/{id}/import-draft") public Result<?> importDraft(@PathVariable String id,@RequestBody ImportInput input) { return Result.success(imports.draft(id,owner(),input.type(),input.projectId())); }
     private long owner() { Long id=BaseContext.getCurrentId(); if(id==null || id<=0) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"请先登录"); return id; }
-    public record RunInput(String requestId,String message) {}
+    public record RunInput(String requestId,String message,Map<String,Object> context) {public RunInput(String requestId,String message){this(requestId,message,null);}}
     public record ImportInput(String type,long projectId) {}
     @ExceptionHandler(ResponseStatusException.class)
     public org.springframework.http.ResponseEntity<Result<String>> status(ResponseStatusException ex) {

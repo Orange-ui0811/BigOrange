@@ -1,0 +1,29 @@
+{
+  "phase": "full",
+  "caseSha256": "71405c1f3acff8573481a3f002933b37baaa306041a6073b455b9e6e962d1221",
+  "runs": 88,
+  "model": "deepseek-flash",
+  "scope": "Synthetic requirements and retrieved B evidence only; profiles/history are synthetic.",
+  "embeddingProvider": "OLLAMA",
+  "environmentTextEndpoint": "https://api.deepseek.com",
+  "endpointResolution": "Platform text configuration; active runtime settings can override environment.",
+  "purposePolicy": {
+    "thinking": "false",
+    "outputTokens": "2048",
+    "stageSeconds": "30",
+    "retryReserveSeconds": "10",
+    "maxAttempts": 2,
+    "truncatedThinkingFallback": "same input/schema with thinking disabled"
+  },
+  "sourceSha256": {
+    "orange-server\\src\\main\\java\\com\\orangejd\\server\\customer\\CustomerModel.java": "75263c034c39cb11006c98b71030e176c8f6ec66f874345d5eed9c3adc2f0794",
+    "orange-server\\src\\main\\java\\com\\orangejd\\server\\customer\\CustomerProperties.java": "62850ffa136b1f9e1a8426138efab5b7d7e084672a7831c8a26c4ea4752da139",
+    "orange-server\\src\\main\\java\\com\\orangejd\\server\\customer\\CustomerPurpose.java": "f75878998b81eee4ebdd514389783e9a39a4475d5e0edc1ee695a206b601f0b5"
+  },
+  "releaseApproved": false,
+  "previousSmokeGate": {
+    "path": "docs\\customer\\langgraph4j\\release-verification-20261008\\smoke\\execution.json",
+    "sha256": "529455f72a858c104779912dbc69b1b17f1e3252582903e0a3435e15a93d56aa",
+    "newSmokeRequests": 0
+  }
+}

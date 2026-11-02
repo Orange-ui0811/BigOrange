@@ -1,5 +1,4 @@
 package com.orangejd.server.ragb.mapper;
-
 import com.orangejd.server.ragb.domain.RagBChunk;
 import com.orangejd.server.ragb.domain.RagBDocument;
 import com.orangejd.server.ragb.domain.RagBDocumentVersion;
@@ -10,10 +9,8 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
 import java.util.List;
 import java.util.Map;
-
 @Mapper
 public interface RagBMapper extends RagBGenerationMapper {
     @Insert("""
@@ -24,7 +21,6 @@ public interface RagBMapper extends RagBGenerationMapper {
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertDocument(RagBDocument document);
-
     @Insert("""
             INSERT INTO rag_b_document_version
                 (document_id, version_no, content_hash, original_content, translated_content, status, chunk_count)
@@ -34,7 +30,6 @@ public interface RagBMapper extends RagBGenerationMapper {
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertVersion(RagBDocumentVersion version);
-
     @Insert("""
             INSERT INTO rag_b_chunk
                 (document_id, version_id, chunk_index, section_path, start_offset, end_offset,
@@ -45,7 +40,6 @@ public interface RagBMapper extends RagBGenerationMapper {
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertChunk(RagBChunk chunk);
-
     @Select("""
             SELECT id, source_type, source_ref, title, status, active_version_id, content_hash,
                    retry_count, last_error, deleted_at, create_time, update_time
@@ -53,7 +47,6 @@ public interface RagBMapper extends RagBGenerationMapper {
             WHERE id = #{id}
             """)
     RagBDocument selectDocument(@Param("id") Long id);
-
     @Select("""
             SELECT id, source_type, source_ref, title, status, active_version_id, content_hash,
                    retry_count, last_error, deleted_at, create_time, update_time
@@ -62,7 +55,6 @@ public interface RagBMapper extends RagBGenerationMapper {
             """)
     RagBDocument selectDocumentBySource(@Param("sourceType") String sourceType,
                                         @Param("sourceRef") String sourceRef);
-
     @Select("""
             SELECT id FROM rag_b_document
             WHERE status='READY' AND deleted_at IS NULL AND active_version_id IS NOT NULL
@@ -73,7 +65,6 @@ public interface RagBMapper extends RagBGenerationMapper {
                      update_time DESC,id DESC LIMIT 12
             """)
     List<Long> selectProjectEvidenceDocuments(@Param("type") String type,@Param("source") String source,@Param("repository") String repository);
-
     @Select("""
             SELECT id, source_type, source_ref, title, status, active_version_id, content_hash,
                    retry_count, last_error, deleted_at, create_time, update_time
@@ -82,7 +73,6 @@ public interface RagBMapper extends RagBGenerationMapper {
             LIMIT #{limit}
             """)
     List<RagBDocument> selectDocuments(@Param("limit") int limit);
-
     @Select("""
             SELECT id, source_type, source_ref, title, status, active_version_id, content_hash,
                    retry_count, last_error, deleted_at, create_time, update_time
@@ -92,7 +82,6 @@ public interface RagBMapper extends RagBGenerationMapper {
             LIMIT #{limit}
             """)
     List<RagBDocument> selectGithubSyncDocuments(@Param("limit") int limit);
-
     @Select("""
             SELECT id, document_id, version_no, content_hash, original_content, translated_content,
                    status, chunk_count, indexed_generation_id, last_error, create_time, update_time

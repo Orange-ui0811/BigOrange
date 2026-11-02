@@ -1,0 +1,55 @@
+{
+  "scope": "对低分或引用可疑样本的人工式逐项复核，不是独立盲审，不据此计算全量引用准确率",
+  "findings": [
+    {
+      "sample": "fact-20-zh-b",
+      "issue": "UNSUPPORTED_CAPABILITY",
+      "detail": "回答将Hermes的环境持久化、闲置休眠和唤醒推断为运行故障后恢复长期任务。C1没有明确说明checkpoint或故障恢复，不能支持该核心结论。",
+      "action": "优先召回LangGraph Durable execution片段，找不到足够证据时拒绝确认故障恢复能力"
+    },
+    {
+      "sample": "fact-21-zh-b",
+      "issue": "UNSUPPORTED_CAPABILITY",
+      "detail": "回答引用C6的低级编排框架、有状态长任务部署信息，推断支持执行中检查和修改状态。引用片段没有Human-in-the-loop的明确证据。",
+      "action": "增加能力级精排及逐句引用支持校验"
+    },
+    {
+      "sample": "fact-26-zh-b",
+      "issue": "CITATION_ATTRIBUTION_AND_SINGLE_GOLD_BIAS",
+      "detail": "Hermes的聊天接入与记忆能力有C6支持，但每月5美元VPS的句子引用C5，实际明确证据位于C6。该题参考答案只列nanobot，对其他符合部分或全部需求的助手会产生参考覆盖低分。轻量与最符合的结论仍需单独证明。",
+      "action": "纠正引用定位；扩充可接受项目集合及需求逐项判据"
+    },
+    {
+      "sample": "fact-12-zh-b",
+      "issue": "CITATION_ATTRIBUTION",
+      "detail": "第一段将开源与Cesium的浏览器/WebGL能力合并引用C2/C3，开源的明确依据位于C4。因此全上下文忠实度不能代表具体引用支持正确。",
+      "action": "按原子事实拆句并绑定对应片段"
+    },
+    {
+      "sample": "fact-29-zh-a",
+      "issue": "UNSUPPORTED_CAPABILITY",
+      "detail": "A压缩卡说明矢量/光栅引擎与节点核心，未保留完全无损编辑的明确证据，回答仍确认无损编辑。",
+      "action": "任务相关压缩应保留核心能力证据，生成前检查需求证据覆盖"
+    },
+    {
+      "sample": "fact-12-zh-a",
+      "issue": "JUDGE_INTERPRETATION_LIMIT",
+      "detail": "Cesium的浏览器、WebGL和动态数据可视化事实均出现在C1，评分器因文档未直接写建议研究和适合展示能力而判定部分陈述不支持。需要区分事实错误与合理推荐推断。",
+      "action": "保留原始评分，增加评分规则校准，不把1减去忠实度当作事实错误率"
+    },
+    {
+      "sample": "fact-04-zh-a",
+      "issue": "REFERENCE_F1_LIMIT",
+      "detail": "A回答描述设计评价、竞赛匹配和申报文案能力，与证据及参考核心功能一致，但未报出参考中的确切仓库名，参考事实F1为0。该分数不能单独代表回答事实准确性。",
+      "action": "扩充实体别名及参考原子事实；下一轮采用独立校准题集"
+    }
+  ],
+  "verifiedSourcePresence": {
+    "documentId": 46,
+    "sourceRef": "langchain-ai/langgraph",
+    "characters": 6351,
+    "DurablePosition": 2004,
+    "HumanPosition": 2233,
+    "conclusion": "关键英文能力已存在于B原文，失败不应归因为尚未全量入库"
+  }
+}

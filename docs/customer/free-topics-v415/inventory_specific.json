@@ -1,0 +1,1451 @@
+{
+  "case": {
+    "id": "inventory_specific",
+    "family": "inventory",
+    "kind": "specific",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：库存管理。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "167",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：库存管理。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "ec0d04fb-a837-41d2-9450-a3b2ec4e23e7",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 8078,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：库存管理"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "experience": "一年",
+          "topic": [
+            "库存管理"
+          ],
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年；已记录项目目标：学习；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "scope": "b2019e97c95d7303a61546b232fc3624dca1fdf6d041834016ed827480f0d713",
+            "topic": "库存管理",
+            "proofs": {}
+          },
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "countUnit": "DISTINCT_REPOSITORY",
+          "alternatives": [],
+          "available": {
+            "confirmed": 494,
+            "total": 494,
+            "uncertain": 0
+          },
+          "current": {
+            "confirmed": 0,
+            "total": 0,
+            "uncertain": 0
+          },
+          "conditions": {
+            "topic": [
+              "库存管理"
+            ]
+          },
+          "calculatedAt": "2026-10-04T03:51:08.981535799Z"
+        },
+        "status": "NO_MATCH",
+        "answer": "已记录基础（排序偏好）：一年；已记录项目目标：学习；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n暂时还没有核对出有效的调整方案。我会保留你的方向，不自动换成其他领域。可以从原目标里选一个最重要的功能继续找，或补充一个参考项目；目前不能保证放宽时间或语言就有合适结果。你最想先实现哪部分？",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年；已记录项目目标：学习；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "embeddingUsage": "NOT_REPORTED",
+        "promptVersion": "customer-v4.15-purpose-review",
+        "modelCalls": [
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 5325,
+              "completion_tokens": 503,
+              "total_tokens": 5828,
+              "prompt_tokens_details": {
+                "cached_tokens": 5120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 264
+              },
+              "prompt_cache_hit_tokens": 5120,
+              "prompt_cache_miss_tokens": 205
+            },
+            "durationMs": 2398,
+            "model": "deepseek-flash",
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 182,
+              "completion_tokens": 16,
+              "total_tokens": 198,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 182
+            },
+            "durationMs": 616,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 1475,
+              "completion_tokens": 414,
+              "total_tokens": 1889,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 408
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 1219
+            },
+            "durationMs": 2268,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "costUsd": "UNKNOWN",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "models": [
+            "deepseek-flash"
+          ],
+          "calls": 3,
+          "callsWithoutUsage": 0,
+          "outputTokens": 933,
+          "totalTokens": 7915,
+          "cacheMissTokens": 1606,
+          "inputTokens": 6982,
+          "cacheHitTokens": 5376,
+          "complete": true,
+          "reasoningTokens": 672
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "库存管理 | 库存控制 | inventory management",
+            "topic": [
+              "库存管理"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.019254032258064515,
+                  "title": "cifertech/free-embedded-dev-tools",
+                  "chunkId": 18027,
+                  "content": "## :package: Parts Inventory & BOM Management\n\n| Tool | What's Free | Notes |\n|---|---|---|\n| [InvenTree](https://inventree.org/) | Free, open-source, self-hosted | Stock control, BOM management, supplier data, and a [KiCad plugin](https://inventree.org/blog/2023/09/26/kicad) for native symbol libraries. |\n| [Ki-nTree](https://github.com/sparkmicro/Ki-nTree) | Free, open-source | Pulls part data from DigiKey/Mouser/LCSC/Element14 and creates InvenTree + KiCad entries in one step. |\n| [Part-DB](https://github.com/Part-DB/Part-DB-server) | Free, open-source, self-hosted | Similar scope to InvenTree with KiCad integration. |\n| [PartKeepr](https://github.com/partkeepr/PartKeepr) | Free, open-source | Older, simpler option for shared hackerspace inventory. |\n\n",
+                  "endOffset": 14638,
+                  "sourceRef": "cifertech/free-embedded-dev-tools",
+                  "versionId": 770,
+                  "chunkIndex": 19,
+                  "documentId": 551,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":package: Parts Inventory & BOM Management",
+                  "startOffset": 13873,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017364813404417367,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15210,
+                  "content": "##### :black_small_square: Productivity\n\n<p>\n&nbsp;&nbsp; <a href=\"https://taskwarrior.org\"><b>taskwarrior</b></a> - task management system, todo list <br>\n</p>\n\n",
+                  "endOffset": 30294,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 35,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Productivity",
+                  "startOffset": 30132,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=41,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017100009738046547,
+                  "title": "Awesome-Selfhosted",
+                  "chunkId": 17189,
+                  "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                  "endOffset": 3047,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "versionId": 645,
+                  "chunkIndex": 2,
+                  "documentId": 426,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Awesome-Selfhosted > 目录",
+                  "startOffset": 1205,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=103,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "ToolJet/ToolJet",
+                  "chunkId": 16576,
+                  "content": "<p align=\"center\">\n    <img src=\"docs/static/img/readme/banner.png\" alt=\"ToolJet 仪表盘显示库存和订单\"/>\n</p>\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/flowchart.png\"/>\n</p>\n\n",
+                  "endOffset": 1360,
+                  "sourceRef": "ToolJet/ToolJet",
+                  "versionId": 548,
+                  "chunkIndex": 1,
+                  "documentId": 329,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 1180,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "wntrblm/nox",
+                  "chunkId": 12905,
+                  "content": "## 仓库地址\nhttps://github.com/wntrblm/nox\n\n",
+                  "endOffset": 71,
+                  "sourceRef": "career:229",
+                  "versionId": 343,
+                  "chunkIndex": 2,
+                  "documentId": 124,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "wntrblm/nox > 仓库地址",
+                  "startOffset": 31,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "virgiliojr94/book-to-skill",
+                  "chunkId": 10445,
+                  "content": "## 仓库地址\nhttps://github.com/virgiliojr94/book-to-skill\n\n",
+                  "endOffset": 101,
+                  "sourceRef": "career:270",
+                  "versionId": 248,
+                  "chunkIndex": 2,
+                  "documentId": 29,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "virgiliojr94/book-to-skill > 仓库地址",
+                  "startOffset": 46,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "timmyy123/LLM-Hub",
+                  "chunkId": 11953,
+                  "content": "## 仓库地址\nhttps://github.com/timmyy123/LLM-Hub\n\n",
+                  "endOffset": 83,
+                  "sourceRef": "beginner:26",
+                  "versionId": 307,
+                  "chunkIndex": 2,
+                  "documentId": 88,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "timmyy123/LLM-Hub > 仓库地址",
+                  "startOffset": 37,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "Project-N-E-K-O/N.E.K.O",
+                  "chunkId": 10096,
+                  "content": "## 仓库地址\nhttps://github.com/Project-N-E-K-O/N.E.K.O\n\n",
+                  "endOffset": 95,
+                  "sourceRef": "career:253",
+                  "versionId": 237,
+                  "chunkIndex": 2,
+                  "documentId": 18,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Project-N-E-K-O/N.E.K.O > 仓库地址",
+                  "startOffset": 43,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "seek-oss/sku",
+                  "chunkId": 11940,
+                  "content": "## 仓库地址\nhttps://github.com/seek-oss/sku\n\n",
+                  "endOffset": 73,
+                  "sourceRef": "beginner:24",
+                  "versionId": 306,
+                  "chunkIndex": 2,
+                  "documentId": 87,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "seek-oss/sku > 仓库地址",
+                  "startOffset": 32,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014401133947554929,
+                  "title": "openobserve/openobserve",
+                  "chunkId": 12722,
+                  "content": "### 📊 Logs\n\nCentralized log management with full-text search, SQL queries, quick filters, and a visual query builder. Instantly search across all your logs, build dashboards from log data, and set up alerts — all on Parquet columnar storage for 140x lower storage cost than Elasticsearch. [Read more →](https://openobserve.ai/logs/)\n\n![Logs search with histogram and field explorer](./screenshots/logs.png)\n\n",
+                  "endOffset": 6236,
+                  "sourceRef": "career:223",
+                  "versionId": 337,
+                  "chunkIndex": 26,
+                  "documentId": 118,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "openobserve/openobserve > Product Tour > 📊 Logs",
+                  "startOffset": 5827,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=25,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "ciembor/agent-rules-books",
+                  "chunkId": 10440,
+                  "content": "### [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)\n\nAuthor: [Michael T. Nygard](https://www.michaelnygard.com/)\n\nThe book focuses on systems that survive production reality: failures, overload, timeouts, retries, circuit breakers, bulkheads, backpressure, observability, and deployment behavior. This rule set is useful for services, APIs, queues, integrations, and critical production paths.\n\n",
+                  "endOffset": 12552,
+                  "sourceRef": "career:267",
+                  "versionId": 247,
+                  "chunkIndex": 33,
+                  "documentId": 28,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ciembor/agent-rules-books > Books List > [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)",
+                  "startOffset": 12131,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "netobserv/netobserv-operator",
+                  "chunkId": 13307,
+                  "content": "## 仓库地址\nhttps://github.com/netobserv/netobserv-operator\n\n",
+                  "endOffset": 105,
+                  "sourceRef": "career:244",
+                  "versionId": 356,
+                  "chunkIndex": 2,
+                  "documentId": 137,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "netobserv/netobserv-operator > 仓库地址",
+                  "startOffset": 48,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013968253968253968,
+                  "title": "系统设计入门",
+                  "chunkId": 11417,
+                  "content": "### Relational database management system (RDBMS)\n\nA relational database like SQL is a collection of data items organized in tables.\n\n**ACID** is a set of properties of relational database [transactions](https://en.wikipedia.org/wiki/Database_transaction).\n\n* **Atomicity** - Each transaction is all or nothing\n* **Consistency** - Any transaction will bring the database from one valid state to another\n* **Isolation** - Executing transactions concurrently has the same results as if the transactions were executed serially\n* **Durability** - Once a transaction has been committed, it will remain so\n\nThere are many techniques to scale a relational database: **master-slave replication**, **master-master replication**, **federation**, **sharding**, **denormalization**, and **SQL tuning**.\n\n",
+                  "endOffset": 43011,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "versionId": 291,
+                  "chunkIndex": 88,
+                  "documentId": 72,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "The System Design Primer > Database > Relational database management system (RDBMS)",
+                  "startOffset": 42219,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=30,lexicalRank=10,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "BetterWright/betterwright",
+                  "chunkId": 11888,
+                  "content": "## 仓库地址\nhttps://github.com/BetterWright/betterwright\n\n",
+                  "endOffset": 99,
+                  "sourceRef": "beginner:11",
+                  "versionId": 302,
+                  "chunkIndex": 2,
+                  "documentId": 83,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "BetterWright/betterwright > 仓库地址",
+                  "startOffset": 45,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "fastrepl/anarlog",
+                  "chunkId": 11810,
+                  "content": "## 仓库地址\nhttps://github.com/fastrepl/anarlog\n\n",
+                  "endOffset": 81,
+                  "sourceRef": "beginner:2",
+                  "versionId": 296,
+                  "chunkIndex": 2,
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "fastrepl/anarlog > 仓库地址",
+                  "startOffset": 36,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "mylee04/code-notify",
+                  "chunkId": 13202,
+                  "content": "## 仓库地址\nhttps://github.com/mylee04/code-notify\n\n",
+                  "endOffset": 87,
+                  "sourceRef": "career:241",
+                  "versionId": 353,
+                  "chunkIndex": 2,
+                  "documentId": 134,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "mylee04/code-notify > 仓库地址",
+                  "startOffset": 39,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "affaan-m/ECC",
+                  "chunkId": 16883,
+                  "content": "</div>\n\n---\n\n**面向代理工作的 harness 原生操控系统。构建于真实的多 harness 工程工作流之上。**\n\n不仅仅是配置。一个完整的系统：技能、本能、记忆优化、持续学习、安全扫描和研究优先开发。",
+                  "endOffset": 3596,
+                  "sourceRef": "affaan-m/ECC",
+                  "versionId": 601,
+                  "chunkIndex": 3,
+                  "documentId": 382,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 3487,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15207,
+                  "content": "##### :black_small_square: Databases\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/xo/usql\"><b>usql</b></a> - universal command-line interface for SQL databases.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/dbcli/pgcli\"><b>pgcli</b></a> - postgres CLI with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/dbcli/mycli\"><b>mycli</b></a> - terminal client for MySQL with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/dbcli/litecli\"><b>litecli</b></a> - SQLite CLI with autocompletion and syntax highlighting.<br>\n  &nbsp;&nbsp; <a href=\"https://github.com/dbcli/mssql-cli\"><b>mssql-cli</b></a> - SQL Server CLI with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/osquery/osquery\"><b>OSQuery</b></a> - is a SQL powered operating system instrumentation, monitoring, and analytics framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/ankane/pgsync\"><b>pgsync</b></a> - sync data from one Postgres database to another.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/laixintao/iredis\"><b>iredis</b></a> - a terminal client for redis with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://www.schemacrawler.com/diagramming.html\"><b>SchemaCrawler</b></a> - generates an E-R diagram of your database.<br>\n</p>\n\n",
+                  "endOffset": 29500,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 32,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Databases",
+                  "startOffset": 28161,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "mlflow/mlflow",
+                  "chunkId": 12668,
+                  "content": "## 仓库地址\nhttps://github.com/mlflow/mlflow\n\n",
+                  "endOffset": 75,
+                  "sourceRef": "career:221",
+                  "versionId": 336,
+                  "chunkIndex": 2,
+                  "documentId": 117,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "mlflow/mlflow > 仓库地址",
+                  "startOffset": 33,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "SeanJ1ang/design-judge-skills",
+                  "chunkId": 9703,
+                  "content": "## 仓库地址\nhttps://github.com/SeanJ1ang/design-judge-skills\n\n",
+                  "endOffset": 107,
+                  "sourceRef": "beginner:91",
+                  "versionId": 224,
+                  "chunkIndex": 2,
+                  "documentId": 5,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "SeanJ1ang/design-judge-skills > 仓库地址",
+                  "startOffset": 49,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 254,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "cifertech/free-embedded-dev-tools",
+                  "evidence": [
+                    {
+                      "score": 0.019254032258064515,
+                      "title": "cifertech/free-embedded-dev-tools",
+                      "chunkId": 18027,
+                      "content": "## :package: Parts Inventory & BOM Management\n\n| Tool | What's Free | Notes |\n|---|---|---|\n| [InvenTree](https://inventree.org/) | Free, open-source, self-hosted | Stock control, BOM management, supplier data, and a [KiCad plugin](https://inventree.org/blog/2023/09/26/kicad) for native symbol libraries. |\n| [Ki-nTree](https://github.com/sparkmicro/Ki-nTree) | Free, open-source | Pulls part data from DigiKey/Mouser/LCSC/Element14 and creates InvenTree + KiCad entries in one step. |\n| [Part-DB](https://github.com/Part-DB/Part-DB-server) | Free, open-source, self-hosted | Similar scope to InvenTree with KiCad integration. |\n| [PartKeepr](https://github.com/partkeepr/PartKeepr) | Free, open-source | Older, simpler option for shared hackerspace inventory. |\n\n",
+                      "endOffset": 14638,
+                      "sourceRef": "cifertech/free-embedded-dev-tools",
+                      "versionId": 770,
+                      "chunkIndex": 19,
+                      "documentId": 551,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":package: Parts Inventory & BOM Management",
+                      "startOffset": 13873,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:cifertech/free-embedded-dev-tools",
+                  "bestScore": 0.019254032258064515,
+                  "sourceRef": "cifertech/free-embedded-dev-tools",
+                  "documentId": 551,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "evidence": [
+                    {
+                      "score": 0.017364813404417367,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15210,
+                      "content": "##### :black_small_square: Productivity\n\n<p>\n&nbsp;&nbsp; <a href=\"https://taskwarrior.org\"><b>taskwarrior</b></a> - task management system, todo list <br>\n</p>\n\n",
+                      "endOffset": 30294,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 35,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Productivity",
+                      "startOffset": 30132,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=41,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15207,
+                      "content": "##### :black_small_square: Databases\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/xo/usql\"><b>usql</b></a> - universal command-line interface for SQL databases.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/dbcli/pgcli\"><b>pgcli</b></a> - postgres CLI with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/dbcli/mycli\"><b>mycli</b></a> - terminal client for MySQL with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/dbcli/litecli\"><b>litecli</b></a> - SQLite CLI with autocompletion and syntax highlighting.<br>\n  &nbsp;&nbsp; <a href=\"https://github.com/dbcli/mssql-cli\"><b>mssql-cli</b></a> - SQL Server CLI with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/osquery/osquery\"><b>OSQuery</b></a> - is a SQL powered operating system instrumentation, monitoring, and analytics framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/ankane/pgsync\"><b>pgsync</b></a> - sync data from one Postgres database to another.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/laixintao/iredis\"><b>iredis</b></a> - a terminal client for redis with autocompletion and syntax highlighting.<br>\n&nbsp;&nbsp; <a href=\"https://www.schemacrawler.com/diagramming.html\"><b>SchemaCrawler</b></a> - generates an E-R diagram of your database.<br>\n</p>\n\n",
+                      "endOffset": 29500,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 32,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Databases",
+                      "startOffset": 28161,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:trimstray/the-book-of-secret-knowledge",
+                  "bestScore": 0.017364813404417367,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "documentId": 213,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Awesome-Selfhosted",
+                  "evidence": [
+                    {
+                      "score": 0.017100009738046547,
+                      "title": "Awesome-Selfhosted",
+                      "chunkId": 17189,
+                      "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                      "endOffset": 3047,
+                      "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                      "versionId": 645,
+                      "chunkIndex": 2,
+                      "documentId": 426,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Awesome-Selfhosted > 目录",
+                      "startOffset": 1205,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=103,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:awesome-selfhosted/awesome-selfhosted",
+                  "bestScore": 0.017100009738046547,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "documentId": 426,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "ToolJet/ToolJet",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "ToolJet/ToolJet",
+                      "chunkId": 16576,
+                      "content": "<p align=\"center\">\n    <img src=\"docs/static/img/readme/banner.png\" alt=\"ToolJet 仪表盘显示库存和订单\"/>\n</p>\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/flowchart.png\"/>\n</p>\n\n",
+                      "endOffset": 1360,
+                      "sourceRef": "ToolJet/ToolJet",
+                      "versionId": 548,
+                      "chunkIndex": 1,
+                      "documentId": 329,
+                      "sourceType": "GITHUB",
+                      "sectionPath": null,
+                      "startOffset": 1180,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:ToolJet/ToolJet",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "ToolJet/ToolJet",
+                  "documentId": 329,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "wntrblm/nox",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "wntrblm/nox",
+                      "chunkId": 12905,
+                      "content": "## 仓库地址\nhttps://github.com/wntrblm/nox\n\n",
+                      "endOffset": 71,
+                      "sourceRef": "career:229",
+                      "versionId": 343,
+                      "chunkIndex": 2,
+                      "documentId": 124,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "wntrblm/nox > 仓库地址",
+                      "startOffset": 31,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:229",
+                  "bestScore": 0.015625,
+                  "sourceRef": "career:229",
+                  "documentId": 124,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "virgiliojr94/book-to-skill",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "virgiliojr94/book-to-skill",
+                      "chunkId": 10445,
+                      "content": "## 仓库地址\nhttps://github.com/virgiliojr94/book-to-skill\n\n",
+                      "endOffset": 101,
+                      "sourceRef": "career:270",
+                      "versionId": 248,
+                      "chunkIndex": 2,
+                      "documentId": 29,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "virgiliojr94/book-to-skill > 仓库地址",
+                      "startOffset": 46,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:270",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "career:270",
+                  "documentId": 29,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "timmyy123/LLM-Hub",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "timmyy123/LLM-Hub",
+                      "chunkId": 11953,
+                      "content": "## 仓库地址\nhttps://github.com/timmyy123/LLM-Hub\n\n",
+                      "endOffset": 83,
+                      "sourceRef": "beginner:26",
+                      "versionId": 307,
+                      "chunkIndex": 2,
+                      "documentId": 88,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "timmyy123/LLM-Hub > 仓库地址",
+                      "startOffset": 37,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:26",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "beginner:26",
+                  "documentId": 88,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Project-N-E-K-O/N.E.K.O",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "Project-N-E-K-O/N.E.K.O",
+                      "chunkId": 10096,
+                      "content": "## 仓库地址\nhttps://github.com/Project-N-E-K-O/N.E.K.O\n\n",
+                      "endOffset": 95,
+                      "sourceRef": "career:253",
+                      "versionId": 237,
+                      "chunkIndex": 2,
+                      "documentId": 18,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "Project-N-E-K-O/N.E.K.O > 仓库地址",
+                      "startOffset": 43,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:253",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "career:253",
+                  "documentId": 18,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "seek-oss/sku",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "seek-oss/sku",
+                      "chunkId": 11940,
+                      "content": "## 仓库地址\nhttps://github.com/seek-oss/sku\n\n",
+                      "endOffset": 73,
+                      "sourceRef": "beginner:24",
+                      "versionId": 306,
+                      "chunkIndex": 2,
+                      "documentId": 87,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "seek-oss/sku > 仓库地址",
+                      "startOffset": 32,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:24",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "beginner:24",
+                  "documentId": 87,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "openobserve/openobserve",
+                  "evidence": [
+                    {
+                      "score": 0.014401133947554929,
+                      "title": "openobserve/openobserve",
+                      "chunkId": 12722,
+                      "content": "### 📊 Logs\n\nCentralized log management with full-text search, SQL queries, quick filters, and a visual query builder. Instantly search across all your logs, build dashboards from log data, and set up alerts — all on Parquet columnar storage for 140x lower storage cost than Elasticsearch. [Read more →](https://openobserve.ai/logs/)\n\n![Logs search with histogram and field explorer](./screenshots/logs.png)\n\n",
+                      "endOffset": 6236,
+                      "sourceRef": "career:223",
+                      "versionId": 337,
+                      "chunkIndex": 26,
+                      "documentId": 118,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "openobserve/openobserve > Product Tour > 📊 Logs",
+                      "startOffset": 5827,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=25,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:223",
+                  "bestScore": 0.014401133947554929,
+                  "sourceRef": "career:223",
+                  "documentId": 118,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "ciembor/agent-rules-books",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "ciembor/agent-rules-books",
+                      "chunkId": 10440,
+                      "content": "### [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)\n\nAuthor: [Michael T. Nygard](https://www.michaelnygard.com/)\n\nThe book focuses on systems that survive production reality: failures, overload, timeouts, retries, circuit breakers, bulkheads, backpressure, observability, and deployment behavior. This rule set is useful for services, APIs, queues, integrations, and critical production paths.\n\n",
+                      "endOffset": 12552,
+                      "sourceRef": "career:267",
+                      "versionId": 247,
+                      "chunkIndex": 33,
+                      "documentId": 28,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "ciembor/agent-rules-books > Books List > [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)",
+                      "startOffset": 12131,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:267",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "career:267",
+                  "documentId": 28,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "netobserv/netobserv-operator",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "netobserv/netobserv-operator",
+                      "chunkId": 13307,
+                      "content": "## 仓库地址\nhttps://github.com/netobserv/netobserv-operator\n\n",
+                      "endOffset": 105,
+                      "sourceRef": "career:244",
+                      "versionId": 356,
+                      "chunkIndex": 2,
+                      "documentId": 137,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "netobserv/netobserv-operator > 仓库地址",
+                      "startOffset": 48,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:244",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "career:244",
+                  "documentId": 137,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "系统设计入门",
+                  "evidence": [
+                    {
+                      "score": 0.013968253968253968,
+                      "title": "系统设计入门",
+                      "chunkId": 11417,
+                      "content": "### Relational database management system (RDBMS)\n\nA relational database like SQL is a collection of data items organized in tables.\n\n**ACID** is a set of properties of relational database [transactions](https://en.wikipedia.org/wiki/Database_transaction).\n\n* **Atomicity** - Each transaction is all or nothing\n* **Consistency** - Any transaction will bring the database from one valid state to another\n* **Isolation** - Executing transactions concurrently has the same results as if the transactions were executed serially\n* **Durability** - Once a transaction has been committed, it will remain so\n\nThere are many techniques to scale a relational database: **master-slave replication**, **master-master replication**, **federation**, **sharding**, **denormalization**, and **SQL tuning**.\n\n",
+                      "endOffset": 43011,
+                      "sourceRef": "donnemartin/system-design-primer",
+                      "versionId": 291,
+                      "chunkIndex": 88,
+                      "documentId": 72,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "The System Design Primer > Database > Relational database management system (RDBMS)",
+                      "startOffset": 42219,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=30,lexicalRank=10,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:donnemartin/system-design-primer",
+                  "bestScore": 0.013968253968253968,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "documentId": 72,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "BetterWright/betterwright",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "BetterWright/betterwright",
+                      "chunkId": 11888,
+                      "content": "## 仓库地址\nhttps://github.com/BetterWright/betterwright\n\n",
+                      "endOffset": 99,
+                      "sourceRef": "beginner:11",
+                      "versionId": 302,
+                      "chunkIndex": 2,
+                      "documentId": 83,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "BetterWright/betterwright > 仓库地址",
+                      "startOffset": 45,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:11",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "beginner:11",
+                  "documentId": 83,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "fastrepl/anarlog",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "fastrepl/anarlog",
+                      "chunkId": 11810,
+                      "content": "## 仓库地址\nhttps://github.com/fastrepl/anarlog\n\n",
+                      "endOffset": 81,
+                      "sourceRef": "beginner:2",
+                      "versionId": 296,
+                      "chunkIndex": 2,
+                      "documentId": 77,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "fastrepl/anarlog > 仓库地址",
+                      "startOffset": 36,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:2",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "beginner:2",
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "mylee04/code-notify",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "mylee04/code-notify",
+                      "chunkId": 13202,
+                      "content": "## 仓库地址\nhttps://github.com/mylee04/code-notify\n\n",
+                      "endOffset": 87,
+                      "sourceRef": "career:241",
+                      "versionId": 353,
+                      "chunkIndex": 2,
+                      "documentId": 134,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "mylee04/code-notify > 仓库地址",
+                      "startOffset": 39,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:241",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "career:241",
+                  "documentId": 134,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "affaan-m/ECC",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "affaan-m/ECC",
+                      "chunkId": 16883,
+                      "content": "</div>\n\n---\n\n**面向代理工作的 harness 原生操控系统。构建于真实的多 harness 工程工作流之上。**\n\n不仅仅是配置。一个完整的系统：技能、本能、记忆优化、持续学习、安全扫描和研究优先开发。",
+                      "endOffset": 3596,
+                      "sourceRef": "affaan-m/ECC",
+                      "versionId": 601,
+                      "chunkIndex": 3,
+                      "documentId": 382,
+                      "sourceType": "GITHUB",
+                      "sectionPath": null,
+                      "startOffset": 3487,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:affaan-m/ECC",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "affaan-m/ECC",
+                  "documentId": 382,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "mlflow/mlflow",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "mlflow/mlflow",
+                      "chunkId": 12668,
+                      "content": "## 仓库地址\nhttps://github.com/mlflow/mlflow\n\n",
+                      "endOffset": 75,
+                      "sourceRef": "career:221",
+                      "versionId": 336,
+                      "chunkIndex": 2,
+                      "documentId": 117,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "mlflow/mlflow > 仓库地址",
+                      "startOffset": 33,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:221",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "career:221",
+                  "documentId": 117,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "SeanJ1ang/design-judge-skills",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "SeanJ1ang/design-judge-skills",
+                      "chunkId": 9703,
+                      "content": "## 仓库地址\nhttps://github.com/SeanJ1ang/design-judge-skills\n\n",
+                      "endOffset": 107,
+                      "sourceRef": "beginner:91",
+                      "versionId": 224,
+                      "chunkIndex": 2,
+                      "documentId": 5,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "SeanJ1ang/design-judge-skills > 仓库地址",
+                      "startOffset": 49,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:91",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "beginner:91",
+                  "documentId": 5,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "库存管理 | 库存控制 | inventory management",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "BEGINNER_PROJECT",
+                "CAREER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 213,
+                "url": "https://github.com/trimstray/the-book-of-secret-knowledge",
+                "name": "trimstray/the-book-of-secret-knowledge",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                "versionId": 432,
+                "documentId": 213,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge\">\n    <img src=\"https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-secret-knowledge-preview.png\" alt=\"Master\">\n  </a>\n</p>\n\n<p align=\"center\">\"<i>Knowledge is powerful, be careful how you use it!</i>\"</p>\n\n<h4 align=\"center\">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more.</h4>\n\n<br>\n\n<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/pulls\">\n    <img src=\"https://img.shields.io/badge/PRs-welcome-brightgreen.svg?longCache=true\" alt=\"Pull Requests\">\n  </a>\n  <a href=\"LICENSE.md\">\n    <img src=\"https://img.shields.io/badge/License-MIT-lightgrey.svg?longCache=true\" alt=\"MIT License\">\n  </a>\n</p>\n\n<br>\n\n****\n\n## :notebook_with_decorative_cover: &nbsp;What is it?\n\nThis repository is a collection of various materials and tools that I use every day in my work. It contains a lot of useful information gathered in one piece. It is an invaluable source of knowledge for me that I often look back on.\n\n## :restroom: &nbsp;For whom?\n\nFor everyone, really. Here everyone can find their favourite tastes. But to be perfectly honest, it is aimed towards System and Network administrators, DevOps, Pentesters, and Security Researchers.\n\n## :information_source: &nbsp;Contributing\n\nIf you find something which doesn't make sense, or something doesn't seem right, please make a pull request and please add valid and well-reasoned explanations about your changes or comments.\n\nA few simple rules for this project:\n\n- inviting and clear\n- not tiring\n- useful\n\nThese below rules may be better:\n\n- easy to contribute to (Markdown + HTML ...)\n- easy to find (simple TOC, maybe it's worth extending them?)\n\nUrl marked **\\*** is temporary unavailable. Please don't delete it without confirming that it has permanently expired.\n\nBefore adding a pull request, please see the **[contributing guidelines](.github/CONTRIBUTING.md)**. You should also remember about this:\n\n```diff\n+ This repository is not meant to contain everything but only good quality stuff.\n```\n\nAll **suggestions/PR** are welcome!\n\n### Code Contributors\n\nThis project exists thanks to all the people who contribute.\n\n<a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/graphs/contributors\"><img src=\"https://opencollective.com/the-book-of-secret-knowledge/contributors.svg?width=890&button=false\"></a>\n\n### Financial Contributors\n\n<p align=\"left\">\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/backers/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/sponsors/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n</p>\n\n## :newspaper: &nbsp;RSS Feed & Updates\n\nGitHub exposes an [RSS/Atom](https://github.com/trimstray/the-book-of-secret-knowledge/commits.atom) feed of the commits, which may also be useful if you want to be kept informed about all changes.\n\n## :ballot_box_with_check: &nbsp;ToDo\n\n- [ ] Add new stuff...\n- [ ] Add useful shell functions\n- [ ] Add one-liners for collection tools (eg. CLI Tools)\n- [ ] Sort order in lists\n\nNew items are also added on a regular basis.\n\n## :anger: &nbsp;Table of Contents\n\nOnly main chapters:\n\n- **[CLI Tools](#cli-tools-toc)**\n- **[GUI Tools](#gui-tools-toc)**\n- **[Web Tools](#web-tools-toc)**\n- **[Systems/Services](#systemsservices-toc)**\n- **[Networks](#networks-toc)**\n- **[Containers/Orchestration](#containersorchestration-toc)**\n- **[Manuals/Howtos/Tutorials](#manualshowtostutorials-toc)**\n- **[Inspiring Lists](#inspiring-lists-toc)**\n- **[Blogs/Podcasts/Videos](#blogspodcastsvideos-toc)**\n- **[Hacking/Penetration Testing](#hackingpenetration-testing-toc)**\n- **[Your daily knowledge and news](#your-daily-knowledge-and-news-toc)**\n- **[Other Cheat Sheets](#other-cheat-sheets-toc)**\n- **[Shell One-liners](#shell-one-liners-toc)**\n- **[Shell Tricks](#shell-tricks-toc)**\n- **[Shell Functions](#shell-functions-toc)**\n\n## :trident: &nbsp;The Book of Secret Knowledge (Chapters)\n\n#### CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents)\n\n##### :black_small_square: Shells\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/bash/\"><b>GNU Bash</b></a> - is an sh-compatible shell that incorporates useful features from the Korn shell and C shell.<br>\n&nbsp;&nbsp; <a href=\"https://www.zsh.org/\"><b>Zsh</b></a> - is a shell designed for interactive use, although it is also a powerful scripting language.<br>\n&nbsp;&nbsp; <a href=\"https://tcl-lang.org/\"><b>tclsh</b></a> - is a very powerful cross-platform shell, suitable for a huge range of uses.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/Bash-it/bash-it\"><b>bash-it</b></a> - is a framework for using, developing and maintaining shell scripts and custom commands.<br>\n&nbsp;&nbsp; <a href=\"https://ohmyz.sh/\"><b>Oh My ZSH!</b></a> - is the best framework for managing your Zsh configuration.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/oh-my-fish/oh-my-fish\"><b>Oh My Fish</b></a> - the Fishshell framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/starship/starship\"><b>Starship</b></a> - the cross-shell prompt written in Rust.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/romkatv/powerlevel10k\"><b>powerlevel10k</b></a> - is a fast reimplementation of Powerlevel9k ZSH theme.<br>\n</p>\n\n##### :black_small_square: Shell plugins\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/rupa/z\"><b>z</b></a> - tracks the folder you use the most and allow you to jump, without having to type the whole path.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/junegunn/fzf\"><b>fzf</b></a> - is a general-purpose command-line fuzzy finder.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-autosuggestions\"><b>zsh-autosuggestions</b></a> - Fish-like autosuggestions for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-syntax-highlighting\"><b>zsh-syntax-highlighting</b></a> - Fish shell like syntax highlighting for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/unixorn/awesome-zsh-plugins\"><b>Awesome ZSH Plugins</b></a> - A list of frameworks, plugins, themes and tutorials for ZSH.<br>\n</p>\n\n##### :black_small_square: Managers\n\n<p>\n&nbsp;&nbsp; <a href=\"https://midnight-commander.org/\"><b>Midnight Commander</b></a> - is a visual file manager, licensed under GNU General Public License.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/ranger/ranger\"><b>ranger</b></a> - is a VIM-inspired filemanager for the console.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jarun/nnn\"><b>nnn</b></a> - is a tiny, lightning fast, feature-packed file manager.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/screen/\"><b>screen</b></a> - is a full-screen window manager that multiplexes a physical terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tmux/tmux/wiki\"><b>tmux</b></a> - is a terminal multiplexer, lets you switch easily between several programs in one terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/peikk0/tmux-cssh\"><b>tmux-cssh</b></a> - is a tool to set comfortable and easy to use functionality tmux-sessions.<br>\n</p>\n\n##### :black_small_square: Text editors\n\n<p>\n&nbsp;&nbsp; <a href=\"http://ex-vi.sourceforge.net/\"><b>vi</b></a> - is one of the most common text editors on Unix.<br>\n&nbsp;&nbsp; <a href=\"https://www.vim.org/\"><b>vim</b></a> - is a highly configurable text editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/emacs/\"><b>emacs</b></a> - is an extensible, customizable, free/libre text editor, and more.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zyedidia/micro\"><b>micro</b></a> - is a modern and intuitive terminal-based text editor.<br>\n&nbsp;&nbsp; <a href=\"https://neovim.io/\"><b>neovim</b></a> - is a free open source, powerful, extensible and usable code editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.spacemacs.org/\"><b>spacemacs</b></a> - a community-driven Emacs distribution.<br>\n&nbsp;&nbsp; <a href=\"https://spacevim.org/\"><b>spacevim</b></a> - a community-driven vim distribution.<br>\n</p>\n\n##### :black_small_square: Files and directories\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/sharkdp/fd\"><b>fd</b></a> - is a simple, fast and user-friendly alternative to find.<br>\n&nbsp;&nbsp; <a href=\"https://dev.yorhel.nl/ncdu\"><b>ncdu</b></a> - is an easy to use, fast disk usage analyzer.<br>\n</p>\n\n##### :black_small_square: Network\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.putty.org/\"><b>PuTTY</b></a> - is an SSH and telnet client, developed originally by Simon Tatham.<br>\n&nbsp;&nbsp; <a href=\"https://mosh.org/\"><b>Mosh</b></a> - is a SSH wrapper designed to keep a SSH session alive over a volatile connection.<br>\n&nbsp;&nbsp; <a href=\"https://eternalterminal.dev/\"><b>Eternal Terminal</b></a> - enables mouse-scrolling and tmux commands inside the SSH session.<br>\n&nbsp;&nbsp; <a href=\"https://nmap.org/\"><b>nmap</b></a> - is a free and open source (license) utility for network discovery and security auditing.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zmap/zmap\"><b>zmap</b></a> - is a fast single packet network scanner designed for Internet-wide network surveys.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/RustScan/RustScan\"><b>Rust Scan</b></a> - to find all open ports faster than Nmap.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/robertdavidgraham/masscan\"><b>masscan</b></a> - is the fastest Internet port scanner, spews SYN packets asynchronously.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/gvb84/pbscan\"><b>pbscan</b></a> - is a faster and more efficient stateless SYN scanner and banner grabber.<br>\n&nbsp;&nbsp; <a href=\"http://www.hping.org/\"><b>hping</b></a> - is a command-line oriented TCP/IP packet assembler/analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/traviscross/mtr\"><b>mtr</b></a> - is a tool that combines the functionality of the 'traceroute' and 'ping' programs in a single tool.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mehrdadrad/mylg\"><b>mylg</b></a> - utility which combines the functions of the different network probes in one diagnostic tool.<br>\n&nbsp;&nbsp; <a href=\"http://netcat.sourceforge.net/\"><b>netcat</b></a> - utility which reads and writes data across network connections, using the TCP/IP protocol.<br>\n&nbsp;&nbsp; <a href=\"http://www.dest-unreach.org/socat/\"><b>socat</b></a> - utility which transfers data between two objects.<br>\n&nbsp;&nbsp; <a href=\"https://www.tcpdump.org/\"><b>tcpdump</b></a> - is a powerful command-line packet analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://www.wireshark.org/docs/man-pages/tshark.html\"><b>tshark</b></a> - is a tool that allows us to dump and analyze network traffic (wireshark cli).<br>\n&nbsp;&nbsp; <a href=\"https://termshark.io/\"><b>Termshark</b></a> - is a simple terminal user-interface for tshark.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jpr5/ngrep\"><b>ngrep</b></a> - is like GNU grep applied to the network layer.<br>\n&nbsp;&nbsp; <a href=\"http://netsniff-ng.org/\"><b>netsniff-ng</b></a> - is a Swiss army knife for your daily Linux network plumbing if you will.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mechpen/sockdump\"><b>sockdump</b></a> - dump unix domain socket traffic.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/google/stenographer\"><b>stenographer</b></a> - is a packet capture solution which aims to quickly spool all packets to disk.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/sachaos/tcpterm\"><b>tcpterm</b></a> - visualize packets in TUI.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tgraf/bmon\"><b>bmon</b></a> - is a monitoring and debugging tool to capture networking related statistics and prepare them visually.<br>\n&nbsp;&nbsp; <a href=\"http://iptraf.seul.org/2.6/manual",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "trimstray/the-book-of-secret-knowledge",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 329,
+                "url": "https://github.com/ToolJet/ToolJet",
+                "name": "ToolJet/ToolJet",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "ToolJet/ToolJet",
+                "versionId": 548,
+                "documentId": 329,
+                "importable": false,
+                "catalogText": "ToolJet 是 ToolJet AI 的开源基础——一个用于构建和部署内部工具、工作流和 AI 代理的 AI 原生平台。社区版提供了强大的可视化构建器、拖放式 UI，以及与数据库、API、SaaS 应用和对象存储的集成。有关 AI 驱动的 UI 生成、查询构建、调试和企业功能，请参阅 ToolJet AI。\n\n:star: 如果您觉得 ToolJet 有用，请考虑在 GitHub 上给我们一个 star！您的支持有助于我们持续创新并交付令人兴奋的功能。\n\n![Docker 云构建状态](https://img.shields.io/docker/automated/tooljet/tooljet-ce)\n![GitHub 贡献者数量](https://img.shields.io/github/contributors/tooljet/tooljet)\n[![GitHub 未解决的 issues 数量](https://img.shields.io/github/issues/ToolJet/ToolJet)](https://github.com/ToolJet/ToolJet/issues)\n[![GitHub star 数量](https://img.shields.io/github/stars/ToolJet/ToolJet)](https://github.com/ToolJet/ToolJet/stargazers)\n![GitHub 已关闭 issues 数量](https://img.shields.io/github/issues-closed/tooljet/tooljet)\n![GitHub 开放的拉取请求数量](https://img.shields.io/github/issues-pr-raw/tooljet/tooljet)\n![GitHub 最新发布版本](https://img.shields.io/github/v/release/tooljet/tooljet)\n![GitHub 提交活动](https://img.shields.io/github/commit-activity/m/tooljet/tooljet)\n[![GitHub 许可证（AGPL 许可证）](https://img.shields.io/github/license/ToolJet/ToolJet)](https://github.com/ToolJet/ToolJet)\n[![在 X（原 Twitter）上关注我们](https://img.shields.io/twitter/follow/ToolJet?style=social)](https://twitter.com/ToolJet)\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/banner.png\" alt=\"ToolJet 仪表盘显示库存和订单\"/>\n</p>\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/flowchart.png\"/>\n</p>\n\n## 功能特性\n\n### 社区版 (CE)\n- **可视化应用构建器：** 60+ 个响应式组件（表格、图表、表单、列表、进度条等）。\n- **ToolJet 数据库：** 内置无代码数据库。\n- **多页应用与多人协作编辑：** 协作构建复杂应用。\n- **80+ 数据源：** 连接数据库、API、云存储和 SaaS 工具。\n- **灵活部署：** 使用 Docker、Kubernetes、AWS、GCP、Azure 等进行自托管。\n- **协作工具：** 内联评论、提及和细粒度访问控制。\n- **可扩展性：** 使用 [ToolJet CLI](https://www.npmjs.com/package/@tooljet/cli) 创建插件和连接器。\n- **任意位置编码：** 在应用内运行 JavaScript 和 Python。\n- **安全设计：** AES-256-GCM 加密、仅代理数据流、SSO 支持。\n\n### ToolJet AI（企业版）\n社区版所有功能，外加：\n- **AI 应用生成：** 通过自然语言提示即时创建应用。\n- **AI 查询构建器：** 借助 AI 辅助生成和转换查询。\n- **AI 调试：** 一键识别并修复问题。\n- **代理构建器：** 创建智能代理来自动化工作流并编排流程。\n- **企业级安全与合规：** SOC 2 和 GDPR 就绪、审计日志和高级访问控制。\n- **用户管理：** 基于角色的访问控制 (RBAC)、自定义组和细粒度的应用/数据权限。\n- **多环境管理：** 无缝的开发/预发布/生产环境。\n- **GitSync 与 CI/CD：** 与 GitHub/GitLab 集成，实现版本控制和简化部署。\n- **品牌与定制：** 白标和自定义主题，满足组织品牌需求。\n- **细粒度访问控制：** 在行、组件、页面和查询级别保护数据和操作。\n- **嵌入式应用：** 将 ToolJet 应用安全地嵌入到其他应用程序或门户中。\n- **企业支持：** SLA、优先错误修复和入门协助。\n\n<hr>\n\n## 快速入门\n开始使用 ToolJet 的最简单方法是创建一个 [ToolJet Cloud](https://tooljet.com) 账户。ToolJet Cloud 提供 ToolJet 的托管解决方案。如果",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "ToolJet/ToolJet",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 229,
+                "url": "https://github.com/wntrblm/nox",
+                "name": "wntrblm/nox",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 67,
+                "archived": false,
+                "duration": "2 周",
+                "language": "Python",
+                "mainRisks": "issue 较多（73），项目维护复杂；Python 项目不涉及 AI 本身，需额外包装以匹配 AI 岗位。",
+                "sourceRef": "career:229",
+                "techStack": "Python",
+                "difficulty": "中等",
+                "importable": false,
+                "description": "nox 是一个灵活的 Python 测试自动化工具，可以创建隔离的虚拟环境来运行测试、lint 等任务。",
+                "proofPoints": "测试、CI、发布自动化齐全；快速入门和 Apache-2.0 许可；无 Docker 化，但可集成。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "贡献或扩展 nox 可以展现你在 Python 工具开发、测试自动化、CI/CD 集成方面的技能，适合 AI 应用和工具开发岗位。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "讨论 Python 虚拟环境管理、测试框架设计、与 AI 项目（如模型评估）的结合，以及如何用 nox 实现复杂的 CI 流水线。",
+                "requiresSecrets": false,
+                "modificationPlan": "开发一个基于 nox 的 AI 模型评估工作流示例；添加 Docker 执行器支持；集成数据库记录测试历史；提供云部署方案的文档。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 270,
+                "url": "https://github.com/virgiliojr94/book-to-skill",
+                "name": "virgiliojr94/book-to-skill",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 80,
+                "archived": false,
+                "duration": "兼职约 2～4 周（包括学习、修改和文档完善）",
+                "language": "Python",
+                "mainRisks": "- PDF 解析依赖格式规整度，遇到扫描版或混乱排版可能失败\n- Claude Code 技能接口可能变更，需要持续跟进官方更新\n- 当前无容器化部署，环境复现可能费时\n- 开放 Issue 较多，需投入时间修复后才显专业",
+                "sourceRef": "career:270",
+                "techStack": "Python",
+                "difficulty": "ENTRY",
+                "importable": false,
+                "description": "将任意技术书籍 PDF 转化为可执行的 Claude Code 技能，支持边学边参考、直接在工作中调用。项目用 Python 开发，提供完整测试、CI 和自动化发布。",
+                "proofPoints": "- 包含完整单元测试与 CI 配置，展示质量意识\n- 实现了自动化发布流水线，体现 DevOps 素养\n- 提供快速启动文档，降低他人使用门槛\n- 已有架构文档，便于扩展和维护",
+                "prerequisites": "Docker：资料标记不需要；数据库：需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "完成本项目能证明你具备 AI Agent 工具集成、PDF 解析与结构化、自动化发布流水线搭建等核心能力，并直接匹配国内 AI 应用/Agent 开发岗位的需求。作品有清晰文档和快速启动，在面试时可作为原创工程案例展示。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "- 如何解析并清洗 PDF 内容，生成结构化知识？\n- Claude Code 技能的 prompt 方案与模板设计是怎样的？\n- 项目如何通过 CI 进行自动化测试与发布？\n- 如果扩展到更多模型或格式，架构如何调整？\n- 设计哪些容错策略应对 PDF 格式不规范的场景？",
+                "requiresSecrets": false,
+                "modificationPlan": "差异化方向：1. 添加 Docker 一键部署支持；2. 补充在线 Web UI，让用户直接在浏览器转换；3. 支持 epub/mobi 等多格式输入；4. 预设中文技术书籍优化模板；5. 清理 18 个开放 Issue，提升项目健康度；6. 增加与 Obsidian 等笔记工具的集成示例。",
+                "requiresDatabase": true,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 26,
+                "url": "https://github.com/timmyy123/LLM-Hub",
+                "name": "timmyy123/LLM-Hub",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"ai\", \"gemma3\", \"gemma3n\", \"gemma4\", \"gemma4-agent-skills\", \"gptoss\", \"granite\", \"lfm25\", \"llama\", \"llm\", \"llm-inference\", \"mistral\", \"phi4\", \"rag\", \"stable-diffusion\", \"whisper\"]",
+                "archived": false,
+                "duration": "5-10天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:26",
+                "techStack": "TypeScript",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "集成多种大模型的本地AI助手。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "通过调用不同LLM的接口构建统一工具，适合锻炼TypeScript开发与API集成能力。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 253,
+                "url": "https://github.com/Project-N-E-K-O/N.E.K.O",
+                "name": "Project-N-E-K-O/N.E.K.O",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 75,
+                "archived": false,
+                "duration": "高级（约 100 小时）",
+                "language": "Python",
+                "mainRisks": "项目侧重于创意与交互，面试时可能被追问技术深度；缺少部署方案，仅靠终端演示可能不够直观；情感引擎容易被视为玩具项目，需要准备严肃的技术阐述。",
+                "sourceRef": "career:253",
+                "techStack": "Python",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "一个会主动找你玩的实时 AI 猫娘，拥有具身化情感引擎，能主动发起互动、共享你的媒体内容。基于 Python 构建。",
+                "proofPoints": "自动化测试、CI 和发布流水线完备；提供快速入门和 Docker 支持；Apache-2.0 许可。",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "展示你将情感计算、实时交互和 AI 代理结合在一起的跨领域工程能力。在 AI 应用与 Agent 方向上提供极具创意和差异化的作品，吸引面试官兴趣。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "如何设计情感引擎的状态机与触发规则；实时交互中的低延迟优化策略；Python 在长期运行代理中的内存管理；为何选择这种高互动性的 AI 形态，背后的人机交互思考；77 个 issue 中的典型技术难题。",
+                "requiresSecrets": true,
+                "modificationPlan": "1) 补充缺失的部署方案（如 Web 或桌面端打包），让作品更容易被体验；2) 扩展多语言或个性化情感模型，突出差异化；3) 增加可观测性面板，实时显示情感状态与决策过程，方便面试展示；4) 撰写设计文档，解释情感引擎的心理学/工程学原理，提升技术深度。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 24,
+                "url": "https://github.com/seek-oss/sku",
+                "name": "seek-oss/sku",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"babel\", \"build-tool\", \"eslint\", \"front-end\", \"owner-experience-platforms\", \"toolkit\", \"vanilla-extract\", \"vite\", \"webpack\"]",
+                "archived": false,
+                "duration": "3-5天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:24",
+                "techStack": "TypeScript,Playwright",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "前端开发工具包，集成构建与端到端测试能力。",
+                "beginnerScore": 95,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "使用 TypeScript 和 Playwright，架构清晰，适合学习现代前端工具链和自动化测试。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 223,
+                "url": "https://github.com/openobserve/openobserve",
+                "name": "openobserve/openobserve",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 90,
+                "archived": false,
+                "duration": "20-35 天（含学习、贡献功能或构建集成示例）",
+                "language": "TypeScript",
+                "mainRisks": "项目活跃但 issues 极多，社区响应可能延迟；无自带数据库依赖外部存储，集成复杂度高；AGPL-3.0 协议可能限制商用闭源产品闭源衍生。",
+                "sourceRef": "career:223",
+                "techStack": "TypeScript",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "OpenObserve 是一个用 TypeScript 编写的开源可观测性平台，能处理 logs、metrics、traces 及 LLM 可观测性，号称比 Datadog 等成本低 140 倍并以单二进制部署。",
+                "proofPoints": "- 理解全栈可观测性 pipeline 的设计与实现\n- 具备基于 TypeScript 开发高性能数据处理系统的经验\n- 熟悉日志、指标、链路追踪和 LLM 监控的整合方案\n- 能独立完成从单节点到分布式部署和自动化测试",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "对 AI 应用与 Agent、AI 基础设施等方向很友好，可展现候选人处理海量流数据、构建高性价比监控平台的能力，适合应聘后端或基础设施工程师。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "- 如何实现 140x 成本节省的存储和索引设计\n- LLM 可观测性与传统应用监控的技术异同\n- 大量 open issues（599）中你如何选择入手点\n- 单二进制部署架构的优缺点和适用场景",
+                "requiresSecrets": true,
+                "modificationPlan": "为平台增加对国产 LLM（如百川、智谱）的可观测支持，或开发国内常用运维工具（如飞书、钉钉）的告警通道，制作中文仪表板模板；这样作品能突出本地化实践能力。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 267,
+                "url": "https://github.com/ciembor/agent-rules-books",
+                "name": "ciembor/agent-rules-books",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 67,
+                "archived": false,
+                "duration": "初级（2-3 周）：阅读现有规则，修复打字错误或补充简单示例；中级（1-2 个月）：贡献一个新规则模块并为其编写测试；高级（2-3 个月）：实现差异化改造方案中",
+                "mainRisks": "规则内容因软件工程理念演变而变得过时；不同 AI 代理对规则语法的解析不一致导致行为未达预期；新增规则与已有规则冲突，引发代理混乱；缺少 CI 导致规则修改后未及时验证。",
+                "sourceRef": "career:267",
+                "techStack": "",
+                "difficulty": "中等",
+                "importable": false,
+                "description": "为 Codex、Cursor、Claude Code 等 AI 编程代理设计的 AGENTS.md 规则与技能集合，内容源自《代码整洁之道》《重构》《领域驱动设计》《整洁架构》及《DDIA》等经典软件工程著作，旨在规范 AI 编程行为并提升生成代码的质量。",
+                "proofPoints": "完成后能证明：① 能够设计结构化的 AI 代理指导规则；② 理解并应用代码整洁、重构、DDD 等工程原则；③ 具备在多 AI 编程工具（Codex、Cursor 等）中统一代理标准的能力；④ 能通过测试和文档维护规则的可靠性（项目已有测试和架构文档，但缺少 CI，可补充）。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "掌握 AI 代理行为工程的核心方法，理解如何将软件工程原则（整洁代码、DDD、架构模式）转化为机器可执行的引导规则，培养 AI 辅助开发中的质量把控与规则设计能力，对 AI 应用与 Agent 岗位有直接加分作用。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "面试时可深入讨论：AI 编程代理如何解析和执行 AGENTS.md 规则？为什么选择这些经典书籍作为灵感而不是现代框架？如何测试和验证代理对规则的遵守情况？在 5 个开放 issue（如规则冲突处理、兼容性）中，你会如何解决？如何从无 CI 状态走向持续验证？",
+                "requiresSecrets": false,
+                "modificationPlan": "差异化方法：① 添加垂直领域规则集（如 React 最佳实践、微服务设计约束），突出特定场景；② 集成 GitHub Actions 实现规则的一致性自动检查，弥补 CI 缺失；③ 构建规则效果演示项目，用同一需求对比有无规则时代理输出的差异；④ 提供多代理适配器（Cursor vs Claude Code 的差异配置）；⑤ 贡献高质量 PR 解决至少 2 个开放 issue。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 244,
+                "url": "https://github.com/netobserv/netobserv-operator",
+                "name": "netobserv/netobserv-operator",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 86,
+                "archived": false,
+                "duration": "4-6周（研究+贡献PR）",
+                "language": "Go",
+                "mainRisks": "项目ADVANCED，需要深入K8s和网络知识；Go语言栈需精通。",
+                "sourceRef": "career:244",
+                "techStack": "Go",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "netobserv-operator：用于Kubernetes网络可观测性的Operator。",
+                "proofPoints": "- 测试：测试覆盖（tests=true）\n- CI/CD：持续集成（ci=true）\n- 发布自动化：release automation=true\n- 架构文档：存在（architectureDocs=true）\n- 部署：Dockerized，提供部署指南（deployment=true）\n- 规模：LARGE，36个open issues",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "展现你在Kubernetes、Go语言和可观测性工程方面的深度，特别适合AI基础设施方向，面试可深入讨论Operator模式与网络流量监控。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "- Kubernetes Operator的设计模式与开发流程\n- 如何用eBPF等工具实现网络可观测\n- 在大规模集群中处理网络流量的挑战\n- CI/CD和自动化发布在K8s项目中的实践",
+                "requiresSecrets": true,
+                "modificationPlan": "贡献中文部署文档或视频教程；增加对国产Kubernetes发行版（如KubeSphere）的支持；或扩展为AI推理网络流量的专门监控。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 72,
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "name": "donnemartin/system-design-primer",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "donnemartin/system-design-primer",
+                "versionId": 291,
+                "documentId": 72,
+                "importable": false,
+                "catalogText": "*[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues/272) ∙ [Italiano](https://github.com/donnemartin/system-design-primer/issues/104) ∙ [한국어](https://github.com/donnemartin/system-design-primer/issues/102) ∙ [فارسی](https://github.com/donnemartin/system-design-primer/issues/110) ∙ [Polski](https://github.com/donnemartin/system-design-primer/issues/68) ∙ [русский язык](https://github.com/donnemartin/system-design-primer/issues/87) ∙ [Español](https://github.com/donnemartin/system-design-primer/issues/136) ∙ [ภาษาไทย](https://github.com/donnemartin/system-design-primer/issues/187) ∙ [Türkçe](https://github.com/donnemartin/system-design-primer/issues/39) ∙ [tiếng Việt](https://github.com/donnemartin/system-design-primer/issues/127) ∙ [Français](https://github.com/donnemartin/system-design-primer/issues/250) | [Add Translation](https://github.com/donnemartin/system-design-primer/issues/28)*\n\n**Help [translate](TRANSLATIONS.md) this guide!**\n\n# The System Design Primer\n\n<p align=\"center\">\n  <img src=\"images/jj3A5N8.png\">\n  <br/>\n</p>\n\n## Motivation\n\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n\n### Learn how to design large-scale systems\n\nLearning how to design scalable systems will help you become a better engineer.\n\nSystem design is a broad topic.  There are a **vast number of resources scattered throughout the web** on system design principles.\n\nThis repo is an **organized collection** of resources to help you learn how to build systems at scale.\n\n### Learn from the open source community\n\nThis is a continually updated, open source project.\n\n[Contributions](#contributing) are welcome!\n\n### Prep for the system design interview\n\nIn addition to coding interviews, system design is a **required component** of the **technical interview process** at many tech companies.\n\n**Practice common system design interview questions** and **compare** your results with **sample solutions**: discussions, code, and diagrams.\n\nAdditional topics for interview prep:\n\n* [Study guide](#study-guide)\n* [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question)\n* [System design interview questions, **with solutions**](#system-design-interview-questions-with-solutions)\n* [Object-oriented design interview questions, **with solutions**](#object-oriented-design-interview-questions-with-solutions)\n* [Additional system design interview questions](#additional-system-design-interview-questions)\n\n## Anki flashcards\n\n<p align=\"center\">\n  <img src=\"images/zdCAkB3.png\">\n  <br/>\n</p>\n\nThe provided [Anki flashcard decks](https://apps.ankiweb.net/) use spaced repetition to help you retain key system design concepts.\n\n* [System design deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design.apkg)\n* [System design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design%20Exercises.apkg)\n* [Object oriented design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/OO%20Design.apkg)\n\nGreat for use while on-the-go.\n\n### Coding Resource: Interactive Coding Challenges\n\nLooking for resources to help you prep for the [**Coding Interview**](https://github.com/donnemartin/interactive-coding-challenges)?\n\n<p align=\"center\">\n  <img src=\"images/b4YtAEN.png\">\n  <br/>\n</p>\n\nCheck out the sister repo [**Interactive Coding Challenges**](https://github.com/donnemartin/interactive-coding-challenges), which contains an additional Anki deck:\n\n* [Coding deck](https://github.com/donnemartin/interactive-coding-challenges/tree/master/anki_cards/Coding.apkg)\n\n## Contributing\n\n> Learn from the community.\n\nFeel free to submit pull requests to help:\n\n* Fix errors\n* Improve sections\n* Add new sections\n* [Translate](https://github.com/donnemartin/system-design-primer/issues/28)\n\nContent that needs some polishing is placed [under development](#under-development).\n\nReview the [Contributing Guidelines](CONTRIBUTING.md).\n\n## Index of system design topics\n\n> Summaries of various system design topics, including pros and cons.  **Everything is a trade-off**.\n>\n> Each section contains links to more in-depth resources.\n\n<p align=\"center\">\n  <img src=\"images/jrUBAF7.png\">\n  <br/>\n</p>\n\n* [System design topics: start here](#system-design-topics-start-here)\n    * [Step 1: Review the scalability video lecture](#step-1-review-the-scalability-video-lecture)\n    * [Step 2: Review the scalability article](#step-2-review-the-scalability-article)\n    * [Next steps](#next-steps)\n* [Performance vs scalability](#performance-vs-scalability)\n* [Latency vs throughput](#latency-vs-throughput)\n* [Availability vs consistency](#availability-vs-consistency)\n    * [CAP theorem](#cap-theorem)\n        * [CP - consistency and partition tolerance](#cp---consistency-and-partition-tolerance)\n        * [AP - availability and partition tolerance](#ap---availability-and-partition-tolerance)\n* [Consistency patterns](#consistency-patterns)\n    * [Weak consistency](#weak-consistency)\n    * [Eventual consistency](#eventual-consistency)\n    * [Strong consistency](#strong-consistency)\n* [Availability patterns](#availability-patterns)\n    * [Fail-over](#fail-over)\n    * [Replication](#replication)\n    * [Availability in numbers](#availability-in-numbers)\n* [Domain name system](#domain-name-system)\n* [Content delivery network](#content-delivery-network)\n    * [Push CDNs](#push-cdns)\n    * [Pull CDNs](#pull-cdns)\n* [Load balancer](#load-balancer)\n    * [Active-passive](#active-passive)\n    * [Active-active](#active-active)\n    * [Layer 4 load balancing](#layer-4-load-balancing)\n    * [Layer 7 load balancing](#layer-7-load-balancing)\n    * [Horizontal scaling](#horizontal-scaling)\n* [Reverse proxy (web server)](#reverse-proxy-web-server)\n    * [Load balancer vs reverse proxy](#load-balancer-vs-reverse-proxy)\n* [Application layer](#application-layer)\n    * [Microservices](#microservices)\n    * [Service discovery](#service-discovery)\n* [Database](#database)\n    * [Relational database management system (RDBMS)](#relational-database-management-system-rdbms)\n        * [Master-slave replication](#master-slave-replication)\n        * [Master-master replication](#master-master-replication)\n        * [Federation](#federation)\n        * [Sharding](#sharding)\n        * [Denormalization](#denormalization)\n        * [SQL tuning](#sql-tuning)\n    * [NoSQL](#nosql)\n        * [Key-value store](#key-value-store)\n        * [Document store](#document-store)\n        * [Wide column store](#wide-column-store)\n        * [Graph Database](#graph-database)\n    * [SQL or NoSQL](#sql-or-nosql)\n* [Cache](#cache)\n    * [Client caching](#client-caching)\n    * [CDN caching](#cdn-caching)\n    * [Web server caching](#web-server-caching)\n    * [Database caching](#database-caching)\n    * [Application caching](#application-caching)\n    * [Caching at the database query level](#caching-at-the-database-query-level)\n    * [Caching at the object level](#caching-at-the-object-level)\n    * [When to update the cache](#when-to-update-the-cache)\n        * [Cache-aside](#cache-aside)\n        * [Write-through](#write-through)\n        * [Write-behind (write-back)](#write-behind-write-back)\n        * [Refresh-ahead](#refresh-ahead)\n* [Asynchronism](#asynchronism)\n    * [Message queues](#message-queues)\n    * [Task queues](#task-queues)\n    * [Back pressure](#back-pressure)\n* [Communication](#communication)\n    * [Transmission control protocol (TCP)](#transmission-control-protocol-tcp)\n    * [User datagram protocol (UDP)](#user-datagram-protocol-udp)\n    * [Remote procedure call (RPC)](#remote-procedure-call-rpc)\n    * [Representational state transfer (REST)](#representational-state-transfer-rest)\n* [Security](#security)\n* [Appendix](#appendix)\n    * [Powers of two table](#powers-of-two-table)\n    * [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)\n    * [Additional system design interview questions](#additional-system-design-interview-questions)\n    * [Real world architectures](#real-world-architectures)\n    * [Company architectures](#company-architectures)\n    * [Company engineering blogs](#company-engineering-blogs)\n* [Under development](#under-development)\n* [Credits](#credits)\n* [Contact info](#contact-info)\n* [License](#license)\n\n## Study guide\n\n> Suggested topics to review based on your interview timeline (short, medium, long).\n\n![Imgur](images/OfVllex.png)\n\n**Q: For interviews, do I need to know everything here?**\n\n**A: No, you don't need to know everything here to prepare for the interview**.\n\nWhat you are asked in an interview depends on variables such as:\n\n* How much experience you have\n* What your technical background is\n* What positions you are interviewing for\n* Which companies you are interviewing with\n* Luck\n\nMore experienced candidates are generally expected to know more about system design.  Architects or team leads might be expected to know more than individual contributors.  Top tech companies are likely to have one or more design interview rounds.\n\nStart broad and go deeper in a few areas.  It helps to know a little about various key system design topics.  Adjust the following guide based on your timeline, experience, what positions you are interviewing for, and which companies you are interviewing with.\n\n* **Short timeline** - Aim for **breadth** with system design topics.  Practice by solving **some** interview questions.\n* **Medium timeline** - Aim for **breadth** and **some depth** with system design topics.  Practice by solving **many** interview questions.\n* **Long timeline** - Aim for **breadth** and **more depth** with system design topics.  Practice by solving **most** interview questions.\n\n| | Short | Medium | Long |\n|---|---|---|---|\n| Read through the [System design topics](#index-of-system-design-topics) to get a broad understanding of how systems work | :+1: | :+1: | :+1: |\n| Read through a few articles in the [Company engineering blogs](#company-engineering-blogs) for the companies you are interviewing with | :+1: | :+1: | :+1: |\n| Read through a few [Real world architectures](#real-world-architectures) | :+1: | :+1: | :+1: |\n| Review [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question) | :+1: | :+1: | :+1: |\n| Work through [System design interview questions with solutions](#system-design-interview-questions-with-solutions) | Some | Many | Most |\n| Work through [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions) | Some | Many | Most |\n| Review [Additional system design interview questions](#additional-system-design-interview-questions) | Some | Many | Most |\n\n## How to approach a system design interview question\n\n> How to tackle a system design interview question.\n\nThe system design interview is an **open-ended conversation**.  You are expected to lead it.\n\nYou can use the following steps to guide the discussion.  To help solidify this process, work through the [System design interview questions with solutions](#system-design-interview-questions-with-solutions) section using the following steps.\n\n### Step 1: Outline use cases, constraints, and assumptions\n\nGather requirements and scope the problem.  Ask questions to clarify use cases and constraints.  Discuss assumptions.\n\n* Who is going to use it?\n* How ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "系统设计入门",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 11,
+                "url": "https://github.com/BetterWright/betterwright",
+                "name": "BetterWright/betterwright",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[]",
+                "archived": false,
+                "duration": "4-8天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:11",
+                "techStack": "TypeScript,Playwright",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。",
+                "beginnerScore": 79,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "基于 Playwright 的工程化应用，适合学习浏览器自动化、安全存储和策略引擎，功能拆分清晰，可逐个攻破。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": true,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "库存管理 | 库存控制 | inventory management",
+              "topic": [
+                "库存管理"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "库存管理",
+              "candidates": [
+                {
+                  "key": "EXTERNAL_PROJECT:213",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n \" Knowledge is powerful, be careful how you use it! \" \n A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more. \n****\n## :notebook_with_decorative_cover: &nbsp;What is it?\nThis repository is a collection of various materials and tools that I use every day in my work. It contains a lot of useful information gathered in one piece. It is an invaluable"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:329",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 ToolJet 是 ToolJet AI 的开源基础——一个用于构建和部署内部工具、工作流和 AI 代理的 AI 原生平台。社区版提供了强大的可视化构建器、拖放式 UI，以及与数据库、API、SaaS 应用和对象存储的集成。有关 AI 驱动的 UI 生成、查询构建、调试和企业功能，请参阅 ToolJet AI。\n:star: 如果您觉得 ToolJet 有用，请考虑在 GitHub 上给我们一个 star！您的支持有助于我们持续创新并交付令人兴奋的功能。\n## 功能特性\n### 社区版 (CE)\n- **可视化应用构建器：** 60+ 个响应式组件（表格、图表、表单、列表、进度条等）。\n- **ToolJet 数据库：** 内置无代码数据库。\n- **多页应用与多人协作编辑：** 协作构建复杂应用。\n- **80+ 数据源：** 连接数据库、API、云存储和 SaaS 工具。\n- **灵活部署"
+                },
+                {
+                  "key": "CAREER_PROJECT:229",
+                  "purpose": "nox 是一个灵活的 Python 测试自动化工具，可以创建隔离的虚拟环境来运行测试、lint 等任务。"
+                },
+                {
+                  "key": "CAREER_PROJECT:270",
+                  "purpose": "将任意技术书籍 PDF 转化为可执行的 Claude Code 技能，支持边学边参考、直接在工作中调用。项目用 Python 开发，提供完整测试、CI 和自动化发布。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:26",
+                  "purpose": "集成多种大模型的本地AI助手。"
+                },
+                {
+                  "key": "CAREER_PROJECT:253",
+                  "purpose": "一个会主动找你玩的实时 AI 猫娘，拥有具身化情感引擎，能主动发起互动、共享你的媒体内容。基于 Python 构建。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:24",
+                  "purpose": "前端开发工具包，集成构建与端到端测试能力。"
+                },
+                {
+                  "key": "CAREER_PROJECT:223",
+                  "purpose": "OpenObserve 是一个用 TypeScript 编写的开源可观测性平台，能处理 logs、metrics、traces 及 LLM 可观测性，号称比 Datadog 等成本低 140 倍并以单二进制部署。"
+                },
+                {
+                  "key": "CAREER_PROJECT:267",
+                  "purpose": "为 Codex、Cursor、Claude Code 等 AI 编程代理设计的 AGENTS.md 规则与技能集合，内容源自《代码整洁之道》《重构》《领域驱动设计》《整洁架构》及《DDIA》等经典软件工程著作，旨在规范 AI 编程行为并提升生成代码的质量。"
+                },
+                {
+                  "key": "CAREER_PROJECT:244",
+                  "purpose": "netobserv-operator：用于Kubernetes网络可观测性的Operator。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:72",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 *English ∙ 日本語 ∙ 简体中文 ∙ 繁體中文 | العَرَبِيَّة‎ ∙ বাংলা ∙ Português do Brasil ∙ Deutsch ∙ ελληνικά ∙ עברית ∙ Italiano ∙ 한국어 ∙ فارسی ∙ Polski ∙ русский язык ∙ Español ∙ ภาษาไทย ∙ Türkçe ∙ tiếng Việt ∙ Français | Add Translation*\n**Help translate this guide!**\n# The System Design Primer\n## Motivation\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n### Learn how to des"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:11",
+                  "purpose": "一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。"
+                }
+              ],
+              "originalRequest": "想做的方向或用途是：库存管理"
+            },
+            "verdict": {
+              "matches": []
+            },
+            "accepted": {
+              "scope": "b2019e97c95d7303a61546b232fc3624dca1fdf6d041834016ed827480f0d713",
+              "topic": "库存管理",
+              "proofs": {}
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "库存管理"
+                ]
+              },
+              "alternatives": [],
+              "calculatedAt": "2026-10-04T03:51:08.981535799Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "库存管理"
+                ],
+                "experience": "一年",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "想做的方向或用途是：库存管理",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "purposeReview": {
+                  "scope": "b2019e97c95d7303a61546b232fc3624dca1fdf6d041834016ed827480f0d713",
+                  "topic": "库存管理",
+                  "proofs": {}
+                },
+                "lastCandidates": [],
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：一年；已记录项目目标：学习；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ],
+  "sessionDeleted": true
+}

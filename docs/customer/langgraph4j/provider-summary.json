@@ -1,0 +1,707 @@
+{
+  "releaseApproved": false,
+  "automaticCriteriaFrozen": true,
+  "results": {
+    "LEGACY": {
+      "runs": 40,
+      "automaticPasses": 34,
+      "terminalStatuses": {
+        "SUCCEEDED": 40
+      },
+      "p95Ms": 20249,
+      "maxMs": 33626,
+      "modelAttempts": 41,
+      "failedAttempts": 0,
+      "retryAttempts": 0,
+      "reportedTotalTokens": 208566,
+      "attemptsWithoutUsage": 0,
+      "runsWithRetrievalFailures": 10,
+      "degradedStepCounts": {
+        "searchKnowledge": 15,
+        "recommendationRecall": 8,
+        "reviewProjectPurpose": 3,
+        "projectEvidence": 5,
+        "getConfirmedProfile": 2,
+        "profile": 2,
+        "searchProjects": 1,
+        "knowledge": 2
+      },
+      "costUsd": "UNKNOWN",
+      "embeddingUsage": "NOT_REPORTED"
+    },
+    "LANGGRAPH4J": {
+      "runs": 40,
+      "automaticPasses": 35,
+      "terminalStatuses": {
+        "SUCCEEDED": 40
+      },
+      "p95Ms": 17067,
+      "maxMs": 44667,
+      "modelAttempts": 44,
+      "failedAttempts": 2,
+      "retryAttempts": 2,
+      "reportedTotalTokens": 222244,
+      "attemptsWithoutUsage": 0,
+      "runsWithRetrievalFailures": 10,
+      "degradedStepCounts": {
+        "searchKnowledge": 16,
+        "recommendationRecall": 8,
+        "reviewProjectPurpose": 2,
+        "projectEvidence": 6,
+        "knowledge": 2
+      },
+      "costUsd": "UNKNOWN",
+      "embeddingUsage": "NOT_REPORTED"
+    }
+  },
+  "limitations": [
+    "Embedding 429/timeouts mean successful recommendations may be degraded catalog results, not successful B retrieval.",
+    "G14 goal-vs-topic criterion needs human review; raw automatic score is unchanged.",
+    "No price configured; unknown costs are not zero.",
+    "True administrator browser/raw-access flow and server rollout/24h observation remain pending."
+  ],
+  "failures": [
+    {
+      "caseId": "G14",
+      "engine": "LEGACY",
+      "round": 1,
+      "status": "CONVERSATION",
+      "intent": "CHAT",
+      "state": {
+        "topic": [
+          "库存管理"
+        ]
+      },
+      "projectCount": 0,
+      "durationMs": 6045,
+      "error": null
+    },
+    {
+      "caseId": "G15",
+      "engine": "LEGACY",
+      "round": 1,
+      "status": "KNOWLEDGE_UNAVAILABLE",
+      "intent": "QUESTION",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 2573,
+      "error": null
+    },
+    {
+      "caseId": "G16",
+      "engine": "LEGACY",
+      "round": 1,
+      "status": "CONVERSATION",
+      "intent": "CHAT",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 3937,
+      "error": null
+    },
+    {
+      "caseId": "G15",
+      "engine": "LANGGRAPH4J",
+      "round": 1,
+      "status": "KNOWLEDGE_UNAVAILABLE",
+      "intent": "QUESTION",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 2876,
+      "error": null
+    },
+    {
+      "caseId": "G16",
+      "engine": "LANGGRAPH4J",
+      "round": 1,
+      "status": "CONVERSATION",
+      "intent": "CHAT",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 3477,
+      "error": null
+    },
+    {
+      "caseId": "G14",
+      "engine": "LANGGRAPH4J",
+      "round": 2,
+      "status": "CONVERSATION",
+      "intent": "CHAT",
+      "state": {
+        "preferences": [
+          "给家里的店做库存管理"
+        ]
+      },
+      "projectCount": 0,
+      "durationMs": 16004,
+      "error": null
+    },
+    {
+      "caseId": "G16",
+      "engine": "LANGGRAPH4J",
+      "round": 2,
+      "status": "CONVERSATION",
+      "intent": "CHAT",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 3178,
+      "error": null
+    },
+    {
+      "caseId": "G15",
+      "engine": "LANGGRAPH4J",
+      "round": 2,
+      "status": "KNOWLEDGE_UNAVAILABLE",
+      "intent": "QUESTION",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 17067,
+      "error": null
+    },
+    {
+      "caseId": "G11",
+      "engine": "LEGACY",
+      "round": 2,
+      "status": "RELEVANCE_UNAVAILABLE",
+      "intent": "RECOMMEND",
+      "state": {
+        "goal": "求职",
+        "topic": [
+          "RAG"
+        ],
+        "language": "Python",
+        "maxDurationDays": 180
+      },
+      "projectCount": 0,
+      "durationMs": 4080,
+      "error": null
+    },
+    {
+      "caseId": "G16",
+      "engine": "LEGACY",
+      "round": 2,
+      "status": "CONVERSATION",
+      "intent": "CHAT",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 4682,
+      "error": null
+    },
+    {
+      "caseId": "G15",
+      "engine": "LEGACY",
+      "round": 2,
+      "status": "KNOWLEDGE_UNAVAILABLE",
+      "intent": "QUESTION",
+      "state": {},
+      "projectCount": 0,
+      "durationMs": 17652,
+      "error": null
+    }
+  ],
+  "degradedSteps": [
+    {
+      "tool": "searchKnowledge",
+      "runId": "0dbc4256-dc7b-4398-8bdf-87277553dba2",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "0dbc4256-dc7b-4398-8bdf-87277553dba2",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "reviewProjectPurpose",
+      "runId": "0dbc4256-dc7b-4398-8bdf-87277553dba2",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "DataIntegrityViolationException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "0dbc4256-dc7b-4398-8bdf-87277553dba2",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "0dbc4256-dc7b-4398-8bdf-87277553dba2",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "getConfirmedProfile",
+      "runId": "37a36b07-8564-48de-a94f-8de4a7f573c6",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "profile",
+      "runId": "37a36b07-8564-48de-a94f-8de4a7f573c6",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "37a36b07-8564-48de-a94f-8de4a7f573c6",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "37a36b07-8564-48de-a94f-8de4a7f573c6",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "searchProjects",
+      "runId": "37a36b07-8564-48de-a94f-8de4a7f573c6",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "reviewProjectPurpose",
+      "runId": "37a36b07-8564-48de-a94f-8de4a7f573c6",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "38823c95-35b5-49df-9cc5-cf914da5e572",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "38823c95-35b5-49df-9cc5-cf914da5e572",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "5739ba79-c000-47e6-9af7-ed5fb250455a",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "5739ba79-c000-47e6-9af7-ed5fb250455a",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "5739ba79-c000-47e6-9af7-ed5fb250455a",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "5739ba79-c000-47e6-9af7-ed5fb250455a",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "5ef2d48c-844b-4aeb-ace9-ab8c675e2020",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "5ef2d48c-844b-4aeb-ace9-ab8c675e2020",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "6833c403-c6f7-47c9-93bd-eb425286abbe",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "6833c403-c6f7-47c9-93bd-eb425286abbe",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "reviewProjectPurpose",
+      "runId": "6833c403-c6f7-47c9-93bd-eb425286abbe",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "DataIntegrityViolationException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "6833c403-c6f7-47c9-93bd-eb425286abbe",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "6833c403-c6f7-47c9-93bd-eb425286abbe",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "6b81b08e-6414-4431-8ea6-fb44473f472d",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "knowledge",
+      "runId": "6b81b08e-6414-4431-8ea6-fb44473f472d",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "6e2195a2-c506-44d7-9aba-8daf5c9b1030",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "6e2195a2-c506-44d7-9aba-8daf5c9b1030",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "6e2195a2-c506-44d7-9aba-8daf5c9b1030",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "6e2195a2-c506-44d7-9aba-8daf5c9b1030",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "765a28ac-c1da-46ca-a63f-caf4bce6c6ea",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "765a28ac-c1da-46ca-a63f-caf4bce6c6ea",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "765a28ac-c1da-46ca-a63f-caf4bce6c6ea",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "765a28ac-c1da-46ca-a63f-caf4bce6c6ea",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "7aa71765-533b-4518-bb52-21a1ea8e6819",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "7aa71765-533b-4518-bb52-21a1ea8e6819",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "7aa71765-533b-4518-bb52-21a1ea8e6819",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "7aa71765-533b-4518-bb52-21a1ea8e6819",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "8aea342f-2bbf-492d-9de7-31159faf7615",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "8aea342f-2bbf-492d-9de7-31159faf7615",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "8aea342f-2bbf-492d-9de7-31159faf7615",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "8aea342f-2bbf-492d-9de7-31159faf7615",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "9184a240-5b3c-4434-b213-3465ba8cf536",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "9184a240-5b3c-4434-b213-3465ba8cf536",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "9184a240-5b3c-4434-b213-3465ba8cf536",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "9184a240-5b3c-4434-b213-3465ba8cf536",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "getConfirmedProfile",
+      "runId": "99f1072a-c60b-434b-a5ef-c497f9e7c27a",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "profile",
+      "runId": "99f1072a-c60b-434b-a5ef-c497f9e7c27a",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RejectedExecutionException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "9fd31736-5a94-4a02-a008-c0ed900a8950",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "9fd31736-5a94-4a02-a008-c0ed900a8950",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "a0e72ad4-3f2e-478d-a42e-a74b4abdfe1d",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "a0e72ad4-3f2e-478d-a42e-a74b4abdfe1d",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "reviewProjectPurpose",
+      "runId": "a0e72ad4-3f2e-478d-a42e-a74b4abdfe1d",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "DataIntegrityViolationException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "a0e72ad4-3f2e-478d-a42e-a74b4abdfe1d",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "a0e72ad4-3f2e-478d-a42e-a74b4abdfe1d",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "a1648b2a-4797-46e7-abe7-7eee3787f958",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "a1648b2a-4797-46e7-abe7-7eee3787f958",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "a7fb8703-72dd-4926-b590-bdbb789bee0e",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "knowledge",
+      "runId": "a7fb8703-72dd-4926-b590-bdbb789bee0e",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "c968099e-1ee5-4432-82e4-8b247df4d931",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "knowledge",
+      "runId": "c968099e-1ee5-4432-82e4-8b247df4d931",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "daea5547-b7b3-4d05-8df3-f34afe100f1a",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "knowledge",
+      "runId": "daea5547-b7b3-4d05-8df3-f34afe100f1a",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "e14c41c4-1bc9-4d4d-bb6a-36a61afa85ed",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "e14c41c4-1bc9-4d4d-bb6a-36a61afa85ed",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "RuntimeException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "e14c41c4-1bc9-4d4d-bb6a-36a61afa85ed",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "e14c41c4-1bc9-4d4d-bb6a-36a61afa85ed",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "f1cf15b8-6b8b-400f-b1be-97f47f08fae7",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "recommendationRecall",
+      "runId": "f1cf15b8-6b8b-400f-b1be-97f47f08fae7",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    },
+    {
+      "tool": "reviewProjectPurpose",
+      "runId": "f1cf15b8-6b8b-400f-b1be-97f47f08fae7",
+      "status": "DEGRADED",
+      "errorCode": "DEPENDENCY_FAILED",
+      "errorType": "DataIntegrityViolationException"
+    },
+    {
+      "tool": "searchKnowledge",
+      "runId": "f1cf15b8-6b8b-400f-b1be-97f47f08fae7",
+      "status": "FAILED",
+      "errorCode": null,
+      "errorType": "TOOL_TIMEOUT"
+    },
+    {
+      "tool": "projectEvidence",
+      "runId": "f1cf15b8-6b8b-400f-b1be-97f47f08fae7",
+      "status": "DEGRADED",
+      "errorCode": "TOOL_TIMEOUT",
+      "errorType": "IllegalStateException"
+    }
+  ]
+}

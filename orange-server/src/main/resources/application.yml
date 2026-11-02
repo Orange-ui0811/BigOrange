@@ -54,14 +54,30 @@ orange:
     chunk-overlap: ${RAG_B_CHUNK_OVERLAP:50}
     max-chunks: ${RAG_B_MAX_CHUNKS:4096}
     embedding-batch-size: ${RAG_B_EMBEDDING_BATCH_SIZE:16}
+    embedding-provider: ${RAG_B_EMBEDDING_PROVIDER:GITEE}
+    embedding-revision: ${RAG_B_EMBEDDING_REVISION:}
+    ollama-base-url: ${RAG_B_OLLAMA_BASE_URL:http://localhost:11434}
+    ollama-model: ${RAG_B_OLLAMA_MODEL:bge-m3:orangejd-v1}
     search-candidate-limit: ${RAG_B_SEARCH_CANDIDATE_LIMIT:20000}
     route-candidate-limit: ${RAG_B_ROUTE_CANDIDATE_LIMIT:128}
     fusion-candidate-limit: ${RAG_B_FUSION_CANDIDATE_LIMIT:80}
+    rerank:
+      enabled: ${RAG_B_RERANK_ENABLED:false}
+      endpoint: ${RAG_B_RERANK_ENDPOINT:}
+      api-key: ${RAG_B_RERANK_API_KEY:}
+      model: ${RAG_B_RERANK_MODEL:bge-reranker-v2-m3}
+      max-candidates: ${RAG_B_RERANK_MAX_CANDIDATES:80}
+      batch-size: ${RAG_B_RERANK_BATCH_SIZE:20}
+      timeout-millis: ${RAG_B_RERANK_TIMEOUT_MILLIS:5000}
+      max-concurrent-requests: ${RAG_B_RERANK_MAX_CONCURRENT_REQUESTS:2}
+      max-request-characters: ${RAG_B_RERANK_MAX_REQUEST_CHARACTERS:300000}
     github-sync-enabled: ${RAG_B_GITHUB_SYNC_ENABLED:false}
     github-sync-limit: ${RAG_B_GITHUB_SYNC_LIMIT:50}
     github-sync-cron: "${RAG_B_GITHUB_SYNC_CRON:0 15 4 * * *}"
   customer:
     enabled: ${CUSTOMER_ENABLED:false}
+    execution-engine: ${CUSTOMER_EXECUTION_ENGINE:LANGGRAPH4J}
+    raw-access-enabled: ${CUSTOMER_RAW_ACCESS_ENABLED:false}
     model: ${CUSTOMER_MODEL:deepseek-flash}
     thinking: ${CUSTOMER_THINKING:false}
     native-actions: ${CUSTOMER_NATIVE_ACTIONS:false}
@@ -77,6 +93,10 @@ orange:
     verification-output-tokens: ${CUSTOMER_VERIFICATION_OUTPUT_TOKENS:2048}
     evidence-thinking: ${CUSTOMER_EVIDENCE_THINKING:false}
     verification-thinking: ${CUSTOMER_VERIFICATION_THINKING:false}
+    purpose-thinking: ${CUSTOMER_PURPOSE_THINKING:false}
+    purpose-output-tokens: ${CUSTOMER_PURPOSE_OUTPUT_TOKENS:2048}
+    purpose-seconds: ${CUSTOMER_PURPOSE_SECONDS:30}
+    purpose-retry-reserve-seconds: ${CUSTOMER_PURPOSE_RETRY_RESERVE_SECONDS:10}
   bootstrap-admin:
     username: ${ORANGE_ADMIN_BOOTSTRAP_USERNAME:}
     password: ${ORANGE_ADMIN_BOOTSTRAP_PASSWORD:}

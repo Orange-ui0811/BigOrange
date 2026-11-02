@@ -1,0 +1,345 @@
+# K2 规则预览对照 · development
+
+按 K1 已标注原文范围统计；未标注部分不算正确样本。分歧包含父块/子块边界差异，不能直接等同语义错误率。
+标注为助手审阅；尚未独立人工确认，也不是检索效果评测。
+
+| 仓库 | 已标注 | KEEP 被删 | KEEP 待复核 | DROP 被保留 | REVIEW 被放行 |
+|---|---:|---:|---:|---:|---:|
+| langchain-ai/langgraph | 6 | 0 | 4 | 0 | 0 |
+| EbookFoundation/free-programming-books | 6 | 0 | 1 | 0 | 0 |
+| tidalcycles/strudel | 3 | 0 | 0 | 0 | 0 |
+| tteck/Proxmox | 4 | 0 | 1 | 0 | 0 |
+| abatchy17/abatchy17.github.io | 1 | 0 | 0 | 0 | 0 |
+| georgealways/lil-gui | 3 | 0 | 1 | 0 | 0 |
+| tldraw/tldraw | 6 | 0 | 0 | 0 | 0 |
+| ToolJet/ToolJet | 7 | 0 | 2 | 0 | 0 |
+| Donkie/Spoolman | 5 | 0 | 1 | 0 | 0 |
+| Slicer/Slicer | 6 | 0 | 1 | 0 | 0 |
+| immich-app/immich | 6 | 0 | 0 | 0 | 0 |
+| navidrome/navidrome | 7 | 0 | 1 | 0 | 0 |
+| raphaelsalaja/audio | 5 | 0 | 1 | 0 | 0 |
+| crankyoldgit/IRremoteESP8266 | 4 | 0 | 2 | 0 | 0 |
+| lvgl/lvgl | 4 | 0 | 1 | 0 | 0 |
+| nolangz/pixel2motion | 4 | 0 | 0 | 0 | 0 |
+| react/react | 3 | 0 | 0 | 0 | 0 |
+| deepseek-ai/deepseek-harness | 5 | 0 | 3 | 0 | 0 |
+| infiniflow/ragflow | 5 | 0 | 0 | 0 | 0 |
+| jeecgboot/JeecgBoot | 6 | 0 | 1 | 0 | 0 |
+| hacs/integration | 3 | 0 | 2 | 0 | 0 |
+| piitaya/lovelace-mushroom | 6 | 0 | 2 | 0 | 0 |
+| 78/xiaozhi-esp32 | 4 | 0 | 0 | 0 | 0 |
+| MarlinFirmware/Marlin | 4 | 0 | 1 | 0 | 0 |
+
+## 分歧清单
+
+### K1-046-03 · langchain-ai/langgraph · DEFERRED_REVIEW
+
+原标注 KEEP；L26–L28；覆盖 {'REVIEW': 31}。
+完整保留 pip 安装命令。
+
+- L26–L28：REVIEW / DEPENDENCY_NOT_APPROVED
+
+### K1-046-04 · langchain-ai/langgraph · DEFERRED_REVIEW
+
+原标注 KEEP；L30–L33；覆盖 {'REVIEW': 236, 'KEEP': 172}。
+Deep Agents 与 JavaScript 库是相关产品入口，不能归为 LangGraph 本体已提供的能力。
+
+- L30–L31：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L32–L32：DROP / LAYOUT_ONLY
+- L33–L33：KEEP / LABELED_SOURCE_POINTER
+
+### K1-046-05 · langchain-ai/langgraph · DEFERRED_REVIEW
+
+原标注 KEEP；L35–L41；覆盖 {'KEEP': 113, 'REVIEW': 586}。
+保留框架定位、持久执行、人机协作和记忆声明；这是文档声明，不是运行验证。
+
+- L35–L35：KEEP / SCOPE_HEADING_ONLY
+- L36–L36：DROP / LAYOUT_ONLY
+- L37–L37：KEEP / EXPLICIT_PURPOSE_STATEMENT
+- L38–L38：DROP / LAYOUT_ONLY
+- L39–L43：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-046-06 · langchain-ai/langgraph · DEFERRED_REVIEW
+
+原标注 KEEP；L42–L43；覆盖 {'REVIEW': 432}。
+LangSmith 调试和部署必须保留产品归属，不能自动归入开源框架自身。
+
+- L39–L43：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-050-04 · EbookFoundation/free-programming-books · DEFERRED_REVIEW
+
+原标注 KEEP；L43–L45；覆盖 {'KEEP': 17, 'REVIEW': 304}。
+贡献指南对学习和参与项目有用，不能按非功能文字全部删除。
+
+- L43–L43：KEEP / SCOPE_HEADING_ONLY
+- L44–L44：DROP / LAYOUT_ONLY
+- L45–L45：REVIEW / INTERNAL_ANCHOR_REQUIRES_BODY_CHECK
+
+### K1-228-03 · tidalcycles/strudel · NOISE_DEFERRED
+
+原标注 DROP；L8–L8；覆盖 {'REVIEW': 8}。
+迁移地址已保留后，单独的更新书签礼貌提示无需索引。
+
+- L8–L8：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-268-03 · tteck/Proxmox · DEFERRED_REVIEW
+
+原标注 KEEP；L19–L21；覆盖 {'KEEP': 73, 'REVIEW': 50}。
+保留容器与虚拟机脚本的业务定位。
+
+- L20–L20：DROP / LAYOUT_ONLY
+- L21–L21：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L19–L19：KEEP / EXPLICIT_PURPOSE_STATEMENT
+
+### K1-299-03 · georgealways/lil-gui · DEFERRED_REVIEW
+
+原标注 KEEP；L12–L53；覆盖 {'REVIEW': 851}。
+保留完整示例及 addColor、onChange、数值步长上下文，不拆出失去对象关系的零散参数。
+
+- L12–L53：REVIEW / DEPENDENCY_NOT_APPROVED
+
+### K1-318-01 · tldraw/tldraw · NOISE_DEFERRED
+
+原标注 DROP；L1–L6；覆盖 {'DROP': 61, 'REVIEW': 235}。
+picture Logo 不作为能力证据。
+
+- L1–L1：DROP / LAYOUT_ONLY
+- L6–L6：DROP / LAYOUT_ONLY
+- L2–L5：REVIEW / IMAGE_OR_MIXED_MARKUP
+
+### K1-329-01 · ToolJet/ToolJet · DEFERRED_REVIEW
+
+原标注 KEEP；L1–L1；覆盖 {'REVIEW': 140}。
+低代码构建器不等于已经完成库存管理系统。
+
+- L1–L1：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-329-02 · ToolJet/ToolJet · NOISE_DEFERRED
+
+原标注 DROP；L3–L3；覆盖 {'REVIEW': 66}。
+求 Star 话术不进入检索证据。
+
+- L3–L3：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-329-06 · ToolJet/ToolJet · DEFERRED_REVIEW
+
+原标注 KEEP；L37–L41；覆盖 {'KEEP': 17, 'REVIEW': 85}。
+企业 AI 能力必须携带企业版限定，不能向免费社区版迁移。
+
+- L37–L37：KEEP / SCOPE_HEADING_ONLY
+- L38–L50：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-354-01 · Donkie/Spoolman · NOISE_DEFERRED
+
+原标注 DROP；L1–L5；覆盖 {'REVIEW': 405}。
+独立 Logo 不进入功能知识。
+
+- L1–L5：REVIEW / IMAGE_OR_MIXED_MARKUP
+
+### K1-354-02 · Donkie/Spoolman · DEFERRED_REVIEW
+
+原标注 KEEP；L9–L11；覆盖 {'REVIEW': 18, 'KEEP': 243}。
+耗材管理场景明确，不能扩写为通用库存 ERP。
+
+- L9–L9：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L10–L10：DROP / LAYOUT_ONLY
+- L11–L11：KEEP / EXPLICIT_PURPOSE_STATEMENT
+
+### K1-357-04 · Slicer/Slicer · DEFERRED_REVIEW
+
+原标注 KEEP；L6–L8；覆盖 {'KEEP': 42, 'REVIEW': 40}。
+保留可视化、图像分析与多平台定位，不从项目名补充当前片段未写的领域限制。
+
+- L6–L6：KEEP / EXPLICIT_PURPOSE_STATEMENT
+- L7–L7：DROP / LAYOUT_ONLY
+- L8–L8：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-408-03 · immich-app/immich · NOISE_DEFERRED
+
+原标注 DROP；L21–L40；覆盖 {'DROP': 21, 'REVIEW': 870}。
+README 翻译导航不等于产品支持这些界面语言。
+
+- L27–L27：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L28–L28：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L29–L29：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L30–L30：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L31–L31：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L32–L32：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L33–L33：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L34–L34：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L35–L35：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L36–L36：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L37–L37：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L38–L38：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L39–L39：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L40–L40：DROP / LAYOUT_ONLY
+- L21–L21：DROP / LAYOUT_ONLY
+- L22–L22：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L23–L23：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L24–L24：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L25–L25：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L26–L26：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-435-06 · navidrome/navidrome · DEFERRED_REVIEW
+
+原标注 KEEP；L28–L32；覆盖 {'KEEP': 5, 'REVIEW': 265}。
+托管服务是部署替代方式，需保留服务归属，不能推断必须购买云服务。
+
+- L28–L28：KEEP / SCOPE_HEADING_ONLY
+- L29–L29：DROP / LAYOUT_ONLY
+- L30–L30：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L31–L31：DROP / LAYOUT_ONLY
+- L32–L32：REVIEW / IMAGE_OR_MIXED_MARKUP
+
+### K1-047-03 · raphaelsalaja/audio · DEFERRED_REVIEW
+
+原标注 KEEP；L7–L9；覆盖 {'KEEP': 92, 'REVIEW': 55}。
+保留音频库用途和 11 kB 声明；不当作本轮实测大小。
+
+- L7–L7：KEEP / EXPLICIT_PURPOSE_STATEMENT
+- L8–L8：DROP / LAYOUT_ONLY
+- L9–L9：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-054-03 · crankyoldgit/IRremoteESP8266 · DEFERRED_REVIEW
+
+原标注 KEEP；L16–L24；覆盖 {'KEEP': 326, 'REVIEW': 232}。
+2.0 和 2.5 之前的破坏性变更需要保留版本条件。
+
+- L16–L16：KEEP / SCOPE_HEADING_ONLY
+- L17–L17：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L18–L18：DROP / LAYOUT_ONLY
+- L19–L19：KEEP / SCOPE_HEADING_ONLY
+- L20–L27：KEEP / CONDITION_OR_NEGATION
+
+### K1-054-04 · crankyoldgit/IRremoteESP8266 · DEFERRED_REVIEW
+
+原标注 KEEP；L48–L53；覆盖 {'KEEP': 71, 'REVIEW': 245}。
+IDE 版本与各系统安装步骤有实际适配价值。
+
+- L48–L48：KEEP / SCOPE_HEADING_ONLY
+- L49–L49：KEEP / SCOPE_HEADING_ONLY
+- L50–L53：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-055-03 · lvgl/lvgl · DEFERRED_REVIEW
+
+原标注 KEEP；L56–L56；覆盖 {'REVIEW': 283}。
+Pro 导出和使用条件应归属商业产品，不能移植成核心库能力。
+
+- L56–L56：REVIEW / INTERNAL_ANCHOR_REQUIRES_BODY_CHECK
+
+### K1-164-01 · deepseek-ai/deepseek-harness · DEFERRED_REVIEW
+
+原标注 KEEP；L5–L7；覆盖 {'KEEP': 95, 'REVIEW': 223}。
+插件能力组织是源码学习与二次开发证据。
+
+- L6–L6：DROP / LAYOUT_ONLY
+- L7–L7：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L5–L5：KEEP / EXPLICIT_PURPOSE_STATEMENT
+
+### K1-164-02 · deepseek-ai/deepseek-harness · DEFERRED_REVIEW
+
+原标注 KEEP；L11–L15；覆盖 {'KEEP': 120, 'REVIEW': 58}。
+开发者预览与破坏性变更说明必须进入适配限制。
+
+- L11–L11：KEEP / SCOPE_HEADING_ONLY
+- L12–L12：DROP / LAYOUT_ONLY
+- L13–L13：KEEP / MAINTENANCE_CONDITION
+- L14–L14：DROP / LAYOUT_ONLY
+- L15–L15：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-164-03 · deepseek-ai/deepseek-harness · DEFERRED_REVIEW
+
+原标注 KEEP；L19–L27；覆盖 {'KEEP': 299, 'REVIEW': 55}。
+Node、CLI、端口和 SSH 条件需保留适用范围。
+
+- L19–L19：KEEP / SCOPE_HEADING_ONLY
+- L20–L20：DROP / LAYOUT_ONLY
+- L21–L21：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L22–L22：DROP / LAYOUT_ONLY
+- L23–L25：REVIEW / DEPENDENCY_NOT_APPROVED
+- L26–L26：DROP / LAYOUT_ONLY
+- L27–L27：KEEP / CONDITION_OR_NEGATION
+
+### K1-231-02 · infiniflow/ragflow · NOISE_DEFERRED
+
+原标注 DROP；L8–L18；覆盖 {'DROP': 869, 'REVIEW': 115}。
+README 翻译导航不表示产品支持语言。
+
+- L16–L16：DROP / README_TRANSLATION_NAV
+- L17–L17：DROP / README_TRANSLATION_NAV
+- L18–L18：DROP / LAYOUT_ONLY
+- L8–L8：DROP / README_TRANSLATION_NAV
+- L9–L9：DROP / README_TRANSLATION_NAV
+- L10–L10：DROP / README_TRANSLATION_NAV
+- L11–L11：DROP / README_TRANSLATION_NAV
+- L12–L12：DROP / README_TRANSLATION_NAV
+- L13–L13：DROP / README_TRANSLATION_NAV
+- L14–L14：DROP / README_TRANSLATION_NAV
+- L15–L15：REVIEW / IMAGE_OR_MIXED_MARKUP
+
+### K1-247-05 · jeecgboot/JeecgBoot · DEFERRED_REVIEW
+
+原标注 KEEP；L81–L82；覆盖 {'REVIEW': 123}。
+官网和演示链接已完整，尾部另一链接截断不影响这两行。
+
+- L81–L83：REVIEW / POSSIBLY_TRUNCATED_TEXT
+
+### K1-254-01 · hacs/integration · DEFERRED_REVIEW
+
+原标注 KEEP；L11–L21；覆盖 {'KEEP': 47, 'REVIEW': 89}。
+保留集成、插件和前端管理能力及宿主范围。
+
+- L11–L11：KEEP / SCOPE_HEADING_ONLY
+- L12–L12：DROP / LAYOUT_ONLY
+- L13–L13：KEEP / EXPLICIT_PURPOSE_STATEMENT
+- L14–L14：DROP / LAYOUT_ONLY
+- L15–L15：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L16–L16：DROP / LAYOUT_ONLY
+- L17–L21：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-254-02 · hacs/integration · DEFERRED_REVIEW
+
+原标注 KEEP；L25–L27；覆盖 {'KEEP': 26, 'REVIEW': 87}。
+文档、配置和常见问题入口有导航价值。
+
+- L25–L25：KEEP / LABELED_SOURCE_POINTER
+- L26–L26：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L27–L27：REVIEW / SEMANTIC_REVIEW_NEEDED
+
+### K1-259-02 · piitaya/lovelace-mushroom · DEFERRED_REVIEW
+
+原标注 KEEP；L13–L24；覆盖 {'KEEP': 136, 'REVIEW': 62}。
+零依赖指不依赖其他卡片，不意味着不依赖 Home Assistant。
+
+- L13–L13：KEEP / SCOPE_HEADING_ONLY
+- L14–L14：DROP / LAYOUT_ONLY
+- L15–L15：KEEP / EXPLICIT_PURPOSE_STATEMENT
+- L16–L16：DROP / LAYOUT_ONLY
+- L17–L17：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L18–L18：DROP / LAYOUT_ONLY
+- L19–L19：KEEP / SCOPE_HEADING_ONLY
+- L20–L20：DROP / LAYOUT_ONLY
+- L21–L28：KEEP / CONDITION_OR_NEGATION
+
+### K1-259-05 · piitaya/lovelace-mushroom · DEFERRED_REVIEW
+
+原标注 KEEP；L95–L103；覆盖 {'KEEP': 119, 'REVIEW': 32}。
+旧卡片与 2024.8 模板徽章的版本区别保留。
+
+- L95–L95：KEEP / SCOPE_HEADING_ONLY
+- L96–L96：DROP / LAYOUT_ONLY
+- L97–L97：REVIEW / SEMANTIC_REVIEW_NEEDED
+- L98–L98：DROP / LAYOUT_ONLY
+- L99–L99：KEEP / LABELED_SOURCE_POINTER
+- L100–L100：DROP / LAYOUT_ONLY
+- L101–L101：KEEP / SCOPE_HEADING_ONLY
+- L102–L102：DROP / LAYOUT_ONLY
+- L103–L103：KEEP / LABELED_SOURCE_POINTER
+
+### K1-278-02 · MarlinFirmware/Marlin · DEFERRED_REVIEW
+
+原标注 KEEP；L3–L3；覆盖 {'REVIEW': 36}。
+仅能确认 3D 打印机固件定位，不能据此判断具体机型。
+
+- L3–L3：REVIEW / SEMANTIC_REVIEW_NEEDED
+

@@ -1,0 +1,2341 @@
+{
+  "case": {
+    "id": "office_specific",
+    "family": "office",
+    "kind": "specific",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：工作流自动化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "159",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：工作流自动化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "8b6ef5ba-14c8-4cb0-9a49-a1e7efaee42c",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 25109,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：工作流自动化"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "experience": "一年编程基础",
+          "topic": [
+            "工作流自动化"
+          ],
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：工作流自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "scope": "04b30215764fe9be920b66f6c16fd86b2e8904d11f31889b8c2f27fb50104c0c",
+            "topic": "工作流自动化",
+            "proofs": {
+              "EXTERNAL_PROJECT:427": {
+                "rank": 1,
+                "relation": "DIRECT",
+                "quote": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过 1500 个集成。",
+                "fingerprint": "64145871f250419c675906de0f8bd0420071c9ee6612b8e8ce76961c5b3531c5"
+              },
+              "BEGINNER_PROJECT:43": {
+                "rank": 2,
+                "relation": "DIRECT",
+                "quote": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。",
+                "fingerprint": "e31780e186267361f84256e57c9750702e1a6c4cf26993efc691e8e7ab925c5e"
+              }
+            }
+          },
+          "lastCandidates": [
+            {
+              "name": "n8n-io/n8n",
+              "id": 427,
+              "type": "EXTERNAL_PROJECT"
+            },
+            {
+              "name": "flowsforapex/apex-flowsforapex",
+              "id": 43,
+              "type": "BEGINNER_PROJECT"
+            }
+          ]
+        },
+        "projects": [
+          {
+            "type": "EXTERNAL_PROJECT",
+            "id": 427,
+            "sourceRef": "n8n-io/n8n",
+            "name": "n8n-io/n8n",
+            "url": "https://github.com/n8n-io/n8n",
+            "status": "DOCUMENTED",
+            "archived": false,
+            "description": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。 [E2]\n公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。 [E4]",
+            "evidenceStatus": "DOCUMENT_IDENTITY",
+            "importable": true,
+            "documentId": 427,
+            "versionId": 646,
+            "catalogTitle": "n8n – AI 智能体与工作流自动化平台",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "semanticMatched": true,
+              "quality": 0.0,
+              "semanticAvailable": true,
+              "total": 17.008401285415225,
+              "goalPreference": 0.0,
+              "semantic": 17.008401285415225,
+              "uncertaintyPenalty": 0.0,
+              "version": "customer-rank-v3",
+              "preference": 0.0
+            },
+            "recommendReason": "本轮目标：学习；资料涉及工作流自动化，具体实践范围见项目说明；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E2",
+                "title": "n8n – AI 智能体与工作流自动化平台",
+                "sourceRef": "n8n-io/n8n",
+                "spans": [
+                  {
+                    "startInChunk": 9,
+                    "text": "- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 367
+                  }
+                ],
+                "documentId": 427,
+                "versionId": 646,
+                "chunkId": 17192,
+                "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 核心能力",
+                "startOffset": 400,
+                "endOffset": 758,
+                "contentStartInChunk": 9,
+                "quote": "- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                "text": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E4",
+                "title": "n8n – AI 智能体与工作流自动化平台",
+                "sourceRef": "n8n-io/n8n",
+                "spans": [
+                  {
+                    "startInChunk": 25,
+                    "text": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 274
+                  }
+                ],
+                "documentId": 427,
+                "versionId": 646,
+                "chunkId": 17191,
+                "sectionPath": "n8n – AI 智能体与工作流自动化平台",
+                "startOffset": 142,
+                "endOffset": 391,
+                "contentStartInChunk": 25,
+                "quote": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                "text": "公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。",
+                "field": "description"
+              }
+            ],
+            "whatIsIt": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。 [E2]\n公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。 [E4]",
+            "supportedExplanation": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。 [E2]\n公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。 [E4]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议结合学习目标，利用其可视化画布与自定义代码，尝试搭建一个多步骤AI工作流小案例，如自动整理笔记并调用模型总结，以理解工作流自动化核心概念。",
+              "difficultyAdvice": "先确认自托管或云端部署的环境要求，以及JavaScript或Python基础是否足够修改节点逻辑，避免直接深入复杂集成。",
+              "vibeCodingAdvice": "可以用AI辅助生成节点配置或代码片段，但需在可视化画布中手动验证流程执行结果，确保理解每一步作用。",
+              "steps": [
+                "先运行一个内置模板，观察工作流触发与执行过程",
+                "修改模板中的一个节点，加入自己的数据处理逻辑",
+                "测试完整流程并记录学习心得与遇到的问题"
+              ],
+              "evidenceIds": [
+                "E2",
+                "E4"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 43,
+            "sourceRef": "beginner:43",
+            "name": "flowsforapex/apex-flowsforapex",
+            "url": "https://github.com/flowsforapex/apex-flowsforapex",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "JavaScript",
+            "techStack": "JavaScript",
+            "difficulty": "入门",
+            "duration": "7-14天",
+            "description": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。 [E1]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[]",
+            "beginnerScore": 91,
+            "analysisReason": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "semanticMatched": true,
+              "quality": 0.0,
+              "semanticAvailable": true,
+              "total": 30.0,
+              "goalPreference": 15.0,
+              "semantic": 15.0,
+              "uncertaintyPenalty": 0.0,
+              "version": "customer-rank-v3",
+              "preference": 0.0
+            },
+            "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及工作流自动化，具体实践范围见项目说明；资料记录主语言为JavaScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E1",
+                "title": "flowsforapex/apex-flowsforapex",
+                "sourceRef": "beginner:43",
+                "spans": [
+                  {
+                    "startInChunk": 8,
+                    "text": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 49
+                  }
+                ],
+                "documentId": 96,
+                "versionId": 315,
+                "chunkId": 12058,
+                "sectionPath": "flowsforapex/apex-flowsforapex > 中文简介",
+                "startOffset": 117,
+                "endOffset": 158,
+                "contentStartInChunk": 8,
+                "quote": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                "text": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E3",
+                "title": "flowsforapex/apex-flowsforapex",
+                "sourceRef": "beginner:43",
+                "spans": [
+                  {
+                    "startInChunk": 11,
+                    "text": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 58
+                  }
+                ],
+                "documentId": 96,
+                "versionId": 315,
+                "chunkId": 12059,
+                "sectionPath": "flowsforapex/apex-flowsforapex > 适合新手的原因",
+                "startOffset": 169,
+                "endOffset": 216,
+                "contentStartInChunk": 11,
+                "quote": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\n\n",
+                "text": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。",
+                "field": "vibeCodingReason"
+              }
+            ],
+            "whatIsIt": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。 [E1]",
+            "vibeCodingReason": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。 [E3]",
+            "supportedExplanation": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。 [E1]\n作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。 [E3]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议以学习BPMN 2.0和低代码集成为目标，在Oracle APEX环境中尝试设计一个简单审批流程，理解业务逻辑与工作流引擎的配合。",
+              "difficultyAdvice": "先确认是否已具备Oracle APEX基础环境，以及BPMN 2.0基本概念，若缺少可先补充前置知识。",
+              "vibeCodingAdvice": "可以用AI辅助解释BPMN元素或生成流程草图，但需在APEX中实际部署并运行，验证流程走向是否符合预期。",
+              "steps": [
+                "在APEX中导入或创建一个最简单的BPMN流程示例",
+                "尝试修改流程中的用户任务或网关条件",
+                "运行流程并观察任务流转，记录与预期的差异"
+              ],
+              "evidenceIds": [
+                "E1",
+                "E3"
+              ],
+              "kind": "SUGGESTION"
+            }
+          }
+        ],
+        "references": [
+          {
+            "evidenceId": "E1",
+            "title": "flowsforapex/apex-flowsforapex",
+            "sourceRef": "beginner:43",
+            "spans": [
+              {
+                "startInChunk": 8,
+                "text": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                "spanId": "E1.S1",
+                "endInChunk": 49
+              }
+            ],
+            "documentId": 96,
+            "versionId": 315,
+            "chunkId": 12058,
+            "sectionPath": "flowsforapex/apex-flowsforapex > 中文简介",
+            "startOffset": 117,
+            "endOffset": 158,
+            "contentStartInChunk": 8,
+            "quote": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+            "text": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "flowsforapex/apex-flowsforapex",
+            "sourceRef": "beginner:43",
+            "spans": [
+              {
+                "startInChunk": 11,
+                "text": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\n\n",
+                "spanId": "E3.S1",
+                "endInChunk": 58
+              }
+            ],
+            "documentId": 96,
+            "versionId": 315,
+            "chunkId": 12059,
+            "sectionPath": "flowsforapex/apex-flowsforapex > 适合新手的原因",
+            "startOffset": 169,
+            "endOffset": 216,
+            "contentStartInChunk": 11,
+            "quote": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\n\n",
+            "text": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E2",
+            "title": "n8n – AI 智能体与工作流自动化平台",
+            "sourceRef": "n8n-io/n8n",
+            "spans": [
+              {
+                "startInChunk": 9,
+                "text": "- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                "spanId": "E2.S1",
+                "endInChunk": 367
+              }
+            ],
+            "documentId": 427,
+            "versionId": 646,
+            "chunkId": 17192,
+            "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 核心能力",
+            "startOffset": 400,
+            "endOffset": 758,
+            "contentStartInChunk": 9,
+            "quote": "- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+            "text": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "n8n – AI 智能体与工作流自动化平台",
+            "sourceRef": "n8n-io/n8n",
+            "spans": [
+              {
+                "startInChunk": 25,
+                "text": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                "spanId": "E4.S1",
+                "endInChunk": 274
+              }
+            ],
+            "documentId": 427,
+            "versionId": 646,
+            "chunkId": 17191,
+            "sectionPath": "n8n – AI 智能体与工作流自动化平台",
+            "startOffset": 142,
+            "endOffset": 391,
+            "contentStartInChunk": 25,
+            "quote": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+            "text": "公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。",
+            "field": "description"
+          }
+        ],
+        "profileLoaded": false,
+        "generation": "20261002164953-ec113424",
+        "status": "VERIFIED_PROJECTS",
+        "recommendationReport": {
+          "timeline": "先运行示例并确认改造范围，再根据实际投入估算进度。",
+          "approach": "结合「学习」目标，建议先运行已有示例，再完成一个小改造，通过输入输出与测试理解系统的工作过程。",
+          "learning": [
+            {
+              "key": "EXTERNAL_PROJECT:427",
+              "name": "n8n-io/n8n",
+              "personalized": true,
+              "steps": [
+                "先运行一个内置模板，观察工作流触发与执行过程",
+                "修改模板中的一个节点，加入自己的数据处理逻辑",
+                "测试完整流程并记录学习心得与遇到的问题"
+              ]
+            },
+            {
+              "key": "BEGINNER_PROJECT:43",
+              "name": "flowsforapex/apex-flowsforapex",
+              "personalized": true,
+              "steps": [
+                "在APEX中导入或创建一个最简单的BPMN流程示例",
+                "尝试修改流程中的用户任务或网关条件",
+                "运行流程并观察任务流转，记录与预期的差异"
+              ]
+            }
+          ],
+          "direction": "本轮围绕「工作流自动化」查找项目，下面区分资料事实与实践建议。",
+          "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。"
+        },
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：工作流自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：工作流自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "embeddingUsage": "NOT_REPORTED",
+        "promptVersion": "customer-v4.15-purpose-review",
+        "modelCalls": [
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 5326,
+              "completion_tokens": 482,
+              "total_tokens": 5808,
+              "prompt_tokens_details": {
+                "cached_tokens": 5120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 187
+              },
+              "prompt_cache_hit_tokens": 5120,
+              "prompt_cache_miss_tokens": 206
+            },
+            "durationMs": 2456,
+            "model": "deepseek-flash",
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 184,
+              "completion_tokens": 17,
+              "total_tokens": 201,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 184
+            },
+            "durationMs": 795,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 2625,
+              "completion_tokens": 3760,
+              "total_tokens": 6385,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 3649
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 2369
+            },
+            "durationMs": 14683,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 1432,
+              "completion_tokens": 265,
+              "total_tokens": 1697,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1304
+            },
+            "durationMs": 1361,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "EVIDENCE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 811,
+              "completion_tokens": 12,
+              "total_tokens": 823,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 811
+            },
+            "durationMs": 504,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "VERIFY",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 686,
+              "completion_tokens": 420,
+              "total_tokens": 1106,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 430
+            },
+            "durationMs": 2578,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "ADVICE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "costUsd": "UNKNOWN",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "models": [
+            "deepseek-flash"
+          ],
+          "calls": 6,
+          "callsWithoutUsage": 0,
+          "outputTokens": 4956,
+          "totalTokens": 16020,
+          "cacheMissTokens": 5304,
+          "inputTokens": 11064,
+          "cacheHitTokens": 5760,
+          "complete": true,
+          "reasoningTokens": 3836
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "工作流自动化 | 业务流程自动化 | workflow automation",
+            "topic": [
+              "工作流自动化"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.018051282051282053,
+                  "title": "google/adk-python",
+                  "chunkId": 12592,
+                  "content": "## 🔥 What's New in 2.0\n\n- **Workflow Runtime**: A graph-based execution engine for composing\n  deterministic execution flows for agentic apps, with support for routing,\n  fan-out/fan-in, loops, retry, state management, dynamic nodes,\n  human-in-the-loop, and nested workflows.\n\n- **Task API**: Structured agent-to-agent delegation with multi-turn task\n  mode, single-turn controlled output, mixed delegation patterns,\n  human-in-the-loop, and task agents as workflow nodes.\n\n",
+                  "endOffset": 2992,
+                  "sourceRef": "career:214",
+                  "versionId": 333,
+                  "chunkIndex": 20,
+                  "documentId": 114,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Agent Development Kit (ADK) 2.0 > 🔥 What's New in 2.0",
+                  "startOffset": 2516,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=15,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01700295937584073,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11694,
+                  "content": "### Job Schedulers\n\n_Libraries for scheduling jobs._\n\n- [airflow](https://github.com/apache/airflow) - Airflow is a platform to programmatically author, schedule and monitor workflows.\n- [apscheduler](https://github.com/agronholm/apscheduler) - A light but powerful in-process task scheduler that lets you schedule functions.\n- [dagster](https://github.com/dagster-io/dagster) - An orchestration platform for the development, production, and observation of data assets.\n- [prefect](https://github.com/PrefectHQ/prefect) - A modern workflow orchestration framework that makes it easy to build, schedule and monitor robust data pipelines.\n- [schedule](https://github.com/dbader/schedule) - Python job scheduling for humans.\n- [SpiffWorkflow](https://github.com/sartography/SpiffWorkflow) - A powerful workflow engine implemented in pure Python.\n\n",
+                  "endOffset": 54267,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 53,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Job Schedulers",
+                  "startOffset": 53423,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=117,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016597180861623984,
+                  "title": "infiniflow/ragflow",
+                  "chunkId": 14113,
+                  "content": "### 🛀 **Automated and effortless RAG workflow**\n\n- Streamlined RAG orchestration catered to both personal and large businesses.\n- Configurable LLMs as well as embedding models.\n- Multiple recall paired with fused re-ranking.\n- Intuitive APIs for seamless integration with business.\n\n",
+                  "endOffset": 7451,
+                  "sourceRef": "infiniflow/ragflow|week",
+                  "versionId": 388,
+                  "chunkIndex": 12,
+                  "documentId": 169,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "🌟 Key Features > 🛀 **Automated and effortless RAG workflow**",
+                  "startOffset": 7167,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+                  "chunkId": 16036,
+                  "content": "### 工作流\n\n",
+                  "endOffset": 1932,
+                  "sourceRef": "QuivrHQ/quivr",
+                  "versionId": 469,
+                  "chunkIndex": 6,
+                  "documentId": 250,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流",
+                  "startOffset": 1923,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "前端检查清单",
+                  "chunkId": 15933,
+                  "content": "## 选择你的工作流\n\n",
+                  "endOffset": 1278,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 4,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流",
+                  "startOffset": 1266,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "SeanJ1ang/design-judge-skills",
+                  "chunkId": 9724,
+                  "content": "## 2. 工作流\n\n```text\n设计材料 ── 不确定路线或需要完整流程 ──> design-award-pipeline\n  │\n  ├─ 寻找同类获奖案例 ──────────────> design-award-search\n  ├─ 评价设计与展示表达 ────────────> design-evaluation\n  └─ 选择奖项 / 赛道 / 类别 ───────> design-award-match\n                                         │\n                                         v\n                                design-information-prep\n                                         │\n                                         v\n                                design-submission-check\n```\n\n这些模块可以独立使用。完整申报流程通常从评价或匹配开始，在目标奖项确定后进入信息准备，最后执行提交终检。\n\n",
+                  "endOffset": 3297,
+                  "sourceRef": "beginner:91",
+                  "versionId": 224,
+                  "chunkIndex": 23,
+                  "documentId": 5,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Design Judge Skills > 2. 工作流",
+                  "startOffset": 2739,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17192,
+                  "content": "## 核心能力\n\n- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                  "endOffset": 758,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 2,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 核心能力",
+                  "startOffset": 391,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "系统设计入门",
+                  "chunkId": 11471,
+                  "content": "## Asynchronism\n\n<p align=\"center\">\n  <img src=\"images/54GYsSx.png\">\n  <br/>\n  <i><a href=http://lethain.com/introduction-to-architecting-systems-for-scale/#platform_layer>Source: Intro to architecting systems for scale</a></i>\n</p>\n\nAsynchronous workflows help reduce request times for expensive operations that would otherwise be performed in-line.  They can also help by doing time-consuming work in advance, such as periodic aggregation of data.\n\n",
+                  "endOffset": 71261,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "versionId": 291,
+                  "chunkIndex": 142,
+                  "documentId": 72,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "The System Design Primer > Asynchronism",
+                  "startOffset": 70810,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12058,
+                  "content": "## 中文简介\n在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                  "endOffset": 158,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 3,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 中文简介",
+                  "startOffset": 109,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "mlflow/mlflow",
+                  "chunkId": 12669,
+                  "content": "## 项目摘要\nMLflow 是一个开源 AI 工程平台，支持智能体、大语言模型和传统 ML 模型的全生命周期管理：调试、评估、监控、优化及成本控制。\n\n",
+                  "endOffset": 152,
+                  "sourceRef": "career:221",
+                  "versionId": 336,
+                  "chunkIndex": 3,
+                  "documentId": 117,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "mlflow/mlflow > 项目摘要",
+                  "startOffset": 75,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "MindsHub Cowork",
+                  "chunkId": 16027,
+                  "content": "## 你能做什么\n\n面向所有知识工作者——创作者、策略师和运营者：\n\n- **自动化** 涉及阅读和写作的重复性多步骤工作：报告、监控、周期性工作流和计划性操作。\n- **构建** 内部 AI 工具和成果物——应用、仪表盘、幻灯片、文档、分析——无需工程，并发布到实时 URL 与团队分享。\n\n",
+                  "endOffset": 2082,
+                  "sourceRef": "mindsdb/minds",
+                  "versionId": 468,
+                  "chunkIndex": 4,
+                  "documentId": 249,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "MindsHub Cowork > 你能做什么",
+                  "startOffset": 1935,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "Awesome-Selfhosted",
+                  "chunkId": 17189,
+                  "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                  "endOffset": 3047,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "versionId": 645,
+                  "chunkIndex": 2,
+                  "documentId": 426,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Awesome-Selfhosted > 目录",
+                  "startOffset": 1205,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "Gemini CLI",
+                  "chunkId": 16917,
+                  "content": "### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                  "endOffset": 2595,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "versionId": 605,
+                  "chunkIndex": 15,
+                  "documentId": 386,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Gemini CLI > 📋 主要特性 > 自动化与集成",
+                  "startOffset": 2496,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013801084990958407,
+                  "title": "google/adk-python",
+                  "chunkId": 12598,
+                  "content": "## 📚 Documentation\n\n- **Getting Started**: https://google.github.io/adk-docs/\n- **Samples**: See `contributing/workflow_samples/` and\n  `contributing/task_samples/` for workflow and task API examples.\n\n",
+                  "endOffset": 4942,
+                  "sourceRef": "career:214",
+                  "versionId": 333,
+                  "chunkIndex": 26,
+                  "documentId": 114,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "Agent Development Kit (ADK) 2.0 > 📚 Documentation",
+                  "startOffset": 4739,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=115,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "mlflow/mlflow",
+                  "chunkId": 12666,
+                  "content": "# mlflow/mlflow\n\n",
+                  "endOffset": 17,
+                  "sourceRef": "career:221",
+                  "versionId": 336,
+                  "chunkIndex": 0,
+                  "documentId": 117,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "mlflow/mlflow",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "infiniflow/ragflow",
+                  "chunkId": 14105,
+                  "content": "## 🎮 Get Started\n\nTry our cloud service at [https://cloud.ragflow.io](https://cloud.ragflow.io).\n\n<div align=\"center\" style=\"margin-top:20px;margin-bottom:20px;\">\n<img alt=\"Chunking demonstration\" src=\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/chunking.gif\" width=\"1200\"/>\n<img alt=\"Agentic workflow demonstration\" src=\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/agentic-dark.gif\" width=\"1200\"/>\n</div>\n\n",
+                  "endOffset": 5185,
+                  "sourceRef": "infiniflow/ragflow|week",
+                  "versionId": 388,
+                  "chunkIndex": 4,
+                  "documentId": 169,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "🎮 Get Started",
+                  "startOffset": 4703,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17191,
+                  "content": "# n8n – AI 智能体与工作流自动化平台\n\n这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                  "endOffset": 391,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 1,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台",
+                  "startOffset": 117,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "Frigate NVR™ - 为IP摄像头提供实时对象检测",
+                  "chunkId": 16667,
+                  "content": "### 精简的审查工作流\n\n<div>\n<img width=\"800\" alt=\"精简的审查工作流\" src=\"https://github.com/blakeblackshear/frigate/assets/569905/6fed96e8-3b18-40e5-9ddc-31e6f3c9f2ff\">\n</div>\n\n",
+                  "endOffset": 1732,
+                  "sourceRef": "blakeblackshear/frigate",
+                  "versionId": 563,
+                  "chunkIndex": 7,
+                  "documentId": 344,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Frigate NVR™ - 为IP摄像头提供实时对象检测 > 截图 > 精简的审查工作流",
+                  "startOffset": 1571,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012862474877978754,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15255,
+                  "content": "##### :black_small_square: Labs\n\n<p>\n&nbsp;&nbsp; <a href=\"https://labs.networkreliability.engineering/\"><b>NRE Labs</b></a> - learn automation by doing it. Right now, right here, in your browser.<br>\n</p>\n\n",
+                  "endOffset": 65228,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 80,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Networks &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Labs",
+                  "startOffset": 65021,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=26,lexicalRank=102,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "infiniflow/ragflow",
+                  "chunkId": 14104,
+                  "content": "## 💡 What is RAGFlow?\n\n[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to enterprises of any scale. Powered by a converged [context engine](https://ragflow.io/basics/what-is-agent-context-engine) and pre-built agent templates, RAGFlow enables developers to transform complex data into high-fidelity, production-ready AI systems with exceptional efficiency and precision.\n\n",
+                  "endOffset": 4703,
+                  "sourceRef": "infiniflow/ragflow|week",
+                  "versionId": 388,
+                  "chunkIndex": 3,
+                  "documentId": 169,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "💡 What is RAGFlow?",
+                  "startOffset": 4093,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 237,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "google/adk-python",
+                  "evidence": [
+                    {
+                      "score": 0.018051282051282053,
+                      "title": "google/adk-python",
+                      "chunkId": 12592,
+                      "content": "## 🔥 What's New in 2.0\n\n- **Workflow Runtime**: A graph-based execution engine for composing\n  deterministic execution flows for agentic apps, with support for routing,\n  fan-out/fan-in, loops, retry, state management, dynamic nodes,\n  human-in-the-loop, and nested workflows.\n\n- **Task API**: Structured agent-to-agent delegation with multi-turn task\n  mode, single-turn controlled output, mixed delegation patterns,\n  human-in-the-loop, and task agents as workflow nodes.\n\n",
+                      "endOffset": 2992,
+                      "sourceRef": "career:214",
+                      "versionId": 333,
+                      "chunkIndex": 20,
+                      "documentId": 114,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "Agent Development Kit (ADK) 2.0 > 🔥 What's New in 2.0",
+                      "startOffset": 2516,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=15,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013801084990958407,
+                      "title": "google/adk-python",
+                      "chunkId": 12598,
+                      "content": "## 📚 Documentation\n\n- **Getting Started**: https://google.github.io/adk-docs/\n- **Samples**: See `contributing/workflow_samples/` and\n  `contributing/task_samples/` for workflow and task API examples.\n\n",
+                      "endOffset": 4942,
+                      "sourceRef": "career:214",
+                      "versionId": 333,
+                      "chunkIndex": 26,
+                      "documentId": 114,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "Agent Development Kit (ADK) 2.0 > 📚 Documentation",
+                      "startOffset": 4739,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=115,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:214",
+                  "bestScore": 0.018051282051282053,
+                  "sourceRef": "career:214",
+                  "documentId": 114,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "vinta/awesome-python",
+                  "evidence": [
+                    {
+                      "score": 0.01700295937584073,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11694,
+                      "content": "### Job Schedulers\n\n_Libraries for scheduling jobs._\n\n- [airflow](https://github.com/apache/airflow) - Airflow is a platform to programmatically author, schedule and monitor workflows.\n- [apscheduler](https://github.com/agronholm/apscheduler) - A light but powerful in-process task scheduler that lets you schedule functions.\n- [dagster](https://github.com/dagster-io/dagster) - An orchestration platform for the development, production, and observation of data assets.\n- [prefect](https://github.com/PrefectHQ/prefect) - A modern workflow orchestration framework that makes it easy to build, schedule and monitor robust data pipelines.\n- [schedule](https://github.com/dbader/schedule) - Python job scheduling for humans.\n- [SpiffWorkflow](https://github.com/sartography/SpiffWorkflow) - A powerful workflow engine implemented in pure Python.\n\n",
+                      "endOffset": 54267,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 53,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Projects > Job Schedulers",
+                      "startOffset": 53423,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=117,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:vinta/awesome-python",
+                  "bestScore": 0.01700295937584073,
+                  "sourceRef": "vinta/awesome-python",
+                  "documentId": 74,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "infiniflow/ragflow",
+                  "evidence": [
+                    {
+                      "score": 0.016597180861623984,
+                      "title": "infiniflow/ragflow",
+                      "chunkId": 14113,
+                      "content": "### 🛀 **Automated and effortless RAG workflow**\n\n- Streamlined RAG orchestration catered to both personal and large businesses.\n- Configurable LLMs as well as embedding models.\n- Multiple recall paired with fused re-ranking.\n- Intuitive APIs for seamless integration with business.\n\n",
+                      "endOffset": 7451,
+                      "sourceRef": "infiniflow/ragflow|week",
+                      "versionId": 388,
+                      "chunkIndex": 12,
+                      "documentId": 169,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "🌟 Key Features > 🛀 **Automated and effortless RAG workflow**",
+                      "startOffset": 7167,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "infiniflow/ragflow",
+                      "chunkId": 14105,
+                      "content": "## 🎮 Get Started\n\nTry our cloud service at [https://cloud.ragflow.io](https://cloud.ragflow.io).\n\n<div align=\"center\" style=\"margin-top:20px;margin-bottom:20px;\">\n<img alt=\"Chunking demonstration\" src=\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/chunking.gif\" width=\"1200\"/>\n<img alt=\"Agentic workflow demonstration\" src=\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/agentic-dark.gif\" width=\"1200\"/>\n</div>\n\n",
+                      "endOffset": 5185,
+                      "sourceRef": "infiniflow/ragflow|week",
+                      "versionId": 388,
+                      "chunkIndex": 4,
+                      "documentId": 169,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "🎮 Get Started",
+                      "startOffset": 4703,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "infiniflow/ragflow",
+                      "chunkId": 14104,
+                      "content": "## 💡 What is RAGFlow?\n\n[RAGFlow](https://ragflow.io/) is a leading open-source Retrieval-Augmented Generation ([RAG](https://ragflow.io/basics/what-is-rag)) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs. It offers a streamlined RAG workflow adaptable to enterprises of any scale. Powered by a converged [context engine](https://ragflow.io/basics/what-is-agent-context-engine) and pre-built agent templates, RAGFlow enables developers to transform complex data into high-fidelity, production-ready AI systems with exceptional efficiency and precision.\n\n",
+                      "endOffset": 4703,
+                      "sourceRef": "infiniflow/ragflow|week",
+                      "versionId": 388,
+                      "chunkIndex": 3,
+                      "documentId": 169,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "💡 What is RAGFlow?",
+                      "startOffset": 4093,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:infiniflow/ragflow",
+                  "bestScore": 0.016597180861623984,
+                  "sourceRef": "infiniflow/ragflow|week",
+                  "documentId": 169,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "Quivr - 你的第二大脑，由生成式AI赋能",
+                      "chunkId": 16036,
+                      "content": "### 工作流\n\n",
+                      "endOffset": 1932,
+                      "sourceRef": "QuivrHQ/quivr",
+                      "versionId": 469,
+                      "chunkIndex": 6,
+                      "documentId": 250,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流",
+                      "startOffset": 1923,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:QuivrHQ/quivr",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "QuivrHQ/quivr",
+                  "documentId": 250,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "前端检查清单",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "前端检查清单",
+                      "chunkId": 15933,
+                      "content": "## 选择你的工作流\n\n",
+                      "endOffset": 1278,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 4,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 选择你的工作流",
+                      "startOffset": 1266,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:thedaviddias/Front-End-Checklist",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "documentId": 234,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "SeanJ1ang/design-judge-skills",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "SeanJ1ang/design-judge-skills",
+                      "chunkId": 9724,
+                      "content": "## 2. 工作流\n\n```text\n设计材料 ── 不确定路线或需要完整流程 ──> design-award-pipeline\n  │\n  ├─ 寻找同类获奖案例 ──────────────> design-award-search\n  ├─ 评价设计与展示表达 ────────────> design-evaluation\n  └─ 选择奖项 / 赛道 / 类别 ───────> design-award-match\n                                         │\n                                         v\n                                design-information-prep\n                                         │\n                                         v\n                                design-submission-check\n```\n\n这些模块可以独立使用。完整申报流程通常从评价或匹配开始，在目标奖项确定后进入信息准备，最后执行提交终检。\n\n",
+                      "endOffset": 3297,
+                      "sourceRef": "beginner:91",
+                      "versionId": 224,
+                      "chunkIndex": 23,
+                      "documentId": 5,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Design Judge Skills > 2. 工作流",
+                      "startOffset": 2739,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:91",
+                  "bestScore": 0.015625,
+                  "sourceRef": "beginner:91",
+                  "documentId": 5,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "n8n – AI 智能体与工作流自动化平台",
+                      "chunkId": 17192,
+                      "content": "## 核心能力\n\n- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                      "endOffset": 758,
+                      "sourceRef": "n8n-io/n8n",
+                      "versionId": 646,
+                      "chunkIndex": 2,
+                      "documentId": 427,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 核心能力",
+                      "startOffset": 391,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "n8n – AI 智能体与工作流自动化平台",
+                      "chunkId": 17191,
+                      "content": "# n8n – AI 智能体与工作流自动化平台\n\n这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                      "endOffset": 391,
+                      "sourceRef": "n8n-io/n8n",
+                      "versionId": 646,
+                      "chunkIndex": 1,
+                      "documentId": 427,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "n8n – AI 智能体与工作流自动化平台",
+                      "startOffset": 117,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:n8n-io/n8n",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "n8n-io/n8n",
+                  "documentId": 427,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "系统设计入门",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "系统设计入门",
+                      "chunkId": 11471,
+                      "content": "## Asynchronism\n\n<p align=\"center\">\n  <img src=\"images/54GYsSx.png\">\n  <br/>\n  <i><a href=http://lethain.com/introduction-to-architecting-systems-for-scale/#platform_layer>Source: Intro to architecting systems for scale</a></i>\n</p>\n\nAsynchronous workflows help reduce request times for expensive operations that would otherwise be performed in-line.  They can also help by doing time-consuming work in advance, such as periodic aggregation of data.\n\n",
+                      "endOffset": 71261,
+                      "sourceRef": "donnemartin/system-design-primer",
+                      "versionId": 291,
+                      "chunkIndex": 142,
+                      "documentId": 72,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "The System Design Primer > Asynchronism",
+                      "startOffset": 70810,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:donnemartin/system-design-primer",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "documentId": 72,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "flowsforapex/apex-flowsforapex",
+                      "chunkId": 12058,
+                      "content": "## 中文简介\n在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                      "endOffset": 158,
+                      "sourceRef": "beginner:43",
+                      "versionId": 315,
+                      "chunkIndex": 3,
+                      "documentId": 96,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "flowsforapex/apex-flowsforapex > 中文简介",
+                      "startOffset": 109,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:43",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "beginner:43",
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "mlflow/mlflow",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "mlflow/mlflow",
+                      "chunkId": 12669,
+                      "content": "## 项目摘要\nMLflow 是一个开源 AI 工程平台，支持智能体、大语言模型和传统 ML 模型的全生命周期管理：调试、评估、监控、优化及成本控制。\n\n",
+                      "endOffset": 152,
+                      "sourceRef": "career:221",
+                      "versionId": 336,
+                      "chunkIndex": 3,
+                      "documentId": 117,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "mlflow/mlflow > 项目摘要",
+                      "startOffset": 75,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "mlflow/mlflow",
+                      "chunkId": 12666,
+                      "content": "# mlflow/mlflow\n\n",
+                      "endOffset": 17,
+                      "sourceRef": "career:221",
+                      "versionId": 336,
+                      "chunkIndex": 0,
+                      "documentId": 117,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "mlflow/mlflow",
+                      "startOffset": 0,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:221",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "career:221",
+                  "documentId": 117,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "MindsHub Cowork",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "MindsHub Cowork",
+                      "chunkId": 16027,
+                      "content": "## 你能做什么\n\n面向所有知识工作者——创作者、策略师和运营者：\n\n- **自动化** 涉及阅读和写作的重复性多步骤工作：报告、监控、周期性工作流和计划性操作。\n- **构建** 内部 AI 工具和成果物——应用、仪表盘、幻灯片、文档、分析——无需工程，并发布到实时 URL 与团队分享。\n\n",
+                      "endOffset": 2082,
+                      "sourceRef": "mindsdb/minds",
+                      "versionId": 468,
+                      "chunkIndex": 4,
+                      "documentId": 249,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "MindsHub Cowork > 你能做什么",
+                      "startOffset": 1935,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:mindsdb/minds",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "mindsdb/minds",
+                  "documentId": 249,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Awesome-Selfhosted",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "Awesome-Selfhosted",
+                      "chunkId": 17189,
+                      "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                      "endOffset": 3047,
+                      "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                      "versionId": 645,
+                      "chunkIndex": 2,
+                      "documentId": 426,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Awesome-Selfhosted > 目录",
+                      "startOffset": 1205,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:awesome-selfhosted/awesome-selfhosted",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "documentId": 426,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Gemini CLI",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "Gemini CLI",
+                      "chunkId": 16917,
+                      "content": "### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                      "endOffset": 2595,
+                      "sourceRef": "google-gemini/gemini-cli",
+                      "versionId": 605,
+                      "chunkIndex": 15,
+                      "documentId": 386,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Gemini CLI > 📋 主要特性 > 自动化与集成",
+                      "startOffset": 2496,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:google-gemini/gemini-cli",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "documentId": 386,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Frigate NVR™ - 为IP摄像头提供实时对象检测",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "Frigate NVR™ - 为IP摄像头提供实时对象检测",
+                      "chunkId": 16667,
+                      "content": "### 精简的审查工作流\n\n<div>\n<img width=\"800\" alt=\"精简的审查工作流\" src=\"https://github.com/blakeblackshear/frigate/assets/569905/6fed96e8-3b18-40e5-9ddc-31e6f3c9f2ff\">\n</div>\n\n",
+                      "endOffset": 1732,
+                      "sourceRef": "blakeblackshear/frigate",
+                      "versionId": 563,
+                      "chunkIndex": 7,
+                      "documentId": 344,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Frigate NVR™ - 为IP摄像头提供实时对象检测 > 截图 > 精简的审查工作流",
+                      "startOffset": 1571,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:blakeblackshear/frigate",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "blakeblackshear/frigate",
+                  "documentId": 344,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "evidence": [
+                    {
+                      "score": 0.012862474877978754,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15255,
+                      "content": "##### :black_small_square: Labs\n\n<p>\n&nbsp;&nbsp; <a href=\"https://labs.networkreliability.engineering/\"><b>NRE Labs</b></a> - learn automation by doing it. Right now, right here, in your browser.<br>\n</p>\n\n",
+                      "endOffset": 65228,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 80,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > Networks &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Labs",
+                      "startOffset": 65021,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=26,lexicalRank=102,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:trimstray/the-book-of-secret-knowledge",
+                  "bestScore": 0.012862474877978754,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "documentId": 213,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "工作流自动化 | 业务流程自动化 | workflow automation",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "BEGINNER_PROJECT",
+                "CAREER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 214,
+                "url": "https://github.com/google/adk-python",
+                "name": "google/adk-python",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 76,
+                "archived": false,
+                "duration": "高级（约 120 小时）",
+                "language": "Python",
+                "mainRisks": "Google 官方项目难免与内部生态绑定，面试时需说明你的独立理解；595 个 issue 数量多，作为初学者可能难以找准贡献方向；项目缺少架构文档，上手理解全貌需要额外时间。",
+                "sourceRef": "career:214",
+                "techStack": "Python",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "Google 开源的 Python 工具包，以代码优先的方式构建、评估和部署复杂的 AI 智能体。提供高效灵活的可控代理开发框架。",
+                "proofPoints": "完整的测试、CI 和发布自动化；提供快速入门和可部署产物；Apache-2.0 许可；项目规模大。",
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "直接表明你掌握了 Google 官方的 AI Agent 构建方法论，能够基于大型工具包快速交付生产级代理应用。在 AI 应用与 Agent 方向上成为强有力的大厂背书作品。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "interviewTopics": "代码优先 vs. 配置优先的代理设计哲学；评估复杂代理性能的指标与方法；如何复用 Google adk 构建企业级 Agent 服务；595 个开放 issue 中反映的社区痛点；Python 在大型 Agent 项目中的模块化实践。",
+                "requiresSecrets": false,
+                "modificationPlan": "1) 增加缺失的架构文档，梳理核心模块关系，展示你的文档输出能力；2) 构建一个与业务结合的垂直领域 Agent（如智能客服、自动化测试），脱离官方示例，体现迁移能力；3) 增加监控与可观测性组件，使作品更完整；4) 输出一份性能评估报告，对比不同配置下的表现。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 427,
+                "url": "https://github.com/n8n-io/n8n",
+                "name": "n8n-io/n8n",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "n8n-io/n8n",
+                "versionId": 646,
+                "documentId": 427,
+                "importable": false,
+                "catalogText": "![Banner 图片](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)\n\n# n8n – AI 智能体与工作流自动化平台\n\n这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n## 核心能力\n\n- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n## 快速开始\n\n使用 [npx](https://docs.n8n.io/hosting/installation/npm/) 立即试用 n8n（需要 [Node.js](https://nodejs.org/en/)）：\n\n```\nnpx n8n\n```\n\n或使用 [Docker](https://docs.n8n.io/hosting/installation/docker/) 部署：\n\n```\ndocker volume create n8n_data\ndocker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n\n```\n\n访问编辑器：http://localhost:5678\n\n## 资源\n\n- 📚 [文档](https://docs.n8n.io)\n- 🔧 [1500+ 集成](https://n8n.io/integrations)\n- 💡 [示例工作流](https://n8n.io/workflows)\n- 🤖 [AI 与 LangChain 指南](https://docs.n8n.io/advanced-ai/)\n- 👥 [社区论坛](https://community.n8n.io)\n- 📖 [社区教程](https://community.n8n.io/c/tutorials/28)\n\n## 支持\n\n需要帮助？我们的社区论坛是获取支持并与其他用户交流的地方：\n[community.n8n.io](https://community.n8n.io)\n\n## 许可证\n\nn8n 是[公平代码](https://faircode.io)，依据[可持续使用许可证](https://github.com/n8n-io/n8n/blob/master/LICENSE.md)和 [n8n 企业许可证](https://github.com/n8n-io/n8n/blob/master/LICENSE_EE.md)分发。\n\n- **源码可见**：始终可查看源代码\n- **可自托管**：随处部署\n- **可扩展**：添加你自己的节点和功能\n\n[企业许可证](mailto:license@n8n.io) 提供额外功能和支持。\n\n有关许可证模式的更多信息，请参阅[文档](https://docs.n8n.io/sustainable-use-license/)。\n\n## 贡献\n\n发现 bug 🐛 或有功能想法 ✨？请查看我们的[贡献指南](https://github.com/n8n-io/n8n/blob/master/CONTRIBUTING.md)，了解设置指南和最佳实践。\n\n## 加入我们\n\n想要塑造自动化的未来？查看我们的[招聘信息](https://n8n.io/careers)并加入团队！\n\n## n8n 是什么意思？\n\n**简短回答：** 意思是 \"nodemation\"，发音为 n-eight-n。\n\n**长回答：** \"我经常被问到这个问题（比我预想的要多），所以我觉得最好在这里回答一下。在寻找一个好名字且域名未被占用的项目名称时，我很快意识到所有我能想到的好名字都已经被占用了。最终，我选择了 nodemation。'node-' 表示它使用节点视图（Node-View）和 Node.js，'-mation' 表示 'automation'（自动化），这正是该项目旨在帮助实现的。然而，我不喜欢这个名字太长，也无法想象每次在 CLI 中都要输入那么长的名字。于是，我最终选择了 'n8n'。\" - **Jan Oberhauser，n8n.io 创始人兼 CEO**",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "n8n – AI 智能体与工作流自动化平台",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 231,
+                "url": "https://github.com/infiniflow/ragflow",
+                "name": "infiniflow/ragflow",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "infiniflow/ragflow",
+                "versionId": 450,
+                "documentId": 231,
+                "importable": false,
+                "catalogText": "<div align=\"center\">\n<a href=\"https://cloud.ragflow.io/\">\n<img src=\"web/src/assets/logo-with-text.svg\" width=\"520\" alt=\"ragflow logo\">\n</a>\n</div>\n\n<p align=\"center\">\n  <a href=\"./README.md\"><img alt=\"英文 README\" src=\"https://img.shields.io/badge/English-DBEDFA\"></a>\n  <a href=\"./README_zh.md\"><img alt=\"简体中文版自述文件\" src=\"https://img.shields.io/badge/简体中文-DFE0E5\"></a>\n  <a href=\"./README_tzh.md\"><img alt=\"繁體中文版自述文件\" src=\"https://img.shields.io/badge/繁體中文-DFE0E5\"></a>\n  <a href=\"./README_ja.md\"><img alt=\"日文 README\" src=\"https://img.shields.io/badge/日本語-DFE0E5\"></a>\n  <a href=\"./README_ko.md\"><img alt=\"韩文 README\" src=\"https://img.shields.io/badge/한국어-DFE0E5\"></a>\n  <a href=\"./README_fr.md\"><img alt=\"法文 README\" src=\"https://img.shields.io/badge/Français-DFE0E5\"></a>\n  <a href=\"./README_id.md\"><img alt=\"印度尼西亚文 README\" src=\"https://img.shields.io/badge/Bahasa Indonesia-DFE0E5\"></a>\n  <a href=\"./README_pt_br.md\"><img alt=\"葡萄牙文 (巴西) README\" src=\"https://img.shields.io/badge/Português(Brasil)-DFE0E5\"></a>\n  <a href=\"./README_ar.md\"><img alt=\"阿拉伯文 README\" src=\"https://img.shields.io/badge/Arabic-DFE0E5\"></a>\n  <a href=\"./README_tr.md\"><img alt=\"土耳其文 README\" src=\"https://img.shields.io/badge/Türkçe-DFE0E5\"></a>\n</p>\n\n<p align=\"center\">\n    <a href=\"https://x.com/intent/follow?screen_name=infiniflowai\" target=\"_blank\">\n        <img src=\"https://img.shields.io/twitter/follow/infiniflow?logo=X&color=%20%23f5f5f5\" alt=\"在 X(Twitter) 上关注\">\n    </a>\n    <a href=\"https://cloud.ragflow.io\" target=\"_blank\">\n        <img alt=\"开始使用\" src=\"https://img.shields.io/badge/Get-Started-4e6b99\">\n    </a>\n    <a href=\"https://hub.docker.com/r/infiniflow/ragflow\" target=\"_blank\">\n        <img src=\"https://img.shields.io/docker/pulls/infiniflow/ragflow?label=Docker%20Pulls&color=0db7ed&logo=docker&logoColor=white&style=flat-square\" alt=\"docker pull infiniflow/ragflow:v0.26.1\">\n    </a>\n    <a href=\"https://github.com/infiniflow/ragflow/releases/latest\">\n        <img src=\"https://img.shields.io/github/v/release/infiniflow/ragflow?color=blue&label=Latest%20Release\" alt=\"最新版本\">\n    </a>\n    <a href=\"https://github.com/infiniflow/ragflow/blob/main/LICENSE\">\n        <img height=\"21\" src=\"https://img.shields.io/badge/License-Apache--2.0-ffffff?labelColor=d4eaf7&color=2e6cc4\" alt=\"许可证\">\n    </a>\n    <a href=\"https://deepwiki.com/infiniflow/ragflow\">\n        <img alt=\"询问 DeepWiki\" src=\"https://deepwiki.com/badge.svg\">\n    </a>\n</p>\n\n<h4 align=\"center\">\n  <a href=\"https://cloud.ragflow.io\">云服务</a> |\n  <a href=\"https://ragflow.io/docs/dev/\">文档</a> |\n  <a href=\"https://github.com/infiniflow/ragflow/issues/12241\">路线图</a> |\n  <a href=\"https://discord.gg/NjYzJD3GM3\">Discord</a>\n</h4>\n\n<div align=\"center\" style=\"margin-top:20px;margin-bottom:20px;\">\n<img src=\"https://raw.githubusercontent.com/infiniflow/ragflow-docs/refs/heads/image/image/ragflow-octoverse.png\" width=\"1200\"/>\n</div>\n\n<div align=\"center\">\n<a href=\"https://trendshift.io/repositories/9064\" target=\"_blank\"><img src=\"https://trendshift.io/api/badge/repositories/9064\" alt=\"infiniflow%2Fragflow | Trendshift\" style=\"width: 250px; height: 55px;\" width=\"250\" height=\"55\"/></a>\n</div>\n\n<details open>\n<summary><b>📕 目录</b></summary>\n\n- 💡 [什么是 RAGFlow？](#-what-is-ragflow)\n- 🎮 [开始使用](#-get-started)\n- 📌 [最新更新](#-latest-updates)\n- 🌟 [主要特性](#-key-features)\n- 🔎 [系统架构](#-system-architecture)\n- 🎬 [自托管](#-self-hosting)\n- 🔧 [配置](#-configurations)\n- 🔧 [构建 Docker 镜像](#-build-a-docker-image)\n- 🔨 [从源码启动开发服务](#-launch-service-from-source-for-development)\n- 📚 [文档](#-documentation)\n- 📜 [路线图](#-roadmap)\n- 🏄 [社区](#-community)\n- 🙌 [贡献](#-contributing)\n\n</details>\n\n## 💡 什么是 RAGFlow？\n\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "infiniflow/ragflow",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 250,
+                "url": "https://github.com/QuivrHQ/quivr",
+                "name": "QuivrHQ/quivr",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "QuivrHQ/quivr",
+                "versionId": 469,
+                "documentId": 250,
+                "importable": false,
+                "catalogText": "# Quivr - 你的第二大脑，由生成式AI赋能\n\n<div align=\"center\">\n    <img src=\"./logo.png\" alt=\"Quivr-logo\" width=\"31%\"  style=\"border-radius: 50%; padding-bottom: 20px\"/>\n</div>\n\n[![Discord Follow](https://dcbadge.vercel.app/api/server/HUpRgp2HG8?style=flat)](https://discord.gg/HUpRgp2HG8)\n[![GitHub Repo stars](https://img.shields.io/github/stars/quivrhq/quivr?style=social)](https://github.com/quivrhq/quivr)\n[![Twitter Follow](https://img.shields.io/twitter/follow/StanGirard?style=social)](https://twitter.com/_StanGirard)\n\nQuivr 帮助你构建你的第二大脑，利用生成式AI的力量成为你的个人助手！\n\n## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n## 快速开始 🚀\n\n你可以在 [文档](https://core.quivr.com/) 中找到所有内容。\n\n### 先决条件 📋\n\n请确保已安装以下软件：\n\n- Python 3.10 或更高版本\n\n### 30秒安装 💽\n\n- **步骤1**：安装软件包\n\n  ```bash\n  pip install quivr-core # Check that the installation worked\n  ```\n\n- **步骤2**：用5行代码创建一个 RAG\n\n  ```python\n  import tempfile\n\n  from quivr_core import Brain\n\n  if __name__ == \"__main__\":\n      with tempfile.NamedTemporaryFile(mode=\"w\", suffix=\".txt\") as temp_file:\n          temp_file.write(\"Gold is a liquid of blue-like colour.\")\n          temp_file.flush()\n\n          brain = Brain.from_files(\n              name=\"test_brain\",\n              file_paths=[temp_file.name],\n          )\n\n          answer = brain.ask(\n              \"what is gold? asnwer in french\"\n          )\n          print(\"answer:\", answer)\n  ```\n\n## 配置\n\n### 工作流\n\n#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Quivr - 你的第二大脑，由生成式AI赋能",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 234,
+                "url": "https://github.com/thedaviddias/Front-End-Checklist",
+                "name": "thedaviddias/Front-End-Checklist",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "thedaviddias/Front-End-Checklist",
+                "versionId": 453,
+                "documentId": 234,
+                "importable": false,
+                "catalogText": "# 前端检查清单\n\n[![Open Collective 上的支持者](https://opencollective.com/front-end-checklist/backers/badge.svg)](#backers)\n[![通过 Open Collective 支持](https://opencollective.com/front-end-checklist/sponsors/badge.svg)](https://opencollective.com/front-end-checklist)\n\n前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流，你可以通过网页浏览、使用 MCP 兼容工具执行，或直接在此 README 中逐步完成。\n\n- 网站：[frontendchecklist.io](https://frontendchecklist.io)\n- 规则：[frontendchecklist.io/rules](https://frontendchecklist.io/rules)\n- MCP 服务器：[mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)\n\n配套项目：[UX Patterns for Devs](https://uxpatterns.dev/) 帮助开发者在利用前端检查清单验证实现质量之前，选择合适的 UI 模式。\n\n> [!IMPORTANT]\n> 使用网站进行浏览和过滤，使用 MCP 服务器进行智能体工作流，当需要将清单集中在一处时，使用此 README。\n\n## 你将获得\n\n- 涵盖 `11` 个活跃类别的 `385` 条英文规则\n- 托管服务器公开的 `11` 个 MCP 工具\n- 包含解释、修复指导和验证步骤的规则页面\n\n## 如何使用此检查清单\n\n1. 从下面的类别导航器开始，直接跳转到你需要的清单部分。\n2. 处理适用于你的项目、审计或拉取请求的复选框项目。\n3. 当你需要完整的指导、示例、验证步骤和 AI 提示时，打开链接的规则页面。\n4. 使用 [frontendchecklist.io](https://frontendchecklist.io) 进行交互式浏览，当需要智能体直接使用相同规则库时，使用 [mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)。\n\n## 优先级图例\n\n- ![严重][critical_img] 意味着导致网站崩溃、合规性敏感或安全相关的问题，应优先修复。\n- ![高][high_img] 意味着对用户体验、可访问性、性能或可发现性有重大影响的问题。\n- ![中][medium_img] 意味着强烈建议的最佳实践，应作为常规前端质量审查的一部分。\n- ![低][low_img] 意味着有用的改进，但视情况而定或紧急程度较低。\n\n## 选择你的工作流\n\n### 在线浏览\n\n- 在 [frontendchecklist.io/rules](https://frontendchecklist.io/rules) 探索所有规则\n- 使用 [frontendchecklist.io/checklists](https://frontendchecklist.io/checklists) 中的精选检查清单\n- 打开类别页面，进行专注的审计和实现指导\n\n### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n### 为检查清单做贡献\n\n- 安装依赖项：`pnpm install`\n- 运行本地开发：`pnpm dev`\n- 验证结构：`pnpm validate:rule-structure`\n- 评分语料库：`pnpm score:rules`\n- 重新生成派生工件：`pnpm generate:skills` 和 `pnpm generate:readme`\n\n## 与 MCP 配合使用\n\n将支持 MCP 的智能体连接到前端检查清单，以进行面向 React、Next.js、HTML、CSS、JavaScript、可访问性、性能、SEO、安全性、图像、隐私、国际化（i18n）和测试的前端代码审查、结构化规则查询、审计和修复工作流。\n\n> [!TIP]\n> 最佳首次使用：让支持 MCP 的智能体指向一个真实的组件、页面或公开 URL，并明确要求它使用前端检查清单 MCP，优先获取可信度最高的前端发现。一些客户端发现已安装的 MCP 工具时比较迟缓，因此在提示中指定服务器名称会有所帮助。\n\n- 公共端点：[mcp.frontendchecklist.io](https://mcp.frontendchecklist.io)\n- 公开文档：[frontendchecklist.io/mcp](https://frontendchecklist.io/mcp)\n- 本地/编辑器集成",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "前端检查清单",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 91,
+                "url": "https://github.com/SeanJ1ang/design-judge-skills",
+                "name": "SeanJ1ang/design-judge-skills",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"agent-skills\", \"claude-code\", \"codex\", \"design-awards\", \"design-evaluation\", \"design-research\", \"hermes-agent\", \"industrial-design\", \"openclaw\", \"opencode\", \"python\"]",
+                "quality": 88,
+                "archived": false,
+                "duration": "几小时熟悉与测试，1~2天制作个性化奖项目录。",
+                "language": "Python",
+                "whatIsIt": "一组可安装的智能体技能，让 Claude Code、Codex 等 AI 编码助手具备设计奖申报专长，能根据官方标准为你的设计打分、匹配最适合的竞赛、准备合规的申报文案。",
+                "mainRisks": "依赖 Claude 等付费 Agent 服务，部分功能需 API 消费；评价结果仅供决策参考，不能替代专业评审。",
+                "sourceRef": "beginner:91",
+                "techStack": "Python",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "用AI自动评价设计作品、匹配奖项并生成申报材料",
+                "codebaseSize": "SMALL",
+                "beginnerScore": 94,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "1. 无需编写代码，只需用一条命令安装技能到 Agent。\n2. 提供即用的提示模板，上传设计图片即可获得评价报告。\n3. 快速理解设计竞赛标准，学习用证据化方法评估作品。\n4. 适合零编程背景的设计学生，实践 AI 辅助决策。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": true,
+                "modificationPlan": "- 扩充获奖案例库，加入更多国内赛事数据。\n- 自定义评价量表，适配特定导师或学校评分要求。\n- 集成自动化工具，直接从 Figma 文件提取设计信息。\n- 增加申报内容多语言版本生成。",
+                "requiresDatabase": false,
+                "vibeCodingReason": "强烈推荐给设计专业学生或申报者，能快速体验 AI 在设计流程中的实际价值，成果直观。",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 72,
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "name": "donnemartin/system-design-primer",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "donnemartin/system-design-primer",
+                "versionId": 291,
+                "documentId": 72,
+                "importable": false,
+                "catalogText": "*[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues/272) ∙ [Italiano](https://github.com/donnemartin/system-design-primer/issues/104) ∙ [한국어](https://github.com/donnemartin/system-design-primer/issues/102) ∙ [فارسی](https://github.com/donnemartin/system-design-primer/issues/110) ∙ [Polski](https://github.com/donnemartin/system-design-primer/issues/68) ∙ [русский язык](https://github.com/donnemartin/system-design-primer/issues/87) ∙ [Español](https://github.com/donnemartin/system-design-primer/issues/136) ∙ [ภาษาไทย](https://github.com/donnemartin/system-design-primer/issues/187) ∙ [Türkçe](https://github.com/donnemartin/system-design-primer/issues/39) ∙ [tiếng Việt](https://github.com/donnemartin/system-design-primer/issues/127) ∙ [Français](https://github.com/donnemartin/system-design-primer/issues/250) | [Add Translation](https://github.com/donnemartin/system-design-primer/issues/28)*\n\n**Help [translate](TRANSLATIONS.md) this guide!**\n\n# The System Design Primer\n\n<p align=\"center\">\n  <img src=\"images/jj3A5N8.png\">\n  <br/>\n</p>\n\n## Motivation\n\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n\n### Learn how to design large-scale systems\n\nLearning how to design scalable systems will help you become a better engineer.\n\nSystem design is a broad topic.  There are a **vast number of resources scattered throughout the web** on system design principles.\n\nThis repo is an **organized collection** of resources to help you learn how to build systems at scale.\n\n### Learn from the open source community\n\nThis is a continually updated, open source project.\n\n[Contributions](#contributing) are welcome!\n\n### Prep for the system design interview\n\nIn addition to coding interviews, system design is a **required component** of the **technical interview process** at many tech companies.\n\n**Practice common system design interview questions** and **compare** your results with **sample solutions**: discussions, code, and diagrams.\n\nAdditional topics for interview prep:\n\n* [Study guide](#study-guide)\n* [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question)\n* [System design interview questions, **with solutions**](#system-design-interview-questions-with-solutions)\n* [Object-oriented design interview questions, **with solutions**](#object-oriented-design-interview-questions-with-solutions)\n* [Additional system design interview questions](#additional-system-design-interview-questions)\n\n## Anki flashcards\n\n<p align=\"center\">\n  <img src=\"images/zdCAkB3.png\">\n  <br/>\n</p>\n\nThe provided [Anki flashcard decks](https://apps.ankiweb.net/) use spaced repetition to help you retain key system design concepts.\n\n* [System design deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design.apkg)\n* [System design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design%20Exercises.apkg)\n* [Object oriented design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/OO%20Design.apkg)\n\nGreat for use while on-the-go.\n\n### Coding Resource: Interactive Coding Challenges\n\nLooking for resources to help you prep for the [**Coding Interview**](https://github.com/donnemartin/interactive-coding-challenges)?\n\n<p align=\"center\">\n  <img src=\"images/b4YtAEN.png\">\n  <br/>\n</p>\n\nCheck out the sister repo [**Interactive Coding Challenges**](https://github.com/donnemartin/interactive-coding-challenges), which contains an additional Anki deck:\n\n* [Coding deck](https://github.com/donnemartin/interactive-coding-challenges/tree/master/anki_cards/Coding.apkg)\n\n## Contributing\n\n> Learn from the community.\n\nFeel free to submit pull requests to help:\n\n* Fix errors\n* Improve sections\n* Add new sections\n* [Translate](https://github.com/donnemartin/system-design-primer/issues/28)\n\nContent that needs some polishing is placed [under development](#under-development).\n\nReview the [Contributing Guidelines](CONTRIBUTING.md).\n\n## Index of system design topics\n\n> Summaries of various system design topics, including pros and cons.  **Everything is a trade-off**.\n>\n> Each section contains links to more in-depth resources.\n\n<p align=\"center\">\n  <img src=\"images/jrUBAF7.png\">\n  <br/>\n</p>\n\n* [System design topics: start here](#system-design-topics-start-here)\n    * [Step 1: Review the scalability video lecture](#step-1-review-the-scalability-video-lecture)\n    * [Step 2: Review the scalability article](#step-2-review-the-scalability-article)\n    * [Next steps](#next-steps)\n* [Performance vs scalability](#performance-vs-scalability)\n* [Latency vs throughput](#latency-vs-throughput)\n* [Availability vs consistency](#availability-vs-consistency)\n    * [CAP theorem](#cap-theorem)\n        * [CP - consistency and partition tolerance](#cp---consistency-and-partition-tolerance)\n        * [AP - availability and partition tolerance](#ap---availability-and-partition-tolerance)\n* [Consistency patterns](#consistency-patterns)\n    * [Weak consistency](#weak-consistency)\n    * [Eventual consistency](#eventual-consistency)\n    * [Strong consistency](#strong-consistency)\n* [Availability patterns](#availability-patterns)\n    * [Fail-over](#fail-over)\n    * [Replication](#replication)\n    * [Availability in numbers](#availability-in-numbers)\n* [Domain name system](#domain-name-system)\n* [Content delivery network](#content-delivery-network)\n    * [Push CDNs](#push-cdns)\n    * [Pull CDNs](#pull-cdns)\n* [Load balancer](#load-balancer)\n    * [Active-passive](#active-passive)\n    * [Active-active](#active-active)\n    * [Layer 4 load balancing](#layer-4-load-balancing)\n    * [Layer 7 load balancing](#layer-7-load-balancing)\n    * [Horizontal scaling](#horizontal-scaling)\n* [Reverse proxy (web server)](#reverse-proxy-web-server)\n    * [Load balancer vs reverse proxy](#load-balancer-vs-reverse-proxy)\n* [Application layer](#application-layer)\n    * [Microservices](#microservices)\n    * [Service discovery](#service-discovery)\n* [Database](#database)\n    * [Relational database management system (RDBMS)](#relational-database-management-system-rdbms)\n        * [Master-slave replication](#master-slave-replication)\n        * [Master-master replication](#master-master-replication)\n        * [Federation](#federation)\n        * [Sharding](#sharding)\n        * [Denormalization](#denormalization)\n        * [SQL tuning](#sql-tuning)\n    * [NoSQL](#nosql)\n        * [Key-value store](#key-value-store)\n        * [Document store](#document-store)\n        * [Wide column store](#wide-column-store)\n        * [Graph Database](#graph-database)\n    * [SQL or NoSQL](#sql-or-nosql)\n* [Cache](#cache)\n    * [Client caching](#client-caching)\n    * [CDN caching](#cdn-caching)\n    * [Web server caching](#web-server-caching)\n    * [Database caching](#database-caching)\n    * [Application caching](#application-caching)\n    * [Caching at the database query level](#caching-at-the-database-query-level)\n    * [Caching at the object level](#caching-at-the-object-level)\n    * [When to update the cache](#when-to-update-the-cache)\n        * [Cache-aside](#cache-aside)\n        * [Write-through](#write-through)\n        * [Write-behind (write-back)](#write-behind-write-back)\n        * [Refresh-ahead](#refresh-ahead)\n* [Asynchronism](#asynchronism)\n    * [Message queues](#message-queues)\n    * [Task queues](#task-queues)\n    * [Back pressure](#back-pressure)\n* [Communication](#communication)\n    * [Transmission control protocol (TCP)](#transmission-control-protocol-tcp)\n    * [User datagram protocol (UDP)](#user-datagram-protocol-udp)\n    * [Remote procedure call (RPC)](#remote-procedure-call-rpc)\n    * [Representational state transfer (REST)](#representational-state-transfer-rest)\n* [Security](#security)\n* [Appendix](#appendix)\n    * [Powers of two table](#powers-of-two-table)\n    * [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)\n    * [Additional system design interview questions](#additional-system-design-interview-questions)\n    * [Real world architectures](#real-world-architectures)\n    * [Company architectures](#company-architectures)\n    * [Company engineering blogs](#company-engineering-blogs)\n* [Under development](#under-development)\n* [Credits](#credits)\n* [Contact info](#contact-info)\n* [License](#license)\n\n## Study guide\n\n> Suggested topics to review based on your interview timeline (short, medium, long).\n\n![Imgur](images/OfVllex.png)\n\n**Q: For interviews, do I need to know everything here?**\n\n**A: No, you don't need to know everything here to prepare for the interview**.\n\nWhat you are asked in an interview depends on variables such as:\n\n* How much experience you have\n* What your technical background is\n* What positions you are interviewing for\n* Which companies you are interviewing with\n* Luck\n\nMore experienced candidates are generally expected to know more about system design.  Architects or team leads might be expected to know more than individual contributors.  Top tech companies are likely to have one or more design interview rounds.\n\nStart broad and go deeper in a few areas.  It helps to know a little about various key system design topics.  Adjust the following guide based on your timeline, experience, what positions you are interviewing for, and which companies you are interviewing with.\n\n* **Short timeline** - Aim for **breadth** with system design topics.  Practice by solving **some** interview questions.\n* **Medium timeline** - Aim for **breadth** and **some depth** with system design topics.  Practice by solving **many** interview questions.\n* **Long timeline** - Aim for **breadth** and **more depth** with system design topics.  Practice by solving **most** interview questions.\n\n| | Short | Medium | Long |\n|---|---|---|---|\n| Read through the [System design topics](#index-of-system-design-topics) to get a broad understanding of how systems work | :+1: | :+1: | :+1: |\n| Read through a few articles in the [Company engineering blogs](#company-engineering-blogs) for the companies you are interviewing with | :+1: | :+1: | :+1: |\n| Read through a few [Real world architectures](#real-world-architectures) | :+1: | :+1: | :+1: |\n| Review [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question) | :+1: | :+1: | :+1: |\n| Work through [System design interview questions with solutions](#system-design-interview-questions-with-solutions) | Some | Many | Most |\n| Work through [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions) | Some | Many | Most |\n| Review [Additional system design interview questions](#additional-system-design-interview-questions) | Some | Many | Most |\n\n## How to approach a system design interview question\n\n> How to tackle a system design interview question.\n\nThe system design interview is an **open-ended conversation**.  You are expected to lead it.\n\nYou can use the following steps to guide the discussion.  To help solidify this process, work through the [System design interview questions with solutions](#system-design-interview-questions-with-solutions) section using the following steps.\n\n### Step 1: Outline use cases, constraints, and assumptions\n\nGather requirements and scope the problem.  Ask questions to clarify use cases and constraints.  Discuss assumptions.\n\n* Who is going to use it?\n* How ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "系统设计入门",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 43,
+                "url": "https://github.com/flowsforapex/apex-flowsforapex",
+                "name": "flowsforapex/apex-flowsforapex",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[]",
+                "archived": false,
+                "duration": "7-14天",
+                "language": "JavaScript",
+                "sourceRef": "beginner:43",
+                "techStack": "JavaScript",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 221,
+                "url": "https://github.com/mlflow/mlflow",
+                "name": "mlflow/mlflow",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 84,
+                "archived": false,
+                "duration": "4-8周",
+                "language": "Python",
+                "mainRisks": "需理解 MLOps 全流程；社区贡献规范严格；大规模测试环境搭建复杂。",
+                "sourceRef": "career:221",
+                "techStack": "Python",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "MLflow 是一个开源 AI 工程平台，支持智能体、大语言模型和传统 ML 模型的全生命周期管理：调试、评估、监控、优化及成本控制。",
+                "proofPoints": "证明能够贡献于行业标准的 ML 平台，实现模型追踪、评估管线、服务部署等，具备 Python 工程和系统设计能力。",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。",
+                "requiresSecrets": false,
+                "modificationPlan": "为 MLflow 添加对特定框架（如 PyTorch Lightning）的自动追踪集成，或开发自定义评估指标、与云原生监控系统集成。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 249,
+                "url": "https://github.com/mindsdb/minds",
+                "name": "mindsdb/minds",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "mindsdb/minds",
+                "versionId": 468,
+                "documentId": 249,
+                "importable": false,
+                "catalogText": "<div align=\"center\">\n\n# MindsHub Cowork\n\n**统一工作空间，让开源代理为你完成任务。**\n\n_委派任何事。它都能完成并返回。_\n\n[![发布](https://img.shields.io/github/v/release/mindsdb/minds?logo=github&label=release)](https://github.com/mindsdb/minds/releases)\n[![星标](https://img.shields.io/github/stars/mindsdb/minds?logo=github)](https://github.com/mindsdb/minds/stargazers)\n[![许可证：MIT](https://img.shields.io/github/license/mindsdb/minds)](#-license)\n[![Python 3.10–3.13](https://img.shields.io/badge/python-3.10%20–%203.13-brightgreen.svg)](https://www.python.org/downloads/)\n\n[网站](https://mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[文档](https://docs.mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[Web 应用](https://console.mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[定价](https://mindshub.ai/pricing?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[Discord](https://mindshub.ai/discord)\n\n</div>\n\n<p align=\"center\">\n  <img alt=\"MindsHub Cowork — 统一工作空间\" width=\"100%\" src=\"https://github.com/user-attachments/assets/769e6463-0a9d-45ae-83d1-ef9e234775d3\" />\n</p>\n\n**MindsHub Cowork** 是一个统一工作空间，你可以委派整个任务——研究、分析、报告、计划性操作——并收集已完成、可分享的成果。接入你的数据，将每一步路由到合适的模型，运行开源代理，并将它们的输出转化为可发布的成果物。它是开源的，可以在任何地方运行——你的机器、你的 VPC，或托管应用。\n\n此仓库是**平台超级项目**：它整合了桌面/Web 应用、代理后端和数据引擎，让你可以从源码构建和运行整个技术栈。\n\n## 快速开始\n\n选择适合你的方式：\n\n- **Web — 无需安装。** 打开 **[console.mindshub.ai](https://console.mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme)** 并登录。\n- **macOS。** [下载桌面应用](https://downloads.mindsdb.com/mindshub-cowork/mac/mindshub-cowork-latest.pkg)（`.pkg`）。\n- **Windows。** [下载桌面应用](https://downloads.mindsdb.com/mindshub-cowork/windows/mindshub-cowork-latest.exe)（`.exe`）。\n- **以开源方式运行。** [从源码构建](#从源码构建) — 见下文。\n\n免费开始使用。Pro 版增加所有前沿模型和私有成果物——详见[定价](https://mindshub.ai/pricing?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme)。\n\n## 你能做什么\n\n面向所有知识工作者——创作者、策略师和运营者：\n\n- **自动化** 涉及阅读和写作的重复性多步骤工作：报告、监控、周期性工作流和计划性操作。\n- **构建** 内部 AI 工具和成果物——应用、仪表盘、幻灯片、文档、分析——无需工程，并发布到实时 URL 与团队分享。\n\n## 内部技术\n\n- **连接数据。** 一个安全的保险库可以连接 BigQuery、Postgres、Gmail、Drive、HubSpot、Notion 和 Linear 等系统。凭据按连接限定了作用域——代理永远不会看到原始密钥。\n- **模型路由器。** 在前沿模型（Claude、GPT、Gemini）和开放模型（DeepSeek、Qwen、Kimi）之间切换，无需为每个提供商配置密钥。\n- **开放代理。** 运行可互换的开源工具——Anton（默认）和 Hermes——可从下拉菜单切换。\n- **成果物。** 将代理输出转化为文档、仪表盘、应用和代码，并发布到实时 URL。\n- **记忆、技能与计划任务。** 跨会话记忆、可复用的技能库，以及按计划运行的任务。\n\n## 从源码构建\n\n**1. 克隆仓库**\n\n```bash\ngit clone --recurse-submodules https://github.com/mindsdb/minds.git\ncd minds\n```\n\n**2. 安装依赖**\n\n```bash\nmake setup\n```\n\n**3. 运行**\n\n| 模式 | 命令 |\n|---|---|\n| 桌面应用（Electron）带热重载 | `make dev` 或 `m` |",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "MindsHub Cowork",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 386,
+                "url": "https://github.com/google-gemini/gemini-cli",
+                "name": "google-gemini/gemini-cli",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "google-gemini/gemini-cli",
+                "versionId": 605,
+                "documentId": 386,
+                "importable": false,
+                "catalogText": "# Gemini CLI\n\n[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)\n[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)\n[![版本](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)\n[![许可证](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)\n[![查看 Code Wiki](https://assets.codewiki.google/readme-badge/static.svg)](https://codewiki.google/github.com/google-gemini/gemini-cli?utm_source=badge&utm_medium=github&utm_campaign=github.com/google-gemini/gemini-cli)\n\n![Gemini CLI 截图](/docs/assets/gemini-screenshot.png)\n\nGemini CLI 是一个开源 AI 代理，将 Gemini 的强大功能直接带入您的终端。它提供对 Gemini 的轻量级访问，为您提供从提示到模型的最直接路径。\n\n在我们的[文档](https://geminicli.com/docs/)中了解有关 Gemini CLI 的所有信息。\n\n## 🚀 为什么选择 Gemini CLI？\n\n- **🎯 免费套餐**：使用个人 Google 账户，每分钟 60 个请求，每天 1,000 个请求。\n- **🧠 强大的 Gemini 3 模型**：可访问改进的推理能力和 100 万 Token 上下文窗口。\n- **🔧 内置工具**：Google 搜索基础、文件操作、Shell 命令、网页抓取。\n- **🔌 可扩展**：MCP（模型上下文协议）支持自定义集成。\n- **💻 终端优先**：专为生活在命令行中的开发者设计。\n- **🛡️ 开源**：Apache 2.0 许可。\n\n## 📦 安装\n\n有关推荐的系统规格和详细的安装指南，请参阅\n[Gemini CLI 安装、执行和发布](https://www.geminicli.com/docs/get-started/installation)。\n\n### 快速安装\n\n#### 使用 npx 立即运行\n\n```bash\n# 使用 npx（无需安装）\nnpx @google/gemini-cli\n```\n\n#### 使用 npm 全局安装\n\n```bash\nnpm install -g @google/gemini-cli\n```\n\n#### 使用 Homebrew 全局安装（macOS/Linux）\n\n```bash\nbrew install gemini-cli\n```\n\n#### 使用 MacPorts 全局安装（macOS）\n\n```bash\nsudo port install gemini-cli\n```\n\n#### 使用 Anaconda 安装（适用于受限环境）\n\n```bash\n# 创建并激活一个新环境\nconda create -y -n gemini_env -c conda-forge nodejs\nconda activate gemini_env\n\n# 在环境内通过 npm 全局安装 Gemini CLI\nnpm install -g @google/gemini-cli\n```\n\n## 发布渠道\n\n有关更多详细信息，请参阅[发布说明](https://www.geminicli.com/docs/changelogs)。\n\n### 预览版\n\n新的预览版将在每周二 UTC 23:59 发布。这些版本尚未经过全面审查，可能包含回归或其他未解决的问题。请帮助我们测试，并使用 `preview` 标签安装。\n\n```bash\nnpm install -g @google/gemini-cli@preview\n```\n\n### 稳定版\n\n- 新的稳定版将在每周二 UTC 20:00 发布，这是上周 `preview` 版本的完整提升，并包含所有错误修复和验证。使用 `latest` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@latest\n```\n\n### 每夜版\n\n- 每日 UTC 00:00 发布新版本。包含发布时主分支的所有更改。应假定存在待确认的验证和问题。使用 `nightly` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@nightly\n```\n\n## 📋 主要特性\n\n### 代码理解与生成\n\n- 查询和编辑大型代码库\n- 使用多模态功能，从 PDF、图像或草图生成新应用\n- 使用自然语言调试问题并排查故障\n\n### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Gemini CLI",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 344,
+                "url": "https://github.com/blakeblackshear/frigate",
+                "name": "blakeblackshear/frigate",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "blakeblackshear/frigate",
+                "versionId": 563,
+                "documentId": 344,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <img align=\"center\" alt=\"logo\" src=\"docs/static/img/branding/frigate.png\">\n</p>\n\n# Frigate NVR™ - 为IP摄像头提供实时对象检测\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\n<a href=\"https://hosted.weblate.org/engage/frigate-nvr/\">\n<img src=\"https://hosted.weblate.org/widget/frigate-nvr/language-badge.svg\" alt=\"翻译状态\" />\n</a>\n\n\\[English\\] | [简体中文](https://github.com/blakeblackshear/frigate/blob/dev/README_CN.md)\n\n一个完整且本地运行的NVR，专为[Home Assistant](https://www.home-assistant.io)设计，具备AI对象检测功能。使用OpenCV和Tensorflow在本地为IP摄像头执行实时对象检测。\n\n强烈推荐使用GPU或AI加速器。AI加速器的性能甚至优于最好的CPU，且开销极低。请参阅Frigate支持的[对象检测器](https://docs.frigate.video/configuration/object_detectors/)。\n\n- 通过[自定义组件](https://github.com/blakeblackshear/frigate-hass-integration)与Home Assistant紧密集成\n- 设计宗旨是仅在必要时才查找对象，从而最小化资源使用并最大化性能\n- 大量利用多进程处理，强调实时性而非处理每一帧\n- 使用开销极低的运动检测来确定在何处运行对象检测\n- 使用TensorFlow的对象检测在独立进程中运行，以获得最大FPS\n- 通过MQTT通信，便于集成到其他系统\n- 根据检测到的对象设置保留策略录制视频\n- 24/7全天候录制\n- 通过RTSP重新推流，减少与摄像头的连接数\n- 支持WebRTC和MSE，实现低延迟实时查看\n\n## 文档\n\n查看文档：https://docs.frigate.video\n\n## 捐赠\n\n如果您想捐赠支持开发，请使用[Github Sponsors](https://github.com/sponsors/blakeblackshear)。\n\n## 许可证\n\n本项目采用**MIT许可证**。\n\n- **代码：** 本仓库中的源代码、配置文件和文档均基于[MIT许可证](LICENSE)提供。您可以自由使用、修改和分发代码，但需保留原始版权声明。\n- **商标：** “Frigate”名称、“Frigate NVR”品牌以及Frigate标识是**Frigate, Inc.的商标**，**不**受MIT许可证的覆盖。\n\n有关我们品牌资产可接受使用的详细信息，请参阅我们的[商标政策](TRADEMARK.md)。\n\n## 截图\n\n### 实时仪表盘\n\n<div>\n<img width=\"800\" alt=\"实时仪表盘\" src=\"https://github.com/blakeblackshear/frigate/assets/569905/5e713cb9-9db5-41dc-947a-6937c3bc376e\">\n</div>\n\n### 精简的审查工作流\n\n<div>\n<img width=\"800\" alt=\"精简的审查工作流\" src=\"https://github.com/blakeblackshear/frigate/assets/569905/6fed96e8-3b18-40e5-9ddc-31e6f3c9f2ff\">\n</div>\n\n### 多摄像头时间轴拖拽\n\n<div>\n<img width=\"800\" alt=\"多摄像头时间轴拖拽\" src=\"https://github.com/blakeblackshear/frigate/assets/569905/d6788a15-0eeb-4427-a8d4-80b93cae3d74\">\n</div>\n\n### 内置遮罩和区域编辑器\n\n<div>\n<img width=\"800\" alt=\"内置遮罩和区域编辑器\" src=\"https://github.com/blakeblackshear/frigate/assets/569905/d7885fc3-bfe6-452f-b7d0-d957cb3e31f5\">\n</div>\n\n## 翻译\n\n我们使用[Weblate](https://hosted.weblate.org/projects/frigate-nvr/)来支持语言翻译。欢迎贡献。\n\n<a href=\"https://hosted.weblate.org/engage/frigate-nvr/\">\n<img src=\"https://hosted.weblate.org/widget/frigate-nvr/multi-auto.svg\" alt=\"翻译状态\" />\n</a>\n\n---\n\n**版权所有 © 2026 Frigate, Inc.**",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Frigate NVR™ - 为IP摄像头提供实时对象检测",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "工作流自动化 | 业务流程自动化 | workflow automation",
+              "topic": [
+                "工作流自动化"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "工作流自动化",
+              "candidates": [
+                {
+                  "key": "CAREER_PROJECT:214",
+                  "purpose": "Google 开源的 Python 工具包，以代码优先的方式构建、评估和部署复杂的 AI 智能体。提供高效灵活的可控代理开发框架。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:427",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n# n8n – AI 智能体与工作流自动化平台\n这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n## 核心能力\n- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:231",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n 云服务 |\n 文档 |\n 路线图 |\n Discord \n 📕 目录 \n- 💡 什么是 RAGFlow？\n- 🎮 开始使用\n- 📌 最新更新\n- 🌟 主要特性\n- 🔎 系统架构\n- 🎬 自托管\n- 🔧 配置\n- 🔧 构建 Docker 镜像\n- 🔨 从源码启动开发服务\n- 📚 文档\n- 📜 路线图\n- 🏄 社区\n- 🙌 贡献\n## 💡 什么是 RAGFlow？\nRAGFlow 是一个领先的开源检索增强生成 (RAG) 引擎"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:250",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Quivr - 你的第二大脑，由生成式AI赋能\nQuivr 帮助你构建你的第二大脑，利用生成式AI的力量成为你的个人助手！\n## 核心特性 🎯\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 Megaparse 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n> 我们负责处理 RA"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:234",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 前端检查清单\n前端检查清单是一个面向人类和 AI 智能体的开源前端质量体系。它将前端最佳实践转化为可操作的审查工作流，你可以通过网页浏览、使用 MCP 兼容工具执行，或直接在此 README 中逐步完成。\n- 网站：frontendchecklist.io\n- 规则：frontendchecklist.io/rules\n- MCP 服务器：mcp.frontendchecklist.io\n配套项目：UX Patterns for Devs 帮助开发者在利用前端检查清单验证实现质量之前，选择合适的 UI 模式。\n> [!IMPORTANT]\n> 使用网站进行浏览和过滤，使用 MCP 服务器进行智能体工作流，当需要将清单集中在一处时，使用此 README。\n## 你将获得\n- 涵盖 `11` 个活跃类别的 `385` 条英文规则\n- 托管服务器公开的 `11` 个 MCP 工具\n- 包含解释、"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:91",
+                  "purpose": "一组可安装的智能体技能，让 Claude Code、Codex 等 AI 编码助手具备设计奖申报专长，能根据官方标准为你的设计打分、匹配最适合的竞赛、准备合规的申报文案。 用AI自动评价设计作品、匹配奖项并生成申报材料"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:72",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 *English ∙ 日本語 ∙ 简体中文 ∙ 繁體中文 | العَرَبِيَّة‎ ∙ বাংলা ∙ Português do Brasil ∙ Deutsch ∙ ελληνικά ∙ עברית ∙ Italiano ∙ 한국어 ∙ فارسی ∙ Polski ∙ русский язык ∙ Español ∙ ภาษาไทย ∙ Türkçe ∙ tiếng Việt ∙ Français | Add Translation*\n**Help translate this guide!**\n# The System Design Primer\n## Motivation\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n### Learn how to des"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:43",
+                  "purpose": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。"
+                },
+                {
+                  "key": "CAREER_PROJECT:221",
+                  "purpose": "MLflow 是一个开源 AI 工程平台，支持智能体、大语言模型和传统 ML 模型的全生命周期管理：调试、评估、监控、优化及成本控制。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:249",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n# MindsHub Cowork\n**统一工作空间，让开源代理为你完成任务。**\n_委派任何事。它都能完成并返回。_\n网站 ·\n文档 ·\nWeb 应用 ·\n定价 ·\nDiscord\n**MindsHub Cowork** 是一个统一工作空间，你可以委派整个任务——研究、分析、报告、计划性操作——并收集已完成、可分享的成果。接入你的数据，将每一步路由到合适的模型，运行开源代理，并将它们的输出转化为可发布的成果物。它是开源的，可以在任何地方运行——你的机器、你的 VPC，或托管应用。\n此仓库是**平台超级项目**：它整合了桌面/Web 应用、代理后端和数据引擎，让你可以从源码构建和运行整个技术栈。\n## 快速开始\n选择适合你的方式：\n- **Web — 无需安装。** 打开 **console.mindshub.ai** 并登录。\n- **macOS。** 下载桌面应用（`.pkg`）。\n- "
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:386",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Gemini CLI\nGemini CLI 是一个开源 AI 代理，将 Gemini 的强大功能直接带入您的终端。它提供对 Gemini 的轻量级访问，为您提供从提示到模型的最直接路径。\n在我们的文档中了解有关 Gemini CLI 的所有信息。\n## 🚀 为什么选择 Gemini CLI？\n- **🎯 免费套餐**：使用个人 Google 账户，每分钟 60 个请求，每天 1,000 个请求。\n- **🧠 强大的 Gemini 3 模型**：可访问改进的推理能力和 100 万 Token 上下文窗口。\n- **🔧 内置工具**：Google 搜索基础、文件操作、Shell 命令、网页抓取。\n- **🔌 可扩展**：MCP（模型上下文协议）支持自定义集成。\n- **💻 终端优先**：专为生活在命令行中的开发者设计。\n- **🛡️ 开源**：Apache 2.0 许可。\n## "
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:344",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n# Frigate NVR™ - 为IP摄像头提供实时对象检测\n\\[English\\] | 简体中文\n一个完整且本地运行的NVR，专为Home Assistant设计，具备AI对象检测功能。使用OpenCV和Tensorflow在本地为IP摄像头执行实时对象检测。\n强烈推荐使用GPU或AI加速器。AI加速器的性能甚至优于最好的CPU，且开销极低。请参阅Frigate支持的对象检测器。\n- 通过自定义组件与Home Assistant紧密集成\n- 设计宗旨是仅在必要时才查找对象，从而最小化资源使用并最大化性能\n- 大量利用多进程处理，强调实时性而非处理每一帧\n- 使用开销极低的运动检测来确定在何处运行对象检测\n- 使用TensorFlow的对象检测在独立进程中运行，以获得最大FPS\n- 通过MQTT通信，便于集成到其他系统\n- 根据检测到的对象设置保留策略录制视频\n- 24/7全天候录制\n- "
+                }
+              ],
+              "originalRequest": "想做的方向或用途是：工作流自动化"
+            },
+            "verdict": {
+              "matches": [
+                {
+                  "key": "EXTERNAL_PROJECT:427",
+                  "quote": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过 1500 个集成。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:43",
+                  "quote": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。",
+                  "relation": "DIRECT"
+                }
+              ]
+            },
+            "accepted": {
+              "scope": "04b30215764fe9be920b66f6c16fd86b2e8904d11f31889b8c2f27fb50104c0c",
+              "topic": "工作流自动化",
+              "proofs": {
+                "BEGINNER_PROJECT:43": {
+                  "rank": 2,
+                  "quote": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。",
+                  "relation": "DIRECT",
+                  "fingerprint": "e31780e186267361f84256e57c9750702e1a6c4cf26993efc691e8e7ab925c5e"
+                },
+                "EXTERNAL_PROJECT:427": {
+                  "rank": 1,
+                  "quote": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过 1500 个集成。",
+                  "relation": "DIRECT",
+                  "fingerprint": "64145871f250419c675906de0f8bd0420071c9ee6612b8e8ce76961c5b3531c5"
+                }
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12058,
+                  "content": "## 中文简介\n在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                  "endOffset": 158,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 3,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 中文简介",
+                  "startOffset": 109,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17192,
+                  "content": "## 核心能力\n\n- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                  "endOffset": 758,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 2,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 核心能力",
+                  "startOffset": 391,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17194,
+                  "content": "## 资源\n\n- 📚 [文档](https://docs.n8n.io)\n- 🔧 [1500+ 集成](https://n8n.io/integrations)\n- 💡 [示例工作流](https://n8n.io/workflows)\n- 🤖 [AI 与 LangChain 指南](https://docs.n8n.io/advanced-ai/)\n- 👥 [社区论坛](https://community.n8n.io)\n- 📖 [社区教程](https://community.n8n.io/c/tutorials/28)\n\n",
+                  "endOffset": 1394,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 4,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 资源",
+                  "startOffset": 1121,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17191,
+                  "content": "# n8n – AI 智能体与工作流自动化平台\n\n这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                  "endOffset": 391,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 1,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台",
+                  "startOffset": 117,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17198,
+                  "content": "## 加入我们\n\n想要塑造自动化的未来？查看我们的[招聘信息](https://n8n.io/careers)并加入团队！\n\n",
+                  "endOffset": 2005,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 8,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 加入我们",
+                  "startOffset": 1942,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12056,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 1,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12057,
+                  "content": "## 仓库地址\nhttps://github.com/flowsforapex/apex-flowsforapex\n\n",
+                  "endOffset": 109,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 2,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 仓库地址",
+                  "startOffset": 50,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12059,
+                  "content": "## 适合新手的原因\n作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\n\n",
+                  "endOffset": 216,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 4,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 适合新手的原因",
+                  "startOffset": 158,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17197,
+                  "content": "## 贡献\n\n发现 bug 🐛 或有功能想法 ✨？请查看我们的[贡献指南](https://github.com/n8n-io/n8n/blob/master/CONTRIBUTING.md)，了解设置指南和最佳实践。\n\n",
+                  "endOffset": 1942,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 7,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 贡献",
+                  "startOffset": 1830,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12067,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 338,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 12,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 环境要求",
+                  "startOffset": 321,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17196,
+                  "content": "## 许可证\n\nn8n 是[公平代码](https://faircode.io)，依据[可持续使用许可证](https://github.com/n8n-io/n8n/blob/master/LICENSE.md)和 [n8n 企业许可证](https://github.com/n8n-io/n8n/blob/master/LICENSE_EE.md)分发。\n\n- **源码可见**：始终可查看源代码\n- **可自托管**：随处部署\n- **可扩展**：添加你自己的节点和功能\n\n[企业许可证](mailto:license@n8n.io) 提供额外功能和支持。\n\n有关许可证模式的更多信息，请参阅[文档](https://docs.n8n.io/sustainable-use-license/)。\n\n",
+                  "endOffset": 1830,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 6,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 许可证",
+                  "startOffset": 1477,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12055,
+                  "content": "# flowsforapex/apex-flowsforapex\n\n",
+                  "endOffset": 34,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 0,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17193,
+                  "content": "## 快速开始\n\n使用 [npx](https://docs.n8n.io/hosting/installation/npm/) 立即试用 n8n（需要 [Node.js](https://nodejs.org/en/)）：\n\n```\nnpx n8n\n```\n\n或使用 [Docker](https://docs.n8n.io/hosting/installation/docker/) 部署：\n\n```\ndocker volume create n8n_data\ndocker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n\n```\n\n访问编辑器：http://localhost:5678\n\n",
+                  "endOffset": 1121,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 3,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 快速开始",
+                  "startOffset": 758,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17195,
+                  "content": "## 支持\n\n需要帮助？我们的社区论坛是获取支持并与其他用户交流的地方：\n[community.n8n.io](https://community.n8n.io)\n\n",
+                  "endOffset": 1477,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 5,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 支持",
+                  "startOffset": 1394,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12064,
+                  "content": "## 预计周期\n7-14天\n\n",
+                  "endOffset": 296,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 9,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 预计周期",
+                  "startOffset": 281,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12061,
+                  "content": "## 主要语言\nJavaScript\n\n",
+                  "endOffset": 255,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 6,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 主要语言",
+                  "startOffset": 235,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12062,
+                  "content": "## 主题\n[]\n\n",
+                  "endOffset": 265,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 7,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 主题",
+                  "startOffset": 255,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17190,
+                  "content": "![Banner 图片](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)\n\n",
+                  "endOffset": 117,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 0,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12060,
+                  "content": "## 技术栈\nJavaScript\n\n",
+                  "endOffset": 235,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 5,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 技术栈",
+                  "startOffset": 216,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "chunkId": 17199,
+                  "content": "## n8n 是什么意思？\n\n**简短回答：** 意思是 \"nodemation\"，发音为 n-eight-n。\n\n**长回答：** \"我经常被问到这个问题（比我预想的要多），所以我觉得最好在这里回答一下。在寻找一个好名字且域名未被占用的项目名称时，我很快意识到所有我能想到的好名字都已经被占用了。最终，我选择了 nodemation。'node-' 表示它使用节点视图（Node-View）和 Node.js，'-mation' 表示 'automation'（自动化），这正是该项目旨在帮助实现的。然而，我不喜欢这个名字太长，也无法想象每次在 CLI 中都要输入那么长的名字。于是，我最终选择了 'n8n'。\" - **Jan Oberhauser，n8n.io 创始人兼 CEO**",
+                  "endOffset": 2349,
+                  "sourceRef": "n8n-io/n8n",
+                  "versionId": 646,
+                  "chunkIndex": 9,
+                  "documentId": 427,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "n8n – AI 智能体与工作流自动化平台 > n8n 是什么意思？",
+                  "startOffset": 2005,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 23,
+              "candidateCount": 23,
+              "evidenceGroups": [
+                {
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "flowsforapex/apex-flowsforapex",
+                      "chunkId": 12058,
+                      "content": "## 中文简介\n在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                      "endOffset": 158,
+                      "sourceRef": "beginner:43",
+                      "versionId": 315,
+                      "chunkIndex": 3,
+                      "documentId": 96,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "flowsforapex/apex-flowsforapex > 中文简介",
+                      "startOffset": 109,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "flowsforapex/apex-flowsforapex",
+                      "chunkId": 12056,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:43",
+                      "versionId": 315,
+                      "chunkIndex": 1,
+                      "documentId": 96,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "flowsforapex/apex-flowsforapex",
+                      "chunkId": 12057,
+                      "content": "## 仓库地址\nhttps://github.com/flowsforapex/apex-flowsforapex\n\n",
+                      "endOffset": 109,
+                      "sourceRef": "beginner:43",
+                      "versionId": 315,
+                      "chunkIndex": 2,
+                      "documentId": 96,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "flowsforapex/apex-flowsforapex > 仓库地址",
+                      "startOffset": 50,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:43",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "beginner:43",
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "n8n – AI 智能体与工作流自动化平台",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "n8n – AI 智能体与工作流自动化平台",
+                      "chunkId": 17192,
+                      "content": "## 核心能力\n\n- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                      "endOffset": 758,
+                      "sourceRef": "n8n-io/n8n",
+                      "versionId": 646,
+                      "chunkIndex": 2,
+                      "documentId": 427,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 核心能力",
+                      "startOffset": 391,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "n8n – AI 智能体与工作流自动化平台",
+                      "chunkId": 17194,
+                      "content": "## 资源\n\n- 📚 [文档](https://docs.n8n.io)\n- 🔧 [1500+ 集成](https://n8n.io/integrations)\n- 💡 [示例工作流](https://n8n.io/workflows)\n- 🤖 [AI 与 LangChain 指南](https://docs.n8n.io/advanced-ai/)\n- 👥 [社区论坛](https://community.n8n.io)\n- 📖 [社区教程](https://community.n8n.io/c/tutorials/28)\n\n",
+                      "endOffset": 1394,
+                      "sourceRef": "n8n-io/n8n",
+                      "versionId": 646,
+                      "chunkIndex": 4,
+                      "documentId": 427,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 资源",
+                      "startOffset": 1121,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015625,
+                      "title": "n8n – AI 智能体与工作流自动化平台",
+                      "chunkId": 17191,
+                      "content": "# n8n – AI 智能体与工作流自动化平台\n\n这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                      "endOffset": 391,
+                      "sourceRef": "n8n-io/n8n",
+                      "versionId": 646,
+                      "chunkIndex": 1,
+                      "documentId": 427,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "n8n – AI 智能体与工作流自动化平台",
+                      "startOffset": 117,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:n8n-io/n8n",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "n8n-io/n8n",
+                  "documentId": 427,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "query": "工作流自动化 项目功能 用途 实践示例 安装部署 环境依赖 限制 请推荐真实项目，想做的方向或用途是：工作流自动化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+              "projects": [
+                {
+                  "name": "n8n-io/n8n",
+                  "type": "EXTERNAL_PROJECT",
+                  "sourceRef": "n8n-io/n8n"
+                },
+                {
+                  "name": "flowsforapex/apex-flowsforapex",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:43"
+                }
+              ],
+              "sourceTypes": [
+                "BEGINNER_PROJECT",
+                "CAREER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "buildPrompt",
+          "detail": {
+            "evidence": [
+              {
+                "spans": [
+                  {
+                    "text": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 49,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "flowsforapex/apex-flowsforapex",
+                "chunkId": 12058,
+                "endOffset": 158,
+                "sourceRef": "beginner:43",
+                "versionId": 315,
+                "documentId": 96,
+                "evidenceId": "E1",
+                "sectionPath": "flowsforapex/apex-flowsforapex > 中文简介",
+                "startOffset": 117,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 367,
+                    "startInChunk": 9
+                  }
+                ],
+                "title": "n8n – AI 智能体与工作流自动化平台",
+                "chunkId": 17192,
+                "endOffset": 758,
+                "sourceRef": "n8n-io/n8n",
+                "versionId": 646,
+                "documentId": 427,
+                "evidenceId": "E2",
+                "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 核心能力",
+                "startOffset": 400,
+                "contentStartInChunk": 9
+              },
+              {
+                "spans": [
+                  {
+                    "text": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 58,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "flowsforapex/apex-flowsforapex",
+                "chunkId": 12059,
+                "endOffset": 216,
+                "sourceRef": "beginner:43",
+                "versionId": 315,
+                "documentId": 96,
+                "evidenceId": "E3",
+                "sectionPath": "flowsforapex/apex-flowsforapex > 适合新手的原因",
+                "startOffset": 169,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 274,
+                    "startInChunk": 25
+                  }
+                ],
+                "title": "n8n – AI 智能体与工作流自动化平台",
+                "chunkId": 17191,
+                "endOffset": 391,
+                "sourceRef": "n8n-io/n8n",
+                "versionId": 646,
+                "documentId": 427,
+                "evidenceId": "E4",
+                "sectionPath": "n8n – AI 智能体与工作流自动化平台",
+                "startOffset": 142,
+                "contentStartInChunk": 25
+              },
+              {
+                "spans": [
+                  {
+                    "text": "想要塑造自动化的未来？查看我们的[招聘信息](https://n8n.io/careers)并加入团队！\n\n",
+                    "spanId": "E5.S1",
+                    "endInChunk": 63,
+                    "startInChunk": 9
+                  }
+                ],
+                "title": "n8n – AI 智能体与工作流自动化平台",
+                "chunkId": 17198,
+                "endOffset": 2005,
+                "sourceRef": "n8n-io/n8n",
+                "versionId": 646,
+                "documentId": 427,
+                "evidenceId": "E5",
+                "sectionPath": "n8n – AI 智能体与工作流自动化平台 > 加入我们",
+                "startOffset": 1951,
+                "contentStartInChunk": 9
+              }
+            ],
+            "question": "请推荐真实项目，想做的方向或用途是：工作流自动化。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。\n当前需求（只用于选择解释重点，不作为项目事实）：{\"goal\":\"学习\",\"experience\":\"一年编程基础\",\"topic\":[\"工作流自动化\"]}",
+            "promptVersion": "customer-v4.15-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "validateEvidence",
+          "detail": {
+            "accepted": 4,
+            "rejected": []
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "verifyFacts",
+          "detail": {
+            "claims": [
+              {
+                "text": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。",
+                "quote": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。\n\n",
+                "sourceRef": "beginner:43",
+                "sourceTitle": "flowsforapex/apex-flowsforapex"
+              },
+              {
+                "text": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。",
+                "quote": "作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。\n\n",
+                "sourceRef": "beginner:43",
+                "sourceTitle": "flowsforapex/apex-flowsforapex"
+              },
+              {
+                "text": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。",
+                "quote": "- **AI 原生自动化平台**：使用你自己的数据、模型和工具，构建并运营 AI 工作流与多步骤智能体\n- **模型灵活，无锁定**：连接 OpenAI、Anthropic、Google 或开源模型，无需更改架构即可切换提供商\n- **从原型到生产**：设计包含逻辑、工具使用、人工审批和完整可观测性的多步骤 AI 工作流\n- **按需编码**：将可视化构建与 JavaScript、Python 和 npm 包相结合，用于高级 AI 工作流\n- **企业级 AI 就绪**：自托管或安全部署，具备基于角色的访问控制、审计跟踪和对敏感数据的支持\n- **利用现有资源**：超过 1500 个集成和 9000 多个工作流[模板](https://n8n.io/workflows)，将 AI 与你现有的系统连接起来\n\n",
+                "sourceRef": "n8n-io/n8n",
+                "sourceTitle": "n8n – AI 智能体与工作流自动化平台"
+              },
+              {
+                "text": "公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。",
+                "quote": "这是一个公平代码（fair-code）平台，用于构建和部署 AI 智能体与工作流。通过可视化画布与自定义代码相结合，支持自托管或[云端](https://app.n8n.cloud/login)运行，并连接超过 1500 个集成。从原型到生产，为你提供可信赖的 AI 自动化，处理真实工作。\n\n![n8n.io - 截图](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-screenshot-readme.png)\n\n",
+                "sourceRef": "n8n-io/n8n",
+                "sourceTitle": "n8n – AI 智能体与工作流自动化平台"
+              }
+            ],
+            "verdict": {
+              "supportedIds": [
+                0,
+                1,
+                2,
+                3
+              ]
+            },
+            "supported": 4
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "practiceAdvice",
+          "detail": {
+            "kind": "SUGGESTION",
+            "promptVersion": "customer-v4.15-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

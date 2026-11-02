@@ -1,0 +1,89 @@
+[
+  {
+    "id": "G01",
+    "message": "既想练手学习，也想准备找工作的作品",
+    "expected": {
+      "goal": [
+        "学习",
+        "求职"
+      ],
+      "noPending": true
+    }
+  },
+  {
+    "id": "G02",
+    "message": "还想挣点外快接些外包单，原来的目标也保留，只记录不用推荐",
+    "prior": {
+      "goal": "学习",
+      "language": "Java",
+      "maxDurationDays": 60
+    },
+    "expected": {
+      "goal": [
+        "学习",
+        "赚钱/接单/创业"
+      ],
+      "language": "Java",
+      "maxDurationDays": 60,
+      "noPending": true
+    }
+  },
+  {
+    "id": "G03",
+    "message": "求职这个目标先不考虑，学习和给家里的店做库存管理这两个保留",
+    "prior": {
+      "goal": [
+        "学习",
+        "求职",
+        "给家里的店做库存管理"
+      ],
+      "language": "Java"
+    },
+    "expected": {
+      "goal": [
+        "学习",
+        "给家里的店做库存管理"
+      ],
+      "language": "Java",
+      "noPending": true
+    }
+  },
+  {
+    "id": "G04",
+    "message": "我做这个项目是为了给家里的店做库存管理",
+    "expected": {
+      "goal": "给家里的店做库存管理",
+      "noPending": true
+    }
+  },
+  {
+    "id": "G05",
+    "message": "我就想探索技术兴趣，同时为求职做准备，可以同时选这两个目标吗？",
+    "expected": {
+      "goal": [
+        "探索技术兴趣",
+        "求职"
+      ],
+      "noPending": true
+    }
+  },
+  {
+    "id": "G06",
+    "message": "请将项目目标设置为：学习；求职；给家里的店做库存管理。其他条件保持不变，先记录目标，不用推荐。",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 60
+    },
+    "expected": {
+      "goal": [
+        "学习",
+        "求职",
+        "给家里的店做库存管理"
+      ],
+      "language": "Java",
+      "maxDurationDays": 60,
+      "intent": "CHAT",
+      "noPending": true
+    }
+  }
+]

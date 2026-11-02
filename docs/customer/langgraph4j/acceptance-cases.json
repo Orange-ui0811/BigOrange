@@ -1,0 +1,22 @@
+[
+  {"id":"G01","message":"你好呀，先随便聊聊吧","expected":{"intents":["CHAT"],"statuses":["CONVERSATION"]}},
+  {"id":"G02","message":"今天有点累，还不想挑项目","expected":{"intents":["CHAT"],"statuses":["CONVERSATION"]}},
+  {"id":"G03","message":"当前有什么条件","prior":{"language":"Java","maxDurationDays":180},"expected":{"intents":["STATE"],"state":{"language":"Java","maxDurationDays":180}}},
+  {"id":"G04","message":"用途核对是什么","prior":{"language":"Python"},"expected":{"intents":["EXPLAIN"],"state":{"language":"Python"}}},
+  {"id":"G05","message":"半年以内就好，先记住，不用推荐","prior":{"language":"Java","maxDurationDays":60},"expected":{"state":{"language":"Java","maxDurationDays":180}}},
+  {"id":"G06","message":"项目难度不限，其他不改，先记录","prior":{"difficulty":"初级","language":"Java"},"expected":{"absent":"difficulty","state":{"language":"Java"}}},
+  {"id":"G07","message":"语言改成Python，先不要查项目","prior":{"language":"Java"},"expected":{"state":{"language":"Python"}}},
+  {"id":"G08","message":"仍然不用Docker，只把时间改成六周，先记录","prior":{"language":"Python","allowDocker":false,"maxDurationDays":180},"expected":{"state":{"language":"Python","allowDocker":false,"maxDurationDays":42}}},
+  {"id":"G09","message":"想做学习和求职都用得上的作品，你先记住","expected":{"goalIncludes":["学习","求职"]}},
+  {"id":"G10","message":"先推荐一些Python项目，其他暂时不限","prior":{"language":"Python"},"expected":{"intents":["RECOMMEND"],"projectsRequired":true}},
+  {"id":"G11","message":"推荐Python的RAG项目，用来求职，半年内完成","prior":{"language":"Python","goal":"求职","maxDurationDays":180},"expected":{"intents":["RECOMMEND"],"projectsRequired":true}},
+  {"id":"G12","message":"按当前方向找项目","prior":{"language":"Python","topic":["AI应用开发"],"goal":"求职","maxDurationDays":180},"expected":{"projectsRequired":true}},
+  {"id":"G13","message":"给我找Java练手项目吧","prior":{"language":"Java","goal":"学习"},"expected":{"intents":["RECOMMEND"],"state":{"language":"Java"}}},
+  {"id":"G14","message":"我想给家里的店做库存管理，先帮我记录这个用途","expected":{"goalIncludes":["库存"]}},
+  {"id":"G15","message":"这次不推荐，告诉我这个平台是否承诺所有项目都可以免费商用","expected":{"intents":["QUESTION"],"statuses":["REFUSE_NO_PLATFORM_FAQ_EVIDENCE","SUPPORTED_EXTRACTS","REFUSE_INSUFFICIENT_EVIDENCE"]}},
+  {"id":"G16","message":"请解释知识库中RAG项目通常能实现什么功能","expected":{"intents":["QUESTION"],"statuses":["SUPPORTED_EXTRACTS","REFUSE_INSUFFICIENT_EVIDENCE","REFUSE_NO_MATCH"]}},
+  {"id":"G17","message":"比较前两个项目","expected":{"intents":["COMPARE"],"statuses":["FOLLOW_UP"]}},
+  {"id":"G18","message":"第二个项目怎么部署","expected":{"intents":["DETAIL"],"statuses":["FOLLOW_UP"]}},
+  {"id":"G19","message":"不再限制编程语言，保留不使用Docker，先记下来","prior":{"language":"Java","allowDocker":false},"expected":{"absent":"language","state":{"allowDocker":false}}},
+  {"id":"G20","message":"谢谢，今天先到这里，不用继续找了","prior":{"language":"Python","maxDurationDays":180},"expected":{"intents":["CHAT"],"state":{"language":"Python","maxDurationDays":180}}}
+]

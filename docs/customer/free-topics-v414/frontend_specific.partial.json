@@ -1,0 +1,2798 @@
+{
+  "case": {
+    "id": "frontend_specific",
+    "family": "frontend",
+    "kind": "specific",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "150",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "a11481c5-9170-40af-ac3b-d788aa935e9e",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 12172,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：Vue"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "experience": "一年编程基础",
+          "topic": [
+            "Vue"
+          ],
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "Vue",
+            "proofs": {
+              "EXTERNAL_PROJECT:257": {
+                "fingerprint": "4490a379489747d828b8625e6ce346efae1ec4935f3c8cab52b01bd282f5caca",
+                "quote": "这是官方 Home Assistant 前端的仓库。",
+                "relation": "DIRECT",
+                "rank": 1
+              },
+              "BEGINNER_PROJECT:36": {
+                "fingerprint": "68f7363790e9f94bc6a17da8894f18a4cc0b630d8eb081f6e9f6c7628fb869ad",
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "relation": "DIRECT",
+                "rank": 2
+              },
+              "BEGINNER_PROJECT:12": {
+                "fingerprint": "ff12b7a1d5050d7350300831eaae0f3b172e56d748100be59b8c7969a8d9d468",
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "relation": "SUBTOPIC",
+                "rank": 3
+              },
+              "BEGINNER_PROJECT:77": {
+                "fingerprint": "93cc96226c9ce4171bb5722e58f061f1263f29145a804be49d042fbf9e17be07",
+                "quote": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。",
+                "relation": "SUBTOPIC",
+                "rank": 4
+              },
+              "EXTERNAL_PROJECT:306": {
+                "fingerprint": "51b165fe79b6f0787f23ea0f2910e2aa689061212505bc8729a48a2c0a8ab348",
+                "quote": "Phaser 支持超过 40 种不同的前端框架，包括 React 和 Vue。",
+                "relation": "SUBTOPIC",
+                "rank": 5
+              }
+            }
+          },
+          "lastCandidates": [
+            {
+              "id": 257,
+              "name": "home-assistant/frontend",
+              "type": "EXTERNAL_PROJECT"
+            },
+            {
+              "id": 36,
+              "name": "JustArchiNET/ASF-WebConfigGenerator",
+              "type": "BEGINNER_PROJECT"
+            },
+            {
+              "id": 12,
+              "name": "pocket-stack/pocketjs",
+              "type": "BEGINNER_PROJECT"
+            }
+          ]
+        },
+        "projects": [
+          {
+            "type": "EXTERNAL_PROJECT",
+            "id": 257,
+            "sourceRef": "home-assistant/frontend",
+            "name": "home-assistant/frontend",
+            "url": "https://github.com/home-assistant/frontend",
+            "status": "DOCUMENTED",
+            "archived": false,
+            "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+            "evidenceStatus": "DOCUMENT_IDENTITY",
+            "importable": true,
+            "documentId": 257,
+            "versionId": 476,
+            "catalogTitle": "Home Assistant 前端",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 45.0,
+              "goalPreference": 0.0,
+              "total": 45.0,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true
+            },
+            "recommendReason": "本轮目标：学习；资料涉及Vue，具体实践范围见项目说明；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E1",
+                "title": "Home Assistant 前端",
+                "sourceRef": "home-assistant/frontend",
+                "spans": [
+                  {
+                    "spanId": "E1.S1",
+                    "text": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                    "startInChunk": 10,
+                    "endInChunk": 94
+                  }
+                ],
+                "documentId": 257,
+                "versionId": 476,
+                "chunkId": 16082,
+                "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                "startOffset": 597,
+                "endOffset": 681,
+                "contentStartInChunk": 10,
+                "quote": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                "text": "完整指南可在官方链接找到，其中简要介绍了项目的构建过程。",
+                "field": "vibeCodingReason"
+              },
+              {
+                "evidenceId": "E4",
+                "title": "Home Assistant 前端",
+                "sourceRef": "home-assistant/frontend",
+                "spans": [
+                  {
+                    "spanId": "E4.S1",
+                    "text": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                    "startInChunk": 7,
+                    "endInChunk": 180
+                  }
+                ],
+                "documentId": 257,
+                "versionId": 476,
+                "chunkId": 16080,
+                "sectionPath": "Home Assistant 前端 > 开发",
+                "startOffset": 405,
+                "endOffset": 578,
+                "contentStartInChunk": 7,
+                "quote": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                "text": "初始设置：script/setup；开发见官方说明；生产构建：script/build_frontend；画廊：cd gallery && script/develop_gallery。",
+                "field": "prerequisites"
+              },
+              {
+                "evidenceId": "E7",
+                "title": "Home Assistant 前端",
+                "sourceRef": "home-assistant/frontend",
+                "spans": [
+                  {
+                    "spanId": "E7.S1",
+                    "text": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                    "startInChunk": 8,
+                    "endInChunk": 295
+                  }
+                ],
+                "documentId": 257,
+                "versionId": 476,
+                "chunkId": 16083,
+                "sectionPath": "Home Assistant 前端 > 许可证",
+                "startOffset": 689,
+                "endOffset": 976,
+                "contentStartInChunk": 8,
+                "quote": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "text": "Home Assistant是开源软件，采用Apache 2许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "prerequisites": "初始设置：script/setup；开发见官方说明；生产构建：script/build_frontend；画廊：cd gallery && script/develop_gallery。 [E4]",
+            "vibeCodingReason": "完整指南可在官方链接找到，其中简要介绍了项目的构建过程。 [E1]",
+            "supportedExplanation": "完整指南可在官方链接找到，其中简要介绍了项目的构建过程。 [E1]\n初始设置：script/setup；开发见官方说明；生产构建：script/build_frontend；画廊：cd gallery && script/develop_gallery。 [E4]\nHome Assistant是开源软件，采用Apache 2许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。 [E7]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议作为Vue进阶学习参考，通过阅读官方构建指南和运行开发脚本，了解大型前端项目结构。可尝试修改一个简单UI组件并观察效果，但需注意项目复杂度较高。",
+              "difficultyAdvice": "建议先核对Node.js版本和构建脚本，确认能运行script/setup和开发命令。若环境配置遇到困难，可先查阅官方说明，避免直接修改核心代码。",
+              "vibeCodingAdvice": "建议用AI辅助解读构建脚本和组件依赖，生成一个简单样式调整的代码片段，并让AI解释其影响范围。务必在本地运行验证，避免引入未测试的改动。",
+              "steps": [
+                "先核对并运行已有示例，确认开发环境正常",
+                "实现一个具体小改造：调整一个现有组件的样式或文案",
+                "测试并形成演示与复盘"
+              ],
+              "evidenceIds": [
+                "E1",
+                "E4",
+                "E7"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 36,
+            "sourceRef": "beginner:36",
+            "name": "JustArchiNET/ASF-WebConfigGenerator",
+            "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "JavaScript",
+            "techStack": "JavaScript,Vue",
+            "difficulty": "入门",
+            "duration": "2-5天",
+            "description": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E9]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+            "beginnerScore": 91,
+            "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 22.5,
+              "goalPreference": 15.0,
+              "total": 37.5,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true
+            },
+            "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及Vue，具体实践范围见项目说明；资料记录主语言为JavaScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E3",
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "sourceRef": "beginner:36",
+                "spans": [
+                  {
+                    "spanId": "E3.S1",
+                    "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 49
+                  }
+                ],
+                "documentId": 61,
+                "versionId": 280,
+                "chunkId": 10757,
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                "startOffset": 175,
+                "endOffset": 213,
+                "contentStartInChunk": 11,
+                "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E9",
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "sourceRef": "beginner:36",
+                "spans": [
+                  {
+                    "spanId": "E9.S1",
+                    "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 45
+                  }
+                ],
+                "documentId": 61,
+                "versionId": 280,
+                "chunkId": 10756,
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                "startOffset": 127,
+                "endOffset": 164,
+                "contentStartInChunk": 8,
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E6",
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "sourceRef": "beginner:36",
+                "spans": [
+                  {
+                    "spanId": "E6.S1",
+                    "text": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                    "startInChunk": 6,
+                    "endInChunk": 109
+                  }
+                ],
+                "documentId": 61,
+                "versionId": 280,
+                "chunkId": 10760,
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                "startOffset": 262,
+                "endOffset": 365,
+                "contentStartInChunk": 6,
+                "quote": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                "text": "项目主题包含vue、vuejs、webpack、nodejs等。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "whatIsIt": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E9]",
+            "supportedExplanation": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E9]\n项目主题包含vue、vuejs、webpack、nodejs等。 [E6]",
+            "practiceAdvice": {
+              "recommendationAdvice": "建议作为Vue学习起点，通过表单驱动配置生成练习组件开发与数据逻辑，符合学习目标且门槛较低。可先运行现有示例，再尝试添加一个配置字段并验证生成结果。",
+              "difficultyAdvice": "建议先核对项目依赖的Node.js版本和构建工具，确认本地环境能运行开发服务器。若已有Vue基础，可快速上手；否则先复习Vue组件基础。",
+              "vibeCodingAdvice": "建议用AI辅助理解现有组件结构，生成一个简单表单字段的代码片段，并让AI解释数据绑定逻辑。注意验证生成配置的正确性，避免直接复制未测试代码。",
+              "steps": [
+                "先核对并运行已有示例，确认开发环境正常",
+                "实现一个具体小改造：添加一个配置选项并绑定到生成逻辑",
+                "测试生成结果并形成演示与复盘"
+              ],
+              "evidenceIds": [
+                "E3",
+                "E9",
+                "E6"
+              ],
+              "kind": "SUGGESTION"
+            }
+          },
+          {
+            "type": "BEGINNER_PROJECT",
+            "id": 12,
+            "sourceRef": "beginner:12",
+            "name": "pocket-stack/pocketjs",
+            "url": "https://github.com/pocket-stack/pocketjs",
+            "status": "PUBLISHED",
+            "archived": false,
+            "language": "TypeScript",
+            "techStack": "TypeScript,Vue",
+            "difficulty": "入门",
+            "duration": "4-6天",
+            "description": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。 [E8]",
+            "evidenceStatus": "VERIFIED_DATABASE",
+            "importable": true,
+            "requiresDocker": false,
+            "requiresDatabase": false,
+            "requiresSecrets": false,
+            "topics": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]",
+            "beginnerScore": 91,
+            "analysisReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+            "modificationPlan": "",
+            "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+            "evidenceAvailable": true,
+            "conditionGaps": [],
+            "matchStatus": "CONFIRMED",
+            "ranking": {
+              "preference": 0.0,
+              "version": "customer-rank-v3",
+              "uncertaintyPenalty": 0.0,
+              "semantic": 18.371173070873837,
+              "goalPreference": 15.0,
+              "total": 33.37117307087384,
+              "semanticAvailable": true,
+              "quality": 0.0,
+              "semanticMatched": true
+            },
+            "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习；资料涉及Vue，具体实践范围见项目说明；资料记录主语言为TypeScript；已通过当前已知字段的条件检查，周期仅为资料估算。",
+            "references": [
+              {
+                "evidenceId": "E8",
+                "title": "pocket-stack/pocketjs",
+                "sourceRef": "beginner:12",
+                "spans": [
+                  {
+                    "spanId": "E8.S1",
+                    "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                    "startInChunk": 8,
+                    "endInChunk": 94
+                  }
+                ],
+                "documentId": 62,
+                "versionId": 281,
+                "chunkId": 10769,
+                "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                "startOffset": 99,
+                "endOffset": 185,
+                "contentStartInChunk": 8,
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "text": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。",
+                "field": "description"
+              },
+              {
+                "evidenceId": "E5",
+                "title": "pocket-stack/pocketjs",
+                "sourceRef": "beginner:12",
+                "spans": [
+                  {
+                    "spanId": "E5.S1",
+                    "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                    "startInChunk": 11,
+                    "endInChunk": 44
+                  }
+                ],
+                "documentId": 62,
+                "versionId": 281,
+                "chunkId": 10770,
+                "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                "startOffset": 196,
+                "endOffset": 229,
+                "contentStartInChunk": 11,
+                "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "text": "清晰的模块划分和文档能让新手了解嵌入式UI原理和性能优化。",
+                "field": "vibeCodingReason"
+              },
+              {
+                "evidenceId": "E2",
+                "title": "pocket-stack/pocketjs",
+                "sourceRef": "beginner:12",
+                "spans": [
+                  {
+                    "spanId": "E2.S1",
+                    "text": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                    "startInChunk": 6,
+                    "endInChunk": 153
+                  }
+                ],
+                "documentId": 62,
+                "versionId": 281,
+                "chunkId": 10773,
+                "sectionPath": "pocket-stack/pocketjs > 主题",
+                "startOffset": 278,
+                "endOffset": 425,
+                "contentStartInChunk": 6,
+                "quote": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                "text": "项目主题包含vue、vue-vapor、solidjs、rust、webassembly等。",
+                "field": "supportedExplanation"
+              }
+            ],
+            "whatIsIt": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。 [E8]",
+            "vibeCodingReason": "清晰的模块划分和文档能让新手了解嵌入式UI原理和性能优化。 [E5]",
+            "supportedExplanation": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。 [E8]\n清晰的模块划分和文档能让新手了解嵌入式UI原理和性能优化。 [E5]\n项目主题包含vue、vue-vapor、solidjs、rust、webassembly等。 [E2]"
+          }
+        ],
+        "references": [
+          {
+            "evidenceId": "E3",
+            "title": "JustArchiNET/ASF-WebConfigGenerator",
+            "sourceRef": "beginner:36",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 49
+              }
+            ],
+            "documentId": 61,
+            "versionId": 280,
+            "chunkId": 10757,
+            "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+            "startOffset": 175,
+            "endOffset": 213,
+            "contentStartInChunk": 11,
+            "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+            "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E9",
+            "title": "JustArchiNET/ASF-WebConfigGenerator",
+            "sourceRef": "beginner:36",
+            "spans": [
+              {
+                "spanId": "E9.S1",
+                "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 45
+              }
+            ],
+            "documentId": 61,
+            "versionId": 280,
+            "chunkId": 10756,
+            "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+            "startOffset": 127,
+            "endOffset": 164,
+            "contentStartInChunk": 8,
+            "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+            "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E6",
+            "title": "JustArchiNET/ASF-WebConfigGenerator",
+            "sourceRef": "beginner:36",
+            "spans": [
+              {
+                "spanId": "E6.S1",
+                "text": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                "startInChunk": 6,
+                "endInChunk": 109
+              }
+            ],
+            "documentId": 61,
+            "versionId": 280,
+            "chunkId": 10760,
+            "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+            "startOffset": 262,
+            "endOffset": 365,
+            "contentStartInChunk": 6,
+            "quote": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+            "text": "项目主题包含vue、vuejs、webpack、nodejs等。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E8",
+            "title": "pocket-stack/pocketjs",
+            "sourceRef": "beginner:12",
+            "spans": [
+              {
+                "spanId": "E8.S1",
+                "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 94
+              }
+            ],
+            "documentId": 62,
+            "versionId": 281,
+            "chunkId": 10769,
+            "sectionPath": "pocket-stack/pocketjs > 中文简介",
+            "startOffset": 99,
+            "endOffset": 185,
+            "contentStartInChunk": 8,
+            "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+            "text": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E5",
+            "title": "pocket-stack/pocketjs",
+            "sourceRef": "beginner:12",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 44
+              }
+            ],
+            "documentId": 62,
+            "versionId": 281,
+            "chunkId": 10770,
+            "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+            "startOffset": 196,
+            "endOffset": 229,
+            "contentStartInChunk": 11,
+            "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+            "text": "清晰的模块划分和文档能让新手了解嵌入式UI原理和性能优化。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E2",
+            "title": "pocket-stack/pocketjs",
+            "sourceRef": "beginner:12",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                "startInChunk": 6,
+                "endInChunk": 153
+              }
+            ],
+            "documentId": 62,
+            "versionId": 281,
+            "chunkId": 10773,
+            "sectionPath": "pocket-stack/pocketjs > 主题",
+            "startOffset": 278,
+            "endOffset": 425,
+            "contentStartInChunk": 6,
+            "quote": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+            "text": "项目主题包含vue、vue-vapor、solidjs、rust、webassembly等。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E1",
+            "title": "Home Assistant 前端",
+            "sourceRef": "home-assistant/frontend",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "text": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                "startInChunk": 10,
+                "endInChunk": 94
+              }
+            ],
+            "documentId": 257,
+            "versionId": 476,
+            "chunkId": 16082,
+            "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+            "startOffset": 597,
+            "endOffset": 681,
+            "contentStartInChunk": 10,
+            "quote": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+            "text": "完整指南可在官方链接找到，其中简要介绍了项目的构建过程。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "Home Assistant 前端",
+            "sourceRef": "home-assistant/frontend",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                "startInChunk": 7,
+                "endInChunk": 180
+              }
+            ],
+            "documentId": 257,
+            "versionId": 476,
+            "chunkId": 16080,
+            "sectionPath": "Home Assistant 前端 > 开发",
+            "startOffset": 405,
+            "endOffset": 578,
+            "contentStartInChunk": 7,
+            "quote": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+            "text": "初始设置：script/setup；开发见官方说明；生产构建：script/build_frontend；画廊：cd gallery && script/develop_gallery。",
+            "field": "prerequisites"
+          },
+          {
+            "evidenceId": "E7",
+            "title": "Home Assistant 前端",
+            "sourceRef": "home-assistant/frontend",
+            "spans": [
+              {
+                "spanId": "E7.S1",
+                "text": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "startInChunk": 8,
+                "endInChunk": 295
+              }
+            ],
+            "documentId": 257,
+            "versionId": 476,
+            "chunkId": 16083,
+            "sectionPath": "Home Assistant 前端 > 许可证",
+            "startOffset": 689,
+            "endOffset": 976,
+            "contentStartInChunk": 8,
+            "quote": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+            "text": "Home Assistant是开源软件，采用Apache 2许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "profileLoaded": false,
+        "generation": "20261002164953-ec113424",
+        "status": "VERIFIED_PROJECTS",
+        "recommendationReport": {
+          "direction": "本轮围绕「Vue」查找项目，下面区分资料事实与实践建议。",
+          "learning": [
+            {
+              "personalized": true,
+              "name": "home-assistant/frontend",
+              "key": "EXTERNAL_PROJECT:257",
+              "steps": [
+                "先核对并运行已有示例，确认开发环境正常",
+                "实现一个具体小改造：调整一个现有组件的样式或文案",
+                "测试并形成演示与复盘"
+              ]
+            },
+            {
+              "personalized": true,
+              "name": "JustArchiNET/ASF-WebConfigGenerator",
+              "key": "BEGINNER_PROJECT:36",
+              "steps": [
+                "先核对并运行已有示例，确认开发环境正常",
+                "实现一个具体小改造：添加一个配置选项并绑定到生成逻辑",
+                "测试生成结果并形成演示与复盘"
+              ]
+            },
+            {
+              "personalized": false,
+              "name": "pocket-stack/pocketjs",
+              "key": "BEGINNER_PROJECT:12",
+              "steps": [
+                "先核对仓库文档、许可与运行要求；尚未确认的语言、资源和周期不要当作已满足。",
+                "条件允许后运行一个已有示例，记录输入、输出和失败情况，再选择一个小改造。",
+                "验证改造结果，整理演示、测试与复盘；资料不足时先补充核对。"
+              ]
+            }
+          ],
+          "approach": "结合「学习」目标，建议先运行已有示例，再完成一个小改造，通过输入输出与测试理解系统的工作过程。",
+          "timeline": "先运行示例并确认改造范围，再根据实际投入估算进度。",
+          "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。"
+        },
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "model": "deepseek-flash",
+            "durationMs": 3272,
+            "usage": {
+              "prompt_tokens": 5317,
+              "completion_tokens": 568,
+              "total_tokens": 5885,
+              "prompt_tokens_details": {
+                "cached_tokens": 5120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 375
+              },
+              "prompt_cache_hit_tokens": 5120,
+              "prompt_cache_miss_tokens": 197
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 650,
+            "usage": {
+              "prompt_tokens": 159,
+              "completion_tokens": 26,
+              "total_tokens": 185,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 159
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 1178,
+            "usage": {
+              "prompt_tokens": 2032,
+              "completion_tokens": 226,
+              "total_tokens": 2258,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 1904
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 1660,
+            "usage": {
+              "prompt_tokens": 1805,
+              "completion_tokens": 397,
+              "total_tokens": 2202,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 1549
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "EVIDENCE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 596,
+            "usage": {
+              "prompt_tokens": 980,
+              "completion_tokens": 22,
+              "total_tokens": 1002,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 852
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "VERIFY",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 2048,
+            "thinking": false
+          },
+          {
+            "model": "deepseek-flash",
+            "durationMs": 2652,
+            "usage": {
+              "prompt_tokens": 783,
+              "completion_tokens": 477,
+              "total_tokens": 1260,
+              "prompt_tokens_details": {
+                "cached_tokens": 256
+              },
+              "prompt_cache_hit_tokens": 256,
+              "prompt_cache_miss_tokens": 527
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "protocol": "JSON_OBJECT",
+            "phase": "ADVICE",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.14-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 375,
+          "complete": true,
+          "cacheHitTokens": 5888,
+          "inputTokens": 11076,
+          "cacheMissTokens": 5188,
+          "totalTokens": 12792,
+          "outputTokens": 1716,
+          "callsWithoutUsage": 0,
+          "calls": 6,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "Vue Vue frontend framework Vue 前端框架 Vue 单页应用开发",
+            "topic": [
+              "Vue"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.16771899868113385,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16082,
+                  "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                  "endOffset": 681,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 3,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                  "startOffset": 587,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=23,nameRank=1,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.1647666429755982,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16080,
+                  "content": "## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                  "endOffset": 578,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 1,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 开发",
+                  "startOffset": 398,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=30,nameRank=3,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.1604352895452779,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16081,
+                  "content": "## 前端开发\n\n",
+                  "endOffset": 587,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 2,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发",
+                  "startOffset": 578,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=2,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.15698892053348154,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16079,
+                  "content": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n",
+                  "endOffset": 398,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 0,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=58,lexicalRank=62,nameRank=4,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.14615384615384616,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16083,
+                  "content": "## 许可证\n\nHome Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                  "endOffset": 976,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 4,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 许可证",
+                  "startOffset": 681,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=0,lexicalRank=0,nameRank=5,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                },
+                {
+                  "score": 0.019151704397606037,
+                  "title": "项目式学习",
+                  "chunkId": 11760,
+                  "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                  "endOffset": 21252,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 27,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                  "startOffset": 20259,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016643291257597007,
+                  "title": "dream-num/Luckysheet",
+                  "chunkId": 17035,
+                  "content": "## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n",
+                  "endOffset": 2415,
+                  "sourceRef": "dream-num/Luckysheet",
+                  "versionId": 624,
+                  "chunkIndex": 5,
+                  "documentId": 405,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。 > 生态系统",
+                  "startOffset": 1544,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=33,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016638513513513514,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10758,
+                  "content": "## 技术栈\nJavaScript,Vue\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 5,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                  "startOffset": 213,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016559139784946237,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10784,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 266,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 5,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                  "startOffset": 243,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10783,
+                  "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                  "endOffset": 243,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 4,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                  "startOffset": 181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01633249791144528,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10771,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 252,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 5,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                  "startOffset": 229,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "visgl/deck.gl",
+                  "chunkId": 16995,
+                  "content": "#### 纯 JavaScript\n\n- [快速入门](/docs/get-started/using-standalone.md)\n- [完整示例](/examples/get-started/pure-js)\n\n",
+                  "endOffset": 1689,
+                  "sourceRef": "visgl/deck.gl",
+                  "versionId": 619,
+                  "chunkIndex": 5,
+                  "documentId": 400,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "版本 > NPM 模块 > 纯 JavaScript",
+                  "startOffset": 1581,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "前端检查清单",
+                  "chunkId": 15935,
+                  "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                  "endOffset": 1629,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "versionId": 453,
+                  "chunkIndex": 6,
+                  "documentId": 234,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                  "startOffset": 1476,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015360930550803968,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10773,
+                  "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                  "endOffset": 425,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 7,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 主题",
+                  "startOffset": 272,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=14,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10757,
+                  "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                  "endOffset": 213,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 4,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                  "startOffset": 164,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "🖌 egui: 纯 Rust 编写的易用 GUI 库",
+                  "chunkId": 16414,
+                  "content": "## 演示\n\n[点击运行 egui 网页演示](https://www.egui.rs/#demo)（适用于任何支持 Wasm 和 WebGL 的浏览器）。使用 [`eframe`](https://github.com/emilk/egui/tree/main/crates/eframe) 构建。\n\n要在本地测试演示应用，请运行 `cargo run --release -p egui_demo_app`。\n\n原生后端是 [`egui-wgpu`](https://github.",
+                  "endOffset": 3095,
+                  "sourceRef": "emilk/egui",
+                  "versionId": 526,
+                  "chunkIndex": 5,
+                  "documentId": 307,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "🖌 egui: 纯 Rust 编写的易用 GUI 库 > 演示",
+                  "startOffset": 2852,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "nurmohammed840/extension.vsix",
+                  "chunkId": 16237,
+                  "content": "## [Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)  \n此扩展允许你运行 [Visual-Studio-Code API](https://code.visualstudio.com/api/references/vscode-api)。你也可以将其用作演练场。\n\n<img src=\"https://i.imgur.com/5PusvCK.gif\" alt=\"collaborate\" width=\"500\"/>\n\n",
+                  "endOffset": 482,
+                  "sourceRef": "nurmohammed840/extension.vsix",
+                  "versionId": 501,
+                  "chunkIndex": 1,
+                  "documentId": 282,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)",
+                  "startOffset": 225,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "TensorFlow.js",
+                  "chunkId": 16976,
+                  "content": "## 示例\n\n查看我们的[示例仓库](https://github.com/tensorflow/tfjs-examples)\n和我们的[教程](https://js.tensorflow.org/tutorials/)。\n\n",
+                  "endOffset": 1593,
+                  "sourceRef": "tensorflow/tfjs",
+                  "versionId": 617,
+                  "chunkIndex": 3,
+                  "documentId": 398,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "TensorFlow.js > 示例",
+                  "startOffset": 1480,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "pnpm（推荐）",
+                  "chunkId": 17823,
+                  "content": "## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n",
+                  "endOffset": 7390,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "versionId": 756,
+                  "chunkIndex": 20,
+                  "documentId": 537,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "路线图",
+                  "startOffset": 7104,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "SAPTARSHI-coder/EaseMotion-css",
+                  "chunkId": 13278,
+                  "content": "## 项目摘要\nEaseMotion-css 是一个纯CSS动画优先框架，提供可复用的UI组件和现代效果，零依赖，轻量且对初学者友好。采用MIT许可证，包含架构文档、快速启动和部署示例。\n\n",
+                  "endOffset": 204,
+                  "sourceRef": "career:243",
+                  "versionId": 355,
+                  "chunkIndex": 3,
+                  "documentId": 136,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "SAPTARSHI-coder/EaseMotion-css > 项目摘要",
+                  "startOffset": 109,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 242,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "Home Assistant 前端",
+                  "evidence": [
+                    {
+                      "score": 0.16771899868113385,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16082,
+                      "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                      "endOffset": 681,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 3,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                      "startOffset": 587,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=23,nameRank=1,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    },
+                    {
+                      "score": 0.1647666429755982,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16080,
+                      "content": "## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                      "endOffset": 578,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 1,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 开发",
+                      "startOffset": 398,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=30,nameRank=3,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    },
+                    {
+                      "score": 0.1604352895452779,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16081,
+                      "content": "## 前端开发\n\n",
+                      "endOffset": 587,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 2,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发",
+                      "startOffset": 578,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=2,lexicalWeight=0.2,nameGated=true)+NAME_EXACT"
+                    }
+                  ],
+                  "groupKey": "GITHUB:home-assistant/frontend",
+                  "bestScore": 0.16771899868113385,
+                  "sourceRef": "home-assistant/frontend",
+                  "documentId": 257,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.019151704397606037,
+                      "title": "项目式学习",
+                      "chunkId": 11760,
+                      "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                      "endOffset": 21252,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 27,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                      "startOffset": 20259,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.019151704397606037,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "dream-num/Luckysheet",
+                  "evidence": [
+                    {
+                      "score": 0.016643291257597007,
+                      "title": "dream-num/Luckysheet",
+                      "chunkId": 17035,
+                      "content": "## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n",
+                      "endOffset": 2415,
+                      "sourceRef": "dream-num/Luckysheet",
+                      "versionId": 624,
+                      "chunkIndex": 5,
+                      "documentId": 405,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。 > 生态系统",
+                      "startOffset": 1544,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=33,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:dream-num/Luckysheet",
+                  "bestScore": 0.016643291257597007,
+                  "sourceRef": "dream-num/Luckysheet",
+                  "documentId": 405,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "evidence": [
+                    {
+                      "score": 0.016638513513513514,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10758,
+                      "content": "## 技术栈\nJavaScript,Vue\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 5,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                      "startOffset": 213,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10757,
+                      "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                      "endOffset": 213,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 4,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                      "startOffset": 164,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:36",
+                  "bestScore": 0.016638513513513514,
+                  "sourceRef": "beginner:36",
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.016559139784946237,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10784,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 266,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 5,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                      "startOffset": 243,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10783,
+                      "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                      "endOffset": 243,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 4,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                      "startOffset": 181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.016559139784946237,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pocket-stack/pocketjs",
+                  "evidence": [
+                    {
+                      "score": 0.01633249791144528,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10771,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 252,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 5,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                      "startOffset": 229,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015360930550803968,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10773,
+                      "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                      "endOffset": 425,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 7,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 主题",
+                      "startOffset": 272,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=14,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:12",
+                  "bestScore": 0.01633249791144528,
+                  "sourceRef": "beginner:12",
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "visgl/deck.gl",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "visgl/deck.gl",
+                      "chunkId": 16995,
+                      "content": "#### 纯 JavaScript\n\n- [快速入门](/docs/get-started/using-standalone.md)\n- [完整示例](/examples/get-started/pure-js)\n\n",
+                      "endOffset": 1689,
+                      "sourceRef": "visgl/deck.gl",
+                      "versionId": 619,
+                      "chunkIndex": 5,
+                      "documentId": 400,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "版本 > NPM 模块 > 纯 JavaScript",
+                      "startOffset": 1581,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:visgl/deck.gl",
+                  "bestScore": 0.015625,
+                  "sourceRef": "visgl/deck.gl",
+                  "documentId": 400,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "前端检查清单",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "前端检查清单",
+                      "chunkId": 15935,
+                      "content": "### 先选择合适的模式\n\n前端检查清单有助于审查实现质量。如果你还在决定构建什么界面，请使用 [UX Patterns for Devs](https://uxpatterns.dev/) 来比较常见的 UI 模式，理解权衡，并为表单、导航、数据展示、反馈状态、身份验证和 AI 界面找到实用的指导。\n\n",
+                      "endOffset": 1629,
+                      "sourceRef": "thedaviddias/Front-End-Checklist",
+                      "versionId": 453,
+                      "chunkIndex": 6,
+                      "documentId": 234,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "前端检查清单 > 选择你的工作流 > 先选择合适的模式",
+                      "startOffset": 1476,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:thedaviddias/Front-End-Checklist",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "thedaviddias/Front-End-Checklist",
+                  "documentId": 234,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "🖌 egui: 纯 Rust 编写的易用 GUI 库",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "🖌 egui: 纯 Rust 编写的易用 GUI 库",
+                      "chunkId": 16414,
+                      "content": "## 演示\n\n[点击运行 egui 网页演示](https://www.egui.rs/#demo)（适用于任何支持 Wasm 和 WebGL 的浏览器）。使用 [`eframe`](https://github.com/emilk/egui/tree/main/crates/eframe) 构建。\n\n要在本地测试演示应用，请运行 `cargo run --release -p egui_demo_app`。\n\n原生后端是 [`egui-wgpu`](https://github.",
+                      "endOffset": 3095,
+                      "sourceRef": "emilk/egui",
+                      "versionId": 526,
+                      "chunkIndex": 5,
+                      "documentId": 307,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "🖌 egui: 纯 Rust 编写的易用 GUI 库 > 演示",
+                      "startOffset": 2852,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:emilk/egui",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "emilk/egui",
+                  "documentId": 307,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "nurmohammed840/extension.vsix",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "nurmohammed840/extension.vsix",
+                      "chunkId": 16237,
+                      "content": "## [Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)  \n此扩展允许你运行 [Visual-Studio-Code API](https://code.visualstudio.com/api/references/vscode-api)。你也可以将其用作演练场。\n\n<img src=\"https://i.imgur.com/5PusvCK.gif\" alt=\"collaborate\" width=\"500\"/>\n\n",
+                      "endOffset": 482,
+                      "sourceRef": "nurmohammed840/extension.vsix",
+                      "versionId": 501,
+                      "chunkIndex": 1,
+                      "documentId": 282,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Script](https://github.com/nurmohammed840/extension.vsix/tree/Script)",
+                      "startOffset": 225,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:nurmohammed840/extension.vsix",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "nurmohammed840/extension.vsix",
+                  "documentId": 282,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "TensorFlow.js",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "TensorFlow.js",
+                      "chunkId": 16976,
+                      "content": "## 示例\n\n查看我们的[示例仓库](https://github.com/tensorflow/tfjs-examples)\n和我们的[教程](https://js.tensorflow.org/tutorials/)。\n\n",
+                      "endOffset": 1593,
+                      "sourceRef": "tensorflow/tfjs",
+                      "versionId": 617,
+                      "chunkIndex": 3,
+                      "documentId": 398,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "TensorFlow.js > 示例",
+                      "startOffset": 1480,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:tensorflow/tfjs",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "tensorflow/tfjs",
+                  "documentId": 398,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "pnpm（推荐）",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "pnpm（推荐）",
+                      "chunkId": 17823,
+                      "content": "## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n",
+                      "endOffset": 7390,
+                      "sourceRef": "aidizhi/455555.xyz",
+                      "versionId": 756,
+                      "chunkIndex": 20,
+                      "documentId": 537,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "路线图",
+                      "startOffset": 7104,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:aidizhi/455555.xyz",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "documentId": 537,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "SAPTARSHI-coder/EaseMotion-css",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "SAPTARSHI-coder/EaseMotion-css",
+                      "chunkId": 13278,
+                      "content": "## 项目摘要\nEaseMotion-css 是一个纯CSS动画优先框架，提供可复用的UI组件和现代效果，零依赖，轻量且对初学者友好。采用MIT许可证，包含架构文档、快速启动和部署示例。\n\n",
+                      "endOffset": 204,
+                      "sourceRef": "career:243",
+                      "versionId": 355,
+                      "chunkIndex": 3,
+                      "documentId": 136,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "SAPTARSHI-coder/EaseMotion-css > 项目摘要",
+                      "startOffset": 109,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:243",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "career:243",
+                  "documentId": 136,
+                  "sourceType": "CAREER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "Vue Vue frontend framework Vue 前端框架 Vue 单页应用开发",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "GITHUB",
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 257,
+                "url": "https://github.com/home-assistant/frontend",
+                "name": "home-assistant/frontend",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "importable": false,
+                "catalogText": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n## 前端开发\n\n### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n## 许可证\n\nHome Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Home Assistant 前端",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 306,
+                "url": "https://github.com/phaserjs/phaser",
+                "name": "phaserjs/phaser",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "phaserjs/phaser",
+                "versionId": 525,
+                "documentId": 306,
+                "importable": false,
+                "catalogText": "# Phaser - HTML5 游戏框架\n\n![Phaser 横幅](changelog/v4/assets/phaser4-logo.png \"Phaser 横幅\")\n\n[![Discord](https://img.shields.io/discord/244245946873937922?style=for-the-badge)](https://discord.gg/phaser)\n![JSDelivr](https://img.shields.io/jsdelivr/npm/hm/phaser?style=for-the-badge)\n![GitHub](https://img.shields.io/github/downloads/phaserjs/phaser/total?style=for-the-badge)\n\nPhaser 是一个快速、免费且有趣的开源 HTML5 游戏框架，支持在桌面和移动网页浏览器上使用 WebGL 和 Canvas 渲染，并已持续开发超过 13 年。\n\n游戏可以构建为网页游戏，也可以作为 YouTube Playables、Discord Activities、Reddit 游戏、Twitch Overlays，或使用第三方工具编译为 iOS、Android、Steam 和原生应用。您可以使用 JavaScript 或 TypeScript 进行开发。Phaser 支持超过 40 种不同的前端框架，包括 React 和 Vue。\n\nPhaser 由 **Phaser Studio Inc** 与我们优秀的开源社区共同进行商业开发和维护。得益于快速的支持和开发者友好的 API，Phaser 目前是 GitHub 上[最受关注](https://github.com/collections/javascript-game-engines)的游戏框架之一。\n\n想了解更多？点击下方图片观看我们的介绍视频。\n\n[![YouTube](https://i.ytimg.com/vi/XLhi9IW0rxg/maxresdefault.jpg)](https://www.youtube.com/watch?v=XLhi9IW0rxg)\n\n---\n\n## 从 NPM 安装 Phaser\n\n通过 [npm](https://www.npmjs.com/package/phaser) 安装：\n\n```bash\nnpm install phaser\n```\n\n然后在您的项目中导入：\n\n```js\nimport Phaser from 'phaser';\n```\n\n## 从 CDN 使用 Phaser\n\n[Phaser 已上架 jsDelivr](https://www.jsdelivr.com/package/npm/phaser)（一个面向开发者的超快 CDN）。在您的 HTML 中包含 _以下任一_ 代码：\n\n```html\n<script src=\"//cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.js\"></script>\n<script src=\"//cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js\"></script>\n```\n\n也可从 Cloudflare 的 [cdnjs](https://cdnjs.com/libraries/phaser) 获取：\n\n```html\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/phaser/4.2.1/phaser.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/phaser/4.2.1/phaser.min.js\"></script>\n```\n\n## 创建 Phaser 游戏应用\n\n快速入门 Phaser 的最简单方式是使用我们的 `create-phaser-game` 应用。这个 CLI 工具提供一个交互式选择界面，包含官方项目模板和示例游戏。运行命令，回答一些问题，应用就会为您下载并配置合适的包。\n\n```bash\nnpm create @phaserjs/game@latest\nnpx @phaserjs/create-game@latest\nyarn create @phaserjs/game\npnpm create @phaserjs/game@latest\nbun create @phaserjs/game@latest\n```\n\n我们支持 Vue.js、React、Angular、Next.js、SolidJS、Svelte 和 Remix，以及 Vite、Rollup、Parcel、Webpack、ESBuild、Import Map 和 Bun。大多数都提供 JavaScript 和 TypeScript 版本。\n\n[查看创建游戏应用教程](https://phaser.io/tutorials/create-game-app)。\n\n## Phaser 有多大？\n\n如果您查看 `phaser.js` 并看到一个超过 8 MB 的文件，请不要惊慌。其中超过 84% 是内联文档——JSDoc 注释、类型注解和详细的方法描述，这些为 TypeScript 定义和 API 文档提供支持。它是为您的 IDE 准备的，而不是为您的玩家。\n\n压缩后的构建版本 `phaser.min.js` 会去除所有这些内容，在标准 gzip Web 服务器压缩下大小为 **345 KB**。这是包含所有功能的完整版本，但仍比大多数纹理图片要小。您还可以通过调整构建设置排除游戏不需要的功能来进一步减小体积。\n\n| 构建版本 | 原始大小 | 压缩大小 (gzip) |\n| ----- | -------- | ------------------ |\n| `phaser.js`（含文档） | 8.23 MB | - |\n| `phaser.min.js`（完整） | 1.29 MB | 345 KB |\n| `phaser-arcade.min.js` | 1.18 MB | 313 KB |\n\n### 为什么选择 Phaser？\n\n- **久经考验** - 十多年的活跃开发。数万款游戏发布。一个庞大的开发者社区，他们",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Phaser - HTML5 游戏框架",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 75,
+                "url": "https://github.com/practical-tutorials/project-based-learning",
+                "name": "practical-tutorials/project-based-learning",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "practical-tutorials/project-based-learning",
+                "versionId": 294,
+                "documentId": 75,
+                "importable": false,
+                "catalogText": "# Project Based Learning\n\n[![Gitter](https://badges.gitter.im/practical-tutorials/community.svg)](https://gitter.im/practical-tutorials/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Link rot sweep](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml/badge.svg)](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml)\n\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are divided into different primary programming languages. Tutorials may involve multiple technologies and languages.\n\nTo get started, simply fork this repo. Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.\n\n## Table of Contents:\n\n- [C#](#c)\n- [C/C++](#cc)\n- [Clojure](#clojure)\n- [Dart](#dart)\n- [Elixir](#elixir)\n- [Erlang](#erlang)\n- [F#](#f)\n- [Go](#go)\n- [Haskell](#haskell)\n- [HTML/CSS](#html-and-css)\n- [Java](#java)\n- [JavaScript](#javascript)\n- [Kotlin](#kotlin)\n- [Lua](#lua)\n- [OCaml](#ocaml)\n- [PHP](#php)\n- [Python](#python)\n- [R](#r)\n- [Ruby](#ruby)\n- [Rust](#rust)\n- [Scala](#scala)\n- [Swift](#swift)\n- [Additional resources](#additional-resources)\n\n## C/C++:\n\n- [Build an Interpreter](http://www.craftinginterpreters.com/) (Chapter 14 on is written in C)\n- [Memory Allocators 101 - Write a simple memory allocator](https://arjunsreedharan.org/post/148675821737/memory-allocators-101-write-a-simple-memory)\n- [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)\n- [Write a FUSE Filesystem](https://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/)\n- [Build Your Own Text Editor](http://viewsourcecode.org/snaptoken/kilo/)\n- [Build Your Own Lisp](http://www.buildyourownlisp.com/)\n- [How to Program an NES Game in C](https://nesdoug.com/)\n- [Write an OS from scratch](https://github.com/tuhdo/os01)\n- [How to create an OS from scratch ](https://github.com/cfenollosa/os-tutorial)\n- [Building a CHIP-8 Emulator](https://austinmorlan.com/posts/chip8_emulator/)\n- [Beginning Game Programming with C++ and SDL](http://lazyfoo.net/tutorials/SDL/)\n- [Implementing a Key-Value Store](http://codecapsule.com/2012/11/07/ikvs-implementing-a-key-value-store-table-of-contents/)\n- Tiny 3D graphics projects\n  - [Tiny Renderer or how OpenGL works: software rendering in 500 lines of code](https://github.com/ssloy/tinyrenderer/wiki)\n  - [Understandable RayTracing in 256 lines of bare C++](https://github.com/ssloy/tinyraytracer/wiki)\n  - [KABOOM! in 180 lines of bare C++](https://github.com/ssloy/tinykaboom/wiki)\n  - [486 lines of C++: old-school FPS in a weekend](https://github.com/ssloy/tinyraycaster/wiki)\n- Writing a minimal x86-64 JIT compiler in C++\n  - [Part 1](https://solarianprogrammer.com/2018/01/10/writing-minimal-x86-64-jit-compiler-cpp/)\n  - [Part 2](https://solarianprogrammer.com/2018/01/12/writing-minimal-x86-64-jit-compiler-cpp-part-2/)\n- [Build a Live Code-reloader Library for C++](http://howistart.org/posts/cpp/1/index.html)\n- [Write a hash table in C](https://github.com/jamesroutley/write-a-hash-table)\n- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)\n- [Let's Write a Kernel](http://arjunsreedharan.org/post/82710718100/kernel-101-lets-write-a-kernel)\n- [Write a Bootloader in C](http://3zanders.co.uk/2017/10/13/writing-a-bootloader/)\n- [Linux Container in 500 Lines of Code](https://blog.lizzie.io/linux-containers-in-500-loc.html)\n- [Write Your Own Virtual Machine](https://justinmeiners.github.io/lc3-vm/)\n- [Learning KVM - Implement Your Own Linux Kernel](https://david942j.blogspot.com/2018/10/note-learning-kvm-implement-your-own.html)\n- [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)\n- Write a C compiler\n  - [Part 1: Integers, Lexing and Code Generation](https://norasandler.com/2017/11/29/Write-a-Compiler.html)\n  - [Part 2: Unary Operators](https://norasandler.com/2017/12/05/Write-a-Compiler-2.html)\n  - [Part 3: Binary Operators](https://norasandler.com/2017/12/15/Write-a-Compiler-3.html)\n  - [Part 4: Even More Binary Operators](https://norasandler.com/2017/12/28/Write-a-Compiler-4.html)\n  - [Part 5: Local Variables](https://norasandler.com/2018/01/08/Write-a-Compiler-5.html)\n  - [Part 6: Conditionals](https://norasandler.com/2018/02/25/Write-a-Compiler-6.html)\n  - [Part 7: Compound Statements](https://norasandler.com/2018/03/14/Write-a-Compiler-7.html)\n  - [Part 8: Loops](https://norasandler.com/2018/04/10/Write-a-Compiler-8.html)\n  - [Part 9: Functions](https://norasandler.com/2018/06/27/Write-a-Compiler-9.html)\n  - [Part 10: Global Variables](https://norasandler.com/2019/02/18/Write-a-Compiler-10.html)\n- [Implementing a Language with LLVM](https://llvm.org/docs/tutorial/#kaleidoscope-implementing-a-language-with-llvm)\n- [Meta Crush Saga: a C++17 compile-time game](https://jguegant.github.io//jguegant.github.io/blogs/tech/meta-crush-saga.html)\n- [High-Performance Matrix Multiplication](https://gist.github.com/nadavrot/5b35d44e8ba3dd718e595e40184d03f0)\n- Space Invaders from Scratch\n  - [Part 1](http://nicktasios.nl/posts/space-invaders-from-scratch-part-1.html)\n  - [Part 2](http://nicktasios.nl/posts/space-invaders-from-scratch-part-2.html)\n  - [Part 3](http://nicktasios.nl/posts/space-invaders-from-scratch-part-3.html)\n  - [Part 4](http://nicktasios.nl/posts/space-invaders-from-scratch-part-4.html)\n  - [Part 5](http://nicktasios.nl/posts/space-invaders-from-scratch-part-5.html)\n- [Tetris Tutorial in C++ Platform Independent](http://javilop.com/gamedev/tetris-tutorial-in-c-platform-independent-focused-in-game-logic-for-beginners/)\n- Writing a Linux Debugger\n  - [Part 1: Setup](https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/)\n  - [Part 2: Breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-breakpoints/)\n  - [Part 3: Registers and memory](https://blog.tartanllama.xyz/writing-a-linux-debugger-registers/)\n  - [Part 4: Elves and dwarves](https://blog.tartanllama.xyz/writing-a-linux-debugger-elf-dwarf/)\n  - [Part 5: Source and signals](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-signal/)\n  - [Part 6: Source-level stepping](https://blog.tartanllama.xyz/writing-a-linux-debugger-dwarf-step/)\n  - [Part 7: Source-level breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-break/)\n  - [Part 8: Stack unwinding](https://blog.tartanllama.xyz/writing-a-linux-debugger-unwinding/)\n  - [Part 9: Handling variables](https://blog.tartanllama.xyz/writing-a-linux-debugger-variables/)\n  - [Part 10: Advanced topics](https://blog.tartanllama.xyz/writing-a-linux-debugger-advanced-topics/)\n- Let's write a compiler\n  - [Part 1: Introduction, selecting a language, and doing some planning](https://briancallahan.net/blog/20210814.html)\n  - [Part 2: A lexer](https://briancallahan.net/blog/20210815.html)\n  - [Part 3: A parser](https://briancallahan.net/blog/20210816.html)\n  - [Part 4: Testing](https://briancallahan.net/blog/20210817.html)\n  - [Part 5: A code generator](https://briancallahan.net/blog/20210818.html)\n  - [Part 6: Input and output](https://briancallahan.net/blog/20210819.html)\n  - [Part 7: Arrays](https://briancallahan.net/blog/20210822.html)\n  - [Part 8: Strings, forward references, and conclusion](https://briancallahan.net/blog/20210826.html)\n\n### Network programming\n\n- Let's Code a TCP/IP Stack\n\n  - [Part 1: Ethernet & ARP](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)\n  - [Part 2: IPv4 & ICMPv4](http://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/)\n  - [Part 3: TCP Basics & Handshake](http://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/)\n  - [Part 4: TCP Data Flow & Socket API](http://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/)\n  - [Part 5: TCP Retransmission](http://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/)\n\n- Programming concurrent servers\n\n  - [Part 1 - Introduction](https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/)\n  - [Part 2 - Threads](https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/)\n  - [Part 3 - Event-driven](https://eli.thegreenplace.net/2017/concurrent-servers-part-3-event-driven/)\n  - [Part 4 - libuv](https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/)\n  - [Part 5 - Redis case study](https://eli.thegreenplace.net/2017/concurrent-servers-part-5-redis-case-study/)\n  - [Part 6 - Callbacks, Promises and async/await](https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/)\n\n- MQTT Broker from scratch\n  - [Part 1 - The protocol](https://codepr.github.io/posts/sol-mqtt-broker)\n  - [Part 2 - Networking](https://codepr.github.io/posts/sol-mqtt-broker-p2)\n  - [Part 3 - Server](https://codepr.github.io/posts/sol-mqtt-broker-p3)\n  - [Part 4 - Data structures](https://codepr.github.io/posts/sol-mqtt-broker-p4)\n  - [Part 5 - Topic abstraction](https://codepr.github.io/posts/sol-mqtt-broker-p5)\n  - [Part 6 - Handlers](https://codepr.github.io/posts/sol-mqtt-broker-p6)\n  - [Bonus - Multithreading](https://codepr.github.io/posts/sol-mqtt-broker-bonus)\n- [Networking from Scratch](https://github.com/TanayK07/networking-from-scratch)\n\n### OpenGL:\n\n- Creating 2D Breakout game clone in C++ with OpenGL\n  - [Breakout](https://learnopengl.com/In-Practice/2D-Game/Breakout)\n  - [Setting up](https://learnopengl.com/In-Practice/2D-Game/Setting-up)\n  - [Rendering Sprites](https://learnopengl.com/In-Practice/2D-Game/Rendering-Sprites)\n  - [Levels](https://learnopengl.com/In-Practice/2D-Game/Levels)\n  - Collisions\n    - [Ball](https://learnopengl.com/In-Practice/2D-Game/Collisions/Ball)\n    - [Collision detection](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection)\n    - [Collision resolution](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution)\n  - [Particles](https://learnopengl.com/In-Practice/2D-Game/Particles)\n  - [Postprocessing](https://learnopengl.com/In-Practice/2D-Game/Postprocessing)\n  - [Powerups](https://learnopengl.com/In-Practice/2D-Game/Powerups)\n  - [Audio](https://learnopengl.com/In-Practice/2D-Game/Audio)\n  - [Render text](https://learnopengl.com/In-Practice/2D-Game/Render-text)\n  - [Final thoughts](https://learnopengl.com/In-Practice/2D-Game/Final-thoughts)\n- [Handmade Hero](https://handmadehero.org)\n- [How to Make Minecraft in C++/OpenGL](https://www.youtube.com/playlist?list=PLMZ_9w2XRxiZq1vfw1lrpCMRDufe2MKV_) (video)\n\n## C#:\n\n- [Learn C# By Building a Simple RPG Game](http://scottlilly.com/learn-c-by-building-a-simple-rpg-index/)\n- [Create a Rogue-like game in C#](https://roguesharp.wordpress.com/)\n- [Create a Blank App with C# and Xamarin (work in progress)](https://www.intertech.com/Blog/xamarin-tutorial-part-1-create-a-blank-app/)\n- [Build iOS Photo Library App with Xamarin and Visual Studio](https://www.raywenderlich.com/134049/building-ios-apps-with-xamarin-and-visual-studio)\n- [Building the CoreWiki](https://www.youtube.com/playlist?list=PLVMqA0_8O85yC78I4Xj7z48ES48IQBa7p) This is a Wiki-style content management system that has been completely written in C# with ASP.NET Core and Razor Pages. You can find the source code [here](https://github.com/csharpfritz/CoreWiki).\n\n## Clojure:\n\n- [Build a Twitter Bot with Clojure](http://howistart.org/posts/clojure/1/index.html)\n- [Building a Spell-Checker](https://bernhardwenzel.com/articles/clojure-spellchecker/)\n- [Building a JIRA integration with Clojure & Atlassian Connect](https://hackernoon.com/building-a-jira-integration-with-clojure-atlassian-connect-506ebd112807)\n- [Prototyping with Clojure](https://github.com/aliaksandr-s/prototyping-with-clojure)\n- [Tetris in ClojureScript](https://shaunlebron.github.io/t3tr0s-slides)\n\n## Dart:\n\n### Flutter:\n\n- [Amazon Clone with Admin Panel](https://youtu.be/O3nmP-lZAdg)\n- [Food Delivery App](https://youtu.be/7dAt-JMSCVQ)\n- [Google Docs Clone](https://youtu.be/0_GJ1w_iG44)\n- [Instagram",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "项目式学习",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 12,
+                "url": "https://github.com/pocket-stack/pocketjs",
+                "name": "pocket-stack/pocketjs",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]",
+                "archived": false,
+                "duration": "4-6天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:12",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 405,
+                "url": "https://github.com/dream-num/Luckysheet",
+                "name": "dream-num/Luckysheet",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "dream-num/Luckysheet",
+                "versionId": 624,
+                "documentId": 405,
+                "importable": false,
+                "catalogText": "<div align=\"center\">\n\n![logo](/docs/.vuepress/public/img/logo_text.png)\n\n[![Join the chat at https://gitter.im/mengshukeji/Luckysheet](https://badges.gitter.im/mengshukeji/Luckysheet.svg)](https://gitter.im/mengshukeji/Luckysheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n<a href=\"https://twitter.com/intent/follow?screen_name=luckysheet\">\n        <img src=\"https://img.shields.io/twitter/follow/luckysheet?style=social&logo=twitter\"\n            alt=\"follow on Twitter\"></a>\n\n</div>\n\n中文 | [English](./README.md)\n\n# Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。\n\n更多详情请关注 [#1454](https://github.com/dream-num/Luckysheet/issues/1454) 议题。\n\n## 介绍\n🚀Luckysheet 是一款功能强大、配置简单、完全开源的在线电子表格，类似于 Excel。\n\n## 链接\n | 源代码 | 文档 | 演示 | 论坛 |\n | ------ | -------- | ------ | ------ |\n | [Github](https://github.com/mengshukeji/Luckysheet)| [在线文档](https://dream-num.github.io/LuckysheetDocs/) | [在线演示](https://dream-num.github.io/LuckysheetDemo) / [协同编辑演示](http://luckysheet.lashuju.com/demo/) | [中文论坛](https://support.qq.com/product/288322)  |\n | [Gitee 镜像](https://gitee.com/mengshukeji/Luckysheet)| [Gitee 在线文档](https://mengshukeji.gitee.io/LuckysheetDocs/) | [Gitee 在线演示](https://mengshukeji.gitee.io/luckysheetdemo/) | [Google 群组](https://groups.google.com/g/luckysheet) |\n\n![Demo](/docs/.vuepress/public/img/LuckysheetDemo.gif)\n\n## 插件\n\n若需导入、导出、打印等高级功能，请使用 [Univer](https://github.com/dream-num/univer/)\n\n## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n## 功能特性\n\n- **格式化**：样式、条件格式、文本对齐与旋转、文本截断、溢出、自动换行、多种数据类型、单元格分割样式\n- **单元格**：拖放、填充柄、多选、查找和替换、定位、合并单元格、数据验证\n- **行与列**：隐藏、插入、删除行或列、冻结、以及拆分文本\n- **操作**：撤销、重做、复制、粘贴、剪切、快捷键、格式刷、拖放选择\n- **公式与函数**：内置、远程和自定义公式\n- **表格**：筛选、排序\n- **增强功能**：数据透视表、图表、评论、协同编辑、插入图片、矩阵计算、截图、复制到其他格式、EXCEL 导入导出等。\n\n更详细的功能列表，请参阅：[功能特性](https://dream-num.github.io/LuckysheetDocs/guide/features.html)",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "dream-num/Luckysheet",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 36,
+                "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+                "name": "JustArchiNET/ASF-WebConfigGenerator",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+                "archived": false,
+                "duration": "2-5天",
+                "language": "JavaScript",
+                "sourceRef": "beginner:36",
+                "techStack": "JavaScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 77,
+                "url": "https://github.com/DavidHDev/canvas-ui",
+                "name": "DavidHDev/canvas-ui",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"animation\", \"canvas\", \"component-library\", \"components\", \"creative-coding\", \"design-engineering\", \"frontend\", \"glsl\", \"nextjs\", \"react\", \"shadcn\", \"shaders\", \"svelte\", \"threejs\", \"typescript\", \"ui\", \"ui-library\", \"vue\", \"weggl\"]",
+                "quality": 88,
+                "archived": false,
+                "duration": "30分钟体验，1～3天制作定制页面",
+                "language": "TypeScript",
+                "whatIsIt": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。",
+                "mainRisks": "部分组件依赖实验性API（HTML-in-canvas），某些浏览器可能降级；视觉效果可能影响性能。",
+                "sourceRef": "beginner:77",
+                "techStack": "TypeScript,React,Next.js",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "快速为网页添加玻璃破碎、液体等创意Canvas效果",
+                "codebaseSize": "MEDIUM",
+                "beginnerScore": 87,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "安装简单，使用shadcn CLI即可添加到项目，只需基本的React/Vue知识。\n效果立竿见影，包裹内容即可获得视觉冲击力，非常适合做个人主页或作品集。\n组件源码复制到本地仓库，方便修改和学习WebGL/Canvas原理。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "组合多个组件制作一个全屏交互式体验页面。\n修改现有组件参数（颜色、速度）创造独特风格。\n创作一个全新的组件，如模拟云层或粒子系统。\n为组件编写教程和演示视频，建立中文社区。",
+                "requiresDatabase": false,
+                "vibeCodingReason": "极佳的新手项目，成果酷炫且高度可定制，完美融合创意与技术。",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 46,
+                "url": "https://github.com/zhensherlock/protocol-launcher",
+                "name": "zhensherlock/protocol-launcher",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"ai-tools\", \"api-configuration\", \"deep-link\", \"deeplink\", \"deeplinks\", \"esm\", \"launch-url\", \"llm-provider\", \"mcp\", \"mcp-installer\", \"modelcontextprotocol\", \"one-click\", \"protocol\", \"protocol-launcher\", \"quick-launcher\", \"tree-shaking\", \"typescript\", \"url-generator\", \"url-scheme\"]",
+                "archived": false,
+                "duration": "2-4天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:46",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+                "beginnerScore": 95,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 535,
+                "url": "https://github.com/DezLife/RustMapViewer",
+                "name": "DezLife/RustMapViewer",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "DezLife/RustMapViewer",
+                "versionId": 754,
+                "documentId": 535,
+                "importable": false,
+                "catalogText": "# RustMapViewer\n\nTurns a Rust (Facepunch) `.map` file into a 3D viewer you can open in a browser. It reads the map\nformat and the game's asset bundles directly, so there's no server and no dependency on any mod\nframework.\n\n<a href=\"https://dezlife.github.io/RustMapViewer/HustleRust_Vanilla.5.viewer.html\">\n  <img src=\"docs/screenshot.jpg\" alt=\"RustMapViewer\" width=\"640\">\n</a>\n\n**[Open the live demo →](https://dezlife.github.io/RustMapViewer/HustleRust_Vanilla.5.viewer.html)** —\na real map running in your browser, nothing to install.\n\n## Download\n\nGrab the latest Windows build from the [releases page](../../releases/latest) — a single\n`RustMapViewer.exe` with everything baked in. No .NET install, no extra files to keep around.\n\n## What you get\n\nPoint it at a `.map` and it writes a single self-contained `.html` with:\n\n- the full-resolution terrain painted with the game's own ground textures;\n- rivers, lakes and the ocean, with depth and shorelines;\n- roads and rails using their real in-game textures;\n- every monument marked on the map (hover to see its name, tier and whether it's a safe zone,\n  click to fly there) and listed in the side panel;\n- build-zone and safe-zone toggles that paint each monument's real no-build (red) and safe (green)\n  areas on the ground;\n- biome toggles that light up a whole biome at once;\n- a free-look fly camera and a click-to-read coordinate tool.\n\n## Usage\n\nDrag a `.map` file onto `RustMapViewer.exe`, or run it from a terminal:\n\n```\nRustMapViewer.exe procgen4250.map\n```\n\nIt creates `procgen4250.viewer.html` right next to the map. Open that file in any browser and you're\ndone. (It loads three.js from a CDN, so the first open needs an internet connection.)\n\nA couple of optional flags:\n\n```\nRustMapViewer.exe procgen4250.map --html out.html   # choose where to save the viewer\nRustMapViewer.exe procgen4250.map --viewres 2049     # lighter file, lower terrain detail (default 4097)\n```\n\n### Building from source\n\nIf you'd rather build it yourself, install the .NET 10 SDK and run from the project folder:\n\n```\ndotnet run -c Release -- procgen4250.map\n```\n\nHere `-c Release` is the build configuration and the `--` just separates the build flags from the\nmap path handed to the program. Same flags as above apply after it.\n\n## Assets\n\nThe textures under `detail/` and the monument data in `data/` are extracted from the game and remain\nthe property of Facepunch Studios. They're bundled here only so the viewer looks right out of the box\nand are not covered by this project's license. Rust is a trademark of Facepunch Studios; this project\nis unofficial and not affiliated with or endorsed by them.\n\n---\n\nMade by DezLife.",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "RustMapViewer",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 526,
+                "url": "https://github.com/lubluniky/tre",
+                "name": "lubluniky/tre",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "lubluniky/tre",
+                "versionId": 745,
+                "documentId": 526,
+                "importable": false,
+                "catalogText": "# @borkiss/tre <sub>文字の絵</sub>\n\n**any graphic, as living ASCII on a CRT.**\n\n[![npm](https://img.shields.io/npm/v/%40borkiss%2Ftre?style=flat-square&color=52ff7a&label=npm)](https://www.npmjs.com/package/@borkiss/tre)\n[![license: MIT](https://img.shields.io/badge/license-MIT-c9a24f?style=flat-square)](LICENSE)\n[![live site](https://img.shields.io/badge/live-tre.borkiss.net-52ff7a?style=flat-square)](https://tre.borkiss.net)\n[![agent docs](https://img.shields.io/badge/agents-start.md-c9a24f?style=flat-square)](https://tre.borkiss.net/start.md)\n\nAn engine that renders **any graphic as living ASCII on a CRT** — a live\nthree.js scene, an image, a video, a webcam, a 2D canvas — and can dance to\nyour music. The framework-free core (`@borkiss/tre/core`) needs only\nthree.js; on top of it sit React/R3F bindings and a scroll-driven storytelling\nlayer (GSAP timeline + Lenis + WebAudio reactivity). Zero postprocessing\ndependencies — the ASCII/CRT pipeline is a few tiny hand-rolled fullscreen\npasses.\n\n```bash\nnpm i @borkiss/tre three        # bun add @borkiss/tre three\n```\n\nEverything below is live at **[tre.borkiss.net](https://tre.borkiss.net)** —\nevery glowing pixel there is drawn by this package. Agents start at\n[/start.md](https://tre.borkiss.net/start.md)\n([api](https://tre.borkiss.net/api.md) ·\n[recipes](https://tre.borkiss.net/recipes.md) ·\n[llms.txt](https://tre.borkiss.net/llms.txt)).\n\n[![the showcase site — a live ASCII galaxy boots like a CRT](docs/site-hero.png)](https://tre.borkiss.net)\n\n| eight live tubes, one engine | glyph sets & phosphor tints, swapped live |\n| --- | --- |\n| [![a three.js torus knot and a colour-ASCII sunset](docs/site-tubes.png)](https://tre.borkiss.net#cases) | [![katakana ramp and amber phosphor](docs/site-tubes-2.png)](https://tre.borkiss.net#cases) |\n\nAnd the stories the engine was born for — [DEEP FIELD](https://tre.borkiss.net/deep-field) and [ABOUT FABLE'S SOUL](https://tre.borkiss.net/soul):\n\n| THE EYE — follows your cursor | pulsar | supernova |\n| --- | --- | --- |\n| ![](docs/preview-eye.png) | ![](docs/preview-pulsar.png) | ![](docs/preview-supernova.png) |\n\n| event horizon | wormhole | nebula |\n| --- | --- | --- |\n| ![](docs/preview-blackhole.png) | ![](docs/preview-wormhole.png) | ![](docs/preview-nebula.png) |\n\n```bash\nbun install\nbun dev              # the demo story at http://localhost:5173\nbun run build:lib    # the library -> dist/ (ESM + d.ts, 23 kB / 8.6 kB gzip)\nbun run build        # the demo site -> dist-demo/\n```\n\nThe repo is **library + demo**: `src/` is the publishable engine\n(`@borkiss/tre`), `demo/` is a 9-act story built on it. The demo\nimports the library strictly by package name (aliased to `src/` in dev), so it\nexercises exactly what a consumer would install.\n\n---\n\n## The one idea: a single source of scroll truth\n\n```\nscroll  →  progress  →  timeline  →  state  →  render\n(Lenis)    [0,1]        one GSAP    your        R3F useFrame\n           +energy      timeline    params      READS only\n```\n\n- **Lenis owns the scroll.** Nothing else listens to wheel/touch/scroll events.\n- Lenis position normalizes to **one number, `progress ∈ [0,1]`**.\n- That number — and nothing else — drives **one paused master GSAP timeline**\n  (`ScrollStage` scrubs `timeline.progress(p)`; it never plays).\n- The timeline keyframes **your named params** (camera, hue, cell density…).\n- The R3F render loop **reads** that state every frame. It never sees scroll.\n\nAlongside `progress` there is **`energy`** — a smoothed, non-rewindable [0,1]\nmagnitude of \"how hard is the world being driven right now\": scroll velocity,\nmerged (max) with the audio reactor's level when music is connected.\n\n**State rules:** per-frame values (`progress`, `energy`, your params) are plain\nmutable objects, **not** React state — writing them never re-renders. Only\ndiscrete state (ready, isLowTier, activeSection) lives in zustand. **No\n`setState` inside `useFrame`. No per-frame allocations.**\n\n## The render pipeline (and why it is fast)\n\n```\n3D scene ──► grid buffer ──► ASCII pass ──► persistence ──► CRT pass ──► screen\n            (~cols × rows,   glyph stamp    phosphor        curvature, glow,\n             MSAA ×4)        by luminance   afterglow       scanlines, glitch\n```\n\nThe ASCII pass only ever reads **one sample per cell** — so rendering the scene\nat full resolution would shade ~50–200× more pixels than anyone can see. The\nengine renders the 3D scene into a **grid-sized buffer** (one texel per cell at\nthe densest zoom, MSAA-averaged), then stamps glyphs at full resolution. The\nwin is double: the expensive pass became ~two orders of magnitude smaller, and\nMSAA area-averaging replaces flickery point-sampling — calmer cells, better\nmotion.\n\nEverything else that guards the 16 ms budget:\n\n- **Frame cap + demand rendering** (`FrameCap`, `frameloop=\"demand\"`) — 60fps\n  cap; a 120 Hz screen does half the GPU work.\n- **Adaptive quality** (`AdaptiveQuality`) — dpr clamp (≤1.5), weak-GPU triage\n  (`isLowTier`), drei `PerformanceMonitor` feedback; `lowCost` mode switches the\n  CRT glow to a 4-tap path and drops scene-buffer MSAA.\n- **Idle costs nothing** — the timeline is scrubbed only when progress actually\n  changes; every readout DOM write is change-gated; per-frame uniform refs are\n  cached (no Map lookups, no allocations).\n- **Preloader gate + shader warmup** (`ShaderWarmup`, demo `WarmupRig`) —\n  `gl.compileAsync` before reveal; no compile hitch on first scroll.\n- **One draw call per subject** — instanced meshes with per-instance attributes;\n  all motion in vertex shaders, fed by uniforms (the black hole's disk, lensed\n  arcs, photon ring and infall are ONE `InstancedMesh`, populations split by\n  seed in the vertex stage).\n\n## Audio reactivity\n\n`audioReactor` (WebAudio `AnalyserNode`) turns music into the same hot-store\ncontract as scroll — `audio = { level, bass, mid, treble, beat, active }`,\nauto-gained to [0,1], with bass-onset beat detection:\n\n```ts\nimport { audioReactor, audio } from '@borkiss/tre'\n\nawait audioReactor.connectMic()           // live input (music in the room)\nawait audioReactor.connectDisplayAudio()  // tab/system audio (Chrome screen share)\naudioReactor.connectElement(audioEl)      // a playing <audio> file\naudioReactor.disconnect()\n\n// per frame, anywhere:\naudio.level   // overall drive — feed to <ScrollStage energySource>\naudio.bass    // kick body    audio.beat  // 1 on onset, exp decay\n```\n\nIn the demo (the SIGNAL block, bottom right): beats flare the CRT glow and\ndilate THE EYE's pupil, bass swells the nebula and feeds the accretion disks,\nthe wormhole runs at music speed, treble brightens the phosphor tint, loud\npassages smear the afterglow.\n\n## Graphics mode — any source, no framework\n\nThe pipeline is not tied to scrollytelling, React or even a 3D scene. The\n`core` subpath ships the engine alone (peer dependency: `three`, nothing\nelse), and `createAsciiArt` runs it on any graphic with its own frame-capped\nrAF loop that goes fully idle offscreen — safe to scatter a dozen per page:\n\n```ts\nimport { createAsciiArt, createWebcamSource, RAMPS } from '@borkiss/tre/core'\n\n// an image (colour ASCII: glyphs take the source's own chroma)\nconst art = createAsciiArt({ canvas, source: myImg, fit: 'cover' })\nart.frame.colorize = 1\n\n// a webcam — you, in phosphor glyphs\nconst cam = await createWebcamSource()\ncreateAsciiArt({ canvas, source: cam.video })\n\n// a 2D canvas being redrawn (plasma, generative art, a chart…)\ncreateAsciiArt({ canvas, source: my2dCanvas, ramp: RAMPS.blocks })\n\n// a live three.js scene with your own animation\ncreateAsciiArt({ canvas, source: { scene, camera, update: (t) => mesh.rotation.set(0, t, 0) } })\n\n// drive the look any time (same AsciiFrame contract as the React component)\nart.frame.persistence = 0.6   // phosphor trails\nart.frame.glitch = 0.4        // datamosh\nart.frame.power = 0           // CRT power-off collapse\nart.snapshot()                // -> PNG data URL\n```\n\nSources: `HTMLImageElement | HTMLVideoElement | HTMLCanvasElement |\nOffscreenCanvas | ImageBitmap | THREE.Texture | { scene, camera, update? }`.\nTexture sources are fit with CSS `object-fit` semantics (`cover | contain |\nfill`); glyph ramps are plain strings (`RAMPS.classic/dense/blocks/braille/\nkatakana/binary/lines` or your own), and the atlas takes any loaded font.\nAlready own a renderer and a loop? Use `AsciiPipeline` directly —\n`renderScene(gl, scene, camera, t, dt)` / `renderTexture(gl, texture, t, dt,\nfit)`; the React `<AsciiRenderer>` is exactly that on R3F's loop.\n\n## Library API (the demo is the reference consumer)\n\n```tsx\nimport {\n  ScrollStage, progress, energy, pointer, useEngineStore,   // scroll truth\n  defineActs, createActTimeline,                            // story + timeline\n  AsciiRenderer,                                            // the whole look\n  AdaptiveQuality, FrameCap, ShaderWarmup, coarseLowPower,  // perf scaffolding\n  SubjectMaterial,                                          // luminance shading\n  audioReactor, audio,                                      // music\n  createAssetResolver, GltfSlot,                            // asset pipeline\n} from '@borkiss/tre'\n```\n\n```tsx\n// 1. a story: weighted acts, extended with whatever your timeline keys\nconst story = defineActs([\n  { key: 'boot', weight: 0.6, cam: {...}, hue: 0.33 },\n  ...\n])\n// bounds/centres/actLocal/actIndex/spanGate all derive from the table\n\n// 2. the one timeline: what to key at each act's centre\nconst timeline = createActTimeline(story, (tl, act, at, duration) =>\n  duration === 0\n    ? tl.set(params, { hue: act.hue }, at)\n    : tl.to(params, { hue: act.hue, duration }, at),\n)\n\n// 3. composition — ScrollStage owns scroll; AsciiRenderer owns the look\n<ScrollStage timeline={timeline} energySource={() => audio.level}\n             onProgress={(p) => useEngineStore.getState().setActiveSection(story.actIndex(p))}>\n  <Canvas frameloop=\"demand\" dpr={[1, 1.5]} gl={{ antialias: false }}>\n    <AdaptiveQuality />\n    <FrameCap fps={60} />\n    {/* your scene: SubjectMaterial outputs luminance; the ASCII pass does the rest */}\n    <AsciiRenderer\n      lowCost={coarseLowPower()}\n      onFrame={(f) => {           // mutate per-frame controls, no allocations\n        f.cellPx = params.cell\n        f.tint.setHSL(params.hue, 0.72, 0.62)\n        f.glitch = ...            // power/jitter/scramble/persistence/glow too\n      }}\n    />\n  </Canvas>\n</ScrollStage>\n```\n\nSharp act-local envelopes (glitch humps, power on/off, shatter) do NOT go\nthrough GSAP — compute them from `progress` via `story.actLocal(p, i)` inside\n`onFrame`/`useFrame`: same boundary table, rewinds for free.\n\n**Two time bases, deliberately:** progress-driven state rewinds with the\nscroll; wall-clock/energy state (idle sway, dance phase, flow churn) does not.\n\n## Where each piece lives\n\n| Concern | File |\n| --- | --- |\n| Scroll loop + Lenis + timeline scrub | [`src/scroll/ScrollStage.tsx`](src/scroll/ScrollStage.tsx) |\n| Hot per-frame stores (progress/energy/pointer) | [`src/store/engineStore.ts`](src/store/engineStore.ts) |\n| Act system (bounds, local progress, gates) | [`src/acts/acts.ts`](src/acts/acts.ts) |\n| Timeline builder (centre-eased, weight axis) | [`src/timeline/createActTimeline.ts`](src/timeline/createActTimeline.ts) |\n| ASCII/CRT pipeline (framework-agnostic core) | [`src/ascii/AsciiPipeline.ts`](src/ascii/AsciiPipeline.ts) |\n| R3F shell over the pipeline | [`src/ascii/AsciiRenderer.tsx`](src/ascii/AsciiRenderer.tsx) |\n| Standalone engine (own rAF loop, any source) | [`src/art/createAsciiArt.ts`](src/art/createAsciiArt.ts) |\n| Source adapters (image/video/canvas/webcam) | [`src/art/sources.ts`](src/art/sources.ts) |\n| The fragment shaders | [`src/ascii/shaders.ts`](src/ascii/shaders.ts) |\n| Glyph atlas (runtime canvas, no asset) + ramps | [`src/ascii/glyphAtlas.ts`](src/ascii/glyphAtlas.ts), [`src/ascii/ramps.ts`](src/ascii/ramps.ts) |\n| Audio reactor (mic / tab / file → levels+beat) | [`src/audio/audioReactor.ts`](",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "@borkiss/tre <sub>文字の絵</sub>",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 400,
+                "url": "https://github.com/visgl/deck.gl",
+                "name": "visgl/deck.gl",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "visgl/deck.gl",
+                "versionId": 619,
+                "documentId": 400,
+                "importable": false,
+                "catalogText": "<p align=\"right\">\n  <a href=\"https://npmjs.org/package/deck.gl\">\n    <img src=\"https://img.shields.io/npm/v/deck.gl.svg?style=flat-square\" alt=\"version\" />\n  </a>\n  <a href=\"https://github.com/visgl/deck.gl/actions?query=workflow%3Atest+branch%3Amaster\">\n    <img src=\"https://github.com/visgl/deck.gl/workflows/test/badge.svg?branch=master\" alt=\"build\" />\n  </a>\n  <a href=\"https://npmjs.org/package/deck.gl\">\n    <img src=\"https://img.shields.io/npm/dm/@deck.gl/core.svg?style=flat-square\" alt=\"downloads\" />\n  </a>\n  <a href='https://coveralls.io/github/visgl/deck.gl?branch=master'>\n    <img src='https://img.shields.io/coveralls/visgl/deck.gl.svg?style=flat-square' alt='Coverage Status' />\n  </a>\n</p>\n\n<h1 align=\"center\">deck.gl | <a href=\"https://deck.gl\">官方网站</a></h1>\n\n<h5 align=\"center\"> GPU 驱动、高性能的大规模数据可视化</h5>\n\n[![docs](http://i.imgur.com/mvfvgf0.jpg)](https://visgl.github.io/deck.gl)\n\n\ndeck.gl 旨在简化基于 WebGL2/WebGPU 的大规模数据集的高性能可视化。用户可以通过组合现有图层，以最少的投入快速获得令人印象深刻的可视化效果，或利用 deck.gl 的可扩展架构来满足自定义需求。\n\ndeck.gl 将**数据**（通常为 JSON 对象数组）映射为一组可视化**图层**（例如图标、多边形、文本），并通过**视图**（例如地图、第一人称、正交）来观察它们。\n\ndeck.gl 开箱即用地处理了诸多挑战：\n\n* 大规模数据集的高性能渲染与更新\n* 交互式事件处理，如拾取、高亮和筛选\n* 地图投影及与主流底图提供商的集成\n* 一套经过验证、测试良好的图层目录\n\ndeck.gl 设计为高度可定制。所有图层都提供灵活的 API，允许对渲染的每个方面进行编程控制。所有核心类都易于用户扩展，以应对自定义用例。\n\n## 版本\n\n### Script 标签\n\n```html\n<script src=\"https://unpkg.com/deck.gl@latest/dist.min.js\"></script>\n```\n\n- [快速入门](/docs/get-started/using-standalone.md#using-the-scripting-api)\n- [完整示例](https://github.com/visgl/deck.gl/tree/master/examples/get-started/scripting)\n\n### NPM 模块\n\n```bash\nnpm install deck.gl\n```\n\n#### 纯 JavaScript\n\n- [快速入门](/docs/get-started/using-standalone.md)\n- [完整示例](/examples/get-started/pure-js)\n\n#### React\n\n- [快速入门](/docs/get-started/using-with-react.md)\n- [完整示例](/examples/get-started/react)\n\n### Python\n\n```bash\npip install pydeck\n```\n\n- [快速入门](https://deckgl.readthedocs.io/en/latest/installation.html)\n- [示例](https://deckgl.readthedocs.io/en/latest/layer.html)\n\n### 第三方扩展\n\n- [deckgl-typings](https://github.com/danmarshall/deckgl-typings) (TypeScript)\n- [mapdeck](https://symbolixau.github.io/mapdeck/articles/mapdeck.html) (R)\n- [vega-deck.gl](https://github.com/microsoft/SandDance/tree/master/packages/vega-deck.gl) ([Vega](https://vega.github.io/))\n- [earthengine-layers](https://earthengine-layers.com/) ([Google Earth Engine](https://earthengine.google.com/))\n- [deck.gl-native](https://github.com/UnfoldedInc/deck.gl-native) (C++)\n- [deck.gl-raster](https://github.com/kylebarron/deck.gl-raster/) (栅格计算)\n\n## 学习资源\n\n* [API 文档](https://deck.gl/docs)（最新版本）\n* [网站演示](https://deck.gl/examples)（附源代码链接）\n* [交互式演练场](https://deck.gl/playground)\n* [deck.gl Codepen 演示](https://codepen.io/vis-gl/)\n* [deck.gl Observable 演示](https://beta.observablehq.com/@pessimistress)\n* [vis.gl Medium 博客](https://medium.com/vis-gl)\n* [deck.gl Slack 工作区](https://slack-invite.openjsf.org/)\n\n## 参与贡献\n\ndeck.gl 是 vis.gl 的一部分，属于 [OpenJS 基金会](https://openjsf.org/) 项目。如有兴趣贡献，请阅读[贡献指南](/CONTRIBUTING.md)。\n\n## 致谢\n\n#### 数据来源\n\n数据来源在每个示例中列出。",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "visgl/deck.gl",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 517,
+                "url": "https://github.com/konvajs/konva",
+                "name": "konvajs/konva",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "konvajs/konva",
+                "versionId": 736,
+                "documentId": 517,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <img src=\"https://konvajs.org/img/icon.png\" alt=\"Konva logo\" height=\"60\" />\n</p>\n\n<h1 align=\"center\">Konva</h1>\n\n<p align=\"center\"><strong>Build interactive graphics, editors, and diagrams for the web.</strong></p>\n\n[![npm downloads](https://img.shields.io/npm/dw/konva.svg)](https://www.npmjs.com/package/konva)\n[![npm version](https://badge.fury.io/js/konva.svg)](http://badge.fury.io/js/konva)\n[![Financial Contributors on Open Collective](https://opencollective.com/konva/all/badge.svg?label=financial+contributors)](https://opencollective.com/konva)\n[![Build Status](https://github.com/konvajs/konva/actions/workflows/test-browser.yml/badge.svg)](https://github.com/konvajs/konva/actions/workflows/test-browser.yml)\n[![Build Status](https://github.com/konvajs/konva/actions/workflows/test-node.yml/badge.svg)](https://github.com/konvajs/konva/actions/workflows/test-node.yml)\n[![CDNJS version](https://img.shields.io/cdnjs/v/konva.svg)](https://cdnjs.com/libraries/konva)\n\nKonva is an HTML5 Canvas JavaScript framework that enables high performance animations, transitions, node nesting, layering, filtering, caching, event handling for desktop and mobile applications, and much more.\n\nYou can draw things onto the stage, add event listeners to them, move them, scale them, and rotate them independently from other shapes to support high performance animations, even if your application uses thousands of shapes. Served hot with a side of awesomeness.\n\nThis repository began as a GitHub fork of [ericdrowell/KineticJS](https://github.com/ericdrowell/KineticJS).\n\n- **Visit:** The [Home Page](https://konvajs.org/) and follow on [Twitter](https://twitter.com/lavrton)\n- **Discover:** [Tutorials](https://konvajs.org/docs/index.html), [API Documentation](https://konvajs.org/api/Konva.html)\n- **Try it:** [Canvas Editor](https://konvajs.org/docs/sandbox/Canvas_Editor.html), [Free Drawing](https://konvajs.org/docs/sandbox/Free_Drawing.html), [Image Crop](https://konvajs.org/docs/sandbox/Canvas_Crop_Image.html), [Window Frame Designer](https://konvajs.org/docs/sandbox/Window_Frame_Designer.html), and [more demos](https://konvajs.org/docs/sandbox.html)\n- **Used by:** [Polotno](https://polotno.com/?utm_source=konvajs) (design editor SDK) and many others — see the full showcase on the [home page](https://konvajs.org/)\n- **Help:** [StackOverflow](https://stackoverflow.com/questions/tagged/konvajs), [Discord Chat](https://discord.gg/8FqZwVT)\n\n# Quick Look\n\n```html\n<script src=\"https://unpkg.com/konva@10.0.0-1/konva.min.js\"></script>\n<div id=\"container\"></div>\n<script>\n  var stage = new Konva.Stage({\n    container: 'container',\n    width: window.innerWidth,\n    height: window.innerHeight,\n  });\n\n  // add canvas element\n  var layer = new Konva.Layer();\n  stage.add(layer);\n\n  // create shape\n  var box = new Konva.Rect({\n    x: 50,\n    y: 50,\n    width: 100,\n    height: 50,\n    fill: '#00D2FF',\n    stroke: 'black',\n    strokeWidth: 4,\n    draggable: true,\n  });\n  layer.add(box);\n\n  // add cursor styling\n  box.on('mouseover', function () {\n    document.body.style.cursor = 'pointer';\n  });\n  box.on('mouseout', function () {\n    document.body.style.cursor = 'default';\n  });\n</script>\n```\n\n# Browsers support\n\nKonva works in all modern mobile and desktop browsers. A browser need to be capable to run javascript code from ES2015 spec. For older browsers you may need polyfills for missing functions.\n\nAt the current moment `Konva` doesn't work in IE11 directly. To make it work you just need to provide some polyfills such as `Array.prototype.find`, `String.prototype.trimLeft`, `String.prototype.trimRight`, `Array.from`.\n\n# Debugging\n\nThe Chrome inspector simply shows the canvas element. To see the Konva objects and their details, install the konva-dev extension at https://github.com/konvajs/konva-devtool.\n\n# Loading and installing Konva\n\nKonva supports UMD loading. So you can use all possible variants to load the framework into your project:\n\n### Load Konva via classical `<script>` tag from CDN:\n\n```html\n<script src=\"https://unpkg.com/konva@10.0.0-1/konva.min.js\"></script>\n```\n\n### Install with npm:\n\n```bash\nnpm install konva --save\n```\n\n```javascript\n// The modern way (e.g. an ES6-style import for webpack, parcel)\nimport Konva from 'konva';\n```\n\n#### Typescript usage\n\nAdd DOM definitions into your `tsconfig.json`:\n\n```\n{\n  \"compilerOptions\": {\n    \"lib\": [\n        \"es6\",\n        \"dom\"\n    ]\n  }\n}\n```\n\n### 3 Minimal bundle\n\n```javascript\nimport Konva from 'konva/lib/Core';\n// Now you have a Konva object with Stage, Layer, FastLayer, Group, Shape and some additional utils function.\n// Also core currently already have support for drag&drop and animations.\n// BUT there are no shapes (rect, circle, etc), no filters.\n\n// but you can simply add anything you need:\nimport { Rect } from 'konva/lib/shapes/Rect';\n// importing a shape will automatically inject it into Konva object\n\nvar rect1 = new Rect();\n// or:\nvar shape = new Konva.Rect();\n\n// for filters you can use this:\nimport { Blur } from 'konva/lib/filters/Blur';\n```\n\n### 4 NodeJS env\n\nIn order to run `konva` in nodejs environment you also need to install `canvas` or `skia-canvas` package manually for rendering backend.\n\n```bash\n# node-canvas backend\nnpm install konva canvas\n# skia-canvas backend\nnpm install konva skia-canvas\n```\n\nThen you can use the same Konva API and all Konva demos will work just fine. You just don't need to use `container` attribute in your stage.\n\n```js\nimport Konva from 'konva';\nimport 'konva/canvas-backend'; // or import 'konva/skia-backend';\n\nconst stage = new Konva.Stage({\n  width: 500,\n  height: 500,\n});\n// then all regular Konva code will work\n```\n\n# Backers\n\n![https://simpleshow.com](https://avatars.githubusercontent.com/u/99720652?s=200&v=4 'https://simpleshow.com')\n![https://www.notably.ai/](https://avatars.githubusercontent.com/u/80046841?s=200&v=4 'https://www.notably.ai/')\n\n- [myposter GmbH](https://www.myposter.de/)\n- [queue.gg](https://queue.gg/)\n\n# Change log\n\nSee [CHANGELOG.md](https://github.com/konvajs/konva/blob/master/CHANGELOG.md).\n\n## Building the Konva Framework\n\nTo make a full build run `npm run build`. The command will compile all typescript files, combine then into one bundle and run minifier.\n\n## Testing\n\nKonva uses Mocha for testing.\n\n- If you need run test only one time run `npm run test`.\n- While developing it is easy to use `npm start`. Just run it and go to [http://localhost:1234/unit-tests.html](http://localhost:1234/unit-tests.html). The watcher will rebuild the bundle on any change.\n\nKonva is covered with hundreds of tests and well over a thousand assertions.\nKonva uses TDD (test driven development) which means that every new feature or bug fix is accompanied with at least one new test.\n\n## Generate documentation\n\nRun `npx gulp api` which will build the documentation files and place them in the `api` folder.\n\n# Pull Requests\n\nI'd be happy to review any pull requests that may better the Konva project,\nin particular if you have a bug fix, enhancement, or a new shape (see `src/shapes` for examples). Before doing so, please first make sure that all of the tests pass (`npm run test`).\n\n## Contributors\n\n### Financial Contributors\n\nBecome a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/konva/contribute)]\n\n#### Individuals\n\n<a href=\"https://opencollective.com/konva\"><img src=\"https://opencollective.com/konva/individuals.svg?width=890\"></a>\n\n#### Organizations\n\nSupport this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/konva/contribute)]\n\n<a href=\"https://opencollective.com/konva/organization/0/website\"><img src=\"https://opencollective.com/konva/organization/0/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/1/website\"><img src=\"https://opencollective.com/konva/organization/1/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/2/website\"><img src=\"https://opencollective.com/konva/organization/2/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/3/website\"><img src=\"https://opencollective.com/konva/organization/3/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/4/website\"><img src=\"https://opencollective.com/konva/organization/4/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/5/website\"><img src=\"https://opencollective.com/konva/organization/5/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/6/website\"><img src=\"https://opencollective.com/konva/organization/6/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/7/website\"><img src=\"https://opencollective.com/konva/organization/7/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/8/website\"><img src=\"https://opencollective.com/konva/organization/8/avatar.svg\"></a>\n<a href=\"https://opencollective.com/konva/organization/9/website\"><img src=\"https://opencollective.com/konva/organization/9/avatar.svg\"></a>\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Quick Look",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "Vue Vue frontend framework Vue 前端框架 Vue 单页应用开发",
+              "topic": [
+                "Vue"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "Vue",
+              "candidates": [
+                {
+                  "key": "EXTERNAL_PROJECT:257",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Home Assistant 前端\n这是官方 Home Assistant 前端的仓库。\n- 查看 Home Assistant 演示\n- 更多关于 Home Assistant 的信息\n- 前端开发说明\n## 开发\n- 初始设置：`script/setup`\n- 开发：说明\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n## 前端开发\n### 经典环境\n完整指南可在以下链接找到。其中简要介绍了项目的构建过程。\n## 许可证\nHome Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n我们使用 BrowserStack 在各种设备上测试 Home Assistant。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:306",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Phaser - HTML5 游戏框架\nPhaser 是一个快速、免费且有趣的开源 HTML5 游戏框架，支持在桌面和移动网页浏览器上使用 WebGL 和 Canvas 渲染，并已持续开发超过 13 年。\n游戏可以构建为网页游戏，也可以作为 YouTube Playables、Discord Activities、Reddit 游戏、Twitch Overlays，或使用第三方工具编译为 iOS、Android、Steam 和原生应用。您可以使用 JavaScript 或 TypeScript 进行开发。Phaser 支持超过 40 种不同的前端框架，包括 React 和 Vue。\nPhaser 由 **Phaser Studio Inc** 与我们优秀的开源社区共同进行商业开发和维护。得益于快速的支持和开发者友好的 API，Phaser 目前是 GitHub 上最受关注的游戏框架之一。\n"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:75",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Project Based Learning\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are divided into different primary programming languages. Tutorials may involve multiple technologies and languages.\nTo get started, simply fork this repo. Please refer to CONTRIBUTING.md for contribution guidelines.\n## Table of Contents:\n- C#"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:12",
+                  "purpose": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:405",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n alt=\"follow on Twitter\"> \n中文 | English\n# Luckysheet 已停止维护，建议在生产环境中使用升级版 Univer。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。\n更多详情请关注 #1454 议题。\n## 介绍\n🚀Luckysheet 是一款功能强大、配置简单、完全开源的在线电子表格，类似于 Excel。\n## 链接\n | 源代码 | 文档 | 演示 | 论坛 |\n | ------ | -------- | ------ | ------ |\n | Github| 在线文档 | 在线演示 / 协同编辑演示 | 中文论坛 |\n | Gitee 镜像| Gitee 在线文档 | Gitee 在线演示 | Google 群组 |\n##"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:36",
+                  "purpose": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:77",
+                  "purpose": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。 快速为网页添加玻璃破碎、液体等创意Canvas效果"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:46",
+                  "purpose": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:535",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # RustMapViewer\nTurns a Rust (Facepunch) `.map` file into a 3D viewer you can open in a browser. It reads the map\nformat and the game's asset bundles directly, so there's no server and no dependency on any mod\nframework.\n**Open the live demo →** —\na real map running in your browser, nothing to install.\n## Download\nGrab the latest Windows build from the releases page — a single\n`RustMapViewer.exe` wi"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:526",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # @borkiss/tre 文字の絵 \n**any graphic, as living ASCII on a CRT.**\nAn engine that renders **any graphic as living ASCII on a CRT** — a live\nthree.js scene, an image, a video, a webcam, a 2D canvas — and can dance to\nyour music. The framework-free core (`@borkiss/tre/core`) needs only\nthree.js; on top of it sit React/R3F bindings and a scroll-driven storytelling\nlayer (GSAP timeline + Lenis + WebAudio r"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:400",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n deck.gl | 官方网站 \n GPU 驱动、高性能的大规模数据可视化 \ndeck.gl 旨在简化基于 WebGL2/WebGPU 的大规模数据集的高性能可视化。用户可以通过组合现有图层，以最少的投入快速获得令人印象深刻的可视化效果，或利用 deck.gl 的可扩展架构来满足自定义需求。\ndeck.gl 将**数据**（通常为 JSON 对象数组）映射为一组可视化**图层**（例如图标、多边形、文本），并通过**视图**（例如地图、第一人称、正交）来观察它们。\ndeck.gl 开箱即用地处理了诸多挑战：\n* 大规模数据集的高性能渲染与更新\n* 交互式事件处理，如拾取、高亮和筛选\n* 地图投影及与主流底图提供商的集成\n* 一套经过验证、测试良好的图层目录\ndeck.gl 设计为高度可定制。所有图层都提供灵活的 API，允许对渲染的每个方面进行编程控制。所有核心类都易于用户扩展，以应对自定义"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:517",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 \n Konva \n Build interactive graphics, editors, and diagrams for the web. \nKonva is an HTML5 Canvas JavaScript framework that enables high performance animations, transitions, node nesting, layering, filtering, caching, event handling for desktop and mobile applications, and much more.\nYou can draw things onto the stage, add event listeners to them, move them, scale them, and rotate them independentl"
+                }
+              ]
+            },
+            "verdict": {
+              "matches": [
+                {
+                  "key": "EXTERNAL_PROJECT:257",
+                  "quote": "这是官方 Home Assistant 前端的仓库。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:36",
+                  "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                  "relation": "DIRECT"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:12",
+                  "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                  "relation": "SUBTOPIC"
+                },
+                {
+                  "key": "BEGINNER_PROJECT:77",
+                  "quote": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。",
+                  "relation": "SUBTOPIC"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:306",
+                  "quote": "Phaser 支持超过 40 种不同的前端框架，包括 React 和 Vue。",
+                  "relation": "SUBTOPIC"
+                }
+              ]
+            },
+            "accepted": {
+              "topic": "Vue",
+              "proofs": {
+                "BEGINNER_PROJECT:12": {
+                  "rank": 3,
+                  "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                  "relation": "SUBTOPIC",
+                  "fingerprint": "ff12b7a1d5050d7350300831eaae0f3b172e56d748100be59b8c7969a8d9d468"
+                },
+                "BEGINNER_PROJECT:36": {
+                  "rank": 2,
+                  "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                  "relation": "DIRECT",
+                  "fingerprint": "68f7363790e9f94bc6a17da8894f18a4cc0b630d8eb081f6e9f6c7628fb869ad"
+                },
+                "BEGINNER_PROJECT:77": {
+                  "rank": 4,
+                  "quote": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。",
+                  "relation": "SUBTOPIC",
+                  "fingerprint": "93cc96226c9ce4171bb5722e58f061f1263f29145a804be49d042fbf9e17be07"
+                },
+                "EXTERNAL_PROJECT:257": {
+                  "rank": 1,
+                  "quote": "这是官方 Home Assistant 前端的仓库。",
+                  "relation": "DIRECT",
+                  "fingerprint": "4490a379489747d828b8625e6ce346efae1ec4935f3c8cab52b01bd282f5caca"
+                },
+                "EXTERNAL_PROJECT:306": {
+                  "rank": 5,
+                  "quote": "Phaser 支持超过 40 种不同的前端框架，包括 React 和 Vue。",
+                  "relation": "SUBTOPIC",
+                  "fingerprint": "51b165fe79b6f0787f23ea0f2910e2aa689061212505bc8729a48a2c0a8ab348"
+                }
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.018377321603128056,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10758,
+                  "content": "## 技术栈\nJavaScript,Vue\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 5,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                  "startOffset": 213,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01820406165891852,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10771,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 252,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 5,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                  "startOffset": 229,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16082,
+                  "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                  "endOffset": 681,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 3,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                  "startOffset": 587,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.017410714285714286,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10773,
+                  "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                  "endOffset": 425,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 7,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 主题",
+                  "startOffset": 272,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10757,
+                  "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                  "endOffset": 213,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 4,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                  "startOffset": 164,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01616161616161616,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10760,
+                  "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                  "endOffset": 365,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 7,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                  "startOffset": 256,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10767,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 41,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 1,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 知识分类",
+                  "startOffset": 25,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10754,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 55,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 1,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 知识分类",
+                  "startOffset": 39,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10770,
+                  "content": "## 适合新手的原因\n清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                  "endOffset": 229,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 4,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                  "startOffset": 185,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10756,
+                  "content": "## 中文简介\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                  "endOffset": 164,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 3,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                  "startOffset": 119,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16079,
+                  "content": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n",
+                  "endOffset": 398,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 0,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端",
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16080,
+                  "content": "## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                  "endOffset": 578,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 1,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 开发",
+                  "startOffset": 398,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16083,
+                  "content": "## 许可证\n\nHome Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                  "endOffset": 976,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 4,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 许可证",
+                  "startOffset": 681,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10769,
+                  "content": "## 中文简介\n浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                  "endOffset": 185,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 3,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                  "startOffset": 91,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "Home Assistant 前端",
+                  "chunkId": 16081,
+                  "content": "## 前端开发\n\n",
+                  "endOffset": 587,
+                  "sourceRef": "home-assistant/frontend",
+                  "versionId": 476,
+                  "chunkIndex": 2,
+                  "documentId": 257,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Home Assistant 前端 > 前端开发",
+                  "startOffset": 578,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10778,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 498,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 12,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 环境要求",
+                  "startOffset": 481,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10765,
+                  "content": "## 环境要求\n无明显额外要求\n\n",
+                  "endOffset": 437,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 12,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 环境要求",
+                  "startOffset": 420,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10768,
+                  "content": "## 仓库地址\nhttps://github.com/pocket-stack/pocketjs\n\n",
+                  "endOffset": 91,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 2,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 仓库地址",
+                  "startOffset": 41,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10759,
+                  "content": "## 主要语言\nJavaScript\n\n",
+                  "endOffset": 256,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 6,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主要语言",
+                  "startOffset": 236,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10755,
+                  "content": "## 仓库地址\nhttps://github.com/JustArchiNET/ASF-WebConfigGenerator\n\n",
+                  "endOffset": 119,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 2,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 仓库地址",
+                  "startOffset": 55,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 31,
+              "candidateCount": 31,
+              "evidenceGroups": [
+                {
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "evidence": [
+                    {
+                      "score": 0.018377321603128056,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10758,
+                      "content": "## 技术栈\nJavaScript,Vue\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 5,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                      "startOffset": 213,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10757,
+                      "content": "## 适合新手的原因\n以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                      "endOffset": 213,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 4,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                      "startOffset": 164,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01616161616161616,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10760,
+                      "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                      "endOffset": 365,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 7,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                      "startOffset": 256,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:36",
+                  "bestScore": 0.018377321603128056,
+                  "sourceRef": "beginner:36",
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pocket-stack/pocketjs",
+                  "evidence": [
+                    {
+                      "score": 0.01820406165891852,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10771,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 252,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 5,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                      "startOffset": 229,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.017410714285714286,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10773,
+                      "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                      "endOffset": 425,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 7,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 主题",
+                      "startOffset": 272,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10767,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 41,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 1,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 知识分类",
+                      "startOffset": 25,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:12",
+                  "bestScore": 0.01820406165891852,
+                  "sourceRef": "beginner:12",
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Home Assistant 前端",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16082,
+                      "content": "### 经典环境\n\n完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                      "endOffset": 681,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 3,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                      "startOffset": 587,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16079,
+                      "content": "# Home Assistant 前端\n\n这是官方 [Home Assistant](https://home-assistant.io) 前端的仓库。\n\n[![前端截图](https://raw.githubusercontent.com/home-assistant/frontend/master/docs/screenshot.png)](https://demo.home-assistant.io/)\n\n- [查看 Home Assistant 演示](https://demo.home-assistant.io/)\n- [更多关于 Home Assistant 的信息](https://home-assistant.io)\n- [前端开发说明](https://developers.home-assistant.io/docs/frontend/development/)\n\n",
+                      "endOffset": 398,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 0,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端",
+                      "startOffset": 0,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "Home Assistant 前端",
+                      "chunkId": 16080,
+                      "content": "## 开发\n\n- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                      "endOffset": 578,
+                      "sourceRef": "home-assistant/frontend",
+                      "versionId": 476,
+                      "chunkIndex": 1,
+                      "documentId": 257,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Home Assistant 前端 > 开发",
+                      "startOffset": 398,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:home-assistant/frontend",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "home-assistant/frontend",
+                  "documentId": 257,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "query": "Vue 项目功能 用途 实践示例 安装部署 环境依赖 限制 请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+              "projects": [
+                {
+                  "name": "home-assistant/frontend",
+                  "type": "EXTERNAL_PROJECT",
+                  "sourceRef": "home-assistant/frontend"
+                },
+                {
+                  "name": "JustArchiNET/ASF-WebConfigGenerator",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:36"
+                },
+                {
+                  "name": "pocket-stack/pocketjs",
+                  "type": "BEGINNER_PROJECT",
+                  "sourceRef": "beginner:12"
+                }
+              ],
+              "sourceTypes": [
+                "GITHUB",
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "buildPrompt",
+          "detail": {
+            "evidence": [
+              {
+                "spans": [
+                  {
+                    "text": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                    "spanId": "E1.S1",
+                    "endInChunk": 94,
+                    "startInChunk": 10
+                  }
+                ],
+                "title": "Home Assistant 前端",
+                "chunkId": 16082,
+                "endOffset": 681,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "evidenceId": "E1",
+                "sectionPath": "Home Assistant 前端 > 前端开发 > 经典环境",
+                "startOffset": 597,
+                "contentStartInChunk": 10
+              },
+              {
+                "spans": [
+                  {
+                    "text": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                    "spanId": "E2.S1",
+                    "endInChunk": 153,
+                    "startInChunk": 6
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10773,
+                "endOffset": 425,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E2",
+                "sectionPath": "pocket-stack/pocketjs > 主题",
+                "startOffset": 278,
+                "contentStartInChunk": 6
+              },
+              {
+                "spans": [
+                  {
+                    "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                    "spanId": "E3.S1",
+                    "endInChunk": 49,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10757,
+                "endOffset": 213,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E3",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 适合新手的原因",
+                "startOffset": 175,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                    "spanId": "E4.S1",
+                    "endInChunk": 180,
+                    "startInChunk": 7
+                  }
+                ],
+                "title": "Home Assistant 前端",
+                "chunkId": 16080,
+                "endOffset": 578,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "evidenceId": "E4",
+                "sectionPath": "Home Assistant 前端 > 开发",
+                "startOffset": 405,
+                "contentStartInChunk": 7
+              },
+              {
+                "spans": [
+                  {
+                    "text": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                    "spanId": "E5.S1",
+                    "endInChunk": 44,
+                    "startInChunk": 11
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10770,
+                "endOffset": 229,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E5",
+                "sectionPath": "pocket-stack/pocketjs > 适合新手的原因",
+                "startOffset": 196,
+                "contentStartInChunk": 11
+              },
+              {
+                "spans": [
+                  {
+                    "text": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                    "spanId": "E6.S1",
+                    "endInChunk": 109,
+                    "startInChunk": 6
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10760,
+                "endOffset": 365,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E6",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                "startOffset": 262,
+                "contentStartInChunk": 6
+              },
+              {
+                "spans": [
+                  {
+                    "text": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                    "spanId": "E7.S1",
+                    "endInChunk": 295,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "Home Assistant 前端",
+                "chunkId": 16083,
+                "endOffset": 976,
+                "sourceRef": "home-assistant/frontend",
+                "versionId": 476,
+                "documentId": 257,
+                "evidenceId": "E7",
+                "sectionPath": "Home Assistant 前端 > 许可证",
+                "startOffset": 689,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                    "spanId": "E8.S1",
+                    "endInChunk": 94,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "pocket-stack/pocketjs",
+                "chunkId": 10769,
+                "endOffset": 185,
+                "sourceRef": "beginner:12",
+                "versionId": 281,
+                "documentId": 62,
+                "evidenceId": "E8",
+                "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                "startOffset": 99,
+                "contentStartInChunk": 8
+              },
+              {
+                "spans": [
+                  {
+                    "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                    "spanId": "E9.S1",
+                    "endInChunk": 45,
+                    "startInChunk": 8
+                  }
+                ],
+                "title": "JustArchiNET/ASF-WebConfigGenerator",
+                "chunkId": 10756,
+                "endOffset": 164,
+                "sourceRef": "beginner:36",
+                "versionId": 280,
+                "documentId": 61,
+                "evidenceId": "E9",
+                "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 中文简介",
+                "startOffset": 127,
+                "contentStartInChunk": 8
+              }
+            ],
+            "question": "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。\n当前需求（只用于选择解释重点，不作为项目事实）：{\"goal\":\"学习\",\"experience\":\"一年编程基础\",\"topic\":[\"Vue\"]}",
+            "promptVersion": "customer-v4.14-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "validateEvidence",
+          "detail": {
+            "accepted": 9,
+            "rejected": []
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "verifyFacts",
+          "detail": {
+            "claims": [
+              {
+                "text": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "quote": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。\n\n",
+                "sourceRef": "beginner:36",
+                "sourceTitle": "JustArchiNET/ASF-WebConfigGenerator"
+              },
+              {
+                "text": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "quote": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。\n\n",
+                "sourceRef": "beginner:36",
+                "sourceTitle": "JustArchiNET/ASF-WebConfigGenerator"
+              },
+              {
+                "text": "项目主题包含vue、vuejs、webpack、nodejs等。",
+                "quote": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                "sourceRef": "beginner:36",
+                "sourceTitle": "JustArchiNET/ASF-WebConfigGenerator"
+              },
+              {
+                "text": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。",
+                "quote": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                "sourceRef": "beginner:12",
+                "sourceTitle": "pocket-stack/pocketjs"
+              },
+              {
+                "text": "清晰的模块划分和文档能让新手了解嵌入式UI原理和性能优化。",
+                "quote": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。\n\n",
+                "sourceRef": "beginner:12",
+                "sourceTitle": "pocket-stack/pocketjs"
+              },
+              {
+                "text": "项目主题包含vue、vue-vapor、solidjs、rust、webassembly等。",
+                "quote": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                "sourceRef": "beginner:12",
+                "sourceTitle": "pocket-stack/pocketjs"
+              },
+              {
+                "text": "完整指南可在官方链接找到，其中简要介绍了项目的构建过程。",
+                "quote": "完整指南可在以下[链接](https://www.home-assistant.io/developers/frontend/)找到。其中简要介绍了项目的构建过程。\n\n",
+                "sourceRef": "home-assistant/frontend",
+                "sourceTitle": "Home Assistant 前端"
+              },
+              {
+                "text": "初始设置：script/setup；开发见官方说明；生产构建：script/build_frontend；画廊：cd gallery && script/develop_gallery。",
+                "quote": "- 初始设置：`script/setup`\n- 开发：[说明](https://developers.home-assistant.io/docs/frontend/development/)\n- 生产构建：`script/build_frontend`\n- 画廊：`cd gallery && script/develop_gallery`\n\n",
+                "sourceRef": "home-assistant/frontend",
+                "sourceTitle": "Home Assistant 前端"
+              },
+              {
+                "text": "Home Assistant是开源软件，采用Apache 2许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。",
+                "quote": "Home Assistant 是开源软件，采用 Apache 2 许可证。欢迎浏览仓库、学习并在自己的项目中复用部分代码。\n\n我们使用 [BrowserStack](https://www.browserstack.com) 在各种设备上测试 Home Assistant。\n\n[![Home Assistant - 来自 Open Home Foundation 的项目](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)",
+                "sourceRef": "home-assistant/frontend",
+                "sourceTitle": "Home Assistant 前端"
+              }
+            ],
+            "verdict": {
+              "supportedIds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            },
+            "supported": 9
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "practiceAdvice",
+          "detail": {
+            "kind": "SUGGESTION",
+            "promptVersion": "customer-v4.14-purpose-review"
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

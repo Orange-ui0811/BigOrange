@@ -33,9 +33,10 @@ class RagBRedisStackIntegrationTest {
     @Test
     void indexesAndSearchesThroughRealRedisStackHnswAndTextIndex() {
         String host = System.getenv().getOrDefault("RAG_B_REDIS_TEST_HOST", "localhost");
-        try (JedisPooled jedis = new JedisPooled(host, 6380)) {
+        int port = Integer.parseInt(System.getenv().getOrDefault("RAG_B_REDIS_TEST_PORT", "6380"));
+        try (JedisPooled jedis = new JedisPooled(host, port)) {
             try { Assumptions.assumeTrue("PONG".equals(jedis.ping())); }
-            catch (RuntimeException unavailable) { Assumptions.abort("Redis Stack is not running on localhost:6380"); }
+            catch (RuntimeException unavailable) { Assumptions.abort("Redis Stack test endpoint is unavailable"); }
 
             String suffix = UUID.randomUUID().toString().replace("-", "");
             String generationKey = "it-" + suffix;

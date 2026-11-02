@@ -1,0 +1,61 @@
+{
+  "version": "customer-v4.17-adaptive-orchestration",
+  "backend": {
+    "tests": 505,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 8
+  },
+  "backendVerify": "PASSED",
+  "newCases": [
+    "pre-filter window overflow",
+    "unknown vs strict",
+    "counterfactual-only fallback",
+    "duration recheck",
+    "topic/model/source invalidation",
+    "negative and omitted decisions",
+    "partial failure recovery",
+    "query-plan reuse",
+    "bounded cache and expiry",
+    "owned interrupted task",
+    "cross-session isolation",
+    "cross-batch ranking",
+    "repeated run call reuse",
+    "new candidate outage"
+  ],
+  "controlledComparisons": {
+    "eligibleCandidateBeyondOldWindow": {
+      "old": 0,
+      "new": 1,
+      "scope": "13 synthetic projects: first 12 violate language, last matches"
+    },
+    "secondIdenticalRecommendation": {
+      "previousPlanAndReviewCalls": 2,
+      "updatedPlanAndReviewCalls": 0,
+      "scope": "mocked provider, real Java orchestration; evidence refreshed, not a live latency/cost claim"
+    }
+  },
+  "externalModelCalls": 0,
+  "runtimeSmoke": {
+    "passed": true,
+    "version": "customer-v4.17-adaptive-orchestration",
+    "turns": 3,
+    "modelCalls": 0,
+    "sessionDeleted": true
+  },
+  "frontend": {
+    "orange-web": {
+      "passed": 155,
+      "lint": "PASSED",
+      "typecheck": "PASSED",
+      "build": "PASSED"
+    },
+    "orange-admin": {
+      "passed": 3,
+      "lint": "PASSED",
+      "typecheck": "PASSED",
+      "build": "PASSED"
+    }
+  },
+  "browserMockTests": 6
+}

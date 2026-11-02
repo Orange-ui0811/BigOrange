@@ -1,0 +1,138 @@
+{
+  "phase": "before",
+  "case": "ai_application",
+  "message": "请直接推荐项目。方向是AI应用开发；目标是求职；我有Vue前端和Linux部署经验；语言不限；完成周期半年内。可以先展示真实的待核实探索项目，说明功能、推荐理由和学习路径。",
+  "runId": "a9f3450d-11ea-4be1-9826-48a01fc3711a",
+  "status": "SUCCEEDED",
+  "durationMs": 8218,
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "goal": "求职",
+      "provenance": {
+        "goal": {
+          "source": "MESSAGE",
+          "quote": "目标是求职"
+        },
+        "topic": {
+          "source": "MESSAGE",
+          "quote": "方向是AI应用开发"
+        },
+        "experience": {
+          "source": "MESSAGE",
+          "quote": "我有Vue前端和Linux部署经验"
+        },
+        "maxDurationDays": {
+          "source": "MESSAGE",
+          "quote": "完成周期半年内"
+        },
+        "verificationMode": {
+          "source": "MESSAGE",
+          "quote": "可以先展示真实的待核实探索项目"
+        }
+      },
+      "topic": [
+        "AI应用开发"
+      ],
+      "experience": "Vue前端和Linux部署经验",
+      "clearedFields": [
+        "language"
+      ],
+      "durationSemantics": {
+        "quantity": 6,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 180,
+      "verificationMode": "EXPLORE",
+      "lastChangeSummary": "已记录基础（排序偏好）：Vue前端和Linux部署经验；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：AI应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+      "lastCandidates": []
+    },
+    "projects": [],
+    "references": [],
+    "profileLoaded": false,
+    "diagnostics": {
+      "calculatedAt": "2026-10-04T02:36:40.501708423Z",
+      "conditions": {
+        "maxDurationDays": 180,
+        "topic": [
+          "AI应用开发"
+        ]
+      },
+      "current": {
+        "total": 0,
+        "confirmed": 0,
+        "uncertain": 0
+      },
+      "available": {
+        "total": 494,
+        "confirmed": 494,
+        "uncertain": 0
+      },
+      "alternatives": [
+        {
+          "total": 494,
+          "confirmed": 55,
+          "uncertain": 439,
+          "changes": {
+            "topic": null
+          },
+          "label": "项目主题不限"
+        }
+      ],
+      "countUnit": "DISTINCT_REPOSITORY"
+    },
+    "status": "NO_MATCH",
+    "answer": "已记录基础（排序偏好）：Vue前端和Linux部署经验；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：AI应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 0 个资料待核实候选（仓库去重，引用仍需核对）。\n保持其余条件不变，可以考虑：\n- 项目主题不限：可推荐候选共 55 个，另有 439 个待核实。\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。",
+    "conditionChangeSummary": "已记录基础（排序偏好）：Vue前端和Linux部署经验；已记录项目目标：求职；当前本来就没有“编程语言”限制，已保持不限；已记录最长周期：180天；已记录项目主题：AI应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "costUsd": "UNKNOWN",
+    "modelCalls": [
+      {
+        "usage": {
+          "prompt_tokens": 5223,
+          "completion_tokens": 1241,
+          "total_tokens": 6464,
+          "prompt_tokens_details": {
+            "cached_tokens": 4992
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 869
+          },
+          "prompt_cache_hit_tokens": 4992,
+          "prompt_cache_miss_tokens": 231
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 5768,
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "tool_calls",
+        "outputBudget": 4096,
+        "thinking": true
+      }
+    ],
+    "promptVersion": "customer-v4.11-grounded-recommendations",
+    "embeddingUsage": "NOT_REPORTED",
+    "protocol": "NATIVE_ACTION_V1",
+    "tokenUsage": {
+      "reasoningTokens": 869,
+      "complete": true,
+      "cacheHitTokens": 4992,
+      "inputTokens": 5223,
+      "cacheMissTokens": 231,
+      "totalTokens": 6464,
+      "outputTokens": 1241,
+      "callsWithoutUsage": 0,
+      "calls": 1,
+      "models": [
+        "deepseek-flash"
+      ]
+    }
+  }
+}

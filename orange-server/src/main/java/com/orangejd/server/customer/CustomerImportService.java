@@ -35,6 +35,19 @@ public class CustomerImportService {
                 || !Objects.equals(document.getActiveVersionId(),CustomerStore.positiveId(ref.get("versionId")))) deny("证据已更新或删除，请重新推荐");
         }
         Map<String,Object> state=json.read(store.session(CustomerStore.number(run,"session_id"),owner).get("state_json"));
+        if(CustomerWorkflow.enabled(state)) {
+            var task=CustomerWorkflow.task(state);
+            if(!Objects.equals(selected.get("taskId"),task.get("id")) || !(selected.get("requirementVersion") instanceof Number revision) || revision.longValue()!=CustomerWorkflow.number(task,"requirementVersion"))deny("需求或任务已变化，请重新核对项目");
+            if(Boolean.TRUE.equals(task.get("matchesStale"))||Boolean.TRUE.equals(CustomerWorkflow.workflow(state).get("migrationPending"))||"CANCELLED".equals(task.get("status")))deny("当前任务尚未完成有效核对");
+            if(CustomerWorkflow.rows(selected.get("requirementMatches")).stream().anyMatch(m->"HARD".equals(m.get("strength"))&&!"SATISFIED".equals(m.get("verdict"))))deny("必要要求尚未全部核实");
+            if(!CustomerRecommendationPolicy.requiredSatisfied(cast(selected),state))deny("具体用途或必要条件尚未取得本轮完整依据，请重新核对项目");
+            for(var match:CustomerWorkflow.rows(selected.get("requirementMatches")))for(var ref:CustomerWorkflow.rows(match.get("evidenceRefs"))) {
+                if("STRUCTURED".equals(ref.get("kind")))continue;
+                if(ref.get("documentId")==null||ref.get("versionId")==null)deny("用途证据版本缺失");
+                var document=indexes.selectDocument(CustomerStore.positiveId(ref.get("documentId")));
+                if(document==null||document.getDeletedAt()!=null||!"READY".equals(document.getStatus())||!Objects.equals(document.getActiveVersionId(),CustomerStore.positiveId(ref.get("versionId"))))deny("用途核验资料已变化，请重新推荐");
+            }
+        }
         if(state.get("pendingConditions") instanceof List<?> pending && !pending.isEmpty()) deny("还有待确认条件，请先继续对话确认");
         Map<String,Object> fresh;
         try { fresh=projects.detail(type,projectId,state); }
@@ -51,5 +64,6 @@ public class CustomerImportService {
             +"\n请基于上述真实仓库设计个人项目方案，缺失信息明确标记为待确认。";
         return Map.of("runId",runId,"project",fresh,"draft",draft);
     }
+    @SuppressWarnings("unchecked") private static Map<String,Object> cast(Map<?,?> value){return (Map<String,Object>)value;}
     private void deny(String message) { throw new ResponseStatusException(HttpStatus.CONFLICT,message); }
 }

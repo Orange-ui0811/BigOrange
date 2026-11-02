@@ -1,0 +1,1231 @@
+{
+  "case" : "rag_career",
+  "round" : 1,
+  "variant" : "B",
+  "profile" : {
+    "topics" : [ "RAG", "知识库" ],
+    "purpose" : "求职",
+    "experience" : "有一年基础",
+    "languages" : [ "Java" ],
+    "timeCommitment" : "半年内",
+    "customTopics" : null,
+    "customPurpose" : "希望做一个能写进简历的知识库问答项目",
+    "customExp" : null,
+    "customLang" : null,
+    "customTime" : null,
+    "useRag" : true,
+    "usePersona" : false,
+    "preferBeginnerProjects" : false,
+    "preferCareerProjects" : true
+  },
+  "generation" : "local-m3-1791424349362",
+  "startedAt" : "2026-10-09T05:22:38.124880151Z",
+  "response" : {
+    "runtime" : {
+      "model" : "DeepSeek-V4-Pro",
+      "version" : "1-1785206616703",
+      "endpoint" : "https://ai.gitee.com/v1",
+      "source" : "REDIS"
+    },
+    "variant" : "B",
+    "retrieval" : {
+      "text" : "[candidateId=E1;evidenceId=E1;repo=pathwaycom/llm-app] facts=证据:本仓库提供的应用模板可扩展至 数百万页文档 。; 问答 RAG 应用 基础端到端 RAG 应用。; 一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。\n\n[candidateId=E2;evidenceId=E2;repo=quivrhq/quivr] facts=证据:基础 RAG; 创建如上所示的基础 RAG 工作流很简单，步骤如下：; 自定义 RAG ：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n\n[candidateId=E3;evidenceId=E3;repo=hkuds/deeptutor;mode=RAW_FALLBACK] facts=Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected p…",
+      "trace" : {
+        "strategyVersion" : "b-trend-adapter-v1-equal-budget",
+        "status" : "USED",
+        "queries" : [ "RAG 知识库 Java", "RAG 知识库 Java  求职 希望做一个能写进简历的知识库问答项目 有一年基础" ],
+        "routes" : [ {
+          "excludedReasons" : { },
+          "generation" : "local-m3-1791424349362",
+          "hits" : [ {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24697,
+            "chunkIndex" : 7,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset" : 1932,
+            "endOffset" : 3145,
+            "content" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+            "score" : 0.018760611205432938,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=2,lexicalRank=16,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 243,
+            "versionId" : 1027,
+            "chunkId" : 24651,
+            "chunkIndex" : 2,
+            "title" : "Pathway 实时数据框架 AI 流水线",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "pathwaycom/llm-app",
+            "sectionPath" : "Pathway 实时数据框架 AI 流水线 > 应用模板",
+            "startOffset" : 1109,
+            "endOffset" : 2789,
+            "content" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+            "score" : 0.01847041847041847,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=3,lexicalRank=17,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 565,
+            "versionId" : 1349,
+            "chunkId" : 26912,
+            "chunkIndex" : 0,
+            "title" : "rag-verification-fixture.md",
+            "sourceType" : "MANUAL",
+            "sourceRef" : "legacy-document:1001",
+            "sectionPath" : "RAG 验证固定知识",
+            "startOffset" : 0,
+            "endOffset" : 263,
+            "content" : "# RAG 验证固定知识\n\n项目标题：Java 入门任务看板\n项目 ID：RAG-DEMO-JAVA-001\n项目目录：初级项目\n难度：初级\n预计周期：两周\n技术栈：Java、Spring Boot、MySQL\n适合人群：Java 初学者\n项目描述：实现任务创建、查询、状态更新和简单统计，练习 Spring Boot 分层、REST 接口、MySQL 持久化和基础测试。\n验收要求：能够完成用户登录、任务 CRUD、任务状态流转和一个统计接口。\n关键词：Java 初学者、两周、Spring Boot、任务管理、初级项目。\n",
+            "score" : 0.0181478285878631,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=1,lexicalRank=54,nameRank=12,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24691,
+            "chunkIndex" : 1,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset" : 552,
+            "endOffset" : 1155,
+            "content" : "## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+            "score" : 0.017950581395348837,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=4,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 171,
+            "versionId" : 955,
+            "chunkId" : 22864,
+            "chunkIndex" : 37,
+            "title" : "HKUDS/DeepTutor",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "HKUDS/DeepTutor",
+            "sectionPath" : "DeepTutor: Lifelong Personalized Tutoring > 📖 Explore DeepTutor",
+            "startOffset" : 55735,
+            "endOffset" : 57699,
+            "content" : "Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected passages enter a reviewable learning-capture inbox. Progress, bookmarks, quiz attempts, captures, and Page Chat stay private per reader even when an admin book is shared read-only or for collaborative editing; shared deletion stays admin-only. Any book exports to Markdown, long compiles pause and resume, and `deeptutor book health` / `refresh-fingerprints` flag source drift.\n\n</details>\n\n<details>\n<summary><b>📚 Knowledge Center — Multi-Engine RAG Libraries</b></summary>\n\n<div align=\"center\">\n<img src=\"assets/figs/web-1.4.6+/knowledge/00-overview.png\" alt=\"DeepTutor Knowledge Center\" width=\"900\">\n</div>\n\nKnowledge bases are the document collections behind RAG — they ground Chat turns, Co-Writer edits, Book generation, and Partner conversations. What's distinctive is a **choice of retrieval engines**: **LlamaIndex** (the default, hybrid vector + BM25 with optional cross-encoder reranking and exact-flat or HNSW FAISS indexes), **PageIndex** (reasoning retrieval with page-level citations, hosted or self-hosted OSS), **GraphRAG** and **LightRAG** (knowledge-graph retrieval), **LightRAG Server** (retrieval offloaded to an external LightRAG instance you connect over HTTP), **WeKnora** (retrieval from a knowledge base in your self-hosted deployment, without a local index or document copy), **Tencent IMA** (a library you curate in IMA — searched, browsed, and written back to over its OpenAPI), **MarginNote 4** (your MN4 study data — documents, excerpts, mind-map cards and the links between them — pushed in by the app's Add-on and navigated with dedicated tools), or a linked **Obsidian** vault the tutor reads and writes in place. Each KB is bound to one engine.\n\n",
+            "score" : 0.017202797202797205,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=5,lexicalRank=50,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 231,
+            "versionId" : 1015,
+            "chunkId" : 24555,
+            "chunkIndex" : 3,
+            "title" : "infiniflow/ragflow",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "infiniflow/ragflow",
+            "sectionPath" : "💡 什么是 RAGFlow？",
+            "startOffset" : 3626,
+            "endOffset" : 3741,
+            "content" : "## 💡 什么是 RAGFlow？\n\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎",
+            "score" : 0.017003367003367003,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=6,lexicalRank=48,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 24,
+            "versionId" : 808,
+            "chunkId" : 18971,
+            "chunkIndex" : 10,
+            "title" : "foundry-rs/foundry",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:261",
+            "sectionPath" : "foundry-rs/foundry > 技术栈",
+            "startOffset" : 742,
+            "endOffset" : 755,
+            "content" : "## 技术栈\nRust\n\n",
+            "score" : 0.016925373134328358,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 105,
+            "versionId" : 889,
+            "chunkId" : 20972,
+            "chunkIndex" : 10,
+            "title" : "GreptimeTeam/greptimedb",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:194",
+            "sectionPath" : "GreptimeTeam/greptimedb > 技术栈",
+            "startOffset" : 781,
+            "endOffset" : 794,
+            "content" : "## 技术栈\nRust\n\n",
+            "score" : 0.016492753623188406,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          } ],
+          "query" : "RAG 知识库 Java",
+          "status" : "USED",
+          "answerPolicy" : "ANSWER_WITH_CITATIONS"
+        }, {
+          "excludedReasons" : {
+            "SOURCE_INACTIVE" : 5
+          },
+          "generation" : "local-m3-1791424349362",
+          "hits" : [ {
+            "documentId" : 243,
+            "versionId" : 1027,
+            "chunkId" : 24651,
+            "chunkIndex" : 2,
+            "title" : "Pathway 实时数据框架 AI 流水线",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "pathwaycom/llm-app",
+            "sectionPath" : "Pathway 实时数据框架 AI 流水线 > 应用模板",
+            "startOffset" : 1109,
+            "endOffset" : 2789,
+            "content" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+            "score" : 0.018726434855467114,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=2,lexicalRank=17,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 565,
+            "versionId" : 1349,
+            "chunkId" : 26912,
+            "chunkIndex" : 0,
+            "title" : "rag-verification-fixture.md",
+            "sourceType" : "MANUAL",
+            "sourceRef" : "legacy-document:1001",
+            "sectionPath" : "RAG 验证固定知识",
+            "startOffset" : 0,
+            "endOffset" : 263,
+            "content" : "# RAG 验证固定知识\n\n项目标题：Java 入门任务看板\n项目 ID：RAG-DEMO-JAVA-001\n项目目录：初级项目\n难度：初级\n预计周期：两周\n技术栈：Java、Spring Boot、MySQL\n适合人群：Java 初学者\n项目描述：实现任务创建、查询、状态更新和简单统计，练习 Spring Boot 分层、REST 接口、MySQL 持久化和基础测试。\n验收要求：能够完成用户登录、任务 CRUD、任务状态流转和一个统计接口。\n关键词：Java 初学者、两周、Spring Boot、任务管理、初级项目。\n",
+            "score" : 0.0181478285878631,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=1,lexicalRank=54,nameRank=12,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 488,
+            "versionId" : 1272,
+            "chunkId" : 26041,
+            "chunkIndex" : 1,
+            "title" : "AI研发工程师",
+            "sourceType" : "JOB_POSTING",
+            "sourceRef" : "job_91",
+            "sectionPath" : "职位要求",
+            "startOffset" : 301,
+            "endOffset" : 501,
+            "content" : "## 职位要求\n\n1. **有AI应用或Agent实际落地经验**：包括不限于RAG系统、多智能体编排、结合MCP、Skill等的Agent项目，有可展示的项目/实习成果者优先。\n\n2. **开源贡献或技术影响力**：在Github上有高质量AI项目、技术博客或社区影响力，参与过相关竞赛。\n\n3. **精通Java语言**，熟悉异步编程、性能调优、分布式系统设计，能编写高可靠、可观测的服务代码。\n",
+            "score" : 0.017873015873015874,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 489,
+            "versionId" : 1273,
+            "chunkId" : 26048,
+            "chunkIndex" : 6,
+            "title" : "AI应用研发工程师",
+            "sourceType" : "JOB_POSTING",
+            "sourceRef" : "job_90",
+            "sectionPath" : "职位要求 > 加分项",
+            "startOffset" : 1308,
+            "endOffset" : 1546,
+            "content" : "### 加分项\n\n- 有AI应用或Agent实际落地经验：包括不限于RAG系统、多智能体编排、结合MCP、Skill等的Agent项目，有可展示的项目/实习成果者优先\n- 开源贡献或技术影响力：在Github上有高质量AI项目、技术博客或社区影响力\n- 对AI Infra有基本理解：了解vLLM、Ollama等推理框架原理，理解延迟优化、KV cache优化、流式输出等工程全局视角\n- 在CV或NLP方向有扎实的理论基础，有实际业务场景模型训练（SFT、RL）等经验的优先",
+            "score" : 0.017625000000000002,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24691,
+            "chunkIndex" : 1,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset" : 552,
+            "endOffset" : 1155,
+            "content" : "## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+            "score" : 0.01747709654686399,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=6,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 23,
+            "versionId" : 807,
+            "chunkId" : 18942,
+            "chunkIndex" : 6,
+            "title" : "elastic/kibana",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:260",
+            "sectionPath" : "elastic/kibana > 面试讨论点",
+            "startOffset" : 453,
+            "endOffset" : 599,
+            "content" : "## 面试讨论点\n- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+            "score" : 0.016925373134328358,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24697,
+            "chunkIndex" : 7,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset" : 1932,
+            "endOffset" : 3145,
+            "content" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+            "score" : 0.016917293233082706,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=10,lexicalRank=16,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 117,
+            "versionId" : 901,
+            "chunkId" : 21332,
+            "chunkIndex" : 6,
+            "title" : "mlflow/mlflow",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:221",
+            "sectionPath" : "mlflow/mlflow > 面试讨论点",
+            "startOffset" : 285,
+            "endOffset" : 369,
+            "content" : "## 面试讨论点\n模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。\n\n",
+            "score" : 0.016705882352941175,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          } ],
+          "query" : "RAG 知识库 Java  求职 希望做一个能写进简历的知识库问答项目 有一年基础",
+          "status" : "USED",
+          "answerPolicy" : "ANSWER_WITH_CITATIONS"
+        } ],
+        "evidence" : [ {
+          "docTitle" : "Pathway 实时数据框架 AI 流水线",
+          "source" : "GITHUB",
+          "sourceRef" : "pathwaycom/llm-app",
+          "chunkIndex" : 2,
+          "docId" : 243,
+          "evidenceId" : "E1",
+          "repositoryUrl" : "https://github.com/pathwaycom/llm-app",
+          "text" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+          "card" : "[candidateId=E1;evidenceId=E1;repo=pathwaycom/llm-app] facts=证据:本仓库提供的应用模板可扩展至 数百万页文档 。; 问答 RAG 应用 基础端到端 RAG 应用。; 一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。",
+          "chunks" : [ {
+            "documentId" : 243,
+            "versionId" : 1027,
+            "chunkId" : 24651,
+            "chunkIndex" : 2,
+            "title" : "Pathway 实时数据框架 AI 流水线",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "pathwaycom/llm-app",
+            "sectionPath" : "Pathway 实时数据框架 AI 流水线 > 应用模板",
+            "startOffset" : 1109,
+            "endOffset" : 2789,
+            "content" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+            "score" : 0.01847041847041847,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=3,lexicalRank=17,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          } ]
+        }, {
+          "docTitle" : "Quivr - 你的第二大脑，由生成式AI赋能",
+          "source" : "GITHUB",
+          "sourceRef" : "QuivrHQ/quivr",
+          "chunkIndex" : 7,
+          "docId" : 250,
+          "evidenceId" : "E2",
+          "repositoryUrl" : "https://github.com/quivrhq/quivr",
+          "text" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```\n\n## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+          "card" : "[candidateId=E2;evidenceId=E2;repo=quivrhq/quivr] facts=证据:基础 RAG; 创建如上所示的基础 RAG 工作流很简单，步骤如下：; 自定义 RAG ：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。",
+          "chunks" : [ {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24697,
+            "chunkIndex" : 7,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset" : 1932,
+            "endOffset" : 3145,
+            "content" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+            "score" : 0.018760611205432938,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=2,lexicalRank=16,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24691,
+            "chunkIndex" : 1,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset" : 552,
+            "endOffset" : 1155,
+            "content" : "## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+            "score" : 0.017950581395348837,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=4,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          } ]
+        }, {
+          "docTitle" : "HKUDS/DeepTutor",
+          "source" : "GITHUB",
+          "sourceRef" : "HKUDS/DeepTutor",
+          "chunkIndex" : 37,
+          "docId" : 171,
+          "evidenceId" : "E3",
+          "repositoryUrl" : "https://github.com/hkuds/deeptutor",
+          "text" : "Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected passages enter a reviewable learning-capture inbox. Progress, bookmarks, quiz attempts, captures, and Page Chat stay private per reader even when an admin book is shared read-only or for collaborative editing; shared deletion stays admin-only. Any book exports to Markdown, long compiles pause and resume, and `deeptutor book health` / `refresh-fingerprints` flag source drift.\n\n</details>\n\n<details>\n<summary><b>📚 Knowledge Center — Multi-Engine RAG Libraries</b></summary>\n\n<div align=\"center\">\n<img src=\"assets/figs/web-1.4.6+/knowledge/00-overview.png\" alt=\"DeepTutor Knowledge Center\" width=\"900\">\n</div>\n\nKnowledge bases are the document collections behind RAG — they ground Chat turns, Co-Writer edits, Book generation, and Partner conversations. What's distinctive is a **choice of retrieval engines**: **LlamaIndex** (the default, hybrid vector + BM25 with optional cross-encoder reranking and exact-flat or HNSW FAISS indexes), **PageIndex** (reasoning retrieval with page-level citations, hosted or self-hosted OSS), **GraphRAG** and **LightRAG** (knowledge-graph retrieval), **LightRAG Server** (retrieval offloaded to an external LightRAG instance you connect over HTTP), **WeKnora** (retrieval from a knowledge base in your self-hosted deployment, without a local index or document copy), **Tencent IMA** (a library you curate in IMA — searched, browsed, and written back to over its OpenAPI), **MarginNote 4** (your MN4 study data — documents, excerpts, mind-map cards and the links between them — pushed in by the app's Add-on and navigated with dedicated tools), or a linked **Obsidian** vault the tutor reads and writes in place. Each KB is bound to one engine.\n\n",
+          "card" : "[candidateId=E3;evidenceId=E3;repo=hkuds/deeptutor;mode=RAW_FALLBACK] facts=Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected p…",
+          "chunks" : [ {
+            "documentId" : 171,
+            "versionId" : 955,
+            "chunkId" : 22864,
+            "chunkIndex" : 37,
+            "title" : "HKUDS/DeepTutor",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "HKUDS/DeepTutor",
+            "sectionPath" : "DeepTutor: Lifelong Personalized Tutoring > 📖 Explore DeepTutor",
+            "startOffset" : 55735,
+            "endOffset" : 57699,
+            "content" : "Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected passages enter a reviewable learning-capture inbox. Progress, bookmarks, quiz attempts, captures, and Page Chat stay private per reader even when an admin book is shared read-only or for collaborative editing; shared deletion stays admin-only. Any book exports to Markdown, long compiles pause and resume, and `deeptutor book health` / `refresh-fingerprints` flag source drift.\n\n</details>\n\n<details>\n<summary><b>📚 Knowledge Center — Multi-Engine RAG Libraries</b></summary>\n\n<div align=\"center\">\n<img src=\"assets/figs/web-1.4.6+/knowledge/00-overview.png\" alt=\"DeepTutor Knowledge Center\" width=\"900\">\n</div>\n\nKnowledge bases are the document collections behind RAG — they ground Chat turns, Co-Writer edits, Book generation, and Partner conversations. What's distinctive is a **choice of retrieval engines**: **LlamaIndex** (the default, hybrid vector + BM25 with optional cross-encoder reranking and exact-flat or HNSW FAISS indexes), **PageIndex** (reasoning retrieval with page-level citations, hosted or self-hosted OSS), **GraphRAG** and **LightRAG** (knowledge-graph retrieval), **LightRAG Server** (retrieval offloaded to an external LightRAG instance you connect over HTTP), **WeKnora** (retrieval from a knowledge base in your self-hosted deployment, without a local index or document copy), **Tencent IMA** (a library you curate in IMA — searched, browsed, and written back to over its OpenAPI), **MarginNote 4** (your MN4 study data — documents, excerpts, mind-map cards and the links between them — pushed in by the app's Add-on and navigated with dedicated tools), or a linked **Obsidian** vault the tutor reads and writes in place. Each KB is bound to one engine.\n\n",
+            "score" : 0.017202797202797205,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=5,lexicalRank=50,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          } ]
+        } ],
+        "selectedCount" : 3,
+        "candidateCount" : 4,
+        "durationMs" : 649.351749,
+        "evidencePromptChars" : 698,
+        "evidenceBudgetChars" : 1100
+      }
+    },
+    "result" : {
+      "analysis" : {
+        "trend" : "RAG与知识库是AI应用落地的核心方向，但头部开源项目已十分拥挤，需从垂直场景或平台化方案切入。",
+        "prospect" : "企业私有知识库、智能客服等场景需求明确，掌握RAG流水线搭建和优化能力对求职AI应用开发岗位价值显著。",
+        "demand" : "求职市场青睐能独立完成端到端知识库问答系统并具备平台化思维、熟悉主流框架的开发者。",
+        "summary" : "RAG知识库赛道火热但竞争激烈，求职者应选择可扩展、能体现工程能力的项目。"
+      },
+      "recommendations" : [ {
+        "candidateId" : "C:218",
+        "name" : "Dify AI 应用开发平台",
+        "description" : "开源 LLM 应用开发平台，提供可视化的知识库、RAG 流水线、Agent 编排及私有化部署，快速构建企业级知识库问答应用。",
+        "difficulty" : "中等",
+        "difficultyReason" : "项目架构涉及前后端、多模型集成与工作流编排，需要一定的系统设计理解，但平台提供了完善的可视化界面，适合有 Java 基础的开发者通过代码阅读与二次开发深入掌握 RAG 全流程。",
+        "vibeCodingReason" : "Dify 的模块化与可插拔设计非常适合 AI 辅助分步实现知识库加载、向量化、检索与问答接口，并能通过自然语言描述快速生成自定义插件或流水线。",
+        "recommendReason" : "Dify 是成熟的开源平台，能成为简历中亮点的全栈 AI 项目，展现你理解复杂平台架构、多模型集成和私有化部署能力，与求职 AI 应用开发或 Agent 岗位高度匹配，半年内可深入掌握并做出可展示的改进。",
+        "prerequisites" : "Java 基础及基本 Python 语法、REST API 概念、Docker 基础操作",
+        "evidenceIds" : [ "C:218" ],
+        "score" : 90,
+        "references" : [ {
+          "evidenceIds" : [ "C:218" ],
+          "url" : "https://github.com/langgenius/dify",
+          "name" : "langgenius/dify"
+        } ],
+        "evidenceStatus" : "VERIFIED_CANDIDATE",
+        "unsupportedReferenceCount" : 0
+      }, {
+        "candidateId" : "E1",
+        "name" : "LLM App 端到端 RAG 模板",
+        "description" : "基于 Pathway 的实时问答 RAG 应用，可从文件、云盘等数据源构建问答流水线，支持扩展至数百万文档。",
+        "difficulty" : "入门",
+        "difficultyReason" : "项目结构清晰，提供开箱即用的 RAG 模板，适合拥有一年编程经验的学习者快速理解检索增强生成的核心流程，即使 Python 不熟练也可通过阅读和运行搭建基础原型。",
+        "vibeCodingReason" : "清晰的流水线定义与数据源连接器，可通过自然语言要求 AI 帮助扩展文档类型、更换向量数据库或调整提示词，实现低代码迭代。",
+        "recommendReason" : "该项目能让你在短时间内完成一个可演示的知识库问答系统，作为求职作品的基础，同时理解 RAG 的关键技术栈，为进一步学习 Dify 等平台化方案打下扎实基础。",
+        "prerequisites" : "Python 基础、LLM API 使用经验",
+        "evidenceIds" : [ "E1" ],
+        "score" : 82,
+        "references" : [ {
+          "evidenceIds" : [ "E1" ],
+          "url" : "https://github.com/pathwaycom/llm-app",
+          "name" : "pathwaycom/llm-app"
+        } ],
+        "evidenceStatus" : "VERIFIED_CANDIDATE",
+        "unsupportedReferenceCount" : 0
+      } ],
+      "learning" : {
+        "steps" : [ "第一步：通过 E1 项目快速上手 RAG 核心流程，2-3 周搭建本地可运行的知识库问答原型，理解文档加载、切分、向量化、检索与生成。", "第二步：转向 C:218 Dify 平台，部署并阅读其知识库与 RAG 模块源码，第二个月完成一个自定义知识库应用，并进行二次开发（如更换 embedding 模型、优化检索策略）。", "第三步：结合求职目标，将 Dify 改造为一个面向特定领域（如技术文档、医疗）的私有知识库解决方案，并整理成完整的简历项目描述，最后一个月进行模拟面试和优化。" ],
+        "timeline" : "预计 20-24 周",
+        "tips" : "重点理解 RAG 中的检索质量与生成事实性评估方法；面试时强调你对向量数据库选型、文档预处理和成本控制的理解；将 Java 背景转化为微服务化或接口设计优势，讨论如何将知识库服务集成到现有 Java 系统中。"
+      },
+      "raw" : "{\n  \"analysis\": {\n    \"trend\": \"RAG与知识库是AI应用落地的核心方向，但头部开源项目已十分拥挤，需从垂直场景或平台化方案切入。\",\n    \"prospect\": \"企业私有知识库、智能客服等场景需求明确，掌握RAG流水线搭建和优化能力对求职AI应用开发岗位价值显著。\",\n    \"demand\": \"求职市场青睐能独立完成端到端知识库问答系统并具备平台化思维、熟悉主流框架的开发者。\",\n    \"summary\": \"RAG知识库赛道火热但竞争激烈，求职者应选择可扩展、能体现工程能力的项目。\"\n  },\n  \"recommendations\": [\n    {\n      \"candidateId\": \"C:218\",\n      \"name\": \"Dify AI 应用开发平台\",\n      \"description\": \"开源 LLM 应用开发平台，提供可视化的知识库、RAG 流水线、Agent 编排及私有化部署，快速构建企业级知识库问答应用。\",\n      \"difficulty\": \"中等\",\n      \"difficultyReason\": \"项目架构涉及前后端、多模型集成与工作流编排，需要一定的系统设计理解，但平台提供了完善的可视化界面，适合有 Java 基础的开发者通过代码阅读与二次开发深入掌握 RAG 全流程。\",\n      \"vibeCodingReason\": \"Dify 的模块化与可插拔设计非常适合 AI 辅助分步实现知识库加载、向量化、检索与问答接口，并能通过自然语言描述快速生成自定义插件或流水线。\",\n      \"recommendReason\": \"Dify 是成熟的开源平台，能成为简历中亮点的全栈 AI 项目，展现你理解复杂平台架构、多模型集成和私有化部署能力，与求职 AI 应用开发或 Agent 岗位高度匹配，半年内可深入掌握并做出可展示的改进。\",\n      \"prerequisites\": \"Java 基础及基本 Python 语法、REST API 概念、Docker 基础操作\",\n      \"evidenceIds\": [],\n      \"score\": 90\n    },\n    {\n      \"candidateId\": \"E1\",\n      \"name\": \"LLM App 端到端 RAG 模板\",\n      \"description\": \"基于 Pathway 的实时问答 RAG 应用，可从文件、云盘等数据源构建问答流水线，支持扩展至数百万文档。\",\n      \"difficulty\": \"入门\",\n      \"difficultyReason\": \"项目结构清晰，提供开箱即用的 RAG 模板，适合拥有一年编程经验的学习者快速理解检索增强生成的核心流程，即使 Python 不熟练也可通过阅读和运行搭建基础原型。\",\n      \"vibeCodingReason\": \"清晰的流水线定义与数据源连接器，可通过自然语言要求 AI 帮助扩展文档类型、更换向量数据库或调整提示词，实现低代码迭代。\",\n      \"recommendReason\": \"该项目能让你在短时间内完成一个可演示的知识库问答系统，作为求职作品的基础，同时理解 RAG 的关键技术栈，为进一步学习 Dify 等平台化方案打下扎实基础。\",\n      \"prerequisites\": \"Python 基础、LLM API 使用经验\",\n      \"evidenceIds\": [\"E1\"],\n      \"score\": 82\n    }\n  ],\n  \"learning\": {\n    \"steps\": [\n      \"第一步：通过 E1 项目快速上手 RAG 核心流程，2-3 周搭建本地可运行的知识库问答原型，理解文档加载、切分、向量化、检索与生成。\",\n      \"第二步：转向 C:218 Dify 平台，部署并阅读其知识库与 RAG 模块源码，第二个月完成一个自定义知识库应用，并进行二次开发（如更换 embedding 模型、优化检索策略）。\",\n      \"第三步：结合求职目标，将 Dify 改造为一个面向特定领域（如技术文档、医疗）的私有知识库解决方案，并整理成完整的简历项目描述，最后一个月进行模拟面试和优化。\"\n    ],\n    \"timeline\": \"预计 20-24 周\",\n    \"tips\": \"重点理解 RAG 中的检索质量与生成事实性评估方法；面试时强调你对向量数据库选型、文档预处理和成本控制的理解；将 Java 背景转化为微服务化或接口设计优势，讨论如何将知识库服务集成到现有 Java 系统中。\"\n  }\n}",
+      "balance" : 0,
+      "beginnerCases" : [ ],
+      "careerCases" : [ {
+        "id" : 218,
+        "fullName" : "langgenius/dify",
+        "ownerName" : "langgenius",
+        "repositoryName" : "dify",
+        "htmlUrl" : "https://github.com/langgenius/dify",
+        "descriptionOriginal" : "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+        "descriptionZh" : null,
+        "primaryLanguage" : "TypeScript",
+        "techStack" : "TypeScript,React,Storybook",
+        "licenseSpdx" : "NOASSERTION",
+        "stars" : 151254,
+        "hasQuickStart" : true,
+        "requiresDocker" : true,
+        "requiresDatabase" : true,
+        "requiresSecrets" : true,
+        "requiresExternalService" : true,
+        "codebaseSize" : "LARGE",
+        "overallScore" : 91,
+        "bestRoleCode" : "AI_APPLICATION_AGENT",
+        "bestRoleName" : "AI 应用与 Agent",
+        "difficulty" : "ADVANCED",
+        "summaryZh" : "Dify 是一个用 TypeScript/React 构建的可协作 AI 应用开发平台，支持 Agentic 工作流、RAG 管道，可在云/VPC/私有化部署，帮助团队从原型快速走到生产。",
+        "careerValue" : "为 AI 应用与 Agent、AI 全栈后端等方向提供了丰富的作品素材，能展现候选人理解复杂平台架构、前后端协作、多模型集成和私有化部署的能力。",
+        "proofPoints" : "- 熟悉大型全栈项目中前后端解耦与 API 设计\n- 掌握基于工作流的 Agent、RAG 等核心 AI 应用模式\n- 具备私有化部署和云原生交付经验\n- 能参与高效协作的工程文化（tests, CI, release automation）",
+        "interviewTopics" : "- 自建 Dify 插件或 workflow 节点的思路\n- 在团队里如何管理 prompt 和多模型切换\n- 私有化部署时如何保证数据安全与性能\n- 大型开源项目的贡献流程和 Code Review 实践",
+        "modificationPlan" : "为 Dify 开发一个面向国内市场的知识库连接器（如飞书文档、语雀），实现一套符合国情的审批流模板；将前端 Storybook 文档汉化并补充可视化编排案例；以此展示你对开源产品和本地化需求的深度贡献。",
+        "mainRisks" : "项目非常庞大（900+ open issues），参与门槛高；技术栈广（TypeScript/React/Storybook），上手需要时间；架构文档缺失，需要自行阅读代码。",
+        "estimatedDuration" : "30-45 天（以贡献功能模块或插件为目标）",
+        "status" : "PUBLISHED",
+        "githubUpdatedAt" : "2026-08-04T03:15:41",
+        "lastVerifiedAt" : "2026-08-04T11:16:56",
+        "roleScores" : [ {
+          "roleCode" : "AI_APPLICATION_AGENT",
+          "roleName" : "AI 应用与 Agent",
+          "roleRelevance" : 20,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 17,
+          "totalScore" : 91,
+          "jobSampleCount" : 18,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_INFRA_QUALITY",
+          "roleName" : "AI 基础设施与质量",
+          "roleRelevance" : 20,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 17,
+          "totalScore" : 91,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_FULLSTACK_BACKEND",
+          "roleName" : "AI 全栈与后端工程",
+          "roleRelevance" : 19,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 17,
+          "totalScore" : 90,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_PRODUCT_OPERATIONS",
+          "roleName" : "AI 产品与运营",
+          "roleRelevance" : 19,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 17,
+          "totalScore" : 90,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "AI_CREATIVE_INTERACTION",
+          "roleName" : "AI 创意与交互",
+          "roleRelevance" : 16,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 17,
+          "totalScore" : 87,
+          "jobSampleCount" : 1,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+        }, {
+          "roleCode" : "LLM_ALGORITHM_RESEARCH",
+          "roleName" : "大模型算法与研究",
+          "roleRelevance" : 14,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 16,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 17,
+          "totalScore" : 85,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=false, size=LARGE, openIssues=924\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,React,Storybook, database=true, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=NOASSERTION\"}"
+        } ],
+        "matchExplanation" : "可重点证明“AI 应用与 Agent”相关能力；与你关注的“RAG”方向相符；适合围绕作品证明和面试讨论点组织项目经历；可以按照“半年内”安排差异化改造，参考周期为30-45 天（以贡献功能模块或插件为目标）。"
+      }, {
+        "id" : 215,
+        "fullName" : "headroomlabs-ai/headroom",
+        "ownerName" : "headroomlabs-ai",
+        "repositoryName" : "headroom",
+        "htmlUrl" : "https://github.com/headroomlabs-ai/headroom",
+        "descriptionOriginal" : "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.",
+        "descriptionZh" : null,
+        "primaryLanguage" : "Python",
+        "techStack" : "Python",
+        "licenseSpdx" : "Apache-2.0",
+        "stars" : 64410,
+        "hasQuickStart" : true,
+        "requiresDocker" : true,
+        "requiresDatabase" : false,
+        "requiresSecrets" : true,
+        "requiresExternalService" : false,
+        "codebaseSize" : "LARGE",
+        "overallScore" : 87,
+        "bestRoleCode" : "AI_APPLICATION_AGENT",
+        "bestRoleName" : "AI 应用与 Agent",
+        "difficulty" : "ADVANCED",
+        "summaryZh" : "headroom：压缩AI工具输出、日志、文件与RAG分块，为编码Agent节省20% token，为JSON节省60-95% token，不改变答案质量。以库、代理和MCP服务器形式提供。",
+        "careerValue" : "展现你在大模型上下文优化、Token成本控制和AI基础设施中的Python工程能力，面试时可深入讨论Token压缩算法与工程折衷。",
+        "proofPoints" : "- 测试覆盖：项目包含测试（tests=true）\n- CI/CD：集成持续集成（ci=true）\n- 发布自动化：具备release automation\n- 大型项目：LARGE规模，有620个开放issue\n- 易用性：提供快速入门指南和部署指南（quickStart=true, deployment=true）\n- 授权：Apache-2.0许可证",
+        "interviewTopics" : "- 如何安全地压缩LLM上下文而不丢失信息\n- 在编码Agent中实现20% token节省的技术细节\n- MCP服务器的设计与集成经验\n- 管理大型开源社区（620个open issues）的工作方式",
+        "modificationPlan" : "为其增加对不同语言（如中文）JSON的针对性压缩策略，或实现一个可视化的Token压缩效果对比工具；也可以贡献中文文档和示例。",
+        "mainRisks" : "项目为ADVANCED级，需要较强的Python和LLM底层知识；Token压缩可能涉及模型行为微调。",
+        "estimatedDuration" : "3-5周（研究+实现扩展功能）",
+        "status" : "PUBLISHED",
+        "githubUpdatedAt" : "2026-08-04T03:14:31",
+        "lastVerifiedAt" : "2026-08-04T11:16:44",
+        "roleScores" : [ {
+          "roleCode" : "AI_APPLICATION_AGENT",
+          "roleName" : "AI 应用与 Agent",
+          "roleRelevance" : 20,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 88,
+          "jobSampleCount" : 18,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_FULLSTACK_BACKEND",
+          "roleName" : "AI 全栈与后端工程",
+          "roleRelevance" : 19,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 87,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "LLM_ALGORITHM_RESEARCH",
+          "roleName" : "大模型算法与研究",
+          "roleRelevance" : 17,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 85,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_PRODUCT_OPERATIONS",
+          "roleName" : "AI 产品与运营",
+          "roleRelevance" : 13,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 81,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_INFRA_QUALITY",
+          "roleName" : "AI 基础设施与质量",
+          "roleRelevance" : 11,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 79,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        }, {
+          "roleCode" : "AI_CREATIVE_INTERACTION",
+          "roleName" : "AI 创意与交互",
+          "roleRelevance" : 10,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 10,
+          "portfolioCompleteness" : 18,
+          "interviewValue" : 20,
+          "totalScore" : 78,
+          "jobSampleCount" : 1,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=620\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=Python, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=true, license=Apache-2.0\"}"
+        } ],
+        "matchExplanation" : "可重点证明“AI 应用与 Agent”相关能力；与你关注的“RAG”方向相符；适合围绕作品证明和面试讨论点组织项目经历；可以按照“半年内”安排差异化改造，参考周期为3-5周（研究+实现扩展功能）。"
+      }, {
+        "id" : 224,
+        "fullName" : "promptfoo/promptfoo",
+        "ownerName" : "promptfoo",
+        "repositoryName" : "promptfoo",
+        "htmlUrl" : "https://github.com/promptfoo/promptfoo",
+        "descriptionOriginal" : "Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI. Compare performance of GPT, Claude, Gemini, DeepSeek, and more. Simple declarative configs with command line and CI/CD integration.  Used by OpenAI and Anthropic.",
+        "descriptionZh" : null,
+        "primaryLanguage" : "TypeScript",
+        "techStack" : "TypeScript,Playwright",
+        "licenseSpdx" : "MIT",
+        "stars" : 23889,
+        "hasQuickStart" : true,
+        "requiresDocker" : true,
+        "requiresDatabase" : false,
+        "requiresSecrets" : true,
+        "requiresExternalService" : true,
+        "codebaseSize" : "LARGE",
+        "overallScore" : 87,
+        "bestRoleCode" : "AI_APPLICATION_AGENT",
+        "bestRoleName" : "AI 应用与 Agent",
+        "difficulty" : "ADVANCED",
+        "summaryZh" : "promptfoo：用于测试提示词、Agent与RAG的红队/渗透/漏洞扫描工具。支持GPT、Claude、Gemini、DeepSeek等模型性能对比，提供简单声明式配置，集成命令行与CI/CD。OpenAI与Anthropic也在使用。",
+        "careerValue" : "证明你具备AI应用质量保障、安全测试和CI/CD集成的实际能力，在面试中可以展示如何在大型项目中构建可扩展的测试体系。",
+        "proofPoints" : "- 自动化测试：项目包含测试（tests=true）\n- CI/CD集成：有持续集成（ci=true）\n- 发布自动化：具备release automation（releaseAutomation=true）\n- 大型项目：仓库规模为LARGE，开源议题475个\n- 行业认可：被OpenAI和Anthropic使用",
+        "interviewTopics" : "- 如何设计LLM输出的安全测试和红队攻击\n- 在CI/CD流水线中集成AI测试的经验\n- 对比多个大模型性能与成本的工程方法\n- 处理475个开放issue的项目管理与协作",
+        "modificationPlan" : "可以为此项目贡献中文文档或增加针对中文大模型（如GLM、文心一言）的测试模板；或为其开发可视化测试报告仪表板，增强可观察性。",
+        "mainRisks" : "项目高级（ADVANCED），TypeScript与Playwright栈可能对部分求职者较新；贡献需要深入理解AI测试领域。",
+        "estimatedDuration" : "4-6周（熟悉项目并实现差异化修改）",
+        "status" : "PUBLISHED",
+        "githubUpdatedAt" : "2026-08-04T02:58:11",
+        "lastVerifiedAt" : "2026-08-04T11:17:16",
+        "roleScores" : [ {
+          "roleCode" : "AI_APPLICATION_AGENT",
+          "roleName" : "AI 应用与 Agent",
+          "roleRelevance" : 20,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 14,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 20,
+          "totalScore" : 88,
+          "jobSampleCount" : 18,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 18 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+        }, {
+          "roleCode" : "AI_PRODUCT_OPERATIONS",
+          "roleName" : "AI 产品与运营",
+          "roleRelevance" : 19,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 14,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 20,
+          "totalScore" : 87,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+        }, {
+          "roleCode" : "AI_INFRA_QUALITY",
+          "roleName" : "AI 基础设施与质量",
+          "roleRelevance" : 14,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 14,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 20,
+          "totalScore" : 82,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+        }, {
+          "roleCode" : "LLM_ALGORITHM_RESEARCH",
+          "roleName" : "大模型算法与研究",
+          "roleRelevance" : 14,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 14,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 20,
+          "totalScore" : 82,
+          "jobSampleCount" : 8,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 8 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+        }, {
+          "roleCode" : "AI_FULLSTACK_BACKEND",
+          "roleName" : "AI 全栈与后端工程",
+          "roleRelevance" : 13,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 14,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 20,
+          "totalScore" : 81,
+          "jobSampleCount" : 6,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 6 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+        }, {
+          "roleCode" : "AI_CREATIVE_INTERACTION",
+          "roleName" : "AI 创意与交互",
+          "roleRelevance" : 7,
+          "provableAbility" : 20,
+          "knowledgeCoverage" : 14,
+          "portfolioCompleteness" : 14,
+          "interviewValue" : 20,
+          "totalScore" : 75,
+          "jobSampleCount" : 1,
+          "evidenceJson" : "{\"roleRelevance\": \"Matched role vocabulary and 1 approved job samples\", \"interviewValue\": \"architectureDocs=true, size=LARGE, openIssues=475\", \"provableAbility\": \"tests=true, ci=true, releaseAutomation=true\", \"knowledgeCoverage\": \"stack=TypeScript,Playwright, database=false, docker=true\", \"portfolioCompleteness\": \"quickStart=true, deployment=false, license=MIT\"}"
+        } ],
+        "matchExplanation" : "可重点证明“AI 应用与 Agent”相关能力；与你关注的“RAG”方向相符；适合围绕作品证明和面试讨论点组织项目经历；可以按照“半年内”安排差异化改造，参考周期为4-6周（熟悉项目并实现差异化修改）。"
+      } ],
+      "modelMetrics" : {
+        "model" : "deepseek-v4-pro",
+        "runtimeSource" : "REDIS",
+        "providerHost" : "ai.gitee.com",
+        "requestedModel" : "DeepSeek-V4-Pro",
+        "durationMs" : 38039.456713,
+        "finishReason" : "stop",
+        "usageSource" : "PROVIDER",
+        "usage" : {
+          "prompt_tokens" : 1170,
+          "completion_tokens" : 1822,
+          "total_tokens" : 2992,
+          "prompt_tokens_details" : {
+            "cached_tokens" : 0
+          },
+          "completion_tokens_details" : {
+            "reasoning_tokens" : 883
+          }
+        }
+      },
+      "retrievalTrace" : {
+        "strategyVersion" : "b-trend-adapter-v1-equal-budget",
+        "status" : "USED",
+        "queries" : [ "RAG 知识库 Java", "RAG 知识库 Java  求职 希望做一个能写进简历的知识库问答项目 有一年基础" ],
+        "routes" : [ {
+          "excludedReasons" : { },
+          "generation" : "local-m3-1791424349362",
+          "hits" : [ {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24697,
+            "chunkIndex" : 7,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset" : 1932,
+            "endOffset" : 3145,
+            "content" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+            "score" : 0.018760611205432938,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=2,lexicalRank=16,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 243,
+            "versionId" : 1027,
+            "chunkId" : 24651,
+            "chunkIndex" : 2,
+            "title" : "Pathway 实时数据框架 AI 流水线",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "pathwaycom/llm-app",
+            "sectionPath" : "Pathway 实时数据框架 AI 流水线 > 应用模板",
+            "startOffset" : 1109,
+            "endOffset" : 2789,
+            "content" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+            "score" : 0.01847041847041847,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=3,lexicalRank=17,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 565,
+            "versionId" : 1349,
+            "chunkId" : 26912,
+            "chunkIndex" : 0,
+            "title" : "rag-verification-fixture.md",
+            "sourceType" : "MANUAL",
+            "sourceRef" : "legacy-document:1001",
+            "sectionPath" : "RAG 验证固定知识",
+            "startOffset" : 0,
+            "endOffset" : 263,
+            "content" : "# RAG 验证固定知识\n\n项目标题：Java 入门任务看板\n项目 ID：RAG-DEMO-JAVA-001\n项目目录：初级项目\n难度：初级\n预计周期：两周\n技术栈：Java、Spring Boot、MySQL\n适合人群：Java 初学者\n项目描述：实现任务创建、查询、状态更新和简单统计，练习 Spring Boot 分层、REST 接口、MySQL 持久化和基础测试。\n验收要求：能够完成用户登录、任务 CRUD、任务状态流转和一个统计接口。\n关键词：Java 初学者、两周、Spring Boot、任务管理、初级项目。\n",
+            "score" : 0.0181478285878631,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=1,lexicalRank=54,nameRank=12,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24691,
+            "chunkIndex" : 1,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset" : 552,
+            "endOffset" : 1155,
+            "content" : "## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+            "score" : 0.017950581395348837,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=4,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 171,
+            "versionId" : 955,
+            "chunkId" : 22864,
+            "chunkIndex" : 37,
+            "title" : "HKUDS/DeepTutor",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "HKUDS/DeepTutor",
+            "sectionPath" : "DeepTutor: Lifelong Personalized Tutoring > 📖 Explore DeepTutor",
+            "startOffset" : 55735,
+            "endOffset" : 57699,
+            "content" : "Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected passages enter a reviewable learning-capture inbox. Progress, bookmarks, quiz attempts, captures, and Page Chat stay private per reader even when an admin book is shared read-only or for collaborative editing; shared deletion stays admin-only. Any book exports to Markdown, long compiles pause and resume, and `deeptutor book health` / `refresh-fingerprints` flag source drift.\n\n</details>\n\n<details>\n<summary><b>📚 Knowledge Center — Multi-Engine RAG Libraries</b></summary>\n\n<div align=\"center\">\n<img src=\"assets/figs/web-1.4.6+/knowledge/00-overview.png\" alt=\"DeepTutor Knowledge Center\" width=\"900\">\n</div>\n\nKnowledge bases are the document collections behind RAG — they ground Chat turns, Co-Writer edits, Book generation, and Partner conversations. What's distinctive is a **choice of retrieval engines**: **LlamaIndex** (the default, hybrid vector + BM25 with optional cross-encoder reranking and exact-flat or HNSW FAISS indexes), **PageIndex** (reasoning retrieval with page-level citations, hosted or self-hosted OSS), **GraphRAG** and **LightRAG** (knowledge-graph retrieval), **LightRAG Server** (retrieval offloaded to an external LightRAG instance you connect over HTTP), **WeKnora** (retrieval from a knowledge base in your self-hosted deployment, without a local index or document copy), **Tencent IMA** (a library you curate in IMA — searched, browsed, and written back to over its OpenAPI), **MarginNote 4** (your MN4 study data — documents, excerpts, mind-map cards and the links between them — pushed in by the app's Add-on and navigated with dedicated tools), or a linked **Obsidian** vault the tutor reads and writes in place. Each KB is bound to one engine.\n\n",
+            "score" : 0.017202797202797205,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=5,lexicalRank=50,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 231,
+            "versionId" : 1015,
+            "chunkId" : 24555,
+            "chunkIndex" : 3,
+            "title" : "infiniflow/ragflow",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "infiniflow/ragflow",
+            "sectionPath" : "💡 什么是 RAGFlow？",
+            "startOffset" : 3626,
+            "endOffset" : 3741,
+            "content" : "## 💡 什么是 RAGFlow？\n\n[RAGFlow](https://ragflow.io/) 是一个领先的开源检索增强生成 ([RAG](https://ragflow.io/basics/what-is-rag)) 引擎",
+            "score" : 0.017003367003367003,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=6,lexicalRank=48,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 24,
+            "versionId" : 808,
+            "chunkId" : 18971,
+            "chunkIndex" : 10,
+            "title" : "foundry-rs/foundry",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:261",
+            "sectionPath" : "foundry-rs/foundry > 技术栈",
+            "startOffset" : 742,
+            "endOffset" : 755,
+            "content" : "## 技术栈\nRust\n\n",
+            "score" : 0.016925373134328358,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 105,
+            "versionId" : 889,
+            "chunkId" : 20972,
+            "chunkIndex" : 10,
+            "title" : "GreptimeTeam/greptimedb",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:194",
+            "sectionPath" : "GreptimeTeam/greptimedb > 技术栈",
+            "startOffset" : 781,
+            "endOffset" : 794,
+            "content" : "## 技术栈\nRust\n\n",
+            "score" : 0.016492753623188406,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          } ],
+          "query" : "RAG 知识库 Java",
+          "status" : "USED",
+          "answerPolicy" : "ANSWER_WITH_CITATIONS"
+        }, {
+          "excludedReasons" : {
+            "SOURCE_INACTIVE" : 5
+          },
+          "generation" : "local-m3-1791424349362",
+          "hits" : [ {
+            "documentId" : 243,
+            "versionId" : 1027,
+            "chunkId" : 24651,
+            "chunkIndex" : 2,
+            "title" : "Pathway 实时数据框架 AI 流水线",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "pathwaycom/llm-app",
+            "sectionPath" : "Pathway 实时数据框架 AI 流水线 > 应用模板",
+            "startOffset" : 1109,
+            "endOffset" : 2789,
+            "content" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+            "score" : 0.018726434855467114,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=2,lexicalRank=17,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 565,
+            "versionId" : 1349,
+            "chunkId" : 26912,
+            "chunkIndex" : 0,
+            "title" : "rag-verification-fixture.md",
+            "sourceType" : "MANUAL",
+            "sourceRef" : "legacy-document:1001",
+            "sectionPath" : "RAG 验证固定知识",
+            "startOffset" : 0,
+            "endOffset" : 263,
+            "content" : "# RAG 验证固定知识\n\n项目标题：Java 入门任务看板\n项目 ID：RAG-DEMO-JAVA-001\n项目目录：初级项目\n难度：初级\n预计周期：两周\n技术栈：Java、Spring Boot、MySQL\n适合人群：Java 初学者\n项目描述：实现任务创建、查询、状态更新和简单统计，练习 Spring Boot 分层、REST 接口、MySQL 持久化和基础测试。\n验收要求：能够完成用户登录、任务 CRUD、任务状态流转和一个统计接口。\n关键词：Java 初学者、两周、Spring Boot、任务管理、初级项目。\n",
+            "score" : 0.0181478285878631,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=1,lexicalRank=54,nameRank=12,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 488,
+            "versionId" : 1272,
+            "chunkId" : 26041,
+            "chunkIndex" : 1,
+            "title" : "AI研发工程师",
+            "sourceType" : "JOB_POSTING",
+            "sourceRef" : "job_91",
+            "sectionPath" : "职位要求",
+            "startOffset" : 301,
+            "endOffset" : 501,
+            "content" : "## 职位要求\n\n1. **有AI应用或Agent实际落地经验**：包括不限于RAG系统、多智能体编排、结合MCP、Skill等的Agent项目，有可展示的项目/实习成果者优先。\n\n2. **开源贡献或技术影响力**：在Github上有高质量AI项目、技术博客或社区影响力，参与过相关竞赛。\n\n3. **精通Java语言**，熟悉异步编程、性能调优、分布式系统设计，能编写高可靠、可观测的服务代码。\n",
+            "score" : 0.017873015873015874,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 489,
+            "versionId" : 1273,
+            "chunkId" : 26048,
+            "chunkIndex" : 6,
+            "title" : "AI应用研发工程师",
+            "sourceType" : "JOB_POSTING",
+            "sourceRef" : "job_90",
+            "sectionPath" : "职位要求 > 加分项",
+            "startOffset" : 1308,
+            "endOffset" : 1546,
+            "content" : "### 加分项\n\n- 有AI应用或Agent实际落地经验：包括不限于RAG系统、多智能体编排、结合MCP、Skill等的Agent项目，有可展示的项目/实习成果者优先\n- 开源贡献或技术影响力：在Github上有高质量AI项目、技术博客或社区影响力\n- 对AI Infra有基本理解：了解vLLM、Ollama等推理框架原理，理解延迟优化、KV cache优化、流式输出等工程全局视角\n- 在CV或NLP方向有扎实的理论基础，有实际业务场景模型训练（SFT、RL）等经验的优先",
+            "score" : 0.017625000000000002,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24691,
+            "chunkIndex" : 1,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset" : 552,
+            "endOffset" : 1155,
+            "content" : "## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+            "score" : 0.01747709654686399,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=6,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 23,
+            "versionId" : 807,
+            "chunkId" : 18942,
+            "chunkIndex" : 6,
+            "title" : "elastic/kibana",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:260",
+            "sectionPath" : "elastic/kibana > 面试讨论点",
+            "startOffset" : 453,
+            "endOffset" : 599,
+            "content" : "## 面试讨论点\n- 大型React+Next.js项目的性能优化与代码组织\n- 数据可视化系统的架构设计与交互模式（AI创意方向）\n- Playwright自动化测试在大型项目中的落地经验\n- Storybook在组件库与文档化中的作用\n- 面对海量Issue如何进行技术决策与社区贡献\n\n",
+            "score" : 0.016925373134328358,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24697,
+            "chunkIndex" : 7,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset" : 1932,
+            "endOffset" : 3145,
+            "content" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+            "score" : 0.016917293233082706,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=10,lexicalRank=16,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 117,
+            "versionId" : 901,
+            "chunkId" : 21332,
+            "chunkIndex" : 6,
+            "title" : "mlflow/mlflow",
+            "sourceType" : "CAREER_PROJECT",
+            "sourceRef" : "career:221",
+            "sectionPath" : "mlflow/mlflow > 面试讨论点",
+            "startOffset" : 285,
+            "endOffset" : 369,
+            "content" : "## 面试讨论点\n模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。\n\n",
+            "score" : 0.016705882352941175,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)+PREFERENCE_CAREER"
+          } ],
+          "query" : "RAG 知识库 Java  求职 希望做一个能写进简历的知识库问答项目 有一年基础",
+          "status" : "USED",
+          "answerPolicy" : "ANSWER_WITH_CITATIONS"
+        } ],
+        "evidence" : [ {
+          "docTitle" : "Pathway 实时数据框架 AI 流水线",
+          "source" : "GITHUB",
+          "sourceRef" : "pathwaycom/llm-app",
+          "chunkIndex" : 2,
+          "docId" : 243,
+          "evidenceId" : "E1",
+          "repositoryUrl" : "https://github.com/pathwaycom/llm-app",
+          "text" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+          "card" : "[candidateId=E1;evidenceId=E1;repo=pathwaycom/llm-app] facts=证据:本仓库提供的应用模板可扩展至 数百万页文档 。; 问答 RAG 应用 基础端到端 RAG 应用。; 一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。",
+          "chunks" : [ {
+            "documentId" : 243,
+            "versionId" : 1027,
+            "chunkId" : 24651,
+            "chunkIndex" : 2,
+            "title" : "Pathway 实时数据框架 AI 流水线",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "pathwaycom/llm-app",
+            "sectionPath" : "Pathway 实时数据框架 AI 流水线 > 应用模板",
+            "startOffset" : 1109,
+            "endOffset" : 2789,
+            "content" : "## 应用模板\n\n本仓库提供的应用模板可扩展至 **数百万页文档**。有些模板注重简洁性，有些则注重惊人的准确性。请选择最适合您的一款。您可以直接使用，也可以修改流水线的某些步骤——例如，如果您想添加新数据源，或将向量索引改为混合索引，只需修改一行代码即可。\n\n| 应用（模板）                                                                                   | 描述                                                                                                                                                                                                                                                                                                                                                         |\n| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |\n| [`实时文档索引（向量存储 / 检索器）`](templates/document_indexing/)                           | 为 RAG 设计的实时文档索引流水线，可作为向量存储服务。它对来自连接数据源（文件、Google Drive、Sharepoint 等）的文档（PDF、DOCX 等）进行实时索引。可与任何前端配合使用，或作为检索后端集成到 [Langchain](https://pathway.com/blog/langchain-integration) 或 [Llamaindex](https://pathway.com/blog/llamaindex-pathway) 应用中。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/ai-contract-mana |",
+            "score" : 0.01847041847041847,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=3,lexicalRank=17,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          } ]
+        }, {
+          "docTitle" : "Quivr - 你的第二大脑，由生成式AI赋能",
+          "source" : "GITHUB",
+          "sourceRef" : "QuivrHQ/quivr",
+          "chunkIndex" : 7,
+          "docId" : 250,
+          "evidenceId" : "E2",
+          "repositoryUrl" : "https://github.com/quivrhq/quivr",
+          "text" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```\n\n## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+          "card" : "[candidateId=E2;evidenceId=E2;repo=quivrhq/quivr] facts=证据:基础 RAG; 创建如上所示的基础 RAG 工作流很简单，步骤如下：; 自定义 RAG ：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。",
+          "chunks" : [ {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24697,
+            "chunkIndex" : 7,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 配置 > 工作流 > 基础 RAG",
+            "startOffset" : 1932,
+            "endOffset" : 3145,
+            "content" : "#### 基础 RAG\n\n![](docs/docs/workflows/examples/basic_rag.excalidraw.png)\n\n创建如上所示的基础 RAG 工作流很简单，步骤如下：\n\n1. 将 API 密钥添加到环境变量中\n```python\nimport os\nos.environ[\"OPENAI_API_KEY\"] = \"myopenai_apikey\"\n```\nQuivr 支持 Anthropic、OpenAI 和 Mistral 的 API，也支持通过 Ollama 使用本地模型。\n\n2. 创建 YAML 文件 ``basic_rag_workflow.yaml`` 并将以下内容复制进去\n```yaml\nworkflow_config:\n  name: \"standard RAG\"\n  nodes:\n    - name: \"START\"\n      edges: [\"filter_history\"]\n\n    - name: \"filter_history\"\n      edges: [\"rewrite\"]\n\n    - name: \"rewrite\"\n      edges: [\"retrieve\"]\n\n    - name: \"retrieve\"\n      edges: [\"generate_rag\"]\n\n    - name: \"generate_rag\" # the name of the last node, from which we want to stream the answer to the user\n      edges: [\"END\"]\n\n# Maximum number of previous conversation iterations\n# to include in the context of the answer\nmax_history: 10\n\n# Reranker configuration\nreranker_config:\n  # The reranker supplier to use\n  supplier: \"cohere\"\n\n  # The model to use for the reranker for the given supplier\n  model: \"rerank-multilingual-v3.0\"\n\n  # Number of chunks returned by the reranker\n  top_n: 5\n\n# Configuration for the LLM\nllm_config:\n\n  # maximum number of tokens passed to the LLM to generate the answer\n  max_input_tokens: 4000\n```",
+            "score" : 0.018760611205432938,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=2,lexicalRank=16,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          }, {
+            "documentId" : 250,
+            "versionId" : 1034,
+            "chunkId" : 24691,
+            "chunkIndex" : 1,
+            "title" : "Quivr - 你的第二大脑，由生成式AI赋能",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "QuivrHQ/quivr",
+            "sectionPath" : "Quivr - 你的第二大脑，由生成式AI赋能 > 核心特性 🎯",
+            "startOffset" : 552,
+            "endOffset" : 1155,
+            "content" : "## 核心特性 🎯\n\n- **自有的 RAG**：我们创建了一个高效、快速且具有明确设计理念的 RAG，让你可以专注于产品开发。\n- **大语言模型**：Quivr 可与任何 LLM 配合使用，包括 OpenAI、Anthropic、Mistral、Gemma 等。\n- **任意文件**：Quivr 支持所有文件类型，如 PDF、TXT、Markdown 等，你甚至可以添加自己的解析器。\n- **自定义 RAG**：Quivr 允许你自定义 RAG，添加互联网搜索、集成工具等。\n- **与 Megaparse 集成**：Quivr 可与 [Megaparse](https://github.com/quivrhq/megaparse) 配合使用，通过 Megaparse 摄入文件，并使用 Quivr 的 RAG 进行问答。\n\n> 我们负责处理 RAG，让你专注于产品。只需安装 quivr-core 并将其添加到你的项目中，即可开始摄入文件并提问。\n\n**我们会持续改进 RAG 并添加更多功能，敬请关注！**\n\n这是 Quivr 的核心，也是 Quivr.com 的大脑。\n\n<!-- ## 演示亮点 🎥\n\nhttps://github.com/quivrhq/quivr/assets/19614572/a6463b73-76c7-4bc0-978d-70562dca71f5 -->\n\n",
+            "score" : 0.017950581395348837,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=4,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          } ]
+        }, {
+          "docTitle" : "HKUDS/DeepTutor",
+          "source" : "GITHUB",
+          "sourceRef" : "HKUDS/DeepTutor",
+          "chunkIndex" : 37,
+          "docId" : 171,
+          "evidenceId" : "E3",
+          "repositoryUrl" : "https://github.com/hkuds/deeptutor",
+          "text" : "Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected passages enter a reviewable learning-capture inbox. Progress, bookmarks, quiz attempts, captures, and Page Chat stay private per reader even when an admin book is shared read-only or for collaborative editing; shared deletion stays admin-only. Any book exports to Markdown, long compiles pause and resume, and `deeptutor book health` / `refresh-fingerprints` flag source drift.\n\n</details>\n\n<details>\n<summary><b>📚 Knowledge Center — Multi-Engine RAG Libraries</b></summary>\n\n<div align=\"center\">\n<img src=\"assets/figs/web-1.4.6+/knowledge/00-overview.png\" alt=\"DeepTutor Knowledge Center\" width=\"900\">\n</div>\n\nKnowledge bases are the document collections behind RAG — they ground Chat turns, Co-Writer edits, Book generation, and Partner conversations. What's distinctive is a **choice of retrieval engines**: **LlamaIndex** (the default, hybrid vector + BM25 with optional cross-encoder reranking and exact-flat or HNSW FAISS indexes), **PageIndex** (reasoning retrieval with page-level citations, hosted or self-hosted OSS), **GraphRAG** and **LightRAG** (knowledge-graph retrieval), **LightRAG Server** (retrieval offloaded to an external LightRAG instance you connect over HTTP), **WeKnora** (retrieval from a knowledge base in your self-hosted deployment, without a local index or document copy), **Tencent IMA** (a library you curate in IMA — searched, browsed, and written back to over its OpenAPI), **MarginNote 4** (your MN4 study data — documents, excerpts, mind-map cards and the links between them — pushed in by the app's Add-on and navigated with dedicated tools), or a linked **Obsidian** vault the tutor reads and writes in place. Each KB is bound to one engine.\n\n",
+          "card" : "[candidateId=E3;evidenceId=E3;repo=hkuds/deeptutor;mode=RAW_FALLBACK] facts=Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected p…",
+          "chunks" : [ {
+            "documentId" : 171,
+            "versionId" : 955,
+            "chunkId" : 22864,
+            "chunkIndex" : 37,
+            "title" : "HKUDS/DeepTutor",
+            "sourceType" : "GITHUB",
+            "sourceRef" : "HKUDS/DeepTutor",
+            "sectionPath" : "DeepTutor: Lifelong Personalized Tutoring > 📖 Explore DeepTutor",
+            "startOffset" : 55735,
+            "endOffset" : 57699,
+            "content" : "Each chapter compiles into editable typed blocks — text, callouts, quizzes, flash cards, timelines, code, figures, interactive HTML, animations, concept graphs, deep dives, and user notes — with its own Page Chat. Insert, move, regenerate, rewrite, or switch a block type; selected passages enter a reviewable learning-capture inbox. Progress, bookmarks, quiz attempts, captures, and Page Chat stay private per reader even when an admin book is shared read-only or for collaborative editing; shared deletion stays admin-only. Any book exports to Markdown, long compiles pause and resume, and `deeptutor book health` / `refresh-fingerprints` flag source drift.\n\n</details>\n\n<details>\n<summary><b>📚 Knowledge Center — Multi-Engine RAG Libraries</b></summary>\n\n<div align=\"center\">\n<img src=\"assets/figs/web-1.4.6+/knowledge/00-overview.png\" alt=\"DeepTutor Knowledge Center\" width=\"900\">\n</div>\n\nKnowledge bases are the document collections behind RAG — they ground Chat turns, Co-Writer edits, Book generation, and Partner conversations. What's distinctive is a **choice of retrieval engines**: **LlamaIndex** (the default, hybrid vector + BM25 with optional cross-encoder reranking and exact-flat or HNSW FAISS indexes), **PageIndex** (reasoning retrieval with page-level citations, hosted or self-hosted OSS), **GraphRAG** and **LightRAG** (knowledge-graph retrieval), **LightRAG Server** (retrieval offloaded to an external LightRAG instance you connect over HTTP), **WeKnora** (retrieval from a knowledge base in your self-hosted deployment, without a local index or document copy), **Tencent IMA** (a library you curate in IMA — searched, browsed, and written back to over its OpenAPI), **MarginNote 4** (your MN4 study data — documents, excerpts, mind-map cards and the links between them — pushed in by the app's Add-on and navigated with dedicated tools), or a linked **Obsidian** vault the tutor reads and writes in place. Each KB is bound to one engine.\n\n",
+            "score" : 0.017202797202797205,
+            "retrievalRoute" : "HYBRID_RRF(vectorRank=5,lexicalRank=50,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+          } ]
+        } ],
+        "selectedCount" : 3,
+        "candidateCount" : 4,
+        "durationMs" : 649.351749,
+        "evidencePromptChars" : 698,
+        "evidenceBudgetChars" : 1100
+      },
+      "promptVersion" : "trend-v2-evidence-1",
+      "graphDurationMs" : 79.483575,
+      "analyzerAttemptDurationMs" : 38331.662147
+    },
+    "wallMs" : 38982.504107,
+    "scope" : "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages" : [ {
+      "status" : "SUCCEEDED",
+      "stage" : "B.activeGeneration",
+      "durationMs" : 0.350614
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.indexStore",
+      "durationMs" : 0.007785
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.queryEmbedding",
+      "durationMs" : 170.41999
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.embeddingAndVector",
+      "durationMs" : 284.254728
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.lexical",
+      "durationMs" : 16.791069
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.names",
+      "durationMs" : 4.87835
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.nativeFusion",
+      "durationMs" : 5.935975
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.databaseMetadataAndFilters",
+      "durationMs" : 92.907778
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.dedupAndSelect",
+      "durationMs" : 9.556995
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.relevanceAndPolicy",
+      "durationMs" : 0.119246
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.native.total",
+      "durationMs" : 415.135189
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.adapterTopicGateAndFusion",
+      "durationMs" : 0.640218
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.activeGeneration",
+      "durationMs" : 0.892898
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.indexStore",
+      "durationMs" : 0.005802
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.queryEmbedding",
+      "durationMs" : 36.102099
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.embeddingAndVector",
+      "durationMs" : 106.979474
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.lexical",
+      "durationMs" : 4.04152
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.names",
+      "durationMs" : 1.205454
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.nativeFusion",
+      "durationMs" : 8.520377
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.databaseMetadataAndFilters",
+      "durationMs" : 106.836655
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.dedupAndSelect",
+      "durationMs" : 1.104492
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.relevanceAndPolicy",
+      "durationMs" : 0.057103
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.native.total",
+      "durationMs" : 229.880905
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.adapterTopicGateAndFusion",
+      "durationMs" : 0.270295
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "B.renderEvidence",
+      "durationMs" : 3.23158
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "retrieval.total",
+      "durationMs" : 649.354745
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "graph.database",
+      "durationMs" : 79.477193
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "business.career",
+      "durationMs" : 182.85077
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.compose",
+      "durationMs" : 0.526447
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "prompt.protocol",
+      "durationMs" : 0.005982
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "model.http",
+      "durationMs" : 38039.513272
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "output.parseAndAssemble",
+      "durationMs" : 28.840056
+    }, {
+      "status" : "SUCCEEDED",
+      "stage" : "output.bindSources",
+      "durationMs" : 0.133625
+    } ],
+    "snapshotId" : "1b1a1393-d267-4a74-a1b5-43e7383f33e7"
+  },
+  "clientWallMs" : 38986.60228
+}

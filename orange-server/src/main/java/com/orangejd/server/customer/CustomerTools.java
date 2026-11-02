@@ -18,24 +18,31 @@ public class CustomerTools {
     private final CustomerJson json;
     private final com.orangejd.server.ragb.mapper.RagBMapper indexes;
     private final CustomerProperties config;
-    private final ThreadPoolExecutor executor=new ThreadPoolExecutor(2,2,0,TimeUnit.SECONDS,new SynchronousQueue<>(),r->{ Thread t=new Thread(r,"customer-tool"); t.setDaemon(true); return t; });
+    private final ThreadPoolExecutor executor=new ThreadPoolExecutor(2,2,0,TimeUnit.SECONDS,new ArrayBlockingQueue<>(2),r->{ Thread t=new Thread(r,"customer-tool"); t.setDaemon(true); return t; });
     public record ToolSpec(String permission,int timeoutSeconds,int maxResults,Set<String> requiredParameters) {}
     public static final Map<String,ToolSpec> SPECS=Map.of(
         "searchKnowledge",new ToolSpec("OWN_SESSION_READ",15,20,Set.of("query","sourceTypes")),
         "searchProjects",new ToolSpec("CATALOG_AND_DOCUMENT_READ",10,3,Set.of()),
         "getProjectDetail",new ToolSpec("CATALOG_AND_DOCUMENT_READ",5,1,Set.of("type","id","conditions")),
-        "getConfirmedProfile",new ToolSpec("OWN_PROFILE_READ",5,1,Set.of()));
+        "getConfirmedProfile",new ToolSpec("OWN_PROFILE_READ",5,1,Set.of()),
+        "searchConversationHistory",new ToolSpec("OWN_SESSION_HISTORY_READ",3,5,Set.of("query")),
+        "readConversationSource",new ToolSpec("OWN_SESSION_HISTORY_READ",3,1,Set.of("messageId")));
     public CustomerTools(RagBSearchService k,CustomerProjects p,PersonaPromptContextService profiles,CustomerMapper db,CustomerJson json,com.orangejd.server.ragb.mapper.RagBMapper indexes,CustomerProperties config) { knowledge=k; projects=p; this.profiles=profiles; this.db=db; this.json=json; this.indexes=indexes; this.config=config; }
-    public static final Set<String> REGISTERED=Set.of("searchKnowledge","searchProjects","getProjectDetail","getConfirmedProfile");
+    public static final Set<String> REGISTERED=Set.of("searchKnowledge","searchProjects","getProjectDetail","getConfirmedProfile","searchConversationHistory","readConversationSource");
     public class Context {
-        final String run; final long owner; final Instant deadline; int calls; int searches;
+        final String run; final long owner; final Instant deadline; int calls; int searches;int historyCalls;
         final Map<String,Object> cache=new HashMap<>(); final Set<String> evidence=new HashSet<>();
         String generation;
+        CustomerUsageLedger ledger;
+        public void observe(List<Map<String,Object>> usage) {if(usage instanceof CustomerUsageLedger value)ledger=value;}
         public Context(String run,long owner,Instant deadline) { this.run=run; this.owner=owner; this.deadline=deadline; }
         @SuppressWarnings("unchecked")
         private <T> T execute(String tool,Object params,Supplier<T> work) {
             check(); String key=tool+":"+json.write(params); if(cache.containsKey(key)) return (T)cache.get(key);
-            if(!REGISTERED.contains(tool) || ++calls>5) throw new IllegalStateException("TOOL_LIMIT");
+            if(!REGISTERED.contains(tool))throw new IllegalStateException("TOOL_LIMIT");
+            calls++;
+            boolean historyTool=Set.of("searchConversationHistory","readConversationSource").contains(tool);
+            if(historyTool?++historyCalls>2:calls-historyCalls>5)throw new IllegalStateException("TOOL_LIMIT");
             if(tool.equals("searchKnowledge") && ++searches>2) throw new IllegalStateException("SEARCH_LIMIT");
             Future<T> future=null;
             try {
@@ -43,14 +50,35 @@ public class CustomerTools {
                 if(remaining<=0) throw new IllegalStateException("DEADLINE_EXCEEDED");
                 ToolSpec spec=SPECS.get(tool);
                 if(!(params instanceof Map<?,?> values) || !values.keySet().containsAll(spec.requiredParameters())) throw new IllegalArgumentException("INVALID_TOOL_PARAMETERS");
-                future=executor.submit(work::get);
-                T result=future.get(Math.min(remaining,spec.timeoutSeconds()*1000L),TimeUnit.MILLISECONDS);
+                final String parentNode=ledger==null?null:ledger.nodeId;
+                Instant toolBudget=Instant.now().plusSeconds(spec.timeoutSeconds());
+                final Instant toolDeadline=deadline.isBefore(toolBudget)?deadline:toolBudget;
+                future=executor.submit(()->{
+                    long started=System.nanoTime();
+                    try(var limit=com.orangejd.server.foundation.external.ExternalCallDeadline.open(toolDeadline);
+                        var observation=com.orangejd.server.service.TrendLabObservation.open(stage->{if(ledger!=null)ledger.trace.timing(run,parentNode,stage);})) {
+                        check();
+                        if(!Instant.now().isBefore(toolDeadline))throw new IllegalStateException("TOOL_TIMEOUT");
+                        T result=work.get();check();return result;
+                    }
+                    finally {if(ledger!=null)ledger.trace.payload(run,parentNode,"TOOL_EXECUTION",Map.of("tool",tool,"durationMs",(System.nanoTime()-started)/1_000_000,"parameters",params));}
+                });
+                T result=future.get(Math.max(1,java.time.Duration.between(Instant.now(),toolDeadline).toMillis()),TimeUnit.MILLISECONDS);
+                if(ledger!=null)ledger.payload("TOOL_RESULT",Map.of("tool",tool,"result",result));
                 check(); cache.put(key,result); db.step(run,tool,"SUCCEEDED",json.write(Map.of("parameters",params,"result",result))); return result;
             }
             catch(TimeoutException ex) { if(future!=null) future.cancel(true); db.step(run,tool,"FAILED",json.write(Map.of("errorType","TOOL_TIMEOUT"))); throw new IllegalStateException("TOOL_TIMEOUT"); }
             catch(InterruptedException ex) { if(future!=null) future.cancel(true); Thread.currentThread().interrupt(); throw new IllegalStateException("RUN_STOPPED"); }
-            catch(ExecutionException ex) { db.step(run,tool,"FAILED",json.write(Map.of("errorType",ex.getCause().getClass().getSimpleName()))); if(ex.getCause() instanceof RuntimeException cause) throw cause; throw new IllegalStateException("TOOL_FAILED"); }
+            catch(ExecutionException ex) {
+                if(ex.getCause() instanceof RuntimeException cause) {
+                    db.step(run,tool,"FAILED",json.write(CustomerRecovery.details(cause)));throw cause;
+                }
+                db.step(run,tool,"FAILED",json.write(Map.of("errorCode","TOOL_FAILED","errorType",ex.getCause().getClass().getSimpleName())));
+                throw new IllegalStateException("TOOL_FAILED");
+            }
+            catch(RejectedExecutionException ex) { db.step(run,tool,"FAILED",json.write(Map.of("errorType","TOOL_CAPACITY_EXCEEDED"))); throw new IllegalStateException("TOOL_CAPACITY_EXCEEDED",ex); }
             catch(RuntimeException ex) { db.step(run,tool,"FAILED",json.write(Map.of("errorType",ex.getClass().getSimpleName()))); throw ex; }
+            finally { if(future instanceof Runnable task && future.isCancelled())executor.remove(task); }
         }
         public void check() {
             if(!config.canAccess(owner)) throw new IllegalStateException("CUSTOMER_DISABLED");
@@ -58,6 +86,10 @@ public class CustomerTools {
             if(Instant.now().isAfter(deadline)) throw new IllegalStateException("DEADLINE_EXCEEDED");
         }
         public String profile() { return execute("getConfirmedProfile",Map.of(),()->profiles.confirmedContext(owner)); }
+        public String contextRead(String tool,Map<String,Object> parameters,Supplier<String> operation) {
+            if(!Set.of("searchConversationHistory","readConversationSource").contains(tool))throw new IllegalArgumentException("INVALID_CONTEXT_TOOL");
+            return execute(tool,parameters,operation);
+        }
         public List<Map<String,Object>> projects(Map<String,Object> state) { return execute("searchProjects",state,()->projects.search(state)); }
         public Map<String,Object> diagnose(Map<String,Object> state) { return execute("searchProjects",Map.of("purpose","COUNTERFACTUAL_COUNTS","conditions",state),()->projects.diagnose(state)); }
         public List<Map<String,Object>> rankedProjects(Map<String,Object> state,List<com.orangejd.server.ragb.retrieval.RagBSearchHit> hits) {

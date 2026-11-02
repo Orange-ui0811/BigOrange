@@ -2,7 +2,7 @@
   <article class="rec-card">
     <header class="rec-header">
       <div class="rec-name-area"><span class="rec-num">#{{ index + 1 }}</span><h3 class="rec-name"><a v-if="safeExternalHref(project.url)" :href="safeExternalHref(project.url)" target="_blank" rel="noopener noreferrer">{{ project.name }}</a><template v-else>{{ project.name }}</template></h3></div>
-      <div class="rec-meta-area"><span class="rec-difficulty" :class="levelClass">{{ level }}</span><span v-if="score !== null" class="rec-score">{{ scoreLabel }} {{ score }}/100</span></div>
+      <div class="rec-meta-area"><span class="rec-difficulty" :class="levelClass" :title="`目录难度：${level}`">{{ levelLabel }}</span><span v-if="score !== null" class="rec-score">{{ scoreLabel }} {{ score }}/100</span></div>
     </header>
     <p v-if="project.description" class="rec-desc">{{ text(project.description) }}</p>
     <div v-if="project.language || project.duration || project.sourceLabel" class="rec-facts"><span v-if="project.language">{{ project.language }}</span><span v-if="project.duration">周期估算：{{ project.duration }}</span><span v-if="project.sourceLabel">{{ project.sourceLabel }}</span></div>
@@ -10,6 +10,8 @@
     <div class="rec-details">
       <p v-if="project.vibeCodingReason" class="rec-vibe-box"><b>实践参考：</b>{{ text(project.vibeCodingReason) }}</p>
       <p v-if="project.recommendReason" class="rec-bullet"><b>推荐理由</b><span>{{ text(project.recommendReason) }}</span></p>
+      <p v-if="project.purposeFit && project.purposeFit.status!=='NOT_REQUESTED'" class="rec-bullet"><b>用途核验</b><span>{{ text(project.purposeFit.message) }}</span></p>
+      <p v-if="project.learningFit?.profile==='BEGINNER'" class="rec-bullet"><b>基础与门槛</b><span>{{ text(project.learningFit.message) }}</span></p>
       <p v-if="project.difficultyReason" class="rec-bullet"><b>难度说明</b><span>{{ text(project.difficultyReason) }}</span></p>
       <template v-if="project.practiceAdvice?.kind==='SUGGESTION'">
         <p class="rec-bullet"><b>针对你的建议</b><span>{{ text(project.practiceAdvice.recommendationAdvice) }}</span></p>
@@ -38,7 +40,9 @@ defineEmits(['import'])
 const text=normalizeCustomerText
 const sourceNote=computed(()=>props.project.sourceNote || ({VERIFIED_CANDIDATE:'项目与链接来自本次已验证候选；推荐理由仍需结合项目实际情况判断。',SOURCE_MATCHED:'参考链接可在本次资料中找到，推荐理由仍需结合项目实际情况判断。',PARTIAL:'部分链接缺少本次资料支持，已移除；保留的链接可追溯。'}[props.project.evidenceStatus] || (props.project.evidenceStatus?'本次资料未能支持推荐链接，当前内容为未验证建议。':'')))
 const level=computed(()=>customerDifficulty(props.project.difficulty))
-const levelClass=computed(()=>level.value==='入门'?'easy':level.value==='进阶'?'advanced':'medium')
+const scopeUnverified=computed(()=>props.project.learningFit?.status==='SCOPE_UNVERIFIED')
+const levelLabel=computed(()=>scopeUnverified.value?'门槛待核对':level.value)
+const levelClass=computed(()=>scopeUnverified.value?'medium':level.value==='入门'?'easy':level.value==='进阶'?'advanced':'medium')
 const score=computed(()=>{const raw=props.project.score;return typeof raw==='number'&&Number.isFinite(raw)?Math.round(Math.max(0,Math.min(100,raw))):null})
 </script>
 

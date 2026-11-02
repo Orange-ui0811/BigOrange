@@ -1,0 +1,875 @@
+{
+  "before": {
+    "turns": 17,
+    "completed": 17,
+    "clarificationTurns": 1,
+    "turnsWithProjects": 7,
+    "cards": 15,
+    "cardsWithAdvice": 13,
+    "meanMs": 8315,
+    "p95Ms": 11437,
+    "maxMs": 11437,
+    "modelCalls": 38,
+    "retries": 0,
+    "inputTokens": 113476,
+    "outputTokens": 15912,
+    "monetaryCost": "UNKNOWN",
+    "embeddingUsage": "NOT_REPORTED",
+    "phases": {
+      "ACTION": {
+        "calls": 17,
+        "durationMs": 51622,
+        "inputTokens": 90407,
+        "outputTokens": 10413
+      },
+      "ADVICE": {
+        "calls": 7,
+        "durationMs": 18639,
+        "inputTokens": 4747,
+        "outputTokens": 2966
+      },
+      "EVIDENCE": {
+        "calls": 7,
+        "durationMs": 12004,
+        "inputTokens": 10180,
+        "outputTokens": 2421
+      },
+      "VERIFY": {
+        "calls": 7,
+        "durationMs": 5100,
+        "inputTokens": 8142,
+        "outputTokens": 112
+      }
+    },
+    "promptVersions": [
+      "customer-v4.12-semantic-recommendations"
+    ],
+    "generations": [
+      "20261002164953-ec113424"
+    ]
+  },
+  "after": {
+    "turns": 17,
+    "completed": 17,
+    "clarificationTurns": 0,
+    "turnsWithProjects": 12,
+    "cards": 32,
+    "cardsWithAdvice": 28,
+    "meanMs": 26686,
+    "p95Ms": 58515,
+    "maxMs": 58515,
+    "modelCalls": 90,
+    "retries": 5,
+    "inputTokens": 184850,
+    "outputTokens": 89232,
+    "monetaryCost": "UNKNOWN",
+    "embeddingUsage": "NOT_REPORTED",
+    "phases": {
+      "ACTION": {
+        "calls": 17,
+        "durationMs": 48632,
+        "inputTokens": 91317,
+        "outputTokens": 10072
+      },
+      "ADVICE": {
+        "calls": 12,
+        "durationMs": 37389,
+        "inputTokens": 9069,
+        "outputTokens": 6945
+      },
+      "EVIDENCE": {
+        "calls": 12,
+        "durationMs": 20494,
+        "inputTokens": 22384,
+        "outputTokens": 4779
+      },
+      "PURPOSE_REVIEW": {
+        "calls": 21,
+        "durationMs": 280184,
+        "inputTokens": 45056,
+        "outputTokens": 66901
+      },
+      "QUERY_PLAN": {
+        "calls": 16,
+        "durationMs": 10097,
+        "inputTokens": 2896,
+        "outputTokens": 315
+      },
+      "VERIFY": {
+        "calls": 12,
+        "durationMs": 6622,
+        "inputTokens": 14128,
+        "outputTokens": 220
+      }
+    },
+    "promptVersions": [
+      "customer-v4.15-purpose-review"
+    ],
+    "generations": [
+      "20261002164953-ec113424"
+    ]
+  },
+  "cases": [
+    {
+      "case": "data_free",
+      "turn": 1,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [],
+      "afterProjects": [
+        "aidizhi/455555.xyz",
+        "visgl/deck.gl",
+        "plotly/plotly.js"
+      ],
+      "beforeMs": 6469,
+      "afterMs": 26844,
+      "state": {
+        "topic": [
+          "数据处理与可视化"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：数据处理与可视化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "aidizhi/455555.xyz",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "该项目技术栈包括 TypeScript 核心代码开发与类型安全、Vite 开发服务器与生产构建、Jest 单元测试与覆盖率、Canvas 2D API 图表渲染引擎、Material Design 3 主题与视觉规范、npm/pnpm 包管理与发布。 [E1]",
+          "evidence": "该项目技术栈包括 TypeScript 核心代码开发与类型安全、Vite 开发服务器与生产构建、Jest 单元测试与覆盖率、Canvas 2D API 图表渲染引擎、Material Design 3 主题与视觉规范、npm/pnpm 包管理与发布。 [E1]\n项目提供克隆仓库、pnpm install、pnpm dev、pnpm test、pnpm test:coverage、pnpm build、pnpm bench、pnpm lint && pnpm format 等命令入口。 [E4]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "visgl/deck.gl",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "deck.gl 将数据（通常为 JSON 对象数组）映射为可视化图层（如图标、多边形、文本），并通过视图（如地图、第一人称、正交）观察；开箱处理大规模数据高性能渲染与更新、交互式事件处理、地图投影与底图集成，并提供经过验证的图层目录。 [E2]",
+          "evidence": "deck.gl 将数据（通常为 JSON 对象数组）映射为可视化图层（如图标、多边形、文本），并通过视图（如地图、第一人称、正交）观察；开箱处理大规模数据高性能渲染与更新、交互式事件处理、地图投影与底图集成，并提供经过验证的图层目录。 [E2]\ndeck.gl 设计为高度可定制，所有图层提供灵活 API，可对渲染各方面进行编程控制，核心类易于扩展以应对自定义用例。 [E2]\ndeck.gl 提供 React 快速入门与完整示例入口。 [E5]\ndeck.gl 提供纯 JavaScript 快速入门与完整示例入口。 [E8]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "plotly/plotly.js",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "plotly.js 可通过 script 标签将 Plotly 对象添加到 window 作用域，再用 newPlot 方法根据 data 和 layout 在 div 中绘制交互式图表；掌握基本 HTML 和 JSON 语法即可入门，无论是否使用 JavaScript。 [E6]",
+          "evidence": "plotly.js 可通过 script 标签将 Plotly 对象添加到 window 作用域，再用 newPlot 方法根据 data 和 layout 在 div 中绘制交互式图表；掌握基本 HTML 和 JSON 语法即可入门，无论是否使用 JavaScript。 [E6]\nplotly.js 示例展示在 HTML 中放置 div 并调用 Plotly.newPlot 的入门用法。 [E6]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "data_specific",
+      "turn": 1,
+      "beforeStatus": "PROJECTS_WITH_LIMITATIONS",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [
+        "AnswerDotAI/nbdev",
+        "aidizhi/455555.xyz",
+        "bencbartlett/3D-printed-mirror-array"
+      ],
+      "afterProjects": [
+        "teslamate-org/teslamate",
+        "apache/doris"
+      ],
+      "beforeMs": 11437,
+      "afterMs": 17812,
+      "state": {
+        "topic": [
+          "数据分析"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：数据分析；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "teslamate-org/teslamate",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "一个强大、自托管的 Tesla 数据记录器。 [E2]\n内置仪表板示例包括电池健康、充电水平、充电记录、充电详情、充电统计、数据库信息等。 [E4]\n内置仪表板还包括驾驶统计、驾驶记录、驾驶详情、效率、位置（地址）等。 [E4]\n内置仪表板还包含行驶里程、概览、预估续航（电池衰减）等。 [E4]",
+          "evidence": "一个强大、自托管的 Tesla 数据记录器。 [E2]\n使用 Elixir 编写，数据存储在 Postgres 数据库中，使用 Grafana 进行可视化和数据分析，车辆数据发布到本地 MQTT 代理。 [E2]\n内置仪表板示例包括电池健康、充电水平、充电记录、充电详情、充电统计、数据库信息等。 [E4]\n内置仪表板还包括驾驶统计、驾驶记录、驾驶详情、效率、位置（地址）等。 [E4]\n内置仪表板还包含行驶里程、概览、预估续航（电池衰减）等。 [E4]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "apache/doris",
+          "language": "Java",
+          "duration": "4-8周",
+          "matchStatus": "CONFIRMED",
+          "description": "面向客户的分析：向外部用户提供亚秒级交互式分析。 [E1]\n数据仓库：跨业务领域构建一个实时仓库。 [E1]\n可观测性：用 SQL 分析高吞吐日志、事件和指标。 [E1]\nDoris for AI：在一个 SQL 引擎中使用向量、文本、JSON 和结构化搜索。 [E1]",
+          "evidence": "面向客户的分析：向外部用户提供亚秒级交互式分析。 [E1]\n数据仓库：跨业务领域构建一个实时仓库。 [E1]\n可观测性：用 SQL 分析高吞吐日志、事件和指标。 [E1]\nDoris for AI：在一个 SQL 引擎中使用向量、文本、JSON 和结构化搜索。 [E1]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "office_free",
+      "turn": 1,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [],
+      "afterProjects": [
+        "n8n-io/n8n",
+        "Stirling-Tools/Stirling-PDF",
+        "appsmithorg/appsmith"
+      ],
+      "beforeMs": 6500,
+      "afterMs": 47234,
+      "state": {
+        "topic": [
+          "办公自动化"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：办公自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "n8n-io/n8n",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "公平代码平台，用于构建和部署AI智能体与工作流，结合可视化画布与自定义代码，支持自托管或云端运行，连接超1500个集成。 [E5]\nAI原生自动化平台，可用自有数据、模型和工具构建AI工作流与多步骤智能体；支持按需编码，结合JavaScript、Python和npm包。 [E8]",
+          "evidence": "公平代码平台，用于构建和部署AI智能体与工作流，结合可视化画布与自定义代码，支持自托管或云端运行，连接超1500个集成。 [E5]\nAI原生自动化平台，可用自有数据、模型和工具构建AI工作流与多步骤智能体；支持按需编码，结合JavaScript、Python和npm包。 [E8]\n模型灵活无锁定，可连接OpenAI、Anthropic、Google或开源模型；提供超1500个集成和9000多个工作流模板。 [E8]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "Stirling-Tools/Stirling-PDF",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "支持并行文件处理和下载、暗色模式、自定义下载选项、自定义管道自动化队列运行多个功能，并提供API与外部脚本集成。 [E6]",
+          "evidence": "支持并行文件处理和下载、暗色模式、自定义下载选项、自定义管道自动化队列运行多个功能，并提供API与外部脚本集成。 [E6]\n可选登录和身份验证支持；企业特性如SSO；数据库备份和导入，均需参考相应文档配置。 [E6]\n提供全面文档，涵盖各平台安装指南、配置选项、功能文档、API参考、安全设置和企业功能，便于学习。 [E9]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "appsmithorg/appsmith",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "开源低代码平台，用于构建仪表盘、管理面板、客户360、IT自动化和服务管理等自定义应用，简化开发、部署与维护。 [E1]",
+          "evidence": "开源低代码平台，用于构建仪表盘、管理面板、客户360、IT自动化和服务管理等自定义应用，简化开发、部署与维护。 [E1]\n提供多种部署选项，可参考安装指南文档进行部署。 [E4]\n提供本地开发环境搭建指南，适合有编程基础者学习参与。 [E7]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "office_specific",
+      "turn": 1,
+      "beforeStatus": "VERIFIED_PROJECTS",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [
+        "n8n-io/n8n"
+      ],
+      "afterProjects": [
+        "n8n-io/n8n",
+        "flowsforapex/apex-flowsforapex"
+      ],
+      "beforeMs": 11375,
+      "afterMs": 25109,
+      "state": {
+        "topic": [
+          "工作流自动化"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：工作流自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "n8n-io/n8n",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。 [E2]\n公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。 [E4]",
+          "evidence": "AI原生自动化平台，可用自己的数据、模型和工具构建并运营AI工作流与多步骤智能体；支持连接OpenAI、Anthropic、Google或开源模型，无需更改架构即可切换提供商；可从原型到生产设计多步骤AI工作流；支持JavaScript、Python和npm包；可自托管或安全部署；有超过1500个集成和9000多个工作流模板。 [E2]\n公平代码平台，用于构建和部署AI智能体与工作流；通过可视化画布与自定义代码相结合，支持自托管或云端运行，并连接超过1500个集成。 [E4]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "flowsforapex/apex-flowsforapex",
+          "language": "JavaScript",
+          "duration": "7-14天",
+          "matchStatus": "CONFIRMED",
+          "description": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。 [E1]",
+          "evidence": "在Oracle APEX内使用BPMN 2.0建模并执行业务流程的工作流引擎。 [E1]\n作为Oracle APEX扩展，结构清晰，可借BPMN和流程引擎学习业务逻辑与低代码集成。 [E3]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "browser_free",
+      "turn": 1,
+      "beforeStatus": "VERIFIED_PROJECTS",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [
+        "browser-use/browser-use"
+      ],
+      "afterProjects": [
+        "BetterWright/betterwright",
+        "web-infra-dev/midscene",
+        "browserless/browserless"
+      ],
+      "beforeMs": 11375,
+      "afterMs": 43891,
+      "state": {
+        "topic": [
+          "浏览器自动化",
+          "网页自动化"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：浏览器自动化、网页自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "BetterWright/betterwright",
+          "language": "TypeScript",
+          "duration": "4-8天",
+          "matchStatus": "CONFIRMED",
+          "description": "基于 Playwright 的工程化应用，适合学习浏览器自动化、安全存储和策略引擎，功能拆分清晰，可逐个攻破。 [E2]\n一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。 [E5]",
+          "evidence": "基于 Playwright 的工程化应用，适合学习浏览器自动化、安全存储和策略引擎，功能拆分清晰，可逐个攻破。 [E2]\n一个为 AI 代理设计的持久化、策略守护的 Playwright 浏览器，内置网络策略、加密凭证保险库、截屏证明和验证码解算。 [E5]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "web-infra-dev/midscene",
+          "language": "TypeScript",
+          "duration": "1.5-2 个月",
+          "matchStatus": "CONFIRMED",
+          "description": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。 [E7]",
+          "evidence": "AI 视觉驱动的自动化框架原理；如何设计跨平台 UI 测试方案；CI/CD 集成实践；处理大型开源项目中的 issue。 [E7]\n提供文档、示例项目和 API 参考，可作为学习与实践入口。 [E3]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "browserless/browserless",
+          "language": "TypeScript",
+          "duration": "2-5天",
+          "matchStatus": "CONFIRMED",
+          "description": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。 [E1]\n在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。 [E4]",
+          "evidence": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。 [E1]\n在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。 [E4]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "browser_specific",
+      "turn": 1,
+      "beforeStatus": "VERIFIED_PROJECTS",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [
+        "browser-use/browser-use"
+      ],
+      "afterProjects": [
+        "browser-use/browser-use",
+        "browserless/browserless",
+        "olo-dot-io/Uni-CLI"
+      ],
+      "beforeMs": 9782,
+      "afterMs": 24360,
+      "state": {
+        "topic": [
+          "浏览器自动化"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：浏览器自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "browser-use/browser-use",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "Browser Use 0.13 引入全新 Beta 代理，核心由 Rust 引擎驱动，配备专为前沿模型打造的浏览器运行环境，提供真实浏览器/计算机操作空间、持久化工具及恢复循环。 [E2]",
+          "evidence": "Browser Use 0.13 引入全新 Beta 代理，核心由 Rust 引擎驱动，配备专为前沿模型打造的浏览器运行环境，提供真实浏览器/计算机操作空间、持久化工具及恢复循环。 [E2]\n安装带原生核心运行时的 Browser Use 需要 Python>=3.11，可用 uv add \"browser-use[core]\" 或 pip install \"browser-use[core]\"。 [E2]\n想跳过安装配置可使用云服务，获得更快速、可扩展且具有隐身能力的浏览器自动化。 [E5]\n可让 Cursor、Claude Code 等编程代理指向 Agents.md，然后开始提示。 [E8]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "browserless/browserless",
+          "language": "TypeScript",
+          "duration": "2-5天",
+          "matchStatus": "CONFIRMED",
+          "description": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。 [E1]\n在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。 [E4]",
+          "evidence": "TypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。 [E1]\n在 Docker 中部署无头浏览器，可在云端或自有环境中运行，非商业用途免费。 [E4]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "olo-dot-io/Uni-CLI",
+          "language": "TypeScript",
+          "duration": "2-5天",
+          "matchStatus": "CONFIRMED",
+          "description": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。 [E9]\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E3]",
+          "evidence": "一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。 [E9]\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E3]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "web_free",
+      "turn": 1,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [],
+      "afterProjects": [
+        "appsmithorg/appsmith",
+        "CatsJuice/sticker-forge",
+        "piskelapp/piskel"
+      ],
+      "beforeMs": 7219,
+      "afterMs": 42938,
+      "state": {
+        "topic": [
+          "Web应用开发"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Web应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "appsmithorg/appsmith",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "Appsmith 是开源低代码平台，用于简化自定义应用的开发、部署和维护，可构建仪表盘、管理面板、客户 360、IT 自动化和服务管理工具等。 [E2]",
+          "evidence": "Appsmith 是开源低代码平台，用于简化自定义应用的开发、部署和维护，可构建仪表盘、管理面板、客户 360、IT 自动化和服务管理工具等。 [E2]\n要在本地开发环境构建和运行 Appsmith，参见 Setup for local development 文档。 [E5]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "CatsJuice/sticker-forge",
+          "language": "JavaScript",
+          "duration": "几小时体验，2～5 天做出定制版本",
+          "matchStatus": "CONFIRMED",
+          "description": "基于 WebGL 的贴纸生成器，支持文字或图片输入，可模拟撕开贴纸看到背面的物理效果，并提供组件化嵌入方案。 [E4]",
+          "evidence": "基于 WebGL 的贴纸生成器，支持文字或图片输入，可模拟撕开贴纸看到背面的物理效果，并提供组件化嵌入方案。 [E4]\n只需 npm install && npm run dev 即可本地体验，无需数据库或密钥；可预览、修改贴纸样式并即时生效；提供即插即用的 Web Component 和 JS API，容易集成到其他项目；是学习现代前端交互（React、WebGL、事件系统）的实战案例。 [E1]\n需基础前端知识，调整 WebGL 效果有一定学习曲线；复杂修改可能涉及底层着色器。 [E7]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "piskelapp/piskel",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+          "evidence": "使用 Piskel 应用遇到问题或想请求新功能，可提交 issue。 [E3]",
+          "advice": false,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "web_specific",
+      "turn": 1,
+      "beforeStatus": "PROJECTS_WITH_LIMITATIONS",
+      "afterStatus": "PROJECTS_WITH_LIMITATIONS",
+      "beforeProjects": [
+        "SidhuK/Glyph",
+        "DavidHDev/canvas-ui",
+        "darkmatter2048/WindowsCleaner"
+      ],
+      "afterProjects": [
+        "Vette1123/movies-streaming-platform",
+        "ValueCell-ai/ClawX",
+        "darkmatter2048/WindowsCleaner"
+      ],
+      "beforeMs": 11391,
+      "afterMs": 27578,
+      "state": {
+        "topic": [
+          "Next.js"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：Next.js；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "Vette1123/movies-streaming-platform",
+          "language": "TypeScript",
+          "duration": "1小时获取密钥并成功运行，2～5天定制功能并部署上线",
+          "matchStatus": "CONFIRMED",
+          "description": "仿Netflix电影发现平台，支持PWA安装和实时筛选",
+          "evidence": "",
+          "advice": false,
+          "importable": false
+        },
+        {
+          "name": "ValueCell-ai/ClawX",
+          "language": "TypeScript",
+          "duration": "18-25 天（改造界面、增加场景模板）",
+          "matchStatus": "CONFIRMED",
+          "description": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。 [E6]",
+          "evidence": "ClawX 是一个基于 TypeScript/React/Next.js 的桌面应用，为 OpenClaw AI 代理提供图形化界面，将 CLI 编排转为桌面体验。 [E6]\n可掌握 React/Next.js 构建复杂桌面应用程序，具备将 CLI 工具产品化、提升用户体验的能力，理解 Playwright 等工具在代理自动化中的使用，熟悉 MIT 许可下的开源项目维护与迭代。 [E2]\n技术栈：TypeScript、React、Next.js、Playwright。 [E4]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "darkmatter2048/WindowsCleaner",
+          "language": "TypeScript",
+          "duration": "3-4 周",
+          "matchStatus": "CONFIRMED",
+          "description": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足等问题，提供交互式界面。 [E3]",
+          "evidence": "基于 TypeScript、React 和 Next.js 构建的 Windows 系统清理工具，专注解决 C 盘空间不足等问题，提供交互式界面。 [E3]\n完成此项目可证明在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。 [E1]\n可讨论 React 与 Next.js 在桌面工具中的应用、组件设计、状态管理、CI/CD 流程、测试策略，以及如何优化 Windows 清理功能的用户体验。 [E5]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "frontend_free",
+      "turn": 1,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "VERIFIED_PROJECTS",
+      "beforeProjects": [],
+      "afterProjects": [
+        "home-assistant/frontend",
+        "Oxotka/Landscape1C"
+      ],
+      "beforeMs": 6469,
+      "afterMs": 24407,
+      "state": {
+        "topic": [
+          "前端界面"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+      "cards": [
+        {
+          "name": "home-assistant/frontend",
+          "language": null,
+          "duration": null,
+          "matchStatus": "CONFIRMED",
+          "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+          "evidence": "提供初始设置 script/setup、开发说明、生产构建 script/build_frontend 和画廊开发命令，是明确的实践入口。 [E3]\n完整指南可在官方链接找到，其中简要介绍了项目的构建过程。 [E1]\nHome Assistant 是开源软件，采用 Apache 2 许可证，欢迎浏览仓库、学习并在自己的项目中复用部分代码。 [E5]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "Oxotka/Landscape1C",
+          "language": "JavaScript",
+          "duration": "2-5天",
+          "matchStatus": "CONFIRMED",
+          "description": "前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。 [E2]\n1C 技术生态的交互式地图，包含 200+ 工具、6 个过滤轴、关系图谱、示意图海报和按角色划分的学习路径。 [E4]",
+          "evidence": "前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。 [E2]\n1C 技术生态的交互式地图，包含 200+ 工具、6 个过滤轴、关系图谱、示意图海报和按角色划分的学习路径。 [E4]\n项目主题标签包括 1c、1c-enterprise、bsl、developer-tools、landscape、tech-radar。 [E6]",
+          "advice": true,
+          "importable": true
+        }
+      ]
+    },
+    {
+      "case": "frontend_specific",
+      "turn": 1,
+      "beforeStatus": "VERIFIED_PROJECTS",
+      "afterStatus": "RELEVANCE_UNAVAILABLE",
+      "beforeProjects": [
+        "zhensherlock/protocol-launcher",
+        "DavidHDev/canvas-ui",
+        "JustArchiNET/ASF-WebConfigGenerator"
+      ],
+      "afterProjects": [],
+      "beforeMs": 11437,
+      "afterMs": 5625,
+      "state": {
+        "topic": [
+          "Vue"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；当前本来就没有“编程语言”限制，已保持不限；当前本来就没有“最长周期”限制，已保持不限；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次项目用途核对暂未完成，还不能确认哪些项目适合你的方向。你的条件已经保存，我们可以继续聊想实现的功能，或再试一次查找。",
+      "cards": []
+    },
+    {
+      "case": "inventory_free",
+      "turn": 1,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "NO_MATCH",
+      "beforeProjects": [],
+      "afterProjects": [],
+      "beforeMs": 8938,
+      "afterMs": 16250,
+      "state": {
+        "topic": [
+          "库存管理",
+          "进货管理",
+          "销售管理"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：库存管理、进货管理、销售管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n暂时还没有核对出有效的调整方案。我会保留你的方向，不自动换成其他领域。可以从原目标里选一个最重要的功能继续找，或补充一个参考项目；目前不能保证放宽时间或语言就有合适结果。你最想先实现哪部分？",
+      "cards": []
+    },
+    {
+      "case": "inventory_specific",
+      "turn": 1,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "NO_MATCH",
+      "beforeProjects": [],
+      "afterProjects": [],
+      "beforeMs": 6469,
+      "afterMs": 8078,
+      "state": {
+        "topic": [
+          "库存管理"
+        ],
+        "goal": "学习",
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录基础（排序偏好）：一年；已记录项目目标：学习；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n暂时还没有核对出有效的调整方案。我会保留你的方向，不自动换成其他领域。可以从原目标里选一个最重要的功能继续找，或补充一个参考项目；目前不能保证放宽时间或语言就有合适结果。你最想先实现哪部分？",
+      "cards": []
+    },
+    {
+      "case": "hard_java_browser",
+      "turn": 1,
+      "beforeStatus": "NEEDS_CLARIFICATION",
+      "afterStatus": "PROJECTS_WITH_LIMITATIONS",
+      "beforeProjects": [],
+      "afterProjects": [
+        "browser-use/browser-use",
+        "firecrawl/firecrawl"
+      ],
+      "beforeMs": 4063,
+      "afterMs": 58515,
+      "state": {
+        "topic": [
+          "浏览器自动化"
+        ],
+        "language": "Java",
+        "allowDocker": false,
+        "verificationMode": "EXPLORE"
+      },
+      "answer": "已记录Docker要求：不使用；已记录编程语言：Java；已记录项目主题：浏览器自动化；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。\n\n找到了一些相关项目，但部分要求还缺少资料支持。可以先核对这些项目，也可以调整范围。\n根据现有资料，可以考虑以下调整；每个方案都保留其余条件：\n- 编程语言改为TypeScript，可以找到通过当前字段检查的项目，具体功能还需核对。\n尚未修改条件。你愿意先尝试哪一种调整？也可以告诉我哪项要求必须保留。",
+      "cards": [
+        {
+          "name": "browser-use/browser-use",
+          "language": null,
+          "duration": null,
+          "matchStatus": "NEEDS_VERIFICATION",
+          "description": "Browser Use 0.13 的 Beta 代理由 Rust 引擎驱动，提供真实浏览器/计算机操作空间、持久化工具和恢复循环，流程为 Python API -> Rust 核心 -> 浏览器运行环境 -> Web 任务完成。 [E1]\nBrowser Use 提供云服务，可跳过安装配置，获得更快速、可扩展且具有隐身能力的浏览器自动化。 [E3]",
+          "evidence": "Browser Use 0.13 的 Beta 代理由 Rust 引擎驱动，提供真实浏览器/计算机操作空间、持久化工具和恢复循环，流程为 Python API -> Rust 核心 -> 浏览器运行环境 -> Web 任务完成。 [E1]\n安装带原生核心运行时的 Browser Use 需要 Python>=3.11，通过 uv add \"browser-use[core]\" 或 pip install \"browser-use[core]\" 安装。 [E1]\n可选从 Browser Use 云服务获取 API 密钥，在 .env 中配置 BROWSER_USE_API_KEY，也可用 GOOGLE_API_KEY 或 ANTHROPIC_API_KEY。 [E1]\nBrowser Use 提供云服务，可跳过安装配置，获得更快速、可扩展且具有隐身能力的浏览器自动化。 [E3]\n可将编程代理（Cursor、Claude Code 等）指向 Agents.md 文档，然后开始提示，作为文档明确提供的实践入口。 [E5]",
+          "advice": false,
+          "importable": false
+        },
+        {
+          "name": "firecrawl/firecrawl",
+          "language": null,
+          "duration": null,
+          "matchStatus": "NEEDS_VERIFICATION",
+          "description": "Firecrawl 是用于大规模搜索、抓取和与网络交互的 API，可查找来源、提取内容并转换为干净的 Markdown 或结构化数据，开源且可作为托管服务使用。 [E2]\nFirecrawl 覆盖 96% 网络含 JS 重载页面，百万页面 P95 延迟 3.4 秒，输出 LLM 就绪的 Markdown/JSON/截图，处理轮换代理、编排、速率限制等，可连接 AI 代理或 MCP 客户端，支持解析 PDF/DOCX 及点击滚动等操作。 [E4]\nFirecrawl 核心端点包括搜索、抓取、交互；更多功能包括代理、爬取、映射、批量抓取。 [E6]",
+          "evidence": "Firecrawl 是用于大规模搜索、抓取和与网络交互的 API，可查找来源、提取内容并转换为干净的 Markdown 或结构化数据，开源且可作为托管服务使用。 [E2]\nFirecrawl 覆盖 96% 网络含 JS 重载页面，百万页面 P95 延迟 3.4 秒，输出 LLM 就绪的 Markdown/JSON/截图，处理轮换代理、编排、速率限制等，可连接 AI 代理或 MCP 客户端，支持解析 PDF/DOCX 及点击滚动等操作。 [E4]\nFirecrawl 核心端点包括搜索、抓取、交互；更多功能包括代理、爬取、映射、批量抓取。 [E6]",
+          "advice": false,
+          "importable": false
+        }
+      ]
+    },
+    {
+      "case": "unknown_quantum",
+      "turn": 1,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "NO_MATCH",
+      "beforeProjects": [],
+      "afterProjects": [],
+      "beforeMs": 8156,
+      "afterMs": 9656,
+      "state": {
+        "topic": [
+          "量子纠错芯片",
+          "流片"
+        ],
+        "verificationMode": "STRICT"
+      },
+      "answer": "已记录项目主题：量子纠错芯片、流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n暂时还没有核对出有效的调整方案。我会保留你的方向，不自动换成其他领域。可以从原目标里选一个最重要的功能继续找，或补充一个参考项目；目前不能保证放宽时间或语言就有合适结果。你最想先实现哪部分？",
+      "cards": []
+    },
+    {
+      "case": "dialogue_scope",
+      "turn": 1,
+      "beforeStatus": "CONVERSATION",
+      "afterStatus": "CONVERSATION",
+      "beforeProjects": [],
+      "afterProjects": [],
+      "beforeMs": 4859,
+      "afterMs": 3984,
+      "state": {
+        "topic": [
+          "Web应用开发"
+        ],
+        "goal": "求职",
+        "maxDurationDays": 180
+      },
+      "answer": "已记录基础（排序偏好）：有Vue基础；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：Web应用开发。其他已确认条件保持不变。\n\n好的，先只记需求，不推荐项目。已记录：\n\n- 主题方向：Web 应用开发\n- 目标：求职\n- 基础：有 Vue 基础\n- 周期：半年内完成（上限，更短的也行）\n- 语言：不限\n\n等你想看候选项目时说一声就行，我按这些条件帮你筛。",
+      "cards": []
+    },
+    {
+      "case": "dialogue_scope",
+      "turn": 2,
+      "beforeStatus": "NO_MATCH",
+      "afterStatus": "PROJECTS_WITH_LIMITATIONS",
+      "beforeProjects": [],
+      "afterProjects": [
+        "appsmithorg/appsmith",
+        "home-assistant/frontend",
+        "piskelapp/piskel"
+      ],
+      "beforeMs": 4813,
+      "afterMs": 47016,
+      "state": {
+        "topic": [
+          "Web应用开发"
+        ],
+        "goal": "求职",
+        "maxDurationDays": 180
+      },
+      "answer": "下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。\n\n找到了一些相关项目，但部分要求还缺少资料支持。可以先核对这些项目，也可以调整范围。\n根据现有资料，可以考虑以下调整；每个方案都保留其余条件：\n- 最长周期不限，可以找到通过当前字段检查的项目，具体功能还需核对。\n尚未修改条件。你愿意先尝试哪一种调整？也可以告诉我哪项要求必须保留。",
+      "cards": [
+        {
+          "name": "appsmithorg/appsmith",
+          "language": null,
+          "duration": null,
+          "matchStatus": "NEEDS_VERIFICATION",
+          "description": "Appsmith 是开源低代码平台，用于简化自定义应用的开发、部署和维护，可构建仪表盘、管理面板、客户360、IT自动化和服务管理工具。 [E5]",
+          "evidence": "Appsmith 是开源低代码平台，用于简化自定义应用的开发、部署和维护，可构建仪表盘、管理面板、客户360、IT自动化和服务管理工具。 [E5]\nAppsmith 提供本地开发环境搭建指南，可参考 Setup for local development 文档。 [E2]\nAppsmith 提供其他部署选项的安装指南文档。 [E8]",
+          "advice": true,
+          "importable": false
+        },
+        {
+          "name": "home-assistant/frontend",
+          "language": null,
+          "duration": null,
+          "matchStatus": "NEEDS_VERIFICATION",
+          "description": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。 [E1]",
+          "evidence": "Home Assistant 前端项目提供完整开发指南，简要介绍项目的构建过程。 [E1]\nHome Assistant 前端提供初始设置 script/setup、开发说明、生产构建 script/build_frontend 和画廊启动命令。 [E7]\nHome Assistant 是开源软件，采用 Apache 2 许可证，使用 BrowserStack 在各种设备上测试。 [E4]",
+          "advice": true,
+          "importable": false
+        },
+        {
+          "name": "piskelapp/piskel",
+          "language": null,
+          "duration": null,
+          "matchStatus": "NEEDS_VERIFICATION",
+          "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+          "evidence": "Piskel 支持 Chrome、Firefox、Edge、Brave 最新版；Brave 需禁用画布指纹识别。 [E6]\nPiskel 用户遇到问题或想请求新功能，可提交 issue。 [E3]",
+          "advice": true,
+          "importable": false
+        }
+      ]
+    },
+    {
+      "case": "dialogue_scope",
+      "turn": 3,
+      "beforeStatus": "VERIFIED_PROJECTS",
+      "afterStatus": "PROJECTS_WITH_LIMITATIONS",
+      "beforeProjects": [
+        "zhensherlock/protocol-launcher",
+        "pocket-stack/pocketjs",
+        "JustArchiNET/ASF-WebConfigGenerator"
+      ],
+      "afterProjects": [
+        "JustArchiNET/ASF-WebConfigGenerator",
+        "pocket-stack/pocketjs",
+        "galaxy-s10/billd-live"
+      ],
+      "beforeMs": 10609,
+      "afterMs": 24359,
+      "state": {
+        "topic": [
+          "Vue"
+        ],
+        "goal": "求职",
+        "maxDurationDays": 60
+      },
+      "answer": "已将最长周期从180天调整为60天；已将项目主题从Web应用开发调整为Vue。其他已确认条件保持不变。\n\n下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。",
+      "cards": [
+        {
+          "name": "JustArchiNET/ASF-WebConfigGenerator",
+          "language": "JavaScript",
+          "duration": "2-5天",
+          "matchStatus": "CONFIRMED",
+          "description": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E9]",
+          "evidence": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。 [E3]\n一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。 [E9]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "pocket-stack/pocketjs",
+          "language": "TypeScript",
+          "duration": "4-6天",
+          "matchStatus": "CONFIRMED",
+          "description": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。 [E7]",
+          "evidence": "浏览器外的高性能JSX UI框架，支持硬件渲染、Vue Vapor和Solid标准、Tailwind样式引擎，在8 MB内存下实现60 FPS动画。 [E7]\n清晰的模块划分和文档能让新手了解嵌入式UI原理和性能优化。 [E4]\n主题标签包含vue、vue-vapor、solidjs、tailwindcss、rust、quickjs等。 [E1]",
+          "advice": true,
+          "importable": true
+        },
+        {
+          "name": "galaxy-s10/billd-live",
+          "language": null,
+          "duration": null,
+          "matchStatus": "NEEDS_VERIFICATION",
+          "description": "基于Vue3 + WebRTC + Node + SRS + FFmpeg搭建的直播间。 [E8]",
+          "evidence": "基于Vue3 + WebRTC + Node + SRS + FFmpeg搭建的直播间。 [E8]\nBilldLive目前仍未发布稳定版，不建议开发者用于生产环境。 [E2]\nBilldLivePro稳定性更高、性能更强，但源码并不开源，需付费订阅。 [E5]",
+          "advice": true,
+          "importable": false
+        }
+      ]
+    }
+  ],
+  "allSyntheticSessionsDeleted": true,
+  "sourceSha256": {
+    "CustomerCatalogMapper.java": "29f8e0cb0efdcc1d34bf8fdfb6ae1bc2b19ddc07ab11d53550725d9f9326fb5d",
+    "CustomerConditionFacts.java": "6ee0ae78304338bace9645c3121ce5841b52836e09931cebcd4c0fcff93e7b74",
+    "CustomerConversation.java": "65b6c1bd3bd9188663996ba58ca2b4541bf20b29f2421dd133a619aa44bc67f6",
+    "CustomerDiagnostics.java": "a4988127dab37af710fa664f249dd88edd9f762c9c8c5da0ab3aac03e691ec8a",
+    "CustomerDialogue.java": "2e884e500f8b1ce90845ba32eaf4324e8b45bb9f1e686fd61427d61164b48990",
+    "CustomerDuration.java": "8b61c10948e3c024239f1cee75f84cf9e33ad5ed3b08935af464af8ef42dd764",
+    "CustomerEvidence.java": "ab660b64b4dc9908a2bd165a695aa9e0a32a2277b0ceee3705489e16e1059bbe",
+    "CustomerGoals.java": "b2a71b33526a8d49f4fb7621678777b1f2ed1aaeb3aaca7ba4621084753eb3a8",
+    "CustomerImportService.java": "909910ecc86fe64047eec4b372f2e6459f07ddbc3c2dffd350d921a7af081858",
+    "CustomerJson.java": "115d8b5114c5edd7478c4af2973a80e8f876f8f9274fad4d00f53c994dd2276f",
+    "CustomerKnowledgeBridge.java": "e57d1138ed63636f43467f1c453f604e0ae6de75c9a77ecb0262a6251b57d7ca",
+    "CustomerMapper.java": "7db8675b43f21c5077faf028fd1fee98d3ff00c8ff3ee745d35ee15a2da6c546",
+    "CustomerModel.java": "44cf81e053f68ecdea84ce140bd51904cf1ce1020524a4f8a414da85d16897c0",
+    "CustomerPreferences.java": "7b7e4b74155646a8bf02f6277ec2cb0902913d3ffeb274d2a026c92713a33218",
+    "CustomerProjects.java": "d3deb477f9f1013681ba8d37a414d60c8fdcab51c7da3668f54ec36c7e2e6ca0",
+    "CustomerProperties.java": "278fb0ae221c7db2469adf832bfe0fce7d6f3ddd283c2f358985d5a4af6f68aa",
+    "CustomerPurpose.java": "737d18c811be1126761d87e88e82e7225e5a4072532d8543a4aea7bcc3868868",
+    "CustomerRecommendationAdvice.java": "648c27e4f5d425580b47c062bc705df9eb8a01bc071ae065cae48df969802078",
+    "CustomerRecovery.java": "3da739f28902edc704bd74276ff9d5e576fb1b56090a728100703b65a9286de5",
+    "CustomerRuns.java": "b1e7db1a8fe704c638443e564dc60397b76614a3866a49f5f05ebb24fd40848b",
+    "CustomerSourceFacts.java": "68449adcf95ba3814f57da4602b304ebd641c3cf462171cf8940c6eb91351a1f",
+    "CustomerState.java": "9d97f759730a1e9f5424ceaa64406dc1e101362758988f7caceb5a937e17882a",
+    "CustomerStore.java": "1abd01ee1f0ba77b6451d0d5f41c271105ba922ef19cb8124bf7e60fba54429f",
+    "CustomerText.java": "347946bd37e2da87515e7f63aad3161be2129106a5921cd91a83b69ab1f43dc0",
+    "CustomerTools.java": "ba91d3bccdb00c8d721c6d651f0c474e12108d2de64beb90e8efadc276a90948",
+    "CustomerTopics.java": "f7ac0efc075899ade6549bcf41c71aced37514262ce6336109c167593525a956",
+    "CustomerUsage.java": "70b43f24403d0a97bce20b9b6f3d122a8b8f504f821c974665ab74c1517d9a40"
+  },
+  "limitations": [
+    "Single execution per frozen input; not a stable success rate",
+    "No full-catalog relevance labels: cannot infer Recall from card counts",
+    "Purpose judge is model-based; literal quotes validate provenance, not semantic correctness",
+    "API monetary prices and embedding usage not measured"
+  ]
+}

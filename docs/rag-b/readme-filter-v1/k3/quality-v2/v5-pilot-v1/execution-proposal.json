@@ -1,0 +1,44 @@
+{
+  "authorized": false,
+  "status": "BLOCKED_PENDING_DETERMINISTIC_RULE_REPAIR_AND_REPLAN",
+  "readyForExecution": false,
+  "requiresReplanBeforeAuthorization": true,
+  "blockingIssues": [
+    "FLOWISE_LAYOUT_AS_CODE_PREREQUISITE",
+    "N8N_LICENSE_NAVIGATION_AS_GLOBAL_GUARD",
+    "APPSMITH_NONBODY_RULE_PASSTHROUGH"
+  ],
+  "countsApplyOnlyTo": "Current V1.4/V5 planning snapshot; repair changes invalidate these exact inputs and counts.",
+  "scope": "V5 diagnostic pilot only, no production/index changes",
+  "documentIds": [
+    "240",
+    "244",
+    "427",
+    "522",
+    "546"
+  ],
+  "repositories": [
+    "Mintplex-Labs/anything-llm",
+    "FlowiseAI/Flowise",
+    "n8n-io/n8n",
+    "appsmithorg/appsmith",
+    "ByteBunny777/Docguard"
+  ],
+  "maxBlocks": 8,
+  "maxInputUpperBound": 12000,
+  "maxOutputTokens": 2048,
+  "primaryRequests": 13,
+  "reserveRequests": 2,
+  "maximumProposedAttempts": 15,
+  "automaticRetries": 0,
+  "firstPassReservedUpperBound": 149127,
+  "maximumReservedUpperBound": 210720,
+  "reservePolicy": "At most one same-input retry for each of the first two transport/protocol failures; no semantic-quality resampling.",
+  "newLedgerPath": "docs/rag-b/readme-filter-v1/k3/quality-v2/v5-pilot-v1/provider-calls.jsonl",
+  "oldR5BudgetTransferable": false,
+  "original29ObservationCasesInPilot": 22,
+  "original29ActuallyTargetedInPilot": 16,
+  "modelTargets": 62,
+  "labelledCases": 101,
+  "pilotPurpose": "Check reachable targets under V5 and observe projection blockers. Blocked/fixed-rule cases remain in scoped denominators; pilot is not the final quality gate."
+}

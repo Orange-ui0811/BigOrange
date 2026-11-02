@@ -1,0 +1,469 @@
+{
+  "outcome": "融合与去重修正有明确收益，但当前 B 版尚未达到直接替换 A 版的上线边界。",
+  "import": {
+    "nonblankOriginalDocuments": 203,
+    "sourceHashMismatches": 0,
+    "importedActiveChunks": 9560,
+    "currentBStates": [
+      {
+        "chunks": 9592,
+        "status": "READY",
+        "documents": 219
+      }
+    ],
+    "fallbackDocumentsRetained": 16
+  },
+  "fixedConfiguration": {
+    "embedding": "bge-small-zh-v1.5",
+    "dimensions": 512,
+    "chunkBaseline": "现有按章节/字符切割，500 字符上限、50 字符重叠；本轮未更换模型或分块。",
+    "index": "Redis Stack HNSW_HYBRID; COSINE; M=16; EF_CONSTRUCTION=200",
+    "fusion": "RRF k=60，向量 1.0、关键词 0.2；名称 3.0 和 0.1 奖励仅对明确完整名称命中启用。",
+    "dedup": "GitHub 跨周期同仓库同文本去重；事实查询保留同项目多个事实，推荐列表优先来源多样性。",
+    "generation": "deepseek-v4-pro，temperature=0.1；相同提示词和词面引用校验规则。"
+  },
+  "comparison": {
+    "baseline": {
+      "semanticRetrieval": {
+        "n": 90,
+        "errors": 0,
+        "evidenceRecall8": 0.4,
+        "evidenceMRR8": 0.3316798941798942,
+        "p50Ms": 286.52079999937996,
+        "p95Ms": 398.71462000019164
+      },
+      "retrievalCategories": {
+        "business_cross_language": {
+          "n": 20,
+          "errors": 0,
+          "evidenceRecall8": 0.05,
+          "evidenceMRR8": 0.0125,
+          "p50Ms": 298.10859999997774,
+          "p95Ms": 363.9290199997959
+        },
+        "business_zh": {
+          "n": 20,
+          "errors": 0,
+          "evidenceRecall8": 0.7,
+          "evidenceMRR8": 0.675,
+          "p50Ms": 281.6469999997935,
+          "p95Ms": 398.4770299995944
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "errors": 0,
+          "evidenceRecall8": 0.75,
+          "evidenceMRR8": 0.5967261904761905,
+          "p50Ms": 293.2895499998267,
+          "p95Ms": 401.7566999992596
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "errors": 0,
+          "evidenceRecall8": 0.2,
+          "evidenceMRR8": 0.11666666666666667,
+          "p50Ms": 279.7357999997985,
+          "p95Ms": 387.5577749999138
+        },
+        "named_regression": {
+          "n": 50,
+          "errors": 0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "p50Ms": 297.27104999983567,
+          "p95Ms": 481.64032999957243
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "errors": 0,
+          "evidenceRecall8": 0.2,
+          "evidenceMRR8": 0.15,
+          "p50Ms": 269.5351500005927,
+          "p95Ms": 333.6502499988455
+        },
+        "readme_english": {
+          "n": 10,
+          "errors": 0,
+          "evidenceRecall8": 0.2,
+          "evidenceMRR8": 0.15,
+          "p50Ms": 278.2839499996044,
+          "p95Ms": 392.52568000065367
+        }
+      },
+      "businessBenchmark": {
+        "caseCount": 60,
+        "aPassRate": 0.36666666666666664,
+        "bPassRate": 1.0,
+        "answerExpectedCount": 57,
+        "refusalExpectedCount": 3,
+        "bTraceabilityRate": 1.0,
+        "bCitationReadyRate": 1.0,
+        "bRefusalAccuracy": 1.0,
+        "sourceGoldCaseCount": 53,
+        "aSourceRecallAtK": 0.4339622641509434,
+        "bSourceRecallAtK": 1.0,
+        "aP50Ms": "201",
+        "aP95Ms": "313",
+        "bP50Ms": "264",
+        "bP95Ms": "302"
+      },
+      "load": [
+        {
+          "concurrency": 1,
+          "requests": 24,
+          "elapsedSeconds": 6.995013499999914,
+          "throughputRps": 3.431015536996504,
+          "metrics": {
+            "n": 24,
+            "errors": 0,
+            "evidenceRecall8": 0.6666666666666666,
+            "evidenceMRR8": 0.538938492063492,
+            "p50Ms": 278.1603000012183,
+            "p95Ms": 374.05691000103616
+          }
+        },
+        {
+          "concurrency": 4,
+          "requests": 24,
+          "elapsedSeconds": 2.121003300000666,
+          "throughputRps": 11.315399650718348,
+          "metrics": {
+            "n": 24,
+            "errors": 0,
+            "evidenceRecall8": 0.6666666666666666,
+            "evidenceMRR8": 0.538938492063492,
+            "p50Ms": 318.2064499997068,
+            "p95Ms": 436.761249999472
+          }
+        },
+        {
+          "concurrency": 8,
+          "requests": 24,
+          "elapsedSeconds": 1.8967095000007248,
+          "throughputRps": 12.653492798971497,
+          "metrics": {
+            "n": 24,
+            "errors": 0,
+            "evidenceRecall8": 0.6666666666666666,
+            "evidenceMRR8": 0.538938492063492,
+            "p50Ms": 569.6075500000006,
+            "p95Ms": 691.7854099991927
+          }
+        }
+      ],
+      "generation": {
+        "requests": 18,
+        "statuses": {
+          "UNSUPPORTED_CITATIONS": 14,
+          "SUPPORTED": 4
+        },
+        "usage": {
+          "prompt_tokens": 27240,
+          "completion_tokens": 24055,
+          "total_tokens": 51295,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 27240,
+          "reasoning_tokens": 21510
+        },
+        "estimatedUsdOffPeak": 0.06560730000000001,
+        "estimatedUsdPeak": 0.13121460000000001,
+        "invalidCitationPointers": 0
+      },
+      "citationSentenceHeuristic": {
+        "LOW_TEXTUAL_SUPPORT": 33,
+        "SUPPORTED": 37,
+        "MISSING_CITATION": 10
+      },
+      "answerWallP50Ms": 10521.090949998325,
+      "answerWallP95Ms": 34836.17077000033
+    },
+    "fixed": {
+      "semanticRetrieval": {
+        "n": 90,
+        "errors": 0,
+        "evidenceRecall8": 0.5555555555555556,
+        "evidenceMRR8": 0.4728835978835979,
+        "p50Ms": 276.49524999833375,
+        "p95Ms": 400.99871499805886
+      },
+      "retrievalCategories": {
+        "business_cross_language": {
+          "n": 20,
+          "errors": 0,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "p50Ms": 298.23409999880823,
+          "p95Ms": 413.5353249992477
+        },
+        "business_zh": {
+          "n": 20,
+          "errors": 0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.9,
+          "p50Ms": 276.63994999966235,
+          "p95Ms": 386.4814700007628
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "errors": 0,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.8208333333333334,
+          "p50Ms": 269.58249999916006,
+          "p95Ms": 400.1057599971318
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "errors": 0,
+          "evidenceRecall8": 0.3,
+          "evidenceMRR8": 0.23333333333333334,
+          "p50Ms": 319.80085000031977,
+          "p95Ms": 375.81595499977993
+        },
+        "named_regression": {
+          "n": 50,
+          "errors": 0,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9840000000000001,
+          "p50Ms": 273.6355500001082,
+          "p95Ms": 394.7523300004832
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "errors": 0,
+          "evidenceRecall8": 0.2,
+          "evidenceMRR8": 0.15,
+          "p50Ms": 255.37084999996296,
+          "p95Ms": 372.6110700010395
+        },
+        "readme_english": {
+          "n": 10,
+          "errors": 0,
+          "evidenceRecall8": 0.7,
+          "evidenceMRR8": 0.4309523809523809,
+          "p50Ms": 270.99264999924344,
+          "p95Ms": 389.6530949983571
+        }
+      },
+      "businessBenchmark": {
+        "caseCount": 60,
+        "aPassRate": 0.36666666666666664,
+        "bPassRate": 1.0,
+        "answerExpectedCount": 57,
+        "refusalExpectedCount": 3,
+        "bTraceabilityRate": 1.0,
+        "bCitationReadyRate": 1.0,
+        "bRefusalAccuracy": 1.0,
+        "sourceGoldCaseCount": 53,
+        "aSourceRecallAtK": 0.4339622641509434,
+        "bSourceRecallAtK": 1.0,
+        "aP50Ms": "199",
+        "aP95Ms": "321",
+        "bP50Ms": "256",
+        "bP95Ms": "370"
+      },
+      "load": [
+        {
+          "concurrency": 1,
+          "requests": 24,
+          "elapsedSeconds": 6.619079199997941,
+          "throughputRps": 3.6258819806850875,
+          "metrics": {
+            "n": 24,
+            "errors": 0,
+            "evidenceRecall8": 0.875,
+            "evidenceMRR8": 0.7673611111111112,
+            "p50Ms": 257.83680000131426,
+            "p95Ms": 395.2355750003334
+          }
+        },
+        {
+          "concurrency": 4,
+          "requests": 24,
+          "elapsedSeconds": 2.188755700000911,
+          "throughputRps": 10.965134208440901,
+          "metrics": {
+            "n": 24,
+            "errors": 0,
+            "evidenceRecall8": 0.875,
+            "evidenceMRR8": 0.7673611111111112,
+            "p50Ms": 313.97834999916086,
+            "p95Ms": 511.3413049986774
+          }
+        },
+        {
+          "concurrency": 8,
+          "requests": 24,
+          "elapsedSeconds": 1.9101905000025,
+          "throughputRps": 12.564191896027433,
+          "metrics": {
+            "n": 24,
+            "errors": 0,
+            "evidenceRecall8": 0.875,
+            "evidenceMRR8": 0.7673611111111112,
+            "p50Ms": 592.5432999993063,
+            "p95Ms": 687.062034999144
+          }
+        }
+      ],
+      "generation": {
+        "requests": 18,
+        "statuses": {
+          "SUPPORTED": 7,
+          "UNSUPPORTED_CITATIONS": 11
+        },
+        "usage": {
+          "prompt_tokens": 29654,
+          "completion_tokens": 20672,
+          "total_tokens": 50326,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 29654,
+          "reasoning_tokens": 18036
+        },
+        "estimatedUsdOffPeak": 0.0605022,
+        "estimatedUsdPeak": 0.1210044,
+        "invalidCitationPointers": 0
+      },
+      "citationSentenceHeuristic": {
+        "SUPPORTED": 50,
+        "LOW_TEXTUAL_SUPPORT": 27,
+        "MISSING_CITATION": 2
+      },
+      "answerWallP50Ms": 10273.304600001211,
+      "answerWallP95Ms": 22858.47203500122
+    }
+  },
+  "indexStats": {
+    "A": {
+      "num_docs": 5647,
+      "vector_index_sz_mb": 13.979141235351562,
+      "total_index_memory_sz_mb": 9.010000228881836,
+      "hash_indexing_failures": 0,
+      "indexing": 0
+    },
+    "B": {
+      "num_docs": 9592,
+      "vector_index_sz_mb": 23.323169708251953,
+      "total_index_memory_sz_mb": 14.38719367980957,
+      "hash_indexing_failures": 0,
+      "indexing": 0
+    }
+  },
+  "fixedAnswerReview": {
+    "directTargetAnswers": 10,
+    "insufficientEvidenceResponses": 8,
+    "rows": [
+      {
+        "key": "fact-00-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": []
+      },
+      {
+        "key": "fact-02-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": []
+      },
+      {
+        "key": "fact-03-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": []
+      },
+      {
+        "key": "fact-04-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": []
+      },
+      {
+        "key": "fact-07-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": []
+      },
+      {
+        "key": "fact-12-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": [
+          "引用支持来自平台职业项目摘要，不代表所有能力都已对照上游 README 核验。"
+        ]
+      },
+      {
+        "key": "fact-16-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": [
+          "已说明原证据是“持久化后台智能体”而非完全相同的“后台任务”，平台摘要未独立验证。"
+        ]
+      },
+      {
+        "key": "fact-18-zh",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": []
+      },
+      {
+        "key": "fact-20-zh",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": []
+      },
+      {
+        "key": "fact-21-zh",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": []
+      },
+      {
+        "key": "fact-24-zh",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": []
+      },
+      {
+        "key": "fact-25-zh",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": []
+      },
+      {
+        "key": "fact-26-zh",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": []
+      },
+      {
+        "key": "fact-28-zh",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": []
+      },
+      {
+        "key": "fact-29-zh",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": [
+          "C5 仅含 Graphite 标识图片；不能支持回答中“2D 内容创作程序化工具箱”的描述。最后一个证据不足结论未加引用。"
+        ]
+      },
+      {
+        "key": "fresh-02",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": [
+          "首句摄像头权限事实缺引用；末句本地 HTTP 方案还应明确安全来源条件，不能仅凭避免 file:// 保证可用。"
+        ]
+      },
+      {
+        "key": "fresh-03",
+        "behavior": "DIRECT_TARGET_ANSWER",
+        "notes": []
+      },
+      {
+        "key": "fresh-21",
+        "behavior": "INSUFFICIENT_EVIDENCE_RESPONSE",
+        "notes": []
+      }
+    ],
+    "method": "代码与原片段逐条核对；非独立人工盲评，不能宣称为通用事实准确率。"
+  },
+  "limits": [
+    "A 为直接 VectorStore 检索基线，B 为带业务筛选的混合检索；语料亦不同，不能将 60 题通过率当成实际推荐系统全面优劣。",
+    "固定题集金标要求命中来源和事实片段；可能存在其他有效答案。本轮参数依据已有诊断修正，没有独立未使用过的保留集。",
+    "Redis 短时负载并非长期容量测试，P95 包含外部 Embedding 的网络波动。",
+    "金额为生成 token 按官方峰谷价估算区间，非实际账单；不含历史入库调用、Embedding 和服务器费用。",
+    "旧库与平台用户路由保持不变；不批准生产替换。"
+  ],
+  "nextAcceptanceGates": [
+    "在独立代际测试 bge-m3 + token 结构分块，避免影响 A 的 512 维索引。",
+    "把全文技术事实与平台生成的项目评价区分，并减少 HTML、徽章等无信息片段进入召回。",
+    "验证跨语言事实支持，单独处理无证据拒答，保留真实缺引用/错误引用拦截。",
+    "使用独立保留集、多轮生成与较长时间负载，完成业务入口和失败/回滚测试后再决定上线。"
+  ]
+}

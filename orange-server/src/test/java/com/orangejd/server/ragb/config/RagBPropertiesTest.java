@@ -6,6 +6,10 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RagBPropertiesTest {
+    @Test void validatesRerankBounds(){
+        var p=new RagBProperties();p.getRerank().setMaxCandidates(1);assertThatThrownBy(p::validate).isInstanceOf(IllegalStateException.class);
+        p.getRerank().setMaxCandidates(80);p.getRerank().setTimeoutMillis(99);assertThatThrownBy(p::validate).isInstanceOf(IllegalStateException.class);
+    }
     @Test
     void acceptsDedicatedNamespace() {
         assertThatCode(new RagBProperties()::validate).doesNotThrowAnyException();

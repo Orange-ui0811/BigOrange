@@ -20,6 +20,45 @@ class CustomerToolsTest {
         when(profiles.confirmedContext(5L)).thenReturn("Java新手");
         tools=new CustomerTools(knowledge,projects,profiles,db,new CustomerJson(new ObjectMapper()),indexes,props);
     }
+    @AfterEach void close() { tools.close(); }
+    @Test void historyHasTwoReadsWithoutConsumingFiveBusinessToolSlots() {
+        when(projects.search(anyMap())).thenReturn(List.of());
+        var context=tools.context("r",5,Instant.now().plusSeconds(20));
+        assertThat(context.contextRead("searchConversationHistory",Map.of("query","Java"),()->"{}")).isEqualTo("{}");
+        assertThat(context.contextRead("readConversationSource",Map.of("messageId",1),()->"{}")).isEqualTo("{}");
+        for(int i=0;i<5;i++)context.projects(Map.of("fixture",i));
+        assertThat(context.calls).isEqualTo(7);
+        assertThatThrownBy(()->context.contextRead("readConversationSource",Map.of("messageId",2),()->"{}")).hasMessage("TOOL_LIMIT");
+    }
+    @Test void historyReadChecksCancellationBeforeRunningCallback() {
+        var context=tools.context("r",5,Instant.now().plusSeconds(20));
+        when(db.run("r")).thenReturn(Map.of("status","CANCELLED"));
+        var executed=new java.util.concurrent.atomic.AtomicBoolean();
+        assertThatThrownBy(()->context.contextRead("searchConversationHistory",Map.of("query","Java"),()->{executed.set(true);return "{}";})).hasMessage("RUN_STOPPED");
+        assertThat(executed).isFalse();
+    }
+    @Test void rapidTwoCallerHandoffsDoNotRejectAvailableCapacity() throws Exception {
+        try(var callers=java.util.concurrent.Executors.newFixedThreadPool(2)) {
+            var a=callers.submit(()->{for(int i=0;i<40;i++)tools.context("r",5,Instant.now().plusSeconds(10)).profile();});
+            var b=callers.submit(()->{for(int i=0;i<40;i++)tools.context("r",5,Instant.now().plusSeconds(10)).profile();});
+            a.get(8,java.util.concurrent.TimeUnit.SECONDS);b.get(8,java.util.concurrent.TimeUnit.SECONDS);
+        }
+        verify(profiles,times(80)).confirmedContext(5L);
+    }
+    @Test void cancelledQueuedCallNeverInvokesBusinessWork() throws Exception {
+        var entered=new java.util.concurrent.CountDownLatch(2);
+        var release=new java.util.concurrent.CountDownLatch(1);
+        when(profiles.confirmedContext(5L)).thenAnswer(inv->{entered.countDown();release.await(3,java.util.concurrent.TimeUnit.SECONDS);return "profile";});
+        try(var callers=java.util.concurrent.Executors.newFixedThreadPool(3)) {
+            var a=callers.submit(()->tools.context("r",5,Instant.now().plusSeconds(5)).profile());
+            var b=callers.submit(()->tools.context("r",5,Instant.now().plusSeconds(5)).profile());
+            assertThat(entered.await(2,java.util.concurrent.TimeUnit.SECONDS)).isTrue();
+            var queued=callers.submit(()->tools.context("r",5,Instant.now().plusMillis(100)).projects(Map.of()));
+            assertThatThrownBy(()->queued.get(1,java.util.concurrent.TimeUnit.SECONDS)).isInstanceOf(java.util.concurrent.ExecutionException.class);
+            release.countDown();a.get();b.get();
+            verifyNoInteractions(projects);
+        } finally {release.countDown();}
+    }
     @Test void identicalToolsReuseResultAndServerInjectsOwner() {
         var context=tools.context("r",5,Instant.now().plusSeconds(90)); assertThat(context.profile()).isEqualTo(context.profile());
         verify(profiles,times(1)).confirmedContext(5L); verify(db,times(1)).step(eq("r"),eq("getConfirmedProfile"),eq("SUCCEEDED"),anyString());

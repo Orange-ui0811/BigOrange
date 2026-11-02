@@ -1,0 +1,166 @@
+{
+  "sessionId": 28,
+  "scope": "New synthetic local session; real DB diagnosis; no external calls",
+  "rows": [
+    {
+      "message": "当前有什么条件",
+      "status": "SUCCEEDED",
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "STATE",
+        "state": {
+          "language": "Java",
+          "goal": "学习",
+          "experience": "刚学",
+          "maxDurationDays": 7
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "CONFIRMED_CONDITIONS",
+        "answer": "当前已确认条件：\n- 编程语言：Java\n- 最长周期：7天\n- 项目目标：学习\n- 基础（排序偏好）：刚学\n学习/求职目标和用户基础用于排序，不自动限制项目分类或难度。当前没有项目难度限制。",
+        "conditionChangeSummary": ""
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [],
+        "promptVersion": "customer-v4.2-counted-alternatives",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 0,
+          "complete": true,
+          "cacheHitTokens": 0,
+          "inputTokens": 0,
+          "cacheMissTokens": 0,
+          "totalTokens": 0,
+          "outputTokens": 0,
+          "callsWithoutUsage": 0,
+          "calls": 0,
+          "models": []
+        }
+      }
+    },
+    {
+      "message": "为什么没有推荐项目",
+      "status": "SUCCEEDED",
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "DIAGNOSE",
+        "state": {
+          "language": "Java",
+          "goal": "学习",
+          "experience": "刚学",
+          "maxDurationDays": 7
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-03T08:11:12.362778034Z",
+          "conditions": {
+            "language": "Java",
+            "maxDurationDays": 7
+          },
+          "current": {
+            "total": 347,
+            "confirmed": 0,
+            "uncertain": 347
+          },
+          "available": {
+            "total": 511,
+            "confirmed": 511,
+            "uncertain": 0
+          },
+          "alternatives": [
+            {
+              "total": 405,
+              "confirmed": 14,
+              "uncertain": 391,
+              "changes": {
+                "language": "TypeScript"
+              },
+              "label": "编程语言改为TypeScript"
+            },
+            {
+              "total": 347,
+              "confirmed": 1,
+              "uncertain": 346,
+              "changes": {
+                "maxDurationDays": 21
+              },
+              "label": "最长周期改为21天"
+            }
+          ],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "FILTER_DIAGNOSTICS",
+        "answer": "按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 347 个资料待核实候选（仓库去重，引用仍需核对）。\n保持其余条件不变，可以考虑：\n- 编程语言改为TypeScript：可推荐候选共 14 个，另有 391 个待核实。\n- 最长周期改为21天：可推荐候选共 1 个，另有 346 个待核实。\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。",
+        "conditionChangeSummary": ""
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [],
+        "promptVersion": "customer-v4.2-counted-alternatives",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 0,
+          "complete": true,
+          "cacheHitTokens": 0,
+          "inputTokens": 0,
+          "cacheMissTokens": 0,
+          "totalTokens": 0,
+          "outputTokens": 0,
+          "callsWithoutUsage": 0,
+          "calls": 0,
+          "models": []
+        }
+      }
+    },
+    {
+      "message": "确认",
+      "status": "SUCCEEDED",
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "STATE",
+        "state": {
+          "language": "Java",
+          "goal": "学习",
+          "experience": "刚学",
+          "maxDurationDays": 7
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "CONFIRMED_CONDITIONS",
+        "answer": "当前已确认条件：\n- 编程语言：Java\n- 最长周期：7天\n- 项目目标：学习\n- 基础（排序偏好）：刚学\n学习/求职目标和用户基础用于排序，不自动限制项目分类或难度。当前没有项目难度限制。",
+        "conditionChangeSummary": ""
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [],
+        "promptVersion": "customer-v4.2-counted-alternatives",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 0,
+          "complete": true,
+          "cacheHitTokens": 0,
+          "inputTokens": 0,
+          "cacheMissTokens": 0,
+          "totalTokens": 0,
+          "outputTokens": 0,
+          "callsWithoutUsage": 0,
+          "calls": 0,
+          "models": []
+        }
+      }
+    }
+  ],
+  "durationMs": [
+    89.0,
+    312.0,
+    34.0
+  ]
+}

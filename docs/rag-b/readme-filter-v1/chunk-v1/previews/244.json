@@ -1,0 +1,1322 @@
+{
+  "policyVersion" : "README_KNOWLEDGE_M3_V1",
+  "identity" : {
+    "projectId" : null,
+    "generationId" : "OFFLINE_README_CHUNK_V1_20261031"
+  },
+  "documentId" : "244",
+  "versionId" : "1028",
+  "sourceRef" : "FlowiseAI/Flowise",
+  "sourceSha256" : "6968d715b991af4f536dca53f88ed39e0717c0560434739a8bd4349c3ed0b310",
+  "filterVersions" : {
+    "parser" : "CONTIGUOUS_MARKDOWN_BLOCKS_V1",
+    "rulePolicy" : "README_RULE_PREVIEW_V1_6",
+    "selectionPolicy" : "README_MODEL_REVIEW_V1_6",
+    "prompt" : "README_SELECTOR_ZH_V5_SOURCE_ADMISSION",
+    "schema" : "README_SELECTIONS_V2",
+    "modelIdentity" : "deepseek-flash:864edf3857f1ed84db385b11d51fc5497dba89228568354238d6c87b77e2d424",
+    "runId" : "K3_V5_PILOT_V3_20261030_diagnostic"
+  },
+  "settings" : {
+    "targetTokens" : 512,
+    "maxTokens" : 768,
+    "maxChunks" : 4096
+  },
+  "units" : [ {
+    "unitId" : "0b421659dc0a4077475ac90b055d418ddb63821d09374a64a61827d6efb3d379",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431" ],
+    "subjectScopes" : [ "VERSION_SPECIFIC" ],
+    "knowledgeTypes" : [ "TECHNICAL_TEXT" ],
+    "sectionPath" : [ "⚡快速开始" ],
+    "status" : "READY",
+    "reasons" : [ ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "PRIMARY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    } ],
+    "chunkIds" : [ "d666281f78d2ae9a014645b7cdc9e1dd6669d20fcc180691fbca86678bbb34de" ]
+  }, {
+    "unitId" : "64eb7d363d4d8b6934c05ec8d0807dd465083a7e8bd4ba74d143da68a4734119",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1493-1568", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1569-1611" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "⚡快速开始" ],
+    "status" : "READY",
+    "reasons" : [ ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1493-1568",
+      "startUtf16" : 1493,
+      "endUtf16" : 1568,
+      "text" : "1. 安装 Flowise\n    ```bash\n    npm install -g flowise\n    ```\n2. 启动 Flowise\n",
+      "sha256" : "c40aa2edfe0e62a94abffab32c1accb50475b97923e419d31cd83a4b7fc3d72d",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1569-1611",
+      "startUtf16" : 1569,
+      "endUtf16" : 1611,
+      "text" : "    ```bash\n    npx flowise start\n    ```\n",
+      "sha256" : "6970a712b5f1cc5a5a563507595261314b95ab7ab6c78364f8895c8cd6cae1e8",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ "1bc5655e2b5139f8d6734696a452a1c0bd0340ee452ea596ad6e98eb84a717cf" ]
+  }, {
+    "unitId" : "07e778daf708f38f3c8d3b7562cfc55047aec3964bfb06542e6be2f2dac2ec11",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1612-1665" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "⚡快速开始" ],
+    "status" : "READY",
+    "reasons" : [ ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1612-1665",
+      "startUtf16" : 1612,
+      "endUtf16" : 1665,
+      "text" : "3. 打开 [http://localhost:3000](http://localhost:3000)\n",
+      "sha256" : "196b8b543363903ca2d1adea7588e958f44ca932a307d6332143a4173fde0cf8",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ "f049f51f9cb9c7eedb70258e9e1f41a8482f1b344f9b4e99064c745d882b7efa" ]
+  }, {
+    "unitId" : "c335db39c96fd98a856f974e518d94cfeaed907688218e0a15e4d9883e6c4092",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1918-1929", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1930-1991", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1992-2001", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2002-2076", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2077-2086", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2087-2131" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1903-1917" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "🐳 Docker", "Docker 镜像" ],
+    "status" : "READY",
+    "reasons" : [ ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679",
+      "startUtf16" : 1666,
+      "endUtf16" : 1679,
+      "text" : "## 🐳 Docker\n",
+      "sha256" : "3137dc86a00e041344a19b8d0544d6c15ec8c9dd2999517c12c05c05fc18a07d",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1903-1917",
+      "startUtf16" : 1903,
+      "endUtf16" : 1917,
+      "text" : "### Docker 镜像\n",
+      "sha256" : "1bcfde3cfa612df7df474d969653407707f3f44c98b0ecae7d69eb5b96dd1a4b",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1918-1929",
+      "startUtf16" : 1918,
+      "endUtf16" : 1929,
+      "text" : "1. 本地构建镜像：\n",
+      "sha256" : "70cab5774f869a589b2667ba9d220aa7c0e337392c10bad94f21d088e521159e",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1930-1991",
+      "startUtf16" : 1930,
+      "endUtf16" : 1991,
+      "text" : "    ```bash\n    docker build --no-cache -t flowise .\n    ```\n",
+      "sha256" : "954f353760b0672d98bc95cfda07d735dfb217046512e1e874b7726d12e90b0e",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1992-2001",
+      "startUtf16" : 1992,
+      "endUtf16" : 2001,
+      "text" : "2. 运行镜像：\n",
+      "sha256" : "b8c32f66098cb2548c4cccf062f2c9e12112a29e5d504f92acf56cf4fb2ea5c5",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2002-2076",
+      "startUtf16" : 2002,
+      "endUtf16" : 2076,
+      "text" : "    ```bash\n    docker run -d --name flowise -p 3000:3000 flowise\n    ```\n",
+      "sha256" : "1e81974e6bed2f2037b2cc7810c383286696db2045b7c12e39d7be5110a1d006",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2077-2086",
+      "startUtf16" : 2077,
+      "endUtf16" : 2086,
+      "text" : "3. 停止镜像：\n",
+      "sha256" : "c975a0f709bbace44c6e44152db3027753b524649fc98b06553fdf19fb5b7dc6",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2087-2131",
+      "startUtf16" : 2087,
+      "endUtf16" : 2131,
+      "text" : "    ```bash\n    docker stop flowise\n    ```\n",
+      "sha256" : "617285109bf00b2258b9509c88be015cce2f50c0c8851ff57cf65da98d858579",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ "5eaa9de5b023b0156742a10db0d325b27d9b550395b0f1833ff6635f821cdec4" ]
+  }, {
+    "unitId" : "49d5ea7943737d1e1671d8ce253fc681c1fdee34c36c6de8231de2b18f9a4bdd",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2174-2307" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "ARCHITECTURE" ],
+    "sectionPath" : [ "👨‍💻 开发者" ],
+    "status" : "READY",
+    "reasons" : [ ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2174-2307",
+      "startUtf16" : 2174,
+      "endUtf16" : 2307,
+      "text" : "-   `server`：Node 后端，提供 API 逻辑\n-   `ui`：React 前端\n-   `components`：第三方节点集成\n-   `api-documentation`：基于 express 自动生成的 swagger-ui API 文档\n",
+      "sha256" : "86f58a43049bb8a5543b6f9f8e88de427d28b842fb420915624d441aa7422dc5",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ "ebfa214e653a061df9657ce6cdb88937385195e808a0b0efa2e2fd2de478570e" ]
+  }, {
+    "unitId" : "8154019de3cac4b128b16639788b10decab273c917d0ec9ae69029396388e69f",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "👨‍💻 开发者", "先决条件" ],
+    "status" : "READY",
+    "reasons" : [ ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317",
+      "startUtf16" : 2308,
+      "endUtf16" : 2317,
+      "text" : "### 先决条件\n",
+      "sha256" : "121e3d9edfe422badc8209e3750a9e80b56489134166d851f6fc43411ec05767",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400",
+      "startUtf16" : 2318,
+      "endUtf16" : 2400,
+      "text" : "-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n",
+      "sha256" : "c5e8dca4496d7ea1cd0473fe9a40d1a52bcab5fed55270d20307373e908582ae",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ "5f54233fa8d7d446b5c34ee6ba6b49fa32531af1daba3ff2cab33aec4377fefa" ]
+  }, {
+    "unitId" : "2120eacc5dd08407e52f98579ac725922e780e71f2c9698c724b4cbdc5ef19ab",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2409-2419", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2420-2495", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2496-2509", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2510-2545", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2546-2561", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2562-2599", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2600-2612", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2613-2648" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2649-2769", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2770-2865", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2866-2941", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2942-3015", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3016-3026", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3027-3062", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3063-3078" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "👨‍💻 开发者", "设置" ],
+    "status" : "DEFERRED",
+    "reasons" : [ "REQUIRED_BLOCK_NOT_ADMITTED:af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3016-3026,af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3027-3062,af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3063-3078" ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317",
+      "startUtf16" : 2308,
+      "endUtf16" : 2317,
+      "text" : "### 先决条件\n",
+      "sha256" : "121e3d9edfe422badc8209e3750a9e80b56489134166d851f6fc43411ec05767",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400",
+      "startUtf16" : 2318,
+      "endUtf16" : 2400,
+      "text" : "-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n",
+      "sha256" : "c5e8dca4496d7ea1cd0473fe9a40d1a52bcab5fed55270d20307373e908582ae",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408",
+      "startUtf16" : 2401,
+      "endUtf16" : 2408,
+      "text" : "### 设置\n",
+      "sha256" : "4d31e892a1dfbe1d5c60fa1d72b8bcd18e38b2187960d7f8bc2ae103b70fd36f",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2409-2419",
+      "startUtf16" : 2409,
+      "endUtf16" : 2419,
+      "text" : "1.  克隆仓库：\n",
+      "sha256" : "43691b756e3015d0f8fdf02ab1548be4c57e30f8c17c68b9e71a3beda06d35ed",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2420-2495",
+      "startUtf16" : 2420,
+      "endUtf16" : 2495,
+      "text" : "    ```bash\n    git clone https://github.com/FlowiseAI/Flowise.git\n    ```\n",
+      "sha256" : "f8e803053ee37c455ccb714763fc60840dbe1426740a7ffde07d62c4919586b7",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2496-2509",
+      "startUtf16" : 2496,
+      "endUtf16" : 2509,
+      "text" : "2.  进入仓库文件夹：\n",
+      "sha256" : "c295164cdf5911896e6fae20f630f2aa05afcb746a803aaf7e59c2c350a3f50c",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2510-2545",
+      "startUtf16" : 2510,
+      "endUtf16" : 2545,
+      "text" : "    ```bash\n    cd Flowise\n    ```\n",
+      "sha256" : "8e48db37e22d6c8cdfb478b0a78039dd72df415051061038d808127f28b28355",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2546-2561",
+      "startUtf16" : 2546,
+      "endUtf16" : 2561,
+      "text" : "3.  安装所有模块的依赖：\n",
+      "sha256" : "cbe9aff654a97cb6c75fdb167211efe072442c94029e3c337e5b9eb1769d3ab3",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2562-2599",
+      "startUtf16" : 2562,
+      "endUtf16" : 2599,
+      "text" : "    ```bash\n    pnpm install\n    ```\n",
+      "sha256" : "95d99f5a1c61f17dbab117a3b33551001dfa44a1cfbba3363cd2be9d597412e7",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2600-2612",
+      "startUtf16" : 2600,
+      "endUtf16" : 2612,
+      "text" : "4.  构建所有代码：\n",
+      "sha256" : "03dae8dab86ff9d16537ee97224365379fe76940fe6c74cd4fbe119b7d470838",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2613-2648",
+      "startUtf16" : 2613,
+      "endUtf16" : 2648,
+      "text" : "    ```bash\n    pnpm build\n    ```\n",
+      "sha256" : "1d195f821a78eeda743489b751bc192bcf556e4ef37722463a79fe1c052d11d9",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2649-2769",
+      "startUtf16" : 2649,
+      "endUtf16" : 2769,
+      "text" : "    <details>\n    <summary>错误代码 134（JavaScript 堆内存不足）</summary>  \n    如果运行上述 `build` 脚本时遇到此错误，请尝试增加 Node.js 堆大小并重新运行脚本：\n",
+      "sha256" : "5b0da5cf9638a59f5cf339b1169ecc45a1213c4fb6350de66c00f31341c365c4",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2770-2865",
+      "startUtf16" : 2770,
+      "endUtf16" : 2865,
+      "text" : "    ```bash\n    # macOS / Linux / Git Bash\n    export NODE_OPTIONS=\"--max-old-space-size=4096\"\n",
+      "sha256" : "1da0149e21023ccc91b04afa79ebbe52eec2c257b8704c994561c619bc6140e4",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2866-2941",
+      "startUtf16" : 2866,
+      "endUtf16" : 2941,
+      "text" : "    # Windows PowerShell\n    $env:NODE_OPTIONS=\"--max-old-space-size=4096\"\n",
+      "sha256" : "07491ade89666cde21bcb2f5d9071f27a25facf03646ec09c45bb1f8133e1cb9",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2942-3015",
+      "startUtf16" : 2942,
+      "endUtf16" : 3015,
+      "text" : "    # Windows CMD\n    set NODE_OPTIONS=--max-old-space-size=4096\n    ```\n",
+      "sha256" : "668380153a6a612b4bcb1d0e589ff82b55c5472dcb151ad8e44e294735fec0e5",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    } ],
+    "chunkIds" : [ ]
+  }, {
+    "unitId" : "bb9bc4b2eedd3a028d9ce4123178470ec929da615d92895ce0b1530819d8b11e",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2409-2419", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2420-2495", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2496-2509", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2510-2545", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2546-2561", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2562-2599", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2600-2612", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2613-2648", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3079-3089", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3090-3125", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3126-3189" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2649-2769", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2770-2865", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2866-2941", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2942-3015", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3016-3026", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3027-3062", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3063-3078" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "👨‍💻 开发者", "设置" ],
+    "status" : "DEFERRED",
+    "reasons" : [ "REQUIRED_BLOCK_NOT_ADMITTED:af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3016-3026,af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3027-3062,af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3063-3078" ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317",
+      "startUtf16" : 2308,
+      "endUtf16" : 2317,
+      "text" : "### 先决条件\n",
+      "sha256" : "121e3d9edfe422badc8209e3750a9e80b56489134166d851f6fc43411ec05767",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400",
+      "startUtf16" : 2318,
+      "endUtf16" : 2400,
+      "text" : "-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n",
+      "sha256" : "c5e8dca4496d7ea1cd0473fe9a40d1a52bcab5fed55270d20307373e908582ae",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408",
+      "startUtf16" : 2401,
+      "endUtf16" : 2408,
+      "text" : "### 设置\n",
+      "sha256" : "4d31e892a1dfbe1d5c60fa1d72b8bcd18e38b2187960d7f8bc2ae103b70fd36f",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2409-2419",
+      "startUtf16" : 2409,
+      "endUtf16" : 2419,
+      "text" : "1.  克隆仓库：\n",
+      "sha256" : "43691b756e3015d0f8fdf02ab1548be4c57e30f8c17c68b9e71a3beda06d35ed",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2420-2495",
+      "startUtf16" : 2420,
+      "endUtf16" : 2495,
+      "text" : "    ```bash\n    git clone https://github.com/FlowiseAI/Flowise.git\n    ```\n",
+      "sha256" : "f8e803053ee37c455ccb714763fc60840dbe1426740a7ffde07d62c4919586b7",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2496-2509",
+      "startUtf16" : 2496,
+      "endUtf16" : 2509,
+      "text" : "2.  进入仓库文件夹：\n",
+      "sha256" : "c295164cdf5911896e6fae20f630f2aa05afcb746a803aaf7e59c2c350a3f50c",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2510-2545",
+      "startUtf16" : 2510,
+      "endUtf16" : 2545,
+      "text" : "    ```bash\n    cd Flowise\n    ```\n",
+      "sha256" : "8e48db37e22d6c8cdfb478b0a78039dd72df415051061038d808127f28b28355",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2546-2561",
+      "startUtf16" : 2546,
+      "endUtf16" : 2561,
+      "text" : "3.  安装所有模块的依赖：\n",
+      "sha256" : "cbe9aff654a97cb6c75fdb167211efe072442c94029e3c337e5b9eb1769d3ab3",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2562-2599",
+      "startUtf16" : 2562,
+      "endUtf16" : 2599,
+      "text" : "    ```bash\n    pnpm install\n    ```\n",
+      "sha256" : "95d99f5a1c61f17dbab117a3b33551001dfa44a1cfbba3363cd2be9d597412e7",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2600-2612",
+      "startUtf16" : 2600,
+      "endUtf16" : 2612,
+      "text" : "4.  构建所有代码：\n",
+      "sha256" : "03dae8dab86ff9d16537ee97224365379fe76940fe6c74cd4fbe119b7d470838",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2613-2648",
+      "startUtf16" : 2613,
+      "endUtf16" : 2648,
+      "text" : "    ```bash\n    pnpm build\n    ```\n",
+      "sha256" : "1d195f821a78eeda743489b751bc192bcf556e4ef37722463a79fe1c052d11d9",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2649-2769",
+      "startUtf16" : 2649,
+      "endUtf16" : 2769,
+      "text" : "    <details>\n    <summary>错误代码 134（JavaScript 堆内存不足）</summary>  \n    如果运行上述 `build` 脚本时遇到此错误，请尝试增加 Node.js 堆大小并重新运行脚本：\n",
+      "sha256" : "5b0da5cf9638a59f5cf339b1169ecc45a1213c4fb6350de66c00f31341c365c4",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2770-2865",
+      "startUtf16" : 2770,
+      "endUtf16" : 2865,
+      "text" : "    ```bash\n    # macOS / Linux / Git Bash\n    export NODE_OPTIONS=\"--max-old-space-size=4096\"\n",
+      "sha256" : "1da0149e21023ccc91b04afa79ebbe52eec2c257b8704c994561c619bc6140e4",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2866-2941",
+      "startUtf16" : 2866,
+      "endUtf16" : 2941,
+      "text" : "    # Windows PowerShell\n    $env:NODE_OPTIONS=\"--max-old-space-size=4096\"\n",
+      "sha256" : "07491ade89666cde21bcb2f5d9071f27a25facf03646ec09c45bb1f8133e1cb9",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2942-3015",
+      "startUtf16" : 2942,
+      "endUtf16" : 3015,
+      "text" : "    # Windows CMD\n    set NODE_OPTIONS=--max-old-space-size=4096\n    ```\n",
+      "sha256" : "668380153a6a612b4bcb1d0e589ff82b55c5472dcb151ad8e44e294735fec0e5",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3079-3089",
+      "startUtf16" : 3079,
+      "endUtf16" : 3089,
+      "text" : "5.  启动应用：\n",
+      "sha256" : "ad0be4f7ddf5dbf0af203f3da6a436553148d8c4f32c9598814f8c266dca0082",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3090-3125",
+      "startUtf16" : 3090,
+      "endUtf16" : 3125,
+      "text" : "    ```bash\n    pnpm start\n    ```\n",
+      "sha256" : "809ba513bf411c664ab1ea7a9f6721bdeb50c08ffc489b9f788cff89af552d66",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3126-3189",
+      "startUtf16" : 3126,
+      "endUtf16" : 3189,
+      "text" : "    现在可以通过 [http://localhost:3000](http://localhost:3000) 访问应用\n",
+      "sha256" : "74fd14e7d41ec8e2a32378a98bb249809e50efd53c7541a1186c6101cd93220f",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ ]
+  }, {
+    "unitId" : "0aeeb3bb246b2d5ae2b881c1d4af46cb42bb1f7ea4ceaafbec12e666f2eb5735",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3190-3200" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3201-3272" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "👨‍💻 开发者", "设置" ],
+    "status" : "DEFERRED",
+    "reasons" : [ "REQUIRED_BLOCK_NOT_ADMITTED:af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3201-3272" ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317",
+      "startUtf16" : 2308,
+      "endUtf16" : 2317,
+      "text" : "### 先决条件\n",
+      "sha256" : "121e3d9edfe422badc8209e3750a9e80b56489134166d851f6fc43411ec05767",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400",
+      "startUtf16" : 2318,
+      "endUtf16" : 2400,
+      "text" : "-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n",
+      "sha256" : "c5e8dca4496d7ea1cd0473fe9a40d1a52bcab5fed55270d20307373e908582ae",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408",
+      "startUtf16" : 2401,
+      "endUtf16" : 2408,
+      "text" : "### 设置\n",
+      "sha256" : "4d31e892a1dfbe1d5c60fa1d72b8bcd18e38b2187960d7f8bc2ae103b70fd36f",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3190-3200",
+      "startUtf16" : 3190,
+      "endUtf16" : 3200,
+      "text" : "6.  开发构建：\n",
+      "sha256" : "43c0c8a8dc5cf80ea367868f39bef897ea7c28ad70ab297a6b4ef66b6e71bfb8",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ ]
+  }, {
+    "unitId" : "e8218f17fa158d6ea693af028dc631230e02251f60256586b5fc047e487840cc",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2649-2769", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2770-2865", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2866-2941", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2942-3015" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2409-2419", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2420-2495", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2496-2509", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2510-2545", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2546-2561", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2562-2599", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2600-2612", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2613-2648", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3016-3026", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3027-3062", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3063-3078" ],
+    "subjectScopes" : [ "PLATFORM_SPECIFIC" ],
+    "knowledgeTypes" : [ "LIMITATION", "USAGE" ],
+    "sectionPath" : [ "👨‍💻 开发者", "设置" ],
+    "status" : "DEFERRED",
+    "reasons" : [ "REQUIRED_BLOCK_NOT_ADMITTED:af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3016-3026,af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3027-3062,af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3063-3078" ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317",
+      "startUtf16" : 2308,
+      "endUtf16" : 2317,
+      "text" : "### 先决条件\n",
+      "sha256" : "121e3d9edfe422badc8209e3750a9e80b56489134166d851f6fc43411ec05767",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400",
+      "startUtf16" : 2318,
+      "endUtf16" : 2400,
+      "text" : "-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n",
+      "sha256" : "c5e8dca4496d7ea1cd0473fe9a40d1a52bcab5fed55270d20307373e908582ae",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2401-2408",
+      "startUtf16" : 2401,
+      "endUtf16" : 2408,
+      "text" : "### 设置\n",
+      "sha256" : "4d31e892a1dfbe1d5c60fa1d72b8bcd18e38b2187960d7f8bc2ae103b70fd36f",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2409-2419",
+      "startUtf16" : 2409,
+      "endUtf16" : 2419,
+      "text" : "1.  克隆仓库：\n",
+      "sha256" : "43691b756e3015d0f8fdf02ab1548be4c57e30f8c17c68b9e71a3beda06d35ed",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2420-2495",
+      "startUtf16" : 2420,
+      "endUtf16" : 2495,
+      "text" : "    ```bash\n    git clone https://github.com/FlowiseAI/Flowise.git\n    ```\n",
+      "sha256" : "f8e803053ee37c455ccb714763fc60840dbe1426740a7ffde07d62c4919586b7",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2496-2509",
+      "startUtf16" : 2496,
+      "endUtf16" : 2509,
+      "text" : "2.  进入仓库文件夹：\n",
+      "sha256" : "c295164cdf5911896e6fae20f630f2aa05afcb746a803aaf7e59c2c350a3f50c",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2510-2545",
+      "startUtf16" : 2510,
+      "endUtf16" : 2545,
+      "text" : "    ```bash\n    cd Flowise\n    ```\n",
+      "sha256" : "8e48db37e22d6c8cdfb478b0a78039dd72df415051061038d808127f28b28355",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2546-2561",
+      "startUtf16" : 2546,
+      "endUtf16" : 2561,
+      "text" : "3.  安装所有模块的依赖：\n",
+      "sha256" : "cbe9aff654a97cb6c75fdb167211efe072442c94029e3c337e5b9eb1769d3ab3",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2562-2599",
+      "startUtf16" : 2562,
+      "endUtf16" : 2599,
+      "text" : "    ```bash\n    pnpm install\n    ```\n",
+      "sha256" : "95d99f5a1c61f17dbab117a3b33551001dfa44a1cfbba3363cd2be9d597412e7",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2600-2612",
+      "startUtf16" : 2600,
+      "endUtf16" : 2612,
+      "text" : "4.  构建所有代码：\n",
+      "sha256" : "03dae8dab86ff9d16537ee97224365379fe76940fe6c74cd4fbe119b7d470838",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2613-2648",
+      "startUtf16" : 2613,
+      "endUtf16" : 2648,
+      "text" : "    ```bash\n    pnpm build\n    ```\n",
+      "sha256" : "1d195f821a78eeda743489b751bc192bcf556e4ef37722463a79fe1c052d11d9",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2649-2769",
+      "startUtf16" : 2649,
+      "endUtf16" : 2769,
+      "text" : "    <details>\n    <summary>错误代码 134（JavaScript 堆内存不足）</summary>  \n    如果运行上述 `build` 脚本时遇到此错误，请尝试增加 Node.js 堆大小并重新运行脚本：\n",
+      "sha256" : "5b0da5cf9638a59f5cf339b1169ecc45a1213c4fb6350de66c00f31341c365c4",
+      "role" : "PRIMARY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2770-2865",
+      "startUtf16" : 2770,
+      "endUtf16" : 2865,
+      "text" : "    ```bash\n    # macOS / Linux / Git Bash\n    export NODE_OPTIONS=\"--max-old-space-size=4096\"\n",
+      "sha256" : "1da0149e21023ccc91b04afa79ebbe52eec2c257b8704c994561c619bc6140e4",
+      "role" : "PRIMARY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2866-2941",
+      "startUtf16" : 2866,
+      "endUtf16" : 2941,
+      "text" : "    # Windows PowerShell\n    $env:NODE_OPTIONS=\"--max-old-space-size=4096\"\n",
+      "sha256" : "07491ade89666cde21bcb2f5d9071f27a25facf03646ec09c45bb1f8133e1cb9",
+      "role" : "PRIMARY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2942-3015",
+      "startUtf16" : 2942,
+      "endUtf16" : 3015,
+      "text" : "    # Windows CMD\n    set NODE_OPTIONS=--max-old-space-size=4096\n    ```\n",
+      "sha256" : "668380153a6a612b4bcb1d0e589ff82b55c5472dcb151ad8e44e294735fec0e5",
+      "role" : "PRIMARY",
+      "scopes" : [ "PLATFORM_SPECIFIC" ]
+    } ],
+    "chunkIds" : [ ]
+  }, {
+    "unitId" : "a6679bf98f2b5be64ea97b6e119c161c9badb5cfb3b4f22e041f3a28087aa904",
+    "primaryBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1700-1902" ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1680-1699" ],
+    "subjectScopes" : [ "CORE" ],
+    "knowledgeTypes" : [ "USAGE" ],
+    "sectionPath" : [ "🐳 Docker", "Docker Compose" ],
+    "status" : "READY",
+    "reasons" : [ ],
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679",
+      "startUtf16" : 1666,
+      "endUtf16" : 1679,
+      "text" : "## 🐳 Docker\n",
+      "sha256" : "3137dc86a00e041344a19b8d0544d6c15ec8c9dd2999517c12c05c05fc18a07d",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1680-1699",
+      "startUtf16" : 1680,
+      "endUtf16" : 1699,
+      "text" : "### Docker Compose\n",
+      "sha256" : "95cdaab37508021bc8386e4f77b9e349c983fb9f5c20b47e086ebb84008fbaac",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1700-1902",
+      "startUtf16" : 1700,
+      "endUtf16" : 1902,
+      "text" : "1. 克隆 Flowise 项目\n2. 进入项目根目录下的 `docker` 文件夹\n3. 复制 `.env.example` 文件，粘贴到同一位置，并重命名为 `.env`\n4. `docker compose up -d`\n5. 打开 [http://localhost:3000](http://localhost:3000)\n6. 可以通过 `docker compose stop` 停止容器\n",
+      "sha256" : "88b9ad377f78e3061b84b30b2e26d6e3ca62584e34a7ce85c730c42bdaecba57",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "chunkIds" : [ "1311e6e4f4ac0d95123ec5206e19c1761c79a7524af6c11c194933356fb1a292" ]
+  } ],
+  "chunks" : [ {
+    "chunkId" : "d666281f78d2ae9a014645b7cdc9e1dd6669d20fcc180691fbca86678bbb34de",
+    "unitId" : "0b421659dc0a4077475ac90b055d418ddb63821d09374a64a61827d6efb3d379",
+    "index" : 0,
+    "embeddingText" : "Repository: FlowiseAI/Flowise\nSection: ⚡快速开始\nKnowledge: [TECHNICAL_TEXT]\nSubject scopes: [VERSION_SPECIFIC]\n\n## ⚡快速开始\n\n下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+    "tokens" : 72,
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "PRIMARY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    } ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431" ]
+  }, {
+    "chunkId" : "1bc5655e2b5139f8d6734696a452a1c0bd0340ee452ea596ad6e98eb84a717cf",
+    "unitId" : "64eb7d363d4d8b6934c05ec8d0807dd465083a7e8bd4ba74d143da68a4734119",
+    "index" : 0,
+    "embeddingText" : "Repository: FlowiseAI/Flowise\nSection: ⚡快速开始\nKnowledge: [USAGE]\nSubject scopes: [CORE]\n\n## ⚡快速开始\n\n下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n\n1. 安装 Flowise\n    ```bash\n    npm install -g flowise\n    ```\n2. 启动 Flowise\n\n    ```bash\n    npx flowise start\n    ```\n",
+    "tokens" : 96,
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1493-1568",
+      "startUtf16" : 1493,
+      "endUtf16" : 1568,
+      "text" : "1. 安装 Flowise\n    ```bash\n    npm install -g flowise\n    ```\n2. 启动 Flowise\n",
+      "sha256" : "c40aa2edfe0e62a94abffab32c1accb50475b97923e419d31cd83a4b7fc3d72d",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1569-1611",
+      "startUtf16" : 1569,
+      "endUtf16" : 1611,
+      "text" : "    ```bash\n    npx flowise start\n    ```\n",
+      "sha256" : "6970a712b5f1cc5a5a563507595261314b95ab7ab6c78364f8895c8cd6cae1e8",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492" ]
+  }, {
+    "chunkId" : "f049f51f9cb9c7eedb70258e9e1f41a8482f1b344f9b4e99064c745d882b7efa",
+    "unitId" : "07e778daf708f38f3c8d3b7562cfc55047aec3964bfb06542e6be2f2dac2ec11",
+    "index" : 0,
+    "embeddingText" : "Repository: FlowiseAI/Flowise\nSection: ⚡快速开始\nKnowledge: [USAGE]\nSubject scopes: [CORE]\n\n## ⚡快速开始\n\n下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n\n3. 打开 [http://localhost:3000](http://localhost:3000)\n",
+    "tokens" : 83,
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1612-1665",
+      "startUtf16" : 1612,
+      "endUtf16" : 1665,
+      "text" : "3. 打开 [http://localhost:3000](http://localhost:3000)\n",
+      "sha256" : "196b8b543363903ca2d1adea7588e958f44ca932a307d6332143a4173fde0cf8",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492" ]
+  }, {
+    "chunkId" : "5eaa9de5b023b0156742a10db0d325b27d9b550395b0f1833ff6635f821cdec4",
+    "unitId" : "c335db39c96fd98a856f974e518d94cfeaed907688218e0a15e4d9883e6c4092",
+    "index" : 0,
+    "embeddingText" : "Repository: FlowiseAI/Flowise\nSection: 🐳 Docker > Docker 镜像\nKnowledge: [USAGE]\nSubject scopes: [CORE]\n\n## ⚡快速开始\n\n下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n\n## 🐳 Docker\n\n### Docker 镜像\n\n1. 本地构建镜像：\n\n    ```bash\n    docker build --no-cache -t flowise .\n    ```\n\n2. 运行镜像：\n\n    ```bash\n    docker run -d --name flowise -p 3000:3000 flowise\n    ```\n\n3. 停止镜像：\n\n    ```bash\n    docker stop flowise\n    ```\n",
+    "tokens" : 151,
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679",
+      "startUtf16" : 1666,
+      "endUtf16" : 1679,
+      "text" : "## 🐳 Docker\n",
+      "sha256" : "3137dc86a00e041344a19b8d0544d6c15ec8c9dd2999517c12c05c05fc18a07d",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1903-1917",
+      "startUtf16" : 1903,
+      "endUtf16" : 1917,
+      "text" : "### Docker 镜像\n",
+      "sha256" : "1bcfde3cfa612df7df474d969653407707f3f44c98b0ecae7d69eb5b96dd1a4b",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1918-1929",
+      "startUtf16" : 1918,
+      "endUtf16" : 1929,
+      "text" : "1. 本地构建镜像：\n",
+      "sha256" : "70cab5774f869a589b2667ba9d220aa7c0e337392c10bad94f21d088e521159e",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1930-1991",
+      "startUtf16" : 1930,
+      "endUtf16" : 1991,
+      "text" : "    ```bash\n    docker build --no-cache -t flowise .\n    ```\n",
+      "sha256" : "954f353760b0672d98bc95cfda07d735dfb217046512e1e874b7726d12e90b0e",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1992-2001",
+      "startUtf16" : 1992,
+      "endUtf16" : 2001,
+      "text" : "2. 运行镜像：\n",
+      "sha256" : "b8c32f66098cb2548c4cccf062f2c9e12112a29e5d504f92acf56cf4fb2ea5c5",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2002-2076",
+      "startUtf16" : 2002,
+      "endUtf16" : 2076,
+      "text" : "    ```bash\n    docker run -d --name flowise -p 3000:3000 flowise\n    ```\n",
+      "sha256" : "1e81974e6bed2f2037b2cc7810c383286696db2045b7c12e39d7be5110a1d006",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2077-2086",
+      "startUtf16" : 2077,
+      "endUtf16" : 2086,
+      "text" : "3. 停止镜像：\n",
+      "sha256" : "c975a0f709bbace44c6e44152db3027753b524649fc98b06553fdf19fb5b7dc6",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2087-2131",
+      "startUtf16" : 2087,
+      "endUtf16" : 2131,
+      "text" : "    ```bash\n    docker stop flowise\n    ```\n",
+      "sha256" : "617285109bf00b2258b9509c88be015cce2f50c0c8851ff57cf65da98d858579",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1903-1917" ]
+  }, {
+    "chunkId" : "ebfa214e653a061df9657ce6cdb88937385195e808a0b0efa2e2fd2de478570e",
+    "unitId" : "49d5ea7943737d1e1671d8ce253fc681c1fdee34c36c6de8231de2b18f9a4bdd",
+    "index" : 0,
+    "embeddingText" : "Repository: FlowiseAI/Flowise\nSection: 👨‍💻 开发者\nKnowledge: [ARCHITECTURE]\nSubject scopes: [CORE]\n\n## ⚡快速开始\n\n下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n\n## 👨‍💻 开发者\n\n-   `server`：Node 后端，提供 API 逻辑\n-   `ui`：React 前端\n-   `components`：第三方节点集成\n-   `api-documentation`：基于 express 自动生成的 swagger-ui API 文档\n",
+    "tokens" : 134,
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2174-2307",
+      "startUtf16" : 2174,
+      "endUtf16" : 2307,
+      "text" : "-   `server`：Node 后端，提供 API 逻辑\n-   `ui`：React 前端\n-   `components`：第三方节点集成\n-   `api-documentation`：基于 express 自动生成的 swagger-ui API 文档\n",
+      "sha256" : "86f58a43049bb8a5543b6f9f8e88de427d28b842fb420915624d441aa7422dc5",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145" ]
+  }, {
+    "chunkId" : "5f54233fa8d7d446b5c34ee6ba6b49fa32531af1daba3ff2cab33aec4377fefa",
+    "unitId" : "8154019de3cac4b128b16639788b10decab273c917d0ec9ae69029396388e69f",
+    "index" : 0,
+    "embeddingText" : "Repository: FlowiseAI/Flowise\nSection: 👨‍💻 开发者 > 先决条件\nKnowledge: [USAGE]\nSubject scopes: [CORE]\n\n## ⚡快速开始\n\n下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n\n## 👨‍💻 开发者\n\n### 先决条件\n\n-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n",
+    "tokens" : 117,
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145",
+      "startUtf16" : 2132,
+      "endUtf16" : 2145,
+      "text" : "## 👨‍💻 开发者\n",
+      "sha256" : "c64904af39a5e46d062a37b8b9818e38c8d953db6ba7312aa6073024c0d17ec2",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317",
+      "startUtf16" : 2308,
+      "endUtf16" : 2317,
+      "text" : "### 先决条件\n",
+      "sha256" : "121e3d9edfe422badc8209e3750a9e80b56489134166d851f6fc43411ec05767",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2318-2400",
+      "startUtf16" : 2318,
+      "endUtf16" : 2400,
+      "text" : "-   安装 [PNPM](https://pnpm.io/installation)\n    ```bash\n    npm i -g pnpm\n    ```\n",
+      "sha256" : "c5e8dca4496d7ea1cd0473fe9a40d1a52bcab5fed55270d20307373e908582ae",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2132-2145", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2308-2317" ]
+  }, {
+    "chunkId" : "1311e6e4f4ac0d95123ec5206e19c1761c79a7524af6c11c194933356fb1a292",
+    "unitId" : "a6679bf98f2b5be64ea97b6e119c161c9badb5cfb3b4f22e041f3a28087aa904",
+    "index" : 0,
+    "embeddingText" : "Repository: FlowiseAI/Flowise\nSection: 🐳 Docker > Docker Compose\nKnowledge: [USAGE]\nSubject scopes: [CORE]\n\n## ⚡快速开始\n\n下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n\n## 🐳 Docker\n\n### Docker Compose\n\n1. 克隆 Flowise 项目\n2. 进入项目根目录下的 `docker` 文件夹\n3. 复制 `.env.example` 文件，粘贴到同一位置，并重命名为 `.env`\n4. `docker compose up -d`\n5. 打开 [http://localhost:3000](http://localhost:3000)\n6. 可以通过 `docker compose stop` 停止容器\n",
+    "tokens" : 172,
+    "sourceSpans" : [ {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431",
+      "startUtf16" : 1422,
+      "endUtf16" : 1431,
+      "text" : "## ⚡快速开始\n",
+      "sha256" : "0eec310708595d70e981caa0c56b3ec43aed3c8fbb27772bfb6c5191d34efc12",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492",
+      "startUtf16" : 1432,
+      "endUtf16" : 1492,
+      "text" : "下载并安装 [NodeJS](https://nodejs.org/en/download)，版本 >= 20.0.0\n",
+      "sha256" : "e873a4fe5db45722bf7af2385c2413ec7ceb5773134e7e81c2eb452ee92ca103",
+      "role" : "DEPENDENCY",
+      "scopes" : [ "VERSION_SPECIFIC" ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679",
+      "startUtf16" : 1666,
+      "endUtf16" : 1679,
+      "text" : "## 🐳 Docker\n",
+      "sha256" : "3137dc86a00e041344a19b8d0544d6c15ec8c9dd2999517c12c05c05fc18a07d",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1680-1699",
+      "startUtf16" : 1680,
+      "endUtf16" : 1699,
+      "text" : "### Docker Compose\n",
+      "sha256" : "95cdaab37508021bc8386e4f77b9e349c983fb9f5c20b47e086ebb84008fbaac",
+      "role" : "HEADING",
+      "scopes" : [ ]
+    }, {
+      "blockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1700-1902",
+      "startUtf16" : 1700,
+      "endUtf16" : 1902,
+      "text" : "1. 克隆 Flowise 项目\n2. 进入项目根目录下的 `docker` 文件夹\n3. 复制 `.env.example` 文件，粘贴到同一位置，并重命名为 `.env`\n4. `docker compose up -d`\n5. 打开 [http://localhost:3000](http://localhost:3000)\n6. 可以通过 `docker compose stop` 停止容器\n",
+      "sha256" : "88b9ad377f78e3061b84b30b2e26d6e3ca62584e34a7ce85c730c42bdaecba57",
+      "role" : "PRIMARY",
+      "scopes" : [ "CORE" ]
+    } ],
+    "requiredBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1422-1431", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1432-1492", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1666-1679", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1680-1699" ]
+  } ],
+  "navigation" : [ {
+    "label" : "English",
+    "href" : "../../README.md",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:853-998",
+    "hints" : [ ]
+  }, {
+    "label" : "繁體中文",
+    "href" : "./i18n/README-TW.md",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:853-998",
+    "hints" : [ ]
+  }, {
+    "label" : "简体中文",
+    "href" : "./i18n/README-ZH.md",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:853-998",
+    "hints" : [ ]
+  }, {
+    "label" : "日本語",
+    "href" : "./i18n/README-JA.md",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:853-998",
+    "hints" : [ ]
+  }, {
+    "label" : "한국어",
+    "href" : "./i18n/README-KR.md",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:853-998",
+    "hints" : [ ]
+  }, {
+    "label" : "⚡ 快速开始",
+    "href" : "#-快速开始",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1202-1223",
+    "hints" : [ ]
+  }, {
+    "label" : "🐳 Docker",
+    "href" : "#-docker",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1223-1249",
+    "hints" : [ ]
+  }, {
+    "label" : "👨‍💻 开发者",
+    "href" : "#-开发者",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1249-1272",
+    "hints" : [ ]
+  }, {
+    "label" : "🌱 环境变量",
+    "href" : "#-环境变量",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1272-1294",
+    "hints" : [ ]
+  }, {
+    "label" : "📖 文档",
+    "href" : "#-文档",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1294-1312",
+    "hints" : [ ]
+  }, {
+    "label" : "🌐 自托管",
+    "href" : "#-自托管",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1312-1332",
+    "hints" : [ ]
+  }, {
+    "label" : "☁️ Flowise 云",
+    "href" : "#️-flowise-云",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1332-1365",
+    "hints" : [ ]
+  }, {
+    "label" : "🙋 支持",
+    "href" : "#-支持",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1365-1383",
+    "hints" : [ ]
+  }, {
+    "label" : "🙌 贡献",
+    "href" : "#-贡献",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1383-1401",
+    "hints" : [ ]
+  }, {
+    "label" : "📄 许可证",
+    "href" : "#-许可证",
+    "evidenceBlockId" : "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1401-1421",
+    "hints" : [ ]
+  } ],
+  "reviewBlockIds" : [ "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:19-223", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:251-365", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:488-597", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1007-1029", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:1029-1191", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:2146-2173", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3016-3026", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3027-3062", "af541e373f1f22c099c2909f0544576e7523841c786edf54e3062a5df0012220:3201-3272" ],
+  "qualityFlags" : [ "SOURCE_CLAIMS_NOT_RUNTIME_VERIFIED", "HAS_REVIEW_BLOCKS", "RECOMMENDATION_ADMISSION:README_RECOMMENDATION_V4", "UNREAD_CONDITION_POINTERS_NOT_VERIFIED" ]
+}

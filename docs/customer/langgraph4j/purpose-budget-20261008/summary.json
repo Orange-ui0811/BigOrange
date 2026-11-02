@@ -1,0 +1,400 @@
+{
+  "releaseApproved": false,
+  "offlineChecks": 89,
+  "baseline": {
+    "LEGACY": {
+      "runs": 4,
+      "passes": 3,
+      "p95Ms": 36703,
+      "maxMs": 36703,
+      "modelAttempts": 9,
+      "failedAttempts": 2,
+      "retryAttempts": 1,
+      "reportedTotalTokens": 34269,
+      "attemptsWithoutUsage": 1,
+      "runsWithRetrievalFailures": 0,
+      "costUsd": "UNKNOWN",
+      "purpose": {
+        "attempts": 2,
+        "failedAttempts": 2,
+        "retryAttempts": 1,
+        "durationMs": 31400,
+        "reportedTotalTokens": 6643,
+        "attemptsWithoutUsage": 1
+      },
+      "cases": [
+        {
+          "caseId": "S01",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "CONVERSATION",
+          "durationMs": 2763,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S02",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "SUPPORTED_EXTRACTS",
+          "durationMs": 6396,
+          "projectCount": 0,
+          "referenceCount": 6,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S04",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "CONVERSATION",
+          "durationMs": 6051,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S03",
+          "round": 1,
+          "passed": false,
+          "runStatus": "SUCCEEDED",
+          "status": "RELEVANCE_UNAVAILABLE",
+          "durationMs": 36703,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        }
+      ],
+      "purposeAttempts": [
+        {
+          "status": "FAILED",
+          "attempt": 1,
+          "durationMs": 15447,
+          "usage": {
+            "prompt_tokens": 2547,
+            "completion_tokens": 4096,
+            "total_tokens": 6643,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 4096
+            },
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 2291
+          },
+          "thinking": true,
+          "outputBudget": 4096,
+          "timeoutSeconds": null,
+          "finishReason": "length",
+          "errorCode": "MODEL_OUTPUT_TRUNCATED",
+          "retryDecision": null,
+          "remainingSeconds": null
+        },
+        {
+          "status": "FAILED",
+          "attempt": 2,
+          "durationMs": 15953,
+          "usage": null,
+          "thinking": null,
+          "outputBudget": null,
+          "timeoutSeconds": null,
+          "finishReason": null,
+          "errorCode": "DEPENDENCY_FAILED",
+          "retryDecision": null,
+          "remainingSeconds": null
+        }
+      ]
+    },
+    "LANGGRAPH4J": {
+      "runs": 4,
+      "passes": 4,
+      "p95Ms": 19037,
+      "maxMs": 19037,
+      "modelAttempts": 11,
+      "failedAttempts": 0,
+      "retryAttempts": 0,
+      "reportedTotalTokens": 37194,
+      "attemptsWithoutUsage": 0,
+      "runsWithRetrievalFailures": 0,
+      "costUsd": "UNKNOWN",
+      "purpose": {
+        "attempts": 1,
+        "failedAttempts": 0,
+        "retryAttempts": 0,
+        "durationMs": 7154,
+        "reportedTotalTokens": 4349,
+        "attemptsWithoutUsage": 0
+      },
+      "cases": [
+        {
+          "caseId": "S01",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "CONVERSATION",
+          "durationMs": 1828,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S02",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "SUPPORTED_EXTRACTS",
+          "durationMs": 5752,
+          "projectCount": 0,
+          "referenceCount": 6,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S04",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "FOLLOW_UP",
+          "durationMs": 4090,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S03",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "PROJECTS_WITH_LIMITATIONS",
+          "durationMs": 19037,
+          "projectCount": 3,
+          "referenceCount": 7,
+          "retrievalFailures": 0
+        }
+      ],
+      "purposeAttempts": [
+        {
+          "status": "SUCCEEDED",
+          "attempt": 1,
+          "durationMs": 7154,
+          "usage": {
+            "prompt_tokens": 2543,
+            "completion_tokens": 1806,
+            "total_tokens": 4349,
+            "prompt_tokens_details": {
+              "cached_tokens": 2304
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 1533
+            },
+            "prompt_cache_hit_tokens": 2304,
+            "prompt_cache_miss_tokens": 239
+          },
+          "thinking": true,
+          "outputBudget": 4096,
+          "timeoutSeconds": null,
+          "finishReason": "stop",
+          "errorCode": null,
+          "retryDecision": null,
+          "remainingSeconds": null
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Automatic behavior checks are not manual claim-support acceptance.",
+    "One smoke run per scenario is not a stability or causal estimate.",
+    "Provider generation is stochastic; no framework quality conclusion from different answers.",
+    "Unknown language/duration must remain unverified and non-importable.",
+    "No current-user profile/history was sent; public engine switching is a separate release gate.",
+    "Unavailable usage is not zero cost; prices and local hardware costs are not measured."
+  ],
+  "smoke": {
+    "LEGACY": {
+      "runs": 4,
+      "passes": 3,
+      "p95Ms": 7779,
+      "maxMs": 7779,
+      "modelAttempts": 8,
+      "failedAttempts": 0,
+      "retryAttempts": 0,
+      "reportedTotalTokens": 30138,
+      "attemptsWithoutUsage": 0,
+      "runsWithRetrievalFailures": 0,
+      "costUsd": "UNKNOWN",
+      "purpose": {
+        "attempts": 1,
+        "failedAttempts": 0,
+        "retryAttempts": 0,
+        "durationMs": 2066,
+        "reportedTotalTokens": 2908,
+        "attemptsWithoutUsage": 0
+      },
+      "cases": [
+        {
+          "caseId": "S01",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "CONVERSATION",
+          "durationMs": 2471,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S02",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "SUPPORTED_EXTRACTS",
+          "durationMs": 7779,
+          "projectCount": 0,
+          "referenceCount": 6,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S04",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "CONVERSATION",
+          "durationMs": 3792,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S03",
+          "round": 1,
+          "passed": false,
+          "runStatus": "SUCCEEDED",
+          "status": "RELEVANCE_UNAVAILABLE",
+          "durationMs": 7419,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        }
+      ],
+      "purposeAttempts": [
+        {
+          "status": "SUCCEEDED",
+          "attempt": 1,
+          "durationMs": 2066,
+          "usage": {
+            "prompt_tokens": 2501,
+            "completion_tokens": 407,
+            "total_tokens": 2908,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 2501
+          },
+          "thinking": false,
+          "outputBudget": 2048,
+          "timeoutSeconds": 19,
+          "finishReason": "stop",
+          "errorCode": null,
+          "retryDecision": null,
+          "remainingSeconds": null
+        }
+      ]
+    },
+    "LANGGRAPH4J": {
+      "runs": 4,
+      "passes": 3,
+      "p95Ms": 6521,
+      "maxMs": 6521,
+      "modelAttempts": 8,
+      "failedAttempts": 0,
+      "retryAttempts": 0,
+      "reportedTotalTokens": 29789,
+      "attemptsWithoutUsage": 0,
+      "runsWithRetrievalFailures": 0,
+      "costUsd": "UNKNOWN",
+      "purpose": {
+        "attempts": 1,
+        "failedAttempts": 0,
+        "retryAttempts": 0,
+        "durationMs": 1803,
+        "reportedTotalTokens": 2942,
+        "attemptsWithoutUsage": 0
+      },
+      "cases": [
+        {
+          "caseId": "S01",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "CONVERSATION",
+          "durationMs": 1821,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S02",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "SUPPORTED_EXTRACTS",
+          "durationMs": 6521,
+          "projectCount": 0,
+          "referenceCount": 6,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S04",
+          "round": 1,
+          "passed": true,
+          "runStatus": "SUCCEEDED",
+          "status": "CONVERSATION",
+          "durationMs": 3031,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        },
+        {
+          "caseId": "S03",
+          "round": 1,
+          "passed": false,
+          "runStatus": "SUCCEEDED",
+          "status": "RELEVANCE_UNAVAILABLE",
+          "durationMs": 6357,
+          "projectCount": 0,
+          "referenceCount": 0,
+          "retrievalFailures": 0
+        }
+      ],
+      "purposeAttempts": [
+        {
+          "status": "SUCCEEDED",
+          "attempt": 1,
+          "durationMs": 1803,
+          "usage": {
+            "prompt_tokens": 2498,
+            "completion_tokens": 444,
+            "total_tokens": 2942,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 2242
+          },
+          "thinking": false,
+          "outputBudget": 2048,
+          "timeoutSeconds": 19,
+          "finishReason": "stop",
+          "errorCode": null,
+          "retryDecision": null,
+          "remainingSeconds": null
+        }
+      ]
+    }
+  },
+  "smokeExitCode": 1
+}

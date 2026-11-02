@@ -1,0 +1,152 @@
+{
+  "case": "rag_python",
+  "variant": "A",
+  "phase": "retrieval",
+  "repeat": 0,
+  "startedAt": "2026-10-03T11:50:29.710909+00:00",
+  "response": {
+    "runtime": {
+      "model": "DeepSeek-V4-Pro",
+      "source": "REDIS",
+      "endpoint": "https://ai.gitee.com/v1",
+      "version": "1-1785206616703"
+    },
+    "variant": "A",
+    "retrieval": {
+      "text": "[candidateId=E1;evidenceId=E1;repo=langgenius/dify;mode=RAW_FALLBACK] facts=ures such as text-to-speech to a chat-based app. 4. RAG Pipeline : Extensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.\n\n[candidateId=E2;evidenceId=E2;repo=xinhuangcs/agentmaker;mode=RAW_FALLBACK] facts=and remember I'm vegetarian.\").final output) Every argument past llm is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another sources= entry, MCP servers and sub-agents ( AgentTool ) as tools= , a Smar…\n\n[candidateId=E3;evidenceId=E3;repo=pathwaycom/llm-app] facts=证据:问答 RAG 应用 基础端到端 RAG 应用。; 一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。",
+      "trace": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "USED",
+        "queries": [
+          "RAG Python",
+          "RAG Python  学习 中文提问，检索英文技术文档，说明部署依赖 有基础"
+        ],
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "documentKey": "508:20",
+            "source": "GITHUB",
+            "title": "langgenius/dify",
+            "sourceRef": "langgenius/dify",
+            "projectId": 218.0,
+            "projectType": "CAREER_PROJECT",
+            "mappingStatus": "AUTO_MATCHED",
+            "repositoryUrl": "https://github.com/langgenius/dify",
+            "text": "ures such as text-to-speech to a chat-based app.\n\n**4. RAG Pipeline**:\nExtensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.",
+            "card": "[candidateId=E1;evidenceId=E1;repo=langgenius/dify;mode=RAW_FALLBACK] facts=ures such as text-to-speech to a chat-based app. 4. RAG Pipeline : Extensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.",
+            "promptMode": "RAW_FALLBACK"
+          },
+          {
+            "evidenceId": "E2",
+            "documentKey": "596:15",
+            "source": "GITHUB",
+            "title": "agentmaker",
+            "sourceRef": "xinhuangcs/agentmaker",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/xinhuangcs/agentmaker",
+            "text": "and remember I'm vegetarian.\").final_output)\n```\n\nEvery argument past `llm` is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another `sources=` entry, MCP servers and sub-agents (`AgentTool`) as `tools=`, a `SmartWriter` that extracts and diffs memories instead of storing raw text, structured output and streaming, the `PlanAgent` / `ReflectionAgent` workflow recipes, plus sessions, checkpoints (human-in-the-loop), permis",
+            "card": "[candidateId=E2;evidenceId=E2;repo=xinhuangcs/agentmaker;mode=RAW_FALLBACK] facts=and remember I'm vegetarian.\").final output) Every argument past llm is optional, so you add capabilities one at a time, and the same pattern reaches the rest of the framework: RAG retrieval as another sources= entry, MCP servers and sub-agents ( AgentTool ) as tools= , a Smar…",
+            "promptMode": "RAW_FALLBACK"
+          },
+          {
+            "evidenceId": "E3",
+            "documentKey": "94:5",
+            "source": "GITHUB",
+            "title": "Pathway 实时数据框架 AI 流水线",
+            "sourceRef": "pathwaycom/llm-app",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/pathwaycom/llm-app",
+            "text": "----------------------------------------------- |\n| [`问答 RAG 应用`](templates/question_answering_rag/)                                          | 基础端到端 RAG 应用。一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。您还可以试用 [演示 REST 端点](https://pathway.com/solutions/rag-pipelines#try-it-out)。 |",
+            "card": "[candidateId=E3;evidenceId=E3;repo=pathwaycom/llm-app] facts=证据:问答 RAG 应用 基础端到端 RAG 应用。; 一个问答流水线，使用所选的 GPT 模型，根据实时连接的数据源（文件、Google Drive、Sharepoint 等）中的文档（PDF、DOCX 等）为查询提供答案。",
+            "promptMode": "CARD"
+          }
+        ],
+        "durationMs": 561.080027,
+        "candidateCount": 15,
+        "selectedCount": 3,
+        "confidence": "HIGH",
+        "ragApplied": true,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 1073,
+        "evidencePromptChars": 863,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": "2",
+        "evidenceCompressionRatio": 0.195712954333644
+      }
+    },
+    "wallMs": 562.045616,
+    "scope": "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change.",
+    "labStages": [
+      {
+        "durationMs": 315.610681,
+        "stage": "embedding.http.bge-small-zh-v1.5",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 327.121513,
+        "stage": "A.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 10.754169,
+        "stage": "A.restoreMetadata",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 2.143991,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 193.177827,
+        "stage": "embedding.http.bge-small-zh-v1.5",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 207.076924,
+        "stage": "A.embeddingAndVector",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 7.323376,
+        "stage": "A.restoreMetadata",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 1.345166,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 3.735016,
+        "stage": "A.lexical",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.263432,
+        "stage": "A.topicGateAndFusion",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.30341,
+        "stage": "A.selectProjects",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 0.724038,
+        "stage": "A.renderEvidence",
+        "status": "SUCCEEDED"
+      },
+      {
+        "durationMs": 561.100067,
+        "stage": "retrieval.total",
+        "status": "SUCCEEDED"
+      }
+    ]
+  },
+  "clientWallMs": 586.0897000093246
+}

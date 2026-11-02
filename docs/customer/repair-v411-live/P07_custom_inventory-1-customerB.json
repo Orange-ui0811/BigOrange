@@ -1,0 +1,213 @@
+{
+  "case": "P07_custom_inventory",
+  "round": 1,
+  "product": "customerB",
+  "startedAt": "2026-10-03T15:24:14.851576+00:00",
+  "sessionId": "102",
+  "runId": "e4aa4b53-51ec-438d-9dc8-a939c36d2cc0",
+  "run": {
+    "id": "e4aa4b53-51ec-438d-9dc8-a939c36d2cc0",
+    "session_id": "102",
+    "status": "SUCCEEDED",
+    "stage": "SUCCEEDED",
+    "result_json": "{\"skill\":\"PROJECT_RECOMMENDATION_V1\",\"intent\":\"RECOMMEND\",\"state\":{\"topic\":[\"库存管理\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是库存管理\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是给家里的小店做库存管理\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"基础是刚学\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Java\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是四个月内\",\"source\":\"MESSAGE\"},\"allowDocker\":{\"quote\":\"不使用 Docker\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"给家里的小店做库存管理\",\"experience\":\"刚学\",\"language\":\"Java\",\"durationSemantics\":{\"quantity\":4,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":120,\"allowDocker\":false,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"先做商品和库存记录的小功能\"],\"lastChangeSummary\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[]},\"projects\":[],\"references\":[],\"profileLoaded\":false,\"diagnostics\":{\"countUnit\":\"DISTINCT_REPOSITORY\",\"alternatives\":[{\"uncertain\":324,\"confirmed\":1,\"total\":325,\"changes\":{\"topic\":null},\"label\":\"项目主题不限\"}],\"available\":{\"uncertain\":0,\"confirmed\":494,\"total\":494},\"current\":{\"uncertain\":0,\"confirmed\":0,\"total\":0},\"conditions\":{\"language\":\"Java\",\"maxDurationDays\":120,\"topic\":[\"库存管理\"],\"allowDocker\":false},\"calculatedAt\":\"2026-10-03T15:24:22.382126491Z\"},\"status\":\"NO_MATCH\",\"answer\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\\n\\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 0 个资料待核实候选（仓库去重，引用仍需核对）。\\n保持其余条件不变，可以考虑：\\n- 项目主题不限：可推荐候选共 1 个，另有 324 个待核实。\\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。\",\"conditionChangeSummary\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"}",
+    "metrics_json": "{\"protocol\":\"NATIVE_ACTION_V1\",\"embeddingUsage\":\"NOT_REPORTED\",\"promptVersion\":\"customer-v4.11-grounded-recommendations\",\"modelCalls\":[{\"durationMs\":4688,\"model\":\"deepseek-flash\",\"costUsd\":\"UNKNOWN\",\"status\":\"SUCCEEDED\",\"attempt\":1,\"usage\":{\"prompt_tokens\":5291,\"completion_tokens\":1062,\"total_tokens\":6353,\"prompt_tokens_details\":{\"cached_tokens\":4992},\"completion_tokens_details\":{\"reasoning_tokens\":549},\"prompt_cache_hit_tokens\":4992,\"prompt_cache_miss_tokens\":299},\"protocol\":\"NATIVE_ACTION\",\"phase\":\"ACTION\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"tool_calls\",\"outputBudget\":4096,\"thinking\":true}],\"costUsd\":\"UNKNOWN\",\"tokenUsage\":{\"reasoningTokens\":549,\"models\":[\"deepseek-flash\"],\"calls\":1,\"callsWithoutUsage\":0,\"outputTokens\":1062,\"totalTokens\":6353,\"cacheMissTokens\":299,\"inputTokens\":5291,\"cacheHitTokens\":4992,\"complete\":true}}",
+    "created_at": "2026-10-03 23:24",
+    "finished_at": "2026-10-03 23:24",
+    "generation_key": "20261002164953-ec113424",
+    "prompt_version": "customer-v4.11-grounded-recommendations"
+  },
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "topic": [
+        "库存管理"
+      ],
+      "provenance": {
+        "topic": {
+          "quote": "技术方向是库存管理",
+          "source": "MESSAGE"
+        },
+        "goal": {
+          "quote": "目标是给家里的小店做库存管理",
+          "source": "MESSAGE"
+        },
+        "experience": {
+          "quote": "基础是刚学",
+          "source": "MESSAGE"
+        },
+        "language": {
+          "quote": "语言是Java",
+          "source": "MESSAGE"
+        },
+        "maxDurationDays": {
+          "quote": "完成周期是四个月内",
+          "source": "MESSAGE"
+        },
+        "allowDocker": {
+          "quote": "不使用 Docker",
+          "source": "MESSAGE"
+        },
+        "verificationMode": {
+          "quote": "资料缺失可以展示真实探索候选，但必须标明尚未核实",
+          "source": "MESSAGE"
+        }
+      },
+      "goal": "给家里的小店做库存管理",
+      "experience": "刚学",
+      "language": "Java",
+      "durationSemantics": {
+        "quantity": 4,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 120,
+      "allowDocker": false,
+      "verificationMode": "EXPLORE",
+      "preferences": [
+        "先做商品和库存记录的小功能"
+      ],
+      "lastChangeSummary": "已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+      "lastCandidates": []
+    },
+    "projects": [],
+    "references": [],
+    "profileLoaded": false,
+    "diagnostics": {
+      "countUnit": "DISTINCT_REPOSITORY",
+      "alternatives": [
+        {
+          "uncertain": 324,
+          "confirmed": 1,
+          "total": 325,
+          "changes": {
+            "topic": null
+          },
+          "label": "项目主题不限"
+        }
+      ],
+      "available": {
+        "uncertain": 0,
+        "confirmed": 494,
+        "total": 494
+      },
+      "current": {
+        "uncertain": 0,
+        "confirmed": 0,
+        "total": 0
+      },
+      "conditions": {
+        "language": "Java",
+        "maxDurationDays": 120,
+        "topic": [
+          "库存管理"
+        ],
+        "allowDocker": false
+      },
+      "calculatedAt": "2026-10-03T15:24:22.382126491Z"
+    },
+    "status": "NO_MATCH",
+    "answer": "已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 0 个资料待核实候选（仓库去重，引用仍需核对）。\n保持其余条件不变，可以考虑：\n- 项目主题不限：可推荐候选共 1 个，另有 324 个待核实。\n以上是本次数据快照下的试算，尚未修改条件。你想采用哪项调整？请说出要修改的条件。",
+    "conditionChangeSummary": "已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "protocol": "NATIVE_ACTION_V1",
+    "embeddingUsage": "NOT_REPORTED",
+    "promptVersion": "customer-v4.11-grounded-recommendations",
+    "modelCalls": [
+      {
+        "durationMs": 4688,
+        "model": "deepseek-flash",
+        "costUsd": "UNKNOWN",
+        "status": "SUCCEEDED",
+        "attempt": 1,
+        "usage": {
+          "prompt_tokens": 5291,
+          "completion_tokens": 1062,
+          "total_tokens": 6353,
+          "prompt_tokens_details": {
+            "cached_tokens": 4992
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 549
+          },
+          "prompt_cache_hit_tokens": 4992,
+          "prompt_cache_miss_tokens": 299
+        },
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "tool_calls",
+        "outputBudget": 4096,
+        "thinking": true
+      }
+    ],
+    "costUsd": "UNKNOWN",
+    "tokenUsage": {
+      "reasoningTokens": 549,
+      "models": [
+        "deepseek-flash"
+      ],
+      "calls": 1,
+      "callsWithoutUsage": 0,
+      "outputTokens": 1062,
+      "totalTokens": 6353,
+      "cacheMissTokens": 299,
+      "inputTokens": 5291,
+      "cacheHitTokens": 4992,
+      "complete": true
+    }
+  },
+  "events": [
+    {
+      "atMs": 622.6561999937985,
+      "status": "QUEUED",
+      "stage": "ACCEPTED"
+    },
+    {
+      "atMs": 1153.1964000023436,
+      "status": "RUNNING",
+      "stage": "UNDERSTANDING"
+    },
+    {
+      "atMs": 5343.753299996024,
+      "status": "RUNNING",
+      "stage": "SEARCHING"
+    },
+    {
+      "atMs": 6379.02719998965,
+      "status": "RUNNING",
+      "stage": "FILTERING_PROJECTS"
+    },
+    {
+      "atMs": 7947.177099995315,
+      "status": "SUCCEEDED",
+      "stage": "SUCCEEDED"
+    }
+  ],
+  "steps": [
+    {
+      "tool": "getConfirmedProfile",
+      "detail": "{\"parameters\":{},\"result\":\"\"}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"parameters\":{\"topK\":20,\"purpose\":\"PROJECT_RANKING\",\"query\":\"推荐项目 Java 库存管理 给家里的小店做库存管理 刚学\",\"sourceTypes\":[\"GITHUB\",\"BEGINNER_PROJECT\",\"CAREER_PROJECT\"]},\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":213,\"candidateCount\":80,\"excludedReasons\":{},\"hits\":[{\"documentId\":69,\"versionId\":288,\"chunkId\":10987,\"chunkIndex\":3,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Distributed Systems`\",\"startOffset\":1877,\"endOffset\":2066,\"content\":\"#### Build your own `Distributed Systems`\\n* [**Java**: _Building Your Own Kafka-like System From Scratch: A Step-by-Step Guide_](https://github.com/buildthingsuseful/build-your-own-kafka)\\n\\n\",\"score\":0.018719024018299658,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":329,\"versionId\":548,\"chunkId\":16576,\"chunkIndex\":1,\"title\":\"ToolJet/ToolJet\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"ToolJet/ToolJet\",\"sectionPath\":null,\"startOffset\":1180,\"endOffset\":1360,\"content\":\"<p align=\\\"center\\\">\\n    <img src=\\\"docs/static/img/readme/banner.png\\\" alt=\\\"ToolJet 仪表盘显示库存和订单\\\"/>\\n</p>\\n\\n<p align=\\\"center\\\">\\n    <img src=\\\"docs/static/img/readme/flowchart.png\\\"/>\\n</p>\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":18,\"versionId\":237,\"chunkId\":10096,\"chunkIndex\":2,\"title\":\"Project-N-E-K-O/N.E.K.O\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:253\",\"sectionPath\":\"Project-N-E-K-O/N.E.K.O > 仓库地址\",\"startOffset\":43,\"endOffset\":95,\"content\":\"## 仓库地址\\nhttps://github.com/Project-N-E-K-O/N.E.K.O\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":80,\"versionId\":299,\"chunkId\":11849,\"chunkIndex\":2,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"sectionPath\":\"qwen-code-dev-bot/oh-my-cli > 仓库地址\",\"startOffset\":47,\"endOffset\":103,\"content\":\"## 仓库地址\\nhttps://github.com/qwen-code-dev-bot/oh-my-cli\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":94,\"versionId\":313,\"chunkId\":12033,\"chunkIndex\":4,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 适合新手的原因\",\"startOffset\":149,\"endOffset\":222,\"content\":\"## 适合新手的原因\\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\\n\\n\",\"score\":0.015384615384615385,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":115,\"versionId\":334,\"chunkId\":12603,\"chunkIndex\":2,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:215\",\"sectionPath\":\"headroomlabs-ai/headroom > 仓库地址\",\"startOffset\":44,\"endOffset\":97,\"content\":\"## 仓库地址\\nhttps://github.com/headroomlabs-ai/headroom\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":6,\"versionId\":225,\"chunkId\":9741,\"chunkIndex\":2,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 仓库地址\",\"startOffset\":33,\"endOffset\":75,\"content\":\"## 仓库地址\\nhttps://github.com/pireel/pireel\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":102,\"versionId\":321,\"chunkId\":12210,\"chunkIndex\":2,\"title\":\"CherryHQ/cherry-studio\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:123\",\"sectionPath\":\"CherryHQ/cherry-studio > 仓库地址\",\"startOffset\":42,\"endOffset\":93,\"content\":\"## 仓库地址\\nhttps://github.com/CherryHQ/cherry-studio\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":120,\"versionId\":339,\"chunkId\":12769,\"chunkIndex\":2,\"title\":\"sgl-project/sglang\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:225\",\"sectionPath\":\"sgl-project/sglang > 仓库地址\",\"startOffset\":38,\"endOffset\":85,\"content\":\"## 仓库地址\\nhttps://github.com/sgl-project/sglang\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":89,\"versionId\":308,\"chunkId\":11965,\"chunkIndex\":1,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":91,\"versionId\":310,\"chunkId\":11991,\"chunkIndex\":1,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"sectionPath\":\"conorbronsdon/avoid-ai-writing > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":85,\"versionId\":304,\"chunkId\":11913,\"chunkIndex\":1,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012195121951219513,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":75,\"versionId\":294,\"chunkId\":11749,\"chunkIndex\":16,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"sectionPath\":\"Project Based Learning > Java:\",\"startOffset\":13242,\"endOffset\":13679,\"content\":\"## Java:\\n\\n- [Build an Interpreter](http://www.craftinginterpreters.com/) (Chapter 4-13 is written in Java)\\n- [Build a Simple HTTP Server with Java](http://javarevisited.blogspot.com/2015/06/how-to-create-http-server-in-java-serversocket-example.html)\\n- [Build an Android Flashlight App](https://www.youtube.com/watch?v=dhWL4DC7Krs) (video)\\n- [Build a Spring Boot App with User Authentication](https://spring.io/guides/gs/securing-web/)\\n\\n\",\"score\":0.012050618349151568,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=54,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"GITHUB:codecrafters-io/build-your-own-x\",\"documentId\":69,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"bestScore\":0.018719024018299658,\"evidence\":[{\"documentId\":69,\"versionId\":288,\"chunkId\":10987,\"chunkIndex\":3,\"title\":\"codecrafters-io/build-your-own-x\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"codecrafters-io/build-your-own-x\",\"sectionPath\":\"Tutorials > Build your own `Distributed Systems`\",\"startOffset\":1877,\"endOffset\":2066,\"content\":\"#### Build your own `Distributed Systems`\\n* [**Java**: _Building Your Own Kafka-like System From Scratch: A Step-by-Step Guide_](https://github.com/buildthingsuseful/build-your-own-kafka)\\n\\n\",\"score\":0.018719024018299658,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:ToolJet/ToolJet\",\"documentId\":329,\"title\":\"ToolJet/ToolJet\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"ToolJet/ToolJet\",\"bestScore\":0.016129032258064516,\"evidence\":[{\"documentId\":329,\"versionId\":548,\"chunkId\":16576,\"chunkIndex\":1,\"title\":\"ToolJet/ToolJet\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"ToolJet/ToolJet\",\"sectionPath\":null,\"startOffset\":1180,\"endOffset\":1360,\"content\":\"<p align=\\\"center\\\">\\n    <img src=\\\"docs/static/img/readme/banner.png\\\" alt=\\\"ToolJet 仪表盘显示库存和订单\\\"/>\\n</p>\\n\\n<p align=\\\"center\\\">\\n    <img src=\\\"docs/static/img/readme/flowchart.png\\\"/>\\n</p>\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:253\",\"documentId\":18,\"title\":\"Project-N-E-K-O/N.E.K.O\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:253\",\"bestScore\":0.015873015873015872,\"evidence\":[{\"documentId\":18,\"versionId\":237,\"chunkId\":10096,\"chunkIndex\":2,\"title\":\"Project-N-E-K-O/N.E.K.O\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:253\",\"sectionPath\":\"Project-N-E-K-O/N.E.K.O > 仓库地址\",\"startOffset\":43,\"endOffset\":95,\"content\":\"## 仓库地址\\nhttps://github.com/Project-N-E-K-O/N.E.K.O\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:8\",\"documentId\":80,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"bestScore\":0.015625,\"evidence\":[{\"documentId\":80,\"versionId\":299,\"chunkId\":11849,\"chunkIndex\":2,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"sectionPath\":\"qwen-code-dev-bot/oh-my-cli > 仓库地址\",\"startOffset\":47,\"endOffset\":103,\"content\":\"## 仓库地址\\nhttps://github.com/qwen-code-dev-bot/oh-my-cli\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:38\",\"documentId\":94,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"bestScore\":0.015384615384615385,\"evidence\":[{\"documentId\":94,\"versionId\":313,\"chunkId\":12033,\"chunkIndex\":4,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 适合新手的原因\",\"startOffset\":149,\"endOffset\":222,\"content\":\"## 适合新手的原因\\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\\n\\n\",\"score\":0.015384615384615385,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:215\",\"documentId\":115,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:215\",\"bestScore\":0.015151515151515152,\"evidence\":[{\"documentId\":115,\"versionId\":334,\"chunkId\":12603,\"chunkIndex\":2,\"title\":\"headroomlabs-ai/headroom\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:215\",\"sectionPath\":\"headroomlabs-ai/headroom > 仓库地址\",\"startOffset\":44,\"endOffset\":97,\"content\":\"## 仓库地址\\nhttps://github.com/headroomlabs-ai/headroom\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:80\",\"documentId\":3,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"bestScore\":0.014925373134328358,\"evidence\":[{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:94\",\"documentId\":6,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"bestScore\":0.014705882352941176,\"evidence\":[{\"documentId\":6,\"versionId\":225,\"chunkId\":9741,\"chunkIndex\":2,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 仓库地址\",\"startOffset\":33,\"endOffset\":75,\"content\":\"## 仓库地址\\nhttps://github.com/pireel/pireel\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:123\",\"documentId\":102,\"title\":\"CherryHQ/cherry-studio\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:123\",\"bestScore\":0.014492753623188406,\"evidence\":[{\"documentId\":102,\"versionId\":321,\"chunkId\":12210,\"chunkIndex\":2,\"title\":\"CherryHQ/cherry-studio\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:123\",\"sectionPath\":\"CherryHQ/cherry-studio > 仓库地址\",\"startOffset\":42,\"endOffset\":93,\"content\":\"## 仓库地址\\nhttps://github.com/CherryHQ/cherry-studio\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:225\",\"documentId\":120,\"title\":\"sgl-project/sglang\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:225\",\"bestScore\":0.014285714285714285,\"evidence\":[{\"documentId\":120,\"versionId\":339,\"chunkId\":12769,\"chunkIndex\":2,\"title\":\"sgl-project/sglang\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:225\",\"sectionPath\":\"sgl-project/sglang > 仓库地址\",\"startOffset\":38,\"endOffset\":85,\"content\":\"## 仓库地址\\nhttps://github.com/sgl-project/sglang\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:125\",\"documentId\":14,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"bestScore\":0.014084507042253521,\"evidence\":[{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:119\",\"documentId\":12,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"bestScore\":0.013888888888888888,\"evidence\":[{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:46\",\"documentId\":63,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"bestScore\":0.013333333333333334,\"evidence\":[{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:5\",\"documentId\":78,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"bestScore\":0.013157894736842105,\"evidence\":[{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:10\",\"documentId\":82,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"bestScore\":0.012987012987012988,\"evidence\":[{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:35\",\"documentId\":93,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"bestScore\":0.01282051282051282,\"evidence\":[{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:30\",\"documentId\":89,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"bestScore\":0.012658227848101266,\"evidence\":[{\"documentId\":89,\"versionId\":308,\"chunkId\":11965,\"chunkIndex\":1,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:33\",\"documentId\":91,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"bestScore\":0.012345679012345678,\"evidence\":[{\"documentId\":91,\"versionId\":310,\"chunkId\":11991,\"chunkIndex\":1,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"sectionPath\":\"conorbronsdon/avoid-ai-writing > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:17\",\"documentId\":85,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"bestScore\":0.012195121951219513,\"evidence\":[{\"documentId\":85,\"versionId\":304,\"chunkId\":11913,\"chunkIndex\":1,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012195121951219513,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=22,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:practical-tutorials/project-based-learning\",\"documentId\":75,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"bestScore\":0.012050618349151568,\"evidence\":[{\"documentId\":75,\"versionId\":294,\"chunkId\":11749,\"chunkIndex\":16,\"title\":\"项目式学习\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"practical-tutorials/project-based-learning\",\"sectionPath\":\"Project Based Learning > Java:\",\"startOffset\":13242,\"endOffset\":13679,\"content\":\"## Java:\\n\\n- [Build an Interpreter](http://www.craftinginterpreters.com/) (Chapter 4-13 is written in Java)\\n- [Build a Simple HTTP Server with Java](http://javarevisited.blogspot.com/2015/06/how-to-create-http-server-in-java-serversocket-example.html)\\n- [Build an Android Flashlight App](https://www.youtube.com/watch?v=dhWL4DC7Krs) (video)\\n- [Build a Spring Boot App with User Authentication](https://spring.io/guides/gs/securing-web/)\\n\\n\",\"score\":0.012050618349151568,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=54,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"parameters\":{\"conditions\":{\"topic\":[\"库存管理\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是库存管理\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是给家里的小店做库存管理\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"基础是刚学\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Java\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是四个月内\",\"source\":\"MESSAGE\"},\"allowDocker\":{\"quote\":\"不使用 Docker\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"给家里的小店做库存管理\",\"experience\":\"刚学\",\"language\":\"Java\",\"durationSemantics\":{\"quantity\":4,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":120,\"allowDocker\":false,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"先做商品和库存记录的小功能\"],\"lastChangeSummary\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"},\"semanticChunks\":[10987,16576,10096,11849,12033,12603,9641,9741,12210,12769,9976,9914,10780,11822,11874,12017,11965,11991,11913,11749]},\"result\":[]}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"parameters\":{\"conditions\":{\"topic\":[\"库存管理\"],\"provenance\":{\"topic\":{\"quote\":\"技术方向是库存管理\",\"source\":\"MESSAGE\"},\"goal\":{\"quote\":\"目标是给家里的小店做库存管理\",\"source\":\"MESSAGE\"},\"experience\":{\"quote\":\"基础是刚学\",\"source\":\"MESSAGE\"},\"language\":{\"quote\":\"语言是Java\",\"source\":\"MESSAGE\"},\"maxDurationDays\":{\"quote\":\"完成周期是四个月内\",\"source\":\"MESSAGE\"},\"allowDocker\":{\"quote\":\"不使用 Docker\",\"source\":\"MESSAGE\"},\"verificationMode\":{\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\",\"source\":\"MESSAGE\"}},\"goal\":\"给家里的小店做库存管理\",\"experience\":\"刚学\",\"language\":\"Java\",\"durationSemantics\":{\"quantity\":4,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":120,\"allowDocker\":false,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"先做商品和库存记录的小功能\"],\"lastChangeSummary\":\"已记录Docker要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：给家里的小店做库存管理；已记录编程语言：Java；已记录最长周期：120天；已记录项目主题：库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[]},\"purpose\":\"COUNTERFACTUAL_COUNTS\"},\"result\":{\"countUnit\":\"DISTINCT_REPOSITORY\",\"alternatives\":[{\"uncertain\":324,\"confirmed\":1,\"total\":325,\"changes\":{\"topic\":null},\"label\":\"项目主题不限\"}],\"available\":{\"uncertain\":0,\"confirmed\":494,\"total\":494},\"current\":{\"uncertain\":0,\"confirmed\":0,\"total\":0},\"conditions\":{\"language\":\"Java\",\"maxDurationDays\":120,\"topic\":[\"库存管理\"],\"allowDocker\":false},\"calculatedAt\":\"2026-10-03T15:24:22.382126491Z\"}}",
+      "status": "SUCCEEDED"
+    }
+  ],
+  "clientWallMs": 8787.284899997758,
+  "sessionSoftDeleted": true
+}

@@ -1,0 +1,207 @@
+[
+  {
+    "id": "S01",
+    "message": "把这次项目的完成周期设为半年内，先记下就好",
+    "expected": {
+      "maxDurationDays": 180
+    }
+  },
+  {
+    "id": "S02",
+    "message": "我最多能花一个半月做完，先记录这个条件",
+    "expected": {
+      "maxDurationDays": 45
+    }
+  },
+  {
+    "id": "S03",
+    "message": "希望一个季度之内完成项目，先记下要求",
+    "expected": {
+      "maxDurationDays": 90
+    }
+  },
+  {
+    "id": "S04",
+    "message": "I need to finish the project within a fortnight. Just note this condition.",
+    "expected": {
+      "maxDurationDays": 14
+    }
+  },
+  {
+    "id": "S05",
+    "message": "项目最多十二周完成，先记录",
+    "expected": {
+      "maxDurationDays": 84
+    }
+  },
+  {
+    "id": "S06",
+    "message": "希望三到四个月完成，短一些也可以，先记录",
+    "expected": {
+      "maxDurationDays": 120
+    }
+  },
+  {
+    "id": "S07",
+    "message": "每天可以学两小时，暂时没有项目截止时间",
+    "expected": {
+      "absent": "maxDurationDays"
+    }
+  },
+  {
+    "id": "S08",
+    "message": "使用JS开发，Docker我并不排斥，先记录",
+    "expected": {
+      "language": "JavaScript",
+      "allowDocker": true
+    }
+  },
+  {
+    "id": "S09",
+    "message": "我想用爪哇语言做作品来找份工作，先记下",
+    "expected": {
+      "language": "Java",
+      "goal": "求职"
+    }
+  },
+  {
+    "id": "S10",
+    "message": "需要二十个工作日做完，周末不做，先记录",
+    "expected": {
+      "pendingFields": [
+        "maxDurationDays"
+      ]
+    }
+  },
+  {
+    "id": "S11",
+    "message": "至少半年才能体现项目规模，不能少于半年，先记录",
+    "expected": {
+      "minDurationDays": 180
+    }
+  },
+  {
+    "id": "S12",
+    "message": "只用Java，数据库和Docker都不想用，先记下",
+    "expected": {
+      "language": "Java",
+      "allowDatabase": false,
+      "allowDocker": false
+    }
+  },
+  {
+    "id": "C01",
+    "message": "你好",
+    "expected": {
+      "intent": "CHAT"
+    }
+  },
+  {
+    "id": "C02",
+    "message": "今天不想聊项目，我有点累，随便聊聊吧",
+    "expected": {
+      "intent": "CHAT"
+    }
+  },
+  {
+    "id": "C03",
+    "message": "用一个简单例子解释一下Java依赖注入",
+    "expected": {
+      "intent": "CHAT"
+    }
+  },
+  {
+    "id": "C04",
+    "message": "哈哈哈😂",
+    "expected": {
+      "intent": "CHAT"
+    }
+  },
+  {
+    "id": "H01",
+    "message": "不用满半年，六十天以内就行，其他条件不变",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "language": "Java",
+      "maxDurationDays": 60
+    }
+  },
+  {
+    "id": "H02",
+    "message": "取消Docker限制，语言还是原来的",
+    "prior": {
+      "language": "Java",
+      "allowDocker": false
+    },
+    "expected": {
+      "language": "Java",
+      "absent": "allowDocker"
+    }
+  },
+  {
+    "id": "H03",
+    "message": "不要比两个月短，也不要超过三个月",
+    "expected": {
+      "minDurationDays": 60,
+      "maxDurationDays": 90
+    }
+  },
+  {
+    "id": "H04",
+    "message": "我希望用Golang，工期至多六个星期，先记录",
+    "expected": {
+      "language": "Go",
+      "maxDurationDays": 42
+    }
+  },
+  {
+    "id": "H05",
+    "message": "数据库我已经装好了可以用，但不接受Docker，先记录",
+    "expected": {
+      "allowDatabase": true,
+      "allowDocker": false
+    }
+  },
+  {
+    "id": "H06",
+    "message": "工期改成两周，其他要求都保留",
+    "prior": {
+      "language": "Python",
+      "allowDocker": false,
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "language": "Python",
+      "allowDocker": false,
+      "maxDurationDays": 14
+    }
+  },
+  {
+    "id": "H07",
+    "message": "语言不限，保留不用Docker",
+    "prior": {
+      "language": "Java",
+      "allowDocker": false
+    },
+    "expected": {
+      "absent": "language",
+      "allowDocker": false
+    }
+  },
+  {
+    "id": "H08",
+    "message": "谢谢你，不用继续推荐了",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "intent": "CHAT",
+      "language": "Java",
+      "maxDurationDays": 180
+    }
+  }
+]

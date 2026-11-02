@@ -1,0 +1,197 @@
+{
+  "case": "P08_unavailable",
+  "round": 1,
+  "product": "customerB",
+  "startedAt": "2026-10-03T14:27:14.197372+00:00",
+  "sessionId": "70",
+  "runId": "db9ddb13-f19f-4bd2-9bf8-85c68b217eca",
+  "run": {
+    "id": "db9ddb13-f19f-4bd2-9bf8-85c68b217eca",
+    "session_id": "70",
+    "status": "SUCCEEDED",
+    "stage": "SUCCEEDED",
+    "result_json": "{\"skill\":\"PROJECT_RECOMMENDATION_V1\",\"intent\":\"RECOMMEND\",\"state\":{\"topic\":[\"量子纠错\",\"芯片流片\"],\"provenance\":{\"topic\":{\"source\":\"MESSAGE\",\"quote\":\"技术方向是量子纠错芯片流片\"},\"goal\":{\"source\":\"MESSAGE\",\"quote\":\"目标是探索技术兴趣\"},\"experience\":{\"source\":\"MESSAGE\",\"quote\":\"基础是刚学\"},\"language\":{\"source\":\"MESSAGE\",\"quote\":\"语言是Java\"},\"maxDurationDays\":{\"source\":\"MESSAGE\",\"quote\":\"完成周期是两天内\"},\"allowHardware\":{\"source\":\"MESSAGE\",\"quote\":\"不能使用硬件\"},\"verificationMode\":{\"source\":\"MESSAGE\",\"quote\":\"只能推荐能核实\"}},\"goal\":\"探索技术兴趣\",\"experience\":\"刚学\",\"language\":\"Java\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"DAY\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":2,\"allowHardware\":false,\"verificationMode\":\"STRICT\",\"lastChangeSummary\":\"已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[]},\"projects\":[],\"references\":[],\"profileLoaded\":false,\"diagnostics\":{\"conditions\":{\"language\":\"Java\",\"maxDurationDays\":2,\"topic\":[\"量子纠错\",\"芯片流片\"],\"allowHardware\":false},\"current\":{\"uncertain\":0,\"total\":0,\"confirmed\":0},\"available\":{\"uncertain\":0,\"total\":495,\"confirmed\":495},\"alternatives\":[],\"countUnit\":\"DISTINCT_REPOSITORY\",\"calculatedAt\":\"2026-10-03T14:27:27.053697145Z\"},\"status\":\"NO_MATCH\",\"answer\":\"已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\\n\\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 0 个资料待核实候选（仓库去重，引用仍需核对）。\\n当前数据中，尝试单项或两项调整未找到能增加候选的方案；可能需要补充项目资料或重新明确范围。不会自动更改你的要求。\",\"conditionChangeSummary\":\"已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\"}",
+    "metrics_json": "{\"promptVersion\":\"customer-v4.7-grounded-recommendations\",\"embeddingUsage\":\"NOT_REPORTED\",\"protocol\":\"NATIVE_ACTION_V1\",\"costUsd\":\"UNKNOWN\",\"modelCalls\":[{\"costUsd\":\"UNKNOWN\",\"model\":\"deepseek-flash\",\"durationMs\":7217,\"usage\":{\"prompt_tokens\":5269,\"completion_tokens\":1549,\"total_tokens\":6818,\"prompt_tokens_details\":{\"cached_tokens\":5120},\"completion_tokens_details\":{\"reasoning_tokens\":1106},\"prompt_cache_hit_tokens\":5120,\"prompt_cache_miss_tokens\":149},\"attempt\":1,\"status\":\"SUCCEEDED\",\"protocol\":\"NATIVE_ACTION\",\"phase\":\"ACTION\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"tool_calls\",\"outputBudget\":4096,\"thinking\":true}],\"tokenUsage\":{\"totalTokens\":6818,\"outputTokens\":1549,\"callsWithoutUsage\":0,\"calls\":1,\"models\":[\"deepseek-flash\"],\"reasoningTokens\":1106,\"complete\":true,\"cacheHitTokens\":5120,\"inputTokens\":5269,\"cacheMissTokens\":149}}",
+    "created_at": "2026-10-03 22:27",
+    "finished_at": "2026-10-03 22:27",
+    "generation_key": "20261002164953-ec113424",
+    "prompt_version": "customer-v4.7-grounded-recommendations"
+  },
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "topic": [
+        "量子纠错",
+        "芯片流片"
+      ],
+      "provenance": {
+        "topic": {
+          "source": "MESSAGE",
+          "quote": "技术方向是量子纠错芯片流片"
+        },
+        "goal": {
+          "source": "MESSAGE",
+          "quote": "目标是探索技术兴趣"
+        },
+        "experience": {
+          "source": "MESSAGE",
+          "quote": "基础是刚学"
+        },
+        "language": {
+          "source": "MESSAGE",
+          "quote": "语言是Java"
+        },
+        "maxDurationDays": {
+          "source": "MESSAGE",
+          "quote": "完成周期是两天内"
+        },
+        "allowHardware": {
+          "source": "MESSAGE",
+          "quote": "不能使用硬件"
+        },
+        "verificationMode": {
+          "source": "MESSAGE",
+          "quote": "只能推荐能核实"
+        }
+      },
+      "goal": "探索技术兴趣",
+      "experience": "刚学",
+      "language": "Java",
+      "durationSemantics": {
+        "quantity": 2,
+        "unit": "DAY",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 2,
+      "allowHardware": false,
+      "verificationMode": "STRICT",
+      "lastChangeSummary": "已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。",
+      "lastCandidates": []
+    },
+    "projects": [],
+    "references": [],
+    "profileLoaded": false,
+    "diagnostics": {
+      "conditions": {
+        "language": "Java",
+        "maxDurationDays": 2,
+        "topic": [
+          "量子纠错",
+          "芯片流片"
+        ],
+        "allowHardware": false
+      },
+      "current": {
+        "uncertain": 0,
+        "total": 0,
+        "confirmed": 0
+      },
+      "available": {
+        "uncertain": 0,
+        "total": 495,
+        "confirmed": 495
+      },
+      "alternatives": [],
+      "countUnit": "DISTINCT_REPOSITORY",
+      "calculatedAt": "2026-10-03T14:27:27.053697145Z"
+    },
+    "status": "NO_MATCH",
+    "answer": "已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\n\n按当前已确认条件，当前业务项目与抓取资料中有 0 个项目通过条件检查，另有 0 个资料待核实候选（仓库去重，引用仍需核对）。\n当前数据中，尝试单项或两项调整未找到能增加候选的方案；可能需要补充项目资料或重新明确范围。不会自动更改你的要求。",
+    "conditionChangeSummary": "已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "promptVersion": "customer-v4.7-grounded-recommendations",
+    "embeddingUsage": "NOT_REPORTED",
+    "protocol": "NATIVE_ACTION_V1",
+    "costUsd": "UNKNOWN",
+    "modelCalls": [
+      {
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 7217,
+        "usage": {
+          "prompt_tokens": 5269,
+          "completion_tokens": 1549,
+          "total_tokens": 6818,
+          "prompt_tokens_details": {
+            "cached_tokens": 5120
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1106
+          },
+          "prompt_cache_hit_tokens": 5120,
+          "prompt_cache_miss_tokens": 149
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "tool_calls",
+        "outputBudget": 4096,
+        "thinking": true
+      }
+    ],
+    "tokenUsage": {
+      "totalTokens": 6818,
+      "outputTokens": 1549,
+      "callsWithoutUsage": 0,
+      "calls": 1,
+      "models": [
+        "deepseek-flash"
+      ],
+      "reasoningTokens": 1106,
+      "complete": true,
+      "cacheHitTokens": 5120,
+      "inputTokens": 5269,
+      "cacheMissTokens": 149
+    }
+  },
+  "events": [
+    {
+      "atMs": 642.3686999914935,
+      "status": "RUNNING",
+      "stage": "UNDERSTANDING"
+    },
+    {
+      "atMs": 8403.418899993994,
+      "status": "RUNNING",
+      "stage": "SEARCHING"
+    },
+    {
+      "atMs": 8924.2469999881,
+      "status": "RUNNING",
+      "stage": "FILTERING_PROJECTS"
+    },
+    {
+      "atMs": 13006.580299988855,
+      "status": "SUCCEEDED",
+      "stage": "SUCCEEDED"
+    }
+  ],
+  "steps": [
+    {
+      "tool": "getConfirmedProfile",
+      "detail": "{\"result\":\"\",\"parameters\":{}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":209,\"candidateCount\":80,\"excludedReasons\":{},\"hits\":[{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.01639344262295082,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":94,\"versionId\":313,\"chunkId\":12033,\"chunkIndex\":4,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 适合新手的原因\",\"startOffset\":149,\"endOffset\":222,\"content\":\"## 适合新手的原因\\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":89,\"versionId\":308,\"chunkId\":11965,\"chunkIndex\":1,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":80,\"versionId\":299,\"chunkId\":11848,\"chunkIndex\":1,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"sectionPath\":\"qwen-code-dev-bot/oh-my-cli > 知识分类\",\"startOffset\":31,\"endOffset\":47,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":91,\"versionId\":310,\"chunkId\":11991,\"chunkIndex\":1,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"sectionPath\":\"conorbronsdon/avoid-ai-writing > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0136986301369863,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":85,\"versionId\":304,\"chunkId\":11913,\"chunkIndex\":1,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013513513513513514,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":62,\"versionId\":281,\"chunkId\":10767,\"chunkIndex\":1,\"title\":\"pocket-stack/pocketjs\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:12\",\"sectionPath\":\"pocket-stack/pocketjs > 知识分类\",\"startOffset\":25,\"endOffset\":41,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":5,\"versionId\":224,\"chunkId\":9702,\"chunkIndex\":1,\"title\":\"SeanJ1ang/design-judge-skills\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:91\",\"sectionPath\":\"SeanJ1ang/design-judge-skills > 知识分类\",\"startOffset\":33,\"endOffset\":49,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":83,\"versionId\":302,\"chunkId\":11887,\"chunkIndex\":1,\"title\":\"BetterWright/betterwright\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:11\",\"sectionPath\":\"BetterWright/betterwright > 知识分类\",\"startOffset\":29,\"endOffset\":45,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":7,\"versionId\":226,\"chunkId\":9767,\"chunkIndex\":1,\"title\":\"img2threejs/img2threejs\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:101\",\"sectionPath\":\"img2threejs/img2threejs > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":84,\"versionId\":303,\"chunkId\":11900,\"chunkIndex\":1,\"title\":\"raycast/extensions\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:14\",\"sectionPath\":\"raycast/extensions > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":13,\"versionId\":232,\"chunkId\":9944,\"chunkIndex\":1,\"title\":\"zhnt/loushang\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:121\",\"sectionPath\":\"zhnt/loushang > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":81,\"versionId\":300,\"chunkId\":11861,\"chunkIndex\":1,\"title\":\"willsoto/ng-chartist\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:9\",\"sectionPath\":\"willsoto/ng-chartist > 知识分类\",\"startOffset\":24,\"endOffset\":40,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"BEGINNER_PROJECT:beginner:80\",\"documentId\":3,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"bestScore\":0.01639344262295082,\"evidence\":[{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.01639344262295082,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:38\",\"documentId\":94,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"bestScore\":0.016129032258064516,\"evidence\":[{\"documentId\":94,\"versionId\":313,\"chunkId\":12033,\"chunkIndex\":4,\"title\":\"Oxotka/Landscape1C\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:38\",\"sectionPath\":\"Oxotka/Landscape1C > 适合新手的原因\",\"startOffset\":149,\"endOffset\":222,\"content\":\"## 适合新手的原因\\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:125\",\"documentId\":14,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"bestScore\":0.015873015873015872,\"evidence\":[{\"documentId\":14,\"versionId\":233,\"chunkId\":9976,\"chunkIndex\":1,\"title\":\"agent-of-empires/agent-of-empires\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:125\",\"sectionPath\":\"agent-of-empires/agent-of-empires > 知识分类\",\"startOffset\":37,\"endOffset\":53,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:119\",\"documentId\":12,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"bestScore\":0.015625,\"evidence\":[{\"documentId\":12,\"versionId\":231,\"chunkId\":9914,\"chunkIndex\":1,\"title\":\"CatsJuice/sticker-forge\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:119\",\"sectionPath\":\"CatsJuice/sticker-forge > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015625,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:94\",\"documentId\":6,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"bestScore\":0.015151515151515152,\"evidence\":[{\"documentId\":6,\"versionId\":225,\"chunkId\":9740,\"chunkIndex\":1,\"title\":\"pireel/pireel\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:94\",\"sectionPath\":\"pireel/pireel > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:46\",\"documentId\":63,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"bestScore\":0.014925373134328358,\"evidence\":[{\"documentId\":63,\"versionId\":282,\"chunkId\":10780,\"chunkIndex\":1,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:5\",\"documentId\":78,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"bestScore\":0.014705882352941176,\"evidence\":[{\"documentId\":78,\"versionId\":297,\"chunkId\":11822,\"chunkIndex\":1,\"title\":\"geostyler/geostyler\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:5\",\"sectionPath\":\"geostyler/geostyler > 知识分类\",\"startOffset\":23,\"endOffset\":39,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:10\",\"documentId\":82,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"bestScore\":0.014492753623188406,\"evidence\":[{\"documentId\":82,\"versionId\":301,\"chunkId\":11874,\"chunkIndex\":1,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 知识分类\",\"startOffset\":18,\"endOffset\":34,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:35\",\"documentId\":93,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"bestScore\":0.014285714285714285,\"evidence\":[{\"documentId\":93,\"versionId\":312,\"chunkId\":12017,\"chunkIndex\":1,\"title\":\"johnny-shaman/Sign\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:35\",\"sectionPath\":\"johnny-shaman/Sign > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:30\",\"documentId\":89,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"bestScore\":0.014084507042253521,\"evidence\":[{\"documentId\":89,\"versionId\":308,\"chunkId\":11965,\"chunkIndex\":1,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:8\",\"documentId\":80,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"bestScore\":0.013888888888888888,\"evidence\":[{\"documentId\":80,\"versionId\":299,\"chunkId\":11848,\"chunkIndex\":1,\"title\":\"qwen-code-dev-bot/oh-my-cli\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:8\",\"sectionPath\":\"qwen-code-dev-bot/oh-my-cli > 知识分类\",\"startOffset\":31,\"endOffset\":47,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013888888888888888,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:33\",\"documentId\":91,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"bestScore\":0.0136986301369863,\"evidence\":[{\"documentId\":91,\"versionId\":310,\"chunkId\":11991,\"chunkIndex\":1,\"title\":\"conorbronsdon/avoid-ai-writing\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:33\",\"sectionPath\":\"conorbronsdon/avoid-ai-writing > 知识分类\",\"startOffset\":34,\"endOffset\":50,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0136986301369863,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:17\",\"documentId\":85,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"bestScore\":0.013513513513513514,\"evidence\":[{\"documentId\":85,\"versionId\":304,\"chunkId\":11913,\"chunkIndex\":1,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 知识分类\",\"startOffset\":32,\"endOffset\":48,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013513513513513514,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:12\",\"documentId\":62,\"title\":\"pocket-stack/pocketjs\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:12\",\"bestScore\":0.013333333333333334,\"evidence\":[{\"documentId\":62,\"versionId\":281,\"chunkId\":10767,\"chunkIndex\":1,\"title\":\"pocket-stack/pocketjs\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:12\",\"sectionPath\":\"pocket-stack/pocketjs > 知识分类\",\"startOffset\":25,\"endOffset\":41,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:91\",\"documentId\":5,\"title\":\"SeanJ1ang/design-judge-skills\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:91\",\"bestScore\":0.013157894736842105,\"evidence\":[{\"documentId\":5,\"versionId\":224,\"chunkId\":9702,\"chunkIndex\":1,\"title\":\"SeanJ1ang/design-judge-skills\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:91\",\"sectionPath\":\"SeanJ1ang/design-judge-skills > 知识分类\",\"startOffset\":33,\"endOffset\":49,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:11\",\"documentId\":83,\"title\":\"BetterWright/betterwright\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:11\",\"bestScore\":0.012987012987012988,\"evidence\":[{\"documentId\":83,\"versionId\":302,\"chunkId\":11887,\"chunkIndex\":1,\"title\":\"BetterWright/betterwright\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:11\",\"sectionPath\":\"BetterWright/betterwright > 知识分类\",\"startOffset\":29,\"endOffset\":45,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:101\",\"documentId\":7,\"title\":\"img2threejs/img2threejs\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:101\",\"bestScore\":0.01282051282051282,\"evidence\":[{\"documentId\":7,\"versionId\":226,\"chunkId\":9767,\"chunkIndex\":1,\"title\":\"img2threejs/img2threejs\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:101\",\"sectionPath\":\"img2threejs/img2threejs > 知识分类\",\"startOffset\":27,\"endOffset\":43,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:14\",\"documentId\":84,\"title\":\"raycast/extensions\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:14\",\"bestScore\":0.012658227848101266,\"evidence\":[{\"documentId\":84,\"versionId\":303,\"chunkId\":11900,\"chunkIndex\":1,\"title\":\"raycast/extensions\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:14\",\"sectionPath\":\"raycast/extensions > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:121\",\"documentId\":13,\"title\":\"zhnt/loushang\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:121\",\"bestScore\":0.0125,\"evidence\":[{\"documentId\":13,\"versionId\":232,\"chunkId\":9944,\"chunkIndex\":1,\"title\":\"zhnt/loushang\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:121\",\"sectionPath\":\"zhnt/loushang > 知识分类\",\"startOffset\":17,\"endOffset\":33,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.0125,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:9\",\"documentId\":81,\"title\":\"willsoto/ng-chartist\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:9\",\"bestScore\":0.012345679012345678,\"evidence\":[{\"documentId\":81,\"versionId\":300,\"chunkId\":11861,\"chunkIndex\":1,\"title\":\"willsoto/ng-chartist\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:9\",\"sectionPath\":\"willsoto/ng-chartist > 知识分类\",\"startOffset\":24,\"endOffset\":40,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.012345679012345678,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"},\"parameters\":{\"topK\":20,\"purpose\":\"PROJECT_RANKING\",\"query\":\"推荐项目 Java 量子纠错、芯片流片 探索技术兴趣 刚学\",\"sourceTypes\":[\"BEGINNER_PROJECT\",\"GITHUB\",\"CAREER_PROJECT\"]}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"result\":[],\"parameters\":{\"conditions\":{\"topic\":[\"量子纠错\",\"芯片流片\"],\"provenance\":{\"topic\":{\"source\":\"MESSAGE\",\"quote\":\"技术方向是量子纠错芯片流片\"},\"goal\":{\"source\":\"MESSAGE\",\"quote\":\"目标是探索技术兴趣\"},\"experience\":{\"source\":\"MESSAGE\",\"quote\":\"基础是刚学\"},\"language\":{\"source\":\"MESSAGE\",\"quote\":\"语言是Java\"},\"maxDurationDays\":{\"source\":\"MESSAGE\",\"quote\":\"完成周期是两天内\"},\"allowHardware\":{\"source\":\"MESSAGE\",\"quote\":\"不能使用硬件\"},\"verificationMode\":{\"source\":\"MESSAGE\",\"quote\":\"只能推荐能核实\"}},\"goal\":\"探索技术兴趣\",\"experience\":\"刚学\",\"language\":\"Java\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"DAY\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":2,\"allowHardware\":false,\"verificationMode\":\"STRICT\",\"lastChangeSummary\":\"已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\"},\"semanticChunks\":[9641,12033,9976,9914,9740,10780,11822,11874,12017,11965,11848,11991,11913,10767,9702,11887,9767,11900,9944,11861]}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"result\":{\"conditions\":{\"language\":\"Java\",\"maxDurationDays\":2,\"topic\":[\"量子纠错\",\"芯片流片\"],\"allowHardware\":false},\"current\":{\"uncertain\":0,\"total\":0,\"confirmed\":0},\"available\":{\"uncertain\":0,\"total\":495,\"confirmed\":495},\"alternatives\":[],\"countUnit\":\"DISTINCT_REPOSITORY\",\"calculatedAt\":\"2026-10-03T14:27:27.053697145Z\"},\"parameters\":{\"conditions\":{\"topic\":[\"量子纠错\",\"芯片流片\"],\"provenance\":{\"topic\":{\"source\":\"MESSAGE\",\"quote\":\"技术方向是量子纠错芯片流片\"},\"goal\":{\"source\":\"MESSAGE\",\"quote\":\"目标是探索技术兴趣\"},\"experience\":{\"source\":\"MESSAGE\",\"quote\":\"基础是刚学\"},\"language\":{\"source\":\"MESSAGE\",\"quote\":\"语言是Java\"},\"maxDurationDays\":{\"source\":\"MESSAGE\",\"quote\":\"完成周期是两天内\"},\"allowHardware\":{\"source\":\"MESSAGE\",\"quote\":\"不能使用硬件\"},\"verificationMode\":{\"source\":\"MESSAGE\",\"quote\":\"只能推荐能核实\"}},\"goal\":\"探索技术兴趣\",\"experience\":\"刚学\",\"language\":\"Java\",\"durationSemantics\":{\"quantity\":2,\"unit\":\"DAY\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":2,\"allowHardware\":false,\"verificationMode\":\"STRICT\",\"lastChangeSummary\":\"已记录硬件要求：不使用；已记录基础（排序偏好）：刚学；已记录项目目标：探索技术兴趣；已记录编程语言：Java；已记录最长周期：2天；已记录项目主题：量子纠错、芯片流片；已记录核实要求：仅已核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[]},\"purpose\":\"COUNTERFACTUAL_COUNTS\"}}",
+      "status": "SUCCEEDED"
+    }
+  ],
+  "clientWallMs": 13847.460299992235,
+  "sessionSoftDeleted": true
+}

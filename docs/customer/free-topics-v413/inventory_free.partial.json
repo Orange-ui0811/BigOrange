@@ -1,0 +1,1379 @@
+{
+  "case": {
+    "id": "inventory_free",
+    "family": "inventory",
+    "kind": "free",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：帮小店管理进货、卖货和库存。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "136",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：帮小店管理进货、卖货和库存。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "10366a01-1fe1-4e03-bdbb-23d20a2271be",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 9766,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "topic": [
+            "进货管理",
+            "销售管理",
+            "库存管理"
+          ],
+          "provenance": {
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：帮小店管理进货、卖货和库存"
+            },
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "goal": "学习",
+          "experience": "一年编程基础",
+          "verificationMode": "EXPLORE",
+          "preferences": [
+            "帮小店管理进货、卖货和库存"
+          ],
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：进货管理、销售管理、库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "purposeReview": {
+            "topic": "进货管理、销售管理、库存管理",
+            "proofs": {}
+          },
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-04T03:19:44.819536517Z",
+          "conditions": {
+            "topic": [
+              "进货管理",
+              "销售管理",
+              "库存管理"
+            ]
+          },
+          "current": {
+            "total": 0,
+            "confirmed": 0,
+            "uncertain": 0
+          },
+          "available": {
+            "total": 494,
+            "confirmed": 494,
+            "uncertain": 0
+          },
+          "alternatives": [],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "NO_MATCH",
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：进货管理、销售管理、库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n暂时还没有核对出有效的调整方案。我会保留你的方向，不自动换成其他领域。可以从原目标里选一个最重要的功能继续找，或补充一个参考项目；目前不能保证放宽时间或语言就有合适结果。你最想先实现哪部分？",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：进货管理、销售管理、库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5291,
+              "completion_tokens": 1100,
+              "total_tokens": 6391,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 745
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 299
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 5099,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "usage": {
+              "prompt_tokens": 146,
+              "completion_tokens": 25,
+              "total_tokens": 171,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 146
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 996,
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "usage": {
+              "prompt_tokens": 2310,
+              "completion_tokens": 5,
+              "total_tokens": 2315,
+              "prompt_tokens_details": {
+                "cached_tokens": 128
+              },
+              "prompt_cache_hit_tokens": 128,
+              "prompt_cache_miss_tokens": 2182
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 991,
+            "protocol": "JSON_OBJECT",
+            "phase": "PURPOSE_REVIEW",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 4096,
+            "thinking": false
+          }
+        ],
+        "promptVersion": "customer-v4.13-purpose-review",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 745,
+          "complete": true,
+          "cacheHitTokens": 5120,
+          "inputTokens": 7747,
+          "cacheMissTokens": 2627,
+          "totalTokens": 8877,
+          "outputTokens": 1130,
+          "callsWithoutUsage": 0,
+          "calls": 3,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "进货管理、销售管理、库存管理 进货管理 采购入库 销售管理 订单出库 库存管理 库存盘点",
+            "topic": [
+              "进货管理",
+              "销售管理",
+              "库存管理"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "ToolJet/ToolJet",
+                  "chunkId": 16576,
+                  "content": "<p align=\"center\">\n    <img src=\"docs/static/img/readme/banner.png\" alt=\"ToolJet 仪表盘显示库存和订单\"/>\n</p>\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/flowchart.png\"/>\n</p>\n\n",
+                  "endOffset": 1360,
+                  "sourceRef": "ToolJet/ToolJet",
+                  "versionId": 548,
+                  "chunkIndex": 1,
+                  "documentId": 329,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 1180,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "Awesome-Selfhosted",
+                  "chunkId": 17189,
+                  "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                  "endOffset": 3047,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "versionId": 645,
+                  "chunkIndex": 2,
+                  "documentId": 426,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Awesome-Selfhosted > 目录",
+                  "startOffset": 1205,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "Project-N-E-K-O/N.E.K.O",
+                  "chunkId": 10143,
+                  "content": "#### 📊 系统监控\n\n<details>\n<summary>点击展开查看监控和管理命令</summary>\n\n",
+                  "endOffset": 9874,
+                  "sourceRef": "career:253",
+                  "versionId": 237,
+                  "chunkIndex": 49,
+                  "documentId": 18,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "N.E.K.O. 猫娘计划 :kissing_cat: <br>**听见你的心情，看见你的世界，<br>陪你发现更多喜欢。** > 快速开始 > Docker 部署 (Linux) > 📊 系统监控",
+                  "startOffset": 9816,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "vinta/awesome-python",
+                  "chunkId": 11643,
+                  "content": "## Categories\n\n**AI & ML**\n\n- [AI and Agents](#ai-and-agents)\n- [Deep Learning](#deep-learning)\n- [Machine Learning](#machine-learning)\n- [Natural Language Processing](#natural-language-processing)\n- [Computer Vision](#computer-vision)\n- [Recommender Systems](#recommender-systems)\n\n**Web Development**\n\n- [Web Frameworks](#web-frameworks)\n- [Web APIs](#web-apis)\n- [Web Servers](#web-servers)\n- [WebSocket](#websocket)\n- [Template Engines](#template-engines)\n- [Web Asset Management](#web-asset-management)\n- [Authentication](#authentication)\n- [Admin Panels](#admin-panels)\n- [CMS](#cms)\n- [Static Site Generators](#static-site-generators)\n\n**HTTP & Scraping**\n\n- [HTTP Clients](#http-clients)\n- [Web Scraping](#web-scraping)\n- [Email](#email)\n\n**Database & Storage**\n\n- [ORM](#orm)\n- [Database Drivers](#database-drivers)\n- [Database](#database)\n- [Caching](#caching)\n- [Search](#search)\n- [Serialization](#serialization)\n\n**Data & Science**\n\n- [Data Analysis](#data-analysis)\n- [Data Ingestion / ETL](#data-ingestion--etl)\n- [Data Validation](#data-validation)\n- [Data Visualization](#data-visualization)\n- [Geolocation](#geolocation)\n- [Science](#science)\n- [Quantum Computing](#quantum-computing)\n\n**Developer Tools**\n\n- [Algorithms and Design Patterns](#algorithms-and-design-patterns)\n- [Interactive Interpreter](#interactive-interpreter)\n- [Code Analysis](#code-analysis)\n- [Testing](#testing)\n- [Debugging Tools](#debugging-tools)\n- [Build Tools](#build-tools)\n- [Documentation](#documentation)\n\n",
+                  "endOffset": 1883,
+                  "sourceRef": "vinta/awesome-python",
+                  "versionId": 293,
+                  "chunkIndex": 2,
+                  "documentId": 74,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                  "startOffset": 377,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "系统设计入门",
+                  "chunkId": 11362,
+                  "content": "### Step 1: Review the scalability video lecture\n\n[Scalability Lecture at Harvard](https://www.youtube.com/watch?v=-W9F__D3oY4)\n\n* Topics covered:\n    * Vertical scaling\n    * Horizontal scaling\n    * Caching\n    * Load balancing\n    * Database replication\n    * Database partitioning\n\n",
+                  "endOffset": 18218,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "versionId": 291,
+                  "chunkIndex": 33,
+                  "documentId": 72,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "The System Design Primer > System design topics: start here > Step 1: Review the scalability video lecture",
+                  "startOffset": 17932,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "yanglbme/reading",
+                  "chunkId": 16240,
+                  "content": "## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n",
+                  "endOffset": 474,
+                  "sourceRef": "yanglbme/reading",
+                  "versionId": 502,
+                  "chunkIndex": 1,
+                  "documentId": 283,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "阅读 > 目录",
+                  "startOffset": 397,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "Gemini CLI",
+                  "chunkId": 16917,
+                  "content": "### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                  "endOffset": 2595,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "versionId": 605,
+                  "chunkIndex": 15,
+                  "documentId": 386,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Gemini CLI > 📋 主要特性 > 自动化与集成",
+                  "startOffset": 2496,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "系统设计入门",
+                  "chunkId": 11473,
+                  "content": "### Task queues\n\nTasks queues receive tasks and their related data, runs them, then delivers their results.  They can support scheduling and can be used to run computationally-intensive jobs in the background.\n\n**[Celery](https://docs.celeryproject.org/en/stable/)** has support for scheduling and primarily has python support.\n\n",
+                  "endOffset": 72686,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "versionId": 291,
+                  "chunkIndex": 144,
+                  "documentId": 72,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "The System Design Primer > Asynchronism > Task queues",
+                  "startOffset": 72357,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "chunkId": 15210,
+                  "content": "##### :black_small_square: Productivity\n\n<p>\n&nbsp;&nbsp; <a href=\"https://taskwarrior.org\"><b>taskwarrior</b></a> - task management system, todo list <br>\n</p>\n\n",
+                  "endOffset": 30294,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "versionId": 432,
+                  "chunkIndex": 35,
+                  "documentId": 213,
+                  "sourceType": "GITHUB",
+                  "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Productivity",
+                  "startOffset": 30132,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "Donchitos/Claude-Code-Game-Studios",
+                  "chunkId": 16785,
+                  "content": "## 包含内容\n\n| 类别 | 数量 | 描述 |\n|----------|-------|-------------|\n| **代理** | 49 | 涵盖设计、编程、美术、音频、叙事、QA 和制作的专门子代理 |\n| **技能** | 73 | 每个工作流阶段的斜杠命令（`/start`, `/design-system`, `/create-epics`, `/create-stories`, `/dev-story`, `/story-done` 等） |\n| **钩子** | 12 | 提交、推送、资产变更、会话生命周期、代理审计追踪和缺口检测时的自动化验证 |\n| **规则** | 11 | 在编辑玩法、引擎、AI、UI、网络代码等时强制执行的路径范围编码规范 |\n| **模板** | 41 | 用于 GDD、UX 规格说明、ADR、冲刺计划、HUD 设计、无障碍性等的文档模板 |\n\n",
+                  "endOffset": 2182,
+                  "sourceRef": "Donchitos/Claude-Code-Game-Studios",
+                  "versionId": 586,
+                  "chunkIndex": 4,
+                  "documentId": 367,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "包含内容",
+                  "startOffset": 1778,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "community-scripts/ProxmoxVE",
+                  "chunkId": 16676,
+                  "content": "## 包含的内容\n\n该仓库涵盖广泛的类别。以下是一些示例：\n\n| 类别       | 示例                                                |\n| ---------- | --------------------------------------------------- |\n| 家庭自动化 | Home Assistant、Zigbee2MQTT、ESPHome、Node-RED      |\n| 媒体       | Jellyfin、Plex、Radarr、Sonarr、Immich              |\n| 网络       | AdGuard Home、Nginx Proxy Manager、Pi-hole、Traefik |\n| 监控       | Grafana、Prometheus、Uptime Kuma、Netdata           |\n| 数据库     | PostgreSQL、MariaDB、Redis、InfluxDB                |\n| 安全       |",
+                  "endOffset": 2667,
+                  "sourceRef": "community-scripts/ProxmoxVE",
+                  "versionId": 564,
+                  "chunkIndex": 5,
+                  "documentId": 345,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "包含的内容",
+                  "startOffset": 2175,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "Project-N-E-K-O/N.E.K.O",
+                  "chunkId": 10134,
+                  "content": "#### 🔧 故障排除\n\n<details>\n<summary>点击展开查看常见问题解决方案</summary>\n\n",
+                  "endOffset": 8884,
+                  "sourceRef": "career:253",
+                  "versionId": 237,
+                  "chunkIndex": 40,
+                  "documentId": 18,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "N.E.K.O. 猫娘计划 :kissing_cat: <br>**听见你的心情，看见你的世界，<br>陪你发现更多喜欢。** > 快速开始 > Docker 部署 (Linux) > 🔧 故障排除",
+                  "startOffset": 8825,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "ComposioHQ/awesome-claude-skills",
+                  "chunkId": 15959,
+                  "content": "## 目录\n\n- [什么是 Claude 技能？](#什么是-Claude-技能)\n- [技能](#技能)\n  - [文档处理](#文档处理)\n  - [开发与代码工具](#开发与代码工具)\n  - [数据与分析](#数据与分析)\n  - [商业与营销](#商业与营销)\n  - [沟通与写作](#沟通与写作)\n  - [创意与媒体](#创意与媒体)\n  - [生产力与组织](#生产力与组织)\n  - [协作与项目管理](#协作与项目管理)\n  - [安全与系统](#安全与系统)\n  - [通过 Composio 实现应用自动化](#通过-Composio-实现应用自动化)\n- [入门指南](#入门指南)\n- [创建技能](#创建技能)\n- [贡献](#贡献)\n- [资源](#资源)\n- [许可证](#许可证)\n\n",
+                  "endOffset": 2615,
+                  "sourceRef": "ComposioHQ/awesome-claude-skills",
+                  "versionId": 457,
+                  "chunkIndex": 6,
+                  "documentId": 238,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "目录",
+                  "startOffset": 2254,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "tphakala/birdnet-go",
+                  "chunkId": 14982,
+                  "content": "### Operations\n\n- System Health diagnostics page covering audio pipeline, models and inference, network, and the datastore\n- Database doctor for diagnosis and schema repair\n- Help & Support page with guided bug reporting and one-click support dumps\n- OIDC / SSO with Google, GitHub, and generic providers, including RP-Initiated Logout\n- TLS certificate management UI with transactional writes and backup/restore\n- Hot-reload for settings, model installs, and per-source model assignments (no restart)\n- Optional, opt-in Sentry telemetry with strict privacy filtering\n\n",
+                  "endOffset": 7562,
+                  "sourceRef": "tphakala/birdnet-go|week",
+                  "versionId": 420,
+                  "chunkIndex": 11,
+                  "documentId": 201,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "BirdNET-Go > Features > Operations",
+                  "startOffset": 6993,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "HKUDS/nanobot",
+                  "chunkId": 10712,
+                  "content": "## ✨ Features\n\n<table align=\"center\">\n  <tr align=\"center\">\n    <th><p align=\"center\">📈 24/7 Real-Time Market Analysis</p></th>\n    <th><p align=\"center\">🚀 Full-Stack Software Engineer</p></th>\n    <th><p align=\"center\">📅 Smart Daily Routine Manager</p></th>\n    <th><p align=\"center\">📚 Personal Knowledge Assistant</p></th>\n  </tr>\n  <tr>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/search.gif\" width=\"180\" height=\"400\"></p></td>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/code.gif\" width=\"180\" height=\"400\"></p></td>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/schedule.gif\" width=\"180\" height=\"400\"></p></td>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/memory.gif\" width=\"180\" height=\"400\"></p></td>\n  </tr>\n  <tr>\n    <td align=\"center\">Discovery • Insights • Trends</td>\n    <td align=\"center\">Develop • Deploy • Scale</td>\n    <td align=\"center\">Schedule • Automate • Organize</td>\n    <td align=\"center\">Learn • Memory • Reasoning</td>\n  </tr>\n</table>\n\n",
+                  "endOffset": 14083,
+                  "sourceRef": "HKUDS/nanobot",
+                  "versionId": 275,
+                  "chunkIndex": 12,
+                  "documentId": 56,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "✨ Features",
+                  "startOffset": 13069,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "mikiarlo3/ai-copywriter",
+                  "chunkId": 9671,
+                  "content": "## 可改造方向\n- 结合产品数据库，批量生成商品描述。\n- 添加 A/B 测试模块，对比不同风格文案点击率。\n- 集成到邮件营销工具，自动优化邮件标题和内容。\n- 制作在线 demo 页面，实时展示改写过程。\n\n",
+                  "endOffset": 443,
+                  "sourceRef": "beginner:88",
+                  "versionId": 223,
+                  "chunkIndex": 6,
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "mikiarlo3/ai-copywriter > 可改造方向",
+                  "startOffset": 336,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "MindsHub Cowork",
+                  "chunkId": 16028,
+                  "content": "## 内部技术\n\n- **连接数据。** 一个安全的保险库可以连接 BigQuery、Postgres、Gmail、Drive、HubSpot、Notion 和 Linear 等系统。凭据按连接限定了作用域——代理永远不会看到原始密钥。\n- **模型路由器。** 在前沿模型（Claude、GPT、Gemini）和开放模型（DeepSeek、Qwen、Kimi）之间切换，无需为每个提供商配置密钥。\n- **开放代理。** 运行可互换的开源工具——Anton（默认）和 Hermes——可从下拉菜单切换。\n- **成果物。** 将代理输出转化为文档、仪表盘、应用和代码，并发布到实时 URL。\n- **记忆、技能与计划任务。** 跨会话记忆、可复用的技能库，以及按计划运行的任务。\n\n",
+                  "endOffset": 2424,
+                  "sourceRef": "mindsdb/minds",
+                  "versionId": 468,
+                  "chunkIndex": 5,
+                  "documentId": 249,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "MindsHub Cowork > 内部技术",
+                  "startOffset": 2082,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "ciembor/agent-rules-books",
+                  "chunkId": 10440,
+                  "content": "### [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)\n\nAuthor: [Michael T. Nygard](https://www.michaelnygard.com/)\n\nThe book focuses on systems that survive production reality: failures, overload, timeouts, retries, circuit breakers, bulkheads, backpressure, observability, and deployment behavior. This rule set is useful for services, APIs, queues, integrations, and critical production paths.\n\n",
+                  "endOffset": 12552,
+                  "sourceRef": "career:267",
+                  "versionId": 247,
+                  "chunkIndex": 33,
+                  "documentId": 28,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ciembor/agent-rules-books > Books List > [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)",
+                  "startOffset": 12131,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "APILayer 统一套件现已上线！🎉 🥳",
+                  "chunkId": 11065,
+                  "content": "| [Square](https://developer.squareup.com/reference/square) | Easy way to take payments, manage refunds, and help customers checkout online | `OAuth` | Yes | Unknown |\n| [SwiftKanban](https://www.digite.com/knowledge-base/swiftkanban/article/api-for-swift-kanban-web-services/#restapi) | Kanban software, Visualize Work, Increase Organizations Lead Time, Throughput & Productivity | `apiKey` | Yes | Unknown |\n| [Tenders in Hungary](https://tenders.guru/hu/api) | Get data for procurements in Hungary in JSON format | No | Yes | Unknown |\n| [Tenders in Poland](https://tenders.guru/pl/api) | Get data for procurements in Poland in JSON format | No | Yes | Unknown |\n| [Tenders in Romania](https://tenders.guru/ro/api) | Get data for procurements in Romania in JSON format | No | Yes | Unknown |\n| [Tenders in Spain](https://tenders.guru/es/api) | Get data for procurements in Spain in JSON format | No | Yes | Unknown |\n| [Tenders in Ukraine](https://tenders.guru/ua/api) | Get data for procurements in Ukraine in JSON format | No | Yes | Unknown |\n| [Tomba email finder](https://tomba.io/api) | Email Finder for B2B sales and email marketing and email verifier | `apiKey` | Yes | Yes |\n| [Trello](https://developers.trello.com/) | Boards, lists and cards to help you organize and prioritize your projects | `OAuth` | Yes | Unknown |\n\n**[⬆ Back to Index](#index)**\n<br >\n<br >\n",
+                  "endOffset": 30510,
+                  "sourceRef": "public-apis/public-apis",
+                  "versionId": 289,
+                  "chunkIndex": 28,
+                  "documentId": 70,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Try Public APIs for free > Index > Business",
+                  "startOffset": 29133,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0125,
+                  "title": "🦞 OpenClaw — 个人 AI 助手",
+                  "chunkId": 11251,
+                  "content": "- Internals: [Architecture](https://docs.openclaw.ai/concepts/architecture), [Agent](https://docs.openclaw.ai/concepts/agent), [Session model](https://docs.openclaw.ai/concepts/session), [Gateway protocol](https://docs.openclaw.ai/reference/rpc)\n- Troubleshooting: [Channel troubleshooting](https://docs.openclaw.ai/channels/troubleshooting), [Logging](https://docs.openclaw.ai/logging), [Docs home](https://docs.openclaw.ai)\n\n",
+                  "endOffset": 13221,
+                  "sourceRef": "openclaw/openclaw",
+                  "versionId": 290,
+                  "chunkIndex": 12,
+                  "documentId": 71,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "🦞 OpenClaw — Personal AI Assistant > Docs by goal",
+                  "startOffset": 12794,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 128,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "ToolJet/ToolJet",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "ToolJet/ToolJet",
+                      "chunkId": 16576,
+                      "content": "<p align=\"center\">\n    <img src=\"docs/static/img/readme/banner.png\" alt=\"ToolJet 仪表盘显示库存和订单\"/>\n</p>\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/flowchart.png\"/>\n</p>\n\n",
+                      "endOffset": 1360,
+                      "sourceRef": "ToolJet/ToolJet",
+                      "versionId": 548,
+                      "chunkIndex": 1,
+                      "documentId": 329,
+                      "sourceType": "GITHUB",
+                      "sectionPath": null,
+                      "startOffset": 1180,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:ToolJet/ToolJet",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "ToolJet/ToolJet",
+                  "documentId": 329,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Awesome-Selfhosted",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "Awesome-Selfhosted",
+                      "chunkId": 17189,
+                      "content": "## 目录\n\n- [软件](#software)\n  - [分析](#analytics)\n  - [归档与数字保存 (DP)](#archiving-and-digital-preservation-dp)\n  - [自动化](#automation)\n  - [备份](#backup)\n  - [博客平台](#blogging-platforms)\n  - [预约与日程安排](#booking-and-scheduling)\n  - [书签与链接分享](#bookmarks-and-link-sharing)\n  - [日历与联系人](#calendar--contacts)\n  - [通信 - 自定义通信系统](#communication---custom-communication-systems)\n  - [通信 - 电子邮件 - 完整解决方案](#communication---email---complete-solutions)\n  - [通信 - 电子邮件 - 邮件投递代理](#communication---email---mail-delivery-agents)\n  - [通信 - 电子邮件 - 邮件传输代理](#communication---email---mail-transfer-agents)\n  - [通信 - 电子邮件 - 邮件列表与新闻通讯](#communication---email---mailing-lists-and-newsletters)\n  - [通信 - 电子邮件 - Webmail 客户端](#communication---email---webmail-clients)\n  - [通信 - IRC](#communication---irc)\n  - [通信 - SIP](#communication---sip)\n  - [通信 - 社交网络与论坛](#communication---social-networks-and-forums)\n  - [通信 - 视频会议](#communication---video-conferencing)\n  - [通信 - XMPP - 服务器](#communication---xmpp---servers)\n  - [通信 - XMPP - Web 客户端](#communication---xmpp---web-clients)\n  - [社区支持农业 (CSA)](#community-supported-agriculture-csa)\n  - [会议管理](#conference-management)\n  - [内容管理系统 (CMS)](#content-management-systems-cms)\n  - [客户关系管理 (CRM)](#customer-relationship-management-crm)\n  - [数据库管理](#database-management)\n  - [DNS](#dns)\n  - [文档管理](#document-management)\n  - [文档管理 - 电子书](#document-management---e-books)\n  - [文档管理 - 机构知识库与数字图书馆软件](#document-management---institutional-repository-and-digital-library-software)\n  - [文档管理 - 集成图书馆系统 (ILS)](#document-management---integrated-library-systems-ils)\n  - [电子商务](#e-commerce)\n  - [联邦身份与认证](#federated-identity--authentication)\n  - [订阅阅读器](#feed-readers)\n  - [文件传输与同步](#file-transfer--synchronization)\n  - [文件传输 - 分布式文件系统](#file-transfer---distributed-filesystems)\n  - [文件传输 - 对象存储与文件服务器](#file-transfer---object-storage--file-servers)",
+                      "endOffset": 3047,
+                      "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                      "versionId": 645,
+                      "chunkIndex": 2,
+                      "documentId": 426,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Awesome-Selfhosted > 目录",
+                      "startOffset": 1205,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:awesome-selfhosted/awesome-selfhosted",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "awesome-selfhosted/awesome-selfhosted",
+                  "documentId": 426,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Project-N-E-K-O/N.E.K.O",
+                  "evidence": [
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "Project-N-E-K-O/N.E.K.O",
+                      "chunkId": 10143,
+                      "content": "#### 📊 系统监控\n\n<details>\n<summary>点击展开查看监控和管理命令</summary>\n\n",
+                      "endOffset": 9874,
+                      "sourceRef": "career:253",
+                      "versionId": 237,
+                      "chunkIndex": 49,
+                      "documentId": 18,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "N.E.K.O. 猫娘计划 :kissing_cat: <br>**听见你的心情，看见你的世界，<br>陪你发现更多喜欢。** > 快速开始 > Docker 部署 (Linux) > 📊 系统监控",
+                      "startOffset": 9816,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "Project-N-E-K-O/N.E.K.O",
+                      "chunkId": 10134,
+                      "content": "#### 🔧 故障排除\n\n<details>\n<summary>点击展开查看常见问题解决方案</summary>\n\n",
+                      "endOffset": 8884,
+                      "sourceRef": "career:253",
+                      "versionId": 237,
+                      "chunkIndex": 40,
+                      "documentId": 18,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "N.E.K.O. 猫娘计划 :kissing_cat: <br>**听见你的心情，看见你的世界，<br>陪你发现更多喜欢。** > 快速开始 > Docker 部署 (Linux) > 🔧 故障排除",
+                      "startOffset": 8825,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:253",
+                  "bestScore": 0.015873015873015872,
+                  "sourceRef": "career:253",
+                  "documentId": 18,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "vinta/awesome-python",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "vinta/awesome-python",
+                      "chunkId": 11643,
+                      "content": "## Categories\n\n**AI & ML**\n\n- [AI and Agents](#ai-and-agents)\n- [Deep Learning](#deep-learning)\n- [Machine Learning](#machine-learning)\n- [Natural Language Processing](#natural-language-processing)\n- [Computer Vision](#computer-vision)\n- [Recommender Systems](#recommender-systems)\n\n**Web Development**\n\n- [Web Frameworks](#web-frameworks)\n- [Web APIs](#web-apis)\n- [Web Servers](#web-servers)\n- [WebSocket](#websocket)\n- [Template Engines](#template-engines)\n- [Web Asset Management](#web-asset-management)\n- [Authentication](#authentication)\n- [Admin Panels](#admin-panels)\n- [CMS](#cms)\n- [Static Site Generators](#static-site-generators)\n\n**HTTP & Scraping**\n\n- [HTTP Clients](#http-clients)\n- [Web Scraping](#web-scraping)\n- [Email](#email)\n\n**Database & Storage**\n\n- [ORM](#orm)\n- [Database Drivers](#database-drivers)\n- [Database](#database)\n- [Caching](#caching)\n- [Search](#search)\n- [Serialization](#serialization)\n\n**Data & Science**\n\n- [Data Analysis](#data-analysis)\n- [Data Ingestion / ETL](#data-ingestion--etl)\n- [Data Validation](#data-validation)\n- [Data Visualization](#data-visualization)\n- [Geolocation](#geolocation)\n- [Science](#science)\n- [Quantum Computing](#quantum-computing)\n\n**Developer Tools**\n\n- [Algorithms and Design Patterns](#algorithms-and-design-patterns)\n- [Interactive Interpreter](#interactive-interpreter)\n- [Code Analysis](#code-analysis)\n- [Testing](#testing)\n- [Debugging Tools](#debugging-tools)\n- [Build Tools](#build-tools)\n- [Documentation](#documentation)\n\n",
+                      "endOffset": 1883,
+                      "sourceRef": "vinta/awesome-python",
+                      "versionId": 293,
+                      "chunkIndex": 2,
+                      "documentId": 74,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "[Awesome Python](https://awesome-python.com/) > Categories",
+                      "startOffset": 377,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:vinta/awesome-python",
+                  "bestScore": 0.015625,
+                  "sourceRef": "vinta/awesome-python",
+                  "documentId": 74,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "系统设计入门",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "系统设计入门",
+                      "chunkId": 11362,
+                      "content": "### Step 1: Review the scalability video lecture\n\n[Scalability Lecture at Harvard](https://www.youtube.com/watch?v=-W9F__D3oY4)\n\n* Topics covered:\n    * Vertical scaling\n    * Horizontal scaling\n    * Caching\n    * Load balancing\n    * Database replication\n    * Database partitioning\n\n",
+                      "endOffset": 18218,
+                      "sourceRef": "donnemartin/system-design-primer",
+                      "versionId": 291,
+                      "chunkIndex": 33,
+                      "documentId": 72,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "The System Design Primer > System design topics: start here > Step 1: Review the scalability video lecture",
+                      "startOffset": 17932,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "系统设计入门",
+                      "chunkId": 11473,
+                      "content": "### Task queues\n\nTasks queues receive tasks and their related data, runs them, then delivers their results.  They can support scheduling and can be used to run computationally-intensive jobs in the background.\n\n**[Celery](https://docs.celeryproject.org/en/stable/)** has support for scheduling and primarily has python support.\n\n",
+                      "endOffset": 72686,
+                      "sourceRef": "donnemartin/system-design-primer",
+                      "versionId": 291,
+                      "chunkIndex": 144,
+                      "documentId": 72,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "The System Design Primer > Asynchronism > Task queues",
+                      "startOffset": 72357,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:donnemartin/system-design-primer",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "donnemartin/system-design-primer",
+                  "documentId": 72,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "yanglbme/reading",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "yanglbme/reading",
+                      "chunkId": 16240,
+                      "content": "## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n",
+                      "endOffset": 474,
+                      "sourceRef": "yanglbme/reading",
+                      "versionId": 502,
+                      "chunkIndex": 1,
+                      "documentId": 283,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "阅读 > 目录",
+                      "startOffset": 397,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:yanglbme/reading",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "yanglbme/reading",
+                  "documentId": 283,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Gemini CLI",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "Gemini CLI",
+                      "chunkId": 16917,
+                      "content": "### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                      "endOffset": 2595,
+                      "sourceRef": "google-gemini/gemini-cli",
+                      "versionId": 605,
+                      "chunkIndex": 15,
+                      "documentId": 386,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Gemini CLI > 📋 主要特性 > 自动化与集成",
+                      "startOffset": 2496,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:google-gemini/gemini-cli",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "google-gemini/gemini-cli",
+                  "documentId": 386,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "trimstray/the-book-of-secret-knowledge",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "trimstray/the-book-of-secret-knowledge",
+                      "chunkId": 15210,
+                      "content": "##### :black_small_square: Productivity\n\n<p>\n&nbsp;&nbsp; <a href=\"https://taskwarrior.org\"><b>taskwarrior</b></a> - task management system, todo list <br>\n</p>\n\n",
+                      "endOffset": 30294,
+                      "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                      "versionId": 432,
+                      "chunkIndex": 35,
+                      "documentId": 213,
+                      "sourceType": "GITHUB",
+                      "sectionPath": ":trident: &nbsp;The Book of Secret Knowledge (Chapters) > CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents) > :black_small_square: Productivity",
+                      "startOffset": 30132,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:trimstray/the-book-of-secret-knowledge",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                  "documentId": 213,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "Donchitos/Claude-Code-Game-Studios",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "Donchitos/Claude-Code-Game-Studios",
+                      "chunkId": 16785,
+                      "content": "## 包含内容\n\n| 类别 | 数量 | 描述 |\n|----------|-------|-------------|\n| **代理** | 49 | 涵盖设计、编程、美术、音频、叙事、QA 和制作的专门子代理 |\n| **技能** | 73 | 每个工作流阶段的斜杠命令（`/start`, `/design-system`, `/create-epics`, `/create-stories`, `/dev-story`, `/story-done` 等） |\n| **钩子** | 12 | 提交、推送、资产变更、会话生命周期、代理审计追踪和缺口检测时的自动化验证 |\n| **规则** | 11 | 在编辑玩法、引擎、AI、UI、网络代码等时强制执行的路径范围编码规范 |\n| **模板** | 41 | 用于 GDD、UX 规格说明、ADR、冲刺计划、HUD 设计、无障碍性等的文档模板 |\n\n",
+                      "endOffset": 2182,
+                      "sourceRef": "Donchitos/Claude-Code-Game-Studios",
+                      "versionId": 586,
+                      "chunkIndex": 4,
+                      "documentId": 367,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "包含内容",
+                      "startOffset": 1778,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:Donchitos/Claude-Code-Game-Studios",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "Donchitos/Claude-Code-Game-Studios",
+                  "documentId": 367,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "community-scripts/ProxmoxVE",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "community-scripts/ProxmoxVE",
+                      "chunkId": 16676,
+                      "content": "## 包含的内容\n\n该仓库涵盖广泛的类别。以下是一些示例：\n\n| 类别       | 示例                                                |\n| ---------- | --------------------------------------------------- |\n| 家庭自动化 | Home Assistant、Zigbee2MQTT、ESPHome、Node-RED      |\n| 媒体       | Jellyfin、Plex、Radarr、Sonarr、Immich              |\n| 网络       | AdGuard Home、Nginx Proxy Manager、Pi-hole、Traefik |\n| 监控       | Grafana、Prometheus、Uptime Kuma、Netdata           |\n| 数据库     | PostgreSQL、MariaDB、Redis、InfluxDB                |\n| 安全       |",
+                      "endOffset": 2667,
+                      "sourceRef": "community-scripts/ProxmoxVE",
+                      "versionId": 564,
+                      "chunkIndex": 5,
+                      "documentId": 345,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "包含的内容",
+                      "startOffset": 2175,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:community-scripts/ProxmoxVE",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "community-scripts/ProxmoxVE",
+                  "documentId": 345,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "ComposioHQ/awesome-claude-skills",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "ComposioHQ/awesome-claude-skills",
+                      "chunkId": 15959,
+                      "content": "## 目录\n\n- [什么是 Claude 技能？](#什么是-Claude-技能)\n- [技能](#技能)\n  - [文档处理](#文档处理)\n  - [开发与代码工具](#开发与代码工具)\n  - [数据与分析](#数据与分析)\n  - [商业与营销](#商业与营销)\n  - [沟通与写作](#沟通与写作)\n  - [创意与媒体](#创意与媒体)\n  - [生产力与组织](#生产力与组织)\n  - [协作与项目管理](#协作与项目管理)\n  - [安全与系统](#安全与系统)\n  - [通过 Composio 实现应用自动化](#通过-Composio-实现应用自动化)\n- [入门指南](#入门指南)\n- [创建技能](#创建技能)\n- [贡献](#贡献)\n- [资源](#资源)\n- [许可证](#许可证)\n\n",
+                      "endOffset": 2615,
+                      "sourceRef": "ComposioHQ/awesome-claude-skills",
+                      "versionId": 457,
+                      "chunkIndex": 6,
+                      "documentId": 238,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "目录",
+                      "startOffset": 2254,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:ComposioHQ/awesome-claude-skills",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "ComposioHQ/awesome-claude-skills",
+                  "documentId": 238,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "tphakala/birdnet-go",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "tphakala/birdnet-go",
+                      "chunkId": 14982,
+                      "content": "### Operations\n\n- System Health diagnostics page covering audio pipeline, models and inference, network, and the datastore\n- Database doctor for diagnosis and schema repair\n- Help & Support page with guided bug reporting and one-click support dumps\n- OIDC / SSO with Google, GitHub, and generic providers, including RP-Initiated Logout\n- TLS certificate management UI with transactional writes and backup/restore\n- Hot-reload for settings, model installs, and per-source model assignments (no restart)\n- Optional, opt-in Sentry telemetry with strict privacy filtering\n\n",
+                      "endOffset": 7562,
+                      "sourceRef": "tphakala/birdnet-go|week",
+                      "versionId": 420,
+                      "chunkIndex": 11,
+                      "documentId": 201,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "BirdNET-Go > Features > Operations",
+                      "startOffset": 6993,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:tphakala/birdnet-go",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "tphakala/birdnet-go|week",
+                  "documentId": 201,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "HKUDS/nanobot",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "HKUDS/nanobot",
+                      "chunkId": 10712,
+                      "content": "## ✨ Features\n\n<table align=\"center\">\n  <tr align=\"center\">\n    <th><p align=\"center\">📈 24/7 Real-Time Market Analysis</p></th>\n    <th><p align=\"center\">🚀 Full-Stack Software Engineer</p></th>\n    <th><p align=\"center\">📅 Smart Daily Routine Manager</p></th>\n    <th><p align=\"center\">📚 Personal Knowledge Assistant</p></th>\n  </tr>\n  <tr>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/search.gif\" width=\"180\" height=\"400\"></p></td>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/code.gif\" width=\"180\" height=\"400\"></p></td>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/schedule.gif\" width=\"180\" height=\"400\"></p></td>\n    <td align=\"center\"><p align=\"center\"><img src=\"case/memory.gif\" width=\"180\" height=\"400\"></p></td>\n  </tr>\n  <tr>\n    <td align=\"center\">Discovery • Insights • Trends</td>\n    <td align=\"center\">Develop • Deploy • Scale</td>\n    <td align=\"center\">Schedule • Automate • Organize</td>\n    <td align=\"center\">Learn • Memory • Reasoning</td>\n  </tr>\n</table>\n\n",
+                      "endOffset": 14083,
+                      "sourceRef": "HKUDS/nanobot",
+                      "versionId": 275,
+                      "chunkIndex": 12,
+                      "documentId": 56,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "✨ Features",
+                      "startOffset": 13069,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:HKUDS/nanobot",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "HKUDS/nanobot",
+                  "documentId": 56,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "mikiarlo3/ai-copywriter",
+                  "evidence": [
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "mikiarlo3/ai-copywriter",
+                      "chunkId": 9671,
+                      "content": "## 可改造方向\n- 结合产品数据库，批量生成商品描述。\n- 添加 A/B 测试模块，对比不同风格文案点击率。\n- 集成到邮件营销工具，自动优化邮件标题和内容。\n- 制作在线 demo 页面，实时展示改写过程。\n\n",
+                      "endOffset": 443,
+                      "sourceRef": "beginner:88",
+                      "versionId": 223,
+                      "chunkIndex": 6,
+                      "documentId": 4,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "mikiarlo3/ai-copywriter > 可改造方向",
+                      "startOffset": 336,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:88",
+                  "bestScore": 0.013157894736842105,
+                  "sourceRef": "beginner:88",
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "MindsHub Cowork",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "MindsHub Cowork",
+                      "chunkId": 16028,
+                      "content": "## 内部技术\n\n- **连接数据。** 一个安全的保险库可以连接 BigQuery、Postgres、Gmail、Drive、HubSpot、Notion 和 Linear 等系统。凭据按连接限定了作用域——代理永远不会看到原始密钥。\n- **模型路由器。** 在前沿模型（Claude、GPT、Gemini）和开放模型（DeepSeek、Qwen、Kimi）之间切换，无需为每个提供商配置密钥。\n- **开放代理。** 运行可互换的开源工具——Anton（默认）和 Hermes——可从下拉菜单切换。\n- **成果物。** 将代理输出转化为文档、仪表盘、应用和代码，并发布到实时 URL。\n- **记忆、技能与计划任务。** 跨会话记忆、可复用的技能库，以及按计划运行的任务。\n\n",
+                      "endOffset": 2424,
+                      "sourceRef": "mindsdb/minds",
+                      "versionId": 468,
+                      "chunkIndex": 5,
+                      "documentId": 249,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "MindsHub Cowork > 内部技术",
+                      "startOffset": 2082,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:mindsdb/minds",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "mindsdb/minds",
+                  "documentId": 249,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "ciembor/agent-rules-books",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "ciembor/agent-rules-books",
+                      "chunkId": 10440,
+                      "content": "### [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)\n\nAuthor: [Michael T. Nygard](https://www.michaelnygard.com/)\n\nThe book focuses on systems that survive production reality: failures, overload, timeouts, retries, circuit breakers, bulkheads, backpressure, observability, and deployment behavior. This rule set is useful for services, APIs, queues, integrations, and critical production paths.\n\n",
+                      "endOffset": 12552,
+                      "sourceRef": "career:267",
+                      "versionId": 247,
+                      "chunkIndex": 33,
+                      "documentId": 28,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "ciembor/agent-rules-books > Books List > [Release It!](https://www.goodreads.com/en/book/show/1069827.Release_It_)",
+                      "startOffset": 12131,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:267",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "career:267",
+                  "documentId": 28,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "APILayer 统一套件现已上线！🎉 🥳",
+                  "evidence": [
+                    {
+                      "score": 0.012658227848101266,
+                      "title": "APILayer 统一套件现已上线！🎉 🥳",
+                      "chunkId": 11065,
+                      "content": "| [Square](https://developer.squareup.com/reference/square) | Easy way to take payments, manage refunds, and help customers checkout online | `OAuth` | Yes | Unknown |\n| [SwiftKanban](https://www.digite.com/knowledge-base/swiftkanban/article/api-for-swift-kanban-web-services/#restapi) | Kanban software, Visualize Work, Increase Organizations Lead Time, Throughput & Productivity | `apiKey` | Yes | Unknown |\n| [Tenders in Hungary](https://tenders.guru/hu/api) | Get data for procurements in Hungary in JSON format | No | Yes | Unknown |\n| [Tenders in Poland](https://tenders.guru/pl/api) | Get data for procurements in Poland in JSON format | No | Yes | Unknown |\n| [Tenders in Romania](https://tenders.guru/ro/api) | Get data for procurements in Romania in JSON format | No | Yes | Unknown |\n| [Tenders in Spain](https://tenders.guru/es/api) | Get data for procurements in Spain in JSON format | No | Yes | Unknown |\n| [Tenders in Ukraine](https://tenders.guru/ua/api) | Get data for procurements in Ukraine in JSON format | No | Yes | Unknown |\n| [Tomba email finder](https://tomba.io/api) | Email Finder for B2B sales and email marketing and email verifier | `apiKey` | Yes | Yes |\n| [Trello](https://developers.trello.com/) | Boards, lists and cards to help you organize and prioritize your projects | `OAuth` | Yes | Unknown |\n\n**[⬆ Back to Index](#index)**\n<br >\n<br >\n",
+                      "endOffset": 30510,
+                      "sourceRef": "public-apis/public-apis",
+                      "versionId": 289,
+                      "chunkIndex": 28,
+                      "documentId": 70,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Try Public APIs for free > Index > Business",
+                      "startOffset": 29133,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:public-apis/public-apis",
+                  "bestScore": 0.012658227848101266,
+                  "sourceRef": "public-apis/public-apis",
+                  "documentId": 70,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "🦞 OpenClaw — 个人 AI 助手",
+                  "evidence": [
+                    {
+                      "score": 0.0125,
+                      "title": "🦞 OpenClaw — 个人 AI 助手",
+                      "chunkId": 11251,
+                      "content": "- Internals: [Architecture](https://docs.openclaw.ai/concepts/architecture), [Agent](https://docs.openclaw.ai/concepts/agent), [Session model](https://docs.openclaw.ai/concepts/session), [Gateway protocol](https://docs.openclaw.ai/reference/rpc)\n- Troubleshooting: [Channel troubleshooting](https://docs.openclaw.ai/channels/troubleshooting), [Logging](https://docs.openclaw.ai/logging), [Docs home](https://docs.openclaw.ai)\n\n",
+                      "endOffset": 13221,
+                      "sourceRef": "openclaw/openclaw",
+                      "versionId": 290,
+                      "chunkIndex": 12,
+                      "documentId": 71,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "🦞 OpenClaw — Personal AI Assistant > Docs by goal",
+                      "startOffset": 12794,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=20,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:openclaw/openclaw",
+                  "bestScore": 0.0125,
+                  "sourceRef": "openclaw/openclaw",
+                  "documentId": 71,
+                  "sourceType": "GITHUB"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "进货管理、销售管理、库存管理 进货管理 采购入库 销售管理 订单出库 库存管理 库存盘点",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 329,
+                "url": "https://github.com/ToolJet/ToolJet",
+                "name": "ToolJet/ToolJet",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "ToolJet/ToolJet",
+                "versionId": 548,
+                "documentId": 329,
+                "importable": false,
+                "catalogText": "ToolJet 是 ToolJet AI 的开源基础——一个用于构建和部署内部工具、工作流和 AI 代理的 AI 原生平台。社区版提供了强大的可视化构建器、拖放式 UI，以及与数据库、API、SaaS 应用和对象存储的集成。有关 AI 驱动的 UI 生成、查询构建、调试和企业功能，请参阅 ToolJet AI。\n\n:star: 如果您觉得 ToolJet 有用，请考虑在 GitHub 上给我们一个 star！您的支持有助于我们持续创新并交付令人兴奋的功能。\n\n![Docker 云构建状态](https://img.shields.io/docker/automated/tooljet/tooljet-ce)\n![GitHub 贡献者数量](https://img.shields.io/github/contributors/tooljet/tooljet)\n[![GitHub 未解决的 issues 数量](https://img.shields.io/github/issues/ToolJet/ToolJet)](https://github.com/ToolJet/ToolJet/issues)\n[![GitHub star 数量](https://img.shields.io/github/stars/ToolJet/ToolJet)](https://github.com/ToolJet/ToolJet/stargazers)\n![GitHub 已关闭 issues 数量](https://img.shields.io/github/issues-closed/tooljet/tooljet)\n![GitHub 开放的拉取请求数量](https://img.shields.io/github/issues-pr-raw/tooljet/tooljet)\n![GitHub 最新发布版本](https://img.shields.io/github/v/release/tooljet/tooljet)\n![GitHub 提交活动](https://img.shields.io/github/commit-activity/m/tooljet/tooljet)\n[![GitHub 许可证（AGPL 许可证）](https://img.shields.io/github/license/ToolJet/ToolJet)](https://github.com/ToolJet/ToolJet)\n[![在 X（原 Twitter）上关注我们](https://img.shields.io/twitter/follow/ToolJet?style=social)](https://twitter.com/ToolJet)\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/banner.png\" alt=\"ToolJet 仪表盘显示库存和订单\"/>\n</p>\n\n<p align=\"center\">\n    <img src=\"docs/static/img/readme/flowchart.png\"/>\n</p>\n\n## 功能特性\n\n### 社区版 (CE)\n- **可视化应用构建器：** 60+ 个响应式组件（表格、图表、表单、列表、进度条等）。\n- **ToolJet 数据库：** 内置无代码数据库。\n- **多页应用与多人协作编辑：** 协作构建复杂应用。\n- **80+ 数据源：** 连接数据库、API、云存储和 SaaS 工具。\n- **灵活部署：** 使用 Docker、Kubernetes、AWS、GCP、Azure 等进行自托管。\n- **协作工具：** 内联评论、提及和细粒度访问控制。\n- **可扩展性：** 使用 [ToolJet CLI](https://www.npmjs.com/package/@tooljet/cli) 创建插件和连接器。\n- **任意位置编码：** 在应用内运行 JavaScript 和 Python。\n- **安全设计：** AES-256-GCM 加密、仅代理数据流、SSO 支持。\n\n### ToolJet AI（企业版）\n社区版所有功能，外加：\n- **AI 应用生成：** 通过自然语言提示即时创建应用。\n- **AI 查询构建器：** 借助 AI 辅助生成和转换查询。\n- **AI 调试：** 一键识别并修复问题。\n- **代理构建器：** 创建智能代理来自动化工作流并编排流程。\n- **企业级安全与合规：** SOC 2 和 GDPR 就绪、审计日志和高级访问控制。\n- **用户管理：** 基于角色的访问控制 (RBAC)、自定义组和细粒度的应用/数据权限。\n- **多环境管理：** 无缝的开发/预发布/生产环境。\n- **GitSync 与 CI/CD：** 与 GitHub/GitLab 集成，实现版本控制和简化部署。\n- **品牌与定制：** 白标和自定义主题，满足组织品牌需求。\n- **细粒度访问控制：** 在行、组件、页面和查询级别保护数据和操作。\n- **嵌入式应用：** 将 ToolJet 应用安全地嵌入到其他应用程序或门户中。\n- **企业支持：** SLA、优先错误修复和入门协助。\n\n<hr>\n\n## 快速入门\n开始使用 ToolJet 的最简单方法是创建一个 [ToolJet Cloud](https://tooljet.com) 账户。ToolJet Cloud 提供 ToolJet 的托管解决方案。如果",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "ToolJet/ToolJet",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 253,
+                "url": "https://github.com/Project-N-E-K-O/N.E.K.O",
+                "name": "Project-N-E-K-O/N.E.K.O",
+                "type": "CAREER_PROJECT",
+                "status": "PUBLISHED",
+                "quality": 75,
+                "archived": false,
+                "duration": "高级（约 100 小时）",
+                "language": "Python",
+                "mainRisks": "项目侧重于创意与交互，面试时可能被追问技术深度；缺少部署方案，仅靠终端演示可能不够直观；情感引擎容易被视为玩具项目，需要准备严肃的技术阐述。",
+                "sourceRef": "career:253",
+                "techStack": "Python",
+                "difficulty": "进阶",
+                "importable": false,
+                "description": "一个会主动找你玩的实时 AI 猫娘，拥有具身化情感引擎，能主动发起互动、共享你的媒体内容。基于 Python 构建。",
+                "proofPoints": "自动化测试、CI 和发布流水线完备；提供快速入门和 Docker 支持；Apache-2.0 许可。",
+                "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+                "analysisReason": "展示你将情感计算、实时交互和 AI 代理结合在一起的跨领域工程能力。在 AI 应用与 Agent 方向上提供极具创意和差异化的作品，吸引面试官兴趣。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": true,
+                "interviewTopics": "如何设计情感引擎的状态机与触发规则；实时交互中的低延迟优化策略；Python 在长期运行代理中的内存管理；为何选择这种高互动性的 AI 形态，背后的人机交互思考；77 个 issue 中的典型技术难题。",
+                "requiresSecrets": true,
+                "modificationPlan": "1) 补充缺失的部署方案（如 Web 或桌面端打包），让作品更容易被体验；2) 扩展多语言或个性化情感模型，突出差异化；3) 增加可观测性面板，实时显示情感状态与决策过程，方便面试展示；4) 撰写设计文档，解释情感引擎的心理学/工程学原理，提升技术深度。",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 72,
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "name": "donnemartin/system-design-primer",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "donnemartin/system-design-primer",
+                "versionId": 291,
+                "documentId": 72,
+                "importable": false,
+                "catalogText": "*[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues/272) ∙ [Italiano](https://github.com/donnemartin/system-design-primer/issues/104) ∙ [한국어](https://github.com/donnemartin/system-design-primer/issues/102) ∙ [فارسی](https://github.com/donnemartin/system-design-primer/issues/110) ∙ [Polski](https://github.com/donnemartin/system-design-primer/issues/68) ∙ [русский язык](https://github.com/donnemartin/system-design-primer/issues/87) ∙ [Español](https://github.com/donnemartin/system-design-primer/issues/136) ∙ [ภาษาไทย](https://github.com/donnemartin/system-design-primer/issues/187) ∙ [Türkçe](https://github.com/donnemartin/system-design-primer/issues/39) ∙ [tiếng Việt](https://github.com/donnemartin/system-design-primer/issues/127) ∙ [Français](https://github.com/donnemartin/system-design-primer/issues/250) | [Add Translation](https://github.com/donnemartin/system-design-primer/issues/28)*\n\n**Help [translate](TRANSLATIONS.md) this guide!**\n\n# The System Design Primer\n\n<p align=\"center\">\n  <img src=\"images/jj3A5N8.png\">\n  <br/>\n</p>\n\n## Motivation\n\n> Learn how to design large-scale systems.\n>\n> Prep for the system design interview.\n\n### Learn how to design large-scale systems\n\nLearning how to design scalable systems will help you become a better engineer.\n\nSystem design is a broad topic.  There are a **vast number of resources scattered throughout the web** on system design principles.\n\nThis repo is an **organized collection** of resources to help you learn how to build systems at scale.\n\n### Learn from the open source community\n\nThis is a continually updated, open source project.\n\n[Contributions](#contributing) are welcome!\n\n### Prep for the system design interview\n\nIn addition to coding interviews, system design is a **required component** of the **technical interview process** at many tech companies.\n\n**Practice common system design interview questions** and **compare** your results with **sample solutions**: discussions, code, and diagrams.\n\nAdditional topics for interview prep:\n\n* [Study guide](#study-guide)\n* [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question)\n* [System design interview questions, **with solutions**](#system-design-interview-questions-with-solutions)\n* [Object-oriented design interview questions, **with solutions**](#object-oriented-design-interview-questions-with-solutions)\n* [Additional system design interview questions](#additional-system-design-interview-questions)\n\n## Anki flashcards\n\n<p align=\"center\">\n  <img src=\"images/zdCAkB3.png\">\n  <br/>\n</p>\n\nThe provided [Anki flashcard decks](https://apps.ankiweb.net/) use spaced repetition to help you retain key system design concepts.\n\n* [System design deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design.apkg)\n* [System design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/System%20Design%20Exercises.apkg)\n* [Object oriented design exercises deck](https://github.com/donnemartin/system-design-primer/tree/master/resources/flash_cards/OO%20Design.apkg)\n\nGreat for use while on-the-go.\n\n### Coding Resource: Interactive Coding Challenges\n\nLooking for resources to help you prep for the [**Coding Interview**](https://github.com/donnemartin/interactive-coding-challenges)?\n\n<p align=\"center\">\n  <img src=\"images/b4YtAEN.png\">\n  <br/>\n</p>\n\nCheck out the sister repo [**Interactive Coding Challenges**](https://github.com/donnemartin/interactive-coding-challenges), which contains an additional Anki deck:\n\n* [Coding deck](https://github.com/donnemartin/interactive-coding-challenges/tree/master/anki_cards/Coding.apkg)\n\n## Contributing\n\n> Learn from the community.\n\nFeel free to submit pull requests to help:\n\n* Fix errors\n* Improve sections\n* Add new sections\n* [Translate](https://github.com/donnemartin/system-design-primer/issues/28)\n\nContent that needs some polishing is placed [under development](#under-development).\n\nReview the [Contributing Guidelines](CONTRIBUTING.md).\n\n## Index of system design topics\n\n> Summaries of various system design topics, including pros and cons.  **Everything is a trade-off**.\n>\n> Each section contains links to more in-depth resources.\n\n<p align=\"center\">\n  <img src=\"images/jrUBAF7.png\">\n  <br/>\n</p>\n\n* [System design topics: start here](#system-design-topics-start-here)\n    * [Step 1: Review the scalability video lecture](#step-1-review-the-scalability-video-lecture)\n    * [Step 2: Review the scalability article](#step-2-review-the-scalability-article)\n    * [Next steps](#next-steps)\n* [Performance vs scalability](#performance-vs-scalability)\n* [Latency vs throughput](#latency-vs-throughput)\n* [Availability vs consistency](#availability-vs-consistency)\n    * [CAP theorem](#cap-theorem)\n        * [CP - consistency and partition tolerance](#cp---consistency-and-partition-tolerance)\n        * [AP - availability and partition tolerance](#ap---availability-and-partition-tolerance)\n* [Consistency patterns](#consistency-patterns)\n    * [Weak consistency](#weak-consistency)\n    * [Eventual consistency](#eventual-consistency)\n    * [Strong consistency](#strong-consistency)\n* [Availability patterns](#availability-patterns)\n    * [Fail-over](#fail-over)\n    * [Replication](#replication)\n    * [Availability in numbers](#availability-in-numbers)\n* [Domain name system](#domain-name-system)\n* [Content delivery network](#content-delivery-network)\n    * [Push CDNs](#push-cdns)\n    * [Pull CDNs](#pull-cdns)\n* [Load balancer](#load-balancer)\n    * [Active-passive](#active-passive)\n    * [Active-active](#active-active)\n    * [Layer 4 load balancing](#layer-4-load-balancing)\n    * [Layer 7 load balancing](#layer-7-load-balancing)\n    * [Horizontal scaling](#horizontal-scaling)\n* [Reverse proxy (web server)](#reverse-proxy-web-server)\n    * [Load balancer vs reverse proxy](#load-balancer-vs-reverse-proxy)\n* [Application layer](#application-layer)\n    * [Microservices](#microservices)\n    * [Service discovery](#service-discovery)\n* [Database](#database)\n    * [Relational database management system (RDBMS)](#relational-database-management-system-rdbms)\n        * [Master-slave replication](#master-slave-replication)\n        * [Master-master replication](#master-master-replication)\n        * [Federation](#federation)\n        * [Sharding](#sharding)\n        * [Denormalization](#denormalization)\n        * [SQL tuning](#sql-tuning)\n    * [NoSQL](#nosql)\n        * [Key-value store](#key-value-store)\n        * [Document store](#document-store)\n        * [Wide column store](#wide-column-store)\n        * [Graph Database](#graph-database)\n    * [SQL or NoSQL](#sql-or-nosql)\n* [Cache](#cache)\n    * [Client caching](#client-caching)\n    * [CDN caching](#cdn-caching)\n    * [Web server caching](#web-server-caching)\n    * [Database caching](#database-caching)\n    * [Application caching](#application-caching)\n    * [Caching at the database query level](#caching-at-the-database-query-level)\n    * [Caching at the object level](#caching-at-the-object-level)\n    * [When to update the cache](#when-to-update-the-cache)\n        * [Cache-aside](#cache-aside)\n        * [Write-through](#write-through)\n        * [Write-behind (write-back)](#write-behind-write-back)\n        * [Refresh-ahead](#refresh-ahead)\n* [Asynchronism](#asynchronism)\n    * [Message queues](#message-queues)\n    * [Task queues](#task-queues)\n    * [Back pressure](#back-pressure)\n* [Communication](#communication)\n    * [Transmission control protocol (TCP)](#transmission-control-protocol-tcp)\n    * [User datagram protocol (UDP)](#user-datagram-protocol-udp)\n    * [Remote procedure call (RPC)](#remote-procedure-call-rpc)\n    * [Representational state transfer (REST)](#representational-state-transfer-rest)\n* [Security](#security)\n* [Appendix](#appendix)\n    * [Powers of two table](#powers-of-two-table)\n    * [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)\n    * [Additional system design interview questions](#additional-system-design-interview-questions)\n    * [Real world architectures](#real-world-architectures)\n    * [Company architectures](#company-architectures)\n    * [Company engineering blogs](#company-engineering-blogs)\n* [Under development](#under-development)\n* [Credits](#credits)\n* [Contact info](#contact-info)\n* [License](#license)\n\n## Study guide\n\n> Suggested topics to review based on your interview timeline (short, medium, long).\n\n![Imgur](images/OfVllex.png)\n\n**Q: For interviews, do I need to know everything here?**\n\n**A: No, you don't need to know everything here to prepare for the interview**.\n\nWhat you are asked in an interview depends on variables such as:\n\n* How much experience you have\n* What your technical background is\n* What positions you are interviewing for\n* Which companies you are interviewing with\n* Luck\n\nMore experienced candidates are generally expected to know more about system design.  Architects or team leads might be expected to know more than individual contributors.  Top tech companies are likely to have one or more design interview rounds.\n\nStart broad and go deeper in a few areas.  It helps to know a little about various key system design topics.  Adjust the following guide based on your timeline, experience, what positions you are interviewing for, and which companies you are interviewing with.\n\n* **Short timeline** - Aim for **breadth** with system design topics.  Practice by solving **some** interview questions.\n* **Medium timeline** - Aim for **breadth** and **some depth** with system design topics.  Practice by solving **many** interview questions.\n* **Long timeline** - Aim for **breadth** and **more depth** with system design topics.  Practice by solving **most** interview questions.\n\n| | Short | Medium | Long |\n|---|---|---|---|\n| Read through the [System design topics](#index-of-system-design-topics) to get a broad understanding of how systems work | :+1: | :+1: | :+1: |\n| Read through a few articles in the [Company engineering blogs](#company-engineering-blogs) for the companies you are interviewing with | :+1: | :+1: | :+1: |\n| Read through a few [Real world architectures](#real-world-architectures) | :+1: | :+1: | :+1: |\n| Review [How to approach a system design interview question](#how-to-approach-a-system-design-interview-question) | :+1: | :+1: | :+1: |\n| Work through [System design interview questions with solutions](#system-design-interview-questions-with-solutions) | Some | Many | Most |\n| Work through [Object-oriented design interview questions with solutions](#object-oriented-design-interview-questions-with-solutions) | Some | Many | Most |\n| Review [Additional system design interview questions](#additional-system-design-interview-questions) | Some | Many | Most |\n\n## How to approach a system design interview question\n\n> How to tackle a system design interview question.\n\nThe system design interview is an **open-ended conversation**.  You are expected to lead it.\n\nYou can use the following steps to guide the discussion.  To help solidify this process, work through the [System design interview questions with solutions](#system-design-interview-questions-with-solutions) section using the following steps.\n\n### Step 1: Outline use cases, constraints, and assumptions\n\nGather requirements and scope the problem.  Ask questions to clarify use cases and constraints.  Discuss assumptions.\n\n* Who is going to use it?\n* How ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "系统设计入门",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 283,
+                "url": "https://github.com/yanglbme/reading",
+                "name": "yanglbme/reading",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "yanglbme/reading",
+                "versionId": 502,
+                "documentId": 283,
+                "importable": false,
+                "catalogText": "# 阅读\n\n[![license](https://img.shields.io/github/license/yanglbme/reading?color=42b883&style=flat-square)](https://github.com/yanglbme/reading/blob/main/LICENSE)\n[![actions status](https://img.shields.io/github/workflow/status/yanglbme/reading/Sync?color=42b883&label=sync&logo=github&style=flat-square)](https://github.com/yanglbme/reading/actions?query=workflow%3ASync)\n\n本项目记录了我的阅读笔记，包括技术类和其他类。\n\n## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n### [技术类](docs/tech/README.md)\n\n| #   | 标题                                                                                 | 作者                               | 评分     |\n| --- | ------------------------------------------------------------------------------------- | --------------------------------------- | ---------- |\n| 1   | [Redis 设计与实现[2014]](docs/tech/2019-03-17.md)                                     | [黄健宏](https://github.com/huangz1990) | ⭐⭐⭐⭐⭐ |\n| 2   | [企业 IT 架构转型之道：阿里巴巴中台战略思想与架构实战[2017]](docs/tech/2019-03-31.md) | 钟华(花名:古谦)                         | ⭐⭐⭐⭐   |\n| 3   | [代码整洁之道[2010]](docs/tech/2019-04-07.md)                                         | [美]Robert C.Martin                     | ⭐⭐⭐⭐⭐ |\n\n### [其他类](docs/other/README.md)\n\n| #   | 标题                                                                       | 作者                                                                       | 评分     |\n| --- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ---------- |\n| 1   | [软技能：代码之外的生存指南[2016]](docs/other/2019-03-10.md)                | [[美]John Z. Sonmez](https://simpleprogrammer.com/about-simple-programmer/) | ⭐⭐⭐⭐⭐ |\n| 2   | [自学是门手艺[2019]](docs/other/2019-03-24.md)                              | [李笑来](https://github.com/xiaolai)                                        | ⭐⭐⭐⭐⭐ |\n| 3   | [枕边算法书[2018]](docs/other/2019-04-14.md)                                | [韩]林栢濬 著、崔盛一 译                                                    | ⭐⭐⭐⭐   |\n| 4   | [房思琪的初恋乐园[2017]](docs/other/2019-04-21.md)                          | [台]林奕含                                                                  | ⭐⭐⭐⭐⭐ |\n| 5   | [人性的弱点[2006]](docs/other/2019-04-28.md)                                | [美]戴尔·卡耐基                                                             | ⭐⭐⭐⭐⭐ |\n| 6   | [我的生活不可能那么坏[2018]](docs/other/2019-05-05.md)                      | [日]河尻圭吾                                                                | ⭐⭐⭐⭐⭐ |\n| 7   | [坚持，一种可以养成的习惯[2016]](docs/other/2019-05-12.md)                  | [日]古川武士                                                                | ⭐⭐⭐⭐   |\n| 8   | [如何阅读一本书[2014]](docs/other/2019-05-26.md)                            | [美] 莫提默·J 艾德勒、查尔斯·范多伦                                         | ⭐⭐⭐⭐   |\n| 9   | [黑客与画家：硅谷创业之父 Paul Graham 文集[2011]](docs/other/2019-05-27.md) | [美] 保罗·格雷厄姆 著、[阮一峰](https://github.com/ruanyf) 译               | ⭐⭐⭐⭐⭐ |\n| 10  | [未来世界的幸存者[2018]](docs/other/2019-06-01.md)                          | [阮一峰](https://github.com/ruanyf)                                         | ⭐⭐⭐⭐⭐ |\n| 11  | [韭菜的自我修养[2018]](docs/other/2019-06-09.md)                            | [李笑来](https://github.com/xiaolai)                                        | ⭐⭐⭐⭐   |\n| 12  | [稀缺：我们是如何陷入贫穷与忙碌的[2014]](docs/other/2019-06-16.md)          | [美] 塞德希尔· 穆来纳森 & 埃尔德·沙菲尔 著、魏薇 & 龙志勇 译                | ⭐⭐⭐⭐⭐ |\n| 13  | [认知尺度[2019]](docs/other/2019-06-24.md)                                  | 魏坤琳 等                                                                   | ⭐⭐⭐⭐⭐ |\n| 14  | [顺势而为：雷军传[2014]](docs/other/2019-07-14.md)                          | 采文                                                                        | ⭐⭐⭐⭐⭐ |\n| 15  | [MacTalk 跨越边界[2015]](docs/other/2019-07-22.md)                          | 池建强                                                                      | ⭐⭐⭐⭐⭐ |",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "yanglbme/reading",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 386,
+                "url": "https://github.com/google-gemini/gemini-cli",
+                "name": "google-gemini/gemini-cli",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "google-gemini/gemini-cli",
+                "versionId": 605,
+                "documentId": 386,
+                "importable": false,
+                "catalogText": "# Gemini CLI\n\n[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)\n[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)\n[![版本](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)\n[![许可证](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)\n[![查看 Code Wiki](https://assets.codewiki.google/readme-badge/static.svg)](https://codewiki.google/github.com/google-gemini/gemini-cli?utm_source=badge&utm_medium=github&utm_campaign=github.com/google-gemini/gemini-cli)\n\n![Gemini CLI 截图](/docs/assets/gemini-screenshot.png)\n\nGemini CLI 是一个开源 AI 代理，将 Gemini 的强大功能直接带入您的终端。它提供对 Gemini 的轻量级访问，为您提供从提示到模型的最直接路径。\n\n在我们的[文档](https://geminicli.com/docs/)中了解有关 Gemini CLI 的所有信息。\n\n## 🚀 为什么选择 Gemini CLI？\n\n- **🎯 免费套餐**：使用个人 Google 账户，每分钟 60 个请求，每天 1,000 个请求。\n- **🧠 强大的 Gemini 3 模型**：可访问改进的推理能力和 100 万 Token 上下文窗口。\n- **🔧 内置工具**：Google 搜索基础、文件操作、Shell 命令、网页抓取。\n- **🔌 可扩展**：MCP（模型上下文协议）支持自定义集成。\n- **💻 终端优先**：专为生活在命令行中的开发者设计。\n- **🛡️ 开源**：Apache 2.0 许可。\n\n## 📦 安装\n\n有关推荐的系统规格和详细的安装指南，请参阅\n[Gemini CLI 安装、执行和发布](https://www.geminicli.com/docs/get-started/installation)。\n\n### 快速安装\n\n#### 使用 npx 立即运行\n\n```bash\n# 使用 npx（无需安装）\nnpx @google/gemini-cli\n```\n\n#### 使用 npm 全局安装\n\n```bash\nnpm install -g @google/gemini-cli\n```\n\n#### 使用 Homebrew 全局安装（macOS/Linux）\n\n```bash\nbrew install gemini-cli\n```\n\n#### 使用 MacPorts 全局安装（macOS）\n\n```bash\nsudo port install gemini-cli\n```\n\n#### 使用 Anaconda 安装（适用于受限环境）\n\n```bash\n# 创建并激活一个新环境\nconda create -y -n gemini_env -c conda-forge nodejs\nconda activate gemini_env\n\n# 在环境内通过 npm 全局安装 Gemini CLI\nnpm install -g @google/gemini-cli\n```\n\n## 发布渠道\n\n有关更多详细信息，请参阅[发布说明](https://www.geminicli.com/docs/changelogs)。\n\n### 预览版\n\n新的预览版将在每周二 UTC 23:59 发布。这些版本尚未经过全面审查，可能包含回归或其他未解决的问题。请帮助我们测试，并使用 `preview` 标签安装。\n\n```bash\nnpm install -g @google/gemini-cli@preview\n```\n\n### 稳定版\n\n- 新的稳定版将在每周二 UTC 20:00 发布，这是上周 `preview` 版本的完整提升，并包含所有错误修复和验证。使用 `latest` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@latest\n```\n\n### 每夜版\n\n- 每日 UTC 00:00 发布新版本。包含发布时主分支的所有更改。应假定存在待确认的验证和问题。使用 `nightly` 标签。\n\n```bash\nnpm install -g @google/gemini-cli@nightly\n```\n\n## 📋 主要特性\n\n### 代码理解与生成\n\n- 查询和编辑大型代码库\n- 使用多模态功能，从 PDF、图像或草图生成新应用\n- 使用自然语言调试问题并排查故障\n\n### 自动化与集成\n\n- 自动化操作任务，如查询拉取请求或处理复杂的变基操作\n- 使用 MCP 服务器连接新功能，包括[使用 Imagen、Veo 或 Lyria 生成媒体](https://gi",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Gemini CLI",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 213,
+                "url": "https://github.com/trimstray/the-book-of-secret-knowledge",
+                "name": "trimstray/the-book-of-secret-knowledge",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "trimstray/the-book-of-secret-knowledge",
+                "versionId": 432,
+                "documentId": 213,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge\">\n    <img src=\"https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-secret-knowledge-preview.png\" alt=\"Master\">\n  </a>\n</p>\n\n<p align=\"center\">\"<i>Knowledge is powerful, be careful how you use it!</i>\"</p>\n\n<h4 align=\"center\">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more.</h4>\n\n<br>\n\n<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/pulls\">\n    <img src=\"https://img.shields.io/badge/PRs-welcome-brightgreen.svg?longCache=true\" alt=\"Pull Requests\">\n  </a>\n  <a href=\"LICENSE.md\">\n    <img src=\"https://img.shields.io/badge/License-MIT-lightgrey.svg?longCache=true\" alt=\"MIT License\">\n  </a>\n</p>\n\n<br>\n\n****\n\n## :notebook_with_decorative_cover: &nbsp;What is it?\n\nThis repository is a collection of various materials and tools that I use every day in my work. It contains a lot of useful information gathered in one piece. It is an invaluable source of knowledge for me that I often look back on.\n\n## :restroom: &nbsp;For whom?\n\nFor everyone, really. Here everyone can find their favourite tastes. But to be perfectly honest, it is aimed towards System and Network administrators, DevOps, Pentesters, and Security Researchers.\n\n## :information_source: &nbsp;Contributing\n\nIf you find something which doesn't make sense, or something doesn't seem right, please make a pull request and please add valid and well-reasoned explanations about your changes or comments.\n\nA few simple rules for this project:\n\n- inviting and clear\n- not tiring\n- useful\n\nThese below rules may be better:\n\n- easy to contribute to (Markdown + HTML ...)\n- easy to find (simple TOC, maybe it's worth extending them?)\n\nUrl marked **\\*** is temporary unavailable. Please don't delete it without confirming that it has permanently expired.\n\nBefore adding a pull request, please see the **[contributing guidelines](.github/CONTRIBUTING.md)**. You should also remember about this:\n\n```diff\n+ This repository is not meant to contain everything but only good quality stuff.\n```\n\nAll **suggestions/PR** are welcome!\n\n### Code Contributors\n\nThis project exists thanks to all the people who contribute.\n\n<a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/graphs/contributors\"><img src=\"https://opencollective.com/the-book-of-secret-knowledge/contributors.svg?width=890&button=false\"></a>\n\n### Financial Contributors\n\n<p align=\"left\">\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/backers/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n  <a href=\"https://opencollective.com/the-book-of-secret-knowledge\" alt=\"Financial Contributors on Open Collective\">\n    <img src=\"https://img.shields.io/opencollective/sponsors/the-book-of-secret-knowledge?style=for-the-badge&color=FF4500&labelColor=A9A9A9\"></a>\n  </a>\n</p>\n\n## :newspaper: &nbsp;RSS Feed & Updates\n\nGitHub exposes an [RSS/Atom](https://github.com/trimstray/the-book-of-secret-knowledge/commits.atom) feed of the commits, which may also be useful if you want to be kept informed about all changes.\n\n## :ballot_box_with_check: &nbsp;ToDo\n\n- [ ] Add new stuff...\n- [ ] Add useful shell functions\n- [ ] Add one-liners for collection tools (eg. CLI Tools)\n- [ ] Sort order in lists\n\nNew items are also added on a regular basis.\n\n## :anger: &nbsp;Table of Contents\n\nOnly main chapters:\n\n- **[CLI Tools](#cli-tools-toc)**\n- **[GUI Tools](#gui-tools-toc)**\n- **[Web Tools](#web-tools-toc)**\n- **[Systems/Services](#systemsservices-toc)**\n- **[Networks](#networks-toc)**\n- **[Containers/Orchestration](#containersorchestration-toc)**\n- **[Manuals/Howtos/Tutorials](#manualshowtostutorials-toc)**\n- **[Inspiring Lists](#inspiring-lists-toc)**\n- **[Blogs/Podcasts/Videos](#blogspodcastsvideos-toc)**\n- **[Hacking/Penetration Testing](#hackingpenetration-testing-toc)**\n- **[Your daily knowledge and news](#your-daily-knowledge-and-news-toc)**\n- **[Other Cheat Sheets](#other-cheat-sheets-toc)**\n- **[Shell One-liners](#shell-one-liners-toc)**\n- **[Shell Tricks](#shell-tricks-toc)**\n- **[Shell Functions](#shell-functions-toc)**\n\n## :trident: &nbsp;The Book of Secret Knowledge (Chapters)\n\n#### CLI Tools &nbsp;[<sup>[TOC]</sup>](#anger-table-of-contents)\n\n##### :black_small_square: Shells\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/bash/\"><b>GNU Bash</b></a> - is an sh-compatible shell that incorporates useful features from the Korn shell and C shell.<br>\n&nbsp;&nbsp; <a href=\"https://www.zsh.org/\"><b>Zsh</b></a> - is a shell designed for interactive use, although it is also a powerful scripting language.<br>\n&nbsp;&nbsp; <a href=\"https://tcl-lang.org/\"><b>tclsh</b></a> - is a very powerful cross-platform shell, suitable for a huge range of uses.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/Bash-it/bash-it\"><b>bash-it</b></a> - is a framework for using, developing and maintaining shell scripts and custom commands.<br>\n&nbsp;&nbsp; <a href=\"https://ohmyz.sh/\"><b>Oh My ZSH!</b></a> - is the best framework for managing your Zsh configuration.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/oh-my-fish/oh-my-fish\"><b>Oh My Fish</b></a> - the Fishshell framework.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/starship/starship\"><b>Starship</b></a> - the cross-shell prompt written in Rust.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/romkatv/powerlevel10k\"><b>powerlevel10k</b></a> - is a fast reimplementation of Powerlevel9k ZSH theme.<br>\n</p>\n\n##### :black_small_square: Shell plugins\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/rupa/z\"><b>z</b></a> - tracks the folder you use the most and allow you to jump, without having to type the whole path.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/junegunn/fzf\"><b>fzf</b></a> - is a general-purpose command-line fuzzy finder.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-autosuggestions\"><b>zsh-autosuggestions</b></a> - Fish-like autosuggestions for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zsh-users/zsh-syntax-highlighting\"><b>zsh-syntax-highlighting</b></a> - Fish shell like syntax highlighting for Zsh.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/unixorn/awesome-zsh-plugins\"><b>Awesome ZSH Plugins</b></a> - A list of frameworks, plugins, themes and tutorials for ZSH.<br>\n</p>\n\n##### :black_small_square: Managers\n\n<p>\n&nbsp;&nbsp; <a href=\"https://midnight-commander.org/\"><b>Midnight Commander</b></a> - is a visual file manager, licensed under GNU General Public License.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/ranger/ranger\"><b>ranger</b></a> - is a VIM-inspired filemanager for the console.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jarun/nnn\"><b>nnn</b></a> - is a tiny, lightning fast, feature-packed file manager.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/screen/\"><b>screen</b></a> - is a full-screen window manager that multiplexes a physical terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tmux/tmux/wiki\"><b>tmux</b></a> - is a terminal multiplexer, lets you switch easily between several programs in one terminal.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/peikk0/tmux-cssh\"><b>tmux-cssh</b></a> - is a tool to set comfortable and easy to use functionality tmux-sessions.<br>\n</p>\n\n##### :black_small_square: Text editors\n\n<p>\n&nbsp;&nbsp; <a href=\"http://ex-vi.sourceforge.net/\"><b>vi</b></a> - is one of the most common text editors on Unix.<br>\n&nbsp;&nbsp; <a href=\"https://www.vim.org/\"><b>vim</b></a> - is a highly configurable text editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.gnu.org/software/emacs/\"><b>emacs</b></a> - is an extensible, customizable, free/libre text editor, and more.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zyedidia/micro\"><b>micro</b></a> - is a modern and intuitive terminal-based text editor.<br>\n&nbsp;&nbsp; <a href=\"https://neovim.io/\"><b>neovim</b></a> - is a free open source, powerful, extensible and usable code editor.<br>\n&nbsp;&nbsp; <a href=\"https://www.spacemacs.org/\"><b>spacemacs</b></a> - a community-driven Emacs distribution.<br>\n&nbsp;&nbsp; <a href=\"https://spacevim.org/\"><b>spacevim</b></a> - a community-driven vim distribution.<br>\n</p>\n\n##### :black_small_square: Files and directories\n\n<p>\n&nbsp;&nbsp; <a href=\"https://github.com/sharkdp/fd\"><b>fd</b></a> - is a simple, fast and user-friendly alternative to find.<br>\n&nbsp;&nbsp; <a href=\"https://dev.yorhel.nl/ncdu\"><b>ncdu</b></a> - is an easy to use, fast disk usage analyzer.<br>\n</p>\n\n##### :black_small_square: Network\n\n<p>\n&nbsp;&nbsp; <a href=\"https://www.putty.org/\"><b>PuTTY</b></a> - is an SSH and telnet client, developed originally by Simon Tatham.<br>\n&nbsp;&nbsp; <a href=\"https://mosh.org/\"><b>Mosh</b></a> - is a SSH wrapper designed to keep a SSH session alive over a volatile connection.<br>\n&nbsp;&nbsp; <a href=\"https://eternalterminal.dev/\"><b>Eternal Terminal</b></a> - enables mouse-scrolling and tmux commands inside the SSH session.<br>\n&nbsp;&nbsp; <a href=\"https://nmap.org/\"><b>nmap</b></a> - is a free and open source (license) utility for network discovery and security auditing.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/zmap/zmap\"><b>zmap</b></a> - is a fast single packet network scanner designed for Internet-wide network surveys.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/RustScan/RustScan\"><b>Rust Scan</b></a> - to find all open ports faster than Nmap.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/robertdavidgraham/masscan\"><b>masscan</b></a> - is the fastest Internet port scanner, spews SYN packets asynchronously.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/gvb84/pbscan\"><b>pbscan</b></a> - is a faster and more efficient stateless SYN scanner and banner grabber.<br>\n&nbsp;&nbsp; <a href=\"http://www.hping.org/\"><b>hping</b></a> - is a command-line oriented TCP/IP packet assembler/analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/traviscross/mtr\"><b>mtr</b></a> - is a tool that combines the functionality of the 'traceroute' and 'ping' programs in a single tool.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mehrdadrad/mylg\"><b>mylg</b></a> - utility which combines the functions of the different network probes in one diagnostic tool.<br>\n&nbsp;&nbsp; <a href=\"http://netcat.sourceforge.net/\"><b>netcat</b></a> - utility which reads and writes data across network connections, using the TCP/IP protocol.<br>\n&nbsp;&nbsp; <a href=\"http://www.dest-unreach.org/socat/\"><b>socat</b></a> - utility which transfers data between two objects.<br>\n&nbsp;&nbsp; <a href=\"https://www.tcpdump.org/\"><b>tcpdump</b></a> - is a powerful command-line packet analyzer.<br>\n&nbsp;&nbsp; <a href=\"https://www.wireshark.org/docs/man-pages/tshark.html\"><b>tshark</b></a> - is a tool that allows us to dump and analyze network traffic (wireshark cli).<br>\n&nbsp;&nbsp; <a href=\"https://termshark.io/\"><b>Termshark</b></a> - is a simple terminal user-interface for tshark.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/jpr5/ngrep\"><b>ngrep</b></a> - is like GNU grep applied to the network layer.<br>\n&nbsp;&nbsp; <a href=\"http://netsniff-ng.org/\"><b>netsniff-ng</b></a> - is a Swiss army knife for your daily Linux network plumbing if you will.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/mechpen/sockdump\"><b>sockdump</b></a> - dump unix domain socket traffic.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/google/stenographer\"><b>stenographer</b></a> - is a packet capture solution which aims to quickly spool all packets to disk.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/sachaos/tcpterm\"><b>tcpterm</b></a> - visualize packets in TUI.<br>\n&nbsp;&nbsp; <a href=\"https://github.com/tgraf/bmon\"><b>bmon</b></a> - is a monitoring and debugging tool to capture networking related statistics and prepare them visually.<br>\n&nbsp;&nbsp; <a href=\"http://iptraf.seul.org/2.6/manual",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "trimstray/the-book-of-secret-knowledge",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 367,
+                "url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+                "name": "Donchitos/Claude-Code-Game-Studios",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "Donchitos/Claude-Code-Game-Studios",
+                "versionId": 586,
+                "documentId": 367,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <h1 align=\"center\">Claude Code 游戏工作室</h1>\n  <p align=\"center\">\n    将单个 Claude Code 会话转变为一个完整的游戏开发工作室。\n    <br />\n    49 个代理。73 项技能。一个协调一致的 AI 团队。\n  </p>\n</p>\n\n<p align=\"center\">\n  <a href=\"LICENSE\"><img src=\"https://img.shields.io/badge/license-MIT-blue.svg\" alt=\"MIT 许可证\"></a>\n  <a href=\".claude/agents\"><img src=\"https://img.shields.io/badge/agents-49-blueviolet\" alt=\"49 个代理\"></a>\n  <a href=\".claude/skills\"><img src=\"https://img.shields.io/badge/skills-73-green\" alt=\"73 项技能\"></a>\n  <a href=\".claude/hooks\"><img src=\"https://img.shields.io/badge/hooks-12-orange\" alt=\"12 个钩子\"></a>\n  <a href=\".claude/rules\"><img src=\"https://img.shields.io/badge/rules-11-red\" alt=\"11 条规则\"></a>\n  <a href=\"https://docs.anthropic.com/en/docs/claude-code\"><img src=\"https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic\" alt=\"为 Claude Code 构建\"></a>\n  <a href=\"https://www.buymeacoffee.com/donchitos3\"><img src=\"https://img.shields.io/badge/Buy%20Me%20a%20Coffee-支持这个项目-FFDD00?logo=buymeacoffee&logoColor=black\" alt=\"请我喝杯咖啡\"></a>\n  <a href=\"https://github.com/sponsors/Donchitos\"><img src=\"https://img.shields.io/badge/GitHub%20Sponsors-支持这个项目-ea4aaa?logo=githubsponsors&logoColor=white\" alt=\"GitHub 赞助\"></a>\n</p>\n\n---\n\n## 为什么存在\n\n用 AI 独立开发游戏很强大 —— 但单个聊天会话没有结构。没有人阻止你硬编码魔法数字、跳过设计文档或编写意大利面条式代码。没有 QA 环节，没有设计审查，没有人问“这真的符合游戏愿景吗？”\n\n**Claude Code 游戏工作室** 通过为你的 AI 会话赋予真实工作室的结构来解决这个问题。你不是只有一个通用助手，而是有 49 个专业代理，按照工作室层级组织起来 —— 总监守护愿景，部门负责人掌管各自领域，专家负责具体工作。每个代理都有明确的职责、升级路径和质量关卡。\n\n结果：你仍然做出每一个决定，但现在你有了一个团队，会提出正确的问题，及早发现错误，并从最初创意到发布都保持项目井井有条。\n\n---\n\n## 目录\n\n- [包含内容](#包含内容)\n- [工作室层级](#工作室层级)\n- [斜杠命令](#斜杠命令)\n- [快速开始](#快速开始)\n- [升级](#升级)\n- [项目结构](#项目结构)\n- [工作原理](#工作原理)\n- [设计理念](#设计理念)\n- [自定义](#自定义)\n- [平台支持](#平台支持)\n- [社区](#社区)\n- [支持本项目](#支持本项目)\n- [许可证](#许可证)\n\n---\n\n## 包含内容\n\n| 类别 | 数量 | 描述 |\n|----------|-------|-------------|\n| **代理** | 49 | 涵盖设计、编程、美术、音频、叙事、QA 和制作的专门子代理 |\n| **技能** | 73 | 每个工作流阶段的斜杠命令（`/start`, `/design-system`, `/create-epics`, `/create-stories`, `/dev-story`, `/story-done` 等） |\n| **钩子** | 12 | 提交、推送、资产变更、会话生命周期、代理审计追踪和缺口检测时的自动化验证 |\n| **规则** | 11 | 在编辑玩法、引擎、AI、UI、网络代码等时强制执行的路径范围编码规范 |\n| **模板** | 41 | 用于 GDD、UX 规格说明、ADR、冲刺计划、HUD 设计、无障碍性等的文档模板 |\n\n## 工作室层级\n\n代理按三个层级组织，模拟真实工作室的运作方式：\n\n```\n第一层 — 总监 (Opus)\n  creative-director    technical-director    producer\n\n第二层 — 部门负责人 (Sonnet)\n  game-designer        lead-programmer       art-director\n  audio-director       narrative-director    qa-lead\n  release-manager      localization-lead\n\n第三层 — 专家 (Sonnet/Haiku)\n  gameplay-programmer  engine-programmer     ai-programmer\n  network-programmer   t",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Donchitos/Claude-Code-Game-Studios",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 345,
+                "url": "https://github.com/community-scripts/ProxmoxVE",
+                "name": "community-scripts/ProxmoxVE",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "community-scripts/ProxmoxVE",
+                "versionId": 564,
+                "documentId": 345,
+                "importable": false,
+                "catalogText": "<div align=\"center\">\n  <img src=\"https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png\" height=\"112px\" alt=\"Proxmox VE 辅助脚本标志\" />\n\n  <h1>Proxmox VE 辅助脚本</h1>\n  <p><strong>一行命令安装 Proxmox VE 上的服务、容器和虚拟机</strong><br/>\n  一个社区项目 — 基于 <a href=\"https://github.com/tteck\">@tteck</a> 的原创工作构建</p>\n\n  <p>\n    <a href=\"https://community-scripts.org\"><img src=\"https://img.shields.io/badge/Website-community--scripts.org-4c9b3f?style=flat-square\" /></a>\n    <a href=\"https://discord.gg/3AnUqsXnmK\"><img src=\"https://img.shields.io/badge/Discord-加入我们-7289da?style=flat-square&logo=discord&logoColor=white\" /></a>\n    <a href=\"https://github.com/community-scripts/ProxmoxVE/stargazers\"><img src=\"https://img.shields.io/github/stars/community-scripts/ProxmoxVE?style=flat-square&label=Stars&color=f5a623\" /></a>\n    <a href=\"https://github.com/community-scripts/ProxmoxVE/blob/main/CHANGELOG.md\"><img src=\"https://img.shields.io/badge/Changelog-查看-6c5ce7?style=flat-square\" /></a>\n    <a href=\"LICENSE\"><img src=\"https://img.shields.io/badge/License-MIT-blue?style=flat-square\" /></a>\n  </p>\n</div>\n\n---\n\n## 这是什么？\n\n**使用社区驱动的自动化脚本简化你的 Proxmox VE 设置。**\n\n只需一条命令即可安装和配置流行的自托管服务——无需手动寻找软件包，也无需翻阅配置文件。将命令粘贴到 Proxmox Shell 中，回答几个提示，你的容器或虚拟机就会启动并运行。\n\n该集合涵盖了数百种服务，包括家庭自动化、媒体服务器、网络工具、数据库、监控技术栈等。\n\n---\n\n## 要求\n\n| 组件            | 详情                                 |\n| --------------- | ------------------------------------ |\n| **Proxmox VE**  | 版本 8.4、9.0、9.1 或 9.2            |\n| **主机操作系统** | Proxmox VE（基于 Debian）            |\n| **访问权限**    | 在 Proxmox 主机上拥有 root shell 权限 |\n| **网络**        | 安装过程中需要互联网连接             |\n\n---\n\n## 快速入门\n\n查找和运行脚本的最快方法：\n\n1. 访问 **[community-scripts.org](https://community-scripts.org)**\n2. 搜索你想要的服务（例如 \"Home Assistant\"、\"Nginx Proxy Manager\"、\"Jellyfin\"）\n3. 从脚本页面复制一行安装命令\n4. 打开你的 **Proxmox Shell** 并粘贴命令\n5. 在 **默认** 或 **高级** 设置之间选择，并按照提示操作\n\n每个脚本页面都记录了容器包含的内容、默认资源分配以及安装后注意事项。\n\n---\n\n## 脚本如何工作\n\n每个脚本都遵循相同的模式：\n\n**默认模式** — 选择合理的资源默认值（CPU、RAM、存储），并仅询问最少必要的问题。大多数安装可在五分钟内完成。\n\n**高级模式** — 在安装任何内容之前，允许你完全控制容器设置、网络、存储后端以及应用程序级配置。\n\n安装后，每个容器都附带一个可从 Proxmox Shell 访问的 **安装后助手**。它处理常见任务，例如：\n\n- 对已安装服务应用更新\n- 更改应用程序设置，无需手动编辑配置文件\n- 基本故障排除和日志访问\n\n---\n\n## 包含的内容\n\n该仓库涵盖广泛的类别。以下是一些示例：\n\n| 类别       | 示例                                                |\n| ---------- | --------------------------------------------------- |\n| 家庭自动化 | Home Assistant、Zigbee2MQTT、ESPHome、Node-RED      |\n| 媒体       | Jellyfin、Plex、Radarr、Sonarr、Immich              |\n| 网络       | AdGuard Home、Nginx Proxy Manager、Pi-hole、Traefik |\n| 监控       | Grafana、Prometheus、Uptime Kuma、Netdata           |\n| 数据库     | PostgreSQL、MariaDB、Redis、InfluxDB                |\n| 安全       |",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "community-scripts/ProxmoxVE",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 201,
+                "url": "https://github.com/tphakala/birdnet-go",
+                "name": "tphakala/birdnet-go",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "tphakala/birdnet-go",
+                "versionId": 420,
+                "documentId": 201,
+                "importable": false,
+                "catalogText": "# BirdNET-Go\n\n<p align=\"center\">\n  <img src=\"doc/BirdNET-Go-logo.webp\" />\n</p>\n<p align=\"center\">\n  <!-- Project Status -->\n  <a href=\"https://github.com/tphakala/birdnet-go/releases\">\n    <img src=\"https://img.shields.io/github/v/release/tphakala/birdnet-go?include_prereleases&style=flat-square&color=blue\">\n  </a>\n  <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\">\n    <img src=\"https://badgen.net/badge/License/CC-BY-NC-SA%204.0/green\">\n  </a>\n  <img src=\"https://badgen.net/badge/OS/Linux%2C%20Windows%2C%20macOS/blue\">\n\n  <br>\n\n  <!-- Code Quality -->\n  <a href=\"https://golang.org\">\n    <img src=\"https://img.shields.io/badge/Built%20with-Go-teal?style=flat-square&logo=go\">\n  </a>\n  <a href=\"https://scorecard.dev/viewer/?uri=github.com/tphakala/birdnet-go\">\n    <img src=\"https://img.shields.io/ossf-scorecard/github.com/tphakala/birdnet-go?label=OpenSSF%20Scorecard&style=flat-square\">\n  </a>\n\n  <br>\n\n  <!-- Community -->\n  <a href=\"https://github.com/tphakala/birdnet-go/network/members\">\n    <img src=\"https://img.shields.io/github/forks/tphakala/birdnet-go?style=flat-square&color=purple\">\n  <a href=\"https://github.com/tphakala/birdnet-go/graphs/contributors\">\n    <img src=\"https://img.shields.io/github/contributors/tphakala/birdnet-go?style=flat-square&color=orange\">\n  </a>\n  </a>\n  <a href=\"https://github.com/tphakala/birdnet-go/issues\">\n    <img src=\"https://img.shields.io/github/issues/tphakala/birdnet-go?style=flat-square&color=red\">\n  </a>\n  <a href=\"https://discord.gg/gcSCFGUtsd\">\n    <img src=\"https://img.shields.io/discord/1416220486433767436?style=flat-square&logo=discord&color=5865F2&label=Discord\">\n  </a>\n\n  <a href=\"https://coderabbit.ai\">\n    <img src=\"https://img.shields.io/coderabbit/prs/github/tphakala/birdnet-go?utm_source=oss&utm_medium=github&utm_campaign=tphakala%2Fbirdnet-go&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews\">\n  </a>\n</p>\n\n**Realtime soundscape analyser for birds, wildlife, and bats.**\n\nSelf-hosted, 24/7, local AI inference. BirdNET-Go ingests soundcard input or network audio streams, runs multi-model classification, and presents detections in a fast web UI. Runs on a Raspberry Pi.\n\n## Highlights\n\n- **Multi-model AI gallery**: install BirdNET v2.4, Google Perch v2, BattyBirdNET regional bat classifiers, and the BirdNET Geomodel v3.0 from inside the app, no rebuild needed.\n- **Run multiple models in parallel** against separate audio sources and let cross-model agreement boost confidence on shared detections.\n- **Live spectrogram streaming** and **detection heatmaps** rendered straight in the browser.\n- **Alert rules engine** that routes detections to Discord, Slack, Telegram, ntfy, Pushover, Gotify, Matrix, webhooks, browser push, MQTT (with Home Assistant discovery), shell scripts, and BirdWeather.\n- **Production-ready ops**: onboarding wizard, OIDC/SSO, TLS certificate management, hot-reload settings, system health page, database doctor, and one-click support dumps.\n- **Installable as a PWA**, with 15 UI languages and species names in 40+ languages.\n- **Local-only by default**. Optional Sentry telemetry is strictly opt-in.\n\n## Quick install\n\nDebian, Ubuntu, and Raspberry Pi OS:\n\n```bash\ncurl -fsSL https://github.com/tphakala/birdnet-go/raw/main/install.sh -o install.sh\nbash ./install.sh\n```\n\nDocker images are published for `linux/amd64` and `linux/arm64`. Pre-built binaries for Linux, Windows, and macOS ship with each [release](https://github.com/tphakala/birdnet-go/releases). See the [installation guide](https://github.com/tphakala/birdnet-go/wiki/installation), [hardware recommendations](https://github.com/tphakala/birdnet-go/wiki/hardware), and [security guide](https://github.com/tphakala/birdnet-go/wiki/security) for details.\n\n## Web Dashboard\n\n<img src=\"doc/BirdNET-Go-dashboard.webp\" />\n\n## Features\n\n### Detection\n\n- **BirdNET v2.4** (default, embedded, 6,500+ bird species)\n- **Google Perch v2** via ONNX (14,795 species across birds, insects, amphibians, and mammals) with taxonomy-based species names\n- **BattyBirdNET** bat classifiers, 11 regional models covering Africa, the Americas, East Asia, Europe, the Middle East, South Asia, Southeast Asia, and the USA (Linux + ultrasonic-capable device)\n- **BirdNET Geomodel v3.0** for location-based range filtering (12,012 species)\n- **Cross-model detection consensus**: agreement between models strengthens confidence and flags disagreements for review\n- **Custom classifiers**: bring your own TFLite model and label set\n- **Configurable false-positive filtering** for accurate results: Deep Detection (repeat-confirmation within a 15-second window), per-species dynamic thresholds, location-based range filter, privacy and dog-bark filters, and per-classifier bat false-positive levels ([guide](https://github.com/tphakala/birdnet-go/wiki/BirdNET-Go-Guide#deep-detection))\n- Per-model and per-source confidence thresholds\n\n### Audio inputs\n\n- Soundcard capture and RTSP / RTSPS streams, including multiple sources in parallel with independent model assignment\n- Sample rates up to 256 kHz for ultrasonic bat detection\n- Audio liveness watchdog with tiered recovery for flaky streams\n- Stream sample-rate probing and per-model recommendation banners in the UI\n- Audio equalizer, per-source quiet hours, daylight filter, and extended capture mode\n- Offline analysis of audio files\n\n### Interface\n\n- Svelte 5 + TypeScript single-page app\n- Installable as a Progressive Web App (PWA)\n- Onboarding wizard for first-run setup\n- Live spectrogram visualization for active streams ([live audio streaming](https://github.com/tphakala/birdnet-go/wiki/BirdNET-Go-Guide#live-audio-streaming))\n- Detection heatmaps with ONNX-accelerated rendering\n- Customizable dashboard layout, color schemes, and a \"Currently Hearing\" card\n- Multiselect and bulk actions on the detections list\n- Browser terminal (xterm.js over WebSocket PTY) for in-app administration\n- 15 UI languages: English, German, French, Spanish, Portuguese, Dutch, Polish, Italian, Czech, Slovak, Hungarian, Finnish, Swedish, Danish, Latvian\n- Species names in 40+ languages\n\n### Alerts and integrations\n\n- Configurable alert rules engine with per-rule conditions, schedules, and delivery targets\n- Multi-target delivery via [shoutrrr](https://github.com/nicholas-fedor/shoutrrr): Discord, Slack, Telegram, ntfy, Pushover, Gotify, Matrix, Bark, IFTTT, and more\n- Webhooks with custom templates, shell-script hooks, and browser push notifications\n- MQTT publishing with Home Assistant auto-discovery\n- BirdWeather.com API integration\n- Prometheus metrics endpoint\n- Live spectrogram and realtime log output for OBS overlays on bird-feeder streams\n\n### Storage and data\n\n- SQLite (default) or MySQL with retry-aware write paths for contention\n- Automatic backups with real-time status polling\n- Format-aware audio clip export\n- Embedded eBird/Clements taxonomy (2,374 genera, 254 families, 11,145 species) for fast offline lookups\n\n### Operations\n\n- System Health diagnostics page covering audio pipeline, models and inference, network, and the datastore\n- Database doctor for diagnosis and schema repair\n- Help & Support page with guided bug reporting and one-click support dumps\n- OIDC / SSO with Google, GitHub, and generic providers, including RP-Initiated Logout\n- TLS certificate management UI with transactional writes and backup/restore\n- Hot-reload for settings, model installs, and per-source model assignments (no restart)\n- Optional, opt-in Sentry telemetry with strict privacy filtering\n\n### Platform\n\n- Linux, Windows, and macOS\n- Single static binary with the BirdNET TFLite model embedded\n- Optional ONNX Runtime for Perch, BattyBirdNET, and BirdNET Geomodel v3.0 ([install guide](https://github.com/tphakala/birdnet-go/wiki/ONNX-Runtime-Installation))\n- Multi-arch Docker images\n- Runs comfortably on a Raspberry Pi 4 or equivalent 64-bit single-board computer\n\n## Documentation\n\n- [FAQ](https://github.com/tphakala/birdnet-go/wiki/FAQ) - common questions, issues, and workarounds\n- [User guide](https://github.com/tphakala/birdnet-go/wiki/BirdNET-Go-Guide)\n- [Installation](https://github.com/tphakala/birdnet-go/wiki/installation)\n- [Hardware recommendations](https://github.com/tphakala/birdnet-go/wiki/hardware)\n- [ONNX Runtime installation](https://github.com/tphakala/birdnet-go/wiki/ONNX-Runtime-Installation)\n- [Detection pipeline](https://github.com/tphakala/birdnet-go/wiki/detection-pipeline)\n- [Database Doctor](https://github.com/tphakala/birdnet-go/wiki/Database-Doctor)\n- [Training a custom classifier](https://github.com/tphakala/birdnet-go/wiki/Training-a-Custom-Classifier)\n- [Cloudflare Tunnel](https://github.com/tphakala/birdnet-go/wiki/cloudflare_tunnel_guide)\n- [Security](https://github.com/tphakala/birdnet-go/wiki/security)\n- [Telemetry and privacy](https://github.com/tphakala/birdnet-go/wiki/telemetry-privacy)\n- [RTSP troubleshooting](https://github.com/tphakala/birdnet-go/wiki/rtsp-troubleshooting)\n\n## Development setup\n\n> See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.\n\n```bash\ngit clone https://github.com/tphakala/birdnet-go.git\ncd birdnet-go\n\n# Install Task (if not already installed)\n# Linux: sh -c \"$(curl --location https://taskfile.dev/install.sh)\" -- -d -b /usr/local/bin\n# macOS: brew install go-task\n\ntask setup-dev    # installs Go 1.25, Node LTS, build tools, linters, Playwright\ntask              # build\ntask dev_server   # hot-reload dev server (or: air realtime)\n```\n\n## Community\n\nJoin the [Discord server](https://discord.gg/gcSCFGUtsd) for support, discussions, and updates.\n\n## Related projects\n\n### Core and extensions\n\n- [BirdNET-Analyzer](https://github.com/birdnet-team/BirdNET-Analyzer): upstream BirdNET project\n- [BirdNET-Go Classifiers](https://github.com/tphakala/birdnet-go-classifiers): enhanced BirdNET classifiers with additional species\n- [BattyBirdNET-Analyzer](https://github.com/rdz-oss/BattyBirdNET-Analyzer): bat classifier models, installable via the in-app gallery\n\n### Companion tools\n\n- [birda](https://github.com/tphakala/birda): fast CLI for offline bird species detection on existing audio files, using BirdNET and Perch AI models\n- [birda-gui](https://github.com/tphakala/birda-gui): desktop GUI for birda (Electron + Svelte 5) for audio analysis, detection browsing, and species visualization\n\n### System integration\n\n- [Cockpit BirdNET-Go](https://github.com/tphakala/cockpit-birdnet-go): web-based system management plugin using the Cockpit framework\n\n### Migration tools\n\n- [BirdNET-Pi2Go](https://github.com/tphakala/birdnet-pi2go): database converter for migrating from BirdNET-Pi (deprecated, not compatible with the current BirdNET-Go database schema; a native import is planned)\n\n### Hardware solutions\n\n- [BirdNET-Go ESP32 RTSP Microphone](https://github.com/Sukecz/birdnetgo-esp32-rtsp-mic): ESP32-based RTSP streaming microphone\n- [ESP32 Audio Streamer](https://github.com/jpmurray/esp32-audio-streamer): alternative ESP32 RTSP streaming solution\n- [M5Stack Atom Echo RTSP Mic](https://github.com/stedrow/birdnetgo-m5stack-atom-echo-rtsp-mic): RTSP audio server for M5Stack Atom Echo, no soldering required\n- [M5Stack AtomS3 Lite PDM Mic](https://github.com/matthew73210/birdnetgo-m5stack-AtomS3-Lite-PDM-rtsp-mic): RTSP audio server with MEMS PDM microphone\n\n### Mobile apps\n\n- [Perch](https://github.com/arunrajiah/perch): open-source Android/iOS companion app. Connects to BirdNET-Go via the BirdWeather API. Live detection feed, audio playback, species browser, 14-day chart, and notifications for favourite species. MIT licensed.\n\n## Contributing\n\nContributions are welcome.\n\nFor setup, workflow, and quality gates, see [CONTRIBUTING.md](CONTRIBUTING.md):\n\n- [TL;DR quick start](CONTRIBUTING.md#tldr---quick-start-for-experienced-developers): 5-minute setup\n- [Development workflow](CONTRIBUTING.md#development-workflow): hot reload, git hooks, testing\n- [License and privacy](CONTRIBUTING.md#license-and-legal): ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "tphakala/birdnet-go",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 56,
+                "url": "https://github.com/HKUDS/nanobot",
+                "name": "HKUDS/nanobot",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "HKUDS/nanobot",
+                "versionId": 275,
+                "documentId": 56,
+                "importable": false,
+                "catalogText": "<picture>\n  <source media=\"(prefers-color-scheme: dark)\" srcset=\"./images/readme-cover-dark.svg\">\n  <img alt=\"nanobot README cover\" src=\"./images/readme-cover-light.svg\">\n</picture>\n\n<div align=\"center\">\n  <p>\n    <a href=\"https://nanobot.wiki/docs/latest/getting-started/nanobot-overview\">English</a> |\n    <a href=\"https://nanobot.wiki/cn/docs/latest/getting-started/nanobot-overview\">简体中文</a> |\n    <a href=\"https://nanobot.wiki/zh-Hant/docs/latest/getting-started/nanobot-overview\">繁體中文</a> |\n    <a href=\"https://nanobot.wiki/es/docs/latest/getting-started/nanobot-overview\">Español</a> |\n    <a href=\"https://nanobot.wiki/fr/docs/latest/getting-started/nanobot-overview\">Français</a> |\n    <a href=\"https://nanobot.wiki/id/docs/latest/getting-started/nanobot-overview\">Bahasa Indonesia</a> |\n    <a href=\"https://nanobot.wiki/ja/docs/latest/getting-started/nanobot-overview\">日本語</a> |\n    <a href=\"https://nanobot.wiki/ko/docs/latest/getting-started/nanobot-overview\">한국어</a> |\n    <a href=\"https://nanobot.wiki/ru/docs/latest/getting-started/nanobot-overview\">Русский</a> |\n    <a href=\"https://nanobot.wiki/vi/docs/latest/getting-started/nanobot-overview\">Tiếng Việt</a>\n  </p>\n  <p>\n    <a href=\"https://github.com/HKUDS/nanobot\"><img src=\"https://img.shields.io/github/stars/HKUDS/nanobot?style=flat&logo=github\" alt=\"GitHub stars\"></a>\n    <a href=\"https://pypi.org/project/nanobot-ai/\"><img src=\"https://img.shields.io/pypi/v/nanobot-ai\" alt=\"PyPI version\"></a>\n    <a href=\"https://pepy.tech/project/nanobot-ai\"><img src=\"https://static.pepy.tech/badge/nanobot-ai\" alt=\"PyPI downloads\"></a>\n    <a href=\"https://github.com/HKUDS/nanobot/actions/workflows/ci.yml\"><img src=\"https://github.com/HKUDS/nanobot/actions/workflows/ci.yml/badge.svg?branch=main\" alt=\"Test Suite\"></a>\n    <a href=\"https://pypi.org/project/nanobot-ai/\"><img src=\"https://img.shields.io/badge/python-%3E%3D3.11-blue\" alt=\"Python 3.11 or newer\"></a>\n    <a href=\"./LICENSE\"><img src=\"https://img.shields.io/github/license/HKUDS/nanobot\" alt=\"MIT License\"></a>\n    <a href=\"https://nanobot.wiki/docs/latest/getting-started/nanobot-overview\"><img src=\"https://img.shields.io/badge/docs-nanobot.wiki-blue\" alt=\"nanobot documentation\"></a>\n  </p>\n  <p>\n    <a href=\"https://discord.gg/MnCvHqpUGB\">Discord</a> ·\n    <a href=\"https://x.com/nanobot_project\">X</a> ·\n    <a href=\"./COMMUNICATION.md\">WeChat / Feishu</a>\n  </p>\n</div>\n\n🐈 **nanobot** is an ultra-lightweight, open-source, self-hosted personal AI agent framework written in Python. It runs in a WebUI, terminal, or chat apps and combines tools, long-term memory, MCP integrations, model routing, multi-agent delegation, scheduled automation, and an OpenAI-compatible API in a small, readable core.\n\n## Start Here\n\n| You want to... | Go to |\n|---|---|\n| Install nanobot with no terminal/config background | [Start Without Technical Background](./docs/start-without-technical-background.md) |\n| Install quickly and get one CLI reply | [Install](#-install) and [Quick Start](#-quick-start) |\n| Open the bundled browser UI | [WebUI](#-webui) |\n| Connect Telegram, Discord, WeChat, Slack, Email, Mattermost, or another chat app | [Chat Apps](./docs/chat-apps.md) |\n| Configure providers, fallback models, Langfuse, MCP, web tools, or security | [Docs](./docs/README.md) and [Configuration](./docs/configuration.md) |\n| Understand or extend the internals | [Architecture](./docs/architecture.md) and [Development](./docs/development.md) |\n| Deploy to the cloud or keep nanobot running as a service | [Deployment](./docs/deployment.md), including [one-click Render setup](./docs/deployment.md#render) |\n\n## What can nanobot do?\n\nnanobot is a self-hosted personal AI agent runtime. It can:\n\n- run in a browser WebUI or terminal\n- connect to Telegram, Discord, Slack, WeChat, Email, Mattermost, and other chat apps\n- use tools such as files, shell, web search, web fetch, MCP, cron, image generation, and subagents\n- keep session history and long-term memory through Dream\n- run long-horizon goals and scheduled automations\n- expose a Python SDK and OpenAI-compatible API for integrations\n- deploy as a long-running local or server-side agent gateway\n\n## 💡 Why nanobot\n\n- **Persistent workflows**: goals, memory, tools, and chat context survive long-running work.\n- **Chat-native reach**: WebUI, API, Telegram, Feishu, Slack, Discord, Teams, email, and Mattermost.\n- **Model freedom**: OpenAI-compatible APIs, local LLMs, image generation, search, and fallbacks.\n- **Small core**: readable internals with MCP, memory, deployment, and automation built in.\n- **Own your stack**: inspect, customize, self-host, and extend without a giant platform.\n\n## 📦 Install\n\n> [!IMPORTANT]\n> If you want the newest features and experiments, install from source.\n>\n> If you want the most stable day-to-day experience, install from PyPI or with `uv`.\n\nPick **one** install method:\n\nPrerequisites: Python 3.11 or newer. Git is only needed for a source install. Published packages already include the WebUI; a current-source install needs `bun` or `npm` to build it.\n\nIf terminals, API keys, or config files are new to you, use the guided zero-background walkthrough in [Start Without Technical Background](./docs/start-without-technical-background.md) instead of this compact README path.\n\n**One-command setup**\n\nmacOS / Linux:\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh\n```\n\nWindows PowerShell:\n\n```powershell\nirm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1 | iex\n```\n\nThe default command installs or upgrades `nanobot-ai` from PyPI. On a fresh local desktop, it then starts `nanobot webui` so you can configure the first provider and model in **Settings → Models**. SSH, headless, existing-config, and older-release paths keep the terminal setup wizard. The installer avoids system-wide pip installs by using an active virtual environment, `uv`, `pipx`, or a managed venv under `~/.nanobot/venv`. It also prints the exact command it used to run nanobot; reuse that full command below if `nanobot` is not on `PATH`.\n\nTo preview the plan without changing your environment, pass `--dry-run`; combine it with `--dev` when you want to preview the main-branch install.\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh -s -- --dry-run\n```\n\n```powershell\n& ([scriptblock]::Create((irm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1))) --dry-run\n```\n\nTo install the current `main` branch instead, pass `--dev`:\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh -s -- --dev\n```\n\n```powershell\n& ([scriptblock]::Create((irm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1))) --dev\n```\n\nIf you prefer to inspect the script first, open [`scripts/install.sh`](./scripts/install.sh) or [`scripts/install.ps1`](./scripts/install.ps1).\n\n**Install with `uv`**\n\n```bash\nuv tool install nanobot-ai\n```\n\n**Install from PyPI with pip**\n\n```bash\npython -m pip install nanobot-ai\n```\n\nIf pip reports `externally-managed-environment` on macOS or Linux, use the one-command installer, `uv tool install nanobot-ai`, `pipx install nanobot-ai`, or install inside a virtual environment.\n\n**Install from source**\n\n`bun` or `npm` must be available. From an activated virtual environment:\n\n```bash\ngit clone https://github.com/HKUDS/nanobot.git\ncd nanobot\npython -m pip install .\n```\n\nOn Windows, if pip reports that it cannot launch `npm`, run `cd webui`, `npm.cmd install --package-lock=false`, `npm.cmd run build`, and `cd ..` in order, then retry the install. Contributors who need an editable checkout should follow [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`webui/README.md`](./webui/README.md).\n\nVerify the install:\n\n```bash\nnanobot --version\n```\n\nIf `nanobot` is not on `PATH`, invoke it through the method that installed it: reuse the recommended installer's command, use `uv tool run --from nanobot-ai nanobot ...` or `pipx run --spec nanobot-ai nanobot ...`, or use the Python executable from the environment where pip installed the package.\n\n## 🚀 Quick Start\n\n**Open nanobot in your browser**\n\n```bash\nnanobot webui\n```\n\nThis is the recommended first run. The launcher creates the config and workspace when needed, safely enables the local WebSocket channel after confirmation, starts the gateway, and opens [`http://127.0.0.1:8765`](http://127.0.0.1:8765). A fresh install can open before a model is configured, so setup continues in the browser instead of beginning in a JSON file. The first-run WebUI binds to localhost by default and is not exposed to your LAN.\n\n**Your first three steps**\n\n1. Open **Settings → Models** and choose a provider, credential, and model.\n2. Start a new topic and send `Hello!` to verify the connection.\n3. Before project work, choose the intended workspace and access mode from the composer.\n\nAny normal reply means the provider, model, workspace, and browser gateway are working together.\n\n**Keep nanobot running after you close the terminal**\n\n```bash\nnanobot webui --background\n```\n\nThis starts the same full gateway as `nanobot webui`, opens the browser, and leaves channels and automations running after the launcher exits. Complete first-time model setup with foreground `nanobot webui` before switching to background mode.\n\n```bash\nnanobot gateway status\nnanobot gateway logs\nnanobot gateway restart\nnanobot gateway stop\n```\n\n**Prefer a gateway-first workflow?**\n\n```bash\nnanobot gateway\n```\n\nThis skips WebUI setup and browser opening, then runs the same complete gateway in the current terminal. It is the familiar entry point if you are coming from OpenClaw or already operate agents as long-lived services. The WebUI remains available when its channel is configured; open it manually when needed.\n\nUse `nanobot gateway --background` for the same direct entry point without keeping the terminal attached. For automatic startup and supervision by the operating system, see [Deployment](./docs/deployment.md).\n\n**Prefer to work entirely in the terminal?**\n\n```bash\nnanobot agent\n```\n\nThis opens an interactive terminal chat with the same configured model, workspace, and tools while keeping its own CLI session history. It does not open a browser or keep chat channels and automations running after you exit. Type `exit` or press `Ctrl+C` when you are done.\n\nFor one request and an immediate exit, use:\n\n```bash\nnanobot agent -m \"Hello!\"\n```\n\nThe one-shot form is useful for a quick provider check, shell scripts, and local automation. If you have not configured a model yet, run `nanobot webui` and open **Settings → Models** first.\n\nNeed manual JSON, another device on your LAN, or help with provider/model matching? Continue with [Install and Quick Start](./docs/quick-start.md), [WebUI](./docs/webui.md), or [Troubleshooting](./docs/troubleshooting.md).\n\n- Want a pasteable provider setup? See [Provider Cookbook](./docs/provider-cookbook.md)\n- Want to understand provider/model matching? See [Providers and Models](./docs/providers.md)\n- Want web search, MCP, security settings, or more config options? See [Configuration](./docs/configuration.md)\n- Want to run locally? See [Ollama](./docs/providers.md#ollama), [vLLM or another local OpenAI-compatible server](./docs/providers.md#vllm-or-other-local-openai-compatible-server), and the full [provider reference](./docs/configuration.md#providers).\n- Want to run nanobot in chat apps like Telegram, Discord, WeChat or Feishu? See [Chat Apps](./docs/chat-apps.md)\n- Want Docker or Linux service deployment? See [Deployment](./docs/deployment.md)\n\n## 🌐 WebUI\n\nThe WebUI ships **inside the published wheel** with no separate frontend build. It is the browser workbench for persistent topics, visible agent activity, workspace controls, Apps, Skills, Automations, and settings.\n\n<p align=\"center\">\n  <img src=\"images/nanobot_webui.png\" alt=\"nanobot webui preview\" width=\"900\">\n</p>\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "HKUDS/nanobot",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 88,
+                "url": "https://github.com/mikiarlo3/ai-copywriter",
+                "name": "mikiarlo3/ai-copywriter",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[]",
+                "quality": 88,
+                "archived": false,
+                "duration": "几分钟体验，1天整合到自己的项目中。",
+                "language": "Python",
+                "whatIsIt": "一个便携式 AI 技能文件，基于真实营销研究，能写出吸引点击的标题和简介，同时自动清洗掉所有机器写作痕迹，使文字像经验丰富的文案手笔。",
+                "mainRisks": "极度依赖使用者的产品知识，如果输入事实不清，可能产生误导内容；不适合需要大量专业术语的领域。",
+                "sourceRef": "beginner:88",
+                "techStack": "Python",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一键生成类人化营销文案，去除AI腔调",
+                "codebaseSize": "SMALL",
+                "beginnerScore": 98,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "1. 完全免费，无需 API Key，可直接作为系统提示使用。\n2. 支持任意 Agent 平台，一条命令安装或粘贴即可工作。\n3. 对比 AI 原生输出与优化后文案，直观感受去 AI 化的效果。\n4. 学习有效文案的核心要素和人性化写作技巧。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "- 结合产品数据库，批量生成商品描述。\n- 添加 A/B 测试模块，对比不同风格文案点击率。\n- 集成到邮件营销工具，自动优化邮件标题和内容。\n- 制作在线 demo 页面，实时展示改写过程。",
+                "requiresDatabase": false,
+                "vibeCodingReason": "新手最佳选择之一：零成本、立刻见效，非常适合展示 AI 创作辅助能力。",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 249,
+                "url": "https://github.com/mindsdb/minds",
+                "name": "mindsdb/minds",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "mindsdb/minds",
+                "versionId": 468,
+                "documentId": 249,
+                "importable": false,
+                "catalogText": "<div align=\"center\">\n\n# MindsHub Cowork\n\n**统一工作空间，让开源代理为你完成任务。**\n\n_委派任何事。它都能完成并返回。_\n\n[![发布](https://img.shields.io/github/v/release/mindsdb/minds?logo=github&label=release)](https://github.com/mindsdb/minds/releases)\n[![星标](https://img.shields.io/github/stars/mindsdb/minds?logo=github)](https://github.com/mindsdb/minds/stargazers)\n[![许可证：MIT](https://img.shields.io/github/license/mindsdb/minds)](#-license)\n[![Python 3.10–3.13](https://img.shields.io/badge/python-3.10%20–%203.13-brightgreen.svg)](https://www.python.org/downloads/)\n\n[网站](https://mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[文档](https://docs.mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[Web 应用](https://console.mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[定价](https://mindshub.ai/pricing?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme) ·\n[Discord](https://mindshub.ai/discord)\n\n</div>\n\n<p align=\"center\">\n  <img alt=\"MindsHub Cowork — 统一工作空间\" width=\"100%\" src=\"https://github.com/user-attachments/assets/769e6463-0a9d-45ae-83d1-ef9e234775d3\" />\n</p>\n\n**MindsHub Cowork** 是一个统一工作空间，你可以委派整个任务——研究、分析、报告、计划性操作——并收集已完成、可分享的成果。接入你的数据，将每一步路由到合适的模型，运行开源代理，并将它们的输出转化为可发布的成果物。它是开源的，可以在任何地方运行——你的机器、你的 VPC，或托管应用。\n\n此仓库是**平台超级项目**：它整合了桌面/Web 应用、代理后端和数据引擎，让你可以从源码构建和运行整个技术栈。\n\n## 快速开始\n\n选择适合你的方式：\n\n- **Web — 无需安装。** 打开 **[console.mindshub.ai](https://console.mindshub.ai/?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme)** 并登录。\n- **macOS。** [下载桌面应用](https://downloads.mindsdb.com/mindshub-cowork/mac/mindshub-cowork-latest.pkg)（`.pkg`）。\n- **Windows。** [下载桌面应用](https://downloads.mindsdb.com/mindshub-cowork/windows/mindshub-cowork-latest.exe)（`.exe`）。\n- **以开源方式运行。** [从源码构建](#从源码构建) — 见下文。\n\n免费开始使用。Pro 版增加所有前沿模型和私有成果物——详见[定价](https://mindshub.ai/pricing?utm_source=github&utm_medium=repo-readme&utm_campaign=minds-readme)。\n\n## 你能做什么\n\n面向所有知识工作者——创作者、策略师和运营者：\n\n- **自动化** 涉及阅读和写作的重复性多步骤工作：报告、监控、周期性工作流和计划性操作。\n- **构建** 内部 AI 工具和成果物——应用、仪表盘、幻灯片、文档、分析——无需工程，并发布到实时 URL 与团队分享。\n\n## 内部技术\n\n- **连接数据。** 一个安全的保险库可以连接 BigQuery、Postgres、Gmail、Drive、HubSpot、Notion 和 Linear 等系统。凭据按连接限定了作用域——代理永远不会看到原始密钥。\n- **模型路由器。** 在前沿模型（Claude、GPT、Gemini）和开放模型（DeepSeek、Qwen、Kimi）之间切换，无需为每个提供商配置密钥。\n- **开放代理。** 运行可互换的开源工具——Anton（默认）和 Hermes——可从下拉菜单切换。\n- **成果物。** 将代理输出转化为文档、仪表盘、应用和代码，并发布到实时 URL。\n- **记忆、技能与计划任务。** 跨会话记忆、可复用的技能库，以及按计划运行的任务。\n\n## 从源码构建\n\n**1. 克隆仓库**\n\n```bash\ngit clone --recurse-submodules https://github.com/mindsdb/minds.git\ncd minds\n```\n\n**2. 安装依赖**\n\n```bash\nmake setup\n```\n\n**3. 运行**\n\n| 模式 | 命令 |\n|---|---|\n| 桌面应用（Electron）带热重载 | `make dev` 或 `m` |",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "MindsHub Cowork",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "进货管理、销售管理、库存管理 进货管理 采购入库 销售管理 订单出库 库存管理 库存盘点",
+              "topic": [
+                "进货管理",
+                "销售管理",
+                "库存管理"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "input": {
+              "topic": "进货管理、销售管理、库存管理",
+              "candidates": [
+                {
+                  "key": "EXTERNAL_PROJECT:329",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 ToolJet 是 ToolJet AI 的开源基础——一个用于构建和部署内部工具、工作流和 AI 代理的 AI 原生平台。社区版提供了强大的可视化构建器、拖放式 UI，以及与数据库、API、SaaS 应用和对象存储的集成。有关 AI 驱动的 UI 生成、查询构建、调试和企业功能，请参阅 ToolJet AI。\n\n:star: 如果您觉得 ToolJet 有用，请考虑在 GitHub 上给我们一个 star！您的支持有助于我们持续创新并交付令人兴奋的功能。\n\n![Docker 云构建状态](https://img.shields.io/docker/automated/tooljet/tooljet-ce)\n![GitHub 贡献者数量](https://img.shields.io/github/contributors/tooljet/tooljet)\n[![GitHub 未解决的 issues 数量](https://img.shields.io/github/issues/ToolJet/ToolJet)](https://github.com/ToolJet/ToolJet/issues)\n[![GitHub star 数量](https://img.shields.io/github/stars"
+                },
+                {
+                  "key": "CAREER_PROJECT:253",
+                  "purpose": "一个会主动找你玩的实时 AI 猫娘，拥有具身化情感引擎，能主动发起互动、共享你的媒体内容。基于 Python 构建。"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:72",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 *[English](README.md) ∙ [日本語](README-ja.md) ∙ [简体中文](README-zh-Hans.md) ∙ [繁體中文](README-zh-TW.md) | [العَرَبِيَّة‎](https://github.com/donnemartin/system-design-primer/issues/170) ∙ [বাংলা](https://github.com/donnemartin/system-design-primer/issues/220) ∙ [Português do Brasil](https://github.com/donnemartin/system-design-primer/issues/40) ∙ [Deutsch](https://github.com/donnemartin/system-design-primer/issues/186) ∙ [ελληνικά](https://github.com/donnemartin/system-design-primer/issues/130) ∙ [עברית](https://github.com/donnemartin/system-design-primer/issues"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:283",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # 阅读\n\n[![license](https://img.shields.io/github/license/yanglbme/reading?color=42b883&style=flat-square)](https://github.com/yanglbme/reading/blob/main/LICENSE)\n[![actions status](https://img.shields.io/github/workflow/status/yanglbme/reading/Sync?color=42b883&label=sync&logo=github&style=flat-square)](https://github.com/yanglbme/reading/actions?query=workflow%3ASync)\n\n本项目记录了我的阅读笔记，包括技术类和其他类。\n\n## 目录\n\n| [技术类](#tech) | [其他类](#other) |\n| ------------- | --------------- |\n\n### [技术类](docs/tech/README.md)\n\n| #   | 标题                                              "
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:386",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # Gemini CLI\n\n[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)\n[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)\n[![版本](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)\n[![许可证](https://img.shields.io/github/license/google-gemini/gemini-cli)](h"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:213",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge\">\n    <img src=\"https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-secret-knowledge-preview.png\" alt=\"Master\">\n  </a>\n</p>\n\n<p align=\"center\">\"<i>Knowledge is powerful, be careful how you use it!</i>\"</p>\n\n<h4 align=\"center\">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more.</h4>\n\n<br>\n\n<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge/p"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:367",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <p align=\"center\">\n  <h1 align=\"center\">Claude Code 游戏工作室</h1>\n  <p align=\"center\">\n    将单个 Claude Code 会话转变为一个完整的游戏开发工作室。\n    <br />\n    49 个代理。73 项技能。一个协调一致的 AI 团队。\n  </p>\n</p>\n\n<p align=\"center\">\n  <a href=\"LICENSE\"><img src=\"https://img.shields.io/badge/license-MIT-blue.svg\" alt=\"MIT 许可证\"></a>\n  <a href=\".claude/agents\"><img src=\"https://img.shields.io/badge/agents-49-blueviolet\" alt=\"49 个代理\"></a>\n  <a href=\".claude/skills\"><img src=\"https://img.shields.io/badge/skills-73-green\" alt=\"73 项技能\"></a>\n  <a href=\".claude/hooks\"><img src=\"https://img.shields."
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:345",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 <div align=\"center\">\n  <img src=\"https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png\" height=\"112px\" alt=\"Proxmox VE 辅助脚本标志\" />\n\n  <h1>Proxmox VE 辅助脚本</h1>\n  <p><strong>一行命令安装 Proxmox VE 上的服务、容器和虚拟机</strong><br/>\n  一个社区项目 — 基于 <a href=\"https://github.com/tteck\">@tteck</a> 的原创工作构建</p>\n\n  <p>\n    <a href=\"https://community-scripts.org\"><img src=\"https://img.shields.io/badge/Website-community--scripts.org-4c9b3f?style=flat-square\" /></a>\n    <a href=\"https://discord.gg/3AnUqsXnmK\"><img src=\"https://img.shields.io/bad"
+                },
+                {
+                  "key": "EXTERNAL_PROJECT:201",
+                  "purpose": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。 # BirdNET-Go\n\n<p align=\"center\">\n  <img src=\"doc/BirdNET-Go-logo.webp\" />\n</p>\n<p align=\"center\">\n  <!-- Project Status -->\n  <a href=\"https://github.com/tphakala/birdnet-go/releases\">\n    <img src=\"https://img.shields.io/github/v/release/tphakala/birdnet-go?include_prereleases&style=flat-square&color=blue\">\n  </a>\n  <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\">\n    <img src=\"https://badgen.net/badge/License/CC-BY-NC-SA%204.0/green\">\n  </a>\n  <img src=\"https://badgen.net/badge/OS/Linux%2C%20Windows%2C%20macOS/blue\">\n\n  <br>\n\n  <!-- Code Qua"
+                }
+              ]
+            },
+            "verdict": {
+              "matches": []
+            },
+            "accepted": {
+              "topic": "进货管理、销售管理、库存管理",
+              "proofs": {}
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "进货管理",
+                  "销售管理",
+                  "库存管理"
+                ]
+              },
+              "alternatives": [],
+              "calculatedAt": "2026-10-04T03:19:44.819536517Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "进货管理",
+                  "销售管理",
+                  "库存管理"
+                ],
+                "experience": "一年编程基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "想做的方向或用途是：帮小店管理进货、卖货和库存",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "preferences": [
+                  "帮小店管理进货、卖货和库存"
+                ],
+                "purposeReview": {
+                  "topic": "进货管理、销售管理、库存管理",
+                  "proofs": {}
+                },
+                "lastCandidates": [],
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：进货管理、销售管理、库存管理；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+[
+  {
+    "id": "M01",
+    "message": "刚学",
+    "prior": {
+      "language": "Java",
+      "lastQuestion": {
+        "text": "你的基础怎么样？",
+        "runId": "synthetic"
+      }
+    },
+    "expected": {
+      "language": "Java",
+      "experience": "刚学"
+    }
+  },
+  {
+    "id": "M02",
+    "message": "半年以内就行",
+    "prior": {
+      "language": "Java",
+      "lastQuestion": {
+        "text": "你希望多长时间完成？",
+        "runId": "synthetic"
+      }
+    },
+    "expected": {
+      "language": "Java",
+      "maxDurationDays": 180
+    }
+  },
+  {
+    "id": "M03",
+    "message": "比较第一个和第三个",
+    "prior": {
+      "lastCandidates": [
+        {
+          "type": "BEGINNER_PROJECT",
+          "id": 1,
+          "name": "synthetic/project-1"
+        },
+        {
+          "type": "BEGINNER_PROJECT",
+          "id": 2,
+          "name": "synthetic/project-2"
+        },
+        {
+          "type": "BEGINNER_PROJECT",
+          "id": 3,
+          "name": "synthetic/project-3"
+        }
+      ]
+    },
+    "expected": {
+      "intent": "COMPARE",
+      "positions": [
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "id": "M04",
+    "message": "第二个怎么部署",
+    "prior": {
+      "lastCandidates": [
+        {
+          "type": "BEGINNER_PROJECT",
+          "id": 1,
+          "name": "synthetic/project-1"
+        },
+        {
+          "type": "BEGINNER_PROJECT",
+          "id": 2,
+          "name": "synthetic/project-2"
+        },
+        {
+          "type": "BEGINNER_PROJECT",
+          "id": 3,
+          "name": "synthetic/project-3"
+        }
+      ]
+    },
+    "expected": {
+      "intent": "DETAIL",
+      "positions": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "M05",
+    "message": "先推荐吧，其他条件我还没想好",
+    "prior": {
+      "language": "Java"
+    },
+    "expected": {
+      "intent": "RECOMMEND",
+      "language": "Java"
+    }
+  },
+  {
+    "id": "M06",
+    "message": "今天先随便聊聊，暂时不要问项目的事",
+    "prior": {
+      "language": "Java",
+      "lastQuestion": {
+        "text": "你的基础怎么样？",
+        "runId": "synthetic"
+      }
+    },
+    "expected": {
+      "intent": "CHAT",
+      "language": "Java"
+    }
+  }
+]

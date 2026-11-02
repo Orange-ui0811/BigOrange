@@ -1,0 +1,347 @@
+[
+  {
+    "id": "N01",
+    "message": "下午好，今天只想轻松聊一会儿。",
+    "expected": {
+      "intents": [
+        "CHAT"
+      ],
+      "statuses": [
+        "CONVERSATION"
+      ]
+    }
+  },
+  {
+    "id": "N02",
+    "message": "学代码遇到瓶颈了，想听听你的建议，不用推荐。",
+    "expected": {
+      "intents": [
+        "CHAT"
+      ],
+      "statuses": [
+        "CONVERSATION"
+      ]
+    }
+  },
+  {
+    "id": "N03",
+    "message": "列一下目前保存的筛选要求。",
+    "prior": {
+      "language": "Python",
+      "maxDurationDays": 42,
+      "allowDocker": false
+    },
+    "expected": {
+      "intents": [
+        "STATE"
+      ],
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 42,
+        "allowDocker": false
+      }
+    }
+  },
+  {
+    "id": "N04",
+    "message": "刚才说的用途核对失败是什么意思？",
+    "prior": {
+      "goal": "学习"
+    },
+    "expected": {
+      "intents": [
+        "EXPLAIN"
+      ],
+      "state": {
+        "goal": "学习"
+      }
+    }
+  },
+  {
+    "id": "N05",
+    "message": "把最长周期调整为一个季度，暂时不搜索。",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 30
+    },
+    "expected": {
+      "state": {
+        "language": "Java",
+        "maxDurationDays": 90
+      }
+    }
+  },
+  {
+    "id": "N06",
+    "message": "去掉难度限制，初学者这个基础信息保留，只保存。",
+    "prior": {
+      "difficulty": "初级",
+      "experience": "初学者"
+    },
+    "expected": {
+      "absent": "difficulty",
+      "state": {
+        "experience": "初学者"
+      }
+    }
+  },
+  {
+    "id": "N07",
+    "message": "将编程语言设为JavaScript，现在不推荐。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "state": {
+        "language": "JavaScript"
+      }
+    }
+  },
+  {
+    "id": "N08",
+    "message": "项目最多十四天，不允许使用Docker，先保存条件。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 14,
+        "allowDocker": false
+      }
+    }
+  },
+  {
+    "id": "N09",
+    "message": "把学习和求职都作为我的目标，暂时只记下来。",
+    "expected": {
+      "goalIncludes": [
+        "学习",
+        "求职"
+      ]
+    }
+  },
+  {
+    "id": "N10",
+    "message": "这个作品是给我自己的书店管理图书用的，先记住用途。",
+    "expected": {
+      "goalIncludes": [
+        "书店"
+      ]
+    }
+  },
+  {
+    "id": "N11",
+    "message": "按Python给我找几个项目，主题暂时不限。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "projectsRequired": true,
+      "state": {
+        "language": "Python"
+      }
+    }
+  },
+  {
+    "id": "N12",
+    "message": "帮我找Python的检索增强生成方向作品，用于求职，最长六个月。",
+    "prior": {
+      "language": "Python",
+      "goal": "求职",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "projectsRequired": true,
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 180
+      },
+      "topicIncludesAny": [
+        "RAG",
+        "检索增强生成"
+      ]
+    }
+  },
+  {
+    "id": "N13",
+    "message": "请用刚才保存的Python、AI应用开发和求职要求找项目。",
+    "prior": {
+      "language": "Python",
+      "topic": [
+        "AI应用开发"
+      ],
+      "goal": "求职",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "projectsRequired": true,
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 180
+      },
+      "topicIncludesAny": [
+        "AI应用开发"
+      ]
+    }
+  },
+  {
+    "id": "N14",
+    "message": "推荐一些Java练手项目，时间不设上限。",
+    "prior": {
+      "language": "Java",
+      "goal": "学习"
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "state": {
+        "language": "Java"
+      }
+    }
+  },
+  {
+    "id": "N15",
+    "message": "收录在平台的开源项目是不是一定可以用于商业产品？请引用资料核实。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "REFUSE_NO_PLATFORM_FAQ_EVIDENCE",
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE"
+      ]
+    }
+  },
+  {
+    "id": "N16",
+    "message": "请根据知识库证据说明RAG项目有哪些典型功能。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE",
+        "REFUSE_NO_MATCH"
+      ]
+    }
+  },
+  {
+    "id": "N17",
+    "message": "依据项目文档介绍智能体的能力，并标明出处。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE",
+        "REFUSE_NO_MATCH"
+      ]
+    }
+  },
+  {
+    "id": "N18",
+    "message": "请比较刚才列表的第一个和第二个项目。",
+    "expected": {
+      "intents": [
+        "COMPARE"
+      ],
+      "statuses": [
+        "FOLLOW_UP"
+      ]
+    },
+    "turns": [
+      {
+        "message": "想找能查询文档并给出处的Python RAG项目，给求职做作品，半年以内完成",
+        "expected": {
+          "intents": [
+            "RECOMMEND"
+          ],
+          "projectsRequired": true,
+          "topicIncludesAny": [
+            "RAG",
+            "检索增强生成"
+          ]
+        }
+      },
+      {
+        "message": "请比较刚才列表的第一个和第二个项目。",
+        "expected": {
+          "intents": [
+            "COMPARE"
+          ],
+          "projectsRequired": true,
+          "projectPositions": [
+            1,
+            2
+          ],
+          "referencesRequired": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "N19",
+    "message": "说明刚才列表中第二项的部署方式和依赖。",
+    "expected": {
+      "intents": [
+        "DETAIL"
+      ],
+      "statuses": [
+        "FOLLOW_UP"
+      ]
+    },
+    "turns": [
+      {
+        "message": "想找能查询文档并给出处的Python RAG项目，给求职做作品，半年以内完成",
+        "expected": {
+          "intents": [
+            "RECOMMEND"
+          ],
+          "projectsRequired": true,
+          "topicIncludesAny": [
+            "RAG",
+            "检索增强生成"
+          ]
+        }
+      },
+      {
+        "message": "说明刚才列表中第二项的部署方式和依赖。",
+        "expected": {
+          "intents": [
+            "DETAIL"
+          ],
+          "projectsRequired": true,
+          "projectPositions": [
+            2
+          ],
+          "referencesRequired": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "N20",
+    "message": "取消编程语言限制，但仍然不要额外硬件，目前只记录。",
+    "prior": {
+      "language": "Java",
+      "allowHardware": false
+    },
+    "expected": {
+      "absent": "language",
+      "state": {
+        "allowHardware": false
+      }
+    }
+  }
+]

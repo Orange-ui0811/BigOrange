@@ -86,15 +86,16 @@ export function useCustomerChat() {
     }, 2000)
     if (terminal(row.status)) handle(row)
   }
-  const send = async () => {
+  const send = async (binding = {}) => {
     if (loading.value || running.value || deleting.value !== null || !input.value.trim()) return
     loading.value = true; error.value = ''
     try {
       if (!sessionId.value) { const created = checked(await createCustomerSession(input.value.trim().slice(0,45))); sessionId.value = created.id; sessions.value = checked(await customerSessions()) }
-      if (!pending || pending.message !== input.value) pending = { requestId: crypto.randomUUID(), message: input.value, session: sessionId.value }
+      const context = Object.fromEntries(['taskId','questionId','listId'].filter(key => typeof binding?.[key] === 'string').map(key => [key,binding[key]]))
+      if (!pending || pending.message !== input.value || (Object.keys(context).length && JSON.stringify(context)!==JSON.stringify(pending.context))) pending = { requestId: crypto.randomUUID(), message: input.value, session: sessionId.value, context }
       sessionStorage.setItem(storageKey('pending'), JSON.stringify(pending))
       sessionStorage.setItem(storageKey('session'), String(sessionId.value))
-      const row = checked(await submitCustomerRun(sessionId.value, { requestId: pending.requestId, message: pending.message }))
+      const row = checked(await submitCustomerRun(sessionId.value, { requestId: pending.requestId, message: pending.message, ...(Object.keys(pending.context || {}).length ? {context:pending.context} : {}) }))
       input.value = ''; watchRun(row); await reload()
     } catch (ex) { error.value = ex.message || '提交未确认，请重试；相同消息将复用请求标识。' }
     finally { loading.value = false }

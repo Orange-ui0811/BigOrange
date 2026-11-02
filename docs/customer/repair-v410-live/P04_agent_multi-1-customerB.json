@@ -1,0 +1,753 @@
+{
+  "case": "P04_agent_multi",
+  "round": 1,
+  "product": "customerB",
+  "startedAt": "2026-10-03T15:08:49.685849+00:00",
+  "sessionId": "90",
+  "runId": "d8951e9e-9207-4a81-b367-3732d6bcc39a",
+  "run": {
+    "id": "d8951e9e-9207-4a81-b367-3732d6bcc39a",
+    "session_id": "90",
+    "status": "SUCCEEDED",
+    "stage": "SUCCEEDED",
+    "result_json": "{\"skill\":\"PROJECT_RECOMMENDATION_V1\",\"intent\":\"RECOMMEND\",\"state\":{\"goal\":[\"学习\",\"赚钱/接单/创业\"],\"provenance\":{\"goal\":{\"source\":\"MESSAGE\",\"quote\":\"目标是学习；赚钱/接单/创业\"},\"experience\":{\"source\":\"MESSAGE\",\"quote\":\"基础是有两年基础\"},\"language\":{\"source\":\"MESSAGE\",\"quote\":\"只推荐 TypeScript 项目\"},\"topic\":{\"source\":\"MESSAGE\",\"quote\":\"技术方向是Agent、智能体\"},\"maxDurationDays\":{\"source\":\"MESSAGE\",\"quote\":\"完成周期是三个月内\"},\"verificationMode\":{\"source\":\"MESSAGE\",\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\"}},\"experience\":\"有两年基础\",\"language\":\"TypeScript\",\"topic\":[\"Agent\",\"智能体\"],\"durationSemantics\":{\"quantity\":3,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":90,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"想改造成服务小团队的工具\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有两年基础；已记录项目目标：学习、赚钱/接单/创业；已记录编程语言：TypeScript；已记录最长周期：90天；已记录项目主题：Agent、智能体；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\",\"lastCandidates\":[{\"name\":\"olo-dot-io/Uni-CLI\",\"type\":\"BEGINNER_PROJECT\",\"id\":53},{\"name\":\"chaitin/MonkeyCode\",\"type\":\"BEGINNER_PROJECT\",\"id\":6},{\"name\":\"deer-flow/llm-space\",\"type\":\"CAREER_PROJECT\",\"id\":212}]},\"projects\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":53,\"sourceRef\":\"beginner:53\",\"name\":\"olo-dot-io/Uni-CLI\",\"url\":\"https://github.com/olo-dot-io/Uni-CLI\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"TypeScript\",\"techStack\":\"TypeScript\",\"difficulty\":\"入门\",\"duration\":\"2-5天\",\"description\":\"TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E5]\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":true,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":false,\"topics\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\",\"beginnerScore\":91,\"analysisReason\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\",\"modificationPlan\":\"\",\"prerequisites\":\"Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"goalPreference\":15.0,\"total\":40.98076211353316,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true,\"preference\":0.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":25.98076211353316},\"recommendReason\":\"来自学习项目资料，优先结合练手与改造分析；本轮目标：学习、赚钱/接单/创业；资料涉及Agent、智能体，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为2-5天；你的上限为90天；已通过当前已知字段的条件检查，周期仅为资料估算。\",\"references\":[{\"evidenceId\":\"E5\",\"title\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\",\"spans\":[{\"spanId\":\"E5.S1\",\"text\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"startInChunk\":11,\"endInChunk\":67}],\"documentId\":97,\"versionId\":316,\"chunkId\":12072,\"sectionPath\":\"olo-dot-io/Uni-CLI > 适合新手的原因\",\"startOffset\":155,\"endOffset\":211,\"contentStartInChunk\":11,\"quote\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"text\":\"TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\",\"field\":\"description\"},{\"evidenceId\":\"E2\",\"title\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\",\"spans\":[{\"spanId\":\"E2.S1\",\"text\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"startInChunk\":6,\"endInChunk\":264}],\"documentId\":97,\"versionId\":316,\"chunkId\":12075,\"sectionPath\":\"olo-dot-io/Uni-CLI > 主题\",\"startOffset\":256,\"endOffset\":514,\"contentStartInChunk\":6,\"quote\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"text\":\"主题标签包含agent-infrastructure、ai-agents、mcp、mcp-server、typescript、cli、developer-tools等。\",\"field\":\"supportedExplanation\"}],\"whatIsIt\":\"TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E5]\",\"supportedExplanation\":\"TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E5]\\n主题标签包含agent-infrastructure、ai-agents、mcp、mcp-server、typescript、cli、developer-tools等。 [E2]\"},{\"type\":\"BEGINNER_PROJECT\",\"id\":6,\"sourceRef\":\"beginner:6\",\"name\":\"chaitin/MonkeyCode\",\"url\":\"https://github.com/chaitin/MonkeyCode\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"TypeScript\",\"techStack\":\"TypeScript\",\"difficulty\":\"入门\",\"duration\":\"3-6天\",\"description\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。 [E8]\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":true,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":false,\"topics\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\",\"beginnerScore\":91,\"analysisReason\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\",\"modificationPlan\":\"\",\"prerequisites\":\"Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"goalPreference\":15.0,\"total\":25.062305898749052,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true,\"preference\":0.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":10.062305898749052},\"recommendReason\":\"来自学习项目资料，优先结合练手与改造分析；本轮目标：学习、赚钱/接单/创业；资料涉及Agent、智能体，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为3-6天；你的上限为90天；已通过当前已知字段的条件检查，周期仅为资料估算。\",\"references\":[{\"evidenceId\":\"E8\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E8.S1\",\"text\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\\n\\n\",\"startInChunk\":8,\"endInChunk\":37}],\"documentId\":79,\"versionId\":298,\"chunkId\":11837,\"sectionPath\":\"chaitin/MonkeyCode > 中文简介\",\"startOffset\":93,\"endOffset\":122,\"contentStartInChunk\":8,\"quote\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\\n\\n\",\"text\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\",\"field\":\"description\"},{\"evidenceId\":\"E3\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E3.S1\",\"text\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"startInChunk\":11,\"endInChunk\":66}],\"documentId\":79,\"versionId\":298,\"chunkId\":11838,\"sectionPath\":\"chaitin/MonkeyCode > 适合新手的原因\",\"startOffset\":133,\"endOffset\":188,\"contentStartInChunk\":11,\"quote\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"text\":\"项目涉及AI辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\",\"field\":\"supportedExplanation\"},{\"evidenceId\":\"E6\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E6.S1\",\"text\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"startInChunk\":6,\"endInChunk\":140}],\"documentId\":79,\"versionId\":298,\"chunkId\":11841,\"sectionPath\":\"chaitin/MonkeyCode > 主题\",\"startOffset\":233,\"endOffset\":367,\"contentStartInChunk\":6,\"quote\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"text\":\"主题标签包含ai-agent、ai-coding、ai-coding-assistant、vibe-coding等。\",\"field\":\"supportedExplanation\"}],\"whatIsIt\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。 [E8]\",\"supportedExplanation\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。 [E8]\\n项目涉及AI辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。 [E3]\\n主题标签包含ai-agent、ai-coding、ai-coding-assistant、vibe-coding等。 [E6]\"},{\"type\":\"CAREER_PROJECT\",\"id\":212,\"sourceRef\":\"career:212\",\"name\":\"deer-flow/llm-space\",\"url\":\"https://github.com/deer-flow/llm-space\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"TypeScript\",\"techStack\":\"TypeScript,React\",\"difficulty\":\"进阶\",\"duration\":\"1.5-2 个月\",\"description\":\"涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。 [E1]\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":true,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":true,\"quality\":72,\"analysisReason\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\",\"proofPoints\":\"测试充分，持续集成，自动化发布，大型项目规模，目前仅有 3 个开放 issue。\",\"interviewTopics\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\",\"modificationPlan\":\"集成主流 LLM 提供商的 API（如 OpenAI）作为后端；添加多用户协作功能并实现数据库持久化；制作可演示的复杂 Agent 工作流示例。\",\"mainRisks\":\"项目缺少数据库和 Docker 支持，后端能力展示不足；需要一定 React 前端基础。\",\"prerequisites\":\"技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。 [E4]\",\"evidenceAvailable\":true,\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"goalPreference\":0.0,\"total\":21.12370802417528,\"semanticAvailable\":true,\"quality\":10.799999999999999,\"semanticMatched\":true,\"preference\":0.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":10.323708024175279},\"recommendReason\":\"本轮目标：学习、赚钱/接单/创业；资料涉及Agent、智能体，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为1.5-2 个月；你的上限为90天；已通过当前已知字段的条件检查，周期仅为资料估算。\",\"references\":[{\"evidenceId\":\"E1\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E1.S1\",\"text\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"startInChunk\":9,\"endInChunk\":82}],\"documentId\":113,\"versionId\":332,\"chunkId\":12545,\"sectionPath\":\"deer-flow/llm-space > 面试讨论点\",\"startOffset\":254,\"endOffset\":327,\"contentStartInChunk\":9,\"quote\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"text\":\"涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。\",\"field\":\"description\"},{\"evidenceId\":\"E4\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E4.S1\",\"text\":\"- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"startInChunk\":15,\"endInChunk\":382}],\"documentId\":113,\"versionId\":332,\"chunkId\":12560,\"sectionPath\":\"LLM Space 4 > Tech stack\",\"startOffset\":3463,\"endOffset\":3830,\"contentStartInChunk\":15,\"quote\":\"- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"text\":\"技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。\",\"field\":\"prerequisites\"},{\"evidenceId\":\"E7\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E7.S1\",\"text\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"startInChunk\":8,\"endInChunk\":53}],\"documentId\":113,\"versionId\":332,\"chunkId\":12543,\"sectionPath\":\"deer-flow/llm-space > 职业价值\",\"startOffset\":149,\"endOffset\":194,\"contentStartInChunk\":8,\"quote\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"text\":\"体现Agent开发与原型设计能力，适合AI应用与Agent或全栈后端岗位。\",\"field\":\"supportedExplanation\"}],\"whatIsIt\":\"涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。 [E1]\",\"supportedExplanation\":\"涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。 [E1]\\n技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。 [E4]\\n体现Agent开发与原型设计能力，适合AI应用与Agent或全栈后端岗位。 [E7]\"}],\"references\":[{\"evidenceId\":\"E1\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E1.S1\",\"text\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"startInChunk\":9,\"endInChunk\":82}],\"documentId\":113,\"versionId\":332,\"chunkId\":12545,\"sectionPath\":\"deer-flow/llm-space > 面试讨论点\",\"startOffset\":254,\"endOffset\":327,\"contentStartInChunk\":9,\"quote\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"text\":\"涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。\",\"field\":\"description\"},{\"evidenceId\":\"E4\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E4.S1\",\"text\":\"- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"startInChunk\":15,\"endInChunk\":382}],\"documentId\":113,\"versionId\":332,\"chunkId\":12560,\"sectionPath\":\"LLM Space 4 > Tech stack\",\"startOffset\":3463,\"endOffset\":3830,\"contentStartInChunk\":15,\"quote\":\"- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"text\":\"技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。\",\"field\":\"prerequisites\"},{\"evidenceId\":\"E7\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E7.S1\",\"text\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"startInChunk\":8,\"endInChunk\":53}],\"documentId\":113,\"versionId\":332,\"chunkId\":12543,\"sectionPath\":\"deer-flow/llm-space > 职业价值\",\"startOffset\":149,\"endOffset\":194,\"contentStartInChunk\":8,\"quote\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"text\":\"体现Agent开发与原型设计能力，适合AI应用与Agent或全栈后端岗位。\",\"field\":\"supportedExplanation\"},{\"evidenceId\":\"E5\",\"title\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\",\"spans\":[{\"spanId\":\"E5.S1\",\"text\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"startInChunk\":11,\"endInChunk\":67}],\"documentId\":97,\"versionId\":316,\"chunkId\":12072,\"sectionPath\":\"olo-dot-io/Uni-CLI > 适合新手的原因\",\"startOffset\":155,\"endOffset\":211,\"contentStartInChunk\":11,\"quote\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"text\":\"TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\",\"field\":\"description\"},{\"evidenceId\":\"E2\",\"title\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\",\"spans\":[{\"spanId\":\"E2.S1\",\"text\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"startInChunk\":6,\"endInChunk\":264}],\"documentId\":97,\"versionId\":316,\"chunkId\":12075,\"sectionPath\":\"olo-dot-io/Uni-CLI > 主题\",\"startOffset\":256,\"endOffset\":514,\"contentStartInChunk\":6,\"quote\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"text\":\"主题标签包含agent-infrastructure、ai-agents、mcp、mcp-server、typescript、cli、developer-tools等。\",\"field\":\"supportedExplanation\"},{\"evidenceId\":\"E8\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E8.S1\",\"text\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\\n\\n\",\"startInChunk\":8,\"endInChunk\":37}],\"documentId\":79,\"versionId\":298,\"chunkId\":11837,\"sectionPath\":\"chaitin/MonkeyCode > 中文简介\",\"startOffset\":93,\"endOffset\":122,\"contentStartInChunk\":8,\"quote\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\\n\\n\",\"text\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\",\"field\":\"description\"},{\"evidenceId\":\"E3\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E3.S1\",\"text\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"startInChunk\":11,\"endInChunk\":66}],\"documentId\":79,\"versionId\":298,\"chunkId\":11838,\"sectionPath\":\"chaitin/MonkeyCode > 适合新手的原因\",\"startOffset\":133,\"endOffset\":188,\"contentStartInChunk\":11,\"quote\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"text\":\"项目涉及AI辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\",\"field\":\"supportedExplanation\"},{\"evidenceId\":\"E6\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E6.S1\",\"text\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"startInChunk\":6,\"endInChunk\":140}],\"documentId\":79,\"versionId\":298,\"chunkId\":11841,\"sectionPath\":\"chaitin/MonkeyCode > 主题\",\"startOffset\":233,\"endOffset\":367,\"contentStartInChunk\":6,\"quote\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"text\":\"主题标签包含ai-agent、ai-coding、ai-coding-assistant、vibe-coding等。\",\"field\":\"supportedExplanation\"}],\"profileLoaded\":false,\"generation\":\"20261002164953-ec113424\",\"status\":\"VERIFIED_PROJECTS\",\"answer\":\"已记录基础（排序偏好）：有两年基础；已记录项目目标：学习、赚钱/接单/创业；已记录编程语言：TypeScript；已记录最长周期：90天；已记录项目主题：Agent、智能体；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\\n\\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。\",\"conditionChangeSummary\":\"已记录基础（排序偏好）：有两年基础；已记录项目目标：学习、赚钱/接单/创业；已记录编程语言：TypeScript；已记录最长周期：90天；已记录项目主题：Agent、智能体；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"}",
+    "metrics_json": "{\"costUsd\":\"UNKNOWN\",\"modelCalls\":[{\"usage\":{\"prompt_tokens\":5272,\"completion_tokens\":1949,\"total_tokens\":7221,\"prompt_tokens_details\":{\"cached_tokens\":4992},\"completion_tokens_details\":{\"reasoning_tokens\":1321},\"prompt_cache_hit_tokens\":4992,\"prompt_cache_miss_tokens\":280},\"attempt\":1,\"status\":\"SUCCEEDED\",\"costUsd\":\"UNKNOWN\",\"model\":\"deepseek-flash\",\"durationMs\":8745,\"protocol\":\"NATIVE_ACTION\",\"phase\":\"ACTION\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"tool_calls\",\"outputBudget\":4096,\"thinking\":true},{\"usage\":{\"prompt_tokens\":1719,\"completion_tokens\":374,\"total_tokens\":2093,\"prompt_tokens_details\":{\"cached_tokens\":256},\"prompt_cache_hit_tokens\":256,\"prompt_cache_miss_tokens\":1463},\"attempt\":1,\"status\":\"SUCCEEDED\",\"costUsd\":\"UNKNOWN\",\"model\":\"deepseek-flash\",\"durationMs\":1786,\"protocol\":\"JSON_OBJECT\",\"phase\":\"EVIDENCE\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"stop\",\"outputBudget\":2048,\"thinking\":false},{\"usage\":{\"prompt_tokens\":941,\"completion_tokens\":20,\"total_tokens\":961,\"prompt_tokens_details\":{\"cached_tokens\":0},\"prompt_cache_hit_tokens\":0,\"prompt_cache_miss_tokens\":941},\"attempt\":1,\"status\":\"SUCCEEDED\",\"costUsd\":\"UNKNOWN\",\"model\":\"deepseek-flash\",\"durationMs\":285,\"protocol\":\"JSON_OBJECT\",\"phase\":\"VERIFY\",\"requestedModel\":\"deepseek-flash\",\"finishReason\":\"stop\",\"outputBudget\":2048,\"thinking\":false}],\"promptVersion\":\"customer-v4.10-grounded-recommendations\",\"embeddingUsage\":\"NOT_REPORTED\",\"protocol\":\"NATIVE_ACTION_V1\",\"tokenUsage\":{\"reasoningTokens\":1321,\"complete\":true,\"cacheHitTokens\":5248,\"inputTokens\":7932,\"cacheMissTokens\":2684,\"totalTokens\":10275,\"outputTokens\":2343,\"callsWithoutUsage\":0,\"calls\":3,\"models\":[\"deepseek-flash\"]}}",
+    "created_at": "2026-10-03 23:08",
+    "finished_at": "2026-10-03 23:09",
+    "generation_key": "20261002164953-ec113424",
+    "prompt_version": "customer-v4.10-grounded-recommendations"
+  },
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "goal": [
+        "学习",
+        "赚钱/接单/创业"
+      ],
+      "provenance": {
+        "goal": {
+          "source": "MESSAGE",
+          "quote": "目标是学习；赚钱/接单/创业"
+        },
+        "experience": {
+          "source": "MESSAGE",
+          "quote": "基础是有两年基础"
+        },
+        "language": {
+          "source": "MESSAGE",
+          "quote": "只推荐 TypeScript 项目"
+        },
+        "topic": {
+          "source": "MESSAGE",
+          "quote": "技术方向是Agent、智能体"
+        },
+        "maxDurationDays": {
+          "source": "MESSAGE",
+          "quote": "完成周期是三个月内"
+        },
+        "verificationMode": {
+          "source": "MESSAGE",
+          "quote": "资料缺失可以展示真实探索候选，但必须标明尚未核实"
+        }
+      },
+      "experience": "有两年基础",
+      "language": "TypeScript",
+      "topic": [
+        "Agent",
+        "智能体"
+      ],
+      "durationSemantics": {
+        "quantity": 3,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 90,
+      "verificationMode": "EXPLORE",
+      "preferences": [
+        "想改造成服务小团队的工具"
+      ],
+      "lastChangeSummary": "已记录基础（排序偏好）：有两年基础；已记录项目目标：学习、赚钱/接单/创业；已记录编程语言：TypeScript；已记录最长周期：90天；已记录项目主题：Agent、智能体；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+      "lastCandidates": [
+        {
+          "name": "olo-dot-io/Uni-CLI",
+          "type": "BEGINNER_PROJECT",
+          "id": 53
+        },
+        {
+          "name": "chaitin/MonkeyCode",
+          "type": "BEGINNER_PROJECT",
+          "id": 6
+        },
+        {
+          "name": "deer-flow/llm-space",
+          "type": "CAREER_PROJECT",
+          "id": 212
+        }
+      ]
+    },
+    "projects": [
+      {
+        "type": "BEGINNER_PROJECT",
+        "id": 53,
+        "sourceRef": "beginner:53",
+        "name": "olo-dot-io/Uni-CLI",
+        "url": "https://github.com/olo-dot-io/Uni-CLI",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "TypeScript",
+        "techStack": "TypeScript",
+        "difficulty": "入门",
+        "duration": "2-5天",
+        "description": "TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E5]",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": true,
+        "requiresDocker": false,
+        "requiresDatabase": false,
+        "requiresSecrets": false,
+        "topics": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]",
+        "beginnerScore": 91,
+        "analysisReason": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+        "modificationPlan": "",
+        "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "goalPreference": 15.0,
+          "total": 40.98076211353316,
+          "semanticAvailable": true,
+          "quality": 0.0,
+          "semanticMatched": true,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0,
+          "semantic": 25.98076211353316
+        },
+        "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习、赚钱/接单/创业；资料涉及Agent、智能体，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为2-5天；你的上限为90天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+        "references": [
+          {
+            "evidenceId": "E5",
+            "title": "olo-dot-io/Uni-CLI",
+            "sourceRef": "beginner:53",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 67
+              }
+            ],
+            "documentId": 97,
+            "versionId": 316,
+            "chunkId": 12072,
+            "sectionPath": "olo-dot-io/Uni-CLI > 适合新手的原因",
+            "startOffset": 155,
+            "endOffset": 211,
+            "contentStartInChunk": 11,
+            "quote": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+            "text": "TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E2",
+            "title": "olo-dot-io/Uni-CLI",
+            "sourceRef": "beginner:53",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+                "startInChunk": 6,
+                "endInChunk": 264
+              }
+            ],
+            "documentId": 97,
+            "versionId": 316,
+            "chunkId": 12075,
+            "sectionPath": "olo-dot-io/Uni-CLI > 主题",
+            "startOffset": 256,
+            "endOffset": 514,
+            "contentStartInChunk": 6,
+            "quote": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+            "text": "主题标签包含agent-infrastructure、ai-agents、mcp、mcp-server、typescript、cli、developer-tools等。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "whatIsIt": "TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E5]",
+        "supportedExplanation": "TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。 [E5]\n主题标签包含agent-infrastructure、ai-agents、mcp、mcp-server、typescript、cli、developer-tools等。 [E2]"
+      },
+      {
+        "type": "BEGINNER_PROJECT",
+        "id": 6,
+        "sourceRef": "beginner:6",
+        "name": "chaitin/MonkeyCode",
+        "url": "https://github.com/chaitin/MonkeyCode",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "TypeScript",
+        "techStack": "TypeScript",
+        "difficulty": "入门",
+        "duration": "3-6天",
+        "description": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。 [E8]",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": true,
+        "requiresDocker": false,
+        "requiresDatabase": false,
+        "requiresSecrets": false,
+        "topics": "[\"ai\", \"ai-agent\", \"ai-coding\", \"ai-coding-assistant\", \"aicoding\", \"claude\", \"codex\", \"coding\", \"cursor\", \"opencode\", \"vibe-coding\"]",
+        "beginnerScore": 91,
+        "analysisReason": "项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。",
+        "modificationPlan": "",
+        "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "goalPreference": 15.0,
+          "total": 25.062305898749052,
+          "semanticAvailable": true,
+          "quality": 0.0,
+          "semanticMatched": true,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0,
+          "semantic": 10.062305898749052
+        },
+        "recommendReason": "来自学习项目资料，优先结合练手与改造分析；本轮目标：学习、赚钱/接单/创业；资料涉及Agent、智能体，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为3-6天；你的上限为90天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+        "references": [
+          {
+            "evidenceId": "E8",
+            "title": "chaitin/MonkeyCode",
+            "sourceRef": "beginner:6",
+            "spans": [
+              {
+                "spanId": "E8.S1",
+                "text": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 37
+              }
+            ],
+            "documentId": 79,
+            "versionId": 298,
+            "chunkId": 11837,
+            "sectionPath": "chaitin/MonkeyCode > 中文简介",
+            "startOffset": 93,
+            "endOffset": 122,
+            "contentStartInChunk": 8,
+            "quote": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。\n\n",
+            "text": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "chaitin/MonkeyCode",
+            "sourceRef": "beginner:6",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\n\n",
+                "startInChunk": 11,
+                "endInChunk": 66
+              }
+            ],
+            "documentId": 79,
+            "versionId": 298,
+            "chunkId": 11838,
+            "sectionPath": "chaitin/MonkeyCode > 适合新手的原因",
+            "startOffset": 133,
+            "endOffset": 188,
+            "contentStartInChunk": 11,
+            "quote": "项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\n\n",
+            "text": "项目涉及AI辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E6",
+            "title": "chaitin/MonkeyCode",
+            "sourceRef": "beginner:6",
+            "spans": [
+              {
+                "spanId": "E6.S1",
+                "text": "[\"ai\", \"ai-agent\", \"ai-coding\", \"ai-coding-assistant\", \"aicoding\", \"claude\", \"codex\", \"coding\", \"cursor\", \"opencode\", \"vibe-coding\"]\n\n",
+                "startInChunk": 6,
+                "endInChunk": 140
+              }
+            ],
+            "documentId": 79,
+            "versionId": 298,
+            "chunkId": 11841,
+            "sectionPath": "chaitin/MonkeyCode > 主题",
+            "startOffset": 233,
+            "endOffset": 367,
+            "contentStartInChunk": 6,
+            "quote": "[\"ai\", \"ai-agent\", \"ai-coding\", \"ai-coding-assistant\", \"aicoding\", \"claude\", \"codex\", \"coding\", \"cursor\", \"opencode\", \"vibe-coding\"]\n\n",
+            "text": "主题标签包含ai-agent、ai-coding、ai-coding-assistant、vibe-coding等。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "whatIsIt": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。 [E8]",
+        "supportedExplanation": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。 [E8]\n项目涉及AI辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。 [E3]\n主题标签包含ai-agent、ai-coding、ai-coding-assistant、vibe-coding等。 [E6]"
+      },
+      {
+        "type": "CAREER_PROJECT",
+        "id": 212,
+        "sourceRef": "career:212",
+        "name": "deer-flow/llm-space",
+        "url": "https://github.com/deer-flow/llm-space",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "TypeScript",
+        "techStack": "TypeScript,React",
+        "difficulty": "进阶",
+        "duration": "1.5-2 个月",
+        "description": "涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。 [E1]",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": true,
+        "requiresDocker": false,
+        "requiresDatabase": false,
+        "requiresSecrets": true,
+        "quality": 72,
+        "analysisReason": "体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。",
+        "proofPoints": "测试充分，持续集成，自动化发布，大型项目规模，目前仅有 3 个开放 issue。",
+        "interviewTopics": "Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。",
+        "modificationPlan": "集成主流 LLM 提供商的 API（如 OpenAI）作为后端；添加多用户协作功能并实现数据库持久化；制作可演示的复杂 Agent 工作流示例。",
+        "mainRisks": "项目缺少数据库和 Docker 支持，后端能力展示不足；需要一定 React 前端基础。",
+        "prerequisites": "技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。 [E4]",
+        "evidenceAvailable": true,
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "goalPreference": 0.0,
+          "total": 21.12370802417528,
+          "semanticAvailable": true,
+          "quality": 10.799999999999999,
+          "semanticMatched": true,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0,
+          "semantic": 10.323708024175279
+        },
+        "recommendReason": "本轮目标：学习、赚钱/接单/创业；资料涉及Agent、智能体，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为1.5-2 个月；你的上限为90天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+        "references": [
+          {
+            "evidenceId": "E1",
+            "title": "deer-flow/llm-space",
+            "sourceRef": "career:212",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "text": "Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\n\n",
+                "startInChunk": 9,
+                "endInChunk": 82
+              }
+            ],
+            "documentId": 113,
+            "versionId": 332,
+            "chunkId": 12545,
+            "sectionPath": "deer-flow/llm-space > 面试讨论点",
+            "startOffset": 254,
+            "endOffset": 327,
+            "contentStartInChunk": 9,
+            "quote": "Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\n\n",
+            "text": "涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E4",
+            "title": "deer-flow/llm-space",
+            "sourceRef": "career:212",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\n- **UI** — React with Tailwind CSS and shadcn/ui.\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\n\n",
+                "startInChunk": 15,
+                "endInChunk": 382
+              }
+            ],
+            "documentId": 113,
+            "versionId": 332,
+            "chunkId": 12560,
+            "sectionPath": "LLM Space 4 > Tech stack",
+            "startOffset": 3463,
+            "endOffset": 3830,
+            "contentStartInChunk": 15,
+            "quote": "- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\n- **UI** — React with Tailwind CSS and shadcn/ui.\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\n\n",
+            "text": "技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。",
+            "field": "prerequisites"
+          },
+          {
+            "evidenceId": "E7",
+            "title": "deer-flow/llm-space",
+            "sourceRef": "career:212",
+            "spans": [
+              {
+                "spanId": "E7.S1",
+                "text": "体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 53
+              }
+            ],
+            "documentId": 113,
+            "versionId": 332,
+            "chunkId": 12543,
+            "sectionPath": "deer-flow/llm-space > 职业价值",
+            "startOffset": 149,
+            "endOffset": 194,
+            "contentStartInChunk": 8,
+            "quote": "体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\n\n",
+            "text": "体现Agent开发与原型设计能力，适合AI应用与Agent或全栈后端岗位。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "whatIsIt": "涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。 [E1]",
+        "supportedExplanation": "涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。 [E1]\n技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。 [E4]\n体现Agent开发与原型设计能力，适合AI应用与Agent或全栈后端岗位。 [E7]"
+      }
+    ],
+    "references": [
+      {
+        "evidenceId": "E1",
+        "title": "deer-flow/llm-space",
+        "sourceRef": "career:212",
+        "spans": [
+          {
+            "spanId": "E1.S1",
+            "text": "Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\n\n",
+            "startInChunk": 9,
+            "endInChunk": 82
+          }
+        ],
+        "documentId": 113,
+        "versionId": 332,
+        "chunkId": 12545,
+        "sectionPath": "deer-flow/llm-space > 面试讨论点",
+        "startOffset": 254,
+        "endOffset": 327,
+        "contentStartInChunk": 9,
+        "quote": "Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\n\n",
+        "text": "涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E4",
+        "title": "deer-flow/llm-space",
+        "sourceRef": "career:212",
+        "spans": [
+          {
+            "spanId": "E4.S1",
+            "text": "- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\n- **UI** — React with Tailwind CSS and shadcn/ui.\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\n\n",
+            "startInChunk": 15,
+            "endInChunk": 382
+          }
+        ],
+        "documentId": 113,
+        "versionId": 332,
+        "chunkId": 12560,
+        "sectionPath": "LLM Space 4 > Tech stack",
+        "startOffset": 3463,
+        "endOffset": 3830,
+        "contentStartInChunk": 15,
+        "quote": "- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\n- **UI** — React with Tailwind CSS and shadcn/ui.\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\n\n",
+        "text": "技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。",
+        "field": "prerequisites"
+      },
+      {
+        "evidenceId": "E7",
+        "title": "deer-flow/llm-space",
+        "sourceRef": "career:212",
+        "spans": [
+          {
+            "spanId": "E7.S1",
+            "text": "体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\n\n",
+            "startInChunk": 8,
+            "endInChunk": 53
+          }
+        ],
+        "documentId": 113,
+        "versionId": 332,
+        "chunkId": 12543,
+        "sectionPath": "deer-flow/llm-space > 职业价值",
+        "startOffset": 149,
+        "endOffset": 194,
+        "contentStartInChunk": 8,
+        "quote": "体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\n\n",
+        "text": "体现Agent开发与原型设计能力，适合AI应用与Agent或全栈后端岗位。",
+        "field": "supportedExplanation"
+      },
+      {
+        "evidenceId": "E5",
+        "title": "olo-dot-io/Uni-CLI",
+        "sourceRef": "beginner:53",
+        "spans": [
+          {
+            "spanId": "E5.S1",
+            "text": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+            "startInChunk": 11,
+            "endInChunk": 67
+          }
+        ],
+        "documentId": 97,
+        "versionId": 316,
+        "chunkId": 12072,
+        "sectionPath": "olo-dot-io/Uni-CLI > 适合新手的原因",
+        "startOffset": 155,
+        "endOffset": 211,
+        "contentStartInChunk": 11,
+        "quote": "TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\n\n",
+        "text": "TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E2",
+        "title": "olo-dot-io/Uni-CLI",
+        "sourceRef": "beginner:53",
+        "spans": [
+          {
+            "spanId": "E2.S1",
+            "text": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+            "startInChunk": 6,
+            "endInChunk": 264
+          }
+        ],
+        "documentId": 97,
+        "versionId": 316,
+        "chunkId": 12075,
+        "sectionPath": "olo-dot-io/Uni-CLI > 主题",
+        "startOffset": 256,
+        "endOffset": 514,
+        "contentStartInChunk": 6,
+        "quote": "[\"agent-infrastructure\", \"ai-agents\", \"ai-tools\", \"automation\", \"browser-automation\", \"cdp\", \"chrome\", \"claude-code\", \"cli\", \"codex\", \"cursor\", \"developer-tools\", \"mcp\", \"mcp-server\", \"nodejs\", \"openai\", \"self-repair\", \"typescript\", \"web-scraping\", \"yaml\"]\n\n",
+        "text": "主题标签包含agent-infrastructure、ai-agents、mcp、mcp-server、typescript、cli、developer-tools等。",
+        "field": "supportedExplanation"
+      },
+      {
+        "evidenceId": "E8",
+        "title": "chaitin/MonkeyCode",
+        "sourceRef": "beginner:6",
+        "spans": [
+          {
+            "spanId": "E8.S1",
+            "text": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。\n\n",
+            "startInChunk": 8,
+            "endInChunk": 37
+          }
+        ],
+        "documentId": 79,
+        "versionId": 298,
+        "chunkId": 11837,
+        "sectionPath": "chaitin/MonkeyCode > 中文简介",
+        "startOffset": 93,
+        "endOffset": 122,
+        "contentStartInChunk": 8,
+        "quote": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。\n\n",
+        "text": "一个面向团队的人工智能编码平台，旨在提升协作开发效率。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E3",
+        "title": "chaitin/MonkeyCode",
+        "sourceRef": "beginner:6",
+        "spans": [
+          {
+            "spanId": "E3.S1",
+            "text": "项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\n\n",
+            "startInChunk": 11,
+            "endInChunk": 66
+          }
+        ],
+        "documentId": 79,
+        "versionId": 298,
+        "chunkId": 11838,
+        "sectionPath": "chaitin/MonkeyCode > 适合新手的原因",
+        "startOffset": 133,
+        "endOffset": 188,
+        "contentStartInChunk": 11,
+        "quote": "项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\n\n",
+        "text": "项目涉及AI辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。",
+        "field": "supportedExplanation"
+      },
+      {
+        "evidenceId": "E6",
+        "title": "chaitin/MonkeyCode",
+        "sourceRef": "beginner:6",
+        "spans": [
+          {
+            "spanId": "E6.S1",
+            "text": "[\"ai\", \"ai-agent\", \"ai-coding\", \"ai-coding-assistant\", \"aicoding\", \"claude\", \"codex\", \"coding\", \"cursor\", \"opencode\", \"vibe-coding\"]\n\n",
+            "startInChunk": 6,
+            "endInChunk": 140
+          }
+        ],
+        "documentId": 79,
+        "versionId": 298,
+        "chunkId": 11841,
+        "sectionPath": "chaitin/MonkeyCode > 主题",
+        "startOffset": 233,
+        "endOffset": 367,
+        "contentStartInChunk": 6,
+        "quote": "[\"ai\", \"ai-agent\", \"ai-coding\", \"ai-coding-assistant\", \"aicoding\", \"claude\", \"codex\", \"coding\", \"cursor\", \"opencode\", \"vibe-coding\"]\n\n",
+        "text": "主题标签包含ai-agent、ai-coding、ai-coding-assistant、vibe-coding等。",
+        "field": "supportedExplanation"
+      }
+    ],
+    "profileLoaded": false,
+    "generation": "20261002164953-ec113424",
+    "status": "VERIFIED_PROJECTS",
+    "answer": "已记录基础（排序偏好）：有两年基础；已记录项目目标：学习、赚钱/接单/创业；已记录编程语言：TypeScript；已记录最长周期：90天；已记录项目主题：Agent、智能体；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+    "conditionChangeSummary": "已记录基础（排序偏好）：有两年基础；已记录项目目标：学习、赚钱/接单/创业；已记录编程语言：TypeScript；已记录最长周期：90天；已记录项目主题：Agent、智能体；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "costUsd": "UNKNOWN",
+    "modelCalls": [
+      {
+        "usage": {
+          "prompt_tokens": 5272,
+          "completion_tokens": 1949,
+          "total_tokens": 7221,
+          "prompt_tokens_details": {
+            "cached_tokens": 4992
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1321
+          },
+          "prompt_cache_hit_tokens": 4992,
+          "prompt_cache_miss_tokens": 280
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 8745,
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "tool_calls",
+        "outputBudget": 4096,
+        "thinking": true
+      },
+      {
+        "usage": {
+          "prompt_tokens": 1719,
+          "completion_tokens": 374,
+          "total_tokens": 2093,
+          "prompt_tokens_details": {
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1463
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 1786,
+        "protocol": "JSON_OBJECT",
+        "phase": "EVIDENCE",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      },
+      {
+        "usage": {
+          "prompt_tokens": 941,
+          "completion_tokens": 20,
+          "total_tokens": 961,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 941
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 285,
+        "protocol": "JSON_OBJECT",
+        "phase": "VERIFY",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      }
+    ],
+    "promptVersion": "customer-v4.10-grounded-recommendations",
+    "embeddingUsage": "NOT_REPORTED",
+    "protocol": "NATIVE_ACTION_V1",
+    "tokenUsage": {
+      "reasoningTokens": 1321,
+      "complete": true,
+      "cacheHitTokens": 5248,
+      "inputTokens": 7932,
+      "cacheMissTokens": 2684,
+      "totalTokens": 10275,
+      "outputTokens": 2343,
+      "callsWithoutUsage": 0,
+      "calls": 3,
+      "models": [
+        "deepseek-flash"
+      ]
+    }
+  },
+  "events": [
+    {
+      "atMs": 643.8383999920916,
+      "status": "RUNNING",
+      "stage": "UNDERSTANDING"
+    },
+    {
+      "atMs": 9485.588999988977,
+      "status": "RUNNING",
+      "stage": "SEARCHING"
+    },
+    {
+      "atMs": 10510.092000011355,
+      "status": "RUNNING",
+      "stage": "FILTERING_PROJECTS"
+    },
+    {
+      "atMs": 13111.840199999278,
+      "status": "SUCCEEDED",
+      "stage": "SUCCEEDED"
+    }
+  ],
+  "steps": [
+    {
+      "tool": "getConfirmedProfile",
+      "detail": "{\"parameters\":{},\"result\":\"\"}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"parameters\":{\"purpose\":\"PROJECT_RANKING\",\"topK\":20,\"query\":\"推荐项目 TypeScript Agent、智能体 学习、赚钱/接单/创业 有两年基础\",\"sourceTypes\":[\"CAREER_PROJECT\",\"BEGINNER_PROJECT\",\"GITHUB\"]},\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":310,\"candidateCount\":80,\"excludedReasons\":{},\"hits\":[{\"documentId\":87,\"versionId\":306,\"chunkId\":11942,\"chunkIndex\":4,\"title\":\"seek-oss/sku\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:24\",\"sectionPath\":\"seek-oss/sku > 适合新手的原因\",\"startOffset\":104,\"endOffset\":167,\"content\":\"## 适合新手的原因\\n使用 TypeScript 和 Playwright，架构清晰，适合学习现代前端工具链和自动化测试。\\n\\n\",\"score\":0.01819859726836471,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":138,\"versionId\":357,\"chunkId\":13339,\"chunkIndex\":3,\"title\":\"Agent-Analytics/awesome-multi-agent-orchestrators\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:247\",\"sectionPath\":\"Agent-Analytics/awesome-multi-agent-orchestrators > 项目摘要\",\"startOffset\":147,\"endOffset\":258,\"content\":\"## 项目摘要\\nAwesome-multi-agent-orchestrators 是一个关于多智能体编排的精选列表与目录。基于TypeScript，提供测试与CI保障，有数据库支持和Docker配置，但许可证未明确。\\n\\n\",\"score\":0.01758578431372549,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=42,nameRank=80,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":97,\"versionId\":316,\"chunkId\":12072,\"chunkIndex\":4,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 适合新手的原因\",\"startOffset\":144,\"endOffset\":211,\"content\":\"## 适合新手的原因\\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"score\":0.01639344262295082,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":85,\"versionId\":304,\"chunkId\":11916,\"chunkIndex\":4,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 适合新手的原因\",\"startOffset\":154,\"endOffset\":222,\"content\":\"## 适合新手的原因\\nTypeScript 项目，专注于包定义文件，易于理解元数据和脚本编写；适合学习包管理器原理和自动化发布流程。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":106,\"versionId\":325,\"chunkId\":12337,\"chunkIndex\":4,\"title\":\"anomalyco/opencode\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:196\",\"sectionPath\":\"anomalyco/opencode > 职业价值\",\"startOffset\":136,\"endOffset\":217,\"content\":\"## 职业价值\\n完成后能证明对大型 AI 代理系统架构的理解，以及 TypeScript 后端开发与开源社区协作能力，适合 AI 产品与运营或全栈工程师岗位。\\n\\n\",\"score\":0.016004583651642475,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=94,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":86,\"versionId\":305,\"chunkId\":11929,\"chunkIndex\":4,\"title\":\"browserless/browserless\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:22\",\"sectionPath\":\"browserless/browserless > 适合新手的原因\",\"startOffset\":144,\"endOffset\":227,\"content\":\"## 适合新手的原因\\nTypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":82,\"versionId\":301,\"chunkId\":11877,\"chunkIndex\":4,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 适合新手的原因\",\"startOffset\":123,\"endOffset\":200,\"content\":\"## 适合新手的原因\\n围绕 React 应用的一个核心痛点——国际化展开，代码量适中，可以深入理解 TypeScript 类型系统在实际项目中的应用。\\n\\n\",\"score\":0.014741784037558686,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=82,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":237,\"versionId\":456,\"chunkId\":15945,\"chunkIndex\":0,\"title\":\"AI 智能体入门 - 课程\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"microsoft/ai-agents-for-beginners\",\"sectionPath\":\"AI 智能体入门 - 课程\",\"startOffset\":0,\"endOffset\":76,\"content\":\"# AI 智能体入门 - 课程\\n\\n![AI Agents for Beginners](./images/repo-thumbnailv2.png)\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":241,\"versionId\":460,\"chunkId\":15981,\"chunkIndex\":6,\"title\":\"datawhalechina/hello-agents\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"datawhalechina/hello-agents\",\"sectionPath\":\"📚 快速开始 > ✨ 你将收获什么？\",\"startOffset\":1975,\"endOffset\":2478,\"content\":\"### ✨ 你将收获什么？\\n\\n- 📖 <strong>Datawhale 开源免费</strong> 完全免费学习本项目所有内容，与社区共同成长\\n- 🔍 <strong>理解核心原理</strong> 深入理解智能体的概念、历史与经典范式\\n- 🏗️ <strong>亲手实现</strong> 掌握热门低代码平台和智能体代码框架的使用\\n- 🛠️ <strong>自研框架 [HelloAgents](https://github.com/jjyaoao/helloagents)</strong> 基于 Openai 原生 API 从零构建一个自己的智能体框架\\n- ⚙️ <strong>掌握高级技能</strong> 一步步实现上下文工程、Memory、协议、评估等系统性技术\\n- 🤝 <strong>模型训练</strong> 掌握 Agentic RL，从 SFT 到 GRPO 的全流程实战训练 LLM\\n- 🚀 <strong>驱动真实案例</strong> 实战开发智能旅行助手、赛博小镇等综合项目\\n- 📖 <strong>求职面试</strong> 学习智能体求职相关面试问题\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":21,\"versionId\":240,\"chunkId\":10225,\"chunkIndex\":4,\"title\":\"darkmatter2048/WindowsCleaner\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:257\",\"sectionPath\":\"darkmatter2048/WindowsCleaner > 职业价值\",\"startOffset\":193,\"endOffset\":299,\"content\":\"## 职业价值\\n完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":63,\"versionId\":282,\"chunkId\":10783,\"chunkIndex\":4,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 适合新手的原因\",\"startOffset\":181,\"endOffset\":243,\"content\":\"## 适合新手的原因\\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\\n\\n\",\"score\":0.013674673409186683,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=24,lexicalRank=53,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":17,\"versionId\":236,\"chunkId\":10075,\"chunkIndex\":4,\"title\":\"Effect-TS/effect\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:250\",\"sectionPath\":\"Effect-TS/effect > 职业价值\",\"startOffset\":127,\"endOffset\":196,\"content\":\"## 职业价值\\n展示大规模 TypeScript 项目经验，完善的测试、CI/CD 和发布自动化能力，适合 AI 基础设施与质量岗位。\\n\\n\",\"score\":0.013495104299702,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=114,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":26,\"versionId\":245,\"chunkId\":10356,\"chunkIndex\":4,\"title\":\"BuilderIO/agent-native\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:263\",\"sectionPath\":\"BuilderIO/agent-native > 职业价值\",\"startOffset\":163,\"endOffset\":247,\"content\":\"## 职业价值\\n掌握构建可扩展AI Agent框架的全栈能力，展示TypeScript高级应用、自动化测试流水线设计与Agent架构理解，体现大型开源项目协作经验。\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=104,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":89,\"versionId\":308,\"chunkId\":11968,\"chunkIndex\":4,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 适合新手的原因\",\"startOffset\":150,\"endOffset\":206,\"content\":\"## 适合新手的原因\\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":128,\"versionId\":347,\"chunkId\":13010,\"chunkIndex\":4,\"title\":\"dxos/dxos\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:235\",\"sectionPath\":\"dxos/dxos > 职业价值\",\"startOffset\":160,\"endOffset\":243,\"content\":\"## 职业价值\\n证明你能驾驭大型全栈 TypeScript 项目，理解协议实现、前端组件库和测试策略。在 AI 全栈与后端工程方向上展现复杂系统设计和工程化能力。\\n\\n\",\"score\":0.012907563025210084,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=115,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":116,\"versionId\":335,\"chunkId\":12636,\"chunkIndex\":8,\"title\":\"langgenius/dify\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:218\",\"sectionPath\":\"langgenius/dify > 主要风险\",\"startOffset\":625,\"endOffset\":722,\"content\":\"## 主要风险\\n项目非常庞大（900+ open issues），参与门槛高；技术栈广（TypeScript/React/Storybook），上手需要时间；架构文档缺失，需要自行阅读代码。\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":29,\"versionId\":248,\"chunkId\":10456,\"chunkIndex\":13,\"title\":\"virgiliojr94/book-to-skill\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:270\",\"sectionPath\":\"virgiliojr94/book-to-skill > 预计周期\",\"startOffset\":916,\"endOffset\":949,\"content\":\"## 预计周期\\n兼职约 2～4 周（包括学习、修改和文档完善）\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12545,\"chunkIndex\":6,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 面试讨论点\",\"startOffset\":245,\"endOffset\":327,\"content\":\"## 面试讨论点\\nAgent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"score\":0.012601914214817442,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=31,lexicalRank=64,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":79,\"versionId\":298,\"chunkId\":11838,\"chunkIndex\":4,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 适合新手的原因\",\"startOffset\":122,\"endOffset\":188,\"content\":\"## 适合新手的原因\\n项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"score\":0.012048192771084338,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"BEGINNER_PROJECT:beginner:24\",\"documentId\":87,\"title\":\"seek-oss/sku\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:24\",\"bestScore\":0.01819859726836471,\"evidence\":[{\"documentId\":87,\"versionId\":306,\"chunkId\":11942,\"chunkIndex\":4,\"title\":\"seek-oss/sku\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:24\",\"sectionPath\":\"seek-oss/sku > 适合新手的原因\",\"startOffset\":104,\"endOffset\":167,\"content\":\"## 适合新手的原因\\n使用 TypeScript 和 Playwright，架构清晰，适合学习现代前端工具链和自动化测试。\\n\\n\",\"score\":0.01819859726836471,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=26,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:247\",\"documentId\":138,\"title\":\"Agent-Analytics/awesome-multi-agent-orchestrators\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:247\",\"bestScore\":0.01758578431372549,\"evidence\":[{\"documentId\":138,\"versionId\":357,\"chunkId\":13339,\"chunkIndex\":3,\"title\":\"Agent-Analytics/awesome-multi-agent-orchestrators\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:247\",\"sectionPath\":\"Agent-Analytics/awesome-multi-agent-orchestrators > 项目摘要\",\"startOffset\":147,\"endOffset\":258,\"content\":\"## 项目摘要\\nAwesome-multi-agent-orchestrators 是一个关于多智能体编排的精选列表与目录。基于TypeScript，提供测试与CI保障，有数据库支持和Docker配置，但许可证未明确。\\n\\n\",\"score\":0.01758578431372549,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=42,nameRank=80,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:53\",\"documentId\":97,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"bestScore\":0.01639344262295082,\"evidence\":[{\"documentId\":97,\"versionId\":316,\"chunkId\":12072,\"chunkIndex\":4,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 适合新手的原因\",\"startOffset\":144,\"endOffset\":211,\"content\":\"## 适合新手的原因\\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"score\":0.01639344262295082,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:17\",\"documentId\":85,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"bestScore\":0.016129032258064516,\"evidence\":[{\"documentId\":85,\"versionId\":304,\"chunkId\":11916,\"chunkIndex\":4,\"title\":\"brioche-dev/brioche-packages\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:17\",\"sectionPath\":\"brioche-dev/brioche-packages > 适合新手的原因\",\"startOffset\":154,\"endOffset\":222,\"content\":\"## 适合新手的原因\\nTypeScript 项目，专注于包定义文件，易于理解元数据和脚本编写；适合学习包管理器原理和自动化发布流程。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:196\",\"documentId\":106,\"title\":\"anomalyco/opencode\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:196\",\"bestScore\":0.016004583651642475,\"evidence\":[{\"documentId\":106,\"versionId\":325,\"chunkId\":12337,\"chunkIndex\":4,\"title\":\"anomalyco/opencode\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:196\",\"sectionPath\":\"anomalyco/opencode > 职业价值\",\"startOffset\":136,\"endOffset\":217,\"content\":\"## 职业价值\\n完成后能证明对大型 AI 代理系统架构的理解，以及 TypeScript 后端开发与开源社区协作能力，适合 AI 产品与运营或全栈工程师岗位。\\n\\n\",\"score\":0.016004583651642475,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=94,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:22\",\"documentId\":86,\"title\":\"browserless/browserless\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:22\",\"bestScore\":0.015151515151515152,\"evidence\":[{\"documentId\":86,\"versionId\":305,\"chunkId\":11929,\"chunkIndex\":4,\"title\":\"browserless/browserless\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:22\",\"sectionPath\":\"browserless/browserless > 适合新手的原因\",\"startOffset\":144,\"endOffset\":227,\"content\":\"## 适合新手的原因\\nTypeScript + Playwright，自动化浏览器的经典用例；容器化部署，适合学习 Docker、API 设计及浏览器自动化基础。\\n\\n\",\"score\":0.015151515151515152,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:80\",\"documentId\":3,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"bestScore\":0.014925373134328358,\"evidence\":[{\"documentId\":3,\"versionId\":222,\"chunkId\":9641,\"chunkIndex\":7,\"title\":\"bashalarmistalt/decimen-optical-transfer\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:80\",\"sectionPath\":\"bashalarmistalt/decimen-optical-transfer > 最终建议\",\"startOffset\":445,\"endOffset\":493,\"content\":\"## 最终建议\\n强烈推荐，极佳的Vibe Coding项目，成果惊艳，学习价值和改造空间大。\\n\\n\",\"score\":0.014925373134328358,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:10\",\"documentId\":82,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"bestScore\":0.014741784037558686,\"evidence\":[{\"documentId\":82,\"versionId\":301,\"chunkId\":11877,\"chunkIndex\":4,\"title\":\"seek-oss/vocab\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:10\",\"sectionPath\":\"seek-oss/vocab > 适合新手的原因\",\"startOffset\":123,\"endOffset\":200,\"content\":\"## 适合新手的原因\\n围绕 React 应用的一个核心痛点——国际化展开，代码量适中，可以深入理解 TypeScript 类型系统在实际项目中的应用。\\n\\n\",\"score\":0.014741784037558686,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=82,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:microsoft/ai-agents-for-beginners\",\"documentId\":237,\"title\":\"AI 智能体入门 - 课程\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"microsoft/ai-agents-for-beginners\",\"bestScore\":0.014492753623188406,\"evidence\":[{\"documentId\":237,\"versionId\":456,\"chunkId\":15945,\"chunkIndex\":0,\"title\":\"AI 智能体入门 - 课程\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"microsoft/ai-agents-for-beginners\",\"sectionPath\":\"AI 智能体入门 - 课程\",\"startOffset\":0,\"endOffset\":76,\"content\":\"# AI 智能体入门 - 课程\\n\\n![AI Agents for Beginners](./images/repo-thumbnailv2.png)\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"GITHUB:datawhalechina/hello-agents\",\"documentId\":241,\"title\":\"datawhalechina/hello-agents\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"datawhalechina/hello-agents\",\"bestScore\":0.014285714285714285,\"evidence\":[{\"documentId\":241,\"versionId\":460,\"chunkId\":15981,\"chunkIndex\":6,\"title\":\"datawhalechina/hello-agents\",\"sourceType\":\"GITHUB\",\"sourceRef\":\"datawhalechina/hello-agents\",\"sectionPath\":\"📚 快速开始 > ✨ 你将收获什么？\",\"startOffset\":1975,\"endOffset\":2478,\"content\":\"### ✨ 你将收获什么？\\n\\n- 📖 <strong>Datawhale 开源免费</strong> 完全免费学习本项目所有内容，与社区共同成长\\n- 🔍 <strong>理解核心原理</strong> 深入理解智能体的概念、历史与经典范式\\n- 🏗️ <strong>亲手实现</strong> 掌握热门低代码平台和智能体代码框架的使用\\n- 🛠️ <strong>自研框架 [HelloAgents](https://github.com/jjyaoao/helloagents)</strong> 基于 Openai 原生 API 从零构建一个自己的智能体框架\\n- ⚙️ <strong>掌握高级技能</strong> 一步步实现上下文工程、Memory、协议、评估等系统性技术\\n- 🤝 <strong>模型训练</strong> 掌握 Agentic RL，从 SFT 到 GRPO 的全流程实战训练 LLM\\n- 🚀 <strong>驱动真实案例</strong> 实战开发智能旅行助手、赛博小镇等综合项目\\n- 📖 <strong>求职面试</strong> 学习智能体求职相关面试问题\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:257\",\"documentId\":21,\"title\":\"darkmatter2048/WindowsCleaner\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:257\",\"bestScore\":0.014084507042253521,\"evidence\":[{\"documentId\":21,\"versionId\":240,\"chunkId\":10225,\"chunkIndex\":4,\"title\":\"darkmatter2048/WindowsCleaner\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:257\",\"sectionPath\":\"darkmatter2048/WindowsCleaner > 职业价值\",\"startOffset\":193,\"endOffset\":299,\"content\":\"## 职业价值\\n完成此项目能证明你在前端/全栈开发中熟练运用 TypeScript、React 和 Next.js 的能力，尤其在桌面级工具开发、交互设计和工程化实践（CI/测试/发布自动化）方面有实战经验。\\n\\n\",\"score\":0.014084507042253521,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:46\",\"documentId\":63,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"bestScore\":0.013674673409186683,\"evidence\":[{\"documentId\":63,\"versionId\":282,\"chunkId\":10783,\"chunkIndex\":4,\"title\":\"zhensherlock/protocol-launcher\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:46\",\"sectionPath\":\"zhensherlock/protocol-launcher > 适合新手的原因\",\"startOffset\":181,\"endOffset\":243,\"content\":\"## 适合新手的原因\\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\\n\\n\",\"score\":0.013674673409186683,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=24,lexicalRank=53,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:250\",\"documentId\":17,\"title\":\"Effect-TS/effect\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:250\",\"bestScore\":0.013495104299702,\"evidence\":[{\"documentId\":17,\"versionId\":236,\"chunkId\":10075,\"chunkIndex\":4,\"title\":\"Effect-TS/effect\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:250\",\"sectionPath\":\"Effect-TS/effect > 职业价值\",\"startOffset\":127,\"endOffset\":196,\"content\":\"## 职业价值\\n展示大规模 TypeScript 项目经验，完善的测试、CI/CD 和发布自动化能力，适合 AI 基础设施与质量岗位。\\n\\n\",\"score\":0.013495104299702,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=21,lexicalRank=114,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:263\",\"documentId\":26,\"title\":\"BuilderIO/agent-native\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:263\",\"bestScore\":0.013157894736842105,\"evidence\":[{\"documentId\":26,\"versionId\":245,\"chunkId\":10356,\"chunkIndex\":4,\"title\":\"BuilderIO/agent-native\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:263\",\"sectionPath\":\"BuilderIO/agent-native > 职业价值\",\"startOffset\":163,\"endOffset\":247,\"content\":\"## 职业价值\\n掌握构建可扩展AI Agent框架的全栈能力，展示TypeScript高级应用、自动化测试流水线设计与Agent架构理解，体现大型开源项目协作经验。\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=104,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:30\",\"documentId\":89,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"bestScore\":0.012987012987012988,\"evidence\":[{\"documentId\":89,\"versionId\":308,\"chunkId\":11968,\"chunkIndex\":4,\"title\":\"Baskerville42/outage-data-ua\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:30\",\"sectionPath\":\"Baskerville42/outage-data-ua > 适合新手的原因\",\"startOffset\":150,\"endOffset\":206,\"content\":\"## 适合新手的原因\\n项目结构简单，直接涉及网页抓取与数据展示，适合学习Playwright和基础数据处理。\\n\\n\",\"score\":0.012987012987012988,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:235\",\"documentId\":128,\"title\":\"dxos/dxos\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:235\",\"bestScore\":0.012907563025210084,\"evidence\":[{\"documentId\":128,\"versionId\":347,\"chunkId\":13010,\"chunkIndex\":4,\"title\":\"dxos/dxos\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:235\",\"sectionPath\":\"dxos/dxos > 职业价值\",\"startOffset\":160,\"endOffset\":243,\"content\":\"## 职业价值\\n证明你能驾驭大型全栈 TypeScript 项目，理解协议实现、前端组件库和测试策略。在 AI 全栈与后端工程方向上展现复杂系统设计和工程化能力。\\n\\n\",\"score\":0.012907563025210084,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=25,lexicalRank=115,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:218\",\"documentId\":116,\"title\":\"langgenius/dify\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:218\",\"bestScore\":0.01282051282051282,\"evidence\":[{\"documentId\":116,\"versionId\":335,\"chunkId\":12636,\"chunkIndex\":8,\"title\":\"langgenius/dify\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:218\",\"sectionPath\":\"langgenius/dify > 主要风险\",\"startOffset\":625,\"endOffset\":722,\"content\":\"## 主要风险\\n项目非常庞大（900+ open issues），参与门槛高；技术栈广（TypeScript/React/Storybook），上手需要时间；架构文档缺失，需要自行阅读代码。\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:270\",\"documentId\":29,\"title\":\"virgiliojr94/book-to-skill\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:270\",\"bestScore\":0.012658227848101266,\"evidence\":[{\"documentId\":29,\"versionId\":248,\"chunkId\":10456,\"chunkIndex\":13,\"title\":\"virgiliojr94/book-to-skill\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:270\",\"sectionPath\":\"virgiliojr94/book-to-skill > 预计周期\",\"startOffset\":916,\"endOffset\":949,\"content\":\"## 预计周期\\n兼职约 2～4 周（包括学习、修改和文档完善）\\n\\n\",\"score\":0.012658227848101266,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"CAREER_PROJECT:career:212\",\"documentId\":113,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"bestScore\":0.012601914214817442,\"evidence\":[{\"documentId\":113,\"versionId\":332,\"chunkId\":12545,\"chunkIndex\":6,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 面试讨论点\",\"startOffset\":245,\"endOffset\":327,\"content\":\"## 面试讨论点\\nAgent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"score\":0.012601914214817442,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=31,lexicalRank=64,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:6\",\"documentId\":79,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"bestScore\":0.012048192771084338,\"evidence\":[{\"documentId\":79,\"versionId\":298,\"chunkId\":11838,\"chunkIndex\":4,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 适合新手的原因\",\"startOffset\":122,\"endOffset\":188,\"content\":\"## 适合新手的原因\\n项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"score\":0.012048192771084338,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=23,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchProjects",
+      "detail": "{\"parameters\":{\"conditions\":{\"goal\":[\"学习\",\"赚钱/接单/创业\"],\"provenance\":{\"goal\":{\"source\":\"MESSAGE\",\"quote\":\"目标是学习；赚钱/接单/创业\"},\"experience\":{\"source\":\"MESSAGE\",\"quote\":\"基础是有两年基础\"},\"language\":{\"source\":\"MESSAGE\",\"quote\":\"只推荐 TypeScript 项目\"},\"topic\":{\"source\":\"MESSAGE\",\"quote\":\"技术方向是Agent、智能体\"},\"maxDurationDays\":{\"source\":\"MESSAGE\",\"quote\":\"完成周期是三个月内\"},\"verificationMode\":{\"source\":\"MESSAGE\",\"quote\":\"资料缺失可以展示真实探索候选，但必须标明尚未核实\"}},\"experience\":\"有两年基础\",\"language\":\"TypeScript\",\"topic\":[\"Agent\",\"智能体\"],\"durationSemantics\":{\"quantity\":3,\"unit\":\"MONTH\",\"relation\":\"AT_MOST\"},\"maxDurationDays\":90,\"verificationMode\":\"EXPLORE\",\"preferences\":[\"想改造成服务小团队的工具\"],\"lastChangeSummary\":\"已记录基础（排序偏好）：有两年基础；已记录项目目标：学习、赚钱/接单/创业；已记录编程语言：TypeScript；已记录最长周期：90天；已记录项目主题：Agent、智能体；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\"},\"semanticChunks\":[11942,13339,12072,11916,12337,11929,9641,11877,15945,15981,10225,10783,10075,10356,11968,13010,12636,10456,12545,11838]},\"result\":[{\"type\":\"BEGINNER_PROJECT\",\"id\":53,\"sourceRef\":\"beginner:53\",\"name\":\"olo-dot-io/Uni-CLI\",\"url\":\"https://github.com/olo-dot-io/Uni-CLI\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"TypeScript\",\"techStack\":\"TypeScript\",\"difficulty\":\"入门\",\"duration\":\"2-5天\",\"description\":\"一个命令同时操作 API、浏览器、桌面、本地工具和 MCP 等多种界面，实现搜索、运行和检查软件。\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":false,\"topics\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\",\"beginnerScore\":91,\"analysisReason\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\",\"modificationPlan\":\"\",\"prerequisites\":\"Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"goalPreference\":15.0,\"total\":40.98076211353316,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true,\"preference\":0.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":25.98076211353316}},{\"type\":\"BEGINNER_PROJECT\",\"id\":6,\"sourceRef\":\"beginner:6\",\"name\":\"chaitin/MonkeyCode\",\"url\":\"https://github.com/chaitin/MonkeyCode\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"TypeScript\",\"techStack\":\"TypeScript\",\"difficulty\":\"入门\",\"duration\":\"3-6天\",\"description\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":false,\"topics\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\",\"beginnerScore\":91,\"analysisReason\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\",\"modificationPlan\":\"\",\"prerequisites\":\"Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"goalPreference\":15.0,\"total\":25.062305898749052,\"semanticAvailable\":true,\"quality\":0.0,\"semanticMatched\":true,\"preference\":0.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":10.062305898749052}},{\"type\":\"CAREER_PROJECT\",\"id\":212,\"sourceRef\":\"career:212\",\"name\":\"deer-flow/llm-space\",\"url\":\"https://github.com/deer-flow/llm-space\",\"status\":\"PUBLISHED\",\"archived\":false,\"language\":\"TypeScript\",\"techStack\":\"TypeScript,React\",\"difficulty\":\"进阶\",\"duration\":\"1.5-2 个月\",\"description\":\"llm-space：用于快速原型 Agent 想法的桌面应用，支持本地优先的调试与评估。\",\"evidenceStatus\":\"VERIFIED_DATABASE\",\"importable\":false,\"requiresDocker\":false,\"requiresDatabase\":false,\"requiresSecrets\":true,\"quality\":72,\"analysisReason\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\",\"proofPoints\":\"测试充分，持续集成，自动化发布，大型项目规模，目前仅有 3 个开放 issue。\",\"interviewTopics\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\",\"modificationPlan\":\"集成主流 LLM 提供商的 API（如 OpenAI）作为后端；添加多用户协作功能并实现数据库持久化；制作可演示的复杂 Agent 工作流示例。\",\"mainRisks\":\"项目缺少数据库和 Docker 支持，后端能力展示不足；需要一定 React 前端基础。\",\"prerequisites\":\"Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。\",\"evidenceAvailable\":true,\"conditionGaps\":[],\"matchStatus\":\"CONFIRMED\",\"ranking\":{\"goalPreference\":0.0,\"total\":21.12370802417528,\"semanticAvailable\":true,\"quality\":10.799999999999999,\"semanticMatched\":true,\"preference\":0.0,\"version\":\"customer-rank-v3\",\"uncertaintyPenalty\":0.0,\"semantic\":10.323708024175279}}]}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "searchKnowledge",
+      "detail": "{\"parameters\":{\"projects\":[{\"name\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\",\"type\":\"BEGINNER_PROJECT\"},{\"name\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"type\":\"BEGINNER_PROJECT\"},{\"name\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"type\":\"CAREER_PROJECT\"}],\"query\":\"Agent、智能体 项目功能 用途 实践示例 安装部署 环境依赖 限制 请按以下本轮画像直接推荐项目：技术方向是Agent、智能体；目标是学习；赚钱/接单/创业；基础是有两年基础；语言是TypeScript；完成周期是三个月内。只推荐 TypeScript 项目，想改造成服务小团队的工具；不承诺收益。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\",\"sourceTypes\":[\"CAREER_PROJECT\",\"BEGINNER_PROJECT\",\"GITHUB\"]},\"result\":{\"generation\":\"20261002164953-ec113424\",\"adapter\":\"HNSW_HYBRID\",\"scannedCount\":59,\"candidateCount\":59,\"excludedReasons\":{},\"hits\":[{\"documentId\":113,\"versionId\":332,\"chunkId\":12545,\"chunkIndex\":6,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 面试讨论点\",\"startOffset\":245,\"endOffset\":327,\"content\":\"## 面试讨论点\\nAgent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"score\":0.0194703656998739,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":97,\"versionId\":316,\"chunkId\":12075,\"chunkIndex\":7,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 主题\",\"startOffset\":250,\"endOffset\":514,\"content\":\"## 主题\\n[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"score\":0.016924436588599205,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=13,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":79,\"versionId\":298,\"chunkId\":11838,\"chunkIndex\":4,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 适合新手的原因\",\"startOffset\":122,\"endOffset\":188,\"content\":\"## 适合新手的原因\\n项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12560,\"chunkIndex\":21,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"LLM Space 4 > Tech stack\",\"startOffset\":3448,\"endOffset\":3830,\"content\":\"## Tech stack\\n\\n- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"score\":0.018566176470588235,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=8,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12543,\"chunkIndex\":4,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 职业价值\",\"startOffset\":141,\"endOffset\":194,\"content\":\"## 职业价值\\n体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"score\":0.018430203676105317,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12559,\"chunkIndex\":20,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"LLM Space 4 > Features\",\"startOffset\":2657,\"endOffset\":3448,\"content\":\"## Features\\n\\n- **Build** — write and version your prompts, system messages, tools, and model settings.\\n- **Trace** — see every model call and tool run inside the agent loop as it happens.\\n- **Debug** — replay a run from history and step through it to find what went wrong.\\n- **Evaluate** — measure how your agent performs across runs.\\n- **Manage** — keep your threads organized as files on your own machine.\\n- **Generate** — let AI write your prompt and tools for you, and even turn any thread into a runnable [LangGraph](https://github.com/langchain-ai/langgraph) agent.\\n\\nYour files and API keys stay on your local computer. LLM Space collects a small amount of anonymous usage data to improve the app - see [TELEMETRY.md](./TELEMETRY.md) for exactly what is collected and how to opt out.\\n\\n\",\"score\":0.01782392385896604,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=7,lexicalRank=9,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12542,\"chunkIndex\":3,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 项目摘要\",\"startOffset\":87,\"endOffset\":141,\"content\":\"## 项目摘要\\nllm-space：用于快速原型 Agent 想法的桌面应用，支持本地优先的调试与评估。\\n\\n\",\"score\":0.017063492063492062,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=12,lexicalRank=3,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12557,\"chunkIndex\":18,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"LLM Space 4\",\"startOffset\":1259,\"endOffset\":2353,\"content\":\"# LLM Space 4\\n\\n<a href=\\\"https://trendshift.io/repositories/83147?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-83147\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"><img src=\\\"https://trendshift.io/api/badge/trendshift/repositories/83147/daily?language=TypeScript\\\" alt=\\\"deer-flow%2Fllm-space | Trendshift\\\" width=\\\"250\\\" height=\\\"55\\\"/></a>\\n\\n![screenshot](https://github.com/user-attachments/assets/e207bc62-4dab-4b13-a541-d176a8f96c40)\\n\\nhttps://github.com/user-attachments/assets/2ba7a600-1f1a-44c0-b9f1-34ad42100213\\n\\n[**LLM Space** v4](https://github.com/deer-flow/llm-space) is a desktop app for agent builders — prototype your next agent ideas, inspect every step of your harness execution, debug failures, and evaluate performance, all in one place.\\n\\n**Official website:** https://deer-flow.github.io/llm-space/\\n\\nLLM Space is a sister project of [DeerFlow](https://github.com/bytedance/deer-flow), and we dogfood it heavily: every version of DeerFlow is built and debugged with LLM Space. The project started in March 2023, and v4 is its fourth major iteration.\\n\\n\",\"score\":0.016901408450704227,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=11,lexicalRank=11,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12546,\"chunkIndex\":7,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 差异化改造方案\",\"startOffset\":327,\"endOffset\":412,\"content\":\"## 差异化改造方案\\n集成主流 LLM 提供商的 API（如 OpenAI）作为后端；添加多用户协作功能并实现数据库持久化；制作可演示的复杂 Agent 工作流示例。\\n\\n\",\"score\":0.016543816543816543,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=14,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":97,\"versionId\":316,\"chunkId\":12072,\"chunkIndex\":4,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 适合新手的原因\",\"startOffset\":144,\"endOffset\":211,\"content\":\"## 适合新手的原因\\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12561,\"chunkIndex\":22,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"LLM Space 4 > Project layout\",\"startOffset\":3830,\"endOffset\":4034,\"content\":\"## Project layout\\n\\nLLM Space is a Bun monorepo:\\n\\n```\\npackages/\\n  core/       # Shared logic: types, the agent loop, thread storage\\napps/\\n  desktop/    # The desktop app (Electrobun shell + React UI)\\n```\\n\\n\",\"score\":0.01597208761387866,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=17,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12547,\"chunkIndex\":8,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 主要风险\",\"startOffset\":412,\"endOffset\":466,\"content\":\"## 主要风险\\n项目缺少数据库和 Docker 支持，后端能力展示不足；需要一定 React 前端基础。\\n\\n\",\"score\":0.015384615384615385,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12568,\"chunkIndex\":29,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"LLM Space 4 > Sponsors > 🏆 Platinum sponsor\",\"startOffset\":5944,\"endOffset\":6695,\"content\":\"### 🏆 Platinum sponsor\\n\\n<p align=\\\"center\\\">\\n  <a href=\\\"https://superdesign.dev\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">\\n    <img src=\\\"./docs/images/sponsor-superdesign.svg\\\" alt=\\\"Superdesign - AI product design agent that turns prompts into designs on an infinite canvas (Platinum Sponsor)\\\" width=\\\"600\\\" />\\n  </a>\\n</p>\\n\\n<p align=\\\"center\\\">\\n  <strong><a href=\\\"https://superdesign.dev\\\">Superdesign</a></strong> is an AI product design agent that turns natural-language prompts into UI mockups, components, and full designs on an infinite canvas. Thank you for making LLM Space possible. 💜\\n</p>\\n\\nWant to see your logo here? We would love to talk - [reach out by opening an issue](https://github.com/deer-flow/llm-space/issues) or [support the project](#donate).\\n\\n\\n\",\"score\":0.014905335628227195,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=23,lexicalRank=10,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":79,\"versionId\":298,\"chunkId\":11841,\"chunkIndex\":7,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 主题\",\"startOffset\":227,\"endOffset\":367,\"content\":\"## 主题\\n[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"score\":0.014752906976744185,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=26,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":97,\"versionId\":316,\"chunkId\":12069,\"chunkIndex\":1,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":79,\"versionId\":298,\"chunkId\":11835,\"chunkIndex\":1,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12549,\"chunkIndex\":10,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 技术栈\",\"startOffset\":497,\"endOffset\":522,\"content\":\"## 技术栈\\nTypeScript,React\\n\\n\",\"score\":0.014285714285714285,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12558,\"chunkIndex\":19,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"LLM Space 4 > Contents\",\"startOffset\":2353,\"endOffset\":2657,\"content\":\"## Contents\\n\\n- [Features](#features)\\n- [Tech stack](#tech-stack)\\n- [Project layout](#project-layout)\\n- [Download](#download)\\n- [Install](#install)\\n- [Run the app](#run-the-app)\\n- [User guide](#user-guide)\\n- [Contributing](#contributing)\\n- [Sponsors](#sponsors)\\n- [Donate](#donate)\\n- [License](#license)\\n\\n\",\"score\":0.013333333333333334,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":79,\"versionId\":298,\"chunkId\":11837,\"chunkIndex\":3,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 中文简介\",\"startOffset\":85,\"endOffset\":122,\"content\":\"## 中文简介\\n一个面向团队的人工智能编码平台，旨在提升协作开发效率。\\n\\n\",\"score\":0.013157894736842105,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12544,\"chunkIndex\":5,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 可证明能力\",\"startOffset\":194,\"endOffset\":245,\"content\":\"## 可证明能力\\n测试充分，持续集成，自动化发布，大型项目规模，目前仅有 3 个开放 issue。\\n\\n\",\"score\":0.01282051282051282,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}],\"evidenceGroups\":[{\"groupKey\":\"CAREER_PROJECT:career:212\",\"documentId\":113,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"bestScore\":0.0194703656998739,\"evidence\":[{\"documentId\":113,\"versionId\":332,\"chunkId\":12545,\"chunkIndex\":6,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 面试讨论点\",\"startOffset\":245,\"endOffset\":327,\"content\":\"## 面试讨论点\\nAgent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"score\":0.0194703656998739,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=1,lexicalRank=5,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12560,\"chunkIndex\":21,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"LLM Space 4 > Tech stack\",\"startOffset\":3448,\"endOffset\":3830,\"content\":\"## Tech stack\\n\\n- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"score\":0.018566176470588235,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=4,lexicalRank=8,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":113,\"versionId\":332,\"chunkId\":12543,\"chunkIndex\":4,\"title\":\"deer-flow/llm-space\",\"sourceType\":\"CAREER_PROJECT\",\"sourceRef\":\"career:212\",\"sectionPath\":\"deer-flow/llm-space > 职业价值\",\"startOffset\":141,\"endOffset\":194,\"content\":\"## 职业价值\\n体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"score\":0.018430203676105317,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=6,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:53\",\"documentId\":97,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"bestScore\":0.016924436588599205,\"evidence\":[{\"documentId\":97,\"versionId\":316,\"chunkId\":12075,\"chunkIndex\":7,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 主题\",\"startOffset\":250,\"endOffset\":514,\"content\":\"## 主题\\n[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"score\":0.016924436588599205,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=13,lexicalRank=2,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":97,\"versionId\":316,\"chunkId\":12072,\"chunkIndex\":4,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 适合新手的原因\",\"startOffset\":144,\"endOffset\":211,\"content\":\"## 适合新手的原因\\nTypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"score\":0.016129032258064516,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":97,\"versionId\":316,\"chunkId\":12069,\"chunkIndex\":1,\"title\":\"olo-dot-io/Uni-CLI\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:53\",\"sectionPath\":\"olo-dot-io/Uni-CLI > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014705882352941176,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]},{\"groupKey\":\"BEGINNER_PROJECT:beginner:6\",\"documentId\":79,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"bestScore\":0.015873015873015872,\"evidence\":[{\"documentId\":79,\"versionId\":298,\"chunkId\":11838,\"chunkIndex\":4,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 适合新手的原因\",\"startOffset\":122,\"endOffset\":188,\"content\":\"## 适合新手的原因\\n项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"score\":0.015873015873015872,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":79,\"versionId\":298,\"chunkId\":11841,\"chunkIndex\":7,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 主题\",\"startOffset\":227,\"endOffset\":367,\"content\":\"## 主题\\n[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"score\":0.014752906976744185,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=26,lexicalRank=4,nameRank=0,lexicalWeight=0.2,nameGated=true)\"},{\"documentId\":79,\"versionId\":298,\"chunkId\":11835,\"chunkIndex\":1,\"title\":\"chaitin/MonkeyCode\",\"sourceType\":\"BEGINNER_PROJECT\",\"sourceRef\":\"beginner:6\",\"sectionPath\":\"chaitin/MonkeyCode > 知识分类\",\"startOffset\":22,\"endOffset\":38,\"content\":\"## 知识分类\\n新手友好项目\\n\\n\",\"score\":0.014492753623188406,\"retrievalRoute\":\"HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)\"}]}],\"answerPolicy\":\"ANSWER_WITH_CITATIONS\"}}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "buildPrompt",
+      "detail": "{\"promptVersion\":\"customer-v4.10-grounded-recommendations\",\"question\":\"请按以下本轮画像直接推荐项目：技术方向是Agent、智能体；目标是学习；赚钱/接单/创业；基础是有两年基础；语言是TypeScript；完成周期是三个月内。只推荐 TypeScript 项目，想改造成服务小团队的工具；不承诺收益。条件不自动放宽；资料缺失可以展示真实探索候选，但必须标明尚未核实。请说明功能、适合原因、实践范围、环境依赖和风险。\\n已记录实践偏好（不宣称已经满足）：[\\\"想改造成服务小团队的工具\\\"]\",\"evidence\":[{\"evidenceId\":\"E1\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E1.S1\",\"text\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"startInChunk\":9,\"endInChunk\":82}],\"documentId\":113,\"versionId\":332,\"chunkId\":12545,\"sectionPath\":\"deer-flow/llm-space > 面试讨论点\",\"startOffset\":254,\"endOffset\":327,\"contentStartInChunk\":9},{\"evidenceId\":\"E2\",\"title\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\",\"spans\":[{\"spanId\":\"E2.S1\",\"text\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"startInChunk\":6,\"endInChunk\":264}],\"documentId\":97,\"versionId\":316,\"chunkId\":12075,\"sectionPath\":\"olo-dot-io/Uni-CLI > 主题\",\"startOffset\":256,\"endOffset\":514,\"contentStartInChunk\":6},{\"evidenceId\":\"E3\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E3.S1\",\"text\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"startInChunk\":11,\"endInChunk\":66}],\"documentId\":79,\"versionId\":298,\"chunkId\":11838,\"sectionPath\":\"chaitin/MonkeyCode > 适合新手的原因\",\"startOffset\":133,\"endOffset\":188,\"contentStartInChunk\":11},{\"evidenceId\":\"E4\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E4.S1\",\"text\":\"- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"startInChunk\":15,\"endInChunk\":382}],\"documentId\":113,\"versionId\":332,\"chunkId\":12560,\"sectionPath\":\"LLM Space 4 > Tech stack\",\"startOffset\":3463,\"endOffset\":3830,\"contentStartInChunk\":15},{\"evidenceId\":\"E5\",\"title\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\",\"spans\":[{\"spanId\":\"E5.S1\",\"text\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"startInChunk\":11,\"endInChunk\":67}],\"documentId\":97,\"versionId\":316,\"chunkId\":12072,\"sectionPath\":\"olo-dot-io/Uni-CLI > 适合新手的原因\",\"startOffset\":155,\"endOffset\":211,\"contentStartInChunk\":11},{\"evidenceId\":\"E6\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E6.S1\",\"text\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"startInChunk\":6,\"endInChunk\":140}],\"documentId\":79,\"versionId\":298,\"chunkId\":11841,\"sectionPath\":\"chaitin/MonkeyCode > 主题\",\"startOffset\":233,\"endOffset\":367,\"contentStartInChunk\":6},{\"evidenceId\":\"E7\",\"title\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\",\"spans\":[{\"spanId\":\"E7.S1\",\"text\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"startInChunk\":8,\"endInChunk\":53}],\"documentId\":113,\"versionId\":332,\"chunkId\":12543,\"sectionPath\":\"deer-flow/llm-space > 职业价值\",\"startOffset\":149,\"endOffset\":194,\"contentStartInChunk\":8},{\"evidenceId\":\"E8\",\"title\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\",\"spans\":[{\"spanId\":\"E8.S1\",\"text\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\\n\\n\",\"startInChunk\":8,\"endInChunk\":37}],\"documentId\":79,\"versionId\":298,\"chunkId\":11837,\"sectionPath\":\"chaitin/MonkeyCode > 中文简介\",\"startOffset\":93,\"endOffset\":122,\"contentStartInChunk\":8}]}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "validateEvidence",
+      "detail": "{\"rejected\":[],\"accepted\":8}",
+      "status": "SUCCEEDED"
+    },
+    {
+      "tool": "verifyFacts",
+      "detail": "{\"supported\":8,\"claims\":[{\"quote\":\"Agent 原型的设计模式；如何实现本地优先与应用状态管理；React + TypeScript 桌面应用的架构；如何评估 Agent 性能。\\n\\n\",\"text\":\"涉及Agent原型设计模式、本地优先与应用状态管理、React + TypeScript桌面应用架构，以及Agent性能评估。\",\"sourceTitle\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\"},{\"quote\":\"- **Language & tooling** — TypeScript, built and managed with [Bun](https://bun.com).\\n- **Desktop shell** — [Electrobun](https://electrobun.dev), a lightweight way to ship a native app.\\n- **UI** — React with Tailwind CSS and shadcn/ui.\\n- **Agent framework** — [Pi Agent Core](https://github.com/earendil-works/pi), a lightweight agent framework for building agents.\\n\\n\",\"text\":\"技术栈：TypeScript，用Bun构建管理；桌面外壳Electrobun；UI为React + Tailwind CSS + shadcn/ui；Agent框架为Pi Agent Core。\",\"sourceTitle\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\"},{\"quote\":\"体现 Agent 开发与原型设计能力，适合 AI 应用与 Agent 或全栈后端岗位。\\n\\n\",\"text\":\"体现Agent开发与原型设计能力，适合AI应用与Agent或全栈后端岗位。\",\"sourceTitle\":\"deer-flow/llm-space\",\"sourceRef\":\"career:212\"},{\"quote\":\"TypeScript 项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\\n\\n\",\"text\":\"TypeScript项目，功能模块化；涵盖多种接口的统一调用，适合学习命令行工具开发、进程管理和协议适配。\",\"sourceTitle\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\"},{\"quote\":\"[\\\"agent-infrastructure\\\", \\\"ai-agents\\\", \\\"ai-tools\\\", \\\"automation\\\", \\\"browser-automation\\\", \\\"cdp\\\", \\\"chrome\\\", \\\"claude-code\\\", \\\"cli\\\", \\\"codex\\\", \\\"cursor\\\", \\\"developer-tools\\\", \\\"mcp\\\", \\\"mcp-server\\\", \\\"nodejs\\\", \\\"openai\\\", \\\"self-repair\\\", \\\"typescript\\\", \\\"web-scraping\\\", \\\"yaml\\\"]\\n\\n\",\"text\":\"主题标签包含agent-infrastructure、ai-agents、mcp、mcp-server、typescript、cli、developer-tools等。\",\"sourceTitle\":\"olo-dot-io/Uni-CLI\",\"sourceRef\":\"beginner:53\"},{\"quote\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\\n\\n\",\"text\":\"一个面向团队的人工智能编码平台，旨在提升协作开发效率。\",\"sourceTitle\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\"},{\"quote\":\"项目涉及 AI 辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\\n\\n\",\"text\":\"项目涉及AI辅助编程和团队工具，适合了解提示工程与开发者工作流的结合，功能模块相对独立，易于上手贡献。\",\"sourceTitle\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\"},{\"quote\":\"[\\\"ai\\\", \\\"ai-agent\\\", \\\"ai-coding\\\", \\\"ai-coding-assistant\\\", \\\"aicoding\\\", \\\"claude\\\", \\\"codex\\\", \\\"coding\\\", \\\"cursor\\\", \\\"opencode\\\", \\\"vibe-coding\\\"]\\n\\n\",\"text\":\"主题标签包含ai-agent、ai-coding、ai-coding-assistant、vibe-coding等。\",\"sourceTitle\":\"chaitin/MonkeyCode\",\"sourceRef\":\"beginner:6\"}],\"verdict\":{\"supportedIds\":[0,1,2,3,4,5,6,7]}}",
+      "status": "SUCCEEDED"
+    }
+  ],
+  "clientWallMs": 13958.849699993152,
+  "sessionSoftDeleted": true
+}

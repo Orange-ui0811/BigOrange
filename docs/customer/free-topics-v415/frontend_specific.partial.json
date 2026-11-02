@@ -1,0 +1,1187 @@
+{
+  "case": {
+    "id": "frontend_specific",
+    "family": "frontend",
+    "kind": "specific",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "165",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：Vue。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "eab44644-5e9a-4386-ade6-32413890dd01",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 5625,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "想做的方向或用途是：Vue"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "topic": [
+            "Vue"
+          ],
+          "experience": "一年编程基础",
+          "clearedFields": [
+            "language",
+            "maxDurationDays"
+          ],
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；当前本来就没有“编程语言”限制，已保持不限；当前本来就没有“最长周期”限制，已保持不限；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "lastCandidates": [],
+          "purposeReview": {
+            "topic": "Vue",
+            "proofs": {}
+          }
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "status": "RELEVANCE_UNAVAILABLE",
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；当前本来就没有“编程语言”限制，已保持不限；当前本来就没有“最长周期”限制，已保持不限；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次项目用途核对暂未完成，还不能确认哪些项目适合你的方向。你的条件已经保存，我们可以继续聊想实现的功能，或再试一次查找。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；当前本来就没有“编程语言”限制，已保持不限；当前本来就没有“最长周期”限制，已保持不限；已记录项目主题：Vue；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "embeddingUsage": "NOT_REPORTED",
+        "promptVersion": "customer-v4.15-purpose-review",
+        "modelCalls": [
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 5325,
+              "completion_tokens": 611,
+              "total_tokens": 5936,
+              "prompt_tokens_details": {
+                "cached_tokens": 5120
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 282
+              },
+              "prompt_cache_hit_tokens": 5120,
+              "prompt_cache_miss_tokens": 205
+            },
+            "durationMs": 2666,
+            "model": "deepseek-flash",
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          },
+          {
+            "costUsd": "UNKNOWN",
+            "status": "SUCCEEDED",
+            "attempt": 1,
+            "usage": {
+              "prompt_tokens": 182,
+              "completion_tokens": 26,
+              "total_tokens": 208,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 182
+            },
+            "durationMs": 694,
+            "model": "deepseek-flash",
+            "protocol": "JSON_OBJECT",
+            "phase": "QUERY_PLAN",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "stop",
+            "outputBudget": 1500,
+            "thinking": false
+          },
+          {
+            "errorCode": "DEPENDENCY_FAILED",
+            "phase": "PURPOSE_REVIEW",
+            "status": "FAILED",
+            "durationMs": 105,
+            "errorType": "AiToolProviderException",
+            "attempt": 1,
+            "costUsd": "UNKNOWN"
+          }
+        ],
+        "costUsd": "UNKNOWN",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "models": [
+            "deepseek-flash"
+          ],
+          "calls": 3,
+          "callsWithoutUsage": 1,
+          "outputTokens": 637,
+          "totalTokens": 6144,
+          "cacheMissTokens": 387,
+          "inputTokens": 5507,
+          "cacheHitTokens": 5120,
+          "complete": false,
+          "reasoningTokens": 282
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "planProjectQuery",
+          "detail": {
+            "query": "Vue | Vue前端开发框架 | Vue渐进式JavaScript框架 | Vue.js web application development",
+            "topic": [
+              "Vue"
+            ]
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01940772078265468,
+                  "title": "项目式学习",
+                  "chunkId": 11760,
+                  "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                  "endOffset": 21252,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "versionId": 294,
+                  "chunkIndex": 27,
+                  "documentId": 75,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                  "startOffset": 20259,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0189033189033189,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10758,
+                  "content": "## 技术栈\nJavaScript,Vue\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 5,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                  "startOffset": 213,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01861007462686567,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10784,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 266,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 5,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                  "startOffset": 243,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01832579185520362,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10771,
+                  "content": "## 技术栈\nTypeScript,Vue\n\n",
+                  "endOffset": 252,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 5,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                  "startOffset": 229,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=8,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01639344262295082,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10783,
+                  "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                  "endOffset": 243,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 4,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                  "startOffset": 181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "thedotmack/claude-mem",
+                  "chunkId": 16544,
+                  "content": "## System Requirements\n\n- **Node.js**: 20.0.0 or higher\n- **Claude Code**: Latest version with plugin support\n- **Bun**: JavaScript runtime and process manager (auto-installed if missing)\n- **uv**: Python package manager for vector search (auto-installed if missing)\n- **SQLite 3**: For persistent storage (bundled)\n\n---\n",
+                  "endOffset": 12668,
+                  "sourceRef": "thedotmack/claude-mem",
+                  "versionId": 543,
+                  "chunkIndex": 15,
+                  "documentId": 324,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "System Requirements",
+                  "startOffset": 12347,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "pnpm（推荐）",
+                  "chunkId": 17823,
+                  "content": "## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n",
+                  "endOffset": 7390,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "versionId": 756,
+                  "chunkIndex": 20,
+                  "documentId": 537,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "路线图",
+                  "startOffset": 7104,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9610,
+                  "content": "## 项目是什么\n一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。\n\n",
+                  "endOffset": 211,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 4,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 项目是什么",
+                  "startOffset": 122,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10769,
+                  "content": "## 中文简介\n浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                  "endOffset": 185,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 3,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                  "startOffset": 91,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014489402697495183,
+                  "title": "pocket-stack/pocketjs",
+                  "chunkId": 10773,
+                  "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                  "endOffset": 425,
+                  "sourceRef": "beginner:12",
+                  "versionId": 281,
+                  "chunkIndex": 7,
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pocket-stack/pocketjs > 主题",
+                  "startOffset": 272,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=113,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "pnpm（推荐）",
+                  "chunkId": 17822,
+                  "content": "## 技术栈\n\n| 技术 | 用途 |\n|:----:|:-----|\n| TypeScript | 核心代码开发，类型安全 |\n| Vite | 开发服务器与生产构建 |\n| Jest | 单元测试 & 覆盖率 |\n| Canvas 2D API | 图表渲染引擎 |\n| Material Design 3 | 主题与视觉规范 |\n| npm / pnpm | 包管理与发布 |\n\n---\n\n",
+                  "endOffset": 7104,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "versionId": 756,
+                  "chunkIndex": 19,
+                  "documentId": 537,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "技术栈",
+                  "startOffset": 6906,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "dream-num/Luckysheet",
+                  "chunkId": 17035,
+                  "content": "## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n",
+                  "endOffset": 2415,
+                  "sourceRef": "dream-num/Luckysheet",
+                  "versionId": 624,
+                  "chunkIndex": 5,
+                  "documentId": 405,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。 > 生态系统",
+                  "startOffset": 1544,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013931623931623931,
+                  "title": "CatsJuice/sticker-forge",
+                  "chunkId": 9922,
+                  "content": "## 技术栈\nJavaScript,TypeScript,React,Next.js\n\n",
+                  "endOffset": 630,
+                  "sourceRef": "beginner:119",
+                  "versionId": 231,
+                  "chunkIndex": 9,
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "CatsJuice/sticker-forge > 技术栈",
+                  "startOffset": 586,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=120,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "jeecgboot/JeecgBoot",
+                  "chunkId": 16015,
+                  "content": "版本说明\n-----------------------------------\n\n|下载                                 | JDK17 + SpringBoot3.3 + Shiro                                               |JDK17 + SpringBoot3.3+ SpringAuthorizationServer   | JDK17/JDK8 + SpringBoot2.7 |\n|------|----------------------------------------------------|-----------------------------------------------------------------------------|--------------------------------------------|\n| Github |  [`springboot3`](https://github.com/jeecgboot/JeecgBoot/tree/springboot3)  | [`springboot3_sas`](https://github.com/jeecgboot/JeecgBoot/tree/springboot3_sas) 分支 |[`master`](https://github.com/jeecgboot/JeecgBoot) 分支|\n| Gitee |  [`springboot3`](https://gitee.com/jeecg/JeecgBoot/tree/springboot3/)      | [`springboot3_sas`](https://gitee.com/jeecg/JeecgBoot/tree/springboot3_sas) 分支 |[`master`](https://gitee.com/jeecg/JeecgBoot)     分支 |\n\n\n- `jeecg-boot` 是后端JAVA源码项目（支持单体和微服务切换）.\n- `jeecgboot-vue3` 是前端VUE3源码项目（vue3+vite6+ts最新技术栈）.\n- `JeecgUniapp`  是[配套APP框架](https://github.com/jeecgboot/JeecgUniapp) 适配多个终端，支持APP、小程序、H5、鸿蒙、鸿蒙Next.\n- 参考 [文档](https://help.jeecg.com/ui/2dev/mini) 可以删除不需要的demo，制作一个精简版本\n\n\n\n\n\n",
+                  "endOffset": 3324,
+                  "sourceRef": "jeecgboot/JeecgBoot",
+                  "versionId": 466,
+                  "chunkIndex": 3,
+                  "documentId": 247,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "JeecgBoot AI低代码平台 > 版本说明",
+                  "startOffset": 2181,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9617,
+                  "content": "## 主题\n[\"animation\", \"canvas\", \"component-library\", \"components\", \"creative-coding\", \"design-engineering\", \"frontend\", \"glsl\", \"nextjs\", \"react\", \"shadcn\", \"shaders\", \"svelte\", \"threejs\", \"typescript\", \"ui\", \"ui-library\", \"vue\", \"weggl\"]\n\n",
+                  "endOffset": 824,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 11,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 主题",
+                  "startOffset": 586,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01361956436266415,
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "chunkId": 10760,
+                  "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                  "endOffset": 365,
+                  "sourceRef": "beginner:36",
+                  "versionId": 280,
+                  "chunkIndex": 7,
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                  "startOffset": 256,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=97,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "pnpm（推荐）",
+                  "chunkId": 17819,
+                  "content": "## 项目结构\n\n```\n455555.xyz/\n├── src/\n│   ├── core/            # 图表核心（Chart、Scale、Animation）\n│   ├── renderers/       # 各图表类型渲染器\n│   ├── themes/          # Material Design 主题定义\n│   ├── plugins/         # 内置插件（Tooltip、Legend、Zoom）\n│   ├── utils/           # 工具函数\n│   └── index.ts         # 入口导出\n├── benchmarks/          # 性能基准测试\n├── tests/               # Jest 单元测试 & 集成测试\n├── docs/                # API 文档与使用指南\n├── playground/          # Vite 交互式演示\n├── vite.config.ts\n├── tsconfig.json\n├── jest.config.ts\n└── package.json\n```\n\n---\n\n",
+                  "endOffset": 6217,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "versionId": 756,
+                  "chunkIndex": 16,
+                  "documentId": 537,
+                  "sourceType": "GITHUB",
+                  "sectionPath": "项目结构",
+                  "startOffset": 5689,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "ArcReel/ArcReel",
+                  "chunkId": 12449,
+                  "content": "## 技术架构\n\n```mermaid\nflowchart TB\n    subgraph UI[\"Web UI — React 19\"]\n        U1[\"项目管理\"] ~~~ U2[\"素材预览\"] ~~~ U3[\"AI 助手\"] ~~~ U4[\"任务监控\"]\n    end\n\n    subgraph Server[\"FastAPI Server\"]\n        S1[\"REST API<br/>路由分发\"] ~~~ S2[\"Agent Runtime<br/>Claude Agent SDK\"]\n        S3[\"SSE Stream<br/>实时状态推送\"] ~~~ S4[\"Auth<br/>JWT + API Key\"]\n    end\n\n    subgraph Core[\"Core Library\"]\n        C1[\"VideoBackend 抽象层<br/>Gemini · 火山方舟 · Grok · OpenAI · Vidu · 阿里百炼 · MiniMax · 可灵 · 自定义\"] ~~~ C2[\"ImageBackend 抽象层<br/>Gemini · 火山方舟 · Grok · OpenAI · Vidu · 阿里百炼 · MiniMax · 可灵 · 自定义\"]\n        C5[\"TextBackend 抽象层<br/>Gemini · 火山方舟 · Grok · OpenAI · 阿里百炼 · MiniMax · 自定义\"] ~~~ C3[\"GenerationQueue<br/>RPM 限速 · Image/Video/Audio 通道\"]\n        C4[\"ProjectManager<br/>文件系统 + 版本管理\"]\n    end\n\n    subgraph Data[\"数据层\"]\n        D1[\"SQLAlchemy 2.0 Async ORM\"] ~~~ D2[\"SQLite / PostgreSQL\"]\n\n",
+                  "endOffset": 12999,
+                  "sourceRef": "career:204",
+                  "versionId": 328,
+                  "chunkIndex": 35,
+                  "documentId": 109,
+                  "sourceType": "CAREER_PROJECT",
+                  "sectionPath": "ArcReel/ArcReel > 技术架构",
+                  "startOffset": 12136,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "aframevr/aframe",
+                  "chunkId": 16430,
+                  "content": "<h1 align=\"center\">A-Frame</h1>\n\n<p align=\"center\"><a href=\"https://aframe.io\" target=\"_blank\"><img width=\"480\" alt=\"A-Frame\" src=\"https://user-images.githubusercontent.com/674727/32120889-230ef110-bb0f-11e7-908c-76e39aa43149.jpg\"></a></p>\n\n<p align=\"center\"><b>一个用于构建基于浏览器的3D、AR和VR体验的Web框架。</b></p>\n\n<p align=\"center\">\n  <a href=\"https://codecov.io/gh/aframevr/aframe\">\n    <img src=\"https://codecov.io/gh/aframevr/aframe/branch/master/graph/badge.svg\" alt=\"覆盖率状态\">\n  </a>\n  <a href=\"https://npmjs.org/package/aframe\">\n    <img src=\"https://img.shields.io/npm/dt/aframe.svg?style=flat-square\" alt=\"下载量\">\n  </a>\n  <a href=\"https://npmjs.org/package/aframe\">\n    <img src=\"https://img.shields.io/npm/v/aframe.svg?style=flat-square\" alt=\"版本\">\n  </a>\n  <a href=\"https://npmjs.com/package/aframe\">\n    <img src=\"https://img.shields.io/npm/l/aframe.svg?style=flat-square\" alt=\"许可证\"></a>\n  </a>\n</p>\n\n<div align=\"center\">\n  <a href=\"https://aframe.io\">网站</a>\n  &mdash;\n  <a href=\"https://aframe.io/docs/\">文档</a>\n  &mdash;\n  <a href=\"https://aframe.io/aframe/examples/\">示例</a>\n  &mdash;\n  <a href=\"https://aframe.io/school/\">学校</a>\n  &mdash;\n  <a href=\"https://aframe.io/community/\">社区</a>\n</div>\n\n",
+                  "endOffset": 1191,
+                  "sourceRef": "aframevr/aframe",
+                  "versionId": 529,
+                  "chunkIndex": 0,
+                  "documentId": 310,
+                  "sourceType": "GITHUB",
+                  "sectionPath": null,
+                  "startOffset": 0,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012984218077474892,
+                  "title": "SidhuK/Glyph",
+                  "chunkId": 9598,
+                  "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                  "endOffset": 236,
+                  "sourceRef": "beginner:55",
+                  "versionId": 220,
+                  "chunkIndex": 5,
+                  "documentId": 1,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "SidhuK/Glyph > 技术栈",
+                  "startOffset": 203,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=25,lexicalRank=104,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 312,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "项目式学习",
+                  "evidence": [
+                    {
+                      "score": 0.01940772078265468,
+                      "title": "项目式学习",
+                      "chunkId": 11760,
+                      "content": "#### Vue\n\n- [Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes](https://medium.com/@anas.mammeri/vue-2-firebase-how-to-build-a-vue-app-with-firebase-authentication-system-in-15-minutes-fdce6f289c3c)\n- [Vue.js Application Tutorial – Creating a Simple Budgeting App with Vue](https://matthiashager.com/complete-vuejs-application-tutorial/)\n- [Build a Blog with Vue, GraphQL and Apollo](https://www.digitalocean.com/community/tutorials/how-to-build-a-blog-with-vue-graphql-and-apollo-client)\n- Build a full stack web application using MEVN (MongoDB, Express, Vue, Node) stack\n  - [Part 1](https://medium.com/@anaida07/mevn-stack-application-part-1-3a27b61dcae0)\n  - [Part 2](https://medium.com/@anaida07/mevn-stack-application-part-2-2-9ebcf8a22753)\n- [Vue.js To-Do List Tutorial (video)](https://www.youtube.com/watch?v=78tNYZUS-ps)\n- [Vue 2 + Pub/Sub: Build a peer to peer multi-user platform for games](https://www.ably.io/tutorials/peer-to-peer-vue)\n\n",
+                      "endOffset": 21252,
+                      "sourceRef": "practical-tutorials/project-based-learning",
+                      "versionId": 294,
+                      "chunkIndex": 27,
+                      "documentId": 75,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Project Based Learning > HTML and CSS: > Web Applications: > Vue",
+                      "startOffset": 20259,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=1,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:practical-tutorials/project-based-learning",
+                  "bestScore": 0.01940772078265468,
+                  "sourceRef": "practical-tutorials/project-based-learning",
+                  "documentId": 75,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "JustArchiNET/ASF-WebConfigGenerator",
+                  "evidence": [
+                    {
+                      "score": 0.0189033189033189,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10758,
+                      "content": "## 技术栈\nJavaScript,Vue\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 5,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 技术栈",
+                      "startOffset": 213,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=6,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01361956436266415,
+                      "title": "JustArchiNET/ASF-WebConfigGenerator",
+                      "chunkId": 10760,
+                      "content": "## 主题\n[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]\n\n",
+                      "endOffset": 365,
+                      "sourceRef": "beginner:36",
+                      "versionId": 280,
+                      "chunkIndex": 7,
+                      "documentId": 61,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "JustArchiNET/ASF-WebConfigGenerator > 主题",
+                      "startOffset": 256,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=97,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:36",
+                  "bestScore": 0.0189033189033189,
+                  "sourceRef": "beginner:36",
+                  "documentId": 61,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.01861007462686567,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10784,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 266,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 5,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 技术栈",
+                      "startOffset": 243,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=7,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10783,
+                      "content": "## 适合新手的原因\n聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。\n\n",
+                      "endOffset": 243,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 4,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 适合新手的原因",
+                      "startOffset": 181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.01861007462686567,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pocket-stack/pocketjs",
+                  "evidence": [
+                    {
+                      "score": 0.01832579185520362,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10771,
+                      "content": "## 技术栈\nTypeScript,Vue\n\n",
+                      "endOffset": 252,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 5,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 技术栈",
+                      "startOffset": 229,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=8,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10769,
+                      "content": "## 中文简介\n浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。\n\n",
+                      "endOffset": 185,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 3,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 中文简介",
+                      "startOffset": 91,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014489402697495183,
+                      "title": "pocket-stack/pocketjs",
+                      "chunkId": 10773,
+                      "content": "## 主题\n[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]\n\n",
+                      "endOffset": 425,
+                      "sourceRef": "beginner:12",
+                      "versionId": 281,
+                      "chunkIndex": 7,
+                      "documentId": 62,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pocket-stack/pocketjs > 主题",
+                      "startOffset": 272,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=113,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:12",
+                  "bestScore": 0.01832579185520362,
+                  "sourceRef": "beginner:12",
+                  "documentId": 62,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "thedotmack/claude-mem",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "thedotmack/claude-mem",
+                      "chunkId": 16544,
+                      "content": "## System Requirements\n\n- **Node.js**: 20.0.0 or higher\n- **Claude Code**: Latest version with plugin support\n- **Bun**: JavaScript runtime and process manager (auto-installed if missing)\n- **uv**: Python package manager for vector search (auto-installed if missing)\n- **SQLite 3**: For persistent storage (bundled)\n\n---\n",
+                      "endOffset": 12668,
+                      "sourceRef": "thedotmack/claude-mem",
+                      "versionId": 543,
+                      "chunkIndex": 15,
+                      "documentId": 324,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "System Requirements",
+                      "startOffset": 12347,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:thedotmack/claude-mem",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "thedotmack/claude-mem",
+                  "documentId": 324,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "pnpm（推荐）",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "pnpm（推荐）",
+                      "chunkId": 17823,
+                      "content": "## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n",
+                      "endOffset": 7390,
+                      "sourceRef": "aidizhi/455555.xyz",
+                      "versionId": 756,
+                      "chunkIndex": 20,
+                      "documentId": 537,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "路线图",
+                      "startOffset": 7104,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "pnpm（推荐）",
+                      "chunkId": 17822,
+                      "content": "## 技术栈\n\n| 技术 | 用途 |\n|:----:|:-----|\n| TypeScript | 核心代码开发，类型安全 |\n| Vite | 开发服务器与生产构建 |\n| Jest | 单元测试 & 覆盖率 |\n| Canvas 2D API | 图表渲染引擎 |\n| Material Design 3 | 主题与视觉规范 |\n| npm / pnpm | 包管理与发布 |\n\n---\n\n",
+                      "endOffset": 7104,
+                      "sourceRef": "aidizhi/455555.xyz",
+                      "versionId": 756,
+                      "chunkIndex": 19,
+                      "documentId": 537,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "技术栈",
+                      "startOffset": 6906,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "pnpm（推荐）",
+                      "chunkId": 17819,
+                      "content": "## 项目结构\n\n```\n455555.xyz/\n├── src/\n│   ├── core/            # 图表核心（Chart、Scale、Animation）\n│   ├── renderers/       # 各图表类型渲染器\n│   ├── themes/          # Material Design 主题定义\n│   ├── plugins/         # 内置插件（Tooltip、Legend、Zoom）\n│   ├── utils/           # 工具函数\n│   └── index.ts         # 入口导出\n├── benchmarks/          # 性能基准测试\n├── tests/               # Jest 单元测试 & 集成测试\n├── docs/                # API 文档与使用指南\n├── playground/          # Vite 交互式演示\n├── vite.config.ts\n├── tsconfig.json\n├── jest.config.ts\n└── package.json\n```\n\n---\n\n",
+                      "endOffset": 6217,
+                      "sourceRef": "aidizhi/455555.xyz",
+                      "versionId": 756,
+                      "chunkIndex": 16,
+                      "documentId": 537,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "项目结构",
+                      "startOffset": 5689,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:aidizhi/455555.xyz",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "aidizhi/455555.xyz",
+                  "documentId": 537,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "DavidHDev/canvas-ui",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9610,
+                      "content": "## 项目是什么\n一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。\n\n",
+                      "endOffset": 211,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 4,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 项目是什么",
+                      "startOffset": 122,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    },
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9617,
+                      "content": "## 主题\n[\"animation\", \"canvas\", \"component-library\", \"components\", \"creative-coding\", \"design-engineering\", \"frontend\", \"glsl\", \"nextjs\", \"react\", \"shadcn\", \"shaders\", \"svelte\", \"threejs\", \"typescript\", \"ui\", \"ui-library\", \"vue\", \"weggl\"]\n\n",
+                      "endOffset": 824,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 11,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 主题",
+                      "startOffset": 586,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:77",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "beginner:77",
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "dream-num/Luckysheet",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "dream-num/Luckysheet",
+                      "chunkId": 17035,
+                      "content": "## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n",
+                      "endOffset": 2415,
+                      "sourceRef": "dream-num/Luckysheet",
+                      "versionId": 624,
+                      "chunkIndex": 5,
+                      "documentId": 405,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。 > 生态系统",
+                      "startOffset": 1544,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:dream-num/Luckysheet",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "dream-num/Luckysheet",
+                  "documentId": 405,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "CatsJuice/sticker-forge",
+                  "evidence": [
+                    {
+                      "score": 0.013931623931623931,
+                      "title": "CatsJuice/sticker-forge",
+                      "chunkId": 9922,
+                      "content": "## 技术栈\nJavaScript,TypeScript,React,Next.js\n\n",
+                      "endOffset": 630,
+                      "sourceRef": "beginner:119",
+                      "versionId": 231,
+                      "chunkIndex": 9,
+                      "documentId": 12,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "CatsJuice/sticker-forge > 技术栈",
+                      "startOffset": 586,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=120,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:119",
+                  "bestScore": 0.013931623931623931,
+                  "sourceRef": "beginner:119",
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "jeecgboot/JeecgBoot",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "jeecgboot/JeecgBoot",
+                      "chunkId": 16015,
+                      "content": "版本说明\n-----------------------------------\n\n|下载                                 | JDK17 + SpringBoot3.3 + Shiro                                               |JDK17 + SpringBoot3.3+ SpringAuthorizationServer   | JDK17/JDK8 + SpringBoot2.7 |\n|------|----------------------------------------------------|-----------------------------------------------------------------------------|--------------------------------------------|\n| Github |  [`springboot3`](https://github.com/jeecgboot/JeecgBoot/tree/springboot3)  | [`springboot3_sas`](https://github.com/jeecgboot/JeecgBoot/tree/springboot3_sas) 分支 |[`master`](https://github.com/jeecgboot/JeecgBoot) 分支|\n| Gitee |  [`springboot3`](https://gitee.com/jeecg/JeecgBoot/tree/springboot3/)      | [`springboot3_sas`](https://gitee.com/jeecg/JeecgBoot/tree/springboot3_sas) 分支 |[`master`](https://gitee.com/jeecg/JeecgBoot)     分支 |\n\n\n- `jeecg-boot` 是后端JAVA源码项目（支持单体和微服务切换）.\n- `jeecgboot-vue3` 是前端VUE3源码项目（vue3+vite6+ts最新技术栈）.\n- `JeecgUniapp`  是[配套APP框架](https://github.com/jeecgboot/JeecgUniapp) 适配多个终端，支持APP、小程序、H5、鸿蒙、鸿蒙Next.\n- 参考 [文档](https://help.jeecg.com/ui/2dev/mini) 可以删除不需要的demo，制作一个精简版本\n\n\n\n\n\n",
+                      "endOffset": 3324,
+                      "sourceRef": "jeecgboot/JeecgBoot",
+                      "versionId": 466,
+                      "chunkIndex": 3,
+                      "documentId": 247,
+                      "sourceType": "GITHUB",
+                      "sectionPath": "JeecgBoot AI低代码平台 > 版本说明",
+                      "startOffset": 2181,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:jeecgboot/JeecgBoot",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "jeecgboot/JeecgBoot",
+                  "documentId": 247,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "ArcReel/ArcReel",
+                  "evidence": [
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "ArcReel/ArcReel",
+                      "chunkId": 12449,
+                      "content": "## 技术架构\n\n```mermaid\nflowchart TB\n    subgraph UI[\"Web UI — React 19\"]\n        U1[\"项目管理\"] ~~~ U2[\"素材预览\"] ~~~ U3[\"AI 助手\"] ~~~ U4[\"任务监控\"]\n    end\n\n    subgraph Server[\"FastAPI Server\"]\n        S1[\"REST API<br/>路由分发\"] ~~~ S2[\"Agent Runtime<br/>Claude Agent SDK\"]\n        S3[\"SSE Stream<br/>实时状态推送\"] ~~~ S4[\"Auth<br/>JWT + API Key\"]\n    end\n\n    subgraph Core[\"Core Library\"]\n        C1[\"VideoBackend 抽象层<br/>Gemini · 火山方舟 · Grok · OpenAI · Vidu · 阿里百炼 · MiniMax · 可灵 · 自定义\"] ~~~ C2[\"ImageBackend 抽象层<br/>Gemini · 火山方舟 · Grok · OpenAI · Vidu · 阿里百炼 · MiniMax · 可灵 · 自定义\"]\n        C5[\"TextBackend 抽象层<br/>Gemini · 火山方舟 · Grok · OpenAI · 阿里百炼 · MiniMax · 自定义\"] ~~~ C3[\"GenerationQueue<br/>RPM 限速 · Image/Video/Audio 通道\"]\n        C4[\"ProjectManager<br/>文件系统 + 版本管理\"]\n    end\n\n    subgraph Data[\"数据层\"]\n        D1[\"SQLAlchemy 2.0 Async ORM\"] ~~~ D2[\"SQLite / PostgreSQL\"]\n\n",
+                      "endOffset": 12999,
+                      "sourceRef": "career:204",
+                      "versionId": 328,
+                      "chunkIndex": 35,
+                      "documentId": 109,
+                      "sourceType": "CAREER_PROJECT",
+                      "sectionPath": "ArcReel/ArcReel > 技术架构",
+                      "startOffset": 12136,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "CAREER_PROJECT:career:204",
+                  "bestScore": 0.013157894736842105,
+                  "sourceRef": "career:204",
+                  "documentId": 109,
+                  "sourceType": "CAREER_PROJECT"
+                },
+                {
+                  "title": "aframevr/aframe",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "aframevr/aframe",
+                      "chunkId": 16430,
+                      "content": "<h1 align=\"center\">A-Frame</h1>\n\n<p align=\"center\"><a href=\"https://aframe.io\" target=\"_blank\"><img width=\"480\" alt=\"A-Frame\" src=\"https://user-images.githubusercontent.com/674727/32120889-230ef110-bb0f-11e7-908c-76e39aa43149.jpg\"></a></p>\n\n<p align=\"center\"><b>一个用于构建基于浏览器的3D、AR和VR体验的Web框架。</b></p>\n\n<p align=\"center\">\n  <a href=\"https://codecov.io/gh/aframevr/aframe\">\n    <img src=\"https://codecov.io/gh/aframevr/aframe/branch/master/graph/badge.svg\" alt=\"覆盖率状态\">\n  </a>\n  <a href=\"https://npmjs.org/package/aframe\">\n    <img src=\"https://img.shields.io/npm/dt/aframe.svg?style=flat-square\" alt=\"下载量\">\n  </a>\n  <a href=\"https://npmjs.org/package/aframe\">\n    <img src=\"https://img.shields.io/npm/v/aframe.svg?style=flat-square\" alt=\"版本\">\n  </a>\n  <a href=\"https://npmjs.com/package/aframe\">\n    <img src=\"https://img.shields.io/npm/l/aframe.svg?style=flat-square\" alt=\"许可证\"></a>\n  </a>\n</p>\n\n<div align=\"center\">\n  <a href=\"https://aframe.io\">网站</a>\n  &mdash;\n  <a href=\"https://aframe.io/docs/\">文档</a>\n  &mdash;\n  <a href=\"https://aframe.io/aframe/examples/\">示例</a>\n  &mdash;\n  <a href=\"https://aframe.io/school/\">学校</a>\n  &mdash;\n  <a href=\"https://aframe.io/community/\">社区</a>\n</div>\n\n",
+                      "endOffset": 1191,
+                      "sourceRef": "aframevr/aframe",
+                      "versionId": 529,
+                      "chunkIndex": 0,
+                      "documentId": 310,
+                      "sourceType": "GITHUB",
+                      "sectionPath": null,
+                      "startOffset": 0,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "GITHUB:aframevr/aframe",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "aframevr/aframe",
+                  "documentId": 310,
+                  "sourceType": "GITHUB"
+                },
+                {
+                  "title": "SidhuK/Glyph",
+                  "evidence": [
+                    {
+                      "score": 0.012984218077474892,
+                      "title": "SidhuK/Glyph",
+                      "chunkId": 9598,
+                      "content": "## 技术栈\nTypeScript,React,Next.js\n\n",
+                      "endOffset": 236,
+                      "sourceRef": "beginner:55",
+                      "versionId": 220,
+                      "chunkIndex": 5,
+                      "documentId": 1,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "SidhuK/Glyph > 技术栈",
+                      "startOffset": 203,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=25,lexicalRank=104,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:55",
+                  "bestScore": 0.012984218077474892,
+                  "sourceRef": "beginner:55",
+                  "documentId": 1,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "Vue | Vue前端开发框架 | Vue渐进式JavaScript框架 | Vue.js web application development",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "BEGINNER_PROJECT",
+                "CAREER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [
+              {
+                "id": 75,
+                "url": "https://github.com/practical-tutorials/project-based-learning",
+                "name": "practical-tutorials/project-based-learning",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "practical-tutorials/project-based-learning",
+                "versionId": 294,
+                "documentId": 75,
+                "importable": false,
+                "catalogText": "# Project Based Learning\n\n[![Gitter](https://badges.gitter.im/practical-tutorials/community.svg)](https://gitter.im/practical-tutorials/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Link rot sweep](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml/badge.svg)](https://github.com/practical-tutorials/project-based-learning/actions/workflows/link-rot.yml)\n\nA list of programming tutorials in which aspiring software developers learn how to build an application from scratch. These tutorials are divided into different primary programming languages. Tutorials may involve multiple technologies and languages.\n\nTo get started, simply fork this repo. Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.\n\n## Table of Contents:\n\n- [C#](#c)\n- [C/C++](#cc)\n- [Clojure](#clojure)\n- [Dart](#dart)\n- [Elixir](#elixir)\n- [Erlang](#erlang)\n- [F#](#f)\n- [Go](#go)\n- [Haskell](#haskell)\n- [HTML/CSS](#html-and-css)\n- [Java](#java)\n- [JavaScript](#javascript)\n- [Kotlin](#kotlin)\n- [Lua](#lua)\n- [OCaml](#ocaml)\n- [PHP](#php)\n- [Python](#python)\n- [R](#r)\n- [Ruby](#ruby)\n- [Rust](#rust)\n- [Scala](#scala)\n- [Swift](#swift)\n- [Additional resources](#additional-resources)\n\n## C/C++:\n\n- [Build an Interpreter](http://www.craftinginterpreters.com/) (Chapter 14 on is written in C)\n- [Memory Allocators 101 - Write a simple memory allocator](https://arjunsreedharan.org/post/148675821737/memory-allocators-101-write-a-simple-memory)\n- [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)\n- [Write a FUSE Filesystem](https://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/)\n- [Build Your Own Text Editor](http://viewsourcecode.org/snaptoken/kilo/)\n- [Build Your Own Lisp](http://www.buildyourownlisp.com/)\n- [How to Program an NES Game in C](https://nesdoug.com/)\n- [Write an OS from scratch](https://github.com/tuhdo/os01)\n- [How to create an OS from scratch ](https://github.com/cfenollosa/os-tutorial)\n- [Building a CHIP-8 Emulator](https://austinmorlan.com/posts/chip8_emulator/)\n- [Beginning Game Programming with C++ and SDL](http://lazyfoo.net/tutorials/SDL/)\n- [Implementing a Key-Value Store](http://codecapsule.com/2012/11/07/ikvs-implementing-a-key-value-store-table-of-contents/)\n- Tiny 3D graphics projects\n  - [Tiny Renderer or how OpenGL works: software rendering in 500 lines of code](https://github.com/ssloy/tinyrenderer/wiki)\n  - [Understandable RayTracing in 256 lines of bare C++](https://github.com/ssloy/tinyraytracer/wiki)\n  - [KABOOM! in 180 lines of bare C++](https://github.com/ssloy/tinykaboom/wiki)\n  - [486 lines of C++: old-school FPS in a weekend](https://github.com/ssloy/tinyraycaster/wiki)\n- Writing a minimal x86-64 JIT compiler in C++\n  - [Part 1](https://solarianprogrammer.com/2018/01/10/writing-minimal-x86-64-jit-compiler-cpp/)\n  - [Part 2](https://solarianprogrammer.com/2018/01/12/writing-minimal-x86-64-jit-compiler-cpp-part-2/)\n- [Build a Live Code-reloader Library for C++](http://howistart.org/posts/cpp/1/index.html)\n- [Write a hash table in C](https://github.com/jamesroutley/write-a-hash-table)\n- [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)\n- [Let's Write a Kernel](http://arjunsreedharan.org/post/82710718100/kernel-101-lets-write-a-kernel)\n- [Write a Bootloader in C](http://3zanders.co.uk/2017/10/13/writing-a-bootloader/)\n- [Linux Container in 500 Lines of Code](https://blog.lizzie.io/linux-containers-in-500-loc.html)\n- [Write Your Own Virtual Machine](https://justinmeiners.github.io/lc3-vm/)\n- [Learning KVM - Implement Your Own Linux Kernel](https://david942j.blogspot.com/2018/10/note-learning-kvm-implement-your-own.html)\n- [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)\n- Write a C compiler\n  - [Part 1: Integers, Lexing and Code Generation](https://norasandler.com/2017/11/29/Write-a-Compiler.html)\n  - [Part 2: Unary Operators](https://norasandler.com/2017/12/05/Write-a-Compiler-2.html)\n  - [Part 3: Binary Operators](https://norasandler.com/2017/12/15/Write-a-Compiler-3.html)\n  - [Part 4: Even More Binary Operators](https://norasandler.com/2017/12/28/Write-a-Compiler-4.html)\n  - [Part 5: Local Variables](https://norasandler.com/2018/01/08/Write-a-Compiler-5.html)\n  - [Part 6: Conditionals](https://norasandler.com/2018/02/25/Write-a-Compiler-6.html)\n  - [Part 7: Compound Statements](https://norasandler.com/2018/03/14/Write-a-Compiler-7.html)\n  - [Part 8: Loops](https://norasandler.com/2018/04/10/Write-a-Compiler-8.html)\n  - [Part 9: Functions](https://norasandler.com/2018/06/27/Write-a-Compiler-9.html)\n  - [Part 10: Global Variables](https://norasandler.com/2019/02/18/Write-a-Compiler-10.html)\n- [Implementing a Language with LLVM](https://llvm.org/docs/tutorial/#kaleidoscope-implementing-a-language-with-llvm)\n- [Meta Crush Saga: a C++17 compile-time game](https://jguegant.github.io//jguegant.github.io/blogs/tech/meta-crush-saga.html)\n- [High-Performance Matrix Multiplication](https://gist.github.com/nadavrot/5b35d44e8ba3dd718e595e40184d03f0)\n- Space Invaders from Scratch\n  - [Part 1](http://nicktasios.nl/posts/space-invaders-from-scratch-part-1.html)\n  - [Part 2](http://nicktasios.nl/posts/space-invaders-from-scratch-part-2.html)\n  - [Part 3](http://nicktasios.nl/posts/space-invaders-from-scratch-part-3.html)\n  - [Part 4](http://nicktasios.nl/posts/space-invaders-from-scratch-part-4.html)\n  - [Part 5](http://nicktasios.nl/posts/space-invaders-from-scratch-part-5.html)\n- [Tetris Tutorial in C++ Platform Independent](http://javilop.com/gamedev/tetris-tutorial-in-c-platform-independent-focused-in-game-logic-for-beginners/)\n- Writing a Linux Debugger\n  - [Part 1: Setup](https://blog.tartanllama.xyz/writing-a-linux-debugger-setup/)\n  - [Part 2: Breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-breakpoints/)\n  - [Part 3: Registers and memory](https://blog.tartanllama.xyz/writing-a-linux-debugger-registers/)\n  - [Part 4: Elves and dwarves](https://blog.tartanllama.xyz/writing-a-linux-debugger-elf-dwarf/)\n  - [Part 5: Source and signals](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-signal/)\n  - [Part 6: Source-level stepping](https://blog.tartanllama.xyz/writing-a-linux-debugger-dwarf-step/)\n  - [Part 7: Source-level breakpoints](https://blog.tartanllama.xyz/writing-a-linux-debugger-source-break/)\n  - [Part 8: Stack unwinding](https://blog.tartanllama.xyz/writing-a-linux-debugger-unwinding/)\n  - [Part 9: Handling variables](https://blog.tartanllama.xyz/writing-a-linux-debugger-variables/)\n  - [Part 10: Advanced topics](https://blog.tartanllama.xyz/writing-a-linux-debugger-advanced-topics/)\n- Let's write a compiler\n  - [Part 1: Introduction, selecting a language, and doing some planning](https://briancallahan.net/blog/20210814.html)\n  - [Part 2: A lexer](https://briancallahan.net/blog/20210815.html)\n  - [Part 3: A parser](https://briancallahan.net/blog/20210816.html)\n  - [Part 4: Testing](https://briancallahan.net/blog/20210817.html)\n  - [Part 5: A code generator](https://briancallahan.net/blog/20210818.html)\n  - [Part 6: Input and output](https://briancallahan.net/blog/20210819.html)\n  - [Part 7: Arrays](https://briancallahan.net/blog/20210822.html)\n  - [Part 8: Strings, forward references, and conclusion](https://briancallahan.net/blog/20210826.html)\n\n### Network programming\n\n- Let's Code a TCP/IP Stack\n\n  - [Part 1: Ethernet & ARP](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)\n  - [Part 2: IPv4 & ICMPv4](http://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4/)\n  - [Part 3: TCP Basics & Handshake](http://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/)\n  - [Part 4: TCP Data Flow & Socket API](http://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/)\n  - [Part 5: TCP Retransmission](http://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/)\n\n- Programming concurrent servers\n\n  - [Part 1 - Introduction](https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/)\n  - [Part 2 - Threads](https://eli.thegreenplace.net/2017/concurrent-servers-part-2-threads/)\n  - [Part 3 - Event-driven](https://eli.thegreenplace.net/2017/concurrent-servers-part-3-event-driven/)\n  - [Part 4 - libuv](https://eli.thegreenplace.net/2017/concurrent-servers-part-4-libuv/)\n  - [Part 5 - Redis case study](https://eli.thegreenplace.net/2017/concurrent-servers-part-5-redis-case-study/)\n  - [Part 6 - Callbacks, Promises and async/await](https://eli.thegreenplace.net/2018/concurrent-servers-part-6-callbacks-promises-and-asyncawait/)\n\n- MQTT Broker from scratch\n  - [Part 1 - The protocol](https://codepr.github.io/posts/sol-mqtt-broker)\n  - [Part 2 - Networking](https://codepr.github.io/posts/sol-mqtt-broker-p2)\n  - [Part 3 - Server](https://codepr.github.io/posts/sol-mqtt-broker-p3)\n  - [Part 4 - Data structures](https://codepr.github.io/posts/sol-mqtt-broker-p4)\n  - [Part 5 - Topic abstraction](https://codepr.github.io/posts/sol-mqtt-broker-p5)\n  - [Part 6 - Handlers](https://codepr.github.io/posts/sol-mqtt-broker-p6)\n  - [Bonus - Multithreading](https://codepr.github.io/posts/sol-mqtt-broker-bonus)\n- [Networking from Scratch](https://github.com/TanayK07/networking-from-scratch)\n\n### OpenGL:\n\n- Creating 2D Breakout game clone in C++ with OpenGL\n  - [Breakout](https://learnopengl.com/In-Practice/2D-Game/Breakout)\n  - [Setting up](https://learnopengl.com/In-Practice/2D-Game/Setting-up)\n  - [Rendering Sprites](https://learnopengl.com/In-Practice/2D-Game/Rendering-Sprites)\n  - [Levels](https://learnopengl.com/In-Practice/2D-Game/Levels)\n  - Collisions\n    - [Ball](https://learnopengl.com/In-Practice/2D-Game/Collisions/Ball)\n    - [Collision detection](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection)\n    - [Collision resolution](https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution)\n  - [Particles](https://learnopengl.com/In-Practice/2D-Game/Particles)\n  - [Postprocessing](https://learnopengl.com/In-Practice/2D-Game/Postprocessing)\n  - [Powerups](https://learnopengl.com/In-Practice/2D-Game/Powerups)\n  - [Audio](https://learnopengl.com/In-Practice/2D-Game/Audio)\n  - [Render text](https://learnopengl.com/In-Practice/2D-Game/Render-text)\n  - [Final thoughts](https://learnopengl.com/In-Practice/2D-Game/Final-thoughts)\n- [Handmade Hero](https://handmadehero.org)\n- [How to Make Minecraft in C++/OpenGL](https://www.youtube.com/playlist?list=PLMZ_9w2XRxiZq1vfw1lrpCMRDufe2MKV_) (video)\n\n## C#:\n\n- [Learn C# By Building a Simple RPG Game](http://scottlilly.com/learn-c-by-building-a-simple-rpg-index/)\n- [Create a Rogue-like game in C#](https://roguesharp.wordpress.com/)\n- [Create a Blank App with C# and Xamarin (work in progress)](https://www.intertech.com/Blog/xamarin-tutorial-part-1-create-a-blank-app/)\n- [Build iOS Photo Library App with Xamarin and Visual Studio](https://www.raywenderlich.com/134049/building-ios-apps-with-xamarin-and-visual-studio)\n- [Building the CoreWiki](https://www.youtube.com/playlist?list=PLVMqA0_8O85yC78I4Xj7z48ES48IQBa7p) This is a Wiki-style content management system that has been completely written in C# with ASP.NET Core and Razor Pages. You can find the source code [here](https://github.com/csharpfritz/CoreWiki).\n\n## Clojure:\n\n- [Build a Twitter Bot with Clojure](http://howistart.org/posts/clojure/1/index.html)\n- [Building a Spell-Checker](https://bernhardwenzel.com/articles/clojure-spellchecker/)\n- [Building a JIRA integration with Clojure & Atlassian Connect](https://hackernoon.com/building-a-jira-integration-with-clojure-atlassian-connect-506ebd112807)\n- [Prototyping with Clojure](https://github.com/aliaksandr-s/prototyping-with-clojure)\n- [Tetris in ClojureScript](https://shaunlebron.github.io/t3tr0s-slides)\n\n## Dart:\n\n### Flutter:\n\n- [Amazon Clone with Admin Panel](https://youtu.be/O3nmP-lZAdg)\n- [Food Delivery App](https://youtu.be/7dAt-JMSCVQ)\n- [Google Docs Clone](https://youtu.be/0_GJ1w_iG44)\n- [Instagram",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "项目式学习",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 12,
+                "url": "https://github.com/pocket-stack/pocketjs",
+                "name": "pocket-stack/pocketjs",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"embedded-ui\", \"flexbox\", \"frontend\", \"jsx\", \"native-ui\", \"psp\", \"quickjs\", \"rust\", \"solidjs\", \"tailwindcss\", \"vue\", \"vue-vapor\", \"webassembly\"]",
+                "archived": false,
+                "duration": "4-6天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:12",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "浏览器外的高性能 JSX UI 框架，支持硬件渲染、Vue Vapor 和 Solid 标准、Tailwind 样式引擎，在 8 MB 内存下实现 60 FPS 动画。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "清晰的模块划分和文档能让新手了解嵌入式 UI 原理和性能优化。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 36,
+                "url": "https://github.com/JustArchiNET/ASF-WebConfigGenerator",
+                "name": "JustArchiNET/ASF-WebConfigGenerator",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"archisteamfarm\", \"css\", \"hacktoberfest\", \"html\", \"javascript\", \"nodejs\", \"vue\", \"vuejs\", \"webpack\"]",
+                "archived": false,
+                "duration": "2-5天",
+                "language": "JavaScript",
+                "sourceRef": "beginner:36",
+                "techStack": "JavaScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "一款基于Vue.js的ArchiSteamFarm配置文件在线生成器。",
+                "beginnerScore": 91,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "以表单驱动的配置生成工具，可练习Vue组件开发和数据配置逻辑，门槛较低。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 46,
+                "url": "https://github.com/zhensherlock/protocol-launcher",
+                "name": "zhensherlock/protocol-launcher",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"ai-tools\", \"api-configuration\", \"deep-link\", \"deeplink\", \"deeplinks\", \"esm\", \"launch-url\", \"llm-provider\", \"mcp\", \"mcp-installer\", \"modelcontextprotocol\", \"one-click\", \"protocol\", \"protocol-launcher\", \"quick-launcher\", \"tree-shaking\", \"typescript\", \"url-generator\", \"url-scheme\"]",
+                "archived": false,
+                "duration": "2-4天",
+                "language": "TypeScript",
+                "sourceRef": "beginner:46",
+                "techStack": "TypeScript,Vue",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "类型安全的深度链接生成器，为基于协议的应用提供一键启动、安装和配置，支持 Cursor、Cherry Studio 等工具。",
+                "beginnerScore": 95,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "聚焦于类型安全和协议处理，前端使用 Vue，适合学习 TypeScript 高级特性和跨应用通信。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "",
+                "requiresDatabase": false,
+                "evidenceAvailable": true
+              },
+              {
+                "id": 77,
+                "url": "https://github.com/DavidHDev/canvas-ui",
+                "name": "DavidHDev/canvas-ui",
+                "type": "BEGINNER_PROJECT",
+                "status": "PUBLISHED",
+                "topics": "[\"animation\", \"canvas\", \"component-library\", \"components\", \"creative-coding\", \"design-engineering\", \"frontend\", \"glsl\", \"nextjs\", \"react\", \"shadcn\", \"shaders\", \"svelte\", \"threejs\", \"typescript\", \"ui\", \"ui-library\", \"vue\", \"weggl\"]",
+                "quality": 88,
+                "archived": false,
+                "duration": "30分钟体验，1～3天制作定制页面",
+                "language": "TypeScript",
+                "whatIsIt": "一套跨框架的Canvas UI组件库，可在React、Vue等项目中直接使用，通过WebGL在页面上实时渲染流体、玻璃、破碎等视觉效果，且保持原页面可交互。",
+                "mainRisks": "部分组件依赖实验性API（HTML-in-canvas），某些浏览器可能降级；视觉效果可能影响性能。",
+                "sourceRef": "beginner:77",
+                "techStack": "TypeScript,React,Next.js",
+                "difficulty": "入门",
+                "importable": false,
+                "description": "快速为网页添加玻璃破碎、液体等创意Canvas效果",
+                "codebaseSize": "MEDIUM",
+                "beginnerScore": 87,
+                "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+                "analysisReason": "安装简单，使用shadcn CLI即可添加到项目，只需基本的React/Vue知识。\n效果立竿见影，包裹内容即可获得视觉冲击力，非常适合做个人主页或作品集。\n组件源码复制到本地仓库，方便修改和学习WebGL/Canvas原理。",
+                "evidenceStatus": "VERIFIED_DATABASE",
+                "requiresDocker": false,
+                "requiresSecrets": false,
+                "modificationPlan": "组合多个组件制作一个全屏交互式体验页面。\n修改现有组件参数（颜色、速度）创造独特风格。\n创作一个全新的组件，如模拟云层或粒子系统。\n为组件编写教程和演示视频，建立中文社区。",
+                "requiresDatabase": false,
+                "vibeCodingReason": "极佳的新手项目，成果酷炫且高度可定制，完美融合创意与技术。",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 393,
+                "url": "https://github.com/xinnan-tech/xiaozhi-esp32-server",
+                "name": "xinnan-tech/xiaozhi-esp32-server",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "xinnan-tech/xiaozhi-esp32-server",
+                "versionId": 612,
+                "documentId": 393,
+                "importable": false,
+                "catalogText": "[![Banners](docs/images/banner1.png)](https://github.com/xinnan-tech/xiaozhi-esp32-server)\n\n<h1 align=\"center\">小智后端服务xiaozhi-esp32-server</h1>\n\n<p align=\"center\">\n本项目基于人机共生智能理论和技术研发智能终端软硬件体系<br/>为开源智能硬件项目\n<a href=\"https://github.com/78/xiaozhi-esp32\">xiaozhi-esp32</a>提供后端服务<br/>\n根据<a href=\"https://ccnphfhqs21z.feishu.cn/wiki/M0XiwldO9iJwHikpXD5cEx71nKh\">小智通信协议</a>使用Python、Java、Vue实现<br/>\n支持MQTT+UDP协议、Websocket协议、MCP接入点、声纹识别、知识库\n</p>\n\n<p align=\"center\">\n<a href=\"./docs/FAQ.md\">常见问题</a>\n· <a href=\"https://github.com/xinnan-tech/xiaozhi-esp32-server/issues\">反馈问题</a>\n· <a href=\"./README.md#%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3\">部署文档</a>\n· <a href=\"https://github.com/xinnan-tech/xiaozhi-esp32-server/releases\">更新日志</a>\n</p>\n\n<p align=\"center\">\n  <a href=\"./README.md\"><img alt=\"简体中文版自述文件\" src=\"https://img.shields.io/badge/简体中文-DBEDFA\"></a>\n  <a href=\"./docs/readme/README_en.md\"><img alt=\"README in English\" src=\"https://img.shields.io/badge/English-DFE0E5\"></a>\n  <a href=\"./docs/readme/README_vi.md\"><img alt=\"Tiếng Việt\" src=\"https://img.shields.io/badge/Tiếng Việt-DFE0E5\"></a>\n  <a href=\"./docs/readme/README_de.md\"><img alt=\"Deutsch\" src=\"https://img.shields.io/badge/Deutsch-DFE0E5\"></a>\n  <a href=\"./docs/readme/README_pt_BR.md\"><img alt=\"Português (Brasil)\" src=\"https://img.shields.io/badge/Português (Brasil)-DFE0E5\"></a>\n  <a href=\"https://github.com/xinnan-tech/xiaozhi-esp32-server/releases\">\n    <img alt=\"GitHub Contributors\" src=\"https://img.shields.io/github/v/release/xinnan-tech/xiaozhi-esp32-server?logo=docker\" />\n  </a>\n  <a href=\"https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/LICENSE\">\n    <img alt=\"GitHub pull requests\" src=\"https://img.shields.io/badge/license-MIT-white?labelColor=black\" />\n  </a>\n  <a href=\"https://github.com/xinnan-tech/xiaozhi-esp32-server\">\n    <img alt=\"stars\" src=\"https://img.shields.io/github/stars/xinnan-tech/xiaozhi-esp32-server?color=ffcb47&labelColor=black\" />\n  </a>\n</p>\n\n<p align=\"center\">\n由刘思源教授团队（华南理工大学）主导研发\n</br>\n刘思源教授团队主导研发（华南理工大学）\n</br>\n<img src=\"./docs/images/hnlg.jpg\" alt=\"华南理工大学\" width=\"50%\">\n</p>\n\n---\n\n## 适用人群 👥\n\n本项目需要配合 ESP32 硬件设备使用。如果您已经购买了 ESP32 相关硬件，且成功对接过虾哥部署的后端服务，并希望独立搭建自己的\n`xiaozhi-esp32` 后端服务，那么本项目非常适合您。\n\n想看使用效果？请猛戳视频 🎥\n\n<table>\n  <tr>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1FMFyejExX\" target=\"_blank\">\n        <picture>\n          <img alt=\"响应速度感受\" src=\"docs/images/demo9.png\" /></picture>\n      </a>\n    </td>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1vchQzaEse\" target=\"_blank\">\n        <picture>\n          <img alt=\"速度优化秘诀\" src=\"docs/images/demo6.png\" /></picture>\n      </a>\n    </td>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1WEcxzFEAT\" target=\"_blank\">\n        <picture>\n          <img alt=\"小智数字人 支持语音唤醒\" src=\"docs/images/demo8.png\" /></picture>\n      </a>\n    </td>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1CKVz6UEuB\" target=\"_blank\">\n        <picture>\n          <img alt=\"设备呼叫设备，打电话\" src=\"docs/images/demo0.png\" /></picture>\n      </a>\n    </td>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1C1tCzUEZh\" target=\"_blank\">\n        <picture>\n          <img alt=\"复杂医疗场景\" src=\"docs/images/demo1.png\" /></picture>\n      </a>\n    </td>\n  </tr>\n  <tr>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1VC96Y5EMH\" target=\"_blank\">\n        <picture>\n          <img alt=\"播放音乐查询天气播报新闻\" src=\"docs/images/demo7.png\" /></picture>\n      </a>\n    </td>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV12J7WzBEaH\" target=\"_blank\">\n        <picture>\n          <img alt=\"实时打断\" src=\"docs/images/demo10.png\" /></picture>\n      </a>\n    </td>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1Co76z7EvK\" target=\"_blank\">\n        <picture>\n          <img alt=\"拍照识物品\" src=\"docs/images/demo12.png\" /></picture>\n      </a>\n    </td>\n    <td>\n      <a href=\"https://www.bilibili.com/video/BV1pNXWYGEx1\" target=\"_blank\">\n        <picture>\n          <img alt=\"拍照识物品\" src=\"docs/images/demo12.png\" /></picture>\n      </a>\n    </td>\n  </tr>\n</table>",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "xinnan-tech/xiaozhi-esp32-server",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 324,
+                "url": "https://github.com/thedotmack/claude-mem",
+                "name": "thedotmack/claude-mem",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "thedotmack/claude-mem",
+                "versionId": 543,
+                "documentId": 324,
+                "importable": false,
+                "catalogText": "<h1 align=\"center\">\n  <br>\n  <a href=\"https://github.com/thedotmack/claude-mem\">\n    <picture>\n      <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-dark-mode.webp\">\n      <source media=\"(prefers-color-scheme: light)\" srcset=\"https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp\">\n      <img src=\"https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp\" alt=\"Claude-Mem\" width=\"400\">\n    </picture>\n  </a>\n  <br>\n  <a href=\"https://vercel.com/open-source-program\">\n    <img alt=\"Vercel OSS Program\" src=\"https://vercel.com/oss/program-badge-2026.svg\" />\n  </a>\n</h1>\n\n<p align=\"center\">\n  <a href=\"docs/i18n/README.zh.md\">🇨🇳 中文</a> •\n  <a href=\"docs/i18n/README.zh-tw.md\">🇹🇼 繁體中文</a> •\n  <a href=\"docs/i18n/README.ja.md\">🇯🇵 日本語</a> •\n  <a href=\"docs/i18n/README.pt.md\">🇵🇹 Português</a> •\n  <a href=\"docs/i18n/README.pt-br.md\">🇧🇷 Português</a> •\n  <a href=\"docs/i18n/README.ko.md\">🇰🇷 한국어</a> •\n  <a href=\"docs/i18n/README.es.md\">🇪🇸 Español</a> •\n  <a href=\"docs/i18n/README.de.md\">🇩🇪 Deutsch</a> •\n  <a href=\"docs/i18n/README.fr.md\">🇫🇷 Français</a> •\n  <a href=\"docs/i18n/README.he.md\">🇮🇱 עברית</a> •\n  <a href=\"docs/i18n/README.ar.md\">🇸🇦 العربية</a> •\n  <a href=\"docs/i18n/README.ru.md\">🇷🇺 Русский</a> •\n  <a href=\"docs/i18n/README.pl.md\">🇵🇱 Polski</a> •\n  <a href=\"docs/i18n/README.cs.md\">🇨🇿 Čeština</a> •\n  <a href=\"docs/i18n/README.nl.md\">🇳🇱 Nederlands</a> •\n  <a href=\"docs/i18n/README.tr.md\">🇹🇷 Türkçe</a> •\n  <a href=\"docs/i18n/README.uk.md\">🇺🇦 Українська</a> •\n  <a href=\"docs/i18n/README.vi.md\">🇻🇳 Tiếng Việt</a> •\n  <a href=\"docs/i18n/README.tl.md\">🇵🇭 Tagalog</a> •\n  <a href=\"docs/i18n/README.id.md\">🇮🇩 Indonesia</a> •\n  <a href=\"docs/i18n/README.th.md\">🇹🇭 ไทย</a> •\n  <a href=\"docs/i18n/README.hi.md\">🇮🇳 हिन्दी</a> •\n  <a href=\"docs/i18n/README.bn.md\">🇧🇩 বাংলা</a> •\n  <a href=\"docs/i18n/README.ur.md\">🇵🇰 اردو</a> •\n  <a href=\"docs/i18n/README.ro.md\">🇷🇴 Română</a> •\n  <a href=\"docs/i18n/README.sv.md\">🇸🇪 Svenska</a> •\n  <a href=\"docs/i18n/README.it.md\">🇮🇹 Italiano</a> •\n  <a href=\"docs/i18n/README.el.md\">🇬🇷 Ελληνικά</a> •\n  <a href=\"docs/i18n/README.hu.md\">🇭🇺 Magyar</a> •\n  <a href=\"docs/i18n/README.fi.md\">🇫🇮 Suomi</a> •\n  <a href=\"docs/i18n/README.da.md\">🇩🇰 Dansk</a> •\n  <a href=\"docs/i18n/README.no.md\">🇳🇴 Norsk</a>\n</p>\n\n<h4 align=\"center\">Persistent memory compression system built for <a href=\"https://claude.com/claude-code\" target=\"_blank\">Claude Code</a>.</h4>\n\n<p align=\"center\">\n  <a href=\"LICENSE\">\n    <img src=\"https://img.shields.io/badge/License-Apache%202.0-blue.svg\" alt=\"License\">\n  </a>\n  <a href=\"package.json\">\n    <img src=\"https://img.shields.io/badge/version-13.4.0-green.svg\" alt=\"Version\">\n  </a>\n  <a href=\"package.json\">\n    <img src=\"https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg\" alt=\"Node\">\n  </a>\n  <a href=\"https://github.com/thedotmack/awesome-claude-code\">\n    <img src=\"https://awesome.re/mentioned-badge.svg\" alt=\"Mentioned in Awesome Claude Code\">\n  </a>\n</p>\n\n<p align=\"center\">\n  <a href=\"https://trendshift.io/repositories/15496\" target=\"_blank\">\n    <picture>\n      <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge-dark.svg\">\n      <source media=\"(prefers-color-scheme: light)\" srcset=\"https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg\">\n      <img src=\"https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg\" alt=\"thedotmack/claude-mem | Trendshift\" width=\"250\" height=\"55\"/>\n    </picture>\n  </a>\n</p>\n\n<br>\n\n<table align=\"center\">\n  <tr>\n    <td align=\"center\">\n      <a href=\"https://github.com/thedotmack/claude-mem\">\n        <picture>\n          <img\n            src=\"https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/cm-preview.gif\"\n            alt=\"Claude-Mem Preview\"\n            width=\"500\"\n          >\n        </picture>\n      </a>\n    </td>\n    <td align=\"center\">\n      <a href=\"https://www.star-history.com/#thedotmack/claude-mem&Date\">\n        <picture>\n          <source\n            media=\"(prefers-color-scheme: dark)\"\n            srcset=\"https://api.star-history.com/image?repos=thedotmack/claude-mem&type=date&theme=dark&legend=top-left\"\n          />\n          <source\n            media=\"(prefers-color-scheme: light)\"\n            srcset=\"https://api.star-history.com/image?repos=thedotmack/claude-mem&type=date&legend=top-left\"\n          />\n          <img\n            alt=\"Star History Chart\"\n            src=\"https://api.star-history.com/image?repos=thedotmack/claude-mem&type=date&legend=top-left\"\n            width=\"500\"\n          />\n        </picture>\n      </a>\n    </td>\n  </tr>\n</table>\n\n<p align=\"center\">\n  <a href=\"#quick-start\">Quick Start</a> •\n  <a href=\"#how-it-works\">How It Works</a> •\n  <a href=\"#mcp-search-tools\">Search Tools</a> •\n  <a href=\"#documentation\">Documentation</a> •\n  <a href=\"#configuration\">Configuration</a> •\n  <a href=\"#troubleshooting\">Troubleshooting</a> •\n  <a href=\"#license\">License</a>\n</p>\n\n<p align=\"center\">\n  Claude-Mem seamlessly preserves context across sessions by automatically capturing tool usage observations, generating semantic summaries, and making them available to future sessions. This enables Claude to maintain continuity of knowledge about projects even after sessions end or reconnect.\n</p>\n\n---\n\n## Quick Start\n\nInstall with a single command:\n\n```bash\nnpx claude-mem install\n```\n\nOr install for Gemini CLI (auto-detects `~/.gemini`):\n\n```bash\nnpx claude-mem install --ide gemini-cli\n```\nOr install for OpenCode:\n\n```bash\nnpx claude-mem install --ide opencode\n```\n\nOr install from the plugin marketplace inside Claude Code:\n\n```bash\n/plugin marketplace add thedotmack/claude-mem\n\n/plugin install claude-mem\n```\n\nRestart Claude Code or Gemini CLI. Context from previous sessions will automatically appear in new sessions.\n\n> **Note:** Claude-Mem is also published on npm, but `npm install -g claude-mem` installs the **SDK/library only** — it does not register the plugin hooks or set up the worker service. Always install via `npx claude-mem install` or the `/plugin` commands above.\n\n### 🦞 OpenClaw Gateway\n\nInstall claude-mem as a persistent memory plugin on [OpenClaw](https://openclaw.ai) gateways with a single command:\n\n```bash\ncurl -fsSL https://install.cmem.ai/openclaw.sh | bash\n```\n\nThe installer handles dependencies, plugin setup, AI provider configuration, worker startup, and optional real-time observation feeds to Telegram, Discord, Slack, and more. See the [OpenClaw Integration Guide](https://docs.claude-mem.ai/openclaw-integration) for details.\n\n**Key Features:**\n\n- 🧠 **Persistent Memory** - Context survives across sessions\n- 📊 **Progressive Disclosure** - Layered memory retrieval with token cost visibility\n- 🔍 **Skill-Based Search** - Query your project history with mem-search skill\n- 🖥️ **Web Viewer UI** - Real-time memory stream at http://localhost:37777\n- 💻 **Claude Desktop Skill** - Search memory from Claude Desktop conversations\n- 🔒 **Privacy Control** - Use `<private>` tags to exclude sensitive content from storage\n- ⚙️ **Context Configuration** - Fine-grained control over what context gets injected\n- 🤖 **Automatic Operation** - No manual intervention required\n- 🔗 **Citations** - Reference past observations with IDs (access via http://localhost:37777/api/observation/{id} or view all in the web viewer at http://localhost:37777)\n- 🧪 **Beta Channel** - Try experimental features like Endless Mode via version switching\n\n---\n\n## Documentation\n\n📚 **[View Full Documentation](https://docs.claude-mem.ai/)** - Browse on official website\n\n### Getting Started\n\n- **[Installation Guide](https://docs.claude-mem.ai/installation)** - Quick start & advanced installation\n- **[Gemini CLI Setup](https://docs.claude-mem.ai/gemini-cli/setup)** - Dedicated guide for Google's Gemini CLI integration\n- **[Usage Guide](https://docs.claude-mem.ai/usage/getting-started)** - How Claude-Mem works automatically\n- **[Search Tools](https://docs.claude-mem.ai/usage/search-tools)** - Query your project history with natural language\n- **[Beta Features](https://docs.claude-mem.ai/beta-features)** - Try experimental features like Endless Mode\n\n### Best Practices\n\n- **[Context Engineering](https://docs.claude-mem.ai/context-engineering)** - AI agent context optimization principles\n- **[Progressive Disclosure](https://docs.claude-mem.ai/progressive-disclosure)** - Philosophy behind Claude-Mem's context priming strategy\n\n### Architecture\n\n- **[Overview](https://docs.claude-mem.ai/architecture/overview)** - System components & data flow\n- **[Architecture Evolution](https://docs.claude-mem.ai/architecture-evolution)** - The journey from v3 to v5\n- **[Hooks Architecture](https://docs.claude-mem.ai/hooks-architecture)** - How Claude-Mem uses lifecycle hooks\n- **[Hooks Reference](https://docs.claude-mem.ai/architecture/hooks)** - 7 hook scripts explained\n- **[Worker Service](https://docs.claude-mem.ai/architecture/worker-service)** - HTTP API & Bun management\n- **[Database](https://docs.claude-mem.ai/architecture/database)** - SQLite schema & FTS5 search\n- **[Search Architecture](https://docs.claude-mem.ai/architecture/search-architecture)** - Hybrid search with Chroma vector database\n\n### Configuration & Development\n\n- **[Configuration](https://docs.claude-mem.ai/configuration)** - Environment variables & settings\n- **[Development](https://docs.claude-mem.ai/development)** - Building, testing, contributing\n- **[Troubleshooting](https://docs.claude-mem.ai/troubleshooting)** - Common issues & solutions\n\n---\n\n## How It Works\n\n**Core Components:**\n\n1. **5 Lifecycle Hooks** - SessionStart, UserPromptSubmit, PostToolUse, Stop, SessionEnd (6 hook scripts)\n2. **Smart Install** - Cached dependency checker (pre-hook script, not a lifecycle hook)\n3. **Worker Service** - HTTP API on port 37777 with web viewer UI and 10 search endpoints, managed by Bun\n4. **SQLite Database** - Stores sessions, observations, summaries\n5. **mem-search Skill** - Natural language queries with progressive disclosure\n6. **Chroma Vector Database** - Hybrid semantic + keyword search for intelligent context retrieval\n\nSee [Architecture Overview](https://docs.claude-mem.ai/architecture/overview) for details.\n\n---\n\n## MCP Search Tools\n\nClaude-Mem provides intelligent memory search through **4 MCP tools** following a token-efficient **3-layer workflow pattern**:\n\n**The 3-Layer Workflow:**\n\n1. **`search`** - Get compact index with IDs (~50-100 tokens/result)\n2. **`timeline`** - Get chronological context around interesting results\n3. **`get_observations`** - Fetch full details ONLY for filtered IDs (~500-1,000 tokens/result)\n\n**How It Works:**\n- Claude uses MCP tools to search your memory\n- Start with `search` to get an index of results\n- Use `timeline` to see what was happening around specific observations\n- Use `get_observations` to fetch full details for relevant IDs\n- **~10x token savings** by filtering before fetching details\n\n**Available MCP Tools:**\n\n1. **`search`** - Search memory index with full-text queries, filters by type/date/project\n2. **`timeline`** - Get chronological context around a specific observation or query\n3. **`get_observations`** - Fetch full observation details by IDs (always batch multiple IDs)\n\n**Example Usage:**\n\n```typescript\n// Step 1: Search for index\nsearch(query=\"authentication bug\", type=\"bugfix\", limit=10)\n\n// Step 2: Review index, identify relevant IDs (e.g., #123, #456)\n\n// Step 3: Fetch full details\nget_observations(ids=[123, 456])\n```\n\nSee [Search Tools Guide](https://docs.claude-mem.ai/usage/search-tools) for detailed examples.\n\n---\n\n## Beta Features\n\nClaude-Mem offers a **beta channel** with experimental features like **Endless Mode** (biomimetic memory ",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "thedotmack/claude-mem",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 375,
+                "url": "https://github.com/galaxy-s10/billd-live",
+                "name": "galaxy-s10/billd-live",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "galaxy-s10/billd-live",
+                "versionId": 594,
+                "documentId": 375,
+                "importable": false,
+                "catalogText": "<p align=\"center\">\n  <a href=\"https://live.hsslive.cn\" target=\"_blank\">\n    <img\n      width=\"200\"\n      src=\"https://resource.hsslive.cn/billd-live/image/240160ddbc14367f7e0126c1f5b09b69.svg\"\n      alt=\"Billd-Live 标志\"\n    />\n  </a>\n</p>\n\n<h1 align=\"center\">\n  Billd-Live\n</h1>\n\n<p align=\"center\">\n  基于Vue3 + WebRTC + Node + SRS + FFmpeg搭建的直播间\n</p>\n\n<div align=\"center\">\n\n![星标](https://img.shields.io/github/stars/galaxy-s10/billd-live)\n![分支](https://img.shields.io/github/forks/galaxy-s10/billd-live)\n\n![版本](https://img.shields.io/github/package-json/v/galaxy-s10/billd-live)\n![许可证](https://img.shields.io/github/license/galaxy-s10/billd-live)\n![语言](https://img.shields.io/github/languages/top/galaxy-s10/billd-live)\n![语言](https://img.shields.io/github/languages/top/galaxy-s10/billd-live-server)\n![语言](https://img.shields.io/github/languages/top/galaxy-s10/billd-live-flutter)\n\n</div>\n\n## ⭐️ BilldLive\n\n> [!CAUTION]\n> BilldLive 目前仍未发布稳定版，不建议开发者用于生产环境！\n\n## ⚡️ BilldLivePro\n\n`BilldLivePro` 稳定性更高、性能更强、代码可读性更好、更新更频繁！\n\n> [!WARNING]\n> BilldLivePro 对普通用户不影响，一直免费。\n>\n> BilldLivePro 主要针对开发者。源码并不开源，需付费订阅：[https://live.hsslive.cn/price](https://live.hsslive.cn/price)\n\n## 简介\n\nbilld 直播间，目前实现了类似 [bilibili 的 Web 在线直播](https://live.bilibili.com)功能，即你（房主）可以发布直播，别人进入你的直播间后能看到你的直播内容；而你也可以作为观众，进入别人的直播间看别人的直播内容。\n\n## 生态\n\n| 名称         | 仓库                                                                             | 星标 & 分支                                                                                                                                                                                                                                                                                                                         | 线上地址                                                             |\n| ------------ | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |\n| 直播间前台   | [billd-live](https://github.com/galaxy-s10/billd-live)                           | [![github](https://img.shields.io/github/stars/galaxy-s10/billd-live?label=星标&logo=GitHub)](https://github.com/galaxy-s10/billd-live) [![github](https://img.shields.io/github/forks/galaxy-s10/billd-live?label=分支&logo=GitHub)](https://github.com/galaxy-s10/billd-live)                                                     | [https://live.hsslive.cn](https://live.hsslive.cn)                   |\n| 直播间后端   | [billd-live-server](https://github.com/galaxy-s10/billd-live-server)             | [![github](https://img.shields.io/github/stars/galaxy-s10/billd-live-server?label=星标&logo=GitHub)](https://github.com/galaxy-s10/billd-live-server) [![github](https://img.shields.io/github/forks/galaxy-s10/billd-live-server?label=分支&logo=GitHub)](https://github.com/galaxy-s10/billd-live-server)                         | [https://live-api.hsslive.cn](https://live-api.hsslive.cn)           |\n| 直播间后台   | [billd-live-admin](https://github.com/galaxy-s10/billd-live-admin)               | [![github](https://img.shields.io/github/stars/galaxy-s10/billd-live-admin?label=星标&logo=GitHub)](https://github.com/galaxy-s10/billd-live-admin) [![github](https://img.shields.io/github/forks/galaxy-s10/billd-live-admin?label=分支&logo=GitHub)](https://github.com/galaxy-s10/billd-live-admin)                             | [https://live-admin.hsslive.cn](https://live-admin.hsslive.cn)       |\n| 直播间移动端 | [billd-live-flutter](https://github.com/galaxy-s10/billd-live-flutter)           | [![github](https://img.shields.io/github/stars/galaxy-s10/billd-live-flutter?label=星标&logo=GitHub)](https://github.com/galaxy-s10/billd-live-flutter) [![github](https://img.shields.io/github/forks/galaxy-s10/billd-live-flutter?label=分支&logo=GitHub)](https://github.com/galaxy-s10/billd-live-flutter)                     | [https://live-flutter.hsslive.cn](https://live-flutter.hsslive.cn)   |",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "galaxy-s10/billd-live",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 537,
+                "url": "https://github.com/aidizhi/455555.xyz",
+                "name": "aidizhi/455555.xyz",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "aidizhi/455555.xyz",
+                "versionId": 756,
+                "documentId": 537,
+                "importable": false,
+                "catalogText": "#爱爱大学最新地址 视频 官方 https://455555.xyz\n\n<p align=\"center\">\n  <img src=\"https://img.shields.io/npm/v/dataviz-canvas.svg?style=flat-square&color=1976d2\" alt=\"npm version\" />\n  <img src=\"https://img.shields.io/github/actions/workflow/status/aidizhi/455555.xyz/ci.yml?branch=main&style=flat-square&label=Build\" alt=\"Build Status\" />\n  <img src=\"https://img.shields.io/codecov/c/github/aidizhi/455555.xyz?style=flat-square&color=4caf50\" alt=\"Coverage\" />\n  <img src=\"https://img.shields.io/npm/l/dataviz-canvas.svg?style=flat-square&color=ff9800\" alt=\"License\" />\n  <img src=\"https://img.shields.io/badge/Material-Design-00bcd4.svg?style=flat-square\" alt=\"Material Design\" />\n</p>\n\n<h1 align=\"center\">DataViz Canvas</h1>\n\n<p align=\"center\">\n  <strong>高性能 Canvas 2D 数据可视化引擎</strong><br/>\n  基于 Material Design 规范，用 TypeScript 构建的轻量级图表渲染库\n</p>\n\n<p align=\"center\">\n  <a href=\"https://455555.xyz\" target=\"_blank\">官方演示站点</a> &nbsp;·&nbsp;\n  <a href=\"https://aidizhi.github.io/455555.xyz/\" target=\"_blank\">文档中心</a> &nbsp;·&nbsp;\n  <a href=\"#api-%E6%96%87%E6%A1%A3\">API 文档</a> &nbsp;·&nbsp;\n  <a href=\"#%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97\">贡献指南</a>\n</p>\n\n---\n\n## 特性\n\n- **纯 Canvas 2D 渲染** — 无 SVG 依赖，在万级数据点下依然保持 60fps 流畅动画\n- **Material Design 主题系统** — 内置 Light / Dark 双主题，颜色、圆角、阴影严格遵循 MD3 规范\n- **TypeScript 全量类型** — 100% TypeScript 编写，导出完整 `.d.ts` 声明文件，IDE 智能提示开箱即用\n- **插件化架构** — 通过 `use(plugin)` 注册自定义渲染器、交互行为和动画策略\n- **响应式 & 高清屏适配** — 自动感知 `devicePixelRatio`，支持容器尺寸热更新\n- **Tree-shakable** — 基于 ESM 打包，未使用的图表类型不会进入最终产物\n\n---\n\n## 安装\n\n```bash\n# npm\nnpm install dataviz-canvas\n\n# pnpm（推荐）\npnpm add dataviz-canvas\n\n# yarn\nyarn add dataviz-canvas\n```\n\n> 最低要求：Node.js >= 16 · 现代浏览器（Chrome 90+、Firefox 88+、Safari 15+）\n\n---\n\n## 快速开始\n\n### 1. 创建画布容器\n\n```html\n<canvas id=\"myChart\" width=\"800\" height=\"400\"></canvas>\n```\n\n### 2. 初始化图表实例\n\n```typescript\nimport { Chart, LinearScale, BarRenderer, MaterialTheme } from 'dataviz-canvas';\n\n// 创建图表实例，绑定 Canvas 元素\nconst chart = new Chart(document.getElementById('myChart')!, {\n  // 应用 Material Design 暗色主题\n  theme: MaterialTheme.dark,\n\n  // 坐标轴配置\n  scales: {\n    x: new LinearScale({ min: 0, max: 100, title: '时间 (ms)' }),\n    y: new LinearScale({ min: 0, max: 500, title: '请求数 (req/s)' }),\n  },\n\n  // 渲染器\n  renderers: [new BarRenderer()],\n});\n\n// 注入数据\nchart.setData({\n  labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],\n  datasets: [\n    {\n      label: 'API Gateway',\n      data: [120, 85, 340, 480, 390, 210],\n      color: '#1976D2', // Material Blue 700\n    },\n    {\n      label: 'Auth Service',\n      data: [60, 45, 190, 310, 260, 150],\n      color: '#7B1FA2', // Material Purple 700\n    },\n  ],\n});\n\n// 渲染并启动入场动画\nchart.render({ animation: { duration: 800, easing: 'easeOutCubic' } });\n```\n\n### 3. 响应容器尺寸变化\n\n```typescript\n// 图表自动跟随容器 resize，也可手动触发\nconst observer = new ResizeObserver(() => chart.resize());\nobserver.observe(document.getElementById('chart-wrapper')!);\n```\n\n### 4. 交互事件\n\n```typescript\nchart.on('hover', (point) => {\n  console.log(`悬停数据: ${point.dataset.label} = ${point.value}`);\n});\n\nchart.on('click', (point) => {\n  // 点击时弹出 Material 风格 Tooltip\n  chart.showTooltip(point, { elevation: 3 });\n});\n```\n\n---\n\n## 支持的图表类型\n\n| 图表类型 | 类名 | 说明 |\n|:--------:|:-----:|:-----|\n| 柱状图 | `BarRenderer` | 垂直/水平柱状图，支持堆叠与分组 |\n| 折线图 | `LineRenderer` | 平滑曲线/折线，支持面积填充与标记点 |\n| 饼图 | `PieRenderer` | 环形/饼图，支持交互式扇区分离 |\n| 散点图 | `ScatterRenderer` | 自由散点分布，支持聚类着色 |\n| 面积图 | `AreaRenderer` | 堆叠面积图，渐变透明填充 |\n| 雷达图 | `RadarRenderer` | 多维度雷达分析图 |\n| 热力图 | `HeatmapRenderer` | 二维色阶热力矩阵 |\n| 仪表盘 | `GaugeRenderer` | 弧形仪表盘，支持多指针 |\n\n---\n\n## API 文档\n\n### 核心：`Chart` 类\n\n| 方法 / 属性 | 签名 | 说明 |\n|:------------|:-----|:-----|\n| `new Chart()` | `(canvas: HTMLCanvasElement, options: ChartOptions) => Chart` | 构造图表实例 |\n| `setData()` | `(payload: ChartData) => void` | 设置或更新图表数据 |\n| `render()` | `(opts?: RenderOptions) => void` | 执行渲染（可选动画配置） |\n| `resize()` | `() => void` | 重新计算尺寸并重绘 |\n| `destroy()` | `() => void` | 销毁实例，释放 Canvas 上下文与事件监听 |\n| `on()` | `(event: string, handler: Function) => Chart` | 注册交互事件监听 |\n| `off()` | `(event: string, handler?: Function) => Chart` | 移除事件监听 |\n| `showTooltip()` | `(point: DataPoint, opts?: TooltipOptions) => void` | 在指定数据点弹出提示框 |\n| `use()` | `(plugin: ChartPlugin) => Chart` | 注册插件 |\n| `theme` | `ThemeConfig` (读写) | 运行时切换主题 |\n\n### 坐标轴：`LinearScale` / `CategoryScale`\n\n| 参数 | 类型 | 默认值 | 说明 |\n|:-----|:-----|:------:|:-----|\n| `min` | `number` | `auto` | 轴最小值 |\n| `max` | `number` | `auto` | 轴最大值 |\n| `title` | `string` | `''` | 轴标题文本 |\n| `ticks` | `number` | `5` | 刻度数量 |\n| `grid` | `boolean` | `true` | 是否显示网格线 |\n| `format` | `(v: number) => string` | `String` | 刻度值格式化函数 |\n\n### 渲染选项：`RenderOptions`\n\n| 参数 | 类型 | 默认值 | 说明 |\n|:-----|:-----|:------:|:-----|\n| `animation` | `object \\| false` | `{ duration: 600 }` | 入场动画配置，`false` 禁用 |\n| `animation.duration` | `number` | `600` | 动画时长 (ms) |\n| `animation.easing` | `string` | `'easeOutCubic'` | 缓动函数名 |\n| `pixelRatio` | `number` | `devicePixelRatio` | 手动指定像素比 |\n\n---\n\n## 性能基准\n\n在 `Chrome 120 / macOS 14 / M2 Pro` 环境下的测试结果：\n\n| 场景 | 数据量 | 首帧渲染 | 持续帧率 (fps) | 内存占用 |\n|:-----|-------:|---------:|:--------------:|---------:|\n| 柱状图 | 10,000 条 | 12ms | 60 | 3.2 MB |\n| 折线图 | 50,000 条 | 28ms | 58 | 5.8 MB |\n| 散点图 | 100,000 点 | 45ms | 55 | 8.4 MB |\n| 热力图 (100x100) | 10,000 格 | 18ms | 60 | 4.1 MB |\n| 多数据集叠加 | 5 x 10,000 | 35ms | 57 | 6.6 MB |\n\n> 性能测试脚本位于 `benchmarks/` 目录，可运行 `pnpm bench` 在本机复现。\n\n---\n\n## 浏览器兼容性\n\n| 浏览器 | 最低版本 | 支持状态 |\n|:-------|:-------:|:-------:|\n| Chrome | 90+ | ✅ 完全支持 |\n| Firefox | 88+ | ✅ 完全支持 |\n| Safari | 15+ | ✅ 完全支持 |\n| Edge | 90+ | ✅ 完全支持 |\n| IE 11 | — | ❌ 不支持 |\n| Node.js (SSR) | 16+ | ⚠️ 仅数据预处理 |\n\n> 底层依赖 Canvas 2D API，不依赖任何 Polyfill。服务端渲染时可使用 `node-canvas` 进行静态图片导出。\n\n---\n\n## 项目结构\n\n```\n455555.xyz/\n├── src/\n│   ├── core/            # 图表核心（Chart、Scale、Animation）\n│   ├── renderers/       # 各图表类型渲染器\n│   ├── themes/          # Material Design 主题定义\n│   ├── plugins/         # 内置插件（Tooltip、Legend、Zoom）\n│   ├── utils/           # 工具函数\n│   └── index.ts         # 入口导出\n├── benchmarks/          # 性能基准测试\n├── tests/               # Jest 单元测试 & 集成测试\n├── docs/                # API 文档与使用指南\n├── playground/          # Vite 交互式演示\n├── vite.config.ts\n├── tsconfig.json\n├── jest.config.ts\n└── package.json\n```\n\n---\n\n## 开发\n\n```bash\n# 克隆仓库\ngit clone https://github.com/aidizhi/455555.xyz.git\ncd 455555.xyz\n\n# 安装依赖\npnpm install\n\n# 启动本地开发服务器（Vite + HMR）\npnpm dev\n\n# 运行单元测试（Jest）\npnpm test\n\n# 运行测试并生成覆盖率报告\npnpm test:coverage\n\n# 构建生产产物\npnpm build\n\n# 运行性能基准测试\npnpm bench\n\n# 代码检查与格式化\npnpm lint && pnpm format\n```\n\n---\n\n## 贡献指南\n\n我们欢迎任何形式的贡献，包括但不限于提交 Bug 报告、改进文档或发起 Pull Request。\n\n在贡献前，请阅读完整的 [贡献指南 (CONTRIBUTING.md)](./CONTRIBUTING.md)，了解代码规范、提交信息格式和 PR 流程。\n\n提交流程概要：\n\n1. Fork 本仓库并创建特性分支 (`git checkout -b feature/my-feature`)\n2. 编写代码并确保通过所有测试 (`pnpm test`)\n3. 提交变更 (`git commit -m 'feat(renderer): add waterfall chart support'`)\n4. 推送到远程分支 (`git push origin feature/my-feature`)\n5. 创建 Pull Request，描述变更内容与动机\n\n---\n\n## 技术栈\n\n| 技术 | 用途 |\n|:----:|:-----|\n| TypeScript | 核心代码开发，类型安全 |\n| Vite | 开发服务器与生产构建 |\n| Jest | 单元测试 & 覆盖率 |\n| Canvas 2D API | 图表渲染引擎 |\n| Material Design 3 | 主题与视觉规范 |\n| npm / pnpm | 包管理与发布 |\n\n---\n\n## 路线图\n\n- [x] v1.0 — 核心图表类型 (柱状图、折线图、饼图、散点图)\n- [x] v1.1 — Material Design 主题系统\n- [x] v1.2 — 插件架构 & Tooltip / Legend 插件\n- [x] v1.3 — 性能优化 (虚拟化渲染、离屏 Canvas 缓存)\n- [ ] v2.0 — 地图渲染器 (GeoJSON)\n- [ ] v2.0 — WebGL 加速层 (大数据量场景)\n- [ ] v2.1 — 服务端渲染 (SSR) 静态导出\n- [ ] v2.2 — React / Vue 框架绑定层\n\n---\n\n## 许可证\n\n本项目基于 [Apache-2.0 许可证](https://www.apache.org/licenses/LICENSE-2.0) 开源。\n\n```\nCopyright 2024 爱爱大学\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n```\n\n---\n\n<p align=\"center\">\n  <sub>Built with passion by <strong>爱爱大学</strong> · Hosted on GitHub</sub>\n</p>\n",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "pnpm（推荐）",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 405,
+                "url": "https://github.com/dream-num/Luckysheet",
+                "name": "dream-num/Luckysheet",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "dream-num/Luckysheet",
+                "versionId": 624,
+                "documentId": 405,
+                "importable": false,
+                "catalogText": "<div align=\"center\">\n\n![logo](/docs/.vuepress/public/img/logo_text.png)\n\n[![Join the chat at https://gitter.im/mengshukeji/Luckysheet](https://badges.gitter.im/mengshukeji/Luckysheet.svg)](https://gitter.im/mengshukeji/Luckysheet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n<a href=\"https://twitter.com/intent/follow?screen_name=luckysheet\">\n        <img src=\"https://img.shields.io/twitter/follow/luckysheet?style=social&logo=twitter\"\n            alt=\"follow on Twitter\"></a>\n\n</div>\n\n中文 | [English](./README.md)\n\n# Luckysheet 已停止维护，建议在生产环境中使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository)。新版本解决了大数据加载、图表样式、数据透视表、公式计算等问题，并做了许多优化设计，增加了导入、导出、打印、协同编辑等功能，提升了表格性能，并有专业团队提供技术支持。\n\n更多详情请关注 [#1454](https://github.com/dream-num/Luckysheet/issues/1454) 议题。\n\n## 介绍\n🚀Luckysheet 是一款功能强大、配置简单、完全开源的在线电子表格，类似于 Excel。\n\n## 链接\n | 源代码 | 文档 | 演示 | 论坛 |\n | ------ | -------- | ------ | ------ |\n | [Github](https://github.com/mengshukeji/Luckysheet)| [在线文档](https://dream-num.github.io/LuckysheetDocs/) | [在线演示](https://dream-num.github.io/LuckysheetDemo) / [协同编辑演示](http://luckysheet.lashuju.com/demo/) | [中文论坛](https://support.qq.com/product/288322)  |\n | [Gitee 镜像](https://gitee.com/mengshukeji/Luckysheet)| [Gitee 在线文档](https://mengshukeji.gitee.io/LuckysheetDocs/) | [Gitee 在线演示](https://mengshukeji.gitee.io/luckysheetdemo/) | [Google 群组](https://groups.google.com/g/luckysheet) |\n\n![Demo](/docs/.vuepress/public/img/LuckysheetDemo.gif)\n\n## 插件\n\n若需导入、导出、打印等高级功能，请使用 [Univer](https://github.com/dream-num/univer/)\n\n## 生态系统\n\n| 项目 | 描述 |\n|---------|-------------|\n| [Luckysheet Vue]          | 在 vue cli3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet Vue3]          | 在 vite 构建的 vue3 项目中使用 Luckysheet 和 Luckyexcel |\n| [Luckysheet React]          | 在 React 项目中使用 Luckysheet |\n| [Luckyexcel Node]          | 在 koa2 中使用 Luckyexcel |\n| [Luckysheet Server]          | Java 后端 Luckysheet Server |\n| [Luckysheet Server Starter]          | LuckysheetServer Docker 部署启动模板 |\n\n[Luckysheet Vue]: https://github.com/mengshukeji/luckysheet-vue\n[Luckysheet Vue3]: https://github.com/hjwforever/luckysheet-vue3-vite\n[Luckysheet React]: https://github.com/mengshukeji/luckysheet-react\n[Luckyexcel Node]: https://github.com/mengshukeji/Luckyexcel-node\n[Luckysheet Server]: https://github.com/mengshukeji/LuckysheetServer\n[Luckysheet Server Starter]: https://github.com/mengshukeji/LuckysheetServerStarter\n\n## 功能特性\n\n- **格式化**：样式、条件格式、文本对齐与旋转、文本截断、溢出、自动换行、多种数据类型、单元格分割样式\n- **单元格**：拖放、填充柄、多选、查找和替换、定位、合并单元格、数据验证\n- **行与列**：隐藏、插入、删除行或列、冻结、以及拆分文本\n- **操作**：撤销、重做、复制、粘贴、剪切、快捷键、格式刷、拖放选择\n- **公式与函数**：内置、远程和自定义公式\n- **表格**：筛选、排序\n- **增强功能**：数据透视表、图表、评论、协同编辑、插入图片、矩阵计算、截图、复制到其他格式、EXCEL 导入导出等。\n\n更详细的功能列表，请参阅：[功能特性](https://dream-num.github.io/LuckysheetDocs/guide/features.html)",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "dream-num/Luckysheet",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 322,
+                "url": "https://github.com/vcync/modV",
+                "name": "vcync/modV",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "vcync/modV",
+                "versionId": 541,
+                "documentId": 322,
+                "importable": false,
+                "catalogText": "<h1 align=\"center\">modV</h1>\n<p align=\"center\"><img alt=\"modV logo\" src=\"https://github.com/vcync/modV/raw/main/build/icon.png\" width=\"256\" /></p>\n\n<p align=\"center\">\n  <a href=\"https://github.com/vcync/modV/releases/latest\">\n    <img alt=\"GitHub release (latest by date including pre-releases)\" src=\"https://img.shields.io/github/v/release/vcync/modV?color=blue&include_prereleases\" />\n  </a>\n  <a href=\"https://modv.vcync.io/\" target=\"_blank\">\n    <img alt=\"Documentation\" src=\"https://img.shields.io/badge/documentation-living-blue.svg\" />\n  </a>\n  <a href=\"https://github.com/vcync/modV/graphs/commit-activity\" target=\"_blank\">\n    <img alt=\"Maintenance\" src=\"https://img.shields.io/badge/Maintained%3F-yes-green.svg\" />\n  </a>\n  <a href=\"https://github.com/vcync/modV/blob/main/LICENSE\" target=\"_blank\">\n    <img alt=\"License: MIT\" src=\"https://img.shields.io/github/license/vcync/modV\" />\n  </a>\n  <a href=\"https://twitter.com/_modV_\" target=\"_blank\">\n    <img alt=\"Twitter: @_modV_\" src=\"https://img.shields.io/twitter/follow/_modV_.svg?style=social\" />\n  </a>\n</p>\n<p align=\"center\">\nmodV 是一个基于 Web 技术的模块化音频可视化环境。\n</p>\n\n\n## 下载\n\n在发布页面可以找到最新的 modV 二进制文件下载。\n\nhttps://github.com/vcync/modV/releases/latest\n\n\n\n## 项目开发环境搭建\n\n```\nyarn\n```\n\n### 编译和热重载（开发模式）\n\n```\nyarn electron:serve\n```\n\n### 构建用于发布\n\n```\nyarn electron:build\n```\n\n### 注意事项\n\n#### 移除一个包\n\n如果你想使用 `yarn remove` 移除一个包，请确保之后运行 `yarn`，因为我们使用了 `patch-package` 而没有使用 `postinstall-postinstall`，原因见 https://github.com/vcync/modV/issues/554 。\n\n\n\n## 针对不同平台的构建和开发说明\n\n### Windows\n\n#### 命令行\n\n需要使用 CMD 或 PowerShell，因为需要为 Windows 编译或获取原生二进制文件。不支持 WSL（适用于 Linux 的 Windows 子系统）或 WSL2，因为它们会尝试为 Ubuntu 编译这些二进制文件。\n\n#### 依赖\n\nnode-gyp 需要 Visual Studio 工具和 Python 来构建原生 Node 模块。\n从 Node.js 16 开始，官方的 Windows 安装程序可以安装它们。\n\n如果你使用 nvm-windows 或其他无界面的 Node.js 安装方式，可以使用 [Chocolatey](https://chocolatey.org/install) 轻松安装所需的包：\n\n```\nchoco install python visualstudio2022-workload-vctools\n```\n\n#### 'vue-cli-service' 未被识别\n\n请查看 issue 122 ([vcync/modv-3/issues/122#issuecomment-640100114](https://github.com/vcync/modv-3/issues/122#issuecomment-640100114)) 了解如何解决此问题。\n\n### Ubuntu/Debian\n\nNDI 源需要 libndi，必须安装才能构建 modV。你可以在这里找到下载：[Palakis/obs-ndi/releases](https://github.com/Palakis/obs-ndi/releases)\n\n最后成功构建的版本是 `libndi4_4.5.1-1_amd64.deb`。\n\n### 其他 Linux 发行版\n\n未测试。NDI 由 grandiose 提供，我们的分支在这里：[vcync/grandiose](https://github.com/vcync/grandiose/) 这个 grandiose 分支支持其他 libndi 平台，但即使在 Ubuntu 上我们也需要安装上述 libndi 包。\n\n请告诉我们你的进展（无论好坏），我们会相应更新仓库和文档。\n\n\n\n## 贡献\n\n欢迎贡献、反馈问题和提出功能请求！\n请随时查看 [issues 页面](https://github.com/vcync/modV/issues)。\n\n\n\n## 表达你的支持\n\n如果这个项目对你有帮助，请给一个 ⭐️ ！\n\n\n\n## 致谢\n\n感谢：\n\n- [Tim Pietrusky](https://nerddis.co/) 一直以来的支持、帮助、指导和善意\n- [Live:JS](http://livejs.network/) 提供的灵感、动力和建议\n- Hugh Rawlinson、Nevo Segal 和 Jakub Fiala 开发的出色的音频分析引擎 [meyda](https://github.com/hughrawlinson/meyda)\n- [Dario Villanueva](http://alolo.co/) 提供的建议和对实时视觉效果的介绍，这启发了整个项目\n\n\n\n## 许可证\n\n版权所有 © 2022 [vcync](https://g",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "vcync/modV",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              },
+              {
+                "id": 317,
+                "url": "https://github.com/apache/echarts",
+                "name": "apache/echarts",
+                "type": "EXTERNAL_PROJECT",
+                "status": "DOCUMENTED",
+                "archived": false,
+                "sourceRef": "apache/echarts",
+                "versionId": 536,
+                "documentId": 317,
+                "importable": false,
+                "catalogText": "# Apache ECharts\n\n<a href=\"https://echarts.apache.org/\">\n    <img style=\"vertical-align: top;\" src=\"./asset/logo.png?raw=true\" alt=\"logo\" height=\"50px\">\n</a>\n\nApache ECharts 是一款免费、功能强大的图表和可视化库，提供了一种简单的方式，为你的商业产品添加直观、交互式且高度可定制的图表。它使用纯 JavaScript 编写，并基于 <a href=\"https://github.com/ecomfe/zrender\">zrender</a>——一个全新的轻量级 canvas 库。\n\n**[中文官网](https://echarts.apache.org/zh/index.html)** | **[英文主页](https://echarts.apache.org/en/index.html)**\n\n[![许可证](https://img.shields.io/npm/l/echarts?color=5470c6)](https://github.com/apache/echarts/blob/master/LICENSE) [![最新 npm 发布](https://img.shields.io/npm/v/echarts?color=91cc75)](https://www.npmjs.com/package/echarts) [![NPM 下载量](https://img.shields.io/npm/dm/echarts.svg?label=npm%20%E4%B8%8B%E8%BD%BD%E9%87%8F&style=flat&color=fac858)](https://www.npmjs.com/package/echarts) [![贡献者](https://img.shields.io/github/contributors/apache/echarts?color=3ba272)](https://github.com/apache/echarts/graphs/contributors)\n\n[![构建状态](https://github.com/apache/echarts/actions/workflows/ci.yml/badge.svg)](https://github.com/apache/echarts/actions/workflows/ci.yml)\n\n## 获取 Apache ECharts\n\n你可以选择以下方式之一：\n\n+ 从[官方网站](https://echarts.apache.org/download.html)下载\n+ `npm install echarts --save`\n+ CDN：[jsDelivr CDN](https://www.jsdelivr.com/package/npm/echarts?path=dist)\n\n## 文档\n\n+ [快速入门](https://echarts.apache.org/handbook)\n+ [API](https://echarts.apache.org/api.html)\n+ [配置项手册](https://echarts.apache.org/option.html)\n+ [示例](https://echarts.apache.org/examples)\n\n## 获取帮助\n\n+ [GitHub Issues](https://github.com/apache/echarts/issues) 用于报告 bug 和提出功能需求\n+ 邮件 [dev@echarts.apache.org](mailto:dev@echarts.apache.org) 用于一般问题\n+ 订阅[邮件列表](https://echarts.apache.org/maillist.html)以获取项目最新动态\n\n## 构建\n\n构建 echarts 源代码：\n\n在 echarts 根目录下执行以下指令：\n（需要安装 [Node.js](https://nodejs.org)）\n\n```shell\n# 从 NPM 安装依赖：\nnpm install\n\n# 当源代码发生变化时，立即以监视模式重建源代码。\n# 它会打开 `./test` 目录，你可以打开 `-cases.html` 来获取所有测试用例的列表。\n# 如果你想创建测试用例，运行 `npm run mktest:help` 了解更多。\nnpm run dev\n\n# 检查 TypeScript 代码的正确性。\nnpm run checktype\n\n# 如果想要构建并获取所有类型的“生产”文件：\nnpm run release\n```\n\n之后，`dist` 目录下会生成“生产”文件。\n\n## 贡献\n\n如果你希望本地调试或发起 pull request，请参考[贡献指南](https://github.com/apache/echarts/blob/master/CONTRIBUTING.md)文档。\n\n## 资源\n\n### Awesome ECharts\n\n[https://github.com/ecomfe/awesome-echarts](https://github.com/ecomfe/awesome-echarts)\n\n### 扩展\n\n+ [ECharts GL](https://github.com/ecomfe/echarts-gl) ECharts 的扩展包，提供 3D 图表、地球可视化以及 WebGL 加速。\n\n+ [Liquidfill 水球图](https://github.com/ecomfe/echarts-liquidfill)\n\n+ [Wordcloud 字符云](https://github.com/ecomfe/echarts-wordcloud)\n\n+ [Extension for Baidu Map 百度地图扩展](https://github.com/apache/echarts/tree/master/extension-src/bmap) 一个提供百度地图服务 SDK 封装器的扩展。\n\n+ [vue-echarts](https://github.com/ecomfe/vue-echarts) 用于 Vue.js 的 ECharts 组件\n\n+ [echarts-stat](https://github.com/ecomfe/echarts-stat) ECharts 的统计工具\n\n## 许可证\n\nECharts 采用 Apache License V2 许可。\n\n## 行为准则\n\n请参考 [Apache 行为准则](https://www.apache.org/foundation/policies/conduct.html)。\n\n## 论文\n\nDeqing Li, Honghui Mei, Yi Shen, Shuang Su, Wenli Zhang, Junting Wang, Ming Zu, Wei Chen.\n[ECharts: 一个声明式",
+                "description": "已抓取的仓库资料；主语言、周期、难度与资源要求尚未形成可核实的结构化字段。",
+                "catalogTitle": "Apache ECharts",
+                "evidenceStatus": "DOCUMENT_IDENTITY",
+                "evidenceAvailable": true
+              }
+            ],
+            "parameters": {
+              "query": "Vue | Vue前端开发框架 | Vue渐进式JavaScript框架 | Vue.js web application development",
+              "topic": [
+                "Vue"
+              ],
+              "purpose": "PURPOSE_REVIEW"
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "reviewProjectPurpose",
+          "detail": {
+            "errorCode": "DEPENDENCY_FAILED"
+          },
+          "status": "DEGRADED"
+        }
+      ]
+    }
+  ]
+}

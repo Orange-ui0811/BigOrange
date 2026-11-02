@@ -1,0 +1,3677 @@
+{
+  "scope": "8 historical synthetic scenarios, 2 repeats each. Actual service path, not browser/full-controller performance. No independent blind-set claim.",
+  "aggregates": {
+    "A": {
+      "attempts": 16,
+      "successes": 15,
+      "failures": 1,
+      "knownUsageCalls": 15,
+      "unknownUsageCalls": 1,
+      "modelHttpCalls": 16,
+      "meanAllWallMs": 59099.888812125,
+      "meanSuccessWallMs": 61920.23842926667,
+      "meanSuccessRetrievalMs": 664.3662125333333,
+      "meanSuccessModelMs": 61162.1868954,
+      "recommendations": 25,
+      "emptyRecommendationRuns": 2,
+      "knownInputTokens": 15209,
+      "knownOutputTokens": 55140,
+      "knownReasoningTokens": 44779,
+      "knownCachedInputTokens": 0,
+      "duplicateCandidateRuns": 0,
+      "richCardFieldsComplete": 25,
+      "medianSuccessWallMs": 65737.944635,
+      "p95SuccessWallMs": 105345.9723,
+      "ragSelectedCards": 11,
+      "businessSelectedCards": 14,
+      "boundCards": 25,
+      "reportFieldsComplete": 15,
+      "actualModels": [
+        "deepseek-v4-pro",
+        "deepseek-v4-pro-ga-260813"
+      ],
+      "costStatus": "UNKNOWN",
+      "meanSuccessEvidenceCharacters": 608.1333333333333
+    },
+    "B": {
+      "attempts": 16,
+      "successes": 16,
+      "failures": 0,
+      "knownUsageCalls": 16,
+      "unknownUsageCalls": 0,
+      "modelHttpCalls": 16,
+      "meanAllWallMs": 53748.2028071875,
+      "meanSuccessWallMs": 53748.2028071875,
+      "meanSuccessRetrievalMs": 450.9234098125,
+      "meanSuccessModelMs": 53204.9969398125,
+      "recommendations": 27,
+      "emptyRecommendationRuns": 2,
+      "knownInputTokens": 14522,
+      "knownOutputTokens": 48468,
+      "knownReasoningTokens": 37493,
+      "knownCachedInputTokens": 0,
+      "duplicateCandidateRuns": 1,
+      "richCardFieldsComplete": 27,
+      "medianSuccessWallMs": 52875.680993500006,
+      "p95SuccessWallMs": 91429.513316,
+      "ragSelectedCards": 13,
+      "businessSelectedCards": 14,
+      "boundCards": 27,
+      "reportFieldsComplete": 16,
+      "actualModels": [
+        "deepseek-v4-pro",
+        "deepseek-v4-pro-ga-260813"
+      ],
+      "costStatus": "UNKNOWN",
+      "meanSuccessEvidenceCharacters": 415.125
+    }
+  },
+  "pairs": [
+    {
+      "case": "agent_business",
+      "round": 1,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 89943.278397,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/langchain-ai/langchain",
+          "https://github.com/langgenius/dify"
+        ],
+        "usage": {
+          "prompt_tokens": 1549,
+          "completion_tokens": 5481,
+          "total_tokens": 7030,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4659
+          }
+        }
+      },
+      "B": {
+        "wallMs": 59613.314668,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/777genius/agent-teams-ai",
+          "https://github.com/langgenius/dify"
+        ],
+        "usage": {
+          "prompt_tokens": 1645,
+          "completion_tokens": 3783,
+          "total_tokens": 5428,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2897
+          }
+        }
+      }
+    },
+    {
+      "case": "agent_business",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 52131.999621,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/chaitin/monkeycode",
+          "https://github.com/langgenius/dify"
+        ],
+        "usage": {
+          "prompt_tokens": 1549,
+          "completion_tokens": 3039,
+          "total_tokens": 4588,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2255
+          }
+        }
+      },
+      "B": {
+        "wallMs": 82159.185498,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/777genius/agent-teams-ai",
+          "https://github.com/langgenius/dify"
+        ],
+        "usage": {
+          "prompt_tokens": 1645,
+          "completion_tokens": 4663,
+          "total_tokens": 6308,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3895
+          }
+        }
+      }
+    },
+    {
+      "case": "data_analysis",
+      "round": 1,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 53724.23685,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/apache/doris",
+          "https://github.com/elastic/kibana"
+        ],
+        "usage": {
+          "prompt_tokens": 1016,
+          "completion_tokens": 3198,
+          "total_tokens": 4214,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2359
+          }
+        }
+      },
+      "B": {
+        "wallMs": 54959.880082,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/apache/doris",
+          "https://github.com/elastic/kibana"
+        ],
+        "usage": {
+          "prompt_tokens": 758,
+          "completion_tokens": 3520,
+          "total_tokens": 4278,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2776
+          }
+        }
+      }
+    },
+    {
+      "case": "data_analysis",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": false,
+      "A": {
+        "wallMs": 70055.103817,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/apache/doris",
+          "https://github.com/elastic/kibana"
+        ],
+        "usage": {
+          "prompt_tokens": 1016,
+          "completion_tokens": 4299,
+          "total_tokens": 5315,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3505
+          }
+        }
+      },
+      "B": {
+        "wallMs": 29888.202814,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/apache/doris",
+          "https://github.com/elastic/kibana"
+        ],
+        "usage": {
+          "prompt_tokens": 679,
+          "completion_tokens": 1349,
+          "total_tokens": 2028,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 686
+          }
+        }
+      }
+    },
+    {
+      "case": "printing_explore",
+      "round": 1,
+      "bothSuccess": true,
+      "sameActualModel": false,
+      "A": {
+        "wallMs": 65737.944635,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/mainsail-crew/mainsail",
+          "https://github.com/slic3r/slic3r"
+        ],
+        "usage": {
+          "prompt_tokens": 905,
+          "completion_tokens": 3786,
+          "total_tokens": 4691,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3046
+          }
+        }
+      },
+      "B": {
+        "wallMs": 31836.651433,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/bencbartlett/3d-printed-mirror-array",
+          "https://github.com/mainsail-crew/mainsail"
+        ],
+        "usage": {
+          "prompt_tokens": 815,
+          "completion_tokens": 1417,
+          "total_tokens": 2232,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 610
+          }
+        }
+      }
+    },
+    {
+      "case": "printing_explore",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 75040.215045,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/mainsail-crew/mainsail",
+          "https://github.com/slic3r/slic3r"
+        ],
+        "usage": {
+          "prompt_tokens": 905,
+          "completion_tokens": 4477,
+          "total_tokens": 5382,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3596
+          }
+        }
+      },
+      "B": {
+        "wallMs": 91429.513316,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/bencbartlett/3d-printed-mirror-array",
+          "https://github.com/mainsail-crew/mainsail"
+        ],
+        "usage": {
+          "prompt_tokens": 894,
+          "completion_tokens": 5327,
+          "total_tokens": 6221,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4555
+          }
+        }
+      }
+    },
+    {
+      "case": "rag_career",
+      "round": 1,
+      "bothSuccess": true,
+      "sameActualModel": false,
+      "A": {
+        "wallMs": 105345.9723,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/headroomlabs-ai/headroom",
+          "https://github.com/langgenius/dify"
+        ],
+        "usage": {
+          "prompt_tokens": 1201,
+          "completion_tokens": 6581,
+          "total_tokens": 7782,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 5662
+          }
+        }
+      },
+      "B": {
+        "wallMs": 38986.60228,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/langgenius/dify",
+          "https://github.com/pathwaycom/llm-app"
+        ],
+        "usage": {
+          "prompt_tokens": 1170,
+          "completion_tokens": 1822,
+          "total_tokens": 2992,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 883
+          }
+        }
+      }
+    },
+    {
+      "case": "rag_career",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 78406.260479,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/langgenius/dify",
+          "https://github.com/promptfoo/promptfoo"
+        ],
+        "usage": {
+          "prompt_tokens": 1201,
+          "completion_tokens": 5015,
+          "total_tokens": 6216,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4275
+          }
+        }
+      },
+      "B": {
+        "wallMs": 69125.772724,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/langgenius/dify",
+          "https://github.com/pathwaycom/llm-app"
+        ],
+        "usage": {
+          "prompt_tokens": 1249,
+          "completion_tokens": 4101,
+          "total_tokens": 5350,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3344
+          }
+        }
+      }
+    },
+    {
+      "case": "rag_python",
+      "round": 1,
+      "bothSuccess": true,
+      "sameActualModel": false,
+      "A": {
+        "wallMs": 78966.189777,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/langgenius/dify",
+          "https://github.com/quivrhq/quivr"
+        ],
+        "usage": {
+          "prompt_tokens": 1101,
+          "completion_tokens": 4718,
+          "total_tokens": 5819,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3931
+          }
+        }
+      },
+      "B": {
+        "wallMs": 39891.355538,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/quivrhq/quivr",
+          "https://github.com/timmyy123/llm-hub"
+        ],
+        "usage": {
+          "prompt_tokens": 842,
+          "completion_tokens": 1909,
+          "total_tokens": 2751,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1169
+          }
+        }
+      }
+    },
+    {
+      "case": "rag_python",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 71228.931184,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/langgenius/dify",
+          "https://github.com/quivrhq/quivr"
+        ],
+        "usage": {
+          "prompt_tokens": 1101,
+          "completion_tokens": 4266,
+          "total_tokens": 5367,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3544
+          }
+        }
+      },
+      "B": {
+        "wallMs": 50791.481905,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/quivrhq/quivr",
+          "https://github.com/timmyy123/llm-hub"
+        ],
+        "usage": {
+          "prompt_tokens": 921,
+          "completion_tokens": 2787,
+          "total_tokens": 3708,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2039
+          }
+        }
+      }
+    },
+    {
+      "case": "spring_beginner",
+      "round": 1,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 62923.290318,
+        "recommendations": 1,
+        "repositories": [
+          "https://github.com/alibaba/nacos"
+        ],
+        "usage": {
+          "prompt_tokens": 666,
+          "completion_tokens": 3918,
+          "total_tokens": 4584,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3343
+          }
+        }
+      },
+      "B": {
+        "wallMs": 79033.383994,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/practical-tutorials/project-based-learning"
+        ],
+        "usage": {
+          "prompt_tokens": 623,
+          "completion_tokens": 5002,
+          "total_tokens": 5625,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4345
+          }
+        }
+      }
+    },
+    {
+      "case": "spring_beginner",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": false,
+      "A": {
+        "wallMs": 13210.586324,
+        "recommendations": 0,
+        "repositories": [],
+        "usage": {
+          "prompt_tokens": 587,
+          "completion_tokens": 487,
+          "total_tokens": 1074,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 288
+          }
+        }
+      },
+      "B": {
+        "wallMs": 86040.334239,
+        "recommendations": 1,
+        "repositories": [
+          "https://github.com/practical-tutorials/project-based-learning"
+        ],
+        "usage": {
+          "prompt_tokens": 623,
+          "completion_tokens": 5033,
+          "total_tokens": 5656,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4545
+          }
+        }
+      }
+    },
+    {
+      "case": "unavailable",
+      "round": 1,
+      "bothSuccess": false,
+      "sameActualModel": false,
+      "A": {
+        "wallMs": 16794.644555,
+        "recommendations": 0,
+        "repositories": [],
+        "usage": null
+      },
+      "B": {
+        "wallMs": 23989.608356,
+        "recommendations": 0,
+        "repositories": [],
+        "usage": {
+          "prompt_tokens": 470,
+          "completion_tokens": 1288,
+          "total_tokens": 1758,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1047
+          }
+        }
+      }
+    },
+    {
+      "case": "unavailable",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 13314.657753,
+        "recommendations": 0,
+        "repositories": [],
+        "usage": {
+          "prompt_tokens": 391,
+          "completion_tokens": 520,
+          "total_tokens": 911,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 260
+          }
+        }
+      },
+      "B": {
+        "wallMs": 10925.638516,
+        "recommendations": 0,
+        "repositories": [],
+        "usage": {
+          "prompt_tokens": 391,
+          "completion_tokens": 413,
+          "total_tokens": 804,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 153
+          }
+        }
+      }
+    },
+    {
+      "case": "vue_learning",
+      "round": 1,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 38374.639008,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/justarchinet/asf-webconfiggenerator",
+          "https://github.com/pocket-stack/pocketjs"
+        ],
+        "usage": {
+          "prompt_tokens": 971,
+          "completion_tokens": 1727,
+          "total_tokens": 2698,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1004
+          }
+        }
+      },
+      "B": {
+        "wallMs": 43742.059504,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/davidhdev/canvas-ui",
+          "https://github.com/justarchinet/asf-webconfiggenerator"
+        ],
+        "usage": {
+          "prompt_tokens": 859,
+          "completion_tokens": 1903,
+          "total_tokens": 2762,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1141
+          }
+        }
+      }
+    },
+    {
+      "case": "vue_learning",
+      "round": 2,
+      "bothSuccess": true,
+      "sameActualModel": true,
+      "A": {
+        "wallMs": 60400.270931,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/justarchinet/asf-webconfiggenerator",
+          "https://github.com/zhensherlock/protocol-launcher"
+        ],
+        "usage": {
+          "prompt_tokens": 1050,
+          "completion_tokens": 3628,
+          "total_tokens": 4678,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3052
+          }
+        }
+      },
+      "B": {
+        "wallMs": 67558.260048,
+        "recommendations": 2,
+        "repositories": [
+          "https://github.com/justarchinet/asf-webconfiggenerator",
+          "https://github.com/zhensherlock/protocol-launcher"
+        ],
+        "usage": {
+          "prompt_tokens": 938,
+          "completion_tokens": 4151,
+          "total_tokens": 5089,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3408
+          }
+        }
+      }
+    }
+  ],
+  "rows": [
+    {
+      "case": "agent_business",
+      "round": 1,
+      "side": "A",
+      "file": "agent_business-1-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 89943.278397,
+      "retrievalMs": 757.302058,
+      "modelMs": 89098.981113,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1549,
+        "completion_tokens": 5481,
+        "total_tokens": 7030,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4659
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:218",
+        "E3"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/langgenius/dify"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/datawhalechina/hello-agents",
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/microsoft/ai-agents-for-beginners"
+      ],
+      "evidenceCharacters": 488,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 703.5728280000001,
+        "A.embeddingAndVector": 728.8993190000001,
+        "A.restoreMetadata": 13.624039,
+        "A.topicGateAndFusion": 1.494999,
+        "A.lexical": 12.130579,
+        "A.selectProjects": 0.567973,
+        "A.renderEvidence": 0.495812,
+        "retrieval.total": 757.317318,
+        "graph.database": 68.470616,
+        "business.beginner": 3.950482,
+        "business.career": 6.520219,
+        "prompt.compose": 0.230321,
+        "prompt.protocol": 0.005962,
+        "model.http": 89098.998729,
+        "output.parseAndAssemble": 1.128027,
+        "output.bindSources": 0.105997
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 6,
+      "emptyFields": [
+        {
+          "candidateId": "C:218",
+          "fields": []
+        },
+        {
+          "candidateId": "E3",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "agent_business",
+      "round": 1,
+      "side": "B",
+      "file": "agent_business-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 59613.314668,
+      "retrievalMs": 583.563857,
+      "modelMs": 58931.413228,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1645,
+        "completion_tokens": 3783,
+        "total_tokens": 5428,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2897
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:218",
+        "E3"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/langgenius/dify"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/agent-analytics/awesome-multi-agent-orchestrators",
+        "https://github.com/datawhalechina/hello-agents"
+      ],
+      "evidenceCharacters": 658,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 1.086275,
+        "B.indexStore": 0.011783,
+        "B.queryEmbedding": 225.31518,
+        "B.embeddingAndVector": 321.58828200000005,
+        "B.lexical": 33.318365,
+        "B.names": 16.457918,
+        "B.nativeFusion": 11.124882,
+        "B.databaseMetadataAndFilters": 196.15132699999998,
+        "B.dedupAndSelect": 1.580241,
+        "B.relevanceAndPolicy": 0.13186900000000001,
+        "B.native.total": 581.9840899999999,
+        "B.adapterTopicGateAndFusion": 0.756223,
+        "B.renderEvidence": 0.694772,
+        "retrieval.total": 583.567254,
+        "graph.database": 79.219278,
+        "business.beginner": 4.764719,
+        "business.career": 8.135647,
+        "prompt.compose": 0.293104,
+        "prompt.protocol": 0.006282,
+        "model.http": 58931.427246,
+        "output.parseAndAssemble": 1.107631,
+        "output.bindSources": 0.102751
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 6,
+      "emptyFields": [
+        {
+          "candidateId": "C:218",
+          "fields": []
+        },
+        {
+          "candidateId": "E3",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "agent_business",
+      "round": 2,
+      "side": "A",
+      "file": "agent_business-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 52131.999621,
+      "retrievalMs": 584.479884,
+      "modelMs": 51480.709194,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1549,
+        "completion_tokens": 3039,
+        "total_tokens": 4588,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2255
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:218",
+        "B:6"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/chaitin/monkeycode",
+        "https://github.com/langgenius/dify"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/datawhalechina/hello-agents",
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/microsoft/ai-agents-for-beginners"
+      ],
+      "evidenceCharacters": 488,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 561.569418,
+        "A.embeddingAndVector": 569.997834,
+        "A.restoreMetadata": 9.407424,
+        "A.topicGateAndFusion": 0.931523,
+        "A.lexical": 3.612379,
+        "A.selectProjects": 0.149584,
+        "A.renderEvidence": 0.328025,
+        "retrieval.total": 584.492499,
+        "graph.database": 53.356545,
+        "business.beginner": 3.116954,
+        "business.career": 4.650543,
+        "prompt.compose": 0.112883,
+        "prompt.protocol": 0.004599,
+        "model.http": 51480.72292,
+        "output.parseAndAssemble": 0.900707,
+        "output.bindSources": 0.060248
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 6,
+      "emptyFields": [
+        {
+          "candidateId": "C:218",
+          "fields": []
+        },
+        {
+          "candidateId": "B:6",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "agent_business",
+      "round": 2,
+      "side": "B",
+      "file": "agent_business-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 82159.185498,
+      "retrievalMs": 313.090326,
+      "modelMs": 81775.81968,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1645,
+        "completion_tokens": 4663,
+        "total_tokens": 6308,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3895
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E3",
+        "C:218"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/langgenius/dify"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/777genius/agent-teams-ai",
+        "https://github.com/agent-analytics/awesome-multi-agent-orchestrators",
+        "https://github.com/datawhalechina/hello-agents"
+      ],
+      "evidenceCharacters": 658,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 0.595027,
+        "B.indexStore": 0.011061,
+        "B.queryEmbedding": 120.13143,
+        "B.embeddingAndVector": 158.325928,
+        "B.lexical": 10.807706,
+        "B.names": 7.868754,
+        "B.nativeFusion": 10.943845,
+        "B.databaseMetadataAndFilters": 121.832518,
+        "B.dedupAndSelect": 1.337212,
+        "B.relevanceAndPolicy": 0.117391,
+        "B.native.total": 312.198636,
+        "B.adapterTopicGateAndFusion": 0.28573,
+        "B.renderEvidence": 0.523968,
+        "retrieval.total": 313.093201,
+        "graph.database": 54.588472,
+        "business.beginner": 3.871335,
+        "business.career": 4.353108,
+        "prompt.compose": 0.140465,
+        "prompt.protocol": 0.00505,
+        "model.http": 81775.834519,
+        "output.parseAndAssemble": 0.900612,
+        "output.bindSources": 0.064036
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 6,
+      "emptyFields": [
+        {
+          "candidateId": "E3",
+          "fields": []
+        },
+        {
+          "candidateId": "C:218",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "data_analysis",
+      "round": 1,
+      "side": "A",
+      "file": "data_analysis-1-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 53724.23685,
+      "retrievalMs": 458.22109,
+      "modelMs": 53188.910371,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1016,
+        "completion_tokens": 3198,
+        "total_tokens": 4214,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2359
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:210",
+        "C:260"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana",
+        "https://github.com/gupy-io/gupy-skills-candidato"
+      ],
+      "evidenceCharacters": 593,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 423.476183,
+        "A.embeddingAndVector": 438.337002,
+        "A.restoreMetadata": 11.35387,
+        "A.topicGateAndFusion": 2.9894700000000003,
+        "A.lexical": 4.732826,
+        "A.selectProjects": 0.178762,
+        "A.renderEvidence": 0.552839,
+        "retrieval.total": 458.234026,
+        "graph.database": 63.729679,
+        "business.career": 5.399308,
+        "prompt.compose": 0.098935,
+        "prompt.protocol": 0.006312,
+        "model.http": 53188.934629,
+        "output.parseAndAssemble": 1.282678,
+        "output.bindSources": 0.092642
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "C:210",
+          "fields": []
+        },
+        {
+          "candidateId": "C:260",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "data_analysis",
+      "round": 1,
+      "side": "B",
+      "file": "data_analysis-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 54959.880082,
+      "retrievalMs": 399.612908,
+      "modelMs": 54480.147604,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 758,
+        "completion_tokens": 3520,
+        "total_tokens": 4278,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2776
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:210",
+        "C:260"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana"
+      ],
+      "evidenceCount": 0,
+      "retrievedRepositories": [],
+      "evidenceCharacters": 0,
+      "retrievalStatus": "EMPTY",
+      "stagesMs": {
+        "B.activeGeneration": 1.590381,
+        "B.indexStore": 0.011682999999999999,
+        "B.queryEmbedding": 151.390197,
+        "B.embeddingAndVector": 213.60269,
+        "B.lexical": 9.914559,
+        "B.names": 7.46388,
+        "B.nativeFusion": 8.883976,
+        "B.databaseMetadataAndFilters": 144.015945,
+        "B.dedupAndSelect": 12.176601,
+        "B.relevanceAndPolicy": 0.425452,
+        "B.native.total": 398.532827,
+        "B.adapterTopicGateAndFusion": 1.02291,
+        "B.renderEvidence": 0.007545,
+        "retrieval.total": 399.615533,
+        "graph.database": 66.335831,
+        "business.career": 7.120278,
+        "prompt.compose": 0.11734,
+        "prompt.protocol": 0.006132,
+        "model.http": 54480.165329,
+        "output.parseAndAssemble": 0.728878,
+        "output.bindSources": 0.072724
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "C:210",
+          "fields": []
+        },
+        {
+          "candidateId": "C:260",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "data_analysis",
+      "round": 2,
+      "side": "A",
+      "file": "data_analysis-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 70055.103817,
+      "retrievalMs": 677.708089,
+      "modelMs": 69306.207466,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1016,
+        "completion_tokens": 4299,
+        "total_tokens": 5315,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3505
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:210",
+        "C:260"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana",
+        "https://github.com/gupy-io/gupy-skills-candidato"
+      ],
+      "evidenceCharacters": 593,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 641.878733,
+        "A.embeddingAndVector": 656.362905,
+        "A.restoreMetadata": 13.126773,
+        "A.topicGateAndFusion": 4.382372999999999,
+        "A.lexical": 3.065547,
+        "A.selectProjects": 0.10186,
+        "A.renderEvidence": 0.564388,
+        "retrieval.total": 677.723409,
+        "graph.database": 59.987348,
+        "business.career": 5.844772,
+        "prompt.compose": 0.147109,
+        "prompt.protocol": 0.006973,
+        "model.http": 69306.223167,
+        "output.parseAndAssemble": 0.610967,
+        "output.bindSources": 0.058695
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "C:210",
+          "fields": []
+        },
+        {
+          "candidateId": "C:260",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "data_analysis",
+      "round": 2,
+      "side": "B",
+      "file": "data_analysis-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 29888.202814,
+      "retrievalMs": 328.49104,
+      "modelMs": 29495.437679,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 679,
+        "completion_tokens": 1349,
+        "total_tokens": 2028,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 686
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:210",
+        "C:260"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/apache/doris",
+        "https://github.com/elastic/kibana"
+      ],
+      "evidenceCount": 0,
+      "retrievedRepositories": [],
+      "evidenceCharacters": 0,
+      "retrievalStatus": "EMPTY",
+      "stagesMs": {
+        "B.activeGeneration": 0.92464,
+        "B.indexStore": 0.012704,
+        "B.queryEmbedding": 150.009662,
+        "B.embeddingAndVector": 185.896306,
+        "B.lexical": 8.239684,
+        "B.names": 5.984771,
+        "B.nativeFusion": 8.315629,
+        "B.databaseMetadataAndFilters": 103.32629,
+        "B.dedupAndSelect": 12.08027,
+        "B.relevanceAndPolicy": 0.140876,
+        "B.native.total": 325.331847,
+        "B.adapterTopicGateAndFusion": 3.0901069999999997,
+        "B.renderEvidence": 0.002765,
+        "retrieval.total": 328.494536,
+        "graph.database": 53.117294,
+        "business.career": 4.510273,
+        "prompt.compose": 0.10712,
+        "prompt.protocol": 0.006092,
+        "model.http": 29495.454462,
+        "output.parseAndAssemble": 0.608032,
+        "output.bindSources": 0.046872
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "C:210",
+          "fields": []
+        },
+        {
+          "candidateId": "C:260",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "printing_explore",
+      "round": 1,
+      "side": "A",
+      "file": "printing_explore-1-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 65737.944635,
+      "retrievalMs": 593.057492,
+      "modelMs": 65056.996047,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 905,
+        "completion_tokens": 3786,
+        "total_tokens": 4691,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3046
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E1",
+        "E3"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 2,
+      "businessSelectedCards": 0,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "evidenceCharacters": 586,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 544.455871,
+        "A.embeddingAndVector": 568.330198,
+        "A.restoreMetadata": 13.258089,
+        "A.topicGateAndFusion": 4.968822,
+        "A.lexical": 5.469771,
+        "A.selectProjects": 0.255243,
+        "A.renderEvidence": 0.616385,
+        "retrieval.total": 593.074215,
+        "graph.database": 68.914111,
+        "business.beginner": 7.035556,
+        "business.career": 4.212682,
+        "prompt.compose": 0.390269,
+        "prompt.protocol": 0.007705,
+        "model.http": 65057.021146,
+        "output.parseAndAssemble": 0.306343,
+        "output.bindSources": 0.16242
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": [
+        {
+          "candidateId": "E1",
+          "fields": []
+        },
+        {
+          "candidateId": "E3",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "printing_explore",
+      "round": 1,
+      "side": "B",
+      "file": "printing_explore-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 31836.651433,
+      "retrievalMs": 450.60436,
+      "modelMs": 31307.537058,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 815,
+        "completion_tokens": 1417,
+        "total_tokens": 2232,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 610
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E2",
+        "E1"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 2,
+      "businessSelectedCards": 0,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/iroslink/iblowy",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "evidenceCharacters": 648,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 1.815831,
+        "B.indexStore": 0.018857,
+        "B.queryEmbedding": 199.03653400000002,
+        "B.embeddingAndVector": 293.629286,
+        "B.lexical": 1.2946719999999998,
+        "B.names": 0.632295,
+        "B.nativeFusion": 9.693195,
+        "B.databaseMetadataAndFilters": 120.27067600000001,
+        "B.dedupAndSelect": 19.735315,
+        "B.relevanceAndPolicy": 0.189764,
+        "B.native.total": 447.85962099999995,
+        "B.adapterTopicGateAndFusion": 1.9913919999999998,
+        "B.renderEvidence": 0.640213,
+        "retrieval.total": 450.608007,
+        "graph.database": 65.279421,
+        "business.beginner": 3.369829,
+        "business.career": 2.647646,
+        "prompt.compose": 0.14192,
+        "prompt.protocol": 0.019608,
+        "model.http": 31307.561486,
+        "output.parseAndAssemble": 0.195605,
+        "output.bindSources": 0.080379
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": [
+        {
+          "candidateId": "E2",
+          "fields": []
+        },
+        {
+          "candidateId": "E1",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "printing_explore",
+      "round": 2,
+      "side": "A",
+      "file": "printing_explore-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 75040.215045,
+      "retrievalMs": 437.540039,
+      "modelMs": 74535.144802,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 905,
+        "completion_tokens": 4477,
+        "total_tokens": 5382,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3596
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E1",
+        "E3"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 2,
+      "businessSelectedCards": 0,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail",
+        "https://github.com/slic3r/slic3r"
+      ],
+      "evidenceCharacters": 586,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 408.80994799999996,
+        "A.embeddingAndVector": 416.551511,
+        "A.restoreMetadata": 13.882419,
+        "A.topicGateAndFusion": 4.361029,
+        "A.lexical": 2.188781,
+        "A.selectProjects": 0.083423,
+        "A.renderEvidence": 0.417468,
+        "retrieval.total": 437.553386,
+        "graph.database": 57.655719,
+        "business.beginner": 1.979931,
+        "business.career": 2.111919,
+        "prompt.compose": 0.098193,
+        "prompt.protocol": 0.005932,
+        "model.http": 74535.159982,
+        "output.parseAndAssemble": 0.15311,
+        "output.bindSources": 0.045689
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": [
+        {
+          "candidateId": "E1",
+          "fields": []
+        },
+        {
+          "candidateId": "E3",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "printing_explore",
+      "round": 2,
+      "side": "B",
+      "file": "printing_explore-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 91429.513316,
+      "retrievalMs": 271.467999,
+      "modelMs": 91086.979923,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 894,
+        "completion_tokens": 5327,
+        "total_tokens": 6221,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4555
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E2",
+        "E1"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 2,
+      "businessSelectedCards": 0,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/bencbartlett/3d-printed-mirror-array",
+        "https://github.com/iroslink/iblowy",
+        "https://github.com/mainsail-crew/mainsail"
+      ],
+      "evidenceCharacters": 648,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 0.7423740000000001,
+        "B.indexStore": 0.010579999999999999,
+        "B.queryEmbedding": 126.816352,
+        "B.embeddingAndVector": 164.004582,
+        "B.lexical": 1.284629,
+        "B.names": 0.513887,
+        "B.nativeFusion": 4.041271,
+        "B.databaseMetadataAndFilters": 90.073494,
+        "B.dedupAndSelect": 8.534335,
+        "B.relevanceAndPolicy": 0.11858300000000001,
+        "B.native.total": 269.71396100000004,
+        "B.adapterTopicGateAndFusion": 1.260021,
+        "B.renderEvidence": 0.417639,
+        "retrieval.total": 271.471266,
+        "graph.database": 58.47091,
+        "business.beginner": 2.324055,
+        "business.career": 1.911747,
+        "prompt.compose": 0.099284,
+        "prompt.protocol": 0.006242,
+        "model.http": 91086.995373,
+        "output.parseAndAssemble": 0.231424,
+        "output.bindSources": 0.045429
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": [
+        {
+          "candidateId": "E2",
+          "fields": []
+        },
+        {
+          "candidateId": "E1",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_career",
+      "round": 1,
+      "side": "A",
+      "file": "rag_career-1-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 105345.9723,
+      "retrievalMs": 764.48821,
+      "modelMs": 104486.710056,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1201,
+        "completion_tokens": 6581,
+        "total_tokens": 7782,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5662
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:218",
+        "C:215"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/headroomlabs-ai/headroom",
+        "https://github.com/langgenius/dify"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/chatchat-space/langchain-chatchat",
+        "https://github.com/langgenius/dify",
+        "https://github.com/triliumnext/trilium"
+      ],
+      "evidenceCharacters": 463,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 692.176074,
+        "A.embeddingAndVector": 736.083928,
+        "A.restoreMetadata": 16.928553,
+        "A.topicGateAndFusion": 1.981312,
+        "A.lexical": 7.646176,
+        "A.selectProjects": 0.539288,
+        "A.renderEvidence": 1.192601,
+        "retrieval.total": 764.506266,
+        "graph.database": 78.051747,
+        "business.career": 6.886834,
+        "prompt.compose": 0.226579,
+        "prompt.protocol": 0.005411,
+        "model.http": 104486.726499,
+        "output.parseAndAssemble": 1.529457,
+        "output.bindSources": 0.131119
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "C:218",
+          "fields": []
+        },
+        {
+          "candidateId": "C:215",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_career",
+      "round": 1,
+      "side": "B",
+      "file": "rag_career-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 38986.60228,
+      "retrievalMs": 649.351749,
+      "modelMs": 38039.456713,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1170,
+        "completion_tokens": 1822,
+        "total_tokens": 2992,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 883
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:218",
+        "E1"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/pathwaycom/llm-app"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/hkuds/deeptutor",
+        "https://github.com/pathwaycom/llm-app",
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceCharacters": 698,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 1.243512,
+        "B.indexStore": 0.013587,
+        "B.queryEmbedding": 206.52208900000002,
+        "B.embeddingAndVector": 391.234202,
+        "B.lexical": 20.832589,
+        "B.names": 6.083804000000001,
+        "B.nativeFusion": 14.456351999999999,
+        "B.databaseMetadataAndFilters": 199.744433,
+        "B.dedupAndSelect": 10.661487000000001,
+        "B.relevanceAndPolicy": 0.176349,
+        "B.native.total": 645.0160940000001,
+        "B.adapterTopicGateAndFusion": 0.9105129999999999,
+        "B.renderEvidence": 3.23158,
+        "retrieval.total": 649.354745,
+        "graph.database": 79.477193,
+        "business.career": 182.85077,
+        "prompt.compose": 0.526447,
+        "prompt.protocol": 0.005982,
+        "model.http": 38039.513272,
+        "output.parseAndAssemble": 28.840056,
+        "output.bindSources": 0.133625
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "C:218",
+          "fields": []
+        },
+        {
+          "candidateId": "E1",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_career",
+      "round": 2,
+      "side": "A",
+      "file": "rag_career-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 78406.260479,
+      "retrievalMs": 597.046196,
+      "modelMs": 77729.80169,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1201,
+        "completion_tokens": 5015,
+        "total_tokens": 6216,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4275
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "C:218",
+        "C:224"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/promptfoo/promptfoo"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/chatchat-space/langchain-chatchat",
+        "https://github.com/langgenius/dify",
+        "https://github.com/triliumnext/trilium"
+      ],
+      "evidenceCharacters": 463,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 572.053845,
+        "A.embeddingAndVector": 582.28043,
+        "A.restoreMetadata": 10.869848000000001,
+        "A.topicGateAndFusion": 1.1880789999999999,
+        "A.lexical": 2.025066,
+        "A.selectProjects": 0.207308,
+        "A.renderEvidence": 0.414866,
+        "retrieval.total": 597.060044,
+        "graph.database": 65.271437,
+        "business.career": 6.29776,
+        "prompt.compose": 0.291103,
+        "prompt.protocol": 0.007044,
+        "model.http": 77729.818794,
+        "output.parseAndAssemble": 0.827046,
+        "output.bindSources": 0.055369
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "C:218",
+          "fields": []
+        },
+        {
+          "candidateId": "C:224",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_career",
+      "round": 2,
+      "side": "B",
+      "file": "rag_career-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 69125.772724,
+      "retrievalMs": 356.246235,
+      "modelMs": 68696.139761,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1249,
+        "completion_tokens": 4101,
+        "total_tokens": 5350,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3344
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E1",
+        "C:218"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/pathwaycom/llm-app"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/hkuds/deeptutor",
+        "https://github.com/pathwaycom/llm-app",
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceCharacters": 698,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 0.982814,
+        "B.indexStore": 0.019327,
+        "B.queryEmbedding": 143.651324,
+        "B.embeddingAndVector": 180.513235,
+        "B.lexical": 10.600706,
+        "B.names": 2.2416970000000003,
+        "B.nativeFusion": 10.791236,
+        "B.databaseMetadataAndFilters": 145.33419700000002,
+        "B.dedupAndSelect": 2.859342,
+        "B.relevanceAndPolicy": 0.145396,
+        "B.native.total": 354.16274899999996,
+        "B.adapterTopicGateAndFusion": 0.616943,
+        "B.renderEvidence": 1.379533,
+        "retrieval.total": 356.249221,
+        "graph.database": 58.674649,
+        "business.career": 6.676187,
+        "prompt.compose": 0.240172,
+        "prompt.protocol": 0.005381,
+        "model.http": 68696.156433,
+        "output.parseAndAssemble": 1.315174,
+        "output.bindSources": 0.057754
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "E1",
+          "fields": []
+        },
+        {
+          "candidateId": "C:218",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_python",
+      "round": 1,
+      "side": "A",
+      "file": "rag_python-1-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 78966.189777,
+      "retrievalMs": 579.667812,
+      "modelMs": 78292.643346,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1101,
+        "completion_tokens": 4718,
+        "total_tokens": 5819,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3931
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E3",
+        "E1"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 2,
+      "businessSelectedCards": 0,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/quivrhq/quivr",
+        "https://github.com/xinhuangcs/agentmaker"
+      ],
+      "evidenceCharacters": 1049,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 511.81928300000004,
+        "A.embeddingAndVector": 559.652199,
+        "A.restoreMetadata": 14.550964,
+        "A.topicGateAndFusion": 1.9935329999999998,
+        "A.lexical": 2.297756,
+        "A.selectProjects": 0.328891,
+        "A.renderEvidence": 0.712029,
+        "retrieval.total": 579.683183,
+        "graph.database": 77.96346,
+        "business.beginner": 4.186453,
+        "prompt.compose": 0.226187,
+        "prompt.protocol": 0.0051,
+        "model.http": 78292.658075,
+        "output.parseAndAssemble": 4.488726,
+        "output.bindSources": 0.103705
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 1,
+      "emptyFields": [
+        {
+          "candidateId": "E3",
+          "fields": []
+        },
+        {
+          "candidateId": "E1",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_python",
+      "round": 1,
+      "side": "B",
+      "file": "rag_python-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 39891.355538,
+      "retrievalMs": 522.857266,
+      "modelMs": 39283.77569,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 842,
+        "completion_tokens": 1909,
+        "total_tokens": 2751,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1169
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "B:26",
+        "E1"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/quivrhq/quivr",
+        "https://github.com/timmyy123/llm-hub"
+      ],
+      "evidenceCount": 1,
+      "retrievedRepositories": [
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceCharacters": 360,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 1.076822,
+        "B.indexStore": 0.011623000000000001,
+        "B.queryEmbedding": 156.117018,
+        "B.embeddingAndVector": 291.270324,
+        "B.lexical": 36.884377,
+        "B.names": 12.510124000000001,
+        "B.nativeFusion": 13.166703,
+        "B.databaseMetadataAndFilters": 160.884403,
+        "B.dedupAndSelect": 4.923394,
+        "B.relevanceAndPolicy": 0.176819,
+        "B.native.total": 521.434647,
+        "B.adapterTopicGateAndFusion": 0.65804,
+        "B.renderEvidence": 0.650796,
+        "retrieval.total": 522.860132,
+        "graph.database": 73.123627,
+        "business.beginner": 5.370177,
+        "prompt.compose": 0.15721,
+        "prompt.protocol": 0.005872,
+        "model.http": 39283.798254,
+        "output.parseAndAssemble": 0.616207,
+        "output.bindSources": 0.062843
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 1,
+      "emptyFields": [
+        {
+          "candidateId": "B:26",
+          "fields": []
+        },
+        {
+          "candidateId": "E1",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_python",
+      "round": 2,
+      "side": "A",
+      "file": "rag_python-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 71228.931184,
+      "retrievalMs": 426.755937,
+      "modelMs": 70731.600982,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1101,
+        "completion_tokens": 4266,
+        "total_tokens": 5367,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3544
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E3",
+        "E1"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 2,
+      "businessSelectedCards": 0,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/langgenius/dify",
+        "https://github.com/quivrhq/quivr",
+        "https://github.com/xinhuangcs/agentmaker"
+      ],
+      "evidenceCharacters": 1049,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 403.916091,
+        "A.embeddingAndVector": 412.84070099999997,
+        "A.restoreMetadata": 9.896364,
+        "A.topicGateAndFusion": 1.333095,
+        "A.lexical": 2.000348,
+        "A.selectProjects": 0.083074,
+        "A.renderEvidence": 0.545274,
+        "retrieval.total": 426.769274,
+        "graph.database": 62.863476,
+        "business.beginner": 2.867226,
+        "prompt.compose": 0.124415,
+        "prompt.protocol": 0.005972,
+        "model.http": 70731.61504,
+        "output.parseAndAssemble": 0.352664,
+        "output.bindSources": 0.046281
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 1,
+      "emptyFields": [
+        {
+          "candidateId": "E3",
+          "fields": []
+        },
+        {
+          "candidateId": "E1",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "rag_python",
+      "round": 2,
+      "side": "B",
+      "file": "rag_python-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 50791.481905,
+      "retrievalMs": 318.513059,
+      "modelMs": 50398.425851,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 921,
+        "completion_tokens": 2787,
+        "total_tokens": 3708,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2039
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E1",
+        "B:26"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/quivrhq/quivr",
+        "https://github.com/timmyy123/llm-hub"
+      ],
+      "evidenceCount": 1,
+      "retrievedRepositories": [
+        "https://github.com/quivrhq/quivr"
+      ],
+      "evidenceCharacters": 360,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 0.8196300000000001,
+        "B.indexStore": 0.012385,
+        "B.queryEmbedding": 148.384604,
+        "B.embeddingAndVector": 182.03186499999998,
+        "B.lexical": 8.37698,
+        "B.names": 5.7991530000000004,
+        "B.nativeFusion": 12.542022000000001,
+        "B.databaseMetadataAndFilters": 104.743696,
+        "B.dedupAndSelect": 2.855761,
+        "B.relevanceAndPolicy": 0.13680799999999999,
+        "B.native.total": 317.691715,
+        "B.adapterTopicGateAndFusion": 0.298336,
+        "B.renderEvidence": 0.459833,
+        "retrieval.total": 318.516065,
+        "graph.database": 65.355044,
+        "business.beginner": 3.520006,
+        "prompt.compose": 0.222548,
+        "prompt.protocol": 0.007535,
+        "model.http": 50398.443225,
+        "output.parseAndAssemble": 0.458893,
+        "output.bindSources": 0.04592
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 1,
+      "emptyFields": [
+        {
+          "candidateId": "E1",
+          "fields": []
+        },
+        {
+          "candidateId": "B:26",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "spring_beginner",
+      "round": 1,
+      "side": "A",
+      "file": "spring_beginner-1-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 62923.290318,
+      "retrievalMs": 1953.13951,
+      "modelMs": 60684.267527,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 666,
+        "completion_tokens": 3918,
+        "total_tokens": 4584,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3343
+        }
+      },
+      "recommendations": 1,
+      "candidateIds": [
+        "E2"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 0,
+      "boundCards": 1,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/alibaba/nacos"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/alibaba/nacos",
+        "https://github.com/jargin-j/earthquake-warning",
+        "https://github.com/mshumer/claude-of-duty"
+      ],
+      "evidenceCharacters": 719,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 1392.223279,
+        "A.embeddingAndVector": 1717.1504790000001,
+        "A.restoreMetadata": 136.585253,
+        "A.topicGateAndFusion": 28.867421,
+        "A.lexical": 11.329614,
+        "A.selectProjects": 15.132998,
+        "A.renderEvidence": 43.235328,
+        "retrieval.total": 1953.491129,
+        "graph.database": 198.263744,
+        "business.beginner": 41.572443,
+        "prompt.compose": 1.677536,
+        "prompt.protocol": 0.034278,
+        "model.http": 60684.630525,
+        "output.parseAndAssemble": 1.806915,
+        "output.bindSources": 8.289561
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": [
+        {
+          "candidateId": "E2",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "spring_beginner",
+      "round": 1,
+      "side": "B",
+      "file": "spring_beginner-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 79033.383994,
+      "retrievalMs": 1087.676199,
+      "modelMs": 77847.282521,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 623,
+        "completion_tokens": 5002,
+        "total_tokens": 5625,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4345
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "E2",
+        "E2"
+      ],
+      "duplicateCandidateIds": [
+        "E2"
+      ],
+      "ragSelectedCards": 2,
+      "businessSelectedCards": 0,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/jargin-j/earthquake-warning",
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "evidenceCharacters": 535,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 2.261324,
+        "B.indexStore": 75.905162,
+        "B.queryEmbedding": 279.4034,
+        "B.embeddingAndVector": 553.2860459999999,
+        "B.lexical": 62.447312999999994,
+        "B.names": 1.7852709999999998,
+        "B.nativeFusion": 51.328068,
+        "B.databaseMetadataAndFilters": 310.372702,
+        "B.dedupAndSelect": 19.622954,
+        "B.relevanceAndPolicy": 1.570849,
+        "B.native.total": 1083.24405,
+        "B.adapterTopicGateAndFusion": 1.943356,
+        "B.renderEvidence": 1.39465,
+        "retrieval.total": 1087.683313,
+        "graph.database": 87.293883,
+        "business.beginner": 4.921125,
+        "prompt.compose": 0.108254,
+        "prompt.protocol": 0.006273,
+        "model.http": 77847.310597,
+        "output.parseAndAssemble": 0.317849,
+        "output.bindSources": 0.159526
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": [
+        {
+          "candidateId": "E2",
+          "fields": []
+        },
+        {
+          "candidateId": "E2",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "spring_beginner",
+      "round": 2,
+      "side": "A",
+      "file": "spring_beginner-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 13210.586324,
+      "retrievalMs": 461.452794,
+      "modelMs": 12679.443683,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 587,
+        "completion_tokens": 487,
+        "total_tokens": 1074,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 288
+        }
+      },
+      "recommendations": 0,
+      "candidateIds": [],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 0,
+      "boundCards": 0,
+      "reportFieldsComplete": true,
+      "repositories": [],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/alibaba/nacos",
+        "https://github.com/jargin-j/earthquake-warning",
+        "https://github.com/mshumer/claude-of-duty"
+      ],
+      "evidenceCharacters": 719,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 436.388336,
+        "A.embeddingAndVector": 445.142301,
+        "A.restoreMetadata": 10.233014,
+        "A.topicGateAndFusion": 3.0456429999999997,
+        "A.lexical": 2.454069,
+        "A.selectProjects": 0.099757,
+        "A.renderEvidence": 0.416751,
+        "retrieval.total": 461.466772,
+        "graph.database": 61.507425,
+        "business.beginner": 2.8662,
+        "prompt.compose": 0.078805,
+        "prompt.protocol": 0.006773,
+        "model.http": 12679.457631,
+        "output.parseAndAssemble": 0.087091,
+        "output.bindSources": 0.032704
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": []
+    },
+    {
+      "case": "spring_beginner",
+      "round": 2,
+      "side": "B",
+      "file": "spring_beginner-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 86040.334239,
+      "retrievalMs": 344.791609,
+      "modelMs": 85617.916259,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 623,
+        "completion_tokens": 5033,
+        "total_tokens": 5656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4545
+        }
+      },
+      "recommendations": 1,
+      "candidateIds": [
+        "E2"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 0,
+      "boundCards": 1,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/embabel/embabel-agent-examples",
+        "https://github.com/jargin-j/earthquake-warning",
+        "https://github.com/practical-tutorials/project-based-learning"
+      ],
+      "evidenceCharacters": 535,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 0.815026,
+        "B.indexStore": 0.012074000000000001,
+        "B.queryEmbedding": 138.882966,
+        "B.embeddingAndVector": 180.313048,
+        "B.lexical": 8.119073,
+        "B.names": 0.857525,
+        "B.nativeFusion": 10.528468,
+        "B.databaseMetadataAndFilters": 139.17533400000002,
+        "B.dedupAndSelect": 2.827205,
+        "B.relevanceAndPolicy": 0.21404199999999998,
+        "B.native.total": 343.302565,
+        "B.adapterTopicGateAndFusion": 0.839307,
+        "B.renderEvidence": 0.55379,
+        "retrieval.total": 344.794606,
+        "graph.database": 68.838459,
+        "business.beginner": 2.735954,
+        "prompt.compose": 0.11178,
+        "prompt.protocol": 0.007454,
+        "model.http": 85617.93219,
+        "output.parseAndAssemble": 0.12698,
+        "output.bindSources": 0.080318
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": [
+        {
+          "candidateId": "E2",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "unavailable",
+      "round": 1,
+      "side": "A",
+      "file": "unavailable-1-A.json",
+      "success": false,
+      "error": "AI分析暂时失败，系统会自动重试",
+      "wallMs": 16794.644555,
+      "retrievalMs": 719.172426,
+      "modelMs": null,
+      "requestedModel": null,
+      "actualModel": null,
+      "providerHost": null,
+      "usage": null,
+      "recommendations": 0,
+      "candidateIds": [],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 0,
+      "boundCards": 0,
+      "reportFieldsComplete": false,
+      "repositories": [],
+      "evidenceCount": 0,
+      "retrievedRepositories": [],
+      "evidenceCharacters": 0,
+      "retrievalStatus": "EMPTY",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 686.800759,
+        "A.embeddingAndVector": 706.3333130000001,
+        "A.restoreMetadata": 11.982437000000001,
+        "A.topicGateAndFusion": 0.454966,
+        "A.lexical": 0.32506,
+        "A.selectProjects": 0.017194,
+        "A.renderEvidence": 0.002825,
+        "retrieval.total": 719.188558,
+        "graph.database": 62.84805,
+        "business.beginner": 2.353397,
+        "business.career": 2.508572,
+        "prompt.compose": 0.116459,
+        "prompt.protocol": 0.006422,
+        "model.http": 15997.89823,
+        "output.parseAndAssemble": 2.134536
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [
+        "output.parseAndAssemble"
+      ],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": []
+    },
+    {
+      "case": "unavailable",
+      "round": 1,
+      "side": "B",
+      "file": "unavailable-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 23989.608356,
+      "retrievalMs": 448.130035,
+      "modelMs": 23466.121135,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 470,
+        "completion_tokens": 1288,
+        "total_tokens": 1758,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1047
+        }
+      },
+      "recommendations": 0,
+      "candidateIds": [],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 0,
+      "boundCards": 0,
+      "reportFieldsComplete": true,
+      "repositories": [],
+      "evidenceCount": 0,
+      "retrievedRepositories": [],
+      "evidenceCharacters": 0,
+      "retrievalStatus": "EMPTY",
+      "stagesMs": {
+        "B.activeGeneration": 1.491799,
+        "B.indexStore": 0.012485,
+        "B.queryEmbedding": 200.948302,
+        "B.embeddingAndVector": 265.527085,
+        "B.lexical": 8.544664000000001,
+        "B.names": 0.615233,
+        "B.nativeFusion": 7.357535,
+        "B.databaseMetadataAndFilters": 132.274501,
+        "B.dedupAndSelect": 30.948918,
+        "B.relevanceAndPolicy": 0.157891,
+        "B.native.total": 447.408254,
+        "B.adapterTopicGateAndFusion": 0.668608,
+        "B.renderEvidence": 0.005711,
+        "retrieval.total": 448.133573,
+        "graph.database": 63.634063,
+        "business.beginner": 2.331542,
+        "business.career": 3.090511,
+        "prompt.compose": 0.096129,
+        "prompt.protocol": 0.006412,
+        "model.http": 23466.141074,
+        "output.parseAndAssemble": 0.13214,
+        "output.bindSources": 0.004639
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": []
+    },
+    {
+      "case": "unavailable",
+      "round": 2,
+      "side": "A",
+      "file": "unavailable-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 13314.657753,
+      "retrievalMs": 473.634506,
+      "modelMs": 12762.732664,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 391,
+        "completion_tokens": 520,
+        "total_tokens": 911,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 260
+        }
+      },
+      "recommendations": 0,
+      "candidateIds": [],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 0,
+      "boundCards": 0,
+      "reportFieldsComplete": true,
+      "repositories": [],
+      "evidenceCount": 0,
+      "retrievedRepositories": [],
+      "evidenceCharacters": 0,
+      "retrievalStatus": "EMPTY",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 453.451765,
+        "A.embeddingAndVector": 462.33579799999995,
+        "A.restoreMetadata": 10.421520000000001,
+        "A.topicGateAndFusion": 0.430512,
+        "A.lexical": 0.376248,
+        "A.selectProjects": 0.021001,
+        "A.renderEvidence": 0.003447,
+        "retrieval.total": 473.650177,
+        "graph.database": 66.251781,
+        "business.beginner": 3.449704,
+        "business.career": 2.409667,
+        "prompt.compose": 0.076981,
+        "prompt.protocol": 0.006963,
+        "model.http": 12762.751642,
+        "output.parseAndAssemble": 0.228187,
+        "output.bindSources": 0.005831
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": []
+    },
+    {
+      "case": "unavailable",
+      "round": 2,
+      "side": "B",
+      "file": "unavailable-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 10925.638516,
+      "retrievalMs": 334.819602,
+      "modelMs": 10522.619032,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 391,
+        "completion_tokens": 413,
+        "total_tokens": 804,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 153
+        }
+      },
+      "recommendations": 0,
+      "candidateIds": [],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 0,
+      "boundCards": 0,
+      "reportFieldsComplete": true,
+      "repositories": [],
+      "evidenceCount": 0,
+      "retrievedRepositories": [],
+      "evidenceCharacters": 0,
+      "retrievalStatus": "EMPTY",
+      "stagesMs": {
+        "B.activeGeneration": 1.805537,
+        "B.indexStore": 0.018205,
+        "B.queryEmbedding": 138.08564,
+        "B.embeddingAndVector": 171.984837,
+        "B.lexical": 6.171556,
+        "B.names": 0.565438,
+        "B.nativeFusion": 7.876073,
+        "B.databaseMetadataAndFilters": 115.978364,
+        "B.dedupAndSelect": 28.632931,
+        "B.relevanceAndPolicy": 0.479569,
+        "B.native.total": 334.094011,
+        "B.adapterTopicGateAndFusion": 0.6597230000000001,
+        "B.renderEvidence": 0.00523,
+        "retrieval.total": 334.822528,
+        "graph.database": 57.71332,
+        "business.beginner": 2.249676,
+        "business.career": 2.52723,
+        "prompt.compose": 0.105136,
+        "prompt.protocol": 0.005771,
+        "model.http": 10522.636074,
+        "output.parseAndAssemble": 0.108512,
+        "output.bindSources": 0.004619
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 0,
+      "emptyFields": []
+    },
+    {
+      "case": "vue_learning",
+      "round": 1,
+      "side": "A",
+      "file": "vue_learning-1-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 38374.639008,
+      "retrievalMs": 608.052646,
+      "modelMs": 37681.10774,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 971,
+        "completion_tokens": 1727,
+        "total_tokens": 2698,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1004
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "B:36",
+        "E3"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 1,
+      "businessSelectedCards": 1,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/davidhdev/canvas-ui",
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs"
+      ],
+      "evidenceCharacters": 663,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 569.863823,
+        "A.embeddingAndVector": 585.584316,
+        "A.restoreMetadata": 11.460387,
+        "A.topicGateAndFusion": 3.500036,
+        "A.lexical": 6.141033,
+        "A.selectProjects": 0.283815,
+        "A.renderEvidence": 0.968064,
+        "retrieval.total": 608.068988,
+        "graph.database": 74.494272,
+        "business.beginner": 3.734796,
+        "prompt.compose": 0.378836,
+        "prompt.protocol": 0.006232,
+        "model.http": 37681.125275,
+        "output.parseAndAssemble": 1.078305,
+        "output.bindSources": 0.097844
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "B:36",
+          "fields": []
+        },
+        {
+          "candidateId": "E3",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "vue_learning",
+      "round": 1,
+      "side": "B",
+      "file": "vue_learning-1-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 43742.059504,
+      "retrievalMs": 531.537465,
+      "modelMs": 43125.849014,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 859,
+        "completion_tokens": 1903,
+        "total_tokens": 2762,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1141
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "B:36",
+        "B:77"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/davidhdev/canvas-ui",
+        "https://github.com/justarchinet/asf-webconfiggenerator"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "evidenceCharacters": 422,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 0.911815,
+        "B.indexStore": 0.013967,
+        "B.queryEmbedding": 146.283322,
+        "B.embeddingAndVector": 223.032231,
+        "B.lexical": 20.178613,
+        "B.names": 0.714474,
+        "B.nativeFusion": 71.60397800000001,
+        "B.databaseMetadataAndFilters": 210.355471,
+        "B.dedupAndSelect": 2.482805,
+        "B.relevanceAndPolicy": 0.22782,
+        "B.native.total": 530.211271,
+        "B.adapterTopicGateAndFusion": 0.5380849999999999,
+        "B.renderEvidence": 0.656379,
+        "retrieval.total": 531.541083,
+        "graph.database": 74.950973,
+        "business.beginner": 3.385651,
+        "prompt.compose": 0.100479,
+        "prompt.protocol": 0.006773,
+        "model.http": 43125.866839,
+        "output.parseAndAssemble": 0.655431,
+        "output.bindSources": 0.072161
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "B:36",
+          "fields": []
+        },
+        {
+          "candidateId": "B:77",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "vue_learning",
+      "round": 2,
+      "side": "A",
+      "file": "vue_learning-2-A.json",
+      "success": true,
+      "error": null,
+      "wallMs": 60400.270931,
+      "retrievalMs": 592.946925,
+      "modelMs": 59717.54675,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 1050,
+        "completion_tokens": 3628,
+        "total_tokens": 4678,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3052
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "B:36",
+        "B:46"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/davidhdev/canvas-ui",
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs"
+      ],
+      "evidenceCharacters": 663,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "embedding.http.bge-small-zh-v1.5": 567.889493,
+        "A.embeddingAndVector": 575.9104649999999,
+        "A.restoreMetadata": 10.455146,
+        "A.topicGateAndFusion": 3.063502,
+        "A.lexical": 2.599779,
+        "A.selectProjects": 0.170996,
+        "A.renderEvidence": 0.674977,
+        "retrieval.total": 592.963107,
+        "graph.database": 79.007246,
+        "business.beginner": 4.493991,
+        "prompt.compose": 0.125367,
+        "prompt.protocol": 0.007054,
+        "model.http": 59717.562841,
+        "output.parseAndAssemble": 0.430324,
+        "output.bindSources": 0.078624
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "B:36",
+          "fields": []
+        },
+        {
+          "candidateId": "B:46",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "case": "vue_learning",
+      "round": 2,
+      "side": "B",
+      "file": "vue_learning-2-B.json",
+      "success": true,
+      "error": null,
+      "wallMs": 67558.260048,
+      "retrievalMs": 274.020848,
+      "modelMs": 67205.029889,
+      "requestedModel": "DeepSeek-V4-Pro",
+      "actualModel": "deepseek-v4-pro-ga-260813",
+      "providerHost": "ai.gitee.com",
+      "usage": {
+        "prompt_tokens": 938,
+        "completion_tokens": 4151,
+        "total_tokens": 5089,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3408
+        }
+      },
+      "recommendations": 2,
+      "candidateIds": [
+        "B:36",
+        "B:46"
+      ],
+      "duplicateCandidateIds": [],
+      "ragSelectedCards": 0,
+      "businessSelectedCards": 2,
+      "boundCards": 2,
+      "reportFieldsComplete": true,
+      "repositories": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "evidenceCount": 3,
+      "retrievedRepositories": [
+        "https://github.com/justarchinet/asf-webconfiggenerator",
+        "https://github.com/pocket-stack/pocketjs",
+        "https://github.com/zhensherlock/protocol-launcher"
+      ],
+      "evidenceCharacters": 422,
+      "retrievalStatus": "USED",
+      "stagesMs": {
+        "B.activeGeneration": 0.657,
+        "B.indexStore": 0.011563,
+        "B.queryEmbedding": 120.70577399999999,
+        "B.embeddingAndVector": 152.847596,
+        "B.lexical": 8.551074999999999,
+        "B.names": 0.877119,
+        "B.nativeFusion": 10.398711,
+        "B.databaseMetadataAndFilters": 98.25181599999999,
+        "B.dedupAndSelect": 1.232183,
+        "B.relevanceAndPolicy": 0.149364,
+        "B.native.total": 273.429997,
+        "B.adapterTopicGateAndFusion": 0.306593,
+        "B.renderEvidence": 0.209231,
+        "retrieval.total": 274.023403,
+        "graph.database": 64.571289,
+        "business.beginner": 7.323767,
+        "prompt.compose": 0.214201,
+        "prompt.protocol": 0.008658,
+        "model.http": 67205.0871,
+        "output.parseAndAssemble": 0.967581,
+        "output.bindSources": 0.120357
+      },
+      "costCny": null,
+      "costStatus": "UNKNOWN_NO_CONFIRMED_CURRENT_GITEE_RATE_OR_BILL",
+      "failedStages": [],
+      "modelHttpCalls": 1,
+      "businessCandidates": 3,
+      "emptyFields": [
+        {
+          "candidateId": "B:36",
+          "fields": []
+        },
+        {
+          "candidateId": "B:46",
+          "fields": []
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Source URL binding is not factual correctness.",
+    "Failed requests may consume unreported tokens.",
+    "Embedding API usage and local power cost are not included in generation usage.",
+    "No verified current Gitee billing price; no fabricated currency total."
+  ],
+  "providerResponseModelStrata": {
+    "deepseek-v4-pro": {
+      "A": {
+        "count": 3,
+        "meanWallMs": 21633.294361666667,
+        "meanOutputTokens": 911.3333333333334
+      },
+      "B": {
+        "count": 6,
+        "meanWallMs": 32545.085014166667,
+        "meanOutputTokens": 1468.8333333333333
+      }
+    },
+    "deepseek-v4-pro-ga-260813": {
+      "A": {
+        "count": 12,
+        "meanWallMs": 71991.97444616667,
+        "meanOutputTokens": 4367.166666666667
+      },
+      "B": {
+        "count": 10,
+        "meanWallMs": 66470.073483,
+        "meanOutputTokens": 3965.5
+      }
+    }
+  },
+  "matchedModelPairs": 10,
+  "pairedSuccessAggregates": {
+    "bothSuccess": {
+      "pairs": 15,
+      "A": {
+        "wallMs": 61920.23842926667,
+        "modelMs": 61162.1868954,
+        "retrievalMs": 664.3662125333333,
+        "prompt_tokens": 1013.9333333333333,
+        "completion_tokens": 3676,
+        "total_tokens": 4689.933333333333
+      },
+      "B": {
+        "wallMs": 55732.10910393333,
+        "modelMs": 55187.58866013333,
+        "retrievalMs": 451.1096348,
+        "prompt_tokens": 936.8,
+        "completion_tokens": 3145.3333333333335,
+        "total_tokens": 4082.133333333333
+      }
+    },
+    "bothSuccessSameResponseModel": {
+      "pairs": 10,
+      "A": {
+        "wallMs": 59548.7779586,
+        "modelMs": 58761.0802833,
+        "retrievalMs": 688.9118791,
+        "prompt_tokens": 1039.9,
+        "completion_tokens": 3526.9,
+        "total_tokens": 4566.8
+      },
+      "B": {
+        "wallMs": 60933.8490255,
+        "modelMs": 60406.9706503,
+        "retrievalMs": 447.0548498,
+        "prompt_tokens": 992.3,
+        "completion_tokens": 3565,
+        "total_tokens": 4557.3
+      }
+    }
+  },
+  "twoRoundStability": [
+    {
+      "case": "agent_business",
+      "side": "A",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 0.3333333333333333,
+      "bothEmpty": false
+    },
+    {
+      "case": "agent_business",
+      "side": "B",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "data_analysis",
+      "side": "A",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "data_analysis",
+      "side": "B",
+      "retrievalSetJaccard": null,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "printing_explore",
+      "side": "A",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "printing_explore",
+      "side": "B",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "rag_career",
+      "side": "A",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 0.3333333333333333,
+      "bothEmpty": false
+    },
+    {
+      "case": "rag_career",
+      "side": "B",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "rag_python",
+      "side": "A",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "rag_python",
+      "side": "B",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "spring_beginner",
+      "side": "A",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 0.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "spring_beginner",
+      "side": "B",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 1.0,
+      "bothEmpty": false
+    },
+    {
+      "case": "unavailable",
+      "side": "A",
+      "retrievalSetJaccard": null,
+      "recommendationSetJaccard": null,
+      "bothEmpty": true
+    },
+    {
+      "case": "unavailable",
+      "side": "B",
+      "retrievalSetJaccard": null,
+      "recommendationSetJaccard": null,
+      "bothEmpty": true
+    },
+    {
+      "case": "vue_learning",
+      "side": "A",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 0.3333333333333333,
+      "bothEmpty": false
+    },
+    {
+      "case": "vue_learning",
+      "side": "B",
+      "retrievalSetJaccard": 1.0,
+      "recommendationSetJaccard": 0.3333333333333333,
+      "bothEmpty": false
+    }
+  ],
+  "identicalPromptChecks": [
+    {
+      "case": "agent_business",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": false
+    },
+    {
+      "case": "agent_business",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": false
+    },
+    {
+      "case": "agent_business",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "agent_business",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "data_analysis",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": false
+    },
+    {
+      "case": "data_analysis",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": false
+    },
+    {
+      "case": "data_analysis",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "data_analysis",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "printing_explore",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": false
+    },
+    {
+      "case": "printing_explore",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": false
+    },
+    {
+      "case": "printing_explore",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "printing_explore",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "rag_career",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": false
+    },
+    {
+      "case": "rag_career",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": false
+    },
+    {
+      "case": "rag_career",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "rag_career",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "rag_python",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": false
+    },
+    {
+      "case": "rag_python",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": false
+    },
+    {
+      "case": "rag_python",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "rag_python",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "spring_beginner",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": false
+    },
+    {
+      "case": "spring_beginner",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": false
+    },
+    {
+      "case": "spring_beginner",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "spring_beginner",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "unavailable",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": true
+    },
+    {
+      "case": "unavailable",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "unavailable",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "unavailable",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    },
+    {
+      "case": "vue_learning",
+      "first": "1-A",
+      "second": "1-B",
+      "identical": false
+    },
+    {
+      "case": "vue_learning",
+      "first": "2-A",
+      "second": "2-B",
+      "identical": false
+    },
+    {
+      "case": "vue_learning",
+      "first": "1-A",
+      "second": "2-A",
+      "identical": true
+    },
+    {
+      "case": "vue_learning",
+      "first": "1-B",
+      "second": "2-B",
+      "identical": true
+    }
+  ],
+  "byRound": [
+    {
+      "round": 1,
+      "side": "A",
+      "count": 7,
+      "meanWallMs": 70716.50732642857,
+      "meanRetrievalMs": 816.2755454285714,
+      "meanModelMs": 69784.23088571429
+    },
+    {
+      "round": 1,
+      "side": "B",
+      "count": 8,
+      "meanWallMs": 46506.606981875004,
+      "meanRetrievalMs": 584.166729875,
+      "meanModelMs": 45810.197870375
+    },
+    {
+      "round": 2,
+      "side": "A",
+      "count": 8,
+      "meanWallMs": 54223.503144250004,
+      "meanRetrievalMs": 531.44554625,
+      "meanModelMs": 53617.898403875
+    },
+    {
+      "round": 2,
+      "side": "B",
+      "count": 8,
+      "meanWallMs": 60989.7986325,
+      "meanRetrievalMs": 317.68008975,
+      "meanModelMs": 60599.79600925
+    }
+  ]
+}

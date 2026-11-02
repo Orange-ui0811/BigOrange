@@ -16,6 +16,9 @@ class CustomerThinkingProtocolTest {
         assertThat(function.get("name")).isEqualTo("customerAction");
         var schema=(Map<?,?>)function.get("parameters");
         assertThat(((List<?>)schema.get("required")).contains("reply")).isTrue();
+        var properties=(Map<?,?>)schema.get("properties");
+        assertThat(properties.containsKey("needsHistory")).isTrue();assertThat(properties.containsKey("historyQuery")).isTrue();
+        assertThat(((List<?>)schema.get("required")).contains("needsHistory")).isFalse();
     }
     @Test void normalModeAndOtherProvidersKeepTheExistingNamedToolProtocol() {
         assertThat(ExternalAiClient.customerActionFields(config("https://api.deepseek.com"),false)).containsKey("tool_choice");

@@ -1,0 +1,745 @@
+{
+  "phase": "after",
+  "case": "ai_application",
+  "message": "请直接推荐项目。方向是AI应用开发；目标是求职；我有Vue前端和Linux部署经验；语言不限；完成周期半年内。可以先展示真实的待核实探索项目，说明功能、推荐理由和学习路径。",
+  "runId": "d1a03595-e633-42d0-927f-590b7aef94e1",
+  "status": "SUCCEEDED",
+  "durationMs": 15360,
+  "result": {
+    "skill": "PROJECT_RECOMMENDATION_V1",
+    "intent": "RECOMMEND",
+    "state": {
+      "topic": [
+        "AI应用开发"
+      ],
+      "provenance": {
+        "topic": {
+          "source": "MESSAGE",
+          "quote": "方向是AI应用开发"
+        },
+        "goal": {
+          "source": "MESSAGE",
+          "quote": "目标是求职"
+        },
+        "experience": {
+          "source": "MESSAGE",
+          "quote": "我有Vue前端和Linux部署经验"
+        },
+        "maxDurationDays": {
+          "source": "MESSAGE",
+          "quote": "完成周期半年内"
+        },
+        "verificationMode": {
+          "source": "MESSAGE",
+          "quote": "可以先展示真实的待核实探索项目"
+        }
+      },
+      "goal": "求职",
+      "experience": "有Vue前端和Linux部署经验",
+      "durationSemantics": {
+        "quantity": 6,
+        "unit": "MONTH",
+        "relation": "AT_MOST"
+      },
+      "maxDurationDays": 180,
+      "verificationMode": "EXPLORE",
+      "lastChangeSummary": "已记录基础（排序偏好）：有Vue前端和Linux部署经验；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：AI应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+      "lastCandidates": [
+        {
+          "name": "777genius/agent-teams-ai",
+          "type": "CAREER_PROJECT",
+          "id": 203
+        },
+        {
+          "name": "apache/doris",
+          "type": "CAREER_PROJECT",
+          "id": 210
+        },
+        {
+          "name": "mlflow/mlflow",
+          "type": "CAREER_PROJECT",
+          "id": 221
+        }
+      ]
+    },
+    "projects": [
+      {
+        "type": "CAREER_PROJECT",
+        "id": 203,
+        "sourceRef": "career:203",
+        "name": "777genius/agent-teams-ai",
+        "url": "https://github.com/777genius/agent-teams-ai",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "TypeScript",
+        "techStack": "TypeScript,React,Next.js",
+        "difficulty": "进阶",
+        "duration": "4-8周",
+        "description": "Agent Teams AI 是一个多智能体协作平台，允许用户像管理团队一样指挥多个 AI 智能体自主执行任务、相互通信和审查，支持 200+ 模型和 75+ LLM 提供商。",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": true,
+        "requiresDocker": false,
+        "requiresDatabase": false,
+        "requiresSecrets": true,
+        "quality": 86,
+        "analysisReason": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。",
+        "proofPoints": "能够设计并实现复杂的多智能体对话系统，集成多种大模型，管理任务看板与审查流程。",
+        "interviewTopics": "多智能体通信协议、任务分配策略、模型路由、记忆与上下文管理、前端交互设计。",
+        "modificationPlan": "为平台添加自定义 agent 类型、特定的垂直领域工具插件，或优化团队协作的算法，实现更智能的负载均衡。",
+        "mainRisks": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。 [E1]",
+        "prerequisites": "Docker：资料标记不需要；数据库：资料标记不需要；密钥：需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "semantic": 20.124611797498105,
+          "goalPreference": 15.0,
+          "total": 48.0246117974981,
+          "semanticAvailable": true,
+          "quality": 12.9,
+          "semanticMatched": true,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0
+        },
+        "recommendReason": "来自职业项目资料，可结合能力证明与面试讨论点考察；本轮目标：求职；资料涉及AI应用开发，具体实践范围见项目说明；资料记录主语言为TypeScript；资料中的实践周期为4-8周；你的上限为180天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+        "references": [
+          {
+            "evidenceId": "E4",
+            "title": "777genius/agent-teams-ai",
+            "sourceRef": "career:203",
+            "spans": [
+              {
+                "spanId": "E4.S1",
+                "text": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 58
+              }
+            ],
+            "documentId": 108,
+            "versionId": 327,
+            "chunkId": 12392,
+            "sectionPath": "777genius/agent-teams-ai > 职业价值",
+            "startOffset": 203,
+            "endOffset": 253,
+            "contentStartInChunk": 8,
+            "quote": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。\n\n",
+            "text": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E1",
+            "title": "777genius/agent-teams-ai",
+            "sourceRef": "career:203",
+            "spans": [
+              {
+                "spanId": "E1.S1",
+                "text": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 57
+              }
+            ],
+            "documentId": 108,
+            "versionId": 327,
+            "chunkId": 12396,
+            "sectionPath": "777genius/agent-teams-ai > 主要风险",
+            "startOffset": 424,
+            "endOffset": 473,
+            "contentStartInChunk": 8,
+            "quote": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。\n\n",
+            "text": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。",
+            "field": "mainRisks"
+          }
+        ],
+        "vibeCodingReason": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。 [E4]",
+        "supportedExplanation": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。 [E4]\n依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。 [E1]",
+        "practiceAdvice": {
+          "recommendationAdvice": "建议结合你的Vue前端与Linux部署经验，用该项目展示全栈+AI协作能力。可尝试为多agent工作流做一个可视化监控小面板，体现工作流编排理解，作为求职作品。",
+          "difficultyAdvice": "先确认第三方LLM接口的稳定性与版本更新节奏，评估本地Linux环境能否跑通示例；AI行为不确定性高，建议先做小范围验证。",
+          "vibeCodingAdvice": "可用AI辅助生成Vue监控面板与后端适配代码，但需人工核对LLM接口调用与工作流逻辑，避免AI编造不存在的接口。",
+          "steps": [
+            "先核对并运行已有示例，确认多agent协作流程与LLM集成方式",
+            "实现一个具体小改造：为工作流加一个Vue状态展示页",
+            "测试并形成演示与复盘，记录AI行为不确定性的处理"
+          ],
+          "evidenceIds": [
+            "E4",
+            "E1"
+          ],
+          "kind": "SUGGESTION"
+        }
+      },
+      {
+        "type": "CAREER_PROJECT",
+        "id": 210,
+        "sourceRef": "career:210",
+        "name": "apache/doris",
+        "url": "https://github.com/apache/doris",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "Java",
+        "techStack": "Java",
+        "difficulty": "进阶",
+        "duration": "4-8周",
+        "description": "Apache Doris 是一个面向 AI 智能体的实时分析和混合搜索数据库。",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": true,
+        "requiresDocker": true,
+        "requiresDatabase": false,
+        "requiresSecrets": false,
+        "quality": 86,
+        "analysisReason": "掌握大规模实时数据分析引擎的设计与优化，熟悉混合搜索在 AI 场景的应用，提升大数据与 AI 基础设施的架构能力。",
+        "proofPoints": "证明能够理解并修改分布式数据库核心模块，掌握 Java 性能调优、实时查询优化、混合搜索引擎设计。",
+        "interviewTopics": "可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。",
+        "modificationPlan": "为 Doris 扩展特定的 AI agent 集成插件，或优化某个查询场景的性能，添加自定义索引类型，或编写完整的中文文档和案例。",
+        "mainRisks": "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。 [E5]",
+        "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "semantic": 0.0,
+          "goalPreference": 15.0,
+          "total": 27.9,
+          "semanticAvailable": true,
+          "quality": 12.9,
+          "semanticMatched": false,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0
+        },
+        "recommendReason": "来自职业项目资料，可结合能力证明与面试讨论点考察；本轮目标：求职；资料涉及AI应用开发，具体实践范围见项目说明；资料记录主语言为Java；资料中的实践周期为4-8周；你的上限为180天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+        "references": [
+          {
+            "evidenceId": "E2",
+            "title": "apache/doris",
+            "sourceRef": "career:210",
+            "spans": [
+              {
+                "spanId": "E2.S1",
+                "text": "可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。\n\n",
+                "startInChunk": 9,
+                "endInChunk": 64
+              }
+            ],
+            "documentId": 65,
+            "versionId": 284,
+            "chunkId": 10838,
+            "sectionPath": "apache/doris > 面试讨论点",
+            "startOffset": 258,
+            "endOffset": 313,
+            "contentStartInChunk": 9,
+            "quote": "可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。\n\n",
+            "text": "面试可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。",
+            "field": "supportedExplanation"
+          },
+          {
+            "evidenceId": "E5",
+            "title": "apache/doris",
+            "sourceRef": "career:210",
+            "spans": [
+              {
+                "spanId": "E5.S1",
+                "text": "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 44
+              }
+            ],
+            "documentId": 65,
+            "versionId": 284,
+            "chunkId": 10840,
+            "sectionPath": "apache/doris > 主要风险",
+            "startOffset": 399,
+            "endOffset": 435,
+            "contentStartInChunk": 8,
+            "quote": "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。\n\n",
+            "text": "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。",
+            "field": "mainRisks"
+          }
+        ],
+        "supportedExplanation": "面试可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。 [E2]\n项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。 [E5]",
+        "practiceAdvice": {
+          "recommendationAdvice": "建议结合Linux部署经验，先理解实时分析系统架构与MPP查询引擎，再尝试用Vue做一个查询结果展示小工具，作为面试讨论素材。",
+          "difficultyAdvice": "项目庞大、学习曲线陡峭，先确认分布式系统基础与本地部署可行性；上手修改可能耗时较长，建议从只读查询入手。",
+          "vibeCodingAdvice": "可用AI辅助理解列式存储与查询引擎概念，但需人工核对分布式部署细节，避免AI生成未提供的部署命令。",
+          "steps": [
+            "先核对并运行已有示例，确认本地Linux环境能否启动单机版",
+            "实现一个具体小改造：用Vue展示一个简单查询结果",
+            "测试并形成演示与复盘，记录架构理解与部署要点"
+          ],
+          "evidenceIds": [
+            "E2",
+            "E5"
+          ],
+          "kind": "SUGGESTION"
+        }
+      },
+      {
+        "type": "CAREER_PROJECT",
+        "id": 221,
+        "sourceRef": "career:221",
+        "name": "mlflow/mlflow",
+        "url": "https://github.com/mlflow/mlflow",
+        "status": "PUBLISHED",
+        "archived": false,
+        "language": "Python",
+        "techStack": "Python",
+        "difficulty": "进阶",
+        "duration": "4-8周",
+        "description": "统一 API 网关，面向所有 LLM 提供商，支持路由请求、管理速率限制、处理回退，并通过 OpenAI 兼容接口控制成本，内置凭证管理、护栏和流量拆分以进行 A/B 测试。 [E3]",
+        "evidenceStatus": "VERIFIED_DATABASE",
+        "importable": true,
+        "requiresDocker": true,
+        "requiresDatabase": false,
+        "requiresSecrets": false,
+        "quality": 84,
+        "analysisReason": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。",
+        "proofPoints": "证明能够贡献于行业标准的 ML 平台，实现模型追踪、评估管线、服务部署等，具备 Python 工程和系统设计能力。",
+        "interviewTopics": "模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。",
+        "modificationPlan": "为 MLflow 添加对特定框架（如 PyTorch Lightning）的自动追踪集成，或开发自定义评估指标、与云原生监控系统集成。",
+        "mainRisks": "需理解 MLOps 全流程；社区贡献规范严格；大规模测试环境搭建复杂。",
+        "prerequisites": "Docker：需要；数据库：资料标记不需要；密钥：资料标记不需要。其他环境要求需核对仓库。",
+        "evidenceAvailable": true,
+        "conditionGaps": [],
+        "matchStatus": "CONFIRMED",
+        "ranking": {
+          "semantic": 0.0,
+          "goalPreference": 15.0,
+          "total": 27.6,
+          "semanticAvailable": true,
+          "quality": 12.6,
+          "semanticMatched": false,
+          "preference": 0.0,
+          "version": "customer-rank-v3",
+          "uncertaintyPenalty": 0.0
+        },
+        "recommendReason": "来自职业项目资料，可结合能力证明与面试讨论点考察；本轮目标：求职；资料涉及AI应用开发，具体实践范围见项目说明；资料记录主语言为Python；资料中的实践周期为4-8周；你的上限为180天；已通过当前已知字段的条件检查，周期仅为资料估算。",
+        "references": [
+          {
+            "evidenceId": "E9",
+            "title": "mlflow/mlflow",
+            "sourceRef": "career:221",
+            "spans": [
+              {
+                "spanId": "E9.S1",
+                "text": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。\n\n",
+                "startInChunk": 8,
+                "endInChunk": 65
+              }
+            ],
+            "documentId": 117,
+            "versionId": 336,
+            "chunkId": 12670,
+            "sectionPath": "mlflow/mlflow > 职业价值",
+            "startOffset": 160,
+            "endOffset": 217,
+            "contentStartInChunk": 8,
+            "quote": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。\n\n",
+            "text": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。",
+            "field": "vibeCodingReason"
+          },
+          {
+            "evidenceId": "E3",
+            "title": "mlflow/mlflow",
+            "sourceRef": "career:221",
+            "spans": [
+              {
+                "spanId": "E3.S1",
+                "text": "        <a href=\"https://mlflow.org/docs/latest/genai/governance/ai-gateway/\"><strong>AI Gateway</strong></a>\n        <br><br>\n        <div>Unified API gateway for all LLM providers. Route requests, manage rate limits, handle fallbacks, and control costs through an OpenAI-compatible interface with built-in credential management, guardrails and traffic splitting for A/B testing.</div><br>\n        <",
+                "startInChunk": 197,
+                "endInChunk": 597
+              },
+              {
+                "spanId": "E3.S2",
+                "text": "a href=\"https://mlflow.org/docs/latest/genai/governance/ai-gateway",
+                "startInChunk": 597,
+                "endInChunk": 663
+              }
+            ],
+            "documentId": 117,
+            "versionId": 336,
+            "chunkId": 12689,
+            "sectionPath": "mlflow/mlflow > LLMs & Agents",
+            "startOffset": 7306,
+            "endOffset": 7772,
+            "contentStartInChunk": 197,
+            "quote": "        <a href=\"https://mlflow.org/docs/latest/genai/governance/ai-gateway/\"><strong>AI Gateway</strong></a>\n        <br><br>\n        <div>Unified API gateway for all LLM providers. Route requests, manage rate limits, handle fallbacks, and control costs through an OpenAI-compatible interface with built-in credential management, guardrails and traffic splitting for A/B testing.</div><br>\n        <",
+            "text": "统一 API 网关，面向所有 LLM 提供商，支持路由请求、管理速率限制、处理回退，并通过 OpenAI 兼容接口控制成本，内置凭证管理、护栏和流量拆分以进行 A/B 测试。",
+            "field": "description"
+          },
+          {
+            "evidenceId": "E6",
+            "title": "mlflow/mlflow",
+            "sourceRef": "career:221",
+            "spans": [
+              {
+                "spanId": "E6.S1",
+                "text": "模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。\n\n",
+                "startInChunk": 9,
+                "endInChunk": 84
+              }
+            ],
+            "documentId": 117,
+            "versionId": 336,
+            "chunkId": 12672,
+            "sectionPath": "mlflow/mlflow > 面试讨论点",
+            "startOffset": 294,
+            "endOffset": 369,
+            "contentStartInChunk": 9,
+            "quote": "模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。\n\n",
+            "text": "面试可讨论模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。",
+            "field": "supportedExplanation"
+          }
+        ],
+        "whatIsIt": "统一 API 网关，面向所有 LLM 提供商，支持路由请求、管理速率限制、处理回退，并通过 OpenAI 兼容接口控制成本，内置凭证管理、护栏和流量拆分以进行 A/B 测试。 [E3]",
+        "vibeCodingReason": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。 [E9]",
+        "supportedExplanation": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。 [E9]\n统一 API 网关，面向所有 LLM 提供商，支持路由请求、管理速率限制、处理回退，并通过 OpenAI 兼容接口控制成本，内置凭证管理、护栏和流量拆分以进行 A/B 测试。 [E3]\n面试可讨论模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。 [E6]",
+        "practiceAdvice": {
+          "recommendationAdvice": "建议结合Vue前端与Linux部署经验，用该项目展示MLOps与AI Gateway能力。可尝试做一个模型实验跟踪的Vue小面板，体现模型生命周期管理理解。",
+          "difficultyAdvice": "先确认MLflow Tracking/Registry与AI Gateway的本地部署门槛，核对凭证管理与速率限制配置；建议从单机实验跟踪入手。",
+          "vibeCodingAdvice": "可用AI辅助生成Vue面板与API调用代码，但需人工核对MLflow接口与Gateway路由逻辑，避免AI编造未提供的接口。",
+          "steps": [
+            "先核对并运行已有示例，确认MLflow Tracking与AI Gateway基本流程",
+            "实现一个具体小改造：用Vue展示实验跟踪与成本控制数据",
+            "测试并形成演示与复盘，记录模型生命周期管理要点"
+          ],
+          "evidenceIds": [
+            "E9",
+            "E3",
+            "E6"
+          ],
+          "kind": "SUGGESTION"
+        }
+      }
+    ],
+    "references": [
+      {
+        "evidenceId": "E4",
+        "title": "777genius/agent-teams-ai",
+        "sourceRef": "career:203",
+        "spans": [
+          {
+            "spanId": "E4.S1",
+            "text": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。\n\n",
+            "startInChunk": 8,
+            "endInChunk": 58
+          }
+        ],
+        "documentId": 108,
+        "versionId": 327,
+        "chunkId": 12392,
+        "sectionPath": "777genius/agent-teams-ai > 职业价值",
+        "startOffset": 203,
+        "endOffset": 253,
+        "contentStartInChunk": 8,
+        "quote": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。\n\n",
+        "text": "掌握多 agent 协作框架、LLM 集成、工作流编排，展示全栈+AI 结合的复杂系统构建能力。",
+        "field": "vibeCodingReason"
+      },
+      {
+        "evidenceId": "E1",
+        "title": "777genius/agent-teams-ai",
+        "sourceRef": "career:203",
+        "spans": [
+          {
+            "spanId": "E1.S1",
+            "text": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。\n\n",
+            "startInChunk": 8,
+            "endInChunk": 57
+          }
+        ],
+        "documentId": 108,
+        "versionId": 327,
+        "chunkId": 12396,
+        "sectionPath": "777genius/agent-teams-ai > 主要风险",
+        "startOffset": 424,
+        "endOffset": 473,
+        "contentStartInChunk": 8,
+        "quote": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。\n\n",
+        "text": "依赖众多第三方 LLM 接口，稳定性不易控制；项目活跃，需跟上版本更新；AI 行为不确定性高。",
+        "field": "mainRisks"
+      },
+      {
+        "evidenceId": "E9",
+        "title": "mlflow/mlflow",
+        "sourceRef": "career:221",
+        "spans": [
+          {
+            "spanId": "E9.S1",
+            "text": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。\n\n",
+            "startInChunk": 8,
+            "endInChunk": 65
+          }
+        ],
+        "documentId": 117,
+        "versionId": 336,
+        "chunkId": 12670,
+        "sectionPath": "mlflow/mlflow > 职业价值",
+        "startOffset": 160,
+        "endOffset": 217,
+        "contentStartInChunk": 8,
+        "quote": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。\n\n",
+        "text": "掌握 AI/ML 生产化核心工具，熟悉模型实验跟踪、部署、注册等流程，提升 AI 工程化和 MLOps 能力。",
+        "field": "vibeCodingReason"
+      },
+      {
+        "evidenceId": "E3",
+        "title": "mlflow/mlflow",
+        "sourceRef": "career:221",
+        "spans": [
+          {
+            "spanId": "E3.S1",
+            "text": "        <a href=\"https://mlflow.org/docs/latest/genai/governance/ai-gateway/\"><strong>AI Gateway</strong></a>\n        <br><br>\n        <div>Unified API gateway for all LLM providers. Route requests, manage rate limits, handle fallbacks, and control costs through an OpenAI-compatible interface with built-in credential management, guardrails and traffic splitting for A/B testing.</div><br>\n        <",
+            "startInChunk": 197,
+            "endInChunk": 597
+          },
+          {
+            "spanId": "E3.S2",
+            "text": "a href=\"https://mlflow.org/docs/latest/genai/governance/ai-gateway",
+            "startInChunk": 597,
+            "endInChunk": 663
+          }
+        ],
+        "documentId": 117,
+        "versionId": 336,
+        "chunkId": 12689,
+        "sectionPath": "mlflow/mlflow > LLMs & Agents",
+        "startOffset": 7306,
+        "endOffset": 7772,
+        "contentStartInChunk": 197,
+        "quote": "        <a href=\"https://mlflow.org/docs/latest/genai/governance/ai-gateway/\"><strong>AI Gateway</strong></a>\n        <br><br>\n        <div>Unified API gateway for all LLM providers. Route requests, manage rate limits, handle fallbacks, and control costs through an OpenAI-compatible interface with built-in credential management, guardrails and traffic splitting for A/B testing.</div><br>\n        <",
+        "text": "统一 API 网关，面向所有 LLM 提供商，支持路由请求、管理速率限制、处理回退，并通过 OpenAI 兼容接口控制成本，内置凭证管理、护栏和流量拆分以进行 A/B 测试。",
+        "field": "description"
+      },
+      {
+        "evidenceId": "E6",
+        "title": "mlflow/mlflow",
+        "sourceRef": "career:221",
+        "spans": [
+          {
+            "spanId": "E6.S1",
+            "text": "模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。\n\n",
+            "startInChunk": 9,
+            "endInChunk": 84
+          }
+        ],
+        "documentId": 117,
+        "versionId": 336,
+        "chunkId": 12672,
+        "sectionPath": "mlflow/mlflow > 面试讨论点",
+        "startOffset": 294,
+        "endOffset": 369,
+        "contentStartInChunk": 9,
+        "quote": "模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。\n\n",
+        "text": "面试可讨论模型生命周期管理、MLflow Tracking/Projects/Models/Registry 架构、AI Gateway、成本与权限控制等。",
+        "field": "supportedExplanation"
+      },
+      {
+        "evidenceId": "E2",
+        "title": "apache/doris",
+        "sourceRef": "career:210",
+        "spans": [
+          {
+            "spanId": "E2.S1",
+            "text": "可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。\n\n",
+            "startInChunk": 9,
+            "endInChunk": 64
+          }
+        ],
+        "documentId": 65,
+        "versionId": 284,
+        "chunkId": 10838,
+        "sectionPath": "apache/doris > 面试讨论点",
+        "startOffset": 258,
+        "endOffset": 313,
+        "contentStartInChunk": 9,
+        "quote": "可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。\n\n",
+        "text": "面试可讨论实时分析系统架构、列式存储、MPP 查询引擎、混合搜索（向量+全文）设计、与 AI 智能体的集成等。",
+        "field": "supportedExplanation"
+      },
+      {
+        "evidenceId": "E5",
+        "title": "apache/doris",
+        "sourceRef": "career:210",
+        "spans": [
+          {
+            "spanId": "E5.S1",
+            "text": "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。\n\n",
+            "startInChunk": 8,
+            "endInChunk": 44
+          }
+        ],
+        "documentId": 65,
+        "versionId": 284,
+        "chunkId": 10840,
+        "sectionPath": "apache/doris > 主要风险",
+        "startOffset": 399,
+        "endOffset": 435,
+        "contentStartInChunk": 8,
+        "quote": "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。\n\n",
+        "text": "项目庞大，学习曲线陡峭；需深入理解分布式系统；上手修改可能耗时较长。",
+        "field": "mainRisks"
+      }
+    ],
+    "profileLoaded": false,
+    "generation": "20261002164953-ec113424",
+    "status": "VERIFIED_PROJECTS",
+    "recommendationReport": {
+      "learning": [
+        {
+          "name": "777genius/agent-teams-ai",
+          "key": "CAREER_PROJECT:203",
+          "steps": [
+            "先核对并运行已有示例，确认多agent协作流程与LLM集成方式",
+            "实现一个具体小改造：为工作流加一个Vue状态展示页",
+            "测试并形成演示与复盘，记录AI行为不确定性的处理"
+          ],
+          "personalized": true
+        },
+        {
+          "name": "apache/doris",
+          "key": "CAREER_PROJECT:210",
+          "steps": [
+            "先核对并运行已有示例，确认本地Linux环境能否启动单机版",
+            "实现一个具体小改造：用Vue展示一个简单查询结果",
+            "测试并形成演示与复盘，记录架构理解与部署要点"
+          ],
+          "personalized": true
+        },
+        {
+          "name": "mlflow/mlflow",
+          "key": "CAREER_PROJECT:221",
+          "steps": [
+            "先核对并运行已有示例，确认MLflow Tracking与AI Gateway基本流程",
+            "实现一个具体小改造：用Vue展示实验跟踪与成本控制数据",
+            "测试并形成演示与复盘，记录模型生命周期管理要点"
+          ],
+          "personalized": true
+        }
+      ],
+      "approach": "结合「求职」目标，建议围绕一个可演示的小功能形成作品，保留需求、实现取舍、测试与复盘，用来展示解决问题的过程。",
+      "timeline": "你设定的时间上限为180天。建议先做最小可演示范围，运行示例后再估算工作量；这不是完成承诺。",
+      "scopeNote": "本轮依据项目资料与当前需求提供实践建议；未接入实时市场或招聘统计，不据此判断增长率与就业前景。",
+      "direction": "「AI应用开发」涵盖RAG、智能体、聊天机器人等子方向。这些项目可以作为该方向的不同实践入口，无须先把方向改成某个子主题。"
+    },
+    "answer": "已记录基础（排序偏好）：有Vue前端和Linux部署经验；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：AI应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。",
+    "conditionChangeSummary": "已记录基础（排序偏好）：有Vue前端和Linux部署经验；已记录项目目标：求职；已记录最长周期：180天；已记录项目主题：AI应用开发；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+  },
+  "metrics": {
+    "costUsd": "UNKNOWN",
+    "modelCalls": [
+      {
+        "usage": {
+          "prompt_tokens": 5282,
+          "completion_tokens": 701,
+          "total_tokens": 5983,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 390
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 4642
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 5987,
+        "protocol": "NATIVE_ACTION",
+        "phase": "ACTION",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 4096,
+        "thinking": true
+      },
+      {
+        "usage": {
+          "prompt_tokens": 1889,
+          "completion_tokens": 431,
+          "total_tokens": 2320,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1889
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 1609,
+        "protocol": "JSON_OBJECT",
+        "phase": "EVIDENCE",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      },
+      {
+        "usage": {
+          "prompt_tokens": 895,
+          "completion_tokens": 18,
+          "total_tokens": 913,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 895
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 311,
+        "protocol": "JSON_OBJECT",
+        "phase": "VERIFY",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 2048,
+        "thinking": false
+      },
+      {
+        "usage": {
+          "prompt_tokens": 795,
+          "completion_tokens": 680,
+          "total_tokens": 1475,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 795
+        },
+        "attempt": 1,
+        "status": "SUCCEEDED",
+        "costUsd": "UNKNOWN",
+        "model": "deepseek-flash",
+        "durationMs": 3869,
+        "protocol": "JSON_OBJECT",
+        "phase": "ADVICE",
+        "requestedModel": "deepseek-flash",
+        "finishReason": "stop",
+        "outputBudget": 4096,
+        "thinking": false
+      }
+    ],
+    "promptVersion": "customer-v4.12-semantic-recommendations",
+    "embeddingUsage": "NOT_REPORTED",
+    "protocol": "NATIVE_ACTION_V1",
+    "tokenUsage": {
+      "reasoningTokens": 390,
+      "complete": true,
+      "cacheHitTokens": 640,
+      "inputTokens": 8861,
+      "cacheMissTokens": 8221,
+      "totalTokens": 10691,
+      "outputTokens": 1830,
+      "callsWithoutUsage": 0,
+      "calls": 4,
+      "models": [
+        "deepseek-flash"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1876 @@
+[
+  {
+    "caseId": "Q01",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "4",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "知识库怎么保证答案有来源？",
+        "runId": "3f91d63b-9b73-4348-abce-6bfcced77cf8",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 3890,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [],
+          "generation": "20261002164953-ec113424",
+          "status": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "answer": "检索到的资料不能直接回答这个问题，暂时无法给出有依据的结论。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 681,
+            "completion_tokens": 68,
+            "total_tokens": 749,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 41
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1267
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1512,
+            "completion_tokens": 7,
+            "total_tokens": 1519,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1512
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 874
+        }
+      ]
+    },
+    "durationMs": 3890,
+    "expected": "平台规则没有入库时拒答，不把常识当平台事实",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q02",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "5",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "怎样查看项目的部署依赖？",
+        "runId": "3fcb2c65-0f2e-4566-939d-175100b14cf5",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 7125,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E1",
+              "title": "iO-808",
+              "sourceRef": "vincentriemer/io-808",
+              "documentId": 380,
+              "versionId": 599,
+              "chunkId": 16863,
+              "sectionPath": "iO-808 > 工具/库概览",
+              "startOffset": 228,
+              "endOffset": 294,
+              "quote": "## 工具/库概览\n\n和大多数网页/JavaScript 开发者一样，我站在巨人的肩膀上。以下是本项目使用的主要依赖项简要列表：",
+              "text": "项目的部署依赖可以在“工具/库概览”部分查看，该部分列出了项目使用的主要依赖项。"
+            },
+            {
+              "evidenceId": "E2",
+              "title": "Jan - 开源的 ChatGPT 替代品",
+              "sourceRef": "janhq/jan",
+              "documentId": 251,
+              "versionId": 470,
+              "chunkId": 16044,
+              "sectionPath": "Jan - 开源的 ChatGPT 替代品 > 从源码构建 > 使用 Make 运行",
+              "startOffset": 3305,
+              "endOffset": 3410,
+              "quote": "### 使用 Make 运行\n\n```bash\ngit clone https://github.com/janhq/jan\ncd jan\nmake dev\n```\n\n这将处理所有事情：安装依赖、构建核心组件、",
+              "text": "通过运行 make dev 命令可以自动安装依赖并构建核心组件，从而查看部署依赖。"
+            },
+            {
+              "evidenceId": "E3",
+              "title": "LearningCircuit/local-deep-research",
+              "sourceRef": "LearningCircuit/local-deep-research|week",
+              "documentId": 205,
+              "versionId": 424,
+              "chunkId": 15090,
+              "sectionPath": "Local Deep Research > 📄 License",
+              "startOffset": 35933,
+              "endOffset": 36147,
+              "quote": "**Dependencies:** All third-party packages use permissive licenses (MIT, Apache-2.0, BSD, etc.) - see [allowlist](.github/workflows/dependency-review.yml)",
+              "text": "部署依赖的许可证信息可以在 allowlist 文件中查看，该文件列出了所有第三方包及其许可证。"
+            },
+            {
+              "evidenceId": "E4",
+              "title": "安装依赖",
+              "sourceRef": "antvis/G2",
+              "documentId": 222,
+              "versionId": 441,
+              "chunkId": 15847,
+              "sectionPath": "⌨️ 本地开发",
+              "startOffset": 2857,
+              "endOffset": 3021,
+              "quote": "## ⌨️ 本地开发\n\n```bash\n# 安装依赖\n$ npm install\n\n# 运行测试用例\n$ npm run test\n\n# 打开 electron 运行测试用例，监听文件变化构建\n$ npm run test-live\n\n# 运行 CI\n$ npm run ci\n\n# 运行网站\n$ npm start\n```",
+              "text": "在本地开发部分，通过运行 npm install 命令可以安装项目依赖，从而查看部署依赖。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1327
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1339,
+            "completion_tokens": 389,
+            "total_tokens": 1728,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1339
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 3261
+        },
+        {
+          "usage": {
+            "prompt_tokens": 418,
+            "completion_tokens": 19,
+            "total_tokens": 437,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 418
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1204
+        }
+      ]
+    },
+    "durationMs": 7125,
+    "expected": "说明有证据的依赖，资料缺失明确未知",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q03",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "8",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "Java项目为什么可能需要数据库？",
+        "runId": "edebc554-de02-4b11-a628-babe66c8dcbb",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 6531,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E2",
+              "title": "bojieli/ai-agent-book",
+              "sourceRef": "career:211",
+              "documentId": 112,
+              "versionId": 331,
+              "chunkId": 12512,
+              "sectionPath": "bojieli/ai-agent-book > 主要风险",
+              "startOffset": 394,
+              "endOffset": 437,
+              "quote": "项目偏向教育性，缺少实际部署和数据库支持，难以直接展示生产级能力。",
+              "text": "Java项目可能需要数据库，因为缺少数据库支持会难以展示生产级能力。"
+            },
+            {
+              "evidenceId": "E3",
+              "title": "deer-flow/llm-space",
+              "sourceRef": "career:212",
+              "documentId": 113,
+              "versionId": 332,
+              "chunkId": 12547,
+              "sectionPath": "deer-flow/llm-space > 主要风险",
+              "startOffset": 412,
+              "endOffset": 466,
+              "quote": "项目缺少数据库和 Docker 支持，后端能力展示不足；需要一定 React 前端基础。",
+              "text": "Java项目可能需要数据库，因为缺少数据库会导致后端能力展示不足。"
+            },
+            {
+              "evidenceId": "E4",
+              "title": "mylee04/code-notify",
+              "sourceRef": "career:241",
+              "documentId": 134,
+              "versionId": 353,
+              "chunkId": 13208,
+              "sectionPath": "mylee04/code-notify > 主要风险",
+              "startOffset": 403,
+              "endOffset": 448,
+              "quote": "项目规模小，技术含量有限；缺少数据库和后端逻辑，难以展示复杂系统能力。",
+              "text": "Java项目可能需要数据库，因为缺少数据库和后端逻辑会难以展示复杂系统能力。"
+            },
+            {
+              "evidenceId": "E6",
+              "title": "zhnt/loushang",
+              "sourceRef": "beginner:121",
+              "documentId": 13,
+              "versionId": 232,
+              "chunkId": 9951,
+              "sectionPath": "zhnt/loushang > 主要风险",
+              "startOffset": 519,
+              "endOffset": 589,
+              "quote": "项目处于早期开发阶段，API 可能频繁变动；需要额外的数据库支撑，增加了部署复杂度；缺少可视化界面，初期体验偏向命令行。",
+              "text": "Java项目可能需要数据库，因为需要额外的数据库支撑，尽管这会增加部署复杂度。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1206
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1237,
+            "completion_tokens": 263,
+            "total_tokens": 1500,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1237
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 3387
+        },
+        {
+          "usage": {
+            "prompt_tokens": 291,
+            "completion_tokens": 12,
+            "total_tokens": 303,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 35
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 916
+        }
+      ]
+    },
+    "durationMs": 6531,
+    "expected": "区分一般知识与具体仓库事实",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q04",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "10",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "这个平台支持游客免费使用客服吗？",
+        "runId": "866aecef-6c34-49f2-990a-415015661b50",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 3422,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [],
+          "generation": "20261002164953-ec113424",
+          "status": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "answer": "检索到的资料不能直接回答这个问题，暂时无法给出有依据的结论。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 682,
+            "completion_tokens": 68,
+            "total_tokens": 750,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 42
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1415
+        },
+        {
+          "usage": {
+            "prompt_tokens": 2045,
+            "completion_tokens": 7,
+            "total_tokens": 2052,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            },
+            "prompt_cache_hit_tokens": 1920,
+            "prompt_cache_miss_tokens": 125
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 860
+        }
+      ]
+    },
+    "durationMs": 3422,
+    "expected": "没有平台FAQ证据不承诺游客政策",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q05",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "12",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "客服推荐的项目怎么验证是真实仓库？",
+        "runId": "43b502a0-0b61-401a-9155-e6cf754acacf",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 5485,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E1",
+              "title": "CCOSTAN/Home-AssistantConfig",
+              "sourceRef": "CCOSTAN/Home-AssistantConfig",
+              "documentId": 258,
+              "versionId": 477,
+              "chunkId": 16088,
+              "sectionPath": "这个仓库是什么（以及不是什么）",
+              "startOffset": 2747,
+              "endOffset": 2894,
+              "quote": "### 这个仓库是什么（以及不是什么）\n- 是我智能家居实际运行情况的实时记录，包含真实的自动化、脚本和场景。\n- 一个供逆向工程学习模式的地方，而不是部署指南。如果你复用代码片段，请根据你的设置调整实体、密钥和服务。\n- 问题区同时充当变更日志和设计历史；浏览它们可以了解更改背后的理由。",
+              "text": "该仓库是作者智能家居实际运行情况的实时记录，包含真实的自动化、脚本和场景，可作为逆向工程学习模式，但并非部署指南。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 682,
+            "completion_tokens": 68,
+            "total_tokens": 750,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 42
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1194
+        },
+        {
+          "usage": {
+            "prompt_tokens": 943,
+            "completion_tokens": 148,
+            "total_tokens": 1091,
+            "prompt_tokens_details": {
+              "cached_tokens": 896
+            },
+            "prompt_cache_hit_tokens": 896,
+            "prompt_cache_miss_tokens": 47
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1914
+        },
+        {
+          "usage": {
+            "prompt_tokens": 233,
+            "completion_tokens": 6,
+            "total_tokens": 239,
+            "prompt_tokens_details": {
+              "cached_tokens": 128
+            },
+            "prompt_cache_hit_tokens": 128,
+            "prompt_cache_miss_tokens": 105
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1220
+        }
+      ]
+    },
+    "durationMs": 5485,
+    "expected": "平台机制须有FAQ证据",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q06",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "14",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "README里的环境变量有什么用？",
+        "runId": "d43b6a1c-faff-4db6-9db6-067414bd14bb",
+        "status": "FAILED",
+        "errorCode": "INVALID_QUOTE",
+        "durationMs": 7594,
+        "generation": "20261002164953-ec113424",
+        "result": {}
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1273
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1445,
+            "completion_tokens": 711,
+            "total_tokens": 2156,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1445
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 5014
+        }
+      ]
+    },
+    "durationMs": 7594,
+    "expected": "逐条回答绑定实际证据",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q07",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "16",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "找包含Docker部署说明的项目资料",
+        "runId": "1bee1e04-af71-41c8-ab58-eb2e890212ad",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 1828,
+        "generation": null,
+        "result": {
+          "skill": "PROJECT_RECOMMENDATION_V1",
+          "intent": "RECOMMEND",
+          "state": {
+            "allowDocker": true,
+            "provenance": {
+              "allowDocker": {
+                "source": "MESSAGE",
+                "quote": "包含Docker部署说明"
+              }
+            }
+          },
+          "projects": [],
+          "references": [],
+          "status": "FOLLOW_UP",
+          "answer": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 681,
+            "completion_tokens": 91,
+            "total_tokens": 772,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 41
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1431
+        }
+      ]
+    },
+    "durationMs": 1828,
+    "expected": "依赖说明不能冒充项目可推荐状态",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q08",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "18",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "如何确认项目需要API密钥？",
+        "runId": "28c05962-ccdd-496f-9c87-ffb89eff8e9d",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 5438,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E1",
+              "title": "SeanJ1ang/design-judge-skills",
+              "sourceRef": "beginner:91",
+              "documentId": 5,
+              "versionId": 224,
+              "chunkId": 9719,
+              "sectionPath": "SeanJ1ang/design-judge-skills > 环境要求",
+              "startOffset": 898,
+              "endOffset": 918,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "该项目在环境要求中列出了API Key/密钥，因此需要API密钥。"
+            },
+            {
+              "evidenceId": "E2",
+              "title": "BetterWright/betterwright",
+              "sourceRef": "beginner:11",
+              "documentId": 83,
+              "versionId": 302,
+              "chunkId": 11898,
+              "sectionPath": "BetterWright/betterwright > 环境要求",
+              "startOffset": 351,
+              "endOffset": 371,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "该项目在环境要求中列出了API Key/密钥，因此需要API密钥。"
+            },
+            {
+              "evidenceId": "E3",
+              "title": "browserless/browserless",
+              "sourceRef": "beginner:22",
+              "documentId": 86,
+              "versionId": 305,
+              "chunkId": 11937,
+              "sectionPath": "browserless/browserless > 环境要求",
+              "startOffset": 463,
+              "endOffset": 483,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "该项目在环境要求中列出了API Key/密钥，因此需要API密钥。"
+            },
+            {
+              "evidenceId": "E4",
+              "title": "bashalarmistalt/decimen-optical-transfer",
+              "sourceRef": "beginner:80",
+              "documentId": 3,
+              "versionId": 222,
+              "chunkId": 9652,
+              "sectionPath": "bashalarmistalt/decimen-optical-transfer > 环境要求",
+              "startOffset": 686,
+              "endOffset": 706,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "该项目在环境要求中列出了API Key/密钥，因此需要API密钥。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 680,
+            "completion_tokens": 68,
+            "total_tokens": 748,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 40
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1217
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1200,
+            "completion_tokens": 217,
+            "total_tokens": 1417,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152
+            },
+            "prompt_cache_hit_tokens": 1152,
+            "prompt_cache_miss_tokens": 48
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 2093
+        },
+        {
+          "usage": {
+            "prompt_tokens": 245,
+            "completion_tokens": 12,
+            "total_tokens": 257,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 245
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 762
+        }
+      ]
+    },
+    "durationMs": 5438,
+    "expected": "未知不能推断为不需要",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q09",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "20",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "项目许可证允许商用吗？",
+        "runId": "5621d046-7756-453b-b9b6-704936eec8ce",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 5891,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E2",
+              "title": "Spectral VS Code 扩展",
+              "sourceRef": "SpectralOps/vscode-extension",
+              "documentId": 289,
+              "versionId": 508,
+              "chunkId": 16292,
+              "sectionPath": "Spectral VS Code 扩展 > 许可证",
+              "startOffset": 1593,
+              "endOffset": 1647,
+              "quote": "本项目采用 MIT 许可证。有关更多详细信息，请参阅 [LICENSE](LICENSE)。",
+              "text": "MIT 许可证允许商用，因此该项目可以商用。"
+            },
+            {
+              "evidenceId": "E6",
+              "title": "Canvas UI",
+              "sourceRef": "DavidHDev/canvas-ui",
+              "documentId": 58,
+              "versionId": 277,
+              "chunkId": 10740,
+              "sectionPath": "Canvas UI > License",
+              "startOffset": 2712,
+              "endOffset": 2875,
+              "quote": "[MIT + Commons Clause](LICENSE.md). Free to use in your own projects, commercial or not. The Commons Clause only restricts selling the library itself.",
+              "text": "MIT + Commons Clause 许可证允许商用，但限制销售该库本身。"
+            },
+            {
+              "evidenceId": "E8",
+              "title": "InfoTerm",
+              "sourceRef": "spofastic/InfoTerm",
+              "documentId": 557,
+              "versionId": 776,
+              "chunkId": 18158,
+              "sectionPath": "InfoTerm > License",
+              "startOffset": 2863,
+              "endOffset": 2947,
+              "quote": "This project is licensed under the MIT License. See [LICENSE](LICENSE).",
+              "text": "MIT 许可证允许商用，因此该项目可以商用。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1310
+        },
+        {
+          "usage": {
+            "prompt_tokens": 975,
+            "completion_tokens": 278,
+            "total_tokens": 1253,
+            "prompt_tokens_details": {
+              "cached_tokens": 896
+            },
+            "prompt_cache_hit_tokens": 896,
+            "prompt_cache_miss_tokens": 79
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 2398
+        },
+        {
+          "usage": {
+            "prompt_tokens": 308,
+            "completion_tokens": 10,
+            "total_tokens": 318,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 308
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 984
+        }
+      ]
+    },
+    "durationMs": 5891,
+    "expected": "必须有许可证内容，不能凭仓库名称推断",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q10",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "22",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "Redis和MySQL在项目里分别做什么？",
+        "runId": "c925e136-d191-48f5-8185-07e4871d2010",
+        "status": "FAILED",
+        "errorCode": "UNSUPPORTED_CLAIM",
+        "durationMs": 3922,
+        "generation": "20261002164953-ec113424",
+        "result": {}
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 682,
+            "completion_tokens": 68,
+            "total_tokens": 750,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 42
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1117
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1676,
+            "completion_tokens": 152,
+            "total_tokens": 1828,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            },
+            "prompt_cache_hit_tokens": 1664,
+            "prompt_cache_miss_tokens": 12
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1841
+        }
+      ]
+    },
+    "durationMs": 3922,
+    "expected": "涉及具体项目必须有相关章节",
+    "capacityAccountId": 1
+  },
+  {
+    "caseId": "Q01",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "3",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "知识库怎么保证答案有来源？",
+        "runId": "5742d9ee-aa7e-4a73-abf6-45a2a8c1f488",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 4406,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [],
+          "generation": "20261002164953-ec113424",
+          "status": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "answer": "检索到的资料不能直接回答这个问题，暂时无法给出有依据的结论。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 681,
+            "completion_tokens": 68,
+            "total_tokens": 749,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 41
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1673
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1512,
+            "completion_tokens": 7,
+            "total_tokens": 1519,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1512
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1140
+        }
+      ]
+    },
+    "durationMs": 4406,
+    "expected": "平台规则没有入库时拒答，不把常识当平台事实",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q02",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "6",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "怎样查看项目的部署依赖？",
+        "runId": "69dfa099-02c4-49b8-991a-abedc8f4f9e5",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 6031,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E1",
+              "title": "iO-808",
+              "sourceRef": "vincentriemer/io-808",
+              "documentId": 380,
+              "versionId": 599,
+              "chunkId": 16863,
+              "sectionPath": "iO-808 > 工具/库概览",
+              "startOffset": 228,
+              "endOffset": 294,
+              "quote": "## 工具/库概览\n\n和大多数网页/JavaScript 开发者一样，我站在巨人的肩膀上。以下是本项目使用的主要依赖项简要列表：",
+              "text": "项目的部署依赖可以在“工具/库概览”部分查看，该部分列出了项目使用的主要依赖项。"
+            },
+            {
+              "evidenceId": "E2",
+              "title": "Jan - 开源的 ChatGPT 替代品",
+              "sourceRef": "janhq/jan",
+              "documentId": 251,
+              "versionId": 470,
+              "chunkId": 16044,
+              "sectionPath": "Jan - 开源的 ChatGPT 替代品 > 从源码构建 > 使用 Make 运行",
+              "startOffset": 3305,
+              "endOffset": 3410,
+              "quote": "### 使用 Make 运行\n\n```bash\ngit clone https://github.com/janhq/jan\ncd jan\nmake dev\n```\n\n这将处理所有事情：安装依赖、构建核心组件、",
+              "text": "通过运行 make dev 命令可以自动安装依赖并构建核心组件，从而查看部署依赖。"
+            },
+            {
+              "evidenceId": "E4",
+              "title": "安装依赖",
+              "sourceRef": "antvis/G2",
+              "documentId": 222,
+              "versionId": 441,
+              "chunkId": 15847,
+              "sectionPath": "⌨️ 本地开发",
+              "startOffset": 2857,
+              "endOffset": 3021,
+              "quote": "## ⌨️ 本地开发\n\n```bash\n# 安装依赖\n$ npm install\n\n# 运行测试用例\n$ npm run test\n\n# 打开 electron 运行测试用例，监听文件变化构建\n$ npm run test-live\n\n# 运行 CI\n$ npm run ci\n\n# 运行网站\n$ npm start\n```",
+              "text": "在本地开发部分，通过运行 npm install 命令可以安装项目依赖，从而查看部署依赖。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1196
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1339,
+            "completion_tokens": 393,
+            "total_tokens": 1732,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1339
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 3054
+        },
+        {
+          "usage": {
+            "prompt_tokens": 422,
+            "completion_tokens": 10,
+            "total_tokens": 432,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 422
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 963
+        }
+      ]
+    },
+    "durationMs": 6031,
+    "expected": "说明有证据的依赖，资料缺失明确未知",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q03",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "7",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "Java项目为什么可能需要数据库？",
+        "runId": "3fc885ab-3720-4a2f-8246-9de04d7bb4b6",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 5953,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E2",
+              "title": "bojieli/ai-agent-book",
+              "sourceRef": "career:211",
+              "documentId": 112,
+              "versionId": 331,
+              "chunkId": 12512,
+              "sectionPath": "bojieli/ai-agent-book > 主要风险",
+              "startOffset": 394,
+              "endOffset": 437,
+              "quote": "项目偏向教育性，缺少实际部署和数据库支持，难以直接展示生产级能力。",
+              "text": "Java项目可能需要数据库，因为缺少数据库支持会难以展示生产级能力。"
+            },
+            {
+              "evidenceId": "E3",
+              "title": "deer-flow/llm-space",
+              "sourceRef": "career:212",
+              "documentId": 113,
+              "versionId": 332,
+              "chunkId": 12547,
+              "sectionPath": "deer-flow/llm-space > 主要风险",
+              "startOffset": 412,
+              "endOffset": 466,
+              "quote": "项目缺少数据库和 Docker 支持，后端能力展示不足；需要一定 React 前端基础。",
+              "text": "Java项目可能需要数据库，因为缺少数据库会导致后端能力展示不足。"
+            },
+            {
+              "evidenceId": "E4",
+              "title": "mylee04/code-notify",
+              "sourceRef": "career:241",
+              "documentId": 134,
+              "versionId": 353,
+              "chunkId": 13208,
+              "sectionPath": "mylee04/code-notify > 主要风险",
+              "startOffset": 403,
+              "endOffset": 448,
+              "quote": "项目规模小，技术含量有限；缺少数据库和后端逻辑，难以展示复杂系统能力。",
+              "text": "Java项目可能需要数据库，因为缺少数据库和后端逻辑会难以展示复杂系统能力。"
+            },
+            {
+              "evidenceId": "E6",
+              "title": "zhnt/loushang",
+              "sourceRef": "beginner:121",
+              "documentId": 13,
+              "versionId": 232,
+              "chunkId": 9951,
+              "sectionPath": "zhnt/loushang > 主要风险",
+              "startOffset": 519,
+              "endOffset": 589,
+              "quote": "项目处于早期开发阶段，API 可能频繁变动；需要额外的数据库支撑，增加了部署复杂度；缺少可视化界面，初期体验偏向命令行。",
+              "text": "Java项目可能需要数据库，因为需要额外的数据库支撑，尽管这会增加部署复杂度。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1016
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1237,
+            "completion_tokens": 263,
+            "total_tokens": 1500,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1237
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 2787
+        },
+        {
+          "usage": {
+            "prompt_tokens": 291,
+            "completion_tokens": 12,
+            "total_tokens": 303,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 291
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 917
+        }
+      ]
+    },
+    "durationMs": 5953,
+    "expected": "区分一般知识与具体仓库事实",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q04",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "9",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "这个平台支持游客免费使用客服吗？",
+        "runId": "b427b0f0-f9d1-4b88-973c-4724c413fcf7",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 3360,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [],
+          "generation": "20261002164953-ec113424",
+          "status": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "answer": "检索到的资料不能直接回答这个问题，暂时无法给出有依据的结论。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 682,
+            "completion_tokens": 68,
+            "total_tokens": 750,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 42
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1259
+        },
+        {
+          "usage": {
+            "prompt_tokens": 2045,
+            "completion_tokens": 7,
+            "total_tokens": 2052,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 2045
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1269
+        }
+      ]
+    },
+    "durationMs": 3360,
+    "expected": "没有平台FAQ证据不承诺游客政策",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q05",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "11",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "客服推荐的项目怎么验证是真实仓库？",
+        "runId": "49093df8-6be4-426e-9333-8c126a74589f",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 5516,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E1",
+              "title": "CCOSTAN/Home-AssistantConfig",
+              "sourceRef": "CCOSTAN/Home-AssistantConfig",
+              "documentId": 258,
+              "versionId": 477,
+              "chunkId": 16088,
+              "sectionPath": "这个仓库是什么（以及不是什么）",
+              "startOffset": 2747,
+              "endOffset": 2894,
+              "quote": "### 这个仓库是什么（以及不是什么）\n- 是我智能家居实际运行情况的实时记录，包含真实的自动化、脚本和场景。\n- 一个供逆向工程学习模式的地方，而不是部署指南。如果你复用代码片段，请根据你的设置调整实体、密钥和服务。\n- 问题区同时充当变更日志和设计历史；浏览它们可以了解更改背后的理由。",
+              "text": "该仓库是作者智能家居实际运行情况的实时记录，包含真实的自动化、脚本和场景，可作为验证真实性的依据。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 682,
+            "completion_tokens": 68,
+            "total_tokens": 750,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 42
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1236
+        },
+        {
+          "usage": {
+            "prompt_tokens": 943,
+            "completion_tokens": 143,
+            "total_tokens": 1086,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 943
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 2019
+        },
+        {
+          "usage": {
+            "prompt_tokens": 228,
+            "completion_tokens": 6,
+            "total_tokens": 234,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 228
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 948
+        }
+      ]
+    },
+    "durationMs": 5516,
+    "expected": "平台机制须有FAQ证据",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q06",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "13",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "README里的环境变量有什么用？",
+        "runId": "01993e5f-f090-440d-8704-60b94c268672",
+        "status": "FAILED",
+        "errorCode": "INVALID_QUOTE",
+        "durationMs": 7563,
+        "generation": "20261002164953-ec113424",
+        "result": {}
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1375
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1445,
+            "completion_tokens": 710,
+            "total_tokens": 2155,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1445
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 4966
+        }
+      ]
+    },
+    "durationMs": 7563,
+    "expected": "逐条回答绑定实际证据",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q07",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "15",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "找包含Docker部署说明的项目资料",
+        "runId": "03d96baa-7d76-4a70-a953-13bb41aadd9a",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 1829,
+        "generation": null,
+        "result": {
+          "skill": "PROJECT_RECOMMENDATION_V1",
+          "intent": "RECOMMEND",
+          "state": {
+            "allowDocker": true,
+            "provenance": {
+              "allowDocker": {
+                "source": "MESSAGE",
+                "quote": "找包含Docker部署说明的项目资料"
+              }
+            }
+          },
+          "projects": [],
+          "references": [],
+          "status": "FOLLOW_UP",
+          "answer": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 681,
+            "completion_tokens": 94,
+            "total_tokens": 775,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 41
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1322
+        }
+      ]
+    },
+    "durationMs": 1829,
+    "expected": "依赖说明不能冒充项目可推荐状态",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q08",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "17",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "如何确认项目需要API密钥？",
+        "runId": "7b2b1283-8d1a-477c-94d1-35c222b2b7e5",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "durationMs": 5500,
+        "generation": "20261002164953-ec113424",
+        "result": {
+          "skill": "KNOWLEDGE_QA_V1",
+          "intent": "QUESTION",
+          "state": {},
+          "projects": [],
+          "references": [
+            {
+              "evidenceId": "E1",
+              "title": "SeanJ1ang/design-judge-skills",
+              "sourceRef": "beginner:91",
+              "documentId": 5,
+              "versionId": 224,
+              "chunkId": 9719,
+              "sectionPath": "SeanJ1ang/design-judge-skills > 环境要求",
+              "startOffset": 898,
+              "endOffset": 918,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "在环境要求部分明确列出了API Key/密钥，表明该项目需要API密钥。"
+            },
+            {
+              "evidenceId": "E2",
+              "title": "BetterWright/betterwright",
+              "sourceRef": "beginner:11",
+              "documentId": 83,
+              "versionId": 302,
+              "chunkId": 11898,
+              "sectionPath": "BetterWright/betterwright > 环境要求",
+              "startOffset": 351,
+              "endOffset": 371,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "在环境要求部分明确列出了API Key/密钥，表明该项目需要API密钥。"
+            },
+            {
+              "evidenceId": "E3",
+              "title": "browserless/browserless",
+              "sourceRef": "beginner:22",
+              "documentId": 86,
+              "versionId": 305,
+              "chunkId": 11937,
+              "sectionPath": "browserless/browserless > 环境要求",
+              "startOffset": 463,
+              "endOffset": 483,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "在环境要求部分明确列出了API Key/密钥，表明该项目需要API密钥。"
+            },
+            {
+              "evidenceId": "E4",
+              "title": "bashalarmistalt/decimen-optical-transfer",
+              "sourceRef": "beginner:80",
+              "documentId": 3,
+              "versionId": 222,
+              "chunkId": 9652,
+              "sectionPath": "bashalarmistalt/decimen-optical-transfer > 环境要求",
+              "startOffset": 686,
+              "endOffset": 706,
+              "quote": "## 环境要求\nAPI Key/密钥\n\n",
+              "text": "在环境要求部分明确列出了API Key/密钥，表明该项目需要API密钥。"
+            }
+          ],
+          "generation": "20261002164953-ec113424",
+          "status": "SUPPORTED_EXTRACTS",
+          "answer": "以下资料包含可核对的回答依据；引文保留原文。",
+          "pendingQuestion": "你希望通过项目学习技术，还是准备求职作品？"
+        }
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 680,
+            "completion_tokens": 68,
+            "total_tokens": 748,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 40
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 981
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1200,
+            "completion_tokens": 221,
+            "total_tokens": 1421,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1200
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 2340
+        },
+        {
+          "usage": {
+            "prompt_tokens": 249,
+            "completion_tokens": 12,
+            "total_tokens": 261,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 249
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 864
+        }
+      ]
+    },
+    "durationMs": 5500,
+    "expected": "未知不能推断为不需要",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q09",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "19",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "项目许可证允许商用吗？",
+        "runId": "56a3f9ac-6bd7-46e2-ab52-9754cffad1f5",
+        "status": "FAILED",
+        "errorCode": "UNSUPPORTED_CLAIM",
+        "durationMs": 3875,
+        "generation": "20261002164953-ec113424",
+        "result": {}
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 679,
+            "completion_tokens": 68,
+            "total_tokens": 747,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 39
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1132
+        },
+        {
+          "usage": {
+            "prompt_tokens": 975,
+            "completion_tokens": 92,
+            "total_tokens": 1067,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 975
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 1898
+        }
+      ]
+    },
+    "durationMs": 3875,
+    "expected": "必须有许可证内容，不能凭仓库名称推断",
+    "capacityAccountId": 5
+  },
+  {
+    "caseId": "Q10",
+    "round": 1,
+    "variant": "B",
+    "category": "KNOWLEDGE",
+    "sessionId": "21",
+    "manualPassed": null,
+    "criticalFailure": false,
+    "turns": [
+      {
+        "message": "Redis和MySQL在项目里分别做什么？",
+        "runId": "bfb271fa-6d08-4d78-ad0c-6d541b435c4c",
+        "status": "FAILED",
+        "errorCode": "UNSUPPORTED_CLAIM",
+        "durationMs": 4375,
+        "generation": "20261002164953-ec113424",
+        "result": {}
+      }
+    ],
+    "metrics": {
+      "modelCalls": [
+        {
+          "usage": {
+            "prompt_tokens": 682,
+            "completion_tokens": 68,
+            "total_tokens": 750,
+            "prompt_tokens_details": {
+              "cached_tokens": 640
+            },
+            "prompt_cache_hit_tokens": 640,
+            "prompt_cache_miss_tokens": 42
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 962
+        },
+        {
+          "usage": {
+            "prompt_tokens": 1676,
+            "completion_tokens": 152,
+            "total_tokens": 1828,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1676
+          },
+          "attempt": 1,
+          "status": "SUCCEEDED",
+          "costUsd": "UNKNOWN",
+          "model": "deepseek-v4-pro",
+          "durationMs": 2240
+        }
+      ]
+    },
+    "durationMs": 4375,
+    "expected": "涉及具体项目必须有相关章节",
+    "capacityAccountId": 5
+  }
+]

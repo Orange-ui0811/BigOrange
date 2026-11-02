@@ -1,0 +1,249 @@
+{
+  "status": "QUALITY_EVALUATION_COMPLETE_GATE_NOT_MET",
+  "checkedAt": "2026-10-29T12:41:50.622348+00:00",
+  "labelledTargets": 54,
+  "ruleControls": 14,
+  "repositories": 16,
+  "modelBatches": 15,
+  "newRepositories": 8,
+  "budgetAuthorized": 20,
+  "budgetUsed": 18,
+  "budgetRemaining": 2,
+  "historicalLedgersUnchanged": true,
+  "frozenDatasetSha256": "1bdad29e36e53697311605c53ac46ace68cdabd3dae3ba1cc5e09ec841b59f6e",
+  "labelsUserConfirmed": false,
+  "primaryMetrics": {
+    "phase": "primary",
+    "completedBatches": 15,
+    "plannedBatches": 15,
+    "labelledTargets": 54,
+    "goldDecisionCounts": {
+      "KEEP": 46,
+      "REVIEW": 2,
+      "DROP": 6
+    },
+    "attemptStatuses": {
+      "MODEL_VALIDATED": 14,
+      "OUTPUT_REJECTED_ENUM_OR_OTHER": 1
+    },
+    "protocolValidBatches": 14,
+    "protocolValidRate": 0.9333,
+    "decisionAgreement": 0.7037,
+    "keepPrecision": 0.9688,
+    "knowledgeRecovery": 0.6739,
+    "kindAccuracyOnKeep": 0.9706,
+    "scopeAccuracyOnKeep": 1.0,
+    "criticalWrongDrop": 0,
+    "uncertainWrongKeep": 1,
+    "controls": 14,
+    "controlErrors": 0,
+    "sourceMappingErrors": 0,
+    "sourceRewriteErrors": 0,
+    "nonKeepCandidateLeaks": 0,
+    "budgetUsed": 15,
+    "currentBudgetUsed": 18,
+    "budgetLimit": 20,
+    "allPrimaryResultsPresent": true,
+    "userConfirmedGold": false,
+    "wrongDropCases": 3,
+    "expectedKeepStillReview": 12,
+    "cumulativeJournalStatuses": {
+      "START": 18,
+      "VALID_RESPONSE": 17,
+      "OUTPUT_REJECTED_ENUM_OR_OTHER": 1
+    },
+    "cumulativeProviderReportedUsage": {
+      "prompt_tokens": 34050,
+      "completion_tokens": 4843,
+      "total_tokens": 38893
+    },
+    "implementationVersions": [
+      {
+        "policy": "README_MODEL_REVIEW_V1",
+        "prompt": "README_SELECTOR_ZH_V1",
+        "batches": 15
+      }
+    ],
+    "mixedVersionAggregate": false,
+    "proposalDecisionAgreement": 0.7593,
+    "confusion": [
+      {
+        "expected": "DROP",
+        "final": "DROP",
+        "count": 6
+      },
+      {
+        "expected": "KEEP",
+        "final": "DROP",
+        "count": 3
+      },
+      {
+        "expected": "KEEP",
+        "final": "KEEP",
+        "count": 31
+      },
+      {
+        "expected": "KEEP",
+        "final": "REVIEW",
+        "count": 12
+      },
+      {
+        "expected": "REVIEW",
+        "final": "KEEP",
+        "count": 1
+      },
+      {
+        "expected": "REVIEW",
+        "final": "REVIEW",
+        "count": 1
+      }
+    ],
+    "meetsProposedGate": false,
+    "cohorts": {
+      "regression": {
+        "cases": 26,
+        "decisionAgreement": 0.6538,
+        "criticalWrongDrop": 0
+      },
+      "new_repository": {
+        "cases": 28,
+        "decisionAgreement": 0.75,
+        "criticalWrongDrop": 0
+      }
+    }
+  },
+  "diagnosticAggregateMetrics": {
+    "phase": "final",
+    "completedBatches": 15,
+    "plannedBatches": 15,
+    "labelledTargets": 54,
+    "goldDecisionCounts": {
+      "KEEP": 46,
+      "REVIEW": 2,
+      "DROP": 6
+    },
+    "attemptStatuses": {
+      "MODEL_VALIDATED": 15
+    },
+    "protocolValidBatches": 15,
+    "protocolValidRate": 1.0,
+    "decisionAgreement": 0.8148,
+    "keepPrecision": 1.0,
+    "knowledgeRecovery": 0.7826,
+    "kindAccuracyOnKeep": 0.9744,
+    "scopeAccuracyOnKeep": 1.0,
+    "criticalWrongDrop": 0,
+    "uncertainWrongKeep": 0,
+    "controls": 14,
+    "controlErrors": 0,
+    "sourceMappingErrors": 0,
+    "sourceRewriteErrors": 0,
+    "nonKeepCandidateLeaks": 0,
+    "budgetUsed": 18,
+    "currentBudgetUsed": 18,
+    "budgetLimit": 20,
+    "allPrimaryResultsPresent": true,
+    "userConfirmedGold": false,
+    "wrongDropCases": 3,
+    "expectedKeepStillReview": 7,
+    "cumulativeJournalStatuses": {
+      "START": 18,
+      "VALID_RESPONSE": 17,
+      "OUTPUT_REJECTED_ENUM_OR_OTHER": 1
+    },
+    "cumulativeProviderReportedUsage": {
+      "prompt_tokens": 34050,
+      "completion_tokens": 4843,
+      "total_tokens": 38893
+    },
+    "implementationVersions": [
+      {
+        "policy": "README_MODEL_REVIEW_V1_1",
+        "prompt": "README_SELECTOR_ZH_V2",
+        "batches": 3
+      },
+      {
+        "policy": "README_MODEL_REVIEW_V1",
+        "prompt": "README_SELECTOR_ZH_V1",
+        "batches": 12
+      }
+    ],
+    "mixedVersionAggregate": true,
+    "proposalDecisionAgreement": 0.8704,
+    "confusion": [
+      {
+        "expected": "DROP",
+        "final": "DROP",
+        "count": 6
+      },
+      {
+        "expected": "KEEP",
+        "final": "DROP",
+        "count": 3
+      },
+      {
+        "expected": "KEEP",
+        "final": "KEEP",
+        "count": 36
+      },
+      {
+        "expected": "KEEP",
+        "final": "REVIEW",
+        "count": 7
+      },
+      {
+        "expected": "REVIEW",
+        "final": "REVIEW",
+        "count": 2
+      }
+    ],
+    "meetsProposedGate": false,
+    "cohorts": {
+      "regression": {
+        "cases": 26,
+        "decisionAgreement": 0.8846,
+        "criticalWrongDrop": 0
+      },
+      "new_repository": {
+        "cases": 28,
+        "decisionAgreement": 0.75,
+        "criticalWrongDrop": 0
+      }
+    }
+  },
+  "newCohortRetried": false,
+  "uniformNewVersionQualityPassed": false,
+  "repairOfflineTestsPassed": 38,
+  "cacheInvalidationOfflineTestsPassed": 1,
+  "productionIndexWrites": 0,
+  "nextStep": "Fix context dependency closure and clarify navigation/learning resource policy, then evaluate one version on new frozen repositories before K4 activation",
+  "implementationHashes": {
+    "orange-server/src/main/java/com/orangejd/server/ragb/ingest/ReadmeModelReview.java": "17c043578f8fbcb8ee68c49e4379961dc402d04ac4a0ad9648ef59b6b7afb702",
+    "orange-server/src/test/java/com/orangejd/server/ragb/ingest/ReadmeClassificationQualityTest.java": "ce9c06933480e3d7001884eecadf98753009ccccda27ccfc71a61725ee643b16",
+    "orange-server/src/test/java/com/orangejd/server/ragb/ingest/ReadmeModelReviewTest.java": "8c3a6b5d57d9dcac93faa63d0dca70c6e31264275363a0199b13674099a9ba6e",
+    "scripts/prepare_readme_quality_dataset.py": "cc0aacd72a05b1583c24d35a861df3a6f408f54f9c7afc5671cd884cd751b632",
+    "scripts/run_readme_quality_live.py": "9f3e18f55da2169a31aab789547a179a45f31d9d3eb7e407886280ac54e012a1",
+    "scripts/score_readme_quality.py": "6a4ec73719a2cb58d87539c97244c3a34a6657bbb5f06512d1fa7c819971a7fe",
+    "scripts/verify_readme_quality.py": "d9823834c312e6dc4f86de7451efa9f227e9d37e94651aa501e308a34efc5617"
+  },
+  "resultHashes": {
+    "235-primary.json": "2ba46fba3839b4d2d9bed5ad6bf6cc8abf84b32e1f275879b04af27221d2b85d",
+    "237-primary.json": "0700e9f89193b474bbc9c9983334b0f9db18d7c6584d0a0b5193fc07fae2a18b",
+    "258-primary.json": "fd06895950cbec409ec5b9ba51df0ae23cd257f822f0945b568c27f01e7ddd8f",
+    "261-primary.json": "b8bd887ef2ec37d33811e2ca8a695ec3256b46923da84c9d5145b9f833c405dc",
+    "267-primary.json": "f58ec634369bd3a8ef9d77dd05f4dab5dd328bc90a6232aea0ada21a58c1abd5",
+    "286-primary.json": "aceebcef6c67f771aea06f7cc2207a9554fec764061adc0a5d3cc8a04dfaa492",
+    "329-primary.json": "9572dbab1ae9b8461f63279c89a8a5661d4ab8af89c0a6aaf707fdad2382128b",
+    "329-retry.json": "71f673493a9222421e6ffeff42e774847d2861891041eff325d86289508efc3b",
+    "335-primary.json": "deed1400cac3db64433012e93b739f277a2e462a621acee3f8785df078f98d32",
+    "335-retry.json": "7a40b317e6424455256d1362b40a861c99412cd6a8af9caab8f67ea22da35f84",
+    "46-primary.json": "4391c4cbec234250c21c700f22226e0b873dae321051c5cd87d8c660796f51eb",
+    "46-retry.json": "e0a80a2c1fa4493c2af3c490cf952005031a24694c58f58efaee8efe98d0f86e",
+    "51-primary.json": "d557eb11b483a2e22d3d63f9c17e25f738fc5f84f7603c5615c2ba3cf74fd149",
+    "517-primary.json": "a5ba8507f6bf85acfa532133f07611d2442bfe7e152722ec54133edcfdc11bc9",
+    "518-primary.json": "68004739968c026b0fe2b85d347ce816a51e1a7f63f3bbe4d93aa886a14d6e8f",
+    "523-primary.json": "6b36187298120adbb50b621a5cd74fa3da8ab515e5e71f512af7eaee416c8512",
+    "543-primary.json": "58d3129c273da869500f45af58f690238ca1e9563c88ffa216d0b13f77e33a9d",
+    "58-primary.json": "a97e301430ea6b25d23d9e1ab87e53d52bcd8033363c186feefc26a339be41a6"
+  }
+}

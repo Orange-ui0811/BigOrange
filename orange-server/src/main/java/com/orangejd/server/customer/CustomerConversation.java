@@ -6,51 +6,201 @@ import java.util.*;
 
 @Service
 public class CustomerConversation {
-    public static final String PROMPT_VERSION="customer-v4.19-composite-turns";
+    public static final String PROMPT_VERSION="customer-v5.1-evidence-gap-v1";
     public static final Set<String> SKILLS=Set.of("KNOWLEDGE_QA_V1","REQUIREMENTS_V1","PROJECT_RECOMMENDATION_V1");
-    private final CustomerStore store;
-    private final CustomerMapper db;
-    private final CustomerJson json;
-    private final CustomerModel model;
-    private final CustomerTools tools;
-    private final CustomerProjects projects;
-    private final CustomerProperties config;
-    private final CustomerPurposeCatalog purposeCatalog;
+    final CustomerStore store;
+    final CustomerMapper db;
+    final CustomerJson json;
+    final CustomerModel model;
+    final CustomerTools tools;
+    final CustomerProjects projects;
+    final CustomerProperties config;
+    final CustomerPurposeCatalog purposeCatalog;
+    CustomerContextSupport contextSupport;
+    @org.springframework.beans.factory.annotation.Autowired
+    public void contextEngineering(CustomerContextSupport support) {this.contextSupport=support;}
     public CustomerConversation(CustomerStore s,CustomerMapper d,CustomerJson j,CustomerModel m,CustomerTools t,CustomerProjects p,CustomerProperties c) { this(s,d,j,m,t,p,c,CustomerPurposeCatalog.bundled()); }
     @org.springframework.beans.factory.annotation.Autowired
     public CustomerConversation(CustomerStore s,CustomerMapper d,CustomerJson j,CustomerModel m,CustomerTools t,CustomerProjects p,CustomerProperties c,CustomerPurposeCatalog pc) { store=s; db=d; json=j; model=m; tools=t; projects=p; config=c; purposeCatalog=pc; }
+    /** Compatibility entry for existing integration fixtures. Production commits only in CustomerRuns. */
     public void execute(String id,List<Map<String,Object>> usage,Instant deadline) {
-        Map<String,Object> run=db.run(id); long owner=CustomerStore.number(run,"account_id"),sessionId=CustomerStore.number(run,"session_id");
-        String message=run.get("message").toString(); Map<String,Object> session=store.session(sessionId,owner);
-        Map<String,Object> prior=json.read(session.get("state_json"));
+        var out=prepare(new CustomerRunContext(id,deadline,usage));
+        store.complete(id,out.result(),out.state(),metrics(usage));
+    }
+    public CustomerExecutionResult prepare(CustomerRunContext input) {
+        Turn turn=newTurn(input);
+        for(int count=0;!"END".equals(turn.next);count++) {
+            if(count>=32)throw new IllegalStateException("GRAPH_NODE_LIMIT");
+            turn.step(turn.next);
+        }
+        return turn.output();
+    }
+    public Turn newTurn(CustomerRunContext input) { return new Turn(input); }
+    public final class Turn {
+        final CustomerRecommendationSteps recommendationSteps=new CustomerRecommendationSteps(CustomerConversation.this);
+        final CustomerEvidenceSteps evidenceSteps=new CustomerEvidenceSteps(CustomerConversation.this);
+        final String id; final Instant deadline;final List<Map<String,Object>> usage;
+        long owner,sessionId;
+        Map<String,Object> session,prior,action,state,result,generated,reviewInput;
+        Map<String,Object> binding=Map.of();Object messageId;
+        CustomerReferenceResolver.Resolution resolution;
+        CustomerTools.Context context;CustomerHistory.View history;
+        CustomerContextSupport.Memory memory;
+        String message,profile,preamble,changes,intent,policy,purposeQuery,evidenceQuestion;
+        String next="load_context";boolean projectMode,recommendation,evidenceFailed,reviewRecovered;
+        List<Map<String,Object>> rejected,candidates=List.of(),cards=List.of(),evidence=List.of(),claims=List.of(),references=List.of();
+        List<com.orangejd.server.ragb.retrieval.RagBSearchHit> related=List.of(),hits=List.of();
+        com.orangejd.server.ragb.service.RagBSearchService.SearchResult found;
+        CustomerEvidenceCoverage.Assessment questionCoverage;
+        Instant evidenceDeadline;
+        Turn(CustomerRunContext input) {id=input.runId();deadline=input.deadline();usage=input.usage();}
+        public String next() {return next;}
+        public CustomerExecutionResult output() { if(!"END".equals(next))throw new IllegalStateException("GRAPH_INCOMPLETE");return new CustomerExecutionResult(result,state);}
+        public void check() {
+            if(Thread.currentThread().isInterrupted())throw new IllegalStateException("RUN_STOPPED");
+            if(!Instant.now().isBefore(deadline))throw new IllegalStateException("DEADLINE_EXCEEDED");
+            if(context!=null)context.check();
+        }
+        public Map<String,Object> snapshot() {
+            Map<String,Object> out=new LinkedHashMap<>();out.put("runId",id);out.put("sessionId",sessionId);out.put("next",next);
+            out.put("graphVersion","customer-graph-v2");out.put("stateSchemaVersion",2);
+            if(state!=null)out.put("workflowTask",CustomerWorkflow.visible(state));
+            if(intent!=null)out.put("intent",intent);
+            if(state!=null)out.put("conditions",CustomerRecommendationAdvice.conditions(state));
+            if(prior!=null)out.put("priorConditions",CustomerRecommendationAdvice.conditions(prior));
+            out.put("candidatePoolCount",candidates.size());out.put("selectedCount",cards.size());
+            out.put("recalledChunkCount",related.size());out.put("preparedEvidenceCount",evidence.size());
+            if(state!=null)out.put("purposeStatus",Objects.toString(CustomerPurpose.status(state),"NOT_REQUIRED"));
+            if(context!=null){out.put("toolCalls",context.calls);out.put("knowledgeSearches",context.searches);}
+            out.put("candidateIdentities",cards.stream().map(CustomerProjectFeedback::identity).toList());
+            out.put("evidenceIds",references.stream().map(r->Objects.toString(r.get("evidenceId"),"")).toList());
+            if(found!=null)out.put("generation",found.generation());
+            if(result!=null)out.put("businessStatus",result.getOrDefault("status","PENDING"));
+            return json.read(json.write(out));
+        }
+        public void step(String node) {
+            check();
+            try {
+                switch(node) {
+                    case "load_context" -> {load();next="resolve_references";}
+                    case "resolve_references" -> {resolution=CustomerReferenceResolver.resolve(message,prior,binding);if(contextSupport!=null)contextSupport.recover(this);next="understand_turn";}
+                    case "understand_turn" -> {understand();next="reconcile_conditions";}
+                    case "reconcile_conditions" -> {reconcile();next=branch();}
+                    case "direct_response" -> {direct();next="finalize_response";}
+                    case "diagnose" -> {diagnose(state,context,result);next="finalize_response";}
+                    case "retrieve_knowledge" -> {evidenceSteps.retrieveKnowledge(this);next=found!=null && !result.containsKey("answer")?"prepare_evidence":"finalize_response";}
+                    case "plan_recommendation" -> {recommendationSteps.plan(this);next="recall_candidates";}
+                    case "recall_candidates" -> {recommendationSteps.recall(this);next="review_purpose";}
+                    case "review_purpose" -> {recommendationSteps.review(this);next=Set.of("RELEVANCE_UNAVAILABLE","PURPOSE_REVIEW_PARTIAL").contains(Objects.toString(result.get("status"),""))?"finalize_response":"select_projects";}
+                    case "select_projects" -> {recommendationSteps.select(this);next=cards.isEmpty()?"finalize_response":"retrieve_project_evidence";}
+                    case "load_project_details" -> {recommendationSteps.details(this);next=cards.isEmpty()?"finalize_response":"retrieve_project_evidence";}
+                    case "retrieve_project_evidence" -> {evidenceSteps.retrieveProjectEvidence(this);next="prepare_evidence";}
+                    case "prepare_evidence" -> {evidenceSteps.prepareEvidence(this);next=projectMode && hits.isEmpty()?"assemble_project_cards":"generate_claims";}
+                    case "generate_claims" -> {generated=model.call(CustomerEvidence.PROMPT,Map.of("question",evidenceQuestion,"evidence",CustomerEvidence.promptEvidence(evidence)),evidenceDeadline,usage);next="validate_citations";}
+                    case "validate_citations" -> {evidenceSteps.validateCitations(this);next="verify_claims";}
+                    case "verify_claims" -> {evidenceSteps.verifyClaims(this);next="assemble_project_cards";}
+                    case "assemble_project_cards" -> {if(projectMode)evidenceSteps.assemble(this);else evidenceSteps.finishQa(this);next=projectMode?"match_requirements":"finalize_response";}
+                    case "match_requirements" -> {CustomerRequirementMatcher.match(CustomerConversation.this,this);next=cards.isEmpty()?"finalize_response":"generate_advice";}
+                    case "generate_advice" -> {if(recommendation){recommendationAdvice(cards,state,context,result,deadline,usage);recommendationSteps.finishRecommendation(this);}else result.put("answer","下面按相同字段展示项目资料。未核实的信息保留为未知；相关原文证据附在项目后面。");next="finalize_response";}
+                    case "finalize_response" -> {finalizeResponse();next="validate_response";}
+                    case "validate_response" -> {validateResponse();next="END";}
+                    default -> throw new IllegalStateException("UNKNOWN_GRAPH_NODE");
+                }
+            } catch(RuntimeException ex) {
+                boolean evidenceNode=Set.of("retrieve_project_evidence","prepare_evidence","generate_claims","validate_citations","verify_claims","assemble_project_cards").contains(node);
+                if(!evidenceNode || !projectMode && !Set.of("generate_claims","validate_citations","verify_claims").contains(node))throw ex;
+                if(!projectMode || !"DEADLINE_EXCEEDED".equals(CustomerRecovery.code(ex)) || !Instant.now().isBefore(deadline))CustomerRecovery.requireRecoverable(ex);
+                context.check();warning(id,projectMode?"projectEvidence":"evidence",ex);evidenceFailed=true;
+                if(projectMode) {evidenceSteps.fallbackEvidence(this);next="match_requirements";}else {references=List.of();evidenceSteps.finishQa(this);next="finalize_response";}
+            }
+            check();
+        }
+        private String branch() {
+            if(action.containsKey("workflowReply"))return "direct_response";
+            if(Set.of("RECOMMEND","COLLECT","DETAIL","COMPARE").contains(intent) && state.get("pendingConditions") instanceof List<?> p && !p.isEmpty())return "direct_response";
+            return switch(intent) {
+                case "STATE","CHAT","EXPLAIN" -> "direct_response";
+                case "QUESTION" -> "retrieve_knowledge";
+                case "DIAGNOSE" -> "diagnose";
+                case "DETAIL","COMPARE" -> {projectMode=true;yield "load_project_details";}
+                default -> {
+                    if(!"READY_TO_SEARCH".equals(CustomerWorkflow.task(state).get("status")))yield "direct_response";
+                    CustomerWorkflow.task(state).put("status","EVALUATING");
+                    projectMode=true;recommendation=true;yield "plan_recommendation";
+                }
+            };
+        }
+        private void load() {
+        Map<String,Object> run=db.run(id); owner=CustomerStore.number(run,"account_id");sessionId=CustomerStore.number(run,"session_id");
+        message=run.get("message").toString(); session=store.session(sessionId,owner);
+        prior=json.read(session.get("state_json"));
+        var rawHistory=db.messages(sessionId,Long.MAX_VALUE,40);
+        messageId=rawHistory.stream().filter(m->id.equals(m.get("run_id"))&&"user".equals(m.get("role"))).map(m->m.get("id")).findFirst().orElse("run:"+id);
+        CustomerWorkflow.initialize(prior,rawHistory,id);
+        if("EVALUATING".equals(CustomerWorkflow.task(prior).get("status"))) {
+            CustomerWorkflow.task(prior).put("status","READY_TO_SEARCH");CustomerWorkflow.task(prior).put("lastOutcome","PREVIOUS_RUN_INTERRUPTED");
+        }
+        prior.put("_expectedStateVersion",session.getOrDefault("state_version",0));
+        for(var step:db.steps(id))if("inputContext".equals(step.get("tool_name")))binding=json.read(step.get("detail_json"));
         CustomerTaskProgress.recover(prior,db,sessionId,id);
-        CustomerTools.Context context=tools.context(id,owner,deadline); context.check(); db.stage(id,"UNDERSTANDING");
-        String profile;
+        context=tools.context(id,owner,deadline); context.observe(usage); context.check(); db.stage(id,"UNDERSTANDING");
+        if(usage instanceof CustomerUsageLedger ledger)ledger.guard=context::check;
         try { profile=context.profile(); }
         catch(RuntimeException ex) { CustomerRecovery.requireRecoverable(ex); context.check(); profile=""; warning(id,"profile",ex); }
-        CustomerHistory.View history=history(sessionId,id);
+        history=history(sessionId,id);
+        if(contextSupport!=null)contextSupport.prepare(this);
+        }
+        private void understand() {
         String systemIntent=CustomerConditionFacts.route(message);
-        Map<String,Object> action=systemIntent==null?new LinkedHashMap<>(model.call(CustomerState.PROMPT,CustomerDialogue.input(message,prior,profile,history.messages(),history.summary().isBlank()?Objects.toString(session.get("summary_text"),""):history.summary(),config.getInputTokens(),json),deadline,usage)):new LinkedHashMap<>(Map.of("intent",systemIntent,"changes",Map.of()));
+        var input=contextSupport!=null?contextSupport.input(this):CustomerDialogue.input(message,prior,profile,history.messages(),history.summary(),config.getInputTokens(),json,
+            Map.of("positions",resolution.positions(),"references",resolution.references(),"ambiguous",resolution.ambiguous()));
+        boolean migration=Boolean.TRUE.equals(CustomerWorkflow.workflow(prior).get("migrationPending"));
+        action=migration?new LinkedHashMap<>(Map.of("intent","CHAT","reply","请确认旧会话需求。","changes",Map.of())):systemIntent==null?new LinkedHashMap<>(model.call(CustomerState.PROMPT,input,deadline,usage)):new LinkedHashMap<>(Map.of("intent",systemIntent,"changes",Map.of()));
+        if(!migration&&systemIntent==null&&contextSupport!=null&&contextSupport.recoverRequested(this,action))
+            action=new LinkedHashMap<>(model.call(CustomerState.PROMPT,contextSupport.input(this),deadline,usage));
+        if(Boolean.TRUE.equals(action.get("needsHistory")))action=new LinkedHashMap<>(Map.of("intent","CHAT","reply","本轮可回查的历史还不能唯一确认你指的是哪个项目或哪项要求，请补充项目名称、当时的目标或需要恢复的任务。已有条件保留着。","changes",Map.of()));
+        action.remove("workflowReply");action.remove("validatedTaskAction");
+        action.put("positions",resolution.positions());
+        if(!resolution.references().isEmpty() && "QUESTION".equals(action.get("intent")))action.put("intent","DETAIL");
         // Route a pure greeting to dialogue; its actual reply is still generated by the model.
         if(CustomerDialogue.isGreeting(message)) action.put("intent","CHAT");
-        String preamble=CustomerTurnPlan.preamble(action,prior,message);
-        List<Map<String,Object>> rejected=new ArrayList<>();
+        if("CHAT".equals(action.get("intent")) && CustomerDialogue.explicitlyRequestsEvidence(message)) {
+            action.put("intent","QUESTION");
+            db.step(id,"intentBoundary","QUESTION_REQUIRED",json.write(Map.of("reason","EXPLICIT_EVIDENCE_REQUEST")));
+        }
+        var coveredTopics=CustomerTopicCoverage.complete(action,message);
+        String coveredGoal=CustomerGoalCoverage.complete(action,message);
+        if(!coveredGoal.isBlank())db.step(id,"conditionCoverage","LITERAL_GOAL_RECOVERED",json.write(Map.of("source","MESSAGE","field","goal")));
+        if(!coveredTopics.isEmpty())db.step(id,"conditionCoverage","LITERAL_TOPIC_RECOVERED",json.write(Map.of("topics",coveredTopics,"source","MESSAGE")));
+        preamble=CustomerTurnPlan.preamble(action,prior,message);
+        rejected=new ArrayList<>();
         // An explanation must not mutate conditions, even if the model also proposes changes.
         if("EXPLAIN".equals(action.get("intent"))) { action.put("changes",Map.of()); action.put("profileDefaults",Map.of()); action.remove("pendingConditions"); action.remove("preferences"); }
-        context.check(); Map<String,Object> state="EXPLAIN".equals(action.get("intent"))?new LinkedHashMap<>(prior):CustomerState.reconcile(prior,action,message,profile,rejected);
-        String changes=CustomerConditionFacts.changes(prior,state,action);
+        }
+        private void reconcile() {
+        prior=json.read(json.write(prior));
+        CustomerTaskService.prepare(prior,action,message,id);
+        context.check(); state="EXPLAIN".equals(action.get("intent"))?new LinkedHashMap<>(prior):CustomerState.reconcile(prior,action,message,profile,rejected);
+        CustomerRequirementService.apply(state,prior,action,message,messageId,id);
+        CustomerTaskService.apply(state,action,message,messageId,id,resolution);
+        changes=CustomerConditionFacts.changes(prior,state,action);
         if(!changes.isBlank())state.put("lastChangeSummary",changes);
         if(!rejected.isEmpty()) db.step(id,"conditionValidation","REJECTED_PROPOSALS",json.write(Map.of("rejected",rejected)));
-        CustomerTurnPlan.resolve(action,state,message);
+        // References were validated against server-owned list identities before interpretation.
         if(!"EXPLAIN".equals(action.get("intent")))CustomerProjectFeedback.apply(state,action.get("projectFeedback"),message,id);
         db.step(id,"turnPlan","SUCCEEDED",json.write(Map.of("intent",action.get("intent"),"hasPreamble",!preamble.isBlank(),"positions",action.getOrDefault("positions",List.of()),"rejectedFields",rejected.size())));
         store.checkpoint(id,state);
-        String intent=action.get("intent").toString(); Map<String,Object> result=new LinkedHashMap<>();
+        if(contextSupport!=null)contextSupport.bind(this);
+        intent=action.get("intent").toString(); result=new LinkedHashMap<>();
         result.put("skill",intent.equals("QUESTION")?"KNOWLEDGE_QA_V1":intent.equals("COLLECT")?"REQUIREMENTS_V1":"PROJECT_RECOMMENDATION_V1");
         result.put("intent",intent); result.put("state",state); result.put("projects",List.of()); result.put("references",List.of());
+        result.put("workflowIntent",CustomerRoutePolicy.intent(action));result.put("workflowRoute",CustomerRoutePolicy.route(action));result.put("intentSubtype",CustomerRoutePolicy.subtype(action));
         result.put("profileLoaded",!profile.isBlank());
-        if(intent.equals("STATE")) {
-            result.put("status","CONFIRMED_CONDITIONS");result.put("answer",CustomerConditionFacts.describe(state));
+        }
+        private void direct() {
+        if(action.containsKey("workflowReply")) {result.put("status",state.get("pendingConditions") instanceof List<?> p&&!p.isEmpty()?"NEEDS_CLARIFICATION":CustomerWorkflow.question(state).isEmpty()?"TASK_UPDATED":"FOLLOW_UP");result.put("answer",action.get("workflowReply"));}
+        else if(intent.equals("STATE")) {
+            result.put("status","CONFIRMED_CONDITIONS");result.put("answer",CustomerConditionFacts.describe(state)+"\n"+CustomerRequirementService.query(state));
         }
         else if(Set.of("RECOMMEND","COLLECT","DETAIL","COMPARE").contains(intent) && state.get("pendingConditions") instanceof List<?> pending && !pending.isEmpty()) {
             result.put("status","NEEDS_CLARIFICATION");
@@ -66,18 +216,18 @@ public class CustomerConversation {
             }
         }
         else if(intent.equals("EXPLAIN")) { result.put("status","PROCESS_EXPLANATION");result.put("answer",CustomerTaskProgress.describe(state)+CustomerPurpose.explanation(state)); }
-        else if(intent.equals("DIAGNOSE")) diagnose(state,context,result);
-        else if(intent.equals("QUESTION")) answer(message,context,result,deadline,usage);
-        else if(intent.equals("DETAIL") || intent.equals("COMPARE")) details(action,state,context,result,message,deadline,usage);
         else {
             String followUp=CustomerState.followUp(state);
-            if(!intent.equals("RECOMMEND") && !state.containsKey("lastCandidates") && followUp!=null) { result.put("status","FOLLOW_UP"); result.put("answer",action.get("reply") instanceof String reply && !reply.isBlank()?CustomerDialogue.reply(action):followUp); }
-            else recommend(state,context,result,message,deadline,usage);
+            result.put("status","FOLLOW_UP");result.put("answer",action.get("reply") instanceof String reply && !reply.isBlank()?CustomerDialogue.reply(action):followUp);
         }
+        }
+        private void finalizeResponse() {
         context.check(); db.stage(id,"VALIDATING");
         result.put("conditionChangeSummary",changes);
         if(!changes.isBlank()&&!intent.equals("STATE")) result.put("answer",changes+"\n\n"+result.get("answer"));
         if(!preamble.isBlank())result.put("answer",preamble+"\n\n"+result.get("answer"));
+        }
+        private void validateResponse() {
         if(result.get("projects") instanceof List<?> cards) {
             List<Object> valid=new ArrayList<>();
             for(Object raw:cards) {
@@ -104,170 +254,27 @@ public class CustomerConversation {
                 state.put("candidateListRunId",id);state.remove("focusedProject");
             }
         }
-        Object nextQuestion=result.get("pendingQuestion");
-        if(nextQuestion==null && "FOLLOW_UP".equals(result.get("status"))) nextQuestion=result.get("answer");
-        if(nextQuestion instanceof String question && !question.isBlank()) state.put("lastQuestion",Map.of("text",question.substring(0,Math.min(300,question.length())),"runId",id));
         if(result.get("answer") instanceof String text) result.put("answer",CustomerText.paragraphs(text));
         if(result.get("projects") instanceof List<?> cards && !cards.isEmpty() && state.get("sourceFactsVersion") instanceof String version && !version.equals(purposeCatalog.version())) {
             result.put("projects",List.of());result.put("references",List.of());result.remove("recommendationReport");
             result.put("status","PROJECTS_CHANGED");result.put("answer","本轮使用的来源证据刚刚发生变更，推荐暂未提交。你的条件已保留，可以继续按最新资料查找。");
             state.remove("focusedProject");state.put("lastCandidates",List.of());
         }
+        CustomerPurpose.appendPartialNotice(result);
         CustomerTaskProgress.finish(state,id,result.get("status"));
+        CustomerTaskService.finish(state,result,intent,id);
+        CustomerEvidenceDecision.apply(state,result,intent);
+        db.step(id,"evidenceDecision","SUCCEEDED",json.write(result.get("evidenceDecision")));
+        Object nextQuestion=result.get("pendingQuestion");
+        if(nextQuestion instanceof String question && !question.isBlank())state.put("lastQuestion",Map.of("text",question.substring(0,Math.min(300,question.length())),"runId",id));
         result.put("businessOutcome",CustomerOutcome.classify(result));
-        store.complete(id,result,state,metrics(usage));
-    }
-    private void answer(String message,CustomerTools.Context context,Map<String,Object> result,Instant deadline,List<Map<String,Object>> usage) {
-        boolean platform=message.matches("(?s).*(这个平台|当前平台|平台的|平台支持|客服会|知识库怎么保证).*" );
-        db.stage(context.run,"SEARCHING");
-        com.orangejd.server.ragb.service.RagBSearchService.SearchResult found;
-        try { found=context.knowledge(message,platform?Set.of("MANUAL"):Set.of()); }
-        catch(RuntimeException ex) { CustomerRecovery.requireRecoverable(ex); context.check(); warning(context.run,"knowledge",ex); result.put("status","KNOWLEDGE_UNAVAILABLE"); result.put("answer","资料检索暂时不可用，当前不能确认这个问题中的项目或平台事实。我们仍可以继续聊需求，也可以先查看业务库中的真实项目。"); result.put("pendingQuestion","你想先看项目候选，还是继续补充使用场景？"); return; }
-        result.put("generation",found.generation());
-        var hits=platform?found.hits().stream().filter(h->h.sourceRef()!=null && h.sourceRef().startsWith("platform-faq:")).toList():found.hits();
-        if(platform && hits.isEmpty()) { result.put("status","REFUSE_NO_PLATFORM_FAQ_EVIDENCE"); result.put("answer","当前没有可核对的平台规则资料，暂时不能确认这项政策。我们可以继续讨论项目需求。"); result.put("pendingQuestion","你最想解决的具体使用问题是什么？"); return; }
-        if(!"ANSWER_WITH_CITATIONS".equals(found.answerPolicy())) { result.put("status",found.answerPolicy()); result.put("answer","现有资料还不足以确认这个问题的结论，但不影响我们继续找项目。你可以补充问题，也可以让我按已确认条件先推荐真实候选，并标出待核实项。"); result.put("pendingQuestion","你想先看项目候选，还是继续核对这个问题？"); return; }
-        List<Map<String,Object>> evidence=evidenceBudget(hits,message);
-        db.stage(context.run,"GENERATING");
-        db.step(context.run,"buildPrompt","SUCCEEDED",json.write(Map.of("promptVersion",PROMPT_VERSION,"question",message,"evidence",CustomerEvidence.promptEvidence(evidence))));
-        List<Map<String,Object>> references;
-        try { Map<String,Object> generated=model.call(CustomerEvidence.PROMPT,Map.of("question",message,"evidence",CustomerEvidence.promptEvidence(evidence)),deadline,usage); references=verify(context.run,generated,evidence,deadline,usage); }
-        catch(RuntimeException ex) { CustomerRecovery.requireRecoverable(ex); context.check(); warning(context.run,"evidence",ex); references=List.of(); }
-        result.put("references",references); result.put("status",references.isEmpty()?"REFUSE_INSUFFICIENT_EVIDENCE":"SUPPORTED_EXTRACTS");
-        result.put("answer",references.isEmpty()?"这次资料核对未形成可靠结论。我们可以继续讨论需求，或先查看真实项目并标出待核实信息。":String.join("\n\n",references.stream().map(r->r.get("text")+" ["+r.get("evidenceId")+"]").toList()));
-        String pending=CustomerState.followUp(cast(result.get("state"))); if(pending!=null) result.put("pendingQuestion",pending);
-    }
-    private void recommend(Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result,String message,Instant deadline,List<Map<String,Object>> usage) {
-        progress(state,context,"PLANNING");
-        String policy;
-        try { policy=Objects.toString(model.policyIdentity(),config.getModel()); }
-        catch(RuntimeException ex) { CustomerRecovery.requireRecoverable(ex);context.check();warning(context.run,"purposeCache",ex);policy="unavailable:"+context.run; }
-        String factsVersion=purposeCatalog.version();state.put("sourceFactsVersion",factsVersion);
-        policy=policy+"|catalog:"+factsVersion;
-        List<com.orangejd.server.ragb.retrieval.RagBSearchHit> related=List.of();
-        String purposeQuery=CustomerTopics.retrievalQuery(state.get("topic"));
-        if(state.containsKey("topic")) {
-            try {
-                String cached=CustomerPurposeMemory.plannedQuery(state,policy);
-                if(cached!=null)purposeQuery=cached;
-                else {
-                    var plan=model.call(CustomerPurpose.PLAN_PROMPT,Map.of("topic",CustomerPurpose.topic(state),"originalRequest",CustomerPurpose.originalRequest(state)),deadline.minusSeconds(15),usage);
-                    purposeQuery=CustomerPurpose.query(plan,state);CustomerPurposeMemory.rememberPlan(state,policy,purposeQuery);
-                }
-                db.step(context.run,"planProjectQuery",cached==null?"SUCCEEDED":"CACHE_HIT",json.write(Map.of("topic",state.get("topic"),"query",purposeQuery)));
-            } catch(RuntimeException ex) {
-                if(!"DEADLINE_EXCEEDED".equals(CustomerRecovery.code(ex)) || !Instant.now().isBefore(deadline)) CustomerRecovery.requireRecoverable(ex);
-                context.check();warning(context.run,"planProjectQuery",ex);
-            }
-        }
-        progress(state,context,"RETRIEVING");
-        if(List.of("language","topic","goal","experience").stream().anyMatch(state::containsKey)) {
-            String query=state.containsKey("topic")?purposeQuery:"推荐项目 "+Objects.toString(state.get("language"),"")+" "+CustomerGoals.display(state.get("goal"));
-            try { db.stage(context.run,"SEARCHING"); related=context.projectRecall(query).hits(); }
-            catch(RuntimeException ex) { CustomerRecovery.requireRecoverable(ex); context.check(); warning(context.run,"recommendationRecall",ex); result.put("rankingNotice","语义排序暂不可用，本次按已确认条件、基础偏好和项目质量筛选。"); }
-        }
-        db.stage(context.run,"FILTERING_PROJECTS"); List<Map<String,Object>> cards;
-        if(state.containsKey("topic")) {
-            progress(state,context,"REVIEWING");
-            Map<String,Object> reviewInput=null;List<Map<String,Object>> candidates=List.of();
-            try {
-                candidates=context.purposeCandidates(state,related,purposeQuery);
-                var sourceFacts=purposeCatalog.seed(candidates,state,policy,json);
-                if(!sourceFacts.isEmpty())db.step(context.run,"sourcePurposeEvidence","SUCCEEDED",json.write(Map.of("catalogVersion",purposeCatalog.version(),"evidenceIds",sourceFacts)));
-                var pending=CustomerPurposeMemory.pending(candidates,state,policy);
-                boolean restored=CustomerPurposeMemory.restore(candidates,state,policy);
-                // Current constraints still decide admission. Never call select here: it strips source text.
-                long usable=restored?candidates.stream().filter(p->projects.explorable(p,state)).map(CustomerProjects::identity).distinct().count():0;
-                boolean serveKnown=usable>=3 || usable>0 && CustomerPurpose.reviewPaused(state);
-                if(!pending.isEmpty() && !serveKnown) {
-                    var input=CustomerPurpose.input(pending,state,json,config.getInputTokens());reviewInput=input;
-                    if(CustomerPurpose.reviewPaused(state) || CustomerPurpose.retryBlocked(state,input)) {
-                        db.step(context.run,"reviewProjectPurpose","RETRY_SUPPRESSED",json.write(Map.of("reason","RECENT_CONTENT_REJECTION")));
-                        if(!CustomerPurposeMemory.restore(candidates,state,policy)) {
-                            state.put("lastCandidates",List.of());result.put("status","RELEVANCE_UNAVAILABLE");result.put("answer",CustomerPurpose.failureAnswer(state));return;
-                        }
-                    } else {
-                        db.step(context.run,"reviewProjectPurpose","STARTED",json.write(Map.of("candidateKeys",pending.stream().map(CustomerPurpose::key).toList(),"inputHash",CustomerStore.hash(json.write(input)))));
-                        var reviewed=model.call(CustomerPurpose.REVIEW_PROMPT,input,deadline.minusSeconds(10),usage);
-                        CustomerPurposeMemory.remember(reviewed,input,pending,state,policy);
-                        db.step(context.run,"reviewProjectPurpose","SUCCEEDED",json.write(Map.of("input",input,"verdict",reviewed,"cachedCount",candidates.size()-pending.size())));
-                    }
-                } else db.step(context.run,"reviewProjectPurpose",serveKnown?"KNOWN_EVIDENCE_SUFFICIENT":"CACHE_HIT",json.write(Map.of("candidateCount",candidates.size(),"pendingCount",pending.size())));
-                if(!CustomerPurposeMemory.restore(candidates,state,policy))throw new IllegalStateException("PURPOSE_REVIEW_INCOMPLETE");
-                store.checkpoint(context.run,state);
-                cards=projects.select(candidates,state,related);
-            } catch(RuntimeException ex) {
-                if(!"DEADLINE_EXCEEDED".equals(CustomerRecovery.code(ex)) || !Instant.now().isBefore(deadline)) CustomerRecovery.requireRecoverable(ex);
-                context.check();warning(context.run,"reviewProjectPurpose",ex);
-                CustomerPurpose.failed(state,ex,reviewInput);
-                // A failure on new candidates cannot invalidate already verified, unchanged candidates.
-                if(!candidates.isEmpty() && CustomerPurposeMemory.restore(candidates,state,policy)) {
-                    cards=projects.select(candidates,state,related);
-                    result.put("notice","本次仅展示已有有效用途依据且通过当前条件检查的项目，其他候选暂未完成核对。");
-                } else {
-                    state.put("lastCandidates",List.of());result.put("status","RELEVANCE_UNAVAILABLE");
-                    result.put("answer",CustomerPurpose.failureAnswer(state));return;
-                }
-            }
-            if("PARTIAL_MATCHES".equals(CustomerPurpose.status(state)))result.put("purposeReviewIncomplete",true);
-        } else cards=related.isEmpty()?context.projects(state):context.rankedProjects(state,related);
-        if(cards.isEmpty()) { state.put("lastCandidates",List.of()); diagnose(state,context,result); if(!"RELEVANCE_UNAVAILABLE".equals(result.get("status")))result.put("status","NO_MATCH"); return; }
-        state.put("lastCandidates",cards.stream().map(CustomerProjectFeedback::identity).toList());
-        progress(state,context,"ENRICHING");
-        enrich(cards,state,context,result,message,deadline,usage);
-        recommendationAdvice(cards,state,context,result,deadline,usage);
-        String next=CustomerState.followUp(state);
-        boolean uncertain=cards.stream().anyMatch(p->"NEEDS_VERIFICATION".equals(p.get("matchStatus")));
-        result.put("answer",uncertain?"下面是可继续考察的真实项目：已排除明确违反条件的项目，但部分资料缺失，已逐项标注。待核实候选不代表已经满足全部要求。":next==null?"找到以下满足已核实条件的真实项目。周期是资料中的估算，实际完成时间还取决于实现范围和投入。":"先给你几项真实项目作为探索候选，已执行你明确提出的条件；偏好可以继续聊着补充。");
-        if(Boolean.TRUE.equals(result.get("purposeReviewIncomplete"))) {
-            result.put("status","PROJECTS_WITH_LIMITATIONS");
-            result.put("answer",result.get("answer")+"\n\n以上仅包含已有有效用途依据的项目，其他候选尚未完成核对，因此不是完整的匹配结果。");
-        }
-        if(next!=null) result.put("pendingQuestion",next);
-        if(cards.stream().allMatch(p->"NEEDS_VERIFICATION".equals(p.get("matchStatus")))) {
-            try {
-                var diagnostic=context.diagnose(state);result.put("diagnostics",diagnostic);
-                result.put("answer",result.get("answer")+"\n\n"+CustomerDiagnostics.describe(diagnostic));
-                result.remove("pendingQuestion");
-            } catch(RuntimeException ex) { CustomerRecovery.requireRecoverable(ex);context.check();warning(context.run,"filterDiagnostics",ex); }
+        if(contextSupport!=null)contextSupport.archive(this);
         }
     }
-    private void progress(Map<String,Object> state,CustomerTools.Context context,String phase) {
+    void progress(Map<String,Object> state,CustomerTools.Context context,String phase) {
         context.check();CustomerTaskProgress.advance(state,context.run,phase);store.checkpoint(context.run,state);
     }
-    private void details(Map<String,Object> action,Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result,String message,Instant deadline,List<Map<String,Object>> usage) {
-        List<?> candidates=state.get("lastCandidates") instanceof List<?> l?l:List.of();
-        if(candidates.isEmpty()) { result.put("status","FOLLOW_UP"); result.put("answer","当前会话还没有项目列表，请先说明想找什么项目。"); return; }
-        List<Integer> positions;
-        try { positions=CustomerState.positions(action.get("positions"),candidates.size()); }
-        catch(IllegalArgumentException ex) { result.put("status","FOLLOW_UP"); result.put("answer","这个位置不在刚才的项目列表里，请选择列表中的项目编号。"); return; }
-        if(positions.isEmpty()) { result.put("status","FOLLOW_UP"); result.put("answer","你希望查看或比较刚才列表中的哪几个项目？"); return; }
-        List<Map<String,Object>> cards=new ArrayList<>();
-        for(int pos:positions) {
-            Map<?,?> key=(Map<?,?>)candidates.get(pos-1);
-            try { cards.add(context.detail(key.get("type").toString(),CustomerStore.positiveId(key.get("id")),state)); }
-            catch(IllegalArgumentException ex) {
-                if(!Set.of("PROJECT_NOT_FOUND","PROJECT_INACTIVE_OR_CONSTRAINT_MISMATCH").contains(ex.getMessage())) throw ex;
-                warning(context.run,"projectChanged",ex); result.put("notice","部分项目已下架或不满足修改后的条件，已排除。");
-            }
-        }
-        if(cards.isEmpty()) { state.put("lastCandidates",List.of()); result.put("status","PROJECTS_CHANGED"); result.put("answer","你选择的项目已不再有效，或不符合修改后的要求。条件都已保留，我可以继续为你找其他项目。"); return; }
-        CustomerTurnPlan.focus(state,cards,context.run);
-        enrich(cards,state,context,result,message,deadline,usage); result.put("answer","下面按相同字段展示项目资料。未核实的信息保留为未知；相关原文证据附在项目后面。");
-    }
-    private void enrich(List<Map<String,Object>> cards,Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result,String message,Instant deadline,List<Map<String,Object>> usage) {
-        // Publishable DB identities survive optional retrieval/generation outages, without fake evidence.
-        try { enrichWithEvidence(cards,state,context,result,message,deadline.minusSeconds(5),usage); }
-        catch(RuntimeException ex) {
-            // Optional enrichment stops before the real round deadline so verified DB cards can be saved.
-            if(!"DEADLINE_EXCEEDED".equals(CustomerRecovery.code(ex)) || !Instant.now().isBefore(deadline)) CustomerRecovery.requireRecoverable(ex);
-            context.check(); warning(context.run,"projectEvidence",ex);
-            for(var card:cards) { card.put("references",List.of()); card.put("importable",false); card.put("evidenceStatus","UNAVAILABLE"); card.put("recommendReason",projects.reason(card,state)+"补充资料核对暂未完成，部署、功能等细节仍需确认。"); }
-            result.put("projects",cards); result.put("references",List.of()); result.put("status","PROJECTS_WITH_LIMITATIONS");
-            result.put("notice","资料核对暂未完成，当前仅展示业务库已记录的事实，不能带入正式方案。");
-        }
-    }
-    private void diagnose(Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result) {
+    void diagnose(Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result) {
         if(CustomerPurpose.unavailable(state)) {
             result.put("status","RELEVANCE_UNAVAILABLE");result.put("answer",CustomerPurpose.explanation(state));return;
         }
@@ -279,7 +286,7 @@ public class CustomerConversation {
             result.put("status","DIAGNOSTICS_UNAVAILABLE");result.put("answer","这次暂时无法核对调整方案。你的要求已经保留，我们可以先聊聊最想实现的功能，再尝试调整方向或周期；我不会自动更改你的条件。");
         }
     }
-    private void recommendationAdvice(List<Map<String,Object>> cards,Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result,Instant deadline,List<Map<String,Object>> usage) {
+    void recommendationAdvice(List<Map<String,Object>> cards,Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result,Instant deadline,List<Map<String,Object>> usage) {
         if(cards.stream().anyMatch(c->!CustomerRecommendationAdvice.references(c).isEmpty()) && Instant.now().plusSeconds(8).isBefore(deadline)) {
             try {
                 context.check(); db.stage(context.run,"GENERATING");
@@ -295,66 +302,19 @@ public class CustomerConversation {
         }
         result.put("recommendationReport",CustomerRecommendationAdvice.report(cards,state));
     }
-    private void enrichWithEvidence(List<Map<String,Object>> cards,Map<String,Object> state,CustomerTools.Context context,Map<String,Object> result,String message,Instant deadline,List<Map<String,Object>> usage) {
-        // Identity is already enforced by document scope. Names in the query boost logos and badges.
-        String query=CustomerTopics.display(state.get("topic"))+" 项目功能 用途 实践示例 安装部署 环境依赖 限制 "+message;
-        var found=context.projectEvidence(query.substring(0,Math.min(2000,query.length())),cards);
-        var relevant=found.hits().stream().filter(h->cards.stream().anyMatch(p->CustomerProjects.ownsEvidence(p,h.sourceRef()))).toList();
-        List<Map<String,Object>> references=List.of();
-        if(!relevant.isEmpty()) {
-            Map<String,String> aliases=new HashMap<>();
-            cards.forEach(c->{ aliases.put(c.get("sourceRef").toString(),c.get("sourceRef").toString()); aliases.put(c.get("name").toString(),c.get("sourceRef").toString()); });
-            String evidenceQuestion=message+"\n当前需求（只用于选择解释重点，不作为项目事实）："+json.write(CustomerRecommendationAdvice.conditions(state));
-            List<Map<String,Object>> evidence=evidenceBudget(relevant,evidenceQuestion,aliases);
-            Map<String,Object> payload=Map.of("question",evidenceQuestion,"evidence",CustomerEvidence.promptEvidence(evidence));
-            db.step(context.run,"buildPrompt","SUCCEEDED",json.write(Map.of("promptVersion",PROMPT_VERSION,"question",evidenceQuestion,"evidence",CustomerEvidence.promptEvidence(evidence))));
-            references=verify(context.run,model.call(CustomerEvidence.PROMPT,payload,deadline,usage),evidence,deadline,usage);
-        }
-        for(var card:cards) {
-            card.remove("catalogText");
-            card.put("recommendReason",projects.reason(card,state));
-            card.put("references",references.stream().filter(r->CustomerProjects.ownsEvidence(card,Objects.toString(r.get("sourceRef"),""))).toList());
-            for(String field:List.of("description","prerequisites","mainRisks","vibeCodingReason")) {
-                String supported=String.join("\n",references.stream().filter(r->field.equals(r.get("field")) && CustomerProjects.ownsEvidence(card,Objects.toString(r.get("sourceRef"),""))).map(r->r.get("text")+" ["+r.get("evidenceId")+"]").toList());
-                if(!supported.isBlank()) {
-                    card.put(field,supported);
-                    if(field.equals("description"))card.put("whatIsIt",supported);
-                }
-            }
-            card.put("supportedExplanation",String.join("\n",references.stream().filter(r->CustomerProjects.ownsEvidence(card,Objects.toString(r.get("sourceRef"),""))).map(r->Objects.toString(r.get("text"),"")+" ["+r.get("evidenceId")+"]").toList()));
-            card.put("importable",!"NEEDS_VERIFICATION".equals(card.get("matchStatus")) && !((List<?>)card.get("references")).isEmpty());
-        }
-        result.put("projects",cards); result.put("references",references); result.put("generation",found.generation());
-        boolean allSupported=cards.stream().allMatch(c->!"NEEDS_VERIFICATION".equals(c.get("matchStatus")) && !((List<?>)c.get("references")).isEmpty());
-        result.put("status",allSupported?"VERIFIED_PROJECTS":"PROJECTS_WITH_LIMITATIONS");
-        if(!allSupported)result.put("notice","部分项目仍有待核实条件或缺少本轮支持证据，相关项目暂不能导入正式方案；有引用仅表示所引用事实得到支持。");
-    }
     private CustomerHistory.View history(long session,String run) {
         var view=CustomerHistory.build(db.messages(session,Long.MAX_VALUE,40),run,1400,json);
-        if(!view.summary().isBlank())db.summary(session,view.summary(),view.through());
         return view;
     }
-    private List<Map<String,Object>> evidenceBudget(List<com.orangejd.server.ragb.retrieval.RagBSearchHit> hits,String question) {
+    List<Map<String,Object>> evidenceBudget(List<com.orangejd.server.ragb.retrieval.RagBSearchHit> hits,String question) {
         return evidenceBudget(hits,question,Map.of());
     }
-    private List<Map<String,Object>> evidenceBudget(List<com.orangejd.server.ragb.retrieval.RagBSearchHit> hits,String question,Map<String,String> aliases) {
+    List<Map<String,Object>> evidenceBudget(List<com.orangejd.server.ragb.retrieval.RagBSearchHit> hits,String question,Map<String,String> aliases) {
         for(int budget=4200;budget>=1000;budget-=400) {
             var input=CustomerEvidence.input(hits,budget,aliases);
             if(!input.isEmpty() && CustomerModel.estimate(CustomerEvidence.PROMPT+json.write(Map.of("question",question,"evidence",CustomerEvidence.promptEvidence(input))))<=config.getInputTokens()) return input;
         }
         throw new IllegalArgumentException(hits.isEmpty()?"NO_USABLE_EVIDENCE":"EVIDENCE_BUDGET_EXCEEDED");
-    }
-    private List<Map<String,Object>> verify(String run,Map<String,Object> output,List<Map<String,Object>> evidence,Instant deadline,List<Map<String,Object>> usage) {
-        var checked=CustomerEvidence.discardUnsupported(output,evidence);
-        List<Map<String,Object>> claims=new ArrayList<>(checked.claims());
-        while(!claims.isEmpty() && CustomerModel.estimate(CustomerEvidence.VERIFY_PROMPT+json.write(Map.of("claims",CustomerEvidence.verificationInput(claims))))>config.getInputTokens()) claims.removeLast();
-        db.step(run,"validateEvidence",checked.rejected().isEmpty()?"SUCCEEDED":"CLAIMS_REMOVED",json.write(Map.of("accepted",claims.size(),"rejected",checked.rejected())));
-        if(claims.isEmpty()) return claims;
-        var input=CustomerEvidence.verificationInput(claims);
-        var verdict=model.call(CustomerEvidence.VERIFY_PROMPT,Map.of("claims",input),deadline,usage);
-        var supported=CustomerEvidence.supported(claims,verdict);
-        db.step(run,"verifyFacts","SUCCEEDED",json.write(Map.of("claims",input,"verdict",verdict,"supported",supported.size())));
-        return supported;
     }
     private String confirmedConditions(Map<String,Object> state) {
         Map<String,String> labels=new LinkedHashMap<>();
@@ -365,12 +325,15 @@ public class CustomerConversation {
         labels.forEach((key,label)->{ if(state.containsKey(key)) facts.add(label+"："+(state.get(key) instanceof Boolean allowed?(allowed?"允许使用":"不使用"):state.get(key))); });
         return facts.isEmpty()?"当前还没有确认的项目条件。":"当前已确认条件："+String.join("；",facts)+"。";
     }
-    private void warning(String run,String component,RuntimeException ex) {
+    void warning(String run,String component,RuntimeException ex) {
         db.step(run,component,"DEGRADED",json.write(CustomerRecovery.details(ex)));
     }
-    @SuppressWarnings("unchecked") private Map<String,Object> cast(Object value) { return (Map<String,Object>) value; }
+    @SuppressWarnings("unchecked") Map<String,Object> cast(Object value) { return (Map<String,Object>) value; }
     public Map<String,Object> metrics(List<Map<String,Object>> usage) {
+        Set<String> missing=usage instanceof CustomerUsageLedger ledger?Set.copyOf(ledger.missing):Set.of();
+        var orchestration=usage instanceof CustomerUsageLedger ledger?List.copyOf(ledger.orchestration):List.of();
+        usage=new ArrayList<>(usage);
         Map<String,Object> metrics=new LinkedHashMap<>(Map.of("modelCalls",new ArrayList<>(usage),"costUsd","UNKNOWN","embeddingUsage","NOT_REPORTED","protocol",config.isNativeActions()?"NATIVE_ACTION_V1":"SCHEMA_ACTION_V1","promptVersion",PROMPT_VERSION));
-        metrics.put("tokenUsage",CustomerUsage.summarize(usage)); metrics.put("phaseUsage",CustomerUsage.byPhase(usage)); return metrics;
+        metrics.put("orchestrationTimings",orchestration);metrics.put("observationMissing",missing);metrics.put("tokenUsage",CustomerUsage.summarize(usage)); metrics.put("phaseUsage",CustomerUsage.byPhase(usage)); return metrics;
     }
 }

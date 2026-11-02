@@ -15,6 +15,10 @@ public interface CustomerMapper {
     Map<String,Object> sessionIncludingDeleted(@Param("id") long id,@Param("owner") long owner);
     @Update("UPDATE customer_session SET deleted_at=CURRENT_TIMESTAMP(3) WHERE id=#{id} AND account_id=#{owner} AND deleted_at IS NULL")
     int deleteSession(@Param("id") long id,@Param("owner") long owner);
+    @Delete("DELETE FROM customer_graph_checkpoint WHERE run_id IN (SELECT id FROM customer_run WHERE session_id=#{session} AND status NOT IN ('QUEUED','RUNNING'))")
+    int deleteSessionCheckpoints(long session);
+    @Delete("DELETE FROM customer_raw_payload WHERE run_id IN (SELECT id FROM customer_run WHERE session_id=#{session} AND status NOT IN ('QUEUED','RUNNING'))")
+    int deleteSessionPayloads(long session);
     @Select("SELECT id,title,state_version,updated_at FROM customer_session WHERE account_id=#{owner} AND deleted_at IS NULL ORDER BY updated_at DESC LIMIT 100")
     List<Map<String,Object>> sessions(long owner);
     @Select("SELECT * FROM customer_run WHERE session_id=#{session} AND request_id=#{request}")
@@ -23,7 +27,7 @@ public interface CustomerMapper {
     @Select("SELECT COUNT(*) FROM customer_run WHERE status IN ('QUEUED','RUNNING')") int active();
     @Select("SELECT COUNT(*) FROM customer_run WHERE account_id=#{owner} AND status IN ('QUEUED','RUNNING')") int activeOwner(long owner);
     @Select("SELECT id,status,stage FROM customer_run WHERE session_id=#{session} AND status IN ('QUEUED','RUNNING') LIMIT 1") Map<String,Object> activeSession(long session);
-    @Insert("INSERT INTO customer_run(id,session_id,account_id,request_id,input_hash,message,status,stage,prompt_version,deadline_at) VALUES(#{id},#{session},#{owner},#{request},#{hash},#{message},'QUEUED','ACCEPTED',#{promptVersion},#{deadline})")
+    @Insert("INSERT INTO customer_run(id,session_id,account_id,request_id,input_hash,message,status,stage,prompt_version,deadline_at,execution_engine,graph_version,state_schema_version,trace_id) VALUES(#{id},#{session},#{owner},#{request},#{hash},#{message},'QUEUED','ACCEPTED',#{promptVersion},#{deadline},#{executionEngine},#{graphVersion},2,#{traceId})")
     int insertRun(Map<String,Object> row);
     @Insert("INSERT INTO customer_message(session_id,run_id,role,content,status) VALUES(#{session},#{run},#{role},#{content},#{status})")
     int message(@Param("session") long session,@Param("run") String run,@Param("role") String role,@Param("content") String content,@Param("status") String status);
@@ -36,6 +40,8 @@ public interface CustomerMapper {
     @Update("UPDATE customer_run SET metrics_json=#{metrics} WHERE id=#{id}") int metrics(@Param("id") String id,@Param("metrics") String metrics);
     @Update("UPDATE customer_session SET state_json=#{state},state_version=state_version+1,updated_at=CURRENT_TIMESTAMP(3) WHERE id=#{id}")
     int state(@Param("id") long id,@Param("state") String state);
+    @Update("UPDATE customer_session SET state_json=#{state},state_version=state_version+1,updated_at=CURRENT_TIMESTAMP(3) WHERE id=#{id} AND state_version=#{expected}")
+    int stateCas(@Param("id") long id,@Param("state") String state,@Param("expected") long expected);
     @Update("UPDATE customer_session SET summary_text=#{summary},summary_through=#{through} WHERE id=#{id}")
     int summary(@Param("id") long id,@Param("summary") String summary,@Param("through") long through);
     @Insert("INSERT INTO customer_step(run_id,tool_name,status,detail_json) VALUES(#{run},#{tool},#{status},#{detail})")

@@ -1,0 +1,1104 @@
+{
+  "case": {
+    "id": "frontend_free",
+    "family": "frontend",
+    "kind": "free",
+    "messages": [
+      "请推荐真实项目，想做的方向或用途是：做一个网站的前端界面。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。"
+    ]
+  },
+  "sessionId": "119",
+  "turns": [
+    {
+      "message": "请推荐真实项目，想做的方向或用途是：做一个网站的前端界面。目标是学习，我有一年编程基础，语言和周期都不限。资料缺失可以先展示相关探索项目，但不要推荐无关项目。",
+      "runId": "39dd8164-9672-4e89-bd25-ded10b6ff96d",
+      "status": "SUCCEEDED",
+      "error": null,
+      "wallMs": 6469,
+      "result": {
+        "skill": "PROJECT_RECOMMENDATION_V1",
+        "intent": "RECOMMEND",
+        "state": {
+          "goal": "学习",
+          "provenance": {
+            "goal": {
+              "source": "MESSAGE",
+              "quote": "目标是学习"
+            },
+            "experience": {
+              "source": "MESSAGE",
+              "quote": "我有一年编程基础"
+            },
+            "topic": {
+              "source": "MESSAGE",
+              "quote": "做一个网站的前端界面"
+            },
+            "verificationMode": {
+              "source": "MESSAGE",
+              "quote": "资料缺失可以先展示相关探索项目"
+            }
+          },
+          "experience": "一年编程基础",
+          "topic": [
+            "前端界面"
+          ],
+          "verificationMode": "EXPLORE",
+          "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。",
+          "lastCandidates": []
+        },
+        "projects": [],
+        "references": [],
+        "profileLoaded": false,
+        "diagnostics": {
+          "calculatedAt": "2026-10-04T02:51:23.888977047Z",
+          "conditions": {
+            "topic": [
+              "前端界面"
+            ]
+          },
+          "current": {
+            "total": 0,
+            "confirmed": 0,
+            "uncertain": 0
+          },
+          "available": {
+            "total": 494,
+            "confirmed": 494,
+            "uncertain": 0
+          },
+          "alternatives": [
+            {
+              "total": 110,
+              "confirmed": 110,
+              "uncertain": 0,
+              "changes": {
+                "topic": [
+                  "智能体"
+                ]
+              },
+              "label": "项目主题改为智能体"
+            }
+          ],
+          "countUnit": "DISTINCT_REPOSITORY"
+        },
+        "status": "NO_MATCH",
+        "answer": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。\n\n这次没有找到符合当前组合要求的项目，但我们可以换一种找法。\n根据现有资料，可以考虑以下调整；每个方案都保留其余条件：\n- 项目主题改为智能体，可以找到通过当前字段检查的项目，具体功能还需核对。\n尚未修改条件。你愿意先尝试哪一种调整？也可以告诉我哪项要求必须保留。",
+        "conditionChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+      },
+      "metrics": {
+        "costUsd": "UNKNOWN",
+        "modelCalls": [
+          {
+            "usage": {
+              "prompt_tokens": 5282,
+              "completion_tokens": 612,
+              "total_tokens": 5894,
+              "prompt_tokens_details": {
+                "cached_tokens": 4992
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 307
+              },
+              "prompt_cache_hit_tokens": 4992,
+              "prompt_cache_miss_tokens": 290
+            },
+            "attempt": 1,
+            "status": "SUCCEEDED",
+            "costUsd": "UNKNOWN",
+            "model": "deepseek-flash",
+            "durationMs": 2868,
+            "protocol": "NATIVE_ACTION",
+            "phase": "ACTION",
+            "requestedModel": "deepseek-flash",
+            "finishReason": "tool_calls",
+            "outputBudget": 4096,
+            "thinking": true
+          }
+        ],
+        "promptVersion": "customer-v4.12-semantic-recommendations",
+        "embeddingUsage": "NOT_REPORTED",
+        "protocol": "NATIVE_ACTION_V1",
+        "tokenUsage": {
+          "reasoningTokens": 307,
+          "complete": true,
+          "cacheHitTokens": 4992,
+          "inputTokens": 5282,
+          "cacheMissTokens": 290,
+          "totalTokens": 5894,
+          "outputTokens": 612,
+          "callsWithoutUsage": 0,
+          "calls": 1,
+          "models": [
+            "deepseek-flash"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "tool": "getConfirmedProfile",
+          "detail": {
+            "result": "",
+            "parameters": {}
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchKnowledge",
+          "detail": {
+            "result": {
+              "hits": [
+                {
+                  "score": 0.01639344262295082,
+                  "title": "Oxotka/Landscape1C",
+                  "chunkId": 12033,
+                  "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                  "endOffset": 222,
+                  "sourceRef": "beginner:38",
+                  "versionId": 313,
+                  "chunkIndex": 4,
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                  "startOffset": 149,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.016129032258064516,
+                  "title": "DavidHDev/canvas-ui",
+                  "chunkId": 9607,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 39,
+                  "sourceRef": "beginner:77",
+                  "versionId": 221,
+                  "chunkIndex": 1,
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                  "startOffset": 23,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015873015873015872,
+                  "title": "fastrepl/anarlog",
+                  "chunkId": 11809,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 36,
+                  "sourceRef": "beginner:2",
+                  "versionId": 296,
+                  "chunkIndex": 1,
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "fastrepl/anarlog > 知识分类",
+                  "startOffset": 20,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015625,
+                  "title": "is-a-dev/register",
+                  "chunkId": 12004,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 37,
+                  "sourceRef": "beginner:34",
+                  "versionId": 311,
+                  "chunkIndex": 1,
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "is-a-dev/register > 知识分类",
+                  "startOffset": 21,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015384615384615384,
+                  "title": "agent-of-empires/agent-of-empires",
+                  "chunkId": 9976,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 53,
+                  "sourceRef": "beginner:125",
+                  "versionId": 233,
+                  "chunkIndex": 1,
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                  "startOffset": 37,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.015151515151515152,
+                  "title": "willsoto/ng-chartist",
+                  "chunkId": 11861,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 40,
+                  "sourceRef": "beginner:9",
+                  "versionId": 300,
+                  "chunkIndex": 1,
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "willsoto/ng-chartist > 知识分类",
+                  "startOffset": 24,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014925373134328358,
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "chunkId": 11848,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 47,
+                  "sourceRef": "beginner:8",
+                  "versionId": 299,
+                  "chunkIndex": 1,
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                  "startOffset": 31,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014705882352941176,
+                  "title": "mikiarlo3/ai-copywriter",
+                  "chunkId": 9666,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:88",
+                  "versionId": 223,
+                  "chunkIndex": 1,
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014492753623188406,
+                  "title": "img2threejs/img2threejs",
+                  "chunkId": 9767,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:101",
+                  "versionId": 226,
+                  "chunkIndex": 1,
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "img2threejs/img2threejs > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.014285714285714284,
+                  "title": "Baskerville42/outage-data-ua",
+                  "chunkId": 11965,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 48,
+                  "sourceRef": "beginner:30",
+                  "versionId": 308,
+                  "chunkIndex": 1,
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                  "startOffset": 32,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01408450704225352,
+                  "title": "web-infra-dev/rspress",
+                  "chunkId": 10016,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 41,
+                  "sourceRef": "beginner:191",
+                  "versionId": 234,
+                  "chunkIndex": 1,
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "web-infra-dev/rspress > 知识分类",
+                  "startOffset": 25,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013888888888888888,
+                  "title": "zhnt/loushang",
+                  "chunkId": 9944,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:121",
+                  "versionId": 232,
+                  "chunkIndex": 1,
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhnt/loushang > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.0136986301369863,
+                  "title": "pireel/pireel",
+                  "chunkId": 9740,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 33,
+                  "sourceRef": "beginner:94",
+                  "versionId": 225,
+                  "chunkIndex": 1,
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "pireel/pireel > 知识分类",
+                  "startOffset": 17,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013513513513513514,
+                  "title": "zhensherlock/protocol-launcher",
+                  "chunkId": 10780,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:46",
+                  "versionId": 282,
+                  "chunkIndex": 1,
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "zhensherlock/protocol-launcher > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013333333333333334,
+                  "title": "johnny-shaman/Sign",
+                  "chunkId": 12017,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:35",
+                  "versionId": 312,
+                  "chunkIndex": 1,
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "johnny-shaman/Sign > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.013157894736842105,
+                  "title": "olo-dot-io/Uni-CLI",
+                  "chunkId": 12069,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 38,
+                  "sourceRef": "beginner:53",
+                  "versionId": 316,
+                  "chunkIndex": 1,
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "olo-dot-io/Uni-CLI > 知识分类",
+                  "startOffset": 22,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012987012987012988,
+                  "title": "conorbronsdon/avoid-ai-writing",
+                  "chunkId": 11991,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:33",
+                  "versionId": 310,
+                  "chunkIndex": 1,
+                  "documentId": 91,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "conorbronsdon/avoid-ai-writing > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.01282051282051282,
+                  "title": "CatsJuice/sticker-forge",
+                  "chunkId": 9914,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 43,
+                  "sourceRef": "beginner:119",
+                  "versionId": 231,
+                  "chunkIndex": 1,
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "CatsJuice/sticker-forge > 知识分类",
+                  "startOffset": 27,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012658227848101266,
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "chunkId": 12056,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 50,
+                  "sourceRef": "beginner:43",
+                  "versionId": 315,
+                  "chunkIndex": 1,
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                  "startOffset": 34,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                },
+                {
+                  "score": 0.012345679012345678,
+                  "title": "seek-oss/vocab",
+                  "chunkId": 11874,
+                  "content": "## 知识分类\n新手友好项目\n\n",
+                  "endOffset": 34,
+                  "sourceRef": "beginner:10",
+                  "versionId": 301,
+                  "chunkIndex": 1,
+                  "documentId": 82,
+                  "sourceType": "BEGINNER_PROJECT",
+                  "sectionPath": "seek-oss/vocab > 知识分类",
+                  "startOffset": 18,
+                  "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                }
+              ],
+              "adapter": "HNSW_HYBRID",
+              "generation": "20261002164953-ec113424",
+              "answerPolicy": "ANSWER_WITH_CITATIONS",
+              "scannedCount": 129,
+              "candidateCount": 80,
+              "evidenceGroups": [
+                {
+                  "title": "Oxotka/Landscape1C",
+                  "evidence": [
+                    {
+                      "score": 0.01639344262295082,
+                      "title": "Oxotka/Landscape1C",
+                      "chunkId": 12033,
+                      "content": "## 适合新手的原因\n前端 JavaScript 项目，数据驱动且可视化丰富，适合学习数据可视化（如 D3.js）、交互式图表和前端过滤系统。\n\n",
+                      "endOffset": 222,
+                      "sourceRef": "beginner:38",
+                      "versionId": 313,
+                      "chunkIndex": 4,
+                      "documentId": 94,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Oxotka/Landscape1C > 适合新手的原因",
+                      "startOffset": 149,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=1,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:38",
+                  "bestScore": 0.01639344262295082,
+                  "sourceRef": "beginner:38",
+                  "documentId": 94,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "DavidHDev/canvas-ui",
+                  "evidence": [
+                    {
+                      "score": 0.016129032258064516,
+                      "title": "DavidHDev/canvas-ui",
+                      "chunkId": 9607,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 39,
+                      "sourceRef": "beginner:77",
+                      "versionId": 221,
+                      "chunkIndex": 1,
+                      "documentId": 2,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "DavidHDev/canvas-ui > 知识分类",
+                      "startOffset": 23,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=2,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:77",
+                  "bestScore": 0.016129032258064516,
+                  "sourceRef": "beginner:77",
+                  "documentId": 2,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "fastrepl/anarlog",
+                  "evidence": [
+                    {
+                      "score": 0.015873015873015872,
+                      "title": "fastrepl/anarlog",
+                      "chunkId": 11809,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 36,
+                      "sourceRef": "beginner:2",
+                      "versionId": 296,
+                      "chunkIndex": 1,
+                      "documentId": 77,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "fastrepl/anarlog > 知识分类",
+                      "startOffset": 20,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=3,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:2",
+                  "bestScore": 0.015873015873015872,
+                  "sourceRef": "beginner:2",
+                  "documentId": 77,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "is-a-dev/register",
+                  "evidence": [
+                    {
+                      "score": 0.015625,
+                      "title": "is-a-dev/register",
+                      "chunkId": 12004,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 37,
+                      "sourceRef": "beginner:34",
+                      "versionId": 311,
+                      "chunkIndex": 1,
+                      "documentId": 92,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "is-a-dev/register > 知识分类",
+                      "startOffset": 21,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=4,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:34",
+                  "bestScore": 0.015625,
+                  "sourceRef": "beginner:34",
+                  "documentId": 92,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "agent-of-empires/agent-of-empires",
+                  "evidence": [
+                    {
+                      "score": 0.015384615384615384,
+                      "title": "agent-of-empires/agent-of-empires",
+                      "chunkId": 9976,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 53,
+                      "sourceRef": "beginner:125",
+                      "versionId": 233,
+                      "chunkIndex": 1,
+                      "documentId": 14,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "agent-of-empires/agent-of-empires > 知识分类",
+                      "startOffset": 37,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=5,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:125",
+                  "bestScore": 0.015384615384615384,
+                  "sourceRef": "beginner:125",
+                  "documentId": 14,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "willsoto/ng-chartist",
+                  "evidence": [
+                    {
+                      "score": 0.015151515151515152,
+                      "title": "willsoto/ng-chartist",
+                      "chunkId": 11861,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 40,
+                      "sourceRef": "beginner:9",
+                      "versionId": 300,
+                      "chunkIndex": 1,
+                      "documentId": 81,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "willsoto/ng-chartist > 知识分类",
+                      "startOffset": 24,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=6,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:9",
+                  "bestScore": 0.015151515151515152,
+                  "sourceRef": "beginner:9",
+                  "documentId": 81,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "qwen-code-dev-bot/oh-my-cli",
+                  "evidence": [
+                    {
+                      "score": 0.014925373134328358,
+                      "title": "qwen-code-dev-bot/oh-my-cli",
+                      "chunkId": 11848,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 47,
+                      "sourceRef": "beginner:8",
+                      "versionId": 299,
+                      "chunkIndex": 1,
+                      "documentId": 80,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "qwen-code-dev-bot/oh-my-cli > 知识分类",
+                      "startOffset": 31,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=7,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:8",
+                  "bestScore": 0.014925373134328358,
+                  "sourceRef": "beginner:8",
+                  "documentId": 80,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "mikiarlo3/ai-copywriter",
+                  "evidence": [
+                    {
+                      "score": 0.014705882352941176,
+                      "title": "mikiarlo3/ai-copywriter",
+                      "chunkId": 9666,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:88",
+                      "versionId": 223,
+                      "chunkIndex": 1,
+                      "documentId": 4,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "mikiarlo3/ai-copywriter > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=8,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:88",
+                  "bestScore": 0.014705882352941176,
+                  "sourceRef": "beginner:88",
+                  "documentId": 4,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "img2threejs/img2threejs",
+                  "evidence": [
+                    {
+                      "score": 0.014492753623188406,
+                      "title": "img2threejs/img2threejs",
+                      "chunkId": 9767,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:101",
+                      "versionId": 226,
+                      "chunkIndex": 1,
+                      "documentId": 7,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "img2threejs/img2threejs > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=9,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:101",
+                  "bestScore": 0.014492753623188406,
+                  "sourceRef": "beginner:101",
+                  "documentId": 7,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "Baskerville42/outage-data-ua",
+                  "evidence": [
+                    {
+                      "score": 0.014285714285714284,
+                      "title": "Baskerville42/outage-data-ua",
+                      "chunkId": 11965,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 48,
+                      "sourceRef": "beginner:30",
+                      "versionId": 308,
+                      "chunkIndex": 1,
+                      "documentId": 89,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "Baskerville42/outage-data-ua > 知识分类",
+                      "startOffset": 32,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=10,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:30",
+                  "bestScore": 0.014285714285714284,
+                  "sourceRef": "beginner:30",
+                  "documentId": 89,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "web-infra-dev/rspress",
+                  "evidence": [
+                    {
+                      "score": 0.01408450704225352,
+                      "title": "web-infra-dev/rspress",
+                      "chunkId": 10016,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 41,
+                      "sourceRef": "beginner:191",
+                      "versionId": 234,
+                      "chunkIndex": 1,
+                      "documentId": 15,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "web-infra-dev/rspress > 知识分类",
+                      "startOffset": 25,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=11,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:191",
+                  "bestScore": 0.01408450704225352,
+                  "sourceRef": "beginner:191",
+                  "documentId": 15,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhnt/loushang",
+                  "evidence": [
+                    {
+                      "score": 0.013888888888888888,
+                      "title": "zhnt/loushang",
+                      "chunkId": 9944,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:121",
+                      "versionId": 232,
+                      "chunkIndex": 1,
+                      "documentId": 13,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhnt/loushang > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=12,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:121",
+                  "bestScore": 0.013888888888888888,
+                  "sourceRef": "beginner:121",
+                  "documentId": 13,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "pireel/pireel",
+                  "evidence": [
+                    {
+                      "score": 0.0136986301369863,
+                      "title": "pireel/pireel",
+                      "chunkId": 9740,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 33,
+                      "sourceRef": "beginner:94",
+                      "versionId": 225,
+                      "chunkIndex": 1,
+                      "documentId": 6,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "pireel/pireel > 知识分类",
+                      "startOffset": 17,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=13,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:94",
+                  "bestScore": 0.0136986301369863,
+                  "sourceRef": "beginner:94",
+                  "documentId": 6,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "zhensherlock/protocol-launcher",
+                  "evidence": [
+                    {
+                      "score": 0.013513513513513514,
+                      "title": "zhensherlock/protocol-launcher",
+                      "chunkId": 10780,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:46",
+                      "versionId": 282,
+                      "chunkIndex": 1,
+                      "documentId": 63,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "zhensherlock/protocol-launcher > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=14,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:46",
+                  "bestScore": 0.013513513513513514,
+                  "sourceRef": "beginner:46",
+                  "documentId": 63,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "johnny-shaman/Sign",
+                  "evidence": [
+                    {
+                      "score": 0.013333333333333334,
+                      "title": "johnny-shaman/Sign",
+                      "chunkId": 12017,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:35",
+                      "versionId": 312,
+                      "chunkIndex": 1,
+                      "documentId": 93,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "johnny-shaman/Sign > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=15,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:35",
+                  "bestScore": 0.013333333333333334,
+                  "sourceRef": "beginner:35",
+                  "documentId": 93,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "olo-dot-io/Uni-CLI",
+                  "evidence": [
+                    {
+                      "score": 0.013157894736842105,
+                      "title": "olo-dot-io/Uni-CLI",
+                      "chunkId": 12069,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 38,
+                      "sourceRef": "beginner:53",
+                      "versionId": 316,
+                      "chunkIndex": 1,
+                      "documentId": 97,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "olo-dot-io/Uni-CLI > 知识分类",
+                      "startOffset": 22,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=16,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:53",
+                  "bestScore": 0.013157894736842105,
+                  "sourceRef": "beginner:53",
+                  "documentId": 97,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "conorbronsdon/avoid-ai-writing",
+                  "evidence": [
+                    {
+                      "score": 0.012987012987012988,
+                      "title": "conorbronsdon/avoid-ai-writing",
+                      "chunkId": 11991,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:33",
+                      "versionId": 310,
+                      "chunkIndex": 1,
+                      "documentId": 91,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "conorbronsdon/avoid-ai-writing > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=17,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:33",
+                  "bestScore": 0.012987012987012988,
+                  "sourceRef": "beginner:33",
+                  "documentId": 91,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "CatsJuice/sticker-forge",
+                  "evidence": [
+                    {
+                      "score": 0.01282051282051282,
+                      "title": "CatsJuice/sticker-forge",
+                      "chunkId": 9914,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 43,
+                      "sourceRef": "beginner:119",
+                      "versionId": 231,
+                      "chunkIndex": 1,
+                      "documentId": 12,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "CatsJuice/sticker-forge > 知识分类",
+                      "startOffset": 27,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=18,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:119",
+                  "bestScore": 0.01282051282051282,
+                  "sourceRef": "beginner:119",
+                  "documentId": 12,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "flowsforapex/apex-flowsforapex",
+                  "evidence": [
+                    {
+                      "score": 0.012658227848101266,
+                      "title": "flowsforapex/apex-flowsforapex",
+                      "chunkId": 12056,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 50,
+                      "sourceRef": "beginner:43",
+                      "versionId": 315,
+                      "chunkIndex": 1,
+                      "documentId": 96,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "flowsforapex/apex-flowsforapex > 知识分类",
+                      "startOffset": 34,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=19,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:43",
+                  "bestScore": 0.012658227848101266,
+                  "sourceRef": "beginner:43",
+                  "documentId": 96,
+                  "sourceType": "BEGINNER_PROJECT"
+                },
+                {
+                  "title": "seek-oss/vocab",
+                  "evidence": [
+                    {
+                      "score": 0.012345679012345678,
+                      "title": "seek-oss/vocab",
+                      "chunkId": 11874,
+                      "content": "## 知识分类\n新手友好项目\n\n",
+                      "endOffset": 34,
+                      "sourceRef": "beginner:10",
+                      "versionId": 301,
+                      "chunkIndex": 1,
+                      "documentId": 82,
+                      "sourceType": "BEGINNER_PROJECT",
+                      "sectionPath": "seek-oss/vocab > 知识分类",
+                      "startOffset": 18,
+                      "retrievalRoute": "HYBRID_RRF(vectorRank=21,lexicalRank=0,nameRank=0,lexicalWeight=0.2,nameGated=true)"
+                    }
+                  ],
+                  "groupKey": "BEGINNER_PROJECT:beginner:10",
+                  "bestScore": 0.012345679012345678,
+                  "sourceRef": "beginner:10",
+                  "documentId": 82,
+                  "sourceType": "BEGINNER_PROJECT"
+                }
+              ],
+              "excludedReasons": {}
+            },
+            "parameters": {
+              "topK": 20,
+              "query": "推荐项目  前端界面 学习 一年编程基础",
+              "purpose": "PROJECT_RANKING",
+              "sourceTypes": [
+                "CAREER_PROJECT",
+                "BEGINNER_PROJECT",
+                "GITHUB"
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": [],
+            "parameters": {
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "前端界面"
+                ],
+                "experience": "一年编程基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "做一个网站的前端界面",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              },
+              "semanticChunks": [
+                12033,
+                9607,
+                11809,
+                12004,
+                9976,
+                11861,
+                11848,
+                9666,
+                9767,
+                11965,
+                10016,
+                9944,
+                9740,
+                10780,
+                12017,
+                12069,
+                11991,
+                9914,
+                12056,
+                11874
+              ]
+            }
+          },
+          "status": "SUCCEEDED"
+        },
+        {
+          "tool": "searchProjects",
+          "detail": {
+            "result": {
+              "current": {
+                "total": 0,
+                "confirmed": 0,
+                "uncertain": 0
+              },
+              "available": {
+                "total": 494,
+                "confirmed": 494,
+                "uncertain": 0
+              },
+              "countUnit": "DISTINCT_REPOSITORY",
+              "conditions": {
+                "topic": [
+                  "前端界面"
+                ]
+              },
+              "alternatives": [
+                {
+                  "label": "项目主题改为智能体",
+                  "total": 110,
+                  "changes": {
+                    "topic": [
+                      "智能体"
+                    ]
+                  },
+                  "confirmed": 110,
+                  "uncertain": 0
+                }
+              ],
+              "calculatedAt": "2026-10-04T02:51:23.888977047Z"
+            },
+            "parameters": {
+              "purpose": "COUNTERFACTUAL_COUNTS",
+              "conditions": {
+                "goal": "学习",
+                "topic": [
+                  "前端界面"
+                ],
+                "experience": "一年编程基础",
+                "provenance": {
+                  "goal": {
+                    "quote": "目标是学习",
+                    "source": "MESSAGE"
+                  },
+                  "topic": {
+                    "quote": "做一个网站的前端界面",
+                    "source": "MESSAGE"
+                  },
+                  "experience": {
+                    "quote": "我有一年编程基础",
+                    "source": "MESSAGE"
+                  },
+                  "verificationMode": {
+                    "quote": "资料缺失可以先展示相关探索项目",
+                    "source": "MESSAGE"
+                  }
+                },
+                "lastCandidates": [],
+                "verificationMode": "EXPLORE",
+                "lastChangeSummary": "已记录基础（排序偏好）：一年编程基础；已记录项目目标：学习；已记录项目主题：前端界面；已记录核实要求：允许相关的待核实候选。其他已确认条件保持不变。"
+              }
+            }
+          },
+          "status": "SUCCEEDED"
+        }
+      ]
+    }
+  ],
+  "sessionDeleted": true
+}

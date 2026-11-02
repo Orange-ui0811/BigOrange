@@ -10,6 +10,10 @@ public class RagBProperties {
     private int chunkSize = 500;
     private int chunkOverlap = 50;
     private String embeddingModel = "bge-m3";
+    private String embeddingProvider = "GITEE";
+    private String embeddingRevision;
+    private String ollamaBaseUrl = "http://localhost:11434";
+    private String ollamaModel = "bge-m3:orangejd-v1";
     private String chunkPolicy = "STRUCTURE_M3_512_768_64_V1";
     private int maxChunks = 4096;
     private int embeddingBatchSize = 16;
@@ -18,8 +22,14 @@ public class RagBProperties {
     private int fusionCandidateLimit = 80;
     private boolean githubSyncEnabled = false;
     private int githubSyncLimit = 50;
+    private final RagBRerankProperties rerank = new RagBRerankProperties();
 
     public void validate() {
+        rerank.validate();
+        if (!java.util.Set.of("GITEE", "OLLAMA").contains(embeddingProvider))
+            throw new IllegalStateException("B Embedding provider must be GITEE or OLLAMA");
+        if ("OLLAMA".equals(embeddingProvider) && (embeddingRevision == null || !embeddingRevision.matches("sha256:[a-f0-9]{64}")))
+            throw new IllegalStateException("Local B embedding requires a pinned Ollama digest");
         if (!redisPrefix.startsWith("orange:rag:b:") || redisPrefix.contains("*")) {
             throw new IllegalStateException("B 版 Redis 前缀必须位于 orange:rag:b: 命名空间且不能包含通配符");
         }
@@ -41,6 +51,14 @@ public class RagBProperties {
     public void setChunkSize(int chunkSize) { this.chunkSize = chunkSize; }
     public int getChunkOverlap() { return chunkOverlap; }
     public String getEmbeddingModel() { return embeddingModel; }
+    public String getEmbeddingProvider() { return embeddingProvider; }
+    public void setEmbeddingProvider(String value) { embeddingProvider = value.toUpperCase(java.util.Locale.ROOT); }
+    public String getEmbeddingRevision() { return embeddingRevision; }
+    public void setEmbeddingRevision(String value) { embeddingRevision = value; }
+    public String getOllamaBaseUrl() { return ollamaBaseUrl; }
+    public void setOllamaBaseUrl(String value) { ollamaBaseUrl = value; }
+    public String getOllamaModel() { return ollamaModel; }
+    public void setOllamaModel(String value) { ollamaModel = value; }
     public void setEmbeddingModel(String value) { embeddingModel = value; }
     public String getChunkPolicy() { return chunkPolicy; }
     public void setChunkPolicy(String value) { chunkPolicy = value; }
@@ -58,5 +76,6 @@ public class RagBProperties {
     public boolean isGithubSyncEnabled() { return githubSyncEnabled; }
     public void setGithubSyncEnabled(boolean githubSyncEnabled) { this.githubSyncEnabled = githubSyncEnabled; }
     public int getGithubSyncLimit() { return githubSyncLimit; }
+    public RagBRerankProperties getRerank() { return rerank; }
     public void setGithubSyncLimit(int githubSyncLimit) { this.githubSyncLimit = githubSyncLimit; }
 }

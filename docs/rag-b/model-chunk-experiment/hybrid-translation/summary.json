@@ -1,0 +1,925 @@
+{
+  "at": "2026-10-02T05:52:53.075334+00:00",
+  "corpusHash": "7b79504fcc7a0a3cb428037ef55d66822caaf5d7c0fd996ec8ee0198c3b3b902",
+  "caseHash": "2c7d3f169ddbc9b1a07bfba8a926b03ac0e5490ac1c41a14201eaa2c71d12b20",
+  "cases": 140,
+  "translationMode": "preauthored paired English; optimistic, not blind automatic translation",
+  "redis": {
+    "host": "127.0.0.1:6380",
+    "algorithm": "HNSW",
+    "M": 16,
+    "efConstruction": 200,
+    "efRuntime": 10,
+    "distance": "COSINE",
+    "lexicalLanguage": "default English"
+  },
+  "rrf": {
+    "k": 60,
+    "vector": 1,
+    "lexical": 1.15,
+    "name": 3,
+    "nameBonus": 0.1,
+    "dualVector": [
+      0.5,
+      0.5
+    ]
+  },
+  "results": [
+    {
+      "plan": "current-small-char500",
+      "mode": "ann_raw",
+      "index": "rag-exp-m3-7134c7408c73",
+      "dimensions": 512,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 1.7949299999600044
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.925,
+          "top1": 0.9,
+          "redisP95Ms": 1.554725000187318
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.95,
+          "evidenceMRR8": 0.8666666666666666,
+          "top1": 0.8,
+          "redisP95Ms": 1.743205000366288
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.5,
+          "evidenceMRR8": 0.2517857142857143,
+          "top1": 0.2,
+          "redisP95Ms": 1.3246299996353628
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 0.76,
+          "evidenceMRR8": 0.6663333333333332,
+          "top1": 0.62,
+          "redisP95Ms": 1.7279349998716496
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.33333333333333337,
+          "top1": 0.2,
+          "redisP95Ms": 1.5015650003988412
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.6125,
+          "top1": 0.4,
+          "redisP95Ms": 1.4617150005506114
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.6555555555555556,
+        "evidenceMRR8": 0.5312169312169313,
+        "top1": 0.4666666666666667,
+        "redisP95Ms": 1.6794600008324776
+      }
+    },
+    {
+      "plan": "current-small-char500",
+      "mode": "ann_dual",
+      "index": "rag-exp-m3-7134c7408c73",
+      "dimensions": 512,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 1.652180000291992
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.05,
+          "evidenceMRR8": 0.0125,
+          "top1": 0.0,
+          "redisP95Ms": 3.2084349994875083
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.05,
+          "evidenceMRR8": 0.0125,
+          "top1": 0.0,
+          "redisP95Ms": 3.10209500057681
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.7,
+          "evidenceMRR8": 0.6166666666666666,
+          "top1": 0.6,
+          "redisP95Ms": 3.5534699996787817
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 0.76,
+          "evidenceMRR8": 0.6663333333333332,
+          "top1": 0.62,
+          "redisP95Ms": 1.5983050002432717
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6416666666666666,
+          "top1": 0.5,
+          "redisP95Ms": 3.191630000219447
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.6125,
+          "top1": 0.4,
+          "redisP95Ms": 1.845195000259991
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.3111111111111111,
+        "evidenceMRR8": 0.21342592592592596,
+        "top1": 0.16666666666666666,
+        "redisP95Ms": 3.217954999763606
+      }
+    },
+    {
+      "plan": "current-small-char500",
+      "mode": "hybrid_raw",
+      "index": "rag-exp-m3-7134c7408c73",
+      "dimensions": 512,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 6.729769999856217
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.75,
+          "evidenceMRR8": 0.6625,
+          "top1": 0.6,
+          "redisP95Ms": 4.466799999863724
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.65,
+          "top1": 0.55,
+          "redisP95Ms": 4.0848149999874295
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.23333333333333334,
+          "top1": 0.1,
+          "redisP95Ms": 4.104600000027858
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 5.001414999696863
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.3666666666666667,
+          "top1": 0.3,
+          "redisP95Ms": 3.731305000019347
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.4749999999999999,
+          "top1": 0.3,
+          "redisP95Ms": 5.137395001020195
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.5666666666666667,
+        "evidenceMRR8": 0.4111111111111111,
+        "top1": 0.3333333333333333,
+        "redisP95Ms": 5.361100001118756
+      }
+    },
+    {
+      "plan": "current-small-char500",
+      "mode": "hybrid_diverse_raw",
+      "index": "rag-exp-m3-7134c7408c73",
+      "dimensions": 512,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 5.923259998962749
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.65,
+          "evidenceMRR8": 0.625,
+          "top1": 0.6,
+          "redisP95Ms": 4.737755000405741
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.6145833333333333,
+          "top1": 0.55,
+          "redisP95Ms": 4.919190000055096
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.4,
+          "evidenceMRR8": 0.21428571428571427,
+          "top1": 0.1,
+          "redisP95Ms": 5.434759999934613
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 5.140415000005304
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.3,
+          "evidenceMRR8": 0.3,
+          "top1": 0.3,
+          "redisP95Ms": 4.503959999874495
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.36583333333333334,
+          "top1": 0.3,
+          "redisP95Ms": 6.052670000917713
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.4666666666666667,
+        "evidenceMRR8": 0.3732539682539682,
+        "top1": 0.3333333333333333,
+        "redisP95Ms": 5.754344999968453
+      }
+    },
+    {
+      "plan": "current-small-char500",
+      "mode": "hybrid_diverse_dual",
+      "index": "rag-exp-m3-7134c7408c73",
+      "dimensions": 512,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 6.47110000027169
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 6.525169999076752
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.05,
+          "evidenceMRR8": 0.05,
+          "top1": 0.05,
+          "redisP95Ms": 7.326790000752226
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.5,
+          "evidenceMRR8": 0.36428571428571427,
+          "top1": 0.3,
+          "redisP95Ms": 7.205739999699289
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 5.170129998987249
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.36250000000000004,
+          "top1": 0.3,
+          "redisP95Ms": 6.121059999441059
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.36583333333333334,
+          "top1": 0.3,
+          "redisP95Ms": 5.338379999557219
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.2,
+        "evidenceMRR8": 0.1325132275132275,
+        "top1": 0.1111111111111111,
+        "redisP95Ms": 6.9252550001692725
+      }
+    },
+    {
+      "plan": "current-small-char500",
+      "mode": "hybrid_diverse_raw_t055",
+      "index": "rag-exp-m3-7134c7408c73",
+      "dimensions": 512,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 6.7558449994066905
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.65,
+          "evidenceMRR8": 0.5833333333333333,
+          "top1": 0.55,
+          "redisP95Ms": 4.876064998734364
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.75,
+          "evidenceMRR8": 0.6083333333333333,
+          "top1": 0.55,
+          "redisP95Ms": 4.090545000235579
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.4,
+          "evidenceMRR8": 0.2,
+          "top1": 0.1,
+          "redisP95Ms": 3.774564999639551
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 0.98,
+          "evidenceMRR8": 0.98,
+          "top1": 0.98,
+          "redisP95Ms": 4.2259899999407935
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.2,
+          "evidenceMRR8": 0.12,
+          "top1": 0.1,
+          "redisP95Ms": 3.9472649999879645
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.36583333333333334,
+          "top1": 0.3,
+          "redisP95Ms": 6.5286599994578856
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.4444444444444444,
+        "evidenceMRR8": 0.3410185185185185,
+        "top1": 0.3,
+        "redisP95Ms": 6.465694999587868
+      }
+    },
+    {
+      "plan": "current-small-char500",
+      "mode": "hybrid_diverse_dual_t055",
+      "index": "rag-exp-m3-7134c7408c73",
+      "dimensions": 512,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.0,
+          "evidenceMRR8": 0.0,
+          "top1": 0.0,
+          "redisP95Ms": 5.849964998742508
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.4,
+          "evidenceMRR8": 0.35,
+          "top1": 0.3,
+          "redisP95Ms": 6.192729999565928
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.45,
+          "evidenceMRR8": 0.45,
+          "top1": 0.45,
+          "redisP95Ms": 6.319405000704138
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.30357142857142855,
+          "top1": 0.2,
+          "redisP95Ms": 6.353044999923441
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 0.98,
+          "evidenceMRR8": 0.98,
+          "top1": 0.98,
+          "redisP95Ms": 4.098044999955162
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.4476190476190475,
+          "top1": 0.4,
+          "redisP95Ms": 5.488264999712555
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.36583333333333334,
+          "top1": 0.3,
+          "redisP95Ms": 5.027629999403871
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.3888888888888889,
+        "evidenceMRR8": 0.3018915343915344,
+        "top1": 0.26666666666666666,
+        "redisP95Ms": 6.25597000007474
+      }
+    },
+    {
+      "plan": "bge-m3--native512",
+      "mode": "ann_raw",
+      "index": "rag-exp-m3-a59ddd89d94d",
+      "dimensions": 1024,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.7391666666666666,
+          "top1": 0.6,
+          "redisP95Ms": 2.1731100007855275
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8338095238095239,
+          "top1": 0.75,
+          "redisP95Ms": 2.0897699999295583
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.7738095238095237,
+          "top1": 0.7,
+          "redisP95Ms": 1.8188350009040735
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.82,
+          "top1": 0.8,
+          "redisP95Ms": 1.7022399997586033
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 1.8483700002434487
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.925,
+          "top1": 0.9,
+          "redisP95Ms": 1.8404249995001003
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9,
+          "top1": 0.8,
+          "redisP95Ms": 1.4316400003735907
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.9666666666666667,
+        "evidenceMRR8": 0.8153968253968255,
+        "top1": 0.7333333333333333,
+        "redisP95Ms": 2.100029999473918
+      }
+    },
+    {
+      "plan": "bge-m3--native512",
+      "mode": "ann_dual",
+      "index": "rag-exp-m3-a59ddd89d94d",
+      "dimensions": 1024,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.7391666666666666,
+          "top1": 0.6,
+          "redisP95Ms": 1.9643550000182586
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8,
+          "top1": 0.65,
+          "redisP95Ms": 3.87763500048095
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8208333333333332,
+          "top1": 0.7,
+          "redisP95Ms": 3.52125499957765
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8625,
+          "top1": 0.8,
+          "redisP95Ms": 3.3653799991043343
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 1.7765399998097562
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9333333333333332,
+          "top1": 0.9,
+          "redisP95Ms": 3.5603100001935672
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.9,
+          "top1": 0.8,
+          "redisP95Ms": 1.9633599988083004
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 1.0,
+        "evidenceMRR8": 0.8239814814814814,
+        "top1": 0.7111111111111111,
+        "redisP95Ms": 3.6056700001608983
+      }
+    },
+    {
+      "plan": "bge-m3--native512",
+      "mode": "hybrid_raw",
+      "index": "rag-exp-m3-a59ddd89d94d",
+      "dimensions": 1024,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.3,
+          "evidenceMRR8": 0.18916666666666665,
+          "top1": 0.15,
+          "redisP95Ms": 6.109450000167271
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.5713095238095238,
+          "top1": 0.45,
+          "redisP95Ms": 4.284080000707036
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.75,
+          "evidenceMRR8": 0.6041666666666666,
+          "top1": 0.5,
+          "redisP95Ms": 4.498844999670837
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6366666666666667,
+          "top1": 0.5,
+          "redisP95Ms": 4.180029999497492
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 4.559194999546889
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.725,
+          "top1": 0.6,
+          "redisP95Ms": 4.363960000227961
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.6,
+          "evidenceMRR8": 0.4625,
+          "top1": 0.4,
+          "redisP95Ms": 5.023949999122124
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.6777777777777778,
+        "evidenceMRR8": 0.5059391534391534,
+        "top1": 0.4111111111111111,
+        "redisP95Ms": 5.107274999681977
+      }
+    },
+    {
+      "plan": "bge-m3--native512",
+      "mode": "hybrid_diverse_raw",
+      "index": "rag-exp-m3-a59ddd89d94d",
+      "dimensions": 1024,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.2,
+          "evidenceMRR8": 0.15833333333333335,
+          "top1": 0.15,
+          "redisP95Ms": 6.5279049992568625
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.55,
+          "evidenceMRR8": 0.5,
+          "top1": 0.45,
+          "redisP95Ms": 4.55225000050632
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.7,
+          "evidenceMRR8": 0.5708333333333334,
+          "top1": 0.5,
+          "redisP95Ms": 5.255294999733451
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6208333333333333,
+          "top1": 0.5,
+          "redisP95Ms": 4.583205000471935
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 4.692019999220064
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.7166666666666666,
+          "top1": 0.6,
+          "redisP95Ms": 5.106395000620978
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.5,
+          "evidenceMRR8": 0.4333333333333334,
+          "top1": 0.4,
+          "redisP95Ms": 6.225854999593139
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.5777777777777777,
+        "evidenceMRR8": 0.4699074074074074,
+        "top1": 0.4111111111111111,
+        "redisP95Ms": 5.97540999915509
+      }
+    },
+    {
+      "plan": "bge-m3--native512",
+      "mode": "hybrid_diverse_dual",
+      "index": "rag-exp-m3-a59ddd89d94d",
+      "dimensions": 1024,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.2,
+          "evidenceMRR8": 0.15833333333333335,
+          "top1": 0.15,
+          "redisP95Ms": 7.04645999976492
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.55,
+          "evidenceMRR8": 0.45625,
+          "top1": 0.4,
+          "redisP95Ms": 7.996810000440746
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.7,
+          "evidenceMRR8": 0.6,
+          "top1": 0.55,
+          "redisP95Ms": 6.793804998505949
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.6333333333333334,
+          "top1": 0.5,
+          "redisP95Ms": 6.202359999770123
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 5.254739999691083
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 0.8166666666666667,
+          "top1": 0.7,
+          "redisP95Ms": 6.8861099999594435
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.5,
+          "evidenceMRR8": 0.4333333333333334,
+          "top1": 0.4,
+          "redisP95Ms": 6.8454850009402435
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.5777777777777777,
+        "evidenceMRR8": 0.4791666666666667,
+        "top1": 0.4222222222222222,
+        "redisP95Ms": 7.13244000035047
+      }
+    },
+    {
+      "plan": "bge-m3--native512",
+      "mode": "hybrid_diverse_raw_t055",
+      "index": "rag-exp-m3-a59ddd89d94d",
+      "dimensions": 1024,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.25,
+          "evidenceMRR8": 0.2125,
+          "top1": 0.2,
+          "redisP95Ms": 6.456084998990264
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.85,
+          "evidenceMRR8": 0.5588095238095239,
+          "top1": 0.45,
+          "redisP95Ms": 4.433324999263277
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.5995833333333334,
+          "top1": 0.5,
+          "redisP95Ms": 3.7047649991109215
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6976190476190476,
+          "top1": 0.6,
+          "redisP95Ms": 3.139120000287221
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 4.325770000923511
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.6166666666666667,
+          "top1": 0.5,
+          "redisP95Ms": 3.2139399989318918
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.7833333333333333,
+          "top1": 0.7,
+          "redisP95Ms": 4.502425000555376
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.7111111111111111,
+        "evidenceMRR8": 0.5377116402116402,
+        "top1": 0.45555555555555555,
+        "redisP95Ms": 5.133535000732081
+      }
+    },
+    {
+      "plan": "bge-m3--native512",
+      "mode": "hybrid_diverse_dual_t055",
+      "index": "rag-exp-m3-a59ddd89d94d",
+      "dimensions": 1024,
+      "categories": {
+        "business_cross_language": {
+          "n": 20,
+          "evidenceRecall8": 0.25,
+          "evidenceMRR8": 0.2125,
+          "top1": 0.2,
+          "redisP95Ms": 5.332635000559095
+        },
+        "business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.85,
+          "evidenceMRR8": 0.5370833333333334,
+          "top1": 0.4,
+          "redisP95Ms": 5.081675001201802
+        },
+        "fresh_business_zh": {
+          "n": 20,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6333928571428571,
+          "top1": 0.55,
+          "redisP95Ms": 4.976279998754762
+        },
+        "fresh_readme_zh": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.6976190476190476,
+          "top1": 0.6,
+          "redisP95Ms": 4.8345199995310395
+        },
+        "named_regression": {
+          "n": 50,
+          "evidenceRecall8": 1.0,
+          "evidenceMRR8": 1.0,
+          "top1": 1.0,
+          "redisP95Ms": 3.5936950004725077
+        },
+        "readme_cross_language": {
+          "n": 10,
+          "evidenceRecall8": 0.8,
+          "evidenceMRR8": 0.6833333333333333,
+          "top1": 0.6,
+          "redisP95Ms": 4.005004999726225
+        },
+        "readme_english": {
+          "n": 10,
+          "evidenceRecall8": 0.9,
+          "evidenceMRR8": 0.7833333333333333,
+          "top1": 0.7,
+          "redisP95Ms": 4.197665000810957
+        }
+      },
+      "semantic": {
+        "n": 90,
+        "evidenceRecall8": 0.7333333333333333,
+        "evidenceMRR8": 0.547804232804233,
+        "top1": 0.4666666666666667,
+        "redisP95Ms": 5.029825000110577
+      }
+    }
+  ]
+}

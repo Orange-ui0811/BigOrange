@@ -73,6 +73,7 @@ public class GiteeAiEmbeddingModel extends AbstractEmbeddingModel {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
         try {
+            com.orangejd.server.foundation.external.AiAcceptanceBudget.beforeRequest("GITEE_EMBEDDING");
             @SuppressWarnings("unchecked")
             ResponseEntity<Map> response = com.orangejd.server.service.TrendLabObservation.measure("embedding.http."+properties.getModel(),
                     () -> restTemplate.exchange(url, HttpMethod.POST, entity, Map.class));

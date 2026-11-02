@@ -7,6 +7,12 @@ import java.util.Set;
 @Component
 @ConfigurationProperties(prefix = "orange.customer")
 public class CustomerProperties {
+    private CustomerExecutionEngine.Kind executionEngine=CustomerExecutionEngine.Kind.LEGACY;
+    private boolean rawAccessEnabled;
+    public CustomerExecutionEngine.Kind getExecutionEngine() {return executionEngine;}
+    public void setExecutionEngine(CustomerExecutionEngine.Kind value) {executionEngine=java.util.Objects.requireNonNull(value);}
+    public boolean isRawAccessEnabled() {return rawAccessEnabled;}
+    public void setRawAccessEnabled(boolean value) {rawAccessEnabled=value;}
     private boolean enabled;
     private boolean nativeActions;
     private String model="deepseek-flash";
@@ -30,6 +36,25 @@ public class CustomerProperties {
     private int verificationOutputTokens = 2048;
     private boolean evidenceThinking;
     private boolean verificationThinking;
+    private boolean purposeThinking;
+    private int purposeOutputTokens = 2048;
+    private int purposeSeconds = 30;
+    private int purposeRetryReserveSeconds = 10;
+    private int purposeMaxBatches = 2;
+    public int getPurposeMaxBatches() { return purposeMaxBatches; }
+    public void setPurposeMaxBatches(int value) { if(value<1 || value>3)throw new IllegalArgumentException("用途核对批次必须为1至3");purposeMaxBatches=value; }
+    // Separate bounded phases; they never inherit global thinking or grow output on retry.
+    public int getRequirementInputTokens() { return Math.min(inputTokens,4000); }
+    public int getRequirementMatchOutputTokens() { return 2048; }
+    public int getRequirementVerifyOutputTokens() { return 1500; }
+    public boolean isPurposeThinking() { return purposeThinking; }
+    public void setPurposeThinking(boolean value) { purposeThinking=value; }
+    public int getPurposeOutputTokens() { return purposeOutputTokens; }
+    public void setPurposeOutputTokens(int value) { purposeOutputTokens=stageBudget(value); }
+    public int getPurposeSeconds() { return purposeSeconds; }
+    public void setPurposeSeconds(int value) { if(value<20 || value>30)throw new IllegalArgumentException("用途核对时限必须为20至30秒");purposeSeconds=value; }
+    public int getPurposeRetryReserveSeconds() { return purposeRetryReserveSeconds; }
+    public void setPurposeRetryReserveSeconds(int value) { if(value<8 || value>10)throw new IllegalArgumentException("用途核对重试预留必须为8至10秒");purposeRetryReserveSeconds=value; }
     public boolean isEvidenceThinking() { return evidenceThinking; }
     public void setEvidenceThinking(boolean value) { evidenceThinking=value; }
     public boolean isVerificationThinking() { return verificationThinking; }

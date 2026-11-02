@@ -1,0 +1,89 @@
+[
+  {
+    "thinking": false,
+    "maxTokens": 1500,
+    "scope": "synthetic intent only, no knowledge documents or account profile",
+    "finishReason": "tool_calls",
+    "usage": {
+      "prompt_tokens": 975,
+      "completion_tokens": 209,
+      "total_tokens": 1184,
+      "prompt_tokens_details": {
+        "cached_tokens": 128
+      },
+      "prompt_cache_hit_tokens": 128,
+      "prompt_cache_miss_tokens": 847
+    },
+    "reasoningChars": 0,
+    "action": {
+      "intent": "COLLECT",
+      "reply": "收到～我记下了：Java 方向、刚入门、目标是求职作品、半年内完成。这样我就能按求职导向帮你筛项目了。想再确认一点：你希望项目偏后端（比如 Spring Boot 接口服务）还是也接受带前端页面的全栈类型？",
+      "changes": {
+        "language": {
+          "value": "Java",
+          "quote": "Java"
+        },
+        "experience": {
+          "value": "刚学",
+          "quote": "刚学"
+        },
+        "goal": {
+          "value": "求职",
+          "quote": "求职方向"
+        },
+        "maxDurationDays": {
+          "value": 180,
+          "quote": "半年内完成"
+        }
+      },
+      "positions": []
+    },
+    "durationCorrect": true,
+    "durationMs": 1250
+  },
+  {
+    "thinking": true,
+    "maxTokens": 1500,
+    "scope": "synthetic intent only, no knowledge documents or account profile",
+    "errorType": "HTTPError",
+    "durationMs": 125
+  },
+  {
+    "thinking": true,
+    "maxTokens": 1500,
+    "scope": "synthetic intent only, no knowledge documents or account profile",
+    "protocolRevision": "compatible_auto_tools",
+    "finishReason": "tool_calls",
+    "usage": {
+      "prompt_tokens": 998,
+      "completion_tokens": 660,
+      "total_tokens": 1658,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 451
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 998
+    },
+    "reasoningChars": 1755,
+    "action": {
+      "intent": "RECOMMEND",
+      "reply": "收到～已按「Java、刚入门、目标求职、半年内完成」来帮你筛项目。半年时间对刚学 Java 的同学挺充裕，建议选一个能完整跑起来、能讲清楚技术点的后端项目当面试作品。你更想往后端 Web（比如带数据库的接口服务）方向做，还是偏工具/小框架方向？我按这个偏好去挑几个真实候选。",
+      "changes": {
+        "goal": {
+          "value": "求职",
+          "quote": "求职方向"
+        },
+        "maxDurationDays": {
+          "value": 180,
+          "quote": "半年内完成"
+        }
+      },
+      "positions": []
+    },
+    "durationCorrect": true,
+    "durationMs": 3594
+  }
+]

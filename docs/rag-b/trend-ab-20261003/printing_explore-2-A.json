@@ -1,0 +1,257 @@
+{
+  "case": "printing_explore",
+  "round": 2,
+  "variant": "A",
+  "profile": {
+    "topics": [
+      "3D打印"
+    ],
+    "purpose": "探索技术兴趣",
+    "experience": "有基础",
+    "languages": [],
+    "timeCommitment": "三个月内",
+    "customPurpose": "想了解开源切片或打印控制项目，说明硬件依赖",
+    "useRag": true,
+    "usePersona": false,
+    "preferBeginnerProjects": false,
+    "preferCareerProjects": false
+  },
+  "startedAt": "2026-10-03T11:15:06.053475+00:00",
+  "response": {
+    "runtime": {
+      "version": "1-1785206616703",
+      "endpoint": "https://ai.gitee.com/v1",
+      "source": "REDIS",
+      "model": "DeepSeek-V4-Pro"
+    },
+    "variant": "A",
+    "retrieval": {
+      "text": "[candidateId=E1;evidenceId=E1;repo=slic3r/slic3r] facts=证据:兼容： 支持所有已知的 G-code 方言（Marlin、Repetier、Mach3、LinuxCNC、Machinekit、Smoothie、Makerware、Sailfish）。; 模块化： Slic3r 的核心是 libslic3r，一个 C++ 库，提供细粒度的 API 和可重用组件。\n\n[candidateId=E2;evidenceId=E2;repo=bencbartlett/3d-printed-mirror-array] facts=证据:修改代码来生成一个可3D打印的镜面阵列，将任意图像投射到任意焦平面上，是很容易的。; Python 3 和 Jupyter，并安装以下库： numpy 、 matplotlib 、 numpy-stl 、 hexy 、 vpython; 如果你不想渲染光线追踪可视化效果，…\n\n[candidateId=E3;evidenceId=E3;repo=mainsail-crew/mainsail] facts=证据:打印机集群： 支持多台 3D 打印机; 文件管理器： 删除、重命名和上传你的 G-Code 及配置文件; 文件编辑器： 在浏览器中编辑 G-Code 和配置文件，支持语法高亮",
+      "trace": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "USED",
+        "queries": [
+          "3D打印",
+          "3D打印   探索技术兴趣 想了解开源切片或打印控制项目，说明硬件依赖 有基础"
+        ],
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "documentKey": "221:3",
+            "source": "GITHUB",
+            "title": "slic3r/Slic3r",
+            "sourceRef": "slic3r/Slic3r",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/slic3r/slic3r",
+            "text": "等等。尽管基于志愿者的努力，Slic3r 仍在不断突破 3D 打印的边界。\n\nSlic3r 是：\n\n* **开放：** 完全**开源**，且**独立于任何商业公司或打印机制造商**。我们希望保持 3D 打印的开放与自由。\n* **兼容：** 支持所有已知的 G-code 方言（Marlin、Repetier、Mach3、LinuxCNC、Machinekit、Smoothie、Makerware、Sailfish）。\n* **高级：** 丰富的配置选项允许精细调整和完全控制。虽然新手用户通常只需少量选项，但 Slic3r 更多地被高级用户使用。\n* **社区驱动：** 新功能或问题在 [GitHub 仓库](https://github.com/slic3r/Slic3r/issues)中讨论。加入我们的协作努力，帮助改进它！\n* **稳健：** 代码库包含超过 1000 个单元测试和回归测试，经过 6 年的开发积累。\n* **模块化：** Slic3r 的核心是 libslic3r，一个 C++ 库，提供细粒度的 API 和可重用组件。",
+            "card": "[candidateId=E1;evidenceId=E1;repo=slic3r/slic3r] facts=证据:兼容： 支持所有已知的 G-code 方言（Marlin、Repetier、Mach3、LinuxCNC、Machinekit、Smoothie、Makerware、Sailfish）。; 模块化： Slic3r 的核心是 libslic3r，一个 C++ 库，提供细粒度的 API 和可重用组件。",
+            "promptMode": "CARD"
+          },
+          {
+            "evidenceId": "E2",
+            "documentKey": "227:1",
+            "source": "GITHUB",
+            "title": "3D打印镜面阵列",
+            "sourceRef": "bencbartlett/3D-printed-mirror-array",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/bencbartlett/3d-printed-mirror-array",
+            "text": "一篇设计说明。修改代码来生成一个可3D打印的镜面阵列，将任意图像投射到任意焦平面上，是很容易的。\n\n## 所需物品\n\n- Python 3 和 Jupyter，并安装以下库：`numpy`、`matplotlib`、`numpy-stl`、`hexy`、`vpython`\n  - 如果你不想渲染光线追踪可视化效果，`vpython` 是可选的\n- 一台3D打印机\n  - 我为这个项目购买了一台 Creality Ender 3 v2，我对它还算满意，但任何具有合理构建体积和约 0.1mm 精度的 FDM 打印机都应该可以正常工作。\n  - 可选：一些发胶或3D打印粘合喷雾（防止大型打印件翘曲）\n- 任何不错的PLA丝材：[[amazon.com/dp/B01EKEMFQS]](https://amazon.com/dp/B01EKEMFQS)",
+            "card": "[candidateId=E2;evidenceId=E2;repo=bencbartlett/3d-printed-mirror-array] facts=证据:修改代码来生成一个可3D打印的镜面阵列，将任意图像投射到任意焦平面上，是很容易的。; Python 3 和 Jupyter，并安装以下库： numpy 、 matplotlib 、 numpy-stl 、 hexy 、 vpython; 如果你不想渲染光线追踪可视化效果，…",
+            "promptMode": "CARD"
+          },
+          {
+            "evidenceId": "E3",
+            "documentKey": "231:7",
+            "source": "GITHUB",
+            "title": "mainsail-crew/mainsail",
+            "sourceRef": "mainsail-crew/mainsail",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/mainsail-crew/mainsail",
+            "text": "ew/docs/master/assets/img/features.png)\n\n## 功能特色\n\n- **响应式 Web 界面：** _针对桌面、平板和移动设备进行了优化_\n- **打印机集群：** _支持多台 3D 打印机_\n- **[本地化](https://docs.mainsail.xyz/features/localization)：** _可选 12 种不同语言_\n- **文件管理器：** _删除、重命名和上传你的 G-Code 及配置文件_\n- **文件编辑器：** _在浏览器中编辑 G-Code 和配置文件，支持语法高亮_\n- **[打印历史](https://docs.mainsail.xyz/features/history)：** _查看过往打印记录及其状态_\n- **[统计数据](https://docs.mainsail.xyz/features/history)：** _了解打印机的使用时长以及成功与失败的任务数量_\n- **作业队列：** _可对多个作业进行排队，并直接从切片软件中添加_",
+            "card": "[candidateId=E3;evidenceId=E3;repo=mainsail-crew/mainsail] facts=证据:打印机集群： 支持多台 3D 打印机; 文件管理器： 删除、重命名和上传你的 G-Code 及配置文件; 文件编辑器： 在浏览器中编辑 G-Code 和配置文件，支持语法高亮",
+            "promptMode": "CARD"
+          }
+        ],
+        "durationMs": 491.00311,
+        "candidateCount": 11,
+        "selectedCount": 3,
+        "confidence": "HIGH",
+        "ragApplied": true,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 1318,
+        "evidencePromptChars": 586,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": "0",
+        "evidenceCompressionRatio": 0.5553869499241275
+      }
+    },
+    "result": {
+      "analysis": {
+        "trend": "3D打印开源生态持续活跃，切片和控制工具稳定迭代",
+        "prospect": "个人制造和创客教育推动需求，定制化切片与控制前景广阔",
+        "demand": "爱好者追求高效切片和远程控制，模块化项目如Slic3r和Mainsail满足不同层次需求",
+        "summary": "开源3D打印项目丰富，Slic3r和Mainsail分别代表切片与控制方向，适合技术探索。"
+      },
+      "recommendations": [
+        {
+          "candidateId": "E1",
+          "name": "Slic3r 开源切片软件",
+          "description": "开源3D打印切片软件，兼容多种G-code方言，提供模块化C++开发库libslic3r，方便定制切片算法。",
+          "difficulty": "进阶",
+          "difficultyReason": "涉及C++和复杂的几何算法，用户有基础但需投入时间掌握硬件交互",
+          "vibeCodingReason": "C++代码库允许AI辅助生成和修改切片算法，加速定制开发",
+          "recommendReason": "作为经典开源切片项目，是探索3D打印底层技术的理想选择。用户可学习切片流程、G-code生成，并利用模块化库进行二次开发，深入理解打印控制。三个月可完成编译、实验和简单功能改造。",
+          "prerequisites": "C++编程基础，3D打印基本概念",
+          "evidenceIds": [
+            "E1"
+          ],
+          "score": 85,
+          "references": [
+            {
+              "evidenceIds": [
+                "E1"
+              ],
+              "url": "https://github.com/slic3r/slic3r",
+              "name": "slic3r/slic3r"
+            }
+          ],
+          "evidenceStatus": "VERIFIED_CANDIDATE",
+          "unsupportedReferenceCount": 0
+        },
+        {
+          "candidateId": "E3",
+          "name": "Mainsail 打印机 Web 控制面板",
+          "description": "基于Web的3D打印机控制界面，支持多打印机集群管理、G-code文件编辑与上传，提供文件管理器等功能。",
+          "difficulty": "入门",
+          "difficultyReason": "主要是前端配置和使用，用户有基础编程经验可快速上手",
+          "vibeCodingReason": "Web前端技术栈（HTML/JS）适合AI辅助开发，可快速定制界面和功能。",
+          "recommendReason": "聚焦打印控制，无需深入C++，可快速搭建远程管理环境。通过定制Mainsail，用户能学习打印机通信协议（如Klipper）和Web技术融合，三个月内可部署并实现个性化控制面板。",
+          "prerequisites": "基本的Linux和Web知识，Klipper固件概念",
+          "evidenceIds": [
+            "E3"
+          ],
+          "score": 90,
+          "references": [
+            {
+              "evidenceIds": [
+                "E3"
+              ],
+              "url": "https://github.com/mainsail-crew/mainsail",
+              "name": "mainsail-crew/mainsail"
+            }
+          ],
+          "evidenceStatus": "VERIFIED_CANDIDATE",
+          "unsupportedReferenceCount": 0
+        }
+      ],
+      "learning": {
+        "steps": [
+          "第一步：搭建3D打印实验环境（安装Klipper/Mainsail或Slic3r依赖）。",
+          "第二步：熟悉目标项目（Slic3r编译与切片测试，Mainsail配置多打印机）。",
+          "第三步：定制开发（修改切片参数或Web界面功能，利用AI辅助生成代码）。"
+        ],
+        "timeline": "三个月，前两个月学习与配置，第三个月定制开发。",
+        "tips": "注意硬件兼容性，选用常见主控板；利用AI辅助阅读代码和生成修改。"
+      },
+      "raw": "{\n  \"analysis\": {\n    \"trend\": \"3D打印开源生态持续活跃，切片和控制工具稳定迭代\",\n    \"prospect\": \"个人制造和创客教育推动需求，定制化切片与控制前景广阔\",\n    \"demand\": \"爱好者追求高效切片和远程控制，模块化项目如Slic3r和Mainsail满足不同层次需求\",\n    \"summary\": \"开源3D打印项目丰富，Slic3r和Mainsail分别代表切片与控制方向，适合技术探索。\"\n  },\n  \"recommendations\": [\n    {\n      \"candidateId\": \"E1\",\n      \"name\": \"Slic3r 开源切片软件\",\n      \"description\": \"开源3D打印切片软件，兼容多种G-code方言，提供模块化C++开发库libslic3r，方便定制切片算法。\",\n      \"difficulty\": \"进阶\",\n      \"difficultyReason\": \"涉及C++和复杂的几何算法，用户有基础但需投入时间掌握硬件交互\",\n      \"vibeCodingReason\": \"C++代码库允许AI辅助生成和修改切片算法，加速定制开发\",\n      \"recommendReason\": \"作为经典开源切片项目，是探索3D打印底层技术的理想选择。用户可学习切片流程、G-code生成，并利用模块化库进行二次开发，深入理解打印控制。三个月可完成编译、实验和简单功能改造。\",\n      \"prerequisites\": \"C++编程基础，3D打印基本概念\",\n      \"evidenceIds\": [\"E1\"],\n      \"score\": 85\n    },\n    {\n      \"candidateId\": \"E3\",\n      \"name\": \"Mainsail 打印机 Web 控制面板\",\n      \"description\": \"基于Web的3D打印机控制界面，支持多打印机集群管理、G-code文件编辑与上传，提供文件管理器等功能。\",\n      \"difficulty\": \"入门\",\n      \"difficultyReason\": \"主要是前端配置和使用，用户有基础编程经验可快速上手\",\n      \"vibeCodingReason\": \"Web前端技术栈（HTML/JS）适合AI辅助开发，可快速定制界面和功能。\",\n      \"recommendReason\": \"聚焦打印控制，无需深入C++，可快速搭建远程管理环境。通过定制Mainsail，用户能学习打印机通信协议（如Klipper）和Web技术融合，三个月内可部署并实现个性化控制面板。\",\n      \"prerequisites\": \"基本的Linux和Web知识，Klipper固件概念\",\n      \"evidenceIds\": [\"E3\"],\n      \"score\": 90\n    }\n  ],\n  \"learning\": {\n    \"steps\": [\n      \"第一步：搭建3D打印实验环境（安装Klipper/Mainsail或Slic3r依赖）。\",\n      \"第二步：熟悉目标项目（Slic3r编译与切片测试，Mainsail配置多打印机）。\",\n      \"第三步：定制开发（修改切片参数或Web界面功能，利用AI辅助生成代码）。\"\n    ],\n    \"timeline\": \"三个月，前两个月学习与配置，第三个月定制开发。\",\n    \"tips\": \"注意硬件兼容性，选用常见主控板；利用AI辅助阅读代码和生成修改。\"\n  }\n}",
+      "balance": "0",
+      "beginnerCases": [],
+      "careerCases": [],
+      "modelMetrics": {
+        "model": "deepseek-v4-pro",
+        "runtimeSource": "REDIS",
+        "providerHost": "ai.gitee.com",
+        "requestedModel": "DeepSeek-V4-Pro",
+        "durationMs": 40638.414424,
+        "finishReason": "stop",
+        "usageSource": "PROVIDER",
+        "usage": {
+          "prompt_tokens": "826",
+          "completion_tokens": "2167",
+          "total_tokens": "2993",
+          "prompt_tokens_details": {
+            "cached_tokens": "0"
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": "1480"
+          }
+        }
+      },
+      "retrievalTrace": {
+        "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+        "status": "USED",
+        "queries": [
+          "3D打印",
+          "3D打印   探索技术兴趣 想了解开源切片或打印控制项目，说明硬件依赖 有基础"
+        ],
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "documentKey": "221:3",
+            "source": "GITHUB",
+            "title": "slic3r/Slic3r",
+            "sourceRef": "slic3r/Slic3r",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/slic3r/slic3r",
+            "text": "等等。尽管基于志愿者的努力，Slic3r 仍在不断突破 3D 打印的边界。\n\nSlic3r 是：\n\n* **开放：** 完全**开源**，且**独立于任何商业公司或打印机制造商**。我们希望保持 3D 打印的开放与自由。\n* **兼容：** 支持所有已知的 G-code 方言（Marlin、Repetier、Mach3、LinuxCNC、Machinekit、Smoothie、Makerware、Sailfish）。\n* **高级：** 丰富的配置选项允许精细调整和完全控制。虽然新手用户通常只需少量选项，但 Slic3r 更多地被高级用户使用。\n* **社区驱动：** 新功能或问题在 [GitHub 仓库](https://github.com/slic3r/Slic3r/issues)中讨论。加入我们的协作努力，帮助改进它！\n* **稳健：** 代码库包含超过 1000 个单元测试和回归测试，经过 6 年的开发积累。\n* **模块化：** Slic3r 的核心是 libslic3r，一个 C++ 库，提供细粒度的 API 和可重用组件。",
+            "card": "[candidateId=E1;evidenceId=E1;repo=slic3r/slic3r] facts=证据:兼容： 支持所有已知的 G-code 方言（Marlin、Repetier、Mach3、LinuxCNC、Machinekit、Smoothie、Makerware、Sailfish）。; 模块化： Slic3r 的核心是 libslic3r，一个 C++ 库，提供细粒度的 API 和可重用组件。",
+            "promptMode": "CARD"
+          },
+          {
+            "evidenceId": "E2",
+            "documentKey": "227:1",
+            "source": "GITHUB",
+            "title": "3D打印镜面阵列",
+            "sourceRef": "bencbartlett/3D-printed-mirror-array",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/bencbartlett/3d-printed-mirror-array",
+            "text": "一篇设计说明。修改代码来生成一个可3D打印的镜面阵列，将任意图像投射到任意焦平面上，是很容易的。\n\n## 所需物品\n\n- Python 3 和 Jupyter，并安装以下库：`numpy`、`matplotlib`、`numpy-stl`、`hexy`、`vpython`\n  - 如果你不想渲染光线追踪可视化效果，`vpython` 是可选的\n- 一台3D打印机\n  - 我为这个项目购买了一台 Creality Ender 3 v2，我对它还算满意，但任何具有合理构建体积和约 0.1mm 精度的 FDM 打印机都应该可以正常工作。\n  - 可选：一些发胶或3D打印粘合喷雾（防止大型打印件翘曲）\n- 任何不错的PLA丝材：[[amazon.com/dp/B01EKEMFQS]](https://amazon.com/dp/B01EKEMFQS)",
+            "card": "[candidateId=E2;evidenceId=E2;repo=bencbartlett/3d-printed-mirror-array] facts=证据:修改代码来生成一个可3D打印的镜面阵列，将任意图像投射到任意焦平面上，是很容易的。; Python 3 和 Jupyter，并安装以下库： numpy 、 matplotlib 、 numpy-stl 、 hexy 、 vpython; 如果你不想渲染光线追踪可视化效果，…",
+            "promptMode": "CARD"
+          },
+          {
+            "evidenceId": "E3",
+            "documentKey": "231:7",
+            "source": "GITHUB",
+            "title": "mainsail-crew/mainsail",
+            "sourceRef": "mainsail-crew/mainsail",
+            "projectId": null,
+            "projectType": null,
+            "mappingStatus": "UNMAPPED",
+            "repositoryUrl": "https://github.com/mainsail-crew/mainsail",
+            "text": "ew/docs/master/assets/img/features.png)\n\n## 功能特色\n\n- **响应式 Web 界面：** _针对桌面、平板和移动设备进行了优化_\n- **打印机集群：** _支持多台 3D 打印机_\n- **[本地化](https://docs.mainsail.xyz/features/localization)：** _可选 12 种不同语言_\n- **文件管理器：** _删除、重命名和上传你的 G-Code 及配置文件_\n- **文件编辑器：** _在浏览器中编辑 G-Code 和配置文件，支持语法高亮_\n- **[打印历史](https://docs.mainsail.xyz/features/history)：** _查看过往打印记录及其状态_\n- **[统计数据](https://docs.mainsail.xyz/features/history)：** _了解打印机的使用时长以及成功与失败的任务数量_\n- **作业队列：** _可对多个作业进行排队，并直接从切片软件中添加_",
+            "card": "[candidateId=E3;evidenceId=E3;repo=mainsail-crew/mainsail] facts=证据:打印机集群： 支持多台 3D 打印机; 文件管理器： 删除、重命名和上传你的 G-Code 及配置文件; 文件编辑器： 在浏览器中编辑 G-Code 和配置文件，支持语法高亮",
+            "promptMode": "CARD"
+          }
+        ],
+        "durationMs": 491.00311,
+        "candidateCount": 11,
+        "selectedCount": 3,
+        "confidence": "HIGH",
+        "ragApplied": true,
+        "evidenceFormat": "CARD_V2_ADAPTIVE",
+        "evidenceOriginalChars": 1318,
+        "evidencePromptChars": 586,
+        "evidenceBudgetChars": 1100,
+        "evidenceFallbackCount": "0",
+        "evidenceCompressionRatio": 0.5553869499241275
+      },
+      "promptVersion": "trend-v2-evidence-1",
+      "graphDurationMs": 113.676474,
+      "analyzerAttemptDurationMs": 40765.893799
+    },
+    "wallMs": 41257.550516,
+    "scope": "Production TrendV2Analyzer generation/parser/assembler/binder; synthetic profile; no controller quota/history/router retry; B adapted to SAME 3-project/1100-character evidence budget. No global route change."
+  },
+  "clientWallMs": 41265.1993999898
+}

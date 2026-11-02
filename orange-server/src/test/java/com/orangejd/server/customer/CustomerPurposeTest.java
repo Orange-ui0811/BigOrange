@@ -83,4 +83,35 @@ class CustomerPurposeTest {
         String query=CustomerPurpose.query(Map.of("queries",List.of("数据清洗","数据可视化","data visualization")),state);
         assertThat(CustomerPurpose.nominate(List.of(image,chart),state,List.of(),query)).containsExactly(chart);
     }
+    @Test void partialReviewKeepsOnlyExactProofsAndDoesNotCacheUnreviewedAsNegative() {
+        var good=card();var invalid=card();invalid.put("id",8);invalid.put("description","x".repeat(200));
+        var omitted=card();omitted.put("id",9);
+        var state=new HashMap<String,Object>(Map.of("topic",List.of("数据处理与可视化")));
+        var candidates=List.of(good,invalid,omitted);var input=CustomerPurpose.input(candidates,state,json,6000);
+        var raw=Map.<String,Object>of("matches",List.of(
+            Map.of("key",CustomerPurpose.key(good),"relation","DIRECT","quote",good.get("description")),
+            Map.of("key",CustomerPurpose.key(invalid),"relation","DIRECT","quote","x".repeat(200)),
+            Map.of("key","EXTERNAL_PROJECT:999","relation","DIRECT","quote","this is invented")));
+        var partial=CustomerPurpose.partialOutput(raw,input);
+        assertThat((List<?>)partial.get("matches")).hasSize(1);
+        CustomerPurposeMemory.remember(partial,input,candidates,state,"test-v3");
+        assertThat(CustomerPurposeMemory.restore(candidates,state,"test-v3")).isTrue();
+        assertThat(CustomerPurpose.status(state)).isEqualTo("PARTIAL_MATCHES");
+        assertThat(CustomerPurposeMemory.pending(candidates,state,"test-v3")).containsExactly(invalid,omitted);
+        assertThat(CustomerPurpose.matches(good,state)).isTrue();assertThat(CustomerPurpose.matches(invalid,state)).isFalse();
+        state.put("language","Java");assertThat(service.explorable(good,state)).isFalse();
+    }
+    @Test void partialReviewCannotRescueEmptyOrEntirelyInvalidOutput() {
+        var p=card();var input=CustomerPurpose.input(List.of(p),Map.of("topic",List.of("数据分析")),json,6000);
+        assertThat(CustomerPurpose.partialOutput(Map.of("matches",List.of(Map.of("key","FAKE:1"))),input)).isNull();
+        assertThat(CustomerPurpose.partialOutput(Map.of("matches",Arrays.asList((Object)null)),input)).isNull();
+        assertThat(CustomerPurpose.partialOutput(Map.of("matches",Collections.nCopies(13,Map.of())),input)).isNull();
+    }
+    @Test void partialNoticeSurvivesOtherWarningsWithoutDuplicateOrEmptyResultClaims() {
+        var result=new HashMap<String,Object>(Map.of("purposeReviewIncomplete",true,"projects",List.of(card()),"notice","资料不足，不能导入。"));
+        CustomerPurpose.appendPartialNotice(result);CustomerPurpose.appendPartialNotice(result);
+        assertThat(result.get("notice")).isEqualTo("资料不足，不能导入。\n部分候选用途仍待核对，未纳入推荐；这不代表它们不相关。");
+        result.put("projects",List.of());result.remove("notice");CustomerPurpose.appendPartialNotice(result);
+        assertThat(result).doesNotContainKey("notice");
+    }
 }

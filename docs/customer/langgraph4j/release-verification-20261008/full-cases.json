@@ -1,0 +1,347 @@
+[
+  {
+    "id": "H01",
+    "message": "晚上好，今天先聊聊，不急着选项目。",
+    "expected": {
+      "intents": [
+        "CHAT"
+      ],
+      "statuses": [
+        "CONVERSATION"
+      ]
+    }
+  },
+  {
+    "id": "H02",
+    "message": "最近学编程有点焦虑，能给我一点鼓励吗？",
+    "expected": {
+      "intents": [
+        "CHAT"
+      ],
+      "statuses": [
+        "CONVERSATION"
+      ]
+    }
+  },
+  {
+    "id": "H03",
+    "message": "现在的条件是什么？",
+    "prior": {
+      "language": "Python",
+      "maxDurationDays": 42,
+      "allowDocker": false
+    },
+    "expected": {
+      "intents": [
+        "STATE"
+      ],
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 42,
+        "allowDocker": false
+      }
+    }
+  },
+  {
+    "id": "H04",
+    "message": "为什么项目核对未完成？",
+    "prior": {
+      "goal": "学习"
+    },
+    "expected": {
+      "intents": [
+        "EXPLAIN"
+      ],
+      "state": {
+        "goal": "学习"
+      }
+    }
+  },
+  {
+    "id": "H05",
+    "message": "期限改成三个月内，其他不变，先保存就好。",
+    "prior": {
+      "language": "Java",
+      "maxDurationDays": 30
+    },
+    "expected": {
+      "state": {
+        "language": "Java",
+        "maxDurationDays": 90
+      }
+    }
+  },
+  {
+    "id": "H06",
+    "message": "不限定项目难度了，但我还是初学者，先记下来。",
+    "prior": {
+      "difficulty": "初级",
+      "experience": "初学者"
+    },
+    "expected": {
+      "absent": "difficulty",
+      "state": {
+        "experience": "初学者"
+      }
+    }
+  },
+  {
+    "id": "H07",
+    "message": "语言换成JS，先不要执行查找。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "state": {
+        "language": "JavaScript"
+      }
+    }
+  },
+  {
+    "id": "H08",
+    "message": "最多两周做完，不能用Docker，先记着。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 14,
+        "allowDocker": false
+      }
+    }
+  },
+  {
+    "id": "H09",
+    "message": "我既要练习学习，也希望有助于求职，先记录两个目标。",
+    "expected": {
+      "goalIncludes": [
+        "学习",
+        "求职"
+      ]
+    }
+  },
+  {
+    "id": "H10",
+    "message": "我想用项目给自己的书店做图书管理，先记住这个实际用途，不用找。",
+    "expected": {
+      "goalIncludes": [
+        "书店"
+      ]
+    }
+  },
+  {
+    "id": "H11",
+    "message": "推荐几个Python项目让我看看，先不限制方向。",
+    "prior": {
+      "language": "Python"
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "projectsRequired": true,
+      "state": {
+        "language": "Python"
+      }
+    }
+  },
+  {
+    "id": "H12",
+    "message": "帮我挑Python的检索增强生成项目，求职用，最多六个月。",
+    "prior": {
+      "language": "Python",
+      "goal": "求职",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "projectsRequired": true,
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 180
+      },
+      "topicIncludesAny": [
+        "RAG",
+        "检索增强生成"
+      ]
+    }
+  },
+  {
+    "id": "H13",
+    "message": "开始按这些要求推荐吧。",
+    "prior": {
+      "language": "Python",
+      "topic": [
+        "AI应用开发"
+      ],
+      "goal": "求职",
+      "maxDurationDays": 180
+    },
+    "expected": {
+      "projectsRequired": true,
+      "state": {
+        "language": "Python",
+        "maxDurationDays": 180
+      },
+      "topicIncludesAny": [
+        "AI应用开发"
+      ]
+    }
+  },
+  {
+    "id": "H14",
+    "message": "帮我看看有哪些Java项目适合练习，不限制周期。",
+    "prior": {
+      "language": "Java",
+      "goal": "学习"
+    },
+    "expected": {
+      "intents": [
+        "RECOMMEND"
+      ],
+      "state": {
+        "language": "Java"
+      }
+    }
+  },
+  {
+    "id": "H15",
+    "message": "平台是否保证所有收录仓库都允许商用？请给出依据。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "REFUSE_NO_PLATFORM_FAQ_EVIDENCE",
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE"
+      ]
+    }
+  },
+  {
+    "id": "H16",
+    "message": "根据知识库资料介绍检索增强生成项目的常见功能。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE",
+        "REFUSE_NO_MATCH"
+      ]
+    }
+  },
+  {
+    "id": "H17",
+    "message": "知识库里的智能体项目有哪些能力？请给出资料来源。",
+    "expected": {
+      "intents": [
+        "QUESTION"
+      ],
+      "statuses": [
+        "SUPPORTED_EXTRACTS",
+        "REFUSE_INSUFFICIENT_EVIDENCE",
+        "REFUSE_NO_MATCH"
+      ]
+    }
+  },
+  {
+    "id": "H18",
+    "message": "对比你提过的前两个项目。",
+    "expected": {
+      "intents": [
+        "COMPARE"
+      ],
+      "statuses": [
+        "FOLLOW_UP"
+      ]
+    },
+    "turns": [
+      {
+        "message": "推荐Python的RAG项目，用来求职，半年内完成",
+        "expected": {
+          "intents": [
+            "RECOMMEND"
+          ],
+          "projectsRequired": true,
+          "topicIncludesAny": [
+            "RAG",
+            "检索增强生成"
+          ]
+        }
+      },
+      {
+        "message": "对比你刚才推荐的前两个项目",
+        "expected": {
+          "intents": [
+            "COMPARE"
+          ],
+          "projectsRequired": true,
+          "projectPositions": [
+            1,
+            2
+          ],
+          "referencesRequired": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "H19",
+    "message": "第二个项目需要哪些依赖？",
+    "expected": {
+      "intents": [
+        "DETAIL"
+      ],
+      "statuses": [
+        "FOLLOW_UP"
+      ]
+    },
+    "turns": [
+      {
+        "message": "推荐Python的RAG项目，用来求职，半年内完成",
+        "expected": {
+          "intents": [
+            "RECOMMEND"
+          ],
+          "projectsRequired": true,
+          "topicIncludesAny": [
+            "RAG",
+            "检索增强生成"
+          ]
+        }
+      },
+      {
+        "message": "第二个项目怎么部署，需要哪些依赖？",
+        "expected": {
+          "intents": [
+            "DETAIL"
+          ],
+          "projectsRequired": true,
+          "projectPositions": [
+            2
+          ],
+          "referencesRequired": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "H20",
+    "message": "编程语言不限，仍然不能依赖额外硬件，先保留这些要求。",
+    "prior": {
+      "language": "Java",
+      "allowHardware": false
+    },
+    "expected": {
+      "absent": "language",
+      "state": {
+        "allowHardware": false
+      }
+    }
+  }
+]

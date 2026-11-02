@@ -1,0 +1,1201 @@
+{
+  "startedAtUtc": "2026-10-03T02:25:06.220644+00:00",
+  "model": "deepseek-flash",
+  "scope": "32 synthetic requests, 8 independent tasks repeated twice per mode; no platform evidence or profiles",
+  "maxOutputTokens": 1500,
+  "timeoutSeconds": 45,
+  "enabledEffort": "high",
+  "cases": [
+    {
+      "id": "S01",
+      "category": "condition_update",
+      "payload": {
+        "task": "更新旧条件，返回 language,allowDocker,goal",
+        "state": {
+          "language": "Python",
+          "allowDocker": true,
+          "goal": "学习"
+        },
+        "message": "改成 Java，仍然用于学习，不要 Docker"
+      },
+      "expected": {
+        "language": "Java",
+        "allowDocker": false,
+        "goal": "学习"
+      }
+    },
+    {
+      "id": "S02",
+      "category": "condition_isolation",
+      "payload": {
+        "task": "更新旧条件，返回 language,allowDocker",
+        "state": {
+          "language": "Java",
+          "allowDocker": false
+        },
+        "message": "取消不要 Docker 的限制，语言保持原来的"
+      },
+      "expected": {
+        "language": "Java",
+        "allowDocker": true
+      }
+    },
+    {
+      "id": "S03",
+      "category": "ordinal",
+      "payload": {
+        "task": "返回 selectedIds，按展示列表解析指代",
+        "candidates": [
+          {
+            "id": 31,
+            "name": "甲"
+          },
+          {
+            "id": 72,
+            "name": "乙"
+          },
+          {
+            "id": 19,
+            "name": "丙"
+          }
+        ],
+        "message": "比较前两个，然后告诉我第二个怎么部署"
+      },
+      "expected": {
+        "selectedIds": [
+          31,
+          72
+        ]
+      }
+    },
+    {
+      "id": "S04",
+      "category": "strict_filter",
+      "payload": {
+        "task": "返回 recommendedIds，主语言 Java 且不需要 Docker；未知视为未满足条件",
+        "evidence": [
+          {
+            "id": 1,
+            "language": "JavaScript",
+            "requiresDocker": false
+          },
+          {
+            "id": 2,
+            "language": "Java",
+            "requiresDocker": null
+          },
+          {
+            "id": 3,
+            "language": "Java",
+            "requiresDocker": true
+          }
+        ]
+      },
+      "expected": {
+        "recommendedIds": []
+      }
+    },
+    {
+      "id": "S05",
+      "category": "cross_language_citation",
+      "payload": {
+        "task": "问：部署服务用什么命令和端口？返回 command,port,evidenceId,spanId",
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "spans": [
+              {
+                "spanId": "S1",
+                "text": "Build with mvn package. Start the service with java -jar app.jar --server.port=8181. Docker is optional."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "command": "java -jar app.jar --server.port=8181",
+        "port": 8181,
+        "evidenceId": "E1",
+        "spanId": "S1"
+      }
+    },
+    {
+      "id": "S06",
+      "category": "unsupported_fact",
+      "payload": {
+        "task": "返回 answer，资料能否证明该项目两周可做完？只返回 YES/NO/UNKNOWN",
+        "evidence": [
+          {
+            "evidenceId": "E1",
+            "spans": [
+              {
+                "spanId": "S1",
+                "text": "The project uses Python and SQLite. Completion time is not recorded."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "answer": "UNKNOWN"
+      }
+    },
+    {
+      "id": "S07",
+      "category": "version_conflict",
+      "payload": {
+        "task": "仅依据 status=PUBLISHED 且 active=true 的资料，返回 port,evidenceId,spanId",
+        "evidence": [
+          {
+            "evidenceId": "OLD",
+            "status": "PUBLISHED",
+            "active": false,
+            "spans": [
+              {
+                "spanId": "S1",
+                "text": "Service port: 8080."
+              }
+            ]
+          },
+          {
+            "evidenceId": "CURRENT",
+            "status": "PUBLISHED",
+            "active": true,
+            "spans": [
+              {
+                "spanId": "S2",
+                "text": "Service port: 9092."
+              }
+            ]
+          },
+          {
+            "evidenceId": "DELETED",
+            "status": "DELETED",
+            "active": true,
+            "spans": [
+              {
+                "spanId": "S3",
+                "text": "Service port: 3306."
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "port": 9092,
+        "evidenceId": "CURRENT",
+        "spanId": "S2"
+      }
+    },
+    {
+      "id": "S08",
+      "category": "resource_reasoning",
+      "payload": {
+        "task": "RAM 预算 4096 MB，各组件同时运行；返回 recommendedIds。必须主语言 Python，不要 Docker，组件内存总和不能超过预算，未知视为不满足。",
+        "evidence": [
+          {
+            "id": 11,
+            "language": "Python",
+            "requiresDocker": false,
+            "memoryMB": [
+              2048,
+              1024,
+              512
+            ]
+          },
+          {
+            "id": 12,
+            "language": "Python",
+            "requiresDocker": false,
+            "memoryMB": [
+              3072,
+              1024,
+              512
+            ]
+          },
+          {
+            "id": 13,
+            "language": "Python",
+            "requiresDocker": null,
+            "memoryMB": [
+              512
+            ]
+          },
+          {
+            "id": 14,
+            "language": "Java",
+            "requiresDocker": false,
+            "memoryMB": [
+              512
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "recommendedIds": [
+          11
+        ]
+      }
+    }
+  ],
+  "results": [
+    {
+      "caseId": "S01",
+      "category": "condition_update",
+      "thinking": false,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 157,
+        "completion_tokens": 19,
+        "total_tokens": 176,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 157
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": false, \"goal\": \"学习\"}",
+      "validJson": true,
+      "durationMs": 771,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S01",
+      "category": "condition_update",
+      "thinking": true,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 182,
+        "completion_tokens": 63,
+        "total_tokens": 245,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 43
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 182
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 170,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": false, \"goal\": \"学习\"}",
+      "validJson": true,
+      "durationMs": 1077,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S02",
+      "category": "condition_isolation",
+      "thinking": false,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 149,
+        "completion_tokens": 13,
+        "total_tokens": 162,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 149
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": true}",
+      "validJson": true,
+      "durationMs": 498,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S02",
+      "category": "condition_isolation",
+      "thinking": true,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 174,
+        "completion_tokens": 59,
+        "total_tokens": 233,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 45
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 174
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 199,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": true}",
+      "validJson": true,
+      "durationMs": 772,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S03",
+      "category": "ordinal",
+      "thinking": false,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 175,
+        "completion_tokens": 10,
+        "total_tokens": 185,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 175
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"selectedIds\": [31, 72]}",
+      "validJson": true,
+      "durationMs": 555,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S03",
+      "category": "ordinal",
+      "thinking": true,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 306,
+        "total_tokens": 506,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 286
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 200
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 1095,
+      "answer": "{\"selectedIds\": [31, 72], \"deployTargetId\": 72}",
+      "validJson": true,
+      "durationMs": 1677,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S04",
+      "category": "strict_filter",
+      "thinking": false,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 188,
+        "completion_tokens": 7,
+        "total_tokens": 195,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 188
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"recommendedIds\": []}",
+      "validJson": true,
+      "durationMs": 584,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S04",
+      "category": "strict_filter",
+      "thinking": true,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 213,
+        "completion_tokens": 115,
+        "total_tokens": 328,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 107
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 213
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 412,
+      "answer": "{\"recommendedIds\": []}",
+      "validJson": true,
+      "durationMs": 1115,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S05",
+      "category": "cross_language_citation",
+      "thinking": false,
+      "repeat": 1,
+      "passed": false,
+      "usage": {
+        "prompt_tokens": 187,
+        "completion_tokens": 40,
+        "total_tokens": 227,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 187
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"command\": \"java -jar app.jar --server.port=8181\", \"port\": \"8181\", \"evidenceId\": \"E1\", \"spanId\": \"S1\"}",
+      "validJson": true,
+      "durationMs": 864,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S05",
+      "category": "cross_language_citation",
+      "thinking": true,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 212,
+        "completion_tokens": 180,
+        "total_tokens": 392,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 139
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 212
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 476,
+      "answer": "{\"command\": \"java -jar app.jar --server.port=8181\", \"port\": 8181, \"evidenceId\": \"E1\", \"spanId\": \"S1\"}",
+      "validJson": true,
+      "durationMs": 1125,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S06",
+      "category": "unsupported_fact",
+      "thinking": false,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 174,
+        "completion_tokens": 7,
+        "total_tokens": 181,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 174
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"answer\": \"UNKNOWN\"}",
+      "validJson": true,
+      "durationMs": 517,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S06",
+      "category": "unsupported_fact",
+      "thinking": true,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 199,
+        "completion_tokens": 87,
+        "total_tokens": 286,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 79
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 199
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 313,
+      "answer": "{\"answer\": \"UNKNOWN\"}",
+      "validJson": true,
+      "durationMs": 645,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S07",
+      "category": "version_conflict",
+      "thinking": false,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 277,
+        "completion_tokens": 23,
+        "total_tokens": 300,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 277
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"port\": 9092, \"evidenceId\": \"CURRENT\", \"spanId\": \"S2\"}",
+      "validJson": true,
+      "durationMs": 425,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S07",
+      "category": "version_conflict",
+      "thinking": true,
+      "repeat": 1,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 302,
+        "completion_tokens": 183,
+        "total_tokens": 485,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 164
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 174
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 590,
+      "answer": "{\"port\":9092,\"evidenceId\":\"CURRENT\",\"spanId\":\"S2\"}",
+      "validJson": true,
+      "durationMs": 1096,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S08",
+      "category": "resource_reasoning",
+      "thinking": false,
+      "repeat": 1,
+      "passed": false,
+      "usage": {
+        "prompt_tokens": 275,
+        "completion_tokens": 11,
+        "total_tokens": 286,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 275
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"recommendedIds\": [11, 13]}",
+      "validJson": true,
+      "durationMs": 615,
+      "businessPassed": false
+    },
+    {
+      "caseId": "S08",
+      "category": "resource_reasoning",
+      "thinking": true,
+      "repeat": 1,
+      "passed": false,
+      "usage": {
+        "prompt_tokens": 300,
+        "completion_tokens": 1500,
+        "total_tokens": 1800,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1500
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 172
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "length",
+      "reasoningChars": 5788,
+      "answer": "",
+      "validJson": false,
+      "durationMs": 7258,
+      "businessPassed": false
+    },
+    {
+      "caseId": "S01",
+      "category": "condition_update",
+      "thinking": true,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 182,
+        "completion_tokens": 68,
+        "total_tokens": 250,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 48
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 182
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 200,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": false, \"goal\": \"学习\"}",
+      "validJson": true,
+      "durationMs": 718,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S01",
+      "category": "condition_update",
+      "thinking": false,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 157,
+        "completion_tokens": 19,
+        "total_tokens": 176,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 157
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": false, \"goal\": \"学习\"}",
+      "validJson": true,
+      "durationMs": 691,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S02",
+      "category": "condition_isolation",
+      "thinking": true,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 174,
+        "completion_tokens": 144,
+        "total_tokens": 318,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 130
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 174
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 567,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": true}",
+      "validJson": true,
+      "durationMs": 1202,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S02",
+      "category": "condition_isolation",
+      "thinking": false,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 149,
+        "completion_tokens": 13,
+        "total_tokens": 162,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 149
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"language\": \"Java\", \"allowDocker\": true}",
+      "validJson": true,
+      "durationMs": 570,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S03",
+      "category": "ordinal",
+      "thinking": true,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 200,
+        "completion_tokens": 478,
+        "total_tokens": 678,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 469
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 200
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 1834,
+      "answer": "{\"selectedIds\":[31,72]}",
+      "validJson": true,
+      "durationMs": 2685,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S03",
+      "category": "ordinal",
+      "thinking": false,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 175,
+        "completion_tokens": 10,
+        "total_tokens": 185,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 175
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"selectedIds\": [31, 72]}",
+      "validJson": true,
+      "durationMs": 712,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S04",
+      "category": "strict_filter",
+      "thinking": true,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 213,
+        "completion_tokens": 156,
+        "total_tokens": 369,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 148
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 213
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 676,
+      "answer": "{\"recommendedIds\": []}",
+      "validJson": true,
+      "durationMs": 1282,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S04",
+      "category": "strict_filter",
+      "thinking": false,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 188,
+        "completion_tokens": 7,
+        "total_tokens": 195,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 188
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"recommendedIds\": []}",
+      "validJson": true,
+      "durationMs": 733,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S05",
+      "category": "cross_language_citation",
+      "thinking": true,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 212,
+        "completion_tokens": 326,
+        "total_tokens": 538,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 292
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 212
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 1073,
+      "answer": "{\"command\":\"java -jar app.jar --server.port=8181\",\"port\":8181,\"evidenceId\":\"E1\",\"spanId\":\"S1\"}",
+      "validJson": true,
+      "durationMs": 1640,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S05",
+      "category": "cross_language_citation",
+      "thinking": false,
+      "repeat": 2,
+      "passed": false,
+      "usage": {
+        "prompt_tokens": 187,
+        "completion_tokens": 40,
+        "total_tokens": 227,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 187
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"command\": \"java -jar app.jar --server.port=8181\", \"port\": \"8181\", \"evidenceId\": \"E1\", \"spanId\": \"S1\"}",
+      "validJson": true,
+      "durationMs": 698,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S06",
+      "category": "unsupported_fact",
+      "thinking": true,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 199,
+        "completion_tokens": 37,
+        "total_tokens": 236,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 29
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 199
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 148,
+      "answer": "{\"answer\": \"UNKNOWN\"}",
+      "validJson": true,
+      "durationMs": 570,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S06",
+      "category": "unsupported_fact",
+      "thinking": false,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 174,
+        "completion_tokens": 7,
+        "total_tokens": 181,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 174
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"answer\": \"UNKNOWN\"}",
+      "validJson": true,
+      "durationMs": 425,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S07",
+      "category": "version_conflict",
+      "thinking": true,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 302,
+        "completion_tokens": 60,
+        "total_tokens": 362,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 36
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 174
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 133,
+      "answer": "{\"port\": 9092, \"evidenceId\": \"CURRENT\", \"spanId\": \"S2\"}",
+      "validJson": true,
+      "durationMs": 1169,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S07",
+      "category": "version_conflict",
+      "thinking": false,
+      "repeat": 2,
+      "passed": true,
+      "usage": {
+        "prompt_tokens": 277,
+        "completion_tokens": 23,
+        "total_tokens": 300,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 149
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"port\": 9092, \"evidenceId\": \"CURRENT\", \"spanId\": \"S2\"}",
+      "validJson": true,
+      "durationMs": 574,
+      "businessPassed": true
+    },
+    {
+      "caseId": "S08",
+      "category": "resource_reasoning",
+      "thinking": true,
+      "repeat": 2,
+      "passed": false,
+      "usage": {
+        "prompt_tokens": 300,
+        "completion_tokens": 1500,
+        "total_tokens": 1800,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1500
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 172
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "length",
+      "reasoningChars": 6301,
+      "answer": "",
+      "validJson": false,
+      "durationMs": 8822,
+      "businessPassed": false
+    },
+    {
+      "caseId": "S08",
+      "category": "resource_reasoning",
+      "thinking": false,
+      "repeat": 2,
+      "passed": false,
+      "usage": {
+        "prompt_tokens": 275,
+        "completion_tokens": 11,
+        "total_tokens": 286,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 147
+      },
+      "responseModel": "deepseek-flash",
+      "finishReason": "stop",
+      "reasoningChars": 0,
+      "answer": "{\"recommendedIds\": [11, 13]}",
+      "validJson": true,
+      "durationMs": 551,
+      "businessPassed": false
+    }
+  ],
+  "summary": {
+    "disabled": {
+      "requests": 16,
+      "passed": 12,
+      "businessPassed": 14,
+      "validJson": 16,
+      "errors": 0,
+      "lengthTruncated": 0,
+      "meanMs": 611,
+      "p95Ms": 864,
+      "reportedTotalTokens": 3424,
+      "reportedCompletionTokens": 260,
+      "reportedReasoningTokens": 0,
+      "promptCacheHitTokens": 256,
+      "promptCacheMissTokens": 2908,
+      "callsWithoutUsage": 0,
+      "estimatedCostUsd": 0.000592968,
+      "costStatus": "ESTIMATE_FROM_REPORTED_USAGE_AND_OFFICIAL_PRICE_NOT_BILLING_RECEIPT"
+    },
+    "enabled": {
+      "requests": 16,
+      "passed": 14,
+      "businessPassed": 14,
+      "validJson": 14,
+      "errors": 0,
+      "lengthTruncated": 2,
+      "meanMs": 2053,
+      "p95Ms": 8822,
+      "reportedTotalTokens": 8826,
+      "reportedCompletionTokens": 5262,
+      "reportedReasoningTokens": 5015,
+      "promptCacheHitTokens": 512,
+      "promptCacheMissTokens": 3052,
+      "callsWithoutUsage": 0,
+      "estimatedCostUsd": 0.003616536,
+      "costStatus": "ESTIMATE_FROM_REPORTED_USAGE_AND_OFFICIAL_PRICE_NOT_BILLING_RECEIPT"
+    }
+  },
+  "prices": {
+    "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "currency": "USD",
+    "period": "OFF_PEAK_WEEKEND_2026-10-03",
+    "inputCacheHitPerMillion": 0.003,
+    "inputCacheMissPerMillion": 0.15,
+    "outputPerMillion": 0.6
+  },
+  "scoringNote": "Strict matching retained; business scoring additionally accepts numeric-string port because frozen prompt specifies no JSON type. No new API calls.",
+  "supplementary": {
+    "scope": "One resource case, two modes, 4096 output cap; separate from frozen 32-request baseline",
+    "results": [
+      {
+        "caseId": "S08",
+        "category": "resource_reasoning",
+        "thinking": false,
+        "repeat": 1,
+        "maxOutputTokens": 4096,
+        "passed": false,
+        "usage": {
+          "prompt_tokens": 275,
+          "completion_tokens": 11,
+          "total_tokens": 286,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 147
+        },
+        "responseModel": "deepseek-flash",
+        "finishReason": "stop",
+        "reasoningChars": 0,
+        "answer": "{\"recommendedIds\": [11, 13]}",
+        "validJson": true,
+        "businessPassed": false,
+        "durationMs": 356
+      },
+      {
+        "caseId": "S08",
+        "category": "resource_reasoning",
+        "thinking": true,
+        "repeat": 1,
+        "maxOutputTokens": 4096,
+        "passed": false,
+        "usage": {
+          "prompt_tokens": 300,
+          "completion_tokens": 4096,
+          "total_tokens": 4396,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4096
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 172
+        },
+        "responseModel": "deepseek-flash",
+        "finishReason": "length",
+        "reasoningChars": 17020,
+        "answer": "",
+        "validJson": false,
+        "durationMs": 20989
+      }
+    ],
+    "summary": {
+      "disabled": {
+        "requests": 1,
+        "passed": 0,
+        "businessPassed": 0,
+        "validJson": 1,
+        "errors": 0,
+        "lengthTruncated": 0,
+        "meanMs": 356,
+        "p95Ms": 356,
+        "reportedTotalTokens": 286,
+        "reportedCompletionTokens": 11,
+        "reportedReasoningTokens": 0,
+        "promptCacheHitTokens": 128,
+        "promptCacheMissTokens": 147,
+        "callsWithoutUsage": 0,
+        "estimatedCostUsd": 2.9034e-05,
+        "costStatus": "ESTIMATE_FROM_REPORTED_USAGE_AND_OFFICIAL_PRICE_NOT_BILLING_RECEIPT"
+      },
+      "enabled": {
+        "requests": 1,
+        "passed": 0,
+        "businessPassed": 0,
+        "validJson": 0,
+        "errors": 0,
+        "lengthTruncated": 1,
+        "meanMs": 20989,
+        "p95Ms": 20989,
+        "reportedTotalTokens": 4396,
+        "reportedCompletionTokens": 4096,
+        "reportedReasoningTokens": 4096,
+        "promptCacheHitTokens": 128,
+        "promptCacheMissTokens": 172,
+        "callsWithoutUsage": 0,
+        "estimatedCostUsd": 0.002483784,
+        "costStatus": "ESTIMATE_FROM_REPORTED_USAGE_AND_OFFICIAL_PRICE_NOT_BILLING_RECEIPT"
+      }
+    }
+  }
+}

@@ -60,6 +60,8 @@ public class RagBGenerationService {
         generation.setAdapterType(adapter);
         if (!"bge-m3".equals(properties.getEmbeddingModel())) throw new IllegalStateException("新的 B 版代际必须使用 bge-m3");
         generation.setEmbeddingModel("bge-m3");
+        generation.setEmbeddingProvider(properties.getEmbeddingProvider());
+        generation.setEmbeddingRevision(properties.getEmbeddingRevision());
         generation.setEmbeddingDimensions(1024);
         generation.setChunkPolicy(properties.getChunkPolicy());
         generation.setStatus("BUILDING");
@@ -128,7 +130,9 @@ public class RagBGenerationService {
         RagBIndexGeneration active=mapper.selectActiveGeneration();
         if(active==null) return Map.of("status","UNAVAILABLE");
         return Map.of("generation",active.getGenerationKey(),"embeddingModel",active.getEmbeddingModel(),
-                "dimensions",active.getEmbeddingDimensions(),"chunkPolicy",active.getChunkPolicy());
+                "dimensions",active.getEmbeddingDimensions(),"chunkPolicy",active.getChunkPolicy(),
+                "embeddingProvider", active.getEmbeddingProvider() == null ? "GITEE" : active.getEmbeddingProvider(),
+                "embeddingRevision", active.getEmbeddingRevision() == null ? "UNSPECIFIED" : active.getEmbeddingRevision());
     }
 
     private String fingerprint(List<RagBDocument> documents) {

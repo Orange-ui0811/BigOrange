@@ -1,0 +1,522 @@
+{
+  "decision": "NOT_ACCEPTED_FOR_FULL_B_PLATFORM_REPLACEMENT",
+  "date": "2026-10-02",
+  "regression": {
+    "stats": {
+      "tests": 65,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suites": [
+      {
+        "name": "com.orangejd.server.controller.AppTrendControllerTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.foundation.aitool.AiToolRouterTest",
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.impl.QuotaServiceImplTest",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.PersonaPromptContextServiceTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.QuotaRequestIdentityTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendArchitectureServicesTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendCandidateMatcherTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendContextBuilderWeightedRetrievalTest",
+        "tests": 6,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": [
+          {
+            "name": "beginnerPreferenceBoostsUnifiedResultsWithoutFilteringGeneralKnowledge",
+            "message": "expected: <true> but was: <false>"
+          }
+        ]
+      },
+      {
+        "name": "com.orangejd.server.service.TrendEvidenceBinderTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendEvidenceCardFormatterTest",
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendGraphSummaryTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendModelClientTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendProfileAnalysisServiceTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendProjectMatchExplainerTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendPromptFactoryTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendRedisMetadataTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendResponseParserRegressionTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendTopicGateTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      },
+      {
+        "name": "com.orangejd.server.service.TrendV2AnalyzerTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failureCases": []
+      }
+    ]
+  },
+  "liveGuards": {
+    "scope": "Live public API data/readiness and unauthorized boundary only. No authenticated generation, no user quota/history writes, no outbound AI.",
+    "cases": [
+      {
+        "id": "public_graph",
+        "httpStatus": 200,
+        "expectedHttpStatus": 200,
+        "passed": true,
+        "wallMs": 240.51500000496162,
+        "code": 1,
+        "message": null,
+        "graphNodes": {
+          "thisWeek": 14,
+          "lastWeek": 14
+        }
+      },
+      {
+        "id": "public_pricing",
+        "httpStatus": 200,
+        "expectedHttpStatus": 200,
+        "passed": true,
+        "wallMs": 20.0503000014578,
+        "code": 1,
+        "message": null
+      },
+      {
+        "id": "anonymous_analysis_blocked",
+        "httpStatus": 401,
+        "expectedHttpStatus": 401,
+        "passed": true,
+        "wallMs": 5.272400005196687
+      },
+      {
+        "id": "anonymous_history_blocked",
+        "httpStatus": 401,
+        "expectedHttpStatus": 401,
+        "passed": true,
+        "wallMs": 4.006499999377411
+      },
+      {
+        "id": "invalid_app_token_blocked",
+        "httpStatus": 401,
+        "expectedHttpStatus": 401,
+        "passed": true,
+        "wallMs": 4.160899996350054
+      },
+      {
+        "id": "admin_token_is_not_app_token",
+        "httpStatus": 401,
+        "expectedHttpStatus": 401,
+        "passed": true,
+        "wallMs": 4.4893999947817065
+      }
+    ],
+    "bActiveIndex": {
+      "dimensions": 1024,
+      "chunkPolicy": "STRUCTURE_M3_512_768_64_V1",
+      "generation": "20261002164953-ec113424",
+      "embeddingModel": "bge-m3"
+    },
+    "aiGenerationRequests": 0
+  },
+  "componentChain": {
+    "findings": [
+      {
+        "id": "empty_evidence_forces_no_project_recommendation",
+        "observed": {
+          "learning": {
+            "timeline": "两周",
+            "steps": [
+              "运行示例"
+            ]
+          },
+          "recommendations": [
+            {
+              "vibeCodingReason": "测试辅助开发",
+              "difficultyReason": "测试基础",
+              "difficulty": "入门",
+              "candidateId": "E999",
+              "name": "Python 示例",
+              "prerequisites": "Python",
+              "description": "主要使用 Python 的 Spring 相关示例。",
+              "score": 80,
+              "recommendReason": "测试推荐理由",
+              "references": [],
+              "evidenceIds": [],
+              "evidenceStatus": "UNSUPPORTED",
+              "unsupportedReferenceCount": 0
+            }
+          ],
+          "analysis": {
+            "trend": "测试趋势",
+            "prospect": "测试前景",
+            "demand": "测试需求",
+            "summary": "测试总结"
+          },
+          "raw": "{\"learning\":{\"timeline\":\"两周\",\"steps\":[\"运行示例\"]},\"recommendations\":[{\"vibeCodingReason\":\"测试辅助开发\",\"difficultyReason\":\"测试基础\",\"difficulty\":\"入门\",\"candidateId\":\"E999\",\"name\":\"Python 示例\",\"prerequisites\":\"Python\",\"description\":\"主要使用 Python 的 Spring 相关示例。\",\"score\":80,\"recommendReason\":\"测试推荐理由\"}],\"analysis\":{\"trend\":\"测试趋势\",\"prospect\":\"测试前景\",\"demand\":\"测试需求\",\"summary\":\"测试总结\"}}",
+          "balance": 950,
+          "beginnerCases": [],
+          "careerCases": [],
+          "modelMetrics": {
+            "usageSource": "TEST"
+          },
+          "retrievalTrace": {
+            "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+            "status": "EMPTY",
+            "queries": [
+              "Spring Java",
+              "Spring Java  学习 必须只推荐 Java 项目 新手"
+            ],
+            "evidence": [],
+            "durationMs": 81.289186,
+            "candidateCount": 0,
+            "selectedCount": 0,
+            "confidence": "NONE",
+            "ragApplied": false,
+            "evidenceFormat": "CARD_V2_ADAPTIVE",
+            "evidenceOriginalChars": 0,
+            "evidencePromptChars": 0,
+            "evidenceBudgetChars": 1100,
+            "evidenceFallbackCount": 0,
+            "evidenceCompressionRatio": 0.0
+          },
+          "promptVersion": "trend-v2-evidence-1",
+          "graphDurationMs": 0.111758,
+          "analyzerAttemptDurationMs": 279.775258,
+          "historySaved": true,
+          "historyId": 900002
+        },
+        "criterionPassed": false
+      },
+      {
+        "id": "controller_to_history_and_candidate_binding",
+        "observed": {
+          "evidenceStatus": "VERIFIED_CANDIDATE",
+          "historySaved": true
+        },
+        "criterionPassed": true
+      },
+      {
+        "id": "explicit_java_constraint_enforced_after_generation",
+        "observed": "主要使用 Python 的 Spring 相关示例。",
+        "criterionPassed": false
+      },
+      {
+        "id": "b_used_in_final_platform_chain",
+        "observed": {
+          "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+          "status": "USED",
+          "queries": [
+            "Spring Java",
+            "Spring Java  学习 必须只推荐 Java 项目 新手"
+          ],
+          "evidence": [
+            {
+              "evidenceId": "E1",
+              "documentKey": "synthetic-1",
+              "source": "GITHUB",
+              "title": "acceptance/synthetic",
+              "sourceRef": "acceptance/synthetic",
+              "projectId": null,
+              "projectType": null,
+              "mappingStatus": null,
+              "repositoryUrl": "https://github.com/acceptance/synthetic",
+              "text": "Spring 知识库示例，主要语言 Python。支持上传与语义检索。",
+              "card": "[candidateId=E1;evidenceId=E1;repo=acceptance/synthetic] facts=证据:Spring 知识库示例，主要语言 Python。; 支持上传与语义检索。",
+              "promptMode": "CARD"
+            }
+          ],
+          "durationMs": 37.977177,
+          "candidateCount": 1,
+          "selectedCount": 1,
+          "confidence": "MEDIUM",
+          "ragApplied": true,
+          "evidenceFormat": "CARD_V2_ADAPTIVE",
+          "evidenceOriginalChars": 35,
+          "evidencePromptChars": 103,
+          "evidenceBudgetChars": 1100,
+          "evidenceFallbackCount": 0,
+          "evidenceCompressionRatio": -1.942857142857143
+        },
+        "criterionPassed": false
+      },
+      {
+        "id": "invalid_json_refunds_and_skips_history",
+        "observed": "refund called; no history insertion",
+        "criterionPassed": true
+      },
+      {
+        "id": "confirmed_persona_can_drive_retrieval_without_duplicate_form",
+        "observed": {
+          "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+          "status": "NO_TOPIC",
+          "queries": [],
+          "evidence": [],
+          "durationMs": 0.037454
+        },
+        "criterionPassed": false
+      },
+      {
+        "id": "retrieval_failure_does_not_return_unsupported_project",
+        "observed": {
+          "learning": {
+            "timeline": "两周",
+            "steps": [
+              "运行示例"
+            ]
+          },
+          "recommendations": [
+            {
+              "vibeCodingReason": "测试辅助开发",
+              "difficultyReason": "测试基础",
+              "difficulty": "入门",
+              "candidateId": "E999",
+              "name": "Python 示例",
+              "prerequisites": "Python",
+              "description": "主要使用 Python 的 Spring 相关示例。",
+              "score": 80,
+              "recommendReason": "测试推荐理由",
+              "references": [],
+              "evidenceIds": [],
+              "evidenceStatus": "UNSUPPORTED",
+              "unsupportedReferenceCount": 0
+            }
+          ],
+          "analysis": {
+            "trend": "测试趋势",
+            "prospect": "测试前景",
+            "demand": "测试需求",
+            "summary": "测试总结"
+          },
+          "raw": "{\"learning\":{\"timeline\":\"两周\",\"steps\":[\"运行示例\"]},\"recommendations\":[{\"vibeCodingReason\":\"测试辅助开发\",\"difficultyReason\":\"测试基础\",\"difficulty\":\"入门\",\"candidateId\":\"E999\",\"name\":\"Python 示例\",\"prerequisites\":\"Python\",\"description\":\"主要使用 Python 的 Spring 相关示例。\",\"score\":80,\"recommendReason\":\"测试推荐理由\"}],\"analysis\":{\"trend\":\"测试趋势\",\"prospect\":\"测试前景\",\"demand\":\"测试需求\",\"summary\":\"测试总结\"}}",
+          "balance": 950,
+          "beginnerCases": [],
+          "careerCases": [],
+          "modelMetrics": {
+            "usageSource": "TEST"
+          },
+          "retrievalTrace": {
+            "strategyVersion": "hybrid-topic-project-v6-adaptive-card",
+            "status": "PARTIAL_FAILURE",
+            "queries": [
+              "Spring Java",
+              "Spring Java  学习 必须只推荐 Java 项目 新手"
+            ],
+            "evidence": [],
+            "durationMs": 1.144973,
+            "candidateCount": 0,
+            "selectedCount": 0,
+            "confidence": "NONE",
+            "ragApplied": false,
+            "evidenceFormat": "CARD_V2_ADAPTIVE",
+            "evidenceOriginalChars": 0,
+            "evidencePromptChars": 0,
+            "evidenceBudgetChars": 1100,
+            "evidenceFallbackCount": 0,
+            "evidenceCompressionRatio": 0.0
+          },
+          "promptVersion": "trend-v2-evidence-1",
+          "graphDurationMs": 0.036111,
+          "analyzerAttemptDurationMs": 2.60436,
+          "historySaved": true,
+          "historyId": 900002
+        },
+        "criterionPassed": false
+      }
+    ],
+    "scope": "In-process real controller/profile facade/analyzer/context/prompt/parser/assembler/binder/history-service; mocked model, vector, graph, quota and DB. No outbound AI calls or real accounts."
+  },
+  "browserFixtureTests": {
+    "stats": {
+      "startTime": "2026-10-02T13:17:15.439Z",
+      "duration": 24351.849,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "真实浏览器和前端，所有业务API为合成响应；不证明真实后端生成和落库"
+  },
+  "frontendComposableTests": {
+    "tests": 3,
+    "passed": 3,
+    "scope": "前端提交、定价确认、结果处理；接口依赖替身"
+  },
+  "blockers": [
+    {
+      "id": "B_PLATFORM_ENTRY",
+      "status": "BLOCKED",
+      "detail": "B已在实验台启用M3，但用户精准推荐仍固定使用TrendContextBuilder/平台VectorStore，DTO与编排没有B可选入口。",
+      "code": "orange-server/src/main/java/com/orangejd/server/service/TrendV2Analyzer.java:85"
+    },
+    {
+      "id": "EMPTY_EVIDENCE",
+      "status": "FAIL",
+      "detail": "模拟模型给出未经支持项目时，空候选集合仍保留UNSUPPORTED推荐；检索失败分支也可保存并展示该结果。",
+      "code": "orange-server/src/main/java/com/orangejd/server/service/TrendEvidenceBinder.java:61"
+    },
+    {
+      "id": "PERSONA_TO_RETRIEVAL",
+      "status": "FAIL",
+      "detail": "已确认画像进入Prompt，但不进入检索输入。仅画像、不重复填方向时检索NO_TOPIC。",
+      "code": "orange-server/src/main/java/com/orangejd/server/service/TrendContextBuilder.java:263"
+    },
+    {
+      "id": "FINAL_CONSTRAINT_VALIDATION",
+      "status": "FAIL",
+      "detail": "合成模型输出Python项目时，即使请求明确只要Java，只要候选ID匹配仍会绑定并保存。目录语言匹配也主要用于加分，明确限制尚缺最终校验。",
+      "code": "orange-server/src/main/java/com/orangejd/server/service/TrendCandidateMatcher.java:21"
+    },
+    {
+      "id": "BEGINNER_PREFERENCE",
+      "status": "FAIL",
+      "detail": "既有beginnerPreferenceBoostsUnifiedResultsWithoutFilteringGeneralKnowledge回归失败，手动资料加分影响新手偏好排序。",
+      "code": "orange-server/src/main/java/com/orangejd/server/service/TrendContextBuilder.java:199"
+    },
+    {
+      "id": "B_PLATFORM_SOURCE_LIFECYCLE",
+      "status": "BLOCKED",
+      "detail": "平台上传、项目资料更新和删除仍写平台VectorStore，未找到自动驱动B文档版本/删除任务的桥接。B自身版本与有效来源过滤不能替代平台事件接入。",
+      "code": "orange-server/src/main/java/com/orangejd/server/service/impl/ProjectKnowledgeDocumentWriter.java:49"
+    },
+    {
+      "id": "UNSUPPORTED_IMPORT",
+      "status": "FAIL",
+      "detail": "浏览器使用合成UNSUPPORTED结果，能显示未验证提示，但一键导入方案按钮仍可点击。",
+      "code": "orange-web/src/views/TrendAnalysis.vue:346"
+    }
+  ],
+  "newExternalAiRequests": 0,
+  "additionalProviderCostUsd": 0,
+  "notCertified": [
+    "B版完整请求的真实LLM生成与输出校验",
+    "真实登录账号的端到端扣费、重试退款和历史落库",
+    "平台上传/更新/删除到B的自动同步",
+    "A/B请求级路由与故障回退",
+    "持续负载和长期容量"
+  ],
+  "nextAcceptanceCriteria": [
+    "保留A默认入口，提供经过权限控制的B完整链路实验入口，并记录检索代际和模型。",
+    "已确认画像驱动查询与候选筛选，明确排除条件经过可验证的服务端校验。",
+    "空证据或检索服务失败时不保存或展示为已验证真实项目推荐；区分失败和资料不足。",
+    "候选验证与逐句事实支持分开；未验证项目不能直接进入正式方案。",
+    "平台知识生命周期同步B版本，删除下架即时不可检索并可补偿。",
+    "随后才使用独立合成测试账号进行真实外部模型、配额历史和持续负载验收。"
+  ],
+  "limits": [
+    "探针使用合成错误模型输出验证防线，不表示这些错误在真实用户请求中的发生率。",
+    "5个JUnit探针执行成功；其中业务验收判据有失败，不能称为全部验收通过。",
+    "未更改A默认链路、B索引、平台推荐行为或真实账号资料。"
+  ]
+}
