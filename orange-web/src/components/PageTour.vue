@@ -170,6 +170,14 @@ const close = () => {
   localStorage.setItem('tour_done_' + props.storageKey + '_' + myId, '1')
 }
 
+const restart = () => {
+  localStorage.removeItem('tour_done_' + props.storageKey + '_' + myId)
+  current.value = 0
+  tryStart()
+}
+
+defineExpose({ restart })
+
 // 窗口 resize / scroll 重新定位
 let posTimer = null
 const updatePosDebounced = () => {

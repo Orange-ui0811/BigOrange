@@ -18,11 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
 
-    @Autowired private MessageMapper messageMapper;
-    @Autowired private ConversationMapper conversationMapper;
-    @Autowired private NotificationService notificationService;
+    private final MessageMapper messageMapper;
+    private final ConversationMapper conversationMapper;
+    private final NotificationService notificationService;
 
     @Override
     @Transactional
@@ -30,6 +31,7 @@ public class MessageServiceImpl implements MessageService {
         Long currentId = BaseContext.getCurrentId();
         if (dto.getContent() == null || dto.getContent().trim().isEmpty())
             throw new BaseException("消息不能为空");
+        if (dto.getContent().length() > 5000) throw new BaseException("消息不能超过5000字");
 
         Conversation conv = conversationMapper.selectById(dto.getConversationId());
         if (conv == null) throw new BaseException("会话不存在");
@@ -44,7 +46,8 @@ public class MessageServiceImpl implements MessageService {
         msg.setContent(dto.getContent().trim());
         messageMapper.insert(msg);
 
-        // 更新会话时间
+        // A new message makes the conversation relevant to both participants again.
+        conversationMapper.showForAll(dto.getConversationId());
         conversationMapper.updateTime(dto.getConversationId());
 
         // 不创建通知——聊天未读数单独显示在「聊天」角标
@@ -66,13 +69,17 @@ public class MessageServiceImpl implements MessageService {
         if (!currentId.equals(conv.getInitiatorId()) && !currentId.equals(conv.getReceiverId()))
             throw new BaseException(MessageConstant.NO_PERMISSION);
 
-        int offset = (page - 1) * size;
+        int offset = PageUtil.offset(page, size);
         return messageMapper.selectByConversationId(conversationId, offset, size);
     }
 
     @Override
     public void markAsRead(Long conversationId) {
         Long currentId = BaseContext.getCurrentId();
+        Conversation conv = conversationMapper.selectById(conversationId);
+        if (conv == null) throw new BaseException("会话不存在");
+        if (!currentId.equals(conv.getInitiatorId()) && !currentId.equals(conv.getReceiverId()))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
         messageMapper.markAsRead(conversationId, currentId);
     }
 }

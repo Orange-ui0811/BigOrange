@@ -8,14 +8,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/app/common")
+@lombok.RequiredArgsConstructor
 public class AppCommonController {
 
-    @Autowired
-    private FileUploadService fileUploadService;
+    private final FileUploadService fileUploadService;
 
     @PostMapping("/upload")
     public Result<String> upload(@RequestParam("file") MultipartFile file,
                                   @RequestParam(defaultValue = "general") String dir) {
         return Result.success(fileUploadService.upload(file, dir));
+    }
+
+    @PostMapping("/upload/video")
+    public Result<String> uploadVideo(@RequestParam("file") MultipartFile file) {
+        return Result.success(fileUploadService.uploadVideo(file));
     }
 }

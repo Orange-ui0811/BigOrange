@@ -2,21 +2,30 @@ package com.orangejd.server.service;
 
 public interface QuotaService {
 
-    /** 消费配额（原子扣减 + FOR UPDATE + 幂等） */
-    int consume(Long accountId, int amount, String description, String requestId);
+    /** Versioned, idempotent AI service debit. */
+    QuotaCharge consume(Long accountId, String serviceKey, String description,
+                        QuotaRequestIdentity identity);
 
-    /** 充值配额（原子增加 + 写日志） */
-    int recharge(Long accountId, int amount, String source, String description);
+    /** Compatibility entry point for non-priced internal callers. */
+    long consume(Long accountId, long amount, String description, String requestId);
 
-    /** 退款配额 */
-    int refund(Long accountId, int amount, String requestId, String description);
+    /** Direct credit retained for payment callbacks; payment state owns its idempotency. */
+    long recharge(Long accountId, long amount, String source, String description);
 
-    /** 充值码兑换 */
-    int redeemCode(Long accountId, String code);
+    /** Refunds exactly the original debit and never reads the current price. */
+    long refund(Long accountId, String requestId, String description);
 
-    /** 管理员手动调整 */
-    int adminAdjust(Long accountId, long newQuota, Long adminId);
+    /** Compatibility overload that additionally verifies the expected original amount. */
+    long refund(Long accountId, long expectedAmount, String requestId, String description);
 
-    /** 查询余额 */
+    long redeemCode(Long accountId, String code);
+
+    long adminAdjust(Long accountId, long newQuota, Long adminId);
+
     long getBalance(Long accountId);
+
+    long grantNewUserBonus(Long accountId);
+
+    long grantReward(Long accountId, String serviceKey, String businessReference,
+                     String description);
 }

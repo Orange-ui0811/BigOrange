@@ -11,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/category")
+@lombok.RequiredArgsConstructor
 public class AdminCategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @PostMapping
     public Result<CategoryVO> create(@RequestBody CategoryDTO dto) {

@@ -1,12 +1,14 @@
 package com.orangejd.server.service.impl;
 
 import com.orangejd.server.service.SmsService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
  * 开发环境：验证码打印到控制台
  */
 @Service
+@Profile("dev")
 public class ConsoleSmsServiceImpl implements SmsService {
     @Override
     public void sendCode(String phone, String code) {

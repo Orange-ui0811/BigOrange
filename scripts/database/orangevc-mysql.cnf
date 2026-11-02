@@ -1,0 +1,28 @@
+[mysqld]
+bind-address = 127.0.0.1
+mysqlx-bind-address = 127.0.0.1
+require_secure_transport = ON
+skip_name_resolve = ON
+
+lower_case_table_names = 1
+character_set_server = utf8mb3
+collation_server = utf8mb3_general_ci
+default_time_zone = +08:00
+sql_mode = ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+
+innodb_buffer_pool_size = 1536M
+innodb_buffer_pool_instances = 6
+innodb_redo_log_capacity = 512M
+max_connections = 150
+thread_cache_size = 32
+tmp_table_size = 32M
+max_heap_table_size = 32M
+
+slow_query_log = ON
+long_query_time = 1
+slow_query_log_file = /var/log/mysql/mysql-slow.log
+log_bin = /var/log/mysql/mysql-bin.log
+binlog_expire_logs_seconds = 259200
+
+[client]
+default_character_set = utf8mb3

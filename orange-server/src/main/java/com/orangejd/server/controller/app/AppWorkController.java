@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/work")
+@lombok.RequiredArgsConstructor
 public class AppWorkController {
 
-    @Autowired private WorkService workService;
+    private final WorkService workService;
 
     @PostMapping
     public Result<WorkDetailVO> create(@RequestBody WorkCreateDTO dto) {
@@ -30,6 +31,12 @@ public class AppWorkController {
     @PostMapping("/{id}/submit")
     public Result<?> submitForReview(@PathVariable Long id) {
         workService.submitForReview(id);
+        return Result.success();
+    }
+
+    @PostMapping("/{id}/withdraw")
+    public Result<?> withdraw(@PathVariable Long id) {
+        workService.withdraw(id);
         return Result.success();
     }
 

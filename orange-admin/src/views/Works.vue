@@ -29,7 +29,11 @@
     <el-dialog v-model="detailVisible" title="内容详情" width="600px" top="5vh">
       <div style="max-height:60vh;overflow:auto;line-height:1.8">
         <p><b>标题：</b>{{ detail.title }}</p><p><b>状态：</b>{{ detail.auditStatus }}</p>
-        <p><b>简介：</b>{{ detail.summary || '无' }}</p><div v-html="'<b>详情：</b>' + (detail.detail || '无')"></div>
+        <p><b>简介：</b>{{ detail.summary || '无' }}</p><div v-safe-html="'<b>详情：</b>' + (detail.detail || '无')"></div>
+        <div v-if="detail.videoUrl" style="margin:12px 0">
+          <b style="display:block;margin-bottom:6px">视频：</b>
+          <AdminVideoPreview :url="detail.videoUrl" :poster="detail.coverUrl" />
+        </div>
         <p><b>时间：</b>{{ detail.createTime }}</p>
       </div>
     </el-dialog>
@@ -41,6 +45,7 @@ import { ref, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import request from '../api/request'
+import AdminVideoPreview from '../components/AdminVideoPreview.vue'
 
 const router = useRouter()
 const tab = ref('works')

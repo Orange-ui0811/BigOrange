@@ -1,5 +1,7 @@
 package com.orangejd.pojo.entity;
 
+import java.math.BigDecimal;
+
 public class Work extends BaseEntity {
     private Long ownerId;
     private String title;
@@ -9,14 +11,17 @@ public class Work extends BaseEntity {
     private String tags;
     private String coverUrl;
     private String demoUrl;
+    private String videoUrl;
     private String auditStatus;
     private String visibilityStatus;
     private String publishStatus;
+    private Boolean approvalRewardGranted;
     // JOIN 查询时填充，非表字段
     private String ownerName;
     private String ownerAvatar;
     private Integer favoriteCount;
     private Integer commentCount;
+    private BigDecimal referencePrice;
 
     public Long getOwnerId() { return ownerId; }
     public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
@@ -34,12 +39,16 @@ public class Work extends BaseEntity {
     public void setCoverUrl(String coverUrl) { this.coverUrl = coverUrl; }
     public String getDemoUrl() { return demoUrl; }
     public void setDemoUrl(String demoUrl) { this.demoUrl = demoUrl; }
+    public String getVideoUrl() { return videoUrl; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
     public String getAuditStatus() { return auditStatus; }
     public void setAuditStatus(String auditStatus) { this.auditStatus = auditStatus; }
     public String getVisibilityStatus() { return visibilityStatus; }
     public void setVisibilityStatus(String visibilityStatus) { this.visibilityStatus = visibilityStatus; }
     public String getPublishStatus() { return publishStatus; }
     public void setPublishStatus(String publishStatus) { this.publishStatus = publishStatus; }
+    public Boolean getApprovalRewardGranted() { return approvalRewardGranted; }
+    public void setApprovalRewardGranted(Boolean approvalRewardGranted) { this.approvalRewardGranted = approvalRewardGranted; }
     public String getOwnerName() { return ownerName; }
     public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
     public String getOwnerAvatar() { return ownerAvatar; }
@@ -48,4 +57,6 @@ public class Work extends BaseEntity {
     public void setFavoriteCount(Integer favoriteCount) { this.favoriteCount = favoriteCount; }
     public Integer getCommentCount() { return commentCount; }
     public void setCommentCount(Integer commentCount) { this.commentCount = commentCount; }
+    public BigDecimal getReferencePrice() { return referencePrice; }
+    public void setReferencePrice(BigDecimal referencePrice) { this.referencePrice = referencePrice; }
 }

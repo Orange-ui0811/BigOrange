@@ -3,8 +3,9 @@ package com.orangejd.server.controller.admin;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.KnowledgeDocument;
 import com.orangejd.pojo.vo.KnowledgeDocumentVO;
-import com.orangejd.server.mapper.KnowledgeDocumentMapper;
+import com.orangejd.server.service.KnowledgeDocumentQueryService;
 import com.orangejd.server.service.DocumentService;
+import com.orangejd.server.service.impl.KnowledgeReindexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,28 +16,41 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/knowledge/document")
+@lombok.RequiredArgsConstructor
 public class AdminKnowledgeController {
 
-    @Autowired
-    private DocumentService documentService;
+    private final DocumentService documentService;
 
-    @Autowired
-    private KnowledgeDocumentMapper knowledgeDocumentMapper;
+    private final KnowledgeDocumentQueryService knowledgeDocumentMapper;
+
+    private final KnowledgeReindexService knowledgeReindexService;
 
     @GetMapping("/stats")
     public Result<Map<String, Object>> stats() {
         List<KnowledgeDocument> all = knowledgeDocumentMapper.selectAll();
-        long manual = 0, github = 0, totalChunks = 0;
+        long manual = 0, github = 0, beginner = 0, career = 0, jobs = 0, totalChunks = 0;
         for (KnowledgeDocument d : all) {
-            if ("GITHUB".equals(d.getSource())) github++; else manual++;
+            if ("GITHUB".equals(d.getSource())) github++;
+            else if ("BEGINNER_PROJECT".equals(d.getSource())) beginner++;
+            else if ("CAREER_PROJECT".equals(d.getSource())) career++;
+            else if ("JOB_POSTING".equals(d.getSource())) jobs++;
+            else manual++;
             totalChunks += d.getChunkCount() != null ? d.getChunkCount() : 0;
         }
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("totalDocs", all.size());
         map.put("manualCount", manual);
         map.put("githubCount", github);
+        map.put("beginnerCount", beginner);
+        map.put("careerCount", career);
+        map.put("jobCount", jobs);
         map.put("totalChunks", totalChunks);
         return Result.success(map);
+    }
+
+    @GetMapping("/project-index/status")
+    public Result<?> projectIndexStatus() {
+        return Result.success(knowledgeDocumentMapper.selectProjectIndexStatuses());
     }
 
     @GetMapping("/{id}")
@@ -70,5 +84,19 @@ public class AdminKnowledgeController {
     public Result<Void> delete(@PathVariable Long id) {
         documentService.delete(id);
         return Result.success();
+    }
+
+    @PostMapping("/reindex")
+    public Result<KnowledgeReindexService.ReindexStatus> reindex() {
+        try {
+            return Result.success(knowledgeReindexService.start());
+        } catch (IllegalStateException e) {
+            return Result.error(e.getMessage());
+        }
+    }
+
+    @GetMapping("/reindex/status")
+    public Result<KnowledgeReindexService.ReindexStatus> reindexStatus() {
+        return Result.success(knowledgeReindexService.status());
     }
 }

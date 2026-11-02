@@ -4,34 +4,45 @@ import com.orangejd.common.context.BaseContext;
 import com.orangejd.pojo.entity.*;
 import com.orangejd.server.mapper.*;
 import com.orangejd.server.service.impl.AuditServiceImpl;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.external.ExternalAiClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.http.*;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import jakarta.annotation.PostConstruct;
+import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class AiAuditService {
-
     private static final Logger log = LoggerFactory.getLogger(AiAuditService.class);
+    static final int CONNECTION_TEST_MAX_TOKENS = 256;
+    static final int CONTENT_AUDIT_MAX_TOKENS = 800;
 
-    @Autowired private WorkMapper workMapper;
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired private CategoryMapper categoryMapper;
-    @Autowired private AccountMapper accountMapper;
-    @Autowired private AuditServiceImpl auditService;
-    @Autowired(required = false) private FeishuNotifyService feishuNotifyService;
-    @Autowired(required = false) private StringRedisTemplate redisTemplate;
+    private final WorkMapper workMapper;
+    private final RequirementMapper requirementMapper;
+    private final CategoryMapper categoryMapper;
+    private final AccountMapper accountMapper;
+    private final AuditServiceImpl auditService;
+    private final @org.springframework.lang.Nullable FeishuNotifyService feishuNotifyService;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
+    private final AiRuntimeConfigService aiConfigService;
+    private final ExternalAiClient externalAiClient;
+    private final @Qualifier("orangeAiAuditExecutor") Executor executor;
+    private final @Qualifier("orangeTaskScheduler") TaskScheduler taskScheduler;
 
     @Value("${orange.ai-audit.endpoint:}")
     private String apiEndpoint;
@@ -45,25 +56,24 @@ public class AiAuditService {
     @Value("${orange.upload.path:}")
     private String uploadPath;
 
-    @PostConstruct
+    @Value("${orange.public-base-url:}")
+    private String publicBaseUrl;
+
+    @EventListener(ApplicationReadyEvent.class)
     public void init() {
-        // 启动后 10 秒检查：如果开关开着，自动扫描积压
-        new Thread(() -> {
-            try { Thread.sleep(10000); } catch (Exception ignored) {}
+        taskScheduler.schedule(() -> {
             if (isEnabled()) {
                 log.info("AI托管已开启，启动扫描积压");
                 auditAllPending();
             }
-        }).start();
+        }, Instant.now().plusSeconds(10));
     }
 
     // 最多 2 个并发审核
-    private final ExecutorService executor = Executors.newFixedThreadPool(2);
-    private final RestTemplate restTemplate = new RestTemplate();
-    private int runningCount = 0;
+    private final AtomicInteger runningCount = new AtomicInteger();
 
     private static final String SYSTEM_PROMPT =
-        "你是 OrangeJD 平台的 AI 内容审核员。审核用户提交的作品/需求。\n\n" +
+        "你是 OrangeVC 平台的 AI 内容审核员。审核用户提交的作品/需求。\n\n" +
         "审核规则（按优先级）：\n" +
         "1. 【红线-必拒】内容涉及血腥暴力、色情、政治敏感、违法犯罪、不良诱导 → 直接拒绝\n" +
         "2. 【基础质量】标题有意义且长度 ≥ 2 字；简介/描述 ≥ 10 字 → 否则拒绝\n" +
@@ -89,20 +99,20 @@ public class AiAuditService {
     /** 异步审核单条作品 */
     public void auditWorkAsync(Long workId) {
         if (!isEnabled()) return;
-        executor.submit(() -> {
-            runningCount++;
+        executor.execute(() -> {
+            runningCount.incrementAndGet();
             try { auditWork(workId); } catch (Exception e) { log.error("AI审核作品失败 workId={}: {}", workId, e.getMessage()); }
-            finally { runningCount--; }
+            finally { runningCount.decrementAndGet(); }
         });
     }
 
     /** 异步审核单条需求 */
     public void auditRequirementAsync(Long reqId) {
         if (!isEnabled()) return;
-        executor.submit(() -> {
-            runningCount++;
+        executor.execute(() -> {
+            runningCount.incrementAndGet();
             try { auditRequirement(reqId); } catch (Exception e) { log.error("AI审核需求失败 reqId={}: {}", reqId, e.getMessage()); }
-            finally { runningCount--; }
+            finally { runningCount.decrementAndGet(); }
         });
     }
 
@@ -118,13 +128,13 @@ public class AiAuditService {
         return count;
     }
 
-    public int getRunningCount() { return runningCount; }
+    public int getRunningCount() { return runningCount.get(); }
 
     /** 测试大模型连接 */
     public String testConnection() {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("model", model);
-        body.put("max_tokens", 10);
+        body.put("max_tokens", CONNECTION_TEST_MAX_TOKENS);
         List<Map<String, String>> messages = new ArrayList<>();
         Map<String, String> m = new LinkedHashMap<>();
         m.put("role", "user"); m.put("content", "回复OK");
@@ -144,6 +154,7 @@ public class AiAuditService {
         String detail = nvl(work.getDetail());
         if (detail.length() > 3000) detail = detail.substring(0, 3000) + "...";
         String demoUrl = nvl(work.getDemoUrl());
+        String videoUrl = nvl(work.getVideoUrl());
         String coverUrl = buildPublicUrl(work.getCoverUrl());
         String categoryName = "";
         if (work.getCategoryId() != null) {
@@ -155,8 +166,8 @@ public class AiAuditService {
         if (author != null) authorName = author.getUsername();
 
         String userPrompt = String.format(
-            "请审核以下内容：\n\n标题：%s\n简介：%s\n详情：%s\n分类：%s\n演示链接：%s\n提交者：%s",
-            title, summary, detail, categoryName, demoUrl, authorName);
+            "请审核以下内容：\n\n标题：%s\n简介：%s\n详情：%s\n分类：%s\n演示链接：%s\n视频链接：%s\n提交者：%s",
+            title, summary, detail, categoryName, demoUrl, videoUrl, authorName);
 
         List<String> detailImages = extractImageUrls(detail);
         AuditResult result = callAi(userPrompt, coverUrl, detailImages);
@@ -210,7 +221,7 @@ public class AiAuditService {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("model", model);
         body.put("temperature", 0.1);
-        body.put("max_tokens", 300);
+        body.put("max_tokens", CONTENT_AUDIT_MAX_TOKENS);
 
         // system message
         Map<String, String> sysMsg = new LinkedHashMap<>();
@@ -265,9 +276,8 @@ public class AiAuditService {
         } catch (Exception e) {
             String errMsg = e.getMessage() != null ? e.getMessage() : "";
             // 图片相关错误 → 降级重试
-            if (!allImages.isEmpty() &&
-                (errMsg.contains("image") || errMsg.contains("图片") || errMsg.contains("invalid_image"))) {
-                log.warn("AI图片审核失败，降级文本审核: {}", errMsg);
+            if (!allImages.isEmpty()) {
+                log.warn("AI多模态审核失败，降级文本审核: {}", truncate(errMsg, 200));
                 try {
                     // 去掉图片重试
                     userMsg.put("content", userPrompt);
@@ -288,24 +298,8 @@ public class AiAuditService {
 
     @SuppressWarnings("unchecked")
     private String postAi(Map<String, Object> body) {
-        String url = apiEndpoint;
-        if (!url.startsWith("http")) url = "https://" + url;
-        if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + apiKey);
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
-
-        ResponseEntity<Map> resp = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-        if (resp.getBody() != null) {
-            List<Map<String, Object>> choices = (List<Map<String, Object>>) resp.getBody().get("choices");
-            if (choices != null && !choices.isEmpty()) {
-                Map<String, Object> msg = (Map<String, Object>) choices.get(0).get("message");
-                return (String) msg.getOrDefault("content", "");
-            }
-        }
-        throw new RuntimeException("AI 返回为空");
+        AiRuntimeConfig config = aiConfigService.current(AiRuntimeConfigService.AUDIT);
+        return externalAiClient.call(config, body, "content-audit");
     }
 
     private AuditResult parseResponse(String content) {
@@ -394,7 +388,9 @@ public class AiAuditService {
         if (coverUrl == null || coverUrl.isEmpty()) return null;
         if (coverUrl.startsWith("http")) return coverUrl;
         // 相对路径 → 公网 URL
-        return "http://47.116.8.45" + (coverUrl.startsWith("/") ? "" : "/") + coverUrl;
+        if (publicBaseUrl == null || publicBaseUrl.isBlank()) return null;
+        String base = publicBaseUrl.replaceAll("/+$", "");
+        return base + (coverUrl.startsWith("/") ? "" : "/") + coverUrl;
     }
 
     private String nvl(String s) { return s == null ? "" : s.trim(); }

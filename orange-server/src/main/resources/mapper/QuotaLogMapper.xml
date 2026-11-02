@@ -3,17 +3,28 @@
 <mapper namespace="com.orangejd.server.mapper.QuotaLogMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO quota_log (account_id, type, amount, balance, source, description, request_id)
-        VALUES (#{accountId}, #{type}, #{amount}, #{balance}, #{source}, #{description}, #{requestId})
+        INSERT INTO quota_log
+            (transaction_no, operation_id, original_log_id, account_id, type, amount, balance,
+             source, service_key, price_version, description, request_id, request_hash, status)
+        VALUES
+            (#{transactionNo}, #{operationId}, #{originalLogId}, #{accountId}, #{type}, #{amount}, #{balance},
+             #{source}, #{serviceKey}, #{priceVersion}, #{description}, #{requestId}, #{requestHash}, #{status})
     </insert>
 
     <select id="selectByAccountId" resultType="com.orangejd.pojo.entity.QuotaLog">
-        SELECT id, account_id, type, amount, balance, source, description, request_id, create_time
+        SELECT id, transaction_no, operation_id, original_log_id, account_id, type, amount, balance,
+               source, service_key, price_version, description, request_id, request_hash, status, create_time
         FROM quota_log WHERE account_id = #{accountId}
         ORDER BY id DESC LIMIT #{limit}
     </select>
 
     <select id="existsByRequestId" resultType="int">
         SELECT COUNT(*) FROM quota_log WHERE request_id = #{requestId}
+    </select>
+
+    <select id="selectByRequestIdForUpdate" resultType="com.orangejd.pojo.entity.QuotaLog">
+        SELECT id, transaction_no, operation_id, original_log_id, account_id, type, amount, balance,
+               source, service_key, price_version, description, request_id, request_hash, status, create_time
+        FROM quota_log WHERE request_id = #{requestId} FOR UPDATE
     </select>
 </mapper>

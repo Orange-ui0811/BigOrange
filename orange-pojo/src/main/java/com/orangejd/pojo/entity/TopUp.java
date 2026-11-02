@@ -11,6 +11,7 @@ public class TopUp {
     private String tradeNo;
     private String paymentMethod;
     private String paymentProvider;
+    private String providerTradeNo;
     private String status;
     private LocalDateTime createTime;
     private LocalDateTime completeTime;
@@ -29,6 +30,8 @@ public class TopUp {
     public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
     public String getPaymentProvider() { return paymentProvider; }
     public void setPaymentProvider(String paymentProvider) { this.paymentProvider = paymentProvider; }
+    public String getProviderTradeNo() { return providerTradeNo; }
+    public void setProviderTradeNo(String providerTradeNo) { this.providerTradeNo = providerTradeNo; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public LocalDateTime getCreateTime() { return createTime; }

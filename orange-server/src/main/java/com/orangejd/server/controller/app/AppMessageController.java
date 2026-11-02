@@ -11,9 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/app/message")
+@lombok.RequiredArgsConstructor
 public class AppMessageController {
 
-    @Autowired private MessageService messageService;
+    private final MessageService messageService;
 
     @PostMapping
     public Result<Message> send(@RequestBody MessageSendDTO dto) {

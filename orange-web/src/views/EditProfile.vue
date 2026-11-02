@@ -19,7 +19,6 @@ const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
 const loading=ref(false)
 const form=reactive({nickname:'',bio:'',skills:'',contactIntro:'',avatarUrl:''})
 onMounted(async()=>{try{const r=await request.get('/app/profile/me');if(r.code===1){form.nickname=r.data.nickname||'';form.bio=r.data.bio||'';form.skills=r.data.skills||'';form.contactIntro=r.data.contactIntro||'';form.avatarUrl=r.data.avatarUrl||''}}catch{}})
-onMounted(async()=>{try{const r=await request.get('/app/profile/me');if(r.code===1){form.nickname=r.data.nickname||'';form.bio=r.data.bio||'';form.skills=r.data.skills||'';form.contactIntro=r.data.contactIntro||''}}catch{}})
 const uploadHeaders = { 'App-Token': sessionStorage.getItem('appToken') || '' }
 const onAvatarSuccess = (res) => { if (res.code === 1) form.avatarUrl = res.data }
 import { avatarUrl, nickname } from '../stores/unread'

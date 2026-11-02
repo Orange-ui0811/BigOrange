@@ -20,6 +20,7 @@
         VALUES (#{sourceType}, #{sourceId}, #{buyerId}, #{sellerId}, #{workId}, #{deposit}, #{finalAmount}, #{totalAmount}, #{orderStatus})
     </insert>
     <select id="selectById" resultMap="orderMap">SELECT * FROM `order` WHERE id = #{id}</select>
+    <select id="selectByIdForUpdate" resultMap="orderMap">SELECT * FROM `order` WHERE id = #{id} FOR UPDATE</select>
     <select id="selectVOById" resultType="com.orangejd.pojo.vo.OrderVO">
         SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
         FROM `order` o
@@ -34,26 +35,33 @@
         LEFT JOIN user_profile b_prof ON o.buyer_id = b_prof.account_id
         LEFT JOIN user_profile s_prof ON o.seller_id = s_prof.account_id
         LEFT JOIN work w ON o.work_id = w.id
-        WHERE o.buyer_id = #{buyerId}
+        WHERE o.buyer_id = #{buyerId} AND o.buyer_deleted = 0
         ORDER BY o.create_time DESC LIMIT #{offset}, #{limit}
     </select>
-    <select id="countByBuyerId" resultType="int">SELECT COUNT(*) FROM `order` WHERE buyer_id = #{buyerId}</select>
+    <select id="countByBuyerId" resultType="int">SELECT COUNT(*) FROM `order` WHERE buyer_id = #{buyerId} AND buyer_deleted = 0</select>
     <select id="selectBySellerId" resultType="com.orangejd.pojo.vo.OrderVO">
         SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
         FROM `order` o
         LEFT JOIN user_profile b_prof ON o.buyer_id = b_prof.account_id
         LEFT JOIN user_profile s_prof ON o.seller_id = s_prof.account_id
         LEFT JOIN work w ON o.work_id = w.id
-        WHERE o.seller_id = #{sellerId}
+        WHERE o.seller_id = #{sellerId} AND o.seller_deleted = 0
         ORDER BY o.create_time DESC LIMIT #{offset}, #{limit}
     </select>
-    <select id="countBySellerId" resultType="int">SELECT COUNT(*) FROM `order` WHERE seller_id = #{sellerId}</select>
+    <select id="countBySellerId" resultType="int">SELECT COUNT(*) FROM `order` WHERE seller_id = #{sellerId} AND seller_deleted = 0</select>
     <update id="updateStatus">
         UPDATE `order` SET order_status = #{orderStatus}, update_time = NOW() WHERE id = #{id}
     </update>
-    <delete id="deleteById">
-        DELETE FROM `order` WHERE id = #{id}
-    </delete>
+    <update id="updateStatusIfCurrent">
+        UPDATE `order` SET order_status = #{newStatus}, update_time = NOW()
+        WHERE id = #{id} AND order_status = #{currentStatus}
+    </update>
+    <update id="hideForBuyer">
+        UPDATE `order` SET buyer_deleted = 1, update_time = NOW() WHERE id = #{id} AND buyer_id = #{buyerId}
+    </update>
+    <update id="hideForSeller">
+        UPDATE `order` SET seller_deleted = 1, update_time = NOW() WHERE id = #{id} AND seller_id = #{sellerId}
+    </update>
 
     <select id="selectAll" resultType="com.orangejd.pojo.vo.OrderVO">
         SELECT o.*, b_prof.nickname AS buyerName, s_prof.nickname AS sellerName, w.title AS workTitle
@@ -71,5 +79,9 @@
 
     <select id="countAllOrders" resultType="int">
         SELECT COUNT(*) FROM `order`
+    </select>
+
+    <select id="countBySource" resultType="int">
+        SELECT COUNT(*) FROM `order` WHERE source_type = #{sourceType} AND source_id = #{sourceId}
     </select>
 </mapper>

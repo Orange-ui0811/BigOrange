@@ -5,9 +5,16 @@
         <id property="id" column="id"/><result property="orderId" column="order_id"/>
         <result property="delivererId" column="deliverer_id"/><result property="content" column="content"/>
         <result property="attachmentUrl" column="attachment_url"/><result property="createTime" column="create_time"/>
+        <result property="attachmentName" column="attachment_name"/>
+        <result property="attachmentContentType" column="attachment_content_type"/>
+        <result property="attachmentSize" column="attachment_size"/>
     </resultMap>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO delivery (order_id, deliverer_id, content, attachment_url) VALUES (#{orderId}, #{delivererId}, #{content}, #{attachmentUrl})
+        INSERT INTO delivery (order_id, deliverer_id, content, attachment_url,
+                              attachment_name, attachment_content_type, attachment_size)
+        VALUES (#{orderId}, #{delivererId}, #{content}, #{attachmentUrl},
+                #{attachmentName}, #{attachmentContentType}, #{attachmentSize})
     </insert>
     <select id="selectByOrderId" resultMap="delMap">SELECT * FROM delivery WHERE order_id = #{orderId} ORDER BY create_time DESC</select>
+    <select id="selectById" resultMap="delMap">SELECT * FROM delivery WHERE id = #{id}</select>
 </mapper>

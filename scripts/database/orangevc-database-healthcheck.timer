@@ -1,0 +1,11 @@
+[Unit]
+Description=Check OrangeVC local database every 15 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Persistent=true
+Unit=orangevc-database-healthcheck.service
+
+[Install]
+WantedBy=timers.target

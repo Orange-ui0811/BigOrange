@@ -9,6 +9,7 @@ public class AiServicePricing {
     private String serviceKey;      // 主键，如 ai:trend:v1
     private String serviceName;     // 显示名，如 "趋势分析 V1"
     private Integer segmentCost;    // 消费金额（segments）
+    private Long version;           // 价格版本，扣费流水必须保存快照
     private Long updatedBy;         // 最后修改人 adminId
     private LocalDateTime updatedAt;
 
@@ -20,6 +21,9 @@ public class AiServicePricing {
 
     public Integer getSegmentCost() { return segmentCost; }
     public void setSegmentCost(Integer segmentCost) { this.segmentCost = segmentCost; }
+
+    public Long getVersion() { return version; }
+    public void setVersion(Long version) { this.version = version; }
 
     public Long getUpdatedBy() { return updatedBy; }
     public void setUpdatedBy(Long updatedBy) { this.updatedBy = updatedBy; }

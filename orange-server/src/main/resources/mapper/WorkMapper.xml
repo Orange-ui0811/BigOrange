@@ -13,20 +13,23 @@
         <result property="tags" column="tags"/>
         <result property="coverUrl" column="cover_url"/>
         <result property="demoUrl" column="demo_url"/>
+        <result property="videoUrl" column="video_url"/>
         <result property="auditStatus" column="audit_status"/>
         <result property="visibilityStatus" column="visibility_status"/>
         <result property="publishStatus" column="publish_status"/>
+        <result property="approvalRewardGranted" column="approval_reward_granted"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="ownerName" column="owner_name"/>
         <result property="ownerAvatar" column="owner_avatar"/>
         <result property="favoriteCount" column="favorite_count"/>
         <result property="commentCount" column="comment_count"/>
+        <result property="referencePrice" column="reference_price"/>
     </resultMap>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO work (owner_id, title, summary, detail, category_id, tags, cover_url, demo_url, audit_status, visibility_status, publish_status)
-        VALUES (#{ownerId}, #{title}, #{summary}, #{detail}, #{categoryId}, #{tags}, #{coverUrl}, #{demoUrl}, #{auditStatus}, #{visibilityStatus}, #{publishStatus})
+        INSERT INTO work (owner_id, title, summary, detail, category_id, tags, cover_url, demo_url, video_url, audit_status, visibility_status, publish_status)
+        VALUES (#{ownerId}, #{title}, #{summary}, #{detail}, #{categoryId}, #{tags}, #{coverUrl}, #{demoUrl}, #{videoUrl}, #{auditStatus}, #{visibilityStatus}, #{publishStatus})
     </insert>
 
     <update id="update">
@@ -39,19 +42,26 @@
             <if test="tags != null">tags = #{tags},</if>
             <if test="coverUrl != null">cover_url = #{coverUrl},</if>
             <if test="demoUrl != null">demo_url = #{demoUrl},</if>
+            <if test="videoUrl != null">video_url = #{videoUrl},</if>
             update_time = NOW()
         </set>
         WHERE id = #{id}
     </update>
 
     <select id="selectById" resultMap="workMap">
-        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
         WHERE w.id = #{id}
     </select>
 
+    <select id="selectByIdForUpdate" resultMap="workMap">
+        SELECT * FROM work WHERE id = #{id} FOR UPDATE
+    </select>
+
     <select id="selectByOwnerId" resultMap="workMap">
-        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
         WHERE w.owner_id = #{ownerId}
         ORDER BY w.create_time DESC
@@ -70,12 +80,29 @@
         UPDATE work SET audit_status = #{auditStatus}, update_time = NOW() WHERE id = #{id}
     </update>
 
+    <update id="approveAndMarkRewarded">
+        UPDATE work
+        SET audit_status = 'APPROVED', approval_reward_granted = 1, update_time = NOW()
+        WHERE id = #{id}
+          AND audit_status = 'PENDING_REVIEW'
+          AND approval_reward_granted = 0
+    </update>
+
+    <update id="approvePreviouslyRewarded">
+        UPDATE work
+        SET audit_status = 'APPROVED', update_time = NOW()
+        WHERE id = #{id}
+          AND audit_status = 'PENDING_REVIEW'
+          AND approval_reward_granted = 1
+    </update>
+
     <update id="updateVisibility">
         UPDATE work SET visibility_status = #{visibilityStatus}, update_time = NOW() WHERE id = #{id}
     </update>
 
     <select id="selectPublic" resultMap="workMap">
         SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price,
                (SELECT COUNT(*) FROM favorite f WHERE f.target_type='WORK' AND f.target_id=w.id) AS favorite_count,
                (SELECT COUNT(*) FROM comment c WHERE c.target_type='WORK' AND c.target_id=w.id) AS comment_count
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
@@ -102,7 +129,8 @@
     </select>
 
     <select id="selectAll" resultMap="workMap">
-        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar
+        SELECT w.*, up.nickname AS owner_name, up.avatar_url AS owner_avatar,
+               (SELECT MIN(wso.price) FROM work_sale_option wso WHERE wso.work_id = w.id) AS reference_price
         FROM work w LEFT JOIN user_profile up ON w.owner_id = up.account_id
         <where>
             <if test="auditStatus != null and auditStatus != ''">w.audit_status = #{auditStatus}</if>

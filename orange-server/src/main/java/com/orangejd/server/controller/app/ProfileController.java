@@ -8,7 +8,6 @@ import com.orangejd.pojo.vo.WorkVO;
 import com.orangejd.server.service.impl.ProfileServiceImpl;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.service.ProfileService;
-import com.orangejd.server.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +16,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/app/profile")
+@lombok.RequiredArgsConstructor
 public class ProfileController {
 
-    @Autowired private ProfileService profileService;
+    private final ProfileService profileService;
 
     @GetMapping("/me-info")
     public Result<Map<String, Object>> meInfo() {
@@ -29,6 +29,9 @@ public class ProfileController {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("username", account != null ? account.getUsername() : "");
         result.put("nickname", detail != null && detail.getNickname() != null ? detail.getNickname() : (account != null ? account.getUsername() : ""));
+        result.put("avatarUrl", detail != null ? detail.getAvatarUrl() : null);
+        result.put("bio", detail != null ? detail.getBio() : null);
+        result.put("skills", detail != null ? detail.getSkills() : null);
         return Result.success(result);
     }
 
@@ -60,6 +63,10 @@ public class ProfileController {
         AccountVO account = profileService.getAuthorProfile(accountId);
         if (account == null) return Result.success(null);
         UserProfileVO detail = profileService.getAuthorProfileDetail(accountId);
+        if (detail != null && Integer.valueOf(0).equals(detail.getHomepageVisible())
+                && !accountId.equals(BaseContext.getCurrentId())) {
+            return Result.error("该用户主页未公开");
+        }
         PageResult<WorkVO> works = profileService.getAuthorWorks(accountId, page, size);
 
         Map<String, Object> result = new LinkedHashMap<>();

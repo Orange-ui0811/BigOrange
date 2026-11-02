@@ -19,6 +19,13 @@ public interface DocumentService {
      */
     KnowledgeDocumentVO importFromGithub(String fullName, String content, String period);
 
+    default KnowledgeDocumentVO importFromGithub(String fullName, String content, String period,
+                                                 String configVersion) {
+        return importFromGithub(fullName, content, period);
+    }
+
+    int retryPendingGithub(int limit, String configVersion, Long runId);
+
     /** 从岗位投稿导入 JD 到知识库 */
     void importJobPosting(Long jobId, String position, String direction, String displayContent);
 

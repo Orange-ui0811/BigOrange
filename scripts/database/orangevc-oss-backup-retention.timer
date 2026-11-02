@@ -1,0 +1,11 @@
+[Unit]
+Description=Apply OrangeVC OSS backup retention weekly
+
+[Timer]
+OnCalendar=Sun *-*-* 03:30:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=300
+Unit=orangevc-oss-backup-retention.service
+
+[Install]
+WantedBy=timers.target

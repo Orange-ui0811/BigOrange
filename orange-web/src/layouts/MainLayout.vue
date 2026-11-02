@@ -1,5 +1,6 @@
 <template>
-  <el-container style="height:100vh">
+  <el-container class="app-shell">
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
     <!-- ═══ 侧边栏 ═══ -->
     <el-aside width="252px" class="app-sidebar">
 
@@ -51,13 +52,14 @@
           <rect x="20" y="30" width="1" height="1" fill="#5c260f" />
         </svg>
         <div class="sidebar-brand-text">
-          <span class="brand-name">OrangeVC</span>
+          <span class="brand-name">{{ PUBLIC_BRAND_NAME }}</span>
           <span class="brand-sub">vibe coding market</span>
         </div>
       </div>
 
+      <div class="sidebar-scroll-area">
       <!-- 用户面板 -->
-      <div class="sidebar-user">
+      <div v-if="authenticated" class="sidebar-user">
         <el-avatar :size="44" class="sidebar-avatar" :src="avatarUrl || undefined">
           {{ (nickname || me.nickname || me.username || '?')[0] }}
         </el-avatar>
@@ -65,6 +67,11 @@
           <strong>{{ nickname || me.nickname || me.username }}</strong>
           <span>创作者</span>
         </div>
+      </div>
+      <div v-else class="sidebar-guest">
+        <strong>公开浏览模式</strong>
+        <span>当前可浏览 AI 工具首页与公开作品，登录后即可开始分析、保存记录和使用完整功能。</span>
+        <button type="button" @click="router.push('/login')">登录或注册</button>
       </div>
 
       <div class="sidebar-divider"></div>
@@ -84,20 +91,32 @@
             <span>AI 工具</span>
           </span>
         </el-menu-item>
-        <el-menu-item index="/publish">
+        <el-menu-item v-if="authenticated" index="/ai-records">
+          <span class="nav-item-content">
+            <el-icon><Document /></el-icon>
+            <span>AI 记录</span>
+          </span>
+        </el-menu-item>
+        <el-menu-item v-if="authenticated" index="/persona-workshop">
+          <span class="nav-item-content">
+            <el-icon><MagicStick /></el-icon>
+            <span>橙子画像工坊</span>
+          </span>
+        </el-menu-item>
+        <el-menu-item v-if="authenticated" index="/publish">
           <span class="nav-item-content">
             <el-icon><Edit /></el-icon>
             <span>发布</span>
           </span>
         </el-menu-item>
-        <el-menu-item index="/chat">
+        <el-menu-item v-if="authenticated" index="/chat">
           <span class="nav-item-content">
             <el-icon><ChatDotRound /></el-icon>
             <span>消息</span>
           </span>
           <span v-if="chatUnread" class="menu-badge">{{ chatUnread }}</span>
         </el-menu-item>
-        <el-menu-item index="/me">
+        <el-menu-item v-if="authenticated" index="/me">
           <span class="nav-item-content">
             <el-icon><User /></el-icon>
             <span>我的</span>
@@ -106,27 +125,42 @@
       </el-menu>
 
       <!-- 橙子使用指南 -->
-      <GuideBubble />
+      <GuideBubble v-if="authenticated" />
 
       <!-- 功能归属提示 -->
-      <div class="nav-hint">
+      <div v-if="authenticated" class="nav-hint">
         <strong>功能归属</strong>
         榜单、趋势分析、方案设计 → AI 工具<br/>
+        画像、素材箱、橙子换装 → 橙子画像工坊<br/>
         通知、收藏、历史、配额、设置 → 我的
+      </div>
       </div>
 
       <!-- ═══ 底部工具 ═══ -->
       <div class="sidebar-tools">
         <div class="sidebar-divider"></div>
-        <button class="tool-btn" @click="$router.push('/me/notifications')">
+        <button v-if="authenticated" class="tool-btn" type="button" @click="$router.push('/me/notifications')">
           <span>系统通知</span>
           <span v-if="unreadCount" class="menu-badge">{{ unreadCount }}</span>
         </button>
-        <button class="tool-btn" @click="$router.push('/me/settings')">
+        <button v-if="authenticated" class="tool-btn" type="button" @click="$router.push('/me/settings')">
           <span>设置</span>
         </button>
-        <button class="tool-btn logout-btn" @click="logout">
+        <div class="legal-links" aria-label="法律与安全">
+          <router-link to="/legal/terms">用户协议</router-link>
+          <router-link to="/legal/privacy">隐私政策</router-link>
+          <router-link to="/support">举报申诉</router-link>
+        </div>
+        <div class="site-identity-mini">
+          <span>{{ publicOperatorLabel }}</span>
+          <a :href="officialSiteUrl">orangevf.com</a>
+          <a v-if="legalIcpRecord" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ legalIcpRecord }}</a>
+        </div>
+        <button v-if="authenticated" class="tool-btn logout-btn" type="button" @click="logout">
           <span>退出</span>
+        </button>
+        <button v-else class="tool-btn login-tool-btn" type="button" @click="router.push('/login')">
+          <span>登录或注册</span>
         </button>
       </div>
     </el-aside>
@@ -135,306 +169,43 @@
     <el-container>
       <el-header class="app-header">
         <div class="topbar-title">
-          <h1>{{ route.meta.title || 'OrangeVC' }}</h1>
+          <h1>{{ route.meta.title || PUBLIC_BRAND_NAME }}</h1>
         </div>
         <div class="top-actions"></div>
       </el-header>
-      <el-main class="app-main">
+      <el-main id="main-content" class="app-main" tabindex="-1">
         <router-view />
+        <footer class="app-site-footer" aria-label="网站备案信息">
+          <span>{{ publicOperatorLabel }}</span>
+          <a :href="officialSiteUrl">orangevf.com</a>
+          <a v-if="legalIcpRecord" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ legalIcpRecord }}</a>
+        </footer>
       </el-main>
     </el-container>
+
+    <nav class="mobile-nav" aria-label="主导航">
+      <button v-for="item in visibleMobileNavItems" :key="item.path" type="button"
+              :class="{ active: activeMenu === item.path }" :aria-current="activeMenu === item.path ? 'page' : undefined"
+              @click="router.push(item.path)">
+        <el-icon><component :is="item.icon" /></el-icon>
+        <span>{{ item.label }}</span>
+        <span v-if="item.path === '/chat' && chatUnread" class="mobile-badge">{{ chatUnread }}</span>
+      </button>
+    </nav>
+    <ReleaseAnnouncementDialog v-if="authenticated" :account-id="accountId" />
   </el-container>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { Shop, Cpu, Edit, ChatDotRound, User } from '@element-plus/icons-vue'
-import GuideBubble from '../components/GuideBubble.vue'
-import request from '../api/request'
-import { unreadCount, avatarUrl, nickname } from '../stores/unread'
-import { tradeEnabled } from '../stores/tradeMode'
+import { useMainLayout } from '../composables/useMainLayout'
+import { PUBLIC_BRAND_NAME } from '../config/brand'
 
-const API = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8080'
-const route = useRoute()
-const router = useRouter()
-const me = ref({ username: '', nickname: '' })
-const chatUnread = ref(0)
-const logout = () => { sessionStorage.removeItem('appToken'); router.push('/login') }
-
-/* ---- 根据子路由高亮父级菜单 ---- */
-const activeMenu = computed(() => {
-  const p = route.path
-  if (p.startsWith('/market') || p.startsWith('/work/') || p.startsWith('/req/') || p.startsWith('/order/')) return '/market'
-  if (p.startsWith('/ai') || p.startsWith('/leaderboard') || p.startsWith('/trend') || p.startsWith('/plan') || p.startsWith('/job')) return '/ai'
-  if (p.startsWith('/publish')) return '/publish'
-  if (p.startsWith('/chat')) return '/chat'
-  if (p.startsWith('/me') || p.startsWith('/profile')) return '/me'
-  return '/market'
-})
-
-onMounted(async () => {
-  try { const res = await request.get('/app/notification/unread-count'); if (res.code === 1) unreadCount.value = res.data } catch {}
-  try { const res = await request.get('/app/profile/me'); if (res.code === 1) { me.value = res.data; nickname.value = res.data.nickname || ''; avatarUrl.value = res.data.avatarUrl || '' } } catch {}
-  try {
-    const res = await request.get('/app/conversation/list?page=1&size=50')
-    if (res.code === 1 && res.data?.records) chatUnread.value = res.data.records.reduce((s, c) => s + (c.unreadCount || 0), 0)
-  } catch {}
-  try { const r = await request.get('/app/config/trade-mode'); if (r.code === 1) tradeEnabled.value = r.data.enabled } catch {}
-})
+const { GuideBubble, ReleaseAnnouncementDialog, Shop, Cpu, Edit, ChatDotRound, User, Document, route,
+  MagicStick, unreadCount, avatarUrl, nickname, me, chatUnread, visibleMobileNavItems,
+  accountId, authenticated, router, logout, activeMenu,
+  legalIcpRecord, publicOperatorLabel, officialSiteUrl } = useMainLayout()
 </script>
 
 <style scoped>
-/* ===== 侧边栏 ===== */
-.app-sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  background: rgba(255, 255, 255, .86) !important;
-  border-right: 1px solid rgba(254, 215, 170, .85) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-}
-
-/* 品牌 */
-.sidebar-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-}
-
-.sidebar-logo {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  filter: drop-shadow(0 7px 0 rgba(92, 38, 15, .14));
-}
-
-.sidebar-brand-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand-name {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 900;
-  color: var(--brand-strong);
-  letter-spacing: -.045em;
-}
-
-.brand-sub {
-  font-family: var(--font-body);
-  font-size: 11px;
-  color: var(--text-secondary);
-  font-weight: 700;
-  margin-top: 1px;
-}
-
-/* 用户面板 */
-.sidebar-user {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  margin: 0;
-  border: 1px solid var(--border-orange);
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(255, 237, 213, 0.7), rgba(255, 255, 255, 0.7));
-  box-shadow: var(--shadow-pixel-sm);
-}
-
-.sidebar-avatar {
-  background: linear-gradient(135deg, var(--brand), #fbbf24) !important;
-  border: 2px solid #fff !important;
-  flex-shrink: 0;
-  border-radius: 16px !important;
-}
-
-.sidebar-user-info strong {
-  display: block;
-  font-size: 13px;
-  color: var(--text-primary);
-}
-
-.sidebar-user-info span {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-/* 分割线 */
-.sidebar-divider {
-  height: 1px;
-  background: var(--border-orange);
-  margin: 8px 14px;
-  opacity: 0.7;
-}
-
-/* 导航标签 */
-.nav-section-label {
-  margin: 6px 14px 4px;
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* 菜单 */
-.sidebar-menu {
-  flex: 0 0 auto;
-  overflow-y: visible;
-  max-height: 320px;
-  border-right: none !important;
-  background: transparent !important;
-  padding: 2px 8px;
-}
-.sidebar-menu .el-menu-item {
-  font-family: var(--font-mono) !important;
-  font-size: 13px !important;
-  min-height: 42px !important;
-  line-height: 42px !important;
-  color: var(--text-secondary) !important;
-  border-radius: 14px !important;
-  padding: 0 12px !important;
-  margin: 2px 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  border-left: 3px solid transparent !important;
-  transition: background 0.15s, color 0.15s, border-color 0.15s !important;
-}
-.sidebar-menu .el-menu-item:hover {
-  background: #fff7ed !important;
-  color: var(--brand-strong) !important;
-  transform: translateX(2px);
-}
-.sidebar-menu .el-menu-item.is-active {
-  color: var(--brand-strong) !important;
-  background: var(--brand-soft) !important;
-  border-left: 3px solid var(--brand) !important;
-  font-weight: 800 !important;
-}
-.sidebar-menu .el-menu-item .el-icon {
-  font-size: 18px !important;
-  margin-right: 0 !important;
-}
-.nav-item-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 功能归属提示 */
-.nav-hint {
-  margin: 10px 10px 6px;
-  padding: 10px 12px;
-  border: 1px solid rgba(254, 215, 170, 0.7);
-  border-radius: 16px;
-  background: rgba(255, 250, 244, 0.6);
-  color: var(--text-muted);
-  font-size: 11px;
-  line-height: 1.6;
-}
-.nav-hint strong {
-  display: block;
-  margin-bottom: 3px;
-  color: var(--brown);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: -0.3px;
-}
-
-/* 徽章 */
-.menu-badge {
-  min-width: 22px;
-  height: 22px;
-  padding: 0 7px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  color: #fff;
-  background: var(--brand);
-  font-size: 11px;
-  font-family: var(--font-mono);
-  font-weight: 900;
-  line-height: 1;
-}
-
-/* 底部工具区 */
-.sidebar-tools {
-  padding: 14px 8px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  border-top: 1px solid rgba(254, 215, 170, .85);
-  margin-top: auto;
-}
-
-.tool-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 38px;
-  border: none;
-  border-radius: 12px;
-  padding: 0 12px;
-  background: transparent;
-  color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-  text-align: left;
-}
-.tool-btn:hover {
-  background: #fff7ed;
-  color: var(--brand-strong);
-}
-.logout-btn:hover {
-  color: #e53935;
-  background: #fff5f5;
-}
-
-/* ===== 顶栏 ===== */
-.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: rgba(255, 250, 244, 0.88) !important;
-  border-bottom: 1px solid rgba(254, 215, 170, 0.7) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 0 28px !important;
-  height: 52px !important;
-}
-
-.topbar-title h1 {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--text-primary);
-  letter-spacing: -0.5px;
-}
-
-.top-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* ===== 内容区 ===== */
-.app-main {
-  background: transparent !important;
-  padding: 24px 32px 48px !important;
-}
+@import '../styles/layouts/main-layout.css';
 </style>

@@ -1,0 +1,2 @@
+ALTER TABLE work
+    MODIFY COLUMN video_url VARCHAR(512) NULL COMMENT '作品视频文件地址';

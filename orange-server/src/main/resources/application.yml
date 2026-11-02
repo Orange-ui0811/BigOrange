@@ -9,12 +9,17 @@ spring:
       charset: UTF-8
       force: true
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 200MB
+      max-request-size: 205MB
   main:
     allow-circular-references: true
   cache:
     type: redis
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 1
+    locations: classpath:db/migration
   redis:
     host: ${orange.redis.host}
     port: ${orange.redis.port}
@@ -28,9 +33,29 @@ logging:
   level:
     com.orangejd: info
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: never
+  metrics:
+    tags:
+      application: orangevc
+
 orange:
+  bootstrap-admin:
+    username: ${ORANGE_ADMIN_BOOTSTRAP_USERNAME:}
+    password: ${ORANGE_ADMIN_BOOTSTRAP_PASSWORD:}
+  trade:
+    simulated-payment-enabled: false
+  security:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://localhost:5174,http://localhost:15173,http://localhost:15174}
   upload:
     path: D:/Orangejd/uploads
+  public-base-url: ${PUBLIC_BASE_URL:http://localhost:8080}
   jwt:
     admin-secret-key: change-me-admin
     admin-ttl: 7200000
@@ -39,7 +64,11 @@ orange:
     app-ttl: 7200000
     app-token-name: App-Token
   oss:
-    endpoint: ${orange.oss.endpoint}
-    access-key-id: ${orange.oss.access-key-id}
-    access-key-secret: ${orange.oss.access-key-secret}
-    bucket-name: ${orange.oss.bucket-name}
+    enabled: ${OSS_ENABLED:false}
+    endpoint: ${OSS_ENDPOINT:}
+    public-endpoint: ${OSS_PUBLIC_ENDPOINT:}
+    region: ${OSS_REGION:cn-shanghai}
+    access-key-id: ${OSS_ACCESS_KEY:}
+    access-key-secret: ${OSS_ACCESS_SECRET:}
+    bucket-name: ${OSS_BUCKET:}
+    signed-url-ttl-seconds: ${OSS_SIGNED_URL_TTL_SECONDS:300}

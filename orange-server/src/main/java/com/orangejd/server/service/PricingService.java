@@ -1,107 +1,137 @@
 package com.orangejd.server.service;
 
+import com.orangejd.common.exception.BaseException;
 import com.orangejd.pojo.entity.AiServicePricing;
 import com.orangejd.pojo.entity.PricingChangeLog;
 import com.orangejd.server.mapper.PricingMapper;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * 定价管理服务
- * MySQL 主存储 + 内存缓存，启动时加载
- */
 @Service
 public class PricingService {
 
+    public static final String REWARD_WORK_APPROVED = "reward:work-approved";
+    public static final String REWARD_JOB_APPROVED = "reward:job-approved";
+    public static final String REWARD_COMPETITION_APPROVED = "reward:competition-approved";
+
     private static final Logger log = LoggerFactory.getLogger(PricingService.class);
 
-    @Autowired
-    private PricingMapper pricingMapper;
-
-    /** 内存缓存：serviceKey → segmentCost */
-    private final Map<String, Integer> costCache = new ConcurrentHashMap<>();
-
-    /** 内存缓存：serviceKey → serviceName */
-    private final Map<String, String> nameCache = new ConcurrentHashMap<>();
-
-    /** 默认定价（兜底，防止数据库无数据） */
-    private static final Map<String, Integer> DEFAULTS = Map.of(
-        "ai:trend:v1", 50,
-        "ai:trend:v2", 50,
-        "ai:plan", 40,
-        "ai:match", 50
+    private static final Map<String, Integer> DEFAULTS = Map.ofEntries(
+            Map.entry("ai:trend:v1", 50),
+            Map.entry("ai:trend:v2", 50),
+            Map.entry("ai:plan", 40),
+            Map.entry("ai:match", 50),
+            Map.entry("ai:launch-check", 40),
+            Map.entry("ai:open-source-match", 40),
+            Map.entry("ai:open-source-job-match", 40),
+            Map.entry("ai:open-source-guide", 50),
+            Map.entry(REWARD_WORK_APPROVED, 50),
+            Map.entry(REWARD_JOB_APPROVED, 50),
+            Map.entry(REWARD_COMPETITION_APPROVED, 20)
     );
+
+    private static final Map<String, String> SERVICE_NAMES = Map.ofEntries(
+            Map.entry("ai:trend:v1", "趋势分析"),
+            Map.entry("ai:trend:v2", "深度趋势分析"),
+            Map.entry("ai:plan", "方案设计"),
+            Map.entry("ai:match", "岗位匹配"),
+            Map.entry("ai:launch-check", "上线体检"),
+            Map.entry("ai:open-source-match", "开源 Issue AI 匹配"),
+            Map.entry("ai:open-source-job-match", "开源 Issue 岗位匹配"),
+            Map.entry("ai:open-source-guide", "开源贡献指南"),
+            Map.entry(REWARD_WORK_APPROVED, "作品审核通过奖励"),
+            Map.entry(REWARD_JOB_APPROVED, "岗位投稿审核通过奖励"),
+            Map.entry(REWARD_COMPETITION_APPROVED, "比赛投稿审核通过奖励")
+    );
+
+    private final PricingMapper pricingMapper;
+    private final Map<String, Integer> costCache = new ConcurrentHashMap<>();
+    private final Map<String, String> nameCache = new ConcurrentHashMap<>();
+    private final Map<String, PricingSnapshot> snapshotCache = new ConcurrentHashMap<>();
+
+    public PricingService(PricingMapper pricingMapper) {
+        this.pricingMapper = pricingMapper;
+    }
 
     @PostConstruct
     public void init() {
         loadFromDB();
     }
 
-    /** 从 MySQL 加载全部定价到内存缓存 */
     public synchronized void loadFromDB() {
+        costCache.clear();
+        nameCache.clear();
+        snapshotCache.clear();
+        DEFAULTS.forEach(costCache::put);
+        SERVICE_NAMES.forEach(nameCache::put);
         try {
-            List<AiServicePricing> all = pricingMapper.selectAll();
-            if (all.isEmpty()) {
-                log.info("[定价] 数据库无记录，使用硬编码默认值");
-                DEFAULTS.forEach((k, v) -> costCache.put(k, v));
-            } else {
-                for (AiServicePricing p : all) {
-                    costCache.put(p.getServiceKey(), p.getSegmentCost());
-                    nameCache.put(p.getServiceKey(), p.getServiceName());
-                    log.info("[定价] 加载: {} = {} segments", p.getServiceKey(), p.getSegmentCost());
-                }
+            for (AiServicePricing pricing : pricingMapper.selectAll()) {
+                costCache.put(pricing.getServiceKey(), pricing.getSegmentCost());
+                nameCache.put(pricing.getServiceKey(), pricing.getServiceName());
+                long version = pricing.getVersion() == null ? 1L : pricing.getVersion();
+                snapshotCache.put(pricing.getServiceKey(), new PricingSnapshot(
+                        pricing.getServiceKey(), pricing.getSegmentCost().longValue(), version));
             }
-        } catch (Exception e) {
-            log.error("[定价] 数据库加载失败，使用默认值兜底: {}", e.getMessage());
-            DEFAULTS.forEach((k, v) -> costCache.putIfAbsent(k, v));
+        } catch (Exception exception) {
+            log.error("[pricing] Failed to load versioned pricing; charging is disabled: {}",
+                    exception.getMessage());
         }
     }
 
-    /**
-     * 获取服务消费金额
-     * @param serviceKey 如 ai:trend:v1
-     * @return 消费金额（segments），未找到返回默认值
-     */
     public int getCost(String serviceKey) {
         Integer cost = costCache.get(serviceKey);
-        if (cost != null) return cost;
-        // 兜底
-        Integer fallback = DEFAULTS.getOrDefault(serviceKey, 50);
-        log.warn("[定价] {} 未配置，使用兜底值 {}", serviceKey, fallback);
-        return fallback;
+        if (cost != null) {
+            return cost;
+        }
+        throw new IllegalArgumentException("未知定价项: " + serviceKey);
     }
 
-    /** 获取所有定价信息 */
+    /** Charging is fail-closed until a versioned price is loaded from the database. */
+    public PricingSnapshot getSnapshot(String serviceKey) {
+        PricingSnapshot snapshot = snapshotCache.get(serviceKey);
+        if (snapshot == null) throw new BaseException("配额定价暂不可用，请稍后重试");
+        return snapshot;
+    }
+
+    public int getReward(String serviceKey) {
+        if (!isRewardKey(serviceKey)) {
+            throw new IllegalArgumentException("不是奖励定价项: " + serviceKey);
+        }
+        return getCost(serviceKey);
+    }
+
     public List<AiServicePricing> listAll() {
         return pricingMapper.selectAll();
     }
 
-    /** 获取最近 N 条变更日志 */
     public List<PricingChangeLog> getRecentLogs(int limit) {
         return pricingMapper.selectRecentLogs(limit);
     }
 
-    /**
-     * 更新定价并记录审计日志
-     * @param adminId 操作管理员 ID
-     * @return 更新后的 cost
-     */
-    public int updateCost(String serviceKey, int newCost, Long adminId, String serviceName) {
-        // 校验范围
-        if (newCost < 1 || newCost > 10000) {
-            throw new IllegalArgumentException("定价范围：1 ~ 10000 segments");
+    @Transactional
+    public int updateCost(String serviceKey, int newCost, Long adminId, String ignoredServiceName) {
+        if (!DEFAULTS.containsKey(serviceKey)) {
+            throw new IllegalArgumentException("未知定价项: " + serviceKey);
+        }
+        int minimum = isRewardKey(serviceKey) ? 0 : 1;
+        if (newCost < minimum || newCost > 10000) {
+            throw new IllegalArgumentException(
+                    isRewardKey(serviceKey)
+                            ? "奖励数量必须在 0-10000 之间"
+                            : "消耗数量必须在 1-10000 之间"
+            );
         }
 
-        int oldCost = costCache.getOrDefault(serviceKey, DEFAULTS.getOrDefault(serviceKey, 50));
+        int oldCost = getCost(serviceKey);
+        String serviceName = SERVICE_NAMES.get(serviceKey);
 
-        // 写 MySQL
         AiServicePricing pricing = new AiServicePricing();
         pricing.setServiceKey(serviceKey);
         pricing.setServiceName(serviceName);
@@ -109,7 +139,6 @@ public class PricingService {
         pricing.setUpdatedBy(adminId);
         pricingMapper.upsert(pricing);
 
-        // 写审计日志
         PricingChangeLog logEntry = new PricingChangeLog();
         logEntry.setServiceKey(serviceKey);
         logEntry.setOldCost(oldCost);
@@ -117,11 +146,20 @@ public class PricingService {
         logEntry.setAdminId(adminId);
         pricingMapper.insertChangeLog(logEntry);
 
-        // 刷新内存缓存
-        costCache.put(serviceKey, newCost);
-        if (serviceName != null) nameCache.put(serviceKey, serviceName);
-
-        log.info("[定价] adminId={} 修改 {}: {} → {}", adminId, serviceKey, oldCost, newCost);
+        AiServicePricing persisted = pricingMapper.selectByKey(serviceKey);
+        if (persisted == null || persisted.getVersion() == null) {
+            snapshotCache.remove(serviceKey);
+            throw new BaseException("定价已保存但版本读取失败，请刷新后重试");
+        }
+        costCache.put(serviceKey, persisted.getSegmentCost());
+        nameCache.put(serviceKey, persisted.getServiceName());
+        snapshotCache.put(serviceKey, new PricingSnapshot(serviceKey,
+                persisted.getSegmentCost().longValue(), persisted.getVersion()));
+        log.info("[pricing] adminId={} updated {}: {} -> {}", adminId, serviceKey, oldCost, newCost);
         return newCost;
+    }
+
+    private boolean isRewardKey(String serviceKey) {
+        return serviceKey != null && serviceKey.startsWith("reward:");
     }
 }

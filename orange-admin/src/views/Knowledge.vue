@@ -2,18 +2,50 @@
   <div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <h3 style="margin:0">知识库管理</h3>
+      <div style="display:flex;gap:8px;align-items:center">
+      <el-button :loading="reindexRunning" @click="handleReindex">
+        <el-icon style="margin-right:4px"><Refresh /></el-icon>重建向量索引
+      </el-button>
       <el-upload :before-upload="handleUpload" :show-file-list="false" accept=".md,.txt" :http-request="() => {}">
         <el-button type="primary" :loading="uploading"><el-icon style="margin-right:4px"><Upload /></el-icon>上传文档</el-button>
       </el-upload>
+      </div>
+    </div>
+
+    <div v-if="reindexStatus.state !== 'IDLE'" style="margin-bottom:16px">
+      <el-alert :title="reindexStatusText" :type="reindexAlertType" :closable="false" show-icon />
+      <el-progress
+        v-if="reindexRunning"
+        :percentage="reindexPercent"
+        :stroke-width="8"
+        style="margin-top:10px"
+      />
     </div>
 
     <!-- 统计概览 -->
     <el-row :gutter="12" style="margin-bottom:16px" v-if="stats.totalDocs">
-      <el-col :span="6"><el-card shadow="never" style="text-align:center"><div style="font-size:24px;font-weight:700;color:#e65100">{{ stats.totalDocs }}</div><div style="font-size:12px;color:#909399">文档总数</div></el-card></el-col>
-      <el-col :span="6"><el-card shadow="never" style="text-align:center"><div style="font-size:24px;font-weight:700;color:#67c23a">{{ stats.githubCount }}</div><div style="font-size:12px;color:#909399">GitHub 采集</div></el-card></el-col>
-      <el-col :span="6"><el-card shadow="never" style="text-align:center"><div style="font-size:24px;font-weight:700;color:#409eff">{{ stats.manualCount }}</div><div style="font-size:12px;color:#909399">手动上传</div></el-card></el-col>
-      <el-col :span="6"><el-card shadow="never" style="text-align:center"><div style="font-size:24px;font-weight:700;color:#909399">{{ stats.totalChunks }}</div><div style="font-size:12px;color:#909399">总切片数</div></el-card></el-col>
+      <el-col v-for="item in statCards" :key="item.label" :xs="12" :sm="8" :lg="4">
+        <el-card shadow="never" style="text-align:center;margin-bottom:8px"><div :style="{fontSize:'24px',fontWeight:700,color:item.color}">{{ item.value }}</div><div style="font-size:12px;color:#909399">{{ item.label }}</div></el-card>
+      </el-col>
     </el-row>
+
+    <el-collapse v-if="projectIndexRows.length" style="margin-bottom:16px">
+      <el-collapse-item :title="`项目索引状态（${projectIndexSummary.done} 已完成 / ${projectIndexSummary.pending} 处理中 / ${projectIndexSummary.failed} 失败）`">
+        <el-table :data="projectIndexRows" size="small" max-height="320">
+          <el-table-column label="来源" width="130">
+            <template #default="{ row }"><el-tag :type="row.projectType === 'BEGINNER_PROJECT' ? 'warning' : 'primary'">{{ row.projectType === 'BEGINNER_PROJECT' ? '新手榜单采集' : '职业榜单采集' }}</el-tag></template>
+          </el-table-column>
+          <el-table-column prop="projectId" label="项目 ID" width="100" />
+          <el-table-column prop="sourceRef" label="索引标识" min-width="160" />
+          <el-table-column label="状态" width="110">
+            <template #default="{ row }"><el-tag :type="indexStatusType(row.indexStatus)">{{ indexStatusLabel(row.indexStatus) }}</el-tag></template>
+          </el-table-column>
+          <el-table-column prop="chunkCount" label="切片" width="70" />
+          <el-table-column prop="lastIndexedAt" label="最近索引" min-width="160" />
+          <el-table-column prop="lastError" label="失败原因" min-width="220" show-overflow-tooltip />
+        </el-table>
+      </el-collapse-item>
+    </el-collapse>
 
     <!-- 搜索 -->
     <div style="display:flex;gap:12px;margin-bottom:12px;align-items:center">
@@ -22,6 +54,8 @@
         <el-radio-button value="">全部</el-radio-button>
         <el-radio-button value="MANUAL">手动上传</el-radio-button>
         <el-radio-button value="GITHUB">GitHub采集</el-radio-button>
+        <el-radio-button value="BEGINNER_PROJECT">新手项目</el-radio-button>
+        <el-radio-button value="CAREER_PROJECT">职业项目</el-radio-button>
         <el-radio-button value="JOB_POSTING">岗位招聘</el-radio-button>
       </el-radio-group>
     </div>
@@ -32,9 +66,10 @@
         <div style="display:flex;justify-content:space-between;align-items:center">
           <div style="flex:1;min-width:0">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
-              <span style="font-weight:600;font-size:14px;color:#e65100;cursor:pointer" @click="openDetail(doc)">{{ doc.source === 'GITHUB' ? '📦' : '📄' }} {{ doc.title }}</span>
-              <el-tag size="small" :type="doc.source==='GITHUB'?'success':doc.source==='JOB_POSTING'?'danger':''">{{ doc.source==='GITHUB'?'GitHub采集':doc.source==='JOB_POSTING'?'岗位招聘':'手动上传' }}</el-tag>
+              <span style="font-weight:600;font-size:14px;color:#e65100;cursor:pointer" @click="openDetail(doc)">{{ ['GITHUB','BEGINNER_PROJECT','CAREER_PROJECT'].includes(doc.source) ? '📦' : '📄' }} {{ doc.title }}</span>
+              <el-tag size="small" :type="sourceType(doc.source)">{{ sourceLabel(doc.source) }}</el-tag>
               <el-tag size="small" :type="doc.period==='week'||doc.period==='new'?'warning':'info'">{{ doc.period==='week'||doc.period==='new'?'30天后清理':'永久' }}</el-tag>
+              <el-tag size="small" :type="indexStatusType(doc.vectorStatus)">向量：{{ indexStatusLabel(doc.vectorStatus) }}</el-tag>
             </div>
             <div style="color:#909399;font-size:12px">{{ doc.chunkCount }} 个切片 <el-divider direction="vertical" /> {{ doc.createTime || '-' }}</div>
           </div>
@@ -47,16 +82,23 @@
 
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="800px" top="5vh">
       <div v-if="detailLoading" v-loading="true" style="min-height:200px" />
-      <div v-else v-html="rendered" style="max-height:70vh;overflow:auto;background:#fafafa;padding:20px;border-radius:8px;font-size:14px;line-height:1.8" />
+      <div v-else v-safe-html="rendered" style="max-height:70vh;overflow:auto;background:#fafafa;padding:20px;border-radius:8px;font-size:14px;line-height:1.8" />
     </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Upload } from '@element-plus/icons-vue'
-import { uploadDocument, listDocuments, deleteDocument } from '../api/knowledge'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { Upload, Refresh } from '@element-plus/icons-vue'
+import {
+  uploadDocument,
+  listDocuments,
+  deleteDocument,
+  startKnowledgeReindex,
+  getKnowledgeReindexStatus,
+  getProjectKnowledgeIndexStatus
+} from '../api/knowledge'
 import request from '../api/request'
 
 const docs = ref([])
@@ -68,7 +110,47 @@ const dialogVisible = ref(false)
 const dialogTitle = ref('')
 const detailContent = ref('')
 const detailLoading = ref(false)
-const stats = ref({ totalDocs: 0, githubCount: 0, manualCount: 0, totalChunks: 0 })
+const stats = ref({ totalDocs: 0, githubCount: 0, beginnerCount: 0, careerCount: 0, jobCount: 0, manualCount: 0, totalChunks: 0 })
+const projectIndexRows = ref([])
+const reindexStatus = ref({ state: 'IDLE', totalDocuments: 0, processedDocuments: 0, indexedChunks: 0, skippedDocuments: 0, message: '' })
+let reindexTimer = null
+
+const reindexRunning = computed(() => ['QUEUED', 'CHECKING', 'RUNNING'].includes(reindexStatus.value.state))
+const reindexPercent = computed(() => {
+  const total = reindexStatus.value.totalDocuments || 0
+  return total ? Math.min(100, Math.round((reindexStatus.value.processedDocuments || 0) * 100 / total)) : 0
+})
+const reindexAlertType = computed(() => {
+  if (reindexStatus.value.state === 'FAILED') return 'error'
+  if (reindexStatus.value.state === 'COMPLETED') return 'success'
+  return 'info'
+})
+const reindexStatusText = computed(() => {
+  const s = reindexStatus.value
+  if (s.state === 'COMPLETED') return `向量索引重建完成：${s.indexedChunks} 个分片，跳过 ${s.skippedDocuments} 篇无原文文档`
+  if (s.state === 'FAILED') return `向量索引重建失败：${s.message || '未知错误'}`
+  if (reindexRunning.value) return `正在重建向量索引：${s.processedDocuments || 0}/${s.totalDocuments || 0} 篇，已写入 ${s.indexedChunks || 0} 个分片`
+  return s.message || '尚未开始'
+})
+const statCards = computed(() => [
+  { label: '文档总数', value: stats.value.totalDocs, color: '#e65100' },
+  { label: 'GitHub 热榜', value: stats.value.githubCount, color: '#67c23a' },
+  { label: '新手榜单', value: stats.value.beginnerCount, color: '#d97706' },
+  { label: '职业榜单', value: stats.value.careerCount, color: '#2563eb' },
+  { label: '岗位招聘', value: stats.value.jobCount, color: '#ef4444' },
+  { label: '手动上传', value: stats.value.manualCount, color: '#409eff' },
+  { label: '总切片数', value: stats.value.totalChunks, color: '#909399' }
+])
+const projectIndexSummary = computed(() => projectIndexRows.value.reduce((value, row) => {
+  if (row.indexStatus === 'DONE') value.done++
+  else if (row.indexStatus === 'FAILED') value.failed++
+  else value.pending++
+  return value
+}, { done: 0, pending: 0, failed: 0 }))
+const sourceLabel = source => ({ GITHUB: 'GitHub 热榜采集', BEGINNER_PROJECT: '新手榜单采集', CAREER_PROJECT: '职业榜单采集', JOB_POSTING: '岗位招聘', MANUAL: '手动上传' }[source] || source)
+const sourceType = source => ({ GITHUB: 'success', BEGINNER_PROJECT: 'warning', CAREER_PROJECT: 'primary', JOB_POSTING: 'danger', MANUAL: 'info' }[source] || 'info')
+const indexStatusLabel = status => ({ DONE: '已完成', PENDING: '待处理', INDEXING: '索引中', FAILED: '失败', REMOVED: '已移除' }[status] || '未知')
+const indexStatusType = status => ({ DONE: 'success', PENDING: 'warning', INDEXING: 'primary', FAILED: 'danger', REMOVED: 'info' }[status] || 'info')
 
 const filtered = computed(() => {
   let result = docs.value
@@ -105,13 +187,49 @@ const rendered = computed(() => {
 const load = async () => {
   loading.value = true
   try {
-    const [listRes, statsRes] = await Promise.all([
+    const [listRes, statsRes, projectStatusRes] = await Promise.all([
       listDocuments(),
-      request.get('/admin/knowledge/document/stats')
+      request.get('/admin/knowledge/document/stats'),
+      getProjectKnowledgeIndexStatus()
     ])
     docs.value = listRes.data || []
     if (statsRes.data) stats.value = statsRes.data
+    projectIndexRows.value = projectStatusRes.data || []
   } finally { loading.value = false }
+}
+
+const scheduleReindexPoll = () => {
+  if (reindexTimer) clearTimeout(reindexTimer)
+  if (reindexRunning.value) reindexTimer = setTimeout(pollReindexStatus, 2000)
+}
+
+const pollReindexStatus = async () => {
+  try {
+    const response = await getKnowledgeReindexStatus()
+    if (response.data) reindexStatus.value = response.data
+  } finally {
+    scheduleReindexPoll()
+  }
+}
+
+const handleReindex = async () => {
+  try {
+    await ElMessageBox.confirm('重建期间向量检索结果可能暂时不完整，确认继续吗？', '重建向量索引', {
+      confirmButtonText: '开始重建',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+    const response = await startKnowledgeReindex()
+    if (response.code !== 1) {
+      ElMessage.error(response.msg || '启动失败')
+      return
+    }
+    if (response.data) reindexStatus.value = response.data
+    ElMessage.success('重建任务已启动')
+    scheduleReindexPoll()
+  } catch (error) {
+    if (error !== 'cancel' && error !== 'close') ElMessage.error(error?.response?.data?.msg || '启动失败')
+  }
 }
 
 const openDetail = async (doc) => {
@@ -133,5 +251,11 @@ const handleUpload = async (file) => {
 
 const handleDelete = async (id) => { try { await deleteDocument(id); ElMessage.success('已删除'); await load() } catch { ElMessage.error('删除失败') } }
 
-onMounted(() => load())
+onMounted(async () => {
+  await Promise.all([load(), pollReindexStatus()])
+})
+
+onBeforeUnmount(() => {
+  if (reindexTimer) clearTimeout(reindexTimer)
+})
 </script>

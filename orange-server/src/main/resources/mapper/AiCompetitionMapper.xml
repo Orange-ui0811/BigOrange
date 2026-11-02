@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.AiCompetitionMapper">
+
+    <sql id="columns">
+        id, name, source_url, normalized_url, summary, organizer, start_time, end_time,
+        audit_status, submission_source, submitter_id, submitter_ip, reviewer_id,
+        reject_reason, reward_granted, reward_quota, approved_at, create_time, update_time
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO ai_competition
+        (name, source_url, normalized_url, summary, organizer, start_time, end_time,
+         audit_status, submission_source, submitter_id, submitter_ip, reviewer_id,
+         reward_granted, reward_quota, approved_at)
+        VALUES
+        (#{name}, #{sourceUrl}, #{normalizedUrl}, #{summary}, #{organizer}, #{startTime}, #{endTime},
+         #{auditStatus}, #{submissionSource}, #{submitterId}, #{submitterIp}, #{reviewerId},
+         #{rewardGranted}, #{rewardQuota}, #{approvedAt})
+    </insert>
+
+    <select id="selectById" resultType="com.orangejd.pojo.entity.AiCompetition">
+        SELECT <include refid="columns"/> FROM ai_competition WHERE id = #{id}
+    </select>
+
+    <select id="selectByIdForUpdate" resultType="com.orangejd.pojo.entity.AiCompetition">
+        SELECT <include refid="columns"/> FROM ai_competition WHERE id = #{id} FOR UPDATE
+    </select>
+
+    <select id="selectPublic" resultType="com.orangejd.pojo.entity.AiCompetition">
+        SELECT <include refid="columns"/>
+        FROM ai_competition
+        WHERE audit_status = 'APPROVED'
+        <choose>
+            <when test="history">AND end_time IS NOT NULL AND end_time &lt; #{now}</when>
+            <otherwise>AND (end_time IS NULL OR end_time &gt;= #{now})</otherwise>
+        </choose>
+        ORDER BY
+        <choose>
+            <when test="history">end_time DESC</when>
+            <otherwise>
+                CASE
+                    WHEN start_time IS NOT NULL AND start_time &gt; #{now} THEN 1
+                    WHEN start_time IS NULL AND end_time IS NULL THEN 2
+                    ELSE 0
+                END,
+                COALESCE(start_time, create_time) ASC
+            </otherwise>
+        </choose>
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countPublic" resultType="int">
+        SELECT COUNT(*) FROM ai_competition
+        WHERE audit_status = 'APPROVED'
+        <choose>
+            <when test="history">AND end_time IS NOT NULL AND end_time &lt; #{now}</when>
+            <otherwise>AND (end_time IS NULL OR end_time &gt;= #{now})</otherwise>
+        </choose>
+    </select>
+
+    <select id="selectAdmin" resultType="com.orangejd.pojo.entity.AiCompetition">
+        SELECT <include refid="columns"/> FROM ai_competition
+        <where>
+            <if test="status != null and status != ''">audit_status = #{status}</if>
+        </where>
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAdmin" resultType="int">
+        SELECT COUNT(*) FROM ai_competition
+        <where>
+            <if test="status != null and status != ''">audit_status = #{status}</if>
+        </where>
+    </select>
+
+    <update id="updateContent">
+        UPDATE ai_competition
+        SET name = #{name}, source_url = #{sourceUrl}, normalized_url = #{normalizedUrl},
+            summary = #{summary}, organizer = #{organizer},
+            start_time = #{startTime}, end_time = #{endTime}
+        WHERE id = #{id}
+    </update>
+
+    <update id="approve">
+        UPDATE ai_competition
+        SET audit_status = 'APPROVED', reviewer_id = #{reviewerId}, reject_reason = NULL,
+            reward_granted = #{rewardGranted}, reward_quota = #{rewardQuota},
+            approved_at = CURRENT_TIMESTAMP
+        WHERE id = #{id} AND audit_status = 'PENDING'
+    </update>
+
+    <update id="reject">
+        UPDATE ai_competition
+        SET audit_status = 'REJECTED', reviewer_id = #{reviewerId}, reject_reason = #{reason}
+        WHERE id = #{id} AND audit_status = 'PENDING'
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM ai_competition WHERE id = #{id}
+    </delete>
+</mapper>

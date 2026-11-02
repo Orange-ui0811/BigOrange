@@ -9,10 +9,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/app/leaderboard")
+@lombok.RequiredArgsConstructor
 public class AppLeaderboardController {
 
-    @Autowired
-    private LeaderboardService leaderboardService;
+    private final LeaderboardService leaderboardService;
 
     @GetMapping("/works")
     public Result<?> works(@RequestParam(required = false) Long categoryId,

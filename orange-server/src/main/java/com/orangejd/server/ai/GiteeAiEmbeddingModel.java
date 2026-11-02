@@ -21,7 +21,7 @@ import java.util.Map;
  * <p>
  * 模型：{@code bge-small-zh-v1.5}，输出 512 维向量。
  * <p>
- * 借鉴 tjxt-javaai02：DashScope 的 EmbeddingModel 由 starter 自动配置，OrangeJD 改为手动实现。
+ * 借鉴 tjxt-javaai02：DashScope 的 EmbeddingModel 由 starter 自动配置，本项目改为手动实现。
  * 这样后续若要做 ChatModel+Advisor 全链路，无需改接口签名。
  */
 public class GiteeAiEmbeddingModel extends AbstractEmbeddingModel {

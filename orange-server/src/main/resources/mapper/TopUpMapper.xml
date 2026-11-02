@@ -8,27 +8,29 @@
     </insert>
 
     <select id="selectByTradeNo" resultType="com.orangejd.pojo.entity.TopUp">
-        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time, complete_time
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, provider_trade_no, status, create_time, complete_time
         FROM top_up WHERE trade_no = #{tradeNo}
     </select>
 
     <select id="selectByTradeNoForUpdate" resultType="com.orangejd.pojo.entity.TopUp">
-        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time, complete_time
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, provider_trade_no, status, create_time, complete_time
         FROM top_up WHERE trade_no = #{tradeNo} FOR UPDATE
     </select>
 
-    <update id="updateStatus">
-        UPDATE top_up SET status = #{status}, complete_time = NOW() WHERE trade_no = #{tradeNo}
+    <update id="updateStatusIfPending">
+        UPDATE top_up
+        SET status = #{status}, provider_trade_no = #{providerTradeNo}, complete_time = NOW()
+        WHERE trade_no = #{tradeNo} AND status = 'pending'
     </update>
 
     <select id="selectPending" resultType="com.orangejd.pojo.entity.TopUp">
-        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, provider_trade_no, status, create_time
         FROM top_up WHERE account_id = #{accountId} AND status = 'pending'
         ORDER BY id DESC
     </select>
 
     <select id="selectAll" resultType="com.orangejd.pojo.entity.TopUp">
-        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, status, create_time, complete_time
+        SELECT id, account_id, amount, money, trade_no, payment_method, payment_provider, provider_trade_no, status, create_time, complete_time
         FROM top_up ORDER BY id DESC LIMIT #{offset}, #{limit}
     </select>
 </mapper>

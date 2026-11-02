@@ -1,6 +1,7 @@
 package com.orangejd.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,16 +12,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
+@lombok.RequiredArgsConstructor
 public class HealthController {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
-    @Autowired(required = false)
-    private org.springframework.ai.vectorstore.VectorStore vectorStore;
+    private final @org.springframework.lang.Nullable org.springframework.ai.vectorstore.VectorStore vectorStore;
 
     @GetMapping("/health")
     public Map<String, Object> health() {
@@ -43,16 +42,16 @@ public class HealthController {
         try (Connection conn = dataSource.getConnection()) {
             return conn.isValid(3) ? "UP" : "DOWN";
         } catch (Exception e) {
-            return "DOWN: " + e.getMessage();
+            return "DOWN";
         }
     }
 
     private String checkRedis() {
         if (redisTemplate == null) return "NOT_CONFIGURED";
-        try {
-            return "PONG".equals(redisTemplate.getConnectionFactory().getConnection().ping()) ? "UP" : "DOWN";
+        try (RedisConnection connection = redisTemplate.getConnectionFactory().getConnection()) {
+            return "PONG".equals(connection.ping()) ? "UP" : "DOWN";
         } catch (Exception e) {
-            return "DOWN: " + e.getMessage();
+            return "DOWN";
         }
     }
 }

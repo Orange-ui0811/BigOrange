@@ -14,7 +14,7 @@ public interface FavoriteMapper {
 
     int delete(@Param("accountId") Long accountId, @Param("targetType") String targetType, @Param("targetId") Long targetId);
 
-    int deleteById(@Param("id") Long id);
+    int deleteById(@Param("id") Long id, @Param("accountId") Long accountId);
 
     boolean exists(@Param("accountId") Long accountId, @Param("targetType") String targetType, @Param("targetId") Long targetId);
 

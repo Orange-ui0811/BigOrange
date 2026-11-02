@@ -27,7 +27,7 @@
     </delete>
 
     <delete id="deleteById">
-        DELETE FROM favorite WHERE id = #{id}
+        DELETE FROM favorite WHERE id = #{id} AND account_id = #{accountId}
     </delete>
 
     <select id="exists" resultType="boolean">

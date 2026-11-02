@@ -6,7 +6,9 @@
       <div>
         <div class="eyebrow">我的</div>
         <div class="author-row">
-          <el-avatar :size="44" class="me-avatar">{{ (me.username || '?')[0] }}</el-avatar>
+          <el-avatar :size="44" class="me-avatar" :src="me.avatarUrl || undefined">
+            {{ (me.nickname || me.username || '?')[0] }}
+          </el-avatar>
           <div>
             <strong>{{ me.nickname || me.username }}</strong>
             <span>{{ me.bio || 'AI 应用开发者' }}</span>
@@ -26,11 +28,6 @@
         <h3>我的作品</h3>
         <p>管理已发布作品、草稿、审核状态和上架/下架。</p>
         <el-button class="mt-auto" type="primary" size="small">进入作品管理</el-button>
-      </div>
-      <div class="hub-card" @click="$router.push('/me/orders')">
-        <h3>我的订单</h3>
-        <p>查看购买和售出的订单记录。</p>
-        <el-button class="mt-auto" size="small">查看订单</el-button>
       </div>
       <div class="hub-card" @click="$router.push('/me/favorites')">
         <h3>收藏夹</h3>
@@ -68,7 +65,7 @@ import request from '../api/request'
 const mehubTour = [
   { selector: '.profile-summary', text: '顶部是你的个人信息和快捷操作：查看公开主页、编辑个人资料。', expression: 'smile' },
   { selector: '.hub-card.featured', text: '「我的作品」是最常用的入口。在这里管理已发布、草稿、上下架状态。', expression: 'love' },
-  { selector: '.hub-grid', text: '六个大卡片覆盖所有个人管理功能：作品、订单、收藏、历史、配额、设置。点什么进什么～', expression: 'smile' },
+  { selector: '.hub-grid', text: '这里集中管理作品、收藏、历史、AI 配额和账号设置。点什么进什么～', expression: 'smile' },
 ]
 
 const me = ref({ username: '', nickname: '' })

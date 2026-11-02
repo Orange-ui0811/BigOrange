@@ -1,9 +1,16 @@
 package com.orangejd.server.controller.app;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.orangejd.common.context.BaseContext;
+import com.orangejd.common.exception.BaseException;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.dto.TrendProfileDTO;
+import com.orangejd.pojo.entity.TrendHistory;
+import com.orangejd.server.service.AiRecordMetrics;
 import com.orangejd.server.service.KnowledgeGraphService;
 import com.orangejd.server.service.TrendAnalysisService;
+import com.orangejd.server.service.TrendProfileAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -14,22 +21,24 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/app/trend")
+@lombok.RequiredArgsConstructor
 public class AppTrendController {
 
-    @Autowired
-    private KnowledgeGraphService graphService;
+    private final KnowledgeGraphService graphService;
 
-    @Autowired
-    private TrendAnalysisService analysisService;
+    private final TrendAnalysisService analysisService;
 
-    @Autowired
-    private com.orangejd.server.mapper.TrendHistoryMapper trendHistoryMapper;
+    private final TrendProfileAnalysisService profileAnalysisService;
 
-    @Autowired
-    private com.orangejd.common.properties.JwtProperties jwtProperties;
+    private final com.orangejd.server.service.TrendHistoryService trendHistoryMapper;
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
+    private final ObjectMapper objectMapper;
+
+    private final AiRecordMetrics recordMetrics;
+
+    private final com.orangejd.common.properties.JwtProperties jwtProperties;
+
+    private final @org.springframework.lang.Nullable StringRedisTemplate redisTemplate;
 
     @GetMapping("/graph")
     public Result<Map<String, Object>> graph() {
@@ -38,24 +47,12 @@ public class AppTrendController {
 
     @PostMapping("/analyze")
     public Result<?> analyze(@RequestBody Map<String, String> body, HttpServletRequest request) {
-        // IP 限流：10 秒 1 次
-        String ip = request.getHeader("X-Forwarded-For");
-        if (ip == null || ip.isEmpty()) ip = request.getRemoteAddr();
-        String rateKey = "rate:trend:analyze:" + ip;
-
-        if (redisTemplate != null) {
-            String existing = redisTemplate.opsForValue().get(rateKey);
-            if (existing != null) {
-                return Result.error("请求过于频繁，请 10 秒后重试");
-            }
-            redisTemplate.opsForValue().set(rateKey, "1", 10, TimeUnit.SECONDS);
-        }
-
-        String question = body.getOrDefault("question", "");
+        String question = text(body.get("question"), 2_000);
 
         if (question.isEmpty()) {
             return Result.error("请输入分析问题");
         }
+        if (!acquireRateLimit(request)) return Result.error("请求过于频繁，请 10 秒后重试");
 
         Map<String, Object> analysis = analysisService.analyze(question);
         if (analysis.containsKey("error")) {
@@ -66,51 +63,66 @@ public class AppTrendController {
 
     @PostMapping("/analyze-v2")
     public Result<?> analyzeV2(@RequestBody TrendProfileDTO profile, HttpServletRequest request) {
-        String ip = request.getHeader("X-Forwarded-For");
-        if (ip == null || ip.isEmpty()) ip = request.getRemoteAddr();
-        String rateKey = "rate:trend:analyze:" + ip;
-        if (redisTemplate != null) {
-            if (redisTemplate.opsForValue().get(rateKey) != null)
-                return Result.error("请求过于频繁，请 10 秒后重试");
-            redisTemplate.opsForValue().set(rateKey, "1", 10, TimeUnit.SECONDS);
-        }
-
-        // 从请求头提取用户身份（公开端点，JWT 拦截器不生效，手动解析）
         setCurrentUserFromToken(request);
+        boolean hasTopics = profile.getTopics() != null && !profile.getTopics().isEmpty();
+        if (!hasTopics && !Boolean.TRUE.equals(profile.getUsePersona()))
+            return Result.error("请至少选择一个技术方向，或开启橙子画像分析");
+        if (!acquireRateLimit(request)) return Result.error("请求过于频繁，请 10 秒后重试");
 
-        if (profile.getTopics() == null || profile.getTopics().isEmpty())
-            return Result.error("请至少选择一个技术方向");
-
-        Map<String, Object> result = analysisService.analyzeV2(
-            profile.getTopics(), profile.getPurpose(), profile.getExperience(),
-            profile.getLanguages(), profile.getTimeCommitment(),
-            profile.getCustomTopics(), profile.getCustomPurpose(),
-            profile.getCustomExp(), profile.getCustomLang(), profile.getCustomTime(),
-            profile.getUseRag());
-
-        if (result.containsKey("error"))
-            return Result.error((String) result.get("error"));
-        return Result.success(result);
+        Map<String, Object> parameters = new LinkedHashMap<>();
+        parameters.put("topics", profile.getTopics());
+        parameters.put("purpose", profile.getPurpose());
+        parameters.put("experience", profile.getExperience());
+        parameters.put("languages", profile.getLanguages());
+        parameters.put("timeCommitment", profile.getTimeCommitment());
+        parameters.put("customTopics", profile.getCustomTopics());
+        parameters.put("customPurpose", profile.getCustomPurpose());
+        parameters.put("customExp", profile.getCustomExp());
+        parameters.put("customLang", profile.getCustomLang());
+        parameters.put("customTime", profile.getCustomTime());
+        parameters.put("useRag", profile.getUseRag());
+        parameters.put("usePersona", profile.getUsePersona());
+        parameters.put("preferBeginnerProjects", profile.getPreferBeginnerProjects());
+        parameters.put("preferCareerProjects", profile.getPreferCareerProjects());
+        return Result.success(profileAnalysisService.analyze(BaseContext.getCurrentId(), parameters));
     }
 
     // ---- 查询历史（需登录）----
 
     @GetMapping("/history")
-    public Result<List<Map<String, Object>>> history() {
-        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+    public Result<List<Map<String, Object>>> history(
+            @RequestParam(defaultValue = "100") int limit) {
+        Long accountId = BaseContext.getCurrentId();
         if (accountId == null || accountId == 0) return Result.error("请先登录");
-        List<com.orangejd.pojo.entity.TrendHistory> list = trendHistoryMapper.selectByBrowserId(accountId, 20);
-        List<Map<String, Object>> result = new java.util.ArrayList<>();
-        for (com.orangejd.pojo.entity.TrendHistory h : list) {
-            Map<String, Object> m = new java.util.LinkedHashMap<>();
+        List<TrendHistory> list = trendHistoryMapper.selectByBrowserId(accountId,
+                Math.max(1, Math.min(limit, 200)));
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (TrendHistory h : list) {
+            Map<String, Object> m = new LinkedHashMap<>();
             m.put("id", h.getId());
-            m.put("topics", h.getTopics());
+            m.put("topics", parseStringList(h.getTopics()));
             m.put("purpose", h.getPurpose());
             m.put("experience", h.getExperience());
-            m.put("languages", h.getLanguages());
+            m.put("languages", parseStringList(h.getLanguages()));
             m.put("timeCommitment", h.getTimeCommitment());
+            m.put("customTopics", h.getCustomTopics());
+            m.put("customPurpose", h.getCustomPurpose());
+            m.put("customExp", h.getCustomExp());
+            m.put("customLang", h.getCustomLang());
+            m.put("customTime", h.getCustomTime());
+            m.put("useRag", !Boolean.FALSE.equals(h.getUseRag()));
+            m.put("usePersona", Boolean.TRUE.equals(h.getUsePersona()));
+            m.put("preferBeginnerProjects", Boolean.TRUE.equals(h.getPreferBeginnerProjects()));
+            m.put("preferCareerProjects", Boolean.TRUE.equals(h.getPreferCareerProjects()));
             m.put("createTime", h.getCreateTime() != null ? h.getCreateTime().toString() : "");
-            m.put("result", h.getResultJson());
+            try {
+                m.put("result", objectMapper.readValue(h.getResultJson(), Object.class));
+                m.put("corrupted", false);
+            } catch (Exception e) {
+                m.put("result", null);
+                m.put("corrupted", true);
+                recordMetrics.corrupted("trend");
+            }
             result.add(m);
         }
         return Result.success(result);
@@ -118,34 +130,99 @@ public class AppTrendController {
 
     @PostMapping("/history/save")
     public Result<?> saveHistory(@RequestBody Map<String, Object> body) {
-        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        Long accountId = BaseContext.getCurrentId();
         if (accountId == null || accountId == 0) return Result.error("请先登录");
-        com.orangejd.pojo.entity.TrendHistory h = new com.orangejd.pojo.entity.TrendHistory();
-        h.setAccountId(accountId);
-        h.setTopics(body.get("topics") != null ? body.get("topics").toString() : "");
-        h.setPurpose((String) body.getOrDefault("purpose", ""));
-        h.setExperience((String) body.getOrDefault("experience", ""));
-        h.setLanguages(body.get("languages") != null ? body.get("languages").toString() : "");
-        h.setTimeCommitment((String) body.getOrDefault("timeCommitment", ""));
-        h.setResultJson(body.getOrDefault("resultString", body.getOrDefault("result", "")).toString());
-        trendHistoryMapper.insert(h);
-        return Result.success(Collections.singletonMap("id", h.getId()));
+        try {
+            TrendHistory h = new TrendHistory();
+            h.setAccountId(accountId);
+            h.setTopics(objectMapper.writeValueAsString(stringList(body.get("topics"), 20, 100)));
+            h.setPurpose(text(body.get("purpose"), 200));
+            h.setExperience(text(body.get("experience"), 200));
+            h.setLanguages(objectMapper.writeValueAsString(stringList(body.get("languages"), 20, 100)));
+            h.setTimeCommitment(text(body.get("timeCommitment"), 200));
+            h.setCustomTopics(text(body.get("customTopics"), 200));
+            h.setCustomPurpose(text(body.get("customPurpose"), 200));
+            h.setCustomExp(text(body.get("customExp"), 200));
+            h.setCustomLang(text(body.get("customLang"), 200));
+            h.setCustomTime(text(body.get("customTime"), 200));
+            h.setUseRag(!Boolean.FALSE.equals(body.get("useRag")));
+            h.setUsePersona(Boolean.TRUE.equals(body.get("usePersona")));
+            h.setPreferBeginnerProjects(Boolean.TRUE.equals(body.get("preferBeginnerProjects")));
+            h.setPreferCareerProjects(Boolean.TRUE.equals(body.get("preferCareerProjects")));
+            Object rawResult = body.containsKey("result") ? body.get("result") : body.get("resultString");
+            Object parsedResult = rawResult instanceof String value
+                    ? objectMapper.readValue(value, Object.class) : rawResult;
+            if (parsedResult == null) throw new BaseException("趋势分析结果不能为空");
+            String resultJson = objectMapper.writeValueAsString(parsedResult);
+            if (resultJson.length() > 2_000_000) throw new BaseException("趋势分析结果过长");
+            h.setResultJson(resultJson);
+            trendHistoryMapper.insert(h);
+            recordMetrics.success("trend", "save");
+            return Result.success(Collections.singletonMap("id", h.getId()));
+        } catch (BaseException e) {
+            recordMetrics.failure("trend", "save");
+            throw e;
+        } catch (Exception e) {
+            recordMetrics.failure("trend", "save");
+            throw new BaseException("趋势记录格式不正确");
+        }
     }
 
     @DeleteMapping("/history/{id}")
     public Result<?> deleteHistory(@PathVariable Long id) {
-        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        Long accountId = BaseContext.getCurrentId();
         if (accountId == null || accountId == 0) return Result.error("请先登录");
-        trendHistoryMapper.deleteById(id, accountId);
+        if (trendHistoryMapper.deleteById(id, accountId) == 0) return Result.error("记录不存在");
+        recordMetrics.success("trend", "delete");
         return Result.success();
     }
 
     @DeleteMapping("/history/clear")
     public Result<?> clearHistory() {
-        Long accountId = com.orangejd.common.context.BaseContext.getCurrentId();
+        Long accountId = BaseContext.getCurrentId();
         if (accountId == null || accountId == 0) return Result.error("请先登录");
         trendHistoryMapper.deleteByBrowserId(accountId);
+        recordMetrics.success("trend", "clear");
         return Result.success();
+    }
+
+    private boolean acquireRateLimit(HttpServletRequest request) {
+        if (redisTemplate == null) return true;
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null || ip.isBlank()) ip = request.getRemoteAddr();
+        else ip = ip.split(",", 2)[0].trim();
+        return Boolean.TRUE.equals(redisTemplate.opsForValue().setIfAbsent(
+                "rate:trend:analyze:" + ip, "1", 10, TimeUnit.SECONDS));
+    }
+
+    private List<String> parseStringList(String value) {
+        if (value == null || value.isBlank()) return List.of();
+        try {
+            return objectMapper.readValue(value, new TypeReference<List<String>>() {});
+        } catch (Exception ignored) {
+            String normalized = value.trim().replaceAll("^\\[|]$", "");
+            if (normalized.isBlank()) return List.of();
+            return Arrays.stream(normalized.split("[,，、/]"))
+                    .map(String::trim)
+                    .map(item -> item.replaceAll("^\"|\"$", ""))
+                    .filter(item -> !item.isBlank())
+                    .limit(20)
+                    .toList();
+        }
+    }
+
+    private List<String> stringList(Object value, int maxItems, int maxLength) {
+        if (value == null) return List.of();
+        List<?> source = value instanceof List<?> list ? list : List.of(value);
+        if (source.size() > maxItems) throw new BaseException("选择项过多");
+        return source.stream().map(item -> text(item, maxLength))
+                .filter(item -> !item.isBlank()).toList();
+    }
+
+    private String text(Object value, int maxLength) {
+        String result = value == null ? "" : String.valueOf(value).trim();
+        if (result.length() > maxLength) throw new BaseException("输入内容过长");
+        return result;
     }
 
     /** 从 App-Token 请求头解析用户 ID 并设置到 BaseContext（公开端点专用） */

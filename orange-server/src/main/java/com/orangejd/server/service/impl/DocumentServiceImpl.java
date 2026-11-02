@@ -1,28 +1,30 @@
 package com.orangejd.server.service.impl;
-
 import com.orangejd.pojo.entity.KnowledgeDocument;
 import com.orangejd.pojo.vo.KnowledgeDocumentVO;
 import com.orangejd.server.mapper.KnowledgeDocumentMapper;
 import com.orangejd.server.service.DocumentService;
+import com.orangejd.server.foundation.external.ExternalAiClient;
+import com.orangejd.server.foundation.ingestion.IngestionRunService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 @Service
+@lombok.RequiredArgsConstructor
 public class DocumentServiceImpl implements DocumentService {
-
     private static final Logger log = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
     private static final int MAX_FILE_SIZE = 1_048_576;
@@ -33,17 +35,10 @@ public class DocumentServiceImpl implements DocumentService {
     private static final String SOURCE_MANUAL = "MANUAL";
     private static final String SOURCE_GITHUB = "GITHUB";
 
-    @Autowired private KnowledgeDocumentMapper mapper;
-    @Autowired(required = false) private VectorStore vectorStore;
-
-    @Value("${orange.ai-trend.endpoint:https://ai.gitee.com/v1}")
-    private String llmEndpoint;
-    @Value("${orange.ai-trend.api-key:}")
-    private String llmApiKey;
-    @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
-    private String llmModel;
-
-    private final RestTemplate llmRestTemplate = new RestTemplate();
+    private final KnowledgeDocumentMapper mapper;
+    private final @org.springframework.lang.Nullable VectorStore vectorStore;
+    private final ExternalAiClient externalAiClient;
+    private final IngestionRunService ingestionRunService;
 
     // ---- upload ----
 
@@ -51,6 +46,7 @@ public class DocumentServiceImpl implements DocumentService {
     public KnowledgeDocumentVO upload(MultipartFile file) {
         String title = file.getOriginalFilename();
         if (title == null || title.isEmpty()) title = "未命名.md";
+        title = sanitizeTitle(title);
         validateFile(file, title);
         String content = readContent(file);
         return storeDocument(title, SOURCE_MANUAL, null, content, file.getSize());
@@ -60,13 +56,36 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public KnowledgeDocumentVO importFromGithub(String fullName, String content, String period) {
+        return importFromGithub(fullName, content, period, null);
+    }
+
+    @Override
+    public KnowledgeDocumentVO importFromGithub(String fullName, String content, String period,
+                                                String configVersion) {
         String sourceRef = ("new".equals(period) || "week".equals(period))
                 ? fullName + "|" + period : fullName;
-        // 翻译为中文
-        String chineseContent = translateReadme(fullName, content);
-        // 提取翻译后第一行 Markdown 标题作为显示名
-        String title = extractTitle(chineseContent, fullName);
-        return storeDocument(title, SOURCE_GITHUB, sourceRef, chineseContent, (long) content.length());
+        KnowledgeDocument entity = mapper.selectBySourceRef(sourceRef);
+        if (entity == null) {
+            entity = new KnowledgeDocument();
+            entity.setTitle(fullName);
+            entity.setSource(SOURCE_GITHUB);
+            entity.setSourceRef(sourceRef);
+            entity.setChunkCount(0);
+            entity.setFileSize((long) content.length());
+            entity.setOriginalContent(content);
+            entity.setFetchStatus("DONE");
+            entity.setTranslationStatus("PENDING");
+            entity.setStorageStatus("PENDING");
+            entity.setVectorStatus("PENDING");
+            mapper.insert(entity);
+        } else if ("DONE".equals(entity.getTranslationStatus())
+                && "DONE".equals(entity.getStorageStatus())
+                && "DONE".equals(entity.getVectorStatus())) {
+            return toVO(entity);
+        } else if (entity.getOriginalContent() == null) {
+            entity.setOriginalContent(content);
+        }
+        return resumeGithubPipeline(entity, configVersion);
     }
 
     /** 提取 Markdown 第一个 # 标题，无标题则用 repo 名 */
@@ -96,7 +115,25 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public boolean existsBySourceRef(String sourceRef) {
         if (sourceRef == null) return false;
-        return mapper.selectBySourceRef(sourceRef) != null;
+        KnowledgeDocument document = mapper.selectBySourceRef(sourceRef);
+        return document != null && "DONE".equals(document.getVectorStatus());
+    }
+
+    @Override
+    public int retryPendingGithub(int limit, String configVersion, Long runId) {
+        int success = 0;
+        for (KnowledgeDocument document : mapper.selectPipelinePending(Math.max(1, Math.min(limit, 100)))) {
+            try {
+                resumeGithubPipeline(document, configVersion);
+                ingestionRunService.item(runId, "README", document.getSourceRef(),
+                        "SUCCEEDED", null, null);
+                success++;
+            } catch (Exception ex) {
+                ingestionRunService.item(runId, "README", document.getSourceRef(),
+                        "FAILED", null, ex.getMessage());
+            }
+        }
+        return success;
     }
 
     // ---- listAll ----
@@ -175,42 +212,52 @@ public class DocumentServiceImpl implements DocumentService {
     /**
      * 翻译 README 为中文（保留 Markdown 结构和代码块）
      */
-    private String translateReadme(String fullName, String content) {
+    private String translateReadme(String fullName, String content, String configVersion) {
         if (content == null || content.isEmpty()) return content;
-        if (llmApiKey == null || llmApiKey.isEmpty()) {
-            log.debug("[RAG] LLM API key 未配置，跳过翻译");
-            return content;
-        }
+        String toTranslate = content.length() > 4000 ? content.substring(0, 4000) : content;
+        String translated = externalAiClient.callText(configVersion,
+                "请将 GitHub README 翻译为中文，保留 Markdown 结构和代码块，代码内容不翻译。",
+                toTranslate, 0.1, "readme-translation");
+        log.info("[RAG] 翻译完成: {} ({} → {} chars)", fullName, content.length(), translated.length());
+        return translated;
+    }
+
+    private KnowledgeDocumentVO resumeGithubPipeline(KnowledgeDocument entity, String configVersion) {
         try {
-            // 只翻译前 4000 字（避免 token 爆炸）
-            String toTranslate = content.length() > 4000 ? content.substring(0, 4000) : content;
-
-            String prompt = "请将以下 GitHub README 内容翻译为中文。" +
-                "保留 Markdown 格式（标题、列表、代码块）。代码块内容不翻译。只输出翻译结果，不要额外说明。";
-
-            Map<String, Object> body = new LinkedHashMap<>();
-            body.put("model", llmModel);
-            List<Map<String, String>> msgs = new ArrayList<>();
-            msgs.add(Map.of("role", "system", "content", prompt));
-            msgs.add(Map.of("role", "user", "content", toTranslate));
-            body.put("messages", msgs);
-            body.put("temperature", 0.1);
-
-            String url = llmEndpoint.replaceAll("/$", "") + "/chat/completions";
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer " + llmApiKey);
-            ResponseEntity<Map> resp = llmRestTemplate.exchange(url, HttpMethod.POST,
-                    new HttpEntity<>(body, headers), Map.class);
-
-            @SuppressWarnings("unchecked")
-            List<Map<String, Object>> choices = (List<Map<String, Object>>) resp.getBody().get("choices");
-            String translated = (String) ((Map<String, Object>) choices.get(0).get("message")).get("content");
-            log.info("[RAG] 翻译完成: {} ({} → {} chars)", fullName, content.length(), translated.length());
-            return translated;
-        } catch (Exception e) {
-            log.warn("[RAG] 翻译失败 {}: {}", fullName, e.getMessage());
-            return content; // 降级：用原文
+            if (!"DONE".equals(entity.getTranslationStatus())) {
+                String translated = translateReadme(entity.getSourceRef(), entity.getOriginalContent(), configVersion);
+                entity.setContent(translated);
+                entity.setTitle(extractTitle(translated, entity.getSourceRef()));
+                entity.setTranslationStatus("DONE");
+                entity.setStorageStatus("PENDING");
+                entity.setPipelineError(null);
+                mapper.updatePipeline(entity);
+            }
+            if (!"DONE".equals(entity.getStorageStatus())) {
+                List<String> chunks = sanitizeChunks(splitChunks(entity.getContent()), entity.getTitle());
+                entity.setChunkCount(chunks.size());
+                entity.setStorageStatus("DONE");
+                entity.setVectorStatus("PENDING");
+                mapper.updatePipeline(entity);
+            }
+            if (!"DONE".equals(entity.getVectorStatus())) {
+                if (vectorStore == null) throw new IllegalStateException("VectorStore 不可用");
+                vectorStore.delete("docId == '" + entity.getId() + "'");
+                vectorStore.add(buildVectorDocuments(entity));
+                entity.setVectorStatus("DONE");
+                entity.setPipelineError(null);
+                mapper.updatePipeline(entity);
+            }
+            return toVO(entity);
+        } catch (Exception ex) {
+            if (!"DONE".equals(entity.getTranslationStatus())) entity.setTranslationStatus("FAILED");
+            else if (!"DONE".equals(entity.getStorageStatus())) entity.setStorageStatus("FAILED");
+            else entity.setVectorStatus("FAILED");
+            entity.setPipelineError(ex.getMessage() == null ? "README 管道失败"
+                    : ex.getMessage().substring(0, Math.min(900, ex.getMessage().length())));
+            mapper.updatePipeline(entity);
+            throw ex instanceof RuntimeException runtime ? runtime
+                    : new IllegalStateException("README 管道失败", ex);
         }
     }
 
@@ -246,6 +293,21 @@ public class DocumentServiceImpl implements DocumentService {
         return cleaned;
     }
 
+    List<Document> buildVectorDocuments(KnowledgeDocument entity) {
+        List<String> chunks = sanitizeChunks(splitChunks(entity.getContent()), entity.getTitle());
+        List<Document> docs = new ArrayList<>(chunks.size());
+        for (int i = 0; i < chunks.size(); i++) {
+            Map<String, Object> meta = new LinkedHashMap<>();
+            meta.put("docId", entity.getId().toString());
+            meta.put("docTitle", entity.getTitle());
+            meta.put("chunkIndex", i);
+            meta.put("source", entity.getSource());
+            ProjectKnowledgeDocumentWriter.enrichMetadata(meta, entity);
+            docs.add(new Document("knowledge-" + entity.getId() + "-" + i, chunks.get(i), meta));
+        }
+        return docs;
+    }
+
     private void validateFile(MultipartFile file, String title) {
         if (file.isEmpty()) throw new IllegalArgumentException("文件为空");
         if (file.getSize() > MAX_FILE_SIZE) throw new IllegalArgumentException("文件过大");
@@ -255,8 +317,24 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     private String readContent(MultipartFile file) {
-        try { return new String(file.getBytes(), "UTF-8"); }
-        catch (IOException e) { throw new RuntimeException("文件读取失败", e); }
+        try {
+            String content = StandardCharsets.UTF_8.newDecoder()
+                    .onMalformedInput(CodingErrorAction.REPORT)
+                    .onUnmappableCharacter(CodingErrorAction.REPORT)
+                    .decode(ByteBuffer.wrap(file.getBytes())).toString();
+            if (content.indexOf('\0') >= 0) throw new IllegalArgumentException("文件包含不支持的二进制内容");
+            return content;
+        } catch (CharacterCodingException e) {
+            throw new IllegalArgumentException("文件必须使用 UTF-8 编码");
+        } catch (IOException e) {
+            throw new RuntimeException("文件读取失败", e);
+        }
+    }
+
+    private String sanitizeTitle(String title) {
+        String cleaned = title.replaceAll("[\\p{Cntrl}]", "").trim();
+        if (cleaned.isEmpty()) return "未命名.md";
+        return cleaned.length() > 120 ? cleaned.substring(cleaned.length() - 120) : cleaned;
     }
 
     private String resolvePeriod(KnowledgeDocument e) {
@@ -274,6 +352,8 @@ public class DocumentServiceImpl implements DocumentService {
         vo.setChunkCount(e.getChunkCount() != null ? e.getChunkCount() : 0);
         vo.setFileSize(e.getFileSize());
         vo.setPeriod(resolvePeriod(e));
+        vo.setVectorStatus(e.getVectorStatus());
+        vo.setPipelineError(e.getPipelineError());
         if (e.getCreateTime() != null)
             vo.setCreateTime(e.getCreateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         return vo;

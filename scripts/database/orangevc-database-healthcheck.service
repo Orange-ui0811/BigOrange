@@ -1,0 +1,13 @@
+[Unit]
+Description=OrangeVC local database health check
+After=mysql.service orangejd.service nginx.service
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/usr/local/sbin/orangevc-database-healthcheck
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+

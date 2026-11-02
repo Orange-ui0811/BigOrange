@@ -19,11 +19,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class QuoteServiceImpl implements QuoteService {
 
-    @Autowired private QuoteMapper quoteMapper;
-    @Autowired private ConversationMapper conversationMapper;
-    @Autowired private NotificationService notificationService;
+    private final QuoteMapper quoteMapper;
+    private final ConversationMapper conversationMapper;
+    private final NotificationService notificationService;
 
     @Override
     public Quote create(QuoteCreateDTO dto) {
@@ -94,6 +95,11 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     public List<Quote> getByConversation(Long conversationId) {
+        Conversation conversation = conversationMapper.selectById(conversationId);
+        if (conversation == null) throw new BaseException("会话不存在");
+        Long currentId = BaseContext.getCurrentId();
+        if (!currentId.equals(conversation.getInitiatorId()) && !currentId.equals(conversation.getReceiverId()))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
         return quoteMapper.selectByConversationId(conversationId);
     }
 

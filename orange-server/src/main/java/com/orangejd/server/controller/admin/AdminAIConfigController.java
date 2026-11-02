@@ -1,81 +1,71 @@
 package com.orangejd.server.controller.admin;
 
 import com.orangejd.common.result.Result;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.external.ExternalAiClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/ai-config")
 public class AdminAIConfigController {
+    private final AiRuntimeConfigService configService;
+    private final ExternalAiClient aiClient;
 
-    @Autowired(required = false)
-    private StringRedisTemplate redisTemplate;
-
-    // 从 YAML 读取默认值（兜底）
-    @Value("${orange.ai-trend.endpoint:}")
-    private String defaultTrendEndpoint;
-    @Value("${orange.ai-trend.api-key:}")
-    private String defaultTrendKey;
-    @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
-    private String defaultTrendModel;
-
-    @Value("${orange.ai-audit.endpoint:}")
-    private String defaultAuditEndpoint;
-    @Value("${orange.ai-audit.api-key:}")
-    private String defaultAuditKey;
-    @Value("${orange.ai-audit.model:}")
-    private String defaultAuditModel;
-
-    @Value("${orange.ai-embedding.endpoint:}")
-    private String defaultEmbeddingEndpoint;
-    @Value("${orange.ai-embedding.api-key:}")
-    private String defaultEmbeddingKey;
-    @Value("${orange.ai-embedding.model:bge-small-zh-v1.5}")
-    private String defaultEmbeddingModel;
+    public AdminAIConfigController(AiRuntimeConfigService configService, ExternalAiClient aiClient) {
+        this.configService = configService;
+        this.aiClient = aiClient;
+    }
 
     @GetMapping
     public Result<Map<String, Object>> getAll() {
         Map<String, Object> config = new LinkedHashMap<>();
-        config.put("trend", getConfig("ai:trend", defaultTrendEndpoint, defaultTrendKey, defaultTrendModel));
-        config.put("audit", getConfig("ai:audit", defaultAuditEndpoint, defaultAuditKey, defaultAuditModel));
-        config.put("embedding", getConfig("ai:embedding", defaultEmbeddingEndpoint, defaultEmbeddingKey, defaultEmbeddingModel));
-        config.put("leaderboard", Map.of("type", "GitHub Search API", "url", "https://api.github.com/search/repositories", "desc", "无需 API Key，通过定时任务拉取 15 个 topic 的仓库数据"));
+        config.put("project", configService.describe(AiRuntimeConfigService.PROJECT));
+        config.put("contribution", configService.describe(AiRuntimeConfigService.CONTRIBUTION));
+        config.put("trend", configService.describe(AiRuntimeConfigService.TREND));
+        config.put("text", configService.describe(AiRuntimeConfigService.TEXT));
+        config.put("toolFallback", configService.describe(AiRuntimeConfigService.TOOL_FALLBACK));
+        config.put("audit", configService.describe(AiRuntimeConfigService.AUDIT));
+        config.put("embedding", configService.describe(AiRuntimeConfigService.EMBEDDING));
+        config.put("leaderboard", Map.of(
+                "type", "GitHub Search API",
+                "url", "https://api.github.com/search/repositories",
+                "desc", "榜单、Issue 与 README 任务由统一抓取中心记录进度和失败项"));
         return Result.success(config);
     }
 
     @PostMapping("/save")
     public Result<?> save(@RequestBody Map<String, String> body) {
-        if (redisTemplate == null) return Result.error("Redis 不可用，无法保存");
-
-        String prefix = body.get("prefix"); // ai:trend / ai:audit / ai:embedding
-        if (prefix == null) return Result.error("缺少 prefix 参数");
-
-        redisTemplate.opsForValue().set(prefix + ":endpoint", body.getOrDefault("endpoint", ""));
-        redisTemplate.opsForValue().set(prefix + ":api-key", body.getOrDefault("apiKey", ""));
-        redisTemplate.opsForValue().set(prefix + ":model", body.getOrDefault("model", ""));
-        return Result.success();
+        String prefix = body.getOrDefault("prefix", "");
+        String type = switch (prefix) {
+            case "ai:project" -> AiRuntimeConfigService.PROJECT;
+            case "ai:contribution" -> AiRuntimeConfigService.CONTRIBUTION;
+            case "ai:trend" -> AiRuntimeConfigService.TREND;
+            case "ai:text" -> AiRuntimeConfigService.TEXT;
+            case "ai:toolFallback" -> AiRuntimeConfigService.TOOL_FALLBACK;
+            case "ai:audit" -> AiRuntimeConfigService.AUDIT;
+            case "ai:embedding" -> AiRuntimeConfigService.EMBEDDING;
+            default -> throw new IllegalArgumentException("AI 配置类型无效");
+        };
+        AiRuntimeConfig saved = configService.save(type,
+                body.get("endpoint"), body.get("apiKey"), body.get("model"));
+        return Result.success(Map.of("version", saved.version(), "source", saved.source()));
     }
 
-    private Map<String, String> getConfig(String prefix, String defaultEndpoint, String defaultKey, String defaultModel) {
-        Map<String, String> m = new LinkedHashMap<>();
-        m.put("endpoint", getVal(prefix + ":endpoint", defaultEndpoint));
-        m.put("apiKey", maskKey(getVal(prefix + ":api-key", defaultKey)));
-        m.put("model", getVal(prefix + ":model", defaultModel));
-        return m;
-    }
-
-    private String getVal(String key, String fallback) {
-        if (redisTemplate == null) return fallback;
-        String v = redisTemplate.opsForValue().get(key);
-        return (v != null && !v.isEmpty()) ? v : fallback;
-    }
-
-    private String maskKey(String key) {
-        if (key == null || key.length() <= 12) return "***";
-        return key.substring(0, 6) + "****" + key.substring(key.length() - 4);
+    @PostMapping("/test")
+    public Result<?> test(@RequestBody Map<String, String> body) {
+        String type = body.getOrDefault("type", AiRuntimeConfigService.TREND);
+        AiRuntimeConfig config = configService.current(type);
+        if (AiRuntimeConfigService.EMBEDDING.equals(type)) {
+            return Result.success(Map.of(
+                    "configured", !config.apiKey().isBlank(),
+                    "source", "ENV",
+                    "message", "Embedding 在应用启动时固定；修改环境变量后需重启并核对向量维度"));
+        }
+        String content = aiClient.call(config, "你是连接测试助手。", "只回复：连接成功", 0, "admin-config-test");
+        return Result.success(Map.of("message", content, "version", config.version()));
     }
 }

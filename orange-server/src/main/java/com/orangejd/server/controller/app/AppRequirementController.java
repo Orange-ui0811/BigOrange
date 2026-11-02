@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/requirement")
+@lombok.RequiredArgsConstructor
 public class AppRequirementController {
 
-    @Autowired private RequirementService requirementService;
+    private final RequirementService requirementService;
 
     @PostMapping
     public Result<RequirementVO> create(@RequestBody RequirementCreateDTO dto) {

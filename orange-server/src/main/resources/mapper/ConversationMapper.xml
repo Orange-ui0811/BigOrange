@@ -44,13 +44,16 @@
         LEFT JOIN requirement r ON c.requirement_id = r.id
         LEFT JOIN user_profile i_prof ON c.initiator_id = i_prof.account_id
         LEFT JOIN user_profile r_prof ON c.receiver_id = r_prof.account_id
-        WHERE (c.initiator_id = #{userId} OR c.receiver_id = #{userId})
+        WHERE (c.initiator_id = #{userId} AND c.hidden_by_initiator = 0)
+           OR (c.receiver_id = #{userId} AND c.hidden_by_receiver = 0)
         ORDER BY c.update_time DESC
         LIMIT #{offset}, #{limit}
     </select>
 
     <select id="countByUserId" resultType="int">
-        SELECT COUNT(*) FROM conversation WHERE initiator_id = #{userId} OR receiver_id = #{userId}
+        SELECT COUNT(*) FROM conversation
+        WHERE (initiator_id = #{userId} AND hidden_by_initiator = 0)
+           OR (receiver_id = #{userId} AND hidden_by_receiver = 0)
     </select>
 
     <update id="updateTime">
@@ -73,6 +76,12 @@
         UPDATE conversation SET
         <if test="isInitiator">hidden_by_initiator = 1</if>
         <if test="!isInitiator">hidden_by_receiver = 1</if>
+        WHERE id = #{id}
+    </update>
+
+    <update id="showForAll">
+        UPDATE conversation
+        SET hidden_by_initiator = 0, hidden_by_receiver = 0
         WHERE id = #{id}
     </update>
 </mapper>

@@ -1,0 +1,40 @@
+CREATE TABLE IF NOT EXISTS order_payment (
+    id                 BIGINT        NOT NULL AUTO_INCREMENT,
+    trade_no           VARCHAR(64)   NOT NULL COMMENT '本地订单支付流水号',
+    order_id           BIGINT        NOT NULL,
+    payment_stage_id   BIGINT        NOT NULL,
+    payer_account_id   BIGINT        NOT NULL,
+    stage_type         VARCHAR(16)   NOT NULL COMMENT 'DEPOSIT/FINAL',
+    amount             DECIMAL(12,2) NOT NULL,
+    payment_method     VARCHAR(32)   NOT NULL COMMENT 'wxpay/alipay',
+    payment_provider   VARCHAR(32)   NOT NULL DEFAULT 'epay',
+    provider_trade_no  VARCHAR(128)  NULL,
+    status             VARCHAR(16)   NOT NULL DEFAULT 'PENDING',
+    create_time        DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    complete_time      DATETIME      NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_order_payment_trade_no (trade_no),
+    UNIQUE KEY uk_order_payment_stage (payment_stage_id),
+    UNIQUE KEY uk_order_payment_provider_trade (payment_provider, provider_trade_no),
+    KEY idx_order_payment_order (order_id, stage_type),
+    KEY idx_order_payment_status_time (status, create_time),
+    CONSTRAINT fk_order_payment_order FOREIGN KEY (order_id) REFERENCES `order`(id),
+    CONSTRAINT fk_order_payment_stage FOREIGN KEY (payment_stage_id) REFERENCES payment_stage(id),
+    CONSTRAINT fk_order_payment_payer FOREIGN KEY (payer_account_id) REFERENCES account(id),
+    CONSTRAINT chk_order_payment_amount CHECK (amount > 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='产品订单真实支付流水';
+
+CREATE TABLE IF NOT EXISTS order_payment_callback_event (
+    id                  BIGINT       NOT NULL AUTO_INCREMENT,
+    provider            VARCHAR(32)  NOT NULL,
+    provider_event_id   VARCHAR(192) NOT NULL,
+    trade_no            VARCHAR(64)  NOT NULL,
+    provider_trade_no   VARCHAR(128) NOT NULL,
+    trade_status        VARCHAR(32)  NOT NULL,
+    payload             JSON         NOT NULL COMMENT '不含签名和密钥的回调审计信息',
+    create_time         DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_order_payment_event (provider, provider_event_id),
+    KEY idx_order_payment_event_trade (trade_no),
+    CONSTRAINT fk_order_payment_event_trade FOREIGN KEY (trade_no) REFERENCES order_payment(trade_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='产品订单支付回调审计事件';

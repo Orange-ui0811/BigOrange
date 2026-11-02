@@ -2,11 +2,11 @@
   <div>
     <PageTour storageKey="mequota" :steps="quotaTour" />
     <h3 class="page-title">我的配额</h3>
-    <p class="page-subtitle">管理 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" /> 余额，用于 AI 趋势分析和方案设计</p>
+    <p class="page-subtitle">管理 <PixelOrangeSlice :size="14" style="display:inline-block;vertical-align:middle" /> 余额，用于 AI 趋势分析、方案设计和上线体检</p>
 
     <!-- 余额卡片 -->
     <el-row :gutter="16" class="balance-row">
-      <el-col :span="8">
+      <el-col :xs="24" :sm="12" :md="8">
         <el-card shadow="never" class="stat-card">
           <div class="balance-num">
             <PixelOrangeSlice class="segment-coin" />
@@ -16,12 +16,6 @@
             <PixelOrangeSlice :size="16" />
             segments
           </div>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <el-card shadow="never" class="stat-card">
-          <div class="balance-yuan">&#8776; &yen;{{ (balance / 100).toFixed(2) }}</div>
-          <div class="balance-note">100 <PixelOrangeSlice :size="12" style="display:inline-block;vertical-align:middle" /> = 1 元</div>
         </el-card>
       </el-col>
     </el-row>
@@ -39,18 +33,8 @@
       </el-col>
       <el-col :span="12">
         <el-card shadow="never" class="action-card">
-          <template #header><span class="card-header-title">在线充值</span></template>
-          <el-radio-group v-model="payMethod" size="small" class="pay-method-group">
-            <el-radio-button value="wxpay">微信</el-radio-button>
-            <el-radio-button value="alipay">支付宝</el-radio-button>
-          </el-radio-group>
-          <el-select v-model="payAmount" size="small" class="pay-select">
-            <el-option :value="1000" label="¥10 = 1000 🍊" />
-            <el-option :value="3000" label="¥30 = 3000 🍊" />
-            <el-option :value="5000" label="¥50 = 5000 🍊" />
-            <el-option :value="10000" label="¥100 = 10000 🍊" />
-          </el-select>
-          <el-button @click="doPay" type="primary" :loading="paying" class="btn-primary btn-block">前往支付</el-button>
+          <template #header><span class="card-header-title">在线购买</span></template>
+          <el-alert title="支付功能即将开放" description="当前不提供在线购买入口，可继续使用兑换码获得 AI 配额。" type="warning" :closable="false" show-icon />
         </el-card>
       </el-col>
     </el-row>
@@ -91,19 +75,16 @@ import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import PixelOrangeSlice from '../components/PixelOrangeSlice.vue'
 import PageTour from '../components/PageTour.vue'
-import { getBalance, redeemCode, getLog, createEpayOrder } from '../api/quota'
+import { getBalance, redeemCode, getLog } from '../api/quota'
 
 const quotaTour = [
-  { selector: '.balance-row', text: '这里是你的 🍊 余额！大卡片显示剩余数量，旁边是对应的人民币价值。', expression: 'love' },
-  { selector: '.action-row', text: '左边输入兑换码兑换，右边选金额在线充值。消费记录在下方表格里随时查看～', expression: 'smile' },
+  { selector: '.balance-row', text: '这里显示当前可用于 AI 工具的配额余额。', expression: 'love' },
+  { selector: '.action-row', text: '当前可使用兑换码获得 AI 配额；在线购买将在支付能力验收后开放。消费记录在下方表格查看。', expression: 'smile' },
 ]
 
 const balance = ref(0)
 const code = ref('')
 const redeeming = ref(false)
-const paying = ref(false)
-const payMethod = ref('wxpay')
-const payAmount = ref(1000)
 const logs = ref([])
 const logLoading = ref(false)
 
@@ -126,20 +107,6 @@ const doRedeem = async () => {
     loadLogs()
   } catch (e) { ElMessage.error(e?.response?.data?.msg || '兑换失败') }
   finally { redeeming.value = false }
-}
-
-const doPay = async () => {
-  paying.value = true
-  try {
-    const r = await createEpayOrder(payAmount.value, payMethod.value)
-    if (r.data?.payUrl) {
-      window.open(r.data.payUrl, '_blank')
-      ElMessage.info('已打开支付页面，支付完成后刷新查看余额')
-    } else {
-      ElMessage.error('创建支付失败')
-    }
-  } catch (e) { ElMessage.error('支付服务暂不可用') }
-  finally { paying.value = false }
 }
 
 onMounted(() => { loadBalance(); loadLogs() })
@@ -195,14 +162,6 @@ onMounted(() => { loadBalance(); loadLogs() })
   align-items: center;
   gap: 4px;
 }
-.balance-yuan {
-  font-size: 14px;
-  color: #3a302a;
-}
-.balance-note {
-  font-size: 12px;
-  color: #bfb8b0;
-}
 .action-row {
   margin-bottom: 16px;
 }
@@ -229,16 +188,6 @@ onMounted(() => { loadBalance(); loadLogs() })
   border-radius: 0;
   font-family: "Courier New","SimHei",monospace;
   box-shadow: 0 3px 0 rgba(197,83,18,0.15);
-}
-.btn-block {
-  width: 100%;
-}
-.pay-method-group {
-  margin-bottom: 8px;
-}
-.pay-select {
-  width: 100%;
-  margin-bottom: 8px;
 }
 .log-card {
   border: 2px solid #f0ece6;

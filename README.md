@@ -6,8 +6,8 @@
 
 | 入口 | 地址 |
 |------|------|
-| 用户端 | http://47.116.8.45 |
-| 管理后台 | http://47.116.8.45/admin |
+| 用户端 | 由生产环境 HTTPS 域名配置 |
+| 管理后台 | 由生产环境 HTTPS 域名的 `/admin/` 路径提供 |
 
 ## 技术栈
 
@@ -30,14 +30,14 @@
 ## 项目结构
 
 ```
-OrangeJD
+OrangeVC
 ├── orange-common/     共享工具：Result、PageResult、JwtUtil、BaseContext、异常类
 ├── orange-pojo/       数据模型：Entity、DTO、VO
 ├── orange-server/     后端服务：Controller、Service、Mapper、Task、Config、AI
 ├── orange-web/         用户端前端（Vue 3 + Element Plus）
 ├── orange-admin/      管理后台前端（Vue 3 + Element Plus）
 ├── docs/               项目文档 + 开发日志 + 部署指南
-└── deploy/             部署包（jar + 前端 dist + 数据库导出）
+└── scripts/            构建、公开导出与服务器服务模板
 ```
 
 ## 功能模块
@@ -91,16 +91,37 @@ OrangeJD
 
 ### 本地启动
 
+推荐使用 Docker Compose（无需在宿主机安装 JDK、Maven、MySQL 或 Redis）：
+
+```bash
+cp .env.local.example .env.local
+docker compose --env-file .env.local -f compose.local.yml up -d
+```
+
+本地 Compose 使用独立端口，避免与其他开发实例冲突：用户端
+`http://localhost:15173`、管理端 `http://localhost:15174/admin/`、后端及
+Swagger `http://localhost:18080/swagger-ui/index.html`。停止服务使用：
+
+```bash
+docker compose --env-file .env.local -f compose.local.yml down
+```
+
+需要邮件、AI、GitHub 或 Turnstile 功能时，在 `.env.local` 中填入对应密钥；
+不配置时不影响核心页面、数据库与登录功能启动。
+
+手动启动方式：
+
 ```bash
 # 1. Redis Stack
 docker start redis-stack || docker run -d --name redis-stack -p 6380:6379 -p 8002:8001 redis/redis-stack:latest
 
-# 2. 数据库
-mysql -uroot -p123456 -e "CREATE DATABASE IF NOT EXISTS orangejd"
-mysql -uroot -p123456 orangejd < orange-server/src/main/resources/sql/schema-v1.sql
+# 2. 数据库（只创建空库，应用启动后由 Flyway 执行 V1 到最新版本）
+mysql -uroot -p -e "CREATE DATABASE IF NOT EXISTS orangejd CHARACTER SET utf8mb4"
 
-# 3. 后端
-cd OrangeJD
+# 3. 后端。仅在空库第一次启动时提供一次性管理员凭据
+export ORANGE_ADMIN_BOOTSTRAP_USERNAME=owner
+export ORANGE_ADMIN_BOOTSTRAP_PASSWORD='replace-with-a-strong-password'
+cd <repository-root>
 mvn install -DskipTests
 cd orange-server
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
@@ -121,64 +142,78 @@ cd orange-admin && npx vite --host
 | 用户端 | http://localhost:5173 |
 | 管理后台 | http://localhost:5174/admin/ |
 
-### 测试账号
+### 本地开发测试账号
 
-| 身份 | 用户名 | 密码 |
-|------|--------|------|
-| 管理员 | admin | 123456 |
-| 用户 | 自行注册（需邮箱验证码） | — |
+仓库不再内置固定管理员账号。空库首次启动时通过
+`ORANGE_ADMIN_BOOTSTRAP_USERNAME` 和 `ORANGE_ADMIN_BOOTSTRAP_PASSWORD`
+创建管理员；创建成功后应从环境文件删除这两个值。普通用户仍通过注册流程创建。
+
+需要恢复已加密的协作数据库时，按
+`local-deploy/database/README.md` 操作。仓库不保存数据库明文或解密私钥。
+
+本地 `dev` 环境不要求配置 SMTP。点击“获取验证码”后，在后端日志中查找
+`[仅本地开发] 邮箱验证码`；生产环境仍使用真实邮件发送，不会输出明文验证码。
 
 ## 生产部署
 
-详细指南见 `docs/服务器部署完整指南.md`。
+从 GitHub 克隆、初始化数据库、构建发布包和回滚的完整指南见
+`docs/GitHub克隆与服务器数据库部署.md`；Cloudflare 与 HTTPS 见
+`docs/Cloudflare域名与HTTPS接入手册.md`；支付门禁见
+`docs/ePay订单支付接入与服务器交接手册.md`。生产变量从 `.env.prod.example`
+复制到服务器密钥文件，不要把真实值写回仓库。
 
 ```bash
-# 构建
-cd D:/Orangejd
-mvn clean install -DskipTests
-cd orange-web && npm run build
-cd orange-admin && npm run build
+# 发布前验证与构建
+VITE_TURNSTILE_SITE_KEY='PUBLIC_SITE_KEY' \
+VITE_LEGAL_OPERATOR='运营主体全称' \
+VITE_LEGAL_CONTACT_EMAIL='网站公示的联系邮箱' \
+VITE_LEGAL_REGISTERED_ADDRESS='运营主体注册地址' \
+VITE_LEGAL_CREDIT_CODE='统一社会信用代码' \
+VITE_LEGAL_ICP_RECORD='ICP备案号' \
+VITE_LEGAL_PUBLIC_SECURITY_RECORD='公安备案号（取得后填写）' \
+VITE_OFFICIAL_SITE_URL='https://orangevf.com' \
+./scripts/build-release.sh
 
-# 打包
-cp -r orange-server/target/orange-server-1.0.0-SNAPSHOT.jar orange-web/dist/ orange-admin/dist/ deploy/
-mysqldump -uroot -p123456 orangejd > deploy/orangejd_backup.sql
+# 发布前备份（密码通过环境变量或密钥管理系统注入）
+MYSQL_PASSWORD='从密钥管理系统读取' BACKUP_DIR=/data/backups/orangejd ./backup.sh
 
-# 上传 + 部署（服务器）
-\cp -f deploy/orange-server-1.0.0-SNAPSHOT.jar /root/
-rm -rf /data/www/orangejd/web/* && cp -r deploy/web/* /data/www/orangejd/web/
-rm -rf /data/www/orangejd/admin/* && cp -r deploy/admin/* /data/www/orangejd/admin/
-mysql -uroot -p orangejd < deploy/orangejd_backup.sql
-nohup /root/start.sh > /root/app.log 2>&1 &
+# 上传发布包后，由统一安装脚本备份、切换并健康检查
+./scripts/install-release.sh /home/admin/orangejd-release.tar.gz '发布包SHA256'
 ```
 
 ### 关键配置
 
 ```bash
-# start.sh 环境变量
-export MAIL_USERNAME=你的QQ邮箱
-export MAIL_PASSWORD=SMTP授权码
-export AI_TREND_KEY=GiteeAIKey
-export AI_EMBEDDING_KEY=GiteeAIKey
-export TURNSTILE_SECRET_KEY=CloudflareKey
+# 必填变量；完整清单见 .env.prod.example
+export MYSQL_PASSWORD='随机数据库密码'
+export REDIS_PASSWORD='随机 Redis 密码'
 export JWT_ADMIN_SECRET=$(openssl rand -base64 48)
 export JWT_APP_SECRET=$(openssl rand -base64 48)
+export ALLOWED_ORIGINS='https://example.com,https://admin.example.com'
+export TURNSTILE_SECRET_KEY='CloudflareKey'
 ```
 
 ### Nginx 配置要点
 
 ```nginx
 location / { try_files $uri /index.html; }
+location = /robots.txt { try_files $uri =404; }
+location = /sitemap.xml { try_files $uri =404; }
+location = /.well-known/security.txt { try_files $uri =404; }
 location /api/ { proxy_pass http://127.0.0.1:8080/; }
 location /ws/ { proxy_pass http://127.0.0.1:8080; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection "upgrade"; }
-location ^~ /admin { alias /data/www/orangejd/admin; try_files $uri /admin/index.html; }
-location ^~ /uploads/ { alias /root/uploads/; }  # 必须 ^~ 覆盖图片正则
+location ^~ /admin { alias /data/orangejd/web-dist/admin; try_files $uri /admin/index.html; }
 ```
+
+生产站点开放注册前，必须使用真实主体和备案信息完成用户端构建，部署仓库根目录
+`nginx.conf` 中的安全响应头，并确认 `/market` 可公开浏览、未知前端路由显示 404 页面。
+不要使用“团队”“待补充”或示例邮箱作为生产主体信息。
 
 ## AI 功能配置
 
 ### AI 自动审核
 
-管理端开启「AI 托管」→ 新提交自动审核（DeepSeek V4 Pro 多模态）→ 结果飞书通知。
+管理端开启「AI 托管」后，新提交进入持久化 AI 审核任务。只有高置信度结果自动处理并发放奖励，其他结果进入人工审核。
 
 ### AI 趋势分析
 
@@ -186,22 +221,26 @@ location ^~ /uploads/ { alias /root/uploads/; }  # 必须 ^~ 覆盖图片正则
 
 ### GitHub 榜单爬取
 
-每周一凌晨 2:00 自动爬取 15 个 Topic × 3 时段，爬完后统一逐条翻译为中文，失败死磕到成功。
+每周一、周四北京时间 08:00 自动刷新。翻译失败进入持久化重试等待，不占住工作线程，
+应用重启后可继续。
 
 ### 换 AI 模型
 
-修改 `start.sh` 中 `AI_TREND_MODEL` / `AI_AUDIT_MODEL` / `AI_EMBEDDING_MODEL` 环境变量，重启即生效。
+修改 `/etc/orangejd/orangejd.env` 中的 `AI_TREND_MODEL`、`AI_AUDIT_MODEL` 或 `AI_EMBEDDING_MODEL`，再通过 systemd 重启应用。
 
 ## 项目文档
 
 | 文档 | 路径 |
 |------|------|
-| 服务器部署完整指南 | `docs/服务器部署完整指南.md` |
+| GitHub 克隆与生产部署 | `docs/GitHub克隆与服务器数据库部署.md` |
+| Cloudflare 域名与 HTTPS | `docs/Cloudflare域名与HTTPS接入手册.md` |
+| ePay 接入与服务器交接 | `docs/ePay订单支付接入与服务器交接手册.md` |
 | 系统架构设计说明书 | `docs/OrangeJD系统架构设计说明书.md` |
+| 架构治理实施说明 | `docs/架构治理实施说明.md` |
 | 项目进度记录 | `docs/项目进度记录.md` |
 | 开发日志（最新） | `docs/开发日志/2026-07-09-多模块增强.md` |
 | 前端 UI 设计规范 | `docs/OrangeJD前端UI设计规范.md` |
-| 全量表设计 | `orange-server/src/main/resources/sql/schema-v1.sql` |
+| 数据库迁移 | `orange-server/src/main/resources/db/migration/` |
 
 ## License
 

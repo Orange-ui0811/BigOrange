@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     public Result<String> handleSQLIntegrity(SQLIntegrityConstraintViolationException ex) {
         String message = ex.getMessage();
         if (message != null && message.contains("Duplicate entry")) {
-            log.warn("SQL唯一约束冲突: {}", message);
+            log.warn("SQL唯一约束冲突");
             return Result.error("该数据已存在");
         }
         return Result.error(MessageConstant.UNKNOWN_ERROR);
@@ -63,7 +63,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result<String> handleException(Exception ex) {
         log.error("系统异常: {}", ex.getMessage(), ex);
-        return Result.error("系统错误: " + (ex.getMessage() != null ? ex.getMessage().substring(0, Math.min(80, ex.getMessage().length())) : "未知错误"));
+        return Result.error("系统繁忙，请稍后重试");
     }
 }
-

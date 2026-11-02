@@ -19,3 +19,62 @@ Thumbs.db
 # Logs
 *.log
 deploy/
+
+# Environment and secret material. Only redacted examples belong in Git.
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!.env.*.example
+!**/.env.example
+!**/.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_ed25519
+
+# Build and package output
+build/
+release/
+.tmp/
+docs/assets/
+**/node_modules/
+**/dist/
+**/target/
+**/coverage/
+**/playwright-report/
+**/test-results/
+**/*.egg-info/
+**/__pycache__/
+# The XiaoZhi connector is maintained as an independent open-source repository.
+tools/OrangeVC-XiaoZhi-Connector/
+
+# Generated database backups
+backup/
+backups/
+*.sql.gz
+*.dump
+local-deploy/database/*.sql
+local-deploy/database/*.sql.gz
+local-deploy/database/keys.txt
+local-deploy/database/*-key.txt
+
+# Runtime uploads and local analysis indexes
+uploads/
+.codegraph/
+.codex/
+.codex-video-tools/
+_experiment_staging/
+
+# Internal-only workspace material and obsolete snapshots
+.agents/
+orangejd-skeleton/
+test-frontend.html
+docs/开发日志/
+docs/当前生产部署与运维手册.md
+docs/项目进度记录.md

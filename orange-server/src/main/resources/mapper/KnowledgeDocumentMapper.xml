@@ -3,24 +3,58 @@
 <mapper namespace="com.orangejd.server.mapper.KnowledgeDocumentMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO knowledge_document (title, source, source_ref, chunk_count, file_size, content)
-        VALUES (#{title}, #{source}, #{sourceRef}, #{chunkCount}, #{fileSize}, #{content})
+        INSERT INTO knowledge_document
+            (title, source, source_ref, chunk_count, file_size, content, original_content,
+             fetch_status, translation_status, storage_status, vector_status, pipeline_error)
+        VALUES
+            (#{title}, #{source}, #{sourceRef}, #{chunkCount}, #{fileSize}, #{content}, #{originalContent},
+             COALESCE(#{fetchStatus}, 'DONE'), COALESCE(#{translationStatus}, 'DONE'),
+             COALESCE(#{storageStatus}, 'DONE'), COALESCE(#{vectorStatus}, 'DONE'), #{pipelineError})
     </insert>
 
     <select id="selectAll" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
-        SELECT id, title, source, source_ref, chunk_count, file_size, create_time
+        SELECT id, title, source, source_ref, chunk_count, file_size, vector_status, pipeline_error, create_time
         FROM knowledge_document
         ORDER BY id DESC
     </select>
 
+    <select id="selectAllWithContent" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
+        SELECT id, title, source, source_ref, chunk_count, file_size, content, original_content,
+               fetch_status, translation_status, storage_status, vector_status, pipeline_error, create_time
+        FROM knowledge_document
+        ORDER BY id
+    </select>
+
     <select id="selectById" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
-        SELECT id, title, source, source_ref, chunk_count, file_size, content, create_time
+        SELECT id, title, source, source_ref, chunk_count, file_size, content, original_content,
+               fetch_status, translation_status, storage_status, vector_status, pipeline_error, create_time
         FROM knowledge_document WHERE id = #{id}
     </select>
 
     <select id="selectBySourceRef" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
-        SELECT id, title, source, source_ref, chunk_count, file_size, create_time
+        SELECT id, title, source, source_ref, chunk_count, file_size, content, original_content,
+               fetch_status, translation_status, storage_status, vector_status, pipeline_error, create_time
         FROM knowledge_document WHERE source_ref = #{sourceRef}
+    </select>
+
+    <update id="updatePipeline">
+        UPDATE knowledge_document
+        SET title = #{title}, source = #{source}, chunk_count = #{chunkCount}, file_size = #{fileSize}, content = #{content},
+            original_content = COALESCE(#{originalContent}, original_content),
+            fetch_status = #{fetchStatus}, translation_status = #{translationStatus},
+            storage_status = #{storageStatus}, vector_status = #{vectorStatus},
+            pipeline_error = #{pipelineError}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectPipelinePending" resultType="com.orangejd.pojo.entity.KnowledgeDocument">
+        SELECT id, title, source, source_ref, chunk_count, file_size, content, original_content,
+               fetch_status, translation_status, storage_status, vector_status, pipeline_error, create_time
+        FROM knowledge_document
+        WHERE source = 'GITHUB'
+          AND (translation_status != 'DONE' OR storage_status != 'DONE' OR vector_status != 'DONE')
+        ORDER BY id
+        LIMIT #{limit}
     </select>
 
     <delete id="deleteById">

@@ -21,6 +21,7 @@ public interface RequirementService {
     void offline(Long id, String reason);
 
     RequirementVO getDetail(Long id);
+    RequirementVO getAdminDetail(Long id);
 
     PageResult<RequirementVO> listMyRequirements(int page, int size);
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.QuotaOperationMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quota_operation
+            (operation_no, account_id, idempotency_scope, request_id, idempotency_key_hash,
+             request_hash, service_key, price_version, amount, status)
+        VALUES
+            (#{operationNo}, #{accountId}, #{idempotencyScope}, #{requestId}, #{idempotencyKeyHash},
+             #{requestHash}, #{serviceKey}, #{priceVersion}, #{amount}, #{status})
+    </insert>
+
+    <select id="selectByRequestIdForUpdate" resultType="com.orangejd.pojo.entity.QuotaOperation">
+        SELECT id, operation_no, account_id, idempotency_scope, request_id,
+               idempotency_key_hash, request_hash, service_key, price_version, amount,
+               status, debit_log_id, refund_log_id, create_time, update_time
+        FROM quota_operation
+        WHERE request_id = #{requestId}
+        FOR UPDATE
+    </select>
+
+    <update id="attachDebitLog">
+        UPDATE quota_operation SET debit_log_id = #{debitLogId}
+        WHERE id = #{id} AND debit_log_id IS NULL
+    </update>
+
+    <update id="markRefunded">
+        UPDATE quota_operation
+        SET status = 'REFUNDED', refund_log_id = #{refundLogId}
+        WHERE id = #{id} AND status = 'CONSUMED' AND refund_log_id IS NULL
+    </update>
+</mapper>

@@ -1,12 +1,31 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # OrangeJD 数据库备份脚本
-# 用法: MYSQL_PASSWORD=xxx ./backup.sh
-# crontab: 0 3 * * * cd /data/scripts && MYSQL_PASSWORD=xxx ./backup.sh
+# 用法: MYSQL_PASSWORD=xxx BACKUP_DIR=/data/backups/orangejd ./backup.sh
 
-DIR="backup/$(date +%Y-%m-%d)"
+set -euo pipefail
+
+: "${MYSQL_PASSWORD:?请配置 MYSQL_PASSWORD}"
+
+MYSQL_HOST="${MYSQL_HOST:-127.0.0.1}"
+MYSQL_PORT="${MYSQL_PORT:-3306}"
+MYSQL_USER="${MYSQL_USER:-orangejd}"
+MYSQL_DB="${MYSQL_DB:-orangejd}"
+BACKUP_ROOT="${BACKUP_DIR:-./backup}"
+RETENTION_DAYS="${BACKUP_RETENTION_DAYS:-14}"
+STAMP="$(date +%Y-%m-%d_%H%M%S)"
+DIR="$BACKUP_ROOT/$(date +%Y-%m-%d)"
+TARGET="$DIR/${MYSQL_DB}_$STAMP.sql.gz"
+TEMP="$TARGET.tmp"
+
+umask 077
 mkdir -p "$DIR"
-mysqldump -u orangejd_user -p"$MYSQL_PASSWORD" --single-transaction orangejd | gzip > "$DIR/orangejd_$(date +%H%M).sql.gz"
-echo "[$(date)] Backup saved to $DIR/orangejd_$(date +%H%M).sql.gz"
+export MYSQL_PWD="$MYSQL_PASSWORD"
+mysqldump --host="$MYSQL_HOST" --port="$MYSQL_PORT" --user="$MYSQL_USER" \
+  --single-transaction --quick --routines --triggers --events --set-gtid-purged=OFF \
+  "$MYSQL_DB" | gzip -9 > "$TEMP"
+gzip -t "$TEMP"
+mv "$TEMP" "$TARGET"
+unset MYSQL_PWD
 
-# 保留最近7天
-find backup/ -maxdepth 1 -type d -mtime +7 -exec rm -rf {} \; 2>/dev/null
+find "$BACKUP_ROOT" -mindepth 1 -maxdepth 1 -type d -mtime "+$RETENTION_DAYS" -exec rm -rf -- {} +
+echo "[$(date -Iseconds)] Backup verified: $TARGET"

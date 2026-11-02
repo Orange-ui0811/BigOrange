@@ -3,7 +3,7 @@ package com.orangejd.server.controller.admin;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.RedemptionCode;
-import com.orangejd.server.mapper.RedemptionCodeMapper;
+import com.orangejd.server.service.RedemptionCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +15,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/redemption")
+@lombok.RequiredArgsConstructor
 public class AdminRedemptionController {
 
     private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int CODE_LENGTH = 48;
     private final SecureRandom random = new SecureRandom();
 
-    @Autowired
-    private RedemptionCodeMapper mapper;
+    private final RedemptionCodeService mapper;
 
     @PostMapping("/generate")
     public Result<List<String>> generate(@RequestBody Map<String, Object> body) {
@@ -49,8 +49,9 @@ public class AdminRedemptionController {
     @GetMapping("/list")
     public Result<Map<String, Object>> list(@RequestParam(defaultValue = "1") int page,
                                             @RequestParam(defaultValue = "50") int size) {
-        int offset = (page - 1) * size;
-        List<RedemptionCode> list = mapper.selectAll(offset, Math.min(size, 100));
+        int safeSize = com.orangejd.common.util.PageUtil.capSize(size);
+        int offset = com.orangejd.common.util.PageUtil.offset(page, safeSize);
+        List<RedemptionCode> list = mapper.selectAll(offset, safeSize);
         long total = mapper.countAll();
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("records", list);

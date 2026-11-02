@@ -60,7 +60,7 @@
 
       <!-- 品牌标题 + 管理端 -->
       <div class="brand-row">
-        <h1 class="brand-title">OrangeVC</h1>
+        <h1 class="brand-title">{{ PUBLIC_BRAND_NAME }}</h1>
         <span class="admin-badge">管理端</span>
       </div>
 
@@ -100,6 +100,7 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
+import { PUBLIC_BRAND_NAME } from '../config/brand'
 
 const router = useRouter()
 const loading = ref(false)

@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/work")
+@lombok.RequiredArgsConstructor
 public class AdminWorkController {
 
-    @Autowired private WorkService workService;
+    private final WorkService workService;
 
     @GetMapping("/{id}")
     public Result<WorkDetailVO> detail(@PathVariable Long id) {
-        return Result.success(workService.getDetail(id));
+        return Result.success(workService.getAdminDetail(id));
     }
 
     @GetMapping

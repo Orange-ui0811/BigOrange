@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/requirement")
+@lombok.RequiredArgsConstructor
 public class AdminRequirementController {
 
-    @Autowired private RequirementService requirementService;
+    private final RequirementService requirementService;
 
     @GetMapping("/{id}")
     public Result<RequirementVO> detail(@PathVariable Long id) {
-        return Result.success(requirementService.getDetail(id));
+        return Result.success(requirementService.getAdminDetail(id));
     }
 
     @GetMapping

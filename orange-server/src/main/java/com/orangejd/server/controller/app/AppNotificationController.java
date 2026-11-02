@@ -10,9 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/app/notification")
+@lombok.RequiredArgsConstructor
 public class AppNotificationController {
 
-    @Autowired private NotificationService notificationService;
+    private final NotificationService notificationService;
 
     @GetMapping("/list")
     public Result<List<Notification>> list(@RequestParam(defaultValue = "1") int page,

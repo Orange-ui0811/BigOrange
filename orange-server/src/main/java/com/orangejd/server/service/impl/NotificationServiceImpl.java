@@ -1,5 +1,7 @@
 package com.orangejd.server.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.constant.MessageConstant;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.exception.BaseException;
@@ -11,11 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService {
 
-    @Autowired private NotificationMapper notificationMapper;
+    private final NotificationMapper notificationMapper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public void send(Long accountId, String type, String message, Long relatedId) {
@@ -26,16 +31,20 @@ public class NotificationServiceImpl implements NotificationService {
         n.setRelatedId(relatedId);
         notificationMapper.insert(n);
         // WebSocket 实时推送通知
-        com.orangejd.server.websocket.WebSocketServer.sendToUser(
-                String.valueOf(accountId),
-                "{\"type\":\"notification\",\"message\":\"" + message + "\"}");
+        try {
+            com.orangejd.server.websocket.WebSocketServer.sendToUser(
+                    String.valueOf(accountId), objectMapper.writeValueAsString(
+                            Map.of("type", "notification", "message", message)));
+        } catch (JsonProcessingException e) {
+            throw new BaseException("通知序列化失败");
+        }
     }
 
     @Override
     public List<Notification> listMyNotifications(int page, int size) {
         size = PageUtil.capSize(size);
         Long currentId = BaseContext.getCurrentId();
-        int offset = (page - 1) * size;
+        int offset = PageUtil.offset(page, size);
         return notificationMapper.selectByAccountId(currentId, offset, size);
     }
 

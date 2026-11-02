@@ -12,26 +12,64 @@ spring:
     password: ${MAIL_PASSWORD:}
     properties:
       mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.enable: ${MAIL_STARTTLS_ENABLE:true}
+      mail.smtp.ssl.enable: ${MAIL_SSL_ENABLE:false}
+      mail.smtp.connectiontimeout: ${MAIL_CONNECTION_TIMEOUT_MS:10000}
+      mail.smtp.timeout: ${MAIL_READ_TIMEOUT_MS:15000}
+      mail.smtp.writetimeout: ${MAIL_WRITE_TIMEOUT_MS:15000}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangejd}?useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:orangevc}?sslMode=REQUIRED&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD}
   data:
     redis:
       client-type: jedis
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      database: ${REDIS_DB:0}
   ai:
     vectorstore:
       redis:
         initialize-schema: true
-  redis:
-    host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:6379}
-    password: ${REDIS_PASSWORD}
-    database: ${REDIS_DB:0}
 
 orange:
+  beginner-projects:
+    auto-refresh-enabled: ${BEGINNER_PROJECT_AUTO_REFRESH_ENABLED:false}
+  career-projects:
+    auto-refresh-enabled: ${CAREER_PROJECT_AUTO_REFRESH_ENABLED:false}
+    refresh-cron: ${CAREER_PROJECT_REFRESH_CRON:0 0 5 * * 1}
+  ingestion:
+    pipeline-v2-enabled: ${INGESTION_PIPELINE_V2_ENABLED:false}
+  ai-config:
+    encryption-key: ${AI_CONFIG_ENCRYPTION_KEY:}
+  ai-tool-pool:
+    enabled: ${AI_TOOL_POOL_ENABLED:false}
+    global-max-concurrency: ${AI_TOOL_GLOBAL_MAX_CONCURRENCY:50}
+    acquire-wait-millis: ${AI_TOOL_ACQUIRE_WAIT_MS:2000}
+    lease-millis: ${AI_TOOL_LEASE_MS:330000}
+    auto-retry-enabled: ${AI_TOOL_AUTO_RETRY_ENABLED:true}
+    auto-retry-max-attempts: ${AI_TOOL_AUTO_RETRY_MAX_ATTEMPTS:0}
+    auto-retry-initial-delay-millis: ${AI_TOOL_AUTO_RETRY_INITIAL_DELAY_MS:2000}
+    auto-retry-max-delay-millis: ${AI_TOOL_AUTO_RETRY_MAX_DELAY_MS:30000}
+    endpoint: ${GITEE_AI_ENDPOINT:}
+    model: ${GITEE_AI_MODEL:}
+    keys:
+      - ${GITEE_AI_KEY_1:}
+      - ${GITEE_AI_KEY_2:}
+      - ${GITEE_AI_KEY_3:}
+      - ${GITEE_AI_KEY_4:}
+      - ${GITEE_AI_KEY_5:}
+      - ${GITEE_AI_KEY_6:}
+      - ${GITEE_AI_KEY_7:}
+      - ${GITEE_AI_KEY_8:}
+      - ${GITEE_AI_KEY_9:}
+      - ${GITEE_AI_KEY_10:}
+  trade:
+    simulated-payment-enabled: false
+  security:
+    allowed-origins: ${ALLOWED_ORIGINS}
   jwt:
     admin-secret-key: ${JWT_ADMIN_SECRET}
     admin-ttl: ${JWT_ADMIN_TTL:7200000}
@@ -41,14 +79,28 @@ orange:
     app-token-name: App-Token
   upload:
     path: ${UPLOAD_PATH:/data/orangejd/uploads}
+  public-base-url: ${PUBLIC_BASE_URL}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD}
+    database: ${REDIS_DB:0}
+  turnstile:
+    secret-key: ${TURNSTILE_SECRET_KEY}
   oss:
-    endpoint: ${OSS_ENDPOINT}
-    access-key-id: ${OSS_ACCESS_KEY}
-    access-key-secret: ${OSS_ACCESS_SECRET}
-    bucket-name: ${OSS_BUCKET}
+    enabled: ${OSS_ENABLED:false}
+    endpoint: ${OSS_ENDPOINT:}
+    public-endpoint: ${OSS_PUBLIC_ENDPOINT:}
+    region: ${OSS_REGION:cn-shanghai}
+    access-key-id: ${OSS_ACCESS_KEY:}
+    access-key-secret: ${OSS_ACCESS_SECRET:}
+    bucket-name: ${OSS_BUCKET:}
+    signed-url-ttl-seconds: ${OSS_SIGNED_URL_TTL_SECONDS:300}
   leaderboard:
     github-token: ${GITHUB_TOKEN:}
     local-cache-ttl-minutes: ${LEADERBOARD_LOCAL_CACHE_TTL:15}
+    refresh-cron: ${LEADERBOARD_REFRESH_CRON:0 0 2 * * 1}
+    refresh-zone: ${LEADERBOARD_REFRESH_ZONE:Asia/Shanghai}
   ai-audit:
     endpoint: ${AI_AUDIT_ENDPOINT:}
     api-key: ${AI_AUDIT_KEY:}
@@ -57,12 +109,32 @@ orange:
     endpoint: ${AI_TREND_ENDPOINT:}
     api-key: ${AI_TREND_KEY:}
     model: ${AI_TREND_MODEL:DeepSeek-V4-Pro}
+  ai-text:
+    endpoint: ${AI_TEXT_ENDPOINT:${AI_TREND_ENDPOINT:}}
+    api-key: ${AI_TEXT_KEY:${AI_TREND_KEY:}}
+    model: ${AI_TEXT_MODEL:${AI_TREND_MODEL:DeepSeek-V4-Pro}}
+  ai-project:
+    endpoint: ${AI_PROJECT_ENDPOINT:}
+    api-key: ${AI_PROJECT_KEY:}
+    model: ${AI_PROJECT_MODEL:}
+  ai-contribution:
+    endpoint: ${AI_CONTRIBUTION_ENDPOINT:}
+    api-key: ${AI_CONTRIBUTION_KEY:}
+    model: ${AI_CONTRIBUTION_MODEL:}
   ai-embedding:
     endpoint: ${AI_EMBEDDING_ENDPOINT:https://ai.gitee.com/v1}
     api-key: ${AI_EMBEDDING_KEY:}
     model: ${AI_EMBEDDING_MODEL:bge-small-zh-v1.5}
+  epay:
+    pid: ${EPAY_PID:}
+    key: ${EPAY_KEY:}
+    gateway: ${EPAY_GATEWAY:}
+    notify-url: ${EPAY_NOTIFY_URL:}
+    return-url: ${EPAY_RETURN_URL:}
+    order-payments-enabled: ${EPAY_ORDER_PAYMENTS_ENABLED:false}
   feishu:
     webhook-url: ${FEISHU_WEBHOOK_URL:}
+    job-webhook-url: ${FEISHU_JOB_WEBHOOK_URL:}
 
 mybatis:
   configuration:
@@ -71,4 +143,13 @@ mybatis:
 logging:
   level:
     com.orangejd: warn
+    com.orangejd.server.task.LeaderboardRefreshTask: info
     root: error
+
+management:
+  server:
+    address: 127.0.0.1
+    port: ${MANAGEMENT_PORT:8081}
+  endpoint:
+    health:
+      show-details: when_authorized

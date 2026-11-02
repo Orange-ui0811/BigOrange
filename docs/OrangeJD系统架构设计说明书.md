@@ -1,6 +1,6 @@
 # OrangeJD 系统架构设计说明书
 
-> **版本**: v1.0 | **日期**: 2026-07-05 | **状态**: 已交付
+> **版本**: v1.3 | **日期**: 2026-07-22 | **状态**: 持续演进
 >
 > **适用范围**: 团队技术评审、新成员入职、项目落地交付、运维部署参考
 
@@ -8,7 +8,7 @@
 
 ## 1. 文档摘要
 
-OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品交易与职业匹配平台**。平台连接 AI 技能持有者（开发者）与项目需求方，提供作品展示、需求发布、在线交易、GitHub 开源榜单、AI 趋势分析、AI 岗位匹配等核心能力。
+OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品交易、项目实践与职业匹配平台**。平台连接 AI 技能持有者与项目需求方，并通过 GitHub 榜单、开源 Issue 发现、AI 方案设计和岗位能力映射，帮助用户完成“做自己的项目”与“参与开源项目”两类实践路径。
 
 **技术定位**：单体 Spring Boot 应用 + 双前端门户，集成 Spring AI 向量检索（RAG）与 LLM 调用链，面向中小规模并发场景（设计目标 500 QPS）。
 
@@ -16,12 +16,12 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 
 | 指标 | 数值 |
 |------|------|
-| 业务数据表 | 17 张（MySQL 8.0 InnoDB） |
-| API 端点 | 约 85 个（Admin 端 30+ / App 端 55+） |
+| 初始化数据表 | 37 张（MySQL 8.0 InnoDB，Flyway 最新 V13） |
+| 控制器 | 46 个 `@RequestMapping` 控制器，含用户端、管理端与设备 Agent 三类入口 |
 | Maven 模块 | 3 个（common / pojo / server） |
 | 前端入口 | 2 个（用户端 orange-web / 管理端 orange-admin） |
 | AI 模型 | DeepSeek V4 Pro + bge-small-zh-v1.5 Embedding |
-| 外部集成 | GitHub API / Gitee AI / 飞书 / Epay / QQ 邮箱 |
+| 外部集成 | GitHub API / Gitee AI / 飞书 / Epay / QQ 邮箱 / 小智 MCP |
 
 ---
 
@@ -44,13 +44,15 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 | **沟通协商** | 一对一私聊（WebSocket + HTTP 混合）、系统通知 |
 | **交易闭环** | 报价→订单→支付阶段（定金/尾款）→交付记录 |
 | **管理后台** | 分类 CRUD、作品/需求审核、用户管理、报表统计、订单管理 |
-| **GitHub 榜单** | 15 个 Topic 分类，每日全量 + 每周增量缓存，自动 README 采集 |
+| **GitHub 榜单** | 15 个 Topic 分类，按周刷新并缓存快照，自动采集 README |
+| **开源贡献** | 发现与核验 Issue、AI 候选匹配、岗位能力映射、贡献指南；默认每两天完整刷新 |
 | **AI 趋势分析** | 知识图谱展示 + LLM 深度分析 + RAG 上下文增强 |
 | **AI 自动审核** | DeepSeek V4 Pro 多模态审核（文本+图片），审核开关可配置 |
 | **RAG 知识库** | 文档上传/切片/向量化，GitHub README 自动采集，岗位 JD 向量库 |
 | **岗位招聘** | 用户投稿→管理员审核→向量化入库→AI 岗位匹配（方案设计→推荐岗位） |
 | **方案设计** | 六阶段 AI 项目规划（想法→需求理解→成功标准→约束风险→任务计划→岗位匹配） |
 | **配额系统** | 充值码/Epay 支付/消费预扣+退款/新用户赠送/审核奖励 |
+| **StackChan 语音接入** | 官方固件不刷机；Windows Bridge 经小智 MCP 调用受限的 OrangeVC 动作 |
 
 ### 2.3 非功能需求
 
@@ -75,6 +77,7 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 │  Nginx 反向代理 → CORS 过滤器 → RequestID 拦截器          │
 │  → JWT Admin 拦截器 ( /admin/** )                        │
 │  → JWT App 拦截器   ( /app/** )                          │
+│  → Device Token 拦截器 ( /agent/** )                    │
 ├─────────────────────────────────────────────────────────┤
 │                    业务层 (Business Layer)                │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐               │
@@ -82,15 +85,15 @@ OrangeJD 是一个面向 AI 实习生和自由开发者的 **Vibe Coding 作品�
 │  │ Work     │  │ Quote    │  │ Trend    │               │
 │  │ Require  │  │ Order    │  │ Audit   │               │
 │  │ Comment  │  │ Payment  │  │ Plan    │               │
-│  │ Favorite │  │ Delivery │  │ Job     │               │
+│  │ Favorite │  │ Delivery │  │ Job/Open│               │
 │  └──────────┘  └──────────┘  └──────────┘               │
 ├─────────────────────────────────────────────────────────┤
 │                   数据层 (Data Layer)                     │
-│  MySQL 8.0 (MyBatis)  │  Redis Stack (Jedis)             │
-│  17 张业务表           │  Cache + Vector + Token Blacklist│
+│  RDS MySQL 8.0 (MyBatis) │ Redis 8 (Jedis + RediSearch)  │
+│  37 张初始化表            │ Cache + Vector + Token Blacklist│
 ├─────────────────────────────────────────────────────────┤
 │                   外部集成 (External)                     │
-│  Gitee AI │ GitHub API │ 飞书 Webhook │ Epay │ QQ 邮箱   │
+│ Gitee AI │ GitHub API │ 飞书 │ Epay │ QQ邮箱 │ 小智 MCP │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -117,14 +120,14 @@ graph TB
             JWT_U["JwtTokenAppInterceptor<br/>path: /app/**"]
         end
 
-        subgraph Controller["控制器层 40+ controllers"]
-            AdminAPI["Admin 15 controllers"]
-            AppAPI["App 25 controllers"]
+        subgraph Controller["控制器层 43+ controllers"]
+            AdminAPI["管理端 API"]
+            AppAPI["用户端 API"]
         end
 
-        subgraph Service["服务层 22 services"]
+        subgraph Service["服务层"]
             BizSvc["业务服务<br/>Work/Requirement/Comment/<br/>Favorite/Order/Quote..."]
-            AISvc["AI 服务<br/>TrendAnalysis/AiAudit/<br/>JobMatch"]
+            AISvc["AI 服务<br/>Trend/Audit/Plan/Job/<br/>OpenSource"]
             InfraSvc["基础设施<br/>Mail/Epay/Upload/Quota"]
         end
 
@@ -135,14 +138,14 @@ graph TB
     end
 
     subgraph Storage["存储层"]
-        MySQL["MySQL 8.0<br/>17 tables"]
-        Redis["Redis Stack<br/>Cache | Vector | Session"]
+        MySQL["RDS MySQL 8.0<br/>34 initialized tables"]
+        Redis["Redis 8 + RediSearch<br/>Cache | Vector | Token"]
         OSS["阿里云 OSS<br/>文件存储"]
     end
 
     subgraph External["外部服务"]
         GiteeAI["Gitee AI<br/>LLM + Embedding"]
-        GitHub["GitHub API<br/>榜单 + README"]
+        GitHub["GitHub API<br/>榜单 + README + Issue"]
         Feishu["飞书 Bot<br/>审核通知"]
         Epay["易支付<br/>在线充值"]
         SMTP["QQ 邮箱 SMTP<br/>验证码"]
@@ -184,7 +187,7 @@ graph LR
 | 模块 | 职责 | 关键内容 |
 |------|------|---------|
 | `orange-common` | 共享工具与基础设施 | `JwtUtil`、`UrlValidator`、`JacksonObjectMapper`、`BaseContext`（ThreadLocal）、`Result<T>` 统一响应、`JwtProperties` |
-| `orange-pojo` | 数据对象定义 | 17 个 Entity、DTO（LoginDTO/RegisterDTO/PageQueryDTO）、VO（LoginVO/KnowledgeDocumentVO） |
+| `orange-pojo` | 数据对象定义 | Entity、DTO、VO 与分页查询对象 |
 | `orange-server` | 业务逻辑与 API 入口 | Controllers / Services / Mappers / Interceptors / Config / AI / Task / Aspect |
 
 ---
@@ -234,6 +237,24 @@ RequestIdInterceptor (全局 /**)
 | 黑名单 | Redis Set `token:blacklist` | 同 |
 
 JWT 生成 `sk-` 前缀 + 兼容解析（`parseJwt` 自动去前缀），保证旧 token 平滑过渡。
+
+#### 4.1.3 StackChan 设备令牌通道
+
+小智客户端通过小智 MCP 和用户电脑上的 `OrangeVC 小智连接器` 接入；StackChan 是首个推荐设备，但不是使用前提。该方式不刷机，也不向平台上传用户本地模型密钥。用户在已登录网页生成 10 分钟一次性连接码；连接器交换得到独立 Device Token，令牌明文保存在 Windows Credential Manager，服务端只保存 SHA-256 哈希。
+
+Windows 端提供独立开源的 `OrangeVC-XiaoZhi-Connector.cmd` 图形连接器，负责首次环境准备、测试期 SSH 隧道、正式 HTTPS 地址、一次性绑定、连接器启停和脱敏日志；旧的 StackChan 启动脚本仅在 v0.2.x 作为兼容入口。它不保存 SSH 私钥内容，不在普通配置文件中写入小智地址或 Device Token。
+
+Bridge 默认使用确定性规则识别菜单和多轮语音流程，不调用用户模型。用户可选启用“使用我的模型辅助理解自由表达”，填写 OpenAI 兼容 API 接口、模型名称和 API Key；只有连接测试成功后才生效，且仅在规则无法识别时调用。API Key 保存在 Windows Credential Manager，不上传到 OrangeVC。GitHub 榜单通过只读设备动作 `leaderboard.github.list` 读取平台现有快照，支持本周涨星、本周新增、全时段热门和 Topic 方向筛选，最多返回五张卡片供语音选择与朗读，不触发 GitHub 抓取或 AI 扣费。
+
+每次 Bridge 与小智重新建立 MCP 会话后，OrangeVC 平台能力默认锁定。用户必须先说“可以使用 OrangeVC 平台了吗”，由 `orangevc_agent_prepare` 解锁当前连接会话；StackChan 回复“可以使用了，你想使用什么功能呢”并列举功能菜单。断线重连或明确退出后重新锁定，避免普通闲聊误触发平台操作。对外 MCP 工具为 `orangevc_agent_prepare`、`orangevc_agent_confirm`、`orangevc_agent_status` 和 `orangevc_agent_cancel`；内部 Python 包名及 `/agent/**` HTTP 路径为兼容既有部署继续保留。
+
+| 路径 | 鉴权与职责 |
+|------|-----------|
+| `/app/agent-devices/**` | App JWT；创建连接码、查看设备、撤销设备 |
+| `/agent/connect/exchange` | 公开但限流；一次性连接码交换 Device Token |
+| `/agent/actions/**` | Bearer Device Token；校验状态、有效期和 scope |
+
+设备动作采用服务端白名单与 `PREPARED → QUEUED → RUNNING → SUCCEEDED/FAILED` 状态机。写入和付费动作必须确认，账户身份只从 Device Token 获取；上线体检复用 `LaunchCheckService`，开源岗位匹配和贡献指南复用 `OpenSourceContributionService`，自由趋势分析复用 `TrendAnalysisService.analyze`，画像趋势分析由 `TrendProfileAnalysisService` 调用 `TrendAnalysisService.analyzeV2` 并保存网站历史，方案设计复用 `PlanGenerationService`，因此网页与语音具有相同价格、扣费和失败退款规则。只读动作还包括配额、最近语音任务和未读通知数量。Windows Bridge 用持久化会话状态收集画像、锁定运行任务、展示推荐选项并把选中项目导入方案设计；任务确认后通过短时长轮询与 `autoPoll` 指令要求小智在同一轮持续查询，完成后主动播报。方案设计第 2 至 4 阶段可从同一设备最近成功任务中继承项目描述与上一阶段结果。用户端可查看最近 30 条设备任务并打开完整结果；单机服务重启时遗留任务会标记为 `SERVER_RESTARTED`，不会自动重跑。公网 Bridge 地址强制 HTTPS，HTTP 只允许本机开发地址。
 
 ### 4.2 业务模块详细设计
 
@@ -293,6 +314,7 @@ graph TB
         Trend["TrendAnalysisService<br/>趋势分析: DeepSeek V4 Pro<br/>+ RAG 知识库增强"]
         Embed["GiteeAiEmbeddingModel<br/>bge-small-zh-v1.5<br/>512维 Embedding"]
         JobMatch["JobMatchService<br/>岗位匹配: DeepSeek V4 Pro<br/>+ VectorStore 检索"]
+        OpenSource["OpenSourceContributionService<br/>Issue 匹配 / 岗位映射 / 贡献指南"]
     end
 
     subgraph SpringAI_Layer["Spring AI 1.0.0"]
@@ -300,7 +322,7 @@ graph TB
         QE["QuestionAnswerAdvisor<br/>检索增强顾问"]
     end
 
-    subgraph Redis_Stack["Redis Stack"]
+    subgraph Redis_Stack["Redis 8 + RediSearch"]
         FT["FT.INDEX default-index<br/>HNSW + COSINE<br/>512-dim float vector"]
         DocStore["知识库文档向量<br/>+ 岗位 JD 向量"]
     end
@@ -310,6 +332,8 @@ graph TB
     Trend --> VS
     JobMatch --> GiteeAI
     JobMatch --> VS
+    OpenSource --> GiteeAI
+    OpenSource --> GitHubAPI["GitHub REST API<br/>仓库 / Issue / 评论 / Timeline"]
     Embed --> GiteeAI_Emb["Gitee AI API<br/>POST /v1/embeddings"]
     VS --> FT
     FT --> DocStore
@@ -350,23 +374,35 @@ graph TB
 | **输出** | 3 个匹配岗位，每岗位含 `position`/`reason`(100+字)/`focus`(100+字) |
 | **配额** | 50 segments/次，预扣+失败退款 |
 
+#### 4.3.5 开源贡献服务
+
+| 组件 | 职责 |
+|------|------|
+| `OpenSourceGithubService` | 读取仓库元数据、最近更新的 open Issue、评论和 Timeline；识别 assignee、关联 PR、认领线索与环境风险 |
+| `OpenSourceTranslationService` | 每批最多 10 条，把英文标题和正文压缩为中文标题与一句摘要，失败记录为 `FAILED` 供管理端重试 |
+| `OpenSourceAiClient` | 复用趋势分析模型配置，生成候选排序和贡献指南 |
+| `OpenSourceContributionService` | 用户端筛选、详情、实时核验、AI 匹配、岗位映射、指南持久化与配额事务边界 |
+| `OpenSourceRefreshTask` | 每两天完整刷新、每 12 小时轻量核验；原子状态避免同类任务重复运行 |
+
+发现页只展示缓存数据，不在普通分页请求中直接大规模调用 GitHub。AI 匹配、岗位匹配和贡献指南均采用“预扣配额、失败退款”；指南按 `account_id + issue_id` 幂等覆盖保存。
+
 ### 4.4 前端架构
 
 ```mermaid
 graph TB
     subgraph UserPortal["用户端 orange-web"]
         direction TB
-        Views1["12 页面视图"]
-        API1["5 API 模块<br/>request.js | job.js | quota.js<br/>knowledge.js"]
-        Router1["Vue Router<br/>12 路由 + 导航守卫"]
+        Views1["用户业务页面<br/>含 AI Hub / ProjectTools / OpenSource"]
+        API1["同域 /api 请求层<br/>App-Token 鉴权"]
+        Router1["Vue Router<br/>懒加载路由 + 导航守卫"]
         Layout1["MainLayout.vue<br/>顶部导航 + 侧边栏"]
     end
 
     subgraph AdminPortal["管理端 orange-admin"]
         direction TB
-        Views2["10 页面视图"]
-        API2["2 API 模块<br/>request.js | knowledge.js"]
-        Router2["Vue Router<br/>12 路由 + 导航守卫"]
+        Views2["运营管理页面<br/>含开源贡献管理"]
+        API2["同域 /api 请求层<br/>Admin-Token 鉴权"]
+        Router2["Vue Router<br/>Hash 路由 + 导航守卫"]
         Layout2["MainLayout.vue<br/>顶部导航 + 侧边栏"]
     end
 
@@ -565,17 +601,25 @@ MySQL 8.0 (orangejd)
 │   ├── quota_log          — 消费日志（type/amount/balance/requestId幂等）
 │   ├── redemption_code    — 充值码（code/quota/status/USED_BY）
 │   └── top_up             — 充值记录（Epay订单映射）
-└── 方案设计
-    └── plan_history       — 方案历史（account_id/summary/phase1~phase6）
+├── 方案设计与上线体检
+│   ├── plan_history       — 方案历史（account_id/summary/phase1~phase6）
+│   └── launch_assessment  — 上线体检任务、阶段报告与配额状态
+├── 法律与支付
+│   ├── legal_consent_record — 用户协议和隐私文本同意记录
+│   └── order_epay_transaction — 订单支付请求、回调和幂等状态
+└── 开源贡献
+    ├── open_source_repository — GitHub 仓库源、环境元数据和同步状态
+    ├── open_source_issue      — Issue 缓存、翻译、核验和发布状态
+    └── open_source_guide      — 用户贡献指南记录
 ```
 
 ### 6.2 存储技术矩阵
 
 | 存储类型 | 技术选型 | 用途 | 容量 |
 |---------|---------|------|------|
-| **关系数据库** | MySQL 8.0 InnoDB | 业务数据：账号/作品/订单/评论等 17 张表 | < 1GB |
+| **关系数据库** | RDS MySQL 8.0 InnoDB | 账号、内容、交易、AI 记录、开源贡献等 34 张初始化表 | 当前 < 1GB |
 | **缓存** | Redis（Jedis 客户端） | JWT 黑名单 / AI 审核开关 / AI 配置 / 邮箱验证码 | < 100MB |
-| **向量数据库** | Redis Stack RediSearch | 知识库文档切片（512维）、岗位 JD 向量 | < 500MB |
+| **向量数据库** | Redis 8 RediSearch | 知识库文档切片（512维）、岗位 JD 向量 | 当前 < 500MB |
 | **对象存储** | 阿里云 OSS | 用户上传文件（封面图/附件/富文本图片） | < 10GB |
 | **本地文件** | 服务器磁盘 | 开发环境文件上传 /upload/ | < 5GB |
 
@@ -592,6 +636,9 @@ MySQL 8.0 (orangejd)
 | `job_posting` | `uk_company_position` / `idx_direction` / `idx_audit_status` | UNIQUE+INDEX | 岗位去重 + 按方向查询 |
 | `quota_log` | `uk_request_id` | UNIQUE | 幂等消费 |
 | `redemption_code` | `uk_code` | UNIQUE | 充值码唯一 |
+| `open_source_repository` | `uk_open_source_repository_name` | UNIQUE | GitHub 仓库源去重 |
+| `open_source_issue` | `uk_open_source_issue_github_id` / `uk_open_source_issue_repo_number` | UNIQUE | Issue 全局 ID 和仓库编号双重幂等 |
+| `open_source_guide` | `uk_open_source_guide_account_issue` | UNIQUE | 同一用户同一 Issue 只保留一份当前指南 |
 
 ---
 
@@ -649,11 +696,14 @@ graph LR
 
 ```mermaid
 graph TB
-    subgraph Cloud["阿里云 ECS (2C4G)"]
+    subgraph Cloud["阿里云轻量应用服务器（上海，4C8G）"]
         Nginx["Nginx 1.24<br/>:80/:443"]
-        App["Spring Boot Fat JAR<br/>java -jar orange-server.jar<br/>:8080"]
-        Redis["Docker Redis Stack<br/>:6380"]
-        MySQL_Local["MySQL 8.0<br/>:3306"]
+        App["Spring Boot Fat JAR<br/>systemd: orangejd<br/>127.0.0.1:8080"]
+        Redis["APT Redis 8.2.7 + RediSearch<br/>127.0.0.1:6379"]
+    end
+
+    subgraph RDS["阿里云 RDS（上海）"]
+        MySQL["MySQL 8.0<br/>内网 + TLS"]
     end
 
     subgraph Storage_Cloud["阿里云 OSS"]
@@ -668,8 +718,8 @@ graph TB
     end
 
     Nginx -->|proxy_pass :8080| App
-    Nginx -->|serve static| Files
-    App --> MySQL_Local
+    Nginx -->|serve /data/orangejd/web-dist| Static["用户端 + /admin 管理端"]
+    App -->|VPC 内网| MySQL
     App --> Redis
     App --> GiteeAI
     App --> GitHub
@@ -682,50 +732,39 @@ graph TB
 
 | 组件 | 规格 | 用途 |
 |------|------|------|
-| **ECS** | 2 核 4GB (阿里云 ecs.c6.large) | 运行 Spring Boot + Nginx |
-| **MySQL** | 同 ECS 或 RDS 1C1G | 业务数据库（< 1GB） |
-| **Redis** | Docker 同 ECS | 缓存 + 向量存储（内存 < 1GB） |
-| **OSS** | 按量付费 | 用户文件（约 10GB/年增长） |
-| **带宽** | 5 Mbps | 峰值 500 QPS |
+| **轻量服务器** | 4 vCPU / 8 GiB / 70 GiB | Spring Boot、Nginx、Redis 8 |
+| **RDS MySQL** | MySQL 8.0，独立云实例 | 业务数据库，内网 TLS 连接 |
+| **Redis** | APT 安装 Redis 8.2.7，本机最大内存 2GB | 缓存、Token 黑名单、RediSearch 向量索引 |
+| **OSS** | 私有 Bucket，按量计费/试用资源包 | 图片、视频、交付附件和签名读取 |
+| **公网** | 峰值 200 Mbps，按实际产品流量规则计费 | 用户访问；容量判断必须结合业务压测，不以峰值带宽等同稳定吞吐 |
 
-### 8.3 启动命令
+### 8.3 启动方式
 
 ```bash
-# 生产环境启动（环境变量注入敏感信息）
-java -jar orange-server.jar \
-  --spring.profiles.active=prod \
-  --server.port=8080 \
-  -DMYSQL_HOST=localhost \
-  -DMYSQL_PASSWORD=<password> \
-  -DREDIS_HOST=localhost \
-  -DREDIS_PORT=6380 \
-  -DJWT_ADMIN_SECRET=<secret> \
-  -DJWT_APP_SECRET=<secret> \
-  -DAI_AUDIT_KEY=<gitee-key> \
-  -DAI_TREND_KEY=<gitee-key> \
-  -DAI_EMBEDDING_KEY=<gitee-key> \
-  -DFEISHU_WEBHOOK_URL=<works-webhook> \
-  -DFEISHU_JOB_WEBHOOK_URL=<job-webhook> \
-  -DMAIL_USERNAME=<qq-mail> \
-  -DMAIL_PASSWORD=<smtp-auth-code>
+sudo systemctl start orangejd
+sudo systemctl status orangejd --no-pager -l
+curl -fsS http://127.0.0.1:8080/health/detail
 ```
 
-### 8.4 CI/CD 流程
+生产秘密由 systemd 的 `EnvironmentFile=/etc/orangejd/orangejd.env` 注入，JAR 固定为 `/data/orangejd/orange-server.jar`。服务只监听回环地址，公网 API 必须经过 Nginx。
+
+### 8.4 当前发布流程
 
 ```
-Git Push (main)
+本地 V2 工作区
   │
   ▼
-mvn clean package -DskipTests
+scripts/build-release.sh
+（Maven verify + 双前端 npm ci/build）
   │
   ▼
-scp orange-server/target/orange-server-*.jar → ECS:/opt/orangejd/
+SHA256 校验 + SCP 统一发布包
   │
   ▼
-ssh ECS "systemctl restart orangejd"
+备份 JAR/双前端/环境和 Nginx → 安装 → systemctl restart
   │
   ▼
-健康检查: curl http://localhost:8080/health/detail
+健康检查 + Flyway + Nginx + 浏览器业务冒烟
 ```
 
 当前无自动化 CI/CD 流水线（Jenkins/GitHub Actions），部署为手动 Maven 打包 + SCP 上传。
@@ -821,7 +860,7 @@ WHERE id = #{id} AND quota >= #{amount}
 1. **投稿声明**：用户必须勾选"所提交信息来自公开渠道，不含内部保密信息"
 2. **自动清洗**：后端 `stripCompanyNames()` 替换已知公司名为"该公司"
 3. **分层存储**：`content`（管理员可见，含公司名）/ `displayContent`（公开，已脱敏）
-4. **DMCA 声明**：岗位详情页底部展示版权声明 + 联系邮箱 `orangejd2026@163.com`
+4. **DMCA 声明**：岗位详情页底部展示版权声明 + 构建时配置的网站法律联系邮箱
 
 ---
 
@@ -940,10 +979,10 @@ BCrypt 密码存储 (不可逆)
 | 故障 | 影响范围 | 系统行为 | 恢复方式 |
 |------|---------|---------|---------|
 | **MySQL 宕机** | 全部功能不可用 | 应用无法启动/API 返回 500 | 重启 MySQL + 应用 |
-| **Redis Stack 宕机** | AI 审核开关/Token 黑名单/RAG 向量检索 不可用 | `@Autowired(required=false)` 降级，业务正常 | 重启 Docker Redis |
-| **Gitee AI API 故障** | AI 审核/AI 趋势/方案设计/岗位匹配 不可用 | 返回错误提示，配额自动退款 | 等待 API 恢复 |
+| **Redis 8 宕机** | AI 审核开关、Token 黑名单、RAG 向量检索不可用 | 部分非核心能力可降级，鉴权和向量能力需重点确认 | `systemctl restart redis-server` 后检查 `FT._LIST` |
+| **Gitee AI API 故障** | AI 审核、趋势、方案、岗位与开源 AI 功能不可用 | 交互型配额功能返回错误并退款；Issue 缓存仍可浏览 | 等待 API 恢复并检查失败记录 |
 | **飞书 Webhook 故障** | 审核通知不发送 | try-catch 静默失败，不影响审核 | 无需恢复 |
-| **GitHub API 限流** | 榜单不刷新 | 使用本地缓存快照（7天内） | 等待限流窗口过期 |
+| **GitHub API 限流或 Token 失效** | 榜单与 Issue 不刷新、实时核验失败 | 使用 MySQL 缓存继续展示，管理端记录同步错误 | 更新 Token 或等待限流窗口恢复 |
 | **OSS 故障** | 文件上传失败 | 降级到本地文件存储 | 切换 OSS bucket |
 | **邮箱 SMTP 故障** | 注册验证码发送失败 | 注册接口返回错误 | 检查 SMTP 配置 |
 
@@ -959,9 +998,9 @@ BCrypt 密码存储 (不可逆)
 
 | 数据 | 方式 | 频率 | 保留 |
 |------|------|------|------|
-| MySQL | `mysqldump` | 每日凌晨 | 7 天 |
-| Redis | RDB 快照 | 每 6 小时 | 3 天 |
-| OSS 文件 | OSS 跨区域复制 | 实时 | 永久 |
+| RDS MySQL | RDS 自动备份 + 重大迁移前手动备份 | 按控制台策略 | 按实际套餐和合规要求 |
+| Redis | AOF + 定期异机副本 | 待自动化 | 不得只保存在同一系统盘 |
+| OSS 文件 | 私有 Bucket + 生命周期/版本策略 | 按业务等级 | 按成本和恢复目标 |
 | 应用日志 | 日志文件轮转 | 按天 | 30 天 |
 
 > **当前状态**：备份策略为手动执行，未配置自动化。建议引入阿里云 DBS 自动备份。
@@ -971,11 +1010,9 @@ BCrypt 密码存储 (不可逆)
 当前为单机部署，未来扩容路径：
 
 ```
-当前: 单 ECS (Spring Boot + MySQL + Redis)
+当前: 单应用服务器 (Spring Boot + Nginx + Redis) + RDS + OSS
   │
-  ├─► 数据库分离: MySQL → 阿里云 RDS (主备)
-  │
-  ├─► 缓存分离: Redis → 阿里云 Redis (主备)
+  ├─► Redis 分离: 选择支持 RediSearch/Vector 的托管实例
   │
   ├─► 应用扩容: Spring Boot × 2 (Nginx upstream)
   │
@@ -1001,6 +1038,7 @@ BCrypt 密码存储 (不可逆)
 | v0.9 | 06-30 | 邮箱注册 + 项目对比借鉴 + 安全增强（SSRF/Token前缀/RequestID/审计） |
 | v1.0 | 07-01 | 配额系统 + Epay 支付 + 方案设计（四阶段） |
 | v1.1 | 07-05 | 岗位招聘系统 + 方案设计六阶段重构 + 飞书双 Webhook |
+| v1.2 | 07-21 | 上线体检、法律与支付迁移、开源 Issue 发现/匹配/指南、AI 工具首页重构、统一发布包 |
 
 ### 13.2 当前技术债务
 
@@ -1032,7 +1070,7 @@ BCrypt 密码存储 (不可逆)
 | 编号 | 风险 | 触发条件 | 影响 | 概率 | 应对措施 |
 |------|------|---------|------|------|---------|
 | R-01 | **Gitee AI API 服务中断** | API 欠费/升级/限流 | AI 审核/趋势/方案/匹配全部不可用 | 中 | 配额退款机制已就绪；关键业务不依赖 AI |
-| R-02 | **Redis Stack 内存溢出** | 知识库文档激增，向量占用过大 | 向量检索变慢或 OOM | 低 | 设置 `maxmemory` + 过期策略；文档上传 1MB 限制 |
+| R-02 | **Redis 8 内存溢出** | 知识库文档激增，向量占用过大 | 向量检索变慢或写入失败 | 低 | 当前 `maxmemory=2gb`、`noeviction`；监控内存并在写入失败前扩容 |
 | R-03 | **MySQL 慢查询** | 数据量增长，缺少索引优化 | API 响应变慢 | 低 | 已有基础索引；后续加入慢查询日志 + EXPLAIN 优化 |
 | R-04 | **AI 审核误杀/漏审** | 模型理解偏差或 prompt 不完善 | 合规内容被拒或不适当内容通过 | 中 | 人工复审机制（管理后台审核页）；飞书通知可人工介入 |
 | R-05 | **版权纠纷** | 用户提交未公开的内部 JD | 法律风险 | 中 | 避风港原则：强制声明 + 自动脱敏 + 72h 下架流程 |
@@ -1057,7 +1095,7 @@ BCrypt 密码存储 (不可逆)
 | | PageHelper | 2.0.0 | 分页插件 |
 | **安全** | JJWT | 0.12.6 | JWT 签发/解析 |
 | | Spring Security Crypto | 6.x | BCrypt |
-| **数据库** | MySQL Connector | 8.0.33 | JDBC 驱动 |
+| **数据库** | MySQL Connector | 8.0.33 | JDBC 驱动，连接 RDS MySQL 8.0 |
 | | Redis (Jedis) | — | 缓存/向量/黑名单 |
 | **文档** | SpringDoc OpenAPI | 1.7.0 | Swagger UI |
 | **文件** | Apache POI | 5.2.5 | Excel 导入导出 |
@@ -1071,14 +1109,14 @@ BCrypt 密码存储 (不可逆)
 | | marked | 18.0.5 | Markdown 渲染（用户端） |
 | **AI** | DeepSeek V4 Pro | — | LLM |
 | | bge-small-zh-v1.5 | — | Embedding 模型 (512维) |
-| **基础设施** | Docker | — | Redis Stack 容器 |
+| **基础设施** | systemd | Ubuntu 24.04 | 管理 Spring Boot 与 Redis 服务 |
 | | Nginx | 1.24 | 反向代理 |
 | | MySQL | 8.0 | 业务数据库 |
-| | Redis Stack | latest | 缓存+向量 |
+| | Redis 8 + RediSearch | 8.2.7 | 缓存、Token 黑名单和向量检索 |
 
 ## 附录 B：API 端点总览
 
-### 管理端 Admin API (30+ 端点)
+### 管理端 Admin API（含开源贡献管理）
 
 | Controller | Base Path | 端点数 | 核心功能 |
 |------------|-----------|--------|---------|
@@ -1099,8 +1137,9 @@ BCrypt 密码存储 (不可逆)
 | `ReportController` | `/admin/report` | 2 | 报表导出 |
 | `StatisticsController` | `/admin/statistics` | 2 | 平台统计 |
 | `CommonController` | `/admin/common` | 1 | 文件上传 |
+| `AdminOpenSourceController` | `/admin/open-source` | 9 | 仓库源、Issue 编辑/翻译/核验、完整与轻量刷新 |
 
-### 用户端 App API (55+ 端点)
+### 用户端 App API（含开源贡献流程）
 
 | Controller | Base Path | 端点数 | 核心功能 |
 |------------|-----------|--------|---------|
@@ -1126,6 +1165,7 @@ BCrypt 密码存储 (不可逆)
 | `EpayController` | `/app/epay` | 2 | 创建支付/异步回调 |
 | `AppConfigController` | `/app/config` | 1 | 交易模式查询 |
 | `AppCommonController` | `/app/common` | 1 | 文件上传 |
+| `AppOpenSourceController` | `/app/open-source` | 10 | 配置、Issue 列表/详情/核验、AI 匹配、岗位映射、贡献指南 |
 
 ## 附录 C：数据库实体关系（核心业务域）
 
@@ -1142,6 +1182,7 @@ erDiagram
     ACCOUNT ||--o{ MESSAGE : sends
     ACCOUNT ||--o{ QUOTA_LOG : consumes
     ACCOUNT ||--o{ PLAN_HISTORY : saves
+    ACCOUNT ||--o{ OPEN_SOURCE_GUIDE : owns
 
     WORK ||--o{ WORK_SALE_OPTION : has
     WORK ||--o{ COMMENT : receives
@@ -1160,8 +1201,16 @@ erDiagram
     WORK ||--o{ AUDIT_RECORD : audited_as
     REQUIREMENT ||--o{ AUDIT_RECORD : audited_as
     AUDIT_RECORD }o--|| ACCOUNT : audited_by
+
+    OPEN_SOURCE_REPOSITORY ||--o{ OPEN_SOURCE_ISSUE : contains
+    OPEN_SOURCE_ISSUE ||--o{ OPEN_SOURCE_GUIDE : produces
 ```
 
 ---
 
-> **文档维护**：本文档基于项目代码实际状态编写（commit `16c07a2`），各模块细节如有变更请同步更新对应章节。
+> **文档维护**：本文档基于 2026-07-21 的 `V2` 工作区实际代码维护。具体发布版本以 `git log -1`、发布包 SHA256、生产 Flyway 记录和业务验收结果共同确定，不能只依赖文档中的日期。
+# 2026-07-25 架构治理补充
+
+OrangeVC 当前采用模块化单体、渐进治理和全程兼容路线。已建立持久化任务中心、可执行 Flyway V1 基线、岗位 AI 审核证据与事务奖励、集中路由策略、Redis 限流、ArchUnit 规则、前端质量门禁、Actuator 指标和可追踪发布包。
+
+完整边界、已完成内容和后续治理队列以 [架构治理实施说明](./架构治理实施说明.md) 及 `docs/adr` 中的架构决策为准。现有文档中若仍描述 `schema-v1.sql` 手工初始化、裸线程刷新或根目录 `deploy.sh/start.sh`，均视为历史方式，不再用于新环境和生产发布。

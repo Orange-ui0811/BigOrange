@@ -13,6 +13,8 @@ public class KnowledgeDocumentVO {
     private Long fileSize;
     private String period;       // all=永久 / week=30天后清理
     private String createTime;
+    private String vectorStatus;
+    private String pipelineError;
 
     // ---- getters / setters ----
 
@@ -39,4 +41,8 @@ public class KnowledgeDocumentVO {
 
     public String getCreateTime() { return createTime; }
     public void setCreateTime(String createTime) { this.createTime = createTime; }
+    public String getVectorStatus() { return vectorStatus; }
+    public void setVectorStatus(String vectorStatus) { this.vectorStatus = vectorStatus; }
+    public String getPipelineError() { return pipelineError; }
+    public void setPipelineError(String pipelineError) { this.pipelineError = pipelineError; }
 }

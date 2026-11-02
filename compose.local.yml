@@ -1,0 +1,149 @@
+name: nxz-bigorange
+
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-orangejd}
+      MYSQL_USER: ${MYSQL_USER:-orangejd}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-orangejd_dev}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_dev}
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+    volumes:
+      - orangejd-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  redis:
+    image: redis/redis-stack-server:latest
+    volumes:
+      - orangejd-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  backend:
+    image: maven:3.9.9-eclipse-temurin-21
+    working_dir: /workspace
+    command: >-
+      sh -c "mvn -B -DskipTests clean install &&
+      mvn -B -f orange-server/pom.xml spring-boot:run -Dspring-boot.run.profiles=dev"
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-orangejd}?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      MYSQL_USER: ${MYSQL_USER:-orangejd}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-orangejd_dev}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      UPLOAD_PATH: /workspace/uploads
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      AI_AUDIT_ENDPOINT: ${AI_AUDIT_ENDPOINT:-https://ai.gitee.com/v1}
+      AI_AUDIT_KEY: ${AI_AUDIT_KEY:-}
+      AI_AUDIT_MODEL: ${AI_AUDIT_MODEL:-DeepSeek-V4-Pro}
+      AI_TREND_ENDPOINT: ${AI_TREND_ENDPOINT:-https://ai.gitee.com/v1}
+      AI_TREND_KEY: ${AI_TREND_KEY:-}
+      AI_TREND_MODEL: ${AI_TREND_MODEL:-DeepSeek-V4-Pro}
+      AI_TEXT_ENDPOINT: ${AI_TEXT_ENDPOINT:-${AI_TREND_ENDPOINT:-https://ai.gitee.com/v1}}
+      AI_TEXT_KEY: ${AI_TEXT_KEY:-${AI_TREND_KEY:-}}
+      AI_TEXT_MODEL: ${AI_TEXT_MODEL:-${AI_TREND_MODEL:-DeepSeek-V4-Pro}}
+      AI_TOOL_POOL_ENABLED: ${AI_TOOL_POOL_ENABLED:-false}
+      AI_TOOL_GLOBAL_MAX_CONCURRENCY: ${AI_TOOL_GLOBAL_MAX_CONCURRENCY:-50}
+      AI_TOOL_ACQUIRE_WAIT_MS: ${AI_TOOL_ACQUIRE_WAIT_MS:-2000}
+      AI_TOOL_LEASE_MS: ${AI_TOOL_LEASE_MS:-330000}
+      GITEE_AI_ENDPOINT: ${GITEE_AI_ENDPOINT:-}
+      GITEE_AI_MODEL: ${GITEE_AI_MODEL:-}
+      GITEE_AI_KEY_1: ${GITEE_AI_KEY_1:-}
+      GITEE_AI_KEY_2: ${GITEE_AI_KEY_2:-}
+      GITEE_AI_KEY_3: ${GITEE_AI_KEY_3:-}
+      GITEE_AI_KEY_4: ${GITEE_AI_KEY_4:-}
+      GITEE_AI_KEY_5: ${GITEE_AI_KEY_5:-}
+      GITEE_AI_KEY_6: ${GITEE_AI_KEY_6:-}
+      GITEE_AI_KEY_7: ${GITEE_AI_KEY_7:-}
+      GITEE_AI_KEY_8: ${GITEE_AI_KEY_8:-}
+      GITEE_AI_KEY_9: ${GITEE_AI_KEY_9:-}
+      GITEE_AI_KEY_10: ${GITEE_AI_KEY_10:-}
+      AI_PROJECT_ENDPOINT: ${AI_PROJECT_ENDPOINT:-}
+      AI_PROJECT_KEY: ${AI_PROJECT_KEY:-}
+      AI_PROJECT_MODEL: ${AI_PROJECT_MODEL:-}
+      AI_CONTRIBUTION_ENDPOINT: ${AI_CONTRIBUTION_ENDPOINT:-}
+      AI_CONTRIBUTION_KEY: ${AI_CONTRIBUTION_KEY:-}
+      AI_CONTRIBUTION_MODEL: ${AI_CONTRIBUTION_MODEL:-}
+      AI_CONFIG_ENCRYPTION_KEY: ${AI_CONFIG_ENCRYPTION_KEY:-}
+      INGESTION_PIPELINE_V2_ENABLED: ${INGESTION_PIPELINE_V2_ENABLED:-false}
+      AI_EMBEDDING_ENDPOINT: ${AI_EMBEDDING_ENDPOINT:-https://ai.gitee.com/v1}
+      AI_EMBEDDING_KEY: ${AI_EMBEDDING_KEY:-}
+      AI_EMBEDDING_MODEL: ${AI_EMBEDDING_MODEL:-bge-small-zh-v1.5}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      # Local-only Cloudflare test secret. Production always reads the real server secret.
+      TURNSTILE_SECRET_KEY: ${LOCAL_TURNSTILE_SECRET_KEY:-1x0000000000000000000000000000000AA}
+      FEISHU_WEBHOOK_URL: ${FEISHU_WEBHOOK_URL:-}
+      FEISHU_JOB_WEBHOOK_URL: ${FEISHU_JOB_WEBHOOK_URL:-}
+      ORANGE_ADMIN_BOOTSTRAP_USERNAME: ${ORANGE_ADMIN_BOOTSTRAP_USERNAME:-}
+      ORANGE_ADMIN_BOOTSTRAP_PASSWORD: ${ORANGE_ADMIN_BOOTSTRAP_PASSWORD:-}
+      ALLOWED_ORIGINS: http://localhost:15173,http://127.0.0.1:15173,http://localhost:15174,http://127.0.0.1:15174
+    volumes:
+      - .:/workspace
+      - orangejd-maven-cache:/root/.m2
+    ports:
+      - "18080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  web:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    environment:
+      VITE_API_BASE_URL: http://127.0.0.1:18080
+      VITE_WS_URL: ws://127.0.0.1:18080
+      VITE_FS_POLLING: "true"
+      VITE_REGISTRATION_ENABLED: "true"
+      VITE_TURNSTILE_SITE_KEY: ${LOCAL_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
+      NPM_CONFIG_REGISTRY: ${NPM_CONFIG_REGISTRY:-https://registry.npmmirror.com}
+      NPM_CONFIG_FETCH_RETRIES: 5
+      NPM_CONFIG_FETCH_RETRY_MINTIMEOUT: 10000
+      NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT: 60000
+    volumes:
+      - ./orange-web:/app
+      - orangejd-web-node-modules:/app/node_modules
+    ports:
+      - "15173:5173"
+    depends_on:
+      - backend
+
+  admin:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 5174"
+    environment:
+      VITE_API_BASE_URL: http://127.0.0.1:18080
+      NPM_CONFIG_REGISTRY: ${NPM_CONFIG_REGISTRY:-https://registry.npmmirror.com}
+      NPM_CONFIG_FETCH_RETRIES: 5
+      NPM_CONFIG_FETCH_RETRY_MINTIMEOUT: 10000
+      NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT: 60000
+    volumes:
+      - ./orange-admin:/app
+      - orangejd-admin-node-modules:/app/node_modules
+    ports:
+      - "15174:5174"
+    depends_on:
+      - backend
+
+volumes:
+  orangejd-mysql-data:
+  orangejd-redis-data:
+  orangejd-maven-cache:
+  orangejd-web-node-modules:
+  orangejd-admin-node-modules:

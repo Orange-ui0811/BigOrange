@@ -15,6 +15,8 @@ public interface WorkService {
 
     void submitForReview(Long id);
 
+    void withdraw(Long id);
+
     void delete(Long id);
 
     void toggleVisibility(Long id);
@@ -22,6 +24,7 @@ public interface WorkService {
     void offline(Long id, String reason);
 
     WorkDetailVO getDetail(Long id);
+    WorkDetailVO getAdminDetail(Long id);
 
     PageResult<WorkVO> listMyWorks(int page, int size);
 

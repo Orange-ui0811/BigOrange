@@ -17,6 +17,12 @@ public class KnowledgeDocument {
     private Integer chunkCount;
     private Long fileSize;
     private String content;
+    private String originalContent;
+    private String fetchStatus;
+    private String translationStatus;
+    private String storageStatus;
+    private String vectorStatus;
+    private String pipelineError;
     private LocalDateTime createTime;
 
     // ---- getters / setters ----
@@ -41,6 +47,18 @@ public class KnowledgeDocument {
 
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
+    public String getOriginalContent() { return originalContent; }
+    public void setOriginalContent(String originalContent) { this.originalContent = originalContent; }
+    public String getFetchStatus() { return fetchStatus; }
+    public void setFetchStatus(String fetchStatus) { this.fetchStatus = fetchStatus; }
+    public String getTranslationStatus() { return translationStatus; }
+    public void setTranslationStatus(String translationStatus) { this.translationStatus = translationStatus; }
+    public String getStorageStatus() { return storageStatus; }
+    public void setStorageStatus(String storageStatus) { this.storageStatus = storageStatus; }
+    public String getVectorStatus() { return vectorStatus; }
+    public void setVectorStatus(String vectorStatus) { this.vectorStatus = vectorStatus; }
+    public String getPipelineError() { return pipelineError; }
+    public void setPipelineError(String pipelineError) { this.pipelineError = pipelineError; }
 
     public LocalDateTime getCreateTime() { return createTime; }
     public void setCreateTime(LocalDateTime createTime) { this.createTime = createTime; }

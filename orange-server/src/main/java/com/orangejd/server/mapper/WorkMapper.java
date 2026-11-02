@@ -19,6 +19,8 @@ public interface WorkMapper {
 
     Work selectById(@Param("id") Long id);
 
+    Work selectByIdForUpdate(@Param("id") Long id);
+
     List<Work> selectByOwnerId(@Param("ownerId") Long ownerId, @Param("offset") int offset, @Param("limit") int limit);
 
     int countByOwnerId(@Param("ownerId") Long ownerId);
@@ -26,6 +28,10 @@ public interface WorkMapper {
     int deleteById(@Param("id") Long id);
 
     int updateAuditStatus(@Param("id") Long id, @Param("auditStatus") String auditStatus);
+
+    int approveAndMarkRewarded(@Param("id") Long id);
+
+    int approvePreviouslyRewarded(@Param("id") Long id);
 
     int updateVisibility(@Param("id") Long id, @Param("visibilityStatus") String visibilityStatus);
 

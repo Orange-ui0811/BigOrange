@@ -9,21 +9,25 @@ import com.orangejd.server.mapper.FavoriteMapper;
 import com.orangejd.server.mapper.RequirementMapper;
 import com.orangejd.server.mapper.WorkMapper;
 import com.orangejd.server.service.NotificationService;
+import com.orangejd.server.service.ContentAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class FavoriteServiceImpl implements FavoriteService {
 
-    @Autowired private FavoriteMapper favoriteMapper;
-    @Autowired private WorkMapper workMapper;
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired private NotificationService notificationService;
+    private final FavoriteMapper favoriteMapper;
+    private final WorkMapper workMapper;
+    private final RequirementMapper requirementMapper;
+    private final NotificationService notificationService;
+    private final ContentAccessService contentAccessService;
 
     public void favorite(String targetType, Long targetId) {
         Long currentId = BaseContext.getCurrentId();
+        Long ownerId = contentAccessService.requireAccessibleOwner(targetType, targetId, currentId);
         if (favoriteMapper.exists(currentId, targetType, targetId)) return;
         Favorite f = new Favorite();
         f.setAccountId(currentId);
@@ -31,16 +35,15 @@ public class FavoriteServiceImpl implements FavoriteService {
         f.setTargetId(targetId);
         favoriteMapper.insert(f);
         // 通知内容作者
-        Long ownerId = null;
         String title = "";
         if ("WORK".equals(targetType)) {
             com.orangejd.pojo.entity.Work w = workMapper.selectById(targetId);
-            if (w != null && !currentId.equals(w.getOwnerId())) { ownerId = w.getOwnerId(); title = w.getTitle(); }
+            if (w != null) title = w.getTitle();
         } else if ("REQUIREMENT".equals(targetType)) {
             com.orangejd.pojo.entity.Requirement r = requirementMapper.selectById(targetId);
-            if (r != null && !currentId.equals(r.getPublisherId())) { ownerId = r.getPublisherId(); title = r.getTitle(); }
+            if (r != null) title = r.getTitle();
         }
-        if (ownerId != null) {
+        if (!currentId.equals(ownerId)) {
             notificationService.send(ownerId, "FAVORITE", "有人收藏了你的" + ("WORK".equals(targetType) ? "作品《" : "需求《") + title + "》", targetId);
         }
     }
@@ -50,13 +53,13 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     public void unfavoriteById(Long id) {
-        favoriteMapper.deleteById(id);
+        favoriteMapper.deleteById(id, BaseContext.getCurrentId());
     }
 
     public PageResult<FavoriteVO> listMyFavorites(int page, int size) {
         size = com.orangejd.common.util.PageUtil.capSize(size);
         Long currentId = BaseContext.getCurrentId();
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         int total = favoriteMapper.countByAccountId(currentId);
         List<FavoriteVO> records = favoriteMapper.selectVOByAccountId(currentId, offset, size);
         return new PageResult<>(total, records);

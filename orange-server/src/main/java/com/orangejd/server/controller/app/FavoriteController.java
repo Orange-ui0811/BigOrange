@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/favorite")
+@lombok.RequiredArgsConstructor
 public class FavoriteController {
 
-    @Autowired private FavoriteService favoriteService;
+    private final FavoriteService favoriteService;
 
     @PostMapping
     public Result<?> favorite(@RequestParam String targetType, @RequestParam Long targetId) {

@@ -14,15 +14,17 @@ import com.orangejd.server.service.NotificationService;
 import com.orangejd.server.service.RequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@lombok.RequiredArgsConstructor
 public class RequirementServiceImpl implements RequirementService {
 
-    @Autowired private RequirementMapper requirementMapper;
-    @Autowired(required = false) private com.orangejd.server.service.AiAuditService aiAuditService;
+    private final RequirementMapper requirementMapper;
+    private final @org.springframework.lang.Nullable com.orangejd.server.service.AiAuditService aiAuditService;
 
     @Override
     public RequirementVO create(RequirementCreateDTO dto) {
@@ -46,6 +48,7 @@ public class RequirementServiceImpl implements RequirementService {
     }
 
     @Override
+    @Transactional
     public RequirementVO edit(Long id, RequirementEditDTO dto) {
         Requirement r = requirementMapper.selectById(id);
         if (r == null) throw new BaseException(MessageConstant.REQ_NOT_FOUND);
@@ -59,7 +62,7 @@ public class RequirementServiceImpl implements RequirementService {
         r.setBudgetMax(dto.getBudgetMax() != null ? dto.getBudgetMax() : r.getBudgetMax());
         requirementMapper.update(r);
 
-        if ("APPROVED".equals(r.getAuditStatus())) {
+        if ("APPROVED".equals(r.getAuditStatus()) || "PENDING_REVIEW".equals(r.getAuditStatus())) {
             requirementMapper.updateAuditStatus(id, "DRAFT");
         }
 
@@ -87,8 +90,8 @@ public class RequirementServiceImpl implements RequirementService {
         requirementMapper.deleteById(id);
     }
 
-    @Autowired private com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
-    @Autowired private NotificationService notificationService;
+    private final com.orangejd.server.mapper.AuditRecordMapper auditRecordMapper;
+    private final NotificationService notificationService;
 
     @Override
     public void offline(Long id, String reason) {
@@ -120,7 +123,18 @@ public class RequirementServiceImpl implements RequirementService {
     public RequirementVO getDetail(Long id) {
         Requirement r = requirementMapper.selectById(id);
         if (r == null) throw new BaseException(MessageConstant.REQ_NOT_FOUND);
+        Long currentId = BaseContext.getCurrentId();
+        if (!r.getPublisherId().equals(currentId)
+                && (!("APPROVED".equals(r.getAuditStatus())) || !("PUBLIC".equals(r.getVisibilityStatus()))))
+            throw new BaseException(MessageConstant.NO_PERMISSION);
         return toVO(r);
+    }
+
+    @Override
+    public RequirementVO getAdminDetail(Long id) {
+        Requirement requirement = requirementMapper.selectById(id);
+        if (requirement == null) throw new BaseException(MessageConstant.REQ_NOT_FOUND);
+        return toVO(requirement);
     }
 
     @Override
@@ -128,7 +142,7 @@ public class RequirementServiceImpl implements RequirementService {
         size = com.orangejd.common.util.PageUtil.capSize(size);
         Long currentId = BaseContext.getCurrentId();
         int total = requirementMapper.countByPublisherId(currentId);
-        int offset = (page - 1) * size;
+        int offset = com.orangejd.common.util.PageUtil.offset(page, size);
         List<RequirementVO> records = requirementMapper.selectByPublisherId(currentId, offset, size)
                 .stream().map(this::toVO).collect(Collectors.toList());
         return new PageResult<>(total, records);
@@ -137,7 +151,7 @@ public class RequirementServiceImpl implements RequirementService {
     @Override
     public PageResult<RequirementVO> listPublic(RequirementQueryDTO query) {
         query.setSize(com.orangejd.common.util.PageUtil.capSize(query.getSize()));
-        int offset = (query.getPage() - 1) * query.getSize();
+        int offset = com.orangejd.common.util.PageUtil.offset(query.getPage(), query.getSize());
         int total = requirementMapper.countPublic(query.getCategoryId(), query.getBudgetMin(), query.getBudgetMax(), query.getKeyword());
         List<RequirementVO> records = requirementMapper.selectPublic(query.getCategoryId(), query.getBudgetMin(), query.getBudgetMax(), query.getKeyword(), offset, query.getSize())
                 .stream().map(this::toVO).collect(Collectors.toList());
@@ -147,7 +161,7 @@ public class RequirementServiceImpl implements RequirementService {
     @Override
     public PageResult<RequirementVO> listAll(RequirementQueryDTO query) {
         query.setSize(com.orangejd.common.util.PageUtil.capSize(query.getSize()));
-        int offset = (query.getPage() - 1) * query.getSize();
+        int offset = com.orangejd.common.util.PageUtil.offset(query.getPage(), query.getSize());
         int total = requirementMapper.countAll(query.getAuditStatus());
         List<RequirementVO> records = requirementMapper.selectAll(query.getAuditStatus(), offset, query.getSize())
                 .stream().map(this::toVO).collect(Collectors.toList());

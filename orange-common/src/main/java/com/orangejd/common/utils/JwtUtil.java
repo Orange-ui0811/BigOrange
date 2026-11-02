@@ -5,7 +5,7 @@ import io.jsonwebtoken.Jwts;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ public final class JwtUtil {
 
     private static SecretKey toKey(String secretKey) {
         // 确保密钥长度 ≥ 256 bit (32 bytes) for HS256
-        byte[] keyBytes = secretKey.getBytes();
+        byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         if (keyBytes.length < 32) {
             keyBytes = java.util.Arrays.copyOf(keyBytes, 32);
         }

@@ -3,7 +3,10 @@ package com.orangejd.server.config;
 import com.orangejd.common.json.JacksonObjectMapper;
 import com.orangejd.server.interceptor.JwtTokenAdminInterceptor;
 import com.orangejd.server.interceptor.JwtTokenAppInterceptor;
+import com.orangejd.server.interceptor.AgentDeviceInterceptor;
 import com.orangejd.server.interceptor.RequestIdInterceptor;
+import com.orangejd.server.security.ApiRoutePolicy;
+import com.orangejd.server.security.RateLimitInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -15,26 +18,35 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
+@lombok.RequiredArgsConstructor
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Value("${orange.upload.path}")
     private String uploadPath;
 
-    @Autowired
-    private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
+    @Value("${orange.security.allowed-origins:http://localhost:5173,http://localhost:5174,http://localhost:15173,http://localhost:15174}")
+    private String allowedOrigins;
 
-    @Autowired
-    private JwtTokenAppInterceptor jwtTokenAppInterceptor;
+    private final JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
+
+    private final JwtTokenAppInterceptor jwtTokenAppInterceptor;
+
+    private final AgentDeviceInterceptor agentDeviceInterceptor;
+
+    private final RateLimitInterceptor rateLimitInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*")
+                .allowedOrigins(Arrays.stream(allowedOrigins.split(","))
+                        .map(String::trim).filter(s -> !s.isEmpty()).toArray(String[]::new))
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
+                .exposedHeaders("X-Request-Id")
                 .allowCredentials(true);
     }
 
@@ -54,19 +66,17 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RequestIdInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(rateLimitInterceptor).addPathPatterns("/app/**", "/admin/**", "/agent/**");
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/auth/login");
+                .excludePathPatterns(ApiRoutePolicy.ADMIN_PUBLIC_PATHS);
 
         registry.addInterceptor(jwtTokenAppInterceptor)
                 .addPathPatterns("/app/**")
-                .excludePathPatterns("/app/auth/login", "/app/auth/register", "/app/auth/send-code",
-                        "/app/auth/send-reset-code", "/app/auth/reset-password",
-                        "/app/category", "/app/work/public", "/app/requirement/public",
-                        "/app/config/trade-mode",
-                        "/app/leaderboard/**",
-                        "/app/trend/graph", "/app/trend/analyze", "/app/trend/analyze-v2",
-                        "/ws/**");
+                .excludePathPatterns(ApiRoutePolicy.APP_PUBLIC_PATHS);
+
+        registry.addInterceptor(agentDeviceInterceptor)
+                .addPathPatterns("/agent/**")
+                .excludePathPatterns(ApiRoutePolicy.AGENT_PUBLIC_PATHS);
     }
 }
-

@@ -10,7 +10,7 @@
         <article class="detail-main">
           <!-- 封面区 -->
           <div class="detail-cover">
-            <span class="eyebrow">作品详情 · {{ work.auditStatus || '已审核' }}<template v-if="work.demoUrl"> · 可演示</template></span>
+            <span class="eyebrow">作品详情 · {{ work.auditStatus || '已审核' }}<template v-if="work.demoUrl"> · 可演示</template><template v-if="work.videoUrl"> · 有视频</template></span>
             <div style="height:16px"></div>
             <img v-if="work.coverUrl" :src="work.coverUrl" class="cover-img" />
             <div v-else class="mock-browser">
@@ -28,6 +28,7 @@
             <div class="tag-row">
               <span class="tag orange" v-if="work.categoryName">{{ work.categoryName }}</span>
               <span class="tag yellow" v-if="work.demoUrl">可演示</span>
+              <span class="tag yellow" v-if="work.videoUrl">视频展示</span>
               <span class="tag blue" v-if="work.language">{{ work.language }}</span>
               <span class="tag green">{{ work.auditStatus || '已审核' }}</span>
             </div>
@@ -41,8 +42,8 @@
                 <strong>{{ work.language || work.categoryName || '未指定' }}</strong>
               </div>
               <div class="info-box">
-                <span>演示状态</span>
-                <strong>{{ work.demoUrl ? '可在线体验' : '暂无可演示版本' }}</strong>
+                <span>展示内容</span>
+                <strong>{{ work.videoUrl ? '含视频展示' : work.demoUrl ? '可在线体验' : '图文介绍' }}</strong>
               </div>
               <div class="info-box">
                 <span>作者</span>
@@ -53,21 +54,24 @@
             <!-- 作品亮点 -->
             <template v-if="work.detail">
               <h3>作品亮点</h3>
-              <div class="work-detail" v-html="work.detail"></div>
+              <div class="work-detail" v-safe-html="work.detail"></div>
             </template>
 
+            <VideoShowcase v-if="work.videoUrl" :url="work.videoUrl" :poster="work.coverUrl" :title="work.title" />
+
             <!-- 售卖项 -->
-            <div v-if="tradeEnabled && work.saleOptions?.length" class="sale-options">
-              <h3>售卖项</h3>
+            <div v-if="work.saleOptions?.length" class="sale-options">
+              <h3>参考价格</h3>
               <div class="sale-option-list">
-                <el-tag v-for="(so,i) in work.saleOptions" :key="i" type="warning" size="large">¥{{ so.price }} {{ so.saleType }}</el-tag>
+                <el-tag v-for="(so,i) in work.saleOptions" :key="i" type="warning" size="large">¥{{ so.price }}</el-tag>
               </div>
+              <p class="payment-coming-soon">价格仅供展示，在线支付功能即将开放。</p>
             </div>
 
             <!-- 演示链接 -->
             <div v-if="work.demoUrl" class="demo-box">
               <span class="demo-label">🔗 在线演示：</span>
-              <a :href="work.demoUrl" target="_blank" class="demo-link">点击体验 →</a>
+              <a :href="safeExternalHref(work.demoUrl)" class="demo-link" @click.prevent="openExternalSafely(work.demoUrl)">点击体验 →</a>
             </div>
 
             <!-- 评论区 -->
@@ -96,7 +100,9 @@
         <!-- ═══ 侧栏 ═══ -->
         <aside class="deal-panel">
           <div class="author-card">
-            <el-avatar :size="44" class="author-avatar">{{ (work.ownerName || '?')[0] }}</el-avatar>
+            <el-avatar :size="44" class="author-avatar" :src="work.ownerAvatar || undefined">
+              {{ (work.ownerName || '?')[0] }}
+            </el-avatar>
             <div>
               <strong>{{ work.ownerName || '#'+work.ownerId }}</strong>
               <span>AI 应用开发者</span>
@@ -131,11 +137,13 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import PageTour from '../components/PageTour.vue'
+import VideoShowcase from '../components/VideoShowcase.vue'
 import request from '../api/request'
-import { tradeEnabled } from '../stores/tradeMode'
+import { openExternalSafely } from '../composables/useSafeExternalNavigation'
+import { safeExternalHref } from '../utils/safeExternalUrl'
 
 const workdetailTour = [
-  { selector: '.detail-cover', text: '顶部是作品封面和演示。有链接的话直接在线体验这个作品的功能～', expression: 'curious' },
+  { selector: '.detail-cover', text: '顶部是作品封面；作者提供演示地址或视频时，可以继续向下查看和体验。', expression: 'curious' },
   { selector: '.deal-panel', text: '右侧操作面板：联系作者、收藏作品、查看作者主页。点「进入聊天咨询」开始沟通。', expression: 'wink' },
   { selector: '.comment-section', text: '底部评论区：看看别人怎么评价的，也可以留言和作者交流！', expression: 'smile' },
 ]
@@ -152,9 +160,7 @@ const contactAuthor = async () => {
 }
 const stripHtml = (html) => {
   if (!html) return ''
-  const div = document.createElement('div')
-  div.innerHTML = html
-  return div.textContent || div.innerText || ''
+  return new DOMParser().parseFromString(html, 'text/html').body.textContent || ''
 }
 onMounted(async()=>{
   loading.value=true
@@ -384,6 +390,7 @@ const sendCmt=async()=>{if(!cmtText.value.trim())return;try{await request.post('
 .sale-card strong { font-size: 14px; }
 .sale-card span { display: block; margin-top: 3px; color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
 .price { color: var(--brand-strong); font-family: var(--font-mono); font-weight: 900; font-size: 13px; }
+.payment-coming-soon { margin: 10px 0 0; color: var(--text-muted); font-size: 12px; }
 
 .trust-box {
   margin-top: 14px; padding: 12px;

@@ -2,7 +2,9 @@
   <div v-loading="loading" class="profile-page">
     <el-card v-if="account" shadow="never" class="profile-card">
       <div class="profile-header">
-        <el-avatar :size="64" class="profile-avatar">{{ (profile?.nickname || account.username)[0] }}</el-avatar>
+        <el-avatar :size="64" class="profile-avatar" :src="profile?.avatarUrl || undefined">
+          {{ (profile?.nickname || account.username || '?')[0] }}
+        </el-avatar>
         <div class="profile-info">
           <h3 class="profile-name">{{ profile?.nickname || account.username }}</h3>
           <p class="profile-bio">{{ profile?.bio || '这个人很懒，什么都没写' }}</p>
@@ -11,6 +13,7 @@
         <el-button v-if="isMe" size="small" @click="$router.push('/me/edit')" class="profile-edit-btn">编辑资料</el-button>
       </div>
     </el-card>
+    <PersonaProfileShowcase v-if="persona.enabled" :persona="persona" />
     <h4 class="profile-section-title">公开作品 ({{ works?.total || 0 }})</h4>
     <el-row :gutter="16">
       <el-col :span="8" v-for="w in works?.records" :key="w.id" class="profile-work-col">
@@ -27,23 +30,40 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import request from '../api/request'
+import PersonaProfileShowcase from '../components/PersonaProfileShowcase.vue'
+import { getPublicPersonaWorkshop } from '../api/personaWorkshop'
+import { useAuthStore } from '../stores/authStore'
 
 const route = useRoute()
 const isMe = route.params.id === 'me'
+const authStore = useAuthStore()
 const account = ref(null)
 const profile = ref(null)
 const works = ref(null)
 const loading = ref(false)
+const persona = ref({ enabled: false, avatarEnabled: false, equipment: [], dimensions: [], completion: {} })
 
 onMounted(async () => {
   loading.value = true
   try {
-    const id = route.params.id === 'me' ? null : route.params.id
+    const id = route.params.id === 'me' ? authStore.accountId : route.params.id
     const url = id ? `/app/profile/${id}` : '/app/profile/me-info'
     const res = await request.get(url)
     if (res.code === 1 && res.data) {
       if (id) { account.value = res.data.account; profile.value = res.data.profile; works.value = res.data.works }
-      else { account.value = { username: res.data.username }; profile.value = { nickname: res.data.nickname } }
+      else {
+        account.value = { username: res.data.username }
+        profile.value = {
+          nickname: res.data.nickname,
+          avatarUrl: res.data.avatarUrl,
+          bio: res.data.bio,
+          skills: res.data.skills,
+        }
+      }
+      if (id) {
+        const personaResponse = await getPublicPersonaWorkshop(id)
+        if (personaResponse.code === 1 && personaResponse.data) persona.value = personaResponse.data
+      }
     }
   } finally { loading.value = false }
 })

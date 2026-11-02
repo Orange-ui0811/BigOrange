@@ -56,7 +56,12 @@
       </div>
 
       <!-- 品牌标题 -->
-      <h1 class="brand-title">OrangeVC</h1>
+      <h1 class="brand-title">{{ PUBLIC_BRAND_NAME }}</h1>
+      <p class="brand-summary">面向 Vibe Coding 学习者与创作者的作品、项目和 AI 工具平台</p>
+      <div class="official-site" aria-label="官方网站信息">
+        <span>官方网站</span>
+        <strong>{{ officialSiteHost }}</strong>
+      </div>
 
       <!-- Tab 切换 -->
       <div class="tab-wrap" v-show="resetStep === 0">
@@ -65,18 +70,28 @@
           @click="tab = 'login'"
         >登录</div>
         <div
+          v-if="REGISTRATION_ENABLED"
           :class="['tab-item', { active: tab === 'register' }]"
           @click="tab = 'register'"
         >注册</div>
       </div>
+      <div v-if="!REGISTRATION_ENABLED && resetStep === 0" class="identity-gate">
+        新用户注册当前暂停；已有账号仍可正常登录。
+      </div>
+
+      <aside v-if="tab === 'login' && resetStep === 0" class="login-safety" aria-label="安全登录提示">
+        <strong>安全登录提示</strong>
+        <span>本页仅用于 OrangeVC 本站账号。请勿输入邮箱、银行或其他网站的密码；平台不会通过私信索取密码或验证码。</span>
+      </aside>
 
       <!-- 登录表单 -->
       <form v-if="tab === 'login' && resetStep === 0" @submit.prevent="doLogin">
-        <label class="form-label">用户名</label>
+        <label class="form-label">用户名或邮箱</label>
         <input
           v-model="loginForm.username"
           class="form-input"
           type="text"
+          placeholder="请输入用户名或注册邮箱"
           autocomplete="username"
           @keyup.enter="doLogin"
         />
@@ -107,17 +122,17 @@
         <template v-if="resetStep === 1">
           <label class="form-label">注册邮箱</label>
           <input v-model="resetEmail" class="form-input" type="email" placeholder="输入你注册时用的邮箱" />
-          <button class="code-btn reset-btn" :disabled="resetCooldown > 0" @click="sendResetCode">
-            {{ resetCooldown > 0 ? resetCooldown + 's' : '发送验证码' }}
+          <button class="code-btn reset-btn" :disabled="resetCooldown > 0 || resetSending" @click="sendResetCode">
+            {{ resetSending ? '发送中...' : (resetCooldown > 0 ? resetCooldown + 's' : '发送验证码') }}
           </button>
         </template>
 
         <!-- Step 2: 输入验证码 + 新密码 -->
         <template v-if="resetStep === 2">
           <label class="form-label">验证码</label>
-          <input v-model="resetCode" class="form-input" type="text" maxlength="6" placeholder="6位验证码" />
+          <input v-model="resetCode" class="form-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6位验证码" />
           <label class="form-label">新密码</label>
-          <input v-model="resetNewPwd" class="form-input" :type="showResetPwd ? 'text' : 'password'" placeholder="至少6位，包含字母和数字" />
+          <input v-model="resetNewPwd" class="form-input" :type="showResetPwd ? 'text' : 'password'" autocomplete="new-password" maxlength="128" placeholder="至少6位，包含字母和数字" />
           <span class="eye-toggle reset-eye" @click="showResetPwd = !showResetPwd">{{ showResetPwd ? '🙈' : '👁' }}</span>
           <button class="login-btn" :disabled="loading" @click="doResetPwd">{{ loading ? '修改中...' : '确认修改' }}</button>
         </template>
@@ -132,7 +147,7 @@
       </div>
 
       <!-- 注册表单 -->
-      <form v-if="tab === 'register' && resetStep === 0" @submit.prevent="doRegister">
+      <form v-if="REGISTRATION_ENABLED && tab === 'register' && resetStep === 0" @submit.prevent="doRegister">
         <label class="form-label">邮箱</label>
         <input
           v-model="regForm.email"
@@ -153,9 +168,9 @@
           <button
             type="button"
             class="code-btn"
-            :disabled="codeCooldown > 0"
+            :disabled="codeCooldown > 0 || codeSending"
             @click="sendCode"
-          >{{ codeCooldown > 0 ? codeCooldown + 's' : '获取验证码' }}</button>
+          >{{ codeSending ? '发送中...' : (codeCooldown > 0 ? codeCooldown + 's' : '获取验证码') }}</button>
         </div>
         <label class="form-label">用户名</label>
         <input
@@ -183,400 +198,61 @@
           type="text"
           autocomplete="nickname"
         />
+        <label class="consent-row" for="legal-consent">
+          <input
+            id="legal-consent"
+            v-model="legalAccepted"
+            name="legalAccepted"
+            type="checkbox"
+            required
+            aria-required="true"
+          />
+          <span><strong class="required-mark">必选</strong> 我已阅读并同意 <router-link to="/legal/terms" target="_blank" rel="noopener noreferrer" @click.stop>《用户协议》</router-link>和<router-link to="/legal/privacy" target="_blank" rel="noopener noreferrer" @click.stop>《隐私政策》</router-link>，并已知悉<router-link to="/legal/third-parties" target="_blank" rel="noopener noreferrer" @click.stop>《第三方服务清单》</router-link></span>
+        </label>
         <!-- Turnstile 人机验证 -->
-        <div ref="turnstileRef" class="turnstile-widget"></div>
-        <button type="submit" class="login-btn" :disabled="loading">
+        <div v-if="legalAccepted" ref="turnstileRef" class="turnstile-widget"></div>
+        <button type="submit" class="login-btn" :disabled="loading || !legalAccepted">
           {{ loading ? '注册中...' : '注册' }}
         </button>
       </form>
+      <footer class="login-legal">
+        <router-link to="/legal/terms">用户协议</router-link>
+        <router-link to="/legal/privacy">隐私政策</router-link>
+        <router-link to="/legal/third-parties">第三方服务</router-link>
+        <router-link to="/support">举报与申诉</router-link>
+      </footer>
+      <div class="login-identity" aria-label="网站公示信息">
+        <span>{{ PUBLIC_OPERATOR_LABEL }}</span>
+        <a :href="`mailto:${LEGAL_CONTACT}`">{{ LEGAL_CONTACT }}</a>
+        <a v-if="LEGAL_ICP_RECORD" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">{{ LEGAL_ICP_RECORD }}</a>
+        <strong v-if="!LEGAL_IDENTITY_COMPLETE" class="identity-warning">生产上线前须配置真实运营主体与备案信息</strong>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, watch, nextTick } from 'vue'
-import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
-import request from '../api/request'
+import { computed } from 'vue'
+import { useAuthFlow } from '../composables/useAuthFlow'
+import { PUBLIC_BRAND_NAME, PUBLIC_OPERATOR_LABEL } from '../config/brand'
+import {
+  LEGAL_CONTACT,
+  LEGAL_ICP_RECORD,
+  LEGAL_IDENTITY_COMPLETE,
+  OFFICIAL_SITE_URL,
+  REGISTRATION_ENABLED,
+} from '../content/legal'
 
-const router = useRouter()
-const tab = ref('login')
-const turnstileRef = ref(null)
-let turnstileId = null
-const loading = ref(false)
-const showPwd = ref(false)
-const showRegPwd = ref(false)
-const loginForm = reactive({ username: '', password: '' })
-const codeCooldown = ref(0)
-const regForm = reactive({ username: '', password: '', nickname: '', email: '', code: '', turnstileToken: '' })
-const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'
-
-// 忘记密码
-const resetStep = ref(0)
-const resetEmail = ref('')
-const resetCode = ref('')
-const resetNewPwd = ref('')
-const resetCooldown = ref(0)
-const showResetPwd = ref(false)
-
-const sendResetCode = async () => {
-  if (!resetEmail.value || !resetEmail.value.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
-  try {
-    await request.post('/app/auth/send-reset-code', { email: resetEmail.value })
-    ElMessage.success('验证码已发送')
-    resetCooldown.value = 60
-    const timer = setInterval(() => { resetCooldown.value--; if (resetCooldown.value <= 0) clearInterval(timer) }, 1000)
-    resetStep.value = 2
-  } catch (e) { ElMessage.error(e?.response?.data?.msg || '发送失败') }
-}
-
-const doResetPwd = async () => {
-  if (!resetCode.value) { ElMessage.error('请输入验证码'); return }
-  if (resetNewPwd.value.length < 6 || !/[a-zA-Z]/.test(resetNewPwd.value) || !/\d/.test(resetNewPwd.value)) {
-    ElMessage.error('密码至少6位且包含字母和数字'); return
-  }
-  loading.value = true
-  try {
-    const res = await request.post('/app/auth/reset-password', {
-      email: resetEmail.value, code: resetCode.value, newPassword: resetNewPwd.value
-    })
-    if (res.code === 1) { resetStep.value = 3 }
-    else ElMessage.error(res.msg)
-  } catch (e) { ElMessage.error(e?.response?.data?.msg || '网络连接失败') }
-  finally { loading.value = false }
-}
-
-const sendCode = async () => {
-  if (!regForm.email || !regForm.email.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
-  try {
-    await request.post('/app/auth/send-code', { email: regForm.email })
-    ElMessage.success('验证码已发送')
-    codeCooldown.value = 60
-    const timer = setInterval(() => { codeCooldown.value--; if (codeCooldown.value <= 0) clearInterval(timer) }, 1000)
-  } catch (e) {
-    ElMessage.error(e?.response?.data?.msg || '发送失败')
-  }
-}
-
-// 切换到注册 Tab 时初始化 Turnstile
-watch(tab, (val) => {
-  if (val === 'register') {
-    nextTick(() => {
-      if (window.turnstile && turnstileRef.value) {
-        if (turnstileId !== null) window.turnstile.remove(turnstileId)
-        turnstileId = window.turnstile.render(turnstileRef.value, {
-          sitekey: TURNSTILE_SITE_KEY,
-          callback: (token) => { regForm.turnstileToken = token },
-          'expired-callback': () => { regForm.turnstileToken = '' },
-        })
-      }
-    })
-  }
+const officialSiteHost = computed(() => {
+  try { return new URL(OFFICIAL_SITE_URL).host }
+  catch { return OFFICIAL_SITE_URL }
 })
 
-const doLogin = async () => {
-  if (!loginForm.username || !loginForm.password) { ElMessage.warning('请输入用户名和密码'); return }
-  loading.value = true
-  try {
-    const res = await request.post('/app/auth/login', loginForm)
-    if (res.code === 1) { sessionStorage.setItem('appToken', res.data.token); sessionStorage.setItem('myId', res.data.id); router.push('/market') }
-    else ElMessage.error(res.msg)
-  } catch (e) { ElMessage.error(e?.response?.data?.msg || '网络连接失败') }
-  finally { loading.value = false }
-}
-
-const doRegister = async () => {
-  if (regForm.password.length < 6 || !/[a-zA-Z]/.test(regForm.password) || !/\d/.test(regForm.password)) { ElMessage.error('密码至少6位且包含字母和数字'); return }
-  if (!regForm.email || !regForm.email.includes('@')) { ElMessage.error('请输入正确的邮箱地址'); return }
-  if (!regForm.code) { ElMessage.error('请输入验证码'); return }
-  if (!regForm.username) { ElMessage.warning('请输入用户名'); return }
-  loading.value = true
-  try {
-    const res = await request.post('/app/auth/register', { ...regForm, turnstileToken: regForm.turnstileToken })
-    if (res.code === 1) { sessionStorage.setItem('appToken', res.data.token); sessionStorage.setItem('myId', res.data.id); router.push('/market') }
-    else ElMessage.error(res.msg)
-  } catch (e) { ElMessage.error(e?.response?.data?.msg || '网络连接失败') }
-  finally { loading.value = false }
-}
+const { tab, turnstileRef, loading, showPwd, showRegPwd, loginForm, codeCooldown, codeSending,
+  regForm, legalAccepted, resetStep, resetEmail, resetCode, resetNewPwd, resetCooldown,
+  resetSending, showResetPwd, sendResetCode, doResetPwd, sendCode, doLogin, doRegister } = useAuthFlow()
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  image-rendering: pixelated;
-  font-family: "SimHei", monospace;
-}
-
-/* ===== 背景 ===== */
-.login-bg {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, #ff8a33 0%, #fff4d9 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.login-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(#ff9944 1px, transparent 1px);
-  background-size: 6px 6px;
-  opacity: 0.12;
-  pointer-events: none;
-}
-
-/* ===== 卡片 ===== */
-.login-card {
-  width: 420px;
-  background: #ffffff;
-  box-shadow:
-    4px 0 0 #ff7b22,
-    -4px 0 0 #ff7b22,
-    0 4px 0 #ff7b22,
-    0 -4px 0 #ff7b22;
-  padding: 36px 30px 28px;
-  position: relative;
-}
-
-/* ===== 像素橙子 SVG LOGO ===== */
-.orange-wrapper {
-  position: absolute;
-  top: -46px;
-  left: 50%;
-  transform: translateX(-50%);
-  filter: drop-shadow(0 7px 0 rgba(92, 38, 15, .14));
-}
-.orange-mark {
-  width: 100px;
-  height: 100px;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  animation: orange-float 3s ease-in-out infinite;
-}
-
-.highlight-pixel {
-  animation: highlight-shimmer 2.5s ease-in-out infinite;
-}
-@keyframes orange-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-@keyframes highlight-shimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
-}
-
-/* ===== 品牌名 ===== */
-.brand-title {
-  text-align: center;
-  font-size: 32px;
-  color: #ff7b22;
-  font-weight: 900;
-  margin-bottom: 24px;
-  margin-top: 30px;
-  letter-spacing: 3px;
-  font-family: "Courier New", "SimHei", monospace;
-  text-shadow: 2px 2px 0 #c55312, 4px 4px 0 rgba(197,83,18,0.15);
-}
-
-/* ===== Tab ===== */
-.tab-wrap {
-  display: flex;
-  margin-bottom: 22px;
-  border-bottom: 2px solid #e2e2e2;
-}
-
-.tab-item {
-  flex: 1;
-  text-align: center;
-  padding-bottom: 8px;
-  font-size: 16px;
-  color: #777;
-  cursor: pointer;
-  font-family: "Courier New", "SimHei", monospace;
-  letter-spacing: 1px;
-}
-
-.tab-item.active {
-  color: #ff7b22;
-  border-bottom: 2px solid #ff7b22;
-  margin-bottom: -2px;
-}
-
-/* ===== 表单 ===== */
-.form-label {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 6px;
-  display: block;
-  font-family: "Courier New", "SimHei", monospace;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.form-input {
-  width: 100%;
-  height: 44px;
-  border: 2px solid #ffb270;
-  background: #fff;
-  padding: 0 12px;
-  font-size: 14px;
-  margin-bottom: 18px;
-  outline: none;
-  font-family: "Courier New", "SimHei", monospace;
-  color: #333;
-  letter-spacing: 0.5px;
-}
-
-.form-input:focus {
-  border-color: #ff7b22;
-}
-
-.form-input::placeholder {
-  color: #ccc;
-  font-family: "Courier New", monospace;
-  font-size: 12px;
-}
-
-/* ===== 密码眼睛 ===== */
-.pwd-wrap {
-  position: relative;
-}
-
-.pwd-wrap .form-input {
-  padding-right: 40px;
-}
-
-.eye-toggle {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.15s;
-  user-select: none;
-}
-
-.eye-toggle:hover {
-  opacity: 0.9;
-}
-
-/* ===== 验证码行 ===== */
-.code-row {
-  display: flex;
-  gap: 8px;
-}
-
-.code-input {
-  flex: 1;
-  min-width: 0;
-}
-
-.code-btn {
-  height: 44px;
-  padding: 0 14px;
-  border: 2px solid #ffb270;
-  font-family: "Courier New", "SimHei", monospace;
-  background: #fff;
-  color: #ff7b22;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  white-space: nowrap;
-  font-family: inherit;
-  margin-bottom: 18px;
-}
-
-.code-btn:hover:not(:disabled) {
-  border-color: #ff7b22;
-  background: #fff7f0;
-}
-
-.code-btn:disabled {
-  color: #ccc;
-  cursor: not-allowed;
-}
-
-/* ===== 登录按钮 ===== */
-.login-btn {
-  width: 100%;
-  height: 50px;
-  background: #ff7b22;
-  border: none;
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 900;
-  box-shadow: 0 4px 0 #e66e00;
-  cursor: pointer;
-  margin-top: 6px;
-  font-family: "Courier New", "SimHei", monospace;
-  letter-spacing: 2px;
-}
-
-.login-btn:hover:not(:disabled) {
-  background: #ff8a33;
-}
-
-.login-btn:active:not(:disabled) {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #e66e00;
-}
-
-.turnstile-widget {
-  margin: 12px 0 18px;
-  display: flex;
-  justify-content: center;
-}
-.forgot-link {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 12px;
-  color: var(--text-muted);
-  cursor: pointer;
-  font-family: var(--font-mono);
-}
-.forgot-link:hover { color: var(--brand-strong); }
-.reset-section { margin-top: 20px; }
-.reset-title {
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--brand-strong);
-  margin-bottom: 18px;
-}
-.reset-btn { width: 100%; margin-top: 8px; }
-.reset-eye {
-  position: absolute;
-  right: 10px;
-  top: -42px;
-  font-size: 18px;
-  cursor: pointer;
-  opacity: 0.5;
-}
-.reset-success { text-align: center; margin-top: 10px; }
-.reset-success p { font-family: var(--font-mono); font-size: 15px; color: var(--brand-strong); margin-bottom: 16px; }
-.login-btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-/* ===== 响应式 ===== */
-@media (max-width: 460px) {
-  .login-card {
-    width: 92%;
-    padding: 30px 18px 22px;
-  }
-  .brand-title {
-    font-size: 26px;
-    margin-top: 24px;
-  }
-}
+@import '../styles/views/login.css';
 </style>

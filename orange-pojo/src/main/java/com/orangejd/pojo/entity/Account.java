@@ -1,18 +1,25 @@
 package com.orangejd.pojo.entity;
 
+import java.time.LocalDateTime;
+
 public class Account extends BaseEntity {
     private String username;
     private String password;
+    private Long passwordVersion;
     private String phone;
     private String email;
     private Long quota;
     private String status;
     private String role;
+    private String legalVersion;
+    private LocalDateTime legalAcceptedTime;
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+    public Long getPasswordVersion() { return passwordVersion; }
+    public void setPasswordVersion(Long passwordVersion) { this.passwordVersion = passwordVersion; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public String getRole() { return role; }
@@ -23,4 +30,8 @@ public class Account extends BaseEntity {
     public void setEmail(String email) { this.email = email; }
     public Long getQuota() { return quota; }
     public void setQuota(Long quota) { this.quota = quota; }
+    public String getLegalVersion() { return legalVersion; }
+    public void setLegalVersion(String legalVersion) { this.legalVersion = legalVersion; }
+    public LocalDateTime getLegalAcceptedTime() { return legalAcceptedTime; }
+    public void setLegalAcceptedTime(LocalDateTime legalAcceptedTime) { this.legalAcceptedTime = legalAcceptedTime; }
 }

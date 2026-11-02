@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangejd.server.mapper.BeginnerProjectMapper">
+    <sql id="columns">
+        id, full_name, owner_name, repository_name, html_url, description_original, readme_excerpt,
+        description_zh, what_is_it, beginner_reason, modification_ideas, main_risks,
+        final_recommendation, primary_language, topics_json,
+        tech_stack, package_manager, node_version, license_spdx, stars, forks, open_issues, archived,
+        has_readme, has_quick_start, setup_steps, requires_docker, requires_database, requires_secrets,
+        requires_external_service, requires_gpu, requires_native_build, codebase_size,
+        difficulty, estimated_duration, beginner_score, vibe_coding_fit, showcase_value,
+        extension_potential, scope_clarity, content_potential, editorial_score,
+        score_version, status, hidden_reason, content_hash, github_created_at,
+        github_updated_at, last_verified_at, source_run_id, create_time, update_time
+    </sql>
+
+    <insert id="upsertMetadata" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO beginner_project
+        (full_name, owner_name, repository_name, html_url, description_original, readme_excerpt,
+         primary_language, topics_json, tech_stack, package_manager, node_version, license_spdx,
+         stars, forks, open_issues, archived, has_readme, requires_docker,
+         has_quick_start, setup_steps, requires_database, requires_secrets, requires_external_service,
+         requires_gpu, requires_native_build, codebase_size, difficulty,
+         beginner_score, score_version, status, content_hash, github_created_at,
+         github_updated_at, last_verified_at, source_run_id)
+        VALUES
+        (#{fullName}, #{ownerName}, #{repositoryName}, #{htmlUrl}, #{descriptionOriginal}, #{readmeExcerpt},
+         #{primaryLanguage}, CAST(#{topicsJson} AS JSON), #{techStack}, #{packageManager}, #{nodeVersion}, #{licenseSpdx},
+         #{stars}, #{forks}, #{openIssues}, #{archived}, #{hasReadme}, #{requiresDocker},
+         #{hasQuickStart}, #{setupSteps}, #{requiresDatabase}, #{requiresSecrets}, #{requiresExternalService},
+         #{requiresGpu}, #{requiresNativeBuild}, #{codebaseSize}, #{difficulty},
+         #{beginnerScore}, #{scoreVersion}, #{status}, #{contentHash}, #{githubCreatedAt},
+         #{githubUpdatedAt}, CURRENT_TIMESTAMP, #{sourceRunId})
+        ON DUPLICATE KEY UPDATE
+          id = LAST_INSERT_ID(id), owner_name = VALUES(owner_name),
+          repository_name = VALUES(repository_name), html_url = VALUES(html_url),
+          description_original = VALUES(description_original), readme_excerpt = VALUES(readme_excerpt),
+          primary_language = VALUES(primary_language),
+          topics_json = VALUES(topics_json), tech_stack = VALUES(tech_stack),
+          package_manager = VALUES(package_manager), node_version = VALUES(node_version), license_spdx = VALUES(license_spdx),
+          stars = VALUES(stars), forks = VALUES(forks), open_issues = VALUES(open_issues),
+          archived = VALUES(archived), has_readme = VALUES(has_readme), has_quick_start = VALUES(has_quick_start),
+          setup_steps = VALUES(setup_steps),
+          requires_docker = VALUES(requires_docker), requires_database = VALUES(requires_database),
+          requires_secrets = VALUES(requires_secrets),
+          requires_external_service = VALUES(requires_external_service),
+          requires_gpu = VALUES(requires_gpu), requires_native_build = VALUES(requires_native_build),
+          codebase_size = VALUES(codebase_size),
+          difficulty = VALUES(difficulty), beginner_score = VALUES(beginner_score),
+          description_zh = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), description_zh, NULL),
+          beginner_reason = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), beginner_reason, NULL),
+          modification_ideas = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), modification_ideas, NULL),
+          what_is_it = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), what_is_it, NULL),
+          main_risks = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), main_risks, NULL),
+          final_recommendation = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), final_recommendation, NULL),
+          estimated_duration = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), estimated_duration, NULL),
+          editorial_score = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), editorial_score, NULL),
+          vibe_coding_fit = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), vibe_coding_fit, NULL),
+          showcase_value = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), showcase_value, NULL),
+          extension_potential = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), extension_potential, NULL),
+          scope_clarity = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), scope_clarity, NULL),
+          content_potential = IF(content_hash &lt;=&gt; VALUES(content_hash) AND score_version = VALUES(score_version), content_potential, NULL),
+          status = CASE
+              WHEN status = 'HIDDEN' THEN 'HIDDEN'
+              WHEN VALUES(status) = 'INVALID' THEN 'INVALID'
+              WHEN NOT (content_hash &lt;=&gt; VALUES(content_hash))
+                   OR NOT (score_version &lt;=&gt; VALUES(score_version)) THEN 'CANDIDATE'
+              ELSE status END,
+          score_version = VALUES(score_version),
+          content_hash = VALUES(content_hash), github_created_at = VALUES(github_created_at),
+          github_updated_at = VALUES(github_updated_at), last_verified_at = CURRENT_TIMESTAMP,
+          source_run_id = VALUES(source_run_id)
+    </insert>
+
+    <select id="selectById" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project WHERE id = #{id}
+    </select>
+    <select id="selectByFullName" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project WHERE full_name = #{fullName}
+    </select>
+
+    <sql id="publicFilters">
+        status = 'PUBLISHED'
+        <if test="keyword != null and keyword != ''">
+            AND (full_name LIKE CONCAT('%', #{keyword}, '%')
+              OR description_zh LIKE CONCAT('%', #{keyword}, '%')
+              OR beginner_reason LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="language != null and language != ''">AND primary_language = #{language}</if>
+        <if test="difficulty != null and difficulty != ''">AND difficulty = #{difficulty}</if>
+        <if test="topic != null and topic != ''">
+            AND (topics_json LIKE CONCAT('%', #{topic}, '%') OR tech_stack LIKE CONCAT('%', #{topic}, '%'))
+        </if>
+    </sql>
+    <select id="selectPublic" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        WHERE <include refid="publicFilters"/>
+        ORDER BY editorial_score DESC, beginner_score DESC, github_updated_at DESC, full_name ASC
+        LIMIT #{offset}, #{limit}
+    </select>
+    <select id="countPublic" resultType="long">
+        SELECT COUNT(*) FROM beginner_project WHERE <include refid="publicFilters"/>
+    </select>
+    <select id="selectAdmin" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        <where>
+            <if test="status != null and status != ''">status = #{status}</if>
+            <if test="keyword != null and keyword != ''">
+                AND (full_name LIKE CONCAT('%', #{keyword}, '%') OR description_zh LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+        ORDER BY update_time DESC, id DESC LIMIT #{offset}, #{limit}
+    </select>
+    <select id="countAdmin" resultType="long">
+        SELECT COUNT(*) FROM beginner_project
+        <where>
+            <if test="status != null and status != ''">status = #{status}</if>
+            <if test="keyword != null and keyword != ''">
+                AND (full_name LIKE CONCAT('%', #{keyword}, '%') OR description_zh LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+    </select>
+    <select id="selectPendingEnrichment" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        WHERE status IN ('CANDIDATE', 'PUBLISHED') AND beginner_score &gt;= 65
+          AND (editorial_score IS NULL OR what_is_it IS NULL OR what_is_it = '')
+        ORDER BY update_time DESC, beginner_score DESC LIMIT #{limit}
+    </select>
+    <select id="selectDueVerification" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        WHERE last_verified_at IS NULL OR last_verified_at &lt; #{before}
+        ORDER BY COALESCE(last_verified_at, '1970-01-01'), id LIMIT #{limit}
+    </select>
+    <select id="selectRecommended" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        WHERE status = 'PUBLISHED'
+        <if test="topics != null and topics.size() > 0">
+            AND (<foreach collection="topics" item="topic" separator=" OR ">
+                topics_json LIKE CONCAT('%', #{topic}, '%') OR tech_stack LIKE CONCAT('%', #{topic}, '%')
+            </foreach>)
+        </if>
+        <if test="languages != null and languages.size() > 0">
+            AND primary_language IN
+            <foreach collection="languages" item="language" open="(" close=")" separator=",">#{language}</foreach>
+        </if>
+        ORDER BY editorial_score DESC, beginner_score DESC, github_updated_at DESC, full_name ASC LIMIT #{limit}
+    </select>
+
+    <update id="updateEnrichment">
+        UPDATE beginner_project SET description_zh = #{descriptionZh}, what_is_it = #{whatIsIt},
+          beginner_reason = #{beginnerReason}, modification_ideas = #{modificationIdeas},
+          main_risks = #{mainRisks}, final_recommendation = #{finalRecommendation},
+          estimated_duration = #{estimatedDuration}, vibe_coding_fit = #{vibeCodingFit},
+          showcase_value = #{showcaseValue}, extension_potential = #{extensionPotential},
+          scope_clarity = #{scopeClarity}, content_potential = #{contentPotential},
+          editorial_score = #{editorialScore},
+          status = #{status}, hidden_reason = NULL WHERE id = #{id}
+    </update>
+    <update id="updateStatus">
+        UPDATE beginner_project SET status = #{status}, hidden_reason = #{hiddenReason} WHERE id = #{id}
+    </update>
+    <delete id="deleteEvidence">
+        DELETE FROM beginner_project_score_evidence WHERE project_id = #{projectId} AND score_version = #{scoreVersion}
+    </delete>
+    <insert id="insertEvidence">
+        INSERT INTO beginner_project_score_evidence
+          (project_id, run_id, score_version, dimension_key, score, max_score, evidence_text)
+        VALUES (#{projectId}, #{runId}, #{scoreVersion}, #{dimensionKey}, #{score}, #{maxScore}, #{evidenceText})
+    </insert>
+    <select id="selectEvidence" resultType="map">
+        SELECT dimension_key AS dimensionKey, score, max_score AS maxScore,
+          evidence_text AS evidenceText, create_time AS createTime
+        FROM beginner_project_score_evidence WHERE project_id = #{projectId} ORDER BY id
+    </select>
+    <delete id="deleteWeeklyPicks">DELETE FROM beginner_project_weekly_pick WHERE week_start = #{weekStart}</delete>
+    <insert id="insertWeeklyPick">
+        INSERT INTO beginner_project_weekly_pick (week_start, project_id, rank_no, selection_source)
+        VALUES (#{weekStart}, #{projectId}, #{rankNo}, #{selectionSource})
+    </insert>
+    <select id="selectWeeklyPicks" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT p.* FROM beginner_project_weekly_pick w
+        JOIN beginner_project p ON p.id = w.project_id
+        WHERE w.week_start = #{weekStart} AND p.status = 'PUBLISHED'
+        ORDER BY w.rank_no
+    </select>
+    <select id="selectWeeklyPickSource" resultType="string">
+        SELECT selection_source FROM beginner_project_weekly_pick
+        WHERE week_start = #{weekStart}
+        ORDER BY rank_no LIMIT 1
+    </select>
+    <select id="selectTopForWeekly" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        WHERE status = 'PUBLISHED' AND editorial_score &gt;= 76
+          AND vibe_coding_fit &gt;= 4 AND showcase_value &gt;= 4
+          AND extension_potential &gt;= 4 AND scope_clarity &gt;= 4
+          AND content_potential &gt;= 4
+        ORDER BY editorial_score DESC, content_potential DESC, scope_clarity DESC,
+          stars DESC, github_updated_at DESC, full_name ASC LIMIT #{limit}
+    </select>
+    <select id="selectAllPublished" resultType="com.orangejd.pojo.entity.BeginnerProject">
+        SELECT <include refid="columns"/> FROM beginner_project
+        WHERE status = 'PUBLISHED' ORDER BY id
+    </select>
+</mapper>

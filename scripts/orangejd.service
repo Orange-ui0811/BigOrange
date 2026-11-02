@@ -1,0 +1,25 @@
+[Unit]
+Description=OrangeVC application
+Wants=network-online.target
+After=network-online.target redis-server.service
+
+[Service]
+Type=simple
+User=admin
+Group=admin
+WorkingDirectory=/data/orangejd
+EnvironmentFile=/etc/orangejd/orangejd.env
+ExecStart=/usr/bin/java -Xms512m -Xmx2048m -XX:MaxMetaspaceSize=384m -jar /data/orangejd/orange-server.jar --spring.profiles.active=prod
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/data/orangejd
+
+[Install]
+WantedBy=multi-user.target

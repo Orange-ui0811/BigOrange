@@ -1,5 +1,6 @@
 package com.orangejd.pojo.vo;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class WorkVO {
@@ -12,6 +13,7 @@ public class WorkVO {
     private String tags;
     private String coverUrl;
     private String demoUrl;
+    private String videoUrl;
     private String auditStatus;
     private String visibilityStatus;
     private String publishStatus;
@@ -21,6 +23,7 @@ public class WorkVO {
     private String ownerAvatar;
     private Integer favoriteCount;
     private Integer commentCount;
+    private BigDecimal price;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -40,6 +43,8 @@ public class WorkVO {
     public void setCoverUrl(String coverUrl) { this.coverUrl = coverUrl; }
     public String getDemoUrl() { return demoUrl; }
     public void setDemoUrl(String demoUrl) { this.demoUrl = demoUrl; }
+    public String getVideoUrl() { return videoUrl; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
     public String getAuditStatus() { return auditStatus; }
     public void setAuditStatus(String auditStatus) { this.auditStatus = auditStatus; }
     public String getVisibilityStatus() { return visibilityStatus; }
@@ -58,4 +63,6 @@ public class WorkVO {
     public void setFavoriteCount(Integer favoriteCount) { this.favoriteCount = favoriteCount; }
     public Integer getCommentCount() { return commentCount; }
     public void setCommentCount(Integer commentCount) { this.commentCount = commentCount; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 }

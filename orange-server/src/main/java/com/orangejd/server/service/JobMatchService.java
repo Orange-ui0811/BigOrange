@@ -1,5 +1,7 @@
 package com.orangejd.server.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.server.service.impl.QuotaServiceImpl;
 import org.slf4j.Logger;
@@ -10,8 +12,15 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.orangejd.server.foundation.external.AiRuntimeConfig;
+import com.orangejd.server.foundation.external.AiRuntimeConfigService;
+import com.orangejd.server.foundation.aitool.AiToolContext;
+import com.orangejd.server.foundation.aitool.AiToolProviderException;
+import com.orangejd.server.foundation.aitool.AiToolRetryPolicy;
+import com.orangejd.server.foundation.aitool.AiToolRouter;
 
 import java.util.*;
 
@@ -20,9 +29,9 @@ public class JobMatchService {
 
     private static final Logger log = LoggerFactory.getLogger(JobMatchService.class);
 
-    @Autowired(required = false) private VectorStore vectorStore;
-    @Autowired private QuotaServiceImpl quotaService;
-    @Autowired private PricingService pricingService;
+    private final VectorStore vectorStore;
+    private final QuotaServiceImpl quotaService;
+    private final PricingService pricingService;
 
     @Value("${orange.ai-trend.endpoint:}")
     private String endpoint;
@@ -31,15 +40,72 @@ public class JobMatchService {
     @Value("${orange.ai-trend.model:DeepSeek-V4-Pro}")
     private String model;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+    private final ObjectMapper objectMapper;
+    private final AiRuntimeConfigService aiConfigService;
+    private final AiToolRouter aiToolRouter;
+
+    @Autowired
+    public JobMatchService(ObjectMapper objectMapper,
+                           @org.springframework.lang.Nullable VectorStore vectorStore,
+                           QuotaServiceImpl quotaService,
+                           PricingService pricingService,
+                           @org.springframework.lang.Nullable AiRuntimeConfigService aiConfigService,
+                           @org.springframework.lang.Nullable AiToolRouter aiToolRouter) {
+        this(objectMapper, createRestTemplate(), vectorStore, quotaService, pricingService,
+                aiConfigService, aiToolRouter);
+    }
+
+    JobMatchService(ObjectMapper objectMapper, RestTemplate restTemplate) {
+        this(objectMapper, restTemplate, null, null, null, null, null);
+    }
+
+    private JobMatchService(ObjectMapper objectMapper, RestTemplate restTemplate,
+                            VectorStore vectorStore, QuotaServiceImpl quotaService,
+                            PricingService pricingService, AiRuntimeConfigService aiConfigService,
+                            AiToolRouter aiToolRouter) {
+        this.objectMapper = objectMapper;
+        this.restTemplate = restTemplate;
+        this.vectorStore = vectorStore;
+        this.quotaService = quotaService;
+        this.pricingService = pricingService;
+        this.aiConfigService = aiConfigService;
+        this.aiToolRouter = aiToolRouter;
+    }
 
     public Map<String, Object> match(String planContent) {
+        return match(planContent, "ai:match", "岗位匹配");
+    }
+
+    public Map<String, Object> match(String planContent, String pricingKey, String quotaDescription) {
         Long accountId = BaseContext.getCurrentId();
-        String requestId = "match_" + accountId + "_" + System.currentTimeMillis();
+        QuotaRequestIdentity identity = QuotaRequestIdentity.current(pricingKey, accountId,
+                Map.of("content", planContent, "pricingKey", pricingKey));
+        String requestId = identity.requestId();
+        if (aiToolRouter == null) {
+            return matchWithRuntime(planContent, pricingKey, quotaDescription, accountId,
+                    identity, runtimeConfig());
+        }
+        AiToolContext context = new AiToolContext("job-match.generate", requestId,
+                accountId, "JOB_MATCH", pricingKey, AiRuntimeConfigService.CONTRIBUTION,
+                identity.requestHash());
+        return aiToolRouter.execute(context, runtime -> matchWithRuntime(
+                planContent, pricingKey, quotaDescription, accountId, identity, runtime));
+    }
+
+    private Map<String, Object> matchWithRuntime(String planContent, String pricingKey,
+                                                 String quotaDescription, Long accountId,
+                                                 QuotaRequestIdentity identity,
+                                                 AiRuntimeConfig runtime) {
+        long chargedCost = 0;
 
         // 预扣
         if (accountId != null && accountId > 0) {
-            try { int cost = pricingService.getCost("ai:match"); quotaService.consume(accountId, cost, "岗位匹配", requestId); }
+            try {
+                QuotaCharge charge = quotaService.consume(accountId, pricingKey,
+                        quotaDescription, identity);
+                chargedCost = charge.amount();
+            }
             catch (Exception e) { throw new RuntimeException(e.getMessage()); }
         }
 
@@ -74,19 +140,19 @@ public class JobMatchService {
 
             // 调 AI
             Map<String, Object> body = new LinkedHashMap<>();
-            body.put("model", model);
+            body.put("model", runtime.model());
             List<Map<String, String>> msgs = new ArrayList<>();
             msgs.add(Map.of("role", "user", "content", prompt));
             body.put("messages", msgs);
             body.put("temperature", 0.3);
 
-            String url = endpoint.trim();
+            String url = runtime.endpoint().trim();
             if (!url.startsWith("http")) url = "https://" + url;
             if (!url.endsWith("/chat/completions")) url = url.replaceAll("/$", "") + "/chat/completions";
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer " + apiKey);
+            headers.setBearerAuth(runtime.apiKey());
             ResponseEntity<Map> resp = restTemplate.exchange(url, HttpMethod.POST,
                     new HttpEntity<>(body, headers), Map.class);
 
@@ -95,15 +161,63 @@ public class JobMatchService {
                     resp.getBody().get("choices")).get(0).get("message")).get("content");
             content = content.replaceAll("```json\\s*", "").replaceAll("```\\s*", "").trim();
 
+            // Only confirm success after the AI response is valid and renderable by the client.
+            List<Map<String, String>> matches = parseMatches(content);
+
             log.info("[JOB_MATCH] 匹配完成 accountId={}", accountId);
             Map<String, Object> result = new LinkedHashMap<>();
             result.put("result", content);
+            result.put("matches", matches);
             return result;
         } catch (Exception e) {
-            if (accountId != null && accountId > 0) {
-                try { quotaService.refund(accountId, 50, requestId, "岗位匹配失败退款"); } catch (Exception ignored) {}
+            boolean retryManaged = aiToolRouter != null && AiToolRetryPolicy.isRetryable(e);
+            if (accountId != null && accountId > 0 && chargedCost > 0 && !retryManaged) {
+                try { quotaService.refund(accountId, identity.requestId(), quotaDescription + "失败退款"); } catch (Exception ignored) {}
             }
-            throw new RuntimeException("AI匹配失败: " + e.getMessage());
+            log.warn("[JOB_MATCH] 匹配失败 accountId={}, autoRetry={}, reason={}",
+                    accountId, retryManaged, e.getMessage());
+            AiToolProviderException providerFailure = AiToolProviderException.from(e);
+            if (providerFailure != null) throw providerFailure;
+            throw new RuntimeException(retryManaged
+                    ? "AI 匹配暂时失败，系统将自动重试"
+                    : "AI匹配失败，本次配额已退回");
         }
+    }
+
+    private AiRuntimeConfig runtimeConfig() {
+        return aiConfigService == null
+                ? new AiRuntimeConfig(AiRuntimeConfigService.CONTRIBUTION, "env",
+                        endpoint, apiKey, model, "ENV")
+                : aiConfigService.current(AiRuntimeConfigService.CONTRIBUTION);
+    }
+
+    List<Map<String, String>> parseMatches(String content) throws Exception {
+        JsonNode root = objectMapper.readTree(content);
+        JsonNode items = root.path("matches");
+        if (!items.isArray() || items.isEmpty()) {
+            throw new IllegalArgumentException("AI返回缺少岗位匹配结果");
+        }
+
+        List<Map<String, String>> matches = new ArrayList<>();
+        for (JsonNode item : items) {
+            String position = requiredText(item, "position");
+            String reason = requiredText(item, "reason");
+            String focus = requiredText(item, "focus");
+            matches.add(Map.of("position", position, "reason", reason, "focus", focus));
+        }
+        return matches;
+    }
+
+    private String requiredText(JsonNode item, String field) {
+        String value = item.path(field).asText("").trim();
+        if (value.isEmpty()) throw new IllegalArgumentException("AI返回字段不完整: " + field);
+        return value;
+    }
+
+    private static RestTemplate createRestTemplate() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(10_000);
+        factory.setReadTimeout(110_000);
+        return new RestTemplate(factory);
     }
 }

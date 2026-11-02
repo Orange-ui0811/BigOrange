@@ -8,12 +8,16 @@
     </insert>
 
     <select id="selectById" resultType="com.orangejd.pojo.entity.JobPosting">
-        SELECT id, company, position, direction, content, display_content, audit_status, submitter_id, submitter_ip, submitter_role, reject_reason, create_time
+        SELECT id, company, position, direction, content, display_content, audit_status,
+               submitter_id, submitter_ip, submitter_role, reject_reason,
+               audit_source, audit_confidence, audit_reason, reviewer_id, reviewed_at, create_time
         FROM job_posting WHERE id = #{id}
     </select>
 
     <select id="selectByIdForUpdate" resultType="com.orangejd.pojo.entity.JobPosting">
-        SELECT id, company, position, direction, content, display_content, audit_status, submitter_id, submitter_ip, submitter_role, reject_reason, create_time
+        SELECT id, company, position, direction, content, display_content, audit_status,
+               submitter_id, submitter_ip, submitter_role, reject_reason,
+               audit_source, audit_confidence, audit_reason, reviewer_id, reviewed_at, create_time
         FROM job_posting WHERE id = #{id} FOR UPDATE
     </select>
 
@@ -64,6 +68,18 @@
 
     <update id="updateAuditStatus">
         UPDATE job_posting SET audit_status = #{status}, reject_reason = #{reason} WHERE id = #{id}
+    </update>
+
+    <update id="updateReviewDecision">
+        UPDATE job_posting
+        SET audit_status = #{status},
+            reject_reason = CASE WHEN #{status} = 'REJECTED' THEN #{reason} ELSE NULL END,
+            audit_source = #{source},
+            audit_confidence = #{confidence},
+            audit_reason = #{reason},
+            reviewer_id = #{reviewerId},
+            reviewed_at = NOW()
+        WHERE id = #{id} AND audit_status = 'PENDING'
     </update>
 
     <delete id="deleteById">

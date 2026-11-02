@@ -106,7 +106,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onMounted } from 'vue'
+import { ref, nextTick, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import PageTour from '../components/PageTour.vue'
@@ -114,7 +114,7 @@ import request from '../api/request'
 
 const chatTour = [
   { selector: '.conv-panel', text: '左边是会话列表。点击任意会话进入聊天，橙色角标提醒你有新消息。', expression: 'wink' },
-  { selector: '.chat-input-row', text: '在这里输入消息，回车发送。聊得差不多可以点「发报价」创建订单～', expression: 'smile' },
+  { selector: '.chat-input-row', text: '在这里输入消息，回车发送。当前可沟通作品与需求细节，在线交易功能将在后续开放。', expression: 'smile' },
   { selector: '.summary-panel', text: '右边面板显示当前沟通状态：关联了什么内容、需求范围确认了没、下一步该做什么。', expression: 'smile' },
 ]
 import { unreadCount } from '../stores/unread'
@@ -130,12 +130,40 @@ const route = useRoute()
 const myId = ref(sessionStorage.getItem('myId') || null)
 
 let ws = null
-const connectWs = () => {
-  if (ws) try { ws.close() } catch {}
+let reconnectTimer = null
+let destroyed = false
+const closeSocket = socket => {
+  try {
+    socket.close()
+  } catch (error) {
+    if (import.meta.env.DEV) console.debug('WebSocket close ignored', error)
+  }
+}
+const scheduleReconnect = () => {
+  if (destroyed || reconnectTimer) return
+  reconnectTimer = setTimeout(() => {
+    reconnectTimer = null
+    connectWs()
+  }, 5000)
+}
+const connectWs = async () => {
+  if (destroyed) return
+  if (ws) {
+    ws.onclose = null
+    closeSocket(ws)
+    ws = null
+  }
   const uid = myId.value; if (!uid) return
-  const token = sessionStorage.getItem('appToken')
-  const wsBase = import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8080'
-  ws = new WebSocket(wsBase + '/ws/'+uid+'?token='+token)
+  try {
+    const ticketRes = await request.post('/app/auth/ws-ticket')
+    if (!ticketRes.data?.ticket) throw new Error('ticket unavailable')
+    const wsBase = import.meta.env.VITE_WS_URL || `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}`
+    const socket = new WebSocket(wsBase + '/ws/'+uid+'?ticket='+encodeURIComponent(ticketRes.data.ticket))
+    ws = socket
+  } catch {
+    scheduleReconnect()
+    return
+  }
   ws.onmessage = (e) => {
     try {
       const data = JSON.parse(e.data)
@@ -143,7 +171,10 @@ const connectWs = () => {
       if (data.type === 'notification') { convList(); unreadCount.value++ }
     } catch {}
   }
-  ws.onclose = () => { setTimeout(connectWs, 5000) }
+  ws.onclose = () => {
+    ws = null
+    scheduleReconnect()
+  }
 }
 
 const convList = async () => {
@@ -156,6 +187,16 @@ onMounted(async () => {
   if (route.params.id) {
     const c = convs.value.find(c => String(c.id) === route.params.id)
     if (c) openConv(c)
+  }
+})
+onUnmounted(() => {
+  destroyed = true
+  if (reconnectTimer) clearTimeout(reconnectTimer)
+  reconnectTimer = null
+  if (ws) {
+    ws.onclose = null
+    closeSocket(ws)
+    ws = null
   }
 })
 const showQuoteDialog = ref(false)

@@ -2,21 +2,21 @@ spring:
   mail:
     host: smtp.qq.com
     port: 587
-    username: 1281748852@qq.com
-    password: leywbeyvheyeghcj
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/orangejd?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
-    username: root
-    password: 123456
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/orangejd?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=UTF-8}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:123456}
   data:
     redis:
       client-type: jedis
-      host: localhost
-      port: 6380
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6380}
   ai:
     vectorstore:
       redis:
@@ -28,18 +28,48 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 orange:
+  beginner-projects:
+    auto-refresh-enabled: ${BEGINNER_PROJECT_AUTO_REFRESH_ENABLED:false}
+  career-projects:
+    auto-refresh-enabled: ${CAREER_PROJECT_AUTO_REFRESH_ENABLED:false}
+    refresh-cron: ${CAREER_PROJECT_REFRESH_CRON:0 0 5 * * 1}
+  ingestion:
+    pipeline-v2-enabled: ${INGESTION_PIPELINE_V2_ENABLED:false}
+  ai-config:
+    encryption-key: ${AI_CONFIG_ENCRYPTION_KEY:}
+  ai-tool-pool:
+    enabled: ${AI_TOOL_POOL_ENABLED:false}
+    global-max-concurrency: ${AI_TOOL_GLOBAL_MAX_CONCURRENCY:50}
+    acquire-wait-millis: ${AI_TOOL_ACQUIRE_WAIT_MS:2000}
+    lease-millis: ${AI_TOOL_LEASE_MS:330000}
+    auto-retry-enabled: ${AI_TOOL_AUTO_RETRY_ENABLED:true}
+    auto-retry-max-attempts: ${AI_TOOL_AUTO_RETRY_MAX_ATTEMPTS:0}
+    auto-retry-initial-delay-millis: ${AI_TOOL_AUTO_RETRY_INITIAL_DELAY_MS:2000}
+    auto-retry-max-delay-millis: ${AI_TOOL_AUTO_RETRY_MAX_DELAY_MS:30000}
+    endpoint: ${GITEE_AI_ENDPOINT:}
+    model: ${GITEE_AI_MODEL:}
+    keys:
+      - ${GITEE_AI_KEY_1:}
+      - ${GITEE_AI_KEY_2:}
+      - ${GITEE_AI_KEY_3:}
+      - ${GITEE_AI_KEY_4:}
+      - ${GITEE_AI_KEY_5:}
+      - ${GITEE_AI_KEY_6:}
+      - ${GITEE_AI_KEY_7:}
+      - ${GITEE_AI_KEY_8:}
+      - ${GITEE_AI_KEY_9:}
+      - ${GITEE_AI_KEY_10:}
+  trade:
+    simulated-payment-enabled: true
   upload:
-    path: D:/Orangejd/uploads
+    path: ${UPLOAD_PATH:${user.dir}/../uploads}
   redis:
-    host: localhost
-    port: 6380
-    password:
-    database: 0
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6380}
+    password: ${REDIS_PASSWORD:}
+    database: ${REDIS_DATABASE:0}
   oss:
-    endpoint: oss-cn-example.aliyuncs.com
-    access-key-id: your-access-key-id
-    access-key-secret: your-access-key-secret
-    bucket-name: your-bucket-name
+    enabled: false
   turnstile:
     secret-key: ${TURNSTILE_SECRET_KEY:}
   leaderboard:
@@ -47,15 +77,27 @@ orange:
     local-cache-ttl-minutes: 15
   ai-audit:
     endpoint: ${AI_AUDIT_ENDPOINT:https://ai.gitee.com/v1}
-    api-key: ${AI_AUDIT_KEY:YMAS0EKKEF1PB6UICEE0LILHHZXKSO4QIO2RTT18}
+    api-key: ${AI_AUDIT_KEY:}
     model: ${AI_AUDIT_MODEL:DeepSeek-V4-Pro}
   ai-trend:
     endpoint: ${AI_TREND_ENDPOINT:https://ai.gitee.com/v1}
-    api-key: ${AI_TREND_KEY:YMAS0EKKEF1PB6UICEE0LILHHZXKSO4QIO2RTT18}
+    api-key: ${AI_TREND_KEY:}
     model: ${AI_TREND_MODEL:DeepSeek-V4-Pro}
+  ai-text:
+    endpoint: ${AI_TEXT_ENDPOINT:${AI_TREND_ENDPOINT:https://ai.gitee.com/v1}}
+    api-key: ${AI_TEXT_KEY:${AI_TREND_KEY:}}
+    model: ${AI_TEXT_MODEL:${AI_TREND_MODEL:DeepSeek-V4-Pro}}
+  ai-project:
+    endpoint: ${AI_PROJECT_ENDPOINT:}
+    api-key: ${AI_PROJECT_KEY:}
+    model: ${AI_PROJECT_MODEL:}
+  ai-contribution:
+    endpoint: ${AI_CONTRIBUTION_ENDPOINT:}
+    api-key: ${AI_CONTRIBUTION_KEY:}
+    model: ${AI_CONTRIBUTION_MODEL:}
   ai-embedding:
     endpoint: ${AI_EMBEDDING_ENDPOINT:https://ai.gitee.com/v1}
-    api-key: ${AI_EMBEDDING_KEY:YMAS0EKKEF1PB6UICEE0LILHHZXKSO4QIO2RTT18}
+    api-key: ${AI_EMBEDDING_KEY:}
     model: ${AI_EMBEDDING_MODEL:bge-small-zh-v1.5}
   epay:
     pid: ${EPAY_PID:}

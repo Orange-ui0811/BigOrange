@@ -3,7 +3,8 @@ package com.orangejd.server.controller.app;
 import com.orangejd.common.context.BaseContext;
 import com.orangejd.common.result.Result;
 import com.orangejd.pojo.entity.JobPosting;
-import com.orangejd.server.mapper.JobPostingMapper;
+import com.orangejd.server.contribution.application.JobAiAuditOrchestrator;
+import com.orangejd.server.service.JobPostingAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,20 +13,51 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/app/job")
+@lombok.RequiredArgsConstructor
 public class JobController {
 
-    @Autowired private JobPostingMapper mapper;
-    @Autowired private com.orangejd.server.service.JobMatchService jobMatchService;
+    private final JobPostingAccessService mapper;
+    private final com.orangejd.server.service.JobMatchService jobMatchService;
+    private final JobAiAuditOrchestrator jobAiAuditOrchestrator;
 
     @PostMapping("/match")
-    public Result<?> match(@RequestBody Map<String, String> body) {
-        String planContent = body.get("planContent");
+    public Result<?> match(@RequestBody Map<String, Object> body) {
+        String planContent = Objects.toString(body.get("planContent"), "");
         if (planContent == null || planContent.isEmpty()) return Result.error("请输入方案内容");
         try {
-            return Result.success(jobMatchService.match(planContent));
+            Map<String, Object> result = jobMatchService.match(planContent);
+            Long historyId = longValue(body.get("historyId"));
+            Long accountId = BaseContext.getCurrentId();
+            if (historyId != null && accountId != null && accountId > 0) {
+                String phase6 = formatMatches(result.get("matches"));
+                if (!phase6.isBlank() && mapper.updatePhase6Owned(historyId, accountId, phase6) > 0) {
+                    result.put("historyId", historyId);
+                }
+            }
+            return Result.success(result);
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
+    }
+
+    private String formatMatches(Object value) {
+        if (!(value instanceof List<?> matches)) return "";
+        StringBuilder content = new StringBuilder();
+        for (Object item : matches) {
+            if (!(item instanceof Map<?, ?> match)) continue;
+            content.append("### ").append(Objects.toString(match.get("position"), "岗位匹配"))
+                    .append("\n\n📌 **匹配原因**：").append(Objects.toString(match.get("reason"), ""))
+                    .append("\n\n📚 **学习重点**：").append(Objects.toString(match.get("focus"), ""))
+                    .append("\n\n---\n\n");
+        }
+        return content.toString();
+    }
+
+    private Long longValue(Object value) {
+        if (value instanceof Number number) return number.longValue();
+        if (value == null || String.valueOf(value).isBlank()) return null;
+        try { return Long.parseLong(String.valueOf(value)); }
+        catch (NumberFormatException ignored) { return null; }
     }
 
     @GetMapping("/directions")
@@ -95,7 +127,12 @@ public class JobController {
         jp.setSubmitterIp(ip);
         jp.setSubmitterRole("USER");
         mapper.insert(jp);
-        return Result.success(Map.of("id", jp.getId()));
+        Long taskId = jobAiAuditOrchestrator.enqueueIfEnabled(jp.getId());
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("id", jp.getId());
+        response.put("aiAuditQueued", taskId != null);
+        if (taskId != null) response.put("taskId", taskId);
+        return Result.success(response);
     }
 
     private String stripCompanyNames(String text) {

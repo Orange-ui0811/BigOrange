@@ -13,6 +13,8 @@ public interface KnowledgeDocumentMapper {
 
     List<KnowledgeDocument> selectAll();
 
+    List<KnowledgeDocument> selectAllWithContent();
+
     KnowledgeDocument selectById(@Param("id") Long id);
 
     KnowledgeDocument selectBySourceRef(@Param("sourceRef") String sourceRef);
@@ -21,4 +23,8 @@ public interface KnowledgeDocumentMapper {
 
     /** 查 30 天前的 weekly GitHub 文档（用于清理） */
     List<KnowledgeDocument> selectOldGithubWeekly(@Param("beforeDate") String beforeDate);
+
+    int updatePipeline(KnowledgeDocument record);
+
+    List<KnowledgeDocument> selectPipelinePending(@Param("limit") int limit);
 }
