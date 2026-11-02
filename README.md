@@ -1,6 +1,24 @@
 # OrangeVC — AI 创意服务交易平台
 
-> Vibe Coding 实践项目 · Spring Boot 3.3.5 + Vue 3 全栈 | ~88 API · 17 表 · 双前端 · RAG 知识库
+> Vibe Coding 实践项目 · Java 21 / Spring Boot 3.3.5 + Vue 3 双前端 · 规则推荐、RAG 与对话式项目推荐
+
+OrangeVC 连接项目创作者、学习者与需求方，提供作品/需求市场、沟通交易和 AI 项目开发辅助。当前 main 已集成 Customer Agent 与 RAG-B，数据库迁移覆盖 V1–V46；代码合入不表示生产已启用，实际部署状态需检查目标环境。
+
+## 总体架构
+
+```mermaid
+flowchart TD
+  U[Vue 用户端 / 管理端] --> API[Spring Boot：鉴权、业务与额度]
+  API --> Catalog[新手与职业项目目录：采集、规则评分、发布]
+  API --> Trend[趋势推荐：目录匹配 + 可选 A 版 RAG + LLM]
+  API --> Customer[Customer Agent：任务、追问、上下文与受控工具]
+  Customer --> B[B 版混合检索 / 可选 Reranker / 证据核验]
+  API --> DB[(MySQL：业务、任务、会话、版本)]
+  Trend --> Redis[(Redis Stack：缓存与向量索引)]
+  B --> Redis
+  Trend --> Models[配置的模型服务]
+  Customer --> Models
+```
 
 ## 在线地址
 
@@ -18,9 +36,9 @@
 | ORM | MyBatis 3.0.3 |
 | 数据库 | MySQL 8.0 |
 | 缓存 | Redis Stack（Docker，含 RediSearch 模块） |
-| AI 框架 | Spring AI 1.0.0（VectorStore + RAG） |
-| LLM | DeepSeek V4 Pro（Gitee AI） |
-| Embedding | bge-small-zh-v1.5（512 维，中文原生） |
+| AI 框架 | Spring AI 1.0.0；客服支持 LangGraph4j 1.8.27 编排 |
+| LLM | 按业务配置；趋势/审核与客服可使用不同模型，客服默认 deepseek-flash |
+| Embedding | A 默认 bge-small-zh-v1.5（代码回退 512 维）；B 使用 bge-m3（1024 维，Gitee 或固定版本本地 Ollama） |
 | 实时通信 | WebSocket（消息 + 通知实时推送） |
 | 前端 | Vue 3.5 + Element Plus 2.14 + Vite 8.0 |
 | 安全 | JWT 双通道鉴权 + BCrypt + Turnstile 人机验证 |
@@ -68,7 +86,42 @@ OrangeVC
 | AI 自动审核 | DeepSeek 多模态审核 + 飞书通知 |
 | 富文本编辑 | 详情 HTML 渲染 + 图片上传 |
 
-### 其他功能
+## 推荐系统架构（Recommendation System）
+
+以下描述 main 中的实现。推荐系统的统一技术入口是 [RECOMMENDATION_SYSTEM.md](docs/RECOMMENDATION_SYSTEM.md)，实验数据和效果边界见 [RECOMMENDATION_EVALUATION.md](docs/RECOMMENDATION_EVALUATION.md)。
+
+| 场景 | 推荐对象与依据 | 当前状态 |
+|---|---|---|
+| 新手项目 | 仓库语言、README、启动依赖、活跃度、技术分及编辑评分 | 目录、规则评分与发布/周选流程已实现 |
+| 职业成长 | 岗位相关性、能力证明、技术覆盖、作品完整性和面试价值 | 目录与多维规则评分已实现 |
+| 趋势推荐 A | 显式用户输入、已发布目录、图谱与可选 A 版 RAG | `POST /app/trend/analyze-v2`；LLM 生成建议并绑定真实候选来源 |
+| Customer Agent B | 对话需求、项目状态、B 检索、用途/学习适配与原文证据 | 会话、追问、比较、条件修改与核验已实现；默认关闭 |
+
+项目质量评分由人工设计规则计算，不是用户行为训练模型；新手编辑维度还可能来自模型富化/人工维护并经过规则校准。趋势中的主题匹配、语言奖励与客服的硬约束处理各有边界，详见技术说明。
+
+客服推荐流程为：理解需求与历史 → 查询计划和候选召回 → 用途与条件检查 → 项目排序/去重 → 限定项目取证 → 引用及需求核验 → 最多三个候选与后续追问。B 检索使用向量、正文词法和名称路线；名称单独命中不能充当正文证据。可选远程 Reranker 在失败时整体保留原排序。
+
+当前具备内容匹配、规则评分、混合召回、显式偏好和可选语义重排。协同过滤、行为训练的 Learning-to-Rank、训练双塔未作为这些路径的已实现算法。项目质量分、匹配分、RRF、模型重排分及生成评分不能直接混用。新 README 过滤/知识单元准备仍属实验链路，尚未证明可替代现有 B 链路。
+
+新安装的默认开关：
+
+```dotenv
+CUSTOMER_ENABLED=false
+RAG_B_ENABLED=false
+RAG_B_RERANK_ENABLED=false
+CUSTOMER_ALL_AUTHENTICATED_USERS=false
+```
+
+白名单、执行引擎、模型、限额以 [application.yml](orange-server/src/main/resources/application.yml) 与目标环境配置为准；不会覆盖已有本地环境变量。
+
+| 功能 | 关键代码入口 |
+|---|---|
+| 项目质量与发布资格 | [BeginnerProjectScorer](orange-server/src/main/java/com/orangejd/server/service/BeginnerProjectScorer.java)、[BeginnerEditorialPolicy](orange-server/src/main/java/com/orangejd/server/service/BeginnerEditorialPolicy.java)、[CareerProjectScorer](orange-server/src/main/java/com/orangejd/server/service/CareerProjectScorer.java) |
+| 趋势候选及 A 检索 | [TrendV2Analyzer](orange-server/src/main/java/com/orangejd/server/service/TrendV2Analyzer.java)、[TrendContextBuilder](orange-server/src/main/java/com/orangejd/server/service/TrendContextBuilder.java) |
+| B 检索、实际正文融合与重排 | [RagBSearchService](orange-server/src/main/java/com/orangejd/server/ragb/service/RagBSearchService.java)、[RagBProjectEvidenceScorer](orange-server/src/main/java/com/orangejd/server/ragb/retrieval/RagBProjectEvidenceScorer.java)、[RagBReranker](orange-server/src/main/java/com/orangejd/server/ragb/retrieval/RagBReranker.java) |
+| 客服项目与流程 | [CustomerProjects](orange-server/src/main/java/com/orangejd/server/customer/CustomerProjects.java)、[CustomerRecommendationSteps](orange-server/src/main/java/com/orangejd/server/customer/CustomerRecommendationSteps.java) |
+
+## 其他功能
 
 | 功能 | 说明 |
 |------|------|
@@ -87,7 +140,7 @@ OrangeVC
 - MySQL 8.0
 - Redis Stack（Docker，端口 6380/6379）
 - Maven 3.x
-- Node.js 18+
+- Node.js 22（与 CI 保持一致）
 
 ### 本地启动
 
@@ -232,13 +285,13 @@ location ^~ /admin { alias /data/orangejd/web-dist/admin; try_files $uri /admin/
 
 | 文档 | 路径 |
 |------|------|
+| 推荐系统技术说明（统一入口） | [docs/RECOMMENDATION_SYSTEM.md](docs/RECOMMENDATION_SYSTEM.md) |
+| 推荐实验、验收与限制 | [docs/RECOMMENDATION_EVALUATION.md](docs/RECOMMENDATION_EVALUATION.md) |
 | GitHub 克隆与生产部署 | `docs/GitHub克隆与服务器数据库部署.md` |
 | Cloudflare 域名与 HTTPS | `docs/Cloudflare域名与HTTPS接入手册.md` |
 | ePay 接入与服务器交接 | `docs/ePay订单支付接入与服务器交接手册.md` |
 | 系统架构设计说明书 | `docs/OrangeJD系统架构设计说明书.md` |
 | 架构治理实施说明 | `docs/架构治理实施说明.md` |
-| 项目进度记录 | `docs/项目进度记录.md` |
-| 开发日志（最新） | `docs/开发日志/2026-07-09-多模块增强.md` |
 | 前端 UI 设计规范 | `docs/OrangeJD前端UI设计规范.md` |
 | 数据库迁移 | `orange-server/src/main/resources/db/migration/` |
 
