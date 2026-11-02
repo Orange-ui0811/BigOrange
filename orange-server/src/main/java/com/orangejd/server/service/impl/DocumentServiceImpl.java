@@ -1,25 +1,20 @@
 package com.orangejd.server.service.impl;
+
+import org.springframework.stereotype.Service;
+import static com.orangejd.server.service.impl.KnowledgeFileInputs.*;
 import com.orangejd.pojo.entity.KnowledgeDocument;
 import com.orangejd.pojo.vo.KnowledgeDocumentVO;
 import com.orangejd.server.mapper.KnowledgeDocumentMapper;
 import com.orangejd.server.service.DocumentService;
+import com.orangejd.server.service.ProjectIdentityResolver;
 import com.orangejd.server.foundation.external.ExternalAiClient;
 import com.orangejd.server.foundation.ingestion.IngestionRunService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.CodingErrorAction;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 @Service
@@ -28,10 +23,6 @@ public class DocumentServiceImpl implements DocumentService {
     private static final Logger log = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
     private static final int MAX_FILE_SIZE = 1_048_576;
-    private static final int MAX_CHUNKS = 100;
-    private static final int CHUNK_SIZE = 500;
-    private static final int OVERLAP = 50;
-    private static final int MAX_CHUNK_CHARS = 400;
     private static final String SOURCE_MANUAL = "MANUAL";
     private static final String SOURCE_GITHUB = "GITHUB";
 
@@ -39,6 +30,7 @@ public class DocumentServiceImpl implements DocumentService {
     private final @org.springframework.lang.Nullable VectorStore vectorStore;
     private final ExternalAiClient externalAiClient;
     private final IngestionRunService ingestionRunService;
+    private final ProjectIdentityResolver projectIdentityResolver;
 
     // ---- upload ----
 
@@ -197,7 +189,10 @@ public class DocumentServiceImpl implements DocumentService {
                 meta.put("docTitle", title);
                 meta.put("chunkIndex", i);
                 meta.put("source", source);
-                docs.add(new Document(chunks.get(i), meta));
+                ProjectKnowledgeDocumentWriter.enrichMetadata(meta, entity);
+                projectIdentityResolver.enrich(meta, source, sourceRef, title);
+                enrichManualMetadata(meta, content);
+                docs.add(new Document("knowledge-" + entity.getId() + "-" + i, chunks.get(i), meta));
             }
             vectorStore.add(docs);
             log.info("[RAG] 向量存储完成: title={}, chunks={}", title, chunks.size());
@@ -207,6 +202,29 @@ public class DocumentServiceImpl implements DocumentService {
 
         log.info("[RAG] 文档入库: id={}, title={}, source={}, chunks={}", entity.getId(), title, source, chunks.size());
         return toVO(entity);
+    }
+
+    /** Add stable project fields for manually uploaded customer-service documents. */
+    private void enrichManualMetadata(Map<String, Object> metadata, String content) {
+        if (!"MANUAL".equals(metadata.get("source")) || content == null) return;
+        putField(metadata, "projectId", content, "项目 ID");
+        putField(metadata, "catalog", content, "项目目录");
+        putField(metadata, "difficulty", content, "难度");
+        putField(metadata, "duration", content, "预计周期");
+        putField(metadata, "techStack", content, "技术栈");
+    }
+
+    private void putField(Map<String, Object> metadata, String key, String content, String label) {
+        if (metadata.containsKey(key) && metadata.get(key) != null) return;
+        for (String line : content.split("\\R")) {
+            String value = line.trim();
+            for (String prefix : new String[]{label + "：", label + ":"}) {
+                if (value.startsWith(prefix)) {
+                    metadata.put(key, value.substring(prefix.length()).trim());
+                    return;
+                }
+            }
+        }
     }
 
     /**
@@ -264,27 +282,12 @@ public class DocumentServiceImpl implements DocumentService {
     // ---- 切片 ----
 
     List<String> splitChunks(String text) {
-        if (text == null || text.isEmpty()) return Collections.emptyList();
-        List<String> chunks = new ArrayList<>();
-        int start = 0;
-        while (start < text.length() && chunks.size() < MAX_CHUNKS) {
-            int end = Math.min(start + CHUNK_SIZE, text.length());
-            if (end < text.length()) {
-                int nl = text.lastIndexOf('\n', end);
-                if (nl > start + CHUNK_SIZE / 2) end = nl;
-            }
-            String chunk = text.substring(start, end).trim();
-            if (!chunk.isEmpty()) chunks.add(chunk);
-            if (end >= text.length()) break;
-            start = Math.max(end - OVERLAP, start + 1);
-        }
-        return chunks;
+        return KnowledgeChunker.split(text);
     }
 
     private List<String> sanitizeChunks(List<String> chunks, String title) {
         List<String> cleaned = new ArrayList<>();
         for (String chunk : chunks) {
-            if (chunk.length() > MAX_CHUNK_CHARS) chunk = chunk.substring(0, MAX_CHUNK_CHARS);
             String stripped = chunk.replaceAll("\\s+", "").replaceAll("[#*\\-`>|]+", "");
             if (stripped.length() >= 10) cleaned.add(chunk);
         }
@@ -303,6 +306,7 @@ public class DocumentServiceImpl implements DocumentService {
             meta.put("chunkIndex", i);
             meta.put("source", entity.getSource());
             ProjectKnowledgeDocumentWriter.enrichMetadata(meta, entity);
+            projectIdentityResolver.enrich(meta, entity.getSource(), entity.getSourceRef(), entity.getTitle());
             docs.add(new Document("knowledge-" + entity.getId() + "-" + i, chunks.get(i), meta));
         }
         return docs;
@@ -314,27 +318,6 @@ public class DocumentServiceImpl implements DocumentService {
         String lower = title.toLowerCase();
         if (!lower.endsWith(".md") && !lower.endsWith(".txt"))
             throw new IllegalArgumentException("仅支持 .md 和 .txt");
-    }
-
-    private String readContent(MultipartFile file) {
-        try {
-            String content = StandardCharsets.UTF_8.newDecoder()
-                    .onMalformedInput(CodingErrorAction.REPORT)
-                    .onUnmappableCharacter(CodingErrorAction.REPORT)
-                    .decode(ByteBuffer.wrap(file.getBytes())).toString();
-            if (content.indexOf('\0') >= 0) throw new IllegalArgumentException("文件包含不支持的二进制内容");
-            return content;
-        } catch (CharacterCodingException e) {
-            throw new IllegalArgumentException("文件必须使用 UTF-8 编码");
-        } catch (IOException e) {
-            throw new RuntimeException("文件读取失败", e);
-        }
-    }
-
-    private String sanitizeTitle(String title) {
-        String cleaned = title.replaceAll("[\\p{Cntrl}]", "").trim();
-        if (cleaned.isEmpty()) return "未命名.md";
-        return cleaned.length() > 120 ? cleaned.substring(cleaned.length() - 120) : cleaned;
     }
 
     private String resolvePeriod(KnowledgeDocument e) {

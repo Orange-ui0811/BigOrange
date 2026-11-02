@@ -14,6 +14,7 @@ public interface CareerProjectMapper {
     int deleteRoleScores(@Param("projectId") Long projectId);
     int insertRoleScore(CareerRoleScore score);
     CareerProjectProfile selectById(@Param("projectId") Long projectId);
+    CareerProjectProfile selectByFullName(@Param("fullName") String fullName);
     List<CareerRoleScore> selectRoleScores(@Param("projectId") Long projectId);
     List<CareerProjectProfile> selectPublic(@Param("keyword") String keyword,
                                             @Param("language") String language,

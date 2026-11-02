@@ -20,6 +20,7 @@ const chatUnread = ref(0)
 const mobileNavItems = [
   { path: '/market', label: '发现', icon: Shop },
   { path: '/ai', label: 'AI 工具', icon: Cpu },
+  { path: '/customer', label: '客服', icon: ChatDotRound },
   { path: '/ai-records', label: '记录', icon: Document },
   { path: '/persona-workshop', label: '画像', icon: MagicStick },
   { path: '/publish', label: '发布', icon: Edit },
@@ -44,6 +45,7 @@ const logout = async () => {
 /* ---- 根据子路由高亮父级菜单 ---- */
 const activeMenu = computed(() => {
   const p = route.path
+  if (p.startsWith('/customer')) return '/customer'
   if (p.startsWith('/ai-records')) return '/ai-records'
   if (p.startsWith('/persona-workshop')) return '/persona-workshop'
   if (p.startsWith('/market') || p.startsWith('/work/') || p.startsWith('/req/') || p.startsWith('/order/')) return '/market'

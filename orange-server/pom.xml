@@ -13,6 +13,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.bsc.langgraph4j</groupId>
+            <artifactId>langgraph4j-core</artifactId>
+            <version>1.8.27</version>
+        </dependency>
+        <dependency>
+            <groupId>ai.djl.huggingface</groupId>
+            <artifactId>tokenizers</artifactId>
+            <version>0.36.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.orangejd</groupId>
             <artifactId>orange-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
@@ -51,6 +61,11 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-advisors-vector-store</artifactId>
+        </dependency>
+        <!-- B 版 RAG 使用 Spring AI Alibaba Examples 同样的模块化 RAG SPI，版本跟随平台 BOM。 -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-rag</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
